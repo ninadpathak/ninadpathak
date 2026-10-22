@@ -201,6 +201,57 @@
       .replace(/<form\b[\s\S]*?<\/form>/gi, " ");
   }
 
+  /* Conservative robots-meta scan. Regex cannot parse HTML in general, so this
+   * evaluates only tags it can read exactly and sends everything else to a manual
+   * check rather than a pass:
+   *   - any <meta> tag that mentions robots or googlebot anywhere is a source;
+   *   - a source counts only if the whole tag is exactly name + content (either
+   *     order), quoted, with a plain directive charset and no entity or angle bracket;
+   *   - a <meta> whose name attribute holds an entity could hide "robots";
+   *   - a source inside a comment, script, style, template, noscript or textarea
+   *     is not evaluated either way.
+   * Each unclear case adds a reason to `manual`. */
+  var RAW_REGIONS = /<!--[\s\S]*?(?:-->|$)|<(script|style|template|noscript|textarea)\b[\s\S]*?(?:<\/\1\s*>|$)/gi;
+  var CLEAN_ROBOTS_META = new RegExp(
+    "^<meta\\s+(?:name\\s*=\\s*([\"'])(robots|googlebot)\\1\\s+content\\s*=\\s*([\"'])([a-z0-9 ,:._/+-]*)\\3" +
+    "|content\\s*=\\s*([\"'])([a-z0-9 ,:._/+-]*)\\5\\s+name\\s*=\\s*([\"'])(robots|googlebot)\\7)\\s*\\/?>$", "i");
+  function scanRobotsMeta(html) {
+    var regions = [];
+    var region;
+    RAW_REGIONS.lastIndex = 0;
+    while ((region = RAW_REGIONS.exec(html))) {
+      regions.push([region.index, region.index + region[0].length]);
+      if (!region[0].length) RAW_REGIONS.lastIndex++;
+    }
+    var inRegion = function (at) { return regions.some(function (r) { return at >= r[0] && at < r[1]; }); };
+    var sources = [];
+    var manual = [];
+    var metaStart = /<meta\b/gi;
+    var found;
+    while ((found = metaStart.exec(html))) {
+      var at = found.index;
+      var nextTag = html.indexOf("<", at + 1);
+      var span = html.slice(at, nextTag === -1 ? html.length : nextTag);
+      var close = html.indexOf(">", at);
+      var tag = close === -1 ? span : html.slice(at, close + 1);
+      var mentionsRobots = /robots|googlebot/i.test(span);
+      var nameEntity = /\bname\s*=\s*["']?[^"'\s>]*&/i.test(span);
+      if (!mentionsRobots && !nameEntity) continue;
+      if (inRegion(at)) {
+        manual.push("a robots meta tag sits inside a comment or script, so the page's real directives are unclear");
+        continue;
+      }
+      var clean = CLEAN_ROBOTS_META.exec(tag);
+      if (!clean || tag.length !== span.length && span.slice(tag.length).trim()) {
+        manual.push("a robots meta tag could not be read exactly: " + tag.slice(0, 120));
+        continue;
+      }
+      var agent = (clean[2] || clean[8]).toLowerCase();
+      sources.push({ source: "meta " + agent, value: (clean[4] !== undefined ? clean[4] : clean[6]).toLowerCase(), header: false });
+    }
+    return { sources: sources, manual: manual };
+  }
+
   function parseHtml(fullInput) {
     /* Head-level directives and JSON-LD are read from the whole document; prose
      * is read only from the content region. */
@@ -242,19 +293,8 @@
       });
     });
 
-    /* Every robots and googlebot meta tag counts, in any attribute order: Google
-     * combines them and applies the most restrictive. Tags for other crawlers
-     * (bingbot and so on) do not apply to Google and are ignored. */
-    var robotsSources = [];
-    (fullInput.match(/<meta\b[^>]*>/gi) || []).forEach(function (tag) {
-      var name = /\bname\s*=\s*["']([^"']*)["']/i.exec(tag);
-      var content = /\bcontent\s*=\s*["']([^"']*)["']/i.exec(tag);
-      if (!name || !content) return;
-      var agent = name[1].toLowerCase();
-      if (agent === "robots" || agent === "googlebot") {
-        robotsSources.push({ source: "meta " + agent, value: content[1].toLowerCase(), header: false });
-      }
-    });
+    var robotsScan = scanRobotsMeta(fullInput);
+    var robotsSources = robotsScan.sources;
     var robots = robotsSources.map(function (item) { return item.value; }).join(", ");
 
     return {
@@ -264,6 +304,7 @@
       jsonLdCount: jsonLdBlocks.length,
       robots: robots,
       robotsSources: robotsSources,
+      robotsManual: robotsScan.manual,
       hasTimeElement: /<time\b/i.test(fullInput),
       dataNosnippetCount: (fullInput.match(/data-nosnippet/gi) || []).length,
       raw: input,
@@ -312,6 +353,7 @@
       jsonLdCount: 0,
       robots: "",
       robotsSources: [],
+      robotsManual: [],
       hasTimeElement: false,
       dataNosnippetCount: 0,
       raw: input
@@ -566,28 +608,50 @@
   /* Snippet eligibility is the only check in this tool that restates a documented
    * requirement. Google's other documented condition, site inclusion in Search
    * Console's Search generative AI control, cannot be seen from the page. */
-  /* Directives that apply to Google from every source. In an X-Robots-Tag header a
-   * "useragent:" prefix scopes the directives after it, until the next prefix;
-   * only unscoped and googlebot-scoped directives apply. Names that themselves take a
-   * value (max-snippet:, unavailable_after: and so on) are not user agents. */
+  /* Directives Google documents for robots meta tags and X-Robots-Tag. Anything
+   * else sends the page to a manual check. */
+  var KNOWN_DIRECTIVES = { all: 1, index: 1, follow: 1, noindex: 1, nofollow: 1, none: 1, noarchive: 1, nocache: 1,
+    nosnippet: 1, indexifembedded: 1, notranslate: 1, noimageindex: 1 };
   var VALUE_DIRECTIVES = { "max-snippet": 1, "max-image-preview": 1, "max-video-preview": 1, "unavailable_after": 1 };
-  function applicableDirectives(sources) {
-    var found = [];
+  function evaluateDirectives(sources, now) {
+    var result = { blocking: [], manual: [], limit: null, expires: [] };
     (sources || []).forEach(function (item) {
-      var scope = null;
-      item.value.split(",").forEach(function (raw) {
+      var tokens = item.value.split(",").map(function (raw) { return raw.trim(); });
+      var scope = tokens.map(function (token) { return /^([a-z0-9_.-]+)\s*:/.exec(token); })
+        .filter(function (m) { return m && !VALUE_DIRECTIVES[m[1]]; })[0];
+      if (scope) {
+        // A user-agent prefix. Duplicate X-Robots-Tag fields reach the tool flattened
+        // into one string, so which directives a scope covers cannot be known; none of
+        // this source is evaluated.
+        result.manual.push(item.source + " scopes directives to \"" + scope[1] + "\", and the boundaries between header fields are lost once they are combined");
+        return;
+      }
+      tokens.forEach(function (raw) {
         var token = raw.trim();
         if (!token) return;
-        var prefixed = /^([a-z0-9_.-]+)\s*:\s*(.*)$/.exec(token);
-        if (item.header && prefixed && !VALUE_DIRECTIVES[prefixed[1]]) {
-          scope = prefixed[1];
-          token = prefixed[2].trim();
-          if (!token) return;
+        var named = /^([a-z0-9_.-]+)\s*:\s*(.*)$/.exec(token);
+        if (named) {
+          var value = named[2].trim();
+          if (named[1] === "max-snippet") {
+            if (!/^-?\d+$/.test(value)) { result.manual.push(item.source + ": max-snippet value \"" + value + "\" is not a number"); return; }
+            var limit = Number(value);
+            if (limit === 0) result.blocking.push({ excerpt: item.source + ": max-snippet:0", note: "max-snippet:0, equivalent to nosnippet" });
+            else if (limit > 0) result.limit = result.limit === null ? limit : Math.min(result.limit, limit);
+          } else if (named[1] === "unavailable_after") {
+            var when = /^\d{4}-\d{2}-\d{2}(?:[t ]\d{2}:\d{2}(?::\d{2})?(?:z|[+-]\d{2}:?\d{2})?)?$/.test(value) ? Date.parse(value.toUpperCase().replace(" ", "T")) : NaN;
+            if (isNaN(when)) { result.manual.push(item.source + ": unavailable_after date \"" + value + "\" could not be read"); return; }
+            if (when <= now) result.blocking.push({ excerpt: item.source + ": unavailable_after: " + value, note: "unavailable_after is in the past, so Google stops showing the page" });
+            else result.expires.push(value);
+          }
+          return;
         }
-        if (scope === null || scope === "googlebot") found.push({ source: item.source, directive: token });
+        if (!KNOWN_DIRECTIVES[token]) { result.manual.push(item.source + ": unrecognised directive \"" + token + "\""); return; }
+        if (token === "noindex" || token === "none" || token === "nosnippet") {
+          result.blocking.push({ excerpt: item.source + ": " + token, note: token === "none" ? "none, equivalent to noindex, nofollow" : token });
+        }
       });
     });
-    return found;
+    return result;
   }
 
   function checkSnippetEligibility(doc) {
@@ -597,28 +661,26 @@
         "This check needs the page's HTML. Use the URL mode, or paste the full HTML source rather than the text.", []);
     }
     /* Google applies the most restrictive directive across every meta tag and header.
-     * noindex, none (noindex, nofollow), nosnippet and max-snippet:0 each remove
-     * snippet eligibility. A positive max-snippet is a length limit, and -1 lets
-     * Google choose, so neither blocks; the smallest positive limit is reported. */
-    var problems = [];
-    var snippetLimit = null;
-    applicableDirectives(doc.robotsSources).forEach(function (item) {
-      var directive = item.directive;
-      var limit = /^max-snippet\s*:\s*(-?\d+)$/.exec(directive);
-      if (directive === "noindex" || directive === "none" || directive === "nosnippet") {
-        problems.push({ excerpt: item.source + ": " + directive, note: directive === "none" ? "none, equivalent to noindex, nofollow" : directive });
-      } else if (limit && Number(limit[1]) === 0) {
-        problems.push({ excerpt: item.source + ": max-snippet:0", note: "max-snippet:0, equivalent to nosnippet" });
-      } else if (limit && Number(limit[1]) > 0) {
-        snippetLimit = snippetLimit === null ? Number(limit[1]) : Math.min(snippetLimit, Number(limit[1]));
-      }
-    });
+     * PASS needs every source read cleanly and nothing blocking; anything unclear is a
+     * manual check, never a pass. */
+    var verdict = evaluateDirectives(doc.robotsSources, Date.now());
+    var problems = verdict.blocking;
+    var manual = (doc.robotsManual || []).concat(verdict.manual);
+    var snippetLimit = verdict.limit;
     if (problems.length) {
       return makeCheck("snippet-eligibility", "Snippets are not blocked", ATTENTION, DOCUMENTED, basis,
         "The page restricts snippets, which by Google's own wording makes it ineligible for AI Overviews and AI Mode. Google documents snippet eligibility as a requirement, so this finding is not a heuristic. Its other requirement, site inclusion in Search Console's Search generative AI control, is outside what this tool can check.",
         problems);
     }
-    var detail = "No noindex, none, nosnippet, or max-snippet:0 was found in any robots or googlebot meta tag or X-Robots-Tag header.";
+    if (manual.length) {
+      return makeCheck("snippet-eligibility", "Snippets are not blocked", ATTENTION, DOCUMENTED, basis,
+        "Needs a manual check: the snippet directives could not all be read with certainty, so the tool will not report a pass. Inspect the page's robots meta tags and X-Robots-Tag header yourself.",
+        manual.map(function (reason) { return { excerpt: reason }; }));
+    }
+    var detail = "No noindex, none, nosnippet, max-snippet:0, or past unavailable_after was found in any robots or googlebot meta tag or X-Robots-Tag header.";
+    if (verdict.expires.length) {
+      detail += " unavailable_after " + verdict.expires.join(", ") + " will remove the page from results on that date.";
+    }
     if (snippetLimit !== null && snippetLimit > 0) {
       detail += " max-snippet:" + snippetLimit + " limits snippet text to " + snippetLimit + " characters, which Google documents as a length limit, not a block.";
     }

@@ -339,11 +339,15 @@ class HtmlModeTests(unittest.TestCase):
         self.assertEqual(self.snippet('<meta content="nosnippet" name="googlebot">')["status"], "attention")
         self.assertEqual(self.snippet('<meta name="bingbot" content="nosnippet">')["status"], "pass")
 
-    def test_header_user_agent_scope_is_respected(self):
-        self.assertEqual(self.snippet("", {"xRobotsTag": "googlebot: nosnippet"})["status"], "attention")
-        self.assertEqual(self.snippet("", {"xRobotsTag": "otherbot: noindex, nosnippet"})["status"], "pass")
-        self.assertEqual(self.snippet("", {"xRobotsTag": "otherbot: noindex, googlebot: max-snippet:0"})["status"],
-                         "attention")
+    def test_any_scoped_header_is_a_manual_check_never_a_pass(self):
+        # Round 4 changed this deliberately: duplicate X-Robots-Tag fields arrive flattened,
+        # so a scoped header cannot be attributed safely, whichever agent it names.
+        for value in ("googlebot: nosnippet", "otherbot: noindex, nosnippet",
+                      "otherbot: noindex, googlebot: max-snippet:0"):
+            with self.subTest(value=value):
+                check = self.snippet("", {"xRobotsTag": value})
+                self.assertEqual(check["status"], "attention")
+                self.assertIn("manual check", check["detail"])
 
     def test_none_counts_as_noindex(self):
         self.assertEqual(self.snippet('<meta name="robots" content="none">')["status"], "attention")
@@ -352,6 +356,53 @@ class HtmlModeTests(unittest.TestCase):
         check = self.snippet('<meta name="robots" content="max-snippet:300">', {"xRobotsTag": "max-snippet:120"})
         self.assertEqual(check["status"], "pass")
         self.assertIn("max-snippet:120", check["detail"])
+
+    def assert_not_pass(self, head, headers=None, manual=True):
+        check = self.snippet(head, headers)
+        self.assertNotEqual(check["status"], "pass", check["detail"])
+        if manual:
+            self.assertIn("manual check", check["detail"])
+        return check
+
+    def test_extra_attributes_or_entities_need_a_manual_check(self):
+        # Review round 4, finding 1: both passed although they contain noindex.
+        self.assert_not_pass('<meta data-name="otherbot" name="robots" content="noindex">')
+        self.assert_not_pass('<meta name="robots" content="index&#44;noindex">')
+
+    def test_unquoted_and_quoted_angle_bracket_need_a_manual_check(self):
+        self.assert_not_pass("<meta name=robots content=noindex>")
+        self.assert_not_pass('<meta name="robots" content="x>y, noindex">')
+        self.assert_not_pass('<meta name="r&#111;bots" content="noindex">')
+
+    def test_robots_tag_inside_comment_or_script_needs_a_manual_check(self):
+        self.assert_not_pass('<!-- <meta name="robots" content="noindex"> -->')
+        self.assert_not_pass('<script>var t = \'<meta name="robots" content="noindex">\';</script>')
+
+    def test_scoped_header_needs_a_manual_check(self):
+        # Review round 4, finding 2: two X-Robots-Tag fields flattened into
+        # "otherbot: nofollow, noindex" lost their boundary and passed.
+        self.assert_not_pass("", {"xRobotsTag": "otherbot: nofollow, noindex"})
+        self.assert_not_pass("", {"xRobotsTag": "googlebot: max-snippet:160"})
+
+    def test_unknown_directive_needs_a_manual_check(self):
+        self.assert_not_pass('<meta name="robots" content="noindx">')
+
+    def test_past_unavailable_after_fails(self):
+        # Review round 4, finding 3: an expired page passed.
+        for head, headers in (('<meta name="robots" content="unavailable_after: 2000-01-01">', None),
+                              ("", {"xRobotsTag": "unavailable_after: 2000-01-01"})):
+            with self.subTest(head=head, headers=headers):
+                check = self.assert_not_pass(head, headers, manual=False)
+                self.assertIn("unavailable_after", check["detail"] + str(check.get("evidence")))
+
+    def test_future_unavailable_after_passes_and_bad_date_needs_a_manual_check(self):
+        check = self.snippet('<meta name="robots" content="unavailable_after: 2099-01-01">')
+        self.assertEqual(check["status"], "pass")
+        self.assert_not_pass('<meta name="robots" content="unavailable_after: someday">')
+
+    def test_clean_single_quoted_and_reordered_tags_still_work(self):
+        self.assertEqual(self.snippet("<meta content='index, follow' name='robots'>")["status"], "pass")
+        self.assertEqual(self.snippet('<META NAME="ROBOTS" CONTENT="NOSNIPPET">')["status"], "attention")
 
     def test_max_snippet_zero_is_flagged_as_nosnippet(self):
         html = '<html><head><meta name="robots" content="max-snippet:0"></head><body><h1>T</h1><p>B.</p></body></html>'
