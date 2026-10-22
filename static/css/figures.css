@@ -1,0 +1,25 @@
+/* Article figures rendered by tools/image-brand (GUIDELINE.md §15).
+   Loaded only on pages with an .np-figure. */
+
+/* Plates draw their own frame, so the figure adds none. The plate always fits the
+   column, so the whole shape reads at a glance on a phone; the image links to the
+   full-size SVG for readers who want to zoom into the labels. */
+.np-figure {
+  margin: var(--space-8) 0;
+}
+.np-figure .np-figure-zoom {
+  display: block;
+  cursor: zoom-in;
+}
+.np-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.np-figure figcaption {
+  margin-top: var(--space-3);
+  font-family: var(--mono);
+  font-size: var(--font-size-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--text-3);
+}

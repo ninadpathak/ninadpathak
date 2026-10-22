@@ -46,11 +46,14 @@
 .gl-dim { fill: none; stroke: var(--np-ink-2); stroke-width: 1; }
 .gl-digit { font: 500 8.5px var(--np-mono); fill: var(--np-muted); }
 
+/* Scaled diagrams (the share card) keep token stroke widths. */
+.np-scaled path, .np-scaled rect, .np-scaled circle, .np-scaled ellipse, .np-scaled polygon { vector-effect: non-scaling-stroke; }
+
 /* M1–M3 · Glyph nodes */
 .np-diagram { overflow: visible; }
 .np-diagram .np-hit { fill: none; stroke: none; }
 .np-diagram .np-tile { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }
-.np-diagram .accent > .np-tile, .np-diagram .focal > .np-tile { stroke: var(--np-accent); stroke-width: 1.25; }
+.np-diagram .accent > .np-tile, .np-diagram .focal > .np-tile { stroke: var(--np-accent); }
 .np-diagram .focal > .np-tile { fill: var(--np-accent-wash); }
 .np-diagram .muted > .np-tile { stroke-dasharray: 3 3; fill: var(--np-canvas); }
 .np-diagram .np-stack-ghost { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }

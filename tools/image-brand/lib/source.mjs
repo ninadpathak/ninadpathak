@@ -14,6 +14,8 @@ const REMOVED = new Set(['note', 'detail', 'table', 'row', 'bar', 'timeline', 'i
 // Glyphs drawn as a wide strip inside a layer slab (block diagrams); everything else is a tile.
 export const STRIP_GLYPHS = new Set(['queue', 'sram', 'paged', 'quant', 'gpu']);
 const TILE = { w: 56, h: 48 };
+// Glyphs whose drawing is wider than the default tile.
+const TILE_SIZES = { context: { w: 92, h: 48 } };
 const STRIP = { w: 360, h: 46, label: 150 };
 
 const split = (s, sep = '|') => s.split(sep).map((p) => p.trim());
@@ -31,7 +33,8 @@ function parseGlyph(spec, file) {
     } else opts[k] = /^[-\d.]+$/.test(v) ? Number(v) : v.includes(',') ? v.split(',').map(Number) : v;
   }
   const strip = STRIP_GLYPHS.has(name);
-  const w = opts.w ?? (strip ? STRIP.w : TILE.w), h = opts.h ?? (strip ? STRIP.h : TILE.h);
+  const base = strip ? STRIP : TILE_SIZES[name] || TILE;
+  const w = opts.w ?? base.w, h = opts.h ?? base.h;
   return { id, name, opts, strip, w, h, mode: opts.bare ? 'bare' : strip ? 'strip' : 'tile' };
 }
 

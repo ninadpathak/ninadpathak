@@ -543,11 +543,10 @@ class DesignSystemTests(unittest.TestCase):
         self.assertNotIn(".visual-wrapper", global_css)
         self.assertNotIn(".flowchart {", global_css)
 
-    def test_latest_article_uses_responsive_svg_flowchart_instead_of_raster(self):
+    def test_placement_article_uses_the_image_brand_plate_instead_of_raster(self):
         article = Path("content/posts/internal-vs-external-docs.md").read_text()
-        self.assertIn('class="flowchart-image"', article)
-        self.assertIn("documentation-placement-flowchart-mobile.svg", article)
-        self.assertIn("documentation-placement-flowchart.svg", article)
+        self.assertIn('class="np-figure"', article)
+        self.assertIn("/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg", article)
         self.assertNotIn(".png", article)
         self.assertNotIn("documentation-placement-decision-tree", article)
 

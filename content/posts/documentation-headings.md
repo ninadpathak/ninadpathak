@@ -23,13 +23,10 @@ For a concept, name the concept. For a failure, name the condition and the recov
 
 That is the whole rule. Task-based headings are not a mandate to put a verb in every heading.
 
-<div class="visual-wrapper">
-  <div class="visual-title">An illustrative heading rewrite</div>
-  <picture>
-    <img src="/static/images/articles/how-to-write-task-based-documentation-headings/task-heading-anatomy.svg" width="1344" height="640" alt="An illustrative example rewrites the label Setup as Configure the client with an API key, identifying an action, object, and context." loading="lazy" decoding="async">
-  </picture>
-</div>
-<p class="visual-caption">This example shows the difference between a topic label and a heading that states the work the section covers.</p>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/documentation-headings/task-heading-anatomy.svg"><img src="/static/images/diagrams/documentation-headings/task-heading-anatomy.svg" width="720" height="496" alt="An illustrative example rewrites the topic label Configuration as the task heading Configure the client with an API key. Brackets under the heading mark its three parts: the action Configure, the object the client, and the context with an API key, each drawn as a play head, a cube, and a key." loading="lazy" decoding="async"></a>
+  <figcaption>A topic label names a subject. A task heading names the work: an action, an object, and the context that changes the next step.</figcaption>
+</figure>
 
 ## Match the heading to the section's job
 

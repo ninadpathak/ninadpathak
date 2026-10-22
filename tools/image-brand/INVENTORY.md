@@ -31,7 +31,7 @@ Taken on `origin/main` at `2e40c460` (2026-10-22); branch since rebased onto `07
 
 Content findings while sourcing the samples:
 
-- `llm-token-budgets.md` says a 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. At the article's own prices ($0.20 in, $1.25 out per million) that request costs $0.000825, so $13 per day becomes about $41. The sample uses only the pricing table.
+- `llm-token-budgets.md` once priced a 1,000-in / 500-out GPT-5.4 Nano request at $0.00026; at the article's own table it is $0.000825. Fixed on main in 937d5742. The sample uses only the pricing table.
 - The current `inference-optimization-stack.html` iframe shows a combined "20–80x" figure and puts speculative decoding at step 5. The article states neither: its fifth step is INT8 or 4-bit, and it adds speculative decoding only after the basics. The v2 stack follows the article.
 
 ## Proposed rollout (after the look is approved)
@@ -47,3 +47,9 @@ Efforts are estimates for one owner working with this pipeline.
    - *Keep and align:* add a shared `visual-fonts.css` (fixes Courier everywhere at once), replace the 14 hard-coded hex palettes with `visual-embed.css` variables, apply the stroke and type rules, add `prefers-reduced-motion`, and pin one Three.js CDN and version. Each kept visual also gets a plate PNG fallback.
 5. **Receipts and screenshots (about 1 day, lowest priority).** Build the receipt plate template and re-render the one live receipt. Re-capture the 18 evidence screenshots at 1440 wide, cropped to the claim with one accent highlight and a dated caption, and rewrite vague alt text.
 6. **Cleanup (needs Ninad's approval; deletions).** 52 unreferenced visuals and 36 unreferenced image files. List them, confirm none are linked externally or kept on purpose, then delete them.
+
+## Rollout status
+
+- **Batch 1** (branch `image-brand-batch1`): token audit and consistency fixes, stack numbering, loop context glyph, wiring (figures.css, og_image, CI check, tests), the two static diagrams swapped, and share cards for all 67 posts. Review evidence is in `review/image-brand/batch1/`.
+- **Batch 2+**: iframe triage (replace with a plate, or keep and align) and conversions in groups of 15–20.
+- Old assets (the 52 unused visuals, the 36 unused images, and the two replaced static SVGs) stay in place until Ninad approves deletion.

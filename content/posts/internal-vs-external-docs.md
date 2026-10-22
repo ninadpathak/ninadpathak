@@ -34,12 +34,9 @@ Ask four questions:
 3. Does an internal operator need implementation context that an external reader does not?
 4. Who owns the source of truth, and which product or process change makes it stale?
 
-<figure class="flowchart-image">
-  <picture>
-    <source media="(max-width: 600px)" srcset="/static/images/articles/internal-vs-external-documentation/documentation-placement-flowchart-mobile.svg">
-    <img src="/static/images/articles/internal-vs-external-documentation/documentation-placement-flowchart.svg" width="672" height="472" alt="Documentation placement flowchart. If no external reader needs the information, keep it internal when an operator needs it or review whether the page has a task. If an external reader needs it, split public and private context when both remain necessary; otherwise publish it externally." loading="lazy" decoding="async">
-  </picture>
-  <figcaption>Each path ends in internal, review, split, or external documentation without crossing connector lines.</figcaption>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg"><img src="/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg" width="720" height="688" alt="Documentation placement decision tree. If no external reader needs the information, keep it internal when an operator needs it or it holds private context; otherwise review whether the page has a task. If an external reader needs it, split it into a public task page and a private record when private context remains; otherwise publish it externally." loading="lazy" decoding="async"></a>
+  <figcaption>Each path ends in internal, review, split, or external documentation. A split is two documents with one contract between them, not a redacted internal page.</figcaption>
 </figure>
 
 ## Internal vs. external documentation comparison

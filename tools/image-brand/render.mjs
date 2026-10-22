@@ -69,7 +69,7 @@ async function embedFonts(text) {
 function embedSnippet(src, rel, dims) {
   const caption = src.meta.caption ? `\n  <figcaption>${src.meta.caption}</figcaption>` : '';
   return `<figure class="np-figure">
-  <img src="${rel}.svg" width="${dims.width}" height="${dims.height}" alt="${src.meta.alt.replace(/"/g, '&quot;')}" loading="lazy" decoding="async">${caption}
+  <a class="np-figure-zoom" href="${rel}.svg"><img src="${rel}.svg" width="${dims.width}" height="${dims.height}" alt="${src.meta.alt.replace(/"/g, '&quot;')}" loading="lazy" decoding="async"></a>${caption}
 </figure>`;
 }
 
@@ -105,12 +105,14 @@ async function main() {
         document.body.innerHTML = '';
         const dims = src.meta.kind === 'og' ? window.npComposeOg(src, tokens, { hash }) : window.npComposeArticle(src, tokens, { hash });
         const plate = document.body.querySelector('svg.np-plate');
+        const audit = window.npAudit(plate, tokens);
         const text = [...plate.querySelectorAll('text, tspan')].map((t) => t.textContent).join('');
         // Words in the image, excluding the figure title band and decorative digits.
         const counted = [...plate.querySelectorAll('text')].filter((t) => !t.closest('[data-exempt]') && !t.classList.contains('gl-digit')).map((t) => t.textContent);
-        return { dims, text, counted, svg: new XMLSerializer().serializeToString(plate) };
+        return { dims, text, counted, audit, svg: new XMLSerializer().serializeToString(plate) };
       }, { src, tokens, hash });
 
+      if (result.audit.length) throw new Error(`off-token marks: ${result.audit.slice(0, 8).join('; ')}${result.audit.length > 8 ? ` (+${result.audit.length - 8} more)` : ''}`);
       const words = countWords(result.counted.join(' '));
       const budget = tokens.wordBudget[src.meta.kind] ?? tokens.wordBudget.diagram;
       if (words.length > budget) throw new Error(`${words.length} words in the image; the budget is ${budget} (${words.join(' ')})`);

@@ -5,6 +5,7 @@ Renders article figures from Mermaid source into the ninadpathak.com image brand
 ```bash
 cd tools/image-brand
 npm ci                                   # pele 1.8.0, playwright-core, @fontsource fonts, subset-font
+node og.mjs                              # share-card sources for every published post
 node render.mjs                          # every content/diagrams/<slug>/<id>.mmd -> static/images/diagrams/<slug>/
 node render.mjs ../../content/diagrams/agent-loop-anatomy/agent-loop.mmd   # one figure
 node render.mjs --check                  # exit 1 if output is stale, contrast fails AA, a figure is over its word budget, or a source is invalid
@@ -24,6 +25,9 @@ Chromium comes from Playwright's browser cache (`npx playwright-core install chr
 | `lib/plate.js` | In-browser brand layer: glyph nodes, orthogonal router, ring layout, motifs M1–M14 (§8), plate and share-card composition |
 | `render.mjs` | CLI: render, embed WOFF2 font subsets, write SVG, PNG 2x light/dark, JSON sidecar with embed markup |
 | `review.mjs` | Before/after sheets in live article pages |
+| `og-cards.json`, `og.mjs` | Share-card glyph chain per post; writes the og.mmd sources; `--check` fails on a post without a card |
+| `contact.mjs` | Contact sheet of every share card |
+| `sweep.mjs` | Batch sweep: before (main) vs after (branch), plus 320/375/1366 × light/dark with overflow and load checks |
 
 A source file is valid Mermaid. Directives sit in `%%` comments, which Mermaid ignores:
 
@@ -40,4 +44,4 @@ flowchart LR
 
 Determinism: the same sources, tokens, CSS, brand layer, Pele version, fonts, and Chromium build give byte-identical files. Each SVG records a hash of those inputs, and `--check` compares it.
 
-Build integration (proposed, not wired in yet, since `build.py` belongs to the site-fixes branch): have `build.py` or CI run `node tools/image-brand/render.mjs --check`, and keep rendered files committed so Cloudflare Pages needs no Node or Chromium.
+Build integration: rendered files are committed, so `build.py` and Cloudflare Pages stay pure Python. CI (`.github/workflows/quality.yml`) runs `og.mjs --check` and `render.mjs --check`; `tests/test_image_brand.py` checks the built site's share-card tags and figure references.

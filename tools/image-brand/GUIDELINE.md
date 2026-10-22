@@ -1,6 +1,6 @@
 # ninadpathak.com image brand guideline
 
-Version 3 · October 2026 · covers every image an article ships: diagrams, charts, share cards, screenshots, terminal receipts, and interactive visuals.
+Version 3.1 · October 2026 · covers every image an article ships: diagrams, charts, share cards, screenshots, terminal receipts, and interactive visuals.
 
 The site's stylesheet opens with *Technical Precision. No gradients. No decoration.* Images follow it. Version 3 adds a second rule: **visuals are visual.** A figure gets its intricacy from drawing: glyphs that depict the concept, layered depth, repetition, fill levels, hatching, and connectors with ports and flow marks. Words and data don't count as detail. The article carries the explanation; the figure shows the shape of the idea. A reader should get it at a glance and find more on a closer look.
 
@@ -101,6 +101,18 @@ There are no text bands. v2's notes band, panels band, and title block are gone.
 | Hatching | 1 px `rule` at 45°, 5 px pitch |
 | Depth | Isometric slabs (top face surface, left face surface-2, right face hatched), stacked offset outlines (3 and 6 px), and hatch for "outside". No shadows, gradients, blur, or opacity stacks |
 
+## 6a. Token audit (enforced)
+
+After composing a figure, `npAudit` (in `lib/plate.js`) measures every drawn mark after all transforms. A figure fails `render.mjs` and `--check` if any of these is off-token:
+
+| Measured | Allowed |
+|---|---|
+| Stroke width | 0.75, 1, 1.25, 1.5, 1.75, 2 px |
+| Rect corner radius | 0, 1, 2, 4 px (glyph corners snap: ≤1.5 → 1, ≤3 → 2) |
+| Text size | Inter ≥12 px, JetBrains Mono ≥8.5 px |
+
+One border width per element type: every tile, slab, frame, and panel is 1 px, including accent and focal tiles, which change color but not weight. The share card's diagram scales 1.5× or more, so its strokes use `vector-effect: non-scaling-stroke` and stay on token. A deviation is a bug in the pipeline, not a per-figure choice.
+
 ## 7. Glyph library
 
 Each glyph lives in `lib/glyphs.js`, draws on a 56 × 48 box (strips: 360 × 46), and uses at most one accent part. The accent part switches on when the node is `accent` or `focal`, or when the glyph gets the `accent` option. **Use when** is a rule: a glyph means one thing everywhere.
@@ -112,7 +124,10 @@ Each glyph lives in `lib/glyphs.js`, draws on a 56 × 48 box (strips: 360 × 46)
 | `reader` | Head and shoulders | A person or audience | badge as above |
 | `window` | App window with title rule, sidebar, content lines | An application or caller | — |
 | `loop` | 300° track with chevron, particles, hub | A control loop or scheduler | — |
-| `tokens` | Rows of tiles: solid, hatched, outline, newest in accent | A prompt, context, or token stream | `rows=a,b,c` |
+| `tokens` | Rows of tiles: solid, hatched, outline, newest in accent | A prompt or token stream | `rows=a,b,c` |
+| `context` | Token rows inside a bracketed window; the newest tokens spill past the right bracket | A context window filling up (92 px wide tile) | `rows=a,b,c` |
+| `vectors` | Axes with three embeddings; the nearest pair in accent | Embeddings, vector search, similarity | — |
+| `wave` | Waveform bars, newest syllable in accent | Voice input or audio | — |
 | `cells` | Memory grid filled to a level, newest cell accent | State, memory, or cache, where the fill level means fullness | `fill=0–1`, `flag` (checkpoint) |
 | `eye` | Eye over a log trace | Observation, monitoring, logging | — |
 | `core` | Three isometric slabs with weight lines | A model | — |
@@ -165,7 +180,9 @@ Budget per figure: one hot path, at most two span brackets, at most two value ca
 
 ## 11. Share cards
 
-1200 × 630, light, with a 4 px accent rule along the top. Left: the category kicker, the published title (four lines at most), a hairline, the byline, and the URL; all of it is exempt. Right: a drafting panel with a **word-free** chain of two or three glyph tiles at 1.5× or larger. Never shrink the article's full diagram into the card.
+1200 × 630, light, with a 4 px accent rule along the top. Left: the category kicker, the published title, a hairline, the byline, and the URL; all of it is exempt. The title steps down 54 → 48 → 42 → 38 px until it fits in four lines. Right: a drafting panel with a **word-free** chain of two or three glyph tiles at 1.5× or larger. Never shrink the article's full diagram into the card.
+
+Every published post gets a card. Chains live in `og-cards.json`, one entry per slug, read top to bottom, with `*` marking the focal glyph. Pick glyphs by the article's subject using §7, and always the same glyph for the same concept. `node og.mjs` writes `content/diagrams/<slug>/og.mmd` from the map. A hand-written `og.mmd` (without the GENERATED marker) is left alone, so a post can get a bespoke card. `og.mjs --check` fails when a published post has no card. The build points `og:image` and `twitter:image` at `static/images/diagrams/<slug>/og.png` (`summary_large_image`) unless the post's frontmatter sets `og_image`. Review every card on `review/image-brand/batch1/og-contact-sheet.png` (`node contact.mjs`).
 
 ## 12. Screenshots and receipts
 
@@ -183,6 +200,17 @@ Keep one only when interaction teaches something a drawing can't, such as draggi
 - `@caption` carries the takeaway.
 - Never encode with color alone: hot paths are also thicker and carry particles and steps; badges differ by shape (lock versus globe); series differ by fill versus hatch.
 - Contrast is checked on every render.
+
+## 14a. Embedding
+
+```html
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/<slug>/<id>.svg"><img src="…svg" width="720" height="…" alt="…" loading="lazy" decoding="async"></a>
+  <figcaption>…</figcaption>
+</figure>
+```
+
+Copy it from the figure's `.json`. `static/css/figures.css` loads only on pages with an `.np-figure` (the build sets `has_figure`). The plate always fits the column, so phones see the whole shape at a glance; the link opens the full-size SVG for zooming into the labels. Per-figure narrow relayouts are a planned follow-up.
 
 ## 15. Files
 
@@ -202,7 +230,7 @@ The SVG header holds a hash of the source, tokens, CSS, glyphs, brand layer, and
 | `@glyph id \| name [options]` | Draw node `id` as a glyph (`bare` for M2; strips become slabs) |
 | `@path a>b>c` | Hot path with particles and steps |
 | `@ring a>b>c>d \| radius` | Lay those nodes on a ring (M10) |
-| `@center glyph [options] scale=k` | Glyph at the ring's hub |
+| `@center glyph [options] label=Word` | Glyph at the ring's hub, with an optional one-word label |
 | `@parts id \| phrase>node; …` | Parts brackets (M11) |
 | `@step id \| n` | Pin a numbered square to a node or slab |
 | `@dim a \| b \| :badge` | Span bracket (M13); text labels allowed but counted |

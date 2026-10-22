@@ -263,6 +263,12 @@ VISUAL_EMBED_COLORS = ["--bg", "--bg-1", "--bg-2", "--border", "--text-1", "--te
 VISUAL_EMBED_FONTS = ["--sans", "--mono"]
 
 
+def default_og_image(slug: str) -> str:
+    """Return the rendered share card for a post slug, or "" when none exists."""
+    card = Path("static/images/diagrams") / slug / "og.png"
+    return f"/static/images/diagrams/{slug}/og.png" if card.exists() else ""
+
+
 def with_slash_variants(rules: list[str]) -> list[str]:
     """Give every exact redirect source both its bare and trailing-slash form.
 
@@ -394,6 +400,10 @@ class SiteBuilder:
                 # the stylesheet; the element inside it is irrelevant.
                 "has_visuals": ('class="visual-' in html) or ("<iframe" in html),
                 "has_flowchart": 'class="flowchart' in html,
+                "has_figure": 'class="np-figure' in html,
+                # Share card: frontmatter wins; otherwise the card the image pipeline
+                # rendered for this slug (tools/image-brand), else the site default.
+                "og_image": post.get("og_image") or default_og_image(slug),
             })
 
         return sorted(posts, key=sort_key, reverse=True)

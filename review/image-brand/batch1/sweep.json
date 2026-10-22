@@ -1,0 +1,122 @@
+[
+  {
+    "slug": "internal-vs-external-docs",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "ok": true
+  },
+  {
+    "slug": "internal-vs-external-docs",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "ok": true
+  },
+  {
+    "slug": "internal-vs-external-docs",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "ok": true
+  },
+  {
+    "slug": "internal-vs-external-docs",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "ok": true
+  },
+  {
+    "slug": "internal-vs-external-docs",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "ok": true
+  },
+  {
+    "slug": "internal-vs-external-docs",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "ok": true
+  },
+  {
+    "slug": "documentation-headings",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "ok": true
+  },
+  {
+    "slug": "documentation-headings",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "ok": true
+  },
+  {
+    "slug": "documentation-headings",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "ok": true
+  },
+  {
+    "slug": "documentation-headings",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "ok": true
+  },
+  {
+    "slug": "documentation-headings",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "ok": true
+  },
+  {
+    "slug": "documentation-headings",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "ok": true
+  }
+]

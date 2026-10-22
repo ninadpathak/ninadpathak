@@ -12,7 +12,9 @@
     return n;
   };
   const P = (g, d, cls) => el('path', { d, class: cls }, g);
-  const R = (g, x, y, w, h, cls, rx = 0) => el('rect', { x, y, width: w, height: h, rx, class: cls }, g);
+  // Glyph corners snap to the radius tokens: 1 for cells and tiles, 2 for bodies, 4 for frames.
+  const snap = (rx) => (rx === 0 ? 0 : rx <= 1.5 ? 1 : rx <= 3 ? 2 : 4);
+  const R = (g, x, y, w, h, cls, rx = 0) => el('rect', { x, y, width: w, height: h, rx: snap(rx), class: cls }, g);
   const C = (g, cx, cy, r, cls) => el('circle', { cx, cy, r, class: cls }, g);
   const r2 = (n) => Math.round(n * 100) / 100;
   const hatch = (o) => `url(#${o.hatch})`;
@@ -118,6 +120,43 @@
         if (ri === 1) R(g, x, y, tw, th, 'gl-hatch', 1.5).setAttribute('fill', hatch(o));
       }
     });
+  };
+
+  // A context window: bracketed rows of tokens; the newest row runs past the right bracket.
+  G.context = (g, w, h, o) => {
+    const rows = o.rows || [6, 7, 9], tw = 7, th = 8, gap = 2.2, inside = 7;
+    const ww = inside * (tw + gap) - gap, x0 = -ww / 2 - 6, y0 = -(rows.length * (th + gap) - gap) / 2;
+    const bx0 = x0 - 5, bx1 = x0 + ww + 5, by0 = y0 - 6, by1 = -y0 + 6;
+    P(g, `M${r2(bx0 + 4)},${r2(by0)}H${r2(bx0)}V${r2(by1)}H${r2(bx0 + 4)}M${r2(bx1 - 4)},${r2(by0)}H${r2(bx1)}V${r2(by1)}H${r2(bx1 - 4)}`, 'gl-ink gl-thick');
+    rows.forEach((n, ri) => {
+      for (let i = 0; i < n; i++) {
+        const x = x0 + i * (tw + gap), y = y0 + ri * (th + gap);
+        const over = i >= inside;
+        R(g, x, y, tw, th, over ? 'gl-accent' : ri === 0 ? 'gl-solid' : 'gl-fill', 1);
+        if (ri === 1 && !over) R(g, x, y, tw, th, 'gl-hatch', 1).setAttribute('fill', hatch(o));
+      }
+    });
+  };
+
+  // Vectors: axes with three embeddings; the nearest pair shares an accent arc.
+  G.vectors = (g, w, h, o) => {
+    const s = Math.min(w, h) * 0.38;
+    P(g, `M${r2(-s)},${r2(s)}H${r2(s + 4)}M${r2(-s)},${r2(s)}V${r2(-s - 4)}`, 'gl-line');
+    P(g, `M${r2(s + 1)},${r2(s - 2.5)}L${r2(s + 4)},${r2(s)}L${r2(s + 1)},${r2(s + 2.5)}M${r2(-s - 2.5)},${r2(-s - 1)}L${r2(-s)},${r2(-s - 4)}L${r2(-s + 2.5)},${r2(-s - 1)}`, 'gl-line');
+    const tips = [[s * 0.9, -s * 0.35], [s * 0.55, -s * 0.85], [-s * 0.3, -s * 0.95]];
+    tips.forEach(([x, y], i) => {
+      P(g, `M${r2(-s)},${r2(s)}L${r2(x)},${r2(y)}`, i < 2 ? (o.accent ? 'gl-accent-line' : 'gl-ink') : 'gl-ink');
+      C(g, x, y, 2.2, i < 2 && o.accent ? 'gl-accent' : 'gl-solid');
+    });
+    P(g, `M${r2(-s + s * 0.9)},${r2(s - s * 0.55)}A${r2(s * 0.95)},${r2(s * 0.95)} 0 0 0 ${r2(-s + s * 0.62)},${r2(s - s * 0.88)}`, 'gl-hair');
+  };
+
+  // A waveform: voice in, with the newest syllable in accent.
+  G.wave = (g, w, h, o) => {
+    const bars = [0.25, 0.5, 0.85, 0.6, 1, 0.7, 0.4, 0.8, 0.5, 0.3, 0.55];
+    const bw = 3, gap = 2.4, x0 = -(bars.length * (bw + gap) - gap) / 2, hh = h * 0.34;
+    bars.forEach((k, i) => R(g, x0 + i * (bw + gap), -hh * k, bw, 2 * hh * k, i === 8 && o.accent ? 'gl-accent' : 'gl-solid', 1));
+    P(g, `M${r2(x0 - 4)},0H${r2(-x0 + 4)}`, 'gl-hair');
   };
 
   // Memory cells: a grid filled to a level; the newest cell is accent; optional checkpoint flag.

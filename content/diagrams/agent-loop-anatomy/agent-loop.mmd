@@ -1,9 +1,9 @@
 %% @fig 01
 %% @kicker The four-phase agent loop
-%% @alt The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills as the loop repeats.
+%% @alt The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills with each pass until its newest tokens spill past the edge.
 %% @caption Each phase has its own failure modes: infinite loops start in act, context exhaustion and lost tool results start in remember.
 %% @ring perceive>think>act>remember | 128
-%% @center tokens rows=3,5,7 scale=1.6
+%% @center context label=Context
 %% @glyph task | inbox
 %% @glyph perceive | eye
 %% @glyph think | core

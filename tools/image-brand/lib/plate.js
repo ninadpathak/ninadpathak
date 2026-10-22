@@ -366,10 +366,10 @@
     if (src.meta.centerGlyph) {
       const cg = src.meta.centerGlyph;
       const g = el('g', { class: 'np-glyph np-ring-center', transform: `translate(${r2(cx)},${r2(cy)})` }, track);
-      const k = cg.opts.scale || 1;
-      el('circle', { class: 'np-ring-hub', cx: 0, cy: 0, r: r2((Math.max(cg.w, cg.h) / 2) * k + 12) }, g);
-      const inner = el('g', { transform: `scale(${k})` }, g);
-      window.npGlyphs.tile[cg.name](inner, cg.w, cg.h, { ...cg.opts, hatch: `${src.id}-hatch` });
+      const hub = Math.min(R - 52, 66);
+      el('circle', { class: 'np-ring-hub', cx: 0, cy: 0, r: r2(hub) }, g);
+      window.npGlyphs.tile[cg.name](g, cg.w, cg.h, { ...cg.opts, hatch: `${src.id}-hatch` });
+      if (cg.opts.label) text(g, 'np-glyph-label', 0, 40, String(cg.opts.label), 'middle');
     }
   }
 
@@ -687,6 +687,37 @@
     return { width: W, height: H, scale: Math.round(s * 100) / 100 };
   };
 
+  // ---------------------------------------------------------------- audit
+  // Every drawn mark must land on a token: stroke widths, corner radii, and text floors,
+  // measured after all transforms. render.mjs fails the figure on any violation.
+  window.npAudit = (plate, T) => {
+    const A = T.audit;
+    const base = plate.getScreenCTM().a;
+    const scaleOf = (n) => (n.getScreenCTM()?.a || base) / base;
+    const near = (v, set) => set.some((x) => Math.abs(x - v) < 0.02);
+    const out = [];
+    const describe = (n) => `${n.tagName}.${(n.getAttribute('class') || '').split(' ')[0] || '-'}`;
+    for (const n of plate.querySelectorAll('path, rect, circle, ellipse, polygon, line, polyline')) {
+      if (n.closest('pattern, defs')) continue;
+      const cs = getComputedStyle(n);
+      if (cs.display === 'none') continue;
+      const k = cs.vectorEffect === 'non-scaling-stroke' ? 1 : scaleOf(n);
+      const sw = parseFloat(cs.strokeWidth) * k;
+      if (cs.stroke !== 'none' && sw > 0 && !near(sw, A.strokes)) out.push(`stroke ${Math.round(sw * 100) / 100} on ${describe(n)}`);
+      if (n.tagName === 'rect') {
+        const rx = parseFloat(n.getAttribute('rx') || cs.rx || 0) || 0;
+        if (!near(rx, A.radii)) out.push(`radius ${rx} on ${describe(n)}`);
+      }
+    }
+    for (const t of plate.querySelectorAll('text')) {
+      const cs = getComputedStyle(t);
+      const size = parseFloat(cs.fontSize) * scaleOf(t);
+      const mono = /Mono/.test(cs.fontFamily);
+      if (size + 0.01 < (mono ? A.minMono : A.minSans)) out.push(`text ${Math.round(size * 10) / 10}px "${t.textContent.slice(0, 20)}"`);
+    }
+    return [...new Set(out)];
+  };
+
   // ---------------------------------------------------------------- share card
   window.npComposeOg = (card, T) => {
     const C = T.canvas.og;
@@ -704,6 +735,7 @@
     if (card.mermaid) {
       const host = el('g', {}, plate);
       const svg = renderPele(host, card, T, 300);
+      svg.classList.add('np-scaled');
       brandDiagram(svg, card, T, card.id);
       const { s, cw, ch } = fit(svg, fx + fw - F.ox - 56, fy + fh - F.oy - 56, C.minDiagramScale, 2.6, card);
       scale = s;
@@ -713,19 +745,25 @@
     kickerText(plate, C.pad, 100, card.meta['og-kicker'] || 'Article', 'np-og-kicker');
     const roleT = T.type.roles['og-title'];
     const maxW = fx - C.pad - 40;
-    const probe = el('text', { class: 'np-og-title' }, plate);
-    const lines = [];
-    let cur = '';
-    for (const w of card.meta['og-title'].split(/\s+/)) {
-      const next = cur ? `${cur} ${w}` : w;
-      probe.textContent = next;
-      if (probe.getComputedTextLength() > maxW && cur) { lines.push(cur); cur = w; } else cur = next;
-    }
-    lines.push(cur);
-    probe.remove();
-    if (lines.length > 4) throw new Error(`og title wraps to ${lines.length} lines; the limit is 4`);
-    const t = el('text', { class: 'np-og-title', x: C.pad, y: 100 + 30 + roleT.size, 'data-exempt': '1' }, plate);
-    lines.forEach((line, i) => { el('tspan', { x: C.pad, dy: i === 0 ? 0 : r2(roleT.size * roleT.leading) }, t).textContent = line; });
+    // Title steps down 54 → 48 → 42 px until it fits in four lines.
+    const wrap = (size) => {
+      const probe = el('text', { class: 'np-og-title', style: `font-size:${size}px` }, plate);
+      const lines = [];
+      let cur = '';
+      for (const w of card.meta['og-title'].split(/\s+/)) {
+        const next = cur ? `${cur} ${w}` : w;
+        probe.textContent = next;
+        if (probe.getComputedTextLength() > maxW && cur) { lines.push(cur); cur = w; } else cur = next;
+      }
+      lines.push(cur);
+      probe.remove();
+      return lines;
+    };
+    const size = C.titleSizes.find((sz) => wrap(sz).length <= 4);
+    if (!size) throw new Error(`og title does not fit in four lines even at ${C.titleSizes[C.titleSizes.length - 1]} px`);
+    const lines = wrap(size);
+    const t = el('text', { class: 'np-og-title', x: C.pad, y: 100 + 30 + size, style: `font-size:${size}px`, 'data-exempt': '1' }, plate);
+    lines.forEach((line, i) => { el('tspan', { x: C.pad, dy: i === 0 ? 0 : r2(size * roleT.leading) }, t).textContent = line; });
     const by = H - 40 - 48;
     el('path', { class: 'np-sep', d: `M${C.pad},${by}H${fx - 40}` }, plate);
     text(plate, 'np-og-byline', C.pad, by + 26, 'NINAD PATHAK').setAttribute('data-exempt', '1');
