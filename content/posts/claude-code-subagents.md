@@ -6,15 +6,15 @@ slug: claude-code-subagents
 status: published
 takeaways:
 - A Claude Code subagent is a Markdown file in .claude/agents/ that runs in its own context window and returns only its final report to your conversation.
-- A subagent doesn't see your conversation history, so the prompt in its file has to carry every rule the job needs.
-- The tools field is enforced, and a read-only subagent asked to fix links got "No such tool available" on both of its Edit calls.
+- A custom subagent starts without your conversation history, so the prompt in its file has to carry every rule the job needs.
+- The tools field is enforced, and a read-only subagent asked to fix links got "No such tool available" on every Edit call it made.
 title: 'Claude Code Subagents: What Each One Sees, With a Tested Example'
 work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for developer tools, including the agent definitions and instruction files that coding agents run from.'
 ---
 
 Ask Claude Code to check every link in a docs folder and the search results land in your conversation, where they sit for the rest of the session. A subagent runs that search in its own context window and hands back only the answer.
 
-The link-checker subagent below ran in Claude Code 2.1.308 on 2026-10-22. Its tool calls stayed in its own window, and the main conversation received a short report with two broken-link lines and `broken: 2`.
+The link-checker subagent below ran in Claude Code 2.1.308 on 2026-10-22. Its tool calls stayed in its own window, and the main conversation received a short report that listed each missing link target and ended its list with `broken: 3`.
 
 ## What a Claude Code subagent is
 
@@ -34,16 +34,20 @@ Claude Code watches `.claude/agents/` and `~/.claude/agents/`, so an edited file
 
 ## What a subagent starts with
 
-Each subagent starts with a fresh context window. The docs say it "doesn't see your conversation history" or the files Claude has already read, and it begins with:
+A custom subagent like the one below starts with a fresh context window. The docs say it "doesn't see your conversation history" or the files Claude has already read, and it begins with:
 
 - its own prompt from the file's Markdown body, in place of the Claude Code system prompt
 - the task message Claude writes when it delegates
-- your CLAUDE.md files and a git status snapshot, which the built-in Explore and Plan subagents skip
+- the instruction files your main session loaded, such as CLAUDE.md, and a git status snapshot, which the built-in Explore and Plan subagents skip
 - the full text of any skill named in its `skills` field
 
 So the price of a clean window is the brief. Anything you told Claude earlier reaches the subagent only if Claude copies it into the task message, which is why the prompt in the file should carry the rules the job can't run without.
 
-Your [CLAUDE.md and AGENTS.md files](/articles/claude-md/) do reach a custom subagent, unless its frontmatter sets `omitClaudeMd: true`. Rules that only matter for one job belong in that subagent's prompt.
+Which instruction files those are depends on the session, because Claude Code reads [AGENTS.md only when no CLAUDE.md is on the path](/articles/claude-md/).
+
+Setting `omitClaudeMd: true` drops your own instruction files from the start. Managed policy files still load, and a subdirectory's CLAUDE.md loads when the subagent works there.
+
+A fork of the conversation is the exception to all of this, because it inherits the parent's history instead of starting fresh. Rules that only matter for one job belong in that subagent's prompt.
 
 ## A tested subagent: a docs link checker
 
@@ -52,18 +56,18 @@ Save this as `.claude/agents/docs-link-checker.md`:
 ```markdown
 ---
 name: docs-link-checker
-description: Checks relative Markdown links under docs/ and reports any that point to a file that does not exist. Use after editing documentation.
+description: Checks inline relative Markdown links under docs/ and reports any whose target file is missing. Use after editing documentation.
 tools: Read, Grep, Glob
 model: haiku
 ---
 
-You check relative links in Markdown files under docs/.
+You check inline Markdown links of the form [text](target) in .md files under docs/. Reference-style links such as [text][id] are out of scope.
 
 1. Use Glob to list every .md file under docs/.
-2. Use Grep with the pattern `\]\(` to find links, then drop any target that starts with http, https or #. Grep runs ripgrep, which has no look-ahead, so filter those targets yourself.
-3. Resolve each path against the directory of the file that contains it, and use Glob to confirm the target exists.
+2. Use Grep with the pattern `\]\(` to find inline links. Skip a target that contains `://`, starts with `mailto:` or starts with `#`. Every other target is a relative path, including names such as http-guide.md. Grep rejected look-ahead patterns in testing, so filter targets yourself instead of in the pattern.
+3. Remove any `#fragment` from the target, resolve the path against the directory of the file that contains it, and use Glob to confirm the file exists.
 
-Report one line per broken link in the form `file:line -> target`, then a final line `broken: N`. If every link resolves, report `broken: 0`. Do not edit any file.
+Report one line per missing target in the form `file:line -> target`, then a final line `broken: N`. If no target is missing, report `broken: 0`. Do not edit any file.
 ```
 
 Run it from the repository root. Naming the subagent in the prompt asks Claude to delegate, and the docs say an @-mention such as `@"docs-link-checker (agent)" check the docs` guarantees it runs:
@@ -72,45 +76,44 @@ Run it from the repository root. Naming the subagent in the prompt asks Claude t
 claude -p "Use the docs-link-checker subagent to check this repository's docs. Reply with its report verbatim and nothing else."
 ```
 
-If the reply ends with `broken: 0`, every relative link under `docs/` resolves. Any other number comes after one `file:line -> target` line per broken link, and those are the links to fix.
+If the report says `broken: 0`, the subagent found no missing targets among the inline links it checked in that run. It skips reference-style links and doesn't check that a `#fragment` exists on the target page, and any other number comes with one `file:line -> target` line per missing target.
 
-The file ran against a scratch repository whose `docs/` folder held two broken relative links. Each run's subagent transcript shows the model `claude-haiku-5-5`, which is what `model: haiku` resolved to:
+The file ran against a scratch repository whose `docs/` folder mixed missing link targets with links the subagent should skip, such as an external URL. Each run's subagent transcript shows the model `claude-haiku-5-5`, which is what `model: haiku` resolved to:
 
 | Run | Setup | What the subagent did |
 |---|---|---|
-| Find broken links | Two links point to missing files | Reported both as `file:line -> target`, then `broken: 2` |
-| After the fix | Both missing files created | Reported `broken: 0` |
-| Asked to fix them | An earlier draft of the file with the "Do not edit any file" line removed, and the parent told it to edit | Called `Edit` twice and got "No such tool available: Edit" both times, and no file changed |
-| Asked to fix them again | The final file with that line removed | Didn't call `Edit`, and reported that its tools can't write files |
+| Find missing targets, twice | Inline links to `configure.md`, `first-request.md` and `http-guide.md`, none of which exist, plus an external URL, an `#anchor` and a reference-style link to a missing `changelog.md` | Both runs listed every missing target, `http-guide.md` included, then `broken: 3`, and skipped the URL, the anchor and the reference-style link |
+| After the fix | The missing files created | Reported `broken: 0` |
+| Asked to fix them | A copy of the file named `docs-link-checker-noprompt`, without the "Do not edit any file" line, and the parent told it to edit | Called `Edit` once per missing target and got "No such tool available: Edit" each time, and no file changed |
 
-I'd rely on the `tools` line over the prompt. With the prompt's rule gone, the `tools` line alone kept the subagent from editing, and it held whether or not the subagent tried.
+I'd rely on the `tools` line over the prompt. With the prompt's rule gone, the `tools` line alone kept the subagent from editing, and it held on every attempt.
 
-Haiku's Grep calls in the early runs used a look-ahead pattern that ripgrep rejected, so step 2 of the final file names the pattern and the limit. The final file's runs had no failed tool calls.
+Haiku's Grep calls in an earlier draft's runs used a look-ahead pattern that Grep rejected, so step 2 of this file names the pattern and filters targets outside it. The checking runs with this file had no failed tool calls.
 
-The prose around the report also varied between runs, and one run said it "found 2 relative links" before listing 3. The `broken: N` line was right every time, so I'd make the last line of any subagent's report a fixed format the parent can check.
+The prose around the report varied between runs, and the passing run said it checked "all 4 inline relative links" before listing 5. The `broken: N` line was right every time, so I'd make the last line of any subagent's report a fixed format the parent can check.
 
-To confirm a subagent ran, list its transcripts. Claude Code stores each one under the session:
+To confirm a subagent ran, look for the delegation itself. The main session's transcript in these runs recorded an `Agent` tool call with `"subagent_type": "docs-link-checker"`, and Claude Code saved the subagent's own transcript beside it:
 
 ```bash
 ls ~/.claude/projects/*/*/subagents/
 ```
 
-Each `agent-<id>.meta.json` file there names the `agentType`, which read `docs-link-checker` in these runs. If your session has no `subagents` folder, Claude did the work in the main conversation, so @-mention the subagent to make it run.
+Each `agent-<id>.meta.json` file there names the `agentType`, which read `docs-link-checker` for the checking runs and `docs-link-checker-noprompt` for the edit probe. A missing folder proves nothing alone, because `--no-session-persistence` and the 30-day `cleanupPeriodDays` sweep can both leave none, so check for the `Agent` call and @-mention the subagent when you need it to run.
 
 ## Subagents vs skills vs hooks
 
-Each feature starts at a different moment, and the context it sees decides which one fits:
+I'd keep repeatable instructions in a skill and send a separate investigation to a subagent:
 
 | | Subagent | Skill | Hook |
 |---|---|---|---|
 | File | `.claude/agents/<name>.md` | `.claude/skills/<name>/SKILL.md` | A `hooks` entry in a settings JSON file |
 | What starts it | Claude delegates on a matching `description`, or you name it | Claude loads it on a matching `description`, or you type `/<name>` | A lifecycle event such as `PreToolUse` matches |
-| What it sees | A fresh window with its prompt, the task message and CLAUDE.md | The main conversation, unless the skill sets `context: fork` | JSON about the event, on stdin for a command hook |
+| What it sees | For a custom subagent, a fresh window with its prompt, the task message and the session's instruction files | The main conversation, unless the skill sets `context: fork` | JSON about the event, on stdin for a command hook |
 | Use it for | Self-contained work that returns a summary | Instructions you keep pasting into chat | A step that must run every time |
 
 The [skills docs](https://code.claude.com/docs/en/skills) say a skill's body "loads only when it's used," and once invoked it "stays there across later turns." So a skill adds to your context, and a subagent keeps its work out of it.
 
-[Hooks](https://code.claude.com/docs/en/hooks) are handlers, such as shell commands, that "execute automatically at specific points" in a session. A hook in `settings.json` also fires before every tool a subagent uses, so a rule that must hold inside subagents belongs there.
+[Hooks](https://code.claude.com/docs/en/hooks) are handlers, such as shell commands, that "execute automatically at specific points" in a session. Hooks from settings files also fire inside subagents, so I'd put a rule that must run before every tool call in a `PreToolUse` hook that matches every tool.
 
 ## When to keep the work in the main conversation
 
@@ -142,7 +145,7 @@ Project subagents go in `.claude/agents/` and personal ones in `~/.claude/agents
 
 ### Can a subagent see my conversation?
 
-No. A subagent starts with a fresh context window and gets the task message Claude writes, plus your CLAUDE.md files unless its definition turns them off.
+A custom subagent doesn't, because it starts with a fresh context window and the task message Claude writes. Only a fork of the conversation inherits its history.
 
 ### What is the difference between a subagent and a skill?
 
