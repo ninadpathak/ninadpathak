@@ -445,6 +445,49 @@ class HtmlModeTests(unittest.TestCase):
         check = self.assert_not_pass('<meta name="robots" content="unavailable_after: 2000-02-29T00:00Z">', manual=False)
         self.assertNotIn("manual check", check["detail"])
 
+    def test_stray_equals_before_an_encoded_name_needs_a_manual_check(self):
+        # Review round 6, finding 1: "=" swallowed name=... as its value, the encoded
+        # name was never seen, and an active noindex passed.
+        for head in ('<meta = name="&#114;obots" content="noindex">',
+                     '<meta = name=&#114;obots content=noindex>',
+                     '<meta name="robots" content="max-image-preview:noindex"><meta = name="&#114;obots" content="noindex">',
+                     '<meta =x name="description" content="noindex">'):
+            with self.subTest(head=head):
+                self.assert_not_pass(head)
+
+    def test_character_references_are_decoded_before_counting(self):
+        # Decimal, hex and named references, with or without a semicolon, must not
+        # hide robots or googlebot from the invariant.
+        for text in ("&#114;obots", "&#x72;obots", "&#X52;OBOTS", "&#114obots", "&#0000114;obots",
+                     "g&#111;&#x6F;glebot", "rob&#111ts"):
+            with self.subTest(text=text):
+                self.assert_not_pass(f'<meta name="robots" content="index"><meta property="og:title" content="{text}">')
+        self.assertEqual(self.snippet('<meta name="description" content="Tom &amp; Jerry &rarr; &#169; &lt;3">')["status"], "pass")
+
+    def test_inherited_object_properties_are_not_directives(self):
+        # Review round 6, finding 2: "constructor" and "__proto__" were looked up on
+        # plain objects, found on the prototype, and passed.
+        for content in ("constructor", "__proto__", "toString", "hasOwnProperty", "__proto__: noindex", "constructor: x"):
+            with self.subTest(content=content):
+                self.assert_not_pass(f'<meta name="robots" content="{content}">')
+        for header in ("constructor: noindex", "__proto__", "valueOf"):
+            with self.subTest(header=header):
+                self.assert_not_pass("", {"xRobotsTag": header})
+
+    def test_offset_beyond_fourteen_hours_needs_a_manual_check(self):
+        for value in ("2099-01-01T10:00+14:59", "2099-01-01T10:00-14:01", "2099-01-01T10:00+1401"):
+            with self.subTest(value=value):
+                self.assert_not_pass(f'<meta name="robots" content="unavailable_after: {value}">')
+        for value in ("2099-01-01T10:00+14:00", "2099-01-01T10:00-13:59"):
+            with self.subTest(value=value):
+                self.assertEqual(self.snippet(f'<meta name="robots" content="unavailable_after: {value}">')["status"], "pass")
+
+    def test_preview_values_must_be_documented(self):
+        for content in ("max-image-preview:noindex", "max-video-preview:soon", "max-video-preview:9999999999"):
+            with self.subTest(content=content):
+                self.assert_not_pass(f'<meta name="robots" content="{content}">')
+        self.assertEqual(self.snippet('<meta name="robots" content="max-image-preview:large, max-video-preview:-1">')["status"], "pass")
+
     def test_clean_single_quoted_and_reordered_tags_still_work(self):
         self.assertEqual(self.snippet("<meta content='index, follow' name='robots'>")["status"], "pass")
         self.assertEqual(self.snippet('<META NAME="ROBOTS" CONTENT="NOSNIPPET">')["status"], "attention")

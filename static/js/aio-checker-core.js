@@ -220,16 +220,49 @@
   function countRobotsMentions(text) {
     return (String(text).match(/robots|googlebot/gi) || []).length;
   }
+  function hasOwn(object, key) { return Object.prototype.hasOwnProperty.call(object, key); }
+  /* Every HTML named character reference whose replacement is ASCII, from the
+   * WHATWG entities.json (2,231 references, 54 of them ASCII, read 2026-10-22). The
+   * other 2,177 decode to non-ASCII characters, which a non-unicode /i regex never
+   * folds onto ASCII letters, and no reference name contains robots or googlebot,
+   * so leaving them undecoded cannot change the count below. */
+  var ASCII_REFERENCES = {"AMP":"&","AMP;":"&","DiacriticalGrave;":"`","GT":">","GT;":">","Hat;":"^","LT":"<","LT;":"<","NewLine;":"\n","QUOT":"\"","QUOT;":"\"","Tab;":"\t","UnderBar;":"_","VerticalLine;":"|","amp":"&","amp;":"&","apos;":"'","ast;":"*","bsol;":"\\","colon;":":","comma;":",","commat;":"@","dollar;":"$","equals;":"=","excl;":"!","fjlig;":"fj","grave;":"`","gt":">","gt;":">","lbrace;":"{","lbrack;":"[","lcub;":"{","lowbar;":"_","lpar;":"(","lsqb;":"[","lt":"<","lt;":"<","midast;":"*","num;":"#","percnt;":"%","period;":".","plus;":"+","quest;":"?","quot":"\"","quot;":"\"","rbrace;":"}","rbrack;":"]","rcub;":"}","rpar;":")","rsqb;":"]","semi;":";","sol;":"/","verbar;":"|","vert;":"|"};
+  /* Windows-1252 replacements the HTML spec applies to numeric references 0x80-0x9F. */
+  var C1_REFERENCES = { 128: 8364, 130: 8218, 131: 402, 132: 8222, 133: 8230, 134: 8224, 135: 8225, 136: 710, 137: 8240,
+    138: 352, 139: 8249, 140: 338, 142: 381, 145: 8216, 146: 8217, 147: 8220, 148: 8221, 149: 8226, 150: 8211, 151: 8212,
+    152: 732, 153: 8482, 154: 353, 155: 8250, 156: 339, 158: 382, 159: 376 };
+  /* Decodes decimal, hex and named references, with or without the semicolon. It
+   * decodes more eagerly than a browser (legacy names before "=" or a letter), which
+   * can only add mentions, never hide one. */
+  function decodeReferences(text) {
+    return String(text).replace(/&(?:#[xX]([0-9a-fA-F]+);?|#([0-9]+);?|([A-Za-z][A-Za-z0-9]*;?))/g, function (whole, hex, dec, name) {
+      if (name) {
+        for (var len = name.length; len > 0; len--) {
+          var key = name.slice(0, len);
+          if (hasOwn(ASCII_REFERENCES, key)) return ASCII_REFERENCES[key] + name.slice(len);
+        }
+        return whole;
+      }
+      var digits = hex || dec;
+      var code = digits.replace(/^0+/, "").length > 7 ? Infinity : parseInt(digits, hex ? 16 : 10);
+      if (hasOwn(C1_REFERENCES, code)) code = C1_REFERENCES[code];
+      if (!code || code > 0x10ffff || (code >= 0xd800 && code <= 0xdfff)) return "\ufffd";
+      return String.fromCodePoint(code);
+    });
+  }
   /* Reads one tag's attributes the way the HTML tokenizer does, so a quoted "<" or
-   * ">" cannot end the tag early. Returns { end, names } where names are the raw
-   * name attribute values, or null if the tag never closes. */
+   * ">" cannot end the tag early. Returns { end, names, unexpected }: the raw name
+   * attribute values, and whether any attribute name is not a plain word (a stray
+   * "=", say). Returns null if the tag never closes. */
   function readMetaTag(html, at) {
     var i = at + 5;
     var names = [];
+    var unexpected = false;
     while (i < html.length) {
       while (i < html.length && /[\s\/]/.test(html[i])) i++;
-      if (html[i] === ">") return { end: i + 1, names: names };
+      if (html[i] === ">") return { end: i + 1, names: names, unexpected: unexpected };
       var nameStart = i;
+      if (html[i] === "=") i++; // the tokenizer keeps a leading "=" as part of the attribute name
       while (i < html.length && !/[\s\/=>]/.test(html[i])) i++;
       var attr = html.slice(nameStart, i).toLowerCase();
       while (i < html.length && /\s/.test(html[i])) i++;
@@ -248,6 +281,7 @@
           value = html.slice(valueStart, i);
         }
       }
+      if (!/^[a-z][a-z0-9_:.-]*$/.test(attr)) unexpected = true;
       if (attr === "name") names.push(value);
       if (i === nameStart) i++;
     }
@@ -273,7 +307,7 @@
       var tag = read ? html.slice(at, read.end) : html.slice(at);
       var mentionsRobots = /robots|googlebot/i.test(tag);
       // A name that is not a plain word (an entity, say) could spell robots.
-      var unclearName = !read || read.names.length > 1 || read.names.some(function (n) { return !/^[a-z0-9:._-]*$/i.test(n); });
+      var unclearName = !read || read.unexpected || read.names.length > 1 || read.names.some(function (n) { return !/^[a-z0-9:._-]*$/i.test(n); });
       if (!mentionsRobots && !unclearName) continue;
       if (inRegion(at)) {
         manual.push("a robots meta tag sits inside a comment or script, so the page's real directives are unclear");
@@ -291,8 +325,11 @@
     /* Invariant: every occurrence of robots or googlebot in the input (x-robots
      * included) must sit inside a tag that was read exactly. Any other occurrence
      * might be a directive this scanner missed, so the page needs a manual check. */
-    var total = countRobotsMentions(html);
-    if (total !== accounted && !manual.length) {
+    // Counted both raw and with character references decoded, so neither literal
+    // nor encoded text can hide a directive.
+    var raw = countRobotsMentions(html);
+    var total = Math.max(raw, countRobotsMentions(decodeReferences(html)));
+    if ((raw !== accounted || total !== accounted) && !manual.length) {
       manual.push((total - accounted) + " mention" + (total - accounted === 1 ? "" : "s") +
         " of robots or googlebot in the HTML " + (total - accounted === 1 ? "sits" : "sit") + " outside a robots meta tag the tool could read exactly");
     }
@@ -657,9 +694,10 @@
    * Console's Search generative AI control, cannot be seen from the page. */
   /* Directives Google documents for robots meta tags and X-Robots-Tag. Anything
    * else sends the page to a manual check. */
-  var KNOWN_DIRECTIVES = { all: 1, index: 1, follow: 1, noindex: 1, nofollow: 1, none: 1, noarchive: 1, nocache: 1,
-    nosnippet: 1, indexifembedded: 1, notranslate: 1, noimageindex: 1 };
-  var VALUE_DIRECTIVES = { "max-snippet": 1, "max-image-preview": 1, "max-video-preview": 1, "unavailable_after": 1 };
+  var KNOWN_DIRECTIVES = Object.assign(Object.create(null), { all: 1, index: 1, follow: 1, noindex: 1, nofollow: 1, none: 1, noarchive: 1, nocache: 1,
+    nosnippet: 1, indexifembedded: 1, notranslate: 1, noimageindex: 1 });
+  var VALUE_DIRECTIVES = Object.assign(Object.create(null),
+    { "max-snippet": 1, "max-image-preview": 1, "max-video-preview": 1, "unavailable_after": 1 });
   /* unavailable_after is read only as a strict ISO 8601 date whose fields round-trip
    * through Date.UTC, so 2026-02-30 or 25:00 is a manual check instead of being
    * normalized. Without a time zone the instant is known only to within 14 hours;
@@ -678,7 +716,7 @@
     if (m[7] === "z") return { early: at, late: at };
     var offsetHours = Number(m[9]);
     var offsetMinutes = Number(m[10]);
-    if (offsetHours > 14 || offsetMinutes > 59) return null;
+    if (offsetMinutes > 59 || offsetHours * 60 + offsetMinutes > 14 * 60) return null; // documented range is -14:00 to +14:00
     var exact = at - (m[8] === "+" ? 1 : -1) * (offsetHours * 60 + offsetMinutes) * 60000;
     return { early: exact, late: exact };
   }
@@ -692,7 +730,7 @@
       }
       var tokens = item.value.split(",").map(function (raw) { return raw.trim(); });
       var scope = tokens.map(function (token) { return /^([a-z0-9_.-]+)\s*:/.exec(token); })
-        .filter(function (m) { return m && !VALUE_DIRECTIVES[m[1]]; })[0];
+        .filter(function (m) { return m && !hasOwn(VALUE_DIRECTIVES, m[1]); })[0];
       if (scope) {
         // A user-agent prefix. Duplicate X-Robots-Tag fields reach the tool flattened
         // into one string, so which directives a scope covers cannot be known; none of
@@ -714,13 +752,17 @@
           } else if (named[1] === "unavailable_after") {
             var when = readDate(value);
             if (!when) { result.manual.push(item.source + ": unavailable_after date \"" + value + "\" could not be read"); return; }
-            if (when.early <= now && now < when.late) { result.manual.push(item.source + ": unavailable_after date \"" + value + "\" has no time zone and falls within a day of now"); return; }
+            if (when.early <= now && now < when.late) { result.manual.push(item.source + ": unavailable_after date \"" + value + "\" has no time zone and falls within 14 hours of now"); return; }
             if (when.late <= now) result.blocking.push({ excerpt: item.source + ": unavailable_after: " + value, note: "unavailable_after is in the past, so Google stops showing the page" });
             else result.expires.push(value);
+          } else if (named[1] === "max-image-preview") {
+            if (!/^(?:none|standard|large)$/.test(value)) result.manual.push(item.source + ": max-image-preview value \"" + value + "\" is not none, standard or large");
+          } else if (!/^(?:-1|\d{1,9})$/.test(value)) {
+            result.manual.push(item.source + ": max-video-preview value \"" + value + "\" is not -1 or a whole number of up to nine digits");
           }
           return;
         }
-        if (!KNOWN_DIRECTIVES[token]) { result.manual.push(item.source + ": unrecognised directive \"" + token + "\""); return; }
+        if (!hasOwn(KNOWN_DIRECTIVES, token)) { result.manual.push(item.source + ": unrecognised directive \"" + token + "\""); return; }
         if (token === "noindex" || token === "none" || token === "nosnippet") {
           result.blocking.push({ excerpt: item.source + ": " + token, note: token === "none" ? "none, equivalent to noindex, nofollow" : token });
         }
