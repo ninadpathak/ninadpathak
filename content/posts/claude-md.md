@@ -1,18 +1,18 @@
 ---
 category: technical-documentation
 date: 2026-10-22
-description: Which coding agent reads CLAUDE.md and which reads AGENTS.md, tested in four repositories, plus a copyable AGENTS.md template and what to put in it.
+description: Which coding agent reads CLAUDE.md and which reads AGENTS.md with default settings, tested in four repositories, plus a copyable AGENTS.md template.
 slug: claude-md
 status: published
 takeaways:
-- Claude Code reads CLAUDE.md, and reads AGENTS.md only when no CLAUDE.md is on the path. Codex reads AGENTS.md and ignores CLAUDE.md.
+- With default settings, Claude Code prefers CLAUDE.md and falls back to AGENTS.md. Codex reads AGENTS.md, and reads CLAUDE.md only if you configure it as a fallback filename.
 - Keep AGENTS.md as the shared file and put a CLAUDE.md beside it that imports it with @AGENTS.md.
 - Write commands and rules an agent cannot infer from the code, and keep the file under 200 lines.
 title: 'CLAUDE.md and AGENTS.md: Which File Loads, and a Template'
 work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for developer tools, including the instruction files coding agents read before they change a repository.'
 ---
 
-Put a CLAUDE.md and an AGENTS.md in the same repository and ask Claude Code and Codex what their instructions say. Claude Code quotes CLAUDE.md, Codex quotes AGENTS.md, and neither mentions the other file.
+Put a CLAUDE.md and an AGENTS.md in the same repository and ask Claude Code and Codex what their instructions say. With default settings, Claude Code quotes CLAUDE.md, Codex quotes AGENTS.md, and neither mentions the other file.
 
 So the file you write depends on which agents your team runs, and one `@AGENTS.md` line lets a single file serve both.
 
@@ -22,23 +22,31 @@ CLAUDE.md is the Markdown file Claude Code loads at the start of a session as pr
 
 Both are plain Markdown with no required fields. Since v2.1.277, Claude Code also reads AGENTS.md, but only when no CLAUDE.md or CLAUDE.local.md sits in the working directory or above it, according to [Anthropic's memory docs](https://code.claude.com/docs/en/memory#agents-md).
 
+Both defaults can be changed. Claude Code's **Project instructions** setting can load both files or only CLAUDE.md, and Codex reads CLAUDE.md once you list it in `project_doc_fallback_filenames` in its config.
+
 ## Which file each agent loads
 
-Each case below is a fresh git repository whose instruction files carry one codeword apiece: `AGENTS-4417` in AGENTS.md and `CLAUDE-2093` in CLAUDE.md. Both agents were asked to list the codewords they had been given:
+Each case below is a fresh git repository in a temporary directory with no instruction file above it. Each instruction file carries one codeword, `AGENTS-4417` in AGENTS.md and `CLAUDE-2093` in CLAUDE.md.
+
+Claude Code ran with every tool and MCP server switched off and without user settings. Codex kept its read-only shell, with its two file-loading settings pinned to their defaults, and the script prints TOOLS in place of an answer if either agent's event trace shows Claude Code with a tool available or either agent using one.
+
+Both agents were asked to list the codewords they had been given:
 
 | Repository contains | Claude Code answered | Codex answered |
 |---|---|---|
 | AGENTS.md only | AGENTS-4417 | AGENTS-4417 |
 | CLAUDE.md only | CLAUDE-2093 | NONE |
 | AGENTS.md and CLAUDE.md | CLAUDE-2093 | AGENTS-4417 |
-| AGENTS.md, and a CLAUDE.md that starts with `@AGENTS.md` | CLAUDE-2093, AGENTS-4417 | AGENTS-4417 |
+| AGENTS.md, and a CLAUDE.md that starts with `@AGENTS.md` | both codewords | AGENTS-4417 |
 
-Running it twice with Claude Code 2.1.308 and Codex CLI 0.162.0 on 2026-10-22 gave identical answers, and both vendors document the same behavior. A stray CLAUDE.md hides AGENTS.md from Claude Code (third row), and an `@AGENTS.md` import brings it back (fourth row).
+Running the script twice on 2026-10-22, with Claude Code 2.1.308 and Codex CLI 0.162.0, gave the same codewords in each case, and no trace showed a tool available or used. Both vendors document the same default behavior.
 
-You can rerun the test with the [script](/static/examples/which-instructions-load.sh), which needs `claude` and `codex` on your PATH and prints the same table:
+A stray CLAUDE.md hides AGENTS.md from Claude Code (third row), and an `@AGENTS.md` import brings it back (fourth row).
+
+You can rerun the test with the [script](/static/examples/which-instructions-load.sh), which needs `claude`, `codex` and `python3` on your PATH. It takes no arguments, works only inside a temporary directory it creates, and deletes that directory when it finishes:
 
 ```bash
-bash which-instructions-load.sh /tmp/agent-files-test
+bash which-instructions-load.sh
 ```
 
 If Claude Code answers NONE in the first case, check `claude --version`, because direct AGENTS.md support needs v2.1.277 or later. Then type `/config` and confirm that **Project instructions** is not set to `claude-md` or `managed-only`.
@@ -68,7 +76,7 @@ Treat it as documentation whose reader is an agent that can already read your co
 | Changes that need a human, like migrations | Multi-step procedures, which fit a [skill](https://code.claude.com/docs/en/skills) better |
 | The test command to run before calling a change done | Rules for one folder only, which fit a path-scoped rule in `.claude/rules/` |
 
-The left column is what the agent cannot infer. The right column either costs context on every session or belongs in a file that loads only when it applies.
+I keep repository-wide commands in the shared file and move folder-specific rules into a scoped rule.
 
 ## Copy the template
 
@@ -117,7 +125,7 @@ For Codex, run `codex --ask-for-approval never "Summarize the current instructio
 
 ### Does Claude Code read AGENTS.md?
 
-Yes, from v2.1.277, but only when no CLAUDE.md, .claude/CLAUDE.md or CLAUDE.local.md is in the working directory or above it. With a CLAUDE.md present, add `@AGENTS.md` to it or set **Project instructions** to `claude-md-and-agents-md` in `/config`.
+Yes, from v2.1.277, and with default settings it reads AGENTS.md only when no CLAUDE.md, .claude/CLAUDE.md or CLAUDE.local.md is in the working directory or above it. With a CLAUDE.md present, add `@AGENTS.md` to it or set **Project instructions** to `claude-md-and-agents-md` in `/config`.
 
 ### Should I use CLAUDE.md or AGENTS.md?
 
