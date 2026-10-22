@@ -196,6 +196,8 @@ The exact labels can change, but the reading order should remain predictable:
 6. **Known issues:** symptoms, workarounds, and tracking links.
 7. **Resources:** migration guide, reference changes, assets, and support.
 
+The [release notes template](/articles/release-notes-template/) turns this order into a copyable Markdown file with a checker that fails a note missing its rollback line.
+
 <div class="visual-wrapper">
   <div class="visual-title">Release information by depth</div>
   <div class="visual-container visual-container--interactive">

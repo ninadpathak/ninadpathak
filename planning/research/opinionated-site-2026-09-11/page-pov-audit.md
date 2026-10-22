@@ -155,6 +155,7 @@ The thesis text below is a candidate extracted from each page's actual opening, 
 | Article | `why-coding-agents-lose-their-memory.md` | EVIDENCE_REQUIRED | Thesis candidate: “The first time I watched a coding agent forget a six-hour refactoring session, I assumed it was a bug.” Automated sweep found 3 provenance candidates; a human must classify each KEEP, REWRITE, or CUT. |
 | Article | `why-devtools-startups-lose-deals-over-bad-docs.md` | EVIDENCE_REQUIRED | Thesis candidate: “DevTools startups lose deals over bad docs long before anyone writes "documentation" into a CRM field.” Automated sweep found 2 provenance candidates; a human must classify each KEEP, REWRITE, or CUT. |
 | Article | `writing-release-notes-that-developers-trust.md` | PROVISIONAL_REVIEW | Thesis candidate: “It is late in the release cycle and someone wants to upgrade the SDK before the weekend.” Automated sweep found no provenance candidate; human evidence and editorial review remain pending. |
+| Article | `release-notes-template.md` | PROVISIONAL_REVIEW | Thesis candidate: “The Kubernetes v1.31.0 changelog opens with a section called Urgent Upgrade Notes.” New on 2026-10-22: template, filled example and checker ship under static/, and the checker output quoted in the article is pinned by tests/test_release_notes_template.py. Opposite-model and human editorial review pending. |
 
 ## Non-rendered pillar sources
 
