@@ -3,7 +3,7 @@
 
 Usage:
   python3 check_release_notes.py release-notes.md            # structure only
-  python3 check_release_notes.py --filled release-notes.md   # also fail on unfilled [placeholders]
+  python3 check_release_notes.py --filled release-notes.md   # also fail on unfilled {{placeholders}}
 
 Exit status is 0 when the note passes and 1 when it fails, so the check can run in CI.
 """
@@ -15,7 +15,7 @@ import sys
 SUMMARY_FIELDS = ("Version", "Date", "Compatibility", "Affected", "Action", "Rollback")
 BREAKING_FIELDS = ("What changed", "Migration", "Verify", "Deadline")
 ISSUE_FIELDS = ("Workaround", "Tracking", "Fixed in")
-PLACEHOLDER = re.compile(r"\[[^\]]+\](?!\()")
+PLACEHOLDER = re.compile(r"\{\{[^{}]+\}\}")
 ISO_DATE = re.compile(r"\b(\d{4})-(\d{2})-(\d{2})\b")
 
 
@@ -55,8 +55,11 @@ def check(text, filled):
     found = sections(text)
     summary = found["summary"]
     for name in SUMMARY_FIELDS:
-        if field(summary, name) is None:
+        value = field(summary, name)
+        if value is None:
             errors.append(f"summary is missing '{name}:'")
+        elif not value:
+            errors.append(f"summary '{name}:' is empty (write None if it does not apply)")
     when = field(summary, "Date")
     if when is not None and not PLACEHOLDER.fullmatch(when) and not valid_date(when):
         errors.append(f"summary Date is not a calendar date (YYYY-MM-DD): {when!r}")

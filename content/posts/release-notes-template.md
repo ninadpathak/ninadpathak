@@ -12,7 +12,7 @@ title: 'Release Notes Template: Copyable Markdown With a Pre-Publish Check'
 work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation that starts from the behavior a release changed and the check that proves a migration worked.'
 ---
 
-The Kubernetes v1.31.0 changelog opens with a section called "Urgent Upgrade Notes", subtitled "(No, really, you MUST read this before you upgrade)", and only then lists the changes by kind. The Go 1.23 release notes restate the Go 1 compatibility promise in their introduction, so a reader learns in one sentence whether their programs should still build.
+After its download links, the [Kubernetes v1.31.0 changelog](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.31.md#v1310) puts a section called "Urgent Upgrade Notes", subtitled "(No, really, you MUST read this before you upgrade)", ahead of the changes by kind. The Go 1.23 release notes restate the Go 1 compatibility promise in their introduction, so a reader learns in one sentence whether their programs should still build.
 
 Both projects order the page around the upgrade decision. My template follows the same order, and it ships with a filled example and a small checker that fails a release note missing its rollback line.
 
@@ -41,28 +41,28 @@ The checker needs only Python 3:
 The summary block is the part a reader sees first, so it is plain `Field: value` lines:
 
 ```markdown
-Version: [for example, 4.0.0]
-Date: [YYYY-MM-DD]
-Compatibility: [Backward compatible | Breaking changes to ...]
-Affected: [who must act, and who can ignore this release]
-Action: [the one thing an affected reader must do]
-Rollback: [when rolling back is safe, and when it stops being safe]
+Version: {{for example, 4.0.0}}
+Date: {{YYYY-MM-DD}}
+Compatibility: {{Backward compatible | Breaking changes to ...}}
+Affected: {{who must act, and who can ignore this release}}
+Action: {{the one thing an affected reader must do}}
+Rollback: {{when rolling back is safe, and when it stops being safe}}
 ```
 
-Each field stays, even when the answer is "None". A reader scanning for the rollback line then finds it in the same place on each release, and the checker treats a missing field as a failure.
+Each field stays, even when the answer is "None". A reader scanning for the rollback line then finds it in the same place on each release, and the checker fails a field that is missing or left empty.
 
 Each breaking change gets its own entry with four fields:
 
 ```markdown
-### [Name the changed behavior]
+### {{Name the changed behavior}}
 
-What changed: [old behavior, new behavior]
-Migration: [the step, in dependency order with the other steps]
-Verify: [an observable check that the migration worked]
-Deadline: [YYYY-MM-DD, or "None"]
+What changed: {{old behavior, new behavior}}
+Migration: {{the step, in dependency order with the other steps}}
+Verify: {{an observable check that the migration worked}}
+Deadline: {{YYYY-MM-DD, or "None"}}
 ```
 
-Verify turns the migration into something the reader can confirm. I made the checker fail an entry without it, and fail a deadline written as "end of September", because a reader cannot put either one on a calendar.
+I made Verify required so readers can test the migration, and the checker rejects a vague deadline such as "end of September" because a reader cannot put it on a calendar.
 
 ## Fill it in for a breaking SDK release
 
@@ -92,7 +92,7 @@ Deadline: 2026-09-30
 
 ## Check a release note before it ships
 
-Run the checker on the finished note. It checks the summary block and each `###` entry, and `--filled` also fails on any `[placeholder]` left in the text:
+Run the checker on the finished note. It checks the summary block and each `###` entry, and `--filled` also fails on any `{{placeholder}}` left in the text:
 
 ```bash
 python3 check_release_notes.py --filled release-notes-sdk-4.0.0.md
@@ -105,10 +105,10 @@ release-notes-sdk-4.0.0.md: PASS
   unfilled placeholders: 0
 ```
 
-Now delete the `Rollback:` line and change the first deadline to "end of September", then run it again:
+Now copy the example to `broken.md`, delete its `Rollback:` line and change the first deadline to "end of September", then check the copy:
 
 ```text
-release-notes.md: FAIL (2 problem(s))
+broken.md: FAIL (2 problem(s))
   - summary is missing 'Rollback:'
   - breaking change 'List endpoints use cursors instead of page numbers' has a Deadline without a calendar date: 'end of September'
 ```
@@ -123,7 +123,7 @@ The failing run exits with status 1, so fix each listed line and rerun until it 
 | [Go 1.23](https://go.dev/doc/go1.23) | An introduction restating the Go 1 compatibility promise | Sections by area: language, tools, runtime, standard library, ports |
 | [Node.js 22.0.0](https://nodejs.org/en/blog/release/v22.0.0) | A highlights paragraph | A "Semver-Major Commits" list |
 
-I'd copy the Kubernetes order, because its must-read section comes before the full list of changes. Go and Node.js sort by area or by semver level, which suits a reader who already knows the release is compatible.
+I'd copy the Kubernetes order, because its must-read section comes before the full list of changes. I'd use the Go and Node.js layouts when readers need to find a particular subsystem or change type.
 
 ## Release notes template or changelog template
 
