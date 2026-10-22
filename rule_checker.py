@@ -248,10 +248,24 @@ def first_person_count(body):
     ))
 
 
-def get_prose(text):
-    """Strip frontmatter, code fences, inline code, HTML embeds, HTML tags, comments."""
+# An evidence receipt is an HTML comment, `<!-- evidence-three: ... -->`, placed before a
+# counted "three" to show where the count comes from. get_prose() used to delete every
+# comment before the rule-of-three check searched for receipts, so a receipt could never
+# be found. A receipt now survives as this private-use character, and only the
+# rule-of-three check reads the receipt-preserving prose.
+RECEIPT_MARK = '\ue000'
+RECEIPT = re.compile(r'<!--\s*evidence-three:.*?-->', re.S)
+
+
+def get_prose(text, keep_receipts=False):
+    """Strip frontmatter, code fences, inline code, HTML embeds, HTML tags, comments.
+
+    With keep_receipts=True, each evidence-three receipt is replaced by RECEIPT_MARK
+    instead of being deleted with the other comments.
+    """
     parts = text.split('---', 2)
     body = parts[2] if len(parts) > 2 else text
+    body = RECEIPT.sub(RECEIPT_MARK if keep_receipts else '', body)
     body = re.sub(r'<!--.*?-->', '', body, flags=re.S)
     body = re.sub(r'```.*?```', '', body, flags=re.S)
     body = re.sub(r'`[^`]+`', '', body)
@@ -414,16 +428,17 @@ def check_post(path):
         r'\b(?:session|attempt|step|phase|stage|level|version|round|batch|figure|'
         r'chapter|part|tier|day|week|month|item|line|column|table)\s+$', re.I)
 
-    for m in re.finditer(r'\bthree\b|' + bare_three, prose, re.I):
-        if identifier.search(prose[max(0, m.start() - 24):m.start()]):
+    counted = get_prose(text, keep_receipts=True)
+    for m in re.finditer(r'\bthree\b|' + bare_three, counted, re.I):
+        if identifier.search(counted[max(0, m.start() - 24):m.start()]):
             continue
-        receipt_window = prose[max(0, m.start() - 300):m.start()]
-        if '<!-- evidence-three:' in receipt_window:
+        receipt_window = counted[max(0, m.start() - 300):m.start()]
+        if RECEIPT_MARK in receipt_window:
             continue
-        if _names_its_trio(prose, m.end()):
+        if _names_its_trio(counted, m.end()):
             continue
         start = max(0, m.start() - 30)
-        snippet = prose[start:m.start() + 70].replace('\n', ' ').strip()
+        snippet = counted[start:m.start() + 70].replace('\n', ' ').replace(RECEIPT_MARK, '').strip()
         issues.append(('error', 'rule-of-three', None,
                        f'"{m.group(0)}" needs an evidenced count or an explicit factual trio: ...{snippet}...'))
 

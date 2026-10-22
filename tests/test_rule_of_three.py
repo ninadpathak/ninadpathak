@@ -131,3 +131,45 @@ class PositionalEnumerationTests(unittest.TestCase):
     def test_rhetorical_three_with_no_enumeration_still_fires(self):
         self.assertTrue(self.check(
             "Repeating the same idea three different ways on one page only adds noise."))
+
+
+class EvidenceReceiptTests(unittest.TestCase):
+    """The error message offers an evidence receipt, `<!-- evidence-three: ... -->`, as one way
+    to satisfy the check. get_prose() deleted every HTML comment before the receipt search ran,
+    so a receipt could never be found. These tests run the full checker on a post file."""
+
+    def errors(self, body):
+        import tempfile
+        from rule_checker import check_post
+        with tempfile.NamedTemporaryFile('w', suffix='.md', delete=False) as handle:
+            handle.write("---\ntitle: T\nslug: t\nstatus: published\n---\n\n" + body + "\n")
+        try:
+            return [issue for issue in check_post(handle.name) if issue[1] == 'rule-of-three']
+        finally:
+            pathlib.Path(handle.name).unlink()
+
+    def test_receipt_before_a_count_clears_it(self):
+        body = "<!-- evidence-three: link count from the validator run -->\n\n| File | Links |\n|---|---|\n| a | 3 |"
+        self.assertEqual(self.errors(body), [])
+
+    def test_count_without_receipt_still_fails(self):
+        self.assertEqual(len(self.errors("| File | Links |\n|---|---|\n| a | 3 |")), 1)
+
+    def test_receipt_only_reaches_300_characters_back(self):
+        body = "<!-- evidence-three: too far -->\n\n" + ("Filler sentence here. " * 20) + "\n\nThe file has three links."
+        self.assertEqual(len(self.errors(body)), 1)
+
+    def test_other_comments_are_not_receipts(self):
+        self.assertEqual(len(self.errors("<!-- a note -->\n\nThe file has three links.")), 1)
+
+    def test_receipt_does_not_hide_a_banned_starter(self):
+        import tempfile
+        from rule_checker import check_post
+        body = "<!-- evidence-three: x -->\nThis sentence starts badly with three words."
+        with tempfile.NamedTemporaryFile('w', suffix='.md', delete=False) as handle:
+            handle.write("---\ntitle: T\nslug: t\nstatus: published\n---\n\n" + body + "\n")
+        try:
+            issues = check_post(handle.name)
+        finally:
+            pathlib.Path(handle.name).unlink()
+        self.assertTrue(any(issue[1] == 'banned-starter' for issue in issues))
