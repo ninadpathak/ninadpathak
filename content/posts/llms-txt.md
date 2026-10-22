@@ -14,11 +14,13 @@ work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical docume
 
 Cloudflare's root llms.txt lists its products, and each entry links to that product's own llms.txt with the full index of its pages. Stripe's file opens with prose instructions for coding agents before its first list of links.
 
-Both are valid Markdown, and both answer to the same short proposal. They read nothing alike, and the validator on this site finds no errors in one and 21 in the other, though neither result says whether anything reads the file.
+Both are valid Markdown, and both answer to the same short proposal. They read nothing alike, and the validator on this site finds no errors in one and 21 in the other, though neither result says whether anything fetches the file.
 
 ## What llms.txt is
 
-llms.txt is a Markdown file at a site's root that gives language models and the tools around them a short, curated map of the site. The [llms.txt proposal](https://llmstxt.org/index.md), published by Jeremy Howard on 2024-09-03, defines its parts in this order:
+llms.txt is a Markdown index for the site or section where it lives, written for language models and the tools around them. It sits at the root path `/llms.txt` or at a subpath such as `/docs/llms.txt`, where it covers the pages under that path.
+
+The [llms.txt proposal](https://llmstxt.org/index.md), published by Jeremy Howard on 2024-09-03, defines its parts in this order:
 
 1. An H1 with the name of the project or site, the only required section.
 2. A blockquote with a short summary.
@@ -35,11 +37,11 @@ Chrome's [Lighthouse llms.txt audit](https://developer.chrome.com/docs/lighthous
 
 Server logs answer whether anything fetches the file. An [Ahrefs study published on 2026-06-15](https://ahrefs.com/blog/llmstxt-study/) used its Web Analytics and Bot Analytics data across 137,210 domains and found that 97% of published llms.txt files received no request in May 2026, from bots or people.
 
-Ahrefs notes that its customers skew technical and SEO-aware, and it didn't check whether the files followed the proposal. So the 97% measures readership and says nothing about file quality.
+Ahrefs notes that its customers skew technical and SEO-aware, and it didn't check whether the files followed the proposal.
 
 ## Four real files, checked against the proposal
 
-The table comes from the same validation engine that powers the [llms.txt validator](/llms-txt-validator/), run on four public files fetched on 2026-10-22. Each owner can change its file at any time, so these counts are a snapshot:
+The table comes from the same validation engine that powers the [llms.txt validator](/llms-txt-validator/), run on four public files fetched with curl at 14:58 UTC on 2026-10-22. Each owner can change its file at any time, and Stripe's server varies its response by request headers, so these counts are a snapshot of what that request received:
 
 | File | Lines | Errors | Warnings |
 |---|---|---|---|
@@ -82,13 +84,13 @@ The [validator](/llms-txt-validator/) checks the structure, and your server logs
 
 ### What is llms.txt?
 
-llms.txt is a Markdown file at a site's root that lists the pages a site's owner wants language models and AI tools to read first. The proposal at llmstxt.org requires only an H1 and suggests a summary and H2 sections of annotated links.
+llms.txt is a Markdown index for the site or section where it lives, listing the pages its owner wants language models and AI tools to read first. The proposal at llmstxt.org requires only an H1 and suggests a summary and H2 sections of annotated links.
 
 ### Does Google use llms.txt?
 
 No. Google's guide to generative AI search says Google Search doesn't use llms.txt or other AI text files, and you don't need one to appear in Search.
 
-### Do AI crawlers read llms.txt?
+### Do AI crawlers request llms.txt?
 
 Ahrefs found that 97% of published llms.txt files received no request in May 2026, from bots or people. Check your own server logs before assuming yours is fetched.
 
