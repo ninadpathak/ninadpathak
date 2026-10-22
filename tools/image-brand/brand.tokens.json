@@ -40,7 +40,8 @@
     { "fg": "muted",     "bg": ["canvas", "surface"],                             "min": 4.5, "use": "small mono meta text" },
     { "fg": "muted",     "bg": ["surface-2"],                                     "min": 4.5, "use": "kicker on outcome node" },
     { "fg": "accent",    "bg": ["canvas", "surface", "accent-wash"],              "min": 4.5, "use": "accent kicker and edge labels" },
-    { "fg": "on-accent", "bg": ["accent"],                                        "min": 4.5, "use": "badge text on accent" },
+    { "fg": "on-accent", "bg": ["accent"],                                        "min": 4.5, "use": "step numbers on accent" },
+    { "fg": "canvas",    "bg": ["ink"],                                           "min": 4.5, "use": "detail letters on ink tags" },
     { "fg": "danger",    "bg": ["canvas", "surface"],                             "min": 4.5, "use": "failure labels" },
     { "fg": "success",   "bg": ["canvas", "surface"],                             "min": 4.5, "use": "pass labels" },
     { "fg": "line",      "bg": ["canvas", "surface"],                             "min": 3.0, "use": "connectors (non-text graphics)" },
@@ -73,10 +74,10 @@
   "stroke": {
     "frame": 1, "node": 1, "edge": 1.25, "edge-hot": 1.75, "accent-rule": 3, "tick": 0.75, "crop": 1
   },
-  "layout": { "nodeSpacing": 28 },
+  "layout": { "nodeSpacing": 28, "rankSpacing": 64, "chartWidth": 600, "chartHeight": 340 },
   "radius": { "node": 4, "plate": 4, "label": 2 },
   "canvas": {
-    "article": { "width": 720, "head": 44, "foot": 36, "pad": 32, "minScale": 0.875, "grid": 16 },
-    "og":      { "width": 1200, "height": 630, "pad": 64, "grid": 16 }
+    "article": { "width": 720, "head": 44, "pad": 32, "minScale": 0.875, "grid": 16 },
+    "og":      { "width": 1200, "height": 630, "pad": 64, "grid": 16, "minDiagramScale": 1.75 }
   }
 }

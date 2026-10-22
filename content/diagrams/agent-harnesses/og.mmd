@@ -2,4 +2,18 @@
 %% @og-kicker AI engineering
 %% @og-title Agent Harnesses: The Infrastructure Your LLM Agent Needs
 %% @og-url ninadpathak.com/articles/agent-harnesses/
-%% @diagram harness-layers.mmd
+%% @path app>harness>llm
+---
+config:
+  flowchart:
+    rankSpacing: 28
+---
+flowchart TB
+  app["§Caller
+Application"]:::external
+  harness["§Runtime
+Agent harness"]:::focal
+  llm["§Model
+Raw LLM"]:::external
+  app --> harness
+  harness --> llm

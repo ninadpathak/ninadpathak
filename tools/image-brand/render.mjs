@@ -9,7 +9,7 @@
 //
 // Output per figure: <id>.svg (light/dark via prefers-color-scheme, fonts embedded),
 // <id>.light.png and <id>.dark.png at 2x, and <id>.json with alt text and embed markup.
-// Share cards (`@kind og`) write <id>.svg and a 1200x630 <id>.png.
+// Share cards (`@kind og`) write <id>.svg and a 1200x630 <id>.png from their own small diagram.
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
@@ -81,7 +81,6 @@ async function main() {
   const files = findSources();
   if (!files.length) { console.log('no sources'); return failures; }
   const sources = files.map(parseSource);
-  const byPath = new Map(sources.map((s) => [s.file, s]));
 
   const browser = await chromium.launch();
   const page = await (await browser.newContext({ deviceScaleFactor: 1 })).newPage();
@@ -97,22 +96,16 @@ async function main() {
   for (const src of sources) {
     const label = path.relative(REPO_DIR, src.file);
     try {
-      let target = src;
-      if (src.meta.kind === 'og') {
-        if (!src.meta.diagram) throw new Error('@diagram is required for @kind og');
-        const ref = path.resolve(path.dirname(src.file), src.meta.diagram);
-        target = byPath.get(ref) ?? parseSource(ref);
-      }
       const hash = createHash('sha256')
-        .update([readFileSync(src.file, 'utf8'), readFileSync(target.file, 'utf8'), JSON.stringify(tokens), brandCss, plateJs, peleVersion].join('\0'))
+        .update([readFileSync(src.file, 'utf8'), JSON.stringify(tokens), brandCss, plateJs, peleVersion].join('\0'))
         .digest('hex').slice(0, 16);
-      const result = await page.evaluate(({ src, target, tokens }) => {
+      const result = await page.evaluate(({ src, tokens, hash }) => {
         document.body.innerHTML = '';
-        const dims = src.meta.kind === 'og' ? window.npComposeOg(src, target, tokens) : window.npComposeArticle(src, tokens);
+        const dims = src.meta.kind === 'og' ? window.npComposeOg(src, tokens, { hash }) : window.npComposeArticle(src, tokens, { hash });
         const plate = document.body.querySelector('svg.np-plate');
         const text = [...plate.querySelectorAll('text, tspan')].map((t) => t.textContent).join('');
         return { dims, text, svg: new XMLSerializer().serializeToString(plate) };
-      }, { src, target, tokens });
+      }, { src, tokens, hash });
 
       const fonts = await embedFonts(result.text + ' ');
       const svg = `<!-- ninadpathak.com image brand · source content/diagrams/${src.slug}/${src.id}.mmd · pele ${peleVersion} · ${hash} -->\n`

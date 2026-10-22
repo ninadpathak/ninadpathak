@@ -1,6 +1,6 @@
 # Article image inventory and rollout plan
 
-Taken on `origin/main` at `2e40c460` (2026-10-22). There are 67 posts in `content/posts/`.
+Taken on `origin/main` at `2e40c460` (2026-10-22); branch since rebased onto `0759ad64`. There are 67 posts in `content/posts/`.
 
 ## Inventory
 
@@ -17,14 +17,22 @@ Taken on `origin/main` at `2e40c460` (2026-10-22). There are 67 posts in `conten
 
 **`hermes-featured-images` (sibling repo, inspected read-only).** It is a Python renderer that makes 1920×1080 featured images for LinuxForDevices, CodeForGeek, and AskPython, deterministic and byte-identical. Nothing in it targets ninadpathak.com, and this site doesn't consume its output. This pipeline borrows its deterministic-output and validate-before-render ideas but doesn't depend on it.
 
-## Samples redone (phase 1)
+## Samples (phase 1, v2 component library)
 
-| # | Type | Article | Source | Output |
+| # | Archetype | Article | Source | Replaces |
 |---|---|---|---|---|
-| 1 | Static flowchart / decision tree | internal-vs-external-docs | `content/diagrams/internal-vs-external-docs/documentation-placement.mmd` | replaces both desktop and mobile SVGs with one plate, at 100% scale |
-| 2 | Annotated example | documentation-headings | `content/diagrams/documentation-headings/task-heading-anatomy.mmd` | dark mode fixed; the sentence moves to the caption |
-| 3 | Interactive iframe → plate | agent-loop-anatomy | `content/diagrams/agent-loop-anatomy/agent-loop.mmd` | 2×2 loop with the article's two failure points as callouts |
-| 4 | Share card (og:image) | agent-harnesses | `content/diagrams/agent-harnesses/og.mmd` + `harness-layers.mmd` | 1200×630 card, plus the harness diagram as a plate the article can use |
+| 1 | Decision tree | internal-vs-external-docs | `content/diagrams/internal-vs-external-docs/documentation-placement.mmd` | hand-drawn desktop and mobile SVGs |
+| 2 | Anatomy | documentation-headings | `content/diagrams/documentation-headings/task-heading-anatomy.mmd` | light-only SVG |
+| 3 | Loop | agent-loop-anatomy | `content/diagrams/agent-loop-anatomy/agent-loop.mmd` | `agent-loop-cycle.html` iframe |
+| 4 | Share card | agent-harnesses | `content/diagrams/agent-harnesses/og.mmd` | the 512×512 favicon as og:image |
+| 4b | Architecture | agent-harnesses | `content/diagrams/agent-harnesses/harness-layers.mmd` | `agent-harness-layers.html` iframe (Three.js-era rings) |
+| 5 | Stack | llm-inference-optimization | `content/diagrams/llm-inference-optimization/inference-stack.mmd` | `inference-optimization-stack.html` iframe |
+| 6 | Comparison / benchmark | llm-token-budgets | `content/diagrams/llm-token-budgets/token-pricing.mmd` | `token-budget.html` iframe |
+
+Content findings while sourcing the samples:
+
+- `llm-token-budgets.md` says a 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.00026. At the article's own prices ($0.20 in, $1.25 out per million) that request costs $0.000825, so $13 per day becomes about $41. The sample uses only the pricing table.
+- The current `inference-optimization-stack.html` iframe shows a combined "20–80x" figure and puts speculative decoding at step 5. The article states neither: its fifth step is INT8 or 4-bit, and it adds speculative decoding only after the basics. The v2 stack follows the article.
 
 ## Proposed rollout (after the look is approved)
 

@@ -9,7 +9,7 @@ node render.mjs                          # every content/diagrams/<slug>/<id>.mm
 node render.mjs ../../content/diagrams/agent-loop-anatomy/agent-loop.mmd   # one figure
 node render.mjs --check                  # exit 1 if output is stale, contrast fails AA, or a source is invalid
 node render.mjs --out /tmp/preview       # render somewhere else
-node review.mjs http://localhost:8791    # before/after sheets against a locally served build
+V1_DIR=/path/to/v1 node review.mjs http://127.0.0.1:8791   # before/after (+ v1-vs-v2) sheets against a served build
 ```
 
 Chromium comes from Playwright's browser cache (`npx playwright-core install chromium` if it is missing).
@@ -19,8 +19,8 @@ Chromium comes from Playwright's browser cache (`npx playwright-core install chr
 | `brand.tokens.json` | Palette (light/dark, site token mapping), contrast pairs, type roles, strokes, radii, canvas sizes |
 | `lib/tokens.mjs` | Loads tokens, checks WCAG contrast, reports drift from `static/css/main.css`, emits the Pele theme CSS |
 | `theme/brand.css` | Element styles for plates and Pele classes, using only `--np-*` variables |
-| `lib/source.mjs` | Parses `%% @directive` metadata and the `§` kicker / `~` detail label grammar |
-| `lib/plate.js` | In-browser brand layer: chevrons, ports, hot path, cards, top rules, clusters, callouts, legend, drafting field, share card |
+| `lib/source.mjs` | Parses `%% @directive` metadata, enforces the component budget, prepares the `§` kicker / `~` detail grammar |
+| `lib/plate.js` | In-browser brand layer: orthogonal router, components C1–C16 (GUIDELINE.md §8), plate and share-card composition |
 | `render.mjs` | CLI: render, embed WOFF2 font subsets, write SVG, PNG 2x light/dark, JSON sidecar with embed markup |
 | `review.mjs` | Before/after sheets in live article pages |
 

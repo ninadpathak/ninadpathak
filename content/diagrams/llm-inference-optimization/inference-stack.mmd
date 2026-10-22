@@ -1,0 +1,39 @@
+%% @fig 01
+%% @kicker Inference optimization stack
+%% @alt The inference stack, top to bottom: serving engines (vLLM, TensorRT-LLM, SGLang), continuous batching, the Flash Attention 2 kernel, PagedAttention for the KV cache, quantization from FP8 to INT8 to 4-bit, and the GPU. Numbered tags give the order to apply them: continuous batching first, Flash Attention 2 second, FP8 third, PagedAttention fourth, INT8 or 4-bit last.
+%% @caption Apply the levers in the numbered order. The basics move throughput more than the sophisticated techniques do.
+%% @dim batch | quant | Four software levers
+%% @table Order of application | # | Technique | Typical effect | Trade-off
+%% @row 1 | Continuous batching | 10–20× | Memory reserved for max batch
+%% @row 2 | Flash Attention 2 | 2–4× | Baseline; O(n) memory
+%% @row 3 | FP8 quantization | 40–50% | Modest speedup
+%% @row 4 | PagedAttention | 2–4× | Long contexts, high concurrency
+%% @row 5 | INT8 or 4-bit | 1–3% | Quality loss; 5–8% on code
+%% @detail kv | KV cache · 70B, 128K context | One sequence: ≈ 64 GB; 16 sequences: ≈ 1 TB
+%% @detail batch | Over-reserved batch | max_num_seqs: 256; Live sequences: ≈ 30; Phantom slots: 226
+%% @legend accent=Apply first; outcome=Serving engine
+block-beta
+  columns 3
+  e1["§Engine
+vLLM"]
+  e2["§Engine
+TensorRT-LLM"]
+  e3["§Engine
+SGLang"]
+  batch["§Batching | 1st
+Continuous batching
+~Requests join and leave per step"]:3
+  attn["§Attention kernel | 2nd
+Flash Attention 2
+~Tiles in SRAM; O(n) memory"]:3
+  kv["§KV cache | 4th
+PagedAttention
+~Paged blocks; 2–4× more sequences"]:3
+  quant["§Quantization | 3rd, 5th
+FP8 → INT8 → 4-bit
+~Trade precision for memory"]:3
+  gpu["§Hardware
+GPU memory and bandwidth
+~H100 + NVLink for long batches"]:3
+  class e1,e2,e3 outcome
+  class batch accent

@@ -1,16 +1,19 @@
 %% @fig 01
 %% @kicker Documentation placement
 %% @alt Documentation placement decision tree. If no external reader needs the information, keep it internal when an operator needs it or contains private context, otherwise review whether the page has a task. If an external reader needs it, split it into a public task page and a private record when private context remains, otherwise publish it externally.
-%% @caption Each path ends in internal, review, split, or external documentation.
+%% @caption Each path ends in internal, review, split, or external documentation. A split is two documents with one contract between them, not a redacted internal page.
 %% @path reader>public>split
-%% @note split | Split keeps one public task page and moves the private operating record out of it.
+%% @dim internal | review | Private readers
+%% @dim split | external | Public readers
+%% @detail split | Split documentation | Public: customer task + contract; Private: operating detail; Owners: one per side; Update: when the two disagree
+%% @detail external | External documentation | Reader: customer, partner, developer; Task: evaluate, integrate, recover; Update: interface or limit change
 %% @legend accent=Decision; outcome=Destination; hot=Both readers
 flowchart TB
-  reader["§Start
+  reader["§Start | Q1
 Does an external reader need this for a supported task?"]:::accent
-  private["§Private path
+  private["§Private path | Q2
 Does an operator need it, or does it hold private context?"]
-  public["§Public path
+  public["§Public path | Q3
 Does private operating context remain once the public task is clear?"]:::accent
   internal["`§Outcome
 **Internal**

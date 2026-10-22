@@ -1,20 +1,28 @@
 %% @fig 01
 %% @kicker An illustrative heading rewrite
-%% @alt An illustrative example rewrites the topic label Setup as the task heading Configure the client with an API key, which names an action, an object, and a context.
-%% @caption A topic label names a subject. A task heading names the work the section covers.
+%% @alt An illustrative example rewrites the topic label Configuration as the task heading Configure the client with an API key, which names an action, an object, and a context. A table lists six section jobs with a generic label and an illustrative rewrite for each.
+%% @caption A topic label names a subject. A task heading names the work the section covers. The rewrites are illustrations, not a universal template.
 %% @path before>after
 %% @note after | Read it alone in the outline: the reader knows what they will have done.
+%% @dim action | context | One heading · three parts
+%% @table Section job → heading | Section job | Generic label | Illustrative rewrite
+%% @row Procedure | Setup | Create the project and install the CLI
+%% @row Configuration | Configuration | Configure the client with an API key
+%% @row Verification | Testing | Verify the endpoint accepts a signed test event
+%% @row Recovery | Errors | Recover when signature verification fails
+%% @row Explanation | Authentication | Token scopes and integration access
+%% @row Reference | Options | Retry policy options for background jobs
 %% @legend muted=Topic label; focal=Task heading; outcome=Heading part; hot=Rewrite
-flowchart LR
-  before["§Topic label
-Setup"]:::muted
-  after["§Task heading
+flowchart TB
+  before["§Topic label | Before
+Configuration"]:::muted
+  after["§Task heading | After
 Configure the client with an API key"]:::focal
-  action["§Action
+  action["§Action | Verb
 Configure"]:::outcome
-  object["§Object
+  object["§Object | Noun
 the client"]:::outcome
-  context["§Context
+  context["§Context | Condition
 with an API key"]:::outcome
   before -->|rewrite| after
   after --- action

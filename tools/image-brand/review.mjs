@@ -20,14 +20,25 @@ const SAMPLES = [
   { name: '2-anatomy', type: 'Static SVG annotated example', url: '/articles/documentation-headings/', selector: '.visual-wrapper', diagram: 'documentation-headings/task-heading-anatomy', removeNext: 'p.visual-caption' },
   { name: '3-iframe-loop', type: 'Interactive iframe visual (HTML/SVG animation)', url: '/articles/agent-loop-anatomy/', selector: '.visual-wrapper', diagram: 'agent-loop-anatomy/agent-loop' },
   { name: '4-og-card', type: 'Share card (og:image)', og: 'agent-harnesses/og' },
+  { name: '5-stack', type: 'Architecture / stack (iframe replaced)', url: '/articles/llm-inference-optimization/', selector: '.visual-wrapper', diagram: 'llm-inference-optimization/inference-stack' },
+  { name: '6-benchmark', type: 'Comparison / benchmark (iframe replaced)', url: '/articles/llm-token-budgets/', selector: '.visual-wrapper', diagram: 'llm-token-budgets/token-pricing' },
 ];
+
+// v1 renders kept for the v1-vs-v2 sheet (pass a directory holding the phase-1 output).
+const V1_DIR = process.env.V1_DIR;
 
 const browser = await chromium.launch();
 
 async function capture(sample, scheme) {
   const ctx = await browser.newContext({ viewport: { width: 1180, height: 900 }, deviceScaleFactor: 2, colorScheme: scheme });
   const page = await ctx.newPage();
-  const setTheme = () => page.evaluate((s) => document.documentElement.setAttribute('data-theme', s), scheme);
+  const setTheme = () => page.evaluate((s) => {
+    document.documentElement.setAttribute('data-theme', s);
+    // Sticky chrome would overlap figures taller than the viewport in element screenshots.
+    const style = document.createElement('style');
+    style.textContent = 'header, nav, .site-header, .reading-progress, [class*="progress"] { position: static !important; }';
+    document.head.appendChild(style);
+  }, scheme);
   const shots = {};
   await page.goto(base + sample.url, { waitUntil: 'networkidle' });
   await setTheme();
@@ -56,7 +67,7 @@ async function capture(sample, scheme) {
   return shots;
 }
 
-async function sheet(sample, scheme, before, after, beforeNote, afterNote) {
+async function sheet(sample, scheme, before, after, beforeNote, afterNote, labels = ['Before', 'After'], file = `${sample.name}.${scheme}.png`) {
   const dark = scheme === 'dark';
   const bg = dark ? '#090909' : '#f8f8f6', ink = dark ? '#f0f0f0' : '#0e0e0e', muted = dark ? '#8a8a8a' : '#6b6b6b', rule = dark ? '#1e1e1e' : '#e0e0dc', accent = dark ? '#ff5f1f' : '#c23b00';
   const img = (buf) => `data:image/png;base64,${buf.toString('base64')}`;
@@ -64,17 +75,17 @@ async function sheet(sample, scheme, before, after, beforeNote, afterNote) {
   <div id="s" style="display:inline-block;padding:40px">
     <div style="font-size:13px;letter-spacing:.12em;color:${accent};text-transform:uppercase">// ${sample.name} · ${sample.type} · ${scheme}</div>
     <div style="display:flex;gap:40px;margin-top:24px;align-items:flex-start">
-      ${[['Before', before, beforeNote], ['After', after, afterNote]].map(([label, buf, note]) => `
+      ${[[labels[0], before, beforeNote], [labels[1], after, afterNote]].map(([label, buf, note]) => `
       <div style="width:720px">
         <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:${muted};border-bottom:1px solid ${rule};padding-bottom:8px;margin-bottom:16px">${label}${note ? ` · ${note}` : ''}</div>
-        <img src="${img(buf)}" style="display:block;max-width:720px;width:${label === 'Before' && sample.og ? '256px' : '720px'}">
+        <img src="${img(buf)}" style="display:block;max-width:720px;width:${label === labels[0] && sample.og && !sample.v1 ? '256px' : '720px'}">
       </div>`).join('')}
     </div>
   </div></body></html>`;
   const ctx = await browser.newContext({ viewport: { width: 1600, height: 900 }, deviceScaleFactor: 1 });
   const page = await ctx.newPage();
   await page.setContent(html);
-  await page.locator('#s').screenshot({ path: path.join(OUT, `${sample.name}.${scheme}.png`) });
+  await page.locator('#s').screenshot({ path: path.join(OUT, file) });
   await ctx.close();
 }
 
@@ -90,6 +101,15 @@ for (const sample of SAMPLES) {
     const { before, after } = await capture(sample, scheme);
     await sheet(sample, scheme, before, after, 'live article, current asset', 'same page, new figure');
     console.log(`${sample.name}.${scheme}.png`);
+  }
+}
+if (V1_DIR) {
+  for (const sample of SAMPLES.slice(0, 4)) {
+    const id = sample.og || sample.diagram;
+    const v1 = readFileSync(path.join(V1_DIR, sample.og ? `${id}.png` : `${id}.light.png`));
+    const v2 = readFileSync(path.join(REPO_DIR, 'static/images/diagrams', sample.og ? `${id}.png` : `${id}.light.png`));
+    await sheet({ ...sample, v1: true }, 'light', v1, v2, 'phase 1', 'component library', ['v1', 'v2'], `v1-vs-v2-${sample.name}.png`);
+    console.log(`v1-vs-v2-${sample.name}.png`);
   }
 }
 await browser.close();

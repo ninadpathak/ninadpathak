@@ -1,11 +1,11 @@
 {
   "source": "content/diagrams/agent-loop-anatomy/agent-loop.mmd",
-  "hash": "e1cdbd0b79a982ea",
+  "hash": "ea22b9e577319ec3",
   "pele": "1.8.0",
   "width": 720,
-  "height": 864,
+  "height": 1076,
   "scale": 1,
-  "alt": "The agent loop runs perceive, think, act, and remember in sequence and returns to perceive until the task is complete or a stop condition ends the run. Infinite loops start in act; context exhaustion and lost tool results start in remember.",
-  "caption": "Each phase has its own failure modes, so debug the loop one phase at a time.",
-  "embed": "<figure class=\"np-figure\">\n  <img src=\"/static/images/diagrams/agent-loop-anatomy/agent-loop.svg\" width=\"720\" height=\"864\" alt=\"The agent loop runs perceive, think, act, and remember in sequence and returns to perceive until the task is complete or a stop condition ends the run. Infinite loops start in act; context exhaustion and lost tool results start in remember.\" loading=\"lazy\" decoding=\"async\">\n  <figcaption>Each phase has its own failure modes, so debug the loop one phase at a time.</figcaption>\n</figure>"
+  "alt": "The agent loop runs perceive, think, act, and remember in sequence and returns to perceive until the task is complete or a stop condition ends the run. Think passes a tool call to act, and act passes the tool result to remember. Infinite loops start in act; context exhaustion and lost tool results start in remember.",
+  "caption": "Each phase has its own failure modes, so debug the loop one phase at a time. Payloads are illustrative.",
+  "embed": "<figure class=\"np-figure\">\n  <img src=\"/static/images/diagrams/agent-loop-anatomy/agent-loop.svg\" width=\"720\" height=\"1076\" alt=\"The agent loop runs perceive, think, act, and remember in sequence and returns to perceive until the task is complete or a stop condition ends the run. Think passes a tool call to act, and act passes the tool result to remember. Infinite loops start in act; context exhaustion and lost tool results start in remember.\" loading=\"lazy\" decoding=\"async\">\n  <figcaption>Each phase has its own failure modes, so debug the loop one phase at a time. Payloads are illustrative.</figcaption>\n</figure>"
 }

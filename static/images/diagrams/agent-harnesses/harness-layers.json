@@ -1,11 +1,11 @@
 {
   "source": "content/diagrams/agent-harnesses/harness-layers.mmd",
-  "hash": "188033ad47e7b777",
+  "hash": "187b49cdfa9faf1c",
   "pele": "1.8.0",
   "width": 720,
-  "height": 808,
+  "height": 1024,
   "scale": 1,
-  "alt": "The agent harness sits between the application and the LLM. Its execution loop, prompt assembler, state manager, and observer handle everything except reasoning, and tool calls pass through the loop.",
-  "caption": "The model reasons. The harness handles everything else.",
-  "embed": "<figure class=\"np-figure\">\n  <img src=\"/static/images/diagrams/agent-harnesses/harness-layers.svg\" width=\"720\" height=\"808\" alt=\"The agent harness sits between the application and the LLM. Its execution loop, prompt assembler, state manager, and observer handle everything except reasoning, and tool calls pass through the loop.\" loading=\"lazy\" decoding=\"async\">\n  <figcaption>The model reasons. The harness handles everything else.</figcaption>\n</figure>"
+  "alt": "The agent harness sits between the application and the LLM. Its execution loop, prompt assembler, state manager, and observer handle everything except reasoning. The loop calls tools in both directions, the prompt assembler sends the assembled prompt to the model, the state manager checkpoints after each step, and the observer logs every step.",
+  "caption": "The model reasons. The harness handles everything else, including the checkpoint that lets an interrupted run resume.",
+  "embed": "<figure class=\"np-figure\">\n  <img src=\"/static/images/diagrams/agent-harnesses/harness-layers.svg\" width=\"720\" height=\"1024\" alt=\"The agent harness sits between the application and the LLM. Its execution loop, prompt assembler, state manager, and observer handle everything except reasoning. The loop calls tools in both directions, the prompt assembler sends the assembled prompt to the model, the state manager checkpoints after each step, and the observer logs every step.\" loading=\"lazy\" decoding=\"async\">\n  <figcaption>The model reasons. The harness handles everything else, including the checkpoint that lets an interrupted run resume.</figcaption>\n</figure>"
 }

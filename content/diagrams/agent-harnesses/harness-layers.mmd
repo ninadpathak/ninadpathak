@@ -1,34 +1,36 @@
 %% @fig 01
 %% @kicker Harness layers around the raw LLM
-%% @alt The agent harness sits between the application and the LLM. Its execution loop, prompt assembler, state manager, and observer handle everything except reasoning, and tool calls pass through the loop.
-%% @caption The model reasons. The harness handles everything else.
+%% @alt The agent harness sits between the application and the LLM. Its execution loop, prompt assembler, state manager, and observer handle everything except reasoning. The loop calls tools in both directions, the prompt assembler sends the assembled prompt to the model, the state manager checkpoints after each step, and the observer logs every step.
+%% @caption The model reasons. The harness handles everything else, including the checkpoint that lets an interrupted run resume.
 %% @path app>loop>prompt>llm
-%% @legend accent=Harness layer; outcome=Outside the harness; hot=Request path
+%% @dim harness | harness | Everything except reasoning
+%% @detail state | State manager · checkpoint | Writes: after each successful tool call; Holds: history, data, decisions, status; Recovery: tested, not assumed
+%% @legend accent=Layer; external=Outside; stack=Tool set; hot=Request; flow=Call; async=Log
 flowchart TB
-  app["§Caller
-Application"]:::outcome
-  subgraph harness [Agent harness]
+  app["§Caller | In
+Application"]:::external
+  subgraph harness ["Agent harness | Runtime"]
     direction LR
-    loop["§Layer 1
+    loop["§Layer 1 | Control
 Execution loop
 ~Steps, stop rules, retries"]:::accent
-    prompt["§Layer 2
+    prompt["§Layer 2 | Context
 Prompt assembler
 ~System, history, tool results"]:::accent
-    state["§Layer 3
+    state["§Layer 3 | Durable
 State manager
 ~Subtasks and checkpoints"]
-    observer["§Layer 4
+    observer["§Layer 4 | Record
 Observer
 ~Logs every step by run ID"]
   end
-  llm["§Model
+  llm["§Model | Out
 Raw LLM
-~Reasoning only"]:::outcome
-  tools[("Tools")]:::outcome
+~Reasoning only"]:::external
+  tools[("Tools")]:::stack
   app --> loop
   loop --> prompt
-  prompt --> llm
+  prompt -->|prompt :: system + history| llm
   loop <-->|calls| tools
-  loop --> state
-  loop -.-> observer
+  loop -->|checkpoint| state
+  loop -.->|step log| observer

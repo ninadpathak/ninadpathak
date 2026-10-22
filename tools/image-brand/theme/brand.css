@@ -1,50 +1,44 @@
 /* ninadpathak.com image brand: element styles for plates and the Pele SVG inside them.
  * Colors come only from --np-* variables (theme CSS is generated from brand.tokens.json).
- * Sizes are display pixels at the 720 px article width.
+ * Sizes are display pixels at the 720 px article width. Component numbers match GUIDELINE.md §8.
  */
 .np-plate { font-family: var(--np-sans); -webkit-font-smoothing: antialiased; }
 .np-canvas { fill: var(--np-canvas); }
-.np-frame { fill: none; stroke: var(--np-hairline); stroke-width: 1; }
+.np-frame { fill: none; stroke: var(--np-rule); stroke-width: 1; }
 .np-sep { fill: none; stroke: var(--np-hairline); stroke-width: 1; }
+.np-row-sep { fill: none; stroke: var(--np-hairline); stroke-width: 1; stroke-dasharray: 1 2; }
+.np-th-sep { stroke-dasharray: none; stroke: var(--np-rule); }
 
-/* Texture: low-contrast drafting cues. None of it carries meaning. */
+/* C1–C3 · Drafting field, ruler, grid coordinates. Texture only; never carries meaning. */
 .np-grid-dot { fill: var(--np-rule); opacity: 0.55; }
+.np-strip { fill: var(--np-surface); }
+.np-coord { font: 500 8.5px var(--np-mono); letter-spacing: 0.06em; fill: var(--np-muted); }
 .np-ruler { fill: none; stroke: var(--np-rule); stroke-width: 0.75; }
 .np-crop { fill: none; stroke: var(--np-rule); stroke-width: 1; }
+.np-hatch { stroke: var(--np-rule); stroke-width: 1; }
+.np-hatch-fill { stroke: none; pointer-events: none; }
 
-/* Bands */
+/* Head band */
 .np-head-kicker { font: 500 11px var(--np-mono); letter-spacing: 0.12em; fill: var(--np-accent); }
 .np-slash { opacity: 0.5; font-weight: 400; }
-.np-head-meta, .np-foot-meta { font: 400 10px var(--np-mono); letter-spacing: 0.08em; fill: var(--np-muted); }
-.np-legend { font: 500 9px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
-.np-swatch { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }
-.np-swatch-outcome { fill: var(--np-surface-2); }
-.np-swatch-focal { fill: var(--np-accent-wash); stroke: var(--np-accent); }
-.np-swatch-muted { stroke-dasharray: 2 2; }
-.np-swatch-rule-accent { fill: var(--np-accent); }
-.np-swatch-rule-fail { fill: var(--np-danger); }
-.np-swatch-rule-pass { fill: var(--np-success); }
-.np-legend-line { fill: none; stroke: var(--np-accent); stroke-width: 1.75; }
+.np-head-meta { font: 400 10px var(--np-mono); letter-spacing: 0.08em; fill: var(--np-muted); }
 
-/* Callouts */
-.np-badge { fill: var(--np-surface); stroke: var(--np-accent); stroke-width: 1; }
-.np-badge-num { font: 600 9px var(--np-mono); fill: var(--np-accent); }
-.np-note { font: 400 12.5px var(--np-sans); fill: var(--np-ink-2); }
-
-/* Pele diagram: nodes */
+/* C4 · Nodes */
 .np-diagram { overflow: visible; }
 .np-diagram .np-shape { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }
 .np-diagram .pele-label { font-weight: 500; font-size: 14px; fill: var(--np-ink); }
 .np-diagram .pele-shape-diam .pele-label { font-weight: 600; font-size: 13px; }
-.np-diagram .np-kicker { font: 600 9.5px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
+.np-diagram .np-kicker, .np-diagram .np-kicker-meta { font: 600 9.5px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
+.np-diagram .np-kicker-meta { font-weight: 500; }
 .np-diagram .np-detail { font: 400 12.5px var(--np-sans); fill: var(--np-ink-2); }
 .np-diagram .np-index { font: 500 8.5px var(--np-mono); letter-spacing: 0.06em; fill: var(--np-muted); }
 .np-diagram .np-rule { fill: var(--np-accent); }
-
+.np-diagram .np-stack-ghost { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }
 .np-diagram .accent .np-kicker { fill: var(--np-accent); }
 .np-diagram .focal .np-shape { fill: var(--np-accent-wash); stroke: var(--np-accent); }
 .np-diagram .focal .np-kicker { fill: var(--np-accent); }
-.np-diagram .outcome .np-shape { fill: var(--np-surface-2); stroke: var(--np-rule); }
+.np-diagram .outcome .np-shape { fill: var(--np-surface-2); }
+.np-diagram .external .np-shape { fill: var(--np-canvas); }
 .np-diagram .muted .np-shape { stroke-dasharray: 3 3; fill: var(--np-canvas); }
 .np-diagram .muted .pele-label { fill: var(--np-muted); }
 .np-diagram .fail .np-rule { fill: var(--np-danger); }
@@ -52,28 +46,107 @@
 .np-diagram .pass .np-rule { fill: var(--np-success); }
 .np-diagram .pass .np-kicker { fill: var(--np-success); }
 
-/* Pele diagram: edges */
-.np-diagram .pele-edge path { stroke: var(--np-line); stroke-width: 1.25; stroke-linecap: butt; stroke-linejoin: miter; }
-.np-diagram .pele-edge .np-arrow { fill: none; stroke-width: 1.25; }
-.np-diagram .np-port { fill: var(--np-canvas); stroke: var(--np-line); stroke-width: 1.25; }
-.np-diagram .np-hot path { stroke: var(--np-accent); stroke-width: 1.75; }
-.np-diagram .np-port-hot, .np-legend-port { fill: var(--np-accent); stroke: var(--np-accent); }
-.np-diagram .pele-edge-label rect { fill: var(--np-canvas); }
-.np-diagram .pele-edge-label text { font: 600 9.5px var(--np-mono); letter-spacing: 0.08em; fill: var(--np-ink-2); }
-.np-diagram .pele-edge-label.np-hot text { fill: var(--np-accent); }
-
-/* Pele diagram: clusters */
-.np-diagram .pele-cluster rect:first-child { fill: var(--np-surface-2); fill-opacity: 0.35; stroke: var(--np-rule); stroke-width: 1; stroke-dasharray: 4 3; }
+/* C5 · Clusters */
+.np-diagram .pele-cluster > .np-shape { fill: var(--np-surface-2); fill-opacity: 0.35; stroke: var(--np-rule); stroke-width: 1; stroke-dasharray: 4 3; }
+.np-diagram .pele-cluster.ghost > .np-shape { fill: none; stroke: none; }
 .np-diagram .pele-cluster-label { font: 600 9.5px var(--np-mono); letter-spacing: 0.12em; fill: var(--np-muted); }
+.np-diagram .np-cluster-meta { font: 500 9px var(--np-mono); letter-spacing: 0.08em; fill: var(--np-muted); }
 .np-diagram .np-cluster-tick { fill: var(--np-accent); }
 .np-diagram .np-cluster-mask { fill: var(--np-canvas); }
 .np-diagram .np-cluster-mask-wash { fill: var(--np-surface-2); fill-opacity: 0.35; }
-.np-diagram .pele-cluster.ghost rect:first-child { fill: none; stroke: none; }
+
+/* C6–C7 · Edges, chevrons, ports and handles */
+.np-diagram .pele-edge path { fill: none; stroke: var(--np-line); stroke-width: 1.25; stroke-linecap: butt; stroke-linejoin: miter; }
+.np-diagram .np-hot path { stroke: var(--np-accent); stroke-width: 1.75; }
+.np-diagram .np-port { fill: var(--np-canvas); stroke: var(--np-line); stroke-width: 1.25; }
+.np-diagram .np-handle { fill: var(--np-surface); stroke: var(--np-line); stroke-width: 1; }
+.np-diagram .np-port-hot, .np-legend-item .np-port-hot { fill: var(--np-accent); stroke: var(--np-accent); }
+.np-diagram .np-handle-hot { stroke: var(--np-accent); }
+.np-arrow-free { fill: none; stroke: var(--np-line); stroke-width: 1.25; }
+.np-arrow-free.np-arrow-hot { stroke: var(--np-accent); stroke-width: 1.5; }
+
+/* C8 · Edge labels and payload chips */
+.np-label-mask { fill: var(--np-canvas); }
+.np-edge-text { font: 600 9.5px var(--np-mono); letter-spacing: 0.08em; fill: var(--np-ink-2); }
+.np-edge-label.np-hot .np-edge-text { fill: var(--np-accent); }
+.np-payload-chip { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }
+.np-payload { font: 400 10px var(--np-mono); fill: var(--np-ink-2); }
+
+/* C9 · Callouts */
+.np-badge { fill: var(--np-surface); stroke: var(--np-accent); stroke-width: 1; }
+.np-badge-num { font: 600 9px var(--np-mono); fill: var(--np-accent); }
+.np-note { font: 400 12.5px var(--np-sans); fill: var(--np-ink-2); }
+.np-note-ref { font: 500 9px var(--np-mono); letter-spacing: 0.06em; fill: var(--np-muted); }
+
+/* C10 · Step markers */
+.np-step { fill: var(--np-accent); }
+.np-step-num { font: 600 9px var(--np-mono); fill: var(--np-on-accent); }
+
+/* C11 · Dimension lines */
+.np-dim-line { fill: none; stroke: var(--np-ink-2); stroke-width: 1; }
+.np-dim-ext { fill: none; stroke: var(--np-rule); stroke-width: 1; stroke-dasharray: 2 2; }
+.np-dim-text { font: 600 9px var(--np-mono); letter-spacing: 0.08em; fill: var(--np-ink-2); }
+
+/* C12 · Detail marks and panels */
+.np-detail-ring { fill: none; stroke: var(--np-ink-2); stroke-width: 1; stroke-dasharray: 2 3; }
+.np-detail-tag { fill: var(--np-ink); }
+.np-detail-letter { font: 600 9px var(--np-mono); fill: var(--np-canvas); }
+.np-panels-bg { fill: var(--np-canvas); }
+.np-panel-box { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }
+.np-panel-head { fill: var(--np-surface-2); }
+.np-panel-mask { fill: var(--np-surface); }
+.np-panel-title { font: 600 9.5px var(--np-mono); letter-spacing: 0.12em; fill: var(--np-ink); }
+.np-panel-meta { font: 500 9px var(--np-mono); letter-spacing: 0.08em; fill: var(--np-muted); }
+.np-kv-key { font: 500 9px var(--np-mono); letter-spacing: 0.08em; fill: var(--np-muted); }
+.np-kv-value { font: 400 12.5px var(--np-sans); fill: var(--np-ink); }
+
+/* C13 · Tables, C14 · mini-charts and bar charts */
+.np-th { font: 600 9px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
+.np-td { font: 400 12.5px var(--np-sans); fill: var(--np-ink); }
+.np-td-num { font: 500 11.5px var(--np-mono); fill: var(--np-ink); font-variant-numeric: tabular-nums; }
+.np-bar-track { fill: var(--np-surface-2); }
+.np-bar { fill: var(--np-line); }
+.np-diagram .np-series-1 rect { fill: var(--np-accent); }
+.np-diagram .np-series-2 rect:not(.np-hatch-fill) { fill: var(--np-surface); stroke: var(--np-line); stroke-width: 1; }
+.np-diagram .pele-grid { stroke: var(--np-hairline); stroke-dasharray: 2 3; }
+.np-diagram .pele-axis { stroke: var(--np-line); }
+.np-diagram .np-tick { font: 500 9.5px var(--np-mono); fill: var(--np-muted); }
+.np-diagram .np-category { font: 500 12.5px var(--np-sans); fill: var(--np-ink); }
+.np-diagram .pele-axis-titles text { font: 600 9px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
+.np-diagram .np-value { font: 500 9.5px var(--np-mono); fill: var(--np-ink-2); }
+
+/* C15 · Timeline */
+.np-track { fill: none; stroke: var(--np-accent); stroke-width: 1.5; }
+.np-return { stroke-dasharray: 3 3; }
+.np-tl-label { font: 500 12.5px var(--np-sans); fill: var(--np-ink); }
+.np-tl-ref { font: 500 8.5px var(--np-mono); letter-spacing: 0.06em; fill: var(--np-muted); }
+.np-tl-return { font: 600 9px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-accent); }
+
+/* C16 · Title block and key */
+.np-tb-bg { fill: var(--np-canvas); }
+.np-tb-label { font: 500 8.5px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
+.np-tb-value { font: 500 10px var(--np-mono); letter-spacing: 0.04em; fill: var(--np-ink-2); }
+.np-legend { font: 500 9px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
+.np-swatch { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }
+.np-swatch-outcome { fill: var(--np-surface-2); }
+.np-swatch-focal { fill: var(--np-accent-wash); stroke: var(--np-accent); }
+.np-swatch-muted { stroke-dasharray: 2 2; fill: var(--np-canvas); }
+.np-swatch-external { fill: var(--np-canvas); }
+.np-swatch-series-1 { fill: var(--np-accent); stroke: none; }
+.np-swatch-series-2 { stroke: var(--np-line); }
+.np-swatch-rule-accent { fill: var(--np-accent); }
+.np-swatch-rule-fail { fill: var(--np-danger); }
+.np-swatch-rule-pass { fill: var(--np-success); }
+.np-legend-line { fill: none; stroke: var(--np-line); stroke-width: 1.25; }
+.np-legend-line-hot { stroke: var(--np-accent); stroke-width: 1.75; }
+.np-legend-line-async { stroke-dasharray: 3 3; }
 
 /* Share card */
 .np-og-rule { fill: var(--np-accent); }
-.np-og-panel { fill: var(--np-surface); stroke: var(--np-hairline); stroke-width: 1; }
+.np-og-panel { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }
+.np-og-block { fill: var(--np-surface); stroke: var(--np-rule); stroke-width: 1; }
 .np-og-kicker { font: 500 15px var(--np-mono); letter-spacing: 0.12em; fill: var(--np-accent); }
 .np-og-title { font: 600 54px var(--np-sans); letter-spacing: -0.025em; fill: var(--np-ink); }
-.np-og-byline { font: 600 14px var(--np-mono); letter-spacing: 0.12em; fill: var(--np-ink); }
-.np-og-url { font: 400 14px var(--np-mono); letter-spacing: 0.02em; fill: var(--np-muted); }
+.np-og-tb-label { font: 500 11px var(--np-mono); letter-spacing: 0.12em; fill: var(--np-muted); }
+.np-og-byline { font: 600 15px var(--np-mono); letter-spacing: 0.12em; fill: var(--np-ink); }
+.np-og-url { font: 400 15px var(--np-mono); letter-spacing: 0.02em; fill: var(--np-ink-2); }

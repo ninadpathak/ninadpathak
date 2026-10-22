@@ -1,0 +1,11 @@
+{
+  "source": "content/diagrams/llm-token-budgets/token-pricing.mmd",
+  "hash": "fe15bed007ac77c0",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 788,
+  "scale": 1,
+  "alt": "A horizontal bar chart of input and output prices per million tokens for seven models, from GPT-5.4 Nano at $0.20 input and $1.25 output to Claude Opus 4.7 at $5 input and $25 output. A table repeats the prices and shows that output costs 5 to 6.25 times input for every model listed.",
+  "caption": "Prices from the article's Q2 2026 table, rounded to three significant figures. GPT-5.4 Pro ($30 / $180) is left out so the scale stays readable.",
+  "embed": "<figure class=\"np-figure\">\n  <img src=\"/static/images/diagrams/llm-token-budgets/token-pricing.svg\" width=\"720\" height=\"788\" alt=\"A horizontal bar chart of input and output prices per million tokens for seven models, from GPT-5.4 Nano at $0.20 input and $1.25 output to Claude Opus 4.7 at $5 input and $25 output. A table repeats the prices and shows that output costs 5 to 6.25 times input for every model listed.\" loading=\"lazy\" decoding=\"async\">\n  <figcaption>Prices from the article's Q2 2026 table, rounded to three significant figures. GPT-5.4 Pro ($30 / $180) is left out so the scale stays readable.</figcaption>\n</figure>"
+}

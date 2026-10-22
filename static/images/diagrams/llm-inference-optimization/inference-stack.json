@@ -1,0 +1,11 @@
+{
+  "source": "content/diagrams/llm-inference-optimization/inference-stack.mmd",
+  "hash": "fb4ca4b635e5a557",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 1240,
+  "scale": 1,
+  "alt": "The inference stack, top to bottom: serving engines (vLLM, TensorRT-LLM, SGLang), continuous batching, the Flash Attention 2 kernel, PagedAttention for the KV cache, quantization from FP8 to INT8 to 4-bit, and the GPU. Numbered tags give the order to apply them: continuous batching first, Flash Attention 2 second, FP8 third, PagedAttention fourth, INT8 or 4-bit last.",
+  "caption": "Apply the levers in the numbered order. The basics move throughput more than the sophisticated techniques do.",
+  "embed": "<figure class=\"np-figure\">\n  <img src=\"/static/images/diagrams/llm-inference-optimization/inference-stack.svg\" width=\"720\" height=\"1240\" alt=\"The inference stack, top to bottom: serving engines (vLLM, TensorRT-LLM, SGLang), continuous batching, the Flash Attention 2 kernel, PagedAttention for the KV cache, quantization from FP8 to INT8 to 4-bit, and the GPU. Numbered tags give the order to apply them: continuous batching first, Flash Attention 2 second, FP8 third, PagedAttention fourth, INT8 or 4-bit last.\" loading=\"lazy\" decoding=\"async\">\n  <figcaption>Apply the levers in the numbered order. The basics move throughput more than the sophisticated techniques do.</figcaption>\n</figure>"
+}

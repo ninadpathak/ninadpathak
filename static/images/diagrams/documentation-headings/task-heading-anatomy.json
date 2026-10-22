@@ -1,11 +1,11 @@
 {
   "source": "content/diagrams/documentation-headings/task-heading-anatomy.mmd",
-  "hash": "bb46b18ea9008a71",
+  "hash": "eb420756009fd952",
   "pele": "1.8.0",
   "width": 720,
-  "height": 464,
+  "height": 876,
   "scale": 1,
-  "alt": "An illustrative example rewrites the topic label Setup as the task heading Configure the client with an API key, which names an action, an object, and a context.",
-  "caption": "A topic label names a subject. A task heading names the work the section covers.",
-  "embed": "<figure class=\"np-figure\">\n  <img src=\"/static/images/diagrams/documentation-headings/task-heading-anatomy.svg\" width=\"720\" height=\"464\" alt=\"An illustrative example rewrites the topic label Setup as the task heading Configure the client with an API key, which names an action, an object, and a context.\" loading=\"lazy\" decoding=\"async\">\n  <figcaption>A topic label names a subject. A task heading names the work the section covers.</figcaption>\n</figure>"
+  "alt": "An illustrative example rewrites the topic label Configuration as the task heading Configure the client with an API key, which names an action, an object, and a context. A table lists six section jobs with a generic label and an illustrative rewrite for each.",
+  "caption": "A topic label names a subject. A task heading names the work the section covers. The rewrites are illustrations, not a universal template.",
+  "embed": "<figure class=\"np-figure\">\n  <img src=\"/static/images/diagrams/documentation-headings/task-heading-anatomy.svg\" width=\"720\" height=\"876\" alt=\"An illustrative example rewrites the topic label Configuration as the task heading Configure the client with an API key, which names an action, an object, and a context. A table lists six section jobs with a generic label and an illustrative rewrite for each.\" loading=\"lazy\" decoding=\"async\">\n  <figcaption>A topic label names a subject. A task heading names the work the section covers. The rewrites are illustrations, not a universal template.</figcaption>\n</figure>"
 }

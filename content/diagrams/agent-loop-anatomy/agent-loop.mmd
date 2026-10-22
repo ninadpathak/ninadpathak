@@ -1,30 +1,31 @@
 %% @fig 01
 %% @kicker The four-phase agent loop
-%% @alt The agent loop runs perceive, think, act, and remember in sequence and returns to perceive until the task is complete or a stop condition ends the run. Infinite loops start in act; context exhaustion and lost tool results start in remember.
-%% @caption Each phase has its own failure modes, so debug the loop one phase at a time.
+%% @alt The agent loop runs perceive, think, act, and remember in sequence and returns to perceive until the task is complete or a stop condition ends the run. Think passes a tool call to act, and act passes the tool result to remember. Infinite loops start in act; context exhaustion and lost tool results start in remember.
+%% @caption Each phase has its own failure modes, so debug the loop one phase at a time. Payloads are illustrative.
 %% @path perceive>think>act>remember>perceive
-%% @note act | Infinite loops start here. Set an explicit iteration budget and test it.
-%% @note remember | Context exhaustion and lost tool results start here, not in perceive.
+%% @timeline perceive>think>act>remember | loop | Next iteration until a stop condition
+%% @detail act | Act · failure mode | Symptom: same tool, new args, again; Cause: task still looks incomplete; Fix: explicit, tested iteration budget
+%% @detail remember | Remember · failure modes | Exhaustion: untrimmed tool outputs; Lost result: never appended; Fix: log every tool call + result
 %% @legend accent=Phase; outcome=Entry and exit; hot=One iteration
 flowchart TB
   task(["Task arrives"]):::outcome
-  subgraph loop [Agent loop · repeats until a stop condition]
+  subgraph loop ["Agent loop | Repeats until a stop condition"]
     direction TB
     subgraph upper [ ]
       direction LR
-      perceive["§01 Perceive
+      perceive["§01 Perceive | Read
 Read context
 ~Form the task state"]:::accent
-      think["§02 Think
+      think["§02 Think | Decide
 Reason over state
 ~Pick a tool and its arguments"]:::accent
     end
     subgraph lower [ ]
       direction RL
-      act["§03 Act
+      act["§03 Act | Execute
 Call the tool
 ~Produce output"]:::accent
-      remember["§04 Remember
+      remember["§04 Remember | Write
 Update state
 ~Append the result, checkpoint"]:::accent
     end
@@ -32,8 +33,8 @@ Update state
   done(["Done or stopped"]):::outcome
   task --> perceive
   perceive --> think
-  think --> act
-  act --> remember
+  think -->|"call :: tool(name, args)"| act
+  act -->|result :: tool_result| remember
   remember -->|next iteration| perceive
   remember -->|complete or stop| done
   class upper,lower ghost
