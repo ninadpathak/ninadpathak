@@ -7,6 +7,7 @@ from pathlib import Path
 
 from build import (
     SiteBuilder,
+    disable_email_obfuscation,
     estimate_reading_time,
     extract_faqs,
     format_date_iso,
@@ -89,6 +90,38 @@ Ignored.
 
         self.assertIn('src="/static/visuals/moe-routing"', rendered)
         self.assertIn('src="/static/visuals/no-such-visual.html"', rendered)
+
+
+class EmailObfuscationTests(unittest.TestCase):
+    """Cloudflare rewrote addresses into /cdn-cgi/l/email-protection links that 404
+    without JavaScript, on /contact/, /privacy/, /terms/ and inside a code sample."""
+
+    repo_root = Path(__file__).resolve().parent.parent
+
+    def test_whole_document_sits_inside_email_off_markers(self):
+        page = '<!DOCTYPE html>\n<html lang="en">\n<head></head><body><a href="mailto:a@b.com">a@b.com</a></body>\n</html>\n'
+        wrapped = disable_email_obfuscation(page)
+
+        self.assertTrue(wrapped.startswith('<!DOCTYPE html>\n<html lang="en"><!--email_off-->'))
+        self.assertTrue(wrapped.endswith("<!--email_on--></html>\n"))
+        self.assertEqual(disable_email_obfuscation(wrapped), wrapped)
+
+    def test_every_rendered_page_goes_through_the_wrapper(self):
+        source = (self.repo_root / "build.py").read_text(encoding="utf-8")
+        render = source[source.index("    def render("):source.index("    def build_homepage(")]
+        self.assertIn("disable_email_obfuscation(template.render(", render)
+        self.assertEqual(source.count("template.render("), 1, "a second render path would bypass email_off")
+
+    def test_built_pages_ship_plain_mailto_links(self):
+        output = self.repo_root / "output"
+        if not (output / "contact" / "index.html").exists():
+            self.skipTest("output/ not built")
+        for route in ("contact", "privacy", "terms"):
+            html = (output / route / "index.html").read_text(encoding="utf-8")
+            with self.subTest(route=route):
+                self.assertIn('href="mailto:hello@ninadpathak.com"', html)
+                self.assertLess(html.index("<!--email_off-->"), html.index("hello@ninadpathak.com"))
+                self.assertNotIn("/cdn-cgi/l/email-protection", html)
 
 
 class RedirectVariantTests(unittest.TestCase):

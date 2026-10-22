@@ -173,6 +173,30 @@ def render_content_html(html: str) -> str:
     return link_visuals_without_extension(optimize_content_images(html))
 
 
+def disable_email_obfuscation(html: str) -> str:
+    """Wrap a page in Cloudflare's email_off markers so addresses ship as written.
+
+    Cloudflare's Email Address Obfuscation rewrites every address-shaped string into a
+    /cdn-cgi/l/email-protection link that only JavaScript can decode, so crawlers and
+    no-JS readers got a 404 instead of the mailto, and `pnpm@10.17.1` inside a code
+    sample became "[email protected]". Wrapping the whole document covers templates,
+    article bodies and anything added later without tracking where addresses appear.
+    """
+    if "<!--email_off-->" in html:
+        return html
+    opening = re.search(r"<html\b[^>]*>", html, re.IGNORECASE)
+    closing = html.lower().rfind("</html>")
+    if not opening or closing < opening.end():
+        return f"<!--email_off-->{html}<!--email_on-->"
+    return (
+        html[: opening.end()]
+        + "<!--email_off-->"
+        + html[opening.end() : closing]
+        + "<!--email_on-->"
+        + html[closing:]
+    )
+
+
 def _clean_inline_md(text: str) -> str:
     """Strip inline markdown so a string is safe/clean for JSON-LD text fields."""
     text = text.strip()
@@ -532,7 +556,7 @@ class SiteBuilder:
         ctx["build_year"] = datetime.now().year
         ctx["latest_posts"] = getattr(self, "latest_posts", [])
 
-        html = template.render(**ctx)
+        html = disable_email_obfuscation(template.render(**ctx))
         out = self.output / output_path
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(html, encoding="utf-8")
