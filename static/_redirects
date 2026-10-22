@@ -59,3 +59,6 @@
 /blog/api-documentation-template-the-pages-every-api-needs/ /articles/api-documentation/ 301
 /articles/api-documentation-tools-hands-on-comparison-small-teams/ /articles/api-documentation/ 301
 /blog/api-documentation-tools-hands-on-comparison-small-teams/ /articles/api-documentation/ 301
+# llms.txt anchor: the audit archived on 2026-09-11 points to the refreshed page.
+/articles/llms-txt-examples-real-files-audited/ /articles/llms-txt/ 301
+/blog/llms-txt-examples-real-files-audited/ /articles/llms-txt/ 301

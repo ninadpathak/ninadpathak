@@ -83,6 +83,8 @@ Treat the sitemap as a record of the URLs the site actually wants search engines
 
 Google ignores `<priority>` and `<changefreq>`, so those fields do not need release time.
 
+An [llms.txt file](/articles/llms-txt/) is a separate, optional index for AI tools, and Google Search doesn't read it, so it doesn't replace the sitemap.
+
 ### 3. Crawling, rendering, and indexing
 
 The browser can make a broken page look healthy after JavaScript has run. Read the server response before reviewing the layout because it shows whether the content, links, and canonical metadata exist without asking a renderer to repair the page.
