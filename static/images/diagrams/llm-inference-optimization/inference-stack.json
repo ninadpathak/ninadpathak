@@ -1,10 +1,15 @@
 {
   "source": "content/diagrams/llm-inference-optimization/inference-stack.mmd",
-  "hash": "2b8fd2df0116bbcb",
+  "hash": "02dbd3d6bbd7d04d",
   "pele": "1.8.0",
   "width": 720,
   "height": 872,
   "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": null,
   "alt": "The inference stack as layered slabs, top to bottom: serving engines (vLLM, TensorRT-LLM, SGLang); continuous batching, drawn as request lanes where a finished request frees its slot for a new one; Flash Attention, drawn as a score matrix streamed tile by tile into on-chip memory; quantization, drawn as one weight at 16, 8, and 4 bits; the paged KV cache, drawn as three sequences mapped onto scattered memory blocks; and the GPU with its memory stacks. Numbered squares, top to bottom, give the order to apply them: batching, the attention kernel, FP8 quantization, then the paged KV cache.",
   "caption": "Apply the levers in the numbered order. Continuous batching moves throughput 10–20× on its own; the article covers each lever's trade-off.",
   "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/llm-inference-optimization/inference-stack.svg\"><img src=\"/static/images/diagrams/llm-inference-optimization/inference-stack.svg\" width=\"720\" height=\"872\" alt=\"The inference stack as layered slabs, top to bottom: serving engines (vLLM, TensorRT-LLM, SGLang); continuous batching, drawn as request lanes where a finished request frees its slot for a new one; Flash Attention, drawn as a score matrix streamed tile by tile into on-chip memory; quantization, drawn as one weight at 16, 8, and 4 bits; the paged KV cache, drawn as three sequences mapped onto scattered memory blocks; and the GPU with its memory stacks. Numbered squares, top to bottom, give the order to apply them: batching, the attention kernel, FP8 quantization, then the paged KV cache.\" loading=\"lazy\" decoding=\"async\"></a>\n  <figcaption>Apply the levers in the numbered order. Continuous batching moves throughput 10–20× on its own; the article covers each lever's trade-off.</figcaption>\n</figure>"

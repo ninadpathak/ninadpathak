@@ -404,6 +404,8 @@ class SiteBuilder:
                 # Share card: frontmatter wins; otherwise the card the image pipeline
                 # rendered for this slug (tools/image-brand), else the site default.
                 "og_image": post.get("og_image") or default_og_image(slug),
+                "og_image_is_card": not post.get("og_image") and bool(default_og_image(slug)),
+                "og_image_alt": post.get("og_image_alt", ""),
             })
 
         return sorted(posts, key=sort_key, reverse=True)

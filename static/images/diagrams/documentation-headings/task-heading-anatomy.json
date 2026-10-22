@@ -1,11 +1,24 @@
 {
   "source": "content/diagrams/documentation-headings/task-heading-anatomy.mmd",
-  "hash": "441153ca7689dc7e",
+  "hash": "fd035bf13cc76f2f",
   "pele": "1.8.0",
   "width": 720,
   "height": 496,
   "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/documentation-headings/task-heading-anatomy.narrow",
+    "width": 288,
+    "height": 376,
+    "minText": {
+      "sans": 13,
+      "mono": 11
+    }
+  },
   "alt": "An illustrative example rewrites the topic label Configuration as the task heading Configure the client with an API key. Brackets under the heading mark its three parts: the action Configure, the object the client, and the context with an API key, each drawn as a play head, a cube, and a key.",
   "caption": "A topic label names a subject. A task heading names the work: an action, an object, and the context that changes the next step.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/documentation-headings/task-heading-anatomy.svg\"><img src=\"/static/images/diagrams/documentation-headings/task-heading-anatomy.svg\" width=\"720\" height=\"496\" alt=\"An illustrative example rewrites the topic label Configuration as the task heading Configure the client with an API key. Brackets under the heading mark its three parts: the action Configure, the object the client, and the context with an API key, each drawn as a play head, a cube, and a key.\" loading=\"lazy\" decoding=\"async\"></a>\n  <figcaption>A topic label names a subject. A task heading names the work: an action, an object, and the context that changes the next step.</figcaption>\n</figure>"
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/documentation-headings/task-heading-anatomy.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/documentation-headings/task-heading-anatomy.narrow.svg\" width=\"288\" height=\"376\"><img src=\"/static/images/diagrams/documentation-headings/task-heading-anatomy.svg\" width=\"720\" height=\"496\" alt=\"An illustrative example rewrites the topic label Configuration as the task heading Configure the client with an API key. Brackets under the heading mark its three parts: the action Configure, the object the client, and the context with an API key, each drawn as a play head, a cube, and a key.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>A topic label names a subject. A task heading names the work: an action, an object, and the context that changes the next step.</figcaption>\n</figure>"
 }

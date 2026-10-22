@@ -74,12 +74,12 @@
   "stroke": {
     "frame": 1, "node": 1, "edge": 1.25, "edge-hot": 1.75, "accent-rule": 3, "tick": 0.75, "crop": 1
   },
-  "audit": { "strokes": [0.75, 1, 1.25, 1.5, 1.75, 2], "radii": [0, 1, 2, 4], "minSans": 12, "minMono": 8.5 },
+  "audit": { "strokes": [0.75, 1, 1.25, 1.5, 1.75, 2], "radii": [0, 1, 2, 4], "minSans": 13, "minMono": 9.5 },
   "wordBudget": { "diagram": 15, "og": 6 },
   "layout": { "nodeSpacing": 28, "rankSpacing": 64, "chartWidth": 600, "chartHeight": 340 },
   "radius": { "node": 4, "plate": 4, "label": 2 },
   "canvas": {
-    "article": { "width": 720, "head": 44, "pad": 32, "minScale": 0.875, "grid": 16 },
+    "article": { "width": 720, "head": 44, "pad": 32, "minScale": 1, "grid": 16 },
     "og":      { "width": 1200, "height": 630, "pad": 64, "grid": 16, "minDiagramScale": 1.5, "titleSizes": [54, 48, 42, 38] }
   }
 }

@@ -1,69 +1,377 @@
 {
-  "$comment": "Share-card glyph chains, one per post slug. 2–3 glyphs from GUIDELINE.md §7, read top to bottom; '*' marks the focal glyph. og.mjs writes content/diagrams/<slug>/og.mmd from this map. Slugs with a hand-written og.mmd (no 'generated' marker) are left alone.",
-  "agent-design-space": ["reader", "loop*", "tools"],
-  "agent-error-handling": ["loop", "tools*", "stop"],
-  "agent-loop-anatomy": ["eye", "loop*", "cells fill=0.7"],
-  "agent-memory-2026": ["loop", "cells fill=0.7 flag*", "context"],
-  "agent-memory-types": ["context", "cells fill=0.5*", "doc"],
-  "agent-vs-ai-assistant": ["reader", "loop*", "tools"],
-  "agentic-workflows": ["doc", "loop*", "doc check"],
-  "ai-agent-failures": ["loop", "tools", "stop*"],
-  "ai-agent-taxonomy": ["reader", "loop*", "rack"],
-  "ai-memory-management": ["context", "cells fill=0.6*", "doc"],
-  "best-llms-for-coding": ["doc", "core*", "tools"],
-  "browser-vector-search": ["window", "vectors*", "cells fill=0.5"],
-  "claude-code-memory": ["doc", "cells fill=0.6*", "tools"],
-  "claude-vs-gemini-cli": ["tools", "core*", "doc check"],
-  "code-documentation": ["tools", "doc*", "reader"],
-  "coding-agent-memory": ["tools", "cells fill=0.3*", "context"],
-  "context-windows-vs-memory": ["context*", "cells fill=0.6"],
-  "contextual-retrieval": ["doc", "tokens*", "vectors"],
-  "deerflow-memory": ["loop", "cells fill=0.6*", "doc"],
-  "developer-onboarding-docs": ["reader", "doc*", "doc check"],
-  "devtools-documentation": ["doc cross*", "reader", "stop"],
-  "docs-accessibility": ["doc", "eye*", "doc check"],
-  "docs-seo": ["doc", "doc globe*", "eye"],
-  "documentation-best-practices": ["doc", "eye*", "doc check"],
-  "documentation-headings": ["outline*", "doc"],
-  "documentation-review": ["window", "eye*", "doc check"],
-  "documentation-structure": ["reader", "outline*", "doc"],
-  "documentation-template": ["outline", "doc*", "doc check"],
-  "documentation-types": ["doc", "pair*", "outline"],
-  "documentation-velocity": ["doc", "loop*", "rack"],
-  "engineer-to-writer": ["tools", "reader*", "doc"],
-  "fine-tuning-vs-rag": ["core", "cells fill=0.5*", "doc"],
-  "hybrid-search": ["doc question", "vectors*", "doc check"],
-  "hyperagents-memory": ["loop", "cells fill=0.6*", "doc"],
-  "internal-vs-external-docs": ["doc lock", "pair*", "doc globe"],
-  "kv-cache-eviction": ["context", "cells fill=0.85*", "stop"],
-  "lambda-calculus-ai": ["doc", "core*", "doc check"],
-  "llm-context-windows": ["tokens", "context*", "core"],
-  "llm-inference-optimization": ["window", "core*", "chip"],
-  "llm-structured-outputs": ["core", "tools*", "doc check"],
-  "llm-token-budgets": ["tokens*", "core", "doc"],
-  "memory-compression": ["context", "cells fill=0.4*", "doc"],
-  "memory-serialization": ["cells fill=0.6", "doc*", "cells fill=0.6"],
-  "memory-versioning": ["cells fill=0.6", "doc flag*", "doc lock"],
-  "mixture-of-experts": ["tokens", "core*", "chip"],
-  "model-context-protocol": ["core", "tools*", "window"],
-  "multi-agent-vs-single-agent": ["loop", "loop*", "cells fill=0.5"],
-  "rag-evaluation": ["doc", "eye*", "doc check"],
-  "rag-reranking": ["vectors", "doc*", "doc check"],
-  "rag-vs-memory": ["doc", "core*", "cells fill=0.6"],
-  "semantic-caching": ["reader", "cells fill=0.6*", "core"],
-  "shared-vs-isolated-memory": ["loop", "cells fill=0.6*", "loop"],
-  "short-term-agent-memory": ["tokens", "context*", "loop"],
-  "shorter-documentation": ["doc", "outline*"],
-  "speculative-decoding": ["core", "tokens*", "core"],
-  "stripe-technical-blog": ["doc", "reader*", "window"],
-  "technical-docs": ["tools", "doc*", "reader"],
-  "technical-writing-for-engineers": ["reader", "doc*", "doc check"],
-  "time-to-first-token": ["inbox", "core", "tokens*"],
-  "vector-embeddings": ["doc", "vectors*", "cells fill=0.5"],
-  "voice-agent-latency": ["wave", "core*", "wave"],
-  "voice-agent-memory": ["wave", "cells fill=0.6*", "core"],
-  "writing-changelogs": ["tools", "doc flag*", "reader"],
-  "writing-for-ai-products": ["core", "doc*", "reader"],
-  "writing-release-notes": ["doc flag", "doc check*", "reader"],
-  "writing-technical-tutorials": ["reader", "doc*", "tools"]
+  "$comment": "Share-card glyph chains, one per post slug. 2–3 glyphs from GUIDELINE.md §7, read top to bottom; '*' marks the focal glyph. og.mjs writes content/diagrams/<slug>/og.mmd from this map; render.mjs takes the title, category, and URL from the post at render time. '$pending' holds the title and category of posts on unmerged branches so their cards exist when they land. Slugs with a hand-written og.mmd (no GENERATED marker) are left alone.",
+  "$pending": {
+    "api-documentation": {
+      "title": "API Documentation: What to Include, With a Tested Reference Example",
+      "category": "technical-documentation"
+    },
+    "claude-md": {
+      "title": "CLAUDE.md and AGENTS.md: Which File Loads, and a Template",
+      "category": "technical-documentation"
+    },
+    "design-doc-template": {
+      "title": "Design Doc Template: Sections, a Filled Example and a Review Check",
+      "category": "technical-documentation"
+    },
+    "quickstart-guide": {
+      "title": "Quick Start Guide Template: Write a Quickstart Developers Can Run",
+      "category": "technical-documentation"
+    },
+    "release-notes-template": {
+      "title": "Release Notes Template: Copyable Markdown With a Pre-Publish Check",
+      "category": "technical-documentation"
+    }
+  },
+  "agent-design-space": [
+    "reader",
+    "loop*",
+    "tools"
+  ],
+  "agent-error-handling": [
+    "loop",
+    "tools*",
+    "stop"
+  ],
+  "agent-loop-anatomy": [
+    "eye",
+    "loop*",
+    "cells fill=0.7"
+  ],
+  "agent-memory-2026": [
+    "loop",
+    "cells fill=0.7 flag*",
+    "context"
+  ],
+  "agent-memory-types": [
+    "context",
+    "cells fill=0.5*",
+    "doc"
+  ],
+  "agent-vs-ai-assistant": [
+    "reader",
+    "loop*",
+    "tools"
+  ],
+  "agentic-workflows": [
+    "doc",
+    "loop*",
+    "doc check"
+  ],
+  "ai-agent-failures": [
+    "loop",
+    "tools",
+    "stop*"
+  ],
+  "ai-agent-taxonomy": [
+    "reader",
+    "loop*",
+    "rack"
+  ],
+  "ai-memory-management": [
+    "context",
+    "cells fill=0.6*",
+    "doc"
+  ],
+  "api-documentation": [
+    "doc",
+    "tools*",
+    "doc check"
+  ],
+  "best-llms-for-coding": [
+    "doc",
+    "core*",
+    "tools"
+  ],
+  "browser-vector-search": [
+    "window",
+    "vectors*",
+    "cells fill=0.5"
+  ],
+  "claude-code-memory": [
+    "doc",
+    "cells fill=0.6*",
+    "tools"
+  ],
+  "claude-md": [
+    "doc",
+    "doc flag*",
+    "core"
+  ],
+  "claude-vs-gemini-cli": [
+    "tools",
+    "core*",
+    "doc check"
+  ],
+  "code-documentation": [
+    "tools",
+    "doc*",
+    "reader"
+  ],
+  "coding-agent-memory": [
+    "tools",
+    "cells fill=0.3*",
+    "context"
+  ],
+  "context-windows-vs-memory": [
+    "context*",
+    "cells fill=0.6"
+  ],
+  "contextual-retrieval": [
+    "doc",
+    "tokens*",
+    "vectors"
+  ],
+  "deerflow-memory": [
+    "loop",
+    "cells fill=0.6*",
+    "doc"
+  ],
+  "design-doc-template": [
+    "outline",
+    "doc*",
+    "eye"
+  ],
+  "developer-onboarding-docs": [
+    "reader",
+    "doc*",
+    "doc check"
+  ],
+  "devtools-documentation": [
+    "doc cross*",
+    "reader",
+    "stop"
+  ],
+  "docs-accessibility": [
+    "doc",
+    "eye*",
+    "doc check"
+  ],
+  "docs-seo": [
+    "doc",
+    "doc globe*",
+    "eye"
+  ],
+  "documentation-best-practices": [
+    "doc",
+    "eye*",
+    "doc check"
+  ],
+  "documentation-headings": [
+    "outline*",
+    "doc"
+  ],
+  "documentation-review": [
+    "window",
+    "eye*",
+    "doc check"
+  ],
+  "documentation-structure": [
+    "reader",
+    "outline*",
+    "doc"
+  ],
+  "documentation-template": [
+    "outline",
+    "doc*",
+    "doc check"
+  ],
+  "documentation-types": [
+    "doc",
+    "pair*",
+    "outline"
+  ],
+  "documentation-velocity": [
+    "doc",
+    "loop*",
+    "rack"
+  ],
+  "engineer-to-writer": [
+    "tools",
+    "reader*",
+    "doc"
+  ],
+  "fine-tuning-vs-rag": [
+    "core",
+    "cells fill=0.5*",
+    "doc"
+  ],
+  "hybrid-search": [
+    "doc question",
+    "vectors*",
+    "doc check"
+  ],
+  "hyperagents-memory": [
+    "loop",
+    "cells fill=0.6*",
+    "doc"
+  ],
+  "internal-vs-external-docs": [
+    "doc lock",
+    "pair*",
+    "doc globe"
+  ],
+  "kv-cache-eviction": [
+    "context",
+    "cells fill=0.85*",
+    "stop"
+  ],
+  "lambda-calculus-ai": [
+    "doc",
+    "core*",
+    "doc check"
+  ],
+  "llm-context-windows": [
+    "tokens",
+    "context*",
+    "core"
+  ],
+  "llm-inference-optimization": [
+    "window",
+    "core*",
+    "chip"
+  ],
+  "llm-structured-outputs": [
+    "core",
+    "tools*",
+    "doc check"
+  ],
+  "llm-token-budgets": [
+    "tokens*",
+    "core",
+    "doc"
+  ],
+  "memory-compression": [
+    "context",
+    "cells fill=0.4*",
+    "doc"
+  ],
+  "memory-serialization": [
+    "cells fill=0.6",
+    "doc*",
+    "cells fill=0.6"
+  ],
+  "memory-versioning": [
+    "cells fill=0.6",
+    "doc flag*",
+    "doc lock"
+  ],
+  "mixture-of-experts": [
+    "tokens",
+    "core*",
+    "chip"
+  ],
+  "model-context-protocol": [
+    "core",
+    "tools*",
+    "window"
+  ],
+  "multi-agent-vs-single-agent": [
+    "loop",
+    "loop*",
+    "cells fill=0.5"
+  ],
+  "quickstart-guide": [
+    "reader",
+    "doc*",
+    "tools"
+  ],
+  "rag-evaluation": [
+    "doc",
+    "eye*",
+    "doc check"
+  ],
+  "rag-reranking": [
+    "vectors",
+    "doc*",
+    "doc check"
+  ],
+  "rag-vs-memory": [
+    "doc",
+    "core*",
+    "cells fill=0.6"
+  ],
+  "release-notes-template": [
+    "outline",
+    "doc flag*",
+    "doc check"
+  ],
+  "semantic-caching": [
+    "reader",
+    "cells fill=0.6*",
+    "core"
+  ],
+  "shared-vs-isolated-memory": [
+    "loop",
+    "cells fill=0.6*",
+    "loop"
+  ],
+  "short-term-agent-memory": [
+    "tokens",
+    "context*",
+    "loop"
+  ],
+  "shorter-documentation": [
+    "doc",
+    "outline*"
+  ],
+  "speculative-decoding": [
+    "core",
+    "tokens*",
+    "core"
+  ],
+  "stripe-technical-blog": [
+    "doc",
+    "reader*",
+    "window"
+  ],
+  "technical-docs": [
+    "tools",
+    "doc*",
+    "reader"
+  ],
+  "technical-writing-for-engineers": [
+    "reader",
+    "doc*",
+    "doc check"
+  ],
+  "time-to-first-token": [
+    "inbox",
+    "core",
+    "tokens*"
+  ],
+  "vector-embeddings": [
+    "doc",
+    "vectors*",
+    "cells fill=0.5"
+  ],
+  "voice-agent-latency": [
+    "wave",
+    "core*",
+    "wave"
+  ],
+  "voice-agent-memory": [
+    "wave",
+    "cells fill=0.6*",
+    "core"
+  ],
+  "writing-changelogs": [
+    "tools",
+    "doc flag*",
+    "reader"
+  ],
+  "writing-for-ai-products": [
+    "core",
+    "doc*",
+    "reader"
+  ],
+  "writing-release-notes": [
+    "doc flag",
+    "doc check*",
+    "reader"
+  ],
+  "writing-technical-tutorials": [
+    "reader",
+    "doc*",
+    "tools"
+  ]
 }

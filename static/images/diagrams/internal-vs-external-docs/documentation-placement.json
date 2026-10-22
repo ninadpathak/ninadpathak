@@ -1,11 +1,24 @@
 {
   "source": "content/diagrams/internal-vs-external-docs/documentation-placement.mmd",
-  "hash": "226ebf266273630f",
+  "hash": "f0d60c3d52df7dbe",
   "pele": "1.8.0",
   "width": 720,
   "height": 688,
   "scale": 1,
-  "alt": "Documentation placement decision tree. If no external reader needs the information, keep it internal when an operator needs it or it holds private context; otherwise review whether the page has a task. If an external reader needs it, split it into a public task page and a private record when private context remains; otherwise publish it externally.",
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/internal-vs-external-docs/documentation-placement.narrow",
+    "width": 288,
+    "height": 792,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Documentation placement decision tree. If no outside reader needs the information, keep it internal when an operator needs it; otherwise review whether the page has a task. If an outside reader needs it, split it into a public task page and a private record when private context remains; otherwise publish it externally.",
   "caption": "Each path ends in internal, review, split, or external documentation. A split is two documents with one contract between them, not a redacted internal page.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg\"><img src=\"/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg\" width=\"720\" height=\"688\" alt=\"Documentation placement decision tree. If no external reader needs the information, keep it internal when an operator needs it or it holds private context; otherwise review whether the page has a task. If an external reader needs it, split it into a public task page and a private record when private context remains; otherwise publish it externally.\" loading=\"lazy\" decoding=\"async\"></a>\n  <figcaption>Each path ends in internal, review, split, or external documentation. A split is two documents with one contract between them, not a redacted internal page.</figcaption>\n</figure>"
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg\"><picture><source media=\"(max-width: 780px)\" srcset=\"/static/images/diagrams/internal-vs-external-docs/documentation-placement.narrow.svg\" width=\"288\" height=\"792\"><img src=\"/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg\" width=\"720\" height=\"688\" alt=\"Documentation placement decision tree. If no outside reader needs the information, keep it internal when an operator needs it; otherwise review whether the page has a task. If an outside reader needs it, split it into a public task page and a private record when private context remains; otherwise publish it externally.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Each path ends in internal, review, split, or external documentation. A split is two documents with one contract between them, not a redacted internal page.</figcaption>\n</figure>"
 }

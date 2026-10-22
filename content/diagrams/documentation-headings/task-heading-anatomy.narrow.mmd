@@ -1,0 +1,21 @@
+%% @width 288
+%% @kicker A heading rewrite
+%% @alt An illustrative example rewrites the topic label Configuration as the task heading Configure the client with an API key. Brackets under the heading mark its three parts: the action Configure, the object the client, and the context with an API key, each drawn as a play head, a cube, and a key.
+%% @path before>after
+%% @glyph before | outline
+%% @glyph action | action bare w=34
+%% @glyph object | object bare w=34
+%% @glyph context | key bare w=34
+%% @parts after | Configure>action; the client>object; with an API key>context
+%% @spacing 8,36
+flowchart TB
+  before["Configuration"]:::muted
+  after["Configure the client
+with an API key"]:::focal
+  action[" "]:::accent
+  object[" "]
+  context[" "]
+  before --> after
+  after --- action
+  after --- object
+  after --- context

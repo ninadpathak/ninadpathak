@@ -7,6 +7,12 @@
     "figureLoaded": true,
     "figureWidth": 272,
     "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
     "ok": true
   },
   {
@@ -17,6 +23,12 @@
     "figureLoaded": true,
     "figureWidth": 327,
     "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
     "ok": true
   },
   {
@@ -27,6 +39,12 @@
     "figureLoaded": true,
     "figureWidth": 672,
     "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
     "ok": true
   },
   {
@@ -37,6 +55,12 @@
     "figureLoaded": true,
     "figureWidth": 272,
     "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
     "ok": true
   },
   {
@@ -47,6 +71,12 @@
     "figureLoaded": true,
     "figureWidth": 327,
     "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
     "ok": true
   },
   {
@@ -57,6 +87,12 @@
     "figureLoaded": true,
     "figureWidth": 672,
     "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
     "ok": true
   },
   {
@@ -67,6 +103,12 @@
     "figureLoaded": true,
     "figureWidth": 272,
     "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 10.4
+    },
+    "textOk": true,
     "ok": true
   },
   {
@@ -77,6 +119,12 @@
     "figureLoaded": true,
     "figureWidth": 327,
     "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 12.5
+    },
+    "textOk": true,
     "ok": true
   },
   {
@@ -87,6 +135,12 @@
     "figureLoaded": true,
     "figureWidth": 672,
     "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
     "ok": true
   },
   {
@@ -97,6 +151,12 @@
     "figureLoaded": true,
     "figureWidth": 272,
     "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 10.4
+    },
+    "textOk": true,
     "ok": true
   },
   {
@@ -107,6 +167,12 @@
     "figureLoaded": true,
     "figureWidth": 327,
     "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 12.5
+    },
+    "textOk": true,
     "ok": true
   },
   {
@@ -117,6 +183,12 @@
     "figureLoaded": true,
     "figureWidth": 672,
     "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
     "ok": true
   }
 ]

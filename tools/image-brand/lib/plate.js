@@ -113,7 +113,9 @@
       const best = Object.entries(gaps).filter(([, v]) => v >= 6).sort((a, b) => b[1] - a[1])[0];
       return best ? best[0] : null;
     };
+    const all = [...nodes.values()];
     for (const e of edges) {
+      e.nodes = all;
       e.s = nodes.get(e.from); e.t = nodes.get(e.to);
       e.rel = e.s && e.t ? relation(e.s, e.t) : null;
       const lp = parsePoints(e.line.getAttribute('d'));
@@ -164,6 +166,20 @@
         } else {
           const mx = (sx + ex) / 2;
           pts = [[sx, s.cy], [mx, s.cy], [mx, t.cy], [ex, t.cy]];
+        }
+      }
+      // Detour: any vertical leg that would cross another node steps right of the obstacle.
+      if ((e.rel === 'down' || e.rel === 'up') && e.nodes) {
+        const hits = (x, y1, y2) => e.nodes.filter((n) => !n.cluster && n !== s && n !== t && x > n.l - 4 && x < n.r + 4 && Math.max(y1, y2) > n.t && Math.min(y1, y2) < n.b);
+        for (let i = pts.length - 2; i >= 0; i--) {
+          const [a0, a1] = [pts[i], pts[i + 1]];
+          if (Math.abs(a0[0] - a1[0]) > 0.5) continue;
+          const blockers = hits(a0[0], a0[1], a1[1]);
+          if (!blockers.length) continue;
+          const xr = Math.max(...blockers.map((n) => n.r)) + 14;
+          const yTop = Math.min(...blockers.map((n) => n.t)) - 10, yBot = Math.max(...blockers.map((n) => n.b)) + 10;
+          const [yIn, yOut] = sign > 0 ? [Math.max(a0[1], yTop), Math.min(a1[1], yBot)] : [Math.min(a0[1], yBot), Math.max(a1[1], yTop)];
+          pts.splice(i + 1, 0, [a0[0], yIn], [xr, yIn], [xr, yOut], [a0[0], yOut]);
         }
       }
       e.pts = pts;
@@ -574,15 +590,16 @@
   }
 
   // M14 · Drafting field: dot grid, ruled strips with 80 px cells, ruler, crop marks. No text.
-  function field(parent, x, y, w, h, id) {
-    const S = 12;
+  function field(parent, x, y, w, h, id, S = 12) {
     el('rect', { class: 'np-field', x, y, width: w, height: h, fill: `url(#${id}-grid)` }, parent);
-    el('rect', { class: 'np-strip', x, y, width: w, height: S }, parent);
-    el('rect', { class: 'np-strip', x, y: y + S, width: S, height: h - S }, parent);
-    let grid = `M${x},${y + S}H${x + w}M${x + S},${y}V${y + h}`;
-    for (let cx = x + S + COL; cx < x + w - 1; cx += COL) grid += `M${cx},${y}v${S}`;
-    for (let cy = y + S + COL; cy < y + h - 1; cy += COL) grid += `M${x},${cy}h${S}`;
-    el('path', { class: 'np-sep', d: grid }, parent);
+    if (S) {
+      el('rect', { class: 'np-strip', x, y, width: w, height: S }, parent);
+      el('rect', { class: 'np-strip', x, y: y + S, width: S, height: h - S }, parent);
+      let grid = `M${x},${y + S}H${x + w}M${x + S},${y}V${y + h}`;
+      for (let cx = x + S + COL; cx < x + w - 1; cx += COL) grid += `M${cx},${y}v${S}`;
+      for (let cy = y + S + COL; cy < y + h - 1; cy += COL) grid += `M${x},${cy}h${S}`;
+      el('path', { class: 'np-sep', d: grid }, parent);
+    }
     let d = '';
     const ox = x + S, oy = y + S;
     for (let i = 8; ox + i < x + w; i += 8) d += `M${ox + i},${oy}v${i % 40 === 0 ? 5 : 2.5}`;
@@ -634,9 +651,9 @@
     return host.querySelector('svg');
   }
 
-  function fit(svg, maxW, maxH, minScale, maxScale, src) {
+  function fit(svg, maxW, maxH, minScale, maxScale, src, margin = 6) {
     const bb = svg.getBBox();
-    const x0 = bb.x - 6, y0 = bb.y - 6, cw = bb.width + 12, ch = bb.height + 12;
+    const x0 = bb.x - margin, y0 = bb.y - margin, cw = bb.width + 2 * margin, ch = bb.height + 2 * margin;
     svg.setAttribute('viewBox', `${r2(x0)} ${r2(y0)} ${r2(cw)} ${r2(ch)}`);
     const s = Math.min(maxScale, maxW / cw, maxH ? maxH / ch : Infinity);
     if (s < minScale) fail(src, `diagram is ${Math.round(cw)}×${Math.round(ch)} px and would render at ${Math.round(s * 100)}%; the floor is ${Math.round(minScale * 1000) / 10}%. Split it or change direction.`);
@@ -645,8 +662,11 @@
 
   // ---------------------------------------------------------------- article plate
   window.npComposeArticle = (src, T) => {
-    const C = T.canvas.article;
-    const W = Number(src.meta.width || C.width);
+    const W = Number(src.meta.width || T.canvas.article.width);
+    // Narrow plates (phone variants) keep a tighter field so more of the width carries the diagram.
+    const narrow = W < 480;
+    const C = { ...T.canvas.article, pad: narrow ? 8 : T.canvas.article.pad };
+    const S = narrow ? 0 : 12; // narrow plates drop the ruled coordinate strips
     const plate = el('svg', { xmlns: NS, class: 'np-plate np-kind-article', viewBox: `0 0 ${W} 100`, width: W, height: 100, role: 'img' }, document.body);
     el('style', {}, plate).textContent = '/*NP-STYLE*/';
     el('title', { id: `${src.id}-title` }, plate).textContent = src.meta.kicker || src.id;
@@ -656,7 +676,7 @@
     const bg = el('rect', { class: 'np-canvas', x: 0, y: 0, width: W, height: 100 }, plate);
     const fieldLayer = el('g', { class: 'np-texture' }, plate);
     const host = el('g', {}, plate);
-    const inner = W - 12 - 2 * C.pad;
+    const inner = W - S - 2 * C.pad;
     const svg = renderPele(host, src, T, inner);
     const facts = brandDiagram(svg, src, T, src.id);
     drawDims(svg, src, facts.nodes);
@@ -665,13 +685,13 @@
       const { g, w } = seriesKey(svg, src, src.id);
       g.setAttribute('transform', `translate(${r2(bb.x + bb.width - w)},${r2(bb.y - 18)})`);
     }
-    const { s, cw, ch } = fit(svg, inner, 0, C.minScale, 1, src);
+    const { s, cw, ch } = fit(svg, inner, 0, C.minScale, 1, src, narrow ? 3 : 6);
     const dw = cw * s, dh = ch * s;
     const top = C.head;
-    const fieldH = Math.ceil((12 + C.pad * 2 + dh) / 8) * 8;
-    const dx = 12 + (W - 12 - dw) / 2, dy = top + 12 + (fieldH - 12 - dh) / 2;
+    const fieldH = Math.ceil((S + C.pad * 2 + dh) / 8) * 8;
+    const dx = S + (W - S - dw) / 2, dy = top + S + (fieldH - S - dh) / 2;
     for (const [k, v] of Object.entries({ x: dx, y: dy, width: dw, height: dh })) svg.setAttribute(k, r2(v));
-    field(fieldLayer, 0, top, W, fieldH, src.id);
+    field(fieldLayer, 0, top, W, fieldH, src.id, S);
 
     kickerText(plate, 20, 27, src.meta.kicker || src.id, 'np-head-kicker');
     if (src.meta.fig) { const f = text(plate, 'np-head-meta', W - 20, 27, `FIG. ${src.meta.fig}`, 'end'); f.setAttribute('data-exempt', '1'); }
@@ -709,7 +729,7 @@
         if (!near(rx, A.radii)) out.push(`radius ${rx} on ${describe(n)}`);
       }
     }
-    for (const t of plate.querySelectorAll('text')) {
+    for (const t of [...plate.querySelectorAll('text, tspan')].filter((t) => t.textContent.trim())) {
       const cs = getComputedStyle(t);
       const size = parseFloat(cs.fontSize) * scaleOf(t);
       const mono = /Mono/.test(cs.fontFamily);

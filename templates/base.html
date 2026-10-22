@@ -41,7 +41,7 @@
   <meta name="twitter:site"        content="@ninadwrites">
   <meta name="twitter:title"       content="{% block tw_title %}{{ site.title }}{% endblock %}">
   <meta name="twitter:description" content="{% block tw_desc %}{{ site.description }}{% endblock %}">
-  <meta name="twitter:image"       content="{{ site.url }}{% block tw_image %}/static/favicon.png{% endblock %}">
+  <meta name="twitter:image"       content="{% block tw_image %}{{ site.url }}/static/favicon.png{% endblock %}">
 
   <!-- Canonical -->
   <link rel="canonical" href="{{ site.url }}{% block canonical %}/{% endblock %}">

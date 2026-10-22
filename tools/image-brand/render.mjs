@@ -18,6 +18,7 @@ import { chromium } from 'playwright-core';
 import subsetFont from 'subset-font';
 import { loadTokens, contrastReport, siteDrift, themeCss, TOOL_DIR, REPO_DIR } from './lib/tokens.mjs';
 import { parseSource, countWords } from './lib/source.mjs';
+import { publishedPosts, KICKERS } from './lib/posts.mjs';
 
 const require = createRequire(import.meta.url);
 const args = process.argv.slice(2);
@@ -44,6 +45,35 @@ const glyphsJs = readFileSync(path.join(TOOL_DIR, 'lib/glyphs.js'), 'utf8');
 const peleJs = readFileSync(path.join(TOOL_DIR, 'node_modules/pele/dist/pele.global.js'), 'utf8');
 const peleVersion = JSON.parse(readFileSync(path.join(TOOL_DIR, 'node_modules/pele/package.json'), 'utf8')).version;
 const css = themeCss(tokens) + brandCss;
+// Everything that shapes the output goes into each figure's hash: the pipeline code, the
+// tokens and theme, and the locked dependency versions (Pele, fonts, subset-font, and
+// playwright-core, which pins the Chromium build).
+const PIPELINE = ['render.mjs', 'lib/plate.js', 'lib/glyphs.js', 'lib/source.mjs', 'lib/tokens.mjs', 'lib/posts.mjs', 'theme/brand.css', 'brand.tokens.json', 'package-lock.json']
+  .map((f) => readFileSync(path.join(TOOL_DIR, f), 'utf8')).join('\0');
+const posts = new Map(publishedPosts().map((p) => [p.slug, p]));
+
+// A share card's title, kicker, and URL come from the post itself at render time, so a
+// retitle never edits the hashed source. A pending post (not on this branch yet) carries
+// them in its og.mmd.
+const pendingCards = JSON.parse(readFileSync(path.join(TOOL_DIR, 'og-cards.json'), 'utf8')).$pending || {};
+function resolveCard(src) {
+  const post = posts.get(src.slug) || (pendingCards[src.slug] && { slug: src.slug, ...pendingCards[src.slug] });
+  if (post) {
+    src.meta['og-title'] = post.title;
+    src.meta['og-kicker'] = KICKERS[post.category] || src.meta['og-kicker'] || 'Article';
+    src.meta['og-url'] = `ninadpathak.com/articles/${post.slug}/`;
+  }
+  if (!src.meta['og-title']) throw new Error('share card has no published post and no @og-title');
+  return src;
+}
+
+// Committed and fresh SVGs must match token for token; numbers may differ by half a pixel
+// so a different Chromium build's text metrics do not fail CI.
+function sameSvg(a, b) {
+  const A = a.split(/(-?\d+(?:\.\d+)?)/), B = b.split(/(-?\d+(?:\.\d+)?)/);
+  if (A.length !== B.length) return false;
+  return A.every((t, i) => (i % 2 ? Math.abs(Number(t) - Number(B[i])) <= 0.5 : t === B[i]));
+}
 const minify = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '').replace(/\s*([{};:,])\s*/g, '$1').trim();
 
 function findSources() {
@@ -66,10 +96,15 @@ async function embedFonts(text) {
   return fontFaceCss(faces);
 }
 
-function embedSnippet(src, rel, dims) {
+// Breakpoint below which a figure with a narrow variant swaps to it (GUIDELINE.md §14a).
+const NARROW_MEDIA = '(max-width: 780px)';
+
+function embedSnippet(src, rel, dims, narrowVariant) {
   const caption = src.meta.caption ? `\n  <figcaption>${src.meta.caption}</figcaption>` : '';
+  const img = `<img src="${rel}.svg" width="${dims.width}" height="${dims.height}" alt="${src.meta.alt.replace(/"/g, '&quot;')}" loading="lazy" decoding="async">`;
+  const picture = narrowVariant ? `<picture><source media="${NARROW_MEDIA}" srcset="${narrowVariant.rel}.svg" width="${narrowVariant.width}" height="${narrowVariant.height}">${img}</picture>` : img;
   return `<figure class="np-figure">
-  <a class="np-figure-zoom" href="${rel}.svg"><img src="${rel}.svg" width="${dims.width}" height="${dims.height}" alt="${src.meta.alt.replace(/"/g, '&quot;')}" loading="lazy" decoding="async"></a>${caption}
+  <a class="np-figure-zoom" href="${rel}.svg">${picture}</a>${caption}
 </figure>`;
 }
 
@@ -81,7 +116,9 @@ async function main() {
 
   const files = findSources();
   if (!files.length) { console.log('no sources'); return failures; }
-  const sources = files.map(parseSource);
+  // Narrow variants render first so the wide figure's embed can include them.
+  const sources = files.map(parseSource).sort((a, b) => (b.id.endsWith('.narrow') - a.id.endsWith('.narrow')) || a.file.localeCompare(b.file));
+  const narrow = new Map();
 
   const browser = await chromium.launch();
   const page = await (await browser.newContext({ deviceScaleFactor: 1 })).newPage();
@@ -98,9 +135,8 @@ async function main() {
   for (const src of sources) {
     const label = path.relative(REPO_DIR, src.file);
     try {
-      const hash = createHash('sha256')
-        .update([readFileSync(src.file, 'utf8'), JSON.stringify(tokens), brandCss, glyphsJs, plateJs, peleVersion].join('\0'))
-        .digest('hex').slice(0, 16);
+      if (src.meta.kind === 'og') resolveCard(src);
+      const hash = createHash('sha256').update([readFileSync(src.file, 'utf8'), PIPELINE].join('\0')).digest('hex').slice(0, 16);
       const result = await page.evaluate(({ src, tokens, hash }) => {
         document.body.innerHTML = '';
         const dims = src.meta.kind === 'og' ? window.npComposeOg(src, tokens, { hash }) : window.npComposeArticle(src, tokens, { hash });
@@ -108,8 +144,18 @@ async function main() {
         const audit = window.npAudit(plate, tokens);
         const text = [...plate.querySelectorAll('text, tspan')].map((t) => t.textContent).join('');
         // Words in the image, excluding the figure title band and decorative digits.
-        const counted = [...plate.querySelectorAll('text')].filter((t) => !t.closest('[data-exempt]') && !t.classList.contains('gl-digit')).map((t) => t.textContent);
-        return { dims, text, counted, audit, svg: new XMLSerializer().serializeToString(plate) };
+        // Wrapped labels are separate tspans; join them with spaces so wrapping never merges words.
+        const lines = (t) => (t.querySelector('tspan') ? [...t.querySelectorAll('tspan')].map((s) => s.textContent).join(' ') : t.textContent);
+        const visible = [...plate.querySelectorAll('text')].filter((t) => !t.closest('[data-exempt]'));
+        const counted = visible.filter((t) => !t.classList.contains('gl-digit')).map(lines);
+        // Smallest text in the plate, for the sweep's displayed-size check.
+        const minText = { sans: 99, mono: 99 };
+        for (const t of [...plate.querySelectorAll('text, tspan')].filter((t) => !t.closest('.np-og-title') && t.textContent.trim())) {
+          const cs = getComputedStyle(t);
+          const k = /Mono/.test(cs.fontFamily) ? 'mono' : 'sans';
+          minText[k] = Math.min(minText[k], Math.round(parseFloat(cs.fontSize) * 100) / 100);
+        }
+        return { dims, text, counted, audit, minText, svg: new XMLSerializer().serializeToString(plate) };
       }, { src, tokens, hash });
 
       if (result.audit.length) throw new Error(`off-token marks: ${result.audit.slice(0, 8).join('; ')}${result.audit.length > 8 ? ` (+${result.audit.length - 8} more)` : ''}`);
@@ -122,9 +168,26 @@ async function main() {
 
       const outDir = path.join(OUT_ROOT, src.slug);
       const svgPath = path.join(outDir, `${src.id}.svg`);
+      const isNarrow = src.id.endsWith('.narrow');
+      const rel = `/static/images/diagrams/${src.slug}/${src.id}`;
+      if (isNarrow) narrow.set(`${src.slug}/${src.id.replace(/\.narrow$/, '')}`, { rel, width: result.dims.width, height: result.dims.height, minText: result.minText });
+      const meta = !isNarrow && src.meta.kind !== 'og' ? JSON.stringify({
+        source: `content/diagrams/${src.slug}/${src.id}.mmd`, hash, pele: peleVersion,
+        width: result.dims.width, height: result.dims.height, scale: result.dims.scale, minText: result.minText,
+        narrow: narrow.get(`${src.slug}/${src.id}`) || null,
+        alt: src.meta.alt, caption: src.meta.caption ?? null, embed: embedSnippet(src, rel, result.dims, narrow.get(`${src.slug}/${src.id}`)),
+      }, null, 2) + '\n' : null;
       if (CHECK) {
         const committed = existsSync(svgPath) ? readFileSync(svgPath, 'utf8') : '';
-        if (!committed.includes(hash)) failures.push(`${label}: output is stale; run node tools/image-brand/render.mjs`);
+        if (!committed.includes(hash)) { failures.push(`${label}: output is stale; run node tools/image-brand/render.mjs`); continue; }
+        const siblings = isNarrow ? [] : src.meta.kind === 'og' ? [`${src.id}.png`] : [`${src.id}.light.png`, `${src.id}.dark.png`, `${src.id}.json`];
+        for (const f of siblings) if (!existsSync(path.join(outDir, f))) failures.push(`${label}: missing ${src.slug}/${f}`);
+        const titleOf = (x) => (x.match(/<title[^>]*>([^<]*)<\/title>/) || [])[1];
+        if (src.meta.kind === 'og' && titleOf(committed) !== titleOf(svg)) {
+          // A retitled post keeps its old card until someone re-renders; that is not a CI failure.
+          console.warn(`warn ${label}: card still shows "${titleOf(committed)}"; run node tools/image-brand/render.mjs to refresh it`);
+        } else if (!sameSvg(committed, svg)) failures.push(`${label}: committed SVG differs from a fresh render; run node tools/image-brand/render.mjs`);
+        if (meta && existsSync(path.join(outDir, `${src.id}.json`)) && !sameSvg(readFileSync(path.join(outDir, `${src.id}.json`), 'utf8'), meta)) failures.push(`${label}: committed ${src.id}.json differs from a fresh render`);
         continue;
       }
       mkdirSync(outDir, { recursive: true });
@@ -137,6 +200,7 @@ async function main() {
         await shot.evaluate(() => document.fonts.ready);
         await shot.locator('svg.np-plate').screenshot({ path: file, omitBackground: false });
       };
+      if (isNarrow) { console.log(`${label} -> ${path.relative(REPO_DIR, svgPath)} ${result.dims.width}x${result.dims.height} (narrow)`); continue; }
       if (src.meta.kind === 'og') {
         const ogPage = await (await browser.newContext({ deviceScaleFactor: 1 })).newPage();
         await ogPage.setViewportSize({ width: result.dims.width, height: result.dims.height });
@@ -147,12 +211,7 @@ async function main() {
       } else {
         await png('light', path.join(outDir, `${src.id}.light.png`));
         await png('dark', path.join(outDir, `${src.id}.dark.png`));
-        const rel = `/static/images/diagrams/${src.slug}/${src.id}`;
-        writeFileSync(path.join(outDir, `${src.id}.json`), JSON.stringify({
-          source: `content/diagrams/${src.slug}/${src.id}.mmd`, hash, pele: peleVersion,
-          width: result.dims.width, height: result.dims.height, scale: result.dims.scale,
-          alt: src.meta.alt, caption: src.meta.caption ?? null, embed: embedSnippet(src, rel, result.dims),
-        }, null, 2) + '\n');
+        if (meta) writeFileSync(path.join(outDir, `${src.id}.json`), meta);
       }
       console.log(`${label} -> ${path.relative(REPO_DIR, svgPath)} ${result.dims.width}x${result.dims.height} scale ${result.dims.scale} words ${words.length}/${budget}`);
     } catch (error) {

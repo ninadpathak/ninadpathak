@@ -18,7 +18,7 @@ const WIDTHS = [320, 375, 1366];
 const SCHEMES = ['light', 'dark'];
 const browser = await chromium.launch();
 const results = [];
-const unstick = 'header, nav, .site-header, .reading-progress, [class*="progress"] { position: static !important; }';
+const unstick = 'header, nav, .site-header, .reading-progress, [class*="progress"] { position: static !important; } .skip-link, [href="#main"], [href="#content"] { display: none !important; }';
 
 async function open(url, width, scheme) {
   const ctx = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 2, colorScheme: scheme });
@@ -66,19 +66,27 @@ for (const target of targets) {
   const cols = [];
   for (const scheme of SCHEMES) for (const width of WIDTHS) {
     const { ctx, page } = await open(afterUrl + url, width, scheme);
-    const metrics = await page.evaluate(() => {
+    const metrics = await page.evaluate(async () => {
       const fig = document.querySelector('figure.np-figure');
       const img = fig?.querySelector('img');
+      // Displayed text size = the plate's smallest text × its on-screen scale (GUIDELINE.md §4).
+      const meta = img ? await (await fetch(img.getAttribute('src').replace(/\.svg$/, '.json'))).json() : null;
+      const variant = img && meta?.narrow && img.currentSrc.includes('.narrow.svg') ? meta.narrow : meta;
+      const k = img && variant ? img.getBoundingClientRect().width / variant.width : 0;
+      const shown = variant ? { sans: Math.round(variant.minText.sans * k * 10) / 10, mono: Math.round(variant.minText.mono * k * 10) / 10 } : null;
       const scroller = fig?.querySelector('.np-figure-zoom');
       return {
         pageOverflow: document.documentElement.scrollWidth - window.innerWidth,
         figureLoaded: !!img && img.complete && img.naturalWidth > 0,
         figureWidth: img ? Math.round(img.getBoundingClientRect().width) : 0,
         figureFits: scroller ? scroller.scrollWidth <= scroller.clientWidth + 1 : false,
+        variant: img ? (img.currentSrc.includes('.narrow.svg') ? 'narrow' : 'wide') : null,
+        shownText: shown,
+        textOk: !!shown && shown.sans >= 12 && shown.mono >= 8.5,
       };
     });
-    results.push({ slug, width, scheme, ...metrics, ok: metrics.pageOverflow <= 0 && metrics.figureLoaded && metrics.figureFits });
-    cols.push([`${width} · ${scheme}`, await shot(page, 'figure.np-figure'), width === 1366 ? 520 : width * 0.9]);
+    results.push({ slug, width, scheme, ...metrics, ok: metrics.pageOverflow <= 0 && metrics.figureLoaded && metrics.figureFits && metrics.textOk });
+    cols.push([`${width} · ${scheme} · ${metrics.variant} · ${metrics.shownText?.sans}px`, await shot(page, 'figure.np-figure'), width === 1366 ? 520 : width * 0.9]);
     await ctx.close();
   }
   await sheet(`${slug}.sweep.png`, `${slug} · sweep 320 / 375 / 1366 · light and dark`, cols);
@@ -87,5 +95,5 @@ for (const target of targets) {
 writeFileSync(path.join(outDir, 'sweep.json'), JSON.stringify(results, null, 2) + '\n');
 await browser.close();
 const bad = results.filter((r) => !r.ok);
-for (const r of bad) console.error(`FAIL ${r.slug} ${r.width} ${r.scheme}: overflow ${r.pageOverflow}px, loaded ${r.figureLoaded}`);
+for (const r of bad) console.error(`FAIL ${r.slug} ${r.width} ${r.scheme}: overflow ${r.pageOverflow}px, loaded ${r.figureLoaded}, fits ${r.figureFits}, ${r.variant} text ${JSON.stringify(r.shownText)}`);
 process.exit(bad.length ? 1 : 0);

@@ -24,7 +24,7 @@ For a concept, name the concept. For a failure, name the condition and the recov
 That is the whole rule. Task-based headings are not a mandate to put a verb in every heading.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/documentation-headings/task-heading-anatomy.svg"><img src="/static/images/diagrams/documentation-headings/task-heading-anatomy.svg" width="720" height="496" alt="An illustrative example rewrites the topic label Configuration as the task heading Configure the client with an API key. Brackets under the heading mark its three parts: the action Configure, the object the client, and the context with an API key, each drawn as a play head, a cube, and a key." loading="lazy" decoding="async"></a>
+  <a class="np-figure-zoom" href="/static/images/diagrams/documentation-headings/task-heading-anatomy.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/documentation-headings/task-heading-anatomy.narrow.svg" width="288" height="376"><img src="/static/images/diagrams/documentation-headings/task-heading-anatomy.svg" width="720" height="496" alt="An illustrative example rewrites the topic label Configuration as the task heading Configure the client with an API key. Brackets under the heading mark its three parts: the action Configure, the object the client, and the context with an API key, each drawn as a play head, a cube, and a key." loading="lazy" decoding="async"></picture></a>
   <figcaption>A topic label names a subject. A task heading names the work: an action, an object, and the context that changes the next step.</figcaption>
 </figure>
 

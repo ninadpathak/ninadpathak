@@ -35,7 +35,7 @@ Ask four questions:
 4. Who owns the source of truth, and which product or process change makes it stale?
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg"><img src="/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg" width="720" height="688" alt="Documentation placement decision tree. If no external reader needs the information, keep it internal when an operator needs it or it holds private context; otherwise review whether the page has a task. If an external reader needs it, split it into a public task page and a private record when private context remains; otherwise publish it externally." loading="lazy" decoding="async"></a>
+  <a class="np-figure-zoom" href="/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg"><picture><source media="(max-width: 780px)" srcset="/static/images/diagrams/internal-vs-external-docs/documentation-placement.narrow.svg" width="288" height="792"><img src="/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg" width="720" height="688" alt="Documentation placement decision tree. If no outside reader needs the information, keep it internal when an operator needs it; otherwise review whether the page has a task. If an outside reader needs it, split it into a public task page and a private record when private context remains; otherwise publish it externally." loading="lazy" decoding="async"></picture></a>
   <figcaption>Each path ends in internal, review, split, or external documentation. A split is two documents with one contract between them, not a redacted internal page.</figcaption>
 </figure>
 

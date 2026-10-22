@@ -10,7 +10,7 @@ Pele still lays out every diagram. The brand layer in this folder (`lib/glyphs.j
 
 ## 1. Visual over text: the rules
 
-1. **Word budget, enforced.** A diagram carries at most **15 words**, and a share-card diagram at most **6**. The head band (figure title and number) is exempt, and so are the share card's title and byline. A word is any token with two or more letters; digits, `$`, `×`, and single letters don't count. `render.mjs` and `--check` both fail a figure over budget.
+1. **Word budget, enforced.** A diagram carries at most **15 words**, and a share-card diagram at most **6**. The head band (figure title and number) is exempt, and so are the share card's title and byline. A word is any token with two or more letters; digits, `$`, `×`, and single letters don't count. Wrapped label lines are joined with spaces before counting, so the count doesn't depend on where a platform wraps. `render.mjs` and `--check` both fail a figure over budget.
 2. **Labels are names, one to three words.** "Perceive", "KV cache", "Outside reader?". Never a sentence, a description, a payload, or a parenthetical.
 3. **Draw the concept, don't write it.** Before adding a word, look for a glyph (§7) that shows it: a lock instead of "private", a globe instead of "public", a check or cross instead of "yes" or "no", filling cells instead of "context grows".
 4. **Numbers only when the number is the point.** In a benchmark or price chart, encode values as length, count, or fill (tile bars, §8 M12), and label at most two key values plus one ratio. Everywhere else, numbers stay in the article.
@@ -69,7 +69,7 @@ There is less text, but the same faces: **Inter** for labels, **JetBrains Mono**
 | Step digit | Mono | 9 / 600 | on-accent |
 | OG title (exempt) | Inter | 54 / 600, −0.025em | ink |
 
-Floors: Inter 12 px and mono 8.5 px at display size. Plates scale down to 87.5% at most. Share-card diagrams render at **1.5× or larger** and carry no words.
+Floors: Inter 12 px and mono 8.5 px **at display size**, measured on the page by `sweep.mjs` at 320, 375, and 1366 px. Article plates are drawn 1:1 (`minScale` 1), because a scaled plate puts its strokes off-token. A figure that doesn't fit changes layout, or gets a narrow variant (§14a). Share-card diagrams render at **1.5× or larger**, with non-scaling strokes, and carry no words.
 
 ## 5. Canvas
 
@@ -182,7 +182,7 @@ Budget per figure: one hot path, at most two span brackets, at most two value ca
 
 1200 × 630, light, with a 4 px accent rule along the top. Left: the category kicker, the published title, a hairline, the byline, and the URL; all of it is exempt. The title steps down 54 → 48 → 42 → 38 px until it fits in four lines. Right: a drafting panel with a **word-free** chain of two or three glyph tiles at 1.5× or larger. Never shrink the article's full diagram into the card.
 
-Every published post gets a card. Chains live in `og-cards.json`, one entry per slug, read top to bottom, with `*` marking the focal glyph. Pick glyphs by the article's subject using §7, and always the same glyph for the same concept. `node og.mjs` writes `content/diagrams/<slug>/og.mmd` from the map. A hand-written `og.mmd` (without the GENERATED marker) is left alone, so a post can get a bespoke card. `og.mjs --check` fails when a published post has no card. The build points `og:image` and `twitter:image` at `static/images/diagrams/<slug>/og.png` (`summary_large_image`) unless the post's frontmatter sets `og_image`. Review every card on `review/image-brand/batch1/og-contact-sheet.png` (`node contact.mjs`).
+Chains live in `og-cards.json`, one entry per slug, read top to bottom, with `*` marking the focal glyph. Pick glyphs by the article's subject using §7, and always the same glyph for the same concept. `node og.mjs` writes `content/diagrams/<slug>/og.mmd` from the map. The source holds only the glyph chain; `render.mjs` reads the title, category, and URL from the post when it renders, so publishing or retitling a post never edits a hashed file. Posts on unmerged branches go under `$pending` with their title and category, so their cards are rendered and committed before they land. A published post without a card is a **warning**, never a failure; it keeps the site's default image until a card is added. A hand-written `og.mmd` (without the GENERATED marker) is left alone. Frontmatter `og_image` overrides the card; a relative path is prefixed with the site URL, an absolute URL is used as-is, and only the generated card declares 1200 × 630. The build points `og:image` and `twitter:image` at `static/images/diagrams/<slug>/og.png` (`summary_large_image`) unless the post's frontmatter sets `og_image`. Review every card on `review/image-brand/batch1/og-contact-sheet.png` (`node contact.mjs`).
 
 ## 12. Screenshots and receipts
 
@@ -201,16 +201,21 @@ Keep one only when interaction teaches something a drawing can't, such as draggi
 - Never encode with color alone: hot paths are also thicker and carry particles and steps; badges differ by shape (lock versus globe); series differ by fill versus hatch.
 - Contrast is checked on every render.
 
-## 14a. Embedding
+## 14a. Embedding and narrow variants
 
 ```html
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/<slug>/<id>.svg"><img src="…svg" width="720" height="…" alt="…" loading="lazy" decoding="async"></a>
+  <a class="np-figure-zoom" href="/static/images/diagrams/<slug>/<id>.svg"><picture>
+    <source media="(max-width: 780px)" srcset="…/<id>.narrow.svg" width="288" height="…">
+    <img src="…/<id>.svg" width="720" height="…" alt="…" loading="lazy" decoding="async">
+  </picture></a>
   <figcaption>…</figcaption>
 </figure>
 ```
 
-Copy it from the figure's `.json`. `static/css/figures.css` loads only on pages with an `.np-figure` (the build sets `has_figure`). The plate always fits the column, so phones see the whole shape at a glance; the link opens the full-size SVG for zooming into the labels. Per-figure narrow relayouts are a planned follow-up.
+Copy the markup from the figure's `.json`; the `<picture>` appears only when a narrow variant exists. `static/css/figures.css` loads only on pages with an `.np-figure` (the build sets `has_figure`). The link opens the full-size SVG.
+
+**Narrow variant.** A 720 px plate shown at a phone's ~272 px column renders 13 px labels at about 5 px. So any figure whose labels would fall below the §4 floor on a phone needs `<id>.narrow.mmd` beside it, with `@width 288`. Narrow plates drop the ruled coordinate strips and keep 8 px field padding, which leaves 272 px for the diagram at 1:1. That shows labels at ≥12 px on a 320 px screen. Re-flow the figure, don't shrink it: stack subtrees, wrap headings onto two lines, and use the same glyphs and the same word budget. When a straight connector would cross another node, the router detours it past the obstacle.
 
 ## 15. Files
 
@@ -220,7 +225,14 @@ static/images/diagrams/<article-slug>/<figure-id>.svg | .light.png | .dark.png |
 static/images/diagrams/<article-slug>/og.svg | og.png
 ```
 
-The SVG header holds a hash of the source, tokens, CSS, glyphs, brand layer, and Pele version. `--check` fails on stale output, broken contrast, or a figure over its word budget. Output is byte-identical across re-renders.
+The SVG header holds a hash of the source and the whole pipeline: `render.mjs`, every `lib/` module, the theme, the tokens, and `package-lock.json`, which pins Pele, the fonts, subset-font, and playwright-core (and so the Chromium build). `--check` re-renders every figure and fails when:
+
+- the hash is stale;
+- a sibling output is missing (`.light.png`, `.dark.png`, `.json`, `og.png`);
+- the committed SVG or JSON differs from the fresh render (numbers may differ by up to 0.5 px, so a different Chromium build's text metrics don't fail CI);
+- a contrast pair, a stroke, radius, or text token, or the word budget fails.
+
+A share card whose post was retitled only warns: the card keeps the old title until someone re-renders. Output is byte-identical across re-renders on one machine.
 
 ## 16. Directive reference
 

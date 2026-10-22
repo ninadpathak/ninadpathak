@@ -55,7 +55,6 @@ export function parseSource(file) {
   const id = path.basename(file, '.mmd');
   meta.kind ??= 'diagram';
   if (meta.kind === 'diagram' && !meta.alt) throw new Error(`${file}: @alt is required`);
-  if (meta.kind === 'og' && !meta['og-title']) throw new Error(`${file}: @og-title is required`);
 
   meta.hotEdges = meta.path.flatMap((p) => {
     const ids = split(p, '>');

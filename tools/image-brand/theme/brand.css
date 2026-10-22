@@ -44,7 +44,7 @@
 .gl-badge { fill: var(--np-surface); stroke: var(--np-line); stroke-width: 1; }
 .gl-badge-accent { stroke: var(--np-accent); }
 .gl-dim { fill: none; stroke: var(--np-ink-2); stroke-width: 1; }
-.gl-digit { font: 500 8.5px var(--np-mono); fill: var(--np-muted); }
+.gl-digit { font: 500 9.5px var(--np-mono); fill: var(--np-muted); }
 
 /* Scaled diagrams (the share card) keep token stroke widths. */
 .np-scaled path, .np-scaled rect, .np-scaled circle, .np-scaled ellipse, .np-scaled polygon { vector-effect: non-scaling-stroke; }
@@ -82,7 +82,7 @@
 .np-diagram .np-handle { fill: var(--np-surface); stroke: var(--np-line); stroke-width: 1; }
 .np-diagram .np-port-hot { fill: var(--np-accent); stroke: var(--np-accent); }
 .np-diagram .np-handle-hot { stroke: var(--np-accent); }
-.np-particle { fill: var(--np-accent); }
+.np-particle { fill: var(--np-accent); stroke: none; }
 
 /* M8 · Edge marks */
 .np-label-mask { fill: var(--np-canvas); }
@@ -91,7 +91,7 @@
 
 /* M9 · Step markers */
 .np-step { fill: var(--np-accent); }
-.np-step-num { font: 600 9px var(--np-mono); fill: var(--np-on-accent); }
+.np-step-num { font: 600 9.5px var(--np-mono); fill: var(--np-on-accent); }
 
 /* M10 · Ring track */
 .np-ring-rail { fill: none; stroke: var(--np-rule); stroke-width: 1; }
@@ -112,17 +112,17 @@
 .np-diagram .pele-grid { stroke: var(--np-hairline); stroke-dasharray: 2 3; }
 .np-diagram .pele-axis { stroke: var(--np-line); }
 .np-diagram .np-tick { font: 500 9.5px var(--np-mono); fill: var(--np-muted); }
-.np-diagram .np-category { font: 500 12.5px var(--np-sans); fill: var(--np-ink); }
-.np-diagram .pele-axis-titles text { font: 600 9px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
+.np-diagram .np-category { font: 500 13px var(--np-sans); fill: var(--np-ink); }
+.np-diagram .pele-axis-titles text { font: 600 9.5px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
 .np-value { font: 600 10px var(--np-mono); fill: var(--np-ink); }
 .np-ratio { fill: none; stroke: var(--np-ink-2); stroke-width: 1; }
 .np-ratio-text { font: 600 10px var(--np-mono); fill: var(--np-accent); }
-.np-key { font: 500 9px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
+.np-key { font: 500 9.5px var(--np-mono); letter-spacing: 0.1em; fill: var(--np-muted); }
 
 /* M13 · Dimension brackets */
 .np-dim-line { fill: none; stroke: var(--np-ink-2); stroke-width: 1; }
 .np-dim-ext { fill: none; stroke: var(--np-rule); stroke-width: 1; stroke-dasharray: 2 2; }
-.np-dim-text { font: 600 9px var(--np-mono); letter-spacing: 0.08em; fill: var(--np-ink-2); }
+.np-dim-text { font: 600 9.5px var(--np-mono); letter-spacing: 0.08em; fill: var(--np-ink-2); }
 
 /* Share card */
 .np-og-rule { fill: var(--np-accent); }

@@ -1,0 +1,28 @@
+%% @width 288
+%% @kicker Documentation placement
+%% @alt Documentation placement decision tree. If no outside reader needs the information, keep it internal when an operator needs it; otherwise review whether the page has a task. If an outside reader needs it, split it into a public task page and a private record when private context remains; otherwise publish it externally.
+%% @path reader>public>split
+%% @glyph reader | reader globe
+%% @glyph private | reader lock
+%% @glyph public | doc lock
+%% @glyph internal | doc lock
+%% @glyph review | doc question
+%% @glyph split | pair
+%% @glyph external | doc globe
+%% @spacing 8,30
+flowchart TB
+  reader["Outside reader?"]:::accent
+  private["Operator need?"]
+  internal["Internal"]
+  review["Review"]
+  public["Private context?"]:::accent
+  split["Split"]:::focal
+  external["External"]
+  reader -->|no| private
+  private -->|yes| internal
+  private -->|no| review
+  internal ~~~ public
+  review ~~~ public
+  reader -->|yes| public
+  public -->|yes| split
+  public -->|no| external

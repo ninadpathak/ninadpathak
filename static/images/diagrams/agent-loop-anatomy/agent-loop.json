@@ -1,10 +1,15 @@
 {
   "source": "content/diagrams/agent-loop-anatomy/agent-loop.mmd",
-  "hash": "fa7111ccde662ee8",
+  "hash": "b6d5519ff563e154",
   "pele": "1.8.0",
   "width": 720,
   "height": 680,
   "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": null,
   "alt": "The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills with each pass until its newest tokens spill past the edge.",
   "caption": "Each phase has its own failure modes: infinite loops start in act, context exhaustion and lost tool results start in remember.",
   "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-loop-anatomy/agent-loop.svg\"><img src=\"/static/images/diagrams/agent-loop-anatomy/agent-loop.svg\" width=\"720\" height=\"680\" alt=\"The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills with each pass until its newest tokens spill past the edge.\" loading=\"lazy\" decoding=\"async\"></a>\n  <figcaption>Each phase has its own failure modes: infinite loops start in act, context exhaustion and lost tool results start in remember.</figcaption>\n</figure>"
