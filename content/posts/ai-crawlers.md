@@ -25,7 +25,7 @@ Each platform names a separate agent for each job, so one robots.txt rule govern
 | ChatGPT (OpenAI) | `OAI-SearchBot` | `ChatGPT-User` | `GPTBot` |
 | Claude (Anthropic) | `Claude-SearchBot` | `Claude-User` | `ClaudeBot` |
 | Perplexity | `PerplexityBot` | `Perplexity-User` | None listed |
-| Google | `Googlebot`, which covers AI Overviews and AI Mode | None listed | `Google-Extended`, for Gemini apps and Vertex AI |
+| Google | `Googlebot`, which covers AI Overviews and AI Mode | None listed | `Google-Extended`, which also controls grounding in Gemini apps and Vertex AI |
 
 OpenAI's [crawler page](https://developers.openai.com/api/docs/bots) says sites that opt out of OAI-SearchBot "will not be shown in ChatGPT search answers, though can still appear as navigational links." It also says "each setting is independent of the others," so a GPTBot block leaves OAI-SearchBot alone.
 
@@ -41,10 +41,10 @@ OpenAI says that for ChatGPT-User, "robots.txt rules may not apply," because a p
 
 A Disallow for either agent states a preference that the fetch may not follow. Anthropic says its bots honor "industry standard directives in robots.txt," and its article doesn't exempt Claude-User.
 
-To see what user fetchers request on your site, count their paths in a combined-format access log:
+To see what user fetchers request on your site, count their paths in a combined-format access log. The command matches only the quoted user-agent field, so a referrer that happens to contain an agent's name isn't counted:
 
 ```bash
-grep -E "ChatGPT-User|Perplexity-User|Claude-User" access.log | awk '{print $7}' | sort | uniq -c | sort -rn | head
+awk -F'"' '$6 ~ /ChatGPT-User|Perplexity-User|Claude-User/ { split($2, req, " "); print req[2] }' access.log | sort | uniq -c | sort -rn | head
 ```
 
 If a path you disallowed for one of these agents shows up, check the request's IP against the vendor's published ranges below before deciding the rule was ignored. Any client can send those user-agent strings.
@@ -143,6 +143,8 @@ Allow: /
 ```
 
 Pasted into the [AI crawler checker](/ai-crawler-checker/), it reports "citation allowed, training opted out," with all 7 search agents allowed and all 7 training agents blocked at `/`. A docs team that wants its pages in model training too can keep a wildcard-only file like the docs hosts above.
+
+Google-Extended isn't a training-only control, because Google says it also governs grounding in Gemini apps and in Grounding with Google Search on Vertex AI. Drop its line if you want Gemini to ground answers in your docs, and Google Search's AI features follow Googlebot either way.
 
 Crawler access is the first of the [checks for AI search](/articles/aeo-for-developer-docs/), and it doesn't make a page quotable on its own. The [technical SEO checklist for documentation](/articles/docs-seo/) covers indexing, and an [llms.txt file](/articles/llms-txt/) is a separate, optional index that grants or blocks nothing.
 
