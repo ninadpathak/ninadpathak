@@ -192,12 +192,10 @@ def llm_call_with_idempotency(prompt: str, operation_id: str) -> str:
 
 Five failure modes show up consistently across production incidents.
 
-<div class="visual-wrapper">
-  <div class="visual-title">PRODUCTION AGENT ERROR TAXONOMY</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/agent-error-taxonomy.html" title="Taxonomy of production agent failure classes and how each is handled" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/agent-error-handling/error-taxonomy.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-error-handling/error-taxonomy.narrow.svg" width="288" height="704"><img class="np-has-narrow" src="/static/images/diagrams/agent-error-handling/error-taxonomy.svg" width="720" height="264" alt="Five failure modes that recur in production agent incidents. Context exhaustion: tool results pile up until the context window is full and the next call is rejected. Schema drift: the model calls a tool with parameters from an older schema version. Partial failure: some parallel tool calls succeed and some fail. Ambiguous timeout: a request times out after the server may already have processed it, so a retry can execute it twice. Observability gaps: without structured logs of tool calls there is no record of what the agent tried." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Each mode has its own fix: a hard cap on tool history, versioned schemas, per-call tracking, idempotency keys, and a log line for every tool call.</figcaption>
+</figure>
 
 **Context window exhaustion**: the agent piles up tool results, say twenty paginated API responses, until the context is full and the next call rejects. Set a hard limit on total tool call history and fail explicitly when you approach it rather than letting the provider error out mid-task.
 

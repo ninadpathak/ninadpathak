@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/agent-memory-2026/memory-stack.mmd",
+  "hash": "a109b78a106ac7de",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 256,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/agent-memory-2026/memory-stack.narrow",
+    "width": 288,
+    "height": 648,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "The agent memory stack from the bottom up: an embedding and storage layer such as pgvector, Pinecone, or Qdrant holds memories outside the context window; a retrieval layer combines dense vectors with BM25; a ranking layer reorders candidates; and the result reaches the agent's context window, the active working state.",
+  "caption": "Storage, retrieval, and ranking are separate layers; only what survives ranking reaches the context window.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-memory-2026/memory-stack.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-memory-2026/memory-stack.narrow.svg\" width=\"288\" height=\"648\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-memory-2026/memory-stack.svg\" width=\"720\" height=\"256\" alt=\"The agent memory stack from the bottom up: an embedding and storage layer such as pgvector, Pinecone, or Qdrant holds memories outside the context window; a retrieval layer combines dense vectors with BM25; a ranking layer reorders candidates; and the result reaches the agent's context window, the active working state.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Storage, retrieval, and ranking are separate layers; only what survives ranking reaches the context window.</figcaption>\n</figure>"
+}

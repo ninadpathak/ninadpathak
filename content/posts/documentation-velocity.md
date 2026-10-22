@@ -18,12 +18,10 @@ The effect compounds rather than adding up linearly. Technical practices like Co
 
 I have stopped thinking of documentation as a clarity exercise. It behaves like a systemic optimization for engineering throughput, the kind of thing that quietly raises the ceiling on everything else a team does.
 
-<div class="visual-wrapper">
-  <div class="visual-title">The DORA multiplier: capability amplification</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/dora-multiplier.html" title="The DORA Multiplier" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/dora-multiplier.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/dora-multiplier.narrow.svg" width="288" height="416"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/dora-multiplier.svg" width="720" height="472" alt="The performance lift that continuous integration gives a team, by documentation quality: 34% with poor documentation and 750% with high-quality documentation, about 22 times larger. Each tile is 50 percentage points." loading="lazy" decoding="async"></picture></a>
+  <figcaption>DORA research: the same practice lifts performance 34% with poor docs and 750% with elite docs. Each tile is 50 points.</figcaption>
+</figure>
 
 **Short answer:** Documentation acts as a force multiplier for every other technical capability in an engineering organization. Good docs shrink "Lead Time for Changes" by cutting the time engineers spend in discovery, and they shrink "Time to Restore Service" by moving tribal knowledge out of people's heads into something searchable and reliable.
 
@@ -35,12 +33,10 @@ Engineering teams frequently prioritize code-level technical debt over documenta
 
 It accrues quietly as a tax on every Pull Request where a reviewer has to ask what a function actually does, every onboarding cycle where a new hire reverse-engineers the deploy process, and every production incident where the one person who understands the cron job is asleep.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Documentation debt: compounding velocity loss</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/documentation-debt.html" title="Documentation Debt ROI" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/documentation-debt.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/documentation-debt.narrow.svg" width="288" height="448"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/documentation-debt.svg" width="720" height="504" alt="Missing documentation never breaks the build, but it taxes three places: every pull request where a reviewer has to ask what a function does, every onboarding where a new hire reverse-engineers the deploy process, and every incident where the one person who understands the failing job is asleep." loading="lazy" decoding="async"></picture></a>
+  <figcaption>A Stripe survey found developers spend about 17 hours a week on technical debt and maintenance, with poor docs a primary friction point.</figcaption>
+</figure>
 
 A [Stripe survey](https://stripe.com/files/reports/the-developer-coefficient.pdf) found that developers spend an average of 17 hours per week on technical debt and maintenance, with poor documentation cited as a primary friction point. Once the answers live only in someone's memory or a Slack thread that scrolled away last Tuesday, the cost of discovery scales with the size of the team.
 

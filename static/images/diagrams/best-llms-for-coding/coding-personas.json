@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/best-llms-for-coding/coding-personas.mmd",
+  "hash": "5683f5f3c9014477",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 328,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 10
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/best-llms-for-coding/coding-personas.narrow",
+    "width": 288,
+    "height": 648,
+    "minText": {
+      "sans": 13,
+      "mono": 11
+    }
+  },
+  "alt": "Five kinds of coding work matched to the model the article recommends for each: autonomous agentic coding to Claude 4.6 Opus, which leads SWE-bench Verified at 80.9%; repository-scale context and complex logic to Gemini 3.1 Pro; cost-sensitive production use to DeepSeek V4; multi-step reasoning and planning to GPT-5.4 Codex; and everyday IDE autocomplete to the OpenAI and Cursor ecosystem.",
+  "caption": "Claude 4.6 Opus leads SWE-bench Verified at 80.9%, but the right model depends on the kind of work.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/best-llms-for-coding/coding-personas.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/best-llms-for-coding/coding-personas.narrow.svg\" width=\"288\" height=\"648\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/best-llms-for-coding/coding-personas.svg\" width=\"720\" height=\"328\" alt=\"Five kinds of coding work matched to the model the article recommends for each: autonomous agentic coding to Claude 4.6 Opus, which leads SWE-bench Verified at 80.9%; repository-scale context and complex logic to Gemini 3.1 Pro; cost-sensitive production use to DeepSeek V4; multi-step reasoning and planning to GPT-5.4 Codex; and everyday IDE autocomplete to the OpenAI and Cursor ecosystem.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Claude 4.6 Opus leads SWE-bench Verified at 80.9%, but the right model depends on the kind of work.</figcaption>\n</figure>"
+}

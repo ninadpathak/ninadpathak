@@ -6,7 +6,7 @@ import path from 'node:path';
 const LIST_KEYS = new Set(['path', 'glyph', 'dim', 'step', 'callout']);
 const KNOWN = new Set([
   'kind', 'fig', 'kicker', 'alt', 'caption', 'path', 'glyph', 'ring', 'center', 'dim', 'step', 'parts',
-  'callout', 'ratio', 'series', 'unit', 'legend', 'width', 'spacing', 'key', 'og-title', 'og-kicker', 'og-url',
+  'callout', 'ratio', 'series', 'unit', 'tile', 'legend', 'width', 'spacing', 'key', 'og-title', 'og-kicker', 'og-url',
 ]);
 // v2 text components, removed in v3 (GUIDELINE.md §6). Their content belongs in the article.
 const REMOVED = new Set(['note', 'detail', 'table', 'row', 'bar', 'timeline', 'index']);
@@ -71,6 +71,7 @@ export function parseSource(file) {
   })() : null;
   meta.callouts = meta.callout.map((c) => c.split(':').map(Number));
   meta.ratioAt = meta.ratio === undefined ? null : Number(meta.ratio);
+  meta.tileUnits = meta.tile === undefined ? 1 : Number(meta.tile);
   meta.seriesNames = meta.series ? split(meta.series, ';') : [];
   meta.keySpec = meta.key ? meta.key.split(';').map((p) => p.trim()).filter(Boolean).map((p) => p.split('=').map((x) => x.trim())) : null;
   meta.spacingSpec = meta.spacing ? meta.spacing.split(',').map(Number) : null;

@@ -63,12 +63,10 @@ Durability is everything for this pattern, which is why the [agent-loop-anatomy]
 
 Drop state when the process recycles overnight and the perceive-think-act cycle wakes up with no idea what it was working toward. Serve stale data from the memory layer and the agent reasons forward from premises that stopped being true days ago, like an employee who comes back from vacation and acts on a plan that was cancelled while they were out.
 
-<div class="visual-wrapper">
-  <div class="visual-title">THE DESIGN SPACE MAP</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/agent-design-space-map.html" title="A 2D design-space map plotting the five production agent patterns by run frequency and blast radius" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/agent-design-space/design-space-map.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-design-space/design-space-map.narrow.svg" width="288" height="744"><img class="np-has-narrow" src="/static/images/diagrams/agent-design-space/design-space-map.svg" width="720" height="288" alt="The five production agent patterns in order of how often they run and how wide their blast radius is: retrieval-augmented single-loop agents run once per request with the smallest blast radius, then multi-turn conversational agents, workflow orchestration agents, supervisor-delegation agents that split work across several agents, and persistent-goal agents that run continuously and carry state across days with the widest blast radius and the hardest audit." loading="lazy" decoding="async"></picture></a>
+  <figcaption>The further right a pattern sits, the longer it runs and the more its state has to survive a restart.</figcaption>
+</figure>
 
 ## What the production data shows
 

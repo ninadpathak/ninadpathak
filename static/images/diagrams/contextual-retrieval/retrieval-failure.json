@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/contextual-retrieval/retrieval-failure.mmd",
+  "hash": "81d801255dc87306",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 472,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/contextual-retrieval/retrieval-failure.narrow",
+    "width": 288,
+    "height": 432,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Reduction in top-20 retrieval failure, measured as 1 minus recall at 20, in Anthropic's contextual retrieval tests: 35% from contextual embeddings alone, 49% once contextual BM25 joins, and 67% once reranking joins too. Each tile is 5 percentage points.",
+  "caption": "From Anthropic's contextual retrieval writeup. Each layer still helps on top of the one before it; each tile is 5 points.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/contextual-retrieval/retrieval-failure.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/contextual-retrieval/retrieval-failure.narrow.svg\" width=\"288\" height=\"432\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/contextual-retrieval/retrieval-failure.svg\" width=\"720\" height=\"472\" alt=\"Reduction in top-20 retrieval failure, measured as 1 minus recall at 20, in Anthropic's contextual retrieval tests: 35% from contextual embeddings alone, 49% once contextual BM25 joins, and 67% once reranking joins too. Each tile is 5 percentage points.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>From Anthropic's contextual retrieval writeup. Each layer still helps on top of the one before it; each tile is 5 points.</figcaption>\n</figure>"
+}

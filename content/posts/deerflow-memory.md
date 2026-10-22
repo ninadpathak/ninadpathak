@@ -20,12 +20,10 @@ What you get is an architecture you can audit and debug. A single state file can
 
 Anyone who has watched an opaque agent system lose track of what happened three steps ago will recognize the relief.
 
-<div class="visual-wrapper">
-  <div class="visual-title">DeerFlow Memory Architecture</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/deerflow-memory.html" title="DeerFlow layered memory architecture" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/deerflow-memory/stage-handoff.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/deerflow-memory/stage-handoff.narrow.svg" width="288" height="728"><img class="np-has-narrow" src="/static/images/diagrams/deerflow-memory/stage-handoff.svg" width="720" height="256" alt="A DeerFlow workflow runs as a sequence of stages: plan, research, and report. Each stage works in its own fresh working memory, the prompt at execution time, then writes its outputs to the session state file. The file grows stage by stage, and the next stage reads it into its working memory, so stopping and resuming a run only needs that one file." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Working memory resets between stages; the session file carries state forward, so a failed run resumes from its last stage.</figcaption>
+</figure>
 
 ##The Layered Architecture Of DeerFlow Memory
 

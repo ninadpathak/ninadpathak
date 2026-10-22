@@ -20,12 +20,10 @@ The moment you exceed that window, or the moment you need a customer support age
 
 Across production pipelines handling tens of thousands of agent sessions, I have shipped memory management layers, benchmarked eviction strategies, debugged summarization drift, and watched KV caches eat GPU memory faster than anything else. Here is what I have learned.
 
-<div class="visual-wrapper">
-  <div class="visual-title">How LLM Memory Management Works</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/memory-management.html" title="LLM memory management eviction and retention" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/ai-memory-management/memory-operations.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/ai-memory-management/memory-operations.narrow.svg" width="288" height="744"><img class="np-has-narrow" src="/static/images/diagrams/ai-memory-management/memory-operations.svg" width="720" height="520" alt="A new turn arrives in a full context window, and the memory layer has three moves: prioritize by importance so the most valuable records stay, compress older records into a smaller summary, or evict the lowest-value records from memory entirely." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Eviction, compression, and importance-weighted retention are separate policies, and each fails in its own way.</figcaption>
+</figure>
 
 ## Memory hierarchy separates active context from persistent state
 

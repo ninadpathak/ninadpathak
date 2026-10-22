@@ -595,10 +595,15 @@
     for (const g of svg.querySelectorAll('.pele-axis-labels, .pele-axis-titles')) { g.removeAttribute('fill'); g.removeAttribute('font-size'); }
     for (const t of svg.querySelectorAll('.pele-axis-titles text')) t.textContent = t.textContent.toUpperCase();
     const unit = src.meta.unit || '';
-    const fmt = (v) => { const r = Math.round(v * 100) / 100; return `${unit}${Number.isInteger(r) ? r : r.toFixed(2)}`; };
-    const tile = ppu; // one tile per unit of the value axis
+    // A percent sign follows the number; any other unit ($) leads it.
+    const fmt = (v) => { const r = Math.round(v * 100) / 100; const n = Number.isInteger(r) ? r : r.toFixed(2); return unit === '%' ? `${n}%` : `${unit}${n}`; };
+    // One tile per unit of the value axis, or per `@tile n` units when values run into the hundreds.
+    const per = src.meta.tileUnits || 1;
+    const tile = ppu * per;
     const values = el('g', { class: 'np-values' }, svg);
     const bars = [];
+    // Callouts print the source's values; widths measured back from pixels carry float noise.
+    const data = [...(src.mermaid || '').matchAll(/^\s*bar\s*\[([^\]]*)\]/gm)].map((m) => m[1].split(',').map(Number));
     [...svg.querySelectorAll('.pele-series')].forEach((series, si) => {
       series.removeAttribute('fill');
       series.classList.add(`np-series-${si + 1}`);
@@ -606,9 +611,9 @@
       [...series.querySelectorAll('rect')].forEach((r, ci) => {
         const x = Number(r.getAttribute('x')), y = Number(r.getAttribute('y')), w = Number(r.getAttribute('width')), h = Number(r.getAttribute('height'));
         r.remove();
-        const v = horizontal ? w / ppu : h / ppu;
+        const v = Number.isFinite(data[si]?.[ci]) ? data[si][ci] : (horizontal ? w / ppu : h / ppu);
         bars.push({ si, ci, x, y, w, h, v });
-        const n = Math.ceil(v - 1e-6);
+        const n = Math.ceil(v / per - 1e-6);
         for (let k = 0; k < n; k++) {
           const tw = Math.min(tile, w - k * tile) - 1.2;
           if (tw <= 0.4) continue;
@@ -645,14 +650,17 @@
       return i;
     };
     const tick = (x, y) => `M${r2(x - 4)},${r2(y + 4)}L${r2(x + 4)},${r2(y - 4)}`;
-    const mark = (x, y, label) => {
+    const mark = (x, y, label, vertical) => {
       if (label.startsWith(':')) {
         layer.appendChild(el('rect', { class: 'np-label-mask', x: r2(x - 13), y: r2(y - 10), width: 26, height: 20 }));
         window.npGlyphs.badge(layer, x, y, label.slice(1), false, 9);
         return;
       }
       const t = central(text(layer, 'np-dim-text', x, y, label.toUpperCase(), 'middle'));
-      layer.insertBefore(el('rect', { class: 'np-label-mask', x: r2(x - width(t) / 2 - 6), y: r2(y - 7), width: r2(width(t) + 12), height: 14 }), t);
+      const m = el('rect', { class: 'np-label-mask', x: r2(x - width(t) / 2 - 6), y: r2(y - 7), width: r2(width(t) + 12), height: 14 });
+      layer.insertBefore(m, t);
+      // A vertical span's words run along its line, reading upward, so they never cross a tile.
+      if (vertical) for (const n of [t, m]) n.setAttribute('transform', `rotate(-90 ${r2(x)} ${r2(y)})`);
     };
     for (const d of src.meta.dims) {
       const a = nodes.get(d.from), b = nodes.get(d.to);
@@ -663,7 +671,7 @@
         const x = right + 22 + slot('v', top.t, bot.b) * 30;
         el('path', { class: 'np-dim-ext', d: `M${r2(top.r + 4)},${r2(top.t)}H${r2(x + 6)}M${r2(bot.r + 4)},${r2(bot.b)}H${r2(x + 6)}` }, layer);
         el('path', { class: 'np-dim-line', d: `M${r2(x)},${r2(top.t)}V${r2(bot.b)}${tick(x, top.t)}${tick(x, bot.b)}` }, layer);
-        mark(x, (top.t + bot.b) / 2, d.label);
+        mark(x, (top.t + bot.b) / 2, d.label, true);
       } else {
         const lft = a.l <= b.l ? a : b, rgt = a.r >= b.r ? a : b;
         const y = bottom + 22 + slot('h', lft.l, rgt.r) * 30;

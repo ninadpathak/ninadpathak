@@ -1,0 +1,17 @@
+%% @width 288
+%% @kicker What Claude Code loads into a session
+%% @alt Three sources feed a Claude Code session's context. CLAUDE.md files, written and maintained by you, load at startup across managed, user, project, and local scopes. Auto memory, MEMORY.md plus topic files that Claude Code writes as it works, also loads at startup and is updated from the session. One-off context passed on the command line lasts only for that session.
+%% @path claude>session
+%% @glyph claude | doc corner=person
+%% @glyph auto | ledger rows=3
+%% @glyph cli | inbox
+%% @glyph session | context
+%% @spacing 12,20
+flowchart TB
+  claude["CLAUDE.md"]
+  auto["Auto memory"]
+  cli["One-off"]:::muted
+  session["Session"]:::focal
+  claude --> session
+  auto ---> session
+  cli -...-> session

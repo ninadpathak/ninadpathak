@@ -203,7 +203,7 @@
 
   // Experts: a grid of experts with only a few lit (`on` of `n`).
   G.experts = (g, w, h, o) => {
-    const n = o.n || 256, on = o.on || 8, cols = o.cols || 32, rows = Math.ceil(n / cols), s = 3.6, gap = 1.2;
+    const n = o.n || 256, on = o.on || 8, cols = o.cols || 32, rows = Math.ceil(n / cols), s = o.s || 3.6, gap = Math.max(1.2, s / 3);
     const lit = new Set(Array.from({ length: on }, (_, k) => (k * 37 + 11) % n));
     const x0 = -(cols * (s + gap) - gap) / 2, y0 = -(rows * (s + gap) - gap) / 2;
     for (let i = 0; i < n; i++) R(g, x0 + (i % cols) * (s + gap), y0 + Math.floor(i / cols) * (s + gap), s, s, lit.has(i) ? 'gl-accent' : 'gl-cell', 1);

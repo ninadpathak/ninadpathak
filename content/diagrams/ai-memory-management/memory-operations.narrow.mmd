@@ -1,0 +1,20 @@
+%% @width 288
+%% @kicker What happens when context fills
+%% @alt A new turn arrives in a full context window, and the memory layer has three moves: prioritize by importance so the most valuable records stay, compress older records into a smaller summary, or evict the lowest-value records from memory entirely.
+%% @path turn>ctx>keep
+%% @glyph turn | inbox
+%% @glyph ctx | context w=72
+%% @glyph keep | ranked hi=0
+%% @glyph squeeze | cells fill=0.35
+%% @glyph evict | stop
+%% @spacing 12,24
+flowchart TB
+  turn["New turn"]
+  ctx["Context"]:::accent
+  keep["Prioritize"]:::focal
+  squeeze["Compress"]
+  evict["Evict"]:::muted
+  turn --> ctx
+  ctx --> keep
+  ctx ---> squeeze
+  ctx -...-> evict

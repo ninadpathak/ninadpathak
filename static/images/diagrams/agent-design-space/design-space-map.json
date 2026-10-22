@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/agent-design-space/design-space-map.mmd",
+  "hash": "6583ff8d234e563d",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 288,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/agent-design-space/design-space-map.narrow",
+    "width": 288,
+    "height": 744,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "The five production agent patterns in order of how often they run and how wide their blast radius is: retrieval-augmented single-loop agents run once per request with the smallest blast radius, then multi-turn conversational agents, workflow orchestration agents, supervisor-delegation agents that split work across several agents, and persistent-goal agents that run continuously and carry state across days with the widest blast radius and the hardest audit.",
+  "caption": "The further right a pattern sits, the longer it runs and the more its state has to survive a restart.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-design-space/design-space-map.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-design-space/design-space-map.narrow.svg\" width=\"288\" height=\"744\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-design-space/design-space-map.svg\" width=\"720\" height=\"288\" alt=\"The five production agent patterns in order of how often they run and how wide their blast radius is: retrieval-augmented single-loop agents run once per request with the smallest blast radius, then multi-turn conversational agents, workflow orchestration agents, supervisor-delegation agents that split work across several agents, and persistent-goal agents that run continuously and carry state across days with the widest blast radius and the hardest audit.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The further right a pattern sits, the longer it runs and the more its state has to survive a restart.</figcaption>\n</figure>"
+}

@@ -2,33 +2,33 @@
 
 68 live iframes on `origin/main` (51 posts), sorted by GUIDELINE.md §13: keep an iframe only when interaction teaches something a drawing cannot.
 
-**66 replace · 2 keep.** Group A (18) is converted in `image-brand-batch2`; groups B–D (16 each) follow. Each converted figure ships a wide plate and a phone variant.
+**66 replace · 2 keep.** Group A (18) shipped in `image-brand-batch2`, and group B (16) is converted in `image-brand-groupB`; groups C and D (16 each) follow. Each converted figure ships a wide plate and a phone variant.
 
 | # | Post | Visual | Tech | Decision | Group | Reason |
 |---|---|---|---|---|---|---|
-| 1 | agent-design-space | `agent-design-space-map` | html | replace | B | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
-| 2 | agent-error-handling | `agent-error-taxonomy` | html | replace | B | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
+| 1 | agent-design-space | `agent-design-space-map` | html | replace | B · converted | The cycling highlight only replayed an order; the plate lays the five patterns along one span of run length and risk. |
+| 2 | agent-error-handling | `agent-error-taxonomy` | html | replace | B · converted | Six text cards became the article's five failure modes as glyphs; each mode's fix moved to the caption and alt text. |
 | 3 | agent-harnesses| `agent-harness-layers` | svg| replace| A · converted | Concentric rings animate without input; the plate shows the same layers plus the request path and tool calls. |
 | 4 | agent-loop-anatomy| `agent-loop-cycle` | svg| replace| A · converted | Pulse only replays the four phases; the ring plate shows the cycle, its order, and the context hub at once. |
-| 5 | agent-memory-2026 | `state-memory` | three | replace | B | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 6 | agent-memory-types | `three-memory-types` | three | replace | B | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
+| 5 | agent-memory-2026 | `state-memory` | three | replace | B · converted | An orbit of product names carried no structure; the plate draws the stack the article describes, from storage through ranking into context. |
+| 6 | agent-memory-types | `three-memory-types` | three | replace | B · converted | Three text cards became three glyphs on one span of lifespan; what each type stores stays in the article. |
 | 7 | agent-vs-ai-assistant| `who-drives-the-loop` | html| replace| A · converted | Animation contrasts two loops the reader cannot drive; two clusters show who drives each one. |
 | 8 | agentic-workflows| `agentic-workflow-pipeline` | html| replace| A · converted | Pulse travels five fixed stages; a five-tile chain with person badges marks the two human stages. |
 | 9 | ai-agent-failures| `agent-failure-modes` | svg| replace| A · converted | Pulse marks failure points in sequence; the ring with crossed stations and outer failure tiles shows them together. |
 | 10 | ai-agent-taxonomy| `agent-taxonomy` | html| replace| A · converted | Animated ladder with no input; a bottom-up ladder of glyphs reads as rising autonomy at a glance. |
-| 11 | ai-memory-management | `memory-management` | three | replace | B | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 12 | best-llms-for-coding | `llm-coding-comparison` | html | replace | B | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
-| 13 | browser-vector-search | `wasm-vdb-sequence` | svg | replace | B | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
-| 14 | browser-vector-search | `wasm-vdb-indexing` | svg | replace | B | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
-| 15 | browser-vector-search | `wasm-vdb-binary` | svg | replace | B | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
-| 16 | browser-vector-search | `wasm-vdb-comparison` | svg | replace | B | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
-| 17 | claude-code-memory | `claude-code-memory` | three | replace | B | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
+| 11 | ai-memory-management | `memory-management` | three | replace | B · converted | The orbiting scene named three moves; the plate shows a new turn meeting a full context and the three policies that answer it. |
+| 12 | best-llms-for-coding | `llm-coding-comparison` | html | replace | B · converted | A scored matrix with unsupported cells became the article's persona-to-model picks; only the 80.9% SWE-bench figure, in the caption, is a number. |
+| 13 | browser-vector-search | `wasm-vdb-sequence` | svg | replace | B · converted | The four-step animation became the hot path through the three environments the corrected article names. |
+| 14 | browser-vector-search | `wasm-vdb-indexing` | svg | replace | B · converted | A notional latency curve became a comparison of how many vectors each method compares, with no measured results. |
+| 15 | browser-vector-search | `wasm-vdb-binary` | svg | replace | B · converted | The mapping animation became two tile bars: 32 bits against 1 bit per dimension, the 32× the article states. |
+| 16 | browser-vector-search | `wasm-vdb-comparison` | svg | replace | B · converted | The decision matrix became the article's one decision, relational data or not, with ✓ and ✕ branches. |
+| 17 | claude-code-memory | `claude-code-memory` | three | replace | B · converted | The 3D layer stack named a SQLite store the article doesn't describe; the plate shows the three sources the article does: CLAUDE.md, auto memory, and one-off context. |
 | 18 | coding-agent-memory| `context-window-sliding` | html| replace| A · converted | Animated window slide; a strip with the window bracketed and old turns falling away shows the mechanism. |
-| 19 | contextual-retrieval | `contextual-retrieval` | html | replace | B | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
-| 20 | deerflow-memory | `deerflow-memory` | three | replace | B | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 21 | devtools-documentation | `evaluation-funnel` | three | replace | B | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 22 | documentation-velocity | `dora-multiplier` | svg | replace | B | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
-| 23 | documentation-velocity | `documentation-debt` | three | replace | B | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
+| 19 | contextual-retrieval | `contextual-retrieval` | html | replace | B · converted | The toggle hid the result; tile bars show the 35%, 49%, and 67% reductions from the article. |
+| 20 | deerflow-memory | `deerflow-memory` | three | replace | B · converted | The 3D pipeline became the stage handoff: fresh working memory per stage and a session file that grows between them. |
+| 21 | devtools-documentation | `evaluation-funnel` | three | replace | B · converted | Its attrition counter came from a particle simulation, not data; the plate marks the three friction points the article names on the path to a deal. |
+| 22 | documentation-velocity | `dora-multiplier` | svg | replace | B · converted | Two text cards became tile bars at one tile per 50 points: 34% against 750%. |
+| 23 | documentation-velocity | `documentation-debt` | three | replace | B · converted | An animated counter became the three places the article says documentation debt is paid; the 17 hours a week stays in the caption. |
 | 24 | documentation-velocity | `knowledge-silos` | three | replace | C | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
 | 25 | documentation-velocity | `context-switching` | three | replace | C | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
 | 26 | engineer-to-writer | `context-bridge` | three | replace | C | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |

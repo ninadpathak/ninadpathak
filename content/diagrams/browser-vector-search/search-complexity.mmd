@@ -1,0 +1,15 @@
+%% @fig 02
+%% @kicker Flat scan vs HNSW
+%% @alt A query vector can be answered two ways. A flat scan compares the query with every stored vector, so its work grows with the number of vectors. An HNSW graph index navigates sparse long-distance links first and compares only a small set of candidate vectors near the answer.
+%% @caption HNSW compares fewer candidates; wider vectors still make each comparison cost more on both engines.
+%% @path query>hnsw
+%% @glyph query | vectors
+%% @glyph flat | experts n=16 on=16 cols=8 s=8 w=100
+%% @glyph hnsw | experts n=16 on=3 cols=8 s=8 w=100
+%% @spacing 28,64
+flowchart LR
+  query["Query"]
+  flat["Flat scan"]
+  hnsw["HNSW"]:::focal
+  query --> flat
+  query --> hnsw

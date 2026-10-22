@@ -67,12 +67,10 @@ Whenever I reason about where semantic memory sits relative to retrieval, I come
 
 Treating it as the whole system is how teams end up dumping yesterday's task logs into the same store as their hard-won API facts and wondering why answers drift.
 
-<div class="visual-wrapper">
-  <div class="visual-title">THE THREE MEMORY TYPES</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/three-memory-types.html" title="Working, episodic, and semantic memory side by side: what each stores and its lifespan" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/agent-memory-types/memory-types.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-memory-types/memory-types.narrow.svg" width="288" height="488"><img class="np-has-narrow" src="/static/images/diagrams/agent-memory-types/memory-types.svg" width="720" height="288" alt="Working, episodic, and semantic memory side by side. Working memory is the scratchpad for the current turn, backed by the context window and gone when the turn ends. Episodic memory records what happened, such as a task that failed on Friday with a given error, in an event store ordered by time. Semantic memory holds what is true, such as the fact that list.sort() is stable, in a durable knowledge base." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Working memory lasts a turn, episodic memory a session's log, and semantic memory until a fact stops being true.</figcaption>
+</figure>
 
 ## Why agents get the types confused
 

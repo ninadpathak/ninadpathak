@@ -4,7 +4,7 @@
 //
 //   node sweep.mjs <before-url> <after-url> <out-dir> <slug>[#selector] ...
 //
-// The selector defaults to the first .np-figure on the after page and the element it
+// `slug@n` picks the nth figure. The selector defaults to the first .np-figure on the after page and the element it
 // replaced on the before page (same position in the article). Writes PNG sheets and
 // sweep.json; exits 1 if any page scrolls sideways or any figure image fails to load.
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -23,7 +23,10 @@ const unstick = 'header, nav, .site-header, .reading-progress, [class*="progress
 async function open(url, width, scheme) {
   const ctx = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 2, colorScheme: scheme });
   const page = await ctx.newPage();
-  await page.goto(url, { waitUntil: 'networkidle' });
+  // Third-party scripts (analytics, fonts, the booking widget) can keep the network busy,
+  // so wait for load and give idle a short, optional window.
+  await page.goto(url, { waitUntil: 'load', timeout: 60000 });
+  await page.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => {});
   await page.evaluate(([s, css]) => {
     document.documentElement.setAttribute('data-theme', s);
     const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
@@ -31,8 +34,8 @@ async function open(url, width, scheme) {
   return { ctx, page };
 }
 
-const shot = async (page, selector) => {
-  const el = page.locator(selector).first();
+const shot = async (page, selector, nth = 0) => {
+  const el = page.locator(selector).nth(nth);
   await el.scrollIntoViewIfNeeded();
   await page.waitForTimeout(400);
   return el.screenshot();
@@ -51,15 +54,19 @@ async function sheet(file, title, columns) {
 }
 
 for (const target of targets) {
-  const [slug, beforeSel = '.visual-wrapper, figure'] = target.split('|');
+  // `slug@n` sweeps the article's nth figure (0-based) against the nth element it replaced.
+  const [spec, beforeSel = '.visual-wrapper, figure'] = target.split('|');
+  const [slug, nthRaw = '0'] = spec.split('@');
+  const nth = Number(nthRaw);
+  const tag = nth ? `${slug}@${nth}` : slug;
   const url = `/articles/${slug}/`;
   // Before / after at desktop, both schemes.
   for (const scheme of SCHEMES) {
     const b = await open(beforeUrl + url, 1366, scheme);
     const a = await open(afterUrl + url, 1366, scheme);
-    const before = await shot(b.page, beforeSel);
-    const after = await shot(a.page, 'figure.np-figure');
-    await sheet(`${slug}.before-after.${scheme}.png`, `${slug} · before (main) / after (branch) · 1366 · ${scheme}`, [['before', before, 640], ['after', after, 640]]);
+    const before = await shot(b.page, beforeSel, nth);
+    const after = await shot(a.page, 'figure.np-figure', nth);
+    await sheet(`${tag}.before-after.${scheme}.png`, `${tag} · before (main) / after (branch) · 1366 · ${scheme}`, [['before', before, 640], ['after', after, 640]]);
     await b.ctx.close(); await a.ctx.close();
   }
   // Sweep: three widths × two schemes, with layout checks.
@@ -67,10 +74,10 @@ for (const target of targets) {
   for (const scheme of SCHEMES) for (const width of WIDTHS) {
     const { ctx, page } = await open(afterUrl + url, width, scheme);
     // Lazy images load only near the viewport: bring the figure in and wait for its image.
-    await page.locator('figure.np-figure').first().scrollIntoViewIfNeeded();
-    await page.waitForFunction(() => { const i = document.querySelector('figure.np-figure img'); return i && i.complete && i.naturalWidth > 0; }, null, { timeout: 15000 }).catch(() => {});
-    const metrics = await page.evaluate(async () => {
-      const fig = document.querySelector('figure.np-figure');
+    await page.locator('figure.np-figure').nth(nth).scrollIntoViewIfNeeded();
+    await page.waitForFunction((n) => { const i = document.querySelectorAll('figure.np-figure img')[n]; return i && i.complete && i.naturalWidth > 0; }, nth, { timeout: 15000 }).catch(() => {});
+    const metrics = await page.evaluate(async (n) => {
+      const fig = document.querySelectorAll('figure.np-figure')[n];
       const img = fig?.querySelector('img');
       // Displayed text size = the plate's smallest text × its on-screen scale (GUIDELINE.md §4).
       const meta = img ? await (await fetch(img.getAttribute('src').replace(/\.svg$/, '.json'))).json() : null;
@@ -90,13 +97,13 @@ for (const target of targets) {
         notBlownUp: !!variant && k <= 1.25 + 0.01,
         scale: Math.round(k * 100) / 100,
       };
-    });
-    results.push({ slug, width, scheme, ...metrics, ok: metrics.pageOverflow <= 0 && metrics.figureLoaded && metrics.figureFits && metrics.textOk && metrics.notBlownUp });
-    cols.push([`${width} · ${scheme} · ${metrics.variant} · ${metrics.shownText?.sans}px`, await shot(page, 'figure.np-figure'), width >= 768 ? 420 : width * 0.9]);
+    }, nth);
+    results.push({ slug: tag, width, scheme, ...metrics, ok: metrics.pageOverflow <= 0 && metrics.figureLoaded && metrics.figureFits && metrics.textOk && metrics.notBlownUp });
+    cols.push([`${width} · ${scheme} · ${metrics.variant} · ${metrics.shownText?.sans}px`, await shot(page, 'figure.np-figure', nth), width >= 768 ? 420 : width * 0.9]);
     await ctx.close();
   }
-  await sheet(`${slug}.sweep.png`, `${slug} · sweep 320 / 375 / 768 / 1024 / 1366 · light and dark`, cols);
-  console.log(`${slug}: ${results.filter((r) => r.slug === slug && r.ok).length}/${WIDTHS.length * SCHEMES.length} ok`);
+  await sheet(`${tag}.sweep.png`, `${tag} · sweep 320 / 375 / 768 / 1024 / 1366 · light and dark`, cols);
+  console.log(`${tag}: ${results.filter((r) => r.slug === tag && r.ok).length}/${WIDTHS.length * SCHEMES.length} ok`);
 }
 writeFileSync(path.join(outDir, 'sweep.json'), JSON.stringify(results, null, 2) + '\n');
 await browser.close();

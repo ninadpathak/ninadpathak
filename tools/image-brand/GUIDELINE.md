@@ -147,7 +147,7 @@ Each glyph lives in `lib/glyphs.js`, draws on a 56 × 48 box (strips: 360 × 46)
 | `ranked` | Rows shortening with rank, one in accent | A ranked result list | `rows=n`, `hi=i` |
 | `globe` | Meridians and parallels | The network or the public web | — |
 | `store` | Three stacked cylinder discs | Durable storage | — |
-| `experts` | Grid of cells with a few lit | Sparse selection (`on` of `n`) | `n`, `on`, `cols` |
+| `experts` | Grid of cells with a few lit | Sparse selection (`on` of `n`) | `n`, `on`, `cols`, `s` (cell size, default 3.6) |
 | `ledger` | Rows newest-first, superseded rows hatched | Versioned, append-only records | `rows=n` |
 | `sliding` *(strip)* | Turns in a row under a window bracket; old turns fall away, the newest is accent | A sliding context window | — |
 | `budget` *(strip)* | Per-turn bars of system, replayed history, message, answer | Cost that compounds per turn | — |
@@ -170,7 +170,7 @@ A new glyph is added to `glyphs.js` and to this table in the same change. Never 
 | M10 | Ring: tick rail, accent arcs, chevrons, particles, stations, centre glyph | Any cycle (`@ring a>b>c>d`, `@center glyph`) |
 | M11 | Parts brackets: coloured brackets under phrases, edges start from them | Taking apart a label (`@parts`) |
 | M12 | Tile bars: one tile per unit, solid versus hatched series, ≤2 callouts, one ratio | Benchmarks and prices (`@callout s:i`, `@ratio i`) |
-| M13 | Span bracket: dimension line labelled by a badge glyph (`:lock`, `:globe`) | Grouping outcomes or layers without words |
+| M13 | Span bracket: dimension line labelled by a badge glyph (`:lock`, `:globe`); a word label on a vertical span runs along the line, reading upward | Grouping outcomes or layers without words |
 | M14 | Drafting field: dot grid, ruled strips, ruler, crop marks, foot scale bar, registration mark | Always; texture only |
 | M15 | Corner badge (`corner=person`, `cross`, `flag`, …): a badge pinned to any tile's top-right | Ownership (person = a human's stage) or status (cross = failure point) |
 | M16 | Glyph key (`@key solid=…; hatch=…; outline=…; accent=…`): swatches naming fill encodings, wrapping on narrow plates | Any figure whose fills encode categories |
@@ -258,7 +258,8 @@ A share card whose post was retitled or recategorized only warns: the card keeps
 | `@parts id \| phrase>node; …` | Parts brackets (M11) |
 | `@step id \| n` | Pin a numbered square to a node or slab |
 | `@dim a \| b \| :badge` | Span bracket (M13); text labels allowed but counted |
-| `@series A; B`, `@unit $`, `@callout s:i`, `@ratio i` | Tile-bar charts (M12) |
+| `@series A; B`, `@unit $`, `@callout s:i`, `@ratio i` | Tile-bar charts (M12). `@unit %` follows the number; other units lead it |
+| `@tile n` | One bar tile per `n` axis units, for values in the hundreds (default 1) |
 | `@spacing node,rank` | Flowchart spacing override |
 | `@kind og`, `@og-title`, `@og-kicker`, `@og-url` | Share card |
 

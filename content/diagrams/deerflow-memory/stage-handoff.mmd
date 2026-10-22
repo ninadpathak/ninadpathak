@@ -1,0 +1,18 @@
+%% @fig 01
+%% @kicker Memory between DeerFlow stages
+%% @alt A DeerFlow workflow runs as a sequence of stages: plan, research, and report. Each stage works in its own fresh working memory, the prompt at execution time, then writes its outputs to the session state file. The file grows stage by stage, and the next stage reads it into its working memory, so stopping and resuming a run only needs that one file.
+%% @caption Working memory resets between stages; the session file carries state forward, so a failed run resumes from its last stage.
+%% @path s1>f1>s2>f2>s3
+%% @glyph s1 | tokens
+%% @glyph f1 | ledger rows=1
+%% @glyph s2 | tokens
+%% @glyph f2 | ledger rows=2
+%% @glyph s3 | tokens
+%% @spacing 20,20
+flowchart LR
+  s1["Plan"]
+  f1["State"]
+  s2["Research"]
+  f2["State"]:::focal
+  s3["Report"]
+  s1 --> f1 --> s2 --> f2 --> s3

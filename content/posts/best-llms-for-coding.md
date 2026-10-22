@@ -28,12 +28,10 @@ SWE-bench Verified gives the most honest signal I have found today. To pass, a m
 
 Watching a model do that is the closest thing I have to watching it think like an engineer. Claude 4.6 Opus currently leads this benchmark with a score of 80.9%.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Coding LLMs Compared</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/llm-coding-comparison.html" title="Comparison matrix of leading coding LLMs across SWE-bench, reasoning, context, and cost" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/best-llms-for-coding/coding-personas.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/best-llms-for-coding/coding-personas.narrow.svg" width="288" height="648"><img class="np-has-narrow" src="/static/images/diagrams/best-llms-for-coding/coding-personas.svg" width="720" height="328" alt="Five kinds of coding work matched to the model the article recommends for each: autonomous agentic coding to Claude 4.6 Opus, which leads SWE-bench Verified at 80.9%; repository-scale context and complex logic to Gemini 3.1 Pro; cost-sensitive production use to DeepSeek V4; multi-step reasoning and planning to GPT-5.4 Codex; and everyday IDE autocomplete to the OpenAI and Cursor ecosystem." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Claude 4.6 Opus leads SWE-bench Verified at 80.9%, but the right model depends on the kind of work.</figcaption>
+</figure>
 
 
 ## For agentic and autonomous coding: Claude 4.6 Opus
