@@ -24,7 +24,34 @@
     return t;
   };
   const central = (t) => { t.setAttribute('dominant-baseline', 'central'); return t; };
-  const width = (t) => t.getComputedTextLength();
+  // Text width comes from canvas metrics and is pinned on the element with textLength, so
+  // every box measured around text is the same on macOS and Linux (SVG text layout is not).
+  const mctx = document.createElement('canvas').getContext('2d');
+  const canvasWidth = (node) => {
+    let w = 0;
+    for (const c of node.childNodes) {
+      if (c.nodeType === 1) { w += canvasWidth(c); continue; }
+      if (c.nodeType !== 3 || !c.data) continue;
+      const cs = getComputedStyle(node);
+      mctx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      mctx.letterSpacing = cs.letterSpacing === 'normal' ? '0px' : cs.letterSpacing;
+      w += mctx.measureText(c.data.replace(/\s+/g, ' ')).width;
+    }
+    return w;
+  };
+  const pin = (t) => {
+    const w = r2(canvasWidth(t));
+    if (w > 0) { t.setAttribute('textLength', w); t.setAttribute('lengthAdjust', 'spacing'); }
+    return w;
+  };
+  const pinAll = (root) => {
+    for (const t of root.querySelectorAll('text')) {
+      const lines = t.querySelectorAll(':scope > tspan[x]');
+      if (lines.length) lines.forEach(pin); else pin(t);
+    }
+  };
+  window.npPinText = pinAll;
+  const width = pin;
   const parsePoints = (d) => [...d.matchAll(/(-?\d*\.?\d+),(-?\d*\.?\d+)/g)].map((m) => [Number(m[1]), Number(m[2])]);
   const fail = (src, msg) => { throw new Error(`${src.id}: ${msg}`); };
   const translateOf = (g) => {
@@ -392,6 +419,7 @@
   // ---------------------------------------------------------------- parts brackets (M11)
   // Bracket each phrase of a node's label; that part's edge starts from its bracket.
   function partsBrackets(svg, src, nodes, edges) {
+    pinAll(svg);
     const spec = src.meta.partsSpec;
     const node = nodes.get(spec.target);
     if (!node) fail(src, '@parts target is not a node');
@@ -477,6 +505,7 @@
       svg.appendChild(svg.querySelector('.np-ports'));
     }
     svg.appendChild(clusterLabels);
+    pinAll(clusterLabels);
     for (const head of clusterLabels.querySelectorAll('.np-cluster-head')) {
       const b = head.querySelector('.pele-cluster-label').getBBox();
       const m = head.querySelector('.np-cluster-mask');
@@ -652,6 +681,7 @@
   }
 
   function fit(svg, maxW, maxH, minScale, maxScale, src, margin = 6) {
+    pinAll(svg);
     const bb = svg.getBBox();
     const x0 = bb.x - margin, y0 = bb.y - margin, cw = bb.width + 2 * margin, ch = bb.height + 2 * margin;
     svg.setAttribute('viewBox', `${r2(x0)} ${r2(y0)} ${r2(cw)} ${r2(ch)}`);
@@ -773,7 +803,7 @@
       for (const w of card.meta['og-title'].split(/\s+/)) {
         const next = cur ? `${cur} ${w}` : w;
         probe.textContent = next;
-        if (probe.getComputedTextLength() > maxW && cur) { lines.push(cur); cur = w; } else cur = next;
+        if (canvasWidth(probe) > maxW && cur) { lines.push(cur); cur = w; } else cur = next;
       }
       lines.push(cur);
       probe.remove();

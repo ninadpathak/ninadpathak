@@ -153,6 +153,7 @@ async function main() {
         document.body.innerHTML = '';
         const dims = src.meta.kind === 'og' ? window.npComposeOg(src, tokens, { hash }) : window.npComposeArticle(src, tokens, { hash });
         const plate = document.body.querySelector('svg.np-plate');
+        window.npPinText(plate);
         const audit = window.npAudit(plate, tokens);
         const text = [...plate.querySelectorAll('text, tspan')].map((t) => t.textContent).join('');
         // Words in the image, excluding the figure title band and decorative digits.
