@@ -50,3 +50,12 @@
 # Cluster-3 memory-satellite merge: preserve asymmetric and hybrid retrieval at the owner.
 /articles/asymmetric-retrieval-agent-memory/ /articles/rag-vs-memory/ 301
 /blog/asymmetric-retrieval-agent-memory/ /articles/rag-vs-memory/ 301
+# API documentation consolidation: the four posts archived on 2026-09-11 point to the anchor.
+/articles/api-documentation-best-practices-reference-guides-and-working-requests/ /articles/api-documentation/ 301
+/blog/api-documentation-best-practices-reference-guides-and-working-requests/ /articles/api-documentation/ 301
+/articles/api-documentation-examples-what-the-best-developer-portals-get-right/ /articles/api-documentation/ 301
+/blog/api-documentation-examples-what-the-best-developer-portals-get-right/ /articles/api-documentation/ 301
+/articles/api-documentation-template-the-pages-every-api-needs/ /articles/api-documentation/ 301
+/blog/api-documentation-template-the-pages-every-api-needs/ /articles/api-documentation/ 301
+/articles/api-documentation-tools-hands-on-comparison-small-teams/ /articles/api-documentation/ 301
+/blog/api-documentation-tools-hands-on-comparison-small-teams/ /articles/api-documentation/ 301

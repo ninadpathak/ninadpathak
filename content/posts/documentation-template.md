@@ -88,6 +88,8 @@ That distinction keeps setup prose short without hiding the contract.
 
 Run `node check.mjs` to verify the tested cases. An assertion failure means the corresponding contract statement needs investigation.
 
+The [API documentation guide](/articles/api-documentation/) writes out the full reference entry for this endpoint, with each response and a script that checks them against the service.
+
 For a CLI or internal tool, fill the option's allowed values and state the observed failure before recommending the page layout. Limit the claim to the tested cases, then name the behavior change that should trigger page review.
 
 ## Give recovery its own decision table
