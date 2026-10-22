@@ -67,7 +67,7 @@ Claude Code expands the import at launch and reads the imported file first, whic
 
 ## What to put in the file
 
-Treat it as documentation whose reader is an agent that can already read your code. Anthropic's guidance is to write down what you would otherwise re-explain, and to make each instruction concrete enough to verify:
+Treat it as [documentation whose reader is an agent](/articles/documentation-types/) that can already read your code. Anthropic's guidance is to write down what you would otherwise re-explain, and to make each instruction concrete enough to verify:
 
 | Put in | Leave out |
 |---|---|
@@ -76,7 +76,7 @@ Treat it as documentation whose reader is an agent that can already read your co
 | Changes that need a human, like migrations | Multi-step procedures, which fit a [skill](https://code.claude.com/docs/en/skills) better |
 | The test command to run before calling a change done | Rules for one folder only, which fit a path-scoped rule in `.claude/rules/` |
 
-I keep repository-wide commands in the shared file and move folder-specific rules into a scoped rule.
+I keep repository-wide commands in the shared file and move folder-specific rules into a scoped rule. Anthropic's docs also ask for related instructions grouped under headings, and [task-based headings](/articles/documentation-headings/) work for an agent reader the same way they do for a person.
 
 ## Copy the template
 
