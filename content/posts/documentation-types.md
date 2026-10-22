@@ -117,6 +117,8 @@ Keep the boundary visible. Do not hide human onboarding inside an agent file, an
 
 If both audiences work in the repository, maintain both documents and link between them where the information overlaps.
 
+[CLAUDE.md and AGENTS.md](/articles/claude-md/) covers which agent reads which instruction file, with a template you can copy.
+
 ## Build documentation from the work people need to finish
 
 You do not need every document type on launch day. Start by listing the moments where users and operators need an answer that cannot safely remain in chat history, a ticket, or one person’s memory.
