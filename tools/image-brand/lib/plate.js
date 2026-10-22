@@ -53,12 +53,17 @@
   window.npPinText = pinAll;
   // A text line's box with its horizontal extent taken from the pinned width: getBBox reports
   // glyph ink on Linux and advances on macOS.
+  // Vertical extent comes from the font's ascent and descent for the same reason.
   const lineBox = (t) => {
-    const b = t.getBBox();
     const w = Number(t.getAttribute('textLength')) || canvasWidth(t);
-    const x = Number(t.getAttribute('x') ?? t.closest('text').getAttribute('x')) || 0;
-    const a = getComputedStyle(t).textAnchor;
-    return { x: a === 'middle' ? x - w / 2 : a === 'end' ? x - w : x, y: b.y, width: w, height: b.height };
+    const attr = (k) => Number(t.getAttribute(k) ?? t.closest('text').getAttribute(k)) || 0;
+    const cs = getComputedStyle(t);
+    mctx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+    const m = mctx.measureText('H');
+    const asc = m.fontBoundingBoxAscent, desc = m.fontBoundingBoxDescent;
+    const base = attr('y') + (cs.dominantBaseline === 'central' ? (asc - desc) / 2 : 0);
+    const x = attr('x');
+    return { x: cs.textAnchor === 'middle' ? x - w / 2 : cs.textAnchor === 'end' ? x - w : x, y: base - asc, width: w, height: asc + desc };
   };
   // getBBox of a subtree with every text line counted by lineBox.
   const stableBBox = (root) => {
@@ -72,12 +77,12 @@
         if (t.getAttribute('transform')) r.setAttribute('transform', t.getAttribute('transform'));
         temps.push(r);
       }
-      hidden.push([t, t.style.display]);
-      t.style.display = 'none';
+      hidden.push([t, t.getAttribute('display')]);
+      t.setAttribute('display', 'none');
     }
     const bb = root.getBBox();
     temps.forEach((r) => r.remove());
-    for (const [t, d] of hidden) t.style.display = d;
+    for (const [t, d] of hidden) if (d === null) t.removeAttribute('display'); else t.setAttribute('display', d);
     return bb;
   };
   const width = pin;
