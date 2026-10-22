@@ -801,6 +801,7 @@
     if (snippetLimit !== null && snippetLimit > 0) {
       detail += " max-snippet:" + snippetLimit + " limits snippet text to " + snippetLimit + " characters, which Google documents as a length limit, not a block.";
     }
+    detail += " This reads the HTML and headers as served, so a robots meta tag added by JavaScript after load is not seen; if your site injects one, check the rendered page in Search Console's URL Inspection too.";
     detail += " Google also requires the site to be included in the Search generative AI control in Search Console, which this tool cannot see.";
     if (doc.dataNosnippetCount) {
       detail += " " + doc.dataNosnippetCount + " data-nosnippet attributes exclude specific passages, which is a deliberate choice worth confirming.";

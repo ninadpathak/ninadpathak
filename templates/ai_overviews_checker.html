@@ -237,6 +237,8 @@
 
     <p>A live URL check can read the HTML and the <code>X-Robots-Tag</code> response header, so it can detect directives that block or restrict snippets. Paste mode cannot see response headers and skips the checks that need them.</p>
 
+    <p>Both modes read the page as served. A robots meta tag that JavaScript adds after the page loads isn't seen, so a pass means nothing blocking was found in the served HTML and headers. If your site injects meta tags with JavaScript, also check the rendered page with URL Inspection in Search Console.</p>
+
     <h2>Why this checker does not predict placement</h2>
     <p>Google states that AI Overviews and AI Mode have no additional requirements and need no special optimisation. It also says structured data is not required for generative AI search, so the presence of schema is reported as information rather than evidence of likely placement.</p>
 

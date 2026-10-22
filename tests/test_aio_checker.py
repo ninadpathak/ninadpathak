@@ -488,6 +488,11 @@ class HtmlModeTests(unittest.TestCase):
                 self.assert_not_pass(f'<meta name="robots" content="{content}">')
         self.assertEqual(self.snippet('<meta name="robots" content="max-image-preview:large, max-video-preview:-1">')["status"], "pass")
 
+    def test_pass_says_javascript_added_directives_are_not_seen(self):
+        detail = self.snippet('<meta name="robots" content="index">')["detail"]
+        self.assertIn("as served", detail)
+        self.assertIn("URL Inspection", detail)
+
     def test_clean_single_quoted_and_reordered_tags_still_work(self):
         self.assertEqual(self.snippet("<meta content='index, follow' name='robots'>")["status"], "pass")
         self.assertEqual(self.snippet('<META NAME="ROBOTS" CONTENT="NOSNIPPET">')["status"], "attention")
