@@ -62,3 +62,6 @@
 # llms.txt anchor: the audit archived on 2026-09-11 points to the refreshed page.
 /articles/llms-txt-examples-real-files-audited/ /articles/llms-txt/ 301
 /blog/llms-txt-examples-real-files-audited/ /articles/llms-txt/ 301
+# AI crawlers guide: the robots.txt article archived on 2026-09-11 points to the refreshed page.
+/articles/ai-crawlers-robots-txt-training-vs-citation/ /articles/ai-crawlers/ 301
+/blog/ai-crawlers-robots-txt-training-vs-citation/ /articles/ai-crawlers/ 301

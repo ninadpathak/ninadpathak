@@ -96,4 +96,4 @@ Ahrefs found that 97% of published llms.txt files received no request in May 202
 
 ### What is the difference between llms.txt and robots.txt?
 
-robots.txt tells crawlers which paths they may fetch. llms.txt is an optional index of pages worth reading, and it grants or blocks nothing.
+robots.txt tells crawlers which paths they may fetch, with a rule per agent for [AI crawlers such as GPTBot](/articles/ai-crawlers/). llms.txt is an optional index of pages worth reading, and it grants or blocks nothing.
