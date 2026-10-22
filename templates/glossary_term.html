@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ term.title }} | AI Memory & Agent Glossary{% endblock %}
+{% block title %}{{ term.title }} | AI and Documentation Glossary{% endblock %}
 {% block description %}{{ term.description }}{% endblock %}
 {# Glossary bodies carry flowchart and visual markup, and this template linked neither
    stylesheet, so 25 term pages rendered every span, strong and small inline and ran them
@@ -24,7 +24,7 @@
   "url": "{{ site.url }}/glossary/{{ term.slug }}/",
   "inDefinedTermSet": {
     "@type": "DefinedTermSet",
-    "name": "AI Memory & Agent Glossary",
+    "name": "AI and Documentation Glossary",
     "url": "{{ site.url }}/glossary/"
   }
 }
