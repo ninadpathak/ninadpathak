@@ -1,6 +1,11 @@
 {
   "$comment": "Share-card glyph chains, one per post slug. 2–3 glyphs from GUIDELINE.md §7, read top to bottom; '*' marks the focal glyph. og.mjs writes content/diagrams/<slug>/og.mmd from this map; render.mjs takes the title, category, and URL from the post at render time. '$pending' holds the title and category of posts on unmerged branches so their cards exist when they land. Slugs with a hand-written og.mmd (no GENERATED marker) are left alone.",
   "$pending": {},
+  "ai-crawlers": [
+    "eye",
+    "doc lock*",
+    "core"
+  ],
   "aeo-for-developer-docs": [
     "doc globe",
     "core*",
@@ -85,6 +90,11 @@
     "tools",
     "core*",
     "doc check"
+  ],
+  "claude-code-subagents": [
+    "loop",
+    "context*",
+    "tools"
   ],
   "code-documentation": [
     "tools",
