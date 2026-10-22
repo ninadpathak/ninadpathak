@@ -57,7 +57,7 @@ The snippet, Search Console and crawler checks are about access, and Google docu
 
 ## What a documentation team adds
 
-A docs page that meets Google's Search requirements, on a site included in the Search generative AI control, meets both documented conditions for its AI features. What it may still need is a `robots.txt` rule per crawler, and an editing pass for passages that lose their meaning when lifted out.
+An indexed, snippet-eligible docs page on a site included in the Search generative AI control meets both documented eligibility conditions for Google's AI features. What it may still need is a `robots.txt` rule per crawler, and an editing pass for passages that lose their meaning when lifted out.
 
 The [technical SEO checklist for documentation](/articles/docs-seo/) covers crawling, rendering and indexing, which come before any of this. A page Google can't index can't appear in AI Overviews either.
 
