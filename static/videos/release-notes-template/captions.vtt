@@ -1,0 +1,41 @@
+WEBVTT
+
+1
+00:00:00.100 --> 00:00:04.960
+Okay, so a release notes template puts the upgrade decision before the details.
+
+2
+00:00:05.067 --> 00:00:09.467
+My summary at the top says who has to act and what to do,
+
+3
+00:00:09.467 --> 00:00:12.533
+including when rollback stops being safe.
+
+4
+00:00:12.533 --> 00:00:14.773
+In my SDK example,
+
+5
+00:00:15.073 --> 00:00:18.813
+the summary tells Python users they can ignore the release,
+
+6
+00:00:18.813 --> 00:00:20.967
+so they stop after one line.
+
+7
+00:00:20.967 --> 00:00:25.807
+Then each breaking change gets a migration step and a check that proves it worked,
+
+8
+00:00:25.807 --> 00:00:28.267
+plus a deadline with a calendar date.
+
+9
+00:00:28.267 --> 00:00:33.607
+Before publishing, my checker fails a note with a missing rollback line or a vague deadline,
+
+10
+00:00:33.607 --> 00:00:36.707
+so in CI it can't merge until it passes.

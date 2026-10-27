@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/release-notes-template/, imported by tools/import_video.py from
+# ninadpathak-video films/release-notes-template (render of 2026-10-27T22:01:46+05:30).
+name: A release notes template in 40 seconds
+description: 'How a release notes template puts the upgrade decision first: a summary of who must act and when rollback stops being safe, then migration steps, checks and deadlines that a CI checker enforces.'
+upload_date: '2026-10-27T22:01:46+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: release-notes-template.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 5.067
+  L3: 12.533
+  L4: 20.967
+  L5: 28.267
+transcript: Okay, so a release notes template puts the upgrade decision before the details. My summary at the top says who has to act and what to do, including when rollback stops being safe. In my SDK example, the summary tells Python users they can ignore the release, so they stop after one line. Then each breaking change gets a migration step and a check that proves it worked, plus a deadline with a calendar date. Before publishing, my checker fails a note with a missing rollback line or a vague deadline, so in CI it can't merge until it passes.

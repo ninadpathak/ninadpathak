@@ -2,7 +2,7 @@
 """Import a finished film from the ninadpathak-video repo as an article video.
 
 Usage:
-  python tools/import_video.py <slug> --name "..." --description "..." [--video-repo PATH]
+  python tools/import_video.py <slug> --name "..." --description "..." [--video-repo PATH] [--allow-newer-sources]
 
 Reads (never writes) the video repo:
   out/<slug>.mp4, out/<slug>-poster.png       the delivered film and its poster
@@ -12,12 +12,17 @@ Reads (never writes) the video repo:
   films/<slug>/assets/voice/L*.wav, mix.wav    used only to prove the render is current
 
 Writes content/videos/<slug>/{video.yaml,words.json} and static/videos/<slug>/
-(<slug>.mp4, poster.png, captions.vtt), then runs build_video_captions.py.
+(<slug>.mp4, poster.png, poster.webp, captions.vtt), then runs build_video_captions.py
+and build_video_poster.py.
 
 It refuses a stale render: the script, word timings, timeline or a voice take newer
 than the delivered mp4 means the film was revised after it was rendered, and each
 voice take must match the mp4's own audio at its timeline offset. Captions built from
 newer timings than the audio would put the wrong words on screen.
+
+The video repo sometimes rewrites timeline.json and words.json after a render without
+changing them in substance. --allow-newer-sources turns the date check into a warning
+for that case; the audio check still has to pass.
 
 Fields stay provider-neutral (name, description, upload_date, duration, transcript,
 captions), so a later switch to a hosted player only adds a provider field.
@@ -93,6 +98,8 @@ def main() -> int:
     parser.add_argument("slug")
     parser.add_argument("--name", required=True)
     parser.add_argument("--description", required=True)
+    parser.add_argument("--allow-newer-sources", action="store_true",
+                        help="warn instead of refusing when sources postdate the mp4; the audio check still runs")
     parser.add_argument("--video-repo", default=str(Path.home() / "Development/Personal/ninadpathak-video"))
     args = parser.parse_args()
     slug = args.slug
@@ -120,7 +127,10 @@ def main() -> int:
     newer = [p for p in (script, timeline_path, words_path, *sorted(voice.glob("L*.wav")))
              if p.stat().st_mtime > rendered + 1]
     if newer:
-        raise SystemExit("stale render: changed after the delivered mp4 -> " + ", ".join(str(p.relative_to(repo)) for p in newer))
+        listed = ", ".join(str(p.relative_to(repo)) for p in newer)
+        if not args.allow_newer_sources:
+            raise SystemExit("stale render: changed after the delivered mp4 -> " + listed)
+        print("warning: changed after the delivered mp4 (allowed) -> " + listed)
     # Compare each take with the audio inside the delivered mp4 itself (macOS afconvert
     # decodes its AAC track); without afconvert, fall back to the repo's mix.wav.
     audio_source = mix_path
@@ -163,6 +173,7 @@ def main() -> int:
         "height": landscape["height"],
         "file": f"{slug}.mp4",
         "poster": "poster.png",
+        "poster_webp": "poster.webp",
         "captions": "captions.vtt",
         "line_offsets": offsets,
         "transcript": transcript,
@@ -172,6 +183,7 @@ def main() -> int:
     (content / "video.yaml").write_text(header + yaml.safe_dump(meta, sort_keys=False, allow_unicode=True, width=1000),
                                         encoding="utf-8")
     subprocess.run([sys.executable, "tools/build_video_captions.py", slug], check=True)
+    subprocess.run([sys.executable, "tools/build_video_poster.py", slug], check=True)
     print(f"imported {slug}: {duration}s, {mp4.stat().st_size} bytes")
     return 0
 

@@ -10,6 +10,7 @@ takeaways:
 - Run the checker with --filled before publishing, so a missing field fails the build.
 title: 'Release Notes Template: Copyable Markdown With a Pre-Publish Check'
 work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation that starts from the behavior a release changed and the check that proves a migration worked.'
+video: release-notes-template
 ---
 
 After its download links, the [Kubernetes v1.31.0 changelog](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.31.md#v1310) puts a section called "Urgent Upgrade Notes", subtitled "(No, really, you MUST read this before you upgrade)", ahead of the changes by kind. The Go 1.23 release notes restate the Go 1 compatibility promise in their introduction, so a reader learns in one sentence whether their programs should still build.

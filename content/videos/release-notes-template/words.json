@@ -1,0 +1,637 @@
+{
+ "L1": {
+  "duration": 4.779,
+  "text": "Okay, so a release notes template puts the upgrade decision before the details.",
+  "transcript": "Okay, so a release notes template puts the upgrade decision before the details.",
+  "words": [
+   {
+    "w": "Okay,",
+    "start": 0.0,
+    "end": 0.32,
+    "onset": 0.055
+   },
+   {
+    "w": "so",
+    "start": 0.6,
+    "end": 0.74,
+    "onset": 0.6
+   },
+   {
+    "w": "a",
+    "start": 0.74,
+    "end": 1.04,
+    "onset": 0.91
+   },
+   {
+    "w": "release",
+    "start": 1.04,
+    "end": 1.36,
+    "onset": 0.9
+   },
+   {
+    "w": "notes",
+    "start": 1.36,
+    "end": 1.62,
+    "onset": 1.44
+   },
+   {
+    "w": "template",
+    "start": 1.62,
+    "end": 1.96,
+    "onset": 1.64
+   },
+   {
+    "w": "puts",
+    "start": 1.96,
+    "end": 2.4,
+    "onset": 2.185
+   },
+   {
+    "w": "the",
+    "start": 2.4,
+    "end": 2.58,
+    "onset": 2.62
+   },
+   {
+    "w": "upgrade",
+    "start": 2.58,
+    "end": 2.98,
+    "onset": 2.63
+   },
+   {
+    "w": "decision",
+    "start": 2.98,
+    "end": 3.44,
+    "onset": 3.067
+   },
+   {
+    "w": "before",
+    "start": 3.44,
+    "end": 3.86,
+    "onset": 3.44
+   },
+   {
+    "w": "the",
+    "start": 3.86,
+    "end": 4.14,
+    "onset": 3.86
+   },
+   {
+    "w": "details.",
+    "start": 4.14,
+    "end": 4.46,
+    "onset": 4.2
+   }
+  ]
+ },
+ "L2": {
+  "duration": 7.275,
+  "text": "My summary at the top says who has to act and what to do, including when rollback stops being safe.",
+  "transcript": "My summary at the top says who has to act and what to do, including when rollback stops being safe.",
+  "words": [
+   {
+    "w": "My",
+    "start": 0.0,
+    "end": 0.28,
+    "onset": 0.065
+   },
+   {
+    "w": "summary",
+    "start": 0.28,
+    "end": 0.74,
+    "onset": 0.28
+   },
+   {
+    "w": "at",
+    "start": 0.74,
+    "end": 0.96,
+    "onset": 0.965
+   },
+   {
+    "w": "the",
+    "start": 0.96,
+    "end": 1.08,
+    "onset": 0.965
+   },
+   {
+    "w": "top",
+    "start": 1.08,
+    "end": 1.34,
+    "onset": 1.16
+   },
+   {
+    "w": "says",
+    "start": 1.34,
+    "end": 1.76,
+    "onset": 1.405
+   },
+   {
+    "w": "who",
+    "start": 1.76,
+    "end": 2.02,
+    "onset": 1.87
+   },
+   {
+    "w": "has",
+    "start": 2.02,
+    "end": 2.3,
+    "onset": 2.02
+   },
+   {
+    "w": "to",
+    "start": 2.3,
+    "end": 2.44,
+    "onset": 2.37
+   },
+   {
+    "w": "act",
+    "start": 2.44,
+    "end": 2.82,
+    "onset": 2.44
+   },
+   {
+    "w": "and",
+    "start": 2.82,
+    "end": 3.26,
+    "onset": 2.98
+   },
+   {
+    "w": "what",
+    "start": 3.26,
+    "end": 3.6,
+    "onset": 3.49
+   },
+   {
+    "w": "to",
+    "start": 3.6,
+    "end": 3.78,
+    "onset": 3.7
+   },
+   {
+    "w": "do,",
+    "start": 3.78,
+    "end": 4.04,
+    "onset": 3.78
+   },
+   {
+    "w": "including",
+    "start": 4.4,
+    "end": 4.96,
+    "onset": 4.54
+   },
+   {
+    "w": "when",
+    "start": 4.96,
+    "end": 5.58,
+    "onset": 4.96
+   },
+   {
+    "w": "rollback",
+    "start": 5.58,
+    "end": 6.32,
+    "onset": 5.985
+   },
+   {
+    "w": "stops",
+    "start": 6.32,
+    "end": 6.58,
+    "onset": 6.45
+   },
+   {
+    "w": "being",
+    "start": 6.58,
+    "end": 6.9,
+    "onset": 6.77
+   },
+   {
+    "w": "safe.",
+    "start": 6.9,
+    "end": 7.2,
+    "onset": 6.9
+   }
+  ]
+ },
+ "L3": {
+  "duration": 8.256,
+  "text": "In my SDK example, the summary tells Python users they can ignore the release, so they stop after one line.",
+  "transcript": "In my SDK example, the summary tells Python users they can ignore the release, so they stop after one line.",
+  "words": [
+   {
+    "w": "In",
+    "start": 0.0,
+    "end": 0.16,
+    "onset": 0.05
+   },
+   {
+    "w": "my",
+    "start": 0.16,
+    "end": 0.42,
+    "onset": 0.16
+   },
+   {
+    "w": "SDK",
+    "start": 0.42,
+    "end": 0.96,
+    "onset": 0.535
+   },
+   {
+    "w": "example,",
+    "start": 0.96,
+    "end": 1.84,
+    "onset": 0.98
+   },
+   {
+    "w": "the",
+    "start": 2.54,
+    "end": 2.64,
+    "onset": 2.54
+   },
+   {
+    "w": "summary",
+    "start": 2.64,
+    "end": 3.0,
+    "onset": 2.64
+   },
+   {
+    "w": "tells",
+    "start": 3.0,
+    "end": 3.36,
+    "onset": 3.15
+   },
+   {
+    "w": "Python",
+    "start": 3.36,
+    "end": 3.78,
+    "onset": 3.495
+   },
+   {
+    "w": "users",
+    "start": 3.78,
+    "end": 4.36,
+    "onset": 3.78
+   },
+   {
+    "w": "they",
+    "start": 4.36,
+    "end": 4.76,
+    "onset": 4.66
+   },
+   {
+    "w": "can",
+    "start": 4.76,
+    "end": 4.94,
+    "onset": 4.86
+   },
+   {
+    "w": "ignore",
+    "start": 4.94,
+    "end": 5.42,
+    "onset": 4.867
+   },
+   {
+    "w": "the",
+    "start": 5.42,
+    "end": 5.58,
+    "onset": 5.42
+   },
+   {
+    "w": "release,",
+    "start": 5.58,
+    "end": 6.12,
+    "onset": 5.58
+   },
+   {
+    "w": "so",
+    "start": 6.28,
+    "end": 6.54,
+    "onset": 6.4
+   },
+   {
+    "w": "they",
+    "start": 6.54,
+    "end": 6.7,
+    "onset": 6.54
+   },
+   {
+    "w": "stop",
+    "start": 6.7,
+    "end": 7.16,
+    "onset": 6.733
+   },
+   {
+    "w": "after",
+    "start": 7.16,
+    "end": 7.52,
+    "onset": 7.23
+   },
+   {
+    "w": "one",
+    "start": 7.52,
+    "end": 7.82,
+    "onset": 7.467
+   },
+   {
+    "w": "line.",
+    "start": 7.82,
+    "end": 8.1,
+    "onset": 7.82
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.104,
+  "text": "Then each breaking change gets a migration step and a check that proves it worked, plus a deadline with a calendar date.",
+  "transcript": "Then each breaking change gets a migration step and a check that proves it worked, plus a deadline with a calendar date.",
+  "words": [
+   {
+    "w": "Then",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.065
+   },
+   {
+    "w": "each",
+    "start": 0.22,
+    "end": 0.64,
+    "onset": 0.365
+   },
+   {
+    "w": "breaking",
+    "start": 0.64,
+    "end": 1.06,
+    "onset": 0.815
+   },
+   {
+    "w": "change",
+    "start": 1.06,
+    "end": 1.44,
+    "onset": 1.06
+   },
+   {
+    "w": "gets",
+    "start": 1.44,
+    "end": 1.74,
+    "onset": 1.61
+   },
+   {
+    "w": "a",
+    "start": 1.74,
+    "end": 1.9,
+    "onset": 1.765
+   },
+   {
+    "w": "migration",
+    "start": 1.9,
+    "end": 2.38,
+    "onset": 1.833
+   },
+   {
+    "w": "step",
+    "start": 2.38,
+    "end": 2.78,
+    "onset": 2.38
+   },
+   {
+    "w": "and",
+    "start": 2.78,
+    "end": 3.08,
+    "onset": 2.91
+   },
+   {
+    "w": "a",
+    "start": 3.08,
+    "end": 3.26,
+    "onset": 3.25
+   },
+   {
+    "w": "check",
+    "start": 3.26,
+    "end": 3.44,
+    "onset": 3.26
+   },
+   {
+    "w": "that",
+    "start": 3.44,
+    "end": 3.62,
+    "onset": 3.505
+   },
+   {
+    "w": "proves",
+    "start": 3.62,
+    "end": 4.02,
+    "onset": 3.74
+   },
+   {
+    "w": "it",
+    "start": 4.02,
+    "end": 4.2,
+    "onset": 4.195
+   },
+   {
+    "w": "worked,",
+    "start": 4.2,
+    "end": 4.6,
+    "onset": 4.2
+   },
+   {
+    "w": "plus",
+    "start": 4.84,
+    "end": 5.36,
+    "onset": 5.085
+   },
+   {
+    "w": "a",
+    "start": 5.36,
+    "end": 5.58,
+    "onset": 5.475
+   },
+   {
+    "w": "deadline",
+    "start": 5.58,
+    "end": 6.02,
+    "onset": 5.71
+   },
+   {
+    "w": "with",
+    "start": 6.02,
+    "end": 6.32,
+    "onset": 6.02
+   },
+   {
+    "w": "a",
+    "start": 6.32,
+    "end": 6.48,
+    "onset": 6.33
+   },
+   {
+    "w": "calendar",
+    "start": 6.48,
+    "end": 6.84,
+    "onset": 6.525
+   },
+   {
+    "w": "date.",
+    "start": 6.84,
+    "end": 7.08,
+    "onset": 6.995
+   }
+  ]
+ },
+ "L5": {
+  "duration": 8.277,
+  "text": "Before publishing, my checker fails a note with a missing rollback line or a vague deadline, so in CI it can't merge until it passes.",
+  "transcript": "Before publishing, my checker fails a note with a missing rollback line or a vague deadline, so in CI it can't merge until it passes.",
+  "words": [
+   {
+    "w": "Before",
+    "start": 0.0,
+    "end": 0.34,
+    "onset": 0.065
+   },
+   {
+    "w": "publishing,",
+    "start": 0.34,
+    "end": 0.9,
+    "onset": 0.45
+   },
+   {
+    "w": "my",
+    "start": 1.28,
+    "end": 1.52,
+    "onset": 1.375
+   },
+   {
+    "w": "checker",
+    "start": 1.52,
+    "end": 1.9,
+    "onset": 1.545
+   },
+   {
+    "w": "fails",
+    "start": 1.9,
+    "end": 2.18,
+    "onset": 1.9
+   },
+   {
+    "w": "a",
+    "start": 2.18,
+    "end": 2.36,
+    "onset": 2.18
+   },
+   {
+    "w": "note",
+    "start": 2.36,
+    "end": 2.52,
+    "onset": 2.36
+   },
+   {
+    "w": "with",
+    "start": 2.52,
+    "end": 2.66,
+    "onset": 2.69
+   },
+   {
+    "w": "a",
+    "start": 2.66,
+    "end": 2.78,
+    "onset": 2.69
+   },
+   {
+    "w": "missing",
+    "start": 2.78,
+    "end": 3.06,
+    "onset": 2.7
+   },
+   {
+    "w": "rollback",
+    "start": 3.06,
+    "end": 3.5,
+    "onset": 3.06
+   },
+   {
+    "w": "line",
+    "start": 3.5,
+    "end": 3.82,
+    "onset": 3.525
+   },
+   {
+    "w": "or",
+    "start": 3.82,
+    "end": 4.26,
+    "onset": 4.185
+   },
+   {
+    "w": "a",
+    "start": 4.26,
+    "end": 4.44,
+    "onset": 4.26
+   },
+   {
+    "w": "vague",
+    "start": 4.44,
+    "end": 4.58,
+    "onset": 4.44
+   },
+   {
+    "w": "deadline,",
+    "start": 4.58,
+    "end": 5.04,
+    "onset": 4.685
+   },
+   {
+    "w": "so",
+    "start": 5.34,
+    "end": 5.68,
+    "onset": 5.555
+   },
+   {
+    "w": "in",
+    "start": 5.68,
+    "end": 5.86,
+    "onset": 5.68
+   },
+   {
+    "w": "CI",
+    "start": 5.86,
+    "end": 6.12,
+    "onset": 5.86
+   },
+   {
+    "w": "it",
+    "start": 6.12,
+    "end": 6.62,
+    "onset": 6.12
+   },
+   {
+    "w": "can't",
+    "start": 6.62,
+    "end": 6.86,
+    "onset": 6.71
+   },
+   {
+    "w": "merge",
+    "start": 6.86,
+    "end": 7.2,
+    "onset": 6.86
+   },
+   {
+    "w": "until",
+    "start": 7.2,
+    "end": 7.48,
+    "onset": 7.425
+   },
+   {
+    "w": "it",
+    "start": 7.48,
+    "end": 7.66,
+    "onset": 7.48
+   },
+   {
+    "w": "passes.",
+    "start": 7.66,
+    "end": 8.04,
+    "onset": 7.74
+   }
+  ]
+ }
+}
