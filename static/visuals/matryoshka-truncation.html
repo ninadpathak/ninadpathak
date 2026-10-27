@@ -66,14 +66,14 @@
             <desc id="mt-desc">An embedding drawn as a row of dimensions, darkest at the front because a Matryoshka model stores the most important information in the first dimensions. Truncating keeps a prefix of the vector. The kept head is what stays in RAM for the first retrieval stage, while the full vector stays on disk.</desc>
             <text class="kicker" x="20" y="24">DIMENSIONS</text>
             <g id="cells">
-                <rect class="cell" x="20.00" y="40" width="5.20" height="28" rx="1" style="fill-opacity:0.85"/>
-                <rect class="cell" x="26.70" y="40" width="5.20" height="28" rx="1" style="fill-opacity:0.82"/>
-                <rect class="cell" x="33.40" y="40" width="5.20" height="28" rx="1" style="fill-opacity:0.79"/>
-                <rect class="cell" x="40.09" y="40" width="5.20" height="28" rx="1" style="fill-opacity:0.77"/>
-                <rect class="cell" x="46.79" y="40" width="5.20" height="28" rx="1" style="fill-opacity:0.74"/>
-                <rect class="cell" x="53.49" y="40" width="5.20" height="28" rx="1" style="fill-opacity:0.71"/>
-                <rect class="cell" x="60.19" y="40" width="5.20" height="28" rx="1" style="fill-opacity:0.69"/>
-                <rect class="cell" x="66.89" y="40" width="5.20" height="28" rx="1" style="fill-opacity:0.66"/>
+                <rect class="cell" x="20.00" y="40" width="5.20" height="28" rx="1" fill-opacity="0.85"/>
+                <rect class="cell" x="26.70" y="40" width="5.20" height="28" rx="1" fill-opacity="0.82"/>
+                <rect class="cell" x="33.40" y="40" width="5.20" height="28" rx="1" fill-opacity="0.79"/>
+                <rect class="cell" x="40.09" y="40" width="5.20" height="28" rx="1" fill-opacity="0.77"/>
+                <rect class="cell" x="46.79" y="40" width="5.20" height="28" rx="1" fill-opacity="0.74"/>
+                <rect class="cell" x="53.49" y="40" width="5.20" height="28" rx="1" fill-opacity="0.71"/>
+                <rect class="cell" x="60.19" y="40" width="5.20" height="28" rx="1" fill-opacity="0.69"/>
+                <rect class="cell" x="66.89" y="40" width="5.20" height="28" rx="1" fill-opacity="0.66"/>
                 <rect class="cell cut" x="73.58" y="40" width="5.20" height="28" rx="1"/>
                 <rect class="cell cut" x="80.28" y="40" width="5.20" height="28" rx="1"/>
                 <rect class="cell cut" x="86.98" y="40" width="5.20" height="28" rx="1"/>
@@ -163,7 +163,7 @@
                         cells[i].style.fillOpacity = (0.15 + 0.7 * w * w).toFixed(2);
                     } else {
                         cells[i].setAttribute('class', 'cell cut');
-                        cells[i].style.fillOpacity = '';
+                        cells[i].style.fillOpacity = ''; cells[i].removeAttribute('fill-opacity');
                     }
                 }
                 var right = X0 + kept * (cw + GAP) - GAP;
