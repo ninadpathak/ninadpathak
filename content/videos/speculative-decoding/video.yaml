@@ -4,7 +4,7 @@
 # and re-checked against content/posts/speculative-decoding.md on 2026-10-27.
 name: "Speculative decoding in 40 seconds"
 description: "How a 1B draft model and a 70B target model generate several tokens per slow pass, why the output stays identical, and when the speedup is 2x to 3x."
-upload_date: "2026-10-27"
+upload_date: "2026-10-27T14:25:00+05:30"
 duration_seconds: 40
 width: 1920
 height: 1080
