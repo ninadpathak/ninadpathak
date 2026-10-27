@@ -1,0 +1,10 @@
+normal-light-375                   cosine-similarity: ready=true opacity=1 fallback=true/visual-fallback-light | matryoshka-truncation: ready=true opacity=1 fallback=true/visual-fallback-light
+normal-light-1366                  cosine-similarity: ready=true opacity=1 fallback=true/visual-fallback-light | matryoshka-truncation: ready=true opacity=1 fallback=true/visual-fallback-light
+normal-dark-375                    cosine-similarity: ready=true opacity=1 fallback=true/visual-fallback-dark | matryoshka-truncation: ready=true opacity=1 fallback=true/visual-fallback-dark
+normal-dark-1366                   cosine-similarity: ready=true opacity=1 fallback=true/visual-fallback-dark | matryoshka-truncation: ready=true opacity=1 fallback=true/visual-fallback-dark
+blocked-light-375                  cosine-similarity: ready=false opacity=0 fallback=true/visual-fallback-light | matryoshka-truncation: ready=false opacity=0 fallback=true/visual-fallback-light
+blocked-dark-375                   cosine-similarity: ready=false opacity=0 fallback=true/visual-fallback-dark | matryoshka-truncation: ready=false opacity=0 fallback=true/visual-fallback-dark
+deferred-page-new                  cosine-similarity: ready=true opacity=1 fallback=true/visual-fallback-light | matryoshka-truncation: ready=true opacity=1 fallback=true/visual-fallback-light
+deferred-page-OLD-main             cosine-similarity: ready=false opacity=0 fallback=true/visual-fallback-light | matryoshka-truncation: ready=false opacity=0 fallback=true/visual-fallback-light
+slow-main-new                      cosine-similarity: ready=true opacity=1 fallback=true/visual-fallback-light | matryoshka-truncation: ready=true opacity=1 fallback=true/visual-fallback-light
+slow-main-and-deferred-page-new    cosine-similarity: ready=true opacity=1 fallback=true/visual-fallback-light | matryoshka-truncation: ready=true opacity=1 fallback=true/visual-fallback-light

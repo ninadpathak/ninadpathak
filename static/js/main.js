@@ -523,21 +523,30 @@
 
   // ── KEPT VISUAL FALLBACKS ───────────────────────────────────
   // A kept interactive visual keeps its static drawing under the frame. The frame stays
-  // transparent until its page sets window.npVisualReady, so a blocked or failed frame
-  // (a browser error page, which this same-origin check can't read) shows the drawing.
-  document.addEventListener('DOMContentLoaded', function () {
+  // transparent until its page says it has drawn, so a blocked or failed frame (a browser
+  // error page) shows the drawing. The page posts 'visual-ready' to this window and also
+  // sets window.npVisualReady, so the order the two scripts run in doesn't matter: a
+  // message that arrives first reveals the frame, and a page that ran before this script
+  // is caught by the flag. Neither path waits on the frame's load event, which deferred
+  // scripts (Cloudflare Rocket Loader) can fire before the page has drawn.
+  function revealFrame(frame) { frame.classList.add('is-ready'); }
+  window.addEventListener('message', function (e) {
+    if (e.origin !== window.location.origin || !e.data || e.data.type !== 'visual-ready') return;
+    document.querySelectorAll('.visual-container--fallback iframe').forEach(function (frame) {
+      if (frame.contentWindow === e.source) revealFrame(frame);
+    });
+  });
+  function guardVisuals() {
     const frames = document.querySelectorAll('.visual-container--fallback iframe');
     if (!frames.length) return;
     document.documentElement.classList.add('visuals-guarded');
     frames.forEach(function (frame) {
-      function reveal() {
-        try {
-          if (frame.contentWindow && frame.contentWindow.npVisualReady) frame.classList.add('is-ready');
-        } catch (e) { /* error pages are cross-origin: keep the fallback */ }
-      }
-      frame.addEventListener('load', reveal);
-      reveal();
+      try {
+        if (frame.contentWindow && frame.contentWindow.npVisualReady) revealFrame(frame);
+      } catch (err) { /* error pages are cross-origin: keep the fallback */ }
     });
-  });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', guardVisuals);
+  else guardVisuals();
 
 })();

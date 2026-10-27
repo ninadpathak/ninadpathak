@@ -175,8 +175,10 @@
             }
             slider.addEventListener('input', function () { draw(Number(slider.value)); });
             draw(Number(slider.value));
-            // The article page reveals this frame only once this flag is set (static/js/main.js).
+            // The article page reveals this frame once it hears this (static/js/main.js); the flag
+            // covers an article script that starts listening after this page has drawn.
             window.npVisualReady = true;
+            if (window.parent !== window) window.parent.postMessage({ type: 'visual-ready' }, location.origin);
         })();
     </script>
 </body>

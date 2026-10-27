@@ -59,6 +59,7 @@ jobs:
           npx playwright-core install --with-deps --only-shell chromium
           node og.mjs --check
           node render.mjs --check
+          node fallbacks.mjs --check
 
       - name: Compile Python sources
         run: python -m compileall -q build.py check_rules.py rule_checker.py seo_audit.py tests
