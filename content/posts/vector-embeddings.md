@@ -72,7 +72,7 @@ When two vectors point in exactly the same direction, the angle is zero and the 
 <div class="visual-wrapper">
   <div class="visual-title">Vector Distance and Cosine Similarity</div>
   <div class="visual-container">
-    <iframe src="/static/visuals/cosine-similarity.html" title="Cosine Similarity Animation" loading="lazy"></iframe>
+    <iframe src="/static/visuals/cosine-similarity.html" title="Interactive cosine similarity: rotate the query vector and read the cosine of its angle to the document" loading="lazy"></iframe>
   </div>
 </div>
 
@@ -139,7 +139,7 @@ The vector acts like a Russian nesting doll.
         <span>//</span> Matryoshka: Dimensionality vs. Precision
     </div>
     <div class="visual-container visual-container--tall">
-        <iframe src="/static/visuals/matryoshka-truncation.html" title="Matryoshka Truncation Simulator"></iframe>
+        <iframe src="/static/visuals/matryoshka-truncation.html" title="Interactive Matryoshka truncation: choose how many leading dimensions to keep" loading="lazy"></iframe>
     </div>
 </div>
 

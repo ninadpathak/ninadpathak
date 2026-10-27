@@ -3,159 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distance - Cosine Similarity</title>
-    <link rel="stylesheet" href="/static/css/visual-embed.css">
-    <link rel="stylesheet" href="/static/css/visual-utilities.css">
+    <title>Cosine similarity: the angle between two vectors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
     <style>
-        
-        
-        body { margin: 0; height: 100vh; background: var(--bg-1); font-family: var(--mono); color: var(--text-1); overflow: hidden; }
-        #canvas-container { width: 100vw; height: 100vh; }
-        
-        .overlay {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            font-size: 12px;
-            pointer-events: none;
-            background: var(--bg-1);
-            padding: 10px;
-            border: 1px solid var(--text-3);
+        /* Plate tokens from tools/image-brand/brand.tokens.json. The page follows the site's
+           data-theme when the parent exposes it, and prefers-color-scheme otherwise. */
+        :root {
+            --np-canvas: #f8f8f6; --np-surface: #ffffff; --np-rule: #c8c8c4; --np-hairline: #e0e0dc;
+            --np-line: #7d7d79; --np-ink: #0e0e0e; --np-ink-2: #3a3a3a; --np-muted: #6b6b6b;
+            --np-accent: #c23b00; --np-accent-wash: #fdf1ec;
+            --np-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --np-mono: 'JetBrains Mono', 'SF Mono', 'Courier New', monospace;
         }
-        .stat { color: var(--accent); }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --np-canvas: #090909; --np-surface: #111111; --np-rule: #2c2c2c; --np-hairline: #1e1e1e;
+                --np-line: #6f6f6f; --np-ink: #f0f0f0; --np-ink-2: #c2c2c2; --np-muted: #8a8a8a;
+                --np-accent: #ff5f1f; --np-accent-wash: #1a0d07;
+            }
+        }
+        :root[data-theme="dark"] {
+            --np-canvas: #090909; --np-surface: #111111; --np-rule: #2c2c2c; --np-hairline: #1e1e1e;
+            --np-line: #6f6f6f; --np-ink: #f0f0f0; --np-ink-2: #c2c2c2; --np-muted: #8a8a8a;
+            --np-accent: #ff5f1f; --np-accent-wash: #1a0d07;
+        }
+        html, body { margin: 0; height: 100%; background: var(--np-canvas); color: var(--np-ink); font-family: var(--np-sans); }
+        body { display: flex; flex-direction: column; overflow: hidden; -webkit-font-smoothing: antialiased; }
+        .stage { flex: 1 1 auto; min-height: 0; display: flex; padding: 12px 16px 0; }
+        svg { width: 100%; height: 100%; display: block; touch-action: none; }
+        .controls { flex: 0 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; padding: 12px 20px 16px; border-top: 1px solid var(--np-hairline); }
+        .readout { font: 500 13px var(--np-mono); color: var(--np-ink-2); white-space: nowrap; }
+        .readout b { font-weight: 500; color: var(--np-accent); }
+        label { font: 500 9.5px var(--np-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--np-muted); }
+        input[type=range] { flex: 1 1 160px; min-width: 140px; accent-color: var(--np-accent); cursor: pointer; }
+        .js-only { display: none; }
+        .js .js-only { display: revert; }
 
+        .track { fill: none; stroke: var(--np-rule); stroke-width: 1; }
+        .tick { stroke: var(--np-rule); stroke-width: 0.75; }
+        .tick-text { font: 500 9.5px var(--np-mono); fill: var(--np-muted); }
+        .base { stroke: var(--np-line); stroke-width: 1.5; }
+        .doc { stroke: var(--np-ink-2); stroke-width: 1.5; fill: none; }
+        .query { stroke: var(--np-accent); stroke-width: 2; fill: none; }
+        .head-doc { fill: var(--np-ink-2); }
+        .head-query { fill: var(--np-accent); }
+        .arc { fill: none; stroke: var(--np-accent); stroke-width: 1.5; }
+        .hub { fill: var(--np-surface); stroke: var(--np-line); stroke-width: 1.25; }
+        .label { font: 500 13px var(--np-sans); fill: var(--np-ink); }
+        .label-query { font: 500 13px var(--np-sans); fill: var(--np-accent); }
+        .handle { fill: var(--np-surface); stroke: var(--np-accent); stroke-width: 1.5; cursor: grab; }
+        .theta { font: 500 9.5px var(--np-mono); fill: var(--np-accent); }
+        /* Phones: the drawing is cropped tighter (see script) and its text set larger, so it
+           never falls under the 12 px sans / 8.5 px mono display floor. */
+        @media (max-width: 480px) {
+            .label, .label-query { font-size: 15px; }
+            .tick-text, .theta { font-size: 11px; }
+        }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
-    <div id="canvas-container"></div>
-    <div class="overlay">
-        Angle (θ): <span class="stat" id="angle-val">0.00</span>° <br>
-        Cosine Similarity: <span class="stat" id="cos-val">1.000</span>
-        <div class="u-fs-10px--color-text-3--mt-8px">Drag to rotate</div>
+    <div class="stage">
+        <!-- The drawing is complete without JavaScript: it shows the query at 45 degrees. -->
+        <svg id="plot" viewBox="0 0 360 214" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="cs-title cs-desc">
+            <title id="cs-title">Cosine similarity</title>
+            <desc id="cs-desc">A fixed document vector and a query vector that can be rotated around the same origin. The cosine of the angle between them is 1 when they point the same way, 0 at a right angle, and negative 1 when they point in opposite directions.</desc>
+            <path class="track" d="M60,180 A120,120 0 0 1 300,180"/>
+            <line class="base" x1="48" y1="180" x2="312" y2="180"/>
+            <line class="tick" x1="300" y1="174" x2="300" y2="186"/>
+            <line class="tick" x1="180" y1="54" x2="180" y2="66"/>
+            <line class="tick" x1="60" y1="174" x2="60" y2="186"/>
+            <text class="tick-text" x="300" y="202" text-anchor="middle">cos 1</text>
+            <text class="tick-text" x="180" y="46" text-anchor="middle">cos 0</text>
+            <text class="tick-text" x="60" y="202" text-anchor="middle">cos −1</text>
+            <line class="doc" x1="180" y1="180" x2="292" y2="180"/>
+            <path class="head-doc" d="M300,180 L290,175 L290,185 Z"/>
+            <text class="label" x="236" y="200" text-anchor="middle">Document</text>
+            <path id="arc" class="arc" d="M216,180 A36,36 0 0 0 205.46,154.54"/>
+            <text id="theta" class="theta" x="226" y="160">θ</text>
+            <line id="query" class="query" x1="180" y1="180" x2="259.2" y2="100.8"/>
+            <path id="query-head" class="head-query" d="M264.85,95.15 L253.54,99.04 L260.61,106.11 Z"/>
+            <text id="query-label" class="label-query" x="244" y="88" text-anchor="middle">Query</text>
+            <circle id="handle" class="handle js-only" cx="264.85" cy="95.15" r="6"/>
+            <circle class="hub" cx="180" cy="180" r="3.5"/>
+        </svg>
     </div>
-
+    <div class="controls">
+        <span class="readout">θ = <b id="angle-val">45</b>°</span>
+        <span class="readout">cos θ = <b id="cos-val">0.707</b></span>
+        <label class="js-only" for="angle">Angle</label>
+        <input class="js-only" type="range" id="angle" min="0" max="180" step="1" value="45" aria-label="Angle between the query and the document, in degrees">
+    </div>
     <script>
-        const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const colorBg = isDark ? 0x111111 : 0xffffff;
-        const colorPoint = isDark ? 0xff5f1f : 0xd44000;
-        const colorLine = isDark ? 0x444444 : 0xcccccc;
-        const colorText = isDark ? 0xffffff : 0x000000;
+        (function () {
+            document.documentElement.classList.add('js');
+            // Follow the article page's theme toggle when the parent is same-origin.
+            try {
+                var root = window.parent.document.documentElement;
+                var sync = function () {
+                    var t = root.getAttribute('data-theme');
+                    if (t) document.documentElement.setAttribute('data-theme', t);
+                };
+                sync();
+                new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+            } catch (e) { /* standalone or cross-origin: prefers-color-scheme applies */ }
 
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(colorBg);
+            var CX = 180, CY = 180, R = 120, HEAD = 10;
+            var svg = document.getElementById('plot');
+            var slider = document.getElementById('angle');
+            var q = document.getElementById('query'), qh = document.getElementById('query-head');
+            var ql = document.getElementById('query-label'), handle = document.getElementById('handle');
+            var arc = document.getElementById('arc'), theta = document.getElementById('theta');
+            var angleVal = document.getElementById('angle-val'), cosVal = document.getElementById('cos-val');
+            var f = function (n) { return Math.round(n * 100) / 100; };
 
-        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 0, 10);
-
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-        // Add OrbitControls for interactivity
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.05;
-        controls.enablePan = false;
-        controls.enableZoom = false;
-
-        // Origin
-        const origin = new THREE.Vector3(0, -2, 0);
-
-        // Materials
-        const lineMatPrimary = new THREE.LineBasicMaterial({ color: colorText, linewidth: 2 });
-        const lineMatQuery = new THREE.LineBasicMaterial({ color: colorPoint, linewidth: 3 });
-
-        // Vector 1 (Fixed Document Vector)
-        const vec1 = new THREE.Vector3(3, 4, 0);
-        const geo1 = new THREE.BufferGeometry().setFromPoints([origin, vec1]);
-        const line1 = new THREE.Line(geo1, lineMatPrimary);
-        scene.add(line1);
-
-        // Vector 2 (Moving Query Vector)
-        const vec2 = new THREE.Vector3(0, 0, 0); // Gets updated
-        const geo2 = new THREE.BufferGeometry().setFromPoints([origin, vec2]);
-        const line2 = new THREE.Line(geo2, lineMatQuery);
-        scene.add(line2);
-
-        // Arc (Angle visualizer)
-        const arcCurve = new THREE.EllipseCurve(0, -2, 1.5, 1.5, 0, 0, false, 0);
-        const arcPoints = arcCurve.getPoints(50);
-        const arcGeo = new THREE.BufferGeometry().setFromPoints(arcPoints);
-        const arcLine = new THREE.Line(arcGeo, new THREE.LineBasicMaterial({ color: colorPoint, transparent: true, opacity: 0.5 }));
-        scene.add(arcLine);
-
-        // Add small spheres to ends
-        const sphereGeo = new THREE.SphereGeometry(0.15, 16, 16);
-        const mesh1 = new THREE.Mesh(sphereGeo, new THREE.MeshBasicMaterial({color: colorText}));
-        mesh1.position.copy(vec1);
-        scene.add(mesh1);
-        
-        const mesh2 = new THREE.Mesh(sphereGeo, new THREE.MeshBasicMaterial({color: colorPoint}));
-        scene.add(mesh2);
-
-        const angleValEl = document.getElementById('angle-val');
-        const cosValEl = document.getElementById('cos-val');
-
-        let time = 0;
-
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // Animate vector 2 sweeping back and forth
-            const angle = Math.sin(time) * 1.5; // Sweep angle
-            
-            vec2.x = origin.x + 5 * Math.sin(angle);
-            vec2.y = origin.y + 5 * Math.cos(angle);
-            
-            mesh2.position.copy(vec2);
-
-            const positions = line2.geometry.attributes.position.array;
-            positions[3] = vec2.x;
-            positions[4] = vec2.y;
-            positions[5] = vec2.z;
-            line2.geometry.attributes.position.needsUpdate = true;
-
-            // Calculate actual angle and cosine
-            const v1Dir = new THREE.Vector3().subVectors(vec1, origin).normalize();
-            const v2Dir = new THREE.Vector3().subVectors(vec2, origin).normalize();
-            
-            const dot = v1Dir.dot(v2Dir);
-            const actualAngle = Math.acos(dot);
-            
-            angleValEl.innerText = (actualAngle * (180/Math.PI)).toFixed(1);
-            cosValEl.innerText = dot.toFixed(4);
-
-            // Update arc visually
-            const startAngle = Math.atan2(v1Dir.y, v1Dir.x);
-            let endAngle = Math.atan2(v2Dir.y, v2Dir.x);
-            
-            if (endAngle < startAngle) {
-                // Keep drawing simple
-                const temp = arcCurve.aStartAngle;
-                arcCurve.aStartAngle = endAngle;
-                arcCurve.aEndAngle = startAngle;
-            } else {
-                arcCurve.aStartAngle = startAngle;
-                arcCurve.aEndAngle = endAngle;
+            function draw(deg) {
+                var a = deg * Math.PI / 180, ux = Math.cos(a), uy = -Math.sin(a);
+                var tipX = CX + R * ux, tipY = CY + R * uy;
+                var bx = tipX - HEAD * ux, by = tipY - HEAD * uy, px = -uy * 5, py = ux * 5;
+                q.setAttribute('x2', f(bx)); q.setAttribute('y2', f(by));
+                qh.setAttribute('d', 'M' + f(tipX) + ',' + f(tipY) + ' L' + f(bx + px) + ',' + f(by + py) + ' L' + f(bx - px) + ',' + f(by - py) + ' Z');
+                handle.setAttribute('cx', f(tipX)); handle.setAttribute('cy', f(tipY));
+                ql.setAttribute('x', f(CX + (R + 20) * ux)); ql.setAttribute('y', f(CY + (R + 20) * uy + 4));
+                ql.setAttribute('text-anchor', deg < 70 ? 'start' : deg > 110 ? 'end' : 'middle');
+                var r = 36, ex = CX + r * ux, ey = CY + r * uy;
+                arc.setAttribute('d', deg < 0.5 ? '' : 'M' + (CX + r) + ',' + CY + ' A' + r + ',' + r + ' 0 0 0 ' + f(ex) + ',' + f(ey));
+                var mid = a / 2;
+                theta.setAttribute('x', f(CX + 48 * Math.cos(mid) - 3)); theta.setAttribute('y', f(CY - 48 * Math.sin(mid) + 3));
+                angleVal.textContent = Math.round(deg);
+                cosVal.textContent = (Math.abs(Math.cos(a)) < 0.0005 ? 0 : Math.cos(a)).toFixed(3);
+                slider.value = Math.round(deg);
             }
 
-            arcLine.geometry.setFromPoints(arcCurve.getPoints(30));
+            var stopIntro = function () {};
+            function set(deg) { stopIntro(); draw(Math.max(0, Math.min(180, deg))); }
+            slider.addEventListener('input', function () { set(Number(slider.value)); });
 
-            controls.update();
-            time += 0.015;
-            renderer.render(scene, camera);
-        }
+            // Drag the query arrow: the pointer's angle around the origin sets theta.
+            var dragging = false;
+            function fromPointer(e) {
+                var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+                var p = pt.matrixTransform(svg.getScreenCTM().inverse());
+                var deg = Math.atan2(CY - p.y, p.x - CX) * 180 / Math.PI;
+                if (deg < 0) deg = p.x >= CX ? 0 : 180;
+                set(deg);
+            }
+            svg.addEventListener('pointerdown', function (e) { dragging = true; svg.setPointerCapture(e.pointerId); fromPointer(e); });
+            svg.addEventListener('pointermove', function (e) { if (dragging) fromPointer(e); });
+            svg.addEventListener('pointerup', function () { dragging = false; });
 
-        animate();
+            // Phones get a tighter crop of the same drawing.
+            var fitView = function () {
+                svg.setAttribute('viewBox', window.innerWidth <= 480 ? '36 30 288 182' : '0 0 360 214');
+            };
+            fitView();
+            window.addEventListener('resize', fitView);
 
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+            draw(45);
+            // A short opening sweep shows the range once, unless the reader asked for less motion.
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                var start = null, frame;
+                var step = function (ts) {
+                    if (start === null) start = ts;
+                    var t = Math.min((ts - start) / 2400, 1);
+                    draw(45 + 135 * Math.sin(t * Math.PI));
+                    if (t < 1) frame = requestAnimationFrame(step);
+                };
+                stopIntro = function () { cancelAnimationFrame(frame); stopIntro = function () {}; };
+                frame = requestAnimationFrame(step);
+            }
+        })();
     </script>
 </body>
 </html>

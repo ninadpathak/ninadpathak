@@ -2,7 +2,7 @@
 
 68 live iframes on `origin/main` (51 posts), sorted by GUIDELINE.md §13: keep an iframe only when interaction teaches something a drawing cannot.
 
-**66 replace · 2 keep.** Group A (18) shipped in `image-brand-batch2`, group B (16) is converted in `image-brand-groupB`, and group C (16) in `image-brand-groupC`; group D (16) follows. Each converted figure ships a wide plate and a phone variant.
+**66 replace · 2 keep.** Group A (18) shipped in `image-brand-batch2`, group B (16) in `image-brand-groupB`, group C (16) is converted in `image-brand-groupC`, and group D (16) in `image-brand-groupD`, which also aligns the two kept visuals. Each converted figure ships a wide plate and a phone variant.
 
 | # | Post | Visual | Tech | Decision | Group | Reason |
 |---|---|---|---|---|---|---|
@@ -53,26 +53,26 @@
 | 45 | rag-reranking | `cross-encoder-arch` | html | replace | C · converted | Arrow text became query and document entering one cross-encoder together and leaving as one score. |
 | 46 | rag-reranking| `reranking-pipeline` | html| replace| A · converted | Animated sort; ranked lists before and after the cross-encoder show the right chunk moving to the top. |
 | 47 | rag-reranking | `latency-tradeoff` | html | replace | C · converted | The ~50/250/300 ms bars aren't all in the article; the plate spans embed and search as milliseconds and reranking as hundreds of ms, as the prose says. |
-| 48 | rag-reranking | `keyword-exactness` | html | replace | D | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
-| 49 | rag-reranking | `models-providers` | html | replace | D | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
-| 50 | rag-reranking | `dimension-scaling` | html | replace | D | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
-| 51 | rag-reranking | `implementation-flow` | html | replace | D | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
-| 52 | rag-vs-memory | `rag-vs-memory` | three | replace | D | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
+| 48 | rag-reranking | `keyword-exactness` | html | replace | D · converted | The scores in the old card (0.89, 0.02) are not in the article; the plate shows vector search passing E-4049 and E-4048 to the cross-encoder, which rejects the near miss and keeps the exact match. |
+| 49 | rag-reranking | `models-providers` | html | replace | D · converted | Two text cards became one fork: the app calls a hosted API over the network (globe) or a local model on its own GPU (chip); the trade-offs stay in the caption. |
+| 50 | rag-reranking | `dimension-scaling` | html | replace | D · converted | 384 to 3072 dimensions drawn as a span of eight times, with the larger vector still marked as failing and the cross-encoder as the step that remains. |
+| 51 | rag-reranking | `implementation-flow` | html | replace | D · converted | Four lines of pseudo-code became the four numbered stages: search wide, rerank, keep the top five, build the prompt. |
+| 52 | rag-vs-memory | `rag-vs-memory` | three | replace | D · converted | An orbiting scene became retrieval and memory feeding one bounded context before the model. |
 | 53 | semantic-caching| `semantic-cache` | html| replace| A · converted | Animated hit/miss replay; a threshold node with check and cross branches shows both outcomes at once. |
-| 54 | shared-vs-isolated-memory | `shared-vs-isolated` | html | replace | D | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
-| 55 | short-term-agent-memory | `short-term-memory` | three | replace | D | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 56 | shorter-documentation | `cognitive-load` | three | replace | D | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
+| 54 | shared-vs-isolated-memory | `shared-vs-isolated` | html | replace | D · converted | The animated race condition became two rows: isolated artifacts handed along the line, and a shared store marked with the state-pollution failure the article describes. |
+| 55 | short-term-agent-memory | `short-term-memory` | three | replace | D · converted | An orbiting token buffer became the four inputs the article lists filling one fixed context window. |
+| 56 | shorter-documentation | `cognitive-load` | three | replace | D · converted | The made-up load ratios are gone; intrinsic, extraneous (marked to remove), and germane load feed limited working memory. |
 | 57 | speculative-decoding| `speculative-decoding` | html| replace| A · converted | Animation replays draft and verify; token rows with kept and dropped branches show it in one frame. |
-| 58 | stripe-technical-blog | `content-moat-compounding` | svg | replace | D | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
-| 59 | technical-writing-for-engineers | `docs-8020` | html | replace | D | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
+| 58 | stripe-technical-blog | `content-moat-compounding` | svg | replace | D · converted | A growth curve with no data became three searches entering one archive, the article's point about posts as entry points. |
+| 59 | technical-writing-for-engineers | `docs-8020` | html | replace | D · converted | The illustrative impact scores are gone; three practices reach the reader and the ceremony sits apart, as the article's minimal stack says. |
 | 60 | time-to-first-token| `ttft-chain` | html| replace| A · converted | Animated latency bar; a five-step chain with a TTFT span bracket shows what makes up the first-token wait. |
-| 61 | vector-embeddings | `vector-space` | three | replace | D | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 62 | vector-embeddings | `cosine-similarity` | three | keep + align | keep | Dragging a vector changes the angle and the cosine readout; the interaction is the lesson. |
-| 63 | vector-embeddings | `matryoshka-truncation` | three | keep + align | keep | The precision slider truncates dimensions live; seeing recall change as you drag is the lesson. |
-| 64 | vector-embeddings | `chunking` | html | replace | D | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
-| 65 | voice-agent-memory | `voice-memory` | three | replace | D | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 66 | writing-changelogs | `changelog-anatomy` | html | replace | D | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
-| 67 | writing-for-ai-products | `schema-constraints` | three | replace | D | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 68 | writing-release-notes | `release-hierarchy` | three | replace | D | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
+| 61 | vector-embeddings | `vector-space` | three | replace | D · converted | A 3D point cloud became the article's bank example: the same word lands in two different neighbourhoods. |
+| 62 | vector-embeddings | `cosine-similarity` | three | keep + align | keep · aligned | Rebuilt as a branded SVG with no Three.js: drag the query or use the slider and the cosine reads 1, 0 and −1 at the marks. Site fonts, plate tokens in both schemes, a sweep only without reduced motion, and a complete drawing without JavaScript. |
+| 63 | vector-embeddings | `matryoshka-truncation` | three | keep + align | keep · aligned | Rebuilt as a branded SVG: the slider keeps a prefix of the vector (front-loaded cells) and sizes the RAM head against the full vector on disk. The invented accuracy curve and the multi-colour clusters are gone, because the article says to measure quality on your own corpus. |
+| 64 | vector-embeddings | `chunking` | html | replace | D · converted | The animated split became document, chunks, embed, and vector DB, with the query embedded by the same model. |
+| 65 | voice-agent-memory | `voice-memory` | three | replace | D · converted | An orbiting pipeline became speech, STT, LLM, and TTS, with retrieved memory arriving in parallel with generation. |
+| 66 | writing-changelogs | `changelog-anatomy` | html | replace | D · converted | The before/after card became the four layers a useful entry exposes, in reading order. |
+| 67 | writing-for-ai-products | `schema-constraints` | three | replace | D · converted | A decorative 3D schema became the four-part example the section recommends: request, contract, refusal, caveat. |
+| 68 | writing-release-notes | `release-hierarchy` | three | replace | D · converted | Four labelled layers became summary, the impact group, and resources, decision first and detail last. |
 
-Keep-and-align work for the two kept visuals (shared fonts, palette variables, the stroke and type rules, reduced motion, a static plate fallback) lands with group D.
+The two kept visuals are aligned in group D: site fonts, the plate tokens in light and dark (following the article's theme toggle, or prefers-color-scheme standalone), the stroke and type rules, no motion under prefers-reduced-motion, and a static drawing that is complete without JavaScript.
