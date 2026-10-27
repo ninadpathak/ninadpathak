@@ -72,38 +72,10 @@
     gtag('config', 'G-23WKEJ8P2N');
   </script>
 
-  <!-- Structured data -->
-  {% block schema %}
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": "{{ site.url }}/#person",
-    "name": "Ninad Pathak",
-    "url": "{{ site.url }}",
-    "jobTitle": "Technical Content Writer",
-    "description": "{{ site.description }}",
-    "knowsAbout": [
-      "Technical Writing",
-      "Developer Relations",
-      "Developer Education",
-      "Developer Experience",
-      "Developer Documentation",
-      "API Documentation",
-      "Docs as Code",
-      "Documentation SEO",
-      "Code Examples",
-      "Technical Tutorials",
-      "AI-Ready Documentation",
-      "Technical Content Strategy"
-    ],
-    "sameAs": [
-      "{{ contact.linkedin }}",
-      "{{ contact.twitter }}"
-    ]
-  }
-  </script>
-  {% endblock %}
+  <!-- Structured data. The Person node is emitted on every page and is the only
+       place the person is described; page schema points at it by @id. -->
+  <script type="application/ld+json">{{ person_schema | tojson }}</script>
+  {% block schema %}{% endblock %}
 </head>
 <body>
 

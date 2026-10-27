@@ -136,3 +136,41 @@ booking_url = "https://zcal.co/i/AGG1iJtv"
 linkedin = "https://linkedin.com/in/ninadwrites"
 twitter = "https://x.com/ninadwrites"
 email = "hello@ninadpathak.com"
+github = "https://github.com/ninadpathak"
+
+# THE ONE IDENTITY. Every Person node, author and publisher in the site's JSON-LD
+# is built from this table (SiteBuilder.person_schema), so the name, title and
+# description an answer engine reads are identical on every page.
+#
+# Only facts already public on this site go here. same_as lists profiles that were
+# checked to be his on 2026-10-27: GitHub names him and links back to this site, the
+# Centus author page and X carry his name and byline. LinkedIn answers scripts with
+# HTTP 999, so it stays on the owner's word. Mem0 and Firecrawl have no author pages
+# for him, so they are not here.
+#
+# disambiguating_description separates him from a different Ninad Pathak who appears
+# in Indian marketing trade press. It does that with what he does and who for, not by
+# naming anyone else.
+[identity]
+name = "Ninad Pathak"
+job_title = "Technical Writer"
+description = "Technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it."
+disambiguating_description = "Technical writer and developer-content author who works with AI and developer-tool companies, including Firecrawl, Mem0, Centus, Semrush and Adobe."
+same_as = [
+  "https://linkedin.com/in/ninadwrites",
+  "https://x.com/ninadwrites",
+  "https://github.com/ninadpathak",
+  "https://centus.com/blog/author/ninad-pathak",
+]
+knows_about = [
+  "Technical Writing",
+  "Developer Documentation",
+  "API Documentation",
+  "Docs as Code",
+  "Technical Tutorials",
+  "Developer Experience",
+  "Developer Relations",
+  "Documentation SEO",
+  "AI-Ready Documentation",
+  "Technical Content Strategy",
+]

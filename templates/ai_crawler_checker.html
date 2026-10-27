@@ -72,8 +72,8 @@
     "Reports Content-Signal declarations and Sitemap lines",
     "States that a CDN or WAF can block a crawler regardless of robots.txt"
   ],
-  "author": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}/about/" },
-  "publisher": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}" },
+  "author": {{ person_ref | tojson }},
+  "publisher": {{ person_ref | tojson }},
   "isPartOf": { "@type": "WebSite", "url": "{{ site.url }}" },
   "isRelatedTo": [
     {

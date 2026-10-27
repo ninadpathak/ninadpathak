@@ -419,6 +419,10 @@ class SiteBuilder:
         self.env.filters["format_date"] = format_date
         self.env.filters["format_date_iso"] = format_date_iso
         self.env.filters["slugify"] = slugify
+        # Globals, not render context: a template rendered straight from self.env, as
+        # the post-template tests do, must still carry the one Person node.
+        self.env.globals["person_schema"] = self.person_schema()
+        self.env.globals["person_ref"] = self.person_ref()
 
         self.md = markdown.Markdown(
             extensions=["extra", "codehilite", "toc", "tables"],
@@ -650,6 +654,47 @@ class SiteBuilder:
             term["needs_visuals"] = ('class="visual-' in body) or ("<iframe" in body)
             
         return terms
+
+    # ------------------------------------------------------------------
+    # Identity
+    # ------------------------------------------------------------------
+
+    def person_id(self) -> str:
+        return self.config["site"]["url"].rstrip("/") + "/#person"
+
+    def person_schema(self) -> dict:
+        """The one Person node, emitted once on every page by base.html.
+
+        Every other author or publisher on the site points here by @id instead of
+        restating the person, so the pages can no longer drift apart. Articles used
+        to name an Organization called "Ninad Pathak" with the favicon as its logo
+        while the homepage described a Person with a different job title.
+        """
+        identity = self.config["identity"]
+        base = self.config["site"]["url"].rstrip("/")
+        return {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "@id": self.person_id(),
+            "name": identity["name"],
+            "url": f"{base}/",
+            "jobTitle": identity["job_title"],
+            "description": identity["description"],
+            "disambiguatingDescription": identity["disambiguating_description"],
+            "knowsAbout": identity["knows_about"],
+            "sameAs": identity["same_as"],
+        }
+
+    def person_ref(self) -> dict:
+        """A pointer to the Person node, for author and publisher fields. The name
+        and url ride along for consumers that do not resolve @id."""
+        identity = self.config["identity"]
+        return {
+            "@type": "Person",
+            "@id": self.person_id(),
+            "name": identity["name"],
+            "url": self.config["site"]["url"].rstrip("/") + "/about/",
+        }
 
     # ------------------------------------------------------------------
     # Render helper
@@ -967,54 +1012,56 @@ class SiteBuilder:
         feed_path = self.output / "feed.xml"
         tree.write(feed_path, xml_declaration=True, encoding="utf-8")
 
-    def build_llms_txt(self, posts, glossary_terms, work_cases, pillars=None):
+    def build_llms_txt(self, posts, glossary_terms, work_cases, pillars=None, categories=None):
         """Emit /llms.txt — a clean, link-first map of the site for AI crawlers
         and answer engines. Follows the llms.txt convention (H1, summary
         blockquote, then sectioned bullet links)."""
         base = self.config["site"]["url"].rstrip("/")
         site = self.config["site"]
 
-        # Tag -> cluster, first match wins (order defines precedence).
-        clusters = [
-            ("Documentation", {"documentation", "technical-writing"}),
-            ("API Documentation", {"api-documentation", "api"}),
-            ("Docs as Code", {"docs-as-code", "documentation-workflow"}),
-            ("Documentation SEO", {"documentation-seo", "seo"}),
-            ("AI-Ready Documentation", {"ai-ready-documentation", "retrieval"}),
-            ("Technical Content", {"technical-content", "tutorials", "developer-experience"}),
-        ]
-
-        def cluster_for(post):
-            tags = {str(t).lower() for t in post.get("tags", [])}
-            for name, keys in clusters:
-                if tags & keys:
-                    return name
-            return "Other Writing"
-
-        grouped: dict[str, list[dict]] = {}
-        for post in posts:
-            grouped.setdefault(cluster_for(post), []).append(post)
-
+        # Articles are grouped by the editorial category each post declares in its
+        # frontmatter, the same clusters the /articles/<category>/ archives and
+        # tools/audit_clusters.py use. The old tag-matching table put every article
+        # under "Other Writing" because no post carried the tags it looked for, while
+        # the file's own intro claimed the list was grouped by topic.
+        identity = self.config["identity"]
         lines = [
             f"# {site['author']}",
             "",
-            f"> {site['description']}",
+            f"> {identity['description']}",
             "",
-            ("Technical writer and former engineer publishing in-depth, benchmark-backed "
-             "writing on developer documentation, API docs, docs-as-code, documentation "
-             "SEO, AI retrieval, and technical content. Articles below are grouped by "
-             "topic; each links to the canonical URL."),
+            ("Articles below are grouped by topic cluster, and each links to its "
+             "canonical URL. The About, Work and Contact pages say who writes them "
+             "and how to hire me."),
+            "",
+            "## About",
+            "",
+            f"- [About]({base}/about/): Who I am, what I write, and who I write it for.",
+            f"- [Work]({base}/work/): Case studies with the result each piece of work produced.",
+            f"- [Portfolio]({base}/portfolio/): Published articles and documentation, linked at the publisher.",
+            f"- [Contact]({base}/contact/): Get in touch or book a call.",
             "",
         ]
 
-        cluster_order = [name for name, _ in clusters] + ["Other Writing"]
-        for name in cluster_order:
-            items = grouped.get(name)
-            if not items:
+        for category in categories or []:
+            if not category["posts"]:
                 continue
-            lines.append(f"## {name}")
+            # The spec makes an H2 section a file list. A prose line under the heading
+            # is flagged by this site's own validator (non-list-content-in-section).
+            lines.append(f"## {category['title']}")
             lines.append("")
-            for post in items:
+            for post in category["posts"]:
+                desc = (post.get("description") or "").strip().replace("\n", " ")
+                lines.append(f"- [{post['title']}]({base}{post['url']}): {desc}")
+            lines.append("")
+
+        # A post without a declared category still has to be listed somewhere.
+        # audit_clusters.py --strict fails the build on one, so this stays empty.
+        uncategorized = [post for post in posts if not post.get("category")]
+        if uncategorized:
+            lines.append("## More Articles")
+            lines.append("")
+            for post in uncategorized:
                 desc = (post.get("description") or "").strip().replace("\n", " ")
                 lines.append(f"- [{post['title']}]({base}{post['url']}): {desc}")
             lines.append("")
@@ -1052,10 +1099,8 @@ class SiteBuilder:
 
         lines.append("## Pages")
         lines.append("")
-        lines.append(f"- [About]({base}/about/): Background, expertise, and how I work.")
-        lines.append(f"- [Articles]({base}/articles/): Documentation, DevRel, tutorials, technical writing, and developer education.")
+        lines.append(f"- [Articles]({base}/articles/): Every article, newest first, with the topic archives.")
         lines.append(f"- [Projects]({base}/projects/): Working tools and software.")
-        lines.append(f"- [Contact]({base}/contact/): Get in touch or book a call.")
         lines.append("")
 
         (self.output / "llms.txt").write_text("\n".join(lines), encoding="utf-8")
@@ -1265,7 +1310,7 @@ class SiteBuilder:
 
         self.build_sitemap(posts, work_cases, glossary_terms, pillars, categories)
         self.build_rss(posts)
-        self.build_llms_txt(posts, glossary_terms, work_cases, pillars)
+        self.build_llms_txt(posts, glossary_terms, work_cases, pillars, categories)
         self.build_redirects(posts)
         self.build_pygments_css()
         self.build_visual_embed_css()

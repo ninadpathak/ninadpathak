@@ -41,8 +41,8 @@
     "Reports a Flesch reading ease score alongside the findings",
     "Runs entirely in the browser, with no upload and no signup"
   ],
-  "author": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}/about/" },
-  "publisher": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}" },
+  "author": {{ person_ref | tojson }},
+  "publisher": {{ person_ref | tojson }},
   "isPartOf": { "@type": "WebSite", "url": "{{ site.url }}" },
   "isRelatedTo": [
     {

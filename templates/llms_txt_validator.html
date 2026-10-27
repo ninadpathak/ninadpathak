@@ -39,8 +39,8 @@
     "Graded findings separated into spec violations, warnings, and notes",
     "Every finding states whether it rests on the specification or on convention"
   ],
-  "author": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}/about/" },
-  "publisher": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}" },
+  "author": {{ person_ref | tojson }},
+  "publisher": {{ person_ref | tojson }},
   "isPartOf": { "@type": "WebSite", "url": "{{ site.url }}" },
   "isRelatedTo": {
     "@type": ["SoftwareApplication", "WebApplication"],

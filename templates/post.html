@@ -32,27 +32,16 @@
   "@type": "TechArticle",
   "headline": {{ post.title | tojson }},
   "description": {{ post.description | tojson }},
-  "image": "{{ site.url }}/static/favicon.png",
+  "image": {% if post.og_image %}{{ (post.og_image if post.og_image.startswith("http") else site.url ~ post.og_image) | tojson }}{% else %}"{{ site.url }}/static/favicon.png"{% endif %},
   "inLanguage": "en-US",
   "wordCount": {{ post.word_count }},
 {% if post.category %}
   "articleSection": {{ post.category.label | tojson }},
 {% endif %}
-  "author": {
-    "@type": "Person",
-    "name": "Ninad Pathak",
-    "url": "{{ site.url }}/about/"
-  },
+  "author": {{ person_ref | tojson }},
   "datePublished": "{{ post.date | format_date_iso }}",
   "dateModified": "{{ post.updated | format_date_iso }}",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Ninad Pathak",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "{{ site.url }}/static/favicon.png"
-    }
-  },
+  "publisher": {{ person_ref | tojson }},
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "{{ site.url }}/articles/{{ post.slug }}/"

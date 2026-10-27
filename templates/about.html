@@ -1,7 +1,18 @@
 {% extends "base.html" %}
 
 {% block title %}About | Ninad Pathak{% endblock %}
-{% block description %}Ninad Pathak writes developer documentation and technical content with tested examples, strong opinions, and no invented understanding.{% endblock %}
+{% block description %}I'm a technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product first.{% endblock %}
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "url": "{{ site.url }}/about/",
+  "name": "About | Ninad Pathak",
+  "mainEntity": {{ person_ref | tojson }}
+}
+</script>
+{% endblock %}
 {% block canonical %}/about/{% endblock %}
 {% block og_url %}/about/{% endblock %}
 
@@ -32,7 +43,8 @@
         </div>
 
         <div class="about-sidebar-links">
-          <a href="{{ contact.linkedin }}" class="arrow-link arrow-link-block" target="_blank" rel="noopener">LinkedIn →</a>
+          <a href="{{ contact.linkedin }}" class="arrow-link arrow-link-block" target="_blank" rel="me noopener">LinkedIn →</a>
+          <a href="{{ contact.github }}" class="arrow-link arrow-link-block" target="_blank" rel="me noopener">GitHub →</a>
           <a href="{{ contact.booking_url }}" class="arrow-link arrow-link-block booking-modal-trigger" rel="noopener">Book a Call →</a>
         </div>
       </aside>

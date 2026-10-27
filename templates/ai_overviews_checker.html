@@ -45,8 +45,8 @@
     "Whether the page states where it does not apply",
     "Every check reports the dated source it rests on"
   ],
-  "author": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}/about/" },
-  "publisher": { "@type": "Person", "name": "Ninad Pathak", "url": "{{ site.url }}" },
+  "author": {{ person_ref | tojson }},
+  "publisher": {{ person_ref | tojson }},
   "isPartOf": { "@type": "WebSite", "url": "{{ site.url }}" },
   "isRelatedTo": [
     {
