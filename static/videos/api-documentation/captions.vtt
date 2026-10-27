@@ -1,0 +1,41 @@
+WEBVTT
+
+1
+00:00:00.170 --> 00:00:05.460
+Okay, so I treat API documentation as pages with one job each,
+
+2
+00:00:05.460 --> 00:00:07.460
+from the quickstart to the error guide.
+
+3
+00:00:07.460 --> 00:00:10.360
+An OpenAPI file can generate the reference,
+
+4
+00:00:10.505 --> 00:00:15.465
+but explaining what to do after a four-oh-nine is still my job.
+
+5
+00:00:15.465 --> 00:00:19.460
+So my reference lists each response the endpoint returns,
+
+6
+00:00:19.560 --> 00:00:21.565
+with its cause and its fix.
+
+7
+00:00:21.565 --> 00:00:27.210
+A four-oh-nine means the idempotency key was reused with a different body,
+
+8
+00:00:27.210 --> 00:00:29.242
+so the fix is a new key.
+
+9
+00:00:29.242 --> 00:00:33.727
+Then a script sends each documented case to the running service,
+
+10
+00:00:33.762 --> 00:00:37.787
+so a changed status code fails the check before a developer hits it.

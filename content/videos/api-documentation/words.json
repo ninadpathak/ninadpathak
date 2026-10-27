@@ -1,0 +1,637 @@
+{
+ "L1": {
+  "duration": 7.147,
+  "text": "Okay, so I treat API documentation as pages with one job each, from the quickstart to the error guide.",
+  "transcript": "Okay, so I treat API documentation as pages with one job each, from the quickstart to the error guide.",
+  "words": [
+   {
+    "w": "Okay,",
+    "start": 0.07,
+    "end": 0.3,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "so",
+    "start": 0.74,
+    "end": 0.82,
+    "whisper_start": 0.74
+   },
+   {
+    "w": "I",
+    "start": 0.82,
+    "end": 1.02,
+    "whisper_start": 0.82
+   },
+   {
+    "w": "treat",
+    "start": 1.12,
+    "end": 1.4,
+    "whisper_start": 1.02
+   },
+   {
+    "w": "API",
+    "start": 1.505,
+    "end": 1.84,
+    "whisper_start": 1.4
+   },
+   {
+    "w": "documentation",
+    "start": 1.84,
+    "end": 2.58,
+    "whisper_start": 1.84
+   },
+   {
+    "w": "as",
+    "start": 2.58,
+    "end": 3.2,
+    "whisper_start": 2.58
+   },
+   {
+    "w": "pages",
+    "start": 3.3,
+    "end": 3.62,
+    "whisper_start": 3.2
+   },
+   {
+    "w": "with",
+    "start": 3.62,
+    "end": 3.92,
+    "whisper_start": 3.62
+   },
+   {
+    "w": "one",
+    "start": 3.92,
+    "end": 4.22,
+    "whisper_start": 3.92
+   },
+   {
+    "w": "job",
+    "start": 4.22,
+    "end": 4.56,
+    "whisper_start": 4.22
+   },
+   {
+    "w": "each,",
+    "start": 4.56,
+    "end": 5.02,
+    "whisper_start": 4.56
+   },
+   {
+    "w": "from",
+    "start": 5.36,
+    "end": 5.44,
+    "whisper_start": 5.22
+   },
+   {
+    "w": "the",
+    "start": 5.44,
+    "end": 5.56,
+    "whisper_start": 5.44
+   },
+   {
+    "w": "quickstart",
+    "start": 5.625,
+    "end": 6.14,
+    "whisper_start": 5.56
+   },
+   {
+    "w": "to",
+    "start": 6.365,
+    "end": 6.48,
+    "whisper_start": 6.14
+   },
+   {
+    "w": "the",
+    "start": 6.48,
+    "end": 6.62,
+    "whisper_start": 6.48
+   },
+   {
+    "w": "error",
+    "start": 6.62,
+    "end": 6.88,
+    "whisper_start": 6.62
+   },
+   {
+    "w": "guide.",
+    "start": 6.88,
+    "end": 7.12,
+    "whisper_start": 6.88
+   }
+  ]
+ },
+ "L2": {
+  "duration": 7.893,
+  "text": "An OpenAPI file can generate the reference, but explaining what to do after a four-oh-nine is still my job.",
+  "transcript": "An OpenAPI file can generate the reference, but explaining what to do after a four-oh-nine is still my job.",
+  "words": [
+   {
+    "w": "An",
+    "start": 0.06,
+    "end": 0.18,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "OpenAPI",
+    "start": 0.18,
+    "end": 1.0,
+    "whisper_start": 0.18
+   },
+   {
+    "w": "file",
+    "start": 1.12,
+    "end": 1.32,
+    "whisper_start": 1.0
+   },
+   {
+    "w": "can",
+    "start": 1.32,
+    "end": 1.52,
+    "whisper_start": 1.32
+   },
+   {
+    "w": "generate",
+    "start": 1.52,
+    "end": 1.9,
+    "whisper_start": 1.52
+   },
+   {
+    "w": "the",
+    "start": 1.995,
+    "end": 2.08,
+    "whisper_start": 1.9
+   },
+   {
+    "w": "reference,",
+    "start": 2.08,
+    "end": 2.56,
+    "whisper_start": 2.08
+   },
+   {
+    "w": "but",
+    "start": 3.105,
+    "end": 3.28,
+    "whisper_start": 2.84
+   },
+   {
+    "w": "explaining",
+    "start": 3.28,
+    "end": 4.0,
+    "whisper_start": 3.28
+   },
+   {
+    "w": "what",
+    "start": 4.0,
+    "end": 4.38,
+    "whisper_start": 4.0
+   },
+   {
+    "w": "to",
+    "start": 4.38,
+    "end": 4.54,
+    "whisper_start": 4.38
+   },
+   {
+    "w": "do",
+    "start": 4.54,
+    "end": 4.82,
+    "whisper_start": 4.54
+   },
+   {
+    "w": "after",
+    "start": 4.82,
+    "end": 5.2,
+    "whisper_start": 4.82
+   },
+   {
+    "w": "a",
+    "start": 5.2,
+    "end": 5.36,
+    "whisper_start": 5.2
+   },
+   {
+    "w": "four",
+    "start": 5.445,
+    "end": 5.52,
+    "whisper_start": 5.36
+   },
+   {
+    "w": "-oh",
+    "start": 5.52,
+    "end": 5.74,
+    "whisper_start": 5.52
+   },
+   {
+    "w": "-nine",
+    "start": 5.74,
+    "end": 6.1,
+    "whisper_start": 5.74
+   },
+   {
+    "w": "is",
+    "start": 6.1,
+    "end": 6.72,
+    "whisper_start": 6.1
+   },
+   {
+    "w": "still",
+    "start": 6.72,
+    "end": 7.12,
+    "whisper_start": 6.72
+   },
+   {
+    "w": "my",
+    "start": 7.12,
+    "end": 7.44,
+    "whisper_start": 7.12
+   },
+   {
+    "w": "job.",
+    "start": 7.44,
+    "end": 7.68,
+    "whisper_start": 7.44
+   }
+  ]
+ },
+ "L3": {
+  "duration": 5.995,
+  "text": "So my reference lists each response the endpoint returns, with its cause and its fix.",
+  "transcript": "So my reference lists each response the endpoint returns, with its cause and its fix.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.065,
+    "end": 0.26,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "my",
+    "start": 0.26,
+    "end": 0.5,
+    "whisper_start": 0.26
+   },
+   {
+    "w": "reference",
+    "start": 0.5,
+    "end": 1.02,
+    "whisper_start": 0.5
+   },
+   {
+    "w": "lists",
+    "start": 1.02,
+    "end": 1.44,
+    "whisper_start": 1.02
+   },
+   {
+    "w": "each",
+    "start": 1.565,
+    "end": 1.74,
+    "whisper_start": 1.44
+   },
+   {
+    "w": "response",
+    "start": 1.74,
+    "end": 2.34,
+    "whisper_start": 1.74
+   },
+   {
+    "w": "the",
+    "start": 2.34,
+    "end": 2.58,
+    "whisper_start": 2.34
+   },
+   {
+    "w": "endpoint",
+    "start": 2.58,
+    "end": 2.98,
+    "whisper_start": 2.58
+   },
+   {
+    "w": "returns,",
+    "start": 2.98,
+    "end": 3.66,
+    "whisper_start": 2.98
+   },
+   {
+    "w": "with",
+    "start": 4.16,
+    "end": 4.3,
+    "whisper_start": 4.04
+   },
+   {
+    "w": "its",
+    "start": 4.3,
+    "end": 4.48,
+    "whisper_start": 4.3
+   },
+   {
+    "w": "cause",
+    "start": 4.48,
+    "end": 4.96,
+    "whisper_start": 4.48
+   },
+   {
+    "w": "and",
+    "start": 5.11,
+    "end": 5.26,
+    "whisper_start": 4.96
+   },
+   {
+    "w": "its",
+    "start": 5.26,
+    "end": 5.44,
+    "whisper_start": 5.26
+   },
+   {
+    "w": "fix.",
+    "start": 5.575,
+    "end": 5.86,
+    "whisper_start": 5.44
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.552,
+  "text": "A four-oh-nine means the idempotency key was reused with a different body, so the fix is a new key.",
+  "transcript": "A four-oh-nine means the idempotency key was reused with a different body, so the fix is a new key.",
+  "words": [
+   {
+    "w": "A",
+    "start": 0.065,
+    "end": 0.22,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "four",
+    "start": 0.22,
+    "end": 0.34,
+    "whisper_start": 0.22
+   },
+   {
+    "w": "-oh",
+    "start": 0.34,
+    "end": 0.56,
+    "whisper_start": 0.34
+   },
+   {
+    "w": "-nine",
+    "start": 0.56,
+    "end": 0.94,
+    "whisper_start": 0.56
+   },
+   {
+    "w": "means",
+    "start": 0.94,
+    "end": 1.48,
+    "whisper_start": 0.94
+   },
+   {
+    "w": "the",
+    "start": 1.48,
+    "end": 2.08,
+    "whisper_start": 1.48
+   },
+   {
+    "w": "idempotency",
+    "start": 2.22,
+    "end": 3.08,
+    "whisper_start": 2.08
+   },
+   {
+    "w": "key",
+    "start": 3.295,
+    "end": 3.38,
+    "whisper_start": 3.08
+   },
+   {
+    "w": "was",
+    "start": 3.38,
+    "end": 3.7,
+    "whisper_start": 3.38
+   },
+   {
+    "w": "reused",
+    "start": 3.7,
+    "end": 4.36,
+    "whisper_start": 3.7
+   },
+   {
+    "w": "with",
+    "start": 4.36,
+    "end": 4.5,
+    "whisper_start": 4.36
+   },
+   {
+    "w": "a",
+    "start": 4.5,
+    "end": 4.64,
+    "whisper_start": 4.5
+   },
+   {
+    "w": "different",
+    "start": 4.64,
+    "end": 4.88,
+    "whisper_start": 4.64
+   },
+   {
+    "w": "body,",
+    "start": 4.88,
+    "end": 5.36,
+    "whisper_start": 4.88
+   },
+   {
+    "w": "so",
+    "start": 5.71,
+    "end": 5.94,
+    "whisper_start": 5.64
+   },
+   {
+    "w": "the",
+    "start": 5.94,
+    "end": 6.3,
+    "whisper_start": 5.94
+   },
+   {
+    "w": "fix",
+    "start": 6.3,
+    "end": 6.64,
+    "whisper_start": 6.3
+   },
+   {
+    "w": "is",
+    "start": 6.64,
+    "end": 6.86,
+    "whisper_start": 6.64
+   },
+   {
+    "w": "a",
+    "start": 6.86,
+    "end": 6.96,
+    "whisper_start": 6.86
+   },
+   {
+    "w": "new",
+    "start": 6.96,
+    "end": 7.14,
+    "whisper_start": 6.96
+   },
+   {
+    "w": "key.",
+    "start": 7.14,
+    "end": 7.42,
+    "whisper_start": 7.14
+   }
+  ]
+ },
+ "L5": {
+  "duration": 8.256,
+  "text": "Then a script sends each documented case to the running service, so a changed status code fails the check before a developer hits it.",
+  "transcript": "Then, a script sends each documented case to the running service, so a changed status code fails the check before a developer hits it.",
+  "words": [
+   {
+    "w": "Then,",
+    "start": 0.075,
+    "end": 0.34,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "a",
+    "start": 1.005,
+    "end": 1.1,
+    "whisper_start": 0.68
+   },
+   {
+    "w": "script",
+    "start": 1.1,
+    "end": 1.42,
+    "whisper_start": 1.1
+   },
+   {
+    "w": "sends",
+    "start": 1.48,
+    "end": 1.84,
+    "whisper_start": 1.42
+   },
+   {
+    "w": "each",
+    "start": 1.94,
+    "end": 2.14,
+    "whisper_start": 1.84
+   },
+   {
+    "w": "documented",
+    "start": 2.14,
+    "end": 2.72,
+    "whisper_start": 2.14
+   },
+   {
+    "w": "case",
+    "start": 2.72,
+    "end": 3.12,
+    "whisper_start": 2.72
+   },
+   {
+    "w": "to",
+    "start": 3.12,
+    "end": 3.34,
+    "whisper_start": 3.12
+   },
+   {
+    "w": "the",
+    "start": 3.34,
+    "end": 3.44,
+    "whisper_start": 3.34
+   },
+   {
+    "w": "running",
+    "start": 3.44,
+    "end": 3.68,
+    "whisper_start": 3.44
+   },
+   {
+    "w": "service,",
+    "start": 3.68,
+    "end": 4.16,
+    "whisper_start": 3.68
+   },
+   {
+    "w": "so",
+    "start": 4.595,
+    "end": 4.8,
+    "whisper_start": 4.34
+   },
+   {
+    "w": "a",
+    "start": 5.015,
+    "end": 5.14,
+    "whisper_start": 4.8
+   },
+   {
+    "w": "changed",
+    "start": 5.14,
+    "end": 5.44,
+    "whisper_start": 5.14
+   },
+   {
+    "w": "status",
+    "start": 5.58,
+    "end": 5.78,
+    "whisper_start": 5.44
+   },
+   {
+    "w": "code",
+    "start": 5.925,
+    "end": 6.1,
+    "whisper_start": 5.78
+   },
+   {
+    "w": "fails",
+    "start": 6.1,
+    "end": 6.46,
+    "whisper_start": 6.1
+   },
+   {
+    "w": "the",
+    "start": 6.46,
+    "end": 6.66,
+    "whisper_start": 6.46
+   },
+   {
+    "w": "check",
+    "start": 6.66,
+    "end": 6.9,
+    "whisper_start": 6.66
+   },
+   {
+    "w": "before",
+    "start": 6.975,
+    "end": 7.26,
+    "whisper_start": 6.9
+   },
+   {
+    "w": "a",
+    "start": 7.26,
+    "end": 7.38,
+    "whisper_start": 7.26
+   },
+   {
+    "w": "developer",
+    "start": 7.38,
+    "end": 7.76,
+    "whisper_start": 7.38
+   },
+   {
+    "w": "hits",
+    "start": 7.76,
+    "end": 8.06,
+    "whisper_start": 7.76
+   },
+   {
+    "w": "it.",
+    "start": 8.06,
+    "end": 8.22,
+    "whisper_start": 8.06
+   }
+  ]
+ }
+}

@@ -6,7 +6,7 @@ Usage:
 
 Reads (never writes) the video repo:
   out/<slug>.mp4, out/<slug>-poster.png       the delivered film and its poster
-  films/<slug>/script.md                       "### Full text" becomes the transcript
+  films/<slug>/script.md                       "## Full text" or "### Full text" becomes the transcript
   films/<slug>/timeline.json                   voice.lines start frames -> line_offsets
   films/<slug>/assets/voice/words.json         word timings for the captions
   films/<slug>/assets/voice/L*.wav, mix.wav    used only to prove the render is current
@@ -148,9 +148,9 @@ def main() -> int:
         if score < MIN_MATCH:
             raise SystemExit(f"stale render: {line}.wav does not match the delivered mix ({score:.2f} < {MIN_MATCH})")
 
-    full = re.search(r"### Full text[^\n]*\n\s*\n(.+?)\n", script.read_text(encoding="utf-8"))
+    full = re.search(r"#{2,3} Full text[^\n]*\n\s*\n(.+?)\n", script.read_text(encoding="utf-8"))
     if not full:
-        raise SystemExit(f"{script} has no '### Full text' paragraph")
+        raise SystemExit(f"{script} has no 'Full text' paragraph")
     transcript = full.group(1).strip()
     # Each line's written text when the voice spelled something out ("Claude dot MD"),
     # otherwise the words it said.

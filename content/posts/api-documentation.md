@@ -10,6 +10,7 @@ takeaways:
 - Check the reference against the running service, so a changed status code fails before a developer hits it.
 title: 'API Documentation: What to Include, With a Tested Reference Example'
 work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for APIs, checking each documented request and response against the service it describes.'
+video: api-documentation
 ---
 
 The [OpenAPI Specification](https://spec.openapis.org/oas/latest.html) describes an HTTP API's paths, operations, parameters, request bodies and responses, so a generator can turn one OpenAPI file into a reference page for each endpoint. Those pages still leave two jobs to a writer: choosing the request a new developer should send first, and explaining what to do after a 409.

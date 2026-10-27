@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/api-documentation/, imported by tools/import_video.py from
+# ninadpathak-video films/api-documentation (render of 2026-10-28T02:52:13+05:30).
+name: API documentation in 40 seconds
+description: How API documentation splits into pages with one job each, why a reference lists every response with its cause and fix, and how a script checks those responses against the running service.
+upload_date: '2026-10-28T02:52:13+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: api-documentation.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 7.4
+  L3: 15.4
+  L4: 21.5
+  L5: 29.167
+transcript: Okay, so I treat API documentation as pages with one job each, from the quickstart to the error guide. An OpenAPI file can generate the reference, but explaining what to do after a four-oh-nine is still my job. So my reference lists each response the endpoint returns, with its cause and its fix. A four-oh-nine means the idempotency key was reused with a different body, so the fix is a new key. Then a script sends each documented case to the running service, so a changed status code fails the check before a developer hits it.
