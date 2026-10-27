@@ -164,14 +164,14 @@
     <div class="prose-container">
       {% if post.video %}
       <figure class="np-figure">
-        <video controls preload="none" playsinline width="{{ post.video.width }}" height="{{ post.video.height }}" poster="{{ post.video.poster }}" aria-describedby="video-transcript-{{ post.video.slug }}">
-          <source src="{{ post.video.src }}" type="video/mp4">
-          <track kind="captions" src="{{ post.video.captions }}" srclang="en" label="English">
+        <video controls preload="none" playsinline width="{{ post.video.width }}" height="{{ post.video.height }}" poster="{{ post.video.poster | e }}" aria-describedby="video-transcript-{{ post.video.slug }}">
+          <source src="{{ post.video.src | e }}" type="video/mp4">
+          <track kind="captions" src="{{ post.video.captions | e }}" srclang="en" label="English">
         </video>
         <figcaption>
           <details id="video-transcript-{{ post.video.slug }}">
             <summary>Transcript</summary>
-            <p>{{ post.video.transcript }}</p>
+            <p>{{ post.video.transcript | e }}</p>
           </details>
         </figcaption>
       </figure>

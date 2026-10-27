@@ -61,6 +61,32 @@ VIDEO_FIELDS = ("name", "description", "upload_date", "duration_seconds", "width
                 "file", "poster", "captions", "transcript")
 
 
+VTT_TIMING = re.compile(r"^(\d{2,}):(\d{2}):(\d{2})\.(\d{3}) --> (\d{2,}):(\d{2}):(\d{2})\.(\d{3})(?:\s.*)?$")
+
+
+def check_captions(slug: str, text: str, duration: int) -> None:
+    """Require a WebVTT file with at least one cue, every cue non-negative, ending
+    after it starts, in start order, and inside the video's duration."""
+    lines = text.splitlines()
+    if not lines or not lines[0].startswith("WEBVTT"):
+        raise ValueError(f"video {slug!r}: captions are not a WebVTT file")
+    previous = -1.0
+    cues = 0
+    for line in lines:
+        match = VTT_TIMING.match(line.strip())
+        if not match:
+            continue
+        h1, m1, s1, ms1, h2, m2, s2, ms2 = (int(part) for part in match.groups())
+        start = h1 * 3600 + m1 * 60 + s1 + ms1 / 1000
+        end = h2 * 3600 + m2 * 60 + s2 + ms2 / 1000
+        if start < 0 or end <= start or start < previous or end > duration:
+            raise ValueError(f"video {slug!r}: captions cue {line.strip()!r} is out of order or outside 0 to {duration}s")
+        previous = start
+        cues += 1
+    if not cues:
+        raise ValueError(f"video {slug!r}: captions have no timed cues")
+
+
 def load_video(slug):
     """Resolve an article's `video:` frontmatter to the player and VideoObject data.
 
@@ -80,22 +106,40 @@ def load_video(slug):
     if missing:
         raise ValueError(f"{meta_path.relative_to(ROOT)} is missing {', '.join(missing)}")
     base = f"/static/videos/{slug}"
+    folder = (ROOT / "static" / "videos" / slug).resolve()
     for field in ("file", "poster", "captions"):
-        if not (ROOT / "static" / "videos" / slug / meta[field]).is_file():
-            raise ValueError(f"video {slug!r}: static/videos/{slug}/{meta[field]} does not exist")
+        name = meta[field]
+        # A bare file name only: no directories, no absolute paths, nothing that
+        # resolves (through a symlink or otherwise) outside static/videos/<slug>/.
+        if not isinstance(name, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", name) or ".." in name:
+            raise ValueError(f"video {slug!r}: {field} must be a file name inside static/videos/{slug}/, got {name!r}")
+        path = ROOT / "static" / "videos" / slug / name
+        if path.is_symlink() or not path.is_file() or path.resolve().parent != folder:
+            raise ValueError(f"video {slug!r}: static/videos/{slug}/{name} must be a regular file in that folder")
+    for field in ("width", "height", "duration_seconds"):
+        value = meta[field]
+        if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+            raise ValueError(f"video {slug!r}: {field} must be a positive integer, got {value!r}")
+    upload = meta["upload_date"]
+    upload_text = upload.isoformat() if isinstance(upload, datetime) else str(upload)
+    try:
+        parsed_upload = datetime.fromisoformat(upload_text)
+    except ValueError:
+        parsed_upload = None
+    if parsed_upload is None or "T" not in upload_text or parsed_upload.tzinfo is None:
+        raise ValueError(f"video {slug!r}: upload_date must be an ISO 8601 date and time with a zone, got {upload_text!r}")
     captions = (ROOT / "static" / "videos" / slug / meta["captions"]).read_text(encoding="utf-8")
-    if not captions.startswith("WEBVTT"):
-        raise ValueError(f"video {slug!r}: {meta['captions']} is not a WebVTT file")
-    seconds = int(meta["duration_seconds"])
+    check_captions(slug, captions, meta["duration_seconds"])
+    seconds = meta["duration_seconds"]
     minutes, secs = divmod(seconds, 60)
     return {
         "slug": slug,
         "name": meta["name"],
         "description": meta["description"],
-        "upload_date": str(meta["upload_date"]),
+        "upload_date": upload_text,
         "duration_iso": f"PT{minutes}M{secs}S" if minutes else f"PT{secs}S",
-        "width": int(meta["width"]),
-        "height": int(meta["height"]),
+        "width": meta["width"],
+        "height": meta["height"],
         "src": f"{base}/{meta['file']}",
         "poster": f"{base}/{meta['poster']}",
         "captions": f"{base}/{meta['captions']}",
