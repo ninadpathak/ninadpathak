@@ -28,13 +28,13 @@ uv add "mcp[cli]==2.3.0"
 
 With uv 0.12.7, a plain `uv init docs-search` creates a packaged `src/` layout. `--bare` writes only `pyproject.toml`, which is all a single-file server needs.
 
-Add a small docs folder to search, and a file outside it that the server must never read:
+Add a small docs folder to search, and a Markdown file outside it that the server must never read. The sentinel ends in `.md` on purpose, so only the folder check can refuse it:
 
 ```bash
 mkdir -p docs/guides
 printf '# Quickstart\n\nInstall the CLI with `npm install -g acme-cli`.\nThen run `acme login` to store an API key.\n\n## Rate limits\n\nThe API allows 100 requests per minute per key.\n' > docs/guides/quickstart.md
 printf '# Errors\n\nA 429 response means you hit the rate limit. Wait and retry.\n' > docs/guides/errors.md
-echo "SECRET=do-not-read" > .env.secret
+printf '# Private\n\nSECRET=do-not-read\n' > private.md
 ```
 
 ## How to write the server's tools
@@ -112,7 +112,7 @@ A refused path raises `ToolError` on purpose. SDK 2.3.0 sends a `ToolError` mess
 
 Resolve the path first, then check that the resolved location sits under the folder, because a tool's arguments come from the model and arrive as untrusted strings. `inside_docs()` calls `resolve()` before comparing, which collapses `..` segments and follows symlinks, then checks that the real location sits under `DOCS_DIR`.
 
-Checking the raw string would miss both. `guides/../../.env.secret` contains no suspicious prefix, and a symlink named `leak.md` inside `docs/` looks like any other Markdown file until it's resolved.
+Checking the raw string would miss both. `guides/../../private.md` contains no suspicious prefix, and a symlink named `leak.md` inside `docs/` looks like any other Markdown file until it's resolved.
 
 ## How to test an MCP server without a model
 
@@ -142,7 +142,7 @@ async def check(client: Client) -> None:
     page = await client.call_tool("read_doc", {"path": "guides/errors.md"})
     assert not page.is_error and "3: A 429 response" in page.content[0].text, page
 
-    for escape in ["../.env.secret", "/etc/passwd", "guides/../../.env.secret", "leak.md"]:
+    for escape in ["../private.md", "/etc/passwd", "guides/../../private.md", "leak.md"]:
         result = await client.call_tool("read_doc", {"path": escape})
         assert result.is_error, (escape, result)
         assert "do-not-read" not in str(result), (escape, result)
@@ -155,7 +155,7 @@ async def check(client: Client) -> None:
 async def main() -> None:
     leak = DOCS_DIR / "leak.md"
     leak.unlink(missing_ok=True)
-    leak.symlink_to(Path("..") / ".env.secret")
+    leak.symlink_to(Path("..") / "private.md")
     try:
         async with Client(mcp) as client:
             await check(client)
@@ -181,7 +181,9 @@ uv run python test_server.py
 
 If an assertion fails, the traceback names the escape path or the search that broke. The server also logs each refused path at INFO level on stderr, so those lines are expected in the output.
 
-The test catches the bugs it is there for. With the `is_relative_to` check removed, `../.env.secret` came back with the secret in it, and with `os.path.abspath` in place of `resolve()`, the `leak.md` symlink did.
+The test catches the bugs it is there for. With the `is_relative_to` check removed, `read_doc` returned `../private.md` with the secret in it, and with `os.path.abspath` in place of `resolve()`, the `leak.md` symlink did.
+
+A sentinel without the `.md` suffix would hide the first bug, because the suffix check refuses it before the folder check matters.
 
 ## How to inspect an MCP server from the command line
 
