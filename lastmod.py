@@ -24,9 +24,15 @@ today's date when they carry uncommitted edits, which is the normal case when it
 run just before a commit.
 
 A page's sources are its post file, its figure sources in content/diagrams/<slug>/,
-and, when it declares a video, content/videos/<video>/ and static/videos/<video>/.
-Share-card sources (og.mmd) and rendered images are left out: a restyle of every
-card is not a change to what any article says.
+every interactive visual it embeds from static/visuals/, and, when it declares a
+video, content/videos/<video>/ and static/videos/<video>/. Share-card sources
+(og.mmd) and rendered images are left out: a restyle of every card is not a change
+to what any article says.
+
+The hash covers what the files say, not where they live, so a pure rename leaves an
+entry untouched. A rename that changes the slug moves the old entry's date to the
+new slug when the content is identical. Without both, the "refresh before commit"
+workflow saw renamed files as uncommitted changes and dated them today.
 """
 from __future__ import annotations
 
@@ -34,6 +40,7 @@ import argparse
 import datetime as dt
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -56,12 +63,22 @@ def ignored(path: Path) -> bool:
     return path.name == ".DS_Store" or path.stem == "og" or path.stem.startswith("og.")
 
 
+VISUAL_REF = re.compile(r"/static/visuals/([A-Za-z0-9_-]+)(?:\.html)?(?![A-Za-z0-9_.-])")
+
+
+def embedded_visuals(post_path: Path) -> list[Path]:
+    """The static/visuals/*.html files a post embeds, in .html or extensionless form."""
+    text = post_path.read_text(encoding="utf-8")
+    found = (Path("static/visuals") / f"{name}.html" for name in VISUAL_REF.findall(text))
+    return [path for path in found if path.is_file()]
+
+
 def source_paths(post_path: Path, slug: str, video) -> list[Path]:
     """Every file whose change counts as a change to the page, sorted."""
     roots = [Path("content/diagrams") / slug]
     if video:
         roots += [Path("content/videos") / str(video), Path("static/videos") / str(video)]
-    files = [post_path]
+    files = [post_path, *embedded_visuals(post_path)]
     for root in roots:
         if root.is_dir():
             files.extend(p for p in root.rglob("*") if p.is_file() and not ignored(p))
@@ -69,12 +86,10 @@ def source_paths(post_path: Path, slug: str, video) -> list[Path]:
 
 
 def sources_hash(paths: list[Path]) -> str:
-    digest = hashlib.sha256()
-    for path in paths:
-        digest.update(path.as_posix().encode("utf-8") + b"\0")
-        digest.update(path.read_bytes())
-        digest.update(b"\0")
-    return digest.hexdigest()
+    """A hash of the files' contents only. Paths are left out on purpose: moving or
+    renaming a file is not a change to what the page says."""
+    contents = sorted(hashlib.sha256(path.read_bytes()).hexdigest() for path in paths)
+    return hashlib.sha256("\n".join(contents).encode("ascii")).hexdigest()
 
 
 def discover() -> dict[str, list[Path]]:
@@ -145,13 +160,19 @@ def refresh(manifest: dict, pages: dict, reseed: bool, today: str) -> tuple[dict
     if is_shallow():
         sys.exit("lastmod.py needs full git history: run `git fetch --unshallow` first")
     updated, changed = {}, []
+    # Entries whose slug no longer exists, by content hash: a post renamed to a new
+    # slug with nothing else changed takes its old date with it.
+    orphans = {entry.get("sources"): entry for slug, entry in manifest.items() if slug not in pages}
     for slug, paths in pages.items():
         digest = sources_hash(paths)
         entry = manifest.get(slug)
         if entry and entry.get("sources") == digest and not reseed:
             updated[slug] = entry
             continue
-        new = {"lastmod": date_for(paths, today), "sources": digest}
+        if entry is None and digest in orphans and not reseed:
+            new = dict(orphans[digest])
+        else:
+            new = {"lastmod": date_for(paths, today), "sources": digest}
         if new != entry:
             changed.append(f"{slug}: {entry and entry.get('lastmod')} -> {new['lastmod']}")
         updated[slug] = new

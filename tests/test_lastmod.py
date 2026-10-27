@@ -121,6 +121,69 @@ class GitDatingTests(unittest.TestCase):
             "2026-10-20")
 
 
+class RefreshWorkflowTests(unittest.TestCase):
+    """The documented workflow: edit, run `lastmod.py`, commit. Codex reproduced a
+    pure rename made this way being dated today, because the refresh saw dirty files
+    and never reached the history code that skips renames."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.repo = pathlib.Path(self.tmp.name)
+        self.old_root = lastmod.ROOT
+        lastmod.ROOT = self.repo
+        self.addCleanup(setattr, lastmod, "ROOT", self.old_root)
+        self.cwd = os.getcwd()
+        os.chdir(self.repo)
+        self.addCleanup(os.chdir, self.cwd)
+        git(self.repo, "init", "-q")
+        pathlib.Path("content/posts").mkdir(parents=True)
+        pathlib.Path("content/diagrams/demo").mkdir(parents=True)
+        pathlib.Path("static/visuals").mkdir(parents=True)
+        pathlib.Path("content/posts/demo.md").write_text(
+            '---\ntitle: Demo\nslug: demo\n---\n<iframe src="/static/visuals/demo-chart.html"></iframe>\n')
+        pathlib.Path("content/posts/stemmed.md").write_text("---\ntitle: Stem\n---\nBody\n")
+        pathlib.Path("content/diagrams/demo/figure.mmd").write_text("graph LR\n")
+        pathlib.Path("static/visuals/demo-chart.html").write_text("<p>v1</p>\n")
+        git(self.repo, "add", "-A")
+        git(self.repo, "commit", "-qm", "add", date="2026-05-01T10:00:00+05:30")
+        self.manifest = self.refresh({})
+
+    def refresh(self, manifest):
+        updated, _ = lastmod.refresh(manifest, lastmod.discover(), False, "2026-11-02")
+        return updated
+
+    def test_an_uncommitted_pure_rename_keeps_the_date(self):
+        git(self.repo, "mv", "content/posts/demo.md", "content/posts/renamed-file.md")
+        git(self.repo, "mv", "content/diagrams/demo/figure.mmd", "content/diagrams/demo/figure-v2.mmd")
+        self.assertEqual(self.refresh(self.manifest)["demo"]["lastmod"], "2026-05-01")
+
+    def test_a_rename_that_changes_the_slug_keeps_the_date(self):
+        git(self.repo, "mv", "content/posts/stemmed.md", "content/posts/new-stem.md")
+        updated = self.refresh(self.manifest)
+        self.assertNotIn("stemmed", updated)
+        self.assertEqual(updated["new-stem"]["lastmod"], "2026-05-01")
+
+    def test_an_uncommitted_edit_is_dated_today(self):
+        pathlib.Path("content/posts/demo.md").write_text(
+            '---\ntitle: Demo\nslug: demo\n---\nChanged <iframe src="/static/visuals/demo-chart.html"></iframe>\n')
+        self.assertEqual(self.refresh(self.manifest)["demo"]["lastmod"], "2026-11-02")
+
+    def test_an_embedded_visual_counts_as_a_source(self):
+        names = [p.as_posix() for p in lastmod.source_paths(
+            pathlib.Path("content/posts/demo.md"), "demo", None)]
+        self.assertIn("static/visuals/demo-chart.html", names)
+
+    def test_a_visual_edit_moves_the_date(self):
+        pathlib.Path("static/visuals/demo-chart.html").write_text("<p>v2</p>\n")
+        updated = self.refresh(self.manifest)
+        self.assertEqual(updated["demo"]["lastmod"], "2026-11-02")
+        git(self.repo, "commit", "-qam", "visual", date="2026-10-30T09:00:00+05:30")
+        self.assertEqual(lastmod.stale_entries(updated, lastmod.discover()), [])
+        reseeded, _ = lastmod.refresh({}, lastmod.discover(), True, "2026-11-02")
+        self.assertEqual(reseeded["demo"]["lastmod"], "2026-10-30")
+
+
 class ResolveUpdatedTests(unittest.TestCase):
     """The build trusts a manifest entry only while its sources hash matches."""
 
