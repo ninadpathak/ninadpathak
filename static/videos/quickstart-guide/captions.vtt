@@ -1,0 +1,45 @@
+WEBVTT
+
+1
+00:00:00.155 --> 00:00:06.155
+Okay, so a quick start guide gets one reader to one working result by the shortest supported path.
+
+2
+00:00:06.155 --> 00:00:09.680
+So I list each tool's minimum version first,
+
+3
+00:00:09.680 --> 00:00:13.693
+because an old version breaks step one with nothing pointing at the cause.
+
+4
+00:00:13.693 --> 00:00:17.233
+Then each command gets its exact output beside it,
+
+5
+00:00:17.303 --> 00:00:21.222
+so the reader can tell within one step whether they're on track.
+
+6
+00:00:21.222 --> 00:00:23.027
+In my GitHub example,
+
+7
+00:00:23.147 --> 00:00:25.142
+curl needs fail-with-body,
+
+8
+00:00:25.142 --> 00:00:28.787
+because without it a four-oh-four still exits zero,
+
+9
+00:00:28.887 --> 00:00:30.583
+and jq prints null.
+
+10
+00:00:30.583 --> 00:00:32.373
+And before I publish,
+
+11
+00:00:32.578 --> 00:00:37.453
+I run every command in a fresh directory and compare its output with the page.

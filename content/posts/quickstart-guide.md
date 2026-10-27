@@ -10,6 +10,7 @@ takeaways:
 - Run every command in a fresh directory before publishing, and compare the output with the page.
 title: 'Quick Start Guide Template: Write a Quickstart Developers Can Run'
 work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for developer products, starting with the quickstart that takes a new reader to a first working request.'
+video: quickstart-guide
 ---
 
 GitHub's [REST API quickstart](https://docs.github.com/en/rest/quickstart) offers paths for GitHub CLI, `curl` and JavaScript, and its CLI path starts by installing the CLI and signing in. I've kept the example on this page to one public request that needs no account, with the requirements listed before the first command.

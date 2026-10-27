@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/quickstart-guide/, imported by tools/import_video.py from
+# ninadpathak-video films/quickstart-guide (render of 2026-10-28T03:53:05+05:30).
+name: A quick start guide in 40 seconds
+description: 'How a quick start guide gets one reader to one working result: tool versions first, exact output beside each command, and a fresh-directory run of every command before publishing.'
+upload_date: '2026-10-28T03:53:05+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: quickstart-guide.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 6.1
+  L3: 13.633
+  L4: 21.167
+  L5: 30.533
+transcript: Okay, so a quick start guide gets one reader to one working result by the shortest supported path. So I list each tool's minimum version first, because an old version breaks step one with nothing pointing at the cause. Then each command gets its exact output beside it, so the reader can tell within one step whether they're on track. In my GitHub example, curl needs fail-with-body, because without it a four-oh-four still exits zero, and jq prints null. And before I publish, I run every command in a fresh directory and compare its output with the page.
