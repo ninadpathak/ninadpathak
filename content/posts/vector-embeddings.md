@@ -135,9 +135,7 @@ The most significant innovation in embedding geometry recently is [Matryoshka Re
 The vector acts like a Russian nesting doll.
 
 <div class="visual-wrapper">
-    <div class="visual-title">
-        <span>//</span> Matryoshka: Dimensionality vs. Precision
-    </div>
+    <div class="visual-title">Matryoshka: keep the head of the vector</div>
     <div class="visual-container visual-container--tall">
         <iframe src="/static/visuals/matryoshka-truncation.html" title="Interactive Matryoshka truncation: choose how many leading dimensions to keep" loading="lazy"></iframe>
     </div>
