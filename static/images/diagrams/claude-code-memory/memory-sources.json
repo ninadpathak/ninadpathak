@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/claude-code-memory/memory-sources.mmd",
-  "hash": "6b43a1097acd555d",
+  "hash": "f3cbff382b97ae45",
   "pele": "1.8.0",
   "width": 720,
   "height": 416,
@@ -12,13 +12,13 @@
   "narrow": {
     "rel": "/static/images/diagrams/claude-code-memory/memory-sources.narrow",
     "width": 288,
-    "height": 584,
+    "height": 472,
     "minText": {
       "sans": 13,
-      "mono": 11
+      "mono": 9.5
     }
   },
   "alt": "Three sources feed a Claude Code session's context. CLAUDE.md files, written and maintained by you, load at startup across managed, user, project, and local scopes. Auto memory, MEMORY.md plus topic files that Claude Code writes as it works, also loads at startup and is updated from the session. One-off context passed on the command line lasts only for that session.",
   "caption": "CLAUDE.md loads at startup and isn't re-read mid-session, so an edit takes effect in the next session.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/claude-code-memory/memory-sources.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/claude-code-memory/memory-sources.narrow.svg\" width=\"288\" height=\"584\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/claude-code-memory/memory-sources.svg\" width=\"720\" height=\"416\" alt=\"Three sources feed a Claude Code session's context. CLAUDE.md files, written and maintained by you, load at startup across managed, user, project, and local scopes. Auto memory, MEMORY.md plus topic files that Claude Code writes as it works, also loads at startup and is updated from the session. One-off context passed on the command line lasts only for that session.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>CLAUDE.md loads at startup and isn't re-read mid-session, so an edit takes effect in the next session.</figcaption>\n</figure>"
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/claude-code-memory/memory-sources.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/claude-code-memory/memory-sources.narrow.svg\" width=\"288\" height=\"472\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/claude-code-memory/memory-sources.svg\" width=\"720\" height=\"416\" alt=\"Three sources feed a Claude Code session's context. CLAUDE.md files, written and maintained by you, load at startup across managed, user, project, and local scopes. Auto memory, MEMORY.md plus topic files that Claude Code writes as it works, also loads at startup and is updated from the session. One-off context passed on the command line lasts only for that session.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>CLAUDE.md loads at startup and isn't re-read mid-session, so an edit takes effect in the next session.</figcaption>\n</figure>"
 }
