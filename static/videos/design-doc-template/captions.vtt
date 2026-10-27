@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.140 --> 00:00:07.055
+Okay, so a design doc template is a fixed outline for proposing a change before I build it,
+
+2
+00:00:07.055 --> 00:00:10.478
+so reviewers can compare it with the options I rejected.
+
+3
+00:00:10.478 --> 00:00:12.433
+It first states the problem,
+
+4
+00:00:12.858 --> 00:00:16.253
+like an export service whose records live in memory,
+
+5
+00:00:16.263 --> 00:00:18.493
+so a restart erases them.
+
+6
+00:00:18.507 --> 00:00:21.567
+Every alternative needs a reason it was rejected,
+
+7
+00:00:21.662 --> 00:00:23.647
+and the first is doing nothing,
+
+8
+00:00:23.777 --> 00:00:26.267
+because if I can't say what that costs,
+
+9
+00:00:26.462 --> 00:00:29.407
+reviewers can't weigh my proposal against it.
+
+10
+00:00:29.407 --> 00:00:31.347
+So before review,
+
+11
+00:00:31.642 --> 00:00:33.162
+I run the checker,
+
+12
+00:00:33.162 --> 00:00:37.507
+which fails a doc marked Accepted that still lists an open question.

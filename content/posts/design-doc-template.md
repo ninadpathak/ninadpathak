@@ -10,6 +10,7 @@ takeaways:
 - Run the checker before review, so a doc marked Accepted with open questions fails.
 title: 'Design Doc Template: Sections, a Filled Example and a Review Check'
 work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for engineering teams, including the design docs that record why a system was built the way it was.'
+video: design-doc-template
 ---
 
 Under "Rationale and alternatives", the [Rust RFC template](https://github.com/rust-lang/rfcs/blob/master/0000-template.md) asks "What is the impact of not doing this?" The [Kubernetes KEP template](https://github.com/kubernetes/enhancements/blob/master/keps/NNNN-kep-template/README.md) gives Non-Goals its own heading next to Goals, and Alternatives a section of its own.

@@ -1,0 +1,604 @@
+{
+ "L1": {
+  "duration": 10.112,
+  "text": "Okay, so a design doc template is a fixed outline for proposing a change before I build it, so reviewers can compare it with the options I rejected.",
+  "transcript": "Okay, so a design doc template is a fixed outline for proposing a change before I build it, so reviewers can compare it with the options I rejected.",
+  "voiced_db": -23.5,
+  "words": [
+   {
+    "w": "Okay,",
+    "start": 0.04,
+    "end": 0.38,
+    "whisper": 0.0
+   },
+   {
+    "w": "so",
+    "start": 0.85,
+    "end": 1.14,
+    "whisper": 0.98
+   },
+   {
+    "w": "a",
+    "start": 1.765,
+    "end": 1.86,
+    "whisper": 1.14
+   },
+   {
+    "w": "design",
+    "start": 1.86,
+    "end": 2.32,
+    "whisper": 1.86
+   },
+   {
+    "w": "doc",
+    "start": 2.315,
+    "end": 2.64,
+    "whisper": 2.32
+   },
+   {
+    "w": "template",
+    "start": 2.73,
+    "end": 3.06,
+    "whisper": 2.64
+   },
+   {
+    "w": "is",
+    "start": 3.06,
+    "end": 3.28,
+    "whisper": 3.06
+   },
+   {
+    "w": "a",
+    "start": 3.28,
+    "end": 3.4,
+    "whisper": 3.28
+   },
+   {
+    "w": "fixed",
+    "start": 3.515,
+    "end": 3.74,
+    "whisper": 3.4
+   },
+   {
+    "w": "outline",
+    "start": 3.845,
+    "end": 4.24,
+    "whisper": 3.74
+   },
+   {
+    "w": "for",
+    "start": 4.24,
+    "end": 4.58,
+    "whisper": 4.24
+   },
+   {
+    "w": "proposing",
+    "start": 4.64,
+    "end": 5.08,
+    "whisper": 4.58
+   },
+   {
+    "w": "a",
+    "start": 5.08,
+    "end": 5.26,
+    "whisper": 5.08
+   },
+   {
+    "w": "change",
+    "start": 5.275,
+    "end": 5.54,
+    "whisper": 5.26
+   },
+   {
+    "w": "before",
+    "start": 5.54,
+    "end": 5.94,
+    "whisper": 5.54
+   },
+   {
+    "w": "I",
+    "start": 5.915,
+    "end": 6.16,
+    "whisper": 5.94
+   },
+   {
+    "w": "build",
+    "start": 6.16,
+    "end": 6.46,
+    "whisper": 6.16
+   },
+   {
+    "w": "it,",
+    "start": 6.495,
+    "end": 6.68,
+    "whisper": 6.46
+   },
+   {
+    "w": "so",
+    "start": 6.955,
+    "end": 7.12,
+    "whisper": 6.84
+   },
+   {
+    "w": "reviewers",
+    "start": 7.12,
+    "end": 7.6,
+    "whisper": 7.12
+   },
+   {
+    "w": "can",
+    "start": 7.6,
+    "end": 7.86,
+    "whisper": 7.6
+   },
+   {
+    "w": "compare",
+    "start": 7.86,
+    "end": 8.26,
+    "whisper": 7.86
+   },
+   {
+    "w": "it",
+    "start": 8.26,
+    "end": 8.44,
+    "whisper": 8.26
+   },
+   {
+    "w": "with",
+    "start": 8.445,
+    "end": 8.58,
+    "whisper": 8.44
+   },
+   {
+    "w": "the",
+    "start": 8.62,
+    "end": 8.72,
+    "whisper": 8.58
+   },
+   {
+    "w": "options",
+    "start": 8.76,
+    "end": 9.24,
+    "whisper": 8.72
+   },
+   {
+    "w": "I",
+    "start": 9.24,
+    "end": 9.58,
+    "whisper": 9.24
+   },
+   {
+    "w": "rejected.",
+    "start": 9.58,
+    "end": 10.02,
+    "whisper": 9.58
+   }
+  ]
+ },
+ "L2": {
+  "duration": 7.829,
+  "text": "It first states the problem, like an export service whose records live in memory, so a restart erases them.",
+  "transcript": "It first states the problem, like an export service whose records live in memory, so a restart erases them.",
+  "voiced_db": -23.5,
+  "words": [
+   {
+    "w": "It",
+    "start": 0.045,
+    "end": 0.24,
+    "whisper": 0.0
+   },
+   {
+    "w": "first",
+    "start": 0.41,
+    "end": 0.6,
+    "whisper": 0.24
+   },
+   {
+    "w": "states",
+    "start": 0.6,
+    "end": 0.9,
+    "whisper": 0.6
+   },
+   {
+    "w": "the",
+    "start": 0.9,
+    "end": 1.1,
+    "whisper": 0.9
+   },
+   {
+    "w": "problem,",
+    "start": 1.135,
+    "end": 1.6,
+    "whisper": 1.1
+   },
+   {
+    "w": "like",
+    "start": 2.425,
+    "end": 2.7,
+    "whisper": 2.22
+   },
+   {
+    "w": "an",
+    "start": 2.705,
+    "end": 2.84,
+    "whisper": 2.7
+   },
+   {
+    "w": "export",
+    "start": 2.84,
+    "end": 3.36,
+    "whisper": 2.84
+   },
+   {
+    "w": "service",
+    "start": 3.36,
+    "end": 3.86,
+    "whisper": 3.36
+   },
+   {
+    "w": "whose",
+    "start": 3.86,
+    "end": 4.1,
+    "whisper": 3.86
+   },
+   {
+    "w": "records",
+    "start": 4.095,
+    "end": 4.56,
+    "whisper": 4.1
+   },
+   {
+    "w": "live",
+    "start": 4.555,
+    "end": 4.86,
+    "whisper": 4.56
+   },
+   {
+    "w": "in",
+    "start": 4.86,
+    "end": 4.98,
+    "whisper": 4.86
+   },
+   {
+    "w": "memory,",
+    "start": 4.98,
+    "end": 5.42,
+    "whisper": 4.98
+   },
+   {
+    "w": "so",
+    "start": 5.83,
+    "end": 6.0,
+    "whisper": 5.7
+   },
+   {
+    "w": "a",
+    "start": 6.0,
+    "end": 6.2,
+    "whisper": 6.0
+   },
+   {
+    "w": "restart",
+    "start": 6.2,
+    "end": 6.62,
+    "whisper": 6.2
+   },
+   {
+    "w": "erases",
+    "start": 6.88,
+    "end": 7.4,
+    "whisper": 6.62
+   },
+   {
+    "w": "them.",
+    "start": 7.4,
+    "end": 7.66,
+    "whisper": 7.4
+   }
+  ]
+ },
+ "L3": {
+  "duration": 10.667,
+  "text": "Every alternative needs a reason it was rejected, and the first is doing nothing, because if I can't say what that costs, reviewers can't weigh my proposal against it.",
+  "transcript": "Every alternative needs a reason it was rejected, and the first is doing nothing, because if I can't say what that costs, reviewers can't weigh my proposal against it.",
+  "voiced_db": -23.5,
+  "words": [
+   {
+    "w": "Every",
+    "start": 0.04,
+    "end": 0.36,
+    "whisper": 0.0
+   },
+   {
+    "w": "alternative",
+    "start": 0.36,
+    "end": 0.92,
+    "whisper": 0.36
+   },
+   {
+    "w": "needs",
+    "start": 0.92,
+    "end": 1.38,
+    "whisper": 0.92
+   },
+   {
+    "w": "a",
+    "start": 1.38,
+    "end": 1.58,
+    "whisper": 1.38
+   },
+   {
+    "w": "reason",
+    "start": 1.58,
+    "end": 1.84,
+    "whisper": 1.58
+   },
+   {
+    "w": "it",
+    "start": 1.84,
+    "end": 2.0,
+    "whisper": 1.84
+   },
+   {
+    "w": "was",
+    "start": 2.0,
+    "end": 2.14,
+    "whisper": 2.0
+   },
+   {
+    "w": "rejected,",
+    "start": 2.14,
+    "end": 2.7,
+    "whisper": 2.14
+   },
+   {
+    "w": "and",
+    "start": 3.195,
+    "end": 3.32,
+    "whisper": 3.1
+   },
+   {
+    "w": "the",
+    "start": 3.32,
+    "end": 3.46,
+    "whisper": 3.32
+   },
+   {
+    "w": "first",
+    "start": 3.46,
+    "end": 3.78,
+    "whisper": 3.46
+   },
+   {
+    "w": "is",
+    "start": 3.78,
+    "end": 4.06,
+    "whisper": 3.78
+   },
+   {
+    "w": "doing",
+    "start": 4.055,
+    "end": 4.3,
+    "whisper": 4.06
+   },
+   {
+    "w": "nothing,",
+    "start": 4.3,
+    "end": 4.78,
+    "whisper": 4.3
+   },
+   {
+    "w": "because",
+    "start": 5.31,
+    "end": 5.54,
+    "whisper": 5.12
+   },
+   {
+    "w": "if",
+    "start": 5.54,
+    "end": 5.74,
+    "whisper": 5.54
+   },
+   {
+    "w": "I",
+    "start": 5.74,
+    "end": 5.9,
+    "whisper": 5.74
+   },
+   {
+    "w": "can't",
+    "start": 5.9,
+    "end": 6.22,
+    "whisper": 5.9
+   },
+   {
+    "w": "say",
+    "start": 6.22,
+    "end": 6.48,
+    "whisper": 6.22
+   },
+   {
+    "w": "what",
+    "start": 6.48,
+    "end": 6.64,
+    "whisper": 6.48
+   },
+   {
+    "w": "that",
+    "start": 6.68,
+    "end": 6.86,
+    "whisper": 6.64
+   },
+   {
+    "w": "costs,",
+    "start": 6.965,
+    "end": 7.4,
+    "whisper": 6.86
+   },
+   {
+    "w": "reviewers",
+    "start": 7.995,
+    "end": 8.48,
+    "whisper": 7.86
+   },
+   {
+    "w": "can't",
+    "start": 8.48,
+    "end": 8.86,
+    "whisper": 8.48
+   },
+   {
+    "w": "weigh",
+    "start": 8.855,
+    "end": 9.12,
+    "whisper": 8.86
+   },
+   {
+    "w": "my",
+    "start": 9.115,
+    "end": 9.34,
+    "whisper": 9.12
+   },
+   {
+    "w": "proposal",
+    "start": 9.34,
+    "end": 9.94,
+    "whisper": 9.34
+   },
+   {
+    "w": "against",
+    "start": 9.935,
+    "end": 10.34,
+    "whisper": 9.94
+   },
+   {
+    "w": "it.",
+    "start": 10.34,
+    "end": 10.64,
+    "whisper": 10.34
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.936,
+  "text": "So before review, I run the checker, which fails a doc marked Accepted that still lists an open question.",
+  "transcript": "So before review, I run the checker, which fails a doc marked Accepted that still lists an open question.",
+  "voiced_db": -23.5,
+  "words": [
+   {
+    "w": "So",
+    "start": 0.04,
+    "end": 0.3,
+    "whisper": 0.0
+   },
+   {
+    "w": "before",
+    "start": 0.845,
+    "end": 1.12,
+    "whisper": 0.3
+   },
+   {
+    "w": "review,",
+    "start": 1.12,
+    "end": 1.58,
+    "whisper": 1.12
+   },
+   {
+    "w": "I",
+    "start": 2.275,
+    "end": 2.38,
+    "whisper": 1.98
+   },
+   {
+    "w": "run",
+    "start": 2.375,
+    "end": 2.7,
+    "whisper": 2.38
+   },
+   {
+    "w": "the",
+    "start": 2.7,
+    "end": 2.88,
+    "whisper": 2.7
+   },
+   {
+    "w": "checker,",
+    "start": 2.895,
+    "end": 3.44,
+    "whisper": 2.88
+   },
+   {
+    "w": "which",
+    "start": 3.795,
+    "end": 3.96,
+    "whisper": 3.58
+   },
+   {
+    "w": "fails",
+    "start": 3.96,
+    "end": 4.32,
+    "whisper": 3.96
+   },
+   {
+    "w": "a",
+    "start": 4.32,
+    "end": 4.54,
+    "whisper": 4.32
+   },
+   {
+    "w": "doc",
+    "start": 4.54,
+    "end": 4.88,
+    "whisper": 4.54
+   },
+   {
+    "w": "marked",
+    "start": 4.925,
+    "end": 5.28,
+    "whisper": 4.88
+   },
+   {
+    "w": "Accepted",
+    "start": 5.375,
+    "end": 6.06,
+    "whisper": 5.28
+   },
+   {
+    "w": "that",
+    "start": 6.06,
+    "end": 6.22,
+    "whisper": 6.06
+   },
+   {
+    "w": "still",
+    "start": 6.255,
+    "end": 6.56,
+    "whisper": 6.22
+   },
+   {
+    "w": "lists",
+    "start": 6.56,
+    "end": 6.84,
+    "whisper": 6.56
+   },
+   {
+    "w": "an",
+    "start": 6.88,
+    "end": 7.04,
+    "whisper": 6.84
+   },
+   {
+    "w": "open",
+    "start": 7.04,
+    "end": 7.26,
+    "whisper": 7.04
+   },
+   {
+    "w": "question.",
+    "start": 7.26,
+    "end": 7.74,
+    "whisper": 7.26
+   }
+  ]
+ }
+}

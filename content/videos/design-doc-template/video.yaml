@@ -1,0 +1,18 @@
+# Narrated explainer for /articles/design-doc-template/, imported by tools/import_video.py from
+# ninadpathak-video films/design-doc-template (render of 2026-10-28T01:35:08+05:30).
+name: A design doc template in 40 seconds
+description: 'How a design doc template makes the author argue with their own proposal: a problem statement, alternatives that each need a reason for rejection, starting with doing nothing, and a pre-review check.'
+upload_date: '2026-10-28T01:35:08+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: design-doc-template.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 10.433
+  L3: 18.467
+  L4: 29.367
+transcript: Okay, so a design doc template is a fixed outline for proposing a change before I build it, so reviewers can compare it with the options I rejected. It first states the problem, like an export service whose records live in memory, so a restart erases them. Every alternative needs a reason it was rejected, and the first is doing nothing, because if I can't say what that costs, reviewers can't weigh my proposal against it. So before review, I run the checker, which fails a doc marked Accepted that still lists an open question.
