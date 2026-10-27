@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/rag-reranking/implementation-flow.mmd",
+  "hash": "bac70aab92c349b5",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 256,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/rag-reranking/implementation-flow.narrow",
+    "width": 288,
+    "height": 720,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Four steps in order. The vector database returns one hundred candidates for the query. The query and each candidate's text go to the reranker as a list of pairs, which scores them. The top five results are sliced off the sorted list and handed to the prompt builder.",
+  "caption": "Search wide, rerank the hundred, keep the top five for the prompt.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-reranking/implementation-flow.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-reranking/implementation-flow.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-reranking/implementation-flow.svg\" width=\"720\" height=\"256\" alt=\"Four steps in order. The vector database returns one hundred candidates for the query. The query and each candidate's text go to the reranker as a list of pairs, which scores them. The top five results are sliced off the sorted list and handed to the prompt builder.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Search wide, rerank the hundred, keep the top five for the prompt.</figcaption>\n</figure>"
+}

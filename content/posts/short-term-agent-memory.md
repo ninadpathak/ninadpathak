@@ -20,12 +20,10 @@ Every production AI agent I have shipped runs into the same failure mode eventua
 
 Almost always the cause traces back to a misunderstanding of how short-term memory works inside the context window architecture.
 
-<div class="visual-wrapper">
-  <div class="visual-title">The Short-Term Memory Window</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/short-term-memory.html" title="Short-term memory window for AI agents" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/short-term-agent-memory/context-fill.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/short-term-agent-memory/context-fill.narrow.svg" width="288" height="632"><img class="np-has-narrow" src="/static/images/diagrams/short-term-agent-memory/context-fill.svg" width="720" height="424" alt="Four inputs fill one fixed-size context window: the system prompt, the conversation history, retrieved documents, and the agent's scratchpad. Whatever capacity is left is the headroom for the model's next response and tool calls. When it overflows, naive truncation cuts the oldest messages first." loading="lazy" decoding="async"></picture></a>
+  <figcaption>The context window is a fixed buffer. Memory is what you build on top of it.</figcaption>
+</figure>
 
 ##What The Context Window Actually Is
 

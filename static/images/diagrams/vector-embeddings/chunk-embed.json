@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/vector-embeddings/chunk-embed.mmd",
+  "hash": "ac1849af4318b478",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 400,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/vector-embeddings/chunk-embed.narrow",
+    "width": 288,
+    "height": 720,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "A document is split into chunks, and the embedding model turns each chunk into a vector, which is stored in a vector database with its original text and metadata. A user query is embedded by the same model and searched against the database for its nearest neighbors.",
+  "caption": "Chunks and queries go through the same model, so they land in the same space.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/vector-embeddings/chunk-embed.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/vector-embeddings/chunk-embed.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/vector-embeddings/chunk-embed.svg\" width=\"720\" height=\"400\" alt=\"A document is split into chunks, and the embedding model turns each chunk into a vector, which is stored in a vector database with its original text and metadata. A user query is embedded by the same model and searched against the database for its nearest neighbors.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Chunks and queries go through the same model, so they land in the same space.</figcaption>\n</figure>"
+}

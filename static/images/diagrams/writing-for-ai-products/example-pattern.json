@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/writing-for-ai-products/example-pattern.mmd",
+  "hash": "9d63e942f283d3ab",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 256,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/writing-for-ai-products/example-pattern.narrow",
+    "width": 288,
+    "height": 720,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "The preferred pattern for an AI documentation example has four parts in order: a minimal working request, the exact output contract the response must follow, one failure or refusal case, and the production caveat that changes implementation choices.",
+  "caption": "Show the request, the contract, a refusal, and the caveat. Anything less demos well and deploys badly.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/writing-for-ai-products/example-pattern.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/writing-for-ai-products/example-pattern.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/writing-for-ai-products/example-pattern.svg\" width=\"720\" height=\"256\" alt=\"The preferred pattern for an AI documentation example has four parts in order: a minimal working request, the exact output contract the response must follow, one failure or refusal case, and the production caveat that changes implementation choices.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Show the request, the contract, a refusal, and the caveat. Anything less demos well and deploys badly.</figcaption>\n</figure>"
+}

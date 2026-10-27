@@ -1,0 +1,28 @@
+%% @width 288
+%% @kicker What fills the window
+%% @alt Four inputs fill one fixed-size context window: the system prompt, the conversation history, retrieved documents, and the agent's scratchpad. Whatever capacity is left is the headroom for the model's next response and tool calls. When it overflows, naive truncation cuts the oldest messages first.
+%% @glyph sys | doc w=48
+%% @glyph hist | ledger rows=4 w=48
+%% @glyph ret | ranked rows=5 hi=1 w=48
+%% @glyph pad | tokens w=48
+%% @glyph ctx | context
+%% @spacing 30,30
+flowchart TB
+  subgraph r1 [ ]
+    direction TB
+    sys["System"]
+    hist["History"]
+  end
+  subgraph r2 [ ]
+    direction TB
+    ret["Retrieved"]
+    pad["Scratchpad"]
+  end
+  ctx["Context window"]:::focal
+  sys --> ctx
+  hist --> ctx
+  ret --> ctx
+  pad --> ctx
+  sys ~~~ ret
+  hist ~~~ pad
+  class r1,r2 ghost

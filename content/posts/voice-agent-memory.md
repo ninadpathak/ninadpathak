@@ -21,12 +21,10 @@ A voice agent that loses context produces dead air, then a response about a topi
 A voice agent cannot pause to run a retrieval step in the middle of a turn the way a text chatbot does. The caller hears the pause.
 
 
-<div class="visual-wrapper">
-  <div class="visual-title">The Voice AI Memory Pipeline</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/voice-memory.html" title="Voice AI agent memory pipeline" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/voice-agent-memory/voice-pipeline.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/voice-agent-memory/voice-pipeline.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/voice-agent-memory/voice-pipeline.svg" width="720" height="392" alt="A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Working memory lives inside the pipeline stages and updates on every audio frame. Retrieved memory is fetched in parallel with generation, drawn as a dashed input to the model, so it arrives before the first token is spoken instead of blocking the turn." loading="lazy" decoding="async"></picture></a>
+  <figcaption>The caller hears every pause, so retrieved memory runs alongside generation, never in front of it.</figcaption>
+</figure>
 
 ##The Fundamental Difference: Memory Latency Budget
 

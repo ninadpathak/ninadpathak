@@ -20,12 +20,10 @@ That boundary matters more than the storage technology. A vector index can retri
 
 A conversation buffer can hold recent state, but it is not a complete memory system unless the application also controls what enters it, how long it remains valid, and when it may return.
 
-<div class="visual-wrapper">
-  <div class="visual-title">RAG evidence and memory state enter one bounded context</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/rag-vs-memory.html" title="Separate retrieval and memory pathways converging on the model context" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/rag-vs-memory/two-inputs.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-vs-memory/two-inputs.narrow.svg" width="288" height="560"><img class="np-has-narrow" src="/static/images/diagrams/rag-vs-memory/two-inputs.svg" width="720" height="600" alt="Two inputs feed one bounded context window before the model. Retrieval selects source evidence from documents for the current request. Memory supplies saved state that must survive, change, expire, or return across requests." loading="lazy" decoding="async"></picture></a>
+  <figcaption>RAG selects evidence for this request; memory governs state across requests. Both land in the same bounded context.</figcaption>
+</figure>
 
 ## RAG and memory have different owners
 

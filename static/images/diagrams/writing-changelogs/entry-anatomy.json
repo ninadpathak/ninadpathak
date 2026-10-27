@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/writing-changelogs/entry-anatomy.mmd",
+  "hash": "52c2c0dda03b19ea",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 256,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/writing-changelogs/entry-anatomy.narrow",
+    "width": 288,
+    "height": 720,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "A useful changelog entry exposes four layers in order: the version and date, the category it is grouped under with breaking changes first, the impact on the affected user, and the migration path or link that finishes the job. A reader can stop at the first layer that answers their question.",
+  "caption": "A strong entry exposes version, date, category, impact, and migration path in layers. A reader can stop after the first useful answer or continue into the details.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/writing-changelogs/entry-anatomy.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/writing-changelogs/entry-anatomy.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/writing-changelogs/entry-anatomy.svg\" width=\"720\" height=\"256\" alt=\"A useful changelog entry exposes four layers in order: the version and date, the category it is grouped under with breaking changes first, the impact on the affected user, and the migration path or link that finishes the job. A reader can stop at the first layer that answers their question.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>A strong entry exposes version, date, category, impact, and migration path in layers. A reader can stop after the first useful answer or continue into the details.</figcaption>\n</figure>"
+}

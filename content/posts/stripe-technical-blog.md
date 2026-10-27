@@ -100,12 +100,10 @@ One reason I think Stripe’s blog became a moat is that the archive keeps widen
 
 It answers “how do I test, observe, version, reconcile, debug, and scale a financial workflow?” The search and trust footprint grows with every new question the archive can credibly answer.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Why Content Compounds</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/content-moat-compounding.html" title="Compounding content archive widening a traffic and trust moat versus a flat one-off content line over time" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/stripe-technical-blog/archive-doors.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/stripe-technical-blog/archive-doors.narrow.svg" width="288" height="456"><img class="np-has-narrow" src="/static/images/diagrams/stripe-technical-blog/archive-doors.svg" width="720" height="424" alt="Three readers search for different things, Stripe API upgrades, webhook debugging, and sandbox strategy, and each lands on a different post. All three posts belong to one archive that keeps growing, so each search is a separate way into the same Stripe ecosystem." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Each new question the archive can answer adds a side door into the same building.</figcaption>
+</figure>
 
 The 2025 annual letter gives useful scale context here too. Stripe says businesses on Stripe generated $1.9 trillion in 2025, equivalent to 1.6% of global GDP.
 

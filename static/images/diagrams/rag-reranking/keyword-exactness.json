@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/rag-reranking/keyword-exactness.mmd",
+  "hash": "660a7f7c963e7fa1",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 376,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/rag-reranking/keyword-exactness.narrow",
+    "width": 288,
+    "height": 688,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "A query for error code E-4048 goes to vector search, which returns both E-4048 and the near-identical E-4049 as close matches. A cross-encoder then reads the query and each document together: it rejects the document about E-4049 and keeps the document about E-4048.",
+  "caption": "To a bi-encoder, E-4049 looks as close as E-4048. The cross-encoder reads the exact string and keeps only the match.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-reranking/keyword-exactness.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-reranking/keyword-exactness.narrow.svg\" width=\"288\" height=\"688\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-reranking/keyword-exactness.svg\" width=\"720\" height=\"376\" alt=\"A query for error code E-4048 goes to vector search, which returns both E-4048 and the near-identical E-4049 as close matches. A cross-encoder then reads the query and each document together: it rejects the document about E-4049 and keeps the document about E-4048.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>To a bi-encoder, E-4049 looks as close as E-4048. The cross-encoder reads the exact string and keeps only the match.</figcaption>\n</figure>"
+}

@@ -129,13 +129,10 @@ The changelog points readers to the migration guide, updated reference page, sec
 
 Use descriptive link text so the destination is clear out of context. “Migrate from numeric pagination to cursors” is stronger than “learn more.”
 
-<div class="visual-wrapper">
-  <div class="visual-title">Anatomy of a scannable changelog entry</div>
-  <div class="visual-container visual-container--interactive">
-    <iframe src="/static/visuals/changelog-anatomy.html" title="Interactive comparison of a scannable changelog entry and an unstructured list of changes" loading="lazy"></iframe>
-  </div>
-</div>
-<p class="visual-caption">A strong entry exposes version, date, category, impact, and migration path in layers. A reader can stop after the first useful answer or continue into the details.</p>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/writing-changelogs/entry-anatomy.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/writing-changelogs/entry-anatomy.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/writing-changelogs/entry-anatomy.svg" width="720" height="256" alt="A useful changelog entry exposes four layers in order: the version and date, the category it is grouped under with breaking changes first, the impact on the affected user, and the migration path or link that finishes the job. A reader can stop at the first layer that answers their question." loading="lazy" decoding="async"></picture></a>
+  <figcaption>A strong entry exposes version, date, category, impact, and migration path in layers. A reader can stop after the first useful answer or continue into the details.</figcaption>
+</figure>
 
 ## Make the changelog part of the release workflow
 

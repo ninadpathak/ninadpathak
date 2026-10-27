@@ -1,0 +1,21 @@
+%% @fig 05
+%% @kicker Exact identifiers
+%% @alt A query for error code E-4048 goes to vector search, which returns both E-4048 and the near-identical E-4049 as close matches. A cross-encoder then reads the query and each document together: it rejects the document about E-4049 and keeps the document about E-4048.
+%% @caption To a bi-encoder, E-4049 looks as close as E-4048. The cross-encoder reads the exact string and keeps only the match.
+%% @path query>vec>rerank>exact
+%% @glyph query | doc question
+%% @glyph vec | vectors
+%% @glyph rerank | pair
+%% @glyph near | doc cross
+%% @glyph exact | doc check
+%% @spacing 28,48
+flowchart LR
+  query["E-4048"]:::accent
+  vec["Vector search"]
+  rerank["Cross-encoder"]:::focal
+  near["E-4049"]:::muted
+  exact["E-4048"]
+  query --> vec
+  vec --> rerank
+  rerank -->|no| near
+  rerank -->|yes| exact

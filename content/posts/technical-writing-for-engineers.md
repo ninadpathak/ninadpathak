@@ -21,12 +21,10 @@ A version of the 80/20 rule applies here. Roughly twenty percent of documentatio
 
 The rest is ceremony.
 
-<div class="visual-wrapper">
-  <div class="visual-title">The 80/20 of Doc Impact</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/docs-8020.html" title="Sorted impact bars showing the few documentation practices that move the needle versus the many that do not" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/technical-writing-for-engineers/docs-8020.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/technical-writing-for-engineers/docs-8020.narrow.svg" width="288" height="792"><img class="np-has-narrow" src="/static/images/diagrams/technical-writing-for-engineers/docs-8020.svg" width="720" height="624" alt="Three practices reach the reader: leading with the task, code that copies and runs, and a documentation update in every feature pull request. Two more, a style guide and a content calendar, are drawn muted inside a cluster labelled ceremony and do not connect to the reader, because they only matter once the first three are in place." loading="lazy" decoding="async"></picture></a>
+  <figcaption>A few practices deliver most of the value. Layer on the ceremony once the docs ship with the code.</figcaption>
+</figure>
 
 ## The core problem
 

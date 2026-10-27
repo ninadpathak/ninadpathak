@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/stripe-technical-blog/archive-doors.mmd",
+  "hash": "95be89df238ec592",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 424,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 10
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/stripe-technical-blog/archive-doors.narrow",
+    "width": 288,
+    "height": 456,
+    "minText": {
+      "sans": 13,
+      "mono": 11
+    }
+  },
+  "alt": "Three readers search for different things, Stripe API upgrades, webhook debugging, and sandbox strategy, and each lands on a different post. All three posts belong to one archive that keeps growing, so each search is a separate way into the same Stripe ecosystem.",
+  "caption": "Each new question the archive can answer adds a side door into the same building.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/stripe-technical-blog/archive-doors.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/stripe-technical-blog/archive-doors.narrow.svg\" width=\"288\" height=\"456\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/stripe-technical-blog/archive-doors.svg\" width=\"720\" height=\"424\" alt=\"Three readers search for different things, Stripe API upgrades, webhook debugging, and sandbox strategy, and each lands on a different post. All three posts belong to one archive that keeps growing, so each search is a separate way into the same Stripe ecosystem.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Each new question the archive can answer adds a side door into the same building.</figcaption>\n</figure>"
+}

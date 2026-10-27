@@ -1,0 +1,29 @@
+%% @fig 01
+%% @kicker Release information by depth
+%% @alt A release note reads in three layers. The summary comes first with version, date, compatibility, and the action required. Impact comes second: breaking changes, security and support notes, fixes, and new capabilities. Resources such as the migration guide and reference changes come last, for readers who need the implementation detail.
+%% @caption The page should reveal information in layers: decision first, impact second, and implementation detail last. Readers can stop when they have enough evidence.
+%% @path sum>brk
+%% @glyph sum | doc
+%% @glyph brk | doc flag
+%% @glyph sec | doc lock
+%% @glyph fix | doc check
+%% @glyph new | action
+%% @glyph res | outline
+flowchart TB
+  sum["Summary"]:::focal
+  subgraph impact [Impact]
+    direction TB
+    brk["Breaking"]:::accent
+    sec["Security"]
+    fix["Fixes"]
+    new["New"]
+  end
+  res["Resources"]
+  sum --> brk
+  sum --> sec
+  sum --> fix
+  sum --> new
+  brk --> res
+  sec --> res
+  fix --> res
+  new --> res

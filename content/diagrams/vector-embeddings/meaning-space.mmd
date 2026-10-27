@@ -1,0 +1,20 @@
+%% @fig 01
+%% @kicker Same word, different place
+%% @alt Two texts that both use the word bank go through the same embedding model. Text about bank fees lands among financial concepts, and text about a river bank lands among geographic ones, so a strong model keeps the two senses apart in vector space.
+%% @caption A strong model keeps "bank" the institution and "bank" the riverside in different neighbourhoods.
+%% @path t1>enc>v1
+%% @glyph t1 | doc
+%% @glyph t2 | doc
+%% @glyph enc | core
+%% @glyph v1 | vectors
+%% @glyph v2 | vectors
+flowchart LR
+  t1["Bank fees"]:::accent
+  t2["River bank"]
+  enc["Embedding model"]
+  v1["Finance"]:::focal
+  v2["Rivers"]
+  t1 --> enc
+  t2 --> enc
+  enc --> v1
+  enc --> v2

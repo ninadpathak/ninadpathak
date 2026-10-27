@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/shorter-documentation/cognitive-load.mmd",
+  "hash": "540bf820eb81a960",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 432,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/shorter-documentation/cognitive-load.narrow",
+    "width": 288,
+    "height": 440,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Three kinds of cognitive load share a reader's limited working memory. Intrinsic load is the difficulty of the task itself. Extraneous load is effort wasted on poor documentation design, marked as the load to remove. Germane load is the productive effort of building a mental model of the system, drawn as the path that should get the freed capacity.",
+  "caption": "Good docs zero out extraneous load so the reader's bandwidth goes to the task and the mental model.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/shorter-documentation/cognitive-load.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/shorter-documentation/cognitive-load.narrow.svg\" width=\"288\" height=\"440\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/shorter-documentation/cognitive-load.svg\" width=\"720\" height=\"432\" alt=\"Three kinds of cognitive load share a reader's limited working memory. Intrinsic load is the difficulty of the task itself. Extraneous load is effort wasted on poor documentation design, marked as the load to remove. Germane load is the productive effort of building a mental model of the system, drawn as the path that should get the freed capacity.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Good docs zero out extraneous load so the reader's bandwidth goes to the task and the mental model.</figcaption>\n</figure>"
+}

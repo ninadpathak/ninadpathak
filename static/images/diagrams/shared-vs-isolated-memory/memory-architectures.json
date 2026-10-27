@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/shared-vs-isolated-memory/memory-architectures.mmd",
+  "hash": "e1a0018a16cde05e",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 640,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.narrow",
+    "width": 288,
+    "height": 1024,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Two pipelines of the same three agents. In isolated memory the extractor hands its output to the validator, which hands its output to the summary agent, and nothing else passes between them. In shared memory all three use one common store: the extractor writes to it and the validator and summary agent read from it, so the validator can act on a conclusion the extractor later revises, marked as a failure on the store.",
+  "caption": "Isolated memory passes artifacts along the line; shared memory lets every agent read what any agent wrote, including drafts.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.narrow.svg\" width=\"288\" height=\"1024\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.svg\" width=\"720\" height=\"640\" alt=\"Two pipelines of the same three agents. In isolated memory the extractor hands its output to the validator, which hands its output to the summary agent, and nothing else passes between them. In shared memory all three use one common store: the extractor writes to it and the validator and summary agent read from it, so the validator can act on a conclusion the extractor later revises, marked as a failure on the store.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Isolated memory passes artifacts along the line; shared memory lets every agent read what any agent wrote, including drafts.</figcaption>\n</figure>"
+}

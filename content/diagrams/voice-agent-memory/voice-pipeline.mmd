@@ -1,0 +1,18 @@
+%% @fig 01
+%% @kicker Memory inside the voice loop
+%% @alt A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Working memory lives inside the pipeline stages and updates on every audio frame. Retrieved memory is fetched in parallel with generation, drawn as a dashed input to the model, so it arrives before the first token is spoken instead of blocking the turn.
+%% @caption The caller hears every pause, so retrieved memory runs alongside generation, never in front of it.
+%% @path speech>stt>llm>tts
+%% @glyph speech | wave
+%% @glyph stt | tokens
+%% @glyph llm | core
+%% @glyph tts | wave
+%% @glyph mem | store
+flowchart LR
+  speech["Speech"]
+  stt["STT"]
+  llm["LLM"]:::focal
+  tts["TTS"]
+  mem["Memory"]
+  speech --> stt --> llm --> tts
+  mem -.-> llm

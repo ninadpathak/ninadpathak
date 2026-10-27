@@ -1,0 +1,15 @@
+%% @fig 01
+%% @kicker Four parts of an AI example
+%% @alt The preferred pattern for an AI documentation example has four parts in order: a minimal working request, the exact output contract the response must follow, one failure or refusal case, and the production caveat that changes implementation choices.
+%% @caption Show the request, the contract, a refusal, and the caveat. Anything less demos well and deploys badly.
+%% @path req>contract>refusal>caveat
+%% @glyph req | inbox
+%% @glyph contract | doc check
+%% @glyph refusal | stop
+%% @glyph caveat | doc flag
+flowchart LR
+  req["Request"]
+  contract["Contract"]:::focal
+  refusal["Refusal"]
+  caveat["Caveat"]
+  req --> contract --> refusal --> caveat

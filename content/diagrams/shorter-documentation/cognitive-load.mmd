@@ -1,0 +1,17 @@
+%% @fig 01
+%% @kicker Three kinds of load
+%% @alt Three kinds of cognitive load share a reader's limited working memory. Intrinsic load is the difficulty of the task itself. Extraneous load is effort wasted on poor documentation design, marked as the load to remove. Germane load is the productive effort of building a mental model of the system, drawn as the path that should get the freed capacity.
+%% @caption Good docs zero out extraneous load so the reader's bandwidth goes to the task and the mental model.
+%% @path germ>wm
+%% @glyph intr | action
+%% @glyph extr | doc corner=cross
+%% @glyph germ | object
+%% @glyph wm | cells fill=0.85
+flowchart TB
+  intr["Intrinsic"]
+  extr["Extraneous"]:::muted
+  germ["Germane"]:::accent
+  wm["Working memory"]:::focal
+  intr --> wm
+  extr -.-> wm
+  germ --> wm

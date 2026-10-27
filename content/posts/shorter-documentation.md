@@ -30,12 +30,10 @@ Cognitive Load Theory (CLT) defines the mental effort required to process inform
 
 Intrinsic load is the inherent difficulty of the technical task, like reasoning about an OAuth refresh flow. Extraneous load is the mental energy wasted on poor documentation design, such as a wall-of-text paragraph or a navigation scheme where the auth section sits four clicks from the quickstart that depends on it.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Cognitive Load Distribution</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/cognitive-load.html" title="Cognitive Load Distribution" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/shorter-documentation/cognitive-load.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/shorter-documentation/cognitive-load.narrow.svg" width="288" height="440"><img class="np-has-narrow" src="/static/images/diagrams/shorter-documentation/cognitive-load.svg" width="720" height="432" alt="Three kinds of cognitive load share a reader's limited working memory. Intrinsic load is the difficulty of the task itself. Extraneous load is effort wasted on poor documentation design, marked as the load to remove. Germane load is the productive effort of building a mental model of the system, drawn as the path that should get the freed capacity." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Good docs zero out extraneous load so the reader's bandwidth goes to the task and the mental model.</figcaption>
+</figure>
 
 Documentation should aim to zero out extraneous load. Research in clinical training and EHR systems shows that reducing extraneous load correlates with higher task accuracy.
 

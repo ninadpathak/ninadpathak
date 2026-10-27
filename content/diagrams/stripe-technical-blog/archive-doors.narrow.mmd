@@ -1,0 +1,16 @@
+%% @width 288
+%% @kicker Every post is a door
+%% @alt Three readers search for different things, Stripe API upgrades, webhook debugging, and sandbox strategy, and each lands on a different post. All three posts belong to one archive that keeps growing, so each search is a separate way into the same Stripe ecosystem.
+%% @glyph q1 | doc question w=44
+%% @glyph q2 | doc question w=44
+%% @glyph q3 | doc question w=44
+%% @glyph arch | store w=44
+%% @spacing 8,24
+flowchart LR
+  q1["API<br/>upgrades"]
+  q2["Webhooks"]
+  q3["Sandboxes"]
+  arch["Archive"]:::focal
+  q1 --> arch
+  q2 --> arch
+  q3 --> arch

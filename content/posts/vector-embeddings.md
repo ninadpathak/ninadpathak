@@ -26,12 +26,10 @@ Weak models cluster unrelated concepts together. A strong model preserves the su
 That precision is what lets a support bot answer a question about overdraft fees without surfacing a paragraph about fishing trips.
 
 
-<div class="visual-wrapper">
-  <div class="visual-title">Semantic Clustering in 3D Space</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/vector-space.html" title="3D Vector Space Simulation" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/vector-embeddings/meaning-space.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/vector-embeddings/meaning-space.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/vector-embeddings/meaning-space.svg" width="720" height="392" alt="Two texts that both use the word bank go through the same embedding model. Text about bank fees lands among financial concepts, and text about a river bank lands among geographic ones, so a strong model keeps the two senses apart in vector space." loading="lazy" decoding="async"></picture></a>
+  <figcaption>A strong model keeps "bank" the institution and "bank" the riverside in different neighbourhoods.</figcaption>
+</figure>
 
 
 
@@ -231,12 +229,10 @@ Building a search system with these models follows a predictable pipeline. You s
 
 Each chunk is passed to the embedding model to generate a vector.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Splitting and Embedding Document Chunks</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/chunking.html" title="Document Chunking and Embedding Animation" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/vector-embeddings/chunk-embed.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/vector-embeddings/chunk-embed.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/vector-embeddings/chunk-embed.svg" width="720" height="400" alt="A document is split into chunks, and the embedding model turns each chunk into a vector, which is stored in a vector database with its original text and metadata. A user query is embedded by the same model and searched against the database for its nearest neighbors." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Chunks and queries go through the same model, so they land in the same space.</figcaption>
+</figure>
 
 These vectors are stored in a vector database alongside the original text and metadata. A user query arrives and is embedded using the same model.
 

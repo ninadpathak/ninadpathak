@@ -1,0 +1,15 @@
+%% @fig 01
+%% @kicker Anatomy of an entry
+%% @alt A useful changelog entry exposes four layers in order: the version and date, the category it is grouped under with breaking changes first, the impact on the affected user, and the migration path or link that finishes the job. A reader can stop at the first layer that answers their question.
+%% @caption A strong entry exposes version, date, category, impact, and migration path in layers. A reader can stop after the first useful answer or continue into the details.
+%% @path ver>cat>imp>mig
+%% @glyph ver | ledger rows=4
+%% @glyph cat | outline
+%% @glyph imp | reader
+%% @glyph mig | action
+flowchart LR
+  ver["Version"]
+  cat["Category"]
+  imp["Impact"]:::focal
+  mig["Migration"]
+  ver --> cat --> imp --> mig

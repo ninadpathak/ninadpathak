@@ -140,12 +140,10 @@ The search then returns documents about `E-4049` or `E-4047`, because to the bi-
 
 A cross-encoder fixes this on contact. Seeing `E-4048` in the query, it goes looking for that exact string in the document and treats a one-character difference as the relevance-killer it actually is.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Evaluating Keyword Exactness</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/keyword-exactness.html" title="Comparison of vector similarity vs reranker score for exact keywords" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/rag-reranking/keyword-exactness.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-reranking/keyword-exactness.narrow.svg" width="288" height="688"><img class="np-has-narrow" src="/static/images/diagrams/rag-reranking/keyword-exactness.svg" width="720" height="376" alt="A query for error code E-4048 goes to vector search, which returns both E-4048 and the near-identical E-4049 as close matches. A cross-encoder then reads the query and each document together: it rejects the document about E-4049 and keeps the document about E-4048." loading="lazy" decoding="async"></picture></a>
+  <figcaption>To a bi-encoder, E-4049 looks as close as E-4048. The cross-encoder reads the exact string and keeps only the match.</figcaption>
+</figure>
 
 Improving the first stage with hybrid search helps here too. I often combine vector search with standard keyword search (BM25) to build that initial list of one hundred candidates, and the reranker then evaluates candidates from both sources.
 
@@ -161,12 +159,10 @@ You send a query and a list of texts, they return the sorted indices and scores,
 
 Open-source options ask for more infrastructure work and pay you back with better unit economics at scale. The BAAI general embedding (BGE) family includes several capable rerankers, and I lean on `bge-reranker-large` for high-accuracy local deployments where I want to avoid per-call API fees.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Comparing Models and Providers</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/models-providers.html" title="Comparison between commercial API and open source rerankers" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/rag-reranking/models-providers.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-reranking/models-providers.narrow.svg" width="288" height="360"><img class="np-has-narrow" src="/static/images/diagrams/rag-reranking/models-providers.svg" width="720" height="424" alt="An application can send rerank requests two ways. One path goes over the network to a hosted API such as Cohere Rerank, with no infrastructure to run but a network hop and a fee per request. The other goes to an open-source model such as bge-reranker-large running locally on the team's own GPU, with no network hop but a fixed infrastructure cost." loading="lazy" decoding="async"></picture></a>
+  <figcaption>A hosted API trades a network hop and per-call fees for zero infrastructure; a local model trades a GPU for neither.</figcaption>
+</figure>
 
 A standard language model can also act as a reranker. You drop the query and the document into a prompt and ask the model to output a score from one to ten.
 
@@ -180,12 +176,10 @@ Dimensionality does not touch the architecture flaw, though, and I have watched 
 
 Give it eight times the dimensions and you are still asking it to guess a relationship without ever looking at the two items together. A bigger photograph of two rooms does not let you hear a conversation that never happened.
 
-<div class="visual-wrapper">
-  <div class="visual-title">The Problem with Dimension Scaling</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/dimension-scaling.html" title="Scaling vector dimensions does not solve isolated evaluation" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/rag-reranking/dimension-scaling.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-reranking/dimension-scaling.narrow.svg" width="288" height="552"><img class="np-has-narrow" src="/static/images/diagrams/rag-reranking/dimension-scaling.svg" width="720" height="288" alt="Moving from a 384-dimension embedding to a 3072-dimension embedding gives the bi-encoder eight times the dimensions, but it still compresses the query and the document separately, so the larger vector is still marked as failing to compare them together. The cross-encoder after it remains the step that reads both at once." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Eight times the dimensions still compresses each text alone, so the reranker stays.</figcaption>
+</figure>
 
 The other argument I hear leans on massive context windows. The pitch is that you can pass all one hundred retrieved chunks straight to the language model and let it sort them out.
 
@@ -207,12 +201,10 @@ The flow itself is short. You take the output of your vector database client, fo
 
 You slice the top results off the response and hand them to your prompt builder.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Two-Stage Implementation Flow</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/implementation-flow.html" title="Code level pipeline steps for reranking" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/rag-reranking/implementation-flow.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-reranking/implementation-flow.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/rag-reranking/implementation-flow.svg" width="720" height="256" alt="Four steps in order. The vector database returns one hundred candidates for the query. The query and each candidate's text go to the reranker as a list of pairs, which scores them. The top five results are sliced off the sorted list and handed to the prompt builder." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Search wide, rerank the hundred, keep the top five for the prompt.</figcaption>
+</figure>
 
 The effect on reliability runs deep. With crisp, relevant context in front of it, the language model hallucinates less and the whole system reads as noticeably sharper to the person on the other end.
 

@@ -1,0 +1,28 @@
+%% @width 288
+%% @kicker The few that carry the value
+%% @alt Three practices reach the reader: leading with the task, code that copies and runs, and a documentation update in every feature pull request. Two more, a style guide and a content calendar, are drawn muted inside a cluster labelled ceremony and do not connect to the reader, because they only matter once the first three are in place.
+%% @path task>reader
+%% @glyph task | action w=40
+%% @glyph code | doc check w=40
+%% @glyph pr | ledger rows=4 w=40
+%% @glyph guide | doc w=40
+%% @glyph cal | doc w=40
+%% @glyph reader | reader w=40
+%% @spacing 8,18
+flowchart LR
+  subgraph left [ ]
+    direction LR
+    task["Task first"]:::accent
+    code["Runnable<br/>code"]
+    pr["Docs<br/>in PR"]
+    subgraph cer [Ceremony]
+      direction LR
+      guide["Style<br/>guide"]:::muted
+      cal["Calendar"]:::muted
+    end
+  end
+  reader["Reader"]:::focal
+  task --> reader
+  code --> reader
+  pr --> reader
+  class left ghost

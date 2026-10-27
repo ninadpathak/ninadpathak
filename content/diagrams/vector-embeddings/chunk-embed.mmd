@@ -1,0 +1,18 @@
+%% @fig 02
+%% @kicker Split, embed, store
+%% @alt A document is split into chunks, and the embedding model turns each chunk into a vector, which is stored in a vector database with its original text and metadata. A user query is embedded by the same model and searched against the database for its nearest neighbors.
+%% @caption Chunks and queries go through the same model, so they land in the same space.
+%% @path doc>chunks>enc>db
+%% @glyph doc | doc
+%% @glyph chunks | doc
+%% @glyph enc | core
+%% @glyph db | store
+%% @glyph query | doc question
+flowchart LR
+  doc["Document"]
+  chunks["Chunks"]:::stack
+  enc["Embed"]:::focal
+  db["Vector DB"]
+  query["Query"]
+  doc --> chunks --> enc --> db
+  query -.-> enc

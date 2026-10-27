@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/rag-reranking/dimension-scaling.mmd",
+  "hash": "a52656b916acf121",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 288,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/rag-reranking/dimension-scaling.narrow",
+    "width": 288,
+    "height": 552,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Moving from a 384-dimension embedding to a 3072-dimension embedding gives the bi-encoder eight times the dimensions, but it still compresses the query and the document separately, so the larger vector is still marked as failing to compare them together. The cross-encoder after it remains the step that reads both at once.",
+  "caption": "Eight times the dimensions still compresses each text alone, so the reranker stays.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-reranking/dimension-scaling.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-reranking/dimension-scaling.narrow.svg\" width=\"288\" height=\"552\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-reranking/dimension-scaling.svg\" width=\"720\" height=\"288\" alt=\"Moving from a 384-dimension embedding to a 3072-dimension embedding gives the bi-encoder eight times the dimensions, but it still compresses the query and the document separately, so the larger vector is still marked as failing to compare them together. The cross-encoder after it remains the step that reads both at once.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Eight times the dimensions still compresses each text alone, so the reranker stays.</figcaption>\n</figure>"
+}

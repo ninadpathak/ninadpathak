@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/rag-vs-memory/two-inputs.mmd",
+  "hash": "17c97b82e21589ea",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 600,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/rag-vs-memory/two-inputs.narrow",
+    "width": 288,
+    "height": 560,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Two inputs feed one bounded context window before the model. Retrieval selects source evidence from documents for the current request. Memory supplies saved state that must survive, change, expire, or return across requests.",
+  "caption": "RAG selects evidence for this request; memory governs state across requests. Both land in the same bounded context.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-vs-memory/two-inputs.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-vs-memory/two-inputs.narrow.svg\" width=\"288\" height=\"560\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-vs-memory/two-inputs.svg\" width=\"720\" height=\"600\" alt=\"Two inputs feed one bounded context window before the model. Retrieval selects source evidence from documents for the current request. Memory supplies saved state that must survive, change, expire, or return across requests.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>RAG selects evidence for this request; memory governs state across requests. Both land in the same bounded context.</figcaption>\n</figure>"
+}

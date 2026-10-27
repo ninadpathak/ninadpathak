@@ -1,0 +1,15 @@
+%% @fig 08
+%% @kicker The two-stage flow in code
+%% @alt Four steps in order. The vector database returns one hundred candidates for the query. The query and each candidate's text go to the reranker as a list of pairs, which scores them. The top five results are sliced off the sorted list and handed to the prompt builder.
+%% @caption Search wide, rerank the hundred, keep the top five for the prompt.
+%% @path search>rerank>top>prompt
+%% @glyph search | ranked rows=8 hi=6
+%% @glyph rerank | pair
+%% @glyph top | ranked rows=3 hi=0
+%% @glyph prompt | tokens
+flowchart LR
+  search["Search"]
+  rerank["Rerank"]:::focal
+  top["Top 5"]
+  prompt["Prompt"]
+  search --> rerank --> top --> prompt

@@ -30,12 +30,10 @@ With a thinner boundary between agents, the coordination lives inside the memory
 
 That distinction matters because it determines where your coordination logic lives and what failure modes you inherit.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Shared vs Isolated Memory Side-by-Side</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/shared-vs-isolated.html" title="Shared memory with race conditions versus isolated memory with explicit sync in multi-agent systems" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.narrow.svg" width="288" height="1024"><img class="np-has-narrow" src="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.svg" width="720" height="640" alt="Two pipelines of the same three agents. In isolated memory the extractor hands its output to the validator, which hands its output to the summary agent, and nothing else passes between them. In shared memory all three use one common store: the extractor writes to it and the validator and summary agent read from it, so the validator can act on a conclusion the extractor later revises, marked as a failure on the store." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Isolated memory passes artifacts along the line; shared memory lets every agent read what any agent wrote, including drafts.</figcaption>
+</figure>
 
 ## When isolated memory is the right call
 

@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/voice-agent-memory/voice-pipeline.mmd",
+  "hash": "dcb712b0b41752e2",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 392,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/voice-agent-memory/voice-pipeline.narrow",
+    "width": 288,
+    "height": 720,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Working memory lives inside the pipeline stages and updates on every audio frame. Retrieved memory is fetched in parallel with generation, drawn as a dashed input to the model, so it arrives before the first token is spoken instead of blocking the turn.",
+  "caption": "The caller hears every pause, so retrieved memory runs alongside generation, never in front of it.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.svg\" width=\"720\" height=\"392\" alt=\"A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Working memory lives inside the pipeline stages and updates on every audio frame. Retrieved memory is fetched in parallel with generation, drawn as a dashed input to the model, so it arrives before the first token is spoken instead of blocking the turn.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The caller hears every pause, so retrieved memory runs alongside generation, never in front of it.</figcaption>\n</figure>"
+}

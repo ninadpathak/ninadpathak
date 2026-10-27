@@ -1,0 +1,30 @@
+%% @width 288
+%% @kicker Isolated and shared memory
+%% @alt Two pipelines of the same three agents. In isolated memory the extractor hands its output to the validator, which hands its output to the summary agent, and nothing else passes between them. In shared memory all three use one common store: the extractor writes to it and the validator and summary agent read from it, so the validator can act on a conclusion the extractor later revises, marked as a failure on the store.
+%% @path e1>v1>s1
+%% @glyph e1 | loop w=40
+%% @glyph v1 | loop w=40
+%% @glyph s1 | loop w=40
+%% @glyph e2 | loop w=40
+%% @glyph v2 | loop w=40
+%% @glyph s2 | loop w=40
+%% @glyph store | store corner=cross w=40
+%% @spacing 8,40
+flowchart LR
+  subgraph iso [Isolated]
+    direction TB
+    e1["Extractor"]
+    v1["Validator"]
+    s1["Summary"]
+  end
+  subgraph shared [Shared]
+    direction TB
+    e2["Extractor"]
+    store["Store"]
+    v2["Validator"]
+    s2["Summary"]
+  end
+  e1 --> v1 --> s1
+  e2 --> store
+  store --> v2
+  store --> s2

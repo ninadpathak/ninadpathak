@@ -1,0 +1,15 @@
+%% @fig 07
+%% @kicker More dimensions, same flaw
+%% @alt Moving from a 384-dimension embedding to a 3072-dimension embedding gives the bi-encoder eight times the dimensions, but it still compresses the query and the document separately, so the larger vector is still marked as failing to compare them together. The cross-encoder after it remains the step that reads both at once.
+%% @caption Eight times the dimensions still compresses each text alone, so the reranker stays.
+%% @path big>rerank
+%% @glyph small | vectors
+%% @glyph big | vectors corner=cross
+%% @glyph rerank | pair
+%% @dim small | big | 8×
+flowchart LR
+  small["384 dims"]:::muted
+  big["3072 dims"]
+  rerank["Cross-encoder"]:::focal
+  small --> big
+  big --> rerank

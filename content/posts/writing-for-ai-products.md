@@ -92,12 +92,10 @@ They ask for the actual prompt template, the exact schema, the logged error obje
 
 Good AI documentation lives or dies on examples. Google states that good sample code should build without errors, perform the task it claims to perform, be production-ready where possible, and explain how to run it, including setup, dependencies, and expected results ([Google technical writing course on sample code](https://developers.google.com/tech-writing/two/sample-code)).
 
-<div class="visual-wrapper">
-  <div class="visual-title">Schema Constraint Geometry</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/schema-constraints.html" title="3D Schema Constraints" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/writing-for-ai-products/example-pattern.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/writing-for-ai-products/example-pattern.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/writing-for-ai-products/example-pattern.svg" width="720" height="256" alt="The preferred pattern for an AI documentation example has four parts in order: a minimal working request, the exact output contract the response must follow, one failure or refusal case, and the production caveat that changes implementation choices." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Show the request, the contract, a refusal, and the caveat. Anything less demos well and deploys badly.</figcaption>
+</figure>
 
 Because developers actively mutate the sample, that standard matters more for AI products than for ordinary CRUD APIs. They paste it into a notebook, replace the model name, tweak a system instruction, and ship a variant into a prototype by lunch.
 
