@@ -7,7 +7,7 @@
   - no page overflow, and every image loads and fits;
   - the smallest label shows at 12.1 px and the smallest mono text at 8.9 px;
   - the largest stretch is 1.14×.
-- `kept-visuals.png` + `kept-live.json`: the two kept visuals live in the built article at 375 and 1366 px, in light, dark, reduced motion, and with JavaScript off. Each iframe follows the article's theme (`data-theme` read from the parent) and fits its container (400 px desktop, 500 px phone and tall) with no overflow.
+- `kept-visuals.png` + `kept-live.json`: the two kept visuals live in the built article at 375 and 1366 px, in light, dark, reduced motion, with JavaScript off, and with the iframe request blocked (light and dark). Each iframe follows the article's theme (`data-theme` read from the parent) and fits its container (400 px desktop, 500 px phone and tall) with no overflow. With the frame blocked, the container shows the static fallback in the matching theme instead of an empty box.
 
 Numbers the articles don't state stay out of the plates:
 
@@ -32,3 +32,11 @@ Kept visuals (`static/visuals/cosine-similarity.html`, `static/visuals/matryoshk
 - Both draw completely without JavaScript (cosine at 45°, matryoshka at 256 of 1536 dimensions). That static drawing is the fallback.
 
 No shared pipeline files changed in this batch.
+
+Review fixes (ship-with-fixes verdict), all re-rendered and re-swept (rag-reranking@5, technical-writing-for-engineers, writing-release-notes, and both vector-embeddings figures: 50/50, and the batch stays at 160/160):
+
+- cosine-similarity: the Query label stays inside the drawing at every angle and width. Near the axis (under 30° and over 150°) it sits above the tip on the inner side. Near 90° it sits beside the tip, clear of the "cos 0" tick. Then it is clamped into the current view. Checked at 0°, 45°, 90°, 135°, and 180° in iframes 270, 325, and 670 px wide, in light and dark: always inside, with no overlap with other text.
+- Kept-visual fallback: `tools/image-brand/fallbacks.mjs` lifts each page's no-JS drawing into `static/visuals/<name>.fallback-{light,dark}.svg`, with subset Inter and JetBrains Mono embedded. `fallbacks.mjs --check` fails if either visual changes without regenerating them. The article layers the fallback under the iframe (`.visual-container--fallback`, `static/css/visuals.css`). `static/js/main.js` keeps the frame transparent until its page sets `window.npVisualReady`. A blocked or failed frame (a browser error page) therefore shows the drawing. With JavaScript off, the frame shows its own static drawing, as before. The normal case is unchanged: the frame is opaque and on top.
+- writing-release-notes: the Impact group adds Known issues, the article's item 6, on both widths; the alt names it.
+- rag-reranking models-providers caption: "…a local model costs a GPU but no hop and no fee."
+- technical-writing-for-engineers: the Ceremony cluster sits level with the three practices on the wide plate.

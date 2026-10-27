@@ -3,14 +3,12 @@
   "v": "cosine-similarity",
   "width": 375,
   "mode": "light",
-  "info": {
-   "theme": "light",
-   "bg": "rgb(248, 248, 246)",
-   "overflow": [
-    0,
-    0
-   ],
-   "size": [
+  "state": {
+   "ready": true,
+   "frameOpacity": "1",
+   "fallback": "cosine-similarity.fallback-light.svg",
+   "fallbackLoaded": true,
+   "box": [
     325,
     500
    ]
@@ -20,14 +18,12 @@
   "v": "matryoshka-truncation",
   "width": 375,
   "mode": "light",
-  "info": {
-   "theme": "light",
-   "bg": "rgb(248, 248, 246)",
-   "overflow": [
-    0,
-    0
-   ],
-   "size": [
+  "state": {
+   "ready": true,
+   "frameOpacity": "1",
+   "fallback": "matryoshka-truncation.fallback-light.svg",
+   "fallbackLoaded": true,
+   "box": [
     325,
     500
    ]
@@ -37,14 +33,12 @@
   "v": "cosine-similarity",
   "width": 375,
   "mode": "dark",
-  "info": {
-   "theme": "dark",
-   "bg": "rgb(9, 9, 9)",
-   "overflow": [
-    0,
-    0
-   ],
-   "size": [
+  "state": {
+   "ready": true,
+   "frameOpacity": "1",
+   "fallback": "cosine-similarity.fallback-dark.svg",
+   "fallbackLoaded": true,
+   "box": [
     325,
     500
    ]
@@ -54,14 +48,12 @@
   "v": "matryoshka-truncation",
   "width": 375,
   "mode": "dark",
-  "info": {
-   "theme": "dark",
-   "bg": "rgb(9, 9, 9)",
-   "overflow": [
-    0,
-    0
-   ],
-   "size": [
+  "state": {
+   "ready": true,
+   "frameOpacity": "1",
+   "fallback": "matryoshka-truncation.fallback-dark.svg",
+   "fallbackLoaded": true,
+   "box": [
     325,
     500
    ]
@@ -71,14 +63,12 @@
   "v": "cosine-similarity",
   "width": 375,
   "mode": "reduced",
-  "info": {
-   "theme": "light",
-   "bg": "rgb(248, 248, 246)",
-   "overflow": [
-    0,
-    0
-   ],
-   "size": [
+  "state": {
+   "ready": true,
+   "frameOpacity": "1",
+   "fallback": "cosine-similarity.fallback-light.svg",
+   "fallbackLoaded": true,
+   "box": [
     325,
     500
    ]
@@ -88,14 +78,12 @@
   "v": "matryoshka-truncation",
   "width": 375,
   "mode": "reduced",
-  "info": {
-   "theme": "light",
-   "bg": "rgb(248, 248, 246)",
-   "overflow": [
-    0,
-    0
-   ],
-   "size": [
+  "state": {
+   "ready": true,
+   "frameOpacity": "1",
+   "fallback": "matryoshka-truncation.fallback-light.svg",
+   "fallbackLoaded": true,
+   "box": [
     325,
     500
    ]
@@ -105,26 +93,84 @@
   "v": "cosine-similarity",
   "width": 375,
   "mode": "nojs",
-  "info": null
+  "state": null
  },
  {
   "v": "matryoshka-truncation",
   "width": 375,
   "mode": "nojs",
-  "info": null
+  "state": null
+ },
+ {
+  "v": "cosine-similarity",
+  "width": 375,
+  "mode": "blocked-light",
+  "state": {
+   "ready": false,
+   "frameOpacity": "0",
+   "fallback": "cosine-similarity.fallback-light.svg",
+   "fallbackLoaded": true,
+   "box": [
+    325,
+    500
+   ]
+  }
+ },
+ {
+  "v": "matryoshka-truncation",
+  "width": 375,
+  "mode": "blocked-light",
+  "state": {
+   "ready": false,
+   "frameOpacity": "0",
+   "fallback": "matryoshka-truncation.fallback-light.svg",
+   "fallbackLoaded": true,
+   "box": [
+    325,
+    500
+   ]
+  }
+ },
+ {
+  "v": "cosine-similarity",
+  "width": 375,
+  "mode": "blocked-dark",
+  "state": {
+   "ready": false,
+   "frameOpacity": "0",
+   "fallback": "cosine-similarity.fallback-dark.svg",
+   "fallbackLoaded": true,
+   "box": [
+    325,
+    500
+   ]
+  }
+ },
+ {
+  "v": "matryoshka-truncation",
+  "width": 375,
+  "mode": "blocked-dark",
+  "state": {
+   "ready": false,
+   "frameOpacity": "0",
+   "fallback": "matryoshka-truncation.fallback-dark.svg",
+   "fallbackLoaded": true,
+   "box": [
+    325,
+    500
+   ]
+  }
  },
  {
   "v": "cosine-similarity",
   "width": 1366,
   "mode": "light",
-  "info": {
-   "theme": "light",
-   "bg": "rgb(248, 248, 246)",
-   "overflow": [
-    0,
-    0
-   ],
-   "size": [
+  "state": {
+   "ready": true,
+   "frameOpacity": "1",
+   "fallback": "cosine-similarity.fallback-light.svg",
+   "fallbackLoaded": true,
+   "box": [
     670,
     400
    ]
@@ -134,14 +180,12 @@
   "v": "matryoshka-truncation",
   "width": 1366,
   "mode": "light",
-  "info": {
-   "theme": "light",
-   "bg": "rgb(248, 248, 246)",
-   "overflow": [
-    0,
-    0
-   ],
-   "size": [
+  "state": {
+   "ready": true,
+   "frameOpacity": "1",
+   "fallback": "matryoshka-truncation.fallback-light.svg",
+   "fallbackLoaded": true,
+   "box": [
     670,
     500
    ]
@@ -151,14 +195,12 @@
   "v": "cosine-similarity",
   "width": 1366,
   "mode": "dark",
-  "info": {
-   "theme": "dark",
-   "bg": "rgb(9, 9, 9)",
-   "overflow": [
-    0,
-    0
-   ],
-   "size": [
+  "state": {
+   "ready": true,
+   "frameOpacity": "1",
+   "fallback": "cosine-similarity.fallback-dark.svg",
+   "fallbackLoaded": true,
+   "box": [
     670,
     400
    ]
@@ -168,14 +210,12 @@
   "v": "matryoshka-truncation",
   "width": 1366,
   "mode": "dark",
-  "info": {
-   "theme": "dark",
-   "bg": "rgb(9, 9, 9)",
-   "overflow": [
-    0,
-    0
-   ],
-   "size": [
+  "state": {
+   "ready": true,
+   "frameOpacity": "1",
+   "fallback": "matryoshka-truncation.fallback-dark.svg",
+   "fallbackLoaded": true,
+   "box": [
     670,
     500
    ]
@@ -185,14 +225,12 @@
   "v": "cosine-similarity",
   "width": 1366,
   "mode": "reduced",
-  "info": {
-   "theme": "light",
-   "bg": "rgb(248, 248, 246)",
-   "overflow": [
-    0,
-    0
-   ],
-   "size": [
+  "state": {
+   "ready": true,
+   "frameOpacity": "1",
+   "fallback": "cosine-similarity.fallback-light.svg",
+   "fallbackLoaded": true,
+   "box": [
     670,
     400
    ]
@@ -202,14 +240,12 @@
   "v": "matryoshka-truncation",
   "width": 1366,
   "mode": "reduced",
-  "info": {
-   "theme": "light",
-   "bg": "rgb(248, 248, 246)",
-   "overflow": [
-    0,
-    0
-   ],
-   "size": [
+  "state": {
+   "ready": true,
+   "frameOpacity": "1",
+   "fallback": "matryoshka-truncation.fallback-light.svg",
+   "fallbackLoaded": true,
+   "box": [
     670,
     500
    ]
@@ -219,12 +255,72 @@
   "v": "cosine-similarity",
   "width": 1366,
   "mode": "nojs",
-  "info": null
+  "state": null
  },
  {
   "v": "matryoshka-truncation",
   "width": 1366,
   "mode": "nojs",
-  "info": null
+  "state": null
+ },
+ {
+  "v": "cosine-similarity",
+  "width": 1366,
+  "mode": "blocked-light",
+  "state": {
+   "ready": false,
+   "frameOpacity": "0",
+   "fallback": "cosine-similarity.fallback-light.svg",
+   "fallbackLoaded": true,
+   "box": [
+    670,
+    400
+   ]
+  }
+ },
+ {
+  "v": "matryoshka-truncation",
+  "width": 1366,
+  "mode": "blocked-light",
+  "state": {
+   "ready": false,
+   "frameOpacity": "0",
+   "fallback": "matryoshka-truncation.fallback-light.svg",
+   "fallbackLoaded": true,
+   "box": [
+    670,
+    500
+   ]
+  }
+ },
+ {
+  "v": "cosine-similarity",
+  "width": 1366,
+  "mode": "blocked-dark",
+  "state": {
+   "ready": false,
+   "frameOpacity": "0",
+   "fallback": "cosine-similarity.fallback-dark.svg",
+   "fallbackLoaded": true,
+   "box": [
+    670,
+    400
+   ]
+  }
+ },
+ {
+  "v": "matryoshka-truncation",
+  "width": 1366,
+  "mode": "blocked-dark",
+  "state": {
+   "ready": false,
+   "frameOpacity": "0",
+   "fallback": "matryoshka-truncation.fallback-dark.svg",
+   "fallbackLoaded": true,
+   "box": [
+    670,
+    500
+   ]
+  }
  }
 ]
