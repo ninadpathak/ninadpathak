@@ -203,7 +203,7 @@ Chains live in `og-cards.json`, one entry per slug, read top to bottom, with `*`
 
 ## 13. Interactive visuals
 
-Keep one only when interaction teaches something a drawing can't, such as dragging a vector or scrubbing a slider. Those that stay use the same glyphs, strokes, palette, and word budget, load the site fonts, respect `prefers-reduced-motion`, and get a static plate fallback. Everything else becomes a plate. Plates may later move inline into the page with CSS-only motion (pending decision; see `INVENTORY.md`).
+Keep one only when interaction teaches something a drawing can't, such as dragging a vector or scrubbing a slider. Those that stay use the same glyphs, strokes, palette, and word budget, load the site fonts, respect `prefers-reduced-motion`, and get a static plate fallback. A kept page draws a complete picture without JavaScript and sets `window.npVisualReady` when its script has run. `node fallbacks.mjs` lifts that drawing into `static/visuals/<name>.fallback-{light,dark}.svg`, and the article layers it under the frame (`visual-container--fallback`). The frame stays transparent until the page is ready, so a blocked frame shows the drawing, never an empty box. Everything else becomes a plate. Plates may later move inline into the page with CSS-only motion (pending decision; see `INVENTORY.md`).
 
 ## 14. Accessibility
 
