@@ -211,7 +211,7 @@ class PublishedVideoTests(unittest.TestCase):
         self.assertIn("<summary>Transcript</summary>", html)
         self.assertIn("figures.css", html)
         # The player shows the WebP, the head preloads it at high priority, and the
-        # VideoObject thumbnail stays on the PNG.
+        # VideoObject names the same WebP so search sees one thumbnail URL.
         self.assertIn('poster="/static/videos/speculative-decoding/poster.webp"', html)
         self.assertIn('<link rel="preload" as="image" href="/static/videos/speculative-decoding/poster.webp" type="image/webp" fetchpriority="high">', html)
         self.assertLess(html.index('rel="preload" as="image"'), html.index("</head>"))
@@ -220,7 +220,7 @@ class PublishedVideoTests(unittest.TestCase):
         video = article["video"]
         self.assertEqual(video["@type"], "VideoObject")
         self.assertEqual(video["duration"], "PT40S")
-        self.assertTrue(video["thumbnailUrl"].endswith("/static/videos/speculative-decoding/poster.png"))
+        self.assertEqual(video["thumbnailUrl"], "https://ninadpathak.com/static/videos/speculative-decoding/poster.webp")
         self.assertTrue(video["contentUrl"].endswith("/static/videos/speculative-decoding/speculative-decoding.mp4"))
         for field in ("name", "description", "thumbnailUrl", "uploadDate", "transcript"):
             self.assertTrue(video[field], field)

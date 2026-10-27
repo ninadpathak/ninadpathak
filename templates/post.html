@@ -51,7 +51,7 @@
     "@type": "VideoObject",
     "name": {{ post.video.name | tojson }},
     "description": {{ post.video.description | tojson }},
-    "thumbnailUrl": "{{ site.url }}{{ post.video.poster }}",
+    "thumbnailUrl": "{{ site.url }}{{ post.video.poster_webp }}",
     "contentUrl": "{{ site.url }}{{ post.video.src }}",
     "uploadDate": {{ post.video.upload_date | tojson }},
     "duration": {{ post.video.duration_iso | tojson }},

@@ -5,8 +5,9 @@ Usage: python tools/build_video_poster.py <slug> [--check]
 
 The player shows the poster at most 672 CSS pixels wide (the prose column), so the
 WebP is drawn at 1344 pixels wide, 2x that column, keeping the PNG's aspect ratio.
-Quality 85 keeps the poster well under the 40 KB budget. The PNG stays as the
-VideoObject thumbnailUrl. Generating needs cwebp (brew install webp); --check needs
+Quality 85 keeps the poster well under the 40 KB budget. The WebP is also the
+VideoObject thumbnailUrl, so the player and search use one image; the PNG is its
+source. Generating needs cwebp (brew install webp); --check needs
 nothing beyond Python and verifies the committed WebP: its header, its width, and
 the budget.
 """
