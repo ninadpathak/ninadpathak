@@ -117,7 +117,7 @@ That single step can easily push hundreds of milliseconds onto your total respon
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/rag-reranking/latency-tradeoff.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-reranking/latency-tradeoff.narrow.svg" width="288" height="616"><img class="np-has-narrow" src="/static/images/diagrams/rag-reranking/latency-tradeoff.svg" width="720" height="288" alt="A reranked request in four steps. Embedding the query takes about fifty milliseconds and retrieving a hundred vectors takes milliseconds, so the first stage is fast. Reranking a hundred pairs with a cross-encoder can add hundreds of milliseconds before the answer starts streaming." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Retrieval is fast; the cross-encoder is where the clock starts. Cutting the candidates from 100 to 50 or self-hosting the reranker buys time back.</figcaption>
+  <figcaption>Retrieval is fast; the cross-encoder is where the clock starts.</figcaption>
 </figure>
 
 Accuracy and speed have to be balanced against each other. When latency becomes a hard bottleneck, say a chat interface where anything over a second feels broken, I cut the initial retrieval size from one hundred down to fifty chunks.
