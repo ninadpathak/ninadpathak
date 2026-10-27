@@ -250,3 +250,36 @@ class PublishedVideoTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class WrittenCaptionTests(unittest.TestCase):
+    """Captions show the script's written words, timed by the words the voice said."""
+
+    def setUp(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "build_video_captions", Path(__file__).resolve().parents[1] / "tools/build_video_captions.py")
+        self.captions = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.captions)
+
+    def test_voiced_file_name_takes_the_span_of_its_spoken_words(self):
+        line = {"text": "My CLAUDE.md starts with @AGENTS.md.", "words": [
+            {"w": "My", "start": 0.0, "end": 0.2}, {"w": "Claude", "start": 0.2, "end": 0.5},
+            {"w": "dot", "start": 0.5, "end": 0.6}, {"w": "MD", "start": 0.6, "end": 0.9},
+            {"w": "starts", "start": 0.9, "end": 1.2}, {"w": "with", "start": 1.2, "end": 1.4},
+            {"w": "at", "start": 1.4, "end": 1.5}, {"w": "agents", "start": 1.5, "end": 1.8},
+            {"w": "dot", "start": 1.8, "end": 1.9}, {"w": "MD.", "start": 1.9, "end": 2.2}]}
+        timed = self.captions.written_words(line)
+        self.assertEqual([w["w"] for w in timed], ["My", "CLAUDE.md", "starts", "with", "@AGENTS.md."])
+        self.assertEqual((timed[1]["start"], timed[1]["end"]), (0.2, 0.9))
+        self.assertEqual((timed[4]["start"], timed[4]["end"]), (1.4, 2.2))
+
+    def test_line_whose_text_matches_its_words_is_unchanged(self):
+        words = [{"w": "Same", "start": 0.0, "end": 0.3}, {"w": "words.", "start": 0.3, "end": 0.6}]
+        self.assertIs(self.captions.written_words({"text": "Same words.", "words": words}), words)
+        self.assertIs(self.captions.written_words({"words": words}), words)
+
+    def test_written_word_the_voice_never_said_fails(self):
+        line = {"text": "Two extra words.", "words": [{"w": "Words.", "start": 0.0, "end": 0.4}]}
+        with self.assertRaisesRegex(ValueError, "did not say"):
+            self.captions.written_words(line)

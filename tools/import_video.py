@@ -152,8 +152,10 @@ def main() -> int:
     if not full:
         raise SystemExit(f"{script} has no '### Full text' paragraph")
     transcript = full.group(1).strip()
-    spoken = " ".join(" ".join(w["w"] for w in words[line]["words"]) for line in offsets)
-    if spoken != transcript:
+    # Each line's written text when the voice spelled something out ("Claude dot MD"),
+    # otherwise the words it said.
+    written = " ".join(words[line].get("text") or " ".join(w["w"] for w in words[line]["words"]) for line in offsets)
+    if written != transcript:
         raise SystemExit("words.json does not match the script's full text")
 
     duration = round(timeline["durationInFrames"] / fps)

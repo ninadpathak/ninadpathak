@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/claude-md/, imported by tools/import_video.py from
+# ninadpathak-video films/claude-md (render of 2026-10-28T00:19:58+05:30).
+name: CLAUDE.md and AGENTS.md in 45 seconds
+description: Which instruction file Claude Code and Codex read by default, why AGENTS.md makes the better shared file, and how one @AGENTS.md import lets a single file serve both agents.
+upload_date: '2026-10-28T00:19:58+05:30'
+duration_seconds: 45
+width: 1920
+height: 1080
+file: claude-md.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 8.633
+  L3: 18.767
+  L4: 29.833
+  L5: 34.9
+transcript: Okay, so CLAUDE.md is Claude Code's instruction file, and AGENTS.md is the open format Codex reads for the same job. By default, Claude Code reads AGENTS.md only if there's no CLAUDE.md, so with both in a repo, each agent reads just its own file. So I keep AGENTS.md as the shared file, since more agents read it, and my CLAUDE.md starts with @AGENTS.md. Claude Code expands that import at launch, so one file serves both agents. In that file, I write the commands and rules an agent can't infer from the code, and keep it under two hundred lines.

@@ -10,6 +10,7 @@ takeaways:
 - Write commands and rules an agent cannot infer from the code, and keep the file under 200 lines.
 title: 'CLAUDE.md and AGENTS.md: Which File Loads, and a Template'
 work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for developer tools, including the instruction files coding agents read before they change a repository.'
+video: claude-md
 ---
 
 Put a CLAUDE.md and an AGENTS.md in the same repository and ask Claude Code and Codex what their instructions say. With default settings, Claude Code quotes CLAUDE.md, Codex quotes AGENTS.md, and neither mentions the other file.
