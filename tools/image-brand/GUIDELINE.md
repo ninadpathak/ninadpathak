@@ -148,6 +148,7 @@ Each glyph lives in `lib/glyphs.js`, draws on a 56 × 48 box (strips: 360 × 46)
 | `globe` | Meridians and parallels | The network or the public web | — |
 | `store` | Three stacked cylinder discs | Durable storage | — |
 | `experts` | Grid of cells with a few lit | Sparse selection (`on` of `n`) | `n`, `on`, `cols`, `s` (cell size, default 3.6) |
+| `attention` | Causal score grid: sink column, local diagonal band, heavy-hitter columns | Attention scores or KV-cache retention | `part=sink`, `local`, `heavy` |
 | `ledger` | Rows newest-first, superseded rows hatched | Versioned, append-only records | `rows=n` |
 | `sliding` *(strip)* | Turns in a row under a window bracket; old turns fall away, the newest is accent | A sliding context window | — |
 | `budget` *(strip)* | Per-turn bars of system, replayed history, message, answer | Cost that compounds per turn | — |

@@ -1,0 +1,15 @@
+%% @fig 03
+%% @kicker The knowledge silo bottleneck
+%% @alt A delivery pipeline from code through build and deploy. One stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, no matter how quick the build and deploy are.
+%% @caption Throughput is capped by the slowest station. A ten-minute pipeline means nothing if understanding a dependency first takes hours of asking around.
+%% @path code>build>silo>deploy
+%% @glyph code | window
+%% @glyph build | rack
+%% @glyph silo | reader lock
+%% @glyph deploy | rack
+flowchart LR
+  code["Code"]
+  build["Build"]
+  silo["Silo"]:::focal
+  deploy["Deploy"]
+  code --> build --> silo --> deploy

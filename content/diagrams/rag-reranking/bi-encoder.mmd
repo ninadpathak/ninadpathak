@@ -1,0 +1,20 @@
+%% @fig 01
+%% @kicker The bi-encoder
+%% @alt The query and the document each pass through the embedding model on their own, and each comes out as a single vector. The database compares the two vectors by distance, so the model never sees the query and the document together.
+%% @caption Each text is compressed alone. The similarity score compares two summaries that never met.
+%% @path query>qenc>sim
+%% @glyph query | doc question
+%% @glyph doc | doc
+%% @glyph qenc | core
+%% @glyph denc | core
+%% @glyph sim | vectors
+flowchart TB
+  query["Query"]:::accent
+  doc["Document"]
+  qenc["Encoder"]
+  denc["Encoder"]
+  sim["Similarity"]:::focal
+  query --> qenc
+  doc --> denc
+  qenc --> sim
+  denc --> sim

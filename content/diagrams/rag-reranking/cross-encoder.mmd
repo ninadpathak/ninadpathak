@@ -1,0 +1,17 @@
+%% @fig 02
+%% @kicker The cross-encoder
+%% @alt The query and one candidate document go into the cross-encoder as a single combined input, so every query token can attend to every document token. The model reads the pair side by side and outputs one relevance score.
+%% @caption One model reads the query and the document together, which is why its score is accurate and why it's too slow for the whole corpus.
+%% @path query>cross>score
+%% @glyph query | doc question
+%% @glyph doc | doc
+%% @glyph cross | pair
+%% @glyph score | ranked rows=1 hi=0
+flowchart TB
+  query["Query"]:::accent
+  doc["Document"]
+  cross["Cross-encoder"]:::focal
+  score["Score"]
+  query --> cross
+  doc --> cross
+  cross --> score

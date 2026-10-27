@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/engineer-to-writer/context-bridge.mmd",
+  "hash": "aefba2dc243344e6",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 256,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/engineer-to-writer/context-bridge.narrow",
+    "width": 288,
+    "height": 544,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Engineering detail on one side and the user's outcome on the other, with the documentation page as the bridge between them. The page keeps only the detail that moves the reader toward the outcome and cuts the rest, even when the cut material is good.",
+  "caption": "The page exists to carry a reader from engineering detail to their outcome. Completeness that doesn't serve that crossing gets cut.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/engineer-to-writer/context-bridge.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/engineer-to-writer/context-bridge.narrow.svg\" width=\"288\" height=\"544\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/engineer-to-writer/context-bridge.svg\" width=\"720\" height=\"256\" alt=\"Engineering detail on one side and the user's outcome on the other, with the documentation page as the bridge between them. The page keeps only the detail that moves the reader toward the outcome and cuts the rest, even when the cut material is good.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The page exists to carry a reader from engineering detail to their outcome. Completeness that doesn't serve that crossing gets cut.</figcaption>\n</figure>"
+}

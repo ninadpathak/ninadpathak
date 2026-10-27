@@ -1,0 +1,23 @@
+%% @fig 01
+%% @kicker Single versus multi-agent
+%% @alt A single agent runs one loop with one trace. A multi-agent system puts a supervisor over three workers, each with its own memory and failure boundary, so they can run independent work in parallel, but every handoff between them is a message boundary where things can break in transit.
+%% @caption Parallel workers cut wall-clock time only when the work is independent, and every handoff adds a place to fail.
+%% @glyph single | loop
+%% @glyph sup | loop
+%% @glyph w1 | loop
+%% @glyph w2 | loop
+%% @glyph w3 | loop
+flowchart TB
+  subgraph one [Single]
+    single["Agent"]
+  end
+  subgraph many [Multi]
+    direction TB
+    sup["Supervisor"]:::accent
+    w1["Worker"]
+    w2["Worker"]
+    w3["Worker"]
+    sup --> w1
+    sup --> w2
+    sup --> w3
+  end

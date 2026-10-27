@@ -58,12 +58,10 @@ A system that produces the wrong normal form for `Y` applied to a function is no
 
 A revealing failure is a model that confidently writes a terminating answer for `Ω`, as though a tidy result could replace the missing reduction.
 
-<div class="visual-wrapper">
-  <div class="visual-title">BETA-REDUCTION TRACE ACROSS THREE TIERS</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/lambda-reduction.html" title="A lambda expression reducing step by step with the correct normal form highlighted, illustrating the three difficulty tiers: direct application, chained application, and combinator reduction" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/lambda-calculus-ai/reduction-tiers.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/lambda-calculus-ai/reduction-tiers.narrow.svg" width="288" height="432"><img class="np-has-narrow" src="/static/images/diagrams/lambda-calculus-ai/reduction-tiers.svg" width="720" height="528" alt="Three difficulty tiers for beta reduction. A direct application reaches its normal form in one substitution. A chained application takes two steps, keeping its bindings, before it reaches a normal form. The Omega combinator reduces to itself forever, so the correct answer is to detect that it has no normal form rather than invent a terminating one." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Tier 3 separates systems that preserve fixed-point semantics from systems that write a tidy answer for Ω.</figcaption>
+</figure>
 
 ## The connection to agent architecture
 

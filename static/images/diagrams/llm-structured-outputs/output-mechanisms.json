@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/llm-structured-outputs/output-mechanisms.mmd",
+  "hash": "fa3f0b4d50efe784",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 528,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/llm-structured-outputs/output-mechanisms.narrow",
+    "width": 288,
+    "height": 488,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "The same extraction prompt sent through three mechanisms. JSON mode guarantees only syntactically valid JSON, so a field can come back with the wrong type. Function calling lets the model decide whether to call a tool at all. Structured outputs constrain decoding to the schema, so every response matches it.",
+  "caption": "JSON mode guarantees valid JSON, not your schema. Structured outputs enforce the schema at the token level.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/llm-structured-outputs/output-mechanisms.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/llm-structured-outputs/output-mechanisms.narrow.svg\" width=\"288\" height=\"488\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/llm-structured-outputs/output-mechanisms.svg\" width=\"720\" height=\"528\" alt=\"The same extraction prompt sent through three mechanisms. JSON mode guarantees only syntactically valid JSON, so a field can come back with the wrong type. Function calling lets the model decide whether to call a tool at all. Structured outputs constrain decoding to the schema, so every response matches it.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>JSON mode guarantees valid JSON, not your schema. Structured outputs enforce the schema at the token level.</figcaption>\n</figure>"
+}

@@ -2,7 +2,7 @@
 
 68 live iframes on `origin/main` (51 posts), sorted by GUIDELINE.md §13: keep an iframe only when interaction teaches something a drawing cannot.
 
-**66 replace · 2 keep.** Group A (18) shipped in `image-brand-batch2`, and group B (16) is converted in `image-brand-groupB`; groups C and D (16 each) follow. Each converted figure ships a wide plate and a phone variant.
+**66 replace · 2 keep.** Group A (18) shipped in `image-brand-batch2`, group B (16) is converted in `image-brand-groupB`, and group C (16) in `image-brand-groupC`; group D (16) follows. Each converted figure ships a wide plate and a phone variant.
 
 | # | Post | Visual | Tech | Decision | Group | Reason |
 |---|---|---|---|---|---|---|
@@ -29,30 +29,30 @@
 | 21 | devtools-documentation | `evaluation-funnel` | three | replace | B · converted | Its attrition counter came from a particle simulation, not data; the plate marks the three friction points the article names on the path to a deal. |
 | 22 | documentation-velocity | `dora-multiplier` | svg | replace | B · converted | Two text cards became tile bars at one tile per 50 points: 34% against 750%. |
 | 23 | documentation-velocity | `documentation-debt` | three | replace | B · converted | An animated counter became the three places the article says documentation debt is paid; the 17 hours a week stays in the caption. |
-| 24 | documentation-velocity | `knowledge-silos` | three | replace | C | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 25 | documentation-velocity | `context-switching` | three | replace | C | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 26 | engineer-to-writer | `context-bridge` | three | replace | C | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 27 | fine-tuning-vs-rag | `memory-finetuning-decision` | html | replace | C | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
+| 24 | documentation-velocity | `knowledge-silos` | three | replace | C · converted | An orbiting pipe only hinted at a bottleneck; the plate runs code through build to deploy with the one-person silo as the focal stage. |
+| 25 | documentation-velocity | `context-switching` | three | replace | C · converted | Three floating anchors became the IDE with a short hop to docs in the repo and dashed detours to Slack and a stale wiki. |
+| 26 | engineer-to-writer | `context-bridge` | three | replace | C · converted | Two pillars and a bridge became engineering detail, the page, and the reader's outcome on one path. |
+| 27 | fine-tuning-vs-rag | `memory-finetuning-decision` | html | replace | C · converted | The hover quadrant became the article's own decision framework: facts that change go to RAG, behavior problems go to fine-tuning. |
 | 28 | hybrid-search| `hybrid-search-fusion` | html| replace| A · converted | Animated list merge; ranked-list glyphs show two inputs fusing with the agreed document rising. |
-| 29 | hyperagents-memory | `hyperagents-memory` | three | replace | C | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 30 | kv-cache-eviction | `uv-reflink-lifecycle` | svg | replace | C | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
-| 31 | kv-cache-eviction | `kv-cache-heatmap` | three | replace | C | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 32 | lambda-calculus-ai | `lambda-reduction` | three | replace | C | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
-| 33 | llm-context-windows | `lost-in-the-middle` | svg | replace | C | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
+| 29 | hyperagents-memory | `hyperagents-memory` | three | replace | C · converted | An orbiting icosahedron carried no structure; the plate draws the loop over the article's three layers: working, episodic, knowledge. |
+| 30 | kv-cache-eviction | `uv-reflink-lifecycle` | svg | replace | C · converted | The embed showed uv package caching under an attention-sink heading; the plate shows what the section describes: StreamingLLM keeps sinks and recent tokens, H2O keeps heavy hitters. |
+| 31 | kv-cache-eviction | `kv-cache-heatmap` | three | replace | C · converted | The 3D heatmap became a new attention glyph taken apart into its sink column, local band, and heavy-hitter pillars, still marked illustrative. |
+| 32 | lambda-calculus-ai | `lambda-reduction` | three | replace | C · converted | The click-through trace became the three tiers side by side; Ω loops and the correct answer is to detect it. |
+| 33 | llm-context-windows | `lost-in-the-middle` | svg | replace | C · converted | The animated curve had no data behind it; the plate shows start and end feeding the model and the middle fading, with no invented values. |
 | 34 | llm-inference-optimization| `inference-optimization-stack` | html| replace| A · converted | A static list styled as a card stack; layer slabs picture each lever and number the order the article gives. |
-| 35 | llm-structured-outputs | `structured-outputs-comparison` | three | replace | C | Three.js scene whose only interaction is orbit/hover; depth is decoration, so a layered plate carries the same structure. |
+| 35 | llm-structured-outputs | `structured-outputs-comparison` | three | replace | C · converted | Three code panels became one prompt fanning to JSON mode, function calling, and structured outputs; the 94.2% and 100% figures stay in the prose. |
 | 36 | llm-token-budgets| `token-budget` | html| replace| A · converted | Animated cost readout with no reader input; per-turn bars show the replayed history growing, the article's point. |
-| 37 | memory-compression | `context-compression` | svg | replace | C | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
+| 37 | memory-compression | `context-compression` | svg | replace | C · converted | The animation's 8,400 → 2,100 token counts aren't in the article; the plate shows raw memory scored into kept and dropped. |
 | 38 | memory-serialization| `memory-serialization` | html| replace| A · converted | Animated restart; two rows (store and restore vs. empty after restart) show both outcomes together. |
 | 39 | memory-versioning| `memory-versioning` | html| replace| A · converted | Animated ledger; growing ledger glyphs v1 to v3 against a crossed overwrite show the difference statically. |
 | 40 | mixture-of-experts| `moe-routing` | html| replace| A · converted | Animation lights experts in turn; a 256-cell grid with 8 lit cells encodes "8 of 256" directly. |
 | 41 | model-context-protocol| `mcp-architecture` | html| replace| A · converted | Request animation replays one round trip; a two-way chain host, client, server, tools shows the same flow. |
-| 42 | multi-agent-vs-single-agent | `single-vs-multi-agent` | svg | replace | C | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
-| 43 | rag-evaluation | `rag-eval-metrics` | html | replace | C | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
-| 44 | rag-reranking | `bi-encoder-arch` | html | replace | C | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
-| 45 | rag-reranking | `cross-encoder-arch` | html | replace | C | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
+| 42 | multi-agent-vs-single-agent | `single-vs-multi-agent` | svg | replace | C · converted | The readout's 90% and 59% reliability numbers aren't in the article; the plate shows one agent beside a supervisor over three workers. |
+| 43 | rag-evaluation | `rag-eval-metrics` | html | replace | C · converted | The animated bars showed fixed thresholds the article says to derive yourself; the plate keeps only the order to evaluate in. |
+| 44 | rag-reranking | `bi-encoder-arch` | html | replace | C · converted | Arrow text became query and document passing through separate encoders, meeting only at the similarity score. |
+| 45 | rag-reranking | `cross-encoder-arch` | html | replace | C · converted | Arrow text became query and document entering one cross-encoder together and leaving as one score. |
 | 46 | rag-reranking| `reranking-pipeline` | html| replace| A · converted | Animated sort; ranked lists before and after the cross-encoder show the right chunk moving to the top. |
-| 47 | rag-reranking | `latency-tradeoff` | html | replace | C | Motion only replays a sequence the reader cannot control; a plate with steps or a ring shows the whole sequence at once. |
+| 47 | rag-reranking | `latency-tradeoff` | html | replace | C · converted | The ~50/250/300 ms bars aren't all in the article; the plate spans embed and search as milliseconds and reranking as hundreds of ms, as the prose says. |
 | 48 | rag-reranking | `keyword-exactness` | html | replace | D | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
 | 49 | rag-reranking | `models-providers` | html | replace | D | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |
 | 50 | rag-reranking | `dimension-scaling` | html | replace | D | Static HTML/SVG drawn outside the brand; redraw as a plate so it matches the system and loads no iframe. |

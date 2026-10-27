@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/lambda-calculus-ai/reduction-tiers.mmd",
+  "hash": "5ea469cd4125acf2",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 528,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/lambda-calculus-ai/reduction-tiers.narrow",
+    "width": 288,
+    "height": 432,
+    "minText": {
+      "sans": 13,
+      "mono": 11
+    }
+  },
+  "alt": "Three difficulty tiers for beta reduction. A direct application reaches its normal form in one substitution. A chained application takes two steps, keeping its bindings, before it reaches a normal form. The Omega combinator reduces to itself forever, so the correct answer is to detect that it has no normal form rather than invent a terminating one.",
+  "caption": "Tier 3 separates systems that preserve fixed-point semantics from systems that write a tidy answer for Ω.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/lambda-calculus-ai/reduction-tiers.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/lambda-calculus-ai/reduction-tiers.narrow.svg\" width=\"288\" height=\"432\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/lambda-calculus-ai/reduction-tiers.svg\" width=\"720\" height=\"528\" alt=\"Three difficulty tiers for beta reduction. A direct application reaches its normal form in one substitution. A chained application takes two steps, keeping its bindings, before it reaches a normal form. The Omega combinator reduces to itself forever, so the correct answer is to detect that it has no normal form rather than invent a terminating one.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Tier 3 separates systems that preserve fixed-point semantics from systems that write a tidy answer for Ω.</figcaption>\n</figure>"
+}

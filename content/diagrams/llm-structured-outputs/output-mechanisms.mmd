@@ -1,0 +1,17 @@
+%% @fig 01
+%% @kicker Three output mechanisms
+%% @alt The same extraction prompt sent through three mechanisms. JSON mode guarantees only syntactically valid JSON, so a field can come back with the wrong type. Function calling lets the model decide whether to call a tool at all. Structured outputs constrain decoding to the schema, so every response matches it.
+%% @caption JSON mode guarantees valid JSON, not your schema. Structured outputs enforce the schema at the token level.
+%% @path prompt>strict
+%% @glyph prompt | tokens
+%% @glyph json | doc question
+%% @glyph fn | tools
+%% @glyph strict | doc check
+flowchart LR
+  prompt["Prompt"]
+  json["JSON mode"]:::muted
+  fn["Function calling"]
+  strict["Structured outputs"]:::focal
+  prompt --> json
+  prompt --> fn
+  prompt --> strict

@@ -1,0 +1,24 @@
+%% @fig 01
+%% @kicker What each policy keeps
+%% @alt When the KV cache fills, StreamingLLM keeps the attention sinks, the first few tokens, plus the most recent tokens, and evicts everything in between. H2O keeps the heavy hitters, the tokens with the highest accumulated attention, wherever they sit, and evicts the low scorers.
+%% @caption StreamingLLM keeps the boundaries and forgets the middle; H2O keeps whatever has drawn the most attention.
+%% @glyph sinks | attention part=sink
+%% @glyph middle | tokens rows=5,5
+%% @glyph recent | attention part=local
+%% @glyph heavy | attention part=heavy
+%% @glyph cold | tokens rows=5,5
+flowchart TB
+  subgraph streaming [StreamingLLM]
+    direction LR
+    sinks["Sinks"]:::accent
+    middle["Middle"]:::muted
+    recent["Recent"]:::accent
+    sinks ~~~ middle ~~~ recent
+  end
+  subgraph h2o [H2O]
+    direction LR
+    heavy["Heavy hitters"]:::focal
+    cold["Cold"]:::muted
+    heavy ~~~ cold
+  end
+  streaming ~~~ h2o

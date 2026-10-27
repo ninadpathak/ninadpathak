@@ -24,12 +24,10 @@ Attention is not spread evenly across the prompt. Research has found a consisten
 
 A detail dropped into the middle of a long prompt often gets quietly skipped, as if it were never sent.
 
-<div class="visual-wrapper">
-  <div class="visual-title">LOST IN THE MIDDLE</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/lost-in-the-middle.html" title="U-shaped recall curve: high accuracy at the start and end of the context, sagging in the middle" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/llm-context-windows/lost-in-the-middle.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/llm-context-windows/lost-in-the-middle.narrow.svg" width="288" height="528"><img class="np-has-narrow" src="/static/images/diagrams/llm-context-windows/lost-in-the-middle.svg" width="720" height="544" alt="A long prompt split into its start, middle, and end. The model reliably recalls facts placed at the start, which frames the task, and at the end, which is the runway to the next token. Facts buried in the middle compete for whatever attention is left and often get skipped." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Recall follows a U shape across the context. Put the instruction and the data you care about at the two ends.</figcaption>
+</figure>
 
 Why this happens comes down to how attention rations a finite budget across thousands of tokens. The opening tokens frame the task, the closing tokens are the immediate runway to the next predicted word, and everything in between competes for whatever focus is left.
 

@@ -32,12 +32,10 @@ Every document you store in a vector database passes through an embedding model.
 
 The model compresses the entire semantic meaning of a chunk of text into a single array of floating-point numbers.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Bi-Encoder Architecture</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/bi-encoder-arch.html" title="Bi-Encoder isolated embedding architecture" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/rag-reranking/bi-encoder.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-reranking/bi-encoder.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/rag-reranking/bi-encoder.svg" width="720" height="600" alt="The query and the document each pass through the embedding model on their own, and each comes out as a single vector. The database compares the two vectors by distance, so the model never sees the query and the document together." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Each text is compressed alone. The similarity score compares two summaries that never met.</figcaption>
+</figure>
 
 Your query undergoes the exact same process, and the database then calculates the distance between the query vector and the document vectors.
 
@@ -69,12 +67,10 @@ Every token in the query can attend to every token in the document. The model sp
 
 To extend the earlier picture: the cross-encoder is the one reviewer who sits down with both the question and the candidate answer in front of them and reads them side by side before scoring.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Cross-Encoder Architecture</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/cross-encoder-arch.html" title="Cross-Encoder joint attention architecture" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/rag-reranking/cross-encoder.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-reranking/cross-encoder.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/rag-reranking/cross-encoder.svg" width="720" height="600" alt="The query and one candidate document go into the cross-encoder as a single combined input, so every query token can attend to every document token. The model reads the pair side by side and outputs one relevance score." loading="lazy" decoding="async"></picture></a>
+  <figcaption>One model reads the query and the document together, which is why its score is accurate and why it's too slow for the whole corpus.</figcaption>
+</figure>
 
 You cannot run a cross-encoder over your whole corpus for the initial search, and the reason is purely cost. Scoring a pair means pushing both texts through a transformer at query time.
 
@@ -119,12 +115,10 @@ The cross-encoder is where the clock starts ticking. Running one hundred pairs t
 
 That single step can easily push hundreds of milliseconds onto your total response, the kind of pause a user feels as a beat of hesitation before the answer starts streaming.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Latency Tradeoff Comparison</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/latency-tradeoff.html" title="Latency chart comparing vector search to reranking" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/rag-reranking/latency-tradeoff.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-reranking/latency-tradeoff.narrow.svg" width="288" height="616"><img class="np-has-narrow" src="/static/images/diagrams/rag-reranking/latency-tradeoff.svg" width="720" height="288" alt="A reranked request in four steps. Embedding the query takes about fifty milliseconds and retrieving a hundred vectors takes milliseconds, so the first stage is fast. Reranking a hundred pairs with a cross-encoder can add hundreds of milliseconds before the answer starts streaming." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Retrieval is fast; the cross-encoder is where the clock starts. Cutting the candidates from 100 to 50 or self-hosting the reranker buys time back.</figcaption>
+</figure>
 
 Accuracy and speed have to be balanced against each other. When latency becomes a hard bottleneck, say a chat interface where anything over a second feels broken, I cut the initial retrieval size from one hundred down to fifty chunks.
 

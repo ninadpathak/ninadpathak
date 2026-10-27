@@ -1,0 +1,19 @@
+%% @width 288
+%% @kicker Fine-tuning or RAG
+%% @alt A decision tree. If the knowledge changes frequently, use RAG. If it doesn't, ask whether the problem is behavioral, meaning how the model reasons: a behavioral problem means fine-tuning, and a factual problem means RAG.
+%% @glyph change | doc question w=44
+%% @glyph behave | reader question w=44
+%% @glyph rag | vectors w=44
+%% @glyph ft | core w=44
+%% @glyph rag2 | vectors w=44
+%% @spacing 2,40
+flowchart TB
+  change["Facts change?"]:::accent
+  rag["RAG"]:::focal
+  behave["Behavior issue?"]
+  ft["Fine-tune"]
+  rag2["RAG"]
+  change -->|yes| rag
+  change -->|no| behave
+  behave -->|yes| ft
+  behave -->|no| rag2

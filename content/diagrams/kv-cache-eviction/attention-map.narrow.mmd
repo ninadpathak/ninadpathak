@@ -1,0 +1,16 @@
+%% @width 288
+%% @kicker Where attention lands
+%% @alt An illustrative causal attention map, not measured data. Each row is a query and each column a key. The first column is the attention sink, the band along the diagonal is the immediate local context, and a few columns run the full height as heavy hitters that later tokens keep attending to.
+%% @glyph map | attention
+%% @glyph sink | attention part=sink
+%% @glyph local | attention part=local
+%% @glyph heavy | attention part=heavy
+%% @spacing 8,36
+flowchart LR
+  map["Attention"]:::focal
+  sink["Sink"]
+  local["Local"]
+  heavy["Heavy hitters"]:::accent
+  map --> sink
+  map --> local
+  map --> heavy

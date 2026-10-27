@@ -79,12 +79,10 @@ Trunk-based development lives or dies on rapid context sharing and high-frequenc
 
 A knowledge silo is an undocumented architectural detail that lives only in one engineer's head, the kind of thing you discover exists the first time you need it and that person is on vacation. Silos are the primary bottleneck in the modern engineering pipeline.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Knowledge silo: the throughput bottleneck</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/knowledge-silos.html" title="Knowledge Silo Bottleneck" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/knowledge-silos.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/knowledge-silos.narrow.svg" width="288" height="736"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/knowledge-silos.svg" width="720" height="256" alt="A delivery pipeline from code through build and deploy. One stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, no matter how quick the build and deploy are." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Throughput is capped by the slowest station. A ten-minute pipeline means nothing if understanding a dependency first takes hours of asking around.</figcaption>
+</figure>
 
 Throughput capacity is limited by the slowest component of the system, the same way an assembly line moves only as fast as its slowest station no matter how quick the others are. A deployment pipeline that takes 10 minutes means nothing if understanding the Auth Service dependencies first takes four hours of Slack interrogation.
 
@@ -105,12 +103,10 @@ Once the documentation is the source of truth, the "Bus Factor" of any individua
 
 Context switching is the most expensive operation in engineering. Every time an engineer leaves their IDE to hunt for an answer in Slack, Jira, or a wiki page that 404s, they pay a cognitive restart cost: the held stack of variable names, the half-built mental model of the bug, the thread they were three steps into all get dropped, and rebuilding that state after the detour can take far longer than the search itself.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Context switching: the cognitive load flow</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/context-switching.html" title="Context Switching Cost" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/context-switching.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/context-switching.narrow.svg" width="288" height="432"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/context-switching.svg" width="720" height="528" alt="An engineer working in the IDE needs an answer. Documentation kept in the same repository answers it a few keystrokes away, so the engineer stays in flow. A question sent to Slack or a stale wiki page pulls the engineer out of the IDE and drops the mental state they were holding." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Docs that live next to the code put answers at the point of need. Every detour to Slack or a wiki costs a cognitive restart.</figcaption>
+</figure>
 
 High-quality documentation minimizes this tax by putting answers at the point of need. "Documentation as Code", where docs live in the same repository as the source, earns its keep for that reason.
 

@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/memory-compression/compression-pass.mmd",
+  "hash": "197905c759d9fe52",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 392,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/memory-compression/compression-pass.narrow",
+    "width": 288,
+    "height": 544,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Raw agent memory, every tool response and interaction kept in full, goes through a scoring pass that weighs recency, how often each item was accessed, and explicit importance. High scorers stay in memory; stale references and duplicate facts are dropped.",
+  "caption": "Compression trades recall for capacity. Whatever the scorer can't see, the agent quietly forgets.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/memory-compression/compression-pass.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/memory-compression/compression-pass.narrow.svg\" width=\"288\" height=\"544\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/memory-compression/compression-pass.svg\" width=\"720\" height=\"392\" alt=\"Raw agent memory, every tool response and interaction kept in full, goes through a scoring pass that weighs recency, how often each item was accessed, and explicit importance. High scorers stay in memory; stale references and duplicate facts are dropped.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Compression trades recall for capacity. Whatever the scorer can't see, the agent quietly forgets.</figcaption>\n</figure>"
+}

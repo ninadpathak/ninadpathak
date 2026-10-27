@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/llm-context-windows/lost-in-the-middle.mmd",
+  "hash": "6496a861aa816c29",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 544,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/llm-context-windows/lost-in-the-middle.narrow",
+    "width": 288,
+    "height": 528,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "A long prompt split into its start, middle, and end. The model reliably recalls facts placed at the start, which frames the task, and at the end, which is the runway to the next token. Facts buried in the middle compete for whatever attention is left and often get skipped.",
+  "caption": "Recall follows a U shape across the context. Put the instruction and the data you care about at the two ends.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/llm-context-windows/lost-in-the-middle.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/llm-context-windows/lost-in-the-middle.narrow.svg\" width=\"288\" height=\"528\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/llm-context-windows/lost-in-the-middle.svg\" width=\"720\" height=\"544\" alt=\"A long prompt split into its start, middle, and end. The model reliably recalls facts placed at the start, which frames the task, and at the end, which is the runway to the next token. Facts buried in the middle compete for whatever attention is left and often get skipped.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Recall follows a U shape across the context. Put the instruction and the data you care about at the two ends.</figcaption>\n</figure>"
+}

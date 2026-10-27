@@ -1,0 +1,17 @@
+%% @fig 01
+%% @kicker Three memory layers
+%% @alt The HyperAgent loop reads its working context on every model call. When a session ends, the working context is summarized into episodic memory in a durable store, and the agent queries a long-term knowledge base for facts, procedures, and preferences it doesn't need in every prompt. Each layer down trades speed for capacity.
+%% @caption Like registers, RAM, and disk: the agent reaches for a slower layer only when the faster one can't hold the answer.
+%% @path loop>working
+%% @glyph loop | loop
+%% @glyph working | context
+%% @glyph episodic | ledger rows=4
+%% @glyph knowledge | store
+flowchart LR
+  loop["Agent loop"]:::accent
+  working["Working"]:::focal
+  episodic["Episodic"]
+  knowledge["Knowledge"]
+  loop --> working
+  working --> episodic
+  episodic --> knowledge

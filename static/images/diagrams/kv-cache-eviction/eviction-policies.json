@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/kv-cache-eviction/eviction-policies.mmd",
+  "hash": "aca80c8049939980",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 544,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/kv-cache-eviction/eviction-policies.narrow",
+    "width": 288,
+    "height": 1000,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "When the KV cache fills, StreamingLLM keeps the attention sinks, the first few tokens, plus the most recent tokens, and evicts everything in between. H2O keeps the heavy hitters, the tokens with the highest accumulated attention, wherever they sit, and evicts the low scorers.",
+  "caption": "StreamingLLM keeps the boundaries and forgets the middle; H2O keeps whatever has drawn the most attention.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/kv-cache-eviction/eviction-policies.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/kv-cache-eviction/eviction-policies.narrow.svg\" width=\"288\" height=\"1000\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/kv-cache-eviction/eviction-policies.svg\" width=\"720\" height=\"544\" alt=\"When the KV cache fills, StreamingLLM keeps the attention sinks, the first few tokens, plus the most recent tokens, and evicts everything in between. H2O keeps the heavy hitters, the tokens with the highest accumulated attention, wherever they sit, and evicts the low scorers.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>StreamingLLM keeps the boundaries and forgets the middle; H2O keeps whatever has drawn the most attention.</figcaption>\n</figure>"
+}

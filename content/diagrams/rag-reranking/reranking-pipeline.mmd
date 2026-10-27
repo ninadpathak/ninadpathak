@@ -1,4 +1,4 @@
-%% @fig 01
+%% @fig 03
 %% @kicker Two-stage reranking
 %% @alt Stage one embeds the query with a fast bi-encoder and pulls the top 100 chunks from the vector database, where the right chunk can sit far down the list. Stage two pairs the query with each of those chunks, scores the pairs with a cross-encoder, and promotes the right chunk to the top five.
 %% @caption Somewhere in the top 100 sits the correct answer; the order is the problem the cross-encoder fixes.

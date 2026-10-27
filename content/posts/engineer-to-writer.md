@@ -77,12 +77,10 @@ Engineering often rewards local optimization, shaving milliseconds off one funct
 
 Those local wins can quietly wreck the usefulness of the whole page.
 
-<div class="visual-wrapper">
-  <div class="visual-title">The Context Bridge</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/context-bridge.html" title="The Context Bridge" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/engineer-to-writer/context-bridge.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/engineer-to-writer/context-bridge.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/engineer-to-writer/context-bridge.svg" width="720" height="256" alt="Engineering detail on one side and the user's outcome on the other, with the documentation page as the bridge between them. The page keeps only the detail that moves the reader toward the outcome and cuts the rest, even when the cut material is good." loading="lazy" decoding="async"></picture></a>
+  <figcaption>The page exists to carry a reader from engineering detail to their outcome. Completeness that doesn't serve that crossing gets cut.</figcaption>
+</figure>
 
 A sentence can be grammatically perfect and still wrong for its audience. A section can be technically brilliant and still derail the flow of a tutorial.
 

@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/documentation-velocity/context-switching.mmd",
+  "hash": "e3cf9b0a9acf4f90",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 528,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/documentation-velocity/context-switching.narrow",
+    "width": 288,
+    "height": 432,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "An engineer working in the IDE needs an answer. Documentation kept in the same repository answers it a few keystrokes away, so the engineer stays in flow. A question sent to Slack or a stale wiki page pulls the engineer out of the IDE and drops the mental state they were holding.",
+  "caption": "Docs that live next to the code put answers at the point of need. Every detour to Slack or a wiki costs a cognitive restart.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/documentation-velocity/context-switching.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/documentation-velocity/context-switching.narrow.svg\" width=\"288\" height=\"432\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/documentation-velocity/context-switching.svg\" width=\"720\" height=\"528\" alt=\"An engineer working in the IDE needs an answer. Documentation kept in the same repository answers it a few keystrokes away, so the engineer stays in flow. A question sent to Slack or a stale wiki page pulls the engineer out of the IDE and drops the mental state they were holding.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Docs that live next to the code put answers at the point of need. Every detour to Slack or a wiki costs a cognitive restart.</figcaption>\n</figure>"
+}

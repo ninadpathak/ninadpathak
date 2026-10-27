@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/rag-reranking/cross-encoder.mmd",
+  "hash": "5d3ad144ee7f9493",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 600,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/rag-reranking/cross-encoder.narrow",
+    "width": 288,
+    "height": 544,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "The query and one candidate document go into the cross-encoder as a single combined input, so every query token can attend to every document token. The model reads the pair side by side and outputs one relevance score.",
+  "caption": "One model reads the query and the document together, which is why its score is accurate and why it's too slow for the whole corpus.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-reranking/cross-encoder.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-reranking/cross-encoder.narrow.svg\" width=\"288\" height=\"544\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-reranking/cross-encoder.svg\" width=\"720\" height=\"600\" alt=\"The query and one candidate document go into the cross-encoder as a single combined input, so every query token can attend to every document token. The model reads the pair side by side and outputs one relevance score.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>One model reads the query and the document together, which is why its score is accurate and why it's too slow for the whole corpus.</figcaption>\n</figure>"
+}

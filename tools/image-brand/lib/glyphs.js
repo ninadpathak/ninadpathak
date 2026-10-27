@@ -209,6 +209,21 @@
     for (let i = 0; i < n; i++) R(g, x0 + (i % cols) * (s + gap), y0 + Math.floor(i / cols) * (s + gap), s, s, lit.has(i) ? 'gl-accent' : 'gl-cell', 1);
   };
 
+  // Attention: a causal score grid (row = query, column = key). The first column is the
+  // attention sink, the band along the diagonal is local context, and two full-height columns
+  // are heavy hitters. `part=sink|local|heavy` lights one part; otherwise heavy hitters lead.
+  G.attention = (g, w, h, o) => {
+    const n = 8, s = 4.4, gap = 1.2, heavy = new Set([3, 5]);
+    const x0 = -(n * (s + gap) - gap) / 2, y0 = -(n * (s + gap) - gap) / 2;
+    const partOf = (r, c) => (c === 0 ? 'sink' : r - c <= 1 ? 'local' : heavy.has(c) ? 'heavy' : null);
+    const lit = o.accent ? 'gl-accent' : 'gl-solid';
+    for (let r = 0; r < n; r++) for (let c = 0; c <= r; c++) {
+      const p = partOf(r, c);
+      const cls = o.part ? (p === o.part ? lit : 'gl-cell') : p === 'heavy' ? lit : p ? 'gl-bar' : 'gl-cell';
+      R(g, x0 + c * (s + gap), y0 + r * (s + gap), s, s, cls, 1);
+    }
+  };
+
   // A ledger: rows stacked newest on top; superseded rows hatched, never removed.
   G.ledger = (g, w, h, o) => {
     const n = o.rows || 3, rw = w * 0.62, rh = 8, gap = 3, y0 = -(n * (rh + gap) - gap) / 2;

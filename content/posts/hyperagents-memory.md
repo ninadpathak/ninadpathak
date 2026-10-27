@@ -11,12 +11,10 @@ title: How Memory Works in HyperAgents
 slug: hyperagents-memory
 ---
 
-<div class="visual-wrapper">
-  <div class="visual-title">HyperAgents Memory Architecture</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/hyperagents-memory.html" title="HyperAgents memory architecture" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/hyperagents-memory/memory-layers.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/hyperagents-memory/memory-layers.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/hyperagents-memory/memory-layers.svg" width="720" height="256" alt="The HyperAgent loop reads its working context on every model call. When a session ends, the working context is summarized into episodic memory in a durable store, and the agent queries a long-term knowledge base for facts, procedures, and preferences it doesn't need in every prompt. Each layer down trades speed for capacity." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Like registers, RAM, and disk: the agent reaches for a slower layer only when the faster one can't hold the answer.</figcaption>
+</figure>
 
 ##What Is a Hyperagent And Why Does Memory Matter
 

@@ -78,12 +78,10 @@ Anthropic's `tool_use` blocks deliver parsed arguments as a JavaScript object na
 
 Schema-constrained output can make a defensive parsing wrapper redundant, but only observed failures in the target workflow justify removing it. A model name alone is not that evidence.
 
-<div class="visual-wrapper">
-  <div class="visual-title">THREE MECHANISMS, ONE PROMPT</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/structured-outputs-comparison.html" title="The same extraction prompt feeding JSON mode, function calling, and structured outputs side by side, each producing a differently-shaped result with its reliability number" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/llm-structured-outputs/output-mechanisms.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/llm-structured-outputs/output-mechanisms.narrow.svg" width="288" height="488"><img class="np-has-narrow" src="/static/images/diagrams/llm-structured-outputs/output-mechanisms.svg" width="720" height="528" alt="The same extraction prompt sent through three mechanisms. JSON mode guarantees only syntactically valid JSON, so a field can come back with the wrong type. Function calling lets the model decide whether to call a tool at all. Structured outputs constrain decoding to the schema, so every response matches it." loading="lazy" decoding="async"></picture></a>
+  <figcaption>JSON mode guarantees valid JSON, not your schema. Structured outputs enforce the schema at the token level.</figcaption>
+</figure>
 
 ## The overhead question you need to answer before choosing
 

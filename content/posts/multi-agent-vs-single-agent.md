@@ -57,12 +57,10 @@ Speed gains are real but conditional. When two agents work independent sub-probl
 
 Break a task into three parallel workstreams and you can see something close to a 3x cut in wall-clock time. That only holds if the work is genuinely parallelizable and the agents are not stalling on each other for shared state.
 
-<div class="visual-wrapper">
-  <div class="visual-title">SINGLE VS MULTI-AGENT</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/single-vs-multi-agent.html" title="Single-agent versus multi-agent topology with a tradeoff readout for reliability, latency, and failure surface" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.narrow.svg" width="288" height="656"><img class="np-has-narrow" src="/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.svg" width="720" height="488" alt="A single agent runs one loop with one trace. A multi-agent system puts a supervisor over three workers, each with its own memory and failure boundary, so they can run independent work in parallel, but every handoff between them is a message boundary where things can break in transit." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Parallel workers cut wall-clock time only when the work is independent, and every handoff adds a place to fail.</figcaption>
+</figure>
 
 ## The failure modes nobody talks about
 

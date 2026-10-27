@@ -204,12 +204,10 @@ If you're starting from scratch, optimize in this order:
 
 Starting with answer relevancy alone hides upstream failures. The [embedding models guide](/articles/vector-embeddings/) explains one possible failure in the retrieval layer, but it does not provide benchmark evidence for a particular model.
 
-<div class="visual-wrapper">
-  <div class="visual-title">RAG EVALUATION FUNNEL</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/rag-eval-metrics.html" title="A RAG evaluation funnel scoring context recall, context precision, faithfulness, and answer relevance against their thresholds" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/rag-evaluation/eval-order.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-evaluation/eval-order.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/rag-evaluation/eval-order.svg" width="720" height="256" alt="Four RAG metrics in the order to fix them: context recall first, so the right chunks are retrieved; context precision second, so the context carries signal rather than noise; faithfulness third, so the answer sticks to the context; answer relevancy last, because it measures the whole system working together." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Each stage only means something once the one before it holds. Starting with answer relevancy hides upstream failures.</figcaption>
+</figure>
 
 ## Setting thresholds
 

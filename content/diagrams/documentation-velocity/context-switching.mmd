@@ -1,0 +1,17 @@
+%% @fig 04
+%% @kicker The context switching tax
+%% @alt An engineer working in the IDE needs an answer. Documentation kept in the same repository answers it a few keystrokes away, so the engineer stays in flow. A question sent to Slack or a stale wiki page pulls the engineer out of the IDE and drops the mental state they were holding.
+%% @caption Docs that live next to the code put answers at the point of need. Every detour to Slack or a wiki costs a cognitive restart.
+%% @path ide>docs
+%% @glyph ide | window
+%% @glyph docs | doc check
+%% @glyph slack | reader question
+%% @glyph wiki | doc cross
+flowchart LR
+  ide["IDE"]:::accent
+  docs["Docs in repo"]:::focal
+  slack["Slack"]:::muted
+  wiki["Wiki"]:::muted
+  ide --> docs
+  ide -.-> slack
+  ide -.-> wiki

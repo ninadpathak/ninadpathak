@@ -1,0 +1,21 @@
+%% @width 288
+%% @kicker Three tiers of reduction
+%% @alt Three difficulty tiers for beta reduction. A direct application reaches its normal form in one substitution. A chained application takes two steps, keeping its bindings, before it reaches a normal form. The Omega combinator reduces to itself forever, so the correct answer is to detect that it has no normal form rather than invent a terminating one.
+%% @path omega>halt
+%% @glyph direct | tokens rows=3
+%% @glyph nf1 | doc check
+%% @glyph chained | tokens rows=5
+%% @glyph nf2 | doc check
+%% @glyph omega | loop
+%% @glyph halt | stop
+%% @spacing 16,36
+flowchart LR
+  direct["Direct"]
+  nf1["Normal form"]
+  chained["Chained"]
+  nf2["Normal form"]
+  omega["Ω"]:::accent
+  halt["Detect"]:::focal
+  direct --> nf1
+  chained --> nf2
+  omega --> halt

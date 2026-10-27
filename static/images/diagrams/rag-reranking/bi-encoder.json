@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/rag-reranking/bi-encoder.mmd",
+  "hash": "b5c2097fedf3a33d",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 600,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/rag-reranking/bi-encoder.narrow",
+    "width": 288,
+    "height": 544,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "The query and the document each pass through the embedding model on their own, and each comes out as a single vector. The database compares the two vectors by distance, so the model never sees the query and the document together.",
+  "caption": "Each text is compressed alone. The similarity score compares two summaries that never met.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-reranking/bi-encoder.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-reranking/bi-encoder.narrow.svg\" width=\"288\" height=\"544\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-reranking/bi-encoder.svg\" width=\"720\" height=\"600\" alt=\"The query and the document each pass through the embedding model on their own, and each comes out as a single vector. The database compares the two vectors by distance, so the model never sees the query and the document together.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Each text is compressed alone. The similarity score compares two summaries that never met.</figcaption>\n</figure>"
+}

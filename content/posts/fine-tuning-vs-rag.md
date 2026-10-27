@@ -38,12 +38,10 @@ Hardest of the three is episodic knowledge. What happened in this conversation, 
 
 None of it is knowledge you would fine-tune on even if you could, because it belongs to one user or one interaction, not to the domain.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Fine-Tune vs RAG Decision Quadrant</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/memory-finetuning-decision.html" title="Two-axis decision quadrant: knowledge freshness vs behavior specialization routing to fine-tune, RAG, or both" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.narrow.svg" width="288" height="520"><img class="np-has-narrow" src="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg" width="720" height="640" alt="A decision tree. If the knowledge changes frequently, use RAG. If it doesn't, ask whether the problem is behavioral, meaning how the model reasons: a behavioral problem means fine-tuning, and a factual problem means RAG." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Most production systems end up with both: RAG carries the facts, and fine-tuning adds the reasoning patterns retrieval can't teach.</figcaption>
+</figure>
 
 ## When RAG Is the Obvious Choice
 

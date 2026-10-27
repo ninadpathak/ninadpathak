@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/multi-agent-vs-single-agent/agent-topology.mmd",
+  "hash": "b3d5afcecb23e0cb",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 488,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.narrow",
+    "width": 288,
+    "height": 656,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "A single agent runs one loop with one trace. A multi-agent system puts a supervisor over three workers, each with its own memory and failure boundary, so they can run independent work in parallel, but every handoff between them is a message boundary where things can break in transit.",
+  "caption": "Parallel workers cut wall-clock time only when the work is independent, and every handoff adds a place to fail.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.narrow.svg\" width=\"288\" height=\"656\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.svg\" width=\"720\" height=\"488\" alt=\"A single agent runs one loop with one trace. A multi-agent system puts a supervisor over three workers, each with its own memory and failure boundary, so they can run independent work in parallel, but every handoff between them is a message boundary where things can break in transit.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Parallel workers cut wall-clock time only when the work is independent, and every handoff adds a place to fail.</figcaption>\n</figure>"
+}

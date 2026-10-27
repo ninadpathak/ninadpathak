@@ -1,0 +1,13 @@
+%% @fig 01
+%% @kicker The context bridge
+%% @alt Engineering detail on one side and the user's outcome on the other, with the documentation page as the bridge between them. The page keeps only the detail that moves the reader toward the outcome and cuts the rest, even when the cut material is good.
+%% @caption The page exists to carry a reader from engineering detail to their outcome. Completeness that doesn't serve that crossing gets cut.
+%% @path eng>page>user
+%% @glyph eng | tools
+%% @glyph page | doc
+%% @glyph user | reader check
+flowchart LR
+  eng["Engineering"]
+  page["Page"]:::focal
+  user["Outcome"]
+  eng --> page --> user

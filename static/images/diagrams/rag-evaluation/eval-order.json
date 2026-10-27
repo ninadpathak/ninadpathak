@@ -1,0 +1,24 @@
+{
+  "source": "content/diagrams/rag-evaluation/eval-order.mmd",
+  "hash": "ebb30c455a91f5e1",
+  "pele": "1.8.0",
+  "width": 720,
+  "height": 256,
+  "scale": 1,
+  "minText": {
+    "sans": 13,
+    "mono": 9.5
+  },
+  "narrow": {
+    "rel": "/static/images/diagrams/rag-evaluation/eval-order.narrow",
+    "width": 288,
+    "height": 720,
+    "minText": {
+      "sans": 13,
+      "mono": 9.5
+    }
+  },
+  "alt": "Four RAG metrics in the order to fix them: context recall first, so the right chunks are retrieved; context precision second, so the context carries signal rather than noise; faithfulness third, so the answer sticks to the context; answer relevancy last, because it measures the whole system working together.",
+  "caption": "Each stage only means something once the one before it holds. Starting with answer relevancy hides upstream failures.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-evaluation/eval-order.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-evaluation/eval-order.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-evaluation/eval-order.svg\" width=\"720\" height=\"256\" alt=\"Four RAG metrics in the order to fix them: context recall first, so the right chunks are retrieved; context precision second, so the context carries signal rather than noise; faithfulness third, so the answer sticks to the context; answer relevancy last, because it measures the whole system working together.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Each stage only means something once the one before it holds. Starting with answer relevancy hides upstream failures.</figcaption>\n</figure>"
+}

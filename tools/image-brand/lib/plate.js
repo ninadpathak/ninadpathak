@@ -642,6 +642,8 @@
     const layer = el('g', { class: 'np-dims' }, svg);
     const all = [...nodes.values()];
     const right = Math.max(...all.map((n) => n.r)), bottom = Math.max(...all.map((n) => n.b));
+    const spread = (k) => Math.max(...all.map((n) => n[k])) - Math.min(...all.map((n) => n[k]));
+    const rowFlow = spread('l') >= spread('t');
     const slots = { v: [], h: [] };
     const slot = (kind, lo, hi) => {
       let i = 0;
@@ -665,7 +667,9 @@
     for (const d of src.meta.dims) {
       const a = nodes.get(d.from), b = nodes.get(d.to);
       if (!a || !b) fail(src, `@dim target "${!a ? d.from : d.to}" is not a node or cluster id`);
-      const vertical = a === b || a.b <= b.t + 1 || b.b <= a.t + 1;
+      // A span between stacked nodes runs beside them. A span over one node runs across the
+      // flow: under it in a left-to-right figure, beside it in a top-to-bottom one.
+      const vertical = a === b ? !rowFlow : a.b <= b.t + 1 || b.b <= a.t + 1;
       if (vertical) {
         const top = a.t <= b.t ? a : b, bot = a.b >= b.b ? a : b;
         const x = right + 22 + slot('v', top.t, bot.b) * 30;

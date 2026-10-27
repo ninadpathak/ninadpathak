@@ -1,0 +1,17 @@
+%% @fig 01
+%% @kicker A compression pass
+%% @alt Raw agent memory, every tool response and interaction kept in full, goes through a scoring pass that weighs recency, how often each item was accessed, and explicit importance. High scorers stay in memory; stale references and duplicate facts are dropped.
+%% @caption Compression trades recall for capacity. Whatever the scorer can't see, the agent quietly forgets.
+%% @path raw>score>kept
+%% @glyph raw | ledger rows=5
+%% @glyph score | ranked rows=5 hi=0
+%% @glyph kept | cells fill=0.35
+%% @glyph dropped | ledger rows=3
+flowchart LR
+  raw["Raw memory"]
+  score["Score"]:::accent
+  kept["Kept"]:::focal
+  dropped["Dropped"]:::muted
+  raw --> score
+  score --> kept
+  score --> dropped

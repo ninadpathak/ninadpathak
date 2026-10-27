@@ -48,12 +48,10 @@ StreamingLLM takes a different read: the first few tokens and the most recent to
 [StreamingLLM research](https://arxiv.org/abs/2309.17453) proved that "Attention Sinks" (the first 4 tokens) are mandatory for keeping perplexity from exploding.
 
 
-<div class="visual-wrapper">
-  <div class="visual-title">The Attention Sink: why the first 4 tokens matter</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/uv-reflink-lifecycle.html" title="Attention Sink Visualization" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/kv-cache-eviction/eviction-policies.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/kv-cache-eviction/eviction-policies.narrow.svg" width="288" height="1000"><img class="np-has-narrow" src="/static/images/diagrams/kv-cache-eviction/eviction-policies.svg" width="720" height="544" alt="When the KV cache fills, StreamingLLM keeps the attention sinks, the first few tokens, plus the most recent tokens, and evicts everything in between. H2O keeps the heavy hitters, the tokens with the highest accumulated attention, wherever they sit, and evicts the low scorers." loading="lazy" decoding="async"></picture></a>
+  <figcaption>StreamingLLM keeps the boundaries and forgets the middle; H2O keeps whatever has drawn the most attention.</figcaption>
+</figure>
 
 ## What the included simulation does
 
@@ -73,12 +71,10 @@ Attention-sink research shows that retaining initial tokens can stabilize stream
 
 Local tokens form a diagonal ridge that represents the immediate context. Heavy hitters punch up as vertical pillars of high attention that run across the entire sequence, visible from one end to the other.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Attention pillar decay: 3D density map</div>
-  <div class="visual-container">
-    <iframe src="/static/visuals/kv-cache-heatmap.html" title="3D Attention Map" loading="lazy"></iframe>
-  </div>
-</div>
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/kv-cache-eviction/attention-map.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/kv-cache-eviction/attention-map.narrow.svg" width="288" height="424"><img class="np-has-narrow" src="/static/images/diagrams/kv-cache-eviction/attention-map.svg" width="720" height="424" alt="An illustrative causal attention map, not measured data. Each row is a query and each column a key. The first column is the attention sink, the band along the diagonal is the immediate local context, and a few columns run the full height as heavy hitters that later tokens keep attending to." loading="lazy" decoding="async"></picture></a>
+  <figcaption>An illustration of the pattern, not observed attention data. Drop a heavy hitter and generation can destabilize.</figcaption>
+</figure>
 
 Attention-sink research shows that dropping tokens the model still needs can destabilize generation. The heatmap is an illustration, not observed attention data.
 
