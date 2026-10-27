@@ -1787,6 +1787,8 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
 .cs-metric:last-child { border-right: none; }
 .cs-metric-num   { font-family: var(--mono); font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: var(--weight-medium); color: var(--accent); line-height: var(--leading-none); margin-bottom: var(--space-1); }
 .cs-metric-label { font-size: var(--font-size-md); color: var(--text-2); }
+/* Sits under the metrics grid, so it pulls back into the grid's bottom margin. */
+.case-source { margin: calc(var(--space-3) - var(--space-12)) 0 var(--space-12); font-size: var(--font-size-md); color: var(--text-2); }
 
 .case-body { padding: var(--space-12) 0; }
 .case-body h2 { font-size: var(--font-size-4xl); margin-top: var(--space-10); margin-bottom: var(--space-3-5); }

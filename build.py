@@ -805,6 +805,11 @@ class SiteBuilder:
         )
 
     def build_work_pages(self, work_cases):
+        # A headline number with no stated source reads as a claim. Not fatal: the
+        # source has to come from the client's own analytics, which a build cannot fetch.
+        unsourced = [case["slug"] for case in work_cases if not case.get("headline_source")]
+        if unsourced:
+            print(f"  ! case studies with no headline_source yet: {', '.join(unsourced)}")
         for case in work_cases:
             self.render(
                 "work_single.html",

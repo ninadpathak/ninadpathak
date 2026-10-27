@@ -1,5 +1,5 @@
 ---
-title: "7,000 to 450,000 Monthly Visits, A 64x Traffic Multiplier"
+title: "7,000 to 450,000 Monthly Visits, A 64× Traffic Multiplier"
 client: "Kiwi Sizing"
 industry: "Shopify App / eCommerce"
 duration: "Ongoing"
@@ -65,7 +65,7 @@ That is what let the site scale without turning into empty template inventory.
 ## Traffic grew from 7,000 to 450,000 monthly visits
 
 - 7,000 to 450,000 monthly visits
-- 64x traffic growth
+- 64× traffic growth
 - stronger topical authority in sizing and fit
 - pages that kept compounding after the initial rollout
 

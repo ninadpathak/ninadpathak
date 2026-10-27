@@ -1,5 +1,5 @@
 ---
-title: "From 487 to 203,000 Monthly Visits, And $34K More MRR"
+title: "From 487 to 203,400 Monthly Visits, And $34K More MRR"
 client: "LinuxForDevices"
 industry: "Linux / Developer Media"
 duration: "15 months"
@@ -55,7 +55,7 @@ Developers began citing the tutorials in forums, GitHub discussions, and Stack O
 ## Traffic reached 203,400 monthly visits and organic added revenue
 
 - 487 to 203,400 monthly visits in 15 months
-- 418x traffic growth
+- 418× traffic growth
 - $34,000 in added MRR
 - 1,240% increase in lead generation
 - 740% ROI on content investment
