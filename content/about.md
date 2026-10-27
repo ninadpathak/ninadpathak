@@ -6,7 +6,9 @@ title: About Ninad Pathak
 
 I'm a technical writer. I write developer documentation, tutorials and technical articles for AI and developer-tool companies, and I run the product before I write about it.
 
-Over the last eight years I've worked with Semrush, Adobe, TinyFish, Mastra, Manicule, OpenComputer, Firecrawl, Graphite, Mem0 and Centus. The case studies say what the work did. For Centus I wrote [50+ localization guides](/work/centus/) whose engineer reviews went straight to publish. At Mem0 I [ran a team of 13 writers](/work/mem0/). I built the content programs behind [LinuxForDevices](/work/linuxfordevices/) and [DelightChat](/work/delightchat/), and the programmatic SEO system behind [Kiwi Sizing](/work/kiwisizing/).
+Over the last eight years I've worked with Semrush, Adobe, TinyFish, Mastra, Manicule, OpenComputer, Firecrawl, Graphite, Mem0 and Centus.
+
+For Centus I wrote [50+ localization guides](/work/centus/) whose engineer reviews went straight to publish. At Mem0 I [ran a team of 13 writers](/work/mem0/). I built the content programs behind [LinuxForDevices](/work/linuxfordevices/) and [DelightChat](/work/delightchat/), and the programmatic SEO system behind [Kiwi Sizing](/work/kiwisizing/).
 
 ## I refuse to write around a product I do not understand
 
