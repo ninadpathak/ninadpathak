@@ -1,0 +1,637 @@
+{
+ "L1": {
+  "duration": 8.213,
+  "text": "Okay, so llms.txt is a Markdown file listing the pages I want language models to read first.",
+  "transcript": "Okay, so llms.txt is a Markdown file listing the pages I want language models to read first.",
+  "words": [
+   {
+    "w": "Okay,",
+    "start": 0.08,
+    "end": 0.34,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "so",
+    "start": 0.88,
+    "end": 1.04,
+    "whisper_start": 0.88
+   },
+   {
+    "w": "llms",
+    "start": 1.425,
+    "end": 2.54,
+    "whisper_start": 1.04
+   },
+   {
+    "w": ".txt",
+    "start": 2.54,
+    "end": 3.42,
+    "whisper_start": 2.54
+   },
+   {
+    "w": "is",
+    "start": 3.51,
+    "end": 3.6,
+    "whisper_start": 3.42
+   },
+   {
+    "w": "a",
+    "start": 3.6,
+    "end": 3.74,
+    "whisper_start": 3.6
+   },
+   {
+    "w": "Markdown",
+    "start": 3.74,
+    "end": 4.22,
+    "whisper_start": 3.74
+   },
+   {
+    "w": "file",
+    "start": 4.415,
+    "end": 4.68,
+    "whisper_start": 4.22
+   },
+   {
+    "w": "listing",
+    "start": 5.045,
+    "end": 5.34,
+    "whisper_start": 4.68
+   },
+   {
+    "w": "the",
+    "start": 5.34,
+    "end": 5.52,
+    "whisper_start": 5.34
+   },
+   {
+    "w": "pages",
+    "start": 5.58,
+    "end": 5.9,
+    "whisper_start": 5.52
+   },
+   {
+    "w": "I",
+    "start": 5.9,
+    "end": 6.14,
+    "whisper_start": 5.9
+   },
+   {
+    "w": "want",
+    "start": 6.14,
+    "end": 6.38,
+    "whisper_start": 6.14
+   },
+   {
+    "w": "language",
+    "start": 6.38,
+    "end": 6.78,
+    "whisper_start": 6.38
+   },
+   {
+    "w": "models",
+    "start": 6.78,
+    "end": 7.22,
+    "whisper_start": 6.78
+   },
+   {
+    "w": "to",
+    "start": 7.22,
+    "end": 7.5,
+    "whisper_start": 7.22
+   },
+   {
+    "w": "read",
+    "start": 7.5,
+    "end": 7.7,
+    "whisper_start": 7.5
+   },
+   {
+    "w": "first.",
+    "start": 7.85,
+    "end": 8.0,
+    "whisper_start": 7.7
+   }
+  ]
+ },
+ "L2": {
+  "duration": 5.845,
+  "text": "The proposal only requires an H1, and suggests a summary and linked sections with notes.",
+  "transcript": "The proposal only requires an H1, and suggests a summary and linked sections with notes.",
+  "words": [
+   {
+    "w": "The",
+    "start": 0.065,
+    "end": 0.14,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "proposal",
+    "start": 0.14,
+    "end": 0.58,
+    "whisper_start": 0.14
+   },
+   {
+    "w": "only",
+    "start": 0.58,
+    "end": 0.94,
+    "whisper_start": 0.58
+   },
+   {
+    "w": "requires",
+    "start": 0.94,
+    "end": 1.54,
+    "whisper_start": 0.94
+   },
+   {
+    "w": "an",
+    "start": 1.54,
+    "end": 1.74,
+    "whisper_start": 1.54
+   },
+   {
+    "w": "H1,",
+    "start": 1.74,
+    "end": 2.16,
+    "whisper_start": 1.74
+   },
+   {
+    "w": "and",
+    "start": 2.615,
+    "end": 2.7,
+    "whisper_start": 2.34
+   },
+   {
+    "w": "suggests",
+    "start": 2.7,
+    "end": 3.24,
+    "whisper_start": 2.7
+   },
+   {
+    "w": "a",
+    "start": 3.24,
+    "end": 3.48,
+    "whisper_start": 3.24
+   },
+   {
+    "w": "summary",
+    "start": 3.48,
+    "end": 3.88,
+    "whisper_start": 3.48
+   },
+   {
+    "w": "and",
+    "start": 3.88,
+    "end": 4.28,
+    "whisper_start": 3.88
+   },
+   {
+    "w": "linked",
+    "start": 4.28,
+    "end": 4.6,
+    "whisper_start": 4.28
+   },
+   {
+    "w": "sections",
+    "start": 4.6,
+    "end": 5.08,
+    "whisper_start": 4.6
+   },
+   {
+    "w": "with",
+    "start": 5.08,
+    "end": 5.36,
+    "whisper_start": 5.08
+   },
+   {
+    "w": "notes.",
+    "start": 5.36,
+    "end": 5.56,
+    "whisper_start": 5.36
+   }
+  ]
+ },
+ "L3": {
+  "duration": 8.96,
+  "text": "Against it, my validator finds no errors in Cloudflare's file and twenty-one in Stripe's, which works like a documentation export.",
+  "transcript": "Against it, my validator finds no errors in Cloudflare's file and twenty-one in Stripe's, which works like a documentation export.",
+  "words": [
+   {
+    "w": "Against",
+    "start": 0.05,
+    "end": 0.48,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "it,",
+    "start": 0.48,
+    "end": 0.82,
+    "whisper_start": 0.48
+   },
+   {
+    "w": "my",
+    "start": 1.12,
+    "end": 1.32,
+    "whisper_start": 1.12
+   },
+   {
+    "w": "validator",
+    "start": 1.32,
+    "end": 2.04,
+    "whisper_start": 1.32
+   },
+   {
+    "w": "finds",
+    "start": 2.18,
+    "end": 2.42,
+    "whisper_start": 2.04
+   },
+   {
+    "w": "no",
+    "start": 2.42,
+    "end": 2.74,
+    "whisper_start": 2.42
+   },
+   {
+    "w": "errors",
+    "start": 2.865,
+    "end": 3.16,
+    "whisper_start": 2.74
+   },
+   {
+    "w": "in",
+    "start": 3.16,
+    "end": 3.4,
+    "whisper_start": 3.16
+   },
+   {
+    "w": "Cloudflare's",
+    "start": 3.4,
+    "end": 4.06,
+    "whisper_start": 3.4
+   },
+   {
+    "w": "file",
+    "start": 4.135,
+    "end": 4.44,
+    "whisper_start": 4.06
+   },
+   {
+    "w": "and",
+    "start": 4.635,
+    "end": 4.78,
+    "whisper_start": 4.44
+   },
+   {
+    "w": "twenty",
+    "start": 4.78,
+    "end": 5.02,
+    "whisper_start": 4.78
+   },
+   {
+    "w": "-one",
+    "start": 5.02,
+    "end": 5.28,
+    "whisper_start": 5.02
+   },
+   {
+    "w": "in",
+    "start": 5.28,
+    "end": 5.54,
+    "whisper_start": 5.28
+   },
+   {
+    "w": "Stripe's,",
+    "start": 5.62,
+    "end": 6.08,
+    "whisper_start": 5.54
+   },
+   {
+    "w": "which",
+    "start": 6.39,
+    "end": 6.56,
+    "whisper_start": 6.16
+   },
+   {
+    "w": "works",
+    "start": 6.56,
+    "end": 6.96,
+    "whisper_start": 6.56
+   },
+   {
+    "w": "like",
+    "start": 6.96,
+    "end": 7.3,
+    "whisper_start": 6.96
+   },
+   {
+    "w": "a",
+    "start": 7.37,
+    "end": 7.46,
+    "whisper_start": 7.3
+   },
+   {
+    "w": "documentation",
+    "start": 7.46,
+    "end": 8.06,
+    "whisper_start": 7.46
+   },
+   {
+    "w": "export.",
+    "start": 8.06,
+    "end": 8.82,
+    "whisper_start": 8.06
+   }
+  ]
+ },
+ "L4": {
+  "duration": 8.128,
+  "text": "But the validator can't tell me whether anything fetches the file, and Ahrefs found ninety-seven percent of published files got no request in May.",
+  "transcript": "But the validator can't tell me whether anything fetches the file, and Ahrefs found ninety-seven percent of published files got no request in May.",
+  "words": [
+   {
+    "w": "But",
+    "start": 0.07,
+    "end": 0.14,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "the",
+    "start": 0.19,
+    "end": 0.26,
+    "whisper_start": 0.14
+   },
+   {
+    "w": "validator",
+    "start": 0.26,
+    "end": 0.88,
+    "whisper_start": 0.26
+   },
+   {
+    "w": "can't",
+    "start": 0.88,
+    "end": 1.14,
+    "whisper_start": 0.88
+   },
+   {
+    "w": "tell",
+    "start": 1.14,
+    "end": 1.34,
+    "whisper_start": 1.14
+   },
+   {
+    "w": "me",
+    "start": 1.34,
+    "end": 1.5,
+    "whisper_start": 1.34
+   },
+   {
+    "w": "whether",
+    "start": 1.5,
+    "end": 1.76,
+    "whisper_start": 1.5
+   },
+   {
+    "w": "anything",
+    "start": 1.76,
+    "end": 2.18,
+    "whisper_start": 1.76
+   },
+   {
+    "w": "fetches",
+    "start": 2.46,
+    "end": 2.76,
+    "whisper_start": 2.18
+   },
+   {
+    "w": "the",
+    "start": 2.76,
+    "end": 2.9,
+    "whisper_start": 2.76
+   },
+   {
+    "w": "file,",
+    "start": 2.955,
+    "end": 3.24,
+    "whisper_start": 2.9
+   },
+   {
+    "w": "and",
+    "start": 3.66,
+    "end": 3.82,
+    "whisper_start": 3.66
+   },
+   {
+    "w": "Ahrefs",
+    "start": 3.82,
+    "end": 4.36,
+    "whisper_start": 3.82
+   },
+   {
+    "w": "found",
+    "start": 4.36,
+    "end": 4.58,
+    "whisper_start": 4.36
+   },
+   {
+    "w": "ninety",
+    "start": 4.58,
+    "end": 4.9,
+    "whisper_start": 4.58
+   },
+   {
+    "w": "-seven",
+    "start": 4.9,
+    "end": 5.24,
+    "whisper_start": 4.9
+   },
+   {
+    "w": "percent",
+    "start": 5.355,
+    "end": 5.58,
+    "whisper_start": 5.24
+   },
+   {
+    "w": "of",
+    "start": 5.58,
+    "end": 5.76,
+    "whisper_start": 5.58
+   },
+   {
+    "w": "published",
+    "start": 5.81,
+    "end": 6.1,
+    "whisper_start": 5.76
+   },
+   {
+    "w": "files",
+    "start": 6.215,
+    "end": 6.52,
+    "whisper_start": 6.1
+   },
+   {
+    "w": "got",
+    "start": 6.82,
+    "end": 6.96,
+    "whisper_start": 6.52
+   },
+   {
+    "w": "no",
+    "start": 6.96,
+    "end": 7.22,
+    "whisper_start": 6.96
+   },
+   {
+    "w": "request",
+    "start": 7.22,
+    "end": 7.74,
+    "whisper_start": 7.22
+   },
+   {
+    "w": "in",
+    "start": 7.81,
+    "end": 7.92,
+    "whisper_start": 7.74
+   },
+   {
+    "w": "May.",
+    "start": 7.92,
+    "end": 8.1,
+    "whisper_start": 7.92
+   }
+  ]
+ },
+ "L5": {
+  "duration": 7.915,
+  "text": "So I validate the structure and read my server logs, because a clean file and a fetched file are different facts.",
+  "transcript": "So, I validate the structure and read my server logs, because a clean file and a fetched file are different facts.",
+  "words": [
+   {
+    "w": "So,",
+    "start": 0.065,
+    "end": 0.4,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "I",
+    "start": 0.995,
+    "end": 1.12,
+    "whisper_start": 0.72
+   },
+   {
+    "w": "validate",
+    "start": 1.12,
+    "end": 1.68,
+    "whisper_start": 1.12
+   },
+   {
+    "w": "the",
+    "start": 1.825,
+    "end": 1.9,
+    "whisper_start": 1.68
+   },
+   {
+    "w": "structure",
+    "start": 2.075,
+    "end": 2.34,
+    "whisper_start": 1.9
+   },
+   {
+    "w": "and",
+    "start": 2.34,
+    "end": 2.72,
+    "whisper_start": 2.34
+   },
+   {
+    "w": "read",
+    "start": 2.72,
+    "end": 3.02,
+    "whisper_start": 2.72
+   },
+   {
+    "w": "my",
+    "start": 3.02,
+    "end": 3.2,
+    "whisper_start": 3.02
+   },
+   {
+    "w": "server",
+    "start": 3.2,
+    "end": 3.6,
+    "whisper_start": 3.2
+   },
+   {
+    "w": "logs,",
+    "start": 3.6,
+    "end": 4.08,
+    "whisper_start": 3.6
+   },
+   {
+    "w": "because",
+    "start": 4.345,
+    "end": 4.68,
+    "whisper_start": 4.16
+   },
+   {
+    "w": "a",
+    "start": 4.68,
+    "end": 5.14,
+    "whisper_start": 4.68
+   },
+   {
+    "w": "clean",
+    "start": 5.14,
+    "end": 5.4,
+    "whisper_start": 5.14
+   },
+   {
+    "w": "file",
+    "start": 5.55,
+    "end": 5.78,
+    "whisper_start": 5.4
+   },
+   {
+    "w": "and",
+    "start": 5.78,
+    "end": 5.96,
+    "whisper_start": 5.78
+   },
+   {
+    "w": "a",
+    "start": 5.96,
+    "end": 6.1,
+    "whisper_start": 5.96
+   },
+   {
+    "w": "fetched",
+    "start": 6.1,
+    "end": 6.46,
+    "whisper_start": 6.1
+   },
+   {
+    "w": "file",
+    "start": 6.46,
+    "end": 6.7,
+    "whisper_start": 6.46
+   },
+   {
+    "w": "are",
+    "start": 6.7,
+    "end": 6.92,
+    "whisper_start": 6.7
+   },
+   {
+    "w": "different",
+    "start": 6.92,
+    "end": 7.28,
+    "whisper_start": 6.92
+   },
+   {
+    "w": "facts.",
+    "start": 7.28,
+    "end": 7.72,
+    "whisper_start": 7.28
+   }
+  ]
+ }
+}

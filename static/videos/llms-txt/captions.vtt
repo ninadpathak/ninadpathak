@@ -1,0 +1,37 @@
+WEBVTT
+
+1
+00:00:00.180 --> 00:00:08.498
+Okay, so llms.txt is a Markdown file listing the pages I want language models to read first.
+
+2
+00:00:08.498 --> 00:00:10.993
+The proposal only requires an H1,
+
+3
+00:00:11.048 --> 00:00:14.393
+and suggests a summary and linked sections with notes.
+
+4
+00:00:14.450 --> 00:00:20.790
+Against it, my validator finds no errors in Cloudflare's file and twenty-one in Stripe's,
+
+5
+00:00:20.790 --> 00:00:23.537
+which works like a documentation export.
+
+6
+00:00:23.537 --> 00:00:27.107
+But the validator can't tell me whether anything fetches the file,
+
+7
+00:00:27.127 --> 00:00:31.765
+and Ahrefs found ninety-seven percent of published files got no request in May.
+
+8
+00:00:31.765 --> 00:00:36.045
+So I validate the structure and read my server logs,
+
+9
+00:00:36.045 --> 00:00:39.820
+because a clean file and a fetched file are different facts.

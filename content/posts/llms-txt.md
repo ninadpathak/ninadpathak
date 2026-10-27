@@ -10,6 +10,7 @@ takeaways:
 - Validate the structure and read your server logs separately, because a clean file and a fetched file are different facts.
 title: 'llms.txt: What It Is, What It Does, and Four Real Files Checked'
 work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for developer products, including the indexes and reference pages that AI tools and readers use to find them.'
+video: llms-txt
 ---
 
 Cloudflare's root llms.txt lists its products, and each entry links to that product's own llms.txt with the full index of its pages. Stripe's file opens with prose instructions for coding agents before its first list of links.

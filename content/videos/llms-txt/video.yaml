@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/llms-txt/, imported by tools/import_video.py from
+# ninadpathak-video films/llms-txt (render of 2026-10-28T04:40:23+05:30).
+name: llms.txt in 42 seconds
+description: What an llms.txt file is, what the proposal requires, how real files from Cloudflare and Stripe score against it, and why server logs answer a different question than a validator.
+upload_date: '2026-10-28T04:40:23+05:30'
+duration_seconds: 42
+width: 1920
+height: 1080
+file: llms-txt.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 8.433
+  L3: 14.4
+  L4: 23.467
+  L5: 31.7
+transcript: Okay, so llms.txt is a Markdown file listing the pages I want language models to read first. The proposal only requires an H1, and suggests a summary and linked sections with notes. Against it, my validator finds no errors in Cloudflare's file and twenty-one in Stripe's, which works like a documentation export. But the validator can't tell me whether anything fetches the file, and Ahrefs found ninety-seven percent of published files got no request in May. So I validate the structure and read my server logs, because a clean file and a fetched file are different facts.
