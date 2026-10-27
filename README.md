@@ -175,10 +175,12 @@ python3 lastmod.py
 ```
 
 Cloudflare Pages clones shallow, so the deploy build can't read dates from git. The
-manifest records each page's date with a hash of its sources. If you forget the
-refresh, the build falls back to frontmatter dates and prints a warning, and CI's
-`lastmod.py --check` step fails. Frontmatter `date` and `updated` still work as a
-floor: a page is never dated earlier than either.
+manifest records each page's date with a hash of what its sources say, ignoring
+whitespace, line endings and frontmatter a reader never sees. If a push to main skips
+the refresh, as a Hermes publish does, the "Refresh page dates" workflow runs it with
+full history and commits the manifest as `github-actions[bot]`. Until then the build
+uses frontmatter dates for that page and CI shows a warning. Frontmatter `date` and
+`updated` still work as a floor: a page is never dated earlier than either.
 
 Or push manually:
 

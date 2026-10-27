@@ -184,6 +184,98 @@ class RefreshWorkflowTests(unittest.TestCase):
         self.assertEqual(reseeded["demo"]["lastmod"], "2026-10-30")
 
 
+class InvisibleEditTests(unittest.TestCase):
+    """Edits a reader cannot see must not date a page, whether the refresh sees them
+    uncommitted or a reseed finds them in history. Each case was reproduced in review
+    moving the date to the commit day."""
+
+    POST = ('---\ntitle: Demo\nslug: demo\nstatus: published\n---\n'
+            'First paragraph.\n\n<iframe src="/static/visuals/demo-chart.html"></iframe>\n')
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.repo = pathlib.Path(self.tmp.name)
+        self.old_root = lastmod.ROOT
+        lastmod.ROOT = self.repo
+        self.addCleanup(setattr, lastmod, "ROOT", self.old_root)
+        self.cwd = os.getcwd()
+        os.chdir(self.repo)
+        self.addCleanup(os.chdir, self.cwd)
+        git(self.repo, "init", "-q")
+        pathlib.Path("content/posts").mkdir(parents=True)
+        pathlib.Path("static/visuals").mkdir(parents=True)
+        pathlib.Path("static/videos/clip").mkdir(parents=True)
+        self.post = pathlib.Path("content/posts/demo.md")
+        self.visual = pathlib.Path("static/visuals/demo-chart.html")
+        self.post.write_text(self.POST)
+        self.visual.write_text("<div>\n  <p>v1</p>\n</div>\n")
+        git(self.repo, "add", "-A")
+        git(self.repo, "commit", "-qm", "add", date="2026-05-01T10:00:00+05:30")
+        self.manifest, _ = lastmod.refresh({}, lastmod.discover(), False, "2026-11-02")
+
+    def assert_date_kept(self, edit):
+        edit()
+        refreshed, _ = lastmod.refresh(self.manifest, lastmod.discover(), False, "2026-11-02")
+        self.assertEqual(refreshed["demo"]["lastmod"], "2026-05-01", "uncommitted")
+        git(self.repo, "add", "-A")
+        git(self.repo, "commit", "-qm", "tidy", date="2026-10-30T10:00:00+05:30")
+        reseeded, _ = lastmod.refresh({}, lastmod.discover(), True, "2026-11-02")
+        self.assertEqual(reseeded["demo"]["lastmod"], "2026-05-01", "reseeded from history")
+
+    def test_trailing_spaces(self):
+        self.assert_date_kept(lambda: self.post.write_text(self.POST.replace("paragraph.", "paragraph.   ")))
+
+    def test_an_added_blank_line(self):
+        self.assert_date_kept(lambda: self.post.write_text(self.POST.replace("\n\n", "\n\n\n")))
+
+    def test_crlf_line_endings(self):
+        self.assert_date_kept(lambda: self.post.write_bytes(self.POST.replace("\n", "\r\n").encode()))
+
+    def test_an_internal_frontmatter_key(self):
+        self.assert_date_kept(lambda: self.post.write_text(self.POST.replace("status:", "seo_title: X\nstatus:")))
+
+    def test_a_blank_line_in_an_embedded_visual(self):
+        self.assert_date_kept(lambda: self.visual.write_text("<div>\n\n  <p>v1</p>\n</div>\n"))
+
+    def test_a_visible_frontmatter_change_still_counts(self):
+        self.post.write_text(self.POST.replace("title: Demo", "title: Demo, retitled"))
+        git(self.repo, "commit", "-qam", "retitle", date="2026-10-30T10:00:00+05:30")
+        reseeded, _ = lastmod.refresh({}, lastmod.discover(), True, "2026-11-02")
+        self.assertEqual(reseeded["demo"]["lastmod"], "2026-10-30")
+
+    def test_indentation_inside_a_line_still_counts(self):
+        self.visual.write_text("<div>\n<p>v1</p>\n</div>\n")
+        git(self.repo, "commit", "-qam", "reindent", date="2026-10-30T10:00:00+05:30")
+        reseeded, _ = lastmod.refresh({}, lastmod.discover(), True, "2026-11-02")
+        self.assertEqual(reseeded["demo"]["lastmod"], "2026-10-30")
+
+
+class SourceRuleTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.cwd = os.getcwd()
+        os.chdir(self.tmp.name)
+        self.addCleanup(os.chdir, self.cwd)
+
+    def test_video_media_is_not_a_source_but_its_words_are(self):
+        pathlib.Path("content/posts").mkdir(parents=True)
+        pathlib.Path("content/posts/demo.md").write_text("---\ntitle: D\n---\nBody\n")
+        pathlib.Path("static/videos/clip").mkdir(parents=True)
+        for name in ("captions.vtt", "clip.mp4", "poster.png", "poster.webp"):
+            pathlib.Path("static/videos/clip", name).write_text("x")
+        names = {p.name for p in lastmod.source_paths(pathlib.Path("content/posts/demo.md"), "demo", "clip")}
+        self.assertIn("captions.vtt", names)
+        self.assertFalse(names & {"clip.mp4", "poster.png", "poster.webp"})
+
+    def test_slug_matches_build_for_an_awkward_filename(self):
+        from build import slugify
+        path = pathlib.Path("content/posts/My_Odd File.md")
+        self.assertEqual(lastmod.post_slug(path, {}), slugify("My_Odd File"))
+        self.assertEqual(lastmod.post_slug(path, {}), "my-odd-file")
+
+
 class ResolveUpdatedTests(unittest.TestCase):
     """The build trusts a manifest entry only while its sources hash matches."""
 
@@ -225,15 +317,10 @@ def lastmod_floor(meta):
     return latest([meta.get("date"), meta.get("updated")])
 
 
-class ManifestIsCurrentTests(unittest.TestCase):
-    def test_every_post_has_a_current_entry(self):
-        cwd = os.getcwd()
-        os.chdir(ROOT)
-        try:
-            problems = lastmod.stale_entries(lastmod.load_manifest(), lastmod.discover())
-        finally:
-            os.chdir(cwd)
-        self.assertEqual(problems, [], "run `python3 lastmod.py` and commit content/lastmod.json")
+# No test asserts the committed manifest is current. A stale manifest is the normal
+# state for a minute after every Hermes publish, until the "Refresh page dates"
+# workflow commits the refresh, so failing the suite on it would turn CI red by
+# default. quality.yml reports it as a warning in its last step instead.
 
 
 class BuiltDatesAgreeTests(unittest.TestCase):
@@ -258,6 +345,16 @@ class BuiltDatesAgreeTests(unittest.TestCase):
                 self.assertEqual(visible.group(1), modified.group(1), path)
 
     def test_speculative_decoding_carries_its_video_date(self):
+        cwd = os.getcwd()
+        os.chdir(ROOT)
+        try:
+            pages = lastmod.discover()
+            entry = lastmod.load_manifest().get("speculative-decoding")
+            current = entry and entry["sources"] == lastmod.sources_hash(pages["speculative-decoding"])
+        finally:
+            os.chdir(cwd)
+        if not current:
+            self.skipTest("its manifest entry is stale until the refresh workflow runs")
         self.assertGreaterEqual(self.lastmods["/articles/speculative-decoding/"], "2026-10-27")
 
     def test_home_and_sections_are_the_newest_of_their_articles(self):

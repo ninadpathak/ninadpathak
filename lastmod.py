@@ -12,22 +12,25 @@ file's last commit is the tip commit, so every page would claim to be new. So th
 dates are computed where full history exists and committed:
 
     python3 lastmod.py            # refresh entries whose sources changed
-    python3 lastmod.py --check    # exit 1 if any entry is stale (CI runs this)
+    python3 lastmod.py --check    # exit 1 if any entry is stale (CI warns on it)
     python3 lastmod.py --reseed   # recompute every entry from git history
 
 Each entry stores a hash of the page's sources. The build uses an entry only while
 the hash still matches, so a stale manifest can never pin an edited page to an old
-date silently: the build falls back to frontmatter and warns, and CI goes red.
+date silently: the build falls back to frontmatter and warns, and so does CI.
 
-A refresh dates a changed entry from git when its sources are committed, and with
-today's date when they carry uncommitted edits, which is the normal case when it is
-run just before a commit.
+A refresh dates a changed entry by the newest commit that changed what its sources
+say, and with today's date when the working copy says something HEAD does not,
+which is the normal case when it is run just before a commit. On main, the lastmod
+workflow runs the refresh after every push and commits the manifest, so a publish
+that skipped it is dated from its own commit.
 
 A page's sources are its post file, its figure sources in content/diagrams/<slug>/,
 every interactive visual it embeds from static/visuals/, and, when it declares a
-video, content/videos/<video>/ and static/videos/<video>/. Share-card sources
-(og.mmd) and rendered images are left out: a restyle of every card is not a change
-to what any article says.
+video, content/videos/<video>/ and the captions and transcripts in
+static/videos/<video>/. Share-card sources (og.mmd), rendered images and video
+media (the encoded file, the poster) are left out: a restyle of every card or a
+re-encode is not a change to what any article says.
 
 The hash covers what the files say, not where they live, so a pure rename leaves an
 entry untouched. A rename that changes the slug moves the old entry's date to the
@@ -52,15 +55,31 @@ MANIFEST = Path("content/lastmod.json")
 POSTS = Path("content/posts")
 
 
+# Frontmatter a reader can see on the page. Anything else (seo_title, og_image,
+# tags, status, internal notes) can change without the page changing. `updated` is
+# left out because it already acts as a floor on the date in build.py.
+VISIBLE_FIELDS = ("title", "description", "date", "category", "video", "takeaways", "work_note")
+
+# Files under static/videos/<video>/ that carry words. The encoded video and its
+# poster are media: re-encoding them (the WebP poster switch, say) says nothing new.
+VIDEO_TEXT_SUFFIXES = {".vtt", ".srt", ".txt", ".json"}
+
+
 def post_slug(path: Path, meta: dict) -> str:
-    # Mirrors build.py: frontmatter slug wins, else the file stem.
-    return str(meta.get("slug") or path.stem)
+    # The same rule build.py uses, from build.py, so a filename with capitals or
+    # underscores maps to the same key in both. Imported here because build.py
+    # imports this module.
+    from build import slugify
+    return str(meta.get("slug") or slugify(path.stem))
 
 
 def ignored(path: Path) -> bool:
     """Share-card sources (og.mmd) are not article content: one commit that restyled
     every card would otherwise date 60-odd unchanged articles to the same day."""
-    return path.name == ".DS_Store" or path.stem == "og" or path.stem.startswith("og.")
+    if path.name == ".DS_Store" or path.stem == "og" or path.stem.startswith("og."):
+        return True
+    parts = path.as_posix().split("/")
+    return parts[:2] == ["static", "videos"] and path.suffix.lower() not in VIDEO_TEXT_SUFFIXES
 
 
 VISUAL_REF = re.compile(r"/static/visuals/([A-Za-z0-9_-]+)(?:\.html)?(?![A-Za-z0-9_.-])")
@@ -85,10 +104,55 @@ def source_paths(post_path: Path, slug: str, video) -> list[Path]:
     return sorted(set(files), key=lambda p: p.as_posix())
 
 
+def is_post(path: Path) -> bool:
+    return path.suffix == ".md" and path.as_posix().startswith("content/posts/")
+
+
+def normalize(data: bytes, post: bool, blank_lines_matter: bool = True) -> bytes:
+    """What a file says, without the edits a reader cannot see.
+
+    Line endings are unified, trailing whitespace is dropped, and runs of blank lines
+    count as one, so a CRLF conversion, stray spaces or an extra blank line do not
+    date a page. In HTML and Mermaid sources a blank line never renders, so there
+    they are dropped altogether; in Markdown one can split a paragraph, so it counts. Spaces inside a line are kept: indentation is meaningful in code
+    blocks and YAML. For a post, only VISIBLE_FIELDS of the frontmatter count.
+    Bytes that are not UTF-8 text are compared as they are.
+    """
+    try:
+        text = data.decode("utf-8")
+    except UnicodeDecodeError:
+        return data
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    if post:
+        try:
+            parsed = frontmatter.loads(text)
+        except Exception:
+            # An old version in history with frontmatter YAML cannot parse. Compare
+            # it as plain text, which makes it differ from its neighbours, as it did
+            # for readers: the build fails on it.
+            parsed = None
+        if parsed is not None:
+            visible = {key: parsed.metadata[key] for key in VISIBLE_FIELDS if key in parsed.metadata}
+            text = json.dumps(visible, sort_keys=True, default=str) + "\n" + parsed.content
+    lines = [line.rstrip() for line in text.split("\n")]
+    if not blank_lines_matter:
+        lines = [line for line in lines if line]
+    text = re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip("\n")
+    return text.encode("utf-8")
+
+
+BLANK_LINES_INVISIBLE = {".html", ".htm", ".mmd", ".svg"}
+
+
+def content_digest(data: bytes, path: Path) -> str:
+    blank_lines_matter = path.suffix.lower() not in BLANK_LINES_INVISIBLE
+    return hashlib.sha256(normalize(data, is_post(path), blank_lines_matter)).hexdigest()
+
+
 def sources_hash(paths: list[Path]) -> str:
-    """A hash of the files' contents only. Paths are left out on purpose: moving or
+    """A hash of what the files say. Paths are left out on purpose: moving or
     renaming a file is not a change to what the page says."""
-    contents = sorted(hashlib.sha256(path.read_bytes()).hexdigest() for path in paths)
+    contents = sorted(content_digest(path.read_bytes(), path) for path in paths)
     return hashlib.sha256("\n".join(contents).encode("ascii")).hexdigest()
 
 
@@ -114,44 +178,96 @@ def _git(*args: str) -> str:
                           check=True).stdout.strip()
 
 
+def _blobs(shas: list[str]) -> dict[str, bytes]:
+    """Read many blobs in one `git cat-file --batch` call."""
+    if not shas:
+        return {}
+    proc = subprocess.run(["git", "cat-file", "--batch"], cwd=ROOT, check=True,
+                          input="".join(f"{sha}\n" for sha in shas).encode("ascii"),
+                          capture_output=True)
+    out, blobs, pos = proc.stdout, {}, 0
+    for sha in shas:
+        header_end = out.index(b"\n", pos)
+        header = out[pos:header_end].split()
+        size = int(header[2])
+        blobs[sha] = out[header_end + 1:header_end + 1 + size]
+        pos = header_end + 1 + size + 1
+    return blobs
+
+
 def is_shallow() -> bool:
     return _git("rev-parse", "--is-shallow-repository") == "true"
 
 
-def has_uncommitted(paths: list[Path]) -> bool:
-    return bool(_git("status", "--porcelain", "--", *[p.as_posix() for p in paths]))
+def changed_since_head(paths: list[Path]) -> bool:
+    """True when the working copy says something HEAD does not, after normalizing.
 
-
-def file_last_changed(path: Path) -> str | None:
-    """Date of the newest commit that changed this file's content, following renames.
-
-    A pure rename (R100) is skipped: on 2026-10-04 one commit renamed 60 post files to
-    their canonical slugs without changing a byte or a URL, and a plain `git log`
-    would date all 60 pages to that day. The date is the committer's, in the
-    committer's own timezone, so a commit made just after midnight in Mumbai keeps
-    its local date.
+    Only reached for a page whose manifest hash no longer matches. A pure rename
+    never gets here (the hash ignores paths, and a slug change inherits its orphaned
+    entry), so a path that HEAD lacks means new content and counts as a change.
     """
-    log = _git("log", "--follow", "-M", "--format=%x00%cI", "--name-status", "--",
+    if not _git("status", "--porcelain", "--", *[p.as_posix() for p in paths]):
+        return False
+    shas = []
+    for path in paths:
+        try:
+            shas.append(_git("rev-parse", f"HEAD:{path.as_posix()}"))
+        except subprocess.CalledProcessError:
+            return True
+    blobs = _blobs(shas)
+    head = sorted(content_digest(blobs[sha], path) for sha, path in zip(shas, paths))
+    current = sorted(content_digest(path.read_bytes(), path) for path in paths)
+    return head != current
+
+
+def file_versions(path: Path) -> list[tuple[str, str]]:
+    """(date, blob) for each commit that touched the file, newest first, following
+    renames. The date is the committer's, in the committer's own timezone, so a
+    commit made just after midnight in Mumbai keeps its local date."""
+    log = _git("log", "--follow", "-M", "--no-abbrev", "--format=%x00%cI", "--raw", "--",
                path.as_posix())
+    versions = []
     for record in log.split("\0")[1:]:
         lines = [line for line in record.splitlines() if line.strip()]
         if not lines:
             continue
-        stamp, statuses = lines[0], [line.split("\t")[0] for line in lines[1:]]
-        if statuses and all(status == "R100" for status in statuses):
+        raws = [line for line in lines[1:] if line.startswith(":")]
+        if not raws:
             continue
-        return stamp[:10]
-    return None
+        new_sha = raws[-1].split()[3]
+        if set(new_sha) == {"0"}:
+            continue  # deleted in this commit
+        versions.append((lines[0][:10], new_sha))
+    return versions
+
+
+def file_last_changed(path: Path) -> str | None:
+    """Date of the newest commit that changed what the file says.
+
+    Commits whose normalized content equals the version before them are skipped: a
+    pure rename (on 2026-10-04 one commit renamed 60 post files), a CRLF conversion,
+    a whitespace tidy, or a frontmatter key no reader sees. With no such commit, the
+    date the file was added.
+    """
+    versions = file_versions(path)
+    if not versions:
+        return None
+    blobs = _blobs(sorted({sha for _, sha in versions}))
+    digests = [content_digest(blobs[sha], path) for _, sha in versions]
+    for i in range(len(versions) - 1):
+        if digests[i] != digests[i + 1]:
+            return versions[i][0]
+    return versions[-1][0]
 
 
 def last_commit_date(paths: list[Path]) -> str | None:
-    """The newest content change across a page's sources."""
+    """The newest change in what any of a page's sources say."""
     dates = [d for d in (file_last_changed(p) for p in paths) if d]
     return max(dates) if dates else None
 
 
 def date_for(paths: list[Path], today: str) -> str:
-    if has_uncommitted(paths):
+    if changed_since_head(paths):
         return today
     return last_commit_date(paths) or today
 

@@ -67,13 +67,6 @@ jobs:
       - name: Compile Python sources
         run: python -m compileall -q build.py check_rules.py rule_checker.py seo_audit.py lastmod.py tests
 
-      # Cloudflare Pages clones shallow, so the deploy build cannot date pages from git.
-      # It reads content/lastmod.json instead and trusts an entry only while the page's
-      # sources still hash the same. This fails when a post, figure source or video
-      # changed without `python3 lastmod.py` being run and its manifest committed. The
-      # deploy itself never fails on this: it falls back to frontmatter dates and warns.
-      - name: Check the lastmod manifest is current
-        run: python lastmod.py --check
 
       # MUST RUN BEFORE THE TESTS. Several tests read the built site — tool schema,
       # tool end-to-end, cluster and link integrity — and they SKIP when output/ is
@@ -240,3 +233,15 @@ jobs:
       # `output/` is untracked and .gitignored — Cloudflare Pages generates it at build
       # time — so the old "verify generated output is committed" step diffed nothing and
       # passed unconditionally. Removed rather than left in place looking like a check.
+
+      # LAST, and a warning rather than a failure. Cloudflare Pages clones shallow, so
+      # the deploy reads page dates from content/lastmod.json and trusts an entry only
+      # while the page's sources still say the same thing. Hermes publishes without
+      # refreshing it, and the "Refresh page dates" workflow commits the refresh a
+      # minute later, so a stale manifest here is expected on a publish and must not
+      # turn CI red or skip the checks above. It stays visible as an annotation.
+      - name: Report a stale lastmod manifest
+        run: |
+          if ! python lastmod.py --check; then
+            echo "::warning title=lastmod manifest is stale::The Refresh page dates workflow commits the refresh on main. On a branch, run python3 lastmod.py and commit content/lastmod.json."
+          fi
