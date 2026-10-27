@@ -11,7 +11,8 @@
   display: block;
   cursor: zoom-in;
 }
-.np-figure img {
+.np-figure img,
+.np-figure video {
   display: block;
   width: 100%;
   height: auto;

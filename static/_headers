@@ -4,3 +4,7 @@
 # crawl a visual to honour indexifembedded.
 /static/visuals/*
   X-Robots-Tag: noindex, indexifembedded
+
+# Article videos: WebVTT must be served as text/vtt or Firefox ignores the captions track.
+/static/videos/:slug/captions.vtt
+  Content-Type: text/vtt; charset=utf-8

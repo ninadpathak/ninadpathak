@@ -57,6 +57,52 @@ def render_work_note(note) -> str:
     return f'{escape(before)}<a href="{url}">{escape(label)}</a>{escape(after)}'
 
 
+VIDEO_FIELDS = ("name", "description", "upload_date", "duration_seconds", "width", "height",
+                "file", "poster", "captions", "transcript")
+
+
+def load_video(slug):
+    """Resolve an article's `video:` frontmatter to the player and VideoObject data.
+
+    Metadata lives in content/videos/<slug>/video.yaml and the served files in
+    static/videos/<slug>/. A declared video that is missing a field or a file fails
+    the build, because a broken player at the top of an article is worse than none.
+    """
+    if not slug:
+        return None
+    if not isinstance(slug, str) or not re.fullmatch(r"[a-z0-9-]+", slug):
+        raise ValueError(f"video must be a lowercase slug, got {slug!r}")
+    meta_path = ROOT / "content" / "videos" / slug / "video.yaml"
+    if not meta_path.is_file():
+        raise ValueError(f"video {slug!r} has no {meta_path.relative_to(ROOT)}")
+    meta = yaml.safe_load(meta_path.read_text(encoding="utf-8")) or {}
+    missing = [field for field in VIDEO_FIELDS if meta.get(field) in (None, "")]
+    if missing:
+        raise ValueError(f"{meta_path.relative_to(ROOT)} is missing {', '.join(missing)}")
+    base = f"/static/videos/{slug}"
+    for field in ("file", "poster", "captions"):
+        if not (ROOT / "static" / "videos" / slug / meta[field]).is_file():
+            raise ValueError(f"video {slug!r}: static/videos/{slug}/{meta[field]} does not exist")
+    captions = (ROOT / "static" / "videos" / slug / meta["captions"]).read_text(encoding="utf-8")
+    if not captions.startswith("WEBVTT"):
+        raise ValueError(f"video {slug!r}: {meta['captions']} is not a WebVTT file")
+    seconds = int(meta["duration_seconds"])
+    minutes, secs = divmod(seconds, 60)
+    return {
+        "slug": slug,
+        "name": meta["name"],
+        "description": meta["description"],
+        "upload_date": str(meta["upload_date"]),
+        "duration_iso": f"PT{minutes}M{secs}S" if minutes else f"PT{secs}S",
+        "width": int(meta["width"]),
+        "height": int(meta["height"]),
+        "src": f"{base}/{meta['file']}",
+        "poster": f"{base}/{meta['poster']}",
+        "captions": f"{base}/{meta['captions']}",
+        "transcript": meta["transcript"],
+    }
+
+
 def slugify(text: str) -> str:
     text = text.lower().strip()
     text = re.sub(r"[^\w\s-]", "", text)
@@ -400,7 +446,9 @@ class SiteBuilder:
                 # the stylesheet; the element inside it is irrelevant.
                 "has_visuals": ('class="visual-' in html) or ("<iframe" in html),
                 "has_flowchart": 'class="flowchart' in html,
-                "has_figure": 'class="np-figure' in html,
+                "video": load_video(post.get("video")),
+                # figures.css also sizes the article video, so a video turns it on.
+                "has_figure": 'class="np-figure' in html or bool(post.get("video")),
                 # Share card: frontmatter wins; otherwise the card the image pipeline
                 # rendered for this slug (tools/image-brand), else the site default.
                 "og_image": post.get("og_image") or default_og_image(slug),

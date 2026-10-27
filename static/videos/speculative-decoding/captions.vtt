@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.100 --> 00:00:03.960
+Okay, so my 70B makes one token at a time,
+
+2
+00:00:03.960 --> 00:00:07.567
+reading all its weights from memory while the compute sits idle.
+
+3
+00:00:07.567 --> 00:00:10.387
+So I use speculative decoding,
+
+4
+00:00:10.387 --> 00:00:13.500
+where a 1B model drafts the next few tokens.
+
+5
+00:00:13.500 --> 00:00:16.320
+My 70B checks them all in one pass,
+
+6
+00:00:16.320 --> 00:00:18.900
+and because the weights load once,
+
+7
+00:00:18.900 --> 00:00:22.200
+that costs about the same as making one token.
+
+8
+00:00:22.200 --> 00:00:26.800
+It keeps what it agrees with and fixes the first miss,
+
+9
+00:00:26.960 --> 00:00:30.060
+so three right out of five gives me four tokens.
+
+10
+00:00:30.067 --> 00:00:32.887
+Since my 70B has the final say,
+
+11
+00:00:32.927 --> 00:00:34.567
+the output doesn't change,
+
+12
+00:00:34.567 --> 00:00:37.867
+and a good draft makes it two to three times faster.

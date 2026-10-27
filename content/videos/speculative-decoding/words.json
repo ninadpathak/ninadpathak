@@ -1,0 +1,542 @@
+{
+ "L1": {
+  "duration": 7.339,
+  "text": "Okay, so my 70B makes one token at a time, reading all its weights from memory while the compute sits idle.",
+  "transcript": "Okay, so my 70B makes one token at a time, reading all its weights from memory while the compute sits idle.",
+  "words": [
+   {
+    "w": "Okay,",
+    "start": 0.0,
+    "end": 0.24
+   },
+   {
+    "w": "so",
+    "start": 0.44,
+    "end": 0.56
+   },
+   {
+    "w": "my",
+    "start": 0.56,
+    "end": 1.1
+   },
+   {
+    "w": "70B",
+    "start": 1.1,
+    "end": 1.74
+   },
+   {
+    "w": "makes",
+    "start": 1.74,
+    "end": 2.12
+   },
+   {
+    "w": "one",
+    "start": 2.12,
+    "end": 2.5
+   },
+   {
+    "w": "token",
+    "start": 2.5,
+    "end": 2.92
+   },
+   {
+    "w": "at",
+    "start": 2.92,
+    "end": 3.1
+   },
+   {
+    "w": "a",
+    "start": 3.1,
+    "end": 3.18
+   },
+   {
+    "w": "time,",
+    "start": 3.18,
+    "end": 3.5
+   },
+   {
+    "w": "reading",
+    "start": 3.86,
+    "end": 4.42
+   },
+   {
+    "w": "all",
+    "start": 4.42,
+    "end": 4.64
+   },
+   {
+    "w": "its",
+    "start": 4.64,
+    "end": 4.82
+   },
+   {
+    "w": "weights",
+    "start": 4.82,
+    "end": 5.12
+   },
+   {
+    "w": "from",
+    "start": 5.12,
+    "end": 5.36
+   },
+   {
+    "w": "memory",
+    "start": 5.36,
+    "end": 5.74
+   },
+   {
+    "w": "while",
+    "start": 5.74,
+    "end": 6.1
+   },
+   {
+    "w": "the",
+    "start": 6.1,
+    "end": 6.26
+   },
+   {
+    "w": "compute",
+    "start": 6.26,
+    "end": 6.64
+   },
+   {
+    "w": "sits",
+    "start": 6.64,
+    "end": 6.96
+   },
+   {
+    "w": "idle.",
+    "start": 6.96,
+    "end": 7.22
+   }
+  ]
+ },
+ "L2": {
+  "duration": 5.824,
+  "text": "So I use speculative decoding, where a 1B model drafts the next few tokens.",
+  "transcript": "So I use speculative decoding, where a 1B model drafts the next few tokens.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.3
+   },
+   {
+    "w": "I",
+    "start": 0.3,
+    "end": 0.76
+   },
+   {
+    "w": "use",
+    "start": 0.76,
+    "end": 1.26
+   },
+   {
+    "w": "speculative",
+    "start": 1.26,
+    "end": 1.84
+   },
+   {
+    "w": "decoding,",
+    "start": 1.84,
+    "end": 2.46
+   },
+   {
+    "w": "where",
+    "start": 2.82,
+    "end": 3.02
+   },
+   {
+    "w": "a",
+    "start": 3.02,
+    "end": 3.32
+   },
+   {
+    "w": "1B",
+    "start": 3.32,
+    "end": 3.72
+   },
+   {
+    "w": "model",
+    "start": 3.72,
+    "end": 4.1
+   },
+   {
+    "w": "drafts",
+    "start": 4.1,
+    "end": 4.7
+   },
+   {
+    "w": "the",
+    "start": 4.7,
+    "end": 4.8
+   },
+   {
+    "w": "next",
+    "start": 4.8,
+    "end": 5.02
+   },
+   {
+    "w": "few",
+    "start": 5.02,
+    "end": 5.22
+   },
+   {
+    "w": "tokens.",
+    "start": 5.22,
+    "end": 5.6
+   }
+  ]
+ },
+ "L3": {
+  "duration": 8.576,
+  "text": "My 70B checks them all in one pass, and because the weights load once, that costs about the same as making one token.",
+  "transcript": "My 70B checks them all in one pass, and because the weights load once, that costs about the same as making one token.",
+  "words": [
+   {
+    "w": "My",
+    "start": 0.0,
+    "end": 0.26
+   },
+   {
+    "w": "70B",
+    "start": 0.26,
+    "end": 0.96
+   },
+   {
+    "w": "checks",
+    "start": 0.96,
+    "end": 1.38
+   },
+   {
+    "w": "them",
+    "start": 1.38,
+    "end": 1.58
+   },
+   {
+    "w": "all",
+    "start": 1.58,
+    "end": 1.84
+   },
+   {
+    "w": "in",
+    "start": 1.84,
+    "end": 2.02
+   },
+   {
+    "w": "one",
+    "start": 2.02,
+    "end": 2.26
+   },
+   {
+    "w": "pass,",
+    "start": 2.26,
+    "end": 2.76
+   },
+   {
+    "w": "and",
+    "start": 2.82,
+    "end": 3.16
+   },
+   {
+    "w": "because",
+    "start": 3.16,
+    "end": 3.62
+   },
+   {
+    "w": "the",
+    "start": 3.62,
+    "end": 3.8
+   },
+   {
+    "w": "weights",
+    "start": 3.8,
+    "end": 4.1
+   },
+   {
+    "w": "load",
+    "start": 4.1,
+    "end": 4.4
+   },
+   {
+    "w": "once,",
+    "start": 4.4,
+    "end": 5.02
+   },
+   {
+    "w": "that",
+    "start": 5.4,
+    "end": 5.86
+   },
+   {
+    "w": "costs",
+    "start": 5.86,
+    "end": 6.24
+   },
+   {
+    "w": "about",
+    "start": 6.24,
+    "end": 6.54
+   },
+   {
+    "w": "the",
+    "start": 6.54,
+    "end": 6.72
+   },
+   {
+    "w": "same",
+    "start": 6.72,
+    "end": 6.98
+   },
+   {
+    "w": "as",
+    "start": 6.98,
+    "end": 7.3
+   },
+   {
+    "w": "making",
+    "start": 7.3,
+    "end": 7.64
+   },
+   {
+    "w": "one",
+    "start": 7.64,
+    "end": 8.16
+   },
+   {
+    "w": "token.",
+    "start": 8.16,
+    "end": 8.42
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.765,
+  "text": "It keeps what it agrees with and fixes the first miss, so three right out of five gives me four tokens.",
+  "transcript": "It keeps what it agrees with and fixes the first miss, so three right out of five gives me four tokens.",
+  "words": [
+   {
+    "w": "It",
+    "start": 0.0,
+    "end": 0.24
+   },
+   {
+    "w": "keeps",
+    "start": 0.24,
+    "end": 0.5
+   },
+   {
+    "w": "what",
+    "start": 0.5,
+    "end": 0.74
+   },
+   {
+    "w": "it",
+    "start": 0.74,
+    "end": 0.92
+   },
+   {
+    "w": "agrees",
+    "start": 0.92,
+    "end": 1.42
+   },
+   {
+    "w": "with",
+    "start": 1.42,
+    "end": 1.8
+   },
+   {
+    "w": "and",
+    "start": 1.8,
+    "end": 2.7
+   },
+   {
+    "w": "fixes",
+    "start": 2.7,
+    "end": 3.3
+   },
+   {
+    "w": "the",
+    "start": 3.3,
+    "end": 3.56
+   },
+   {
+    "w": "first",
+    "start": 3.56,
+    "end": 3.8
+   },
+   {
+    "w": "miss,",
+    "start": 3.8,
+    "end": 4.2
+   },
+   {
+    "w": "so",
+    "start": 4.76,
+    "end": 4.88
+   },
+   {
+    "w": "three",
+    "start": 4.88,
+    "end": 5.34
+   },
+   {
+    "w": "right",
+    "start": 5.34,
+    "end": 5.78
+   },
+   {
+    "w": "out",
+    "start": 5.78,
+    "end": 5.94
+   },
+   {
+    "w": "of",
+    "start": 5.94,
+    "end": 6.08
+   },
+   {
+    "w": "five",
+    "start": 6.08,
+    "end": 6.38
+   },
+   {
+    "w": "gives",
+    "start": 6.38,
+    "end": 6.74
+   },
+   {
+    "w": "me",
+    "start": 6.74,
+    "end": 6.9
+   },
+   {
+    "w": "four",
+    "start": 6.9,
+    "end": 7.12
+   },
+   {
+    "w": "tokens.",
+    "start": 7.12,
+    "end": 7.46
+   }
+  ]
+ },
+ "L5": {
+  "duration": 7.723,
+  "text": "Since my 70B has the final say, the output doesn't change, and a good draft makes it two to three times faster.",
+  "transcript": "Since my 70B has the final say, the output doesn't change, and a good draft makes it two to three times faster.",
+  "words": [
+   {
+    "w": "Since",
+    "start": 0.0,
+    "end": 0.36
+   },
+   {
+    "w": "my",
+    "start": 0.36,
+    "end": 0.6
+   },
+   {
+    "w": "70B",
+    "start": 0.6,
+    "end": 1.2
+   },
+   {
+    "w": "has",
+    "start": 1.2,
+    "end": 1.54
+   },
+   {
+    "w": "the",
+    "start": 1.54,
+    "end": 1.7
+   },
+   {
+    "w": "final",
+    "start": 1.7,
+    "end": 2.04
+   },
+   {
+    "w": "say,",
+    "start": 2.04,
+    "end": 2.42
+   },
+   {
+    "w": "the",
+    "start": 2.86,
+    "end": 2.94
+   },
+   {
+    "w": "output",
+    "start": 2.94,
+    "end": 3.28
+   },
+   {
+    "w": "doesn't",
+    "start": 3.28,
+    "end": 3.7
+   },
+   {
+    "w": "change,",
+    "start": 3.7,
+    "end": 4.16
+   },
+   {
+    "w": "and",
+    "start": 4.5,
+    "end": 4.7
+   },
+   {
+    "w": "a",
+    "start": 4.7,
+    "end": 4.92
+   },
+   {
+    "w": "good",
+    "start": 4.92,
+    "end": 5.12
+   },
+   {
+    "w": "draft",
+    "start": 5.12,
+    "end": 5.46
+   },
+   {
+    "w": "makes",
+    "start": 5.46,
+    "end": 5.86
+   },
+   {
+    "w": "it",
+    "start": 5.86,
+    "end": 6.08
+   },
+   {
+    "w": "two",
+    "start": 6.08,
+    "end": 6.32
+   },
+   {
+    "w": "to",
+    "start": 6.32,
+    "end": 6.48
+   },
+   {
+    "w": "three",
+    "start": 6.48,
+    "end": 6.68
+   },
+   {
+    "w": "times",
+    "start": 6.68,
+    "end": 7.06
+   },
+   {
+    "w": "faster.",
+    "start": 7.06,
+    "end": 7.4
+   }
+  ]
+ }
+}

@@ -10,6 +10,7 @@ work_note: A faster-generation announcement needs an account of the draft-and-ve
   conditions attached so developers can judge the relevance of the result.
 title: 'Speculative Decoding: Speeding Up LLM Inference'
 slug: speculative-decoding
+video: speculative-decoding
 ---
 
 Inference speed is the biggest hurdle I keep running into with interactive LLM applications. Watching a 70B model dribble out text one token at a time, while a user stares at a blinking cursor, feels slow in a way that no amount of clever UI hides.

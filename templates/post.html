@@ -56,7 +56,20 @@
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "{{ site.url }}/articles/{{ post.slug }}/"
-  }
+  }{% if post.video %},
+  "video": {
+    "@type": "VideoObject",
+    "name": {{ post.video.name | tojson }},
+    "description": {{ post.video.description | tojson }},
+    "thumbnailUrl": "{{ site.url }}{{ post.video.poster }}",
+    "contentUrl": "{{ site.url }}{{ post.video.src }}",
+    "uploadDate": {{ post.video.upload_date | tojson }},
+    "duration": {{ post.video.duration_iso | tojson }},
+    "width": {{ post.video.width }},
+    "height": {{ post.video.height }},
+    "transcript": {{ post.video.transcript | tojson }},
+    "inLanguage": "en-US"
+  }{% endif %}
 }
 </script>
 {% if post.faqs %}
@@ -149,6 +162,20 @@
 
   <div class="post-body">
     <div class="prose-container">
+      {% if post.video %}
+      <figure class="np-figure">
+        <video controls preload="none" playsinline width="{{ post.video.width }}" height="{{ post.video.height }}" poster="{{ post.video.poster }}" aria-describedby="video-transcript-{{ post.video.slug }}">
+          <source src="{{ post.video.src }}" type="video/mp4">
+          <track kind="captions" src="{{ post.video.captions }}" srclang="en" label="English">
+        </video>
+        <figcaption>
+          <details id="video-transcript-{{ post.video.slug }}">
+            <summary>Transcript</summary>
+            <p>{{ post.video.transcript }}</p>
+          </details>
+        </figcaption>
+      </figure>
+      {% endif %}
       {% if post.takeaways %}
       <aside class="article-summary" aria-labelledby="article-summary-title">
         <div class="article-summary-label" id="article-summary-title">The short version</div>
