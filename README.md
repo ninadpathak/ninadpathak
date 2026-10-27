@@ -163,6 +163,23 @@ in `static/js/` with `node --check`.
 
 Set the build command to `python3 build.py` and the output directory to `output`.
 
+### Page dates
+
+An article's sitemap `lastmod`, its `dateModified` and its visible "Updated" date
+come from `content/lastmod.json`, not from frontmatter. After editing a post, its
+figure sources in `content/diagrams/<slug>/`, or its video, run this before you commit,
+and commit the manifest with the change:
+
+```bash
+python3 lastmod.py
+```
+
+Cloudflare Pages clones shallow, so the deploy build can't read dates from git. The
+manifest records each page's date with a hash of its sources. If you forget the
+refresh, the build falls back to frontmatter dates and prints a warning, and CI's
+`lastmod.py --check` step fails. Frontmatter `date` and `updated` still work as a
+floor: a page is never dated earlier than either.
+
 Or push manually:
 
 ```bash

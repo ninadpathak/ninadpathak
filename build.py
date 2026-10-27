@@ -34,6 +34,7 @@ import yaml
 from jinja2 import Environment, FileSystemLoader
 from code_blocks import CodeBlockFormatter, highlight_css, soften_inline_code
 from rule_checker import paragraph_sentence_violations
+import lastmod as lastmod_manifest
 
 # Always resolve paths relative to this script's directory
 ROOT = Path(__file__).parent.resolve()
@@ -184,6 +185,27 @@ def format_date_iso(d) -> str:
     if isinstance(d, date):
         return d.strftime("%Y-%m-%d")
     return str(d)
+
+
+def as_date(value):
+    """A frontmatter or manifest date as a date, or None."""
+    if isinstance(value, datetime):
+        return value.date()
+    if isinstance(value, date):
+        return value
+    if isinstance(value, str):
+        try:
+            return datetime.strptime(value[:10], "%Y-%m-%d").date()
+        except ValueError:
+            return None
+    return None
+
+
+def latest(dates):
+    """The newest of the dates that exist, or None. Sections and the homepage take
+    the newest lastmod among the pages they list."""
+    known = [d for d in (as_date(v) for v in dates) if d]
+    return max(known) if known else None
 
 
 def estimate_reading_time(content: str) -> int:
@@ -418,6 +440,8 @@ class SiteBuilder:
 
         self.include_drafts = include_drafts
         self.output = Path("output")
+        self.lastmod_manifest = lastmod_manifest.load_manifest()
+        self.stale_lastmod: list[str] = []
 
         self.env = Environment(
             loader=FileSystemLoader("templates"),
@@ -478,11 +502,12 @@ class SiteBuilder:
             toc_html = getattr(self.md, 'toc', '') if hasattr(self.md, 'toc') else ''
             slug = post.get("slug") or slugify(md_file.stem)
             source_stem = md_file.stem
+            updated = self.resolve_updated(md_file, slug, post)
 
             posts.append({
                 "title": post.get("title", md_file.stem),
                 "date": post.get("date"),
-                "updated": post.get("updated") or post.get("date"),
+                "updated": updated,
                 "description": post.get("description", ""),
                 "tags": post.get("tags", []),
                 "declared_category": post.get("category", ""),
@@ -515,6 +540,18 @@ class SiteBuilder:
             })
 
         return sorted(posts, key=sort_key, reverse=True)
+
+    def resolve_updated(self, md_file: Path, slug: str, meta) -> date:
+        """When the page last changed: the committed manifest date while its sources
+        hash still matches, else frontmatter. Never earlier than the frontmatter
+        `date` or `updated`, so a hand-set date is a floor, not something to undo."""
+        floor = latest([meta.get("date"), meta.get("updated")])
+        entry = self.lastmod_manifest.get(slug)
+        sources = lastmod_manifest.source_paths(md_file, slug, meta.get("video"))
+        if entry and entry.get("sources") == lastmod_manifest.sources_hash(sources):
+            return latest([entry.get("lastmod"), floor])
+        self.stale_lastmod.append(slug)
+        return floor
 
     def load_categories(self, posts: list[dict]) -> list[dict]:
         """Resolve one editorial category per post without changing article URLs."""
@@ -939,9 +976,14 @@ class SiteBuilder:
         base = self.config["site"]["url"].rstrip("/")
         pillars = pillars or []
         categories = categories or []
-        # Site-freshness proxy: the most recent post's date drives lastmod on
-        # listing/static pages so crawlers re-fetch them when new content ships.
-        site_lastmod = format_date_iso(posts[0].get("updated") or posts[0].get("date")) if posts else None
+        # A listing page changes when anything it lists changes, so its lastmod is
+        # the newest lastmod among its children. posts[0] is the newest by publish
+        # date, which is not the most recently edited.
+        def newest(items, key="updated"):
+            found = latest(item.get(key) for item in items)
+            return format_date_iso(found) if found else None
+
+        site_lastmod = newest(posts)
 
         # (path, priority, changefreq, lastmod)
         urls = [
@@ -962,19 +1004,20 @@ class SiteBuilder:
             ("/terms/", "0.3", "yearly", None),
         ]
         if glossary_terms:
-            urls.append(("/glossary/", "0.8", "weekly", site_lastmod))
+            urls.append(("/glossary/", "0.8", "weekly", newest(glossary_terms, "last_updated")))
+        # Same 20-per-page slices as build_blog_list.
         article_page_count = (len(posts) + 19) // 20
         for page_num in range(2, article_page_count + 1):
-            urls.append((f"/articles/page/{page_num}/", "0.6", "daily", site_lastmod))
+            page_posts = posts[(page_num - 1) * 20:page_num * 20]
+            urls.append((f"/articles/page/{page_num}/", "0.6", "daily", newest(page_posts)))
         for category in categories:
             category_posts = category.get("posts", [])
             if not category_posts:
                 # No page is rendered for an empty category, so it must not be listed.
                 continue
-            lastmod = format_date_iso(category_posts[0].get("updated") or category_posts[0].get("date"))
-            urls.append((category["url"], "0.8", "weekly", lastmod))
+            urls.append((category["url"], "0.8", "weekly", newest(category_posts)))
         for post in posts:
-            urls.append((post["url"], "0.9", "monthly", format_date_iso(post.get("updated") or post.get("date"))))
+            urls.append((post["url"], "0.9", "monthly", format_date_iso(post["updated"])))
         for case in work_cases:
             case_date = case.get("updated") or case.get("date")
             urls.append((case["url"], "0.8", "monthly", format_date_iso(case_date) if case_date else None))
@@ -1316,6 +1359,12 @@ class SiteBuilder:
         self.build_pygments_css()
         self.build_visual_embed_css()
 
+        if self.stale_lastmod:
+            # Not fatal: the deploy must not stop on a date. CI's `lastmod.py --check`
+            # is what turns this red.
+            print(f"  ! lastmod manifest is stale for {len(self.stale_lastmod)} post(s), "
+                  f"using frontmatter dates: {', '.join(sorted(self.stale_lastmod))}. "
+                  "Run `python3 lastmod.py` and commit content/lastmod.json.")
         print(f"  {len(posts)} blog post(s)")
         print(f"  {len(pillars)} article focus area(s)")
         print(f"  {len(work_cases)} case stud(ies)")

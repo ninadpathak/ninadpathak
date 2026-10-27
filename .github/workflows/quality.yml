@@ -15,7 +15,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          # Full history. lastmod.py dates pages from git, and in a shallow clone every
+          # file's last commit is the tip, so a refresh run here would date every page
+          # today. The changed-post gates below only need HEAD^, which this also covers.
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -62,7 +65,15 @@ jobs:
           node fallbacks.mjs --check
 
       - name: Compile Python sources
-        run: python -m compileall -q build.py check_rules.py rule_checker.py seo_audit.py tests
+        run: python -m compileall -q build.py check_rules.py rule_checker.py seo_audit.py lastmod.py tests
+
+      # Cloudflare Pages clones shallow, so the deploy build cannot date pages from git.
+      # It reads content/lastmod.json instead and trusts an entry only while the page's
+      # sources still hash the same. This fails when a post, figure source or video
+      # changed without `python3 lastmod.py` being run and its manifest committed. The
+      # deploy itself never fails on this: it falls back to frontmatter dates and warns.
+      - name: Check the lastmod manifest is current
+        run: python lastmod.py --check
 
       # MUST RUN BEFORE THE TESTS. Several tests read the built site — tool schema,
       # tool end-to-end, cluster and link integrity — and they SKIP when output/ is
