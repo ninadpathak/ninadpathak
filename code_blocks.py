@@ -131,10 +131,11 @@ class CodeBlockFormatter(HtmlFormatter):
         outfile.write("</div>")
 
 
-# Inline code: short tokens never wrap, so `-e` can't split into "-" and "e". Longer ones
-# (paths, URLs, commands) may wrap, but only between words or after a / . _ = ? & : ,
-# delimiter; a run of more than LONG_RUN characters with no delimiter may break anywhere
-# rather than push the column sideways.
+# Inline code: short tokens are marked code-short and never wrap, so `-e` can't split into
+# "-" and "e". Longer ones (paths, URLs, commands) are marked code-long and may wrap, but
+# only between words or after a / . _ = ? & : , delimiter; a run of more than LONG_RUN
+# characters with no delimiter may break anywhere rather than push the column sideways.
+# Code the build doesn't mark (templates, tool pages) wraps like ordinary text.
 SHORT_INLINE = 24
 LONG_RUN = 28
 _PRE = re.compile(r"(<pre\b.*?</pre>)", re.S)
@@ -145,7 +146,7 @@ _PIECES = re.compile(r"[^/._=?&:,]*[/._=?&:,]+|[^/._=?&:,]+")
 def _soften(match: re.Match) -> str:
     raw = html.unescape(match.group(1))
     if len(raw) <= SHORT_INLINE:
-        return match.group(0)
+        return f'<code class="code-short">{match.group(1)}</code>'
     words = []
     for word in raw.split(" "):
         pieces = _PIECES.findall(word) if len(word) > 20 else [word]

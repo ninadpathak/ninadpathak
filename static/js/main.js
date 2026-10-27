@@ -481,10 +481,25 @@
   // ----------------------------------------------------------------
   // The build writes each block's frame and language label (code_blocks.py). Script adds
   // only what needs script: a copy button in the head strip, which has a fixed height so
-  // nothing shifts, and keyboard focus for a block whose code scrolls sideways.
+  // nothing shifts, and a focusable, labelled region for code that scrolls sideways,
+  // re-checked when the block changes width (rotation, resize).
   const COPY_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 3.5v-1a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h1"/></svg>';
   const DONE_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>';
+
+  function markScrollable(pre, lang) {
+    if (pre.scrollWidth > pre.clientWidth + 1) {
+      pre.tabIndex = 0;
+      pre.setAttribute('role', 'region');
+      pre.setAttribute('aria-label', lang + ' code, scrolls sideways');
+    } else if (pre.hasAttribute('tabindex')) {
+      pre.removeAttribute('tabindex');
+      pre.removeAttribute('role');
+      pre.removeAttribute('aria-label');
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    const scrollers = [];
     document.querySelectorAll('.code-block').forEach(function (block) {
       const head = block.querySelector('.code-block-head');
       const pre = block.querySelector('pre');
@@ -492,9 +507,9 @@
       if (!head || !code) return;
       const lang = block.getAttribute('data-lang') || 'code';
 
-      if (block.classList.contains('code-block--scroll') && pre.scrollWidth > pre.clientWidth + 1) {
-        pre.tabIndex = 0;
-        pre.setAttribute('aria-label', lang + ' code, scrolls sideways');
+      if (block.classList.contains('code-block--scroll')) {
+        scrollers.push([pre, lang]);
+        markScrollable(pre, lang);
       }
 
       if (!navigator.clipboard) return;
@@ -509,22 +524,35 @@
       head.append(button, status);
 
       let timer = 0;
+      function reset() {
+        button.classList.remove('is-copied');
+        button.innerHTML = COPY_ICON + '<span>Copy</span>';
+        status.textContent = '';
+      }
       button.addEventListener('click', function () {
+        clearTimeout(timer);
         navigator.clipboard.writeText(code.textContent.replace(/\n$/, '')).then(function () {
           button.classList.add('is-copied');
           button.innerHTML = DONE_ICON + '<span>Copied</span>';
           status.textContent = 'Copied to clipboard';
-          clearTimeout(timer);
-          timer = setTimeout(function () {
-            button.classList.remove('is-copied');
-            button.innerHTML = COPY_ICON + '<span>Copy</span>';
-            status.textContent = '';
-          }, 2000);
+          timer = setTimeout(reset, 2000);
         }).catch(function () {
           status.textContent = 'Copy failed. Select the code and copy it instead.';
+          timer = setTimeout(reset, 4000);
         });
       });
     });
+
+    if (scrollers.length && 'ResizeObserver' in window) {
+      let frame = 0;
+      const observer = new ResizeObserver(function () {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(function () {
+          scrollers.forEach(function (entry) { markScrollable(entry[0], entry[1]); });
+        });
+      });
+      scrollers.forEach(function (entry) { observer.observe(entry[0]); });
+    }
   });
 
   // ── KEPT VISUAL FALLBACKS ───────────────────────────────────

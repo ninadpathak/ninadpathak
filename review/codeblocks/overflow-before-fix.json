@@ -1,0 +1,1180 @@
+[
+  {
+    "url": "/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/work/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/portfolio/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/projects/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/about/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/contact/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/tools/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/linter/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/llms-txt-generator/",
+    "width": 320,
+    "ok": false,
+    "pageOverflow": 6,
+    "gutter": 24,
+    "offenders": [
+      {
+        "tag": "code",
+        "cls": "",
+        "text": "https://example.com/llms.txt",
+        "over": 24.6
+      },
+      {
+        "tag": "code",
+        "cls": "",
+        "text": "https://example.com/llms.txt",
+        "over": 29.5
+      }
+    ],
+    "offenderCount": 2
+  },
+  {
+    "url": "/llms-txt-validator/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/ai-overviews-checker/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/ai-crawler-checker/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/privacy/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/terms/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/page/2/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/page/3/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/page/4/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/ai-search-optimization/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/ai-engineering/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/developer-experience/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/technical-documentation/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/release-notes-template/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/quickstart-guide/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/mcp-server-tutorial/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/llms-txt/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/design-doc-template/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/claude-md/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/claude-code-subagents/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/api-documentation/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/ai-crawlers/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/aeo-for-developer-docs/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/code-documentation/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/documentation-headings/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/docs-accessibility/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/internal-vs-external-docs/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/technical-docs/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/documentation-types/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/documentation-best-practices/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/documentation-template/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/documentation-structure/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/documentation-review/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/docs-seo/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/agentic-workflows/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/fine-tuning-vs-rag/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/shared-vs-isolated-memory/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/llm-inference-optimization/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/coding-agent-memory/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/memory-versioning/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/memory-compression/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/agent-memory-types/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/memory-serialization/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/multi-agent-vs-single-agent/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/agent-vs-ai-assistant/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/agent-design-space/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/lambda-calculus-ai/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/agent-loop-anatomy/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/ai-agent-failures/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/ai-agent-taxonomy/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/voice-agent-memory/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/short-term-agent-memory/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/rag-vs-memory/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/hyperagents-memory/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/deerflow-memory/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/context-windows-vs-memory/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/claude-code-memory/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/ai-memory-management/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/agent-memory-2026/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/technical-writing-for-engineers/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/llm-token-budgets/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/voice-agent-latency/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/rag-evaluation/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/agent-error-handling/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/kv-cache-eviction/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/browser-vector-search/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/claude-vs-gemini-cli/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/documentation-velocity/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/stripe-technical-blog/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/devtools-documentation/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/engineer-to-writer/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/shorter-documentation/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/writing-release-notes/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/writing-technical-tutorials/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/developer-onboarding-docs/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/writing-for-ai-products/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/writing-changelogs/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/hybrid-search/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/semantic-caching/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/llm-structured-outputs/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/contextual-retrieval/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/rag-reranking/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/vector-embeddings/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/llm-context-windows/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/mixture-of-experts/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/best-llms-for-coding/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/model-context-protocol/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/agent-harnesses/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/time-to-first-token/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/articles/speculative-decoding/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/work/centus/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/work/delightchat/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/work/kiwisizing/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/work/linuxfordevices/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/work/mem0/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/context-engineering/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/agentic-engineering/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/flow-engineering/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/test-time-compute/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/model-context-protocol/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/semantic-caching/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/matryoshka-representation-learning/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/cross-encoder-reranking/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/late-chunking/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/tool-calling/",
+    "width": 320,
+    "ok": false,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [
+      {
+        "tag": "code",
+        "cls": "",
+        "text": "{\"city\":\"Pune\",\"units\":\"metric\"}",
+        "over": 18.2
+      },
+      {
+        "tag": "code",
+        "cls": "",
+        "text": "{\"city\":\"Pune\",\"units\":\"metric\"}",
+        "over": 23.4
+      }
+    ],
+    "offenderCount": 2
+  },
+  {
+    "url": "/glossary/pagedattention/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/kv-cache-eviction/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/semantic-chunking/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/hypothetical-document-embeddings-hyde/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/self-querying-retrieval/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/bi-encoder/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/product-quantization/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/hierarchical-navigable-small-world-hnsw/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/react-prompting/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/plan-and-solve-framework/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/speculative-decoding/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/agentic-router/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  },
+  {
+    "url": "/glossary/json-mode-vs-structured-outputs/",
+    "width": 320,
+    "ok": true,
+    "pageOverflow": 0,
+    "gutter": 24,
+    "offenders": [],
+    "offenderCount": 0
+  }
+]

@@ -6,7 +6,7 @@
    ===================================================================== */
 .code-block {
   --code-bg: var(--bg-1);
-  --code-head: #f4f4f1;
+  --code-head: var(--bg-2);
   --code-edge: rgba(194, 59, 0, 0.12);
   margin: var(--space-6) 0;
   border: var(--rule);
@@ -15,7 +15,6 @@
   overflow: hidden;
 }
 [data-theme="dark"] .code-block {
-  --code-head: #161616;
   --code-edge: rgba(255, 95, 31, 0.2);
 }
 
@@ -128,4 +127,19 @@
 @media (max-width: 480px) {
   .code-block pre { padding: var(--space-3) var(--space-4); font-size: var(--font-size-md); }
   .code-block-head { padding-left: var(--space-3); }
+}
+
+/* Paper can't scroll: every line wraps, and the button and fade stay on screen. */
+@media print {
+  .code-block { break-inside: avoid; }
+  .code-block-head { background: none; }
+  .code-copy,
+  .code-copy-status { display: none; }
+  .code-block pre,
+  .code-block--scroll pre {
+    overflow: visible;
+    background: none;
+  }
+  .code-block pre,
+  .code-block pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
 }

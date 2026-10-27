@@ -67,7 +67,7 @@ const measure = () => {
       overflows,
       scrollable: cs.overflowX === 'auto' || cs.overflowX === 'scroll',
       edgeFade: (cs.backgroundImage.match(/linear-gradient/g) || []).length === 4 && cs.backgroundAttachment.includes('local'),
-      focusable: pre.tabIndex === 0,
+      focusable: pre.tabIndex === 0 && pre.getAttribute('role') === 'region' && !!pre.getAttribute('aria-label'),
     });
   }
   for (const code of document.querySelectorAll('.post-content :not(pre) > code')) {

@@ -275,14 +275,17 @@ code {
   color: var(--accent);
   padding: 0.1em 0.35em;
   border-radius: 2px;
-  /* Short inline tokens never wrap, so `-e` can't split after its hyphen. The build marks
-     longer ones code-long and gives them break points (code_blocks.py). */
-  white-space: nowrap;
   font-variant-ligatures: none;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
-code.code-long { white-space: normal; overflow-wrap: anywhere; }
+/* The build marks article code (code_blocks.py): short tokens never wrap, so `-e` can't
+   split after its hyphen; long ones break only at the points the build gives them.
+   Unmarked code (templates, tool pages) wraps like text. */
+code.code-short { white-space: nowrap; }
+/* Sliced, not cloned: a cloned right padding on each wrapped line isn't counted by line
+   breaking, so it hung 4px past the column at 375. */
+code.code-long { overflow-wrap: anywhere; box-decoration-break: slice; -webkit-box-decoration-break: slice; }
 .code-seg { white-space: nowrap; }
 
 pre {
@@ -2275,4 +2278,12 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
   .pagination-info {
     order: -1;
   }
+}
+
+/* Printed, the sticky nav landed mid-page on top of whatever was there (a code block's
+   head strip in the MCP tutorial); static, it prints once at the top. The fixed reading
+   progress bar repeated on every page. Last in the file so it outranks both rules. */
+@media print {
+  .nav { position: static; }
+  .reading-progress { display: none; }
 }

@@ -56,11 +56,10 @@ class ThemeContrastTests(unittest.TestCase):
     def test_head_strip_text_meets_aa(self):
         main = (ROOT / "static/css/main.css").read_text(encoding="utf-8")
         blocks = (ROOT / "static/css/code-blocks.css").read_text(encoding="utf-8")
-        for theme, site_scope, block_scope in (
-            ("light", ":root", ".code-block"),
-            ("dark", '[data-theme="dark"]', '[data-theme="dark"] .code-block'),
-        ):
-            head = css_var(blocks, block_scope, "code-head")
+        # The head strip's background is a site token; the dark theme inherits it.
+        head_ref = re.search(r"--code-head:\s*var\(--([\w-]+)\)", blocks).group(1)
+        for theme, site_scope in (("light", ":root"), ("dark", '[data-theme="dark"]')):
+            head = css_var(main, site_scope, head_ref)
             for role in ("text-3", "text-1", "status-success"):
                 with self.subTest(theme=theme, role=role):
                     self.assertGreaterEqual(contrast(css_var(main, site_scope, role), head), 4.5)
@@ -72,9 +71,9 @@ class ThemeContrastTests(unittest.TestCase):
 
 
 class InlineCodeTests(unittest.TestCase):
-    def test_short_inline_code_is_left_alone(self):
+    def test_short_inline_code_is_marked_to_stay_whole(self):
         html = "<p>Put the name before <code>-e</code>.</p>"
-        self.assertEqual(soften_inline_code(html), html)
+        self.assertEqual(soften_inline_code(html), '<p>Put the name before <code class="code-short">-e</code>.</p>')
 
     def test_long_inline_code_breaks_only_between_words_and_after_delimiters(self):
         out = soften_inline_code("<p><code>claude mcp add --scope project docs-search</code></p>")

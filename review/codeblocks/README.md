@@ -12,8 +12,11 @@ Each block now sits on the text column inside a brand frame: a head strip with t
 ## Rules
 
 - **Scroll or wrap.** Code (bash, python, json, yaml, js, diff, http, html) keeps its lines and scrolls, with a fade on whichever side has more code. `text`, `markdown`, `prompt` and unlabeled blocks soft-wrap: they hold prompts, templates and tool output with lines up to 312 characters.
-- **Copy.** The button is added by `main.js`, so without JavaScript there is no dead button. It is a real `<button>` with an `aria-label` naming the language, a visible focus ring and an `aria-live` "Copied to clipboard". The head strip has a fixed height, so adding the button moves nothing. It copies the code element's text without the final newline.
-- **Inline code.** Inline code of 24 characters or fewer never wraps. Longer inline code (paths, commands) is marked `code-long` at build time and may break only between words or after a `/ . _ = ? & : ,` delimiter. A run of more than 28 characters with no delimiter may break anywhere rather than push the column sideways.
+- **Copy.** The button is added by `main.js`, so without JavaScript there is no dead button. It is a real `<button>` with an `aria-label` naming the language, a visible focus ring and an `aria-live` "Copied to clipboard". The head strip has a fixed height, so adding the button moves nothing. It copies the code element's text without the final newline. A rejected copy says "Copy failed. Select the code and copy it instead." in the live region and clears after 4 seconds.
+- **Scrolling code is a region.** A scroll block whose code overflows gets `tabindex="0"`, `role="region"` and an `aria-label` ("bash code, scrolls sideways"). A ResizeObserver re-checks on resize and rotation, debounced to one animation frame, and removes all three when the code fits again.
+- **Inline code.** The build marks inline code in content. Code of 24 characters or fewer gets `code-short` and never wraps. Longer inline code (paths, commands) gets `code-long` and may break only between words or after a `/ . _ = ? & : ,` delimiter. A run of more than 28 characters with no delimiter may break anywhere rather than push the column sideways. Code the build doesn't mark, in templates and tool pages, wraps like ordinary text; an earlier global `nowrap` pushed two such pages past the gutter at 320. Long inline code uses `box-decoration-break: slice`, because cloned padding on every wrapped line isn't counted by line breaking and hung 4px past the column at 375.
+- **Print.** Every line wraps, with no fade, copy button or head-strip fill, and blocks avoid page breaks. The site's sticky nav printed mid-page over a code block's head strip, so it is static in print, and the fixed reading-progress bar is hidden.
+- **Head strip.** Its background is the `--bg-2` site token in both themes; the label and "Copied" colors are tested against it (lowest 4.63 in light).
 - **Ligatures.** They are off in code, so `==` and `->` show as typed.
 
 ## Contrast
@@ -55,3 +58,15 @@ The sweep runs at 320, 375, 768 and 1366 px in light and dark. Result: 88/88 run
 No article puts code inside a list or blockquote: Python-Markdown's `extra` doesn't nest fenced code. The frame is an ordinary block, so it would align to a list item's content, but the sweep can't exercise that case.
 
 Files are `<slug>.before-after.{light,dark}.png` at 1366, `<slug>.sweep.png` for the eight width and theme combinations, and `sweep.json`.
+
+## Whole site at 320 and 375
+
+`node tools/overflow_sweep.mjs <site> review/codeblocks/overflow.json` opens every URL in the sitemap: 128 pages covering articles, glossary terms, tools, templates, pillars, categories and static pages. Each page is checked at both widths for page-level sideways scroll and for any drawn text, image or code in `<main>` past the right gutter. Content inside a scroll container is exempt, since its overflow is deliberate.
+
+- This branch: 128/128 clean at 320 and 128/128 at 375.
+- The previous head of this branch (`overflow-before-fix.json`, 320 only): 126/128. `/llms-txt-generator/` scrolled sideways by 6px, and `/glossary/tool-calling/` ran its JSON snippet up to 23px into the gutter, as the review found.
+
+## Script behaviour and print
+
+- `node tools/codeblocks_behaviour.mjs <article>` writes `behaviour.json`. On the MCP tutorial, one block that fits at 1366 becomes a labelled region at 375 and loses it at 1366 again. All seven scroll blocks stay consistent at each width. A rejected copy shows the failure message and clears it after 4 seconds.
+- `print-mcp-server-tutorial.png` shows the block with the longest line under print emulation. All 8 blocks on the page wrap, show no fade, hide the copy button and don't clip.
