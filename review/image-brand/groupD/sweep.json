@@ -1,0 +1,2882 @@
+[
+  {
+    "slug": "rag-reranking@4",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@4",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@4",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@4",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@4",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@4",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@4",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@4",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@4",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@4",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@5",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9.4
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@5",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 11.4
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@5",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@5",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@5",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@5",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9.4
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@5",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 11.4
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@5",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@5",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@5",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@6",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@6",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@6",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@6",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@6",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@6",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@6",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@6",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@6",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@6",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@7",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@7",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@7",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@7",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@7",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@7",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@7",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@7",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@7",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-reranking@7",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-vs-memory",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "rag-vs-memory",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "rag-vs-memory",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-vs-memory",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-vs-memory",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-vs-memory",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "rag-vs-memory",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "rag-vs-memory",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-vs-memory",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "rag-vs-memory",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "shared-vs-isolated-memory",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "shared-vs-isolated-memory",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "shared-vs-isolated-memory",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "shared-vs-isolated-memory",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "shared-vs-isolated-memory",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "shared-vs-isolated-memory",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "shared-vs-isolated-memory",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "shared-vs-isolated-memory",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "shared-vs-isolated-memory",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "shared-vs-isolated-memory",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "short-term-agent-memory",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 10.4
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "short-term-agent-memory",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 12.5
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "short-term-agent-memory",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "short-term-agent-memory",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "short-term-agent-memory",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "short-term-agent-memory",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 10.4
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "short-term-agent-memory",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 12.5
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "short-term-agent-memory",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "short-term-agent-memory",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "short-term-agent-memory",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "shorter-documentation",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "shorter-documentation",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "shorter-documentation",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "shorter-documentation",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "shorter-documentation",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "shorter-documentation",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "shorter-documentation",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "shorter-documentation",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "shorter-documentation",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "shorter-documentation",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "stripe-technical-blog",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 10.4
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "stripe-technical-blog",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 12.5
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "stripe-technical-blog",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "stripe-technical-blog",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "stripe-technical-blog",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "stripe-technical-blog",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 10.4
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "stripe-technical-blog",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 12.5
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "stripe-technical-blog",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "stripe-technical-blog",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "stripe-technical-blog",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 9.3
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "technical-writing-for-engineers",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "technical-writing-for-engineers",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "technical-writing-for-engineers",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "technical-writing-for-engineers",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "technical-writing-for-engineers",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "technical-writing-for-engineers",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "technical-writing-for-engineers",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "technical-writing-for-engineers",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "technical-writing-for-engineers",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "technical-writing-for-engineers",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings@1",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings@1",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings@1",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings@1",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings@1",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings@1",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings@1",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings@1",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings@1",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "vector-embeddings@1",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "voice-agent-memory",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "voice-agent-memory",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "voice-agent-memory",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "voice-agent-memory",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "voice-agent-memory",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "voice-agent-memory",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "voice-agent-memory",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "voice-agent-memory",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "voice-agent-memory",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "voice-agent-memory",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-changelogs",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "writing-changelogs",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "writing-changelogs",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-changelogs",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-changelogs",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-changelogs",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "writing-changelogs",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "writing-changelogs",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-changelogs",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-changelogs",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-for-ai-products",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "writing-for-ai-products",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "writing-for-ai-products",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-for-ai-products",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-for-ai-products",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-for-ai-products",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "writing-for-ai-products",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "writing-for-ai-products",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-for-ai-products",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-for-ai-products",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-release-notes",
+    "width": 320,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "writing-release-notes",
+    "width": 375,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "writing-release-notes",
+    "width": 768,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-release-notes",
+    "width": 1024,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-release-notes",
+    "width": 1366,
+    "scheme": "light",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-release-notes",
+    "width": 320,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 272,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 12.3,
+      "mono": 9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.94,
+    "ok": true
+  },
+  {
+    "slug": "writing-release-notes",
+    "width": 375,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 327,
+    "figureFits": true,
+    "variant": "narrow",
+    "shownText": {
+      "sans": 14.8,
+      "mono": 10.8
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 1.14,
+    "ok": true
+  },
+  {
+    "slug": "writing-release-notes",
+    "width": 768,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-release-notes",
+    "width": 1024,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  },
+  {
+    "slug": "writing-release-notes",
+    "width": 1366,
+    "scheme": "dark",
+    "pageOverflow": 0,
+    "figureLoaded": true,
+    "figureWidth": 672,
+    "figureFits": true,
+    "variant": "wide",
+    "shownText": {
+      "sans": 12.1,
+      "mono": 8.9
+    },
+    "textOk": true,
+    "notBlownUp": true,
+    "scale": 0.93,
+    "ok": true
+  }
+]
