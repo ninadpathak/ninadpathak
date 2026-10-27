@@ -507,7 +507,8 @@
     const used = new Set();
     const meta = src.meta;
     svg.classList.add('np-diagram');
-    svg.dataset.direction = src.direction || 'TB';
+    // The chart's main direction, read from the source (derived phone variants are already TB).
+    svg.dataset.direction = (src.mermaid.match(/^\s*(?:flowchart|graph)\s+(TB|TD|BT|LR|RL)/m) || [])[1] || 'TB';
     svg.removeAttribute('width');
     svg.removeAttribute('height');
 

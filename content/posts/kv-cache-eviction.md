@@ -65,11 +65,11 @@ Attention scores follow a power-law distribution, with many tokens contributing 
 High-entropy layers (usually the early ones) need larger caches to hold structural coherence, and low-entropy layers tolerate aggressive pruning. The same Zipf's law shape shows up everywhere: a small subset of tokens carries the bulk of the reasoning value, the way a handful of words account for most of the text in any natural-language corpus.
 
 
-## Attention decay: a 3D view of importance
+## Attention decay: where importance concentrates
 
 Attention-sink research shows that retaining initial tokens can stabilize streaming generation. The visualization is illustrative and does not report measurements from this article.
 
-Local tokens form a diagonal ridge that represents the immediate context. Heavy hitters punch up as vertical pillars of high attention that run across the entire sequence, visible from one end to the other.
+Local tokens form a diagonal band that represents the immediate context. Heavy hitters show up as columns of high attention that run down the entire sequence, visible from one end to the other.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/kv-cache-eviction/attention-map.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/kv-cache-eviction/attention-map.narrow.svg" width="288" height="424"><img class="np-has-narrow" src="/static/images/diagrams/kv-cache-eviction/attention-map.svg" width="720" height="424" alt="An illustrative causal attention map, not measured data. Each row is a query and each column a key. The first column is the attention sink, the band along the diagonal is the immediate local context, and a few columns run the full height as heavy hitters that later tokens keep attending to." loading="lazy" decoding="async"></picture></a>

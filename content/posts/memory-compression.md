@@ -22,7 +22,7 @@ After about 200 interactions, the memory payload was eating 40% of the context w
 Compression stops being optional once context is finite. Something has to give.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/memory-compression/compression-pass.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/memory-compression/compression-pass.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/memory-compression/compression-pass.svg" width="720" height="392" alt="Raw agent memory, every tool response and interaction kept in full, goes through a scoring pass that weighs recency, how often each item was accessed, and explicit importance. High scorers stay in memory; stale references and duplicate facts are dropped." loading="lazy" decoding="async"></picture></a>
+  <a class="np-figure-zoom" href="/static/images/diagrams/memory-compression/compression-pass.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/memory-compression/compression-pass.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/memory-compression/compression-pass.svg" width="720" height="392" alt="Raw agent memory, every tool response and interaction kept in full, goes through a scoring pass that weighs recency, how often each item was accessed, and explicit importance. High scorers stay in memory; low scorers are dropped." loading="lazy" decoding="async"></picture></a>
   <figcaption>Compression trades recall for capacity. Whatever the scorer can't see, the agent quietly forgets.</figcaption>
 </figure>
 
