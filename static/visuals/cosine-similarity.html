@@ -126,8 +126,19 @@
                 q.setAttribute('x2', f(bx)); q.setAttribute('y2', f(by));
                 qh.setAttribute('d', 'M' + f(tipX) + ',' + f(tipY) + ' L' + f(bx + px) + ',' + f(by + py) + ' L' + f(bx - px) + ',' + f(by - py) + ' Z');
                 handle.setAttribute('cx', f(tipX)); handle.setAttribute('cy', f(tipY));
-                ql.setAttribute('x', f(CX + (R + 20) * ux)); ql.setAttribute('y', f(CY + (R + 20) * uy + 4));
-                ql.setAttribute('text-anchor', deg < 70 ? 'start' : deg > 110 ? 'end' : 'middle');
+                // Near the axis the label sits above the tip on the inner side, so it never
+                // runs past the plate edge or onto the axis; then it is clamped inside the view.
+                var lx, ly, anchor;
+                if (deg < 30) { lx = tipX - 6; ly = tipY - 14; anchor = 'end'; }
+                else if (deg > 150) { lx = tipX + 6; ly = tipY - 14; anchor = 'start'; }
+                else if (deg >= 70 && deg <= 110) { lx = tipX + 12; ly = tipY + 8; anchor = 'start'; }
+                else { lx = CX + (R + 20) * ux; ly = CY + (R + 20) * uy + 4; anchor = deg < 70 ? 'start' : 'end'; }
+                ql.setAttribute('text-anchor', anchor); ql.setAttribute('x', f(lx)); ql.setAttribute('y', f(ly));
+                var vb = svg.viewBox.baseVal, bb = ql.getBBox(), pad = 4;
+                if (bb.x < vb.x + pad) lx += vb.x + pad - bb.x;
+                else if (bb.x + bb.width > vb.x + vb.width - pad) lx -= bb.x + bb.width - (vb.x + vb.width - pad);
+                if (bb.y < vb.y + pad) ly += vb.y + pad - bb.y;
+                ql.setAttribute('x', f(lx)); ql.setAttribute('y', f(ly));
                 var r = 36, ex = CX + r * ux, ey = CY + r * uy;
                 arc.setAttribute('d', deg < 0.5 ? '' : 'M' + (CX + r) + ',' + CY + ' A' + r + ',' + r + ' 0 0 0 ' + f(ex) + ',' + f(ey));
                 var mid = a / 2;
@@ -159,7 +170,7 @@
                 svg.setAttribute('viewBox', window.innerWidth <= 480 ? '36 30 288 182' : '0 0 360 214');
             };
             fitView();
-            window.addEventListener('resize', fitView);
+            window.addEventListener('resize', function () { fitView(); draw(Number(slider.value)); });
 
             draw(45);
             // A short opening sweep shows the range once, unless the reader asked for less motion.
@@ -174,6 +185,8 @@
                 stopIntro = function () { cancelAnimationFrame(frame); stopIntro = function () {}; };
                 frame = requestAnimationFrame(step);
             }
+            // The article page reveals this frame only once this flag is set (static/js/main.js).
+            window.npVisualReady = true;
         })();
     </script>
 </body>

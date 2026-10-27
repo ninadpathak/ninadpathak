@@ -521,4 +521,23 @@
     });
   });
 
+  // ── KEPT VISUAL FALLBACKS ───────────────────────────────────
+  // A kept interactive visual keeps its static drawing under the frame. The frame stays
+  // transparent until its page sets window.npVisualReady, so a blocked or failed frame
+  // (a browser error page, which this same-origin check can't read) shows the drawing.
+  document.addEventListener('DOMContentLoaded', function () {
+    const frames = document.querySelectorAll('.visual-container--fallback iframe');
+    if (!frames.length) return;
+    document.documentElement.classList.add('visuals-guarded');
+    frames.forEach(function (frame) {
+      function reveal() {
+        try {
+          if (frame.contentWindow && frame.contentWindow.npVisualReady) frame.classList.add('is-ready');
+        } catch (e) { /* error pages are cross-origin: keep the fallback */ }
+      }
+      frame.addEventListener('load', reveal);
+      reveal();
+    });
+  });
+
 })();

@@ -175,6 +175,8 @@
             }
             slider.addEventListener('input', function () { draw(Number(slider.value)); });
             draw(Number(slider.value));
+            // The article page reveals this frame only once this flag is set (static/js/main.js).
+            window.npVisualReady = true;
         })();
     </script>
 </body>

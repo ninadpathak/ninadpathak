@@ -9,13 +9,14 @@
 %% @glyph guide | doc
 %% @glyph cal | doc
 %% @glyph reader | reader
+%% @spacing 18,64
 flowchart TB
   task["Task first"]:::accent
   code["Runnable code"]
   pr["Docs in PR"]
   reader["Reader"]:::focal
   subgraph cer [Ceremony]
-    direction LR
+    direction TB
     guide["Style guide"]:::muted
     cal["Calendar"]:::muted
   end

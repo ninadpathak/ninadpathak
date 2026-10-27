@@ -71,7 +71,8 @@ When two vectors point in exactly the same direction, the angle is zero and the 
 
 <div class="visual-wrapper">
   <div class="visual-title">Vector Distance and Cosine Similarity</div>
-  <div class="visual-container">
+  <div class="visual-container visual-container--fallback">
+    <div class="visual-fallback"><img class="visual-fallback-light" src="/static/visuals/cosine-similarity.fallback-light.svg" alt="" loading="lazy"><img class="visual-fallback-dark" src="/static/visuals/cosine-similarity.fallback-dark.svg" alt="" loading="lazy"></div>
     <iframe src="/static/visuals/cosine-similarity.html" title="Interactive cosine similarity: rotate the query vector and read the cosine of its angle to the document" loading="lazy"></iframe>
   </div>
 </div>
@@ -136,7 +137,8 @@ The vector acts like a Russian nesting doll.
 
 <div class="visual-wrapper">
     <div class="visual-title">Matryoshka: keep the head of the vector</div>
-    <div class="visual-container visual-container--tall">
+    <div class="visual-container visual-container--tall visual-container--fallback">
+        <div class="visual-fallback"><img class="visual-fallback-light" src="/static/visuals/matryoshka-truncation.fallback-light.svg" alt="" loading="lazy"><img class="visual-fallback-dark" src="/static/visuals/matryoshka-truncation.fallback-dark.svg" alt="" loading="lazy"></div>
         <iframe src="/static/visuals/matryoshka-truncation.html" title="Interactive Matryoshka truncation: choose how many leading dimensions to keep" loading="lazy"></iframe>
     </div>
 </div>

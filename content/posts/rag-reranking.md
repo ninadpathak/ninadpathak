@@ -161,7 +161,7 @@ Open-source options ask for more infrastructure work and pay you back with bette
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/rag-reranking/models-providers.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-reranking/models-providers.narrow.svg" width="288" height="360"><img class="np-has-narrow" src="/static/images/diagrams/rag-reranking/models-providers.svg" width="720" height="424" alt="An application can send rerank requests two ways. One path goes over the network to a hosted API such as Cohere Rerank, with no infrastructure to run but a network hop and a fee per request. The other goes to an open-source model such as bge-reranker-large running locally on the team's own GPU, with no network hop but a fixed infrastructure cost." loading="lazy" decoding="async"></picture></a>
-  <figcaption>A hosted API trades a network hop and per-call fees for zero infrastructure; a local model trades a GPU for neither.</figcaption>
+  <figcaption>A hosted API trades a network hop and per-call fees for zero infrastructure; a local model costs a GPU but no hop and no fee.</figcaption>
 </figure>
 
 A standard language model can also act as a reranker. You drop the query and the document into a prompt and ask the model to output a score from one to ten.

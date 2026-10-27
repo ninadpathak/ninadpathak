@@ -55,6 +55,34 @@
   overflow: hidden;
 }
 
+/* Kept interactive visuals: their static drawing sits under the frame, and the frame stays
+   transparent until its page has run (static/js/main.js), so a blocked or failed frame
+   still shows the drawing. Without script the frame shows its own static drawing. */
+.visual-fallback {
+  position: absolute;
+  inset: 0;
+  padding: var(--space-3) var(--space-4) var(--space-16);
+}
+
+.visual-fallback img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+[data-theme="dark"] .visual-fallback-light,
+:root:not([data-theme="dark"]) .visual-fallback-dark {
+  display: none;
+}
+
+.visual-container--fallback iframe {
+  position: relative;
+}
+
+.visuals-guarded .visual-container--fallback iframe:not(.is-ready) {
+  opacity: 0;
+}
+
 /* Fallback for smaller screens */
 @media (max-width: 768px) {
   .visual-container {

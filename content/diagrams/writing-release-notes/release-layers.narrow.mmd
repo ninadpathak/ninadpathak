@@ -1,11 +1,12 @@
 %% @width 288
 %% @kicker Release information by depth
-%% @alt A release note reads in three layers. The summary comes first with version, date, compatibility, and the action required. Impact comes second: breaking changes, security and support notes, fixes, and new capabilities. Resources such as the migration guide and reference changes come last, for readers who need the implementation detail.
+%% @alt A release note reads in three layers. The summary comes first with version, date, compatibility, and the action required. Impact comes second: breaking changes, security and support notes, fixes, new capabilities, and known issues with their workarounds. Resources such as the migration guide and reference changes come last, for readers who need the implementation detail.
 %% @glyph sum | doc w=40
 %% @glyph brk | doc flag w=40
 %% @glyph sec | doc lock w=40
 %% @glyph fix | doc check w=40
 %% @glyph new | action w=40
+%% @glyph known | doc question w=40
 %% @glyph res | outline w=40
 %% @spacing 8,26
 flowchart TB
@@ -16,6 +17,7 @@ flowchart TB
     sec["Security"]
     fix["Fixes"]
     new["New"]
+    known["Known issues"]
   end
   res["Resources"]
   sum --> impact
