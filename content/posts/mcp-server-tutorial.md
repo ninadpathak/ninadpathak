@@ -1,24 +1,24 @@
 ---
 category: ai-engineering
 date: 2026-10-22
-description: Build an MCP server in Python that searches a docs folder, test it without a model, inspect it, and connect it to Claude Code, with every step run on 2026-10-22.
+description: 'Build an MCP server in Python, test it without a model, and see how numbering a tool''s output changed whether Claude cited the right line in a test run.'
 slug: mcp-server-tutorial
 status: published
 takeaways:
 - The MCP Python SDK turns type-hinted functions into tools, and a stdio server must keep its stdout for protocol messages.
 - Resolve every path a tool receives before checking it against the folder it may read, because relative segments and symlinks both arrive as plain strings.
 - Return what the model has to cite, because Claude cited the right line in every run once the tool numbered its lines.
-title: 'MCP Server Tutorial: Build and Test a Docs Search Server in Python'
-work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for developer tools, including setup guides for MCP servers and the AI clients that call them.'
+title: 'MCP Server Tutorial: Build a Docs Search Server in Python'
+work_note: '[Ninad Pathak](/portfolio/) wrote Firecrawl''s technical guides to its MCP server in Cursor and in ChatGPT. The server here is smaller on purpose, because it exists to test which tool decisions change what a model does with the output.'
 ---
 
-An MCP server is a small program that hands an AI client a list of tools it can call. The one built here gives Claude Code, or any MCP client, read-only search over a folder of Markdown docs.
+A tool's return value is part of its interface to the model, and its format decides what the model can do with the result. Tested with Claude Code 2.1.308 on Haiku 5.5, a `read_doc` tool that returned plain text led to the right line citation in one run of four, and the same tool returning numbered lines led to it in four of four.
 
-Every command below ran from a clean directory on 2026-10-22, with MCP Python SDK 2.3.0 and MCP Inspector 2.12.0, and Claude Code 2.1.308 as the client. Numbering the lines a tool returns was the smallest change, and it decided whether Claude cited the right line.
+The docs-search server below makes that change, plus two decisions about refusals: it resolves every path before checking it against the one folder it may read, and it refuses with an error the model can read. Every command ran from a clean directory on 2026-10-22, with MCP Python SDK 2.3.0 and MCP Inspector 2.12.0, and the `server.py` and `test_server.py` shown here are the files that ran.
 
-## Set up the project
+## How to set up an MCP server project in Python
 
-The [Model Context Protocol](/articles/model-context-protocol/) has its own SDKs, and the Python one installs with uv. The SDK needs Python 3.10 or later:
+Create a bare uv project on Python 3.10 or later and add the [Model Context Protocol](/articles/model-context-protocol/) SDK. I've pinned the SDK to 2.3.0, because version 2 renamed the server class to `MCPServer`, and code written against the 1.x `FastMCP` import won't run on it:
 
 ```bash
 uv init --bare docs-search --python 3.12
@@ -37,9 +37,9 @@ printf '# Errors\n\nA 429 response means you hit the rate limit. Wait and retry.
 echo "SECRET=do-not-read" > .env.secret
 ```
 
-## Write the server with two read-only tools
+## How to write the server's tools
 
-Save this as `server.py`:
+Each tool is a type-hinted Python function under `@mcp.tool()`, and this server has two read-only ones, `search_docs` and `read_doc`. Save this as `server.py`:
 
 ```python
 """An MCP server that searches and reads the Markdown files in one docs folder."""
@@ -67,7 +67,7 @@ def inside_docs(path: Path) -> bool:
 def search_docs(query: str, limit: int = 5) -> list[dict]:
     """Find lines in the docs that contain the query, ignoring case.
 
-    Returns up to `limit` matches (at most 50), each with the file path relative
+    Returns up to `limit` matches (no more than 50), each with the file path relative
     to the docs folder, the line number and the line text.
     """
     needle = query.lower()
@@ -102,19 +102,21 @@ if __name__ == "__main__":
 
 `MCPServer` builds each tool's input schema from the type hints and its description from the docstring, so the docstring is the text the model reads when it decides which tool to call. The [SDK's tools guide](https://py.sdk.modelcontextprotocol.io/servers/tools/) calls the `read_only_hint` annotation a hint, "not security," so the code still has to enforce what the tool may touch.
 
+That docstring does the job a tool registry does inside an [agent harness](/articles/agent-harnesses/), with a protocol in between.
+
 The server never calls `print()`. The [stdio transport spec](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio) says a server "MUST NOT write anything to its `stdout` that is not a valid MCP message," and Python's `logging` writes to stderr, which the spec leaves free for logs.
 
 A refused path raises `ToolError` on purpose. SDK 2.3.0 sends a `ToolError` message to the client as an error result, and it turns any other exception into a generic "Error executing tool" with a crash traceback in the server log.
 
-## Keep tool arguments inside the docs folder
+## How to keep tool arguments inside one folder
 
-A tool's arguments come from the model, so treat each one as untrusted input. `inside_docs()` calls `resolve()` before comparing, which collapses `..` segments and follows symlinks, then checks that the real location sits under `DOCS_DIR`.
+Resolve the path first, then check that the resolved location sits under the folder, because a tool's arguments come from the model and arrive as untrusted strings. `inside_docs()` calls `resolve()` before comparing, which collapses `..` segments and follows symlinks, then checks that the real location sits under `DOCS_DIR`.
 
 Checking the raw string would miss both. `guides/../../.env.secret` contains no suspicious prefix, and a symlink named `leak.md` inside `docs/` looks like any other Markdown file until it's resolved.
 
-## Test the server without a model
+## How to test an MCP server without a model
 
-The SDK's `Client` can connect to the server object in memory, or launch it as a stdio subprocess the way a host does. Save this as `test_server.py`:
+Connect the SDK's `Client` to the server object in memory, then launch the server as a stdio subprocess the way a host does, and run the same checks against both. Save this as `test_server.py`:
 
 ```python
 """Checks the docs-search server in memory and over stdio. Run: uv run python test_server.py"""
@@ -181,9 +183,9 @@ If an assertion fails, the traceback names the escape path or the search that br
 
 The test catches the bugs it is there for. With the `is_relative_to` check removed, `../.env.secret` came back with the secret in it, and with `os.path.abspath` in place of `resolve()`, the `leak.md` symlink did.
 
-## Inspect the server with the MCP Inspector
+## How to inspect an MCP server from the command line
 
-The [MCP Inspector](https://github.com/modelcontextprotocol/inspector) has a CLI mode that calls one method and prints the JSON result:
+Use the [MCP Inspector](https://github.com/modelcontextprotocol/inspector) in CLI mode, which calls one method and prints the JSON result:
 
 ```bash
 npx -y @modelcontextprotocol/inspector@2.12.0 --cli --method tools/list uv run server.py
@@ -196,9 +198,9 @@ Put `--` before the server command whenever `--tool-arg` comes last, because the
 
 The Inspector also parses `--tool-arg query=429` as a number, and the server's schema rejects it with "Input should be a valid string." Wrap the value in JSON quotes, as in `--tool-arg 'query="429"'`, and it arrives as a string.
 
-## Connect the server to Claude Code
+## How to connect an MCP server to Claude Code
 
-Register the server for this project with [`claude mcp add`](https://code.claude.com/docs/en/mcp). The server name goes before `-e`, because `-e` reads every value after it until `--`:
+Register it for the project with [`claude mcp add`](https://code.claude.com/docs/en/mcp), putting the server name before `-e`, because `-e` reads every value after it until `--`:
 
 ```bash
 claude mcp add --scope project docs-search -e DOCS_DIR="$PWD/docs" -- uv --directory "$PWD" run server.py
@@ -219,11 +221,11 @@ Each headless `claude -p` run made the same calls, in this order:
 2. `search_docs` with the query `rate limit`
 3. `read_doc` on `guides/quickstart.md`
 
-If Claude answers without calling `mcp__docs-search__search_docs`, run `/mcp` in the session to check that the server is connected.
+If Claude answers without calling `mcp__docs-search__search_docs`, run `/mcp` in the session to check that the server is connected. A [Claude Code subagent](/articles/claude-code-subagents/) gets these MCP tools only if its `tools` list allows them, so a read-only subagent can be given `search_docs` and `read_doc` and nothing that writes.
 
-## Number the lines a tool returns
+## Why should a tool number the lines it returns?
 
-The first version of `read_doc` returned plain text, and Claude on Haiku 5.5 read the right file and found the right limit. It then cited the wrong line, because it had to count lines itself.
+Because the model cites what it can copy, and it miscounts what it has to count. The first version of `read_doc` returned plain text, and Claude on Haiku 5.5 read the right file and found the right limit, then cited the wrong line in every run but one.
 
 Here are the lines it cited for the same question, with the same two tool calls in every run. The sentence it quoted sits on line 8 of `quickstart.md`:
 
