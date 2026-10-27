@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/documentation-velocity/dora-multiplier.mmd",
-  "hash": "67a51019beac8358",
+  "hash": "7aa389a376e2756d",
   "pele": "1.8.0",
   "width": 720,
   "height": 472,
@@ -18,7 +18,7 @@
       "mono": 9.5
     }
   },
-  "alt": "The performance lift that continuous integration gives a team, by documentation quality: 34% with poor documentation and 750% with high-quality documentation, about 22 times larger. Each tile is 50 percentage points.",
-  "caption": "DORA research: the same practice lifts performance 34% with poor docs and 750% with elite docs. Each tile is 50 points.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/documentation-velocity/dora-multiplier.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/documentation-velocity/dora-multiplier.narrow.svg\" width=\"288\" height=\"416\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/documentation-velocity/dora-multiplier.svg\" width=\"720\" height=\"472\" alt=\"The performance lift that continuous integration gives a team, by documentation quality: 34% with poor documentation and 750% with high-quality documentation, about 22 times larger. Each tile is 50 percentage points.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>DORA research: the same practice lifts performance 34% with poor docs and 750% with elite docs. Each tile is 50 points.</figcaption>\n</figure>"
+  "alt": "The performance lift that continuous integration gives a team, by documentation quality: 34% with poor documentation and 750% with high-quality documentation. Each tile is 50 percentage points.",
+  "caption": "DORA research: the same practice lifts performance 34% with poor documentation and 750% with high-quality documentation. Each tile is 50 points.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/documentation-velocity/dora-multiplier.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/documentation-velocity/dora-multiplier.narrow.svg\" width=\"288\" height=\"416\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/documentation-velocity/dora-multiplier.svg\" width=\"720\" height=\"472\" alt=\"The performance lift that continuous integration gives a team, by documentation quality: 34% with poor documentation and 750% with high-quality documentation. Each tile is 50 percentage points.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>DORA research: the same practice lifts performance 34% with poor documentation and 750% with high-quality documentation. Each tile is 50 points.</figcaption>\n</figure>"
 }

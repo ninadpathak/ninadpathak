@@ -128,7 +128,7 @@
 
   // A context window: bracketed rows of tokens; the newest row runs past the right bracket.
   G.context = (g, w, h, o) => {
-    const rows = Array.isArray(o.rows) ? o.rows : [6, 7, 9], tw = 7, th = 8, gap = 2.2, inside = 7;
+    const inside = o.inside || 7, rows = Array.isArray(o.rows) ? o.rows : [inside - 1, inside, inside + 2], tw = 7, th = 8, gap = 2.2;
     const ww = inside * (tw + gap) - gap, x0 = -ww / 2 - 6, y0 = -(rows.length * (th + gap) - gap) / 2;
     const bx0 = x0 - 5, bx1 = x0 + ww + 5, by0 = y0 - 6, by1 = -y0 + 6;
     P(g, `M${r2(bx0 + 4)},${r2(by0)}H${r2(bx0)}V${r2(by1)}H${r2(bx0 + 4)}M${r2(bx1 - 4)},${r2(by0)}H${r2(bx1)}V${r2(by1)}H${r2(bx1 - 4)}`, 'gl-ink gl-thick');

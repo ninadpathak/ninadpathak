@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/agent-memory-types/memory-types.mmd",
-  "hash": "82b9d5ffa6d9ef70",
+  "hash": "c90f839a02fc65c2",
   "pele": "1.8.0",
   "width": 720,
   "height": 288,
@@ -18,7 +18,7 @@
       "mono": 9.5
     }
   },
-  "alt": "Working, episodic, and semantic memory side by side. Working memory is the scratchpad for the current turn, backed by the context window and gone when the turn ends. Episodic memory records what happened, such as a task that failed on Friday with a given error, in an event store ordered by time. Semantic memory holds what is true, such as the fact that list.sort() is stable, in a durable knowledge base.",
-  "caption": "Working memory lasts a turn, episodic memory a session's log, and semantic memory until a fact stops being true.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-memory-types/memory-types.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-memory-types/memory-types.narrow.svg\" width=\"288\" height=\"488\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-memory-types/memory-types.svg\" width=\"720\" height=\"288\" alt=\"Working, episodic, and semantic memory side by side. Working memory is the scratchpad for the current turn, backed by the context window and gone when the turn ends. Episodic memory records what happened, such as a task that failed on Friday with a given error, in an event store ordered by time. Semantic memory holds what is true, such as the fact that list.sort() is stable, in a durable knowledge base.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Working memory lasts a turn, episodic memory a session's log, and semantic memory until a fact stops being true.</figcaption>\n</figure>"
+  "alt": "Working, episodic, and semantic memory side by side. Working memory is the scratchpad for the current turn, backed by the context window and gone when the turn ends. Episodic memory is the agent's autobiographical record of what happened across sessions, such as a task that failed on Friday with a given error, kept in an event store in time order. Semantic memory holds what is true, such as the fact that list.sort() is stable, in a durable knowledge base.",
+  "caption": "Working memory holds the current turn, episodic memory keeps what happened in order across sessions, and semantic memory holds facts until they stop being true.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-memory-types/memory-types.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-memory-types/memory-types.narrow.svg\" width=\"288\" height=\"488\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-memory-types/memory-types.svg\" width=\"720\" height=\"288\" alt=\"Working, episodic, and semantic memory side by side. Working memory is the scratchpad for the current turn, backed by the context window and gone when the turn ends. Episodic memory is the agent's autobiographical record of what happened across sessions, such as a task that failed on Friday with a given error, kept in an event store in time order. Semantic memory holds what is true, such as the fact that list.sort() is stable, in a durable knowledge base.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Working memory holds the current turn, episodic memory keeps what happened in order across sessions, and semantic memory holds facts until they stop being true.</figcaption>\n</figure>"
 }

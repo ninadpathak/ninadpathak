@@ -27,7 +27,7 @@ Moving retrieval into the browser removes the first half of that latency chain e
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/browser-vector-search/wasm-lifecycle.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/browser-vector-search/wasm-lifecycle.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/browser-vector-search/wasm-lifecycle.svg" width="720" height="256" alt="Vector search in the browser spans three environments. The main thread spawns a Web Worker, the worker loads the WebAssembly engine into the WASM memory heap, where PGlite runs a full Postgres instance or SQLite-vec runs as an extension, and once the engine is ready the first vector query runs locally on the device." loading="lazy" decoding="async"></picture></a>
-  <figcaption>The main thread never blocks: the worker owns the engine, and every query stays on the device.</figcaption>
+  <figcaption>Vector search in the browser spans three environments: the main thread, a Web Worker, and the WASM memory heap.</figcaption>
 </figure>
 
 Implementing vector search in WASM means juggling three distinct environments: the main thread, the Web Worker, and the WASM memory heap. PGlite runs a full Postgres instance inside that heap.

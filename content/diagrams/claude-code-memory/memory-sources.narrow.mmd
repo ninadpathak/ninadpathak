@@ -5,13 +5,13 @@
 %% @glyph claude | doc corner=person
 %% @glyph auto | ledger rows=3
 %% @glyph cli | inbox
-%% @glyph session | context
-%% @spacing 12,20
-flowchart TB
+%% @glyph session | context inside=5 w=74
+%% @spacing 12,34
+flowchart LR
   claude["CLAUDE.md"]
-  auto["Auto memory"]
+  auto["Auto<br/>memory"]
   cli["One-off"]:::muted
   session["Session"]:::focal
   claude --> session
-  auto ---> session
-  cli -...-> session
+  auto --> session
+  cli -.-> session

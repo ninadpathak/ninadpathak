@@ -10,7 +10,7 @@
 // Output per figure: <id>.svg (light/dark via prefers-color-scheme, fonts embedded),
 // <id>.light.png and <id>.dark.png at 2x, and <id>.json with alt text and embed markup.
 // Share cards (`@kind og`) write <id>.svg and a 1200x630 <id>.png from their own small diagram.
-import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, unlinkSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import path from 'node:path';
@@ -256,8 +256,15 @@ async function main() {
       }
       console.log(`${label} -> ${path.relative(REPO_DIR, svgPath)} ${result.dims.width}x${result.dims.height} scale ${result.dims.scale} words ${words.length}/${budget}`);
     } catch (error) {
-      if (src.derived) console.warn(`warn ${label}: no derived phone variant (${error.message.split('\n')[0].slice(0, 120)}); write ${src.id}.mmd by hand`);
-      else failures.push(`${label}: ${error.message}`);
+      if (src.derived) {
+        console.warn(`warn ${label}: no derived phone variant (${error.message.split('\n')[0].slice(0, 120)}); write ${src.id}.mmd by hand`);
+        // A derived variant that no longer fits must not linger: the embed drops it, so the file would be orphaned.
+        const stale = path.join(OUT_ROOT, src.slug, `${src.id}.svg`);
+        if (existsSync(stale)) {
+          if (CHECK) failures.push(`${label}: ${src.slug}/${src.id}.svg is left over from a variant that no longer fits; run node tools/image-brand/render.mjs`);
+          else unlinkSync(stale);
+        }
+      } else failures.push(`${label}: ${error.message}`);
     }
   }
   await browser.close();

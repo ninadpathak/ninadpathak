@@ -125,7 +125,7 @@ Each glyph lives in `lib/glyphs.js`, draws on a 56 × 48 box (strips: 360 × 46)
 | `window` | App window with title rule, sidebar, content lines | An application or caller | — |
 | `loop` | 300° track with chevron, particles, hub | A control loop or scheduler | — |
 | `tokens` | Rows of tiles: solid, hatched, outline, newest in accent | A prompt or token stream | `rows=a,b,c` |
-| `context` | Token rows inside a bracketed window; the newest tokens spill past the right bracket | A context window filling up (92 px wide tile) | `rows=a,b,c` |
+| `context` | Token rows inside a bracketed window; the newest tokens spill past the right bracket | A context window filling up (92 px wide tile) | `rows=a,b,c`, `inside=n` (window width in tokens, default 7; set `w` to match) |
 | `vectors` | Axes with three embeddings; the nearest pair in accent | Embeddings, vector search, similarity | — |
 | `wave` | Waveform bars, newest syllable in accent | Voice input or audio | — |
 | `cells` | Memory grid filled to a level, newest cell accent | State, memory, or cache, where the fill level means fullness | `fill=0–1`, `flag` (checkpoint) |

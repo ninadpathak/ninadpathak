@@ -1,7 +1,7 @@
 %% @fig 01
 %% @kicker Local-first WASM lifecycle
 %% @alt Vector search in the browser spans three environments. The main thread spawns a Web Worker, the worker loads the WebAssembly engine into the WASM memory heap, where PGlite runs a full Postgres instance or SQLite-vec runs as an extension, and once the engine is ready the first vector query runs locally on the device.
-%% @caption The main thread never blocks: the worker owns the engine, and every query stays on the device.
+%% @caption Vector search in the browser spans three environments: the main thread, a Web Worker, and the WASM memory heap.
 %% @path main>worker>heap
 %% @glyph main | window
 %% @glyph worker | loop
