@@ -23,6 +23,7 @@
 {% if post.has_visuals %}<link rel="stylesheet" href="/static/css/visuals.css?v=design-tokens-1">{% endif %}
 {% if post.has_flowchart %}<link rel="stylesheet" href="/static/css/flowcharts.css?v=design-tokens-1">{% endif %}
 {% if post.has_figure %}<link rel="stylesheet" href="/static/css/figures.css?v=image-brand-1">{% endif %}
+{% if post.video %}<link rel="preload" as="image" href="{{ post.video.poster_webp | e }}" type="image/webp" fetchpriority="high">{% endif %}
 {% endblock %}
 
 {% block schema %}
@@ -153,7 +154,7 @@
     <div class="prose-container">
       {% if post.video %}
       <figure class="np-figure">
-        <video controls preload="none" playsinline width="{{ post.video.width }}" height="{{ post.video.height }}" poster="{{ post.video.poster | e }}" aria-describedby="video-transcript-{{ post.video.slug }}">
+        <video controls preload="none" playsinline width="{{ post.video.width }}" height="{{ post.video.height }}" poster="{{ post.video.poster_webp | e }}" aria-describedby="video-transcript-{{ post.video.slug }}">
           <source src="{{ post.video.src | e }}" type="video/mp4">
           <track kind="captions" src="{{ post.video.captions | e }}" srclang="en" label="English">
         </video>

@@ -58,7 +58,10 @@ def render_work_note(note) -> str:
 
 
 VIDEO_FIELDS = ("name", "description", "upload_date", "duration_seconds", "width", "height",
-                "file", "poster", "captions", "transcript")
+                "file", "poster", "poster_webp", "captions", "transcript")
+# The WebP poster is preloaded above the fold, so it has to stay small
+# (tools/build_video_poster.py draws it at 2x the prose column).
+POSTER_WEBP_BUDGET = 40 * 1024
 
 
 VTT_TIMING = re.compile(r"^(\d{2,}):(\d{2}):(\d{2})\.(\d{3}) --> (\d{2,}):(\d{2}):(\d{2})\.(\d{3})(?:\s.*)?$")
@@ -107,7 +110,7 @@ def load_video(slug):
         raise ValueError(f"{meta_path.relative_to(ROOT)} is missing {', '.join(missing)}")
     base = f"/static/videos/{slug}"
     folder = (ROOT / "static" / "videos" / slug).resolve()
-    for field in ("file", "poster", "captions"):
+    for field in ("file", "poster", "poster_webp", "captions"):
         name = meta[field]
         # A bare file name only: no directories, no absolute paths, nothing that
         # resolves (through a symlink or otherwise) outside static/videos/<slug>/.
@@ -116,6 +119,11 @@ def load_video(slug):
         path = ROOT / "static" / "videos" / slug / name
         if path.is_symlink() or not path.is_file() or path.resolve().parent != folder:
             raise ValueError(f"video {slug!r}: static/videos/{slug}/{name} must be a regular file in that folder")
+    webp = (ROOT / "static" / "videos" / slug / meta["poster_webp"]).read_bytes()
+    if webp[:4] != b"RIFF" or webp[8:12] != b"WEBP":
+        raise ValueError(f"video {slug!r}: poster_webp is not a WebP file")
+    if len(webp) > POSTER_WEBP_BUDGET:
+        raise ValueError(f"video {slug!r}: poster_webp is {len(webp)} bytes, over the {POSTER_WEBP_BUDGET}-byte budget")
     for field in ("width", "height", "duration_seconds"):
         value = meta[field]
         if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
@@ -142,6 +150,7 @@ def load_video(slug):
         "height": meta["height"],
         "src": f"{base}/{meta['file']}",
         "poster": f"{base}/{meta['poster']}",
+        "poster_webp": f"{base}/{meta['poster_webp']}",
         "captions": f"{base}/{meta['captions']}",
         "transcript": meta["transcript"],
     }

@@ -14,11 +14,15 @@ import build
 from build import SiteBuilder, load_video
 
 
+# A VP8X header for a 1344x756 image: enough for the magic and size checks.
+TINY_WEBP = b"RIFF" + (22).to_bytes(4, "little") + b"WEBPVP8X" + (10).to_bytes(4, "little") + bytes(4) + (1343).to_bytes(3, "little") + (755).to_bytes(3, "little")
+
+
 def write_video(root: Path, slug: str, **overrides) -> None:
     meta = {
         "name": "A film", "description": "What it shows.", "upload_date": "2026-10-27T14:25:00+05:30",
         "duration_seconds": 75, "width": 1920, "height": 1080, "file": "film.mp4",
-        "poster": "poster.png", "captions": "captions.vtt", "transcript": "Spoken words.",
+        "poster": "poster.png", "poster_webp": "poster.webp", "captions": "captions.vtt", "transcript": "Spoken words.",
         "line_offsets": {"L1": 0.0},
     }
     meta.update(overrides)
@@ -31,6 +35,7 @@ def write_video(root: Path, slug: str, **overrides) -> None:
     static.mkdir(parents=True)
     (static / "film.mp4").write_bytes(b"\0")
     (static / "poster.png").write_bytes(b"\0")
+    (static / "poster.webp").write_bytes(TINY_WEBP)
     (static / "captions.vtt").write_text("WEBVTT\n\n00:00:00.000 --> 00:00:01.000\nSpoken words.\n", encoding="utf-8")
 
 
@@ -148,6 +153,30 @@ class VideoReviewFixTests(unittest.TestCase):
                     load_video("demo")
 
 
+class PosterTests(unittest.TestCase):
+    """Poster follow-up: the player shows a small WebP and the page preloads it."""
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, self.tmp)
+        patcher = mock.patch.object(build, "ROOT", self.tmp)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def test_poster_webp_is_required_a_webp_and_within_budget(self):
+        write_video(self.tmp, "demo", poster_webp=None)
+        with self.assertRaisesRegex(ValueError, "poster_webp"):
+            load_video("demo")
+        shutil.rmtree(self.tmp / "content"); shutil.rmtree(self.tmp / "static")
+        write_video(self.tmp, "demo")
+        (self.tmp / "static/videos/demo/poster.webp").write_bytes(b"\x89PNG not a webp")
+        with self.assertRaisesRegex(ValueError, "not a WebP"):
+            load_video("demo")
+        (self.tmp / "static/videos/demo/poster.webp").write_bytes(TINY_WEBP + bytes(41 * 1024))
+        with self.assertRaisesRegex(ValueError, "budget"):
+            load_video("demo")
+
+
 class PublishedVideoTests(unittest.TestCase):
     def test_every_declared_video_resolves_and_its_captions_are_current(self):
         for path in Path("content/posts").glob("*.md"):
@@ -161,6 +190,11 @@ class PublishedVideoTests(unittest.TestCase):
                     capture_output=True, text=True,
                 )
                 self.assertEqual(result.returncode, 0, result.stderr)
+                poster = subprocess.run(
+                    [sys.executable, "tools/build_video_poster.py", slug, "--check"],
+                    capture_output=True, text=True,
+                )
+                self.assertEqual(poster.returncode, 0, poster.stderr)
 
     def test_template_renders_player_track_transcript_and_nested_video_object(self):
         builder = SiteBuilder()
@@ -169,18 +203,24 @@ class PublishedVideoTests(unittest.TestCase):
             post=post, site=builder.config["site"], contact=builder.config["contact"],
             related=[], latest_posts=[], build_year=2026,
         )
-        self.assertRegex(html, r'<video controls preload="none" playsinline width="1920" height="1080" poster="/static/videos/speculative-decoding/poster.png"')
+        self.assertRegex(html, r'<video controls preload="none" playsinline width="1920" height="1080" poster="/static/videos/speculative-decoding/poster.webp"')
         # The film burns condensed captions into the picture, so the verbatim track is
         # offered in the player's captions menu but not switched on over them.
         self.assertIn('<track kind="captions" src="/static/videos/speculative-decoding/captions.vtt" srclang="en" label="English">', html)
         self.assertLess(html.index("<video"), html.index('class="post-content"'))
         self.assertIn("<summary>Transcript</summary>", html)
         self.assertIn("figures.css", html)
+        # The player shows the WebP, the head preloads it at high priority, and the
+        # VideoObject thumbnail stays on the PNG.
+        self.assertIn('poster="/static/videos/speculative-decoding/poster.webp"', html)
+        self.assertIn('<link rel="preload" as="image" href="/static/videos/speculative-decoding/poster.webp" type="image/webp" fetchpriority="high">', html)
+        self.assertLess(html.index('rel="preload" as="image"'), html.index("</head>"))
         articles = [json.loads(block) for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)]
         article = next(block for block in articles if block.get("@type") == "TechArticle")
         video = article["video"]
         self.assertEqual(video["@type"], "VideoObject")
         self.assertEqual(video["duration"], "PT40S")
+        self.assertTrue(video["thumbnailUrl"].endswith("/static/videos/speculative-decoding/poster.png"))
         self.assertTrue(video["contentUrl"].endswith("/static/videos/speculative-decoding/speculative-decoding.mp4"))
         for field in ("name", "description", "thumbnailUrl", "uploadDate", "transcript"):
             self.assertTrue(video[field], field)
