@@ -32,7 +32,7 @@ import frontmatter
 import markdown
 import yaml
 from jinja2 import Environment, FileSystemLoader
-from pygments.formatters import HtmlFormatter
+from code_blocks import CodeBlockFormatter, highlight_css, soften_inline_code
 from rule_checker import paragraph_sentence_violations
 
 # Always resolve paths relative to this script's directory
@@ -269,7 +269,7 @@ def link_visuals_without_extension(html: str) -> str:
 
 
 def render_content_html(html: str) -> str:
-    return link_visuals_without_extension(optimize_content_images(html))
+    return soften_inline_code(link_visuals_without_extension(optimize_content_images(html)))
 
 
 VISUAL_ROBOTS = "noindex, indexifembedded"
@@ -439,6 +439,7 @@ class SiteBuilder:
                 "codehilite": {
                     "css_class": "highlight",
                     "guess_lang": False,
+                    "pygments_formatter": CodeBlockFormatter,
                 },
                 "toc": {
                     "toc_depth": "2-3",
@@ -1247,22 +1248,8 @@ class SiteBuilder:
         css_path.write_text("\n".join(lines), encoding="utf-8")
 
     def build_pygments_css(self):
-        # Light mode: use 'default' style (good contrast on light backgrounds)
-        light_formatter = HtmlFormatter(style="default")
-        light_css = light_formatter.get_style_defs("[data-theme='light'] .highlight")
-        
-        # Dark mode: use 'monokai' style (good contrast on dark backgrounds)
-        dark_formatter = HtmlFormatter(style="monokai")
-        dark_css = dark_formatter.get_style_defs("[data-theme='dark'] .highlight")
-        
-        # Combine with base pre styles
-        base_css = """pre { line-height: 1.6; overflow-x: auto; }
-.highlight { border-radius: 4px; padding: 1rem; }
-"""
-        
-        css_content = base_css + "\n" + light_css + "\n" + dark_css
         css_path = self.output / "static" / "css" / "highlight.css"
-        css_path.write_text(css_content, encoding="utf-8")
+        css_path.write_text(highlight_css(), encoding="utf-8")
 
     # ------------------------------------------------------------------
     # Main build

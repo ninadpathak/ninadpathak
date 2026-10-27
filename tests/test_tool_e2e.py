@@ -75,7 +75,8 @@ class _PageParser(HTMLParser):
         for cls in (a.get("class") or "").split():
             self.classes.add(cls)
         if tag == "script" and a.get("src"):
-            self.scripts.append(a["src"])
+            # A cache-busting ?v= names the same file, as it does for the browser.
+            self.scripts.append(a["src"].split("?", 1)[0])
         if tag == "link" and "stylesheet" in (a.get("rel") or ""):
             self.stylesheets.append(a.get("href", ""))
         if tag == "style":

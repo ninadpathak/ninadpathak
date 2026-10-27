@@ -477,47 +477,53 @@
   });
 
   // ----------------------------------------------------------------
-  // Copy code buttons for code blocks
+  // Code blocks
   // ----------------------------------------------------------------
+  // The build writes each block's frame and language label (code_blocks.py). Script adds
+  // only what needs script: a copy button in the head strip, which has a fixed height so
+  // nothing shifts, and keyboard focus for a block whose code scrolls sideways.
+  const COPY_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1"/><path d="M10.5 3.5v-1a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h1"/></svg>';
+  const DONE_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>';
   document.addEventListener('DOMContentLoaded', function () {
-    const codeBlocks = document.querySelectorAll('.highlight pre');
-    
-    codeBlocks.forEach(function (pre) {
-      // Create wrapper if not already wrapped
-      let wrapper = pre.parentElement;
-      if (!wrapper.classList.contains('code-block-wrapper')) {
-        wrapper = document.createElement('div');
-        wrapper.className = 'code-block-wrapper';
-        pre.parentNode.insertBefore(wrapper, pre);
-        wrapper.appendChild(pre);
+    document.querySelectorAll('.code-block').forEach(function (block) {
+      const head = block.querySelector('.code-block-head');
+      const pre = block.querySelector('pre');
+      const code = pre && pre.querySelector('code');
+      if (!head || !code) return;
+      const lang = block.getAttribute('data-lang') || 'code';
+
+      if (block.classList.contains('code-block--scroll') && pre.scrollWidth > pre.clientWidth + 1) {
+        pre.tabIndex = 0;
+        pre.setAttribute('aria-label', lang + ' code, scrolls sideways');
       }
-      
-      // Create copy button
+
+      if (!navigator.clipboard) return;
       const button = document.createElement('button');
-      button.className = 'copy-code-btn';
-      button.setAttribute('aria-label', 'Copy code to clipboard');
-      button.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
-      
-      // Add click handler
+      button.type = 'button';
+      button.className = 'code-copy';
+      button.setAttribute('aria-label', 'Copy ' + lang + ' code');
+      button.innerHTML = COPY_ICON + '<span>Copy</span>';
+      const status = document.createElement('span');
+      status.className = 'code-copy-status';
+      status.setAttribute('aria-live', 'polite');
+      head.append(button, status);
+
+      let timer = 0;
       button.addEventListener('click', function () {
-        const code = pre.textContent;
-        navigator.clipboard.writeText(code).then(function () {
-          button.classList.add('copied');
-          button.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-          
-          setTimeout(function () {
-            button.classList.remove('copied');
-            button.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+        navigator.clipboard.writeText(code.textContent.replace(/\n$/, '')).then(function () {
+          button.classList.add('is-copied');
+          button.innerHTML = DONE_ICON + '<span>Copied</span>';
+          status.textContent = 'Copied to clipboard';
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            button.classList.remove('is-copied');
+            button.innerHTML = COPY_ICON + '<span>Copy</span>';
+            status.textContent = '';
           }, 2000);
         }).catch(function () {
-          button.classList.add('copy-failed');
-          setTimeout(function () {
-            button.classList.remove('copy-failed');
-          }, 2000);
+          status.textContent = 'Copy failed. Select the code and copy it instead.';
         });
       });
-      
-      wrapper.appendChild(button);
     });
   });
 

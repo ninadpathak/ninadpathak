@@ -39,6 +39,7 @@ REQUIREMENTS = {
     "flowcharts.css": re.compile(r'class="[^"]*\bflowchart[a-z-]*\b'),
     "visuals.css": re.compile(r'class="[^"]*\bvisual-(?:wrapper|container|title|caption)\b'),
     "linter.css": re.compile(r'class="[^"]*\btool-(?:panel|section|actions|status|hint)\b'),
+    "code-blocks.css": re.compile(r'class="[^"]*\bcode-block\b'),
 }
 
 

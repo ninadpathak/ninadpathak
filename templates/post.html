@@ -19,7 +19,7 @@
 {% block tw_image %}{% if post.og_image %}{{ post.og_image if post.og_image.startswith("http") else site.url ~ post.og_image }}{% else %}{{ site.url }}/static/favicon.png{% endif %}{% endblock %}
 
 {% block extra_css %}
-{% if post.has_code %}<link rel="stylesheet" href="/static/css/highlight.css">{% endif %}
+{% if post.has_code %}<link rel="stylesheet" href="/static/css/code-blocks.css?v=1"><link rel="stylesheet" href="/static/css/highlight.css?v=brand-1">{% endif %}
 {% if post.has_visuals %}<link rel="stylesheet" href="/static/css/visuals.css?v=design-tokens-1">{% endif %}
 {% if post.has_flowchart %}<link rel="stylesheet" href="/static/css/flowcharts.css?v=design-tokens-1">{% endif %}
 {% if post.has_figure %}<link rel="stylesheet" href="/static/css/figures.css?v=image-brand-1">{% endif %}

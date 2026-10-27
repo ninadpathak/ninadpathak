@@ -1,0 +1,131 @@
+/* =====================================================================
+   CODE BLOCKS
+   Markup from code_blocks.py (build time); token colors in highlight.css; the copy
+   button from static/js/main.js. The frame borrows the figure plates' vocabulary:
+   hairline rules, a 4px accent tick, a mono kicker for the language, 4px radius.
+   ===================================================================== */
+.code-block {
+  --code-bg: var(--bg-1);
+  --code-head: #f4f4f1;
+  --code-edge: rgba(194, 59, 0, 0.12);
+  margin: var(--space-6) 0;
+  border: var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--code-bg);
+  overflow: hidden;
+}
+[data-theme="dark"] .code-block {
+  --code-head: #161616;
+  --code-edge: rgba(255, 95, 31, 0.2);
+}
+
+/* Head strip: fixed height, so the button the script adds never moves anything. */
+.code-block-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  height: 2.25rem;
+  padding: 0 var(--space-1-5) 0 var(--space-4);
+  background: var(--code-head);
+  border-bottom: var(--rule);
+}
+.code-block-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-caps-xl);
+  line-height: var(--leading-none);
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.code-block-lang::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+}
+
+.code-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1-5);
+  min-width: 5.75rem;
+  height: 1.625rem;
+  padding: 0 var(--space-2);
+  font-family: var(--mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-caps);
+  line-height: var(--leading-none);
+  text-transform: uppercase;
+  color: var(--text-3);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color var(--t-md), border-color var(--t-md);
+}
+.code-copy:hover { color: var(--text-1); border-color: var(--border-2); }
+.code-copy:focus-visible { outline: var(--focus-ring); outline-offset: 1px; }
+.code-copy.is-copied { color: var(--status-success); }
+.code-copy svg { flex: none; width: 12px; height: 12px; }
+.code-copy-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Body: the frame sits on the text column, so Pygments' wrapper adds nothing. */
+.code-block .highlight { margin: 0; padding: 0; border-radius: 0; background: var(--code-bg); }
+.code-block pre {
+  margin: 0;
+  padding: var(--space-4) var(--space-5);
+  border: 0;
+  background: var(--code-bg);
+  font-family: var(--mono);
+  font-size: var(--font-size-lg);
+  line-height: var(--leading-loose);
+  tab-size: 4;
+  /* JetBrains Mono draws == and -> as single glyphs; code is read to be retyped. */
+  font-variant-ligatures: none;
+}
+.code-block pre code {
+  font-size: inherit;
+  color: var(--text-1);
+  background: none;
+  padding: 0;
+}
+/* Inset, because the frame clips anything outside it. */
+.code-block pre:focus-visible { outline: var(--focus-ring); outline-offset: -2px; }
+
+/* Code scrolls sideways. The two local layers cover the scroll layers until the content
+   moves, so an accent-tinted edge shows only on a side with more code past it. */
+.code-block--scroll pre {
+  overflow-x: auto;
+  background:
+    linear-gradient(to right, var(--code-bg) 40%, transparent) left center / 2.5rem 100% no-repeat local,
+    linear-gradient(to left, var(--code-bg) 40%, transparent) right center / 2.5rem 100% no-repeat local,
+    linear-gradient(to right, var(--code-edge), transparent) left center / 1.25rem 100% no-repeat scroll,
+    linear-gradient(to left, var(--code-edge), transparent) right center / 1.25rem 100% no-repeat scroll,
+    var(--code-bg);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-2) transparent;
+}
+.code-block--scroll pre code { white-space: pre; }
+
+/* Prompts, templates and tool output wrap instead. */
+.code-block--wrap pre,
+.code-block--wrap pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+@media (max-width: 480px) {
+  .code-block pre { padding: var(--space-3) var(--space-4); font-size: var(--font-size-md); }
+  .code-block-head { padding-left: var(--space-3); }
+}
