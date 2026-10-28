@@ -1,0 +1,45 @@
+WEBVTT
+
+1
+00:00:00.067 --> 00:00:03.067
+Ask an agent to add caching to the API,
+
+2
+00:00:03.067 --> 00:00:07.287
+and it picks one kind and builds everything around that guess.
+
+3
+00:00:07.300 --> 00:00:09.940
+So I run an agentic workflow,
+
+4
+00:00:09.940 --> 00:00:14.980
+where I frame and scope the task first and review its diff before it lands.
+
+5
+00:00:15.000 --> 00:00:18.960
+The frame is a brief that says what done looks like,
+
+6
+00:00:18.960 --> 00:00:21.680
+with the goal and an acceptance check.
+
+7
+00:00:21.700 --> 00:00:25.220
+Scoping keeps the diff small enough to read in one sitting,
+
+8
+00:00:25.220 --> 00:00:28.500
+because an unreviewable diff can't be trusted.
+
+9
+00:00:28.500 --> 00:00:31.060
+So before a change lands,
+
+10
+00:00:31.060 --> 00:00:33.580
+I'd read the diff rather than the summary,
+
+11
+00:00:33.580 --> 00:00:37.300
+because the summary is only what the agent believes it did.

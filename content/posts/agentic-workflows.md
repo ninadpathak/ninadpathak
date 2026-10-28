@@ -8,6 +8,7 @@ work_note: '[Ninad Pathak](/portfolio/) creates developer content for coding too
   that takes a scoped repository change through the test commands and diff review
   needed before a merge.'
 title: 'Agentic Workflows: A Five-Stage Playbook From Prompt to PR'
+video: agentic-workflows
 ---
 
 I do not turn an agent loose on a task and hope. I run a sequence, the same one every time, that turns a vague intent into a pull request I am willing to put my name on.

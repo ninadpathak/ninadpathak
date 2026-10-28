@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/agentic-workflows/, imported by tools/import_video.py from
+# ninadpathak-video films/agentic-workflows (render of 2026-10-28T16:33:11+05:30).
+name: Agentic workflows in 40 seconds
+description: Why an agent given a one-line task builds on a guess, and how an agentic workflow frames the task, scopes the diff to something reviewable, and reads the diff instead of the agent's summary.
+upload_date: '2026-10-28T16:33:11+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: agentic-workflows.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.067
+  L2: 7.3
+  L3: 15.0
+  L4: 21.7
+  L5: 28.5
+transcript: Ask an agent to add caching to the API, and it picks one kind and builds everything around that guess. So I run an agentic workflow, where I frame and scope the task first and review its diff before it lands. The frame is a brief that says what done looks like, with the goal and an acceptance check. Scoping keeps the diff small enough to read in one sitting, because an unreviewable diff can't be trusted. So before a change lands, I'd read the diff rather than the summary, because the summary is only what the agent believes it did.
