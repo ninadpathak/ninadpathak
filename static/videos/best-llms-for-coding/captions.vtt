@@ -1,0 +1,41 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.200
+Picture a model that aces a Python quiz but can still fall apart renaming a function used across forty files.
+
+2
+00:00:07.200 --> 00:00:11.660
+That's why I'd compare the best LLMs for coding on SWE-bench Verified,
+
+3
+00:00:11.660 --> 00:00:15.033
+where a model has to resolve an actual GitHub issue.
+
+4
+00:00:15.033 --> 00:00:18.493
+Claude 4.6 Opus leads that benchmark,
+
+5
+00:00:18.493 --> 00:00:21.733
+but the right model still depends on the kind of work.
+
+6
+00:00:21.733 --> 00:00:25.793
+For an unattended agent on multi-file pull requests I'd reach for Claude,
+
+7
+00:00:25.793 --> 00:00:28.333
+and to reason over a whole repository,
+
+8
+00:00:28.333 --> 00:00:30.367
+Gemini 3.1 Pro.
+
+9
+00:00:30.367 --> 00:00:33.227
+So rather than one model for everything,
+
+10
+00:00:33.347 --> 00:00:36.247
+I'd route autocomplete to a small fast model.

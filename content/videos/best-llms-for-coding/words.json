@@ -1,0 +1,642 @@
+{
+ "L1": {
+  "duration": 7.12,
+  "level_db": -26.51,
+  "text": "Picture a model that aces a Python quiz but can still fall apart renaming a function used across forty files.",
+  "transcript": "Picture a model that aces a Python quiz but can still fall apart renaming a function used across forty files.",
+  "words": [
+   {
+    "w": "Picture",
+    "start": 0.0,
+    "end": 0.36,
+    "onset": 0.08
+   },
+   {
+    "w": "a",
+    "start": 0.36,
+    "end": 0.6,
+    "onset": 0.35
+   },
+   {
+    "w": "model",
+    "start": 0.6,
+    "end": 0.88,
+    "onset": 0.51
+   },
+   {
+    "w": "that",
+    "start": 0.88,
+    "end": 1.1,
+    "onset": 0.98
+   },
+   {
+    "w": "aces",
+    "start": 1.1,
+    "end": 1.58,
+    "onset": 1.21
+   },
+   {
+    "w": "a",
+    "start": 1.58,
+    "end": 1.68,
+    "onset": 1.58
+   },
+   {
+    "w": "Python",
+    "start": 1.68,
+    "end": 1.96,
+    "onset": 1.72
+   },
+   {
+    "w": "quiz",
+    "start": 1.96,
+    "end": 2.54,
+    "onset": 1.97
+   },
+   {
+    "w": "but",
+    "start": 2.54,
+    "end": 2.8,
+    "onset": 2.71
+   },
+   {
+    "w": "can",
+    "start": 2.8,
+    "end": 3.0,
+    "onset": 2.87
+   },
+   {
+    "w": "still",
+    "start": 3.0,
+    "end": 3.34,
+    "onset": 3.25
+   },
+   {
+    "w": "fall",
+    "start": 3.34,
+    "end": 3.74,
+    "onset": 3.49
+   },
+   {
+    "w": "apart",
+    "start": 3.74,
+    "end": 4.1,
+    "onset": 3.91
+   },
+   {
+    "w": "renaming",
+    "start": 4.1,
+    "end": 4.64,
+    "onset": 4.22
+   },
+   {
+    "w": "a",
+    "start": 4.64,
+    "end": 4.8,
+    "onset": 4.64
+   },
+   {
+    "w": "function",
+    "start": 4.8,
+    "end": 5.18,
+    "onset": 4.78
+   },
+   {
+    "w": "used",
+    "start": 5.18,
+    "end": 5.62,
+    "onset": 5.17
+   },
+   {
+    "w": "across",
+    "start": 5.62,
+    "end": 5.92,
+    "onset": 5.66
+   },
+   {
+    "w": "forty",
+    "start": 5.92,
+    "end": 6.32,
+    "onset": 6.08
+   },
+   {
+    "w": "files.",
+    "start": 6.32,
+    "end": 6.84,
+    "onset": 6.39
+   }
+  ]
+ },
+ "L2": {
+  "duration": 7.78,
+  "level_db": -24.23,
+  "text": "That's why I'd compare the best LLMs for coding on SWE-bench Verified, where a model has to resolve an actual GitHub issue.",
+  "transcript": "That's why I'd compare the best LLMs for coding on SWE-bench Verified, where a model has to resolve an actual GitHub issue.",
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.0,
+    "end": 0.32,
+    "onset": 0.09
+   },
+   {
+    "w": "why",
+    "start": 0.32,
+    "end": 0.48,
+    "onset": 0.35
+   },
+   {
+    "w": "I'd",
+    "start": 0.48,
+    "end": 0.64,
+    "onset": 0.51
+   },
+   {
+    "w": "compare",
+    "start": 0.64,
+    "end": 1.0,
+    "onset": 0.68
+   },
+   {
+    "w": "the",
+    "start": 1.0,
+    "end": 1.18,
+    "onset": 1.12
+   },
+   {
+    "w": "best",
+    "start": 1.18,
+    "end": 1.46,
+    "onset": 1.26
+   },
+   {
+    "w": "LLMs",
+    "start": 1.46,
+    "end": 2.08,
+    "onset": 1.54
+   },
+   {
+    "w": "for",
+    "start": 2.08,
+    "end": 2.24,
+    "onset": 2.19
+   },
+   {
+    "w": "coding",
+    "start": 2.24,
+    "end": 2.56,
+    "onset": 2.31
+   },
+   {
+    "w": "on",
+    "start": 2.56,
+    "end": 2.9,
+    "onset": 2.53
+   },
+   {
+    "w": "SWE",
+    "start": 2.9,
+    "end": 3.5,
+    "onset": 3.07
+   },
+   {
+    "w": "-bench",
+    "start": 3.5,
+    "end": 3.72,
+    "onset": 3.54
+   },
+   {
+    "w": "Verified,",
+    "start": 3.72,
+    "end": 4.36,
+    "onset": 3.78
+   },
+   {
+    "w": "where",
+    "start": 4.46,
+    "end": 4.72,
+    "onset": 4.58
+   },
+   {
+    "w": "a",
+    "start": 4.72,
+    "end": 4.86,
+    "onset": 4.72
+   },
+   {
+    "w": "model",
+    "start": 4.86,
+    "end": 5.1,
+    "onset": 4.86
+   },
+   {
+    "w": "has",
+    "start": 5.1,
+    "end": 5.3,
+    "onset": 5.14
+   },
+   {
+    "w": "to",
+    "start": 5.3,
+    "end": 5.42,
+    "onset": 5.4
+   },
+   {
+    "w": "resolve",
+    "start": 5.42,
+    "end": 5.92,
+    "onset": 5.4
+   },
+   {
+    "w": "an",
+    "start": 5.92,
+    "end": 6.14,
+    "onset": 6.0
+   },
+   {
+    "w": "actual",
+    "start": 6.14,
+    "end": 6.66,
+    "onset": 6.24
+   },
+   {
+    "w": "GitHub",
+    "start": 6.66,
+    "end": 7.08,
+    "onset": 6.89
+   },
+   {
+    "w": "issue.",
+    "start": 7.08,
+    "end": 7.6,
+    "onset": 7.06
+   }
+  ]
+ },
+ "L3": {
+  "duration": 6.64,
+  "level_db": -22.7,
+  "text": "Claude 4.6 Opus leads that benchmark, but the right model still depends on the kind of work.",
+  "transcript": "Claude 4.6 Opus leads that benchmark, but the right model still depends on the kind of work.",
+  "words": [
+   {
+    "w": "Claude",
+    "start": 0.0,
+    "end": 0.4,
+    "onset": 0.08
+   },
+   {
+    "w": "4",
+    "start": 0.4,
+    "end": 0.7,
+    "onset": 0.53
+   },
+   {
+    "w": ".6",
+    "start": 0.7,
+    "end": 1.34,
+    "onset": 0.75
+   },
+   {
+    "w": "Opus",
+    "start": 1.34,
+    "end": 1.98,
+    "onset": 1.57
+   },
+   {
+    "w": "leads",
+    "start": 1.98,
+    "end": 2.26,
+    "onset": 2.02
+   },
+   {
+    "w": "that",
+    "start": 2.26,
+    "end": 2.54,
+    "onset": 2.4
+   },
+   {
+    "w": "benchmark,",
+    "start": 2.54,
+    "end": 3.1,
+    "onset": 2.66
+   },
+   {
+    "w": "but",
+    "start": 3.46,
+    "end": 3.6,
+    "onset": 3.52
+   },
+   {
+    "w": "the",
+    "start": 3.6,
+    "end": 3.74,
+    "onset": 3.65
+   },
+   {
+    "w": "right",
+    "start": 3.74,
+    "end": 3.96,
+    "onset": 3.8
+   },
+   {
+    "w": "model",
+    "start": 3.96,
+    "end": 4.52,
+    "onset": 4.06
+   },
+   {
+    "w": "still",
+    "start": 4.52,
+    "end": 4.9,
+    "onset": 4.61
+   },
+   {
+    "w": "depends",
+    "start": 4.9,
+    "end": 5.48,
+    "onset": 5.03
+   },
+   {
+    "w": "on",
+    "start": 5.48,
+    "end": 5.7,
+    "onset": 5.61
+   },
+   {
+    "w": "the",
+    "start": 5.7,
+    "end": 5.8,
+    "onset": 5.76
+   },
+   {
+    "w": "kind",
+    "start": 5.8,
+    "end": 6.08,
+    "onset": 5.85
+   },
+   {
+    "w": "of",
+    "start": 6.08,
+    "end": 6.28,
+    "onset": 6.15
+   },
+   {
+    "w": "work.",
+    "start": 6.28,
+    "end": 6.54,
+    "onset": 6.36
+   }
+  ]
+ },
+ "L4": {
+  "duration": 8.57,
+  "level_db": -21.99,
+  "text": "For an unattended agent on multi-file pull requests I'd reach for Claude, and to reason over a whole repository, Gemini 3.1 Pro.",
+  "transcript": "For an unattended agent on multi-file pull requests I'd reach for Claude, and to reason over a whole repository, Gemini 3.1 Pro.",
+  "words": [
+   {
+    "w": "For",
+    "start": 0.0,
+    "end": 0.24,
+    "onset": 0.1
+   },
+   {
+    "w": "an",
+    "start": 0.24,
+    "end": 0.38,
+    "onset": 0.25
+   },
+   {
+    "w": "unattended",
+    "start": 0.38,
+    "end": 1.04,
+    "onset": 0.46
+   },
+   {
+    "w": "agent",
+    "start": 1.04,
+    "end": 1.4,
+    "onset": 1.09
+   },
+   {
+    "w": "on",
+    "start": 1.4,
+    "end": 1.62,
+    "onset": 1.37
+   },
+   {
+    "w": "multi",
+    "start": 1.62,
+    "end": 1.9,
+    "onset": 1.57
+   },
+   {
+    "w": "-file",
+    "start": 1.9,
+    "end": 2.18,
+    "onset": 2.01
+   },
+   {
+    "w": "pull",
+    "start": 2.18,
+    "end": 2.38,
+    "onset": 2.26
+   },
+   {
+    "w": "requests",
+    "start": 2.38,
+    "end": 2.82,
+    "onset": 2.59
+   },
+   {
+    "w": "I'd",
+    "start": 2.82,
+    "end": 3.08,
+    "onset": 2.9
+   },
+   {
+    "w": "reach",
+    "start": 3.08,
+    "end": 3.28,
+    "onset": 3.14
+   },
+   {
+    "w": "for",
+    "start": 3.28,
+    "end": 3.48,
+    "onset": 3.39
+   },
+   {
+    "w": "Claude,",
+    "start": 3.48,
+    "end": 3.9,
+    "onset": 3.51
+   },
+   {
+    "w": "and",
+    "start": 4.06,
+    "end": 4.2,
+    "onset": 4.06
+   },
+   {
+    "w": "to",
+    "start": 4.2,
+    "end": 4.32,
+    "onset": 4.22
+   },
+   {
+    "w": "reason",
+    "start": 4.32,
+    "end": 4.6,
+    "onset": 4.32
+   },
+   {
+    "w": "over",
+    "start": 4.6,
+    "end": 5.0,
+    "onset": 4.59
+   },
+   {
+    "w": "a",
+    "start": 5.0,
+    "end": 5.38,
+    "onset": 5.31
+   },
+   {
+    "w": "whole",
+    "start": 5.38,
+    "end": 5.6,
+    "onset": 5.4
+   },
+   {
+    "w": "repository,",
+    "start": 5.6,
+    "end": 6.28,
+    "onset": 5.69
+   },
+   {
+    "w": "Gemini",
+    "start": 6.6,
+    "end": 7.08,
+    "onset": 6.63
+   },
+   {
+    "w": "3",
+    "start": 7.08,
+    "end": 7.5,
+    "onset": 7.38
+   },
+   {
+    "w": ".1",
+    "start": 7.5,
+    "end": 8.16,
+    "onset": 7.64
+   },
+   {
+    "w": "Pro.",
+    "start": 8.16,
+    "end": 8.42,
+    "onset": 8.25
+   }
+  ]
+ },
+ "L5": {
+  "duration": 5.66,
+  "level_db": -24.63,
+  "text": "So rather than one model for everything, I'd route autocomplete to a small fast model.",
+  "transcript": "So rather than one model for everything, I'd route autocomplete to a small fast model.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.38,
+    "onset": 0.09
+   },
+   {
+    "w": "rather",
+    "start": 0.38,
+    "end": 1.0,
+    "onset": 0.64
+   },
+   {
+    "w": "than",
+    "start": 1.0,
+    "end": 1.22,
+    "onset": 0.98
+   },
+   {
+    "w": "one",
+    "start": 1.22,
+    "end": 1.42,
+    "onset": 1.24
+   },
+   {
+    "w": "model",
+    "start": 1.42,
+    "end": 1.82,
+    "onset": 1.42
+   },
+   {
+    "w": "for",
+    "start": 1.82,
+    "end": 2.02,
+    "onset": 1.97
+   },
+   {
+    "w": "everything,",
+    "start": 2.02,
+    "end": 2.46,
+    "onset": 2.08
+   },
+   {
+    "w": "I'd",
+    "start": 2.98,
+    "end": 3.16,
+    "onset": 2.96
+   },
+   {
+    "w": "route",
+    "start": 3.16,
+    "end": 3.44,
+    "onset": 3.14
+   },
+   {
+    "w": "autocomplete",
+    "start": 3.44,
+    "end": 4.18,
+    "onset": 3.51
+   },
+   {
+    "w": "to",
+    "start": 4.18,
+    "end": 4.3,
+    "onset": 4.23
+   },
+   {
+    "w": "a",
+    "start": 4.3,
+    "end": 4.42,
+    "onset": 4.28
+   },
+   {
+    "w": "small",
+    "start": 4.42,
+    "end": 4.7,
+    "onset": 4.4
+   },
+   {
+    "w": "fast",
+    "start": 4.7,
+    "end": 5.1,
+    "onset": 4.78
+   },
+   {
+    "w": "model.",
+    "start": 5.1,
+    "end": 5.48,
+    "onset": 5.16
+   }
+  ]
+ }
+}

@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/best-llms-for-coding/, imported by tools/import_video.py from
+# ninadpathak-video films/best-llms-for-coding (render of 2026-10-28T20:19:18+05:30).
+name: The best LLMs for coding in 40 seconds
+description: Why SWE-bench Verified is the benchmark to compare coding models on, which model fits unattended agents and which fits repository-scale reasoning, and why autocomplete goes to a small fast model.
+upload_date: '2026-10-28T20:19:18+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: best-llms-for-coding.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 7.2
+  L3: 15.033
+  L4: 21.733
+  L5: 30.367
+transcript: Picture a model that aces a Python quiz but can still fall apart renaming a function used across forty files. That's why I'd compare the best LLMs for coding on SWE-bench Verified, where a model has to resolve an actual GitHub issue. Claude 4.6 Opus leads that benchmark, but the right model still depends on the kind of work. For an unattended agent on multi-file pull requests I'd reach for Claude, and to reason over a whole repository, Gemini 3.1 Pro. So rather than one model for everything, I'd route autocomplete to a small fast model.
