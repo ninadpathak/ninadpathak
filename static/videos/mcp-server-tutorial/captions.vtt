@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.150 --> 00:00:04.475
+Okay, so an MCP server gives an AI client tools,
+
+2
+00:00:04.475 --> 00:00:06.827
+and the model calls each tool by name.
+
+3
+00:00:06.827 --> 00:00:08.527
+With the Python SDK,
+
+4
+00:00:08.787 --> 00:00:11.337
+each type-hinted function becomes a tool,
+
+5
+00:00:11.337 --> 00:00:14.137
+and its docstring is what the model reads to choose one.
+
+6
+00:00:14.137 --> 00:00:17.587
+A tool's arguments come from the model as plain strings,
+
+7
+00:00:17.807 --> 00:00:22.233
+so I'd resolve every path before checking it's inside the docs folder.
+
+8
+00:00:22.233 --> 00:00:24.598
+The tool's output format matters too,
+
+9
+00:00:24.598 --> 00:00:27.533
+because when read_doc returned plain text,
+
+10
+00:00:27.713 --> 00:00:30.212
+Claude cited the right line in one run of four.
+
+11
+00:00:30.212 --> 00:00:33.447
+With numbered lines it was four of four,
+
+12
+00:00:33.632 --> 00:00:38.187
+so I'd return what the model has to cite ready to copy.

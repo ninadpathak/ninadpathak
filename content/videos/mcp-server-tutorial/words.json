@@ -1,0 +1,667 @@
+{
+ "L1": {
+  "duration": 6.549,
+  "text": "Okay, so an MCP server gives an AI client tools, and the model calls each tool by name.",
+  "transcript": "Okay, so an MCP server gives an AI client tools, and the model calls each tool by name.",
+  "words": [
+   {
+    "w": "Okay,",
+    "start": 0.05,
+    "end": 0.3,
+    "whisper": 0.0
+   },
+   {
+    "w": "so",
+    "start": 0.8,
+    "end": 0.94,
+    "whisper": 0.8
+   },
+   {
+    "w": "an",
+    "start": 0.94,
+    "end": 1.3,
+    "whisper": 0.94
+   },
+   {
+    "w": "MCP",
+    "start": 1.355,
+    "end": 1.86,
+    "whisper": 1.3
+   },
+   {
+    "w": "server",
+    "start": 1.86,
+    "end": 2.3,
+    "whisper": 1.86
+   },
+   {
+    "w": "gives",
+    "start": 2.3,
+    "end": 2.74,
+    "whisper": 2.3
+   },
+   {
+    "w": "an",
+    "start": 2.74,
+    "end": 2.88,
+    "whisper": 2.74
+   },
+   {
+    "w": "AI",
+    "start": 2.92,
+    "end": 3.16,
+    "whisper": 2.88
+   },
+   {
+    "w": "client",
+    "start": 3.265,
+    "end": 3.58,
+    "whisper": 3.16
+   },
+   {
+    "w": "tools,",
+    "start": 3.695,
+    "end": 4.0,
+    "whisper": 3.58
+   },
+   {
+    "w": "and",
+    "start": 4.375,
+    "end": 4.54,
+    "whisper": 4.28
+   },
+   {
+    "w": "the",
+    "start": 4.54,
+    "end": 4.64,
+    "whisper": 4.54
+   },
+   {
+    "w": "model",
+    "start": 4.64,
+    "end": 4.92,
+    "whisper": 4.64
+   },
+   {
+    "w": "calls",
+    "start": 5.065,
+    "end": 5.32,
+    "whisper": 4.92
+   },
+   {
+    "w": "each",
+    "start": 5.445,
+    "end": 5.62,
+    "whisper": 5.32
+   },
+   {
+    "w": "tool",
+    "start": 5.725,
+    "end": 5.94,
+    "whisper": 5.62
+   },
+   {
+    "w": "by",
+    "start": 5.94,
+    "end": 6.22,
+    "whisper": 5.94
+   },
+   {
+    "w": "name.",
+    "start": 6.22,
+    "end": 6.44,
+    "whisper": 6.22
+   }
+  ]
+ },
+ "L2": {
+  "duration": 7.168,
+  "text": "With the Python SDK, each type-hinted function becomes a tool, and its docstring is what the model reads to choose one.",
+  "transcript": "With the Python SDK, each type-hinted function becomes a tool, and its docstring is what the model reads to choose one.",
+  "words": [
+   {
+    "w": "With",
+    "start": 0.06,
+    "end": 0.16,
+    "whisper": 0.0
+   },
+   {
+    "w": "the",
+    "start": 0.18,
+    "end": 0.28,
+    "whisper": 0.16
+   },
+   {
+    "w": "Python",
+    "start": 0.31,
+    "end": 0.62,
+    "whisper": 0.28
+   },
+   {
+    "w": "SDK,",
+    "start": 0.8,
+    "end": 1.36,
+    "whisper": 0.62
+   },
+   {
+    "w": "each",
+    "start": 2.02,
+    "end": 2.24,
+    "whisper": 2.02
+   },
+   {
+    "w": "type",
+    "start": 2.29,
+    "end": 2.54,
+    "whisper": 2.24
+   },
+   {
+    "w": "-hinted",
+    "start": 2.575,
+    "end": 2.88,
+    "whisper": 2.54
+   },
+   {
+    "w": "function",
+    "start": 2.99,
+    "end": 3.22,
+    "whisper": 2.88
+   },
+   {
+    "w": "becomes",
+    "start": 3.395,
+    "end": 3.72,
+    "whisper": 3.22
+   },
+   {
+    "w": "a",
+    "start": 3.86,
+    "end": 4.0,
+    "whisper": 3.72
+   },
+   {
+    "w": "tool,",
+    "start": 4.0,
+    "end": 4.28,
+    "whisper": 4.0
+   },
+   {
+    "w": "and",
+    "start": 4.57,
+    "end": 4.68,
+    "whisper": 4.42
+   },
+   {
+    "w": "its",
+    "start": 4.68,
+    "end": 4.88,
+    "whisper": 4.68
+   },
+   {
+    "w": "docstring",
+    "start": 4.94,
+    "end": 5.38,
+    "whisper": 4.88
+   },
+   {
+    "w": "is",
+    "start": 5.38,
+    "end": 5.56,
+    "whisper": 5.38
+   },
+   {
+    "w": "what",
+    "start": 5.56,
+    "end": 5.7,
+    "whisper": 5.56
+   },
+   {
+    "w": "the",
+    "start": 5.745,
+    "end": 5.84,
+    "whisper": 5.7
+   },
+   {
+    "w": "model",
+    "start": 5.84,
+    "end": 6.12,
+    "whisper": 5.84
+   },
+   {
+    "w": "reads",
+    "start": 6.23,
+    "end": 6.44,
+    "whisper": 6.12
+   },
+   {
+    "w": "to",
+    "start": 6.53,
+    "end": 6.62,
+    "whisper": 6.44
+   },
+   {
+    "w": "choose",
+    "start": 6.685,
+    "end": 6.92,
+    "whisper": 6.62
+   },
+   {
+    "w": "one.",
+    "start": 6.92,
+    "end": 7.14,
+    "whisper": 6.92
+   }
+  ]
+ },
+ "L3": {
+  "duration": 8.064,
+  "text": "A tool's arguments come from the model as plain strings, so I'd resolve every path before checking it's inside the docs folder.",
+  "transcript": "A tool's arguments come from the model as plain strings, so I'd resolve every path before checking it's inside the docs folder.",
+  "words": [
+   {
+    "w": "A",
+    "start": 0.07,
+    "end": 0.18,
+    "whisper": 0.0
+   },
+   {
+    "w": "tool's",
+    "start": 0.18,
+    "end": 0.5,
+    "whisper": 0.18
+   },
+   {
+    "w": "arguments",
+    "start": 0.5,
+    "end": 0.96,
+    "whisper": 0.5
+   },
+   {
+    "w": "come",
+    "start": 1.105,
+    "end": 1.32,
+    "whisper": 0.96
+   },
+   {
+    "w": "from",
+    "start": 1.5,
+    "end": 1.6,
+    "whisper": 1.32
+   },
+   {
+    "w": "the",
+    "start": 1.6,
+    "end": 1.8,
+    "whisper": 1.6
+   },
+   {
+    "w": "model",
+    "start": 1.8,
+    "end": 2.12,
+    "whisper": 1.8
+   },
+   {
+    "w": "as",
+    "start": 2.12,
+    "end": 2.34,
+    "whisper": 2.12
+   },
+   {
+    "w": "plain",
+    "start": 2.41,
+    "end": 2.58,
+    "whisper": 2.34
+   },
+   {
+    "w": "strings,",
+    "start": 2.825,
+    "end": 3.12,
+    "whisper": 2.58
+   },
+   {
+    "w": "so",
+    "start": 3.74,
+    "end": 3.96,
+    "whisper": 3.52
+   },
+   {
+    "w": "I'd",
+    "start": 4.275,
+    "end": 4.48,
+    "whisper": 3.96
+   },
+   {
+    "w": "resolve",
+    "start": 4.48,
+    "end": 4.88,
+    "whisper": 4.48
+   },
+   {
+    "w": "every",
+    "start": 4.88,
+    "end": 5.2,
+    "whisper": 4.88
+   },
+   {
+    "w": "path",
+    "start": 5.315,
+    "end": 5.64,
+    "whisper": 5.2
+   },
+   {
+    "w": "before",
+    "start": 5.75,
+    "end": 5.96,
+    "whisper": 5.64
+   },
+   {
+    "w": "checking",
+    "start": 6.1,
+    "end": 6.36,
+    "whisper": 5.96
+   },
+   {
+    "w": "it's",
+    "start": 6.36,
+    "end": 6.64,
+    "whisper": 6.36
+   },
+   {
+    "w": "inside",
+    "start": 6.64,
+    "end": 7.02,
+    "whisper": 6.64
+   },
+   {
+    "w": "the",
+    "start": 7.02,
+    "end": 7.22,
+    "whisper": 7.02
+   },
+   {
+    "w": "docs",
+    "start": 7.275,
+    "end": 7.54,
+    "whisper": 7.22
+   },
+   {
+    "w": "folder.",
+    "start": 7.68,
+    "end": 7.92,
+    "whisper": 7.54
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.829,
+  "text": "The tool's output format matters too, because when read_doc returned plain text, Claude cited the right line in one run of four.",
+  "transcript": "The tool's output format matters too, because when read.doc returned plain text, Claude cited the right line in one run of four.",
+  "words": [
+   {
+    "w": "The",
+    "start": 0.0,
+    "end": 0.18,
+    "whisper": 0.0
+   },
+   {
+    "w": "tool's",
+    "start": 0.18,
+    "end": 0.54,
+    "whisper": 0.18
+   },
+   {
+    "w": "output",
+    "start": 0.54,
+    "end": 0.84,
+    "whisper": 0.54
+   },
+   {
+    "w": "format",
+    "start": 1.01,
+    "end": 1.34,
+    "whisper": 0.84
+   },
+   {
+    "w": "matters",
+    "start": 1.34,
+    "end": 1.76,
+    "whisper": 1.34
+   },
+   {
+    "w": "too,",
+    "start": 1.865,
+    "end": 2.04,
+    "whisper": 1.76
+   },
+   {
+    "w": "because",
+    "start": 2.365,
+    "end": 2.64,
+    "whisper": 2.24
+   },
+   {
+    "w": "when",
+    "start": 2.64,
+    "end": 3.04,
+    "whisper": 2.64
+   },
+   {
+    "w": "read",
+    "start": 3.04,
+    "end": 3.34,
+    "whisper": 3.04
+   },
+   {
+    "w": ".doc",
+    "start": 3.36,
+    "end": 3.6,
+    "whisper": 3.34
+   },
+   {
+    "w": "returned",
+    "start": 3.625,
+    "end": 4.0,
+    "whisper": 3.6
+   },
+   {
+    "w": "plain",
+    "start": 4.185,
+    "end": 4.34,
+    "whisper": 4.0
+   },
+   {
+    "w": "text,",
+    "start": 4.55,
+    "end": 4.9,
+    "whisper": 4.34
+   },
+   {
+    "w": "Claude",
+    "start": 5.48,
+    "end": 5.8,
+    "whisper": 5.46
+   },
+   {
+    "w": "cited",
+    "start": 5.83,
+    "end": 5.98,
+    "whisper": 5.8
+   },
+   {
+    "w": "the",
+    "start": 5.98,
+    "end": 6.18,
+    "whisper": 5.98
+   },
+   {
+    "w": "right",
+    "start": 6.18,
+    "end": 6.4,
+    "whisper": 6.18
+   },
+   {
+    "w": "line",
+    "start": 6.4,
+    "end": 6.74,
+    "whisper": 6.4
+   },
+   {
+    "w": "in",
+    "start": 6.74,
+    "end": 6.92,
+    "whisper": 6.74
+   },
+   {
+    "w": "one",
+    "start": 6.92,
+    "end": 7.1,
+    "whisper": 6.92
+   },
+   {
+    "w": "run",
+    "start": 7.1,
+    "end": 7.3,
+    "whisper": 7.1
+   },
+   {
+    "w": "of",
+    "start": 7.3,
+    "end": 7.48,
+    "whisper": 7.3
+   },
+   {
+    "w": "four.",
+    "start": 7.535,
+    "end": 7.7,
+    "whisper": 7.48
+   }
+  ]
+ },
+ "L5": {
+  "duration": 7.744,
+  "text": "With numbered lines it was four of four, so I'd return what the model has to cite ready to copy.",
+  "transcript": "With numbered lines it was four of four, so I'd return what the model has to cite ready to copy.",
+  "words": [
+   {
+    "w": "With",
+    "start": 0.045,
+    "end": 0.32,
+    "whisper": 0.0
+   },
+   {
+    "w": "numbered",
+    "start": 0.365,
+    "end": 0.72,
+    "whisper": 0.32
+   },
+   {
+    "w": "lines",
+    "start": 0.72,
+    "end": 1.22,
+    "whisper": 0.72
+   },
+   {
+    "w": "it",
+    "start": 1.22,
+    "end": 1.56,
+    "whisper": 1.22
+   },
+   {
+    "w": "was",
+    "start": 1.56,
+    "end": 1.86,
+    "whisper": 1.56
+   },
+   {
+    "w": "four",
+    "start": 2.2,
+    "end": 2.34,
+    "whisper": 1.86
+   },
+   {
+    "w": "of",
+    "start": 2.34,
+    "end": 2.58,
+    "whisper": 2.34
+   },
+   {
+    "w": "four,",
+    "start": 2.655,
+    "end": 2.88,
+    "whisper": 2.58
+   },
+   {
+    "w": "so",
+    "start": 3.465,
+    "end": 3.72,
+    "whisper": 3.4
+   },
+   {
+    "w": "I'd",
+    "start": 4.075,
+    "end": 4.36,
+    "whisper": 3.72
+   },
+   {
+    "w": "return",
+    "start": 4.5,
+    "end": 4.74,
+    "whisper": 4.36
+   },
+   {
+    "w": "what",
+    "start": 4.74,
+    "end": 5.1,
+    "whisper": 4.74
+   },
+   {
+    "w": "the",
+    "start": 5.13,
+    "end": 5.2,
+    "whisper": 5.1
+   },
+   {
+    "w": "model",
+    "start": 5.2,
+    "end": 5.54,
+    "whisper": 5.2
+   },
+   {
+    "w": "has",
+    "start": 5.54,
+    "end": 5.82,
+    "whisper": 5.54
+   },
+   {
+    "w": "to",
+    "start": 5.91,
+    "end": 6.0,
+    "whisper": 5.82
+   },
+   {
+    "w": "cite",
+    "start": 6.0,
+    "end": 6.38,
+    "whisper": 6.0
+   },
+   {
+    "w": "ready",
+    "start": 6.565,
+    "end": 6.78,
+    "whisper": 6.38
+   },
+   {
+    "w": "to",
+    "start": 6.94,
+    "end": 7.1,
+    "whisper": 6.78
+   },
+   {
+    "w": "copy.",
+    "start": 7.27,
+    "end": 7.62,
+    "whisper": 7.1
+   }
+  ]
+ }
+}

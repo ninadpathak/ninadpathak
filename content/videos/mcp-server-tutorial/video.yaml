@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/mcp-server-tutorial/, imported by tools/import_video.py from
+# ninadpathak-video films/mcp-server-tutorial (render of 2026-10-28T07:20:33+05:30).
+name: An MCP server tutorial in 40 seconds
+description: How an MCP server in Python turns type-hinted functions into tools, why every path argument is resolved before it is checked, and how numbering a tool's output changed whether Claude cited the right line.
+upload_date: '2026-10-28T07:20:33+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: mcp-server-tutorial.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 6.767
+  L3: 14.067
+  L4: 22.233
+  L5: 30.167
+transcript: Okay, so an MCP server gives an AI client tools, and the model calls each tool by name. With the Python SDK, each type-hinted function becomes a tool, and its docstring is what the model reads to choose one. A tool's arguments come from the model as plain strings, so I'd resolve every path before checking it's inside the docs folder. The tool's output format matters too, because when read_doc returned plain text, Claude cited the right line in one run of four. With numbered lines it was four of four, so I'd return what the model has to cite ready to copy.

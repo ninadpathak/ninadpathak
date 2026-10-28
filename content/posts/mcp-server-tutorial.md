@@ -10,6 +10,7 @@ takeaways:
 - Return what the model has to cite, because Claude cited the right line in every run once the tool numbered its lines.
 title: 'MCP Server Tutorial: Build a Docs Search Server in Python'
 work_note: '[Ninad Pathak](/portfolio/) wrote Firecrawl''s technical guides to its MCP server in Cursor and in ChatGPT. The server here is smaller on purpose, because it exists to test which tool decisions change what a model does with the output.'
+video: mcp-server-tutorial
 ---
 
 A tool's return value is part of its interface to the model, and its format decides what the model can do with the result. Tested with Claude Code 2.1.308 on Haiku 5.5, a `read_doc` tool that returned plain text led to the right line citation in one run of four, and the same tool returning numbered lines led to it in four of four.
