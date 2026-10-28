@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/agent-memory-types/, imported by tools/import_video.py from
+# ninadpathak-video films/agent-memory-types (render of 2026-10-28T15:25:28+05:30).
+name: Agent memory types in 40 seconds
+description: 'Why an agent forgets what it just did when its logs look normal: working, episodic and semantic memory, routing facts and events to different stores, and how each failure shows itself.'
+upload_date: '2026-10-28T15:25:28+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: agent-memory-types.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.067
+  L2: 5.233
+  L3: 14.833
+  L4: 23.6
+  L5: 29.967
+transcript: Why would an agent forget what it just did, when its logs look normal? It's a category error, because agents run three memory types, working memory for the current turn, episodic for what happened, and semantic for what's true. An agent kept events in semantic memory, so asking what changed in the last hour returned config edits ranked by topic, not time. So I'd route facts to a semantic store, and events to an episodic store fetched by time. When it contradicts itself, I'd investigate episodic ranking, and when it's confidently wrong, I'd update the knowledge base.

@@ -283,3 +283,30 @@ class WrittenCaptionTests(unittest.TestCase):
         line = {"text": "Two extra words.", "words": [{"w": "Words.", "start": 0.0, "end": 0.4}]}
         with self.assertRaisesRegex(ValueError, "did not say"):
             self.captions.written_words(line)
+
+
+class CaptionClauseTests(unittest.TestCase):
+    """Short trailing fragments join the clause before them, and no clause is lost."""
+
+    def setUp(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "build_video_captions", Path(__file__).resolve().parents[1] / "tools/build_video_captions.py")
+        self.captions = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.captions)
+
+    def words(self, text):
+        return [{"w": w, "start": float(i), "end": i + 0.5} for i, w in enumerate(text.split())]
+
+    def test_short_last_fragment_joins_the_clause_before_it(self):
+        # The agent-memory-types line: the first clause was overwritten by the merged last two.
+        groups = self.captions.clauses(self.words(
+            "An agent kept events in memory, so asking what changed returned edits by topic, not time."))
+        self.assertEqual([" ".join(w["w"] for w in g) for g in groups], [
+            "An agent kept events in memory,",
+            "so asking what changed returned edits by topic, not time.",
+        ])
+
+    def test_two_clauses_with_a_short_tail_become_one(self):
+        groups = self.captions.clauses(self.words("It keeps what it agrees with, every time."))
+        self.assertEqual([" ".join(w["w"] for w in g) for g in groups], ["It keeps what it agrees with, every time."])

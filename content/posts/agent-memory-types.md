@@ -9,6 +9,7 @@ work_note: Developer content creator [Ninad Pathak](/portfolio/) explains memory
   through concrete operations, distinguishing how an application saves a preference
   from how it records an action.
 title: 'Episodic, Semantic, and Working Memory in AI Agents: A Practical Map'
+video: agent-memory-types
 ---
 
 An agent can forget what it just did even when its logs look normal, retrieval is fast, and the context window has room.

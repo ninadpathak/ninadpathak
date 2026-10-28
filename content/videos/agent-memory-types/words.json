@@ -1,0 +1,624 @@
+{
+ "L1": {
+  "duration": 4.96,
+  "level_db": -23.87,
+  "text": "Why would an agent forget what it just did, when its logs look normal?",
+  "transcript": "Why would an agent forget what it just did, when its logs look normal?",
+  "words": [
+   {
+    "w": "Why",
+    "start": 0.0,
+    "end": 0.32,
+    "onset": 0.09
+   },
+   {
+    "w": "would",
+    "start": 0.32,
+    "end": 0.62,
+    "onset": 0.61
+   },
+   {
+    "w": "an",
+    "start": 0.62,
+    "end": 0.76,
+    "onset": 0.6
+   },
+   {
+    "w": "agent",
+    "start": 0.76,
+    "end": 1.16,
+    "onset": 0.82
+   },
+   {
+    "w": "forget",
+    "start": 1.16,
+    "end": 1.58,
+    "onset": 1.25
+   },
+   {
+    "w": "what",
+    "start": 1.58,
+    "end": 2.04,
+    "onset": 1.82
+   },
+   {
+    "w": "it",
+    "start": 2.04,
+    "end": 2.18,
+    "onset": 2.07
+   },
+   {
+    "w": "just",
+    "start": 2.18,
+    "end": 2.46,
+    "onset": 2.22
+   },
+   {
+    "w": "did,",
+    "start": 2.46,
+    "end": 2.88,
+    "onset": 2.59
+   },
+   {
+    "w": "when",
+    "start": 3.06,
+    "end": 3.66,
+    "onset": 3.19
+   },
+   {
+    "w": "its",
+    "start": 3.66,
+    "end": 3.84,
+    "onset": 3.66
+   },
+   {
+    "w": "logs",
+    "start": 3.84,
+    "end": 4.22,
+    "onset": 3.85
+   },
+   {
+    "w": "look",
+    "start": 4.22,
+    "end": 4.44,
+    "onset": 4.32
+   },
+   {
+    "w": "normal?",
+    "start": 4.44,
+    "end": 4.76,
+    "onset": 4.49
+   }
+  ]
+ },
+ "L2": {
+  "duration": 9.39,
+  "level_db": -25.36,
+  "text": "It's a category error, because agents run three memory types, working memory for the current turn, episodic for what happened, and semantic for what's true.",
+  "transcript": "It's a category error, because agents run three memory types, working memory for the current turn, episodic for what happened, and semantic for what's true.",
+  "words": [
+   {
+    "w": "It's",
+    "start": 0.0,
+    "end": 0.3,
+    "onset": 0.08
+   },
+   {
+    "w": "a",
+    "start": 0.3,
+    "end": 0.4,
+    "onset": 0.34
+   },
+   {
+    "w": "category",
+    "start": 0.4,
+    "end": 0.9,
+    "onset": 0.43
+   },
+   {
+    "w": "error,",
+    "start": 0.9,
+    "end": 1.44,
+    "onset": 0.86
+   },
+   {
+    "w": "because",
+    "start": 1.78,
+    "end": 2.0,
+    "onset": 1.74
+   },
+   {
+    "w": "agents",
+    "start": 2.0,
+    "end": 2.4,
+    "onset": 2.09
+   },
+   {
+    "w": "run",
+    "start": 2.4,
+    "end": 2.7,
+    "onset": 2.53
+   },
+   {
+    "w": "three",
+    "start": 2.7,
+    "end": 2.98,
+    "onset": 2.81
+   },
+   {
+    "w": "memory",
+    "start": 2.98,
+    "end": 3.36,
+    "onset": 2.96
+   },
+   {
+    "w": "types,",
+    "start": 3.36,
+    "end": 3.82,
+    "onset": 3.5
+   },
+   {
+    "w": "working",
+    "start": 4.04,
+    "end": 4.3,
+    "onset": 3.96
+   },
+   {
+    "w": "memory",
+    "start": 4.3,
+    "end": 4.72,
+    "onset": 4.3
+   },
+   {
+    "w": "for",
+    "start": 4.72,
+    "end": 4.92,
+    "onset": 4.89
+   },
+   {
+    "w": "the",
+    "start": 4.92,
+    "end": 5.02,
+    "onset": 4.89
+   },
+   {
+    "w": "current",
+    "start": 5.02,
+    "end": 5.32,
+    "onset": 5.06
+   },
+   {
+    "w": "turn,",
+    "start": 5.32,
+    "end": 5.7,
+    "onset": 5.41
+   },
+   {
+    "w": "episodic",
+    "start": 6.02,
+    "end": 6.62,
+    "onset": 6.02
+   },
+   {
+    "w": "for",
+    "start": 6.62,
+    "end": 6.78,
+    "onset": 6.72
+   },
+   {
+    "w": "what",
+    "start": 6.78,
+    "end": 7.0,
+    "onset": 6.89
+   },
+   {
+    "w": "happened,",
+    "start": 7.0,
+    "end": 7.36,
+    "onset": 7.25
+   },
+   {
+    "w": "and",
+    "start": 7.58,
+    "end": 7.78,
+    "onset": 7.54
+   },
+   {
+    "w": "semantic",
+    "start": 7.78,
+    "end": 8.34,
+    "onset": 7.84
+   },
+   {
+    "w": "for",
+    "start": 8.34,
+    "end": 8.68,
+    "onset": 8.39
+   },
+   {
+    "w": "what's",
+    "start": 8.68,
+    "end": 8.96,
+    "onset": 8.63
+   },
+   {
+    "w": "true.",
+    "start": 8.96,
+    "end": 9.18,
+    "onset": 8.97
+   }
+  ]
+ },
+ "L3": {
+  "duration": 8.55,
+  "level_db": -23.16,
+  "text": "An agent kept events in semantic memory, so asking what changed in the last hour returned config edits ranked by topic, not time.",
+  "transcript": "An agent kept events in semantic memory, so asking what changed in the last hour returned config edits ranked by topic, not time.",
+  "words": [
+   {
+    "w": "An",
+    "start": 0.0,
+    "end": 0.24,
+    "onset": 0.08
+   },
+   {
+    "w": "agent",
+    "start": 0.24,
+    "end": 0.56,
+    "onset": 0.25
+   },
+   {
+    "w": "kept",
+    "start": 0.56,
+    "end": 0.88,
+    "onset": 0.54
+   },
+   {
+    "w": "events",
+    "start": 0.88,
+    "end": 1.32,
+    "onset": 0.93
+   },
+   {
+    "w": "in",
+    "start": 1.32,
+    "end": 1.46,
+    "onset": 1.29
+   },
+   {
+    "w": "semantic",
+    "start": 1.46,
+    "end": 1.84,
+    "onset": 1.44
+   },
+   {
+    "w": "memory,",
+    "start": 1.84,
+    "end": 2.32,
+    "onset": 1.96
+   },
+   {
+    "w": "so",
+    "start": 2.58,
+    "end": 2.98,
+    "onset": 2.84
+   },
+   {
+    "w": "asking",
+    "start": 2.98,
+    "end": 3.42,
+    "onset": 2.95
+   },
+   {
+    "w": "what",
+    "start": 3.42,
+    "end": 3.64,
+    "onset": 3.39
+   },
+   {
+    "w": "changed",
+    "start": 3.64,
+    "end": 4.04,
+    "onset": 3.68
+   },
+   {
+    "w": "in",
+    "start": 4.04,
+    "end": 4.22,
+    "onset": 4.11
+   },
+   {
+    "w": "the",
+    "start": 4.22,
+    "end": 4.3,
+    "onset": 4.22
+   },
+   {
+    "w": "last",
+    "start": 4.3,
+    "end": 4.56,
+    "onset": 4.3
+   },
+   {
+    "w": "hour",
+    "start": 4.56,
+    "end": 4.92,
+    "onset": 4.68
+   },
+   {
+    "w": "returned",
+    "start": 4.92,
+    "end": 5.42,
+    "onset": 4.94
+   },
+   {
+    "w": "config",
+    "start": 5.42,
+    "end": 5.84,
+    "onset": 5.56
+   },
+   {
+    "w": "edits",
+    "start": 5.84,
+    "end": 6.3,
+    "onset": 5.82
+   },
+   {
+    "w": "ranked",
+    "start": 6.3,
+    "end": 6.74,
+    "onset": 6.33
+   },
+   {
+    "w": "by",
+    "start": 6.74,
+    "end": 6.98,
+    "onset": 6.88
+   },
+   {
+    "w": "topic,",
+    "start": 6.98,
+    "end": 7.48,
+    "onset": 7.07
+   },
+   {
+    "w": "not",
+    "start": 7.66,
+    "end": 8.08,
+    "onset": 7.82
+   },
+   {
+    "w": "time.",
+    "start": 8.08,
+    "end": 8.36,
+    "onset": 8.16
+   }
+  ]
+ },
+ "L4": {
+  "duration": 6.23,
+  "level_db": -23.77,
+  "text": "So I'd route facts to a semantic store, and events to an episodic store fetched by time.",
+  "transcript": "So I'd route facts to a semantic store, and events to an episodic store fetched by time.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.34,
+    "onset": 0.11
+   },
+   {
+    "w": "I'd",
+    "start": 0.34,
+    "end": 0.58,
+    "onset": 0.36
+   },
+   {
+    "w": "route",
+    "start": 0.58,
+    "end": 0.82,
+    "onset": 0.63
+   },
+   {
+    "w": "facts",
+    "start": 0.82,
+    "end": 1.26,
+    "onset": 0.84
+   },
+   {
+    "w": "to",
+    "start": 1.26,
+    "end": 1.46,
+    "onset": 1.37
+   },
+   {
+    "w": "a",
+    "start": 1.46,
+    "end": 1.62,
+    "onset": 1.43
+   },
+   {
+    "w": "semantic",
+    "start": 1.62,
+    "end": 2.02,
+    "onset": 1.58
+   },
+   {
+    "w": "store,",
+    "start": 2.02,
+    "end": 2.52,
+    "onset": 2.16
+   },
+   {
+    "w": "and",
+    "start": 2.9,
+    "end": 3.14,
+    "onset": 2.74
+   },
+   {
+    "w": "events",
+    "start": 3.14,
+    "end": 3.78,
+    "onset": 3.37
+   },
+   {
+    "w": "to",
+    "start": 3.78,
+    "end": 3.98,
+    "onset": 3.87
+   },
+   {
+    "w": "an",
+    "start": 3.98,
+    "end": 4.12,
+    "onset": 3.98
+   },
+   {
+    "w": "episodic",
+    "start": 4.12,
+    "end": 4.76,
+    "onset": 4.14
+   },
+   {
+    "w": "store",
+    "start": 4.76,
+    "end": 5.06,
+    "onset": 4.74
+   },
+   {
+    "w": "fetched",
+    "start": 5.06,
+    "end": 5.56,
+    "onset": 5.14
+   },
+   {
+    "w": "by",
+    "start": 5.56,
+    "end": 5.68,
+    "onset": 5.56
+   },
+   {
+    "w": "time.",
+    "start": 5.68,
+    "end": 5.96,
+    "onset": 5.75
+   }
+  ]
+ },
+ "L5": {
+  "duration": 7.41,
+  "level_db": -23.01,
+  "text": "When it contradicts itself, I'd investigate episodic ranking, and when it's confidently wrong, I'd update the knowledge base.",
+  "transcript": "When it contradicts itself, I'd investigate episodic ranking, and when it's confidently wrong, I'd update the knowledge base.",
+  "words": [
+   {
+    "w": "When",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.09
+   },
+   {
+    "w": "it",
+    "start": 0.22,
+    "end": 0.32,
+    "onset": 0.25
+   },
+   {
+    "w": "contradicts",
+    "start": 0.32,
+    "end": 1.06,
+    "onset": 0.34
+   },
+   {
+    "w": "itself,",
+    "start": 1.06,
+    "end": 1.46,
+    "onset": 1.19
+   },
+   {
+    "w": "I'd",
+    "start": 1.72,
+    "end": 1.9,
+    "onset": 1.71
+   },
+   {
+    "w": "investigate",
+    "start": 1.9,
+    "end": 2.46,
+    "onset": 1.86
+   },
+   {
+    "w": "episodic",
+    "start": 2.46,
+    "end": 3.28,
+    "onset": 2.41
+   },
+   {
+    "w": "ranking,",
+    "start": 3.28,
+    "end": 3.58,
+    "onset": 3.29
+   },
+   {
+    "w": "and",
+    "start": 3.8,
+    "end": 4.08,
+    "onset": 3.99
+   },
+   {
+    "w": "when",
+    "start": 4.08,
+    "end": 4.24,
+    "onset": 4.13
+   },
+   {
+    "w": "it's",
+    "start": 4.24,
+    "end": 4.4,
+    "onset": 4.25
+   },
+   {
+    "w": "confidently",
+    "start": 4.4,
+    "end": 4.88,
+    "onset": 4.44
+   },
+   {
+    "w": "wrong,",
+    "start": 4.88,
+    "end": 5.32,
+    "onset": 4.9
+   },
+   {
+    "w": "I'd",
+    "start": 5.76,
+    "end": 5.94,
+    "onset": 5.75
+   },
+   {
+    "w": "update",
+    "start": 5.94,
+    "end": 6.36,
+    "onset": 6.02
+   },
+   {
+    "w": "the",
+    "start": 6.36,
+    "end": 6.52,
+    "onset": 6.45
+   },
+   {
+    "w": "knowledge",
+    "start": 6.52,
+    "end": 6.82,
+    "onset": 6.51
+   },
+   {
+    "w": "base.",
+    "start": 6.82,
+    "end": 7.14,
+    "onset": 7.0
+   }
+  ]
+ }
+}

@@ -82,7 +82,10 @@ def clauses(words: list[dict]) -> list[list[dict]]:
         else:
             merged.append(group)
     if len(merged) > 1 and len(merged[-1]) < MIN_WORDS:
-        merged[-2] = merged[-2] + merged.pop()
+        # Pop first: the right-hand side of `merged[-2] = ... merged.pop()` runs before the
+        # assignment, so the index would then point one clause too early.
+        tail = merged.pop()
+        merged[-1] = merged[-1] + tail
     return merged
 
 

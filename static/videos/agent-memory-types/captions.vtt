@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.067 --> 00:00:03.127
+Why would an agent forget what it just did,
+
+2
+00:00:03.127 --> 00:00:05.227
+when its logs look normal?
+
+3
+00:00:05.233 --> 00:00:07.013
+It's a category error,
+
+4
+00:00:07.013 --> 00:00:09.273
+because agents run three memory types,
+
+5
+00:00:09.273 --> 00:00:11.253
+working memory for the current turn,
+
+6
+00:00:11.253 --> 00:00:12.813
+episodic for what happened,
+
+7
+00:00:12.813 --> 00:00:14.813
+and semantic for what's true.
+
+8
+00:00:14.833 --> 00:00:17.413
+An agent kept events in semantic memory,
+
+9
+00:00:17.413 --> 00:00:23.593
+so asking what changed in the last hour returned config edits ranked by topic, not time.
+
+10
+00:00:23.600 --> 00:00:26.500
+So I'd route facts to a semantic store,
+
+11
+00:00:26.500 --> 00:00:29.960
+and events to an episodic store fetched by time.
+
+12
+00:00:29.967 --> 00:00:31.687
+When it contradicts itself,
+
+13
+00:00:31.687 --> 00:00:33.767
+I'd investigate episodic ranking,
+
+14
+00:00:33.767 --> 00:00:35.687
+and when it's confidently wrong,
+
+15
+00:00:35.727 --> 00:00:37.507
+I'd update the knowledge base.
