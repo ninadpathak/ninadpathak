@@ -1,0 +1,20 @@
+# Narrated explainer for /articles/claude-code-memory/, imported by tools/import_video.py from
+# ninadpathak-video films/claude-code-memory (render of 2026-10-28T22:19:43+05:30).
+name: Claude Code memory in 40 seconds
+description: 'Where Claude Code memory lives between sessions: CLAUDE.md, read only at startup, and auto memory indexed by MEMORY.md, plus why a stale note is worse than none and how /memory shows what is loaded.'
+upload_date: '2026-10-28T22:19:43+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: claude-code-memory.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 6.7
+  L3: 11.8
+  L4: 19.833
+  L5: 27.167
+  L6: 33.233
+transcript: When a Claude Code session ends, the conversation is gone, but the next one starts with the project's instructions. That's because Claude Code memory lives in files on disk, not in the conversation. The first is CLAUDE.md, which you write, and it's read only at startup, so a mid-session edit waits for the next session. The second is auto memory, which Claude Code writes as it works, with MEMORY.md indexing its topic files. An outdated note is worse than none, because the agent trusts it and writes code that breaks. So I'd run /memory to see what's loaded and remove stale instructions.

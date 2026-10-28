@@ -1,0 +1,61 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.260
+When a Claude Code session ends,
+
+2
+00:00:02.260 --> 00:00:03.860
+the conversation is gone,
+
+3
+00:00:03.860 --> 00:00:06.660
+but the next one starts with the project's instructions.
+
+4
+00:00:06.700 --> 00:00:10.220
+That's because Claude Code memory lives in files on disk,
+
+5
+00:00:10.220 --> 00:00:11.780
+not in the conversation.
+
+6
+00:00:11.800 --> 00:00:14.160
+The first is CLAUDE.md,
+
+7
+00:00:14.160 --> 00:00:14.860
+which you write,
+
+8
+00:00:14.860 --> 00:00:16.860
+and it's read only at startup,
+
+9
+00:00:16.860 --> 00:00:19.833
+so a mid-session edit waits for the next session.
+
+10
+00:00:19.833 --> 00:00:21.433
+The second is auto memory,
+
+11
+00:00:21.433 --> 00:00:23.773
+which Claude Code writes as it works,
+
+12
+00:00:23.773 --> 00:00:27.167
+with MEMORY.md indexing its topic files.
+
+13
+00:00:27.167 --> 00:00:29.607
+An outdated note is worse than none,
+
+14
+00:00:29.607 --> 00:00:33.233
+because the agent trusts it and writes code that breaks.
+
+15
+00:00:33.233 --> 00:00:37.333
+So I'd run /memory to see what's loaded and remove stale instructions.

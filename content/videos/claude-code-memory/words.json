@@ -1,0 +1,686 @@
+{
+ "L1": {
+  "duration": 6.64,
+  "level_db": -26.8,
+  "text": "When a Claude Code session ends, the conversation is gone, but the next one starts with the project's instructions.",
+  "transcript": "When a Claude Code session ends, the conversation is gone, but the next one starts with the project's instructions.",
+  "words": [
+   {
+    "w": "When",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.08
+   },
+   {
+    "w": "a",
+    "start": 0.22,
+    "end": 0.38,
+    "onset": 0.37
+   },
+   {
+    "w": "Claude",
+    "start": 0.38,
+    "end": 0.74,
+    "onset": 0.37
+   },
+   {
+    "w": "Code",
+    "start": 0.74,
+    "end": 1.04,
+    "onset": 0.81
+   },
+   {
+    "w": "session",
+    "start": 1.04,
+    "end": 1.44,
+    "onset": 1.12
+   },
+   {
+    "w": "ends,",
+    "start": 1.44,
+    "end": 2.02,
+    "onset": 1.62
+   },
+   {
+    "w": "the",
+    "start": 2.26,
+    "end": 2.46,
+    "onset": 2.39
+   },
+   {
+    "w": "conversation",
+    "start": 2.46,
+    "end": 3.06,
+    "onset": 2.5
+   },
+   {
+    "w": "is",
+    "start": 3.06,
+    "end": 3.34,
+    "onset": 3.14
+   },
+   {
+    "w": "gone,",
+    "start": 3.34,
+    "end": 3.68,
+    "onset": 3.41
+   },
+   {
+    "w": "but",
+    "start": 3.86,
+    "end": 4.08,
+    "onset": 4.01
+   },
+   {
+    "w": "the",
+    "start": 4.08,
+    "end": 4.18,
+    "onset": 4.11
+   },
+   {
+    "w": "next",
+    "start": 4.18,
+    "end": 4.44,
+    "onset": 4.11
+   },
+   {
+    "w": "one",
+    "start": 4.44,
+    "end": 4.6,
+    "onset": 4.51
+   },
+   {
+    "w": "starts",
+    "start": 4.6,
+    "end": 4.98,
+    "onset": 4.63
+   },
+   {
+    "w": "with",
+    "start": 4.98,
+    "end": 5.18,
+    "onset": 5.03
+   },
+   {
+    "w": "the",
+    "start": 5.18,
+    "end": 5.28,
+    "onset": 5.21
+   },
+   {
+    "w": "project's",
+    "start": 5.28,
+    "end": 5.8,
+    "onset": 5.33
+   },
+   {
+    "w": "instructions.",
+    "start": 5.8,
+    "end": 6.26,
+    "onset": 5.79
+   }
+  ]
+ },
+ "L2": {
+  "duration": 5.04,
+  "level_db": -23.76,
+  "text": "That's because Claude Code memory lives in files on disk, not in the conversation.",
+  "transcript": "That's because Claude Code memory lives in files on disk, not in the conversation.",
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.0,
+    "end": 0.34,
+    "onset": 0.09
+   },
+   {
+    "w": "because",
+    "start": 0.34,
+    "end": 0.72,
+    "onset": 0.36
+   },
+   {
+    "w": "Claude",
+    "start": 0.72,
+    "end": 1.16,
+    "onset": 0.83
+   },
+   {
+    "w": "Code",
+    "start": 1.16,
+    "end": 1.38,
+    "onset": 1.19
+   },
+   {
+    "w": "memory",
+    "start": 1.38,
+    "end": 1.72,
+    "onset": 1.44
+   },
+   {
+    "w": "lives",
+    "start": 1.72,
+    "end": 2.12,
+    "onset": 1.85
+   },
+   {
+    "w": "in",
+    "start": 2.12,
+    "end": 2.28,
+    "onset": 2.17
+   },
+   {
+    "w": "files",
+    "start": 2.28,
+    "end": 2.64,
+    "onset": 2.27
+   },
+   {
+    "w": "on",
+    "start": 2.64,
+    "end": 2.86,
+    "onset": 2.71
+   },
+   {
+    "w": "disk,",
+    "start": 2.86,
+    "end": 3.32,
+    "onset": 2.97
+   },
+   {
+    "w": "not",
+    "start": 3.52,
+    "end": 3.84,
+    "onset": 3.56
+   },
+   {
+    "w": "in",
+    "start": 3.84,
+    "end": 4.04,
+    "onset": 3.92
+   },
+   {
+    "w": "the",
+    "start": 4.04,
+    "end": 4.12,
+    "onset": 4.05
+   },
+   {
+    "w": "conversation.",
+    "start": 4.12,
+    "end": 4.68,
+    "onset": 4.16
+   }
+  ]
+ },
+ "L3": {
+  "duration": 7.96,
+  "level_db": -23.32,
+  "text": "The first is CLAUDE.md, which you write, and it's read only at startup, so a mid-session edit waits for the next session.",
+  "transcript": "The first is CLAUDE.md, which you write, and it's read only at startup, so a mid-session edit waits for the next session.",
+  "words": [
+   {
+    "w": "The",
+    "start": 0.0,
+    "end": 0.16,
+    "onset": 0.09
+   },
+   {
+    "w": "first",
+    "start": 0.16,
+    "end": 0.5,
+    "onset": 0.15
+   },
+   {
+    "w": "is",
+    "start": 0.5,
+    "end": 0.78,
+    "onset": 0.67
+   },
+   {
+    "w": "CLAUDE",
+    "start": 0.78,
+    "end": 1.3,
+    "onset": 0.85
+   },
+   {
+    "w": ".md,",
+    "start": 1.3,
+    "end": 2.18,
+    "onset": 1.43
+   },
+   {
+    "w": "which",
+    "start": 2.36,
+    "end": 2.56,
+    "onset": 2.41
+   },
+   {
+    "w": "you",
+    "start": 2.56,
+    "end": 2.72,
+    "onset": 2.53
+   },
+   {
+    "w": "write,",
+    "start": 2.72,
+    "end": 2.94,
+    "onset": 2.72
+   },
+   {
+    "w": "and",
+    "start": 3.06,
+    "end": 3.24,
+    "onset": 3.16
+   },
+   {
+    "w": "it's",
+    "start": 3.24,
+    "end": 3.4,
+    "onset": 3.33
+   },
+   {
+    "w": "read",
+    "start": 3.4,
+    "end": 3.64,
+    "onset": 3.41
+   },
+   {
+    "w": "only",
+    "start": 3.64,
+    "end": 4.1,
+    "onset": 3.83
+   },
+   {
+    "w": "at",
+    "start": 4.1,
+    "end": 4.36,
+    "onset": 4.12
+   },
+   {
+    "w": "startup,",
+    "start": 4.36,
+    "end": 4.76,
+    "onset": 4.33
+   },
+   {
+    "w": "so",
+    "start": 5.06,
+    "end": 5.24,
+    "onset": 4.95
+   },
+   {
+    "w": "a",
+    "start": 5.24,
+    "end": 5.6,
+    "onset": 5.47
+   },
+   {
+    "w": "mid",
+    "start": 5.6,
+    "end": 5.76,
+    "onset": 5.63
+   },
+   {
+    "w": "-session",
+    "start": 5.76,
+    "end": 6.12,
+    "onset": 5.78
+   },
+   {
+    "w": "edit",
+    "start": 6.12,
+    "end": 6.44,
+    "onset": 6.25
+   },
+   {
+    "w": "waits",
+    "start": 6.44,
+    "end": 6.82,
+    "onset": 6.57
+   },
+   {
+    "w": "for",
+    "start": 6.82,
+    "end": 7.0,
+    "onset": 6.82
+   },
+   {
+    "w": "the",
+    "start": 7.0,
+    "end": 7.12,
+    "onset": 6.96
+   },
+   {
+    "w": "next",
+    "start": 7.12,
+    "end": 7.38,
+    "onset": 7.17
+   },
+   {
+    "w": "session.",
+    "start": 7.38,
+    "end": 7.8,
+    "onset": 7.36
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.26,
+  "level_db": -23.98,
+  "text": "The second is auto memory, which Claude Code writes as it works, with MEMORY.md indexing its topic files.",
+  "transcript": "The second is auto memory, which Claude Code writes as it works, with MEMORY.md indexing its topic files.",
+  "words": [
+   {
+    "w": "The",
+    "start": 0.0,
+    "end": 0.28,
+    "onset": 0.08
+   },
+   {
+    "w": "second",
+    "start": 0.28,
+    "end": 0.48,
+    "onset": 0.27
+   },
+   {
+    "w": "is",
+    "start": 0.48,
+    "end": 0.7,
+    "onset": 0.45
+   },
+   {
+    "w": "auto",
+    "start": 0.7,
+    "end": 0.96,
+    "onset": 0.71
+   },
+   {
+    "w": "memory,",
+    "start": 0.96,
+    "end": 1.3,
+    "onset": 0.96
+   },
+   {
+    "w": "which",
+    "start": 1.6,
+    "end": 1.9,
+    "onset": 1.8
+   },
+   {
+    "w": "Claude",
+    "start": 1.9,
+    "end": 2.28,
+    "onset": 1.99
+   },
+   {
+    "w": "Code",
+    "start": 2.28,
+    "end": 2.5,
+    "onset": 2.34
+   },
+   {
+    "w": "writes",
+    "start": 2.5,
+    "end": 2.9,
+    "onset": 2.53
+   },
+   {
+    "w": "as",
+    "start": 2.9,
+    "end": 3.1,
+    "onset": 2.9
+   },
+   {
+    "w": "it",
+    "start": 3.1,
+    "end": 3.22,
+    "onset": 3.16
+   },
+   {
+    "w": "works,",
+    "start": 3.22,
+    "end": 3.6,
+    "onset": 3.22
+   },
+   {
+    "w": "with",
+    "start": 3.94,
+    "end": 4.04,
+    "onset": 3.92
+   },
+   {
+    "w": "MEMORY",
+    "start": 4.04,
+    "end": 4.46,
+    "onset": 4.07
+   },
+   {
+    "w": ".md",
+    "start": 4.46,
+    "end": 5.26,
+    "onset": 4.55
+   },
+   {
+    "w": "indexing",
+    "start": 5.26,
+    "end": 6.02,
+    "onset": 5.39
+   },
+   {
+    "w": "its",
+    "start": 6.02,
+    "end": 6.24,
+    "onset": 6.09
+   },
+   {
+    "w": "topic",
+    "start": 6.24,
+    "end": 6.6,
+    "onset": 6.32
+   },
+   {
+    "w": "files.",
+    "start": 6.6,
+    "end": 7.06,
+    "onset": 6.7
+   }
+  ]
+ },
+ "L5": {
+  "duration": 5.99,
+  "level_db": -26.5,
+  "text": "An outdated note is worse than none, because the agent trusts it and writes code that breaks.",
+  "transcript": "An outdated note is worse than none, because the agent trusts it and writes code that breaks.",
+  "words": [
+   {
+    "w": "An",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.09
+   },
+   {
+    "w": "outdated",
+    "start": 0.22,
+    "end": 0.62,
+    "onset": 0.23
+   },
+   {
+    "w": "note",
+    "start": 0.62,
+    "end": 1.02,
+    "onset": 0.64
+   },
+   {
+    "w": "is",
+    "start": 1.02,
+    "end": 1.46,
+    "onset": 1.24
+   },
+   {
+    "w": "worse",
+    "start": 1.46,
+    "end": 1.86,
+    "onset": 1.52
+   },
+   {
+    "w": "than",
+    "start": 1.86,
+    "end": 2.08,
+    "onset": 1.99
+   },
+   {
+    "w": "none,",
+    "start": 2.08,
+    "end": 2.34,
+    "onset": 2.19
+   },
+   {
+    "w": "because",
+    "start": 2.44,
+    "end": 2.8,
+    "onset": 2.56
+   },
+   {
+    "w": "the",
+    "start": 2.8,
+    "end": 3.04,
+    "onset": 2.97
+   },
+   {
+    "w": "agent",
+    "start": 3.04,
+    "end": 3.4,
+    "onset": 3.1
+   },
+   {
+    "w": "trusts",
+    "start": 3.4,
+    "end": 3.86,
+    "onset": 3.52
+   },
+   {
+    "w": "it",
+    "start": 3.86,
+    "end": 4.2,
+    "onset": 3.9
+   },
+   {
+    "w": "and",
+    "start": 4.2,
+    "end": 4.54,
+    "onset": 4.34
+   },
+   {
+    "w": "writes",
+    "start": 4.54,
+    "end": 4.94,
+    "onset": 4.66
+   },
+   {
+    "w": "code",
+    "start": 4.94,
+    "end": 5.3,
+    "onset": 5.06
+   },
+   {
+    "w": "that",
+    "start": 5.3,
+    "end": 5.46,
+    "onset": 5.39
+   },
+   {
+    "w": "breaks.",
+    "start": 5.46,
+    "end": 5.74,
+    "onset": 5.53
+   }
+  ]
+ },
+ "L6": {
+  "duration": 4.16,
+  "level_db": -25.1,
+  "text": "So I'd run /memory to see what's loaded and remove stale instructions.",
+  "transcript": "So I'd run slash memory to see what's loaded and remove stale instructions.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.24,
+    "onset": 0.09
+   },
+   {
+    "w": "I'd",
+    "start": 0.24,
+    "end": 0.48,
+    "onset": 0.2
+   },
+   {
+    "w": "run",
+    "start": 0.48,
+    "end": 0.68,
+    "onset": 0.41
+   },
+   {
+    "w": "slash",
+    "start": 0.68,
+    "end": 0.94,
+    "onset": 0.71
+   },
+   {
+    "w": "memory",
+    "start": 0.94,
+    "end": 1.38,
+    "onset": 1.1
+   },
+   {
+    "w": "to",
+    "start": 1.38,
+    "end": 1.58,
+    "onset": 1.38
+   },
+   {
+    "w": "see",
+    "start": 1.58,
+    "end": 1.74,
+    "onset": 1.56
+   },
+   {
+    "w": "what's",
+    "start": 1.74,
+    "end": 2.0,
+    "onset": 1.84
+   },
+   {
+    "w": "loaded",
+    "start": 2.0,
+    "end": 2.32,
+    "onset": 2.01
+   },
+   {
+    "w": "and",
+    "start": 2.32,
+    "end": 2.54,
+    "onset": 2.28
+   },
+   {
+    "w": "remove",
+    "start": 2.54,
+    "end": 2.88,
+    "onset": 2.59
+   },
+   {
+    "w": "stale",
+    "start": 2.88,
+    "end": 3.26,
+    "onset": 2.93
+   },
+   {
+    "w": "instructions.",
+    "start": 3.26,
+    "end": 3.7,
+    "onset": 3.5
+   }
+  ]
+ }
+}

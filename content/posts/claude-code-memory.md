@@ -10,6 +10,7 @@ work_note: '[Ninad Pathak](/contact/) is a technical writer who has worked with 
 title: How Memory Works in Claude Code
 updated: '2026-08-17'
 slug: claude-code-memory
+video: claude-code-memory
 ---
 
 Claude Code carries instructions across sessions through `CLAUDE.md` files and auto memory. Conversation context itself remains session-bound.
