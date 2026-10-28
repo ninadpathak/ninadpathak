@@ -243,6 +243,10 @@
     "lastmod": "2026-10-27",
     "sources": "c9768b0ef999122c959d1909660f15270ce6eccc4dafebf3844b046300de1a8a"
   },
+  "runbook-template": {
+    "lastmod": "2026-10-28",
+    "sources": "f65c6025124b1d1050399990b7e8c04a1b445d4a493ea7fd11ba73ec59045014"
+  },
   "semantic-caching": {
     "lastmod": "2026-10-22",
     "sources": "1aac28032deb8e666460d1ebf7a7e7f325a2ad6608e145a85add5bb9f4a35a1a"
