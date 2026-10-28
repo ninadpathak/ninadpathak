@@ -10,6 +10,7 @@ work_note: An interrupted run makes checkpointing visible. [Ninad Pathak](/conta
   the operator needs to intervene.
 title: 'Agent Harnesses: The Infrastructure Your LLM Agent Needs'
 slug: agent-harnesses
+video: agent-harnesses
 ---
 
 Agents look impressive in demos because the happy path is easy to show. The problems start later, once a search tool times out, a task runs past the timeout you forgot to set, or the model has to pick up after a half-finished step instead of starting the whole run over.

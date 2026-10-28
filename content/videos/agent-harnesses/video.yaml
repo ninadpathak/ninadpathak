@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/agent-harnesses/, imported by tools/import_video.py from
+# ninadpathak-video films/agent-harnesses (render of 2026-10-28T12:25:01+05:30).
+name: Agent harnesses in 40 seconds
+description: What an agent harness does around a stateless model API, why checkpointing is the hard part, and how step-level checkpoints with idempotent tools let a failed run resume instead of starting over.
+upload_date: '2026-10-28T12:25:01+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: agent-harnesses.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 8.233
+  L3: 16.633
+  L4: 23.8
+  L5: 32.5
+transcript: Okay, so an agent harness is the runtime layer around the model, and you need one because an API call is stateless. A research agent might make thirty to fifty calls in one task, so the harness runs the loop while the model only reasons. The hard part is checkpointing, because without it a run that fails at step eighteen restarts from the beginning. So I'd save state after each step and make the tools idempotent, which means a repeated call gives the same result. Then a failed run resumes from its last checkpoint instead of starting over.

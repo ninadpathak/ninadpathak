@@ -1,0 +1,37 @@
+WEBVTT
+
+1
+00:00:00.100 --> 00:00:04.240
+Okay, so an agent harness is the runtime layer around the model,
+
+2
+00:00:04.240 --> 00:00:08.233
+and you need one because an API call is stateless.
+
+3
+00:00:08.233 --> 00:00:12.653
+A research agent might make thirty to fifty calls in one task,
+
+4
+00:00:12.653 --> 00:00:16.553
+so the harness runs the loop while the model only reasons.
+
+5
+00:00:16.633 --> 00:00:18.513
+The hard part is checkpointing,
+
+6
+00:00:18.513 --> 00:00:23.793
+because without it a run that fails at step eighteen restarts from the beginning.
+
+7
+00:00:23.800 --> 00:00:28.960
+So I'd save state after each step and make the tools idempotent,
+
+8
+00:00:28.960 --> 00:00:32.500
+which means a repeated call gives the same result.
+
+9
+00:00:32.500 --> 00:00:37.360
+Then a failed run resumes from its last checkpoint instead of starting over.
