@@ -9,6 +9,7 @@ work_note: Did the tool fail before or after changing external state? Technical 
   need before risking a duplicate action.
 title: What Nobody Tells You About Error Handling in Production AI Agents
 slug: agent-error-handling
+video: agent-error-handling
 ---
 
 Two years of running AI agents in production taught me that error handling separates a system that survives reality from one that falls over the moment something goes wrong. Reasoning and tool use get all the attention.

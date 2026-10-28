@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/agent-error-handling/, imported by tools/import_video.py from
+# ninadpathak-video films/agent-error-handling (render of 2026-10-28T11:36:15+05:30).
+name: Error handling in AI agents in 40 seconds
+description: Why an agent improvises when a tool returns a raw error, and how classifying errors as transient, permanent or ambiguous, with idempotency keys for timeouts, lets code pick the recovery.
+upload_date: '2026-10-28T11:36:15+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: agent-error-handling.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 8.267
+  L3: 13.733
+  L4: 19.567
+  L5: 28.133
+transcript: Okay, so error handling in AI agents breaks when a tool fails, because the agent gets a raw error string and improvises. It might retry a charge that already went through, so the customer pays twice. So I'd classify each error first and let my code pick the recovery, not the model. A transient error like a rate limit gets retried, and a permanent one like an invalid API key fails fast. A timeout is ambiguous, since the server may have processed it, so I'd attach an idempotency key, which makes the tool safe to call twice.
