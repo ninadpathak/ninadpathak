@@ -10,6 +10,7 @@ takeaways:
 - Check crawler access by agent and whether each passage survives being quoted alone.
 title: 'AEO vs GEO vs SEO: What Changes for Developer Docs'
 work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for developer products, with pages that search engines and AI assistants can find, quote and cite.'
+video: aeo-for-developer-docs
 ---
 
 Google's [guide to generative AI search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide) says that optimizing for it "is optimizing for the search experience, and thus still SEO." The [GEO paper](https://arxiv.org/abs/2311.09735), accepted to KDD 2024, reported that rewriting content could raise its visibility in generative engine responses by up to 40% on its own benchmark.

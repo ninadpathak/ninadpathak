@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.175 --> 00:00:01.880
+Okay, so AEO,
+
+2
+00:00:02.000 --> 00:00:05.610
+GEO and SEO sound like three jobs for my docs,
+
+3
+00:00:05.610 --> 00:00:06.820
+but they share one goal,
+
+4
+00:00:06.820 --> 00:00:08.732
+which is getting a page into an answer.
+
+5
+00:00:08.732 --> 00:00:13.247
+Google says optimizing for its AI search is still SEO,
+
+6
+00:00:13.702 --> 00:00:17.172
+so my page needs to be indexed and able to show a snippet,
+
+7
+00:00:17.172 --> 00:00:18.807
+with no special schema.
+
+8
+00:00:18.847 --> 00:00:21.637
+What AEO adds is two checks,
+
+9
+00:00:21.637 --> 00:00:23.467
+and the first is crawler access,
+
+10
+00:00:23.467 --> 00:00:26.787
+because OpenAI runs separate crawlers for search and training,
+
+11
+00:00:26.882 --> 00:00:29.003
+so I can allow one and block the other.
+
+12
+00:00:29.003 --> 00:00:32.673
+The second is that each passage makes sense quoted alone,
+
+13
+00:00:32.743 --> 00:00:37.473
+so my opening answers the title and each section names its subject.

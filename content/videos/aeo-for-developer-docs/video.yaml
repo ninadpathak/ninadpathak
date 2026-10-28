@@ -1,0 +1,18 @@
+# Narrated explainer for /articles/aeo-for-developer-docs/, imported by tools/import_video.py from
+# ninadpathak-video films/aeo-for-developer-docs (render of 2026-10-28T05:25:08+05:30).
+name: AEO for developer docs in 40 seconds
+description: 'Why AEO, GEO and SEO share one goal for developer docs, what Google and OpenAI document about AI search, and the two checks AEO adds: crawler access by agent and passages that stand alone.'
+upload_date: '2026-10-28T05:25:08+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: aeo-for-developer-docs.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 8.667
+  L3: 18.767
+  L4: 28.933
+transcript: Okay, so AEO, GEO and SEO sound like three jobs for my docs, but they share one goal, which is getting a page into an answer. Google says optimizing for its AI search is still SEO, so my page needs to be indexed and able to show a snippet, with no special schema. What AEO adds is two checks, and the first is crawler access, because OpenAI runs separate crawlers for search and training, so I can allow one and block the other. The second is that each passage makes sense quoted alone, so my opening answers the title and each section names its subject.

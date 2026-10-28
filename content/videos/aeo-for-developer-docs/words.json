@@ -1,0 +1,660 @@
+{
+ "L1": {
+  "duration": 8.384,
+  "text": "Okay, so AEO, GEO and SEO sound like three jobs for my docs, but they share one goal, which is getting a page into an answer.",
+  "transcript": "Okay, so AEO, GEO and SEO sound like three jobs for my docs, but they share one goal, which is getting a page into an answer.",
+  "words": [
+   {
+    "w": "Okay,",
+    "start": 0.075,
+    "end": 0.3,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "so",
+    "start": 0.54,
+    "end": 0.62,
+    "whisper_start": 0.54
+   },
+   {
+    "w": "AEO,",
+    "start": 0.735,
+    "end": 1.38,
+    "whisper_start": 0.62
+   },
+   {
+    "w": "GEO",
+    "start": 1.9,
+    "end": 2.42,
+    "whisper_start": 1.9
+   },
+   {
+    "w": "and",
+    "start": 2.42,
+    "end": 2.74,
+    "whisper_start": 2.42
+   },
+   {
+    "w": "SEO",
+    "start": 2.74,
+    "end": 3.28,
+    "whisper_start": 2.74
+   },
+   {
+    "w": "sound",
+    "start": 3.28,
+    "end": 3.94,
+    "whisper_start": 3.28
+   },
+   {
+    "w": "like",
+    "start": 3.94,
+    "end": 4.14,
+    "whisper_start": 3.94
+   },
+   {
+    "w": "three",
+    "start": 4.21,
+    "end": 4.3,
+    "whisper_start": 4.14
+   },
+   {
+    "w": "jobs",
+    "start": 4.3,
+    "end": 4.66,
+    "whisper_start": 4.3
+   },
+   {
+    "w": "for",
+    "start": 4.66,
+    "end": 4.84,
+    "whisper_start": 4.66
+   },
+   {
+    "w": "my",
+    "start": 4.84,
+    "end": 4.98,
+    "whisper_start": 4.84
+   },
+   {
+    "w": "docs,",
+    "start": 4.98,
+    "end": 5.3,
+    "whisper_start": 4.98
+   },
+   {
+    "w": "but",
+    "start": 5.51,
+    "end": 5.6,
+    "whisper_start": 5.38
+   },
+   {
+    "w": "they",
+    "start": 5.665,
+    "end": 5.74,
+    "whisper_start": 5.6
+   },
+   {
+    "w": "share",
+    "start": 5.74,
+    "end": 6.0,
+    "whisper_start": 5.74
+   },
+   {
+    "w": "one",
+    "start": 6.0,
+    "end": 6.24,
+    "whisper_start": 6.0
+   },
+   {
+    "w": "goal,",
+    "start": 6.24,
+    "end": 6.56,
+    "whisper_start": 6.24
+   },
+   {
+    "w": "which",
+    "start": 6.72,
+    "end": 6.9,
+    "whisper_start": 6.72
+   },
+   {
+    "w": "is",
+    "start": 6.9,
+    "end": 7.06,
+    "whisper_start": 6.9
+   },
+   {
+    "w": "getting",
+    "start": 7.06,
+    "end": 7.22,
+    "whisper_start": 7.06
+   },
+   {
+    "w": "a",
+    "start": 7.22,
+    "end": 7.38,
+    "whisper_start": 7.22
+   },
+   {
+    "w": "page",
+    "start": 7.45,
+    "end": 7.68,
+    "whisper_start": 7.38
+   },
+   {
+    "w": "into",
+    "start": 7.68,
+    "end": 7.88,
+    "whisper_start": 7.68
+   },
+   {
+    "w": "an",
+    "start": 7.88,
+    "end": 8.06,
+    "whisper_start": 7.88
+   },
+   {
+    "w": "answer.",
+    "start": 8.06,
+    "end": 8.3,
+    "whisper_start": 8.06
+   }
+  ]
+ },
+ "L2": {
+  "duration": 9.92,
+  "text": "Google says optimizing for its AI search is still SEO, so my page needs to be indexed and able to show a snippet, with no special schema.",
+  "transcript": "Google says optimizing for its AI search is still SEO, so my page needs to be indexed and able to show a snippet, with no special schema.",
+  "words": [
+   {
+    "w": "Google",
+    "start": 0.065,
+    "end": 0.28,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "says",
+    "start": 0.28,
+    "end": 0.64,
+    "whisper_start": 0.28
+   },
+   {
+    "w": "optimizing",
+    "start": 0.805,
+    "end": 1.22,
+    "whisper_start": 0.64
+   },
+   {
+    "w": "for",
+    "start": 1.22,
+    "end": 1.58,
+    "whisper_start": 1.22
+   },
+   {
+    "w": "its",
+    "start": 1.58,
+    "end": 1.74,
+    "whisper_start": 1.58
+   },
+   {
+    "w": "AI",
+    "start": 1.74,
+    "end": 1.94,
+    "whisper_start": 1.74
+   },
+   {
+    "w": "search",
+    "start": 1.94,
+    "end": 2.4,
+    "whisper_start": 1.94
+   },
+   {
+    "w": "is",
+    "start": 2.4,
+    "end": 2.7,
+    "whisper_start": 2.4
+   },
+   {
+    "w": "still",
+    "start": 2.84,
+    "end": 3.08,
+    "whisper_start": 2.7
+   },
+   {
+    "w": "SEO,",
+    "start": 3.08,
+    "end": 4.18,
+    "whisper_start": 3.08
+   },
+   {
+    "w": "so",
+    "start": 5.035,
+    "end": 5.24,
+    "whisper_start": 4.72
+   },
+   {
+    "w": "my",
+    "start": 5.24,
+    "end": 5.48,
+    "whisper_start": 5.24
+   },
+   {
+    "w": "page",
+    "start": 5.48,
+    "end": 5.8,
+    "whisper_start": 5.48
+   },
+   {
+    "w": "needs",
+    "start": 5.8,
+    "end": 6.04,
+    "whisper_start": 5.8
+   },
+   {
+    "w": "to",
+    "start": 6.04,
+    "end": 6.2,
+    "whisper_start": 6.04
+   },
+   {
+    "w": "be",
+    "start": 6.2,
+    "end": 6.3,
+    "whisper_start": 6.2
+   },
+   {
+    "w": "indexed",
+    "start": 6.3,
+    "end": 6.92,
+    "whisper_start": 6.3
+   },
+   {
+    "w": "and",
+    "start": 6.995,
+    "end": 7.1,
+    "whisper_start": 6.92
+   },
+   {
+    "w": "able",
+    "start": 7.1,
+    "end": 7.36,
+    "whisper_start": 7.1
+   },
+   {
+    "w": "to",
+    "start": 7.36,
+    "end": 7.5,
+    "whisper_start": 7.36
+   },
+   {
+    "w": "show",
+    "start": 7.5,
+    "end": 7.7,
+    "whisper_start": 7.5
+   },
+   {
+    "w": "a",
+    "start": 7.7,
+    "end": 7.86,
+    "whisper_start": 7.7
+   },
+   {
+    "w": "snippet,",
+    "start": 7.86,
+    "end": 8.32,
+    "whisper_start": 7.86
+   },
+   {
+    "w": "with",
+    "start": 8.505,
+    "end": 8.7,
+    "whisper_start": 8.38
+   },
+   {
+    "w": "no",
+    "start": 8.7,
+    "end": 9.0,
+    "whisper_start": 8.7
+   },
+   {
+    "w": "special",
+    "start": 9.0,
+    "end": 9.44,
+    "whisper_start": 9.0
+   },
+   {
+    "w": "schema.",
+    "start": 9.44,
+    "end": 9.74,
+    "whisper_start": 9.44
+   }
+  ]
+ },
+ "L3": {
+  "duration": 9.984,
+  "text": "What AEO adds is two checks, and the first is crawler access, because OpenAI runs separate crawlers for search and training, so I can allow one and block the other.",
+  "transcript": "What AEO adds is two checks, and the first is crawler access, because OpenAI runs separate crawlers for search and training, so I can allow one and block the other.",
+  "words": [
+   {
+    "w": "What",
+    "start": 0.08,
+    "end": 0.28,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "AEO",
+    "start": 0.35,
+    "end": 0.9,
+    "whisper_start": 0.28
+   },
+   {
+    "w": "adds",
+    "start": 0.9,
+    "end": 1.46,
+    "whisper_start": 0.9
+   },
+   {
+    "w": "is",
+    "start": 1.46,
+    "end": 1.82,
+    "whisper_start": 1.46
+   },
+   {
+    "w": "two",
+    "start": 1.82,
+    "end": 2.12,
+    "whisper_start": 1.82
+   },
+   {
+    "w": "checks,",
+    "start": 2.12,
+    "end": 2.54,
+    "whisper_start": 2.12
+   },
+   {
+    "w": "and",
+    "start": 2.87,
+    "end": 2.96,
+    "whisper_start": 2.82
+   },
+   {
+    "w": "the",
+    "start": 2.96,
+    "end": 3.1,
+    "whisper_start": 2.96
+   },
+   {
+    "w": "first",
+    "start": 3.19,
+    "end": 3.34,
+    "whisper_start": 3.1
+   },
+   {
+    "w": "is",
+    "start": 3.34,
+    "end": 3.6,
+    "whisper_start": 3.34
+   },
+   {
+    "w": "crawler",
+    "start": 3.715,
+    "end": 3.96,
+    "whisper_start": 3.6
+   },
+   {
+    "w": "access,",
+    "start": 3.96,
+    "end": 4.42,
+    "whisper_start": 3.96
+   },
+   {
+    "w": "because",
+    "start": 4.7,
+    "end": 4.86,
+    "whisper_start": 4.7
+   },
+   {
+    "w": "OpenAI",
+    "start": 4.975,
+    "end": 5.46,
+    "whisper_start": 4.86
+   },
+   {
+    "w": "runs",
+    "start": 5.46,
+    "end": 5.82,
+    "whisper_start": 5.46
+   },
+   {
+    "w": "separate",
+    "start": 5.82,
+    "end": 6.2,
+    "whisper_start": 5.82
+   },
+   {
+    "w": "crawlers",
+    "start": 6.34,
+    "end": 6.7,
+    "whisper_start": 6.2
+   },
+   {
+    "w": "for",
+    "start": 6.7,
+    "end": 6.86,
+    "whisper_start": 6.7
+   },
+   {
+    "w": "search",
+    "start": 6.86,
+    "end": 7.14,
+    "whisper_start": 6.86
+   },
+   {
+    "w": "and",
+    "start": 7.14,
+    "end": 7.28,
+    "whisper_start": 7.14
+   },
+   {
+    "w": "training,",
+    "start": 7.35,
+    "end": 7.62,
+    "whisper_start": 7.28
+   },
+   {
+    "w": "so",
+    "start": 8.115,
+    "end": 8.2,
+    "whisper_start": 7.9
+   },
+   {
+    "w": "I",
+    "start": 8.2,
+    "end": 8.34,
+    "whisper_start": 8.2
+   },
+   {
+    "w": "can",
+    "start": 8.34,
+    "end": 8.46,
+    "whisper_start": 8.34
+   },
+   {
+    "w": "allow",
+    "start": 8.46,
+    "end": 8.7,
+    "whisper_start": 8.46
+   },
+   {
+    "w": "one",
+    "start": 8.7,
+    "end": 9.06,
+    "whisper_start": 8.7
+   },
+   {
+    "w": "and",
+    "start": 9.06,
+    "end": 9.3,
+    "whisper_start": 9.06
+   },
+   {
+    "w": "block",
+    "start": 9.3,
+    "end": 9.58,
+    "whisper_start": 9.3
+   },
+   {
+    "w": "the",
+    "start": 9.665,
+    "end": 9.74,
+    "whisper_start": 9.58
+   },
+   {
+    "w": "other.",
+    "start": 9.74,
+    "end": 9.9,
+    "whisper_start": 9.74
+   }
+  ]
+ },
+ "L4": {
+  "duration": 8.277,
+  "text": "The second is that each passage makes sense quoted alone, so my opening answers the title and each section names its subject.",
+  "transcript": "The second is that each passage makes sense quoted alone, so my opening answers the title and each section names its subject.",
+  "words": [
+   {
+    "w": "The",
+    "start": 0.07,
+    "end": 0.2,
+    "whisper_start": 0.0
+   },
+   {
+    "w": "second",
+    "start": 0.2,
+    "end": 0.52,
+    "whisper_start": 0.2
+   },
+   {
+    "w": "is",
+    "start": 0.52,
+    "end": 0.82,
+    "whisper_start": 0.52
+   },
+   {
+    "w": "that",
+    "start": 0.82,
+    "end": 1.0,
+    "whisper_start": 0.82
+   },
+   {
+    "w": "each",
+    "start": 1.075,
+    "end": 1.24,
+    "whisper_start": 1.0
+   },
+   {
+    "w": "passage",
+    "start": 1.24,
+    "end": 1.78,
+    "whisper_start": 1.24
+   },
+   {
+    "w": "makes",
+    "start": 1.78,
+    "end": 2.1,
+    "whisper_start": 1.78
+   },
+   {
+    "w": "sense",
+    "start": 2.1,
+    "end": 2.46,
+    "whisper_start": 2.1
+   },
+   {
+    "w": "quoted",
+    "start": 2.46,
+    "end": 2.88,
+    "whisper_start": 2.46
+   },
+   {
+    "w": "alone,",
+    "start": 2.88,
+    "end": 3.34,
+    "whisper_start": 2.88
+   },
+   {
+    "w": "so",
+    "start": 3.81,
+    "end": 3.94,
+    "whisper_start": 3.6
+   },
+   {
+    "w": "my",
+    "start": 3.94,
+    "end": 4.12,
+    "whisper_start": 3.94
+   },
+   {
+    "w": "opening",
+    "start": 4.12,
+    "end": 4.5,
+    "whisper_start": 4.12
+   },
+   {
+    "w": "answers",
+    "start": 4.5,
+    "end": 5.02,
+    "whisper_start": 4.5
+   },
+   {
+    "w": "the",
+    "start": 5.02,
+    "end": 5.24,
+    "whisper_start": 5.02
+   },
+   {
+    "w": "title",
+    "start": 5.29,
+    "end": 5.6,
+    "whisper_start": 5.24
+   },
+   {
+    "w": "and",
+    "start": 5.6,
+    "end": 6.04,
+    "whisper_start": 5.6
+   },
+   {
+    "w": "each",
+    "start": 6.45,
+    "end": 6.66,
+    "whisper_start": 6.04
+   },
+   {
+    "w": "section",
+    "start": 6.66,
+    "end": 7.14,
+    "whisper_start": 6.66
+   },
+   {
+    "w": "names",
+    "start": 7.14,
+    "end": 7.6,
+    "whisper_start": 7.14
+   },
+   {
+    "w": "its",
+    "start": 7.6,
+    "end": 7.82,
+    "whisper_start": 7.6
+   },
+   {
+    "w": "subject.",
+    "start": 7.82,
+    "end": 8.14,
+    "whisper_start": 7.82
+   }
+  ]
+ }
+}
