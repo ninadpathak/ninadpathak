@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/agent-loop-anatomy/, imported by tools/import_video.py from
+# ninadpathak-video films/agent-loop-anatomy (render of 2026-10-28T13:21:58+05:30).
+name: The agent loop in 40 seconds
+description: The four phases of an agent loop, perceive, think, act and remember, where each one fails, and why a bug that looks like bad reasoning is often a perception or memory problem.
+upload_date: '2026-10-28T13:21:58+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: agent-loop-anatomy.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 7.667
+  L3: 15.333
+  L4: 21.9
+  L5: 28.633
+transcript: Okay, so an agent loop is four phases, and a failure in any one looks like the whole agent failing. First it perceives, reading its context, then it thinks, deciding which tool to call, and then it acts, calling that tool. Last, it remembers, updating its state with the result, so the next cycle has accurate context. Each phase fails in its own way, so infinite loops start in act, and lost tool results start in remember. So I'd check perceive first, then remember, because what reads as bad reasoning can be a perception or memory problem.

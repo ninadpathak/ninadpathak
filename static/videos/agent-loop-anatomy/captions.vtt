@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.100 --> 00:00:03.080
+Okay, so an agent loop is four phases,
+
+2
+00:00:03.080 --> 00:00:07.667
+and a failure in any one looks like the whole agent failing.
+
+3
+00:00:07.667 --> 00:00:09.167
+First it perceives,
+
+4
+00:00:09.167 --> 00:00:10.387
+reading its context,
+
+5
+00:00:10.387 --> 00:00:11.587
+then it thinks,
+
+6
+00:00:11.587 --> 00:00:13.087
+deciding which tool to call,
+
+7
+00:00:13.087 --> 00:00:14.247
+and then it acts,
+
+8
+00:00:14.247 --> 00:00:15.333
+calling that tool.
+
+9
+00:00:15.333 --> 00:00:16.673
+Last, it remembers,
+
+10
+00:00:16.673 --> 00:00:18.813
+updating its state with the result,
+
+11
+00:00:18.813 --> 00:00:21.900
+so the next cycle has accurate context.
+
+12
+00:00:21.900 --> 00:00:23.960
+Each phase fails in its own way,
+
+13
+00:00:23.960 --> 00:00:26.380
+so infinite loops start in act,
+
+14
+00:00:26.380 --> 00:00:28.633
+and lost tool results start in remember.
+
+15
+00:00:28.633 --> 00:00:31.233
+So I'd check perceive first,
+
+16
+00:00:31.233 --> 00:00:37.373
+then remember, because what reads as bad reasoning can be a perception or memory problem.

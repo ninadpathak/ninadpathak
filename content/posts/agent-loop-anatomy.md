@@ -9,6 +9,7 @@ work_note: '[Ninad Pathak](/portfolio/) creates developer content that follows a
   agent SDK through execution, showing how a returned tool result informs the next
   action and which condition stops the run.'
 title: 'The Anatomy of an Agent Loop: Perceive, Think, Act, Remember'
+video: agent-loop-anatomy
 ---
 
 When an agent starts misbehaving, the loop is the first useful boundary to inspect. The literature describes it as a single construct.

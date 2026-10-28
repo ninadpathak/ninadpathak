@@ -1,0 +1,624 @@
+{
+ "L1": {
+  "duration": 7.552,
+  "level_db": -24.63,
+  "text": "Okay, so an agent loop is four phases, and a failure in any one looks like the whole agent failing.",
+  "transcript": "Okay, so an agent loop is four phases, and a failure in any one looks like the whole agent failing.",
+  "words": [
+   {
+    "w": "Okay,",
+    "start": 0.0,
+    "end": 0.36,
+    "onset": 0.06
+   },
+   {
+    "w": "so",
+    "start": 0.56,
+    "end": 0.62,
+    "onset": 0.59
+   },
+   {
+    "w": "an",
+    "start": 0.62,
+    "end": 0.8,
+    "onset": 0.59
+   },
+   {
+    "w": "agent",
+    "start": 0.8,
+    "end": 1.1,
+    "onset": 0.8
+   },
+   {
+    "w": "loop",
+    "start": 1.1,
+    "end": 1.44,
+    "onset": 1.15
+   },
+   {
+    "w": "is",
+    "start": 1.44,
+    "end": 1.68,
+    "onset": 1.5
+   },
+   {
+    "w": "four",
+    "start": 1.68,
+    "end": 2.02,
+    "onset": 1.7
+   },
+   {
+    "w": "phases,",
+    "start": 2.02,
+    "end": 2.58,
+    "onset": 2.11
+   },
+   {
+    "w": "and",
+    "start": 2.98,
+    "end": 3.22,
+    "onset": 3.13
+   },
+   {
+    "w": "a",
+    "start": 3.22,
+    "end": 3.32,
+    "onset": 3.28
+   },
+   {
+    "w": "failure",
+    "start": 3.32,
+    "end": 3.86,
+    "onset": 3.3
+   },
+   {
+    "w": "in",
+    "start": 3.86,
+    "end": 4.24,
+    "onset": 4.0
+   },
+   {
+    "w": "any",
+    "start": 4.24,
+    "end": 4.56,
+    "onset": 4.34
+   },
+   {
+    "w": "one",
+    "start": 4.56,
+    "end": 5.08,
+    "onset": 4.7
+   },
+   {
+    "w": "looks",
+    "start": 5.08,
+    "end": 5.6,
+    "onset": 5.35
+   },
+   {
+    "w": "like",
+    "start": 5.6,
+    "end": 5.82,
+    "onset": 5.68
+   },
+   {
+    "w": "the",
+    "start": 5.82,
+    "end": 5.94,
+    "onset": 5.86
+   },
+   {
+    "w": "whole",
+    "start": 5.94,
+    "end": 6.28,
+    "onset": 5.97
+   },
+   {
+    "w": "agent",
+    "start": 6.28,
+    "end": 6.76,
+    "onset": 6.4
+   },
+   {
+    "w": "failing.",
+    "start": 6.76,
+    "end": 7.34,
+    "onset": 6.85
+   }
+  ]
+ },
+ "L2": {
+  "duration": 7.595,
+  "level_db": -20.51,
+  "text": "First it perceives, reading its context, then it thinks, deciding which tool to call, and then it acts, calling that tool.",
+  "transcript": "First it perceives, reading its context, then it thinks, deciding which tool to call, and then it acts, calling that tool.",
+  "words": [
+   {
+    "w": "First",
+    "start": 0.0,
+    "end": 0.38,
+    "onset": 0.07
+   },
+   {
+    "w": "it",
+    "start": 0.38,
+    "end": 0.56,
+    "onset": 0.42
+   },
+   {
+    "w": "perceives,",
+    "start": 0.56,
+    "end": 1.36,
+    "onset": 0.63
+   },
+   {
+    "w": "reading",
+    "start": 1.5,
+    "end": 1.62,
+    "onset": 1.44
+   },
+   {
+    "w": "its",
+    "start": 1.62,
+    "end": 1.82,
+    "onset": 1.59
+   },
+   {
+    "w": "context,",
+    "start": 1.82,
+    "end": 2.34,
+    "onset": 1.8
+   },
+   {
+    "w": "then",
+    "start": 2.72,
+    "end": 3.08,
+    "onset": 2.9
+   },
+   {
+    "w": "it",
+    "start": 3.08,
+    "end": 3.24,
+    "onset": 3.13
+   },
+   {
+    "w": "thinks,",
+    "start": 3.24,
+    "end": 3.68,
+    "onset": 3.24
+   },
+   {
+    "w": "deciding",
+    "start": 3.92,
+    "end": 4.42,
+    "onset": 4.04
+   },
+   {
+    "w": "which",
+    "start": 4.42,
+    "end": 4.66,
+    "onset": 4.5
+   },
+   {
+    "w": "tool",
+    "start": 4.66,
+    "end": 4.82,
+    "onset": 4.73
+   },
+   {
+    "w": "to",
+    "start": 4.82,
+    "end": 4.96,
+    "onset": 4.88
+   },
+   {
+    "w": "call,",
+    "start": 4.96,
+    "end": 5.24,
+    "onset": 4.99
+   },
+   {
+    "w": "and",
+    "start": 5.42,
+    "end": 5.64,
+    "onset": 5.54
+   },
+   {
+    "w": "then",
+    "start": 5.64,
+    "end": 5.74,
+    "onset": 5.64
+   },
+   {
+    "w": "it",
+    "start": 5.74,
+    "end": 5.9,
+    "onset": 5.77
+   },
+   {
+    "w": "acts,",
+    "start": 5.9,
+    "end": 6.36,
+    "onset": 5.95
+   },
+   {
+    "w": "calling",
+    "start": 6.58,
+    "end": 6.96,
+    "onset": 6.73
+   },
+   {
+    "w": "that",
+    "start": 6.96,
+    "end": 7.22,
+    "onset": 6.96
+   },
+   {
+    "w": "tool.",
+    "start": 7.22,
+    "end": 7.44,
+    "onset": 7.27
+   }
+  ]
+ },
+ "L3": {
+  "duration": 6.699,
+  "level_db": -22.66,
+  "text": "Last, it remembers, updating its state with the result, so the next cycle has accurate context.",
+  "transcript": "Last, it remembers, updating its state with the result, so the next cycle has accurate context.",
+  "words": [
+   {
+    "w": "Last,",
+    "start": 0.0,
+    "end": 0.5,
+    "onset": 0.05
+   },
+   {
+    "w": "it",
+    "start": 0.7,
+    "end": 0.74,
+    "onset": 0.7
+   },
+   {
+    "w": "remembers,",
+    "start": 0.74,
+    "end": 1.22,
+    "onset": 0.79
+   },
+   {
+    "w": "updating",
+    "start": 1.34,
+    "end": 1.9,
+    "onset": 1.45
+   },
+   {
+    "w": "its",
+    "start": 1.9,
+    "end": 2.18,
+    "onset": 1.87
+   },
+   {
+    "w": "state",
+    "start": 2.18,
+    "end": 2.44,
+    "onset": 2.09
+   },
+   {
+    "w": "with",
+    "start": 2.44,
+    "end": 2.64,
+    "onset": 2.51
+   },
+   {
+    "w": "the",
+    "start": 2.64,
+    "end": 2.78,
+    "onset": 2.72
+   },
+   {
+    "w": "result,",
+    "start": 2.78,
+    "end": 3.26,
+    "onset": 2.83
+   },
+   {
+    "w": "so",
+    "start": 3.48,
+    "end": 3.86,
+    "onset": 3.5
+   },
+   {
+    "w": "the",
+    "start": 3.86,
+    "end": 4.32,
+    "onset": 4.25
+   },
+   {
+    "w": "next",
+    "start": 4.32,
+    "end": 4.58,
+    "onset": 4.37
+   },
+   {
+    "w": "cycle",
+    "start": 4.58,
+    "end": 4.98,
+    "onset": 4.57
+   },
+   {
+    "w": "has",
+    "start": 4.98,
+    "end": 5.4,
+    "onset": 4.94
+   },
+   {
+    "w": "accurate",
+    "start": 5.4,
+    "end": 5.9,
+    "onset": 5.51
+   },
+   {
+    "w": "context.",
+    "start": 5.9,
+    "end": 6.36,
+    "onset": 5.9
+   }
+  ]
+ },
+ "L4": {
+  "duration": 6.784,
+  "level_db": -21.53,
+  "text": "Each phase fails in its own way, so infinite loops start in act, and lost tool results start in remember.",
+  "transcript": "Each phase fails in its own way, so infinite loops start in act, and lost tool results start in remember.",
+  "words": [
+   {
+    "w": "Each",
+    "start": 0.0,
+    "end": 0.28,
+    "onset": 0.06
+   },
+   {
+    "w": "phase",
+    "start": 0.28,
+    "end": 0.58,
+    "onset": 0.3
+   },
+   {
+    "w": "fails",
+    "start": 0.58,
+    "end": 0.98,
+    "onset": 0.66
+   },
+   {
+    "w": "in",
+    "start": 0.98,
+    "end": 1.16,
+    "onset": 1.07
+   },
+   {
+    "w": "its",
+    "start": 1.16,
+    "end": 1.34,
+    "onset": 1.32
+   },
+   {
+    "w": "own",
+    "start": 1.34,
+    "end": 1.5,
+    "onset": 1.31
+   },
+   {
+    "w": "way,",
+    "start": 1.5,
+    "end": 1.82,
+    "onset": 1.6
+   },
+   {
+    "w": "so",
+    "start": 2.06,
+    "end": 2.38,
+    "onset": 2.12
+   },
+   {
+    "w": "infinite",
+    "start": 2.38,
+    "end": 2.98,
+    "onset": 2.66
+   },
+   {
+    "w": "loops",
+    "start": 2.98,
+    "end": 3.4,
+    "onset": 3.11
+   },
+   {
+    "w": "start",
+    "start": 3.4,
+    "end": 3.72,
+    "onset": 3.4
+   },
+   {
+    "w": "in",
+    "start": 3.72,
+    "end": 3.86,
+    "onset": 3.72
+   },
+   {
+    "w": "act,",
+    "start": 3.86,
+    "end": 4.18,
+    "onset": 3.86
+   },
+   {
+    "w": "and",
+    "start": 4.48,
+    "end": 4.58,
+    "onset": 4.48
+   },
+   {
+    "w": "lost",
+    "start": 4.58,
+    "end": 4.96,
+    "onset": 4.6
+   },
+   {
+    "w": "tool",
+    "start": 4.96,
+    "end": 5.18,
+    "onset": 5.02
+   },
+   {
+    "w": "results",
+    "start": 5.18,
+    "end": 5.6,
+    "onset": 5.22
+   },
+   {
+    "w": "start",
+    "start": 5.6,
+    "end": 5.9,
+    "onset": 5.59
+   },
+   {
+    "w": "in",
+    "start": 5.9,
+    "end": 6.2,
+    "onset": 5.93
+   },
+   {
+    "w": "remember.",
+    "start": 6.2,
+    "end": 6.52,
+    "onset": 6.22
+   }
+  ]
+ },
+ "L5": {
+  "duration": 8.555,
+  "level_db": -26.17,
+  "text": "So I'd check perceive first, then remember, because what reads as bad reasoning can be a perception or memory problem.",
+  "transcript": "So I'd check perceive first, then remember, because what reads as bad reasoning can be a perception or memory problem.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.3,
+    "onset": 0.05
+   },
+   {
+    "w": "I'd",
+    "start": 0.3,
+    "end": 0.96,
+    "onset": 0.48
+   },
+   {
+    "w": "check",
+    "start": 0.96,
+    "end": 1.2,
+    "onset": 0.92
+   },
+   {
+    "w": "perceive",
+    "start": 1.2,
+    "end": 1.62,
+    "onset": 1.2
+   },
+   {
+    "w": "first,",
+    "start": 1.62,
+    "end": 2.32,
+    "onset": 1.85
+   },
+   {
+    "w": "then",
+    "start": 2.6,
+    "end": 3.0,
+    "onset": 2.72
+   },
+   {
+    "w": "remember,",
+    "start": 3.0,
+    "end": 3.52,
+    "onset": 2.97
+   },
+   {
+    "w": "because",
+    "start": 3.76,
+    "end": 4.1,
+    "onset": 3.88
+   },
+   {
+    "w": "what",
+    "start": 4.1,
+    "end": 4.36,
+    "onset": 4.06
+   },
+   {
+    "w": "reads",
+    "start": 4.36,
+    "end": 4.78,
+    "onset": 4.48
+   },
+   {
+    "w": "as",
+    "start": 4.78,
+    "end": 5.08,
+    "onset": 4.93
+   },
+   {
+    "w": "bad",
+    "start": 5.08,
+    "end": 5.36,
+    "onset": 5.19
+   },
+   {
+    "w": "reasoning",
+    "start": 5.36,
+    "end": 5.92,
+    "onset": 5.36
+   },
+   {
+    "w": "can",
+    "start": 5.92,
+    "end": 6.18,
+    "onset": 6.14
+   },
+   {
+    "w": "be",
+    "start": 6.18,
+    "end": 6.34,
+    "onset": 6.14
+   },
+   {
+    "w": "a",
+    "start": 6.34,
+    "end": 6.46,
+    "onset": 6.34
+   },
+   {
+    "w": "perception",
+    "start": 6.46,
+    "end": 7.0,
+    "onset": 6.49
+   },
+   {
+    "w": "or",
+    "start": 7.0,
+    "end": 7.52,
+    "onset": 7.44
+   },
+   {
+    "w": "memory",
+    "start": 7.52,
+    "end": 7.96,
+    "onset": 7.44
+   },
+   {
+    "w": "problem.",
+    "start": 7.96,
+    "end": 8.34,
+    "onset": 8.12
+   }
+  ]
+ }
+}
