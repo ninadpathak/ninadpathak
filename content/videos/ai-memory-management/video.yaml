@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/ai-memory-management/, imported by tools/import_video.py from
+# ninadpathak-video films/ai-memory-management (render of 2026-10-28T19:32:02+05:30).
+name: AI memory management in 40 seconds
+description: Why a large context window is not memory, why LRU eviction drops the facts that matter, and how scoring entries by task relevance and explicit user signals decides what an agent keeps.
+upload_date: '2026-10-28T19:32:02+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: ai-memory-management.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 3.333
+  L3: 12.167
+  L4: 22.133
+  L5: 29.267
+transcript: Does a big context window give an agent memory? It doesn't, because the window starts empty each session, so AI memory management stores facts outside the model and decides what to forget. When that store fills, least-recently-used eviction keeps recent small talk and drops the user's deployment region, because recency has nothing to do with importance. So I'd score each entry by its relevance to the task and by whether the user asked to remember it. To start, I'd store session state explicitly and add eviction on day one, before a long customer session fills the context.

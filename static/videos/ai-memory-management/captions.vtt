@@ -1,0 +1,37 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.333
+Does a big context window give an agent memory?
+
+2
+00:00:03.333 --> 00:00:06.773
+It doesn't, because the window starts empty each session,
+
+3
+00:00:06.773 --> 00:00:12.167
+so AI memory management stores facts outside the model and decides what to forget.
+
+4
+00:00:12.167 --> 00:00:13.767
+When that store fills,
+
+5
+00:00:13.847 --> 00:00:19.067
+least-recently-used eviction keeps recent small talk and drops the user's deployment region,
+
+6
+00:00:19.067 --> 00:00:22.027
+because recency has nothing to do with importance.
+
+7
+00:00:22.133 --> 00:00:29.267
+So I'd score each entry by its relevance to the task and by whether the user asked to remember it.
+
+8
+00:00:29.267 --> 00:00:34.427
+To start, I'd store session state explicitly and add eviction on day one,
+
+9
+00:00:34.427 --> 00:00:37.427
+before a long customer session fills the context.

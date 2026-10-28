@@ -10,6 +10,7 @@ work_note: Creation is only part of a memory API's documentation. Technical writ
   later request can still retrieve.
 title: 'AI Memory Management for LLMs: What Actually Works'
 slug: ai-memory-management
+video: ai-memory-management
 ---
 
 Having a context window does not mean an LLM has memory. When I started building agentic pipelines in 2023, I watched junior engineers assume that a 128K token context meant their agent could "remember" previous interactions.

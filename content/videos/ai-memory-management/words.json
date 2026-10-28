@@ -1,0 +1,636 @@
+{
+ "L1": {
+  "duration": 3.28,
+  "level_db": -23.37,
+  "text": "Does a big context window give an agent memory?",
+  "transcript": "Does a big context window give an agent memory?",
+  "words": [
+   {
+    "w": "Does",
+    "start": 0.0,
+    "end": 0.3,
+    "onset": 0.09
+   },
+   {
+    "w": "a",
+    "start": 0.3,
+    "end": 0.44,
+    "onset": 0.32
+   },
+   {
+    "w": "big",
+    "start": 0.44,
+    "end": 0.62,
+    "onset": 0.49
+   },
+   {
+    "w": "context",
+    "start": 0.62,
+    "end": 1.12,
+    "onset": 0.71
+   },
+   {
+    "w": "window",
+    "start": 1.12,
+    "end": 1.66,
+    "onset": 1.09
+   },
+   {
+    "w": "give",
+    "start": 1.66,
+    "end": 2.12,
+    "onset": 1.94
+   },
+   {
+    "w": "an",
+    "start": 2.12,
+    "end": 2.26,
+    "onset": 2.14
+   },
+   {
+    "w": "agent",
+    "start": 2.26,
+    "end": 2.6,
+    "onset": 2.33
+   },
+   {
+    "w": "memory?",
+    "start": 2.6,
+    "end": 3.0,
+    "onset": 2.66
+   }
+  ]
+ },
+ "L2": {
+  "duration": 8.76,
+  "level_db": -21.94,
+  "text": "It doesn't, because the window starts empty each session, so AI memory management stores facts outside the model and decides what to forget.",
+  "transcript": "It doesn't, because the window starts empty each session, so AI memory management stores facts outside the model and decides what to forget.",
+  "words": [
+   {
+    "w": "It",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.08
+   },
+   {
+    "w": "doesn't,",
+    "start": 0.22,
+    "end": 0.72,
+    "onset": 0.34
+   },
+   {
+    "w": "because",
+    "start": 0.94,
+    "end": 1.16,
+    "onset": 0.97
+   },
+   {
+    "w": "the",
+    "start": 1.16,
+    "end": 1.34,
+    "onset": 1.27
+   },
+   {
+    "w": "window",
+    "start": 1.34,
+    "end": 1.64,
+    "onset": 1.42
+   },
+   {
+    "w": "starts",
+    "start": 1.64,
+    "end": 2.0,
+    "onset": 1.7
+   },
+   {
+    "w": "empty",
+    "start": 2.0,
+    "end": 2.42,
+    "onset": 2.13
+   },
+   {
+    "w": "each",
+    "start": 2.42,
+    "end": 2.8,
+    "onset": 2.63
+   },
+   {
+    "w": "session,",
+    "start": 2.8,
+    "end": 3.24,
+    "onset": 2.79
+   },
+   {
+    "w": "so",
+    "start": 3.44,
+    "end": 3.68,
+    "onset": 3.51
+   },
+   {
+    "w": "AI",
+    "start": 3.68,
+    "end": 4.0,
+    "onset": 3.77
+   },
+   {
+    "w": "memory",
+    "start": 4.0,
+    "end": 4.36,
+    "onset": 4.08
+   },
+   {
+    "w": "management",
+    "start": 4.36,
+    "end": 4.92,
+    "onset": 4.42
+   },
+   {
+    "w": "stores",
+    "start": 4.92,
+    "end": 5.4,
+    "onset": 5.07
+   },
+   {
+    "w": "facts",
+    "start": 5.4,
+    "end": 5.86,
+    "onset": 5.53
+   },
+   {
+    "w": "outside",
+    "start": 5.86,
+    "end": 6.3,
+    "onset": 6.01
+   },
+   {
+    "w": "the",
+    "start": 6.3,
+    "end": 6.58,
+    "onset": 6.31
+   },
+   {
+    "w": "model",
+    "start": 6.58,
+    "end": 6.96,
+    "onset": 6.58
+   },
+   {
+    "w": "and",
+    "start": 6.96,
+    "end": 7.22,
+    "onset": 7.14
+   },
+   {
+    "w": "decides",
+    "start": 7.22,
+    "end": 7.62,
+    "onset": 7.26
+   },
+   {
+    "w": "what",
+    "start": 7.62,
+    "end": 8.12,
+    "onset": 7.82
+   },
+   {
+    "w": "to",
+    "start": 8.12,
+    "end": 8.28,
+    "onset": 8.19
+   },
+   {
+    "w": "forget.",
+    "start": 8.28,
+    "end": 8.58,
+    "onset": 8.28
+   }
+  ]
+ },
+ "L3": {
+  "duration": 9.89,
+  "level_db": -27.02,
+  "text": "When that store fills, least-recently-used eviction keeps recent small talk and drops the user's deployment region, because recency has nothing to do with importance.",
+  "transcript": "When that store fills, least-recently-used eviction keeps recent small talk and drops the user's deployment region, because recency has nothing to do with importance.",
+  "words": [
+   {
+    "w": "When",
+    "start": 0.0,
+    "end": 0.2,
+    "onset": 0.08
+   },
+   {
+    "w": "that",
+    "start": 0.2,
+    "end": 0.4,
+    "onset": 0.21
+   },
+   {
+    "w": "store",
+    "start": 0.4,
+    "end": 0.74,
+    "onset": 0.41
+   },
+   {
+    "w": "fills,",
+    "start": 0.74,
+    "end": 1.2,
+    "onset": 0.8
+   },
+   {
+    "w": "least",
+    "start": 1.68,
+    "end": 1.92,
+    "onset": 1.63
+   },
+   {
+    "w": "-recently",
+    "start": 1.92,
+    "end": 2.56,
+    "onset": 2.01
+   },
+   {
+    "w": "-used",
+    "start": 2.56,
+    "end": 2.84,
+    "onset": 2.69
+   },
+   {
+    "w": "eviction",
+    "start": 2.84,
+    "end": 3.3,
+    "onset": 2.88
+   },
+   {
+    "w": "keeps",
+    "start": 3.3,
+    "end": 3.66,
+    "onset": 3.26
+   },
+   {
+    "w": "recent",
+    "start": 3.66,
+    "end": 4.18,
+    "onset": 3.63
+   },
+   {
+    "w": "small",
+    "start": 4.18,
+    "end": 4.46,
+    "onset": 4.21
+   },
+   {
+    "w": "talk",
+    "start": 4.46,
+    "end": 4.78,
+    "onset": 4.57
+   },
+   {
+    "w": "and",
+    "start": 4.78,
+    "end": 4.96,
+    "onset": 4.84
+   },
+   {
+    "w": "drops",
+    "start": 4.96,
+    "end": 5.26,
+    "onset": 4.98
+   },
+   {
+    "w": "the",
+    "start": 5.26,
+    "end": 5.44,
+    "onset": 5.27
+   },
+   {
+    "w": "user's",
+    "start": 5.44,
+    "end": 5.82,
+    "onset": 5.51
+   },
+   {
+    "w": "deployment",
+    "start": 5.82,
+    "end": 6.22,
+    "onset": 5.85
+   },
+   {
+    "w": "region,",
+    "start": 6.22,
+    "end": 6.76,
+    "onset": 6.36
+   },
+   {
+    "w": "because",
+    "start": 6.9,
+    "end": 7.3,
+    "onset": 7.05
+   },
+   {
+    "w": "recency",
+    "start": 7.3,
+    "end": 7.82,
+    "onset": 7.33
+   },
+   {
+    "w": "has",
+    "start": 7.82,
+    "end": 8.08,
+    "onset": 7.81
+   },
+   {
+    "w": "nothing",
+    "start": 8.08,
+    "end": 8.42,
+    "onset": 8.13
+   },
+   {
+    "w": "to",
+    "start": 8.42,
+    "end": 8.64,
+    "onset": 8.42
+   },
+   {
+    "w": "do",
+    "start": 8.64,
+    "end": 8.8,
+    "onset": 8.73
+   },
+   {
+    "w": "with",
+    "start": 8.8,
+    "end": 9.02,
+    "onset": 8.86
+   },
+   {
+    "w": "importance.",
+    "start": 9.02,
+    "end": 9.46,
+    "onset": 9.04
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.07,
+  "level_db": -26.04,
+  "text": "So I'd score each entry by its relevance to the task and by whether the user asked to remember it.",
+  "transcript": "So I'd score each entry by its relevance to the task and by whether the user asked to remember it.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.36,
+    "onset": 0.08
+   },
+   {
+    "w": "I'd",
+    "start": 0.36,
+    "end": 0.96,
+    "onset": 0.68
+   },
+   {
+    "w": "score",
+    "start": 0.96,
+    "end": 1.28,
+    "onset": 0.96
+   },
+   {
+    "w": "each",
+    "start": 1.28,
+    "end": 1.68,
+    "onset": 1.45
+   },
+   {
+    "w": "entry",
+    "start": 1.68,
+    "end": 2.08,
+    "onset": 1.66
+   },
+   {
+    "w": "by",
+    "start": 2.08,
+    "end": 2.38,
+    "onset": 2.04
+   },
+   {
+    "w": "its",
+    "start": 2.38,
+    "end": 2.64,
+    "onset": 2.47
+   },
+   {
+    "w": "relevance",
+    "start": 2.64,
+    "end": 3.04,
+    "onset": 2.7
+   },
+   {
+    "w": "to",
+    "start": 3.04,
+    "end": 3.28,
+    "onset": 3.13
+   },
+   {
+    "w": "the",
+    "start": 3.28,
+    "end": 3.38,
+    "onset": 3.25
+   },
+   {
+    "w": "task",
+    "start": 3.38,
+    "end": 3.8,
+    "onset": 3.43
+   },
+   {
+    "w": "and",
+    "start": 3.8,
+    "end": 4.12,
+    "onset": 3.9
+   },
+   {
+    "w": "by",
+    "start": 4.12,
+    "end": 4.44,
+    "onset": 4.25
+   },
+   {
+    "w": "whether",
+    "start": 4.44,
+    "end": 5.16,
+    "onset": 4.85
+   },
+   {
+    "w": "the",
+    "start": 5.16,
+    "end": 5.36,
+    "onset": 5.14
+   },
+   {
+    "w": "user",
+    "start": 5.36,
+    "end": 5.72,
+    "onset": 5.48
+   },
+   {
+    "w": "asked",
+    "start": 5.72,
+    "end": 6.12,
+    "onset": 5.72
+   },
+   {
+    "w": "to",
+    "start": 6.12,
+    "end": 6.3,
+    "onset": 6.19
+   },
+   {
+    "w": "remember",
+    "start": 6.3,
+    "end": 6.72,
+    "onset": 6.34
+   },
+   {
+    "w": "it.",
+    "start": 6.72,
+    "end": 6.98,
+    "onset": 6.74
+   }
+  ]
+ },
+ "L5": {
+  "duration": 8.03,
+  "level_db": -26.48,
+  "text": "To start, I'd store session state explicitly and add eviction on day one, before a long customer session fills the context.",
+  "transcript": "To start, I'd store session state explicitly and add eviction on day one, before a long customer session fills the context.",
+  "words": [
+   {
+    "w": "To",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.08
+   },
+   {
+    "w": "start,",
+    "start": 0.22,
+    "end": 0.56,
+    "onset": 0.34
+   },
+   {
+    "w": "I'd",
+    "start": 1.18,
+    "end": 1.42,
+    "onset": 1.16
+   },
+   {
+    "w": "store",
+    "start": 1.42,
+    "end": 1.7,
+    "onset": 1.37
+   },
+   {
+    "w": "session",
+    "start": 1.7,
+    "end": 2.1,
+    "onset": 1.75
+   },
+   {
+    "w": "state",
+    "start": 2.1,
+    "end": 2.4,
+    "onset": 2.06
+   },
+   {
+    "w": "explicitly",
+    "start": 2.4,
+    "end": 3.08,
+    "onset": 2.46
+   },
+   {
+    "w": "and",
+    "start": 3.08,
+    "end": 3.64,
+    "onset": 3.22
+   },
+   {
+    "w": "add",
+    "start": 3.64,
+    "end": 3.86,
+    "onset": 3.69
+   },
+   {
+    "w": "eviction",
+    "start": 3.86,
+    "end": 4.32,
+    "onset": 3.85
+   },
+   {
+    "w": "on",
+    "start": 4.32,
+    "end": 4.52,
+    "onset": 4.31
+   },
+   {
+    "w": "day",
+    "start": 4.52,
+    "end": 4.68,
+    "onset": 4.58
+   },
+   {
+    "w": "one,",
+    "start": 4.68,
+    "end": 5.06,
+    "onset": 4.84
+   },
+   {
+    "w": "before",
+    "start": 5.16,
+    "end": 5.48,
+    "onset": 5.26
+   },
+   {
+    "w": "a",
+    "start": 5.48,
+    "end": 5.68,
+    "onset": 5.5
+   },
+   {
+    "w": "long",
+    "start": 5.68,
+    "end": 5.96,
+    "onset": 5.68
+   },
+   {
+    "w": "customer",
+    "start": 5.96,
+    "end": 6.36,
+    "onset": 6.06
+   },
+   {
+    "w": "session",
+    "start": 6.36,
+    "end": 6.82,
+    "onset": 6.33
+   },
+   {
+    "w": "fills",
+    "start": 6.82,
+    "end": 7.18,
+    "onset": 6.93
+   },
+   {
+    "w": "the",
+    "start": 7.18,
+    "end": 7.36,
+    "onset": 7.3
+   },
+   {
+    "w": "context.",
+    "start": 7.36,
+    "end": 7.76,
+    "onset": 7.38
+   }
+  ]
+ }
+}
