@@ -9,6 +9,7 @@ work_note: '[Ninad Pathak](/contact/) plans developer content for agent platform
   around execution patterns, then writes tutorials that connect those architecture
   choices to a supported SDK implementation.'
 title: 'The Agent Design Space: A Map of What Engineers Are Actually Building'
+video: agent-design-space
 ---
 
 Three weeks of reading production architecture posts, scraping GitHub for agent implementations, and talking to engineers who run agents at scale taught me one thing the taxonomy diagrams miss: I wanted to know what engineers are actually building, not what the boxes say they should build.

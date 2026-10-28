@@ -1,0 +1,45 @@
+WEBVTT
+
+1
+00:00:00.112 --> 00:00:06.698
+Okay, so the agent design space maps how production agents cluster around their constraints rather than neat types.
+
+2
+00:00:06.698 --> 00:00:09.553
+A single-loop agent retrieves context,
+
+3
+00:00:09.703 --> 00:00:11.633
+calls a tool and answers,
+
+4
+00:00:11.713 --> 00:00:15.578
+which fits a docs-search assistant where wrong answers cost little.
+
+5
+00:00:15.578 --> 00:00:21.773
+Multi-turn, workflow, supervisor and persistent-goal agents run progressively longer,
+
+6
+00:00:21.853 --> 00:00:24.555
+so more of their state must survive a restart.
+
+7
+00:00:24.555 --> 00:00:27.380
+So the design space isn't a menu,
+
+8
+00:00:27.580 --> 00:00:31.303
+and the mistake is stretching a simple pattern past its scope.
+
+9
+00:00:31.303 --> 00:00:32.498
+For a new agent,
+
+10
+00:00:32.498 --> 00:00:35.193
+I ask whether it acts or just generates,
+
+11
+00:00:35.293 --> 00:00:37.753
+keeps state, or needs several agents.

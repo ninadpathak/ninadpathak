@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/agent-design-space/, imported by tools/import_video.py from
+# ninadpathak-video films/agent-design-space (render of 2026-10-28T10:25:44+05:30).
+name: The agent design space in 40 seconds
+description: How production agents cluster around their constraints, from single-loop retrieval to persistent-goal agents whose state must survive restarts, and the questions that narrow the choice for a new agent.
+upload_date: '2026-10-28T10:25:44+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: agent-design-space.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.067
+  L2: 6.633
+  L3: 15.533
+  L4: 24.5
+  L5: 31.233
+transcript: Okay, so the agent design space maps how production agents cluster around their constraints rather than neat types. A single-loop agent retrieves context, calls a tool and answers, which fits a docs-search assistant where wrong answers cost little. Multi-turn, workflow, supervisor and persistent-goal agents run progressively longer, so more of their state must survive a restart. So the design space isn't a menu, and the mistake is stretching a simple pattern past its scope. For a new agent, I ask whether it acts or just generates, keeps state, or needs several agents.

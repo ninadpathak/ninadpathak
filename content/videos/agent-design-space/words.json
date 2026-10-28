@@ -1,0 +1,613 @@
+{
+ "L1": {
+  "duration": 6.464,
+  "text": "Okay, so the agent design space maps how production agents cluster around their constraints rather than neat types.",
+  "transcript": "Okay, so the agent design space maps how production agents cluster around their constraints rather than neat types.",
+  "words": [
+   {
+    "w": "Okay,",
+    "start": 0.045,
+    "end": 0.28,
+    "whisper": 0.0
+   },
+   {
+    "w": "so",
+    "start": 0.6,
+    "end": 0.66,
+    "whisper": 0.6
+   },
+   {
+    "w": "the",
+    "start": 0.66,
+    "end": 0.8,
+    "whisper": 0.66
+   },
+   {
+    "w": "agent",
+    "start": 0.82,
+    "end": 1.12,
+    "whisper": 0.8
+   },
+   {
+    "w": "design",
+    "start": 1.2,
+    "end": 1.54,
+    "whisper": 1.12
+   },
+   {
+    "w": "space",
+    "start": 1.54,
+    "end": 1.94,
+    "whisper": 1.54
+   },
+   {
+    "w": "maps",
+    "start": 1.94,
+    "end": 2.4,
+    "whisper": 1.94
+   },
+   {
+    "w": "how",
+    "start": 2.475,
+    "end": 2.64,
+    "whisper": 2.4
+   },
+   {
+    "w": "production",
+    "start": 2.755,
+    "end": 3.08,
+    "whisper": 2.64
+   },
+   {
+    "w": "agents",
+    "start": 3.265,
+    "end": 3.62,
+    "whisper": 3.08
+   },
+   {
+    "w": "cluster",
+    "start": 3.72,
+    "end": 4.02,
+    "whisper": 3.62
+   },
+   {
+    "w": "around",
+    "start": 4.02,
+    "end": 4.32,
+    "whisper": 4.02
+   },
+   {
+    "w": "their",
+    "start": 4.32,
+    "end": 4.48,
+    "whisper": 4.32
+   },
+   {
+    "w": "constraints",
+    "start": 4.55,
+    "end": 5.04,
+    "whisper": 4.48
+   },
+   {
+    "w": "rather",
+    "start": 5.145,
+    "end": 5.46,
+    "whisper": 5.04
+   },
+   {
+    "w": "than",
+    "start": 5.46,
+    "end": 5.76,
+    "whisper": 5.46
+   },
+   {
+    "w": "neat",
+    "start": 5.76,
+    "end": 5.98,
+    "whisper": 5.76
+   },
+   {
+    "w": "types.",
+    "start": 6.035,
+    "end": 6.34,
+    "whisper": 5.98
+   }
+  ]
+ },
+ "L2": {
+  "duration": 8.768,
+  "text": "A single-loop agent retrieves context, calls a tool and answers, which fits a docs-search assistant where wrong answers cost little.",
+  "transcript": "A single-loop agent retrieves context, calls a tool and answers, which fits a docs-search assistant where wrong answers cost little.",
+  "words": [
+   {
+    "w": "A",
+    "start": 0.065,
+    "end": 0.22,
+    "whisper": 0.0
+   },
+   {
+    "w": "single",
+    "start": 0.22,
+    "end": 0.56,
+    "whisper": 0.22
+   },
+   {
+    "w": "-loop",
+    "start": 0.56,
+    "end": 0.86,
+    "whisper": 0.56
+   },
+   {
+    "w": "agent",
+    "start": 0.905,
+    "end": 1.28,
+    "whisper": 0.86
+   },
+   {
+    "w": "retrieves",
+    "start": 1.395,
+    "end": 1.98,
+    "whisper": 1.28
+   },
+   {
+    "w": "context,",
+    "start": 2.025,
+    "end": 2.52,
+    "whisper": 1.98
+   },
+   {
+    "w": "calls",
+    "start": 3.07,
+    "end": 3.34,
+    "whisper": 2.92
+   },
+   {
+    "w": "a",
+    "start": 3.34,
+    "end": 3.52,
+    "whisper": 3.34
+   },
+   {
+    "w": "tool",
+    "start": 3.52,
+    "end": 3.76,
+    "whisper": 3.52
+   },
+   {
+    "w": "and",
+    "start": 3.76,
+    "end": 4.1,
+    "whisper": 3.76
+   },
+   {
+    "w": "answers,",
+    "start": 4.1,
+    "end": 4.6,
+    "whisper": 4.1
+   },
+   {
+    "w": "which",
+    "start": 5.08,
+    "end": 5.24,
+    "whisper": 4.86
+   },
+   {
+    "w": "fits",
+    "start": 5.38,
+    "end": 5.54,
+    "whisper": 5.24
+   },
+   {
+    "w": "a",
+    "start": 5.595,
+    "end": 5.74,
+    "whisper": 5.54
+   },
+   {
+    "w": "docs",
+    "start": 5.75,
+    "end": 5.94,
+    "whisper": 5.74
+   },
+   {
+    "w": "-search",
+    "start": 5.975,
+    "end": 6.32,
+    "whisper": 5.94
+   },
+   {
+    "w": "assistant",
+    "start": 6.325,
+    "end": 6.78,
+    "whisper": 6.32
+   },
+   {
+    "w": "where",
+    "start": 6.78,
+    "end": 7.06,
+    "whisper": 6.78
+   },
+   {
+    "w": "wrong",
+    "start": 7.06,
+    "end": 7.36,
+    "whisper": 7.06
+   },
+   {
+    "w": "answers",
+    "start": 7.36,
+    "end": 7.92,
+    "whisper": 7.36
+   },
+   {
+    "w": "cost",
+    "start": 8.06,
+    "end": 8.34,
+    "whisper": 7.92
+   },
+   {
+    "w": "little.",
+    "start": 8.395,
+    "end": 8.64,
+    "whisper": 8.34
+   }
+  ]
+ },
+ "L3": {
+  "duration": 8.853,
+  "text": "Multi-turn, workflow, supervisor and persistent-goal agents run progressively longer, so more of their state must survive a restart.",
+  "transcript": "Multi-turn, workflow, supervisor and persistent-goal agents run progressively longer, so more of their state must survive a restart.",
+  "words": [
+   {
+    "w": "Multi",
+    "start": 0.045,
+    "end": 0.4,
+    "whisper": 0.0
+   },
+   {
+    "w": "-turn,",
+    "start": 0.52,
+    "end": 0.76,
+    "whisper": 0.4
+   },
+   {
+    "w": "workflow,",
+    "start": 1.04,
+    "end": 1.44,
+    "whisper": 1.04
+   },
+   {
+    "w": "supervisor",
+    "start": 1.99,
+    "end": 2.72,
+    "whisper": 1.94
+   },
+   {
+    "w": "and",
+    "start": 2.72,
+    "end": 3.16,
+    "whisper": 2.72
+   },
+   {
+    "w": "persistent",
+    "start": 3.255,
+    "end": 3.68,
+    "whisper": 3.16
+   },
+   {
+    "w": "-goal",
+    "start": 3.68,
+    "end": 4.04,
+    "whisper": 3.68
+   },
+   {
+    "w": "agents",
+    "start": 4.04,
+    "end": 4.44,
+    "whisper": 4.04
+   },
+   {
+    "w": "run",
+    "start": 4.55,
+    "end": 4.76,
+    "whisper": 4.44
+   },
+   {
+    "w": "progressively",
+    "start": 4.89,
+    "end": 5.34,
+    "whisper": 4.76
+   },
+   {
+    "w": "longer,",
+    "start": 5.34,
+    "end": 5.84,
+    "whisper": 5.34
+   },
+   {
+    "w": "so",
+    "start": 6.32,
+    "end": 6.44,
+    "whisper": 6.1
+   },
+   {
+    "w": "more",
+    "start": 6.44,
+    "end": 6.72,
+    "whisper": 6.44
+   },
+   {
+    "w": "of",
+    "start": 6.72,
+    "end": 6.84,
+    "whisper": 6.72
+   },
+   {
+    "w": "their",
+    "start": 6.865,
+    "end": 6.98,
+    "whisper": 6.84
+   },
+   {
+    "w": "state",
+    "start": 6.98,
+    "end": 7.28,
+    "whisper": 6.98
+   },
+   {
+    "w": "must",
+    "start": 7.41,
+    "end": 7.64,
+    "whisper": 7.28
+   },
+   {
+    "w": "survive",
+    "start": 7.64,
+    "end": 8.08,
+    "whisper": 7.64
+   },
+   {
+    "w": "a",
+    "start": 8.22,
+    "end": 8.38,
+    "whisper": 8.08
+   },
+   {
+    "w": "restart.",
+    "start": 8.38,
+    "end": 8.68,
+    "whisper": 8.38
+   }
+  ]
+ },
+ "L4": {
+  "duration": 6.635,
+  "text": "So the design space isn't a menu, and the mistake is stretching a simple pattern past its scope.",
+  "transcript": "So the design space isn't a menu, and the mistake is stretching a simple pattern past its scope.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.055,
+    "end": 0.3,
+    "whisper": 0.0
+   },
+   {
+    "w": "the",
+    "start": 0.3,
+    "end": 0.68,
+    "whisper": 0.3
+   },
+   {
+    "w": "design",
+    "start": 0.74,
+    "end": 1.1,
+    "whisper": 0.68
+   },
+   {
+    "w": "space",
+    "start": 1.1,
+    "end": 1.58,
+    "whisper": 1.1
+   },
+   {
+    "w": "isn't",
+    "start": 1.69,
+    "end": 2.0,
+    "whisper": 1.58
+   },
+   {
+    "w": "a",
+    "start": 2.035,
+    "end": 2.2,
+    "whisper": 2.0
+   },
+   {
+    "w": "menu,",
+    "start": 2.1,
+    "end": 2.48,
+    "whisper": 2.2
+   },
+   {
+    "w": "and",
+    "start": 3.08,
+    "end": 3.18,
+    "whisper": 2.8
+   },
+   {
+    "w": "the",
+    "start": 3.18,
+    "end": 3.28,
+    "whisper": 3.18
+   },
+   {
+    "w": "mistake",
+    "start": 3.28,
+    "end": 3.78,
+    "whisper": 3.28
+   },
+   {
+    "w": "is",
+    "start": 4.02,
+    "end": 4.16,
+    "whisper": 3.78
+   },
+   {
+    "w": "stretching",
+    "start": 4.167,
+    "end": 4.62,
+    "whisper": 4.16
+   },
+   {
+    "w": "a",
+    "start": 4.62,
+    "end": 4.9,
+    "whisper": 4.62
+   },
+   {
+    "w": "simple",
+    "start": 4.9,
+    "end": 5.26,
+    "whisper": 4.9
+   },
+   {
+    "w": "pattern",
+    "start": 5.365,
+    "end": 5.68,
+    "whisper": 5.26
+   },
+   {
+    "w": "past",
+    "start": 5.81,
+    "end": 6.1,
+    "whisper": 5.68
+   },
+   {
+    "w": "its",
+    "start": 6.155,
+    "end": 6.32,
+    "whisper": 6.1
+   },
+   {
+    "w": "scope.",
+    "start": 6.32,
+    "end": 6.6,
+    "whisper": 6.32
+   }
+  ]
+ },
+ "L5": {
+  "duration": 6.315,
+  "text": "For a new agent, I ask whether it acts or just generates, keeps state, or needs several agents.",
+  "transcript": "For a new agent, I ask whether it acts or just generates, keeps state, or needs several agents.",
+  "words": [
+   {
+    "w": "For",
+    "start": 0.07,
+    "end": 0.18,
+    "whisper": 0.0
+   },
+   {
+    "w": "a",
+    "start": 0.18,
+    "end": 0.32,
+    "whisper": 0.18
+   },
+   {
+    "w": "new",
+    "start": 0.32,
+    "end": 0.46,
+    "whisper": 0.32
+   },
+   {
+    "w": "agent,",
+    "start": 0.58,
+    "end": 0.96,
+    "whisper": 0.46
+   },
+   {
+    "w": "I",
+    "start": 1.265,
+    "end": 1.38,
+    "whisper": 1.26
+   },
+   {
+    "w": "ask",
+    "start": 1.51,
+    "end": 1.82,
+    "whisper": 1.38
+   },
+   {
+    "w": "whether",
+    "start": 1.875,
+    "end": 2.08,
+    "whisper": 1.82
+   },
+   {
+    "w": "it",
+    "start": 2.08,
+    "end": 2.32,
+    "whisper": 2.08
+   },
+   {
+    "w": "acts",
+    "start": 2.39,
+    "end": 2.78,
+    "whisper": 2.32
+   },
+   {
+    "w": "or",
+    "start": 2.845,
+    "end": 2.94,
+    "whisper": 2.78
+   },
+   {
+    "w": "just",
+    "start": 2.94,
+    "end": 3.18,
+    "whisper": 2.94
+   },
+   {
+    "w": "generates,",
+    "start": 3.18,
+    "end": 3.56,
+    "whisper": 3.18
+   },
+   {
+    "w": "keeps",
+    "start": 4.06,
+    "end": 4.32,
+    "whisper": 4.02
+   },
+   {
+    "w": "state,",
+    "start": 4.41,
+    "end": 4.64,
+    "whisper": 4.32
+   },
+   {
+    "w": "or",
+    "start": 4.86,
+    "end": 4.94,
+    "whisper": 4.86
+   },
+   {
+    "w": "needs",
+    "start": 4.94,
+    "end": 5.36,
+    "whisper": 4.94
+   },
+   {
+    "w": "several",
+    "start": 5.36,
+    "end": 5.72,
+    "whisper": 5.36
+   },
+   {
+    "w": "agents.",
+    "start": 5.775,
+    "end": 6.12,
+    "whisper": 5.72
+   }
+  ]
+ }
+}
