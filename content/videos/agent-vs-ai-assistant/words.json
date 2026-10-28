@@ -1,0 +1,684 @@
+{
+ "L1": {
+  "duration": 7.57,
+  "level_db": -26.34,
+  "text": "A team wanted an agent to route tickets, and three months in, it was a fragile loop doing one prompt's job.",
+  "transcript": "A team wanted an agent to route tickets, and three months in, it was a fragile loop doing one prompt's job.",
+  "words": [
+   {
+    "w": "A",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.08
+   },
+   {
+    "w": "team",
+    "start": 0.22,
+    "end": 0.56,
+    "onset": 0.22
+   },
+   {
+    "w": "wanted",
+    "start": 0.56,
+    "end": 0.92,
+    "onset": 0.61
+   },
+   {
+    "w": "an",
+    "start": 0.92,
+    "end": 1.14,
+    "onset": 1.0
+   },
+   {
+    "w": "agent",
+    "start": 1.14,
+    "end": 1.58,
+    "onset": 1.25
+   },
+   {
+    "w": "to",
+    "start": 1.58,
+    "end": 1.8,
+    "onset": 1.68
+   },
+   {
+    "w": "route",
+    "start": 1.8,
+    "end": 2.0,
+    "onset": 1.84
+   },
+   {
+    "w": "tickets,",
+    "start": 2.0,
+    "end": 2.5,
+    "onset": 2.08
+   },
+   {
+    "w": "and",
+    "start": 2.72,
+    "end": 3.04,
+    "onset": 2.91
+   },
+   {
+    "w": "three",
+    "start": 3.04,
+    "end": 3.3,
+    "onset": 3.1
+   },
+   {
+    "w": "months",
+    "start": 3.3,
+    "end": 3.62,
+    "onset": 3.3
+   },
+   {
+    "w": "in,",
+    "start": 3.62,
+    "end": 4.0,
+    "onset": 3.62
+   },
+   {
+    "w": "it",
+    "start": 4.22,
+    "end": 4.58,
+    "onset": 4.45
+   },
+   {
+    "w": "was",
+    "start": 4.58,
+    "end": 4.78,
+    "onset": 4.65
+   },
+   {
+    "w": "a",
+    "start": 4.78,
+    "end": 4.92,
+    "onset": 4.85
+   },
+   {
+    "w": "fragile",
+    "start": 4.92,
+    "end": 5.4,
+    "onset": 4.9
+   },
+   {
+    "w": "loop",
+    "start": 5.4,
+    "end": 5.8,
+    "onset": 5.38
+   },
+   {
+    "w": "doing",
+    "start": 5.8,
+    "end": 6.06,
+    "onset": 5.89
+   },
+   {
+    "w": "one",
+    "start": 6.06,
+    "end": 6.44,
+    "onset": 6.2
+   },
+   {
+    "w": "prompt's",
+    "start": 6.44,
+    "end": 7.02,
+    "onset": 6.6
+   },
+   {
+    "w": "job.",
+    "start": 7.02,
+    "end": 7.3,
+    "onset": 7.12
+   }
+  ]
+ },
+ "L2": {
+  "duration": 7.6,
+  "level_db": -23.67,
+  "text": "The question is who drives the loop, since an AI agent picks its next step, and an AI assistant leaves it to you.",
+  "transcript": "The question is who drives the loop, since an AI agent picks its next step, and an AI assistant leaves it to you.",
+  "words": [
+   {
+    "w": "The",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.09
+   },
+   {
+    "w": "question",
+    "start": 0.22,
+    "end": 0.54,
+    "onset": 0.17
+   },
+   {
+    "w": "is",
+    "start": 0.54,
+    "end": 0.9,
+    "onset": 0.57
+   },
+   {
+    "w": "who",
+    "start": 0.9,
+    "end": 1.08,
+    "onset": 0.87
+   },
+   {
+    "w": "drives",
+    "start": 1.08,
+    "end": 1.52,
+    "onset": 1.17
+   },
+   {
+    "w": "the",
+    "start": 1.52,
+    "end": 1.72,
+    "onset": 1.64
+   },
+   {
+    "w": "loop,",
+    "start": 1.72,
+    "end": 2.08,
+    "onset": 1.81
+   },
+   {
+    "w": "since",
+    "start": 2.3,
+    "end": 2.64,
+    "onset": 2.47
+   },
+   {
+    "w": "an",
+    "start": 2.64,
+    "end": 2.86,
+    "onset": 2.74
+   },
+   {
+    "w": "AI",
+    "start": 2.86,
+    "end": 3.2,
+    "onset": 2.91
+   },
+   {
+    "w": "agent",
+    "start": 3.2,
+    "end": 3.76,
+    "onset": 3.41
+   },
+   {
+    "w": "picks",
+    "start": 3.76,
+    "end": 4.12,
+    "onset": 3.9
+   },
+   {
+    "w": "its",
+    "start": 4.12,
+    "end": 4.28,
+    "onset": 4.09
+   },
+   {
+    "w": "next",
+    "start": 4.28,
+    "end": 4.58,
+    "onset": 4.26
+   },
+   {
+    "w": "step,",
+    "start": 4.58,
+    "end": 5.04,
+    "onset": 4.59
+   },
+   {
+    "w": "and",
+    "start": 5.28,
+    "end": 5.6,
+    "onset": 5.5
+   },
+   {
+    "w": "an",
+    "start": 5.6,
+    "end": 5.74,
+    "onset": 5.61
+   },
+   {
+    "w": "AI",
+    "start": 5.74,
+    "end": 6.1,
+    "onset": 5.8
+   },
+   {
+    "w": "assistant",
+    "start": 6.1,
+    "end": 6.62,
+    "onset": 6.1
+   },
+   {
+    "w": "leaves",
+    "start": 6.62,
+    "end": 7.0,
+    "onset": 6.59
+   },
+   {
+    "w": "it",
+    "start": 7.0,
+    "end": 7.18,
+    "onset": 7.08
+   },
+   {
+    "w": "to",
+    "start": 7.18,
+    "end": 7.3,
+    "onset": 7.2
+   },
+   {
+    "w": "you.",
+    "start": 7.3,
+    "end": 7.5,
+    "onset": 7.3
+   }
+  ]
+ },
+ "L3": {
+  "duration": 6.46,
+  "level_db": -20.39,
+  "text": "Each pass is a model call, and the loop can fail in ways that are hard to predict.",
+  "transcript": "Each pass is a model call, and the loop can fail in ways that are hard to predict.",
+  "words": [
+   {
+    "w": "Each",
+    "start": 0.0,
+    "end": 0.3,
+    "onset": 0.1
+   },
+   {
+    "w": "pass",
+    "start": 0.3,
+    "end": 0.7,
+    "onset": 0.41
+   },
+   {
+    "w": "is",
+    "start": 0.7,
+    "end": 0.94,
+    "onset": 0.83
+   },
+   {
+    "w": "a",
+    "start": 0.94,
+    "end": 1.06,
+    "onset": 0.94
+   },
+   {
+    "w": "model",
+    "start": 1.06,
+    "end": 1.32,
+    "onset": 1.06
+   },
+   {
+    "w": "call,",
+    "start": 1.32,
+    "end": 1.8,
+    "onset": 1.43
+   },
+   {
+    "w": "and",
+    "start": 2.06,
+    "end": 2.36,
+    "onset": 2.19
+   },
+   {
+    "w": "the",
+    "start": 2.36,
+    "end": 2.84,
+    "onset": 2.76
+   },
+   {
+    "w": "loop",
+    "start": 2.84,
+    "end": 3.1,
+    "onset": 2.76
+   },
+   {
+    "w": "can",
+    "start": 3.1,
+    "end": 3.46,
+    "onset": 3.12
+   },
+   {
+    "w": "fail",
+    "start": 3.46,
+    "end": 3.94,
+    "onset": 3.57
+   },
+   {
+    "w": "in",
+    "start": 3.94,
+    "end": 4.2,
+    "onset": 3.94
+   },
+   {
+    "w": "ways",
+    "start": 4.2,
+    "end": 4.46,
+    "onset": 4.24
+   },
+   {
+    "w": "that",
+    "start": 4.46,
+    "end": 4.86,
+    "onset": 4.64
+   },
+   {
+    "w": "are",
+    "start": 4.86,
+    "end": 5.38,
+    "onset": 5.09
+   },
+   {
+    "w": "hard",
+    "start": 5.38,
+    "end": 5.88,
+    "onset": 5.74
+   },
+   {
+    "w": "to",
+    "start": 5.88,
+    "end": 6.0,
+    "onset": 5.93
+   },
+   {
+    "w": "predict.",
+    "start": 6.0,
+    "end": 6.24,
+    "onset": 6.04
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.31,
+  "level_db": -26.07,
+  "text": "So I'd want an agent when each step depends on what the last one found, like tracing a checkout bug.",
+  "transcript": "So I'd want an agent when each step depends on what the last one found, like tracing a checkout bug.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.42,
+    "onset": 0.09
+   },
+   {
+    "w": "I'd",
+    "start": 0.42,
+    "end": 1.1,
+    "onset": 0.82
+   },
+   {
+    "w": "want",
+    "start": 1.1,
+    "end": 1.38,
+    "onset": 1.18
+   },
+   {
+    "w": "an",
+    "start": 1.38,
+    "end": 1.64,
+    "onset": 1.38
+   },
+   {
+    "w": "agent",
+    "start": 1.64,
+    "end": 2.14,
+    "onset": 1.79
+   },
+   {
+    "w": "when",
+    "start": 2.14,
+    "end": 2.44,
+    "onset": 2.26
+   },
+   {
+    "w": "each",
+    "start": 2.44,
+    "end": 2.82,
+    "onset": 2.61
+   },
+   {
+    "w": "step",
+    "start": 2.82,
+    "end": 3.22,
+    "onset": 2.79
+   },
+   {
+    "w": "depends",
+    "start": 3.22,
+    "end": 3.76,
+    "onset": 3.31
+   },
+   {
+    "w": "on",
+    "start": 3.76,
+    "end": 4.06,
+    "onset": 3.76
+   },
+   {
+    "w": "what",
+    "start": 4.06,
+    "end": 4.24,
+    "onset": 4.12
+   },
+   {
+    "w": "the",
+    "start": 4.24,
+    "end": 4.38,
+    "onset": 4.31
+   },
+   {
+    "w": "last",
+    "start": 4.38,
+    "end": 4.72,
+    "onset": 4.38
+   },
+   {
+    "w": "one",
+    "start": 4.72,
+    "end": 4.98,
+    "onset": 4.81
+   },
+   {
+    "w": "found,",
+    "start": 4.98,
+    "end": 5.36,
+    "onset": 5.04
+   },
+   {
+    "w": "like",
+    "start": 5.62,
+    "end": 5.94,
+    "onset": 5.7
+   },
+   {
+    "w": "tracing",
+    "start": 5.94,
+    "end": 6.42,
+    "onset": 6.12
+   },
+   {
+    "w": "a",
+    "start": 6.42,
+    "end": 6.6,
+    "onset": 6.42
+   },
+   {
+    "w": "checkout",
+    "start": 6.6,
+    "end": 6.84,
+    "onset": 6.6
+   },
+   {
+    "w": "bug.",
+    "start": 6.84,
+    "end": 7.18,
+    "onset": 7.04
+   }
+  ]
+ },
+ "L5": {
+  "duration": 7.17,
+  "level_db": -24.83,
+  "text": "To check, I ask if a human could do it in under five minutes with the right tools, and if so, I'd build an assistant.",
+  "transcript": "To check, I ask if a human could do it in under five minutes with the right tools, and if so, I'd build an assistant.",
+  "words": [
+   {
+    "w": "To",
+    "start": 0.0,
+    "end": 0.18,
+    "onset": 0.09
+   },
+   {
+    "w": "check,",
+    "start": 0.18,
+    "end": 0.46,
+    "onset": 0.18
+   },
+   {
+    "w": "I",
+    "start": 0.7,
+    "end": 0.94,
+    "onset": 0.84
+   },
+   {
+    "w": "ask",
+    "start": 0.94,
+    "end": 1.26,
+    "onset": 0.94
+   },
+   {
+    "w": "if",
+    "start": 1.26,
+    "end": 1.42,
+    "onset": 1.3
+   },
+   {
+    "w": "a",
+    "start": 1.42,
+    "end": 1.54,
+    "onset": 1.44
+   },
+   {
+    "w": "human",
+    "start": 1.54,
+    "end": 1.9,
+    "onset": 1.53
+   },
+   {
+    "w": "could",
+    "start": 1.9,
+    "end": 2.22,
+    "onset": 2.08
+   },
+   {
+    "w": "do",
+    "start": 2.22,
+    "end": 2.42,
+    "onset": 2.29
+   },
+   {
+    "w": "it",
+    "start": 2.42,
+    "end": 2.56,
+    "onset": 2.42
+   },
+   {
+    "w": "in",
+    "start": 2.56,
+    "end": 2.72,
+    "onset": 2.6
+   },
+   {
+    "w": "under",
+    "start": 2.72,
+    "end": 2.94,
+    "onset": 2.74
+   },
+   {
+    "w": "five",
+    "start": 2.94,
+    "end": 3.3,
+    "onset": 2.98
+   },
+   {
+    "w": "minutes",
+    "start": 3.3,
+    "end": 3.68,
+    "onset": 3.4
+   },
+   {
+    "w": "with",
+    "start": 3.68,
+    "end": 3.92,
+    "onset": 3.73
+   },
+   {
+    "w": "the",
+    "start": 3.92,
+    "end": 4.04,
+    "onset": 3.95
+   },
+   {
+    "w": "right",
+    "start": 4.04,
+    "end": 4.24,
+    "onset": 4.08
+   },
+   {
+    "w": "tools,",
+    "start": 4.24,
+    "end": 4.64,
+    "onset": 4.35
+   },
+   {
+    "w": "and",
+    "start": 4.9,
+    "end": 5.16,
+    "onset": 5.05
+   },
+   {
+    "w": "if",
+    "start": 5.16,
+    "end": 5.28,
+    "onset": 5.16
+   },
+   {
+    "w": "so,",
+    "start": 5.28,
+    "end": 5.58,
+    "onset": 5.23
+   },
+   {
+    "w": "I'd",
+    "start": 5.88,
+    "end": 6.1,
+    "onset": 5.88
+   },
+   {
+    "w": "build",
+    "start": 6.1,
+    "end": 6.38,
+    "onset": 6.17
+   },
+   {
+    "w": "an",
+    "start": 6.38,
+    "end": 6.56,
+    "onset": 6.46
+   },
+   {
+    "w": "assistant.",
+    "start": 6.56,
+    "end": 6.92,
+    "onset": 6.56
+   }
+  ]
+ }
+}

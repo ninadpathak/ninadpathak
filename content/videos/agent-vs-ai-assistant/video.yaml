@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/agent-vs-ai-assistant/, imported by tools/import_video.py from
+# ninadpathak-video films/agent-vs-ai-assistant (render of 2026-10-28T16:01:02+05:30).
+name: AI agent vs AI assistant in 40 seconds
+description: The difference between an AI agent and an AI assistant is who drives the loop, what each extra pass costs, when the next step depends on the last, and the five-minute test for choosing.
+upload_date: '2026-10-28T16:01:02+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: agent-vs-ai-assistant.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.067
+  L2: 7.767
+  L3: 15.667
+  L4: 22.333
+  L5: 29.933
+transcript: A team wanted an agent to route tickets, and three months in, it was a fragile loop doing one prompt's job. The question is who drives the loop, since an AI agent picks its next step, and an AI assistant leaves it to you. Each pass is a model call, and the loop can fail in ways that are hard to predict. So I'd want an agent when each step depends on what the last one found, like tracing a checkout bug. To check, I ask if a human could do it in under five minutes with the right tools, and if so, I'd build an assistant.

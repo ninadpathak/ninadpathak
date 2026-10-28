@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.067 --> 00:00:02.787
+A team wanted an agent to route tickets,
+
+2
+00:00:02.787 --> 00:00:04.287
+and three months in,
+
+3
+00:00:04.287 --> 00:00:07.767
+it was a fragile loop doing one prompt's job.
+
+4
+00:00:07.767 --> 00:00:10.067
+The question is who drives the loop,
+
+5
+00:00:10.067 --> 00:00:13.047
+since an AI agent picks its next step,
+
+6
+00:00:13.047 --> 00:00:15.667
+and an AI assistant leaves it to you.
+
+7
+00:00:15.667 --> 00:00:17.727
+Each pass is a model call,
+
+8
+00:00:17.727 --> 00:00:22.307
+and the loop can fail in ways that are hard to predict.
+
+9
+00:00:22.333 --> 00:00:27.953
+So I'd want an agent when each step depends on what the last one found,
+
+10
+00:00:27.953 --> 00:00:29.913
+like tracing a checkout bug.
+
+11
+00:00:29.933 --> 00:00:34.833
+To check, I ask if a human could do it in under five minutes with the right tools,
+
+12
+00:00:34.833 --> 00:00:35.813
+and if so,
+
+13
+00:00:35.813 --> 00:00:37.253
+I'd build an assistant.

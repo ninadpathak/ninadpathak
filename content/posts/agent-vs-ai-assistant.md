@@ -8,6 +8,7 @@ work_note: 'For AI companies explaining product autonomy, [Ninad Pathak](/contac
   writes developer content that makes the interaction model explicit: what the software
   decides and what still requires the user''s instruction.'
 title: 'AI Agent vs AI Assistant: When to Build Each'
+video: agent-vs-ai-assistant
 ---
 
 For the last year I have watched teams make the same architectural mistake twice. They reach for agent frameworks because agents are what the benchmarks talk about, what the conference talks cover, what their investors ask about.
