@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/agent-memory-2026/, imported by tools/import_video.py from
+# ninadpathak-video films/agent-memory-2026 (render of 2026-10-28T14:18:09+05:30).
+name: Agent memory in 40 seconds
+description: Why agent memory needs more than storage, how storage, retrieval and ranking decide what reaches the context window, and why memory should be tested by whether the agent does better with it.
+upload_date: '2026-10-28T14:18:09+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: agent-memory-2026.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.067
+  L2: 7.267
+  L3: 16.1
+  L4: 24.733
+  L5: 31.5
+transcript: An agent can act on stale state without realizing its memory is wrong, so agent memory needs more than storage. RAG answers questions about documents, but a support agent that learns a customer is on the enterprise plan should still bill them that way tomorrow. To find it again, memory is a stack of storage, retrieval and ranking, and only what survives ranking reaches the context window. But perfect recall isn't enough, since the right facts in the wrong order can make the agent decide worse. So I'd test whether the agent does better with memory than without, including updates and contradictions.

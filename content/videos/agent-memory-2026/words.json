@@ -1,0 +1,654 @@
+{
+ "L1": {
+  "duration": 7.14,
+  "level_db": -22.07,
+  "text": "An agent can act on stale state without realizing its memory is wrong, so agent memory needs more than storage.",
+  "transcript": "An agent can act on stale state without realizing its memory is wrong, so agent memory needs more than storage.",
+  "words": [
+   {
+    "w": "An",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.08
+   },
+   {
+    "w": "agent",
+    "start": 0.22,
+    "end": 0.58,
+    "onset": 0.27
+   },
+   {
+    "w": "can",
+    "start": 0.58,
+    "end": 0.82,
+    "onset": 0.58
+   },
+   {
+    "w": "act",
+    "start": 0.82,
+    "end": 1.18,
+    "onset": 0.92
+   },
+   {
+    "w": "on",
+    "start": 1.18,
+    "end": 1.38,
+    "onset": 1.19
+   },
+   {
+    "w": "stale",
+    "start": 1.38,
+    "end": 1.8,
+    "onset": 1.39
+   },
+   {
+    "w": "state",
+    "start": 1.8,
+    "end": 2.04,
+    "onset": 1.77
+   },
+   {
+    "w": "without",
+    "start": 2.04,
+    "end": 2.34,
+    "onset": 2.16
+   },
+   {
+    "w": "realizing",
+    "start": 2.34,
+    "end": 3.12,
+    "onset": 2.56
+   },
+   {
+    "w": "its",
+    "start": 3.12,
+    "end": 3.34,
+    "onset": 3.12
+   },
+   {
+    "w": "memory",
+    "start": 3.34,
+    "end": 3.68,
+    "onset": 3.3
+   },
+   {
+    "w": "is",
+    "start": 3.68,
+    "end": 3.9,
+    "onset": 3.68
+   },
+   {
+    "w": "wrong,",
+    "start": 3.9,
+    "end": 4.3,
+    "onset": 3.91
+   },
+   {
+    "w": "so",
+    "start": 4.5,
+    "end": 4.72,
+    "onset": 4.58
+   },
+   {
+    "w": "agent",
+    "start": 4.72,
+    "end": 5.08,
+    "onset": 4.81
+   },
+   {
+    "w": "memory",
+    "start": 5.08,
+    "end": 5.46,
+    "onset": 5.07
+   },
+   {
+    "w": "needs",
+    "start": 5.46,
+    "end": 5.82,
+    "onset": 5.54
+   },
+   {
+    "w": "more",
+    "start": 5.82,
+    "end": 6.16,
+    "onset": 5.87
+   },
+   {
+    "w": "than",
+    "start": 6.16,
+    "end": 6.36,
+    "onset": 6.28
+   },
+   {
+    "w": "storage.",
+    "start": 6.36,
+    "end": 6.78,
+    "onset": 6.39
+   }
+  ]
+ },
+ "L2": {
+  "duration": 8.78,
+  "level_db": -30.57,
+  "text": "RAG answers questions about documents, but a support agent that learns a customer is on the enterprise plan should still bill them that way tomorrow.",
+  "transcript": "RAG answers questions about documents, but a support agent that learns a customer is on the enterprise plan should still bill them that way tomorrow.",
+  "words": [
+   {
+    "w": "RAG",
+    "start": 0.0,
+    "end": 0.46,
+    "onset": 0.09
+   },
+   {
+    "w": "answers",
+    "start": 0.46,
+    "end": 0.9,
+    "onset": 0.57
+   },
+   {
+    "w": "questions",
+    "start": 0.9,
+    "end": 1.36,
+    "onset": 1.04
+   },
+   {
+    "w": "about",
+    "start": 1.36,
+    "end": 1.68,
+    "onset": 1.35
+   },
+   {
+    "w": "documents,",
+    "start": 1.68,
+    "end": 2.26,
+    "onset": 1.79
+   },
+   {
+    "w": "but",
+    "start": 2.54,
+    "end": 2.82,
+    "onset": 2.7
+   },
+   {
+    "w": "a",
+    "start": 2.82,
+    "end": 2.94,
+    "onset": 2.83
+   },
+   {
+    "w": "support",
+    "start": 2.94,
+    "end": 3.28,
+    "onset": 2.9
+   },
+   {
+    "w": "agent",
+    "start": 3.28,
+    "end": 3.6,
+    "onset": 3.33
+   },
+   {
+    "w": "that",
+    "start": 3.6,
+    "end": 3.82,
+    "onset": 3.72
+   },
+   {
+    "w": "learns",
+    "start": 3.82,
+    "end": 4.14,
+    "onset": 3.93
+   },
+   {
+    "w": "a",
+    "start": 4.14,
+    "end": 4.26,
+    "onset": 4.19
+   },
+   {
+    "w": "customer",
+    "start": 4.26,
+    "end": 4.7,
+    "onset": 4.3
+   },
+   {
+    "w": "is",
+    "start": 4.7,
+    "end": 4.92,
+    "onset": 4.7
+   },
+   {
+    "w": "on",
+    "start": 4.92,
+    "end": 5.06,
+    "onset": 4.93
+   },
+   {
+    "w": "the",
+    "start": 5.06,
+    "end": 5.16,
+    "onset": 5.11
+   },
+   {
+    "w": "enterprise",
+    "start": 5.16,
+    "end": 5.56,
+    "onset": 5.18
+   },
+   {
+    "w": "plan",
+    "start": 5.56,
+    "end": 6.08,
+    "onset": 5.86
+   },
+   {
+    "w": "should",
+    "start": 6.08,
+    "end": 6.52,
+    "onset": 6.4
+   },
+   {
+    "w": "still",
+    "start": 6.52,
+    "end": 6.96,
+    "onset": 6.79
+   },
+   {
+    "w": "bill",
+    "start": 6.96,
+    "end": 7.36,
+    "onset": 7.2
+   },
+   {
+    "w": "them",
+    "start": 7.36,
+    "end": 7.56,
+    "onset": 7.46
+   },
+   {
+    "w": "that",
+    "start": 7.56,
+    "end": 7.82,
+    "onset": 7.65
+   },
+   {
+    "w": "way",
+    "start": 7.82,
+    "end": 8.1,
+    "onset": 7.9
+   },
+   {
+    "w": "tomorrow.",
+    "start": 8.1,
+    "end": 8.4,
+    "onset": 8.21
+   }
+  ]
+ },
+ "L3": {
+  "duration": 8.6,
+  "level_db": -22.22,
+  "text": "To find it again, memory is a stack of storage, retrieval and ranking, and only what survives ranking reaches the context window.",
+  "transcript": "To find it again, memory is a stack of storage, retrieval and ranking, and only what survives ranking reaches the context window.",
+  "words": [
+   {
+    "w": "To",
+    "start": 0.0,
+    "end": 0.18,
+    "onset": 0.09
+   },
+   {
+    "w": "find",
+    "start": 0.18,
+    "end": 0.44,
+    "onset": 0.16
+   },
+   {
+    "w": "it",
+    "start": 0.44,
+    "end": 0.56,
+    "onset": 0.46
+   },
+   {
+    "w": "again,",
+    "start": 0.56,
+    "end": 0.9,
+    "onset": 0.57
+   },
+   {
+    "w": "memory",
+    "start": 1.12,
+    "end": 1.56,
+    "onset": 1.18
+   },
+   {
+    "w": "is",
+    "start": 1.56,
+    "end": 1.8,
+    "onset": 1.67
+   },
+   {
+    "w": "a",
+    "start": 1.8,
+    "end": 1.92,
+    "onset": 1.8
+   },
+   {
+    "w": "stack",
+    "start": 1.92,
+    "end": 2.22,
+    "onset": 1.88
+   },
+   {
+    "w": "of",
+    "start": 2.22,
+    "end": 2.4,
+    "onset": 2.29
+   },
+   {
+    "w": "storage,",
+    "start": 2.4,
+    "end": 2.92,
+    "onset": 2.37
+   },
+   {
+    "w": "retrieval",
+    "start": 3.14,
+    "end": 3.86,
+    "onset": 3.25
+   },
+   {
+    "w": "and",
+    "start": 3.86,
+    "end": 4.32,
+    "onset": 4.12
+   },
+   {
+    "w": "ranking,",
+    "start": 4.32,
+    "end": 4.72,
+    "onset": 4.47
+   },
+   {
+    "w": "and",
+    "start": 4.94,
+    "end": 5.2,
+    "onset": 5.09
+   },
+   {
+    "w": "only",
+    "start": 5.2,
+    "end": 5.54,
+    "onset": 5.27
+   },
+   {
+    "w": "what",
+    "start": 5.54,
+    "end": 5.76,
+    "onset": 5.7
+   },
+   {
+    "w": "survives",
+    "start": 5.76,
+    "end": 6.26,
+    "onset": 5.77
+   },
+   {
+    "w": "ranking",
+    "start": 6.26,
+    "end": 6.74,
+    "onset": 6.38
+   },
+   {
+    "w": "reaches",
+    "start": 6.74,
+    "end": 7.14,
+    "onset": 6.7
+   },
+   {
+    "w": "the",
+    "start": 7.14,
+    "end": 7.34,
+    "onset": 7.13
+   },
+   {
+    "w": "context",
+    "start": 7.34,
+    "end": 7.86,
+    "onset": 7.38
+   },
+   {
+    "w": "window.",
+    "start": 7.86,
+    "end": 8.34,
+    "onset": 8.06
+   }
+  ]
+ },
+ "L4": {
+  "duration": 6.72,
+  "level_db": -23.67,
+  "text": "But perfect recall isn't enough, since the right facts in the wrong order can make the agent decide worse.",
+  "transcript": "But perfect recall isn't enough, since the right facts in the wrong order can make the agent decide worse.",
+  "words": [
+   {
+    "w": "But",
+    "start": 0.0,
+    "end": 0.2,
+    "onset": 0.08
+   },
+   {
+    "w": "perfect",
+    "start": 0.2,
+    "end": 0.64,
+    "onset": 0.27
+   },
+   {
+    "w": "recall",
+    "start": 0.64,
+    "end": 1.16,
+    "onset": 0.59
+   },
+   {
+    "w": "isn't",
+    "start": 1.16,
+    "end": 1.56,
+    "onset": 1.29
+   },
+   {
+    "w": "enough,",
+    "start": 1.56,
+    "end": 2.02,
+    "onset": 1.74
+   },
+   {
+    "w": "since",
+    "start": 2.24,
+    "end": 2.54,
+    "onset": 2.35
+   },
+   {
+    "w": "the",
+    "start": 2.54,
+    "end": 2.76,
+    "onset": 2.68
+   },
+   {
+    "w": "right",
+    "start": 2.76,
+    "end": 2.96,
+    "onset": 2.81
+   },
+   {
+    "w": "facts",
+    "start": 2.96,
+    "end": 3.46,
+    "onset": 3.17
+   },
+   {
+    "w": "in",
+    "start": 3.46,
+    "end": 3.62,
+    "onset": 3.43
+   },
+   {
+    "w": "the",
+    "start": 3.62,
+    "end": 3.7,
+    "onset": 3.64
+   },
+   {
+    "w": "wrong",
+    "start": 3.7,
+    "end": 3.92,
+    "onset": 3.7
+   },
+   {
+    "w": "order",
+    "start": 3.92,
+    "end": 4.36,
+    "onset": 4.08
+   },
+   {
+    "w": "can",
+    "start": 4.36,
+    "end": 4.64,
+    "onset": 4.53
+   },
+   {
+    "w": "make",
+    "start": 4.64,
+    "end": 4.84,
+    "onset": 4.7
+   },
+   {
+    "w": "the",
+    "start": 4.84,
+    "end": 4.98,
+    "onset": 4.89
+   },
+   {
+    "w": "agent",
+    "start": 4.98,
+    "end": 5.36,
+    "onset": 5.06
+   },
+   {
+    "w": "decide",
+    "start": 5.36,
+    "end": 5.86,
+    "onset": 5.3
+   },
+   {
+    "w": "worse.",
+    "start": 5.86,
+    "end": 6.3,
+    "onset": 6.1
+   }
+  ]
+ },
+ "L5": {
+  "duration": 6.29,
+  "level_db": -24.42,
+  "text": "So I'd test whether the agent does better with memory than without, including updates and contradictions.",
+  "transcript": "So I'd test whether the agent does better with memory than without, including updates and contradictions.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.5,
+    "onset": 0.08
+   },
+   {
+    "w": "I'd",
+    "start": 0.5,
+    "end": 1.08,
+    "onset": 0.81
+   },
+   {
+    "w": "test",
+    "start": 1.08,
+    "end": 1.32,
+    "onset": 1.08
+   },
+   {
+    "w": "whether",
+    "start": 1.32,
+    "end": 1.58,
+    "onset": 1.35
+   },
+   {
+    "w": "the",
+    "start": 1.58,
+    "end": 1.76,
+    "onset": 1.57
+   },
+   {
+    "w": "agent",
+    "start": 1.76,
+    "end": 2.1,
+    "onset": 1.83
+   },
+   {
+    "w": "does",
+    "start": 2.1,
+    "end": 2.38,
+    "onset": 2.07
+   },
+   {
+    "w": "better",
+    "start": 2.38,
+    "end": 2.64,
+    "onset": 2.49
+   },
+   {
+    "w": "with",
+    "start": 2.64,
+    "end": 2.82,
+    "onset": 2.61
+   },
+   {
+    "w": "memory",
+    "start": 2.82,
+    "end": 3.2,
+    "onset": 2.86
+   },
+   {
+    "w": "than",
+    "start": 3.2,
+    "end": 3.42,
+    "onset": 3.23
+   },
+   {
+    "w": "without,",
+    "start": 3.42,
+    "end": 3.78,
+    "onset": 3.66
+   },
+   {
+    "w": "including",
+    "start": 4.06,
+    "end": 4.66,
+    "onset": 4.09
+   },
+   {
+    "w": "updates",
+    "start": 4.66,
+    "end": 5.14,
+    "onset": 4.82
+   },
+   {
+    "w": "and",
+    "start": 5.14,
+    "end": 5.34,
+    "onset": 5.18
+   },
+   {
+    "w": "contradictions.",
+    "start": 5.34,
+    "end": 6.04,
+    "onset": 5.38
+   }
+  ]
+ }
+}

@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.067 --> 00:00:04.567
+An agent can act on stale state without realizing its memory is wrong,
+
+2
+00:00:04.567 --> 00:00:07.247
+so agent memory needs more than storage.
+
+3
+00:00:07.267 --> 00:00:09.807
+RAG answers questions about documents,
+
+4
+00:00:09.807 --> 00:00:16.067
+but a support agent that learns a customer is on the enterprise plan should still bill them that way tomorrow.
+
+5
+00:00:16.100 --> 00:00:17.220
+To find it again,
+
+6
+00:00:17.220 --> 00:00:19.240
+memory is a stack of storage,
+
+7
+00:00:19.240 --> 00:00:21.040
+retrieval and ranking,
+
+8
+00:00:21.040 --> 00:00:24.733
+and only what survives ranking reaches the context window.
+
+9
+00:00:24.733 --> 00:00:26.973
+But perfect recall isn't enough,
+
+10
+00:00:26.973 --> 00:00:31.433
+since the right facts in the wrong order can make the agent decide worse.
+
+11
+00:00:31.500 --> 00:00:35.560
+So I'd test whether the agent does better with memory than without,
+
+12
+00:00:35.560 --> 00:00:37.940
+including updates and contradictions.

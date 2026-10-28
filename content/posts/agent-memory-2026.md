@@ -10,6 +10,7 @@ work_note: For memory products, [Ninad Pathak](/portfolio/) writes technical com
 title: State of AI Agent Memory in 2026
 updated: '2026-08-17'
 slug: agent-memory-2026
+video: agent-memory-2026
 ---
 
 An agent can act on stale or contradictory state without realizing that its memory is wrong. The architecture therefore needs provenance, update rules, and evaluation, not only storage.
