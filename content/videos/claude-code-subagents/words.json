@@ -1,0 +1,637 @@
+{
+ "L1": {
+  "duration": 8.704,
+  "text": "Okay, so when Claude Code checks every link in a docs folder, the search results land in your conversation and sit there all session.",
+  "transcript": "Okay, so when Claude Code checks every link in a docs folder, the search results land in your conversation and sit there all session.",
+  "words": [
+   {
+    "w": "Okay,",
+    "start": 0.055,
+    "end": 0.36,
+    "whisper": 0.0
+   },
+   {
+    "w": "so",
+    "start": 0.68,
+    "end": 0.82,
+    "whisper": 0.68
+   },
+   {
+    "w": "when",
+    "start": 1.21,
+    "end": 1.38,
+    "whisper": 0.82
+   },
+   {
+    "w": "Claude",
+    "start": 1.455,
+    "end": 1.8,
+    "whisper": 1.38
+   },
+   {
+    "w": "Code",
+    "start": 1.855,
+    "end": 2.06,
+    "whisper": 1.8
+   },
+   {
+    "w": "checks",
+    "start": 2.245,
+    "end": 2.5,
+    "whisper": 2.06
+   },
+   {
+    "w": "every",
+    "start": 2.625,
+    "end": 2.88,
+    "whisper": 2.5
+   },
+   {
+    "w": "link",
+    "start": 2.88,
+    "end": 3.16,
+    "whisper": 2.88
+   },
+   {
+    "w": "in",
+    "start": 3.185,
+    "end": 3.28,
+    "whisper": 3.16
+   },
+   {
+    "w": "a",
+    "start": 3.28,
+    "end": 3.44,
+    "whisper": 3.28
+   },
+   {
+    "w": "docs",
+    "start": 3.44,
+    "end": 3.66,
+    "whisper": 3.44
+   },
+   {
+    "w": "folder,",
+    "start": 3.815,
+    "end": 4.08,
+    "whisper": 3.66
+   },
+   {
+    "w": "the",
+    "start": 4.66,
+    "end": 4.74,
+    "whisper": 4.36
+   },
+   {
+    "w": "search",
+    "start": 4.74,
+    "end": 5.04,
+    "whisper": 4.74
+   },
+   {
+    "w": "results",
+    "start": 5.095,
+    "end": 5.52,
+    "whisper": 5.04
+   },
+   {
+    "w": "land",
+    "start": 5.535,
+    "end": 5.94,
+    "whisper": 5.52
+   },
+   {
+    "w": "in",
+    "start": 5.94,
+    "end": 6.1,
+    "whisper": 5.94
+   },
+   {
+    "w": "your",
+    "start": 6.1,
+    "end": 6.26,
+    "whisper": 6.1
+   },
+   {
+    "w": "conversation",
+    "start": 6.315,
+    "end": 6.98,
+    "whisper": 6.26
+   },
+   {
+    "w": "and",
+    "start": 6.98,
+    "end": 7.38,
+    "whisper": 6.98
+   },
+   {
+    "w": "sit",
+    "start": 7.38,
+    "end": 7.66,
+    "whisper": 7.38
+   },
+   {
+    "w": "there",
+    "start": 7.7,
+    "end": 7.82,
+    "whisper": 7.66
+   },
+   {
+    "w": "all",
+    "start": 7.955,
+    "end": 8.1,
+    "whisper": 7.82
+   },
+   {
+    "w": "session.",
+    "start": 8.1,
+    "end": 8.54,
+    "whisper": 8.1
+   }
+  ]
+ },
+ "L2": {
+  "duration": 8.213,
+  "text": "A Claude Code subagent is a Markdown file that runs that search in its own context window and returns only its final report.",
+  "transcript": "A Claude Code subagent is a Markdown file that runs that search in its own context window and returns only its final report.",
+  "words": [
+   {
+    "w": "A",
+    "start": 0.075,
+    "end": 0.24,
+    "whisper": 0.0
+   },
+   {
+    "w": "Claude",
+    "start": 0.34,
+    "end": 0.58,
+    "whisper": 0.24
+   },
+   {
+    "w": "Code",
+    "start": 0.62,
+    "end": 0.84,
+    "whisper": 0.58
+   },
+   {
+    "w": "subagent",
+    "start": 0.84,
+    "end": 1.52,
+    "whisper": 0.84
+   },
+   {
+    "w": "is",
+    "start": 1.67,
+    "end": 1.78,
+    "whisper": 1.52
+   },
+   {
+    "w": "a",
+    "start": 1.78,
+    "end": 1.96,
+    "whisper": 1.78
+   },
+   {
+    "w": "Markdown",
+    "start": 1.96,
+    "end": 2.32,
+    "whisper": 1.96
+   },
+   {
+    "w": "file",
+    "start": 2.437,
+    "end": 2.78,
+    "whisper": 2.32
+   },
+   {
+    "w": "that",
+    "start": 2.78,
+    "end": 3.12,
+    "whisper": 2.78
+   },
+   {
+    "w": "runs",
+    "start": 3.155,
+    "end": 3.46,
+    "whisper": 3.12
+   },
+   {
+    "w": "that",
+    "start": 3.46,
+    "end": 3.72,
+    "whisper": 3.46
+   },
+   {
+    "w": "search",
+    "start": 3.755,
+    "end": 4.12,
+    "whisper": 3.72
+   },
+   {
+    "w": "in",
+    "start": 4.22,
+    "end": 4.32,
+    "whisper": 4.12
+   },
+   {
+    "w": "its",
+    "start": 4.32,
+    "end": 4.5,
+    "whisper": 4.32
+   },
+   {
+    "w": "own",
+    "start": 4.545,
+    "end": 4.78,
+    "whisper": 4.5
+   },
+   {
+    "w": "context",
+    "start": 4.88,
+    "end": 5.28,
+    "whisper": 4.78
+   },
+   {
+    "w": "window",
+    "start": 5.42,
+    "end": 5.76,
+    "whisper": 5.28
+   },
+   {
+    "w": "and",
+    "start": 5.76,
+    "end": 6.22,
+    "whisper": 5.76
+   },
+   {
+    "w": "returns",
+    "start": 6.22,
+    "end": 6.62,
+    "whisper": 6.22
+   },
+   {
+    "w": "only",
+    "start": 6.88,
+    "end": 7.18,
+    "whisper": 6.62
+   },
+   {
+    "w": "its",
+    "start": 7.28,
+    "end": 7.42,
+    "whisper": 7.18
+   },
+   {
+    "w": "final",
+    "start": 7.515,
+    "end": 7.76,
+    "whisper": 7.42
+   },
+   {
+    "w": "report.",
+    "start": 7.76,
+    "end": 8.06,
+    "whisper": 7.76
+   }
+  ]
+ },
+ "L3": {
+  "duration": 6.933,
+  "text": "It starts without your conversation history, so the prompt in that file has to carry every rule the job needs.",
+  "transcript": "It starts without your conversation history, so the prompt in that file has to carry every rule the job needs.",
+  "words": [
+   {
+    "w": "It",
+    "start": 0.07,
+    "end": 0.16,
+    "whisper": 0.0
+   },
+   {
+    "w": "starts",
+    "start": 0.143,
+    "end": 0.66,
+    "whisper": 0.16
+   },
+   {
+    "w": "without",
+    "start": 0.69,
+    "end": 0.94,
+    "whisper": 0.66
+   },
+   {
+    "w": "your",
+    "start": 0.94,
+    "end": 1.2,
+    "whisper": 0.94
+   },
+   {
+    "w": "conversation",
+    "start": 1.255,
+    "end": 1.9,
+    "whisper": 1.2
+   },
+   {
+    "w": "history,",
+    "start": 1.9,
+    "end": 2.48,
+    "whisper": 1.9
+   },
+   {
+    "w": "so",
+    "start": 2.985,
+    "end": 3.16,
+    "whisper": 2.8
+   },
+   {
+    "w": "the",
+    "start": 3.16,
+    "end": 3.32,
+    "whisper": 3.16
+   },
+   {
+    "w": "prompt",
+    "start": 3.38,
+    "end": 3.74,
+    "whisper": 3.32
+   },
+   {
+    "w": "in",
+    "start": 3.74,
+    "end": 3.86,
+    "whisper": 3.74
+   },
+   {
+    "w": "that",
+    "start": 3.86,
+    "end": 3.98,
+    "whisper": 3.86
+   },
+   {
+    "w": "file",
+    "start": 3.997,
+    "end": 4.36,
+    "whisper": 3.98
+   },
+   {
+    "w": "has",
+    "start": 4.36,
+    "end": 4.62,
+    "whisper": 4.36
+   },
+   {
+    "w": "to",
+    "start": 4.62,
+    "end": 4.74,
+    "whisper": 4.62
+   },
+   {
+    "w": "carry",
+    "start": 4.805,
+    "end": 5.06,
+    "whisper": 4.74
+   },
+   {
+    "w": "every",
+    "start": 5.06,
+    "end": 5.52,
+    "whisper": 5.06
+   },
+   {
+    "w": "rule",
+    "start": 5.52,
+    "end": 5.9,
+    "whisper": 5.52
+   },
+   {
+    "w": "the",
+    "start": 5.9,
+    "end": 6.1,
+    "whisper": 5.9
+   },
+   {
+    "w": "job",
+    "start": 6.15,
+    "end": 6.42,
+    "whisper": 6.1
+   },
+   {
+    "w": "needs.",
+    "start": 6.505,
+    "end": 6.72,
+    "whisper": 6.42
+   }
+  ]
+ },
+ "L4": {
+  "duration": 8.235,
+  "text": "The tools line is enforced, because a read-only subagent told to fix links got no such tool available on every Edit call.",
+  "transcript": "The tools line is enforced, because a read-only subagent told to fix links got no such tool available on every Edit call.",
+  "words": [
+   {
+    "w": "The",
+    "start": 0.07,
+    "end": 0.2,
+    "whisper": 0.0
+   },
+   {
+    "w": "tools",
+    "start": 0.22,
+    "end": 0.46,
+    "whisper": 0.2
+   },
+   {
+    "w": "line",
+    "start": 0.46,
+    "end": 0.92,
+    "whisper": 0.46
+   },
+   {
+    "w": "is",
+    "start": 0.92,
+    "end": 1.1,
+    "whisper": 0.92
+   },
+   {
+    "w": "enforced,",
+    "start": 1.1,
+    "end": 1.7,
+    "whisper": 1.1
+   },
+   {
+    "w": "because",
+    "start": 2.315,
+    "end": 2.5,
+    "whisper": 2.06
+   },
+   {
+    "w": "a",
+    "start": 2.5,
+    "end": 2.76,
+    "whisper": 2.5
+   },
+   {
+    "w": "read",
+    "start": 2.76,
+    "end": 3.0,
+    "whisper": 2.76
+   },
+   {
+    "w": "-only",
+    "start": 3.0,
+    "end": 3.32,
+    "whisper": 3.0
+   },
+   {
+    "w": "subagent",
+    "start": 3.353,
+    "end": 4.06,
+    "whisper": 3.32
+   },
+   {
+    "w": "told",
+    "start": 4.085,
+    "end": 4.32,
+    "whisper": 4.06
+   },
+   {
+    "w": "to",
+    "start": 4.32,
+    "end": 4.52,
+    "whisper": 4.32
+   },
+   {
+    "w": "fix",
+    "start": 4.6,
+    "end": 4.8,
+    "whisper": 4.52
+   },
+   {
+    "w": "links",
+    "start": 4.8,
+    "end": 5.16,
+    "whisper": 4.8
+   },
+   {
+    "w": "got",
+    "start": 5.17,
+    "end": 5.46,
+    "whisper": 5.16
+   },
+   {
+    "w": "no",
+    "start": 5.525,
+    "end": 5.76,
+    "whisper": 5.46
+   },
+   {
+    "w": "such",
+    "start": 5.76,
+    "end": 6.1,
+    "whisper": 5.76
+   },
+   {
+    "w": "tool",
+    "start": 6.24,
+    "end": 6.36,
+    "whisper": 6.1
+   },
+   {
+    "w": "available",
+    "start": 6.36,
+    "end": 6.88,
+    "whisper": 6.36
+   },
+   {
+    "w": "on",
+    "start": 6.88,
+    "end": 7.24,
+    "whisper": 6.88
+   },
+   {
+    "w": "every",
+    "start": 7.24,
+    "end": 7.5,
+    "whisper": 7.24
+   },
+   {
+    "w": "Edit",
+    "start": 7.575,
+    "end": 7.78,
+    "whisper": 7.5
+   },
+   {
+    "w": "call.",
+    "start": 7.97,
+    "end": 8.16,
+    "whisper": 7.78
+   }
+  ]
+ },
+ "L5": {
+  "duration": 3.584,
+  "text": "So I'd rely on the tools line over the prompt.",
+  "transcript": "So I'd rely on the tools line over the prompt.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.075,
+    "end": 0.34,
+    "whisper": 0.0
+   },
+   {
+    "w": "I'd",
+    "start": 0.34,
+    "end": 0.86,
+    "whisper": 0.34
+   },
+   {
+    "w": "rely",
+    "start": 0.86,
+    "end": 1.12,
+    "whisper": 0.86
+   },
+   {
+    "w": "on",
+    "start": 1.12,
+    "end": 1.5,
+    "whisper": 1.12
+   },
+   {
+    "w": "the",
+    "start": 1.5,
+    "end": 1.68,
+    "whisper": 1.5
+   },
+   {
+    "w": "tools",
+    "start": 1.69,
+    "end": 2.06,
+    "whisper": 1.68
+   },
+   {
+    "w": "line",
+    "start": 2.06,
+    "end": 2.6,
+    "whisper": 2.06
+   },
+   {
+    "w": "over",
+    "start": 2.61,
+    "end": 3.04,
+    "whisper": 2.6
+   },
+   {
+    "w": "the",
+    "start": 3.04,
+    "end": 3.22,
+    "whisper": 3.04
+   },
+   {
+    "w": "prompt.",
+    "start": 3.32,
+    "end": 3.48,
+    "whisper": 3.22
+   }
+  ]
+ }
+}

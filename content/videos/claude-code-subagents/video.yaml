@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/claude-code-subagents/, imported by tools/import_video.py from
+# ninadpathak-video films/claude-code-subagents (render of 2026-10-28T09:30:36+05:30).
+name: Claude Code subagents in 40 seconds
+description: What a Claude Code subagent is, why its prompt has to carry every rule the job needs, and how a read-only tools line stopped a subagent told to fix links from editing any file.
+upload_date: '2026-10-28T09:30:36+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: claude-code-subagents.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 9.133
+  L3: 17.667
+  L4: 24.9
+  L5: 33.467
+transcript: Okay, so when Claude Code checks every link in a docs folder, the search results land in your conversation and sit there all session. A Claude Code subagent is a Markdown file that runs that search in its own context window and returns only its final report. It starts without your conversation history, so the prompt in that file has to carry every rule the job needs. The tools line is enforced, because a read-only subagent told to fix links got no such tool available on every Edit call. So I'd rely on the tools line over the prompt.

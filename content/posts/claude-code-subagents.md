@@ -10,6 +10,7 @@ takeaways:
 - The tools field is enforced, and a read-only subagent asked to fix links got "No such tool available" on every Edit call it made.
 title: 'Claude Code Subagents: What Each One Sees, With a Tested Example'
 work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for developer tools, including the agent definitions and instruction files that coding agents run from.'
+video: claude-code-subagents
 ---
 
 Ask Claude Code to check every link in a docs folder and the search results land in your conversation, where they sit for the rest of the session. A subagent runs that search in its own context window and hands back only the answer.

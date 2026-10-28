@@ -1,0 +1,33 @@
+WEBVTT
+
+1
+00:00:00.155 --> 00:00:04.580
+Okay, so when Claude Code checks every link in a docs folder,
+
+2
+00:00:04.760 --> 00:00:09.040
+the search results land in your conversation and sit there all session.
+
+3
+00:00:09.208 --> 00:00:17.593
+A Claude Code subagent is a Markdown file that runs that search in its own context window and returns only its final report.
+
+4
+00:00:17.737 --> 00:00:20.547
+It starts without your conversation history,
+
+5
+00:00:20.652 --> 00:00:24.787
+so the prompt in that file has to carry every rule the job needs.
+
+6
+00:00:24.970 --> 00:00:27.000
+The tools line is enforced,
+
+7
+00:00:27.215 --> 00:00:33.460
+because a read-only subagent told to fix links got no such tool available on every Edit call.
+
+8
+00:00:33.542 --> 00:00:37.347
+So I'd rely on the tools line over the prompt.
