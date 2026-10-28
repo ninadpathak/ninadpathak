@@ -8,6 +8,7 @@ work_note: 'Developer content creator [Ninad Pathak](/portfolio/) explains agent
   through the decisions developers need to make: which actions a system can take and
   where human approval belongs.'
 title: 'Types of AI Agents: Five Types by Autonomy and Scope'
+video: ai-agent-taxonomy
 ---
 
 Every few months someone publishes a new taxonomy of AI agents. The diagrams look clean, the categories feel comprehensive, and then you try to use one to decide whether your customer support bot should run a single-agent loop or a multi-agent hierarchy, and the taxonomy dissolves into hand-waving.

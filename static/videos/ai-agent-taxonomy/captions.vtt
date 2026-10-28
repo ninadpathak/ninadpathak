@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.420
+Each step up the five types of AI agents raises cost and blast radius by roughly an order of magnitude.
+
+2
+00:00:07.467 --> 00:00:10.827
+That's because each step decides more without a human,
+
+3
+00:00:10.827 --> 00:00:14.187
+so a reactive chatbot can only give a bad answer,
+
+4
+00:00:14.187 --> 00:00:18.067
+but an autonomous agent can act on it ten times.
+
+5
+00:00:18.067 --> 00:00:20.907
+The steps run from reactive and tool-using agents,
+
+6
+00:00:20.907 --> 00:00:23.527
+through loop agents and multi-agent systems,
+
+7
+00:00:23.527 --> 00:00:25.500
+to persistent-goal agents.
+
+8
+00:00:25.500 --> 00:00:26.580
+So to pick one,
+
+9
+00:00:26.580 --> 00:00:28.620
+I ask if it takes actions,
+
+10
+00:00:28.620 --> 00:00:30.620
+keeps state across interactions,
+
+11
+00:00:30.620 --> 00:00:32.300
+or needs several agents.
+
+12
+00:00:32.300 --> 00:00:33.800
+If it's only text,
+
+13
+00:00:33.800 --> 00:00:36.260
+the first two steps probably suffice,
+
+14
+00:00:36.260 --> 00:00:38.180
+and each yes adds cost.

@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/ai-agent-taxonomy/, imported by tools/import_video.py from
+# ninadpathak-video films/ai-agent-taxonomy (render of 2026-10-28T18:26:59+05:30).
+name: The five types of AI agents in 40 seconds
+description: Five types of AI agents, from reactive to persistent-goal, why cost and blast radius climb about an order of magnitude at each step, and the questions that pick the simplest type a task needs.
+upload_date: '2026-10-28T18:26:59+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: ai-agent-taxonomy.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 7.467
+  L3: 18.067
+  L4: 25.5
+  L5: 32.3
+transcript: Each step up the five types of AI agents raises cost and blast radius by roughly an order of magnitude. That's because each step decides more without a human, so a reactive chatbot can only give a bad answer, but an autonomous agent can act on it ten times. The steps run from reactive and tool-using agents, through loop agents and multi-agent systems, to persistent-goal agents. So to pick one, I ask if it takes actions, keeps state across interactions, or needs several agents. If it's only text, the first two steps probably suffice, and each yes adds cost.
