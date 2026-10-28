@@ -1,0 +1,698 @@
+{
+ "L1": {
+  "duration": 5.84,
+  "level_db": -26.56,
+  "text": "For years, moving the database onto the user's device meant giving up backend vector search.",
+  "transcript": "For years, moving the database onto the user's device meant giving up backend vector search.",
+  "words": [
+   {
+    "w": "For",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.09
+   },
+   {
+    "w": "years,",
+    "start": 0.22,
+    "end": 0.62,
+    "onset": 0.41
+   },
+   {
+    "w": "moving",
+    "start": 1.1,
+    "end": 1.32,
+    "onset": 1.03
+   },
+   {
+    "w": "the",
+    "start": 1.32,
+    "end": 1.46,
+    "onset": 1.36
+   },
+   {
+    "w": "database",
+    "start": 1.46,
+    "end": 1.92,
+    "onset": 1.53
+   },
+   {
+    "w": "onto",
+    "start": 1.92,
+    "end": 2.42,
+    "onset": 2.18
+   },
+   {
+    "w": "the",
+    "start": 2.42,
+    "end": 2.64,
+    "onset": 2.41
+   },
+   {
+    "w": "user's",
+    "start": 2.64,
+    "end": 3.0,
+    "onset": 2.72
+   },
+   {
+    "w": "device",
+    "start": 3.0,
+    "end": 3.34,
+    "onset": 3.03
+   },
+   {
+    "w": "meant",
+    "start": 3.34,
+    "end": 3.76,
+    "onset": 3.55
+   },
+   {
+    "w": "giving",
+    "start": 3.76,
+    "end": 4.1,
+    "onset": 3.8
+   },
+   {
+    "w": "up",
+    "start": 4.1,
+    "end": 4.36,
+    "onset": 4.07
+   },
+   {
+    "w": "backend",
+    "start": 4.36,
+    "end": 4.82,
+    "onset": 4.48
+   },
+   {
+    "w": "vector",
+    "start": 4.82,
+    "end": 5.3,
+    "onset": 5.07
+   },
+   {
+    "w": "search.",
+    "start": 5.3,
+    "end": 5.68,
+    "onset": 5.38
+   }
+  ]
+ },
+ "L2": {
+  "duration": 5.74,
+  "level_db": -25.68,
+  "text": "Now WebAssembly builds of PGlite and SQLite-vec run vector search in the browser.",
+  "transcript": "Now WebAssembly builds of PGlite and SQLite-vec run vector search in the browser.",
+  "words": [
+   {
+    "w": "Now",
+    "start": 0.0,
+    "end": 0.28,
+    "onset": 0.08
+   },
+   {
+    "w": "WebAssembly",
+    "start": 0.28,
+    "end": 0.96,
+    "onset": 0.32
+   },
+   {
+    "w": "builds",
+    "start": 0.96,
+    "end": 1.36,
+    "onset": 1.09
+   },
+   {
+    "w": "of",
+    "start": 1.36,
+    "end": 1.66,
+    "onset": 1.37
+   },
+   {
+    "w": "PGlite",
+    "start": 1.66,
+    "end": 2.62,
+    "onset": 1.89
+   },
+   {
+    "w": "and",
+    "start": 2.62,
+    "end": 2.92,
+    "onset": 2.68
+   },
+   {
+    "w": "SQLite",
+    "start": 2.92,
+    "end": 3.64,
+    "onset": 2.94
+   },
+   {
+    "w": "-vec",
+    "start": 3.64,
+    "end": 3.98,
+    "onset": 3.78
+   },
+   {
+    "w": "run",
+    "start": 3.98,
+    "end": 4.18,
+    "onset": 4.01
+   },
+   {
+    "w": "vector",
+    "start": 4.18,
+    "end": 4.6,
+    "onset": 4.35
+   },
+   {
+    "w": "search",
+    "start": 4.6,
+    "end": 4.94,
+    "onset": 4.56
+   },
+   {
+    "w": "in",
+    "start": 4.94,
+    "end": 5.12,
+    "onset": 4.96
+   },
+   {
+    "w": "the",
+    "start": 5.12,
+    "end": 5.2,
+    "onset": 5.12
+   },
+   {
+    "w": "browser.",
+    "start": 5.2,
+    "end": 5.54,
+    "onset": 5.24
+   }
+  ]
+ },
+ "L3": {
+  "duration": 5.44,
+  "level_db": -24.86,
+  "text": "PGlite runs Postgres with pgvector, whose index walks a graph instead of checking every vector.",
+  "transcript": "pglite runs Postgres with pgvector, whose index walks a graph instead of checking every vector.",
+  "words": [
+   {
+    "w": "pglite",
+    "start": 0.0,
+    "end": 0.72,
+    "onset": 0.08
+   },
+   {
+    "w": "runs",
+    "start": 0.72,
+    "end": 0.98,
+    "onset": 0.77
+   },
+   {
+    "w": "Postgres",
+    "start": 0.98,
+    "end": 1.52,
+    "onset": 1.07
+   },
+   {
+    "w": "with",
+    "start": 1.52,
+    "end": 1.76,
+    "onset": 1.64
+   },
+   {
+    "w": "pgvector,",
+    "start": 1.76,
+    "end": 2.58,
+    "onset": 1.82
+   },
+   {
+    "w": "whose",
+    "start": 2.6,
+    "end": 2.84,
+    "onset": 2.71
+   },
+   {
+    "w": "index",
+    "start": 2.84,
+    "end": 3.12,
+    "onset": 2.9
+   },
+   {
+    "w": "walks",
+    "start": 3.12,
+    "end": 3.46,
+    "onset": 3.27
+   },
+   {
+    "w": "a",
+    "start": 3.46,
+    "end": 3.62,
+    "onset": 3.45
+   },
+   {
+    "w": "graph",
+    "start": 3.62,
+    "end": 3.9,
+    "onset": 3.65
+   },
+   {
+    "w": "instead",
+    "start": 3.9,
+    "end": 4.18,
+    "onset": 3.97
+   },
+   {
+    "w": "of",
+    "start": 4.18,
+    "end": 4.36,
+    "onset": 4.16
+   },
+   {
+    "w": "checking",
+    "start": 4.36,
+    "end": 4.6,
+    "onset": 4.4
+   },
+   {
+    "w": "every",
+    "start": 4.6,
+    "end": 4.9,
+    "onset": 4.6
+   },
+   {
+    "w": "vector.",
+    "start": 4.9,
+    "end": 5.24,
+    "onset": 4.95
+   }
+  ]
+ },
+ "L4": {
+  "duration": 8.24,
+  "level_db": -23.62,
+  "text": "In its stable release, SQLite-vec scans every vector instead, and quantization speeds that up but costs some recall.",
+  "transcript": "In its stable release, SQLite-vec scans every vector instead, and quantization speeds that up but costs some recall.",
+  "words": [
+   {
+    "w": "In",
+    "start": 0.0,
+    "end": 0.18,
+    "onset": 0.08
+   },
+   {
+    "w": "its",
+    "start": 0.18,
+    "end": 0.36,
+    "onset": 0.27
+   },
+   {
+    "w": "stable",
+    "start": 0.36,
+    "end": 0.6,
+    "onset": 0.33
+   },
+   {
+    "w": "release,",
+    "start": 0.6,
+    "end": 1.2,
+    "onset": 0.62
+   },
+   {
+    "w": "SQLite",
+    "start": 1.6,
+    "end": 2.24,
+    "onset": 1.57
+   },
+   {
+    "w": "-vec",
+    "start": 2.24,
+    "end": 2.56,
+    "onset": 2.36
+   },
+   {
+    "w": "scans",
+    "start": 2.56,
+    "end": 2.96,
+    "onset": 2.55
+   },
+   {
+    "w": "every",
+    "start": 2.96,
+    "end": 3.4,
+    "onset": 3.11
+   },
+   {
+    "w": "vector",
+    "start": 3.4,
+    "end": 3.82,
+    "onset": 3.55
+   },
+   {
+    "w": "instead,",
+    "start": 3.82,
+    "end": 4.28,
+    "onset": 4.03
+   },
+   {
+    "w": "and",
+    "start": 4.64,
+    "end": 4.76,
+    "onset": 4.61
+   },
+   {
+    "w": "quantization",
+    "start": 4.76,
+    "end": 5.42,
+    "onset": 4.79
+   },
+   {
+    "w": "speeds",
+    "start": 5.42,
+    "end": 6.0,
+    "onset": 5.57
+   },
+   {
+    "w": "that",
+    "start": 6.0,
+    "end": 6.26,
+    "onset": 6.12
+   },
+   {
+    "w": "up",
+    "start": 6.26,
+    "end": 6.54,
+    "onset": 6.31
+   },
+   {
+    "w": "but",
+    "start": 6.54,
+    "end": 6.84,
+    "onset": 6.69
+   },
+   {
+    "w": "costs",
+    "start": 6.84,
+    "end": 7.32,
+    "onset": 7.02
+   },
+   {
+    "w": "some",
+    "start": 7.32,
+    "end": 7.64,
+    "onset": 7.47
+   },
+   {
+    "w": "recall.",
+    "start": 7.64,
+    "end": 7.98,
+    "onset": 7.69
+   }
+  ]
+ },
+ "L5": {
+  "duration": 8.91,
+  "level_db": -25.22,
+  "text": "PGlite is a real relational database, so I'd pick it when results must join metadata, and SQLite-vec for a bounded docs corpus.",
+  "transcript": "PGlite is a real relational database, so I'd pick it when results must join metadata, and SQLite-vec for a bounded docs corpus.",
+  "words": [
+   {
+    "w": "PGlite",
+    "start": 0.0,
+    "end": 0.68,
+    "onset": 0.08
+   },
+   {
+    "w": "is",
+    "start": 0.68,
+    "end": 0.84,
+    "onset": 0.72
+   },
+   {
+    "w": "a",
+    "start": 0.84,
+    "end": 0.98,
+    "onset": 0.87
+   },
+   {
+    "w": "real",
+    "start": 0.98,
+    "end": 1.24,
+    "onset": 1.05
+   },
+   {
+    "w": "relational",
+    "start": 1.24,
+    "end": 1.72,
+    "onset": 1.3
+   },
+   {
+    "w": "database,",
+    "start": 1.72,
+    "end": 2.18,
+    "onset": 1.88
+   },
+   {
+    "w": "so",
+    "start": 2.5,
+    "end": 2.64,
+    "onset": 2.51
+   },
+   {
+    "w": "I'd",
+    "start": 2.64,
+    "end": 3.0,
+    "onset": 2.81
+   },
+   {
+    "w": "pick",
+    "start": 3.0,
+    "end": 3.2,
+    "onset": 3.06
+   },
+   {
+    "w": "it",
+    "start": 3.2,
+    "end": 3.36,
+    "onset": 3.23
+   },
+   {
+    "w": "when",
+    "start": 3.36,
+    "end": 3.56,
+    "onset": 3.39
+   },
+   {
+    "w": "results",
+    "start": 3.56,
+    "end": 4.04,
+    "onset": 3.56
+   },
+   {
+    "w": "must",
+    "start": 4.04,
+    "end": 4.42,
+    "onset": 4.04
+   },
+   {
+    "w": "join",
+    "start": 4.42,
+    "end": 4.72,
+    "onset": 4.51
+   },
+   {
+    "w": "metadata,",
+    "start": 4.72,
+    "end": 5.24,
+    "onset": 4.72
+   },
+   {
+    "w": "and",
+    "start": 5.64,
+    "end": 5.76,
+    "onset": 5.62
+   },
+   {
+    "w": "SQLite",
+    "start": 5.76,
+    "end": 6.38,
+    "onset": 5.72
+   },
+   {
+    "w": "-vec",
+    "start": 6.38,
+    "end": 6.78,
+    "onset": 6.52
+   },
+   {
+    "w": "for",
+    "start": 6.78,
+    "end": 7.28,
+    "onset": 7.03
+   },
+   {
+    "w": "a",
+    "start": 7.28,
+    "end": 7.6,
+    "onset": 7.43
+   },
+   {
+    "w": "bounded",
+    "start": 7.6,
+    "end": 7.88,
+    "onset": 7.59
+   },
+   {
+    "w": "docs",
+    "start": 7.88,
+    "end": 8.3,
+    "onset": 7.86
+   },
+   {
+    "w": "corpus.",
+    "start": 8.3,
+    "end": 8.8,
+    "onset": 8.4
+   }
+  ]
+ },
+ "L6": {
+  "duration": 7.36,
+  "level_db": -20.91,
+  "text": "Then I'd time both on my own vectors in my target browser, because the faster one depends on vector count and recall.",
+  "transcript": "Then I'd time both on my own vectors in my target browser, because the faster one depends on vector count and recall.",
+  "words": [
+   {
+    "w": "Then",
+    "start": 0.0,
+    "end": 0.46,
+    "onset": 0.09
+   },
+   {
+    "w": "I'd",
+    "start": 0.46,
+    "end": 1.02,
+    "onset": 0.64
+   },
+   {
+    "w": "time",
+    "start": 1.02,
+    "end": 1.22,
+    "onset": 0.95
+   },
+   {
+    "w": "both",
+    "start": 1.22,
+    "end": 1.56,
+    "onset": 1.41
+   },
+   {
+    "w": "on",
+    "start": 1.56,
+    "end": 1.76,
+    "onset": 1.65
+   },
+   {
+    "w": "my",
+    "start": 1.76,
+    "end": 1.94,
+    "onset": 1.78
+   },
+   {
+    "w": "own",
+    "start": 1.94,
+    "end": 2.14,
+    "onset": 1.98
+   },
+   {
+    "w": "vectors",
+    "start": 2.14,
+    "end": 2.62,
+    "onset": 2.26
+   },
+   {
+    "w": "in",
+    "start": 2.62,
+    "end": 2.8,
+    "onset": 2.74
+   },
+   {
+    "w": "my",
+    "start": 2.8,
+    "end": 2.9,
+    "onset": 2.8
+   },
+   {
+    "w": "target",
+    "start": 2.9,
+    "end": 3.18,
+    "onset": 2.97
+   },
+   {
+    "w": "browser,",
+    "start": 3.18,
+    "end": 3.68,
+    "onset": 3.2
+   },
+   {
+    "w": "because",
+    "start": 4.02,
+    "end": 4.2,
+    "onset": 4.07
+   },
+   {
+    "w": "the",
+    "start": 4.2,
+    "end": 4.4,
+    "onset": 4.3
+   },
+   {
+    "w": "faster",
+    "start": 4.4,
+    "end": 4.76,
+    "onset": 4.36
+   },
+   {
+    "w": "one",
+    "start": 4.76,
+    "end": 4.96,
+    "onset": 4.76
+   },
+   {
+    "w": "depends",
+    "start": 4.96,
+    "end": 5.36,
+    "onset": 5.05
+   },
+   {
+    "w": "on",
+    "start": 5.36,
+    "end": 5.6,
+    "onset": 5.49
+   },
+   {
+    "w": "vector",
+    "start": 5.6,
+    "end": 5.94,
+    "onset": 5.64
+   },
+   {
+    "w": "count",
+    "start": 5.94,
+    "end": 6.3,
+    "onset": 6.05
+   },
+   {
+    "w": "and",
+    "start": 6.3,
+    "end": 6.46,
+    "onset": 6.3
+   },
+   {
+    "w": "recall.",
+    "start": 6.46,
+    "end": 7.12,
+    "onset": 6.67
+   }
+  ]
+ }
+}

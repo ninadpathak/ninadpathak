@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.900
+For years, moving the database onto the user's device meant giving up backend vector search.
+
+2
+00:00:05.900 --> 00:00:11.700
+Now WebAssembly builds of PGlite and SQLite-vec run vector search in the browser.
+
+3
+00:00:11.700 --> 00:00:14.300
+PGlite runs Postgres with pgvector,
+
+4
+00:00:14.300 --> 00:00:17.200
+whose index walks a graph instead of checking every vector.
+
+5
+00:00:17.200 --> 00:00:18.800
+In its stable release,
+
+6
+00:00:18.800 --> 00:00:21.840
+SQLite-vec scans every vector instead,
+
+7
+00:00:21.840 --> 00:00:25.500
+and quantization speeds that up but costs some recall.
+
+8
+00:00:25.500 --> 00:00:28.000
+PGlite is a real relational database,
+
+9
+00:00:28.000 --> 00:00:31.140
+so I'd pick it when results must join metadata,
+
+10
+00:00:31.140 --> 00:00:34.467
+and SQLite-vec for a bounded docs corpus.
+
+11
+00:00:34.467 --> 00:00:38.487
+Then I'd time both on my own vectors in my target browser,
+
+12
+00:00:38.487 --> 00:00:41.987
+because the faster one depends on vector count and recall.

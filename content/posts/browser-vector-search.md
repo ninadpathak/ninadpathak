@@ -9,6 +9,7 @@ work_note: '[Ninad Pathak](/portfolio/)''s developer content for browser tools c
 title: 'PGlite vs SQLite-vec: Vector Search in the Browser'
 updated: '2026-08-17'
 slug: browser-vector-search
+video: browser-vector-search
 ---
 
 [PGlite](https://pglite.dev/docs/) runs Postgres in the browser through WebAssembly, and its separately packaged [pgvector extension](https://pglite.dev/extensions/) adds vector columns and indexes. [SQLite-vec](https://github.com/asg017/sqlite-vec) is a pre-v1 SQLite extension that stores full-precision and quantized vectors in `vec0` tables, and it runs in the browser through WebAssembly too.
