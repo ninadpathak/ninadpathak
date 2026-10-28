@@ -9,6 +9,7 @@ work_note: A failed tool call belongs in an agent framework's tutorial, alongsid
   the successful run. [Ninad Pathak](/contact/) writes technical documentation that
   explains retry limits and the recovery steps available to the developer.
 title: Why AI Agents Fail in Production
+video: ai-agent-failures
 ---
 
 Across two years of debugging production AI agents, I keep landing on the same handful of failures. Different companies, different frameworks, same root causes.

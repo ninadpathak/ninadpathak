@@ -1,0 +1,624 @@
+{
+ "L1": {
+  "duration": 8.31,
+  "level_db": -24.89,
+  "text": "AI agents fail in production not because the technology is immature, but because the patterns for running them are still being invented.",
+  "transcript": "AI agents fail in production not because the technology is immature, but because the patterns for running them are still being invented.",
+  "words": [
+   {
+    "w": "AI",
+    "start": 0.0,
+    "end": 0.36,
+    "onset": 0.08
+   },
+   {
+    "w": "agents",
+    "start": 0.36,
+    "end": 1.04,
+    "onset": 0.35
+   },
+   {
+    "w": "fail",
+    "start": 1.04,
+    "end": 1.48,
+    "onset": 1.06
+   },
+   {
+    "w": "in",
+    "start": 1.48,
+    "end": 1.68,
+    "onset": 1.55
+   },
+   {
+    "w": "production",
+    "start": 1.68,
+    "end": 2.2,
+    "onset": 1.71
+   },
+   {
+    "w": "not",
+    "start": 2.2,
+    "end": 2.62,
+    "onset": 2.21
+   },
+   {
+    "w": "because",
+    "start": 2.62,
+    "end": 2.96,
+    "onset": 2.75
+   },
+   {
+    "w": "the",
+    "start": 2.96,
+    "end": 3.16,
+    "onset": 3.08
+   },
+   {
+    "w": "technology",
+    "start": 3.16,
+    "end": 3.72,
+    "onset": 3.2
+   },
+   {
+    "w": "is",
+    "start": 3.72,
+    "end": 4.02,
+    "onset": 3.82
+   },
+   {
+    "w": "immature,",
+    "start": 4.02,
+    "end": 4.42,
+    "onset": 4.05
+   },
+   {
+    "w": "but",
+    "start": 4.78,
+    "end": 4.98,
+    "onset": 4.9
+   },
+   {
+    "w": "because",
+    "start": 4.98,
+    "end": 5.26,
+    "onset": 5.01
+   },
+   {
+    "w": "the",
+    "start": 5.26,
+    "end": 5.44,
+    "onset": 5.37
+   },
+   {
+    "w": "patterns",
+    "start": 5.44,
+    "end": 5.88,
+    "onset": 5.48
+   },
+   {
+    "w": "for",
+    "start": 5.88,
+    "end": 6.12,
+    "onset": 6.06
+   },
+   {
+    "w": "running",
+    "start": 6.12,
+    "end": 6.42,
+    "onset": 6.23
+   },
+   {
+    "w": "them",
+    "start": 6.42,
+    "end": 6.64,
+    "onset": 6.42
+   },
+   {
+    "w": "are",
+    "start": 6.64,
+    "end": 6.84,
+    "onset": 6.73
+   },
+   {
+    "w": "still",
+    "start": 6.84,
+    "end": 7.18,
+    "onset": 6.87
+   },
+   {
+    "w": "being",
+    "start": 7.18,
+    "end": 7.54,
+    "onset": 7.39
+   },
+   {
+    "w": "invented.",
+    "start": 7.54,
+    "end": 8.0,
+    "onset": 7.55
+   }
+  ]
+ },
+ "L2": {
+  "duration": 4.05,
+  "level_db": -24.32,
+  "text": "Underneath, running an agent is a distributed systems problem.",
+  "transcript": "Underneath, running an agent is a distributed systems problem.",
+  "words": [
+   {
+    "w": "Underneath,",
+    "start": 0.0,
+    "end": 0.7,
+    "onset": 0.08
+   },
+   {
+    "w": "running",
+    "start": 0.92,
+    "end": 1.4,
+    "onset": 1.16
+   },
+   {
+    "w": "an",
+    "start": 1.4,
+    "end": 1.58,
+    "onset": 1.42
+   },
+   {
+    "w": "agent",
+    "start": 1.58,
+    "end": 1.92,
+    "onset": 1.61
+   },
+   {
+    "w": "is",
+    "start": 1.92,
+    "end": 2.16,
+    "onset": 1.88
+   },
+   {
+    "w": "a",
+    "start": 2.16,
+    "end": 2.36,
+    "onset": 2.22
+   },
+   {
+    "w": "distributed",
+    "start": 2.36,
+    "end": 2.9,
+    "onset": 2.51
+   },
+   {
+    "w": "systems",
+    "start": 2.9,
+    "end": 3.36,
+    "onset": 2.87
+   },
+   {
+    "w": "problem.",
+    "start": 3.36,
+    "end": 3.84,
+    "onset": 3.31
+   }
+  ]
+ },
+ "L3": {
+  "duration": 8.16,
+  "level_db": -27.64,
+  "text": "When a refund call times out, the agent retries without checking if the first one landed, so the refund goes out twice.",
+  "transcript": "When a refund call times out, the agent retries without checking if the first one landed, so the refund goes out twice.",
+  "words": [
+   {
+    "w": "When",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.08
+   },
+   {
+    "w": "a",
+    "start": 0.22,
+    "end": 0.36,
+    "onset": 0.22
+   },
+   {
+    "w": "refund",
+    "start": 0.36,
+    "end": 0.74,
+    "onset": 0.37
+   },
+   {
+    "w": "call",
+    "start": 0.74,
+    "end": 1.14,
+    "onset": 0.87
+   },
+   {
+    "w": "times",
+    "start": 1.14,
+    "end": 1.54,
+    "onset": 1.23
+   },
+   {
+    "w": "out,",
+    "start": 1.54,
+    "end": 1.94,
+    "onset": 1.65
+   },
+   {
+    "w": "the",
+    "start": 2.46,
+    "end": 2.54,
+    "onset": 2.44
+   },
+   {
+    "w": "agent",
+    "start": 2.54,
+    "end": 2.98,
+    "onset": 2.63
+   },
+   {
+    "w": "retries",
+    "start": 2.98,
+    "end": 3.7,
+    "onset": 2.89
+   },
+   {
+    "w": "without",
+    "start": 3.7,
+    "end": 4.0,
+    "onset": 3.79
+   },
+   {
+    "w": "checking",
+    "start": 4.0,
+    "end": 4.62,
+    "onset": 4.27
+   },
+   {
+    "w": "if",
+    "start": 4.62,
+    "end": 4.84,
+    "onset": 4.6
+   },
+   {
+    "w": "the",
+    "start": 4.84,
+    "end": 4.96,
+    "onset": 4.88
+   },
+   {
+    "w": "first",
+    "start": 4.96,
+    "end": 5.24,
+    "onset": 5.08
+   },
+   {
+    "w": "one",
+    "start": 5.24,
+    "end": 5.46,
+    "onset": 5.28
+   },
+   {
+    "w": "landed,",
+    "start": 5.46,
+    "end": 5.88,
+    "onset": 5.56
+   },
+   {
+    "w": "so",
+    "start": 6.12,
+    "end": 6.36,
+    "onset": 6.23
+   },
+   {
+    "w": "the",
+    "start": 6.36,
+    "end": 6.5,
+    "onset": 6.33
+   },
+   {
+    "w": "refund",
+    "start": 6.5,
+    "end": 6.9,
+    "onset": 6.58
+   },
+   {
+    "w": "goes",
+    "start": 6.9,
+    "end": 7.2,
+    "onset": 7.03
+   },
+   {
+    "w": "out",
+    "start": 7.2,
+    "end": 7.42,
+    "onset": 7.27
+   },
+   {
+    "w": "twice.",
+    "start": 7.42,
+    "end": 7.7,
+    "onset": 7.49
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.68,
+  "level_db": -23.54,
+  "text": "Splitting work across agents makes it worse, because five agents at ninety percent reliability multiply out to fifty-nine percent.",
+  "transcript": "Splitting work across agents makes it worse, because five agents at ninety percent reliability multiply out to fifty-nine percent.",
+  "words": [
+   {
+    "w": "Splitting",
+    "start": 0.0,
+    "end": 0.56,
+    "onset": 0.09
+   },
+   {
+    "w": "work",
+    "start": 0.56,
+    "end": 0.78,
+    "onset": 0.56
+   },
+   {
+    "w": "across",
+    "start": 0.78,
+    "end": 1.06,
+    "onset": 0.89
+   },
+   {
+    "w": "agents",
+    "start": 1.06,
+    "end": 1.52,
+    "onset": 1.18
+   },
+   {
+    "w": "makes",
+    "start": 1.52,
+    "end": 1.82,
+    "onset": 1.62
+   },
+   {
+    "w": "it",
+    "start": 1.82,
+    "end": 1.98,
+    "onset": 1.82
+   },
+   {
+    "w": "worse,",
+    "start": 1.98,
+    "end": 2.4,
+    "onset": 2.0
+   },
+   {
+    "w": "because",
+    "start": 2.6,
+    "end": 2.94,
+    "onset": 2.74
+   },
+   {
+    "w": "five",
+    "start": 2.94,
+    "end": 3.24,
+    "onset": 2.97
+   },
+   {
+    "w": "agents",
+    "start": 3.24,
+    "end": 3.8,
+    "onset": 3.42
+   },
+   {
+    "w": "at",
+    "start": 3.8,
+    "end": 4.0,
+    "onset": 3.89
+   },
+   {
+    "w": "ninety",
+    "start": 4.0,
+    "end": 4.24,
+    "onset": 4.0
+   },
+   {
+    "w": "percent",
+    "start": 4.24,
+    "end": 4.56,
+    "onset": 4.35
+   },
+   {
+    "w": "reliability",
+    "start": 4.56,
+    "end": 5.22,
+    "onset": 4.51
+   },
+   {
+    "w": "multiply",
+    "start": 5.22,
+    "end": 6.04,
+    "onset": 5.63
+   },
+   {
+    "w": "out",
+    "start": 6.04,
+    "end": 6.36,
+    "onset": 6.03
+   },
+   {
+    "w": "to",
+    "start": 6.36,
+    "end": 6.56,
+    "onset": 6.42
+   },
+   {
+    "w": "fifty",
+    "start": 6.56,
+    "end": 6.92,
+    "onset": 6.61
+   },
+   {
+    "w": "-nine",
+    "start": 6.92,
+    "end": 7.16,
+    "onset": 6.89
+   },
+   {
+    "w": "percent.",
+    "start": 7.16,
+    "end": 7.54,
+    "onset": 7.29
+   }
+  ]
+ },
+ "L5": {
+  "duration": 8.95,
+  "level_db": -24.59,
+  "text": "So before adding agents, I'd put in a circuit breaker that halts the loop past an error threshold, and observability on each tool result.",
+  "transcript": "So before adding agents, I'd put in a circuit breaker that halts the loop past an error threshold, and observability on each tool result.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.4,
+    "onset": 0.09
+   },
+   {
+    "w": "before",
+    "start": 0.4,
+    "end": 1.08,
+    "onset": 0.82
+   },
+   {
+    "w": "adding",
+    "start": 1.08,
+    "end": 1.48,
+    "onset": 1.03
+   },
+   {
+    "w": "agents,",
+    "start": 1.48,
+    "end": 2.02,
+    "onset": 1.59
+   },
+   {
+    "w": "I'd",
+    "start": 2.32,
+    "end": 2.58,
+    "onset": 2.44
+   },
+   {
+    "w": "put",
+    "start": 2.58,
+    "end": 2.76,
+    "onset": 2.64
+   },
+   {
+    "w": "in",
+    "start": 2.76,
+    "end": 2.9,
+    "onset": 2.79
+   },
+   {
+    "w": "a",
+    "start": 2.9,
+    "end": 3.02,
+    "onset": 2.9
+   },
+   {
+    "w": "circuit",
+    "start": 3.02,
+    "end": 3.42,
+    "onset": 3.02
+   },
+   {
+    "w": "breaker",
+    "start": 3.42,
+    "end": 3.74,
+    "onset": 3.39
+   },
+   {
+    "w": "that",
+    "start": 3.74,
+    "end": 4.04,
+    "onset": 3.74
+   },
+   {
+    "w": "halts",
+    "start": 4.04,
+    "end": 4.4,
+    "onset": 4.05
+   },
+   {
+    "w": "the",
+    "start": 4.4,
+    "end": 4.56,
+    "onset": 4.48
+   },
+   {
+    "w": "loop",
+    "start": 4.56,
+    "end": 4.8,
+    "onset": 4.67
+   },
+   {
+    "w": "past",
+    "start": 4.8,
+    "end": 5.12,
+    "onset": 4.86
+   },
+   {
+    "w": "an",
+    "start": 5.12,
+    "end": 5.34,
+    "onset": 5.21
+   },
+   {
+    "w": "error",
+    "start": 5.34,
+    "end": 5.56,
+    "onset": 5.36
+   },
+   {
+    "w": "threshold,",
+    "start": 5.56,
+    "end": 6.14,
+    "onset": 5.68
+   },
+   {
+    "w": "and",
+    "start": 6.32,
+    "end": 6.54,
+    "onset": 6.44
+   },
+   {
+    "w": "observability",
+    "start": 6.54,
+    "end": 7.42,
+    "onset": 6.58
+   },
+   {
+    "w": "on",
+    "start": 7.42,
+    "end": 7.72,
+    "onset": 7.59
+   },
+   {
+    "w": "each",
+    "start": 7.72,
+    "end": 8.02,
+    "onset": 7.83
+   },
+   {
+    "w": "tool",
+    "start": 8.02,
+    "end": 8.34,
+    "onset": 8.14
+   },
+   {
+    "w": "result.",
+    "start": 8.34,
+    "end": 8.72,
+    "onset": 8.42
+   }
+  ]
+ }
+}

@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/ai-agent-failures/, imported by tools/import_video.py from
+# ninadpathak-video films/ai-agent-failures (render of 2026-10-28T17:27:06+05:30).
+name: Why AI agents fail in production in 40 seconds
+description: 'Why AI agents fail in production: a distributed systems problem underneath, retries that double-execute, reliability that multiplies down across agents, and the circuit breaker and observability to add first.'
+upload_date: '2026-10-28T17:27:06+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: ai-agent-failures.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.067
+  L2: 8.5
+  L3: 12.7
+  L4: 21.0
+  L5: 28.8
+transcript: AI agents fail in production not because the technology is immature, but because the patterns for running them are still being invented. Underneath, running an agent is a distributed systems problem. When a refund call times out, the agent retries without checking if the first one landed, so the refund goes out twice. Splitting work across agents makes it worse, because five agents at ninety percent reliability multiply out to fifty-nine percent. So before adding agents, I'd put in a circuit breaker that halts the loop past an error threshold, and observability on each tool result.

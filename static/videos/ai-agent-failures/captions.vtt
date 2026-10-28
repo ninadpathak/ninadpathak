@@ -1,0 +1,45 @@
+WEBVTT
+
+1
+00:00:00.067 --> 00:00:04.847
+AI agents fail in production not because the technology is immature,
+
+2
+00:00:04.847 --> 00:00:08.467
+but because the patterns for running them are still being invented.
+
+3
+00:00:08.500 --> 00:00:12.700
+Underneath, running an agent is a distributed systems problem.
+
+4
+00:00:12.700 --> 00:00:15.040
+When a refund call times out,
+
+5
+00:00:15.160 --> 00:00:18.820
+the agent retries without checking if the first one landed,
+
+6
+00:00:18.820 --> 00:00:20.800
+so the refund goes out twice.
+
+7
+00:00:21.000 --> 00:00:23.600
+Splitting work across agents makes it worse,
+
+8
+00:00:23.600 --> 00:00:28.800
+because five agents at ninety percent reliability multiply out to fifty-nine percent.
+
+9
+00:00:28.800 --> 00:00:31.120
+So before adding agents,
+
+10
+00:00:31.120 --> 00:00:35.120
+I'd put in a circuit breaker that halts the loop past an error threshold,
+
+11
+00:00:35.120 --> 00:00:37.920
+and observability on each tool result.
