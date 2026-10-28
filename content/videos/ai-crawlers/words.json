@@ -1,0 +1,649 @@
+{
+ "L1": {
+  "duration": 9.899,
+  "text": "Okay, so AI crawlers in robots.txt aren't one bot, because OpenAI and Anthropic each run a separate agent for each job.",
+  "transcript": "Okay, so AI crawlers in robots.txt aren't one bot, because OpenAI and Anthropic each run a separate agent for each job.",
+  "words": [
+   {
+    "w": "Okay,",
+    "start": 0.065,
+    "end": 0.26,
+    "whisper": 0.0
+   },
+   {
+    "w": "so",
+    "start": 0.54,
+    "end": 0.66,
+    "whisper": 0.54
+   },
+   {
+    "w": "AI",
+    "start": 1.055,
+    "end": 1.28,
+    "whisper": 0.66
+   },
+   {
+    "w": "crawlers",
+    "start": 1.415,
+    "end": 2.04,
+    "whisper": 1.28
+   },
+   {
+    "w": "in",
+    "start": 2.19,
+    "end": 2.34,
+    "whisper": 2.04
+   },
+   {
+    "w": "robots",
+    "start": 2.34,
+    "end": 2.82,
+    "whisper": 2.34
+   },
+   {
+    "w": ".txt",
+    "start": 2.905,
+    "end": 3.74,
+    "whisper": 2.82
+   },
+   {
+    "w": "aren't",
+    "start": 4.295,
+    "end": 4.64,
+    "whisper": 3.74
+   },
+   {
+    "w": "one",
+    "start": 4.66,
+    "end": 4.92,
+    "whisper": 4.64
+   },
+   {
+    "w": "bot,",
+    "start": 5.06,
+    "end": 5.24,
+    "whisper": 4.92
+   },
+   {
+    "w": "because",
+    "start": 5.55,
+    "end": 5.82,
+    "whisper": 5.44
+   },
+   {
+    "w": "OpenAI",
+    "start": 5.91,
+    "end": 6.44,
+    "whisper": 5.82
+   },
+   {
+    "w": "and",
+    "start": 6.44,
+    "end": 6.84,
+    "whisper": 6.44
+   },
+   {
+    "w": "Anthropic",
+    "start": 7.07,
+    "end": 7.38,
+    "whisper": 6.84
+   },
+   {
+    "w": "each",
+    "start": 7.75,
+    "end": 8.0,
+    "whisper": 7.38
+   },
+   {
+    "w": "run",
+    "start": 8.065,
+    "end": 8.26,
+    "whisper": 8.0
+   },
+   {
+    "w": "a",
+    "start": 8.26,
+    "end": 8.42,
+    "whisper": 8.26
+   },
+   {
+    "w": "separate",
+    "start": 8.42,
+    "end": 8.74,
+    "whisper": 8.42
+   },
+   {
+    "w": "agent",
+    "start": 8.74,
+    "end": 9.1,
+    "whisper": 8.74
+   },
+   {
+    "w": "for",
+    "start": 9.1,
+    "end": 9.3,
+    "whisper": 9.1
+   },
+   {
+    "w": "each",
+    "start": 9.37,
+    "end": 9.56,
+    "whisper": 9.3
+   },
+   {
+    "w": "job.",
+    "start": 9.655,
+    "end": 9.8,
+    "whisper": 9.56
+   }
+  ]
+ },
+ "L2": {
+  "duration": 6.933,
+  "text": "GPTBot and ClaudeBot collect training data, while OAI-SearchBot and Claude-SearchBot index my docs for search.",
+  "transcript": "GPTBot and ClaudeBot collect training data, while OAI-SearchBot and Claude-SearchBot index my docs for search.",
+  "words": [
+   {
+    "w": "GPTBot",
+    "start": 0.055,
+    "end": 0.9,
+    "whisper": 0.0
+   },
+   {
+    "w": "and",
+    "start": 0.91,
+    "end": 1.06,
+    "whisper": 0.9
+   },
+   {
+    "w": "ClaudeBot",
+    "start": 1.125,
+    "end": 1.6,
+    "whisper": 1.06
+   },
+   {
+    "w": "collect",
+    "start": 1.7,
+    "end": 2.0,
+    "whisper": 1.6
+   },
+   {
+    "w": "training",
+    "start": 2.075,
+    "end": 2.32,
+    "whisper": 2.0
+   },
+   {
+    "w": "data,",
+    "start": 2.46,
+    "end": 2.7,
+    "whisper": 2.32
+   },
+   {
+    "w": "while",
+    "start": 3.04,
+    "end": 3.24,
+    "whisper": 2.92
+   },
+   {
+    "w": "OAI",
+    "start": 3.3,
+    "end": 3.86,
+    "whisper": 3.24
+   },
+   {
+    "w": "-SearchBot",
+    "start": 3.9,
+    "end": 4.34,
+    "whisper": 3.86
+   },
+   {
+    "w": "and",
+    "start": 4.34,
+    "end": 4.48,
+    "whisper": 4.34
+   },
+   {
+    "w": "Claude",
+    "start": 4.605,
+    "end": 4.88,
+    "whisper": 4.48
+   },
+   {
+    "w": "-SearchBot",
+    "start": 4.88,
+    "end": 5.42,
+    "whisper": 4.88
+   },
+   {
+    "w": "index",
+    "start": 5.49,
+    "end": 5.78,
+    "whisper": 5.42
+   },
+   {
+    "w": "my",
+    "start": 5.84,
+    "end": 6.06,
+    "whisper": 5.78
+   },
+   {
+    "w": "docs",
+    "start": 6.105,
+    "end": 6.34,
+    "whisper": 6.06
+   },
+   {
+    "w": "for",
+    "start": 6.34,
+    "end": 6.58,
+    "whisper": 6.34
+   },
+   {
+    "w": "search.",
+    "start": 6.58,
+    "end": 6.78,
+    "whisper": 6.58
+   }
+  ]
+ },
+ "L3": {
+  "duration": 7.616,
+  "text": "So I can block GPTBot and still show up in ChatGPT search, because OpenAI says each setting is independent.",
+  "transcript": "So I can block GPTBot and still show up in ChatGPT search, because OpenAI says each setting is independent.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.045,
+    "end": 0.16,
+    "whisper": 0.0
+   },
+   {
+    "w": "I",
+    "start": 0.16,
+    "end": 0.3,
+    "whisper": 0.16
+   },
+   {
+    "w": "can",
+    "start": 0.365,
+    "end": 0.46,
+    "whisper": 0.3
+   },
+   {
+    "w": "block",
+    "start": 0.535,
+    "end": 0.76,
+    "whisper": 0.46
+   },
+   {
+    "w": "GPTBot",
+    "start": 0.84,
+    "end": 1.56,
+    "whisper": 0.76
+   },
+   {
+    "w": "and",
+    "start": 1.59,
+    "end": 1.7,
+    "whisper": 1.56
+   },
+   {
+    "w": "still",
+    "start": 1.7,
+    "end": 1.98,
+    "whisper": 1.7
+   },
+   {
+    "w": "show",
+    "start": 1.98,
+    "end": 2.26,
+    "whisper": 1.98
+   },
+   {
+    "w": "up",
+    "start": 2.26,
+    "end": 2.42,
+    "whisper": 2.26
+   },
+   {
+    "w": "in",
+    "start": 2.42,
+    "end": 2.52,
+    "whisper": 2.42
+   },
+   {
+    "w": "ChatGPT",
+    "start": 2.52,
+    "end": 3.22,
+    "whisper": 2.52
+   },
+   {
+    "w": "search,",
+    "start": 3.285,
+    "end": 3.6,
+    "whisper": 3.22
+   },
+   {
+    "w": "because",
+    "start": 4.08,
+    "end": 4.26,
+    "whisper": 4.08
+   },
+   {
+    "w": "OpenAI",
+    "start": 4.365,
+    "end": 4.9,
+    "whisper": 4.26
+   },
+   {
+    "w": "says",
+    "start": 4.9,
+    "end": 5.5,
+    "whisper": 4.9
+   },
+   {
+    "w": "each",
+    "start": 5.705,
+    "end": 5.98,
+    "whisper": 5.5
+   },
+   {
+    "w": "setting",
+    "start": 5.98,
+    "end": 6.44,
+    "whisper": 5.98
+   },
+   {
+    "w": "is",
+    "start": 6.855,
+    "end": 7.0,
+    "whisper": 6.44
+   },
+   {
+    "w": "independent.",
+    "start": 7.0,
+    "end": 7.28,
+    "whisper": 7.0
+   }
+  ]
+ },
+ "L4": {
+  "duration": 9.152,
+  "text": "But a crawler obeys only the group that names it, so a GPTBot group for drafts drops the wildcard rule that kept it out of admin.",
+  "transcript": "But a crawler obeys only the group that names it, so a GPTBot group for drafts drops the wildcard rule that kept it out of admin.",
+  "words": [
+   {
+    "w": "But",
+    "start": 0.06,
+    "end": 0.28,
+    "whisper": 0.0
+   },
+   {
+    "w": "a",
+    "start": 0.44,
+    "end": 0.56,
+    "whisper": 0.28
+   },
+   {
+    "w": "crawler",
+    "start": 0.58,
+    "end": 0.96,
+    "whisper": 0.56
+   },
+   {
+    "w": "obeys",
+    "start": 0.96,
+    "end": 1.52,
+    "whisper": 0.96
+   },
+   {
+    "w": "only",
+    "start": 1.61,
+    "end": 1.82,
+    "whisper": 1.52
+   },
+   {
+    "w": "the",
+    "start": 1.82,
+    "end": 1.98,
+    "whisper": 1.82
+   },
+   {
+    "w": "group",
+    "start": 1.98,
+    "end": 2.32,
+    "whisper": 1.98
+   },
+   {
+    "w": "that",
+    "start": 2.515,
+    "end": 2.64,
+    "whisper": 2.32
+   },
+   {
+    "w": "names",
+    "start": 2.67,
+    "end": 3.0,
+    "whisper": 2.64
+   },
+   {
+    "w": "it,",
+    "start": 3.0,
+    "end": 3.3,
+    "whisper": 3.0
+   },
+   {
+    "w": "so",
+    "start": 3.58,
+    "end": 3.76,
+    "whisper": 3.58
+   },
+   {
+    "w": "a",
+    "start": 3.76,
+    "end": 4.14,
+    "whisper": 3.76
+   },
+   {
+    "w": "GPTBot",
+    "start": 4.17,
+    "end": 5.04,
+    "whisper": 4.14
+   },
+   {
+    "w": "group",
+    "start": 5.06,
+    "end": 5.24,
+    "whisper": 5.04
+   },
+   {
+    "w": "for",
+    "start": 5.24,
+    "end": 5.5,
+    "whisper": 5.24
+   },
+   {
+    "w": "drafts",
+    "start": 5.585,
+    "end": 6.1,
+    "whisper": 5.5
+   },
+   {
+    "w": "drops",
+    "start": 6.15,
+    "end": 6.36,
+    "whisper": 6.1
+   },
+   {
+    "w": "the",
+    "start": 6.485,
+    "end": 6.56,
+    "whisper": 6.36
+   },
+   {
+    "w": "wildcard",
+    "start": 6.56,
+    "end": 7.06,
+    "whisper": 6.56
+   },
+   {
+    "w": "rule",
+    "start": 7.175,
+    "end": 7.36,
+    "whisper": 7.06
+   },
+   {
+    "w": "that",
+    "start": 7.36,
+    "end": 7.58,
+    "whisper": 7.36
+   },
+   {
+    "w": "kept",
+    "start": 7.74,
+    "end": 7.88,
+    "whisper": 7.58
+   },
+   {
+    "w": "it",
+    "start": 7.91,
+    "end": 8.04,
+    "whisper": 7.88
+   },
+   {
+    "w": "out",
+    "start": 8.14,
+    "end": 8.34,
+    "whisper": 8.04
+   },
+   {
+    "w": "of",
+    "start": 8.395,
+    "end": 8.56,
+    "whisper": 8.34
+   },
+   {
+    "w": "admin.",
+    "start": 8.625,
+    "end": 8.92,
+    "whisper": 8.56
+   }
+  ]
+ },
+ "L5": {
+  "duration": 5.824,
+  "text": "So for docs, I'd leave every search agent open and decide on training separately, in its own group.",
+  "transcript": "So for docs, I'd leave every search agent open and decide on training separately, in its own group.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.055,
+    "end": 0.2,
+    "whisper": 0.0
+   },
+   {
+    "w": "for",
+    "start": 0.2,
+    "end": 0.42,
+    "whisper": 0.2
+   },
+   {
+    "w": "docs,",
+    "start": 0.495,
+    "end": 0.8,
+    "whisper": 0.42
+   },
+   {
+    "w": "I'd",
+    "start": 1.18,
+    "end": 1.4,
+    "whisper": 1.18
+   },
+   {
+    "w": "leave",
+    "start": 1.4,
+    "end": 1.64,
+    "whisper": 1.4
+   },
+   {
+    "w": "every",
+    "start": 1.84,
+    "end": 2.14,
+    "whisper": 1.64
+   },
+   {
+    "w": "search",
+    "start": 2.14,
+    "end": 2.46,
+    "whisper": 2.14
+   },
+   {
+    "w": "agent",
+    "start": 2.5,
+    "end": 2.82,
+    "whisper": 2.46
+   },
+   {
+    "w": "open",
+    "start": 2.89,
+    "end": 3.2,
+    "whisper": 2.82
+   },
+   {
+    "w": "and",
+    "start": 3.2,
+    "end": 3.48,
+    "whisper": 3.2
+   },
+   {
+    "w": "decide",
+    "start": 3.515,
+    "end": 3.82,
+    "whisper": 3.48
+   },
+   {
+    "w": "on",
+    "start": 3.82,
+    "end": 4.0,
+    "whisper": 3.82
+   },
+   {
+    "w": "training",
+    "start": 4.04,
+    "end": 4.32,
+    "whisper": 4.0
+   },
+   {
+    "w": "separately,",
+    "start": 4.39,
+    "end": 4.84,
+    "whisper": 4.32
+   },
+   {
+    "w": "in",
+    "start": 5.11,
+    "end": 5.2,
+    "whisper": 5.08
+   },
+   {
+    "w": "its",
+    "start": 5.2,
+    "end": 5.38,
+    "whisper": 5.2
+   },
+   {
+    "w": "own",
+    "start": 5.38,
+    "end": 5.54,
+    "whisper": 5.38
+   },
+   {
+    "w": "group.",
+    "start": 5.54,
+    "end": 5.72,
+    "whisper": 5.54
+   }
+  ]
+ }
+}

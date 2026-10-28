@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/ai-crawlers/, imported by tools/import_video.py from
+# ninadpathak-video films/ai-crawlers (render of 2026-10-28T06:37:55+05:30).
+name: AI crawlers in robots.txt in 43 seconds
+description: Which AI crawlers collect training data and which index docs for search, why blocking GPTBot leaves ChatGPT search alone, and how a named robots.txt group drops the wildcard rules.
+upload_date: '2026-10-28T06:37:55+05:30'
+duration_seconds: 43
+width: 1920
+height: 1080
+file: ai-crawlers.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.1
+  L2: 10.167
+  L3: 17.267
+  L4: 25.167
+  L5: 34.5
+transcript: Okay, so AI crawlers in robots.txt aren't one bot, because OpenAI and Anthropic each run a separate agent for each job. GPTBot and ClaudeBot collect training data, while OAI-SearchBot and Claude-SearchBot index my docs for search. So I can block GPTBot and still show up in ChatGPT search, because OpenAI says each setting is independent. But a crawler obeys only the group that names it, so a GPTBot group for drafts drops the wildcard rule that kept it out of admin. So for docs, I'd leave every search agent open and decide on training separately, in its own group.

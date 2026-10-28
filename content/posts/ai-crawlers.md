@@ -10,6 +10,7 @@ takeaways:
 - A crawler follows only the user-agent group that names it, so a named group drops the wildcard rules for that crawler.
 title: 'GPTBot, ClaudeBot and OAI-SearchBot: AI Crawlers in robots.txt'
 work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for developer products, including the docs pages that search engines and AI assistants crawl and cite.'
+video: ai-crawlers
 ---
 
 GPTBot is the crawler OpenAI uses to collect content that may train its models, and ClaudeBot does the same job for Anthropic. Blocking either one leaves ChatGPT search and Claude's search untouched, because those run on separate agents called OAI-SearchBot and Claude-SearchBot.
