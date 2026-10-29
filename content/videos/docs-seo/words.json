@@ -1,0 +1,660 @@
+{
+ "L1": {
+  "duration": 6.73,
+  "level_db": -24.05,
+  "text": "Suppose a developer searches stripe 401 invalid API key, and two docs pages answer it.",
+  "transcript": "Suppose a developer searches stripe 401 invalid API key, and two docs pages answer it.",
+  "words": [
+   {
+    "w": "Suppose",
+    "start": 0.0,
+    "end": 0.5,
+    "onset": 0.09
+   },
+   {
+    "w": "a",
+    "start": 0.5,
+    "end": 0.76,
+    "onset": 0.67
+   },
+   {
+    "w": "developer",
+    "start": 0.76,
+    "end": 1.28,
+    "onset": 0.8
+   },
+   {
+    "w": "searches",
+    "start": 1.28,
+    "end": 1.82,
+    "onset": 1.29
+   },
+   {
+    "w": "stripe",
+    "start": 1.82,
+    "end": 2.24,
+    "onset": 1.99
+   },
+   {
+    "w": "401",
+    "start": 2.24,
+    "end": 3.06,
+    "onset": 2.39
+   },
+   {
+    "w": "invalid",
+    "start": 3.06,
+    "end": 3.6,
+    "onset": 3.05
+   },
+   {
+    "w": "API",
+    "start": 3.6,
+    "end": 4.22,
+    "onset": 3.86
+   },
+   {
+    "w": "key,",
+    "start": 4.22,
+    "end": 4.56,
+    "onset": 4.3
+   },
+   {
+    "w": "and",
+    "start": 4.84,
+    "end": 4.9,
+    "onset": 4.8
+   },
+   {
+    "w": "two",
+    "start": 4.9,
+    "end": 5.14,
+    "onset": 4.94
+   },
+   {
+    "w": "docs",
+    "start": 5.14,
+    "end": 5.52,
+    "onset": 5.26
+   },
+   {
+    "w": "pages",
+    "start": 5.52,
+    "end": 5.94,
+    "onset": 5.66
+   },
+   {
+    "w": "answer",
+    "start": 5.94,
+    "end": 6.46,
+    "onset": 6.16
+   },
+   {
+    "w": "it.",
+    "start": 6.46,
+    "end": 6.7,
+    "onset": 6.57
+   }
+  ]
+ },
+ "L2": {
+  "duration": 6.73,
+  "level_db": -25.05,
+  "text": "That's where docs SEO starts, because one page should own each task, so I'd fold the other into it.",
+  "transcript": "That's where docs SEO starts, because one page should own each task, so I'd fold the other into it.",
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.0,
+    "end": 0.44,
+    "onset": 0.08
+   },
+   {
+    "w": "where",
+    "start": 0.44,
+    "end": 0.6,
+    "onset": 0.44
+   },
+   {
+    "w": "docs",
+    "start": 0.6,
+    "end": 1.1,
+    "onset": 0.75
+   },
+   {
+    "w": "SEO",
+    "start": 1.1,
+    "end": 1.74,
+    "onset": 1.34
+   },
+   {
+    "w": "starts,",
+    "start": 1.74,
+    "end": 2.42,
+    "onset": 2.1
+   },
+   {
+    "w": "because",
+    "start": 2.68,
+    "end": 2.96,
+    "onset": 2.78
+   },
+   {
+    "w": "one",
+    "start": 2.96,
+    "end": 3.26,
+    "onset": 3.07
+   },
+   {
+    "w": "page",
+    "start": 3.26,
+    "end": 3.64,
+    "onset": 3.35
+   },
+   {
+    "w": "should",
+    "start": 3.64,
+    "end": 3.86,
+    "onset": 3.69
+   },
+   {
+    "w": "own",
+    "start": 3.86,
+    "end": 4.16,
+    "onset": 3.95
+   },
+   {
+    "w": "each",
+    "start": 4.16,
+    "end": 4.42,
+    "onset": 4.23
+   },
+   {
+    "w": "task,",
+    "start": 4.42,
+    "end": 4.98,
+    "onset": 4.53
+   },
+   {
+    "w": "so",
+    "start": 5.1,
+    "end": 5.3,
+    "onset": 5.19
+   },
+   {
+    "w": "I'd",
+    "start": 5.3,
+    "end": 5.48,
+    "onset": 5.27
+   },
+   {
+    "w": "fold",
+    "start": 5.48,
+    "end": 5.76,
+    "onset": 5.45
+   },
+   {
+    "w": "the",
+    "start": 5.76,
+    "end": 5.92,
+    "onset": 5.83
+   },
+   {
+    "w": "other",
+    "start": 5.92,
+    "end": 6.14,
+    "onset": 5.92
+   },
+   {
+    "w": "into",
+    "start": 6.14,
+    "end": 6.42,
+    "onset": 6.17
+   },
+   {
+    "w": "it.",
+    "start": 6.42,
+    "end": 6.7,
+    "onset": 6.39
+   }
+  ]
+ },
+ "L3": {
+  "duration": 9.55,
+  "level_db": -21.64,
+  "text": "A crawler then has to reach it through a plain link, and I'd read the source HTML, because a browser can make a broken page look healthy.",
+  "transcript": "A crawler then has to reach it through a plain link, and I'd read the source HTML, because a browser can make a broken page look healthy.",
+  "words": [
+   {
+    "w": "A",
+    "start": 0.0,
+    "end": 0.28,
+    "onset": 0.08
+   },
+   {
+    "w": "crawler",
+    "start": 0.28,
+    "end": 0.72,
+    "onset": 0.32
+   },
+   {
+    "w": "then",
+    "start": 0.72,
+    "end": 1.02,
+    "onset": 0.87
+   },
+   {
+    "w": "has",
+    "start": 1.02,
+    "end": 1.34,
+    "onset": 1.2
+   },
+   {
+    "w": "to",
+    "start": 1.34,
+    "end": 1.5,
+    "onset": 1.43
+   },
+   {
+    "w": "reach",
+    "start": 1.5,
+    "end": 1.8,
+    "onset": 1.6
+   },
+   {
+    "w": "it",
+    "start": 1.8,
+    "end": 1.94,
+    "onset": 1.79
+   },
+   {
+    "w": "through",
+    "start": 1.94,
+    "end": 2.12,
+    "onset": 1.98
+   },
+   {
+    "w": "a",
+    "start": 2.12,
+    "end": 2.28,
+    "onset": 2.11
+   },
+   {
+    "w": "plain",
+    "start": 2.28,
+    "end": 2.58,
+    "onset": 2.32
+   },
+   {
+    "w": "link,",
+    "start": 2.58,
+    "end": 3.04,
+    "onset": 2.7
+   },
+   {
+    "w": "and",
+    "start": 3.16,
+    "end": 3.46,
+    "onset": 3.28
+   },
+   {
+    "w": "I'd",
+    "start": 3.46,
+    "end": 3.82,
+    "onset": 3.55
+   },
+   {
+    "w": "read",
+    "start": 3.82,
+    "end": 4.04,
+    "onset": 3.9
+   },
+   {
+    "w": "the",
+    "start": 4.04,
+    "end": 4.18,
+    "onset": 4.11
+   },
+   {
+    "w": "source",
+    "start": 4.18,
+    "end": 4.58,
+    "onset": 4.16
+   },
+   {
+    "w": "HTML,",
+    "start": 4.58,
+    "end": 5.28,
+    "onset": 4.73
+   },
+   {
+    "w": "because",
+    "start": 5.7,
+    "end": 6.32,
+    "onset": 5.82
+   },
+   {
+    "w": "a",
+    "start": 6.32,
+    "end": 6.78,
+    "onset": 6.72
+   },
+   {
+    "w": "browser",
+    "start": 6.78,
+    "end": 7.22,
+    "onset": 6.87
+   },
+   {
+    "w": "can",
+    "start": 7.22,
+    "end": 7.5,
+    "onset": 7.26
+   },
+   {
+    "w": "make",
+    "start": 7.5,
+    "end": 7.72,
+    "onset": 7.5
+   },
+   {
+    "w": "a",
+    "start": 7.72,
+    "end": 7.82,
+    "onset": 7.72
+   },
+   {
+    "w": "broken",
+    "start": 7.82,
+    "end": 8.18,
+    "onset": 7.9
+   },
+   {
+    "w": "page",
+    "start": 8.18,
+    "end": 8.68,
+    "onset": 8.34
+   },
+   {
+    "w": "look",
+    "start": 8.68,
+    "end": 9.0,
+    "onset": 8.81
+   },
+   {
+    "w": "healthy.",
+    "start": 9.0,
+    "end": 9.38,
+    "onset": 9.0
+   }
+  ]
+ },
+ "L4": {
+  "duration": 9.15,
+  "level_db": -19.77,
+  "text": "Then its canonical tag, sitemap and links should name one URL, because disagreement usually means parts of the site prefer different URLs.",
+  "transcript": "Then its canonical tag, sitemap and links should name one URL, because disagreement usually means parts of the site prefer different URLs.",
+  "words": [
+   {
+    "w": "Then",
+    "start": 0.0,
+    "end": 0.28,
+    "onset": 0.08
+   },
+   {
+    "w": "its",
+    "start": 0.28,
+    "end": 0.46,
+    "onset": 0.28
+   },
+   {
+    "w": "canonical",
+    "start": 0.46,
+    "end": 0.74,
+    "onset": 0.48
+   },
+   {
+    "w": "tag,",
+    "start": 0.74,
+    "end": 1.28,
+    "onset": 0.85
+   },
+   {
+    "w": "sitemap",
+    "start": 1.46,
+    "end": 2.06,
+    "onset": 1.52
+   },
+   {
+    "w": "and",
+    "start": 2.06,
+    "end": 2.18,
+    "onset": 2.07
+   },
+   {
+    "w": "links",
+    "start": 2.18,
+    "end": 2.48,
+    "onset": 2.24
+   },
+   {
+    "w": "should",
+    "start": 2.48,
+    "end": 2.88,
+    "onset": 2.67
+   },
+   {
+    "w": "name",
+    "start": 2.88,
+    "end": 3.12,
+    "onset": 2.93
+   },
+   {
+    "w": "one",
+    "start": 3.12,
+    "end": 3.44,
+    "onset": 3.12
+   },
+   {
+    "w": "URL,",
+    "start": 3.44,
+    "end": 4.06,
+    "onset": 3.56
+   },
+   {
+    "w": "because",
+    "start": 4.44,
+    "end": 4.9,
+    "onset": 4.55
+   },
+   {
+    "w": "disagreement",
+    "start": 4.9,
+    "end": 5.56,
+    "onset": 5.12
+   },
+   {
+    "w": "usually",
+    "start": 5.56,
+    "end": 6.02,
+    "onset": 5.82
+   },
+   {
+    "w": "means",
+    "start": 6.02,
+    "end": 6.44,
+    "onset": 6.01
+   },
+   {
+    "w": "parts",
+    "start": 6.44,
+    "end": 6.76,
+    "onset": 6.56
+   },
+   {
+    "w": "of",
+    "start": 6.76,
+    "end": 6.9,
+    "onset": 6.78
+   },
+   {
+    "w": "the",
+    "start": 6.9,
+    "end": 7.0,
+    "onset": 6.93
+   },
+   {
+    "w": "site",
+    "start": 7.0,
+    "end": 7.26,
+    "onset": 7.12
+   },
+   {
+    "w": "prefer",
+    "start": 7.26,
+    "end": 7.62,
+    "onset": 7.38
+   },
+   {
+    "w": "different",
+    "start": 7.62,
+    "end": 8.12,
+    "onset": 7.58
+   },
+   {
+    "w": "URLs.",
+    "start": 8.12,
+    "end": 8.62,
+    "onset": 8.2
+   }
+  ]
+ },
+ "L5": {
+  "duration": 6.88,
+  "level_db": -21.97,
+  "text": "So I'd save a baseline first, then fix each blocking failure in that order, so I can explain what moved.",
+  "transcript": "So I'd save a baseline first, then fix each blocking failure in that order, so I can explain what moved.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.36,
+    "onset": 0.09
+   },
+   {
+    "w": "I'd",
+    "start": 0.36,
+    "end": 0.8,
+    "onset": 0.58
+   },
+   {
+    "w": "save",
+    "start": 0.8,
+    "end": 1.06,
+    "onset": 0.77
+   },
+   {
+    "w": "a",
+    "start": 1.06,
+    "end": 1.2,
+    "onset": 1.12
+   },
+   {
+    "w": "baseline",
+    "start": 1.2,
+    "end": 1.64,
+    "onset": 1.26
+   },
+   {
+    "w": "first,",
+    "start": 1.64,
+    "end": 2.14,
+    "onset": 1.76
+   },
+   {
+    "w": "then",
+    "start": 2.32,
+    "end": 2.48,
+    "onset": 2.28
+   },
+   {
+    "w": "fix",
+    "start": 2.48,
+    "end": 2.84,
+    "onset": 2.53
+   },
+   {
+    "w": "each",
+    "start": 2.84,
+    "end": 3.04,
+    "onset": 2.81
+   },
+   {
+    "w": "blocking",
+    "start": 3.04,
+    "end": 3.42,
+    "onset": 3.16
+   },
+   {
+    "w": "failure",
+    "start": 3.42,
+    "end": 3.82,
+    "onset": 3.62
+   },
+   {
+    "w": "in",
+    "start": 3.82,
+    "end": 4.02,
+    "onset": 3.88
+   },
+   {
+    "w": "that",
+    "start": 4.02,
+    "end": 4.16,
+    "onset": 4.06
+   },
+   {
+    "w": "order,",
+    "start": 4.16,
+    "end": 4.48,
+    "onset": 4.17
+   },
+   {
+    "w": "so",
+    "start": 4.74,
+    "end": 5.08,
+    "onset": 4.83
+   },
+   {
+    "w": "I",
+    "start": 5.08,
+    "end": 5.38,
+    "onset": 5.19
+   },
+   {
+    "w": "can",
+    "start": 5.38,
+    "end": 5.54,
+    "onset": 5.45
+   },
+   {
+    "w": "explain",
+    "start": 5.54,
+    "end": 6.0,
+    "onset": 5.63
+   },
+   {
+    "w": "what",
+    "start": 6.0,
+    "end": 6.28,
+    "onset": 6.0
+   },
+   {
+    "w": "moved.",
+    "start": 6.28,
+    "end": 6.66,
+    "onset": 6.3
+   }
+  ]
+ }
+}

@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/docs-seo/, imported by tools/import_video.py from
+# ninadpathak-video films/docs-seo (render of 2026-10-29T11:22:23+05:30).
+name: Docs SEO in 42 seconds
+description: 'The order a docs SEO audit should follow: one page owning each search task, a plain crawlable link, the source HTML rather than the rendered page, and canonical, sitemap and links agreeing on one URL, measured against a saved baseline.'
+upload_date: '2026-10-29T11:22:23+05:30'
+duration_seconds: 42
+width: 1920
+height: 1080
+file: docs-seo.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 6.867
+  L3: 13.733
+  L4: 23.433
+  L5: 32.733
+transcript: Suppose a developer searches stripe 401 invalid API key, and two docs pages answer it. That's where docs SEO starts, because one page should own each task, so I'd fold the other into it. A crawler then has to reach it through a plain link, and I'd read the source HTML, because a browser can make a broken page look healthy. Then its canonical tag, sitemap and links should name one URL, because disagreement usually means parts of the site prefer different URLs. So I'd save a baseline first, then fix each blocking failure in that order, so I can explain what moved.

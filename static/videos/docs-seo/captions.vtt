@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.840
+Suppose a developer searches stripe 401 invalid API key,
+
+2
+00:00:04.840 --> 00:00:06.867
+and two docs pages answer it.
+
+3
+00:00:06.867 --> 00:00:09.547
+That's where docs SEO starts,
+
+4
+00:00:09.547 --> 00:00:11.967
+because one page should own each task,
+
+5
+00:00:11.967 --> 00:00:13.733
+so I'd fold the other into it.
+
+6
+00:00:13.733 --> 00:00:16.893
+A crawler then has to reach it through a plain link,
+
+7
+00:00:16.893 --> 00:00:19.413
+and I'd read the source HTML,
+
+8
+00:00:19.433 --> 00:00:23.433
+because a browser can make a broken page look healthy.
+
+9
+00:00:23.433 --> 00:00:24.893
+Then its canonical tag,
+
+10
+00:00:24.893 --> 00:00:27.873
+sitemap and links should name one URL,
+
+11
+00:00:27.873 --> 00:00:32.453
+because disagreement usually means parts of the site prefer different URLs.
+
+12
+00:00:32.733 --> 00:00:35.053
+So I'd save a baseline first,
+
+13
+00:00:35.053 --> 00:00:37.473
+then fix each blocking failure in that order,
+
+14
+00:00:37.473 --> 00:00:39.793
+so I can explain what moved.

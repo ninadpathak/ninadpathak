@@ -15,6 +15,7 @@ takeaways:
 - A before-and-after record connects search movement to meaningful changes.
 title: Technical SEO Checklist for Documentation Sites
 updated: 2026-08-17
+video: docs-seo
 ---
 
 I built the audit for this guide around Cloudflare's live Workers CLI guide. Its source and rendered page show which checks a reader can rerun and which still need browser or Search Console evidence.
