@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/documentation-review/, imported by tools/import_video.py from
+# ninadpathak-video films/documentation-review (render of 2026-10-29T14:27:43+05:30).
+name: Documentation review in 40 seconds
+description: 'Why documentation review should start with the product, not the prose: a source outside the draft for each claim that can break the task, the page run from its documented starting state, then the rendered page and release state before the wording.'
+upload_date: '2026-10-29T14:27:43+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: documentation-review.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 7.633
+  L3: 15.7
+  L4: 23.433
+  L5: 29.467
+transcript: How does a beautifully edited docs page ship with a broken path, when the review argued over commas and heading length? The command was still untested, so I'd start documentation review with the product, and polish the prose after the behavior survives. For each claim that can break the task, like who can create API keys, I'd want a source outside the draft. Then I'd run the page from its documented starting state and trigger the error it claims to solve. So on your next docs pull request, check the product and the reader's route, then the rendered page and release state, before the wording.

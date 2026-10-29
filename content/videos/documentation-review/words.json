@@ -1,0 +1,672 @@
+{
+ "L1": {
+  "duration": 7.57,
+  "level_db": -23.75,
+  "text": "How does a beautifully edited docs page ship with a broken path, when the review argued over commas and heading length?",
+  "transcript": "How does a beautifully edited docs page ship with a broken path, when the review argued over commas and heading length?",
+  "words": [
+   {
+    "w": "How",
+    "start": 0.0,
+    "end": 0.3,
+    "onset": 0.09
+   },
+   {
+    "w": "does",
+    "start": 0.3,
+    "end": 0.52,
+    "onset": 0.43
+   },
+   {
+    "w": "a",
+    "start": 0.52,
+    "end": 0.66,
+    "onset": 0.57
+   },
+   {
+    "w": "beautifully",
+    "start": 0.66,
+    "end": 1.12,
+    "onset": 0.75
+   },
+   {
+    "w": "edited",
+    "start": 1.12,
+    "end": 1.62,
+    "onset": 1.14
+   },
+   {
+    "w": "docs",
+    "start": 1.62,
+    "end": 2.06,
+    "onset": 1.79
+   },
+   {
+    "w": "page",
+    "start": 2.06,
+    "end": 2.52,
+    "onset": 2.16
+   },
+   {
+    "w": "ship",
+    "start": 2.52,
+    "end": 3.1,
+    "onset": 2.8
+   },
+   {
+    "w": "with",
+    "start": 3.1,
+    "end": 3.28,
+    "onset": 3.16
+   },
+   {
+    "w": "a",
+    "start": 3.28,
+    "end": 3.38,
+    "onset": 3.3
+   },
+   {
+    "w": "broken",
+    "start": 3.38,
+    "end": 3.68,
+    "onset": 3.44
+   },
+   {
+    "w": "path,",
+    "start": 3.68,
+    "end": 4.26,
+    "onset": 3.65
+   },
+   {
+    "w": "when",
+    "start": 4.4,
+    "end": 4.66,
+    "onset": 4.53
+   },
+   {
+    "w": "the",
+    "start": 4.66,
+    "end": 4.76,
+    "onset": 4.68
+   },
+   {
+    "w": "review",
+    "start": 4.76,
+    "end": 5.12,
+    "onset": 4.76
+   },
+   {
+    "w": "argued",
+    "start": 5.12,
+    "end": 5.62,
+    "onset": 5.25
+   },
+   {
+    "w": "over",
+    "start": 5.62,
+    "end": 5.88,
+    "onset": 5.65
+   },
+   {
+    "w": "commas",
+    "start": 5.88,
+    "end": 6.46,
+    "onset": 5.97
+   },
+   {
+    "w": "and",
+    "start": 6.46,
+    "end": 6.72,
+    "onset": 6.57
+   },
+   {
+    "w": "heading",
+    "start": 6.72,
+    "end": 7.02,
+    "onset": 6.73
+   },
+   {
+    "w": "length?",
+    "start": 7.02,
+    "end": 7.42,
+    "onset": 7.12
+   }
+  ]
+ },
+ "L2": {
+  "duration": 8.0,
+  "level_db": -22.54,
+  "text": "The command was still untested, so I'd start documentation review with the product, and polish the prose after the behavior survives.",
+  "transcript": "The command was still untested, so I'd start documentation review with the product, and polish the prose after the behavior survives.",
+  "words": [
+   {
+    "w": "The",
+    "start": 0.0,
+    "end": 0.16,
+    "onset": 0.09
+   },
+   {
+    "w": "command",
+    "start": 0.16,
+    "end": 0.48,
+    "onset": 0.18
+   },
+   {
+    "w": "was",
+    "start": 0.48,
+    "end": 0.68,
+    "onset": 0.59
+   },
+   {
+    "w": "still",
+    "start": 0.68,
+    "end": 0.94,
+    "onset": 0.81
+   },
+   {
+    "w": "untested,",
+    "start": 0.94,
+    "end": 1.56,
+    "onset": 1.04
+   },
+   {
+    "w": "so",
+    "start": 1.86,
+    "end": 2.02,
+    "onset": 1.88
+   },
+   {
+    "w": "I'd",
+    "start": 2.02,
+    "end": 2.62,
+    "onset": 2.36
+   },
+   {
+    "w": "start",
+    "start": 2.62,
+    "end": 2.82,
+    "onset": 2.7
+   },
+   {
+    "w": "documentation",
+    "start": 2.82,
+    "end": 3.38,
+    "onset": 2.93
+   },
+   {
+    "w": "review",
+    "start": 3.38,
+    "end": 4.04,
+    "onset": 3.39
+   },
+   {
+    "w": "with",
+    "start": 4.04,
+    "end": 4.24,
+    "onset": 4.13
+   },
+   {
+    "w": "the",
+    "start": 4.24,
+    "end": 4.36,
+    "onset": 4.28
+   },
+   {
+    "w": "product,",
+    "start": 4.36,
+    "end": 4.74,
+    "onset": 4.39
+   },
+   {
+    "w": "and",
+    "start": 5.02,
+    "end": 5.38,
+    "onset": 5.12
+   },
+   {
+    "w": "polish",
+    "start": 5.38,
+    "end": 5.84,
+    "onset": 5.58
+   },
+   {
+    "w": "the",
+    "start": 5.84,
+    "end": 6.0,
+    "onset": 5.94
+   },
+   {
+    "w": "prose",
+    "start": 6.0,
+    "end": 6.38,
+    "onset": 6.06
+   },
+   {
+    "w": "after",
+    "start": 6.38,
+    "end": 6.7,
+    "onset": 6.48
+   },
+   {
+    "w": "the",
+    "start": 6.7,
+    "end": 6.86,
+    "onset": 6.7
+   },
+   {
+    "w": "behavior",
+    "start": 6.86,
+    "end": 7.22,
+    "onset": 6.89
+   },
+   {
+    "w": "survives.",
+    "start": 7.22,
+    "end": 7.74,
+    "onset": 7.29
+   }
+  ]
+ },
+ "L3": {
+  "duration": 7.67,
+  "level_db": -25.05,
+  "text": "For each claim that can break the task, like who can create API keys, I'd want a source outside the draft.",
+  "transcript": "For each claim that can break the task, like who can create API keys, I'd want a source outside the draft.",
+  "words": [
+   {
+    "w": "For",
+    "start": 0.0,
+    "end": 0.24,
+    "onset": 0.14
+   },
+   {
+    "w": "each",
+    "start": 0.24,
+    "end": 0.54,
+    "onset": 0.33
+   },
+   {
+    "w": "claim",
+    "start": 0.54,
+    "end": 0.94,
+    "onset": 0.63
+   },
+   {
+    "w": "that",
+    "start": 0.94,
+    "end": 1.12,
+    "onset": 0.95
+   },
+   {
+    "w": "can",
+    "start": 1.12,
+    "end": 1.28,
+    "onset": 1.18
+   },
+   {
+    "w": "break",
+    "start": 1.28,
+    "end": 1.56,
+    "onset": 1.37
+   },
+   {
+    "w": "the",
+    "start": 1.56,
+    "end": 1.7,
+    "onset": 1.64
+   },
+   {
+    "w": "task,",
+    "start": 1.7,
+    "end": 2.22,
+    "onset": 1.75
+   },
+   {
+    "w": "like",
+    "start": 2.44,
+    "end": 2.8,
+    "onset": 2.56
+   },
+   {
+    "w": "who",
+    "start": 2.8,
+    "end": 3.26,
+    "onset": 3.06
+   },
+   {
+    "w": "can",
+    "start": 3.26,
+    "end": 3.46,
+    "onset": 3.33
+   },
+   {
+    "w": "create",
+    "start": 3.46,
+    "end": 3.94,
+    "onset": 3.53
+   },
+   {
+    "w": "API",
+    "start": 3.94,
+    "end": 4.36,
+    "onset": 4.05
+   },
+   {
+    "w": "keys,",
+    "start": 4.36,
+    "end": 4.88,
+    "onset": 4.69
+   },
+   {
+    "w": "I'd",
+    "start": 5.24,
+    "end": 5.6,
+    "onset": 5.28
+   },
+   {
+    "w": "want",
+    "start": 5.6,
+    "end": 5.92,
+    "onset": 5.71
+   },
+   {
+    "w": "a",
+    "start": 5.92,
+    "end": 6.14,
+    "onset": 6.04
+   },
+   {
+    "w": "source",
+    "start": 6.14,
+    "end": 6.52,
+    "onset": 6.12
+   },
+   {
+    "w": "outside",
+    "start": 6.52,
+    "end": 6.94,
+    "onset": 6.61
+   },
+   {
+    "w": "the",
+    "start": 6.94,
+    "end": 7.16,
+    "onset": 6.91
+   },
+   {
+    "w": "draft.",
+    "start": 7.16,
+    "end": 7.38,
+    "onset": 7.19
+   }
+  ]
+ },
+ "L4": {
+  "duration": 5.97,
+  "level_db": -25.87,
+  "text": "Then I'd run the page from its documented starting state and trigger the error it claims to solve.",
+  "transcript": "Then, I'd run the page from its documented starting state and trigger the error it claims to solve.",
+  "words": [
+   {
+    "w": "Then,",
+    "start": 0.0,
+    "end": 0.42,
+    "onset": 0.1
+   },
+   {
+    "w": "I'd",
+    "start": 0.78,
+    "end": 0.92,
+    "onset": 0.76
+   },
+   {
+    "w": "run",
+    "start": 0.92,
+    "end": 1.08,
+    "onset": 0.9
+   },
+   {
+    "w": "the",
+    "start": 1.08,
+    "end": 1.22,
+    "onset": 1.12
+   },
+   {
+    "w": "page",
+    "start": 1.22,
+    "end": 1.56,
+    "onset": 1.27
+   },
+   {
+    "w": "from",
+    "start": 1.56,
+    "end": 1.78,
+    "onset": 1.67
+   },
+   {
+    "w": "its",
+    "start": 1.78,
+    "end": 1.94,
+    "onset": 1.86
+   },
+   {
+    "w": "documented",
+    "start": 1.94,
+    "end": 2.5,
+    "onset": 2.23
+   },
+   {
+    "w": "starting",
+    "start": 2.5,
+    "end": 2.88,
+    "onset": 2.5
+   },
+   {
+    "w": "state",
+    "start": 2.88,
+    "end": 3.28,
+    "onset": 2.88
+   },
+   {
+    "w": "and",
+    "start": 3.28,
+    "end": 3.66,
+    "onset": 3.53
+   },
+   {
+    "w": "trigger",
+    "start": 3.66,
+    "end": 3.94,
+    "onset": 3.68
+   },
+   {
+    "w": "the",
+    "start": 3.94,
+    "end": 4.14,
+    "onset": 3.95
+   },
+   {
+    "w": "error",
+    "start": 4.14,
+    "end": 4.54,
+    "onset": 4.21
+   },
+   {
+    "w": "it",
+    "start": 4.54,
+    "end": 4.76,
+    "onset": 4.64
+   },
+   {
+    "w": "claims",
+    "start": 4.76,
+    "end": 5.16,
+    "onset": 4.83
+   },
+   {
+    "w": "to",
+    "start": 5.16,
+    "end": 5.38,
+    "onset": 5.32
+   },
+   {
+    "w": "solve.",
+    "start": 5.38,
+    "end": 5.82,
+    "onset": 5.34
+   }
+  ]
+ },
+ "L5": {
+  "duration": 8.08,
+  "level_db": -22.85,
+  "text": "So on your next docs pull request, check the product and the reader's route, then the rendered page and release state, before the wording.",
+  "transcript": "So on your next docs pull request, check the product and the reader's route, then the rendered page and release state, before the wording.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.38,
+    "onset": 0.1
+   },
+   {
+    "w": "on",
+    "start": 0.38,
+    "end": 0.86,
+    "onset": 0.69
+   },
+   {
+    "w": "your",
+    "start": 0.86,
+    "end": 1.0,
+    "onset": 0.87
+   },
+   {
+    "w": "next",
+    "start": 1.0,
+    "end": 1.28,
+    "onset": 1.08
+   },
+   {
+    "w": "docs",
+    "start": 1.28,
+    "end": 1.64,
+    "onset": 1.4
+   },
+   {
+    "w": "pull",
+    "start": 1.64,
+    "end": 1.9,
+    "onset": 1.77
+   },
+   {
+    "w": "request,",
+    "start": 1.9,
+    "end": 2.34,
+    "onset": 2.1
+   },
+   {
+    "w": "check",
+    "start": 2.62,
+    "end": 2.94,
+    "onset": 2.73
+   },
+   {
+    "w": "the",
+    "start": 2.94,
+    "end": 3.08,
+    "onset": 3.0
+   },
+   {
+    "w": "product",
+    "start": 3.08,
+    "end": 3.44,
+    "onset": 3.12
+   },
+   {
+    "w": "and",
+    "start": 3.44,
+    "end": 3.82,
+    "onset": 3.57
+   },
+   {
+    "w": "the",
+    "start": 3.82,
+    "end": 3.96,
+    "onset": 3.82
+   },
+   {
+    "w": "reader's",
+    "start": 3.96,
+    "end": 4.34,
+    "onset": 4.02
+   },
+   {
+    "w": "route,",
+    "start": 4.34,
+    "end": 4.66,
+    "onset": 4.34
+   },
+   {
+    "w": "then",
+    "start": 4.76,
+    "end": 5.08,
+    "onset": 4.92
+   },
+   {
+    "w": "the",
+    "start": 5.08,
+    "end": 5.22,
+    "onset": 5.1
+   },
+   {
+    "w": "rendered",
+    "start": 5.22,
+    "end": 5.5,
+    "onset": 5.24
+   },
+   {
+    "w": "page",
+    "start": 5.5,
+    "end": 6.04,
+    "onset": 5.64
+   },
+   {
+    "w": "and",
+    "start": 6.04,
+    "end": 6.4,
+    "onset": 6.24
+   },
+   {
+    "w": "release",
+    "start": 6.4,
+    "end": 6.72,
+    "onset": 6.43
+   },
+   {
+    "w": "state,",
+    "start": 6.72,
+    "end": 7.08,
+    "onset": 6.89
+   },
+   {
+    "w": "before",
+    "start": 7.2,
+    "end": 7.54,
+    "onset": 7.34
+   },
+   {
+    "w": "the",
+    "start": 7.54,
+    "end": 7.72,
+    "onset": 7.51
+   },
+   {
+    "w": "wording.",
+    "start": 7.72,
+    "end": 7.98,
+    "onset": 7.78
+   }
+  ]
+ }
+}

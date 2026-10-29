@@ -15,6 +15,7 @@ takeaways:
 - Split approval by evidence instead of asking one reviewer to bless the page.
 title: Documentation Review Should Start With the Product, Not the Prose
 updated: 2026-09-11
+video: documentation-review
 ---
 
 Picture a documentation pull request where the comments are breeding around commas, heading length, and screenshot placement. The command remains untested in the rendered page.
