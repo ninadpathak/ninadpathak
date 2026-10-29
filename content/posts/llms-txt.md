@@ -32,7 +32,7 @@ Everything after the H1 is optional. A file with a title and nothing else meets 
 
 ## Does llms.txt work?
 
-Google's [guide to generative AI search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide), updated 2026-07-10, says you don't need AI text files to appear in Google Search and that "Google Search itself doesn't use them."
+Google's [guide to generative AI search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide), updated 2026-07-10, says you don't need AI text files to appear in Google Search and that "Google Search itself doesn't use them." What gets a docs page into Search is the ordinary work in the [technical SEO checklist for documentation sites](/articles/docs-seo/): crawlable HTML, a correct canonical and internal links.
 
 Chrome's [Lighthouse llms.txt audit](https://developer.chrome.com/docs/lighthouse/agentic-browsing/llms-txt), updated 2026-05-05, treats the file as optional. A missing file gets a Not Applicable result, and the audit flags only a server error when the file is requested.
 

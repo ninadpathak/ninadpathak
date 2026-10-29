@@ -50,6 +50,8 @@ Keep one page title, then use heading levels to describe the task in dependency 
 
 Read the headings without their paragraphs. A reader should be able to tell where to begin, what action follows, and where to verify success.
 
+A search visitor lands without the sidebar too, which is why the same test appears in the [technical SEO checklist for documentation sites](/articles/docs-seo/).
+
 ### Keep lists and tables semantic
 
 Use a list when several items belong together and a table only when readers need to compare consistent fields. A data table needs header cells, and a table used for visual layout invents a relationship that a screen reader will announce as data.

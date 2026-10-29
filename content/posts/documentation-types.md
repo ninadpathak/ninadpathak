@@ -23,7 +23,7 @@ Technical documentation is not one thing. It is the set of documents that help s
 
 ## The three audiences for technical documentation
 
-The most useful classification separates technical documentation by the person who needs it. ClickHelp makes a similar distinction between process documents and user documents, while Squarespace Engineering frames documentation around reader behavior, patience, experience, and goal.
+The most useful classification separates [technical documentation](/articles/technical-documentation/) by the person who needs it. ClickHelp makes a similar distinction between process documents and user documents, while Squarespace Engineering frames documentation around reader behavior, patience, experience, and goal.
 
 That gives you three useful groups. User-facing documents help customers or developers adopt a product.
 

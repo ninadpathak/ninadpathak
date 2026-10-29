@@ -5,7 +5,7 @@
 /topics/ /articles/ 301
 /technical-writing/ /articles/developer-experience/ 301
 /documentation/ /articles/technical-documentation/ 301
-/api-documentation/ /articles/technical-documentation/ 301
+/api-documentation/ /articles/api-documentation/ 301
 /docs-as-code/ /articles/technical-documentation/ 301
 /documentation-seo/ /articles/ai-search-optimization/ 301
 /ai-ready-documentation/ /articles/ai-search-optimization/ 301
@@ -14,6 +14,16 @@
 /articles/technical-content-as-a-moat-the-long-game-for-developer-tools/ /articles/stripe-technical-blog/ 301
 /blog/technical-content-as-a-moat-the-long-game-for-developer-tools /articles/stripe-technical-blog/ 301
 /blog/technical-content-as-a-moat-the-long-game-for-developer-tools/ /articles/stripe-technical-blog/ 301
+# Retired in the Sep 11 archive but still shown by Google (GSC, Oct 29). Each points
+# to the live page that now owns the same reader question.
+/articles/developer-trust-hierarchy /articles/stripe-technical-blog/ 301
+/articles/developer-trust-hierarchy/ /articles/stripe-technical-blog/ 301
+/blog/developer-trust-hierarchy /articles/stripe-technical-blog/ 301
+/blog/developer-trust-hierarchy/ /articles/stripe-technical-blog/ 301
+/articles/how-to-document-multiple-product-versions /articles/docs-seo/ 301
+/articles/how-to-document-multiple-product-versions/ /articles/docs-seo/ 301
+/blog/how-to-document-multiple-product-versions /articles/docs-seo/ 301
+/blog/how-to-document-multiple-product-versions/ /articles/docs-seo/ 301
 # AI-cluster focus areas: collapsed into the /articles/ index during the
 # July 30 refocus. Redirected until each cluster gets its own owner page.
 /ai-agent-memory /articles/ai-engineering/ 301

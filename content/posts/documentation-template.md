@@ -90,7 +90,7 @@ That distinction keeps setup prose short without hiding the contract.
 
 Run `node check.mjs` to verify the tested cases. An assertion failure means the corresponding contract statement needs investigation.
 
-The [API documentation guide](/articles/api-documentation/) writes out the full reference entry for this endpoint, with each response and a script that checks them against the service.
+The [API documentation guide](/articles/api-documentation/) writes out the full reference entry for this endpoint, with each response and a script that checks them against the service. When reference is generated from source, [code documentation](/articles/code-documentation/) decides what stays in comments and docstrings and what moves into a guide.
 
 For a CLI or internal tool, fill the option's allowed values and state the observed failure before recommending the page layout. Limit the claim to the tested cases, then name the behavior change that should trigger page review.
 
@@ -151,6 +151,6 @@ The filled fixture's `node check.mjs` covers behavior and closes its temporary s
 | Storage lifetime changes | Reference and troubleshooting | Recovery before and after restart |
 | A link target moves | Index and referring pages | Link validation and rendered navigation |
 
-The [documentation review checklist](/articles/documentation-review/) adds the reader-facing checks.
+When one of those changes reaches users, the [release notes template](/articles/release-notes-template/) tells them what to do about it. The [documentation review checklist](/articles/documentation-review/) adds the reader-facing checks.
 
 Assign an owner to each filled page and keep its triggering behavior beside the review check.

@@ -47,6 +47,8 @@ A reference page can show the interface without asking a reader to infer details
 
 The same rule applies to APIs and configuration. Google asks API reference authors to document methods, parameters, return values, and exceptions because those details are part of the contract a developer implements.
 
+The [API documentation guide](/articles/api-documentation/) writes one such entry out in full and checks it against the running service.
+
 ### A generated page cannot explain a multi-step decision
 
 Generated output can tell a reader what a parameter accepts. It cannot reliably decide which operation proves an integration is working, which prerequisite changes the order of setup, or what a team should do when an otherwise valid request fails in production.
@@ -59,7 +61,9 @@ A written guide belongs where the reader needs a path through several symbols, f
 
 ### Guides connect a task to the contract it needs
 
-A setup guide can show a reader where to begin, what must already exist, how to recognize success, and where to look when the result differs. The guide should link into reference at the exact point where a stable name or constraint becomes necessary.
+A setup guide can show a reader where to begin, what must already exist, how to recognize success, and where to look when the result differs. A [quick start guide template](/articles/quickstart-guide/) is that guide for a first run.
+
+The guide should link into reference at the exact point where a stable name or constraint becomes necessary.
 
 The guide also has to establish what the reader can safely assume when a request fails, because a signature alone cannot justify a retry.
 
@@ -83,4 +87,6 @@ Ask what kind of answer the reader needs at the moment they discover the informa
 
 There is a practical objection to this boundary: maintaining several documentation forms can sound like duplicated work. It becomes duplication only when each form repeats the same answer, because the local rationale, contract facts, and reader path have different update triggers.
 
-Keep the source of truth close to the change that can invalidate it. Then let the comment, reference, and guide send the reader to the next question instead of trying to answer every question in one place.
+Keep the source of truth close to the change that can invalidate it. A change that breaks a public contract also owes its callers an entry in the [release notes](/articles/release-notes-template/).
+
+Then let the comment, reference, and guide send the reader to the next question instead of trying to answer every question in one place.

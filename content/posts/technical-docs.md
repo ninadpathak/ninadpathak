@@ -80,3 +80,5 @@ A useful review trigger connects the document to the change that can invalidate 
 Use a [technical documentation template](/articles/documentation-template/) when you are ready to turn these decisions into a repository. Then [test whether a page helps someone finish a task](/articles/documentation-best-practices/) before calling it complete.
 
 Use the [documentation review checklist](/articles/documentation-review/) before publication. If duplicate or stale answers are the problem, start by [organizing documentation that has drifted](/articles/documentation-structure/) instead of adding another page.
+
+Every other [technical documentation](/articles/technical-documentation/) guide on this site is listed on one page.

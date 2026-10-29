@@ -77,7 +77,7 @@ slug = "ai-search-optimization"
 preserve_empty_route = true
 title = "AI Search and Citation"
 description = "Tests and arguments about what answer engines can extract, what crawlers can access, and what publishers cannot honestly promise."
-intro = "Answer-engine advice is full of rituals. I test the parts a publisher can control and name the parts nobody can guarantee."
+intro = "Answer-engine advice is full of rituals. I test the parts a publisher can control and name the parts nobody can guarantee. None of it helps a page that ordinary search can't crawl, so the <a href=\"/articles/docs-seo/\">technical SEO checklist for documentation sites</a> comes first."
 tag_matches = ["ai-search", "ai-overviews", "llms-txt", "answer-engines", "documentation-seo", "generative-engine-optimization"]
 
 [[content.categories]]
