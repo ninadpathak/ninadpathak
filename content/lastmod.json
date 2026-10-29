@@ -76,36 +76,36 @@
     "sources": "b13fbb7f8e842cde619025c11b16e930f0d2b542d8f0bd1a7a4b21189099c67e"
   },
   "claude-vs-gemini-cli": {
-    "lastmod": "2026-10-04",
-    "sources": "9e59f6c0c2f0fbbaa5928cb3e05a8a0be1e4890e916744a4f10d833b7c9ea327"
+    "lastmod": "2026-10-29",
+    "sources": "11fbdd6c32d363dd886dec15e075902fdef01c6aa9edce3d31dc189b40751cf7"
   },
   "code-documentation": {
-    "lastmod": "2026-10-04",
-    "sources": "46fa2a15ffc9f53eb70c7427a90ba0a0c43ae9cfe22a91012ba1efb9b4a7ce18"
+    "lastmod": "2026-10-29",
+    "sources": "83768842c07e2f446b87d9edfeed27ad6ae3ee5799faab2c354411d5fb8621fa"
   },
   "coding-agent-memory": {
     "lastmod": "2026-10-22",
     "sources": "9b3847613bce99c179b200ad85d8d18b84c993b66c1f216ade698cf1656cee66"
   },
   "context-windows-vs-memory": {
-    "lastmod": "2026-10-04",
-    "sources": "7da86c76b400bb615d1ee465cfa8ed3ba922a756602e11756390be4de6d3b128"
+    "lastmod": "2026-10-29",
+    "sources": "75161e7d6e4d9112e156a8a444e2c5c4d968aac47d804fec26d60f088a98a80a"
   },
   "contextual-retrieval": {
     "lastmod": "2026-10-27",
     "sources": "45d64efca8f33b0f2b7bf5265091eb6b7995563e25685819fc925541d613af1e"
   },
   "deerflow-memory": {
-    "lastmod": "2026-10-22",
-    "sources": "8bb5d9eb6d18ed5b2f498dc5a33583e129e11fc290588df1cba4665f02a8f7e9"
+    "lastmod": "2026-10-29",
+    "sources": "7a803dcd40bc4671907970eaaeffd3f58597b66a79bd73745ae19094b7ea55ec"
   },
   "design-doc-template": {
     "lastmod": "2026-10-28",
     "sources": "86220cfd47f7ceffaa31d8be64c39b132c8b108c3540d7d703b1d7a7045b7d3b"
   },
   "developer-onboarding-docs": {
-    "lastmod": "2026-10-22",
-    "sources": "4dd0141745e48ae350b7f7d9f31732c95ea75bf00abcc858bbc552c689256ac4"
+    "lastmod": "2026-10-29",
+    "sources": "96535cc9da6e9bdc1f256237ff4db07312c1ce3570d4c06658ce3305fe989bff"
   },
   "devtools-documentation": {
     "lastmod": "2026-10-22",
