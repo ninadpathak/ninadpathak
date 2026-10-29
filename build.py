@@ -61,7 +61,8 @@ def render_work_note(note) -> str:
 VIDEO_FIELDS = ("name", "description", "upload_date", "duration_seconds", "width", "height",
                 "file", "poster", "poster_webp", "captions", "transcript")
 # The WebP poster is preloaded above the fold, so it has to stay small
-# (tools/build_video_poster.py draws it at 2x the prose column).
+# (tools/build_video_poster.py draws it at 2x the prose column, narrowing it to as little
+# as 1.6x only when a text-dense frame cannot otherwise fit).
 POSTER_WEBP_BUDGET = 40 * 1024
 
 
