@@ -81,7 +81,7 @@
   },
   "code-documentation": {
     "lastmod": "2026-10-29",
-    "sources": "83768842c07e2f446b87d9edfeed27ad6ae3ee5799faab2c354411d5fb8621fa"
+    "sources": "fb0335795d114179ed977af40accbb22468bcb79145debd328a4ae0ac995fb00"
   },
   "coding-agent-memory": {
     "lastmod": "2026-10-22",
@@ -113,7 +113,7 @@
   },
   "docs-accessibility": {
     "lastmod": "2026-10-29",
-    "sources": "f3e346ff1519c2bebf680799cef5a673cfa3f179eb3f1c9d510425edc83900e5"
+    "sources": "662692f657d4ad7ec129f7b43a50c78f5b2ef871ac865dfb7a068aadcafe098f"
   },
   "docs-seo": {
     "lastmod": "2026-10-22",
@@ -136,12 +136,12 @@
     "sources": "a7d71d199eb81c8e48d5d3589b37c39d72ebc3b88543044daa3e08353e5ab56d"
   },
   "documentation-template": {
-    "lastmod": "2026-10-22",
-    "sources": "8c2bc26bc6f6da4507746c75e9f5a54120f96fde0e2345690c019cc64c22cbd4"
+    "lastmod": "2026-10-29",
+    "sources": "15c527cec29bf455e8af69bf8b767605dc8105828d3f6ed26908474f072d7308"
   },
   "documentation-types": {
-    "lastmod": "2026-10-22",
-    "sources": "9a956e2289e5da1b7fb05c02eace05f536f0d46cba43cd9702acc1941fdd5a73"
+    "lastmod": "2026-10-29",
+    "sources": "d428d1d23b7e2dfa0a99038edd03b38218bb5e977305f4067660aaa8c812a898"
   },
   "documentation-velocity": {
     "lastmod": "2026-10-27",
@@ -192,8 +192,8 @@
     "sources": "c7686cfdd06e2e0a170c7670b6903f377d0cfacca7ef0430994a3ea7d0ffa0c6"
   },
   "llms-txt": {
-    "lastmod": "2026-10-28",
-    "sources": "fed87aff4d3356f76411b0f804bd321c2c370ba7508c2b7bd64784b278adc45a"
+    "lastmod": "2026-10-29",
+    "sources": "2758c53a593c166a8d4696e1ad9e97852486b74b85330532989358badf778b4a"
   },
   "mcp-server-tutorial": {
     "lastmod": "2026-10-28",
@@ -272,8 +272,8 @@
     "sources": "4921696b2b53c4fa9f738707de757739dad4cf6d612b9e3d214a35e0b94f2d47"
   },
   "technical-docs": {
-    "lastmod": "2026-10-22",
-    "sources": "e6d141c7e3309f56b760b349cf7cde3a56d0021846c27b6a0a41fcb969f29b05"
+    "lastmod": "2026-10-29",
+    "sources": "099aa73175abdf3ae4ceae60ac62b561ee1ff486f5693c67e002e437751d7a4e"
   },
   "technical-writing-for-engineers": {
     "lastmod": "2026-10-27",
