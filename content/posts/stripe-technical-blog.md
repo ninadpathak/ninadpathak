@@ -33,27 +33,27 @@ The rest of [stripe.dev/blog](https://stripe.dev/blog) holds integration tutoria
 
 ## Stripe writes for implementation, not just attention
 
-Stripe says it plainly on the engineering blog landing page: the company cares deeply about beautiful code, APIs, and documentation. Plenty of companies could write that line.
+Stripe said it plainly on the engineering blog's old stripe.com landing page, [archived in July 2026](https://web.archive.org/web/20260708010345/https://stripe.com/blog/engineering): "We love the web, and care deeply about beautiful code, APIs, and documentation." Plenty of companies could write that line.
 
 Stripe earned it by treating the surrounding content system as part of the developer experience.
 
 <div class="visual-wrapper">
-  <div class="visual-title">Stripe Engineering Blog Landing Page</div>
+  <div class="visual-title">Stripe Engineering Blog Landing Page, Before the Move to stripe.dev</div>
   <div class="visual-container">
-    <img src="/static/images/visuals/stripe-engineering-blog.png" alt="Stripe Engineering Blog Landing Page" loading="lazy">
+    <img src="/static/images/visuals/stripe-engineering-blog.png" alt="Stripe Engineering Blog landing page on stripe.com in 2026, before it moved to stripe.dev" loading="lazy">
   </div>
 </div>
 
 Look at the shape of Stripe’s content surface:
 
-- the main engineering blog
-- the Stripe.dev blog for implementation guidance
+- engineering posts, now a section of the stripe.dev blog
+- implementation tutorials on the same stripe.dev blog
 - a detailed public API changelog
 - product docs that feel like an application
 
-Each surface serves a different stage of developer trust. The engineering blog proves depth.
+Each surface serves a different stage of developer trust. The engineering posts prove depth.
 
-The dev blog helps builders ship. [The docs close the loop during implementation](/articles/devtools-documentation/).
+The tutorials beside them help builders ship. [The docs close the loop during implementation](/articles/devtools-documentation/).
 
 The changelog signals stability and respect for existing integrations.
 
