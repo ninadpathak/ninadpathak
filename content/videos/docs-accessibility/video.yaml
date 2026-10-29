@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/docs-accessibility/, imported by tools/import_video.py from
+# ninadpathak-video films/docs-accessibility (render of 2026-10-29T10:25:23+05:30).
+name: Docs accessibility testing in 40 seconds
+description: 'Why a docs page can look finished and still strand a screen-reader user: real heading markup, success stated in text beside screenshots, a checker on generated HTML plus keyboard and zoom checks, all run as a release gate.'
+upload_date: '2026-10-29T10:25:23+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: docs-accessibility.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 4.533
+  L3: 12.7
+  L4: 21.3
+  L5: 29.467
+transcript: What leaves a reader stuck on a docs page that looks finished? Accessibility testing answers that, because a screen reader follows only the structure in the markup, not a bold-text heading. And if only a screenshot shows the request returned 200, that reader can't confirm success, so I'd say it in nearby text. So I'd run a checker on the generated HTML, then tab through and zoom the page, because automation can't judge focus or reflow. Then I'd make that a release gate, running the checker in the same preview step that checks links and examples.

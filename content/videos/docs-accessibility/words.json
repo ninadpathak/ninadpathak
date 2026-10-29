@@ -1,0 +1,624 @@
+{
+ "L1": {
+  "duration": 4.32,
+  "level_db": -23.22,
+  "text": "What leaves a reader stuck on a docs page that looks finished?",
+  "transcript": "What leaves a reader stuck on a docs page that looks finished?",
+  "words": [
+   {
+    "w": "What",
+    "start": 0.0,
+    "end": 0.32,
+    "onset": 0.09
+   },
+   {
+    "w": "leaves",
+    "start": 0.32,
+    "end": 0.76,
+    "onset": 0.38
+   },
+   {
+    "w": "a",
+    "start": 0.76,
+    "end": 1.02,
+    "onset": 0.91
+   },
+   {
+    "w": "reader",
+    "start": 1.02,
+    "end": 1.32,
+    "onset": 1.06
+   },
+   {
+    "w": "stuck",
+    "start": 1.32,
+    "end": 1.7,
+    "onset": 1.37
+   },
+   {
+    "w": "on",
+    "start": 1.7,
+    "end": 1.94,
+    "onset": 1.81
+   },
+   {
+    "w": "a",
+    "start": 1.94,
+    "end": 2.1,
+    "onset": 1.94
+   },
+   {
+    "w": "docs",
+    "start": 2.1,
+    "end": 2.36,
+    "onset": 2.12
+   },
+   {
+    "w": "page",
+    "start": 2.36,
+    "end": 2.74,
+    "onset": 2.51
+   },
+   {
+    "w": "that",
+    "start": 2.74,
+    "end": 3.02,
+    "onset": 2.86
+   },
+   {
+    "w": "looks",
+    "start": 3.02,
+    "end": 3.5,
+    "onset": 3.17
+   },
+   {
+    "w": "finished?",
+    "start": 3.5,
+    "end": 3.9,
+    "onset": 3.55
+   }
+  ]
+ },
+ "L2": {
+  "duration": 7.97,
+  "level_db": -24.35,
+  "text": "Accessibility testing answers that, because a screen reader follows only the structure in the markup, not a bold-text heading.",
+  "transcript": "Accessibility testing answers that, because a screen reader follows only the structure in the markup, not a bold-text heading.",
+  "words": [
+   {
+    "w": "Accessibility",
+    "start": 0.0,
+    "end": 0.96,
+    "onset": 0.09
+   },
+   {
+    "w": "testing",
+    "start": 0.96,
+    "end": 1.3,
+    "onset": 0.95
+   },
+   {
+    "w": "answers",
+    "start": 1.3,
+    "end": 1.76,
+    "onset": 1.33
+   },
+   {
+    "w": "that,",
+    "start": 1.76,
+    "end": 2.06,
+    "onset": 1.88
+   },
+   {
+    "w": "because",
+    "start": 2.32,
+    "end": 2.66,
+    "onset": 2.46
+   },
+   {
+    "w": "a",
+    "start": 2.66,
+    "end": 2.9,
+    "onset": 2.66
+   },
+   {
+    "w": "screen",
+    "start": 2.9,
+    "end": 3.16,
+    "onset": 2.8
+   },
+   {
+    "w": "reader",
+    "start": 3.16,
+    "end": 3.42,
+    "onset": 3.23
+   },
+   {
+    "w": "follows",
+    "start": 3.42,
+    "end": 4.04,
+    "onset": 3.5
+   },
+   {
+    "w": "only",
+    "start": 4.04,
+    "end": 4.56,
+    "onset": 4.26
+   },
+   {
+    "w": "the",
+    "start": 4.56,
+    "end": 4.7,
+    "onset": 4.65
+   },
+   {
+    "w": "structure",
+    "start": 4.7,
+    "end": 5.14,
+    "onset": 4.86
+   },
+   {
+    "w": "in",
+    "start": 5.14,
+    "end": 5.38,
+    "onset": 5.16
+   },
+   {
+    "w": "the",
+    "start": 5.38,
+    "end": 5.48,
+    "onset": 5.38
+   },
+   {
+    "w": "markup,",
+    "start": 5.48,
+    "end": 6.02,
+    "onset": 5.63
+   },
+   {
+    "w": "not",
+    "start": 6.22,
+    "end": 6.56,
+    "onset": 6.31
+   },
+   {
+    "w": "a",
+    "start": 6.56,
+    "end": 6.72,
+    "onset": 6.58
+   },
+   {
+    "w": "bold",
+    "start": 6.72,
+    "end": 7.0,
+    "onset": 6.8
+   },
+   {
+    "w": "-text",
+    "start": 7.0,
+    "end": 7.38,
+    "onset": 7.07
+   },
+   {
+    "w": "heading.",
+    "start": 7.38,
+    "end": 7.74,
+    "onset": 7.43
+   }
+  ]
+ },
+ "L3": {
+  "duration": 8.39,
+  "level_db": -24.9,
+  "text": "And if only a screenshot shows the request returned 200, that reader can't confirm success, so I'd say it in nearby text.",
+  "transcript": "And if only a screenshot shows the request returned 200, that reader can't confirm success, so I'd say it in nearby text.",
+  "words": [
+   {
+    "w": "And",
+    "start": 0.0,
+    "end": 0.26,
+    "onset": 0.1
+   },
+   {
+    "w": "if",
+    "start": 0.26,
+    "end": 0.48,
+    "onset": 0.36
+   },
+   {
+    "w": "only",
+    "start": 0.48,
+    "end": 0.78,
+    "onset": 0.51
+   },
+   {
+    "w": "a",
+    "start": 0.78,
+    "end": 0.94,
+    "onset": 0.83
+   },
+   {
+    "w": "screenshot",
+    "start": 0.94,
+    "end": 1.4,
+    "onset": 0.88
+   },
+   {
+    "w": "shows",
+    "start": 1.4,
+    "end": 1.94,
+    "onset": 1.41
+   },
+   {
+    "w": "the",
+    "start": 1.94,
+    "end": 2.12,
+    "onset": 2.06
+   },
+   {
+    "w": "request",
+    "start": 2.12,
+    "end": 2.56,
+    "onset": 2.16
+   },
+   {
+    "w": "returned",
+    "start": 2.56,
+    "end": 2.92,
+    "onset": 2.77
+   },
+   {
+    "w": "200,",
+    "start": 2.92,
+    "end": 3.46,
+    "onset": 3.06
+   },
+   {
+    "w": "that",
+    "start": 3.86,
+    "end": 4.14,
+    "onset": 3.95
+   },
+   {
+    "w": "reader",
+    "start": 4.14,
+    "end": 4.48,
+    "onset": 4.17
+   },
+   {
+    "w": "can't",
+    "start": 4.48,
+    "end": 4.82,
+    "onset": 4.58
+   },
+   {
+    "w": "confirm",
+    "start": 4.82,
+    "end": 5.2,
+    "onset": 4.86
+   },
+   {
+    "w": "success,",
+    "start": 5.2,
+    "end": 5.78,
+    "onset": 5.46
+   },
+   {
+    "w": "so",
+    "start": 6.0,
+    "end": 6.44,
+    "onset": 6.17
+   },
+   {
+    "w": "I'd",
+    "start": 6.44,
+    "end": 6.98,
+    "onset": 6.75
+   },
+   {
+    "w": "say",
+    "start": 6.98,
+    "end": 7.22,
+    "onset": 6.87
+   },
+   {
+    "w": "it",
+    "start": 7.22,
+    "end": 7.34,
+    "onset": 7.22
+   },
+   {
+    "w": "in",
+    "start": 7.34,
+    "end": 7.46,
+    "onset": 7.34
+   },
+   {
+    "w": "nearby",
+    "start": 7.46,
+    "end": 7.7,
+    "onset": 7.46
+   },
+   {
+    "w": "text.",
+    "start": 7.7,
+    "end": 8.26,
+    "onset": 7.72
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.95,
+  "level_db": -22.76,
+  "text": "So I'd run a checker on the generated HTML, then tab through and zoom the page, because automation can't judge focus or reflow.",
+  "transcript": "So I'd run a checker on the generated HTML, then tab through and zoom the page, because automation can't judge focus or reflow.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.26,
+    "onset": 0.11
+   },
+   {
+    "w": "I'd",
+    "start": 0.26,
+    "end": 0.44,
+    "onset": 0.29
+   },
+   {
+    "w": "run",
+    "start": 0.44,
+    "end": 0.6,
+    "onset": 0.49
+   },
+   {
+    "w": "a",
+    "start": 0.6,
+    "end": 0.76,
+    "onset": 0.61
+   },
+   {
+    "w": "checker",
+    "start": 0.76,
+    "end": 1.18,
+    "onset": 0.78
+   },
+   {
+    "w": "on",
+    "start": 1.18,
+    "end": 1.3,
+    "onset": 1.18
+   },
+   {
+    "w": "the",
+    "start": 1.3,
+    "end": 1.4,
+    "onset": 1.33
+   },
+   {
+    "w": "generated",
+    "start": 1.4,
+    "end": 1.92,
+    "onset": 1.43
+   },
+   {
+    "w": "HTML,",
+    "start": 1.92,
+    "end": 2.56,
+    "onset": 1.89
+   },
+   {
+    "w": "then",
+    "start": 2.9,
+    "end": 3.2,
+    "onset": 3.04
+   },
+   {
+    "w": "tab",
+    "start": 3.2,
+    "end": 3.46,
+    "onset": 3.22
+   },
+   {
+    "w": "through",
+    "start": 3.46,
+    "end": 3.84,
+    "onset": 3.57
+   },
+   {
+    "w": "and",
+    "start": 3.84,
+    "end": 4.04,
+    "onset": 3.9
+   },
+   {
+    "w": "zoom",
+    "start": 4.04,
+    "end": 4.3,
+    "onset": 4.09
+   },
+   {
+    "w": "the",
+    "start": 4.3,
+    "end": 4.48,
+    "onset": 4.32
+   },
+   {
+    "w": "page,",
+    "start": 4.48,
+    "end": 4.94,
+    "onset": 4.53
+   },
+   {
+    "w": "because",
+    "start": 5.06,
+    "end": 5.42,
+    "onset": 5.21
+   },
+   {
+    "w": "automation",
+    "start": 5.42,
+    "end": 5.92,
+    "onset": 5.45
+   },
+   {
+    "w": "can't",
+    "start": 5.92,
+    "end": 6.4,
+    "onset": 6.01
+   },
+   {
+    "w": "judge",
+    "start": 6.4,
+    "end": 6.66,
+    "onset": 6.5
+   },
+   {
+    "w": "focus",
+    "start": 6.66,
+    "end": 7.08,
+    "onset": 6.83
+   },
+   {
+    "w": "or",
+    "start": 7.08,
+    "end": 7.4,
+    "onset": 7.05
+   },
+   {
+    "w": "reflow.",
+    "start": 7.4,
+    "end": 7.82,
+    "onset": 7.43
+   }
+  ]
+ },
+ "L5": {
+  "duration": 6.78,
+  "level_db": -26.01,
+  "text": "Then I'd make that a release gate, running the checker in the same preview step that checks links and examples.",
+  "transcript": "Then, I'd make that a release gate, running the checker in the same preview step that checks links and examples.",
+  "words": [
+   {
+    "w": "Then,",
+    "start": 0.0,
+    "end": 0.44,
+    "onset": 0.08
+   },
+   {
+    "w": "I'd",
+    "start": 0.62,
+    "end": 1.04,
+    "onset": 0.79
+   },
+   {
+    "w": "make",
+    "start": 1.04,
+    "end": 1.28,
+    "onset": 1.07
+   },
+   {
+    "w": "that",
+    "start": 1.28,
+    "end": 1.44,
+    "onset": 1.35
+   },
+   {
+    "w": "a",
+    "start": 1.44,
+    "end": 1.6,
+    "onset": 1.51
+   },
+   {
+    "w": "release",
+    "start": 1.6,
+    "end": 1.92,
+    "onset": 1.63
+   },
+   {
+    "w": "gate,",
+    "start": 1.92,
+    "end": 2.22,
+    "onset": 2.02
+   },
+   {
+    "w": "running",
+    "start": 2.44,
+    "end": 2.88,
+    "onset": 2.64
+   },
+   {
+    "w": "the",
+    "start": 2.88,
+    "end": 3.06,
+    "onset": 2.88
+   },
+   {
+    "w": "checker",
+    "start": 3.06,
+    "end": 3.5,
+    "onset": 3.09
+   },
+   {
+    "w": "in",
+    "start": 3.5,
+    "end": 3.62,
+    "onset": 3.5
+   },
+   {
+    "w": "the",
+    "start": 3.62,
+    "end": 3.7,
+    "onset": 3.67
+   },
+   {
+    "w": "same",
+    "start": 3.7,
+    "end": 3.96,
+    "onset": 3.66
+   },
+   {
+    "w": "preview",
+    "start": 3.96,
+    "end": 4.4,
+    "onset": 4.05
+   },
+   {
+    "w": "step",
+    "start": 4.4,
+    "end": 4.72,
+    "onset": 4.4
+   },
+   {
+    "w": "that",
+    "start": 4.72,
+    "end": 4.96,
+    "onset": 4.85
+   },
+   {
+    "w": "checks",
+    "start": 4.96,
+    "end": 5.34,
+    "onset": 5.02
+   },
+   {
+    "w": "links",
+    "start": 5.34,
+    "end": 5.74,
+    "onset": 5.33
+   },
+   {
+    "w": "and",
+    "start": 5.74,
+    "end": 5.92,
+    "onset": 5.75
+   },
+   {
+    "w": "examples.",
+    "start": 5.92,
+    "end": 6.4,
+    "onset": 6.05
+   }
+  ]
+ }
+}

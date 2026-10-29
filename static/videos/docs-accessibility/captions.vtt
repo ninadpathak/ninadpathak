@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.300
+What leaves a reader stuck on a docs page that looks finished?
+
+2
+00:00:04.533 --> 00:00:06.853
+Accessibility testing answers that,
+
+3
+00:00:06.853 --> 00:00:10.753
+because a screen reader follows only the structure in the markup,
+
+4
+00:00:10.753 --> 00:00:12.673
+not a bold-text heading.
+
+5
+00:00:12.700 --> 00:00:16.560
+And if only a screenshot shows the request returned 200,
+
+6
+00:00:16.560 --> 00:00:18.700
+that reader can't confirm success,
+
+7
+00:00:18.700 --> 00:00:21.300
+so I'd say it in nearby text.
+
+8
+00:00:21.300 --> 00:00:24.200
+So I'd run a checker on the generated HTML,
+
+9
+00:00:24.200 --> 00:00:26.360
+then tab through and zoom the page,
+
+10
+00:00:26.360 --> 00:00:29.467
+because automation can't judge focus or reflow.
+
+11
+00:00:29.467 --> 00:00:31.907
+Then I'd make that a release gate,
+
+12
+00:00:31.907 --> 00:00:36.267
+running the checker in the same preview step that checks links and examples.

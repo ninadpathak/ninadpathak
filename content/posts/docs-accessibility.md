@@ -16,6 +16,7 @@ takeaways:
   task.
 title: 'Accessibility Testing for Documentation: A Release Checklist'
 updated: 2026-08-09
+video: docs-accessibility
 ---
 
 Accessibility testing matters for documentation because a page can look finished and still leave a reader unable to complete its task. A bold heading, a link named “here,” or a screenshot holding the only success signal can turn setup instructions into a visual-only path.
