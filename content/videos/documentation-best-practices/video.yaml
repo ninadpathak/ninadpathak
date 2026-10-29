@@ -1,0 +1,20 @@
+# Narrated explainer for /articles/documentation-best-practices/, imported by tools/import_video.py from
+# ninadpathak-video films/documentation-best-practices (render of 2026-10-29T12:54:21+05:30).
+name: Documentation best practices in 44 seconds
+description: 'A test for documentation best practices: can a reader finish one task, see it worked, and recover from the likeliest failure, with recovery beside the risky action and limits the client can inspect.'
+upload_date: '2026-10-29T12:54:21+05:30'
+duration_seconds: 44
+width: 1920
+height: 1080
+file: documentation-best-practices.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 4.833
+  L3: 13.933
+  L4: 19.667
+  L5: 27.467
+  L6: 33.6
+transcript: Accurate documentation can still fail the moment a reader leaves the happy path. So my test for documentation best practices is whether a reader can finish one task, see it worked, and recover from the likeliest failure. That starts with a visible result, like the error response FastAPI's guide opens with. Then I'd put recovery beside the risky action, so after a timeout the reader sees whether a retry is safe. For a limit, I'd name a signal the client can inspect, like GitHub's x-ratelimit-remaining header. So download the article's review card, run it on your riskiest page first, and turn each blank cell into the next change.

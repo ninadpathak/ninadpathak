@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.833
+Accurate documentation can still fail the moment a reader leaves the happy path.
+
+2
+00:00:04.833 --> 00:00:10.593
+So my test for documentation best practices is whether a reader can finish one task,
+
+3
+00:00:10.593 --> 00:00:11.513
+see it worked,
+
+4
+00:00:11.513 --> 00:00:13.933
+and recover from the likeliest failure.
+
+5
+00:00:13.933 --> 00:00:16.013
+That starts with a visible result,
+
+6
+00:00:16.013 --> 00:00:19.667
+like the error response FastAPI's guide opens with.
+
+7
+00:00:19.667 --> 00:00:22.927
+Then I'd put recovery beside the risky action,
+
+8
+00:00:22.927 --> 00:00:27.467
+so after a timeout the reader sees whether a retry is safe.
+
+9
+00:00:27.467 --> 00:00:28.387
+For a limit,
+
+10
+00:00:28.387 --> 00:00:30.707
+I'd name a signal the client can inspect,
+
+11
+00:00:30.707 --> 00:00:33.600
+like GitHub's x-ratelimit-remaining header.
+
+12
+00:00:33.600 --> 00:00:36.160
+So download the article's review card,
+
+13
+00:00:36.160 --> 00:00:38.620
+run it on your riskiest page first,
+
+14
+00:00:38.620 --> 00:00:41.700
+and turn each blank cell into the next change.

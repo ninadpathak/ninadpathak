@@ -14,6 +14,7 @@ takeaways:
 - Make limits inspectable and assign each reader question to one page owner.
 title: Technical Documentation Best Practices, Tested on Real Developer Docs
 updated: 2026-08-02
+video: documentation-best-practices
 ---
 
 A documentation page can be accurate and still fail the moment a reader leaves the happy path. The useful test is smaller: can someone complete one task, recognize the result, and recover from the failure most likely to interrupt it?
