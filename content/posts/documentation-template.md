@@ -151,6 +151,6 @@ The filled fixture's `node check.mjs` covers behavior and closes its temporary s
 | Storage lifetime changes | Reference and troubleshooting | Recovery before and after restart |
 | A link target moves | Index and referring pages | Link validation and rendered navigation |
 
-When one of those changes reaches users, the [release notes template](/articles/release-notes-template/) tells them what to do about it. The [documentation review checklist](/articles/documentation-review/) adds the reader-facing checks.
+When one of those changes reaches users, the [release notes](/articles/release-notes-template/) tell them what to do about it. The [documentation review checklist](/articles/documentation-review/) adds the reader-facing checks.
 
 Assign an owner to each filled page and keep its triggering behavior beside the review check.
