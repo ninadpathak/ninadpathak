@@ -120,7 +120,7 @@ slug = "developer-experience"
 label = "Developer Experience"
 title = "Developer Experience and DevRel"
 description = "Arguments about developer trust, technical content, and the decisions that make a product feel credible before a sales call."
-intro = "Developer trust dies when marketing makes a technical claim the product cannot cash. These articles show where the debt starts."
+intro = "Developer trust dies when marketing makes a technical claim the product cannot cash. These articles show where the debt starts, and the <a href=\"/articles/stripe-technical-blog/\">Stripe engineering blog</a> shows what paying it down looks like."
 tag_matches = ["developer-experience", "devtools", "developer-tools", "developer-marketing", "developer-productivity", "content-strategy", "engineering-culture", "career"]
 
 [[content.categories]]

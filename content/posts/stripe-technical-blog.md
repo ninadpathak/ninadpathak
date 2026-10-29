@@ -23,6 +23,14 @@ It lowers implementation risk with concrete guidance tied to Stripe’s docs and
 
 That combination compounds. Each post helps Stripe establish trust before the API key, during the integration, and after the first launch.
 
+## Where the Stripe engineering blog lives and what it publishes
+
+The Stripe engineering blog is at [stripe.dev/blog/topic/engineering](https://stripe.dev/blog/topic/engineering), the engineering section of Stripe's developer blog. The old address, stripe.com/blog/engineering, returned a 301 to it when I checked on 2026-10-29.
+
+Its posts describe how Stripe builds its own systems, not how to call the API. Recent ones cover [a distributed proxy for its data plane](https://stripe.dev/blog/building-a-data-plane-from-scratch-stripes-own-high-performance-distributed-proxy), [auto-remediating a database fleet with graph search and state machines](https://stripe.dev/blog/how-stripe-uses-graph-search-and-state-machines-to-auto-remediate-a-global-database-fleet), [formatting 25 million lines of Ruby overnight](https://stripe.dev/blog/formatting-an-entire-25-million-line-codebase-overnight-the-rubyfmt-story) and [machine learning for Radar fraud detection](https://stripe.dev/blog/scaling-radar-fighting-fraud-with-agent-assisted-machine-learning).
+
+The rest of [stripe.dev/blog](https://stripe.dev/blog) holds integration tutorials on Billing, Connect, sandboxes, Workbench and AWS. Product launches, industry research and company news stay on [stripe.com/blog](https://stripe.com/blog).
+
 ## Stripe writes for implementation, not just attention
 
 Stripe says it plainly on the engineering blog landing page: the company cares deeply about beautiful code, APIs, and documentation. Plenty of companies could write that line.

@@ -1,8 +1,8 @@
 ---
 category: technical-documentation
 date: 2026-08-06
-description: Compare internal and external documentation, decide where each page belongs,
-  and split shared subjects without exposing private operating context.
+description: 'Internal vs. external documentation, with a decision table for incidents,
+  architecture, auth and releases: what goes public, what stays private, what splits.'
 slug: internal-vs-external-docs
 status: published
 work_note: Customer recovery instructions and private incident records have different
@@ -66,6 +66,8 @@ Keep privileged commands, escalation paths, rollback criteria, dashboards, and c
 Local access, internal repositories, approval paths, team ownership, coding standards, and deployment responsibilities belong in contributor onboarding. Atlassian's [internal documentation guidance](https://www.atlassian.com/work-management/knowledge-sharing/documentation) treats this material as living team knowledge, which means it still needs ownership and review.
 
 ## What belongs in external documentation
+
+External documentation is everything an outside reader needs to evaluate, start, integrate, configure, migrate or recover a product: quickstarts, API and SDK reference, limits and errors, release notes, migration guides and troubleshooting. It stops at the supported contract, so the reader learns what the product promises without seeing the system that keeps the promise.
 
 ### Product scope and getting started
 

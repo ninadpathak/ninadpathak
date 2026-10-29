@@ -53,7 +53,7 @@ Stripe's [development quickstart](https://docs.stripe.com/development/quickstart
   </div>
 </div>
 
-Stripe's [quickstart index](https://docs.stripe.com/quickstarts) also makes path selection obvious across different integration shapes.
+Stripe's [quickstart index](https://docs.stripe.com/quickstarts) also makes path selection obvious across different integration shapes. The [Stripe engineering blog](/articles/stripe-technical-blog/) does the same work a stage earlier, before anyone has created an API key.
 
 Vercel's [Functions quickstart](https://vercel.com/docs/functions/quickstart) is much shorter, but it still does the essential job: prerequisites, a working code example, and the next technical steps.
 
