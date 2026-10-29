@@ -1,0 +1,660 @@
+{
+ "L1": {
+  "duration": 7.14,
+  "level_db": -24.79,
+  "text": "Devtools startups lose deals over bad docs long before sales hears an objection, because the trial cools off quietly.",
+  "transcript": "Devtools startups lose deals over bad docs long before sales hears an objection, because the trial cools off quietly.",
+  "words": [
+   {
+    "w": "Devtools",
+    "start": 0.0,
+    "end": 0.7,
+    "onset": 0.08
+   },
+   {
+    "w": "startups",
+    "start": 0.7,
+    "end": 1.02,
+    "onset": 0.84
+   },
+   {
+    "w": "lose",
+    "start": 1.02,
+    "end": 1.4,
+    "onset": 1.0
+   },
+   {
+    "w": "deals",
+    "start": 1.4,
+    "end": 1.74,
+    "onset": 1.54
+   },
+   {
+    "w": "over",
+    "start": 1.74,
+    "end": 2.0,
+    "onset": 1.82
+   },
+   {
+    "w": "bad",
+    "start": 2.0,
+    "end": 2.36,
+    "onset": 1.96
+   },
+   {
+    "w": "docs",
+    "start": 2.36,
+    "end": 2.7,
+    "onset": 2.47
+   },
+   {
+    "w": "long",
+    "start": 2.7,
+    "end": 3.04,
+    "onset": 2.79
+   },
+   {
+    "w": "before",
+    "start": 3.04,
+    "end": 3.38,
+    "onset": 3.09
+   },
+   {
+    "w": "sales",
+    "start": 3.38,
+    "end": 3.84,
+    "onset": 3.47
+   },
+   {
+    "w": "hears",
+    "start": 3.84,
+    "end": 4.08,
+    "onset": 3.98
+   },
+   {
+    "w": "an",
+    "start": 4.08,
+    "end": 4.26,
+    "onset": 4.18
+   },
+   {
+    "w": "objection,",
+    "start": 4.26,
+    "end": 4.68,
+    "onset": 4.26
+   },
+   {
+    "w": "because",
+    "start": 5.16,
+    "end": 5.3,
+    "onset": 5.19
+   },
+   {
+    "w": "the",
+    "start": 5.3,
+    "end": 5.46,
+    "onset": 5.37
+   },
+   {
+    "w": "trial",
+    "start": 5.46,
+    "end": 5.82,
+    "onset": 5.47
+   },
+   {
+    "w": "cools",
+    "start": 5.82,
+    "end": 6.22,
+    "onset": 5.96
+   },
+   {
+    "w": "off",
+    "start": 6.22,
+    "end": 6.46,
+    "onset": 6.26
+   },
+   {
+    "w": "quietly.",
+    "start": 6.46,
+    "end": 6.92,
+    "onset": 6.56
+   }
+  ]
+ },
+ "L2": {
+  "duration": 6.9,
+  "level_db": -23.47,
+  "text": "For a technical product, buyers skip the marketing site and judge the risk of adopting it from the docs.",
+  "transcript": "For a technical product, buyers skip the marketing site and judge the risk of adopting it from the docs.",
+  "words": [
+   {
+    "w": "For",
+    "start": 0.0,
+    "end": 0.24,
+    "onset": 0.08
+   },
+   {
+    "w": "a",
+    "start": 0.24,
+    "end": 0.42,
+    "onset": 0.36
+   },
+   {
+    "w": "technical",
+    "start": 0.42,
+    "end": 0.7,
+    "onset": 0.36
+   },
+   {
+    "w": "product,",
+    "start": 0.7,
+    "end": 1.36,
+    "onset": 0.89
+   },
+   {
+    "w": "buyers",
+    "start": 1.66,
+    "end": 2.2,
+    "onset": 1.8
+   },
+   {
+    "w": "skip",
+    "start": 2.2,
+    "end": 2.52,
+    "onset": 2.2
+   },
+   {
+    "w": "the",
+    "start": 2.52,
+    "end": 2.68,
+    "onset": 2.61
+   },
+   {
+    "w": "marketing",
+    "start": 2.68,
+    "end": 3.0,
+    "onset": 2.67
+   },
+   {
+    "w": "site",
+    "start": 3.0,
+    "end": 3.46,
+    "onset": 3.15
+   },
+   {
+    "w": "and",
+    "start": 3.46,
+    "end": 3.94,
+    "onset": 3.68
+   },
+   {
+    "w": "judge",
+    "start": 3.94,
+    "end": 4.5,
+    "onset": 4.22
+   },
+   {
+    "w": "the",
+    "start": 4.5,
+    "end": 4.7,
+    "onset": 4.64
+   },
+   {
+    "w": "risk",
+    "start": 4.7,
+    "end": 5.0,
+    "onset": 4.8
+   },
+   {
+    "w": "of",
+    "start": 5.0,
+    "end": 5.14,
+    "onset": 5.04
+   },
+   {
+    "w": "adopting",
+    "start": 5.14,
+    "end": 5.58,
+    "onset": 5.13
+   },
+   {
+    "w": "it",
+    "start": 5.58,
+    "end": 5.84,
+    "onset": 5.55
+   },
+   {
+    "w": "from",
+    "start": 5.84,
+    "end": 6.14,
+    "onset": 6.0
+   },
+   {
+    "w": "the",
+    "start": 6.14,
+    "end": 6.28,
+    "onset": 6.14
+   },
+   {
+    "w": "docs.",
+    "start": 6.28,
+    "end": 6.62,
+    "onset": 6.33
+   }
+  ]
+ },
+ "L3": {
+  "duration": 9.31,
+  "level_db": -25.45,
+  "text": "So if the quickstart's npm install pulls a version that no longer exports the example's function, the evaluator opens a ticket, and the product already feels expensive.",
+  "transcript": "So if the quickstart's npm install pulls a version that no longer exports the example's function, the evaluator opens a ticket, and the product already feels expensive.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.2,
+    "onset": 0.08
+   },
+   {
+    "w": "if",
+    "start": 0.2,
+    "end": 0.34,
+    "onset": 0.16
+   },
+   {
+    "w": "the",
+    "start": 0.34,
+    "end": 0.46,
+    "onset": 0.39
+   },
+   {
+    "w": "quickstart's",
+    "start": 0.46,
+    "end": 1.08,
+    "onset": 0.51
+   },
+   {
+    "w": "npm",
+    "start": 1.08,
+    "end": 1.44,
+    "onset": 1.03
+   },
+   {
+    "w": "install",
+    "start": 1.44,
+    "end": 1.84,
+    "onset": 1.75
+   },
+   {
+    "w": "pulls",
+    "start": 1.84,
+    "end": 2.2,
+    "onset": 2.0
+   },
+   {
+    "w": "a",
+    "start": 2.2,
+    "end": 2.32,
+    "onset": 2.22
+   },
+   {
+    "w": "version",
+    "start": 2.32,
+    "end": 2.64,
+    "onset": 2.35
+   },
+   {
+    "w": "that",
+    "start": 2.64,
+    "end": 2.8,
+    "onset": 2.56
+   },
+   {
+    "w": "no",
+    "start": 2.8,
+    "end": 2.96,
+    "onset": 2.82
+   },
+   {
+    "w": "longer",
+    "start": 2.96,
+    "end": 3.28,
+    "onset": 3.05
+   },
+   {
+    "w": "exports",
+    "start": 3.28,
+    "end": 3.84,
+    "onset": 3.37
+   },
+   {
+    "w": "the",
+    "start": 3.84,
+    "end": 4.02,
+    "onset": 3.97
+   },
+   {
+    "w": "example's",
+    "start": 4.02,
+    "end": 4.54,
+    "onset": 3.98
+   },
+   {
+    "w": "function,",
+    "start": 4.54,
+    "end": 4.96,
+    "onset": 4.55
+   },
+   {
+    "w": "the",
+    "start": 5.26,
+    "end": 5.32,
+    "onset": 5.26
+   },
+   {
+    "w": "evaluator",
+    "start": 5.32,
+    "end": 5.92,
+    "onset": 5.31
+   },
+   {
+    "w": "opens",
+    "start": 5.92,
+    "end": 6.28,
+    "onset": 6.0
+   },
+   {
+    "w": "a",
+    "start": 6.28,
+    "end": 6.44,
+    "onset": 6.37
+   },
+   {
+    "w": "ticket,",
+    "start": 6.44,
+    "end": 6.74,
+    "onset": 6.46
+   },
+   {
+    "w": "and",
+    "start": 6.88,
+    "end": 7.18,
+    "onset": 7.04
+   },
+   {
+    "w": "the",
+    "start": 7.18,
+    "end": 7.32,
+    "onset": 7.24
+   },
+   {
+    "w": "product",
+    "start": 7.32,
+    "end": 7.66,
+    "onset": 7.37
+   },
+   {
+    "w": "already",
+    "start": 7.66,
+    "end": 8.14,
+    "onset": 7.8
+   },
+   {
+    "w": "feels",
+    "start": 8.14,
+    "end": 8.56,
+    "onset": 8.3
+   },
+   {
+    "w": "expensive.",
+    "start": 8.56,
+    "end": 9.08,
+    "onset": 8.61
+   }
+  ]
+ },
+ "L4": {
+  "duration": 6.63,
+  "level_db": -23.64,
+  "text": "And if the rate limit's Retry-After header isn't documented, they learn it by getting throttled in a load test.",
+  "transcript": "And if the rate limit's Retry-After header isn't documented, they learn it by getting throttled in a load test.",
+  "words": [
+   {
+    "w": "And",
+    "start": 0.0,
+    "end": 0.2,
+    "onset": 0.08
+   },
+   {
+    "w": "if",
+    "start": 0.2,
+    "end": 0.34,
+    "onset": 0.23
+   },
+   {
+    "w": "the",
+    "start": 0.34,
+    "end": 0.46,
+    "onset": 0.37
+   },
+   {
+    "w": "rate",
+    "start": 0.46,
+    "end": 0.76,
+    "onset": 0.56
+   },
+   {
+    "w": "limit's",
+    "start": 0.76,
+    "end": 1.34,
+    "onset": 0.8
+   },
+   {
+    "w": "Retry",
+    "start": 1.34,
+    "end": 1.7,
+    "onset": 1.33
+   },
+   {
+    "w": "-After",
+    "start": 1.7,
+    "end": 2.08,
+    "onset": 1.83
+   },
+   {
+    "w": "header",
+    "start": 2.08,
+    "end": 2.48,
+    "onset": 2.1
+   },
+   {
+    "w": "isn't",
+    "start": 2.48,
+    "end": 2.96,
+    "onset": 2.64
+   },
+   {
+    "w": "documented,",
+    "start": 2.96,
+    "end": 3.6,
+    "onset": 3.02
+   },
+   {
+    "w": "they",
+    "start": 3.94,
+    "end": 4.24,
+    "onset": 4.15
+   },
+   {
+    "w": "learn",
+    "start": 4.24,
+    "end": 4.5,
+    "onset": 4.24
+   },
+   {
+    "w": "it",
+    "start": 4.5,
+    "end": 4.64,
+    "onset": 4.53
+   },
+   {
+    "w": "by",
+    "start": 4.64,
+    "end": 4.8,
+    "onset": 4.7
+   },
+   {
+    "w": "getting",
+    "start": 4.8,
+    "end": 5.04,
+    "onset": 4.89
+   },
+   {
+    "w": "throttled",
+    "start": 5.04,
+    "end": 5.62,
+    "onset": 5.1
+   },
+   {
+    "w": "in",
+    "start": 5.62,
+    "end": 5.78,
+    "onset": 5.69
+   },
+   {
+    "w": "a",
+    "start": 5.78,
+    "end": 5.9,
+    "onset": 5.78
+   },
+   {
+    "w": "load",
+    "start": 5.9,
+    "end": 6.06,
+    "onset": 5.87
+   },
+   {
+    "w": "test.",
+    "start": 6.06,
+    "end": 6.46,
+    "onset": 6.14
+   }
+  ]
+ },
+ "L5": {
+  "duration": 6.24,
+  "level_db": -21.74,
+  "text": "So I'd test each quickstart command and publish the limits first, then track which docs pages start trials.",
+  "transcript": "So I'd test each quickstart command and publish the limits first, then track which docs pages start trials.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.28,
+    "onset": 0.08
+   },
+   {
+    "w": "I'd",
+    "start": 0.28,
+    "end": 0.66,
+    "onset": 0.29
+   },
+   {
+    "w": "test",
+    "start": 0.66,
+    "end": 0.88,
+    "onset": 0.57
+   },
+   {
+    "w": "each",
+    "start": 0.88,
+    "end": 1.2,
+    "onset": 0.98
+   },
+   {
+    "w": "quickstart",
+    "start": 1.2,
+    "end": 1.72,
+    "onset": 1.18
+   },
+   {
+    "w": "command",
+    "start": 1.72,
+    "end": 2.12,
+    "onset": 1.83
+   },
+   {
+    "w": "and",
+    "start": 2.12,
+    "end": 2.36,
+    "onset": 2.18
+   },
+   {
+    "w": "publish",
+    "start": 2.36,
+    "end": 2.7,
+    "onset": 2.42
+   },
+   {
+    "w": "the",
+    "start": 2.7,
+    "end": 2.86,
+    "onset": 2.79
+   },
+   {
+    "w": "limits",
+    "start": 2.86,
+    "end": 3.12,
+    "onset": 2.84
+   },
+   {
+    "w": "first,",
+    "start": 3.12,
+    "end": 3.54,
+    "onset": 3.27
+   },
+   {
+    "w": "then",
+    "start": 3.78,
+    "end": 4.04,
+    "onset": 3.83
+   },
+   {
+    "w": "track",
+    "start": 4.04,
+    "end": 4.4,
+    "onset": 4.09
+   },
+   {
+    "w": "which",
+    "start": 4.4,
+    "end": 4.64,
+    "onset": 4.42
+   },
+   {
+    "w": "docs",
+    "start": 4.64,
+    "end": 4.92,
+    "onset": 4.61
+   },
+   {
+    "w": "pages",
+    "start": 4.92,
+    "end": 5.28,
+    "onset": 5.05
+   },
+   {
+    "w": "start",
+    "start": 5.28,
+    "end": 5.58,
+    "onset": 5.38
+   },
+   {
+    "w": "trials.",
+    "start": 5.58,
+    "end": 5.94,
+    "onset": 5.65
+   }
+  ]
+ }
+}

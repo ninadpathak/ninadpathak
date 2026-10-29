@@ -9,6 +9,7 @@ work_note: '[Ninad Pathak](/contact/) connects developer content strategy with p
   the limits needed to assess the product.'
 title: Why Devtools Startups Lose Deals Over Bad Docs
 slug: devtools-documentation
+video: devtools-documentation
 ---
 
 DevTools startups lose deals over bad docs long before anyone writes "documentation" into a CRM field. A buyer hits a dead quickstart, an auth example leaves out a required scope, a pricing-sensitive limit like the free-tier request cap sits buried three pages deep, or the migration path for one breaking change reads as a single vague sentence.

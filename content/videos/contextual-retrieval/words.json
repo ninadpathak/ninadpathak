@@ -1,0 +1,636 @@
+{
+ "L1": {
+  "duration": 8.25,
+  "level_db": -22.33,
+  "text": "Why can a search for Acme's Q3 revenue miss the right chunk? Because a chunk split from its filing loses the company and the quarter.",
+  "transcript": "Why can a search for Acme's Q3 revenue miss the right chunk? Because a chunk split from its filing loses the company and the quarter.",
+  "words": [
+   {
+    "w": "Why",
+    "start": 0.0,
+    "end": 0.28,
+    "onset": 0.08
+   },
+   {
+    "w": "can",
+    "start": 0.28,
+    "end": 0.5,
+    "onset": 0.42
+   },
+   {
+    "w": "a",
+    "start": 0.5,
+    "end": 0.68,
+    "onset": 0.46
+   },
+   {
+    "w": "search",
+    "start": 0.68,
+    "end": 0.88,
+    "onset": 0.61
+   },
+   {
+    "w": "for",
+    "start": 0.88,
+    "end": 1.1,
+    "onset": 0.92
+   },
+   {
+    "w": "Acme's",
+    "start": 1.1,
+    "end": 1.6,
+    "onset": 1.17
+   },
+   {
+    "w": "Q3",
+    "start": 1.6,
+    "end": 1.96,
+    "onset": 1.71
+   },
+   {
+    "w": "revenue",
+    "start": 1.96,
+    "end": 2.4,
+    "onset": 2.09
+   },
+   {
+    "w": "miss",
+    "start": 2.4,
+    "end": 2.7,
+    "onset": 2.31
+   },
+   {
+    "w": "the",
+    "start": 2.7,
+    "end": 2.86,
+    "onset": 2.78
+   },
+   {
+    "w": "right",
+    "start": 2.86,
+    "end": 3.1,
+    "onset": 2.92
+   },
+   {
+    "w": "chunk?",
+    "start": 3.1,
+    "end": 3.5,
+    "onset": 3.18
+   },
+   {
+    "w": "Because",
+    "start": 3.76,
+    "end": 4.32,
+    "onset": 3.86
+   },
+   {
+    "w": "a",
+    "start": 4.32,
+    "end": 4.72,
+    "onset": 4.65
+   },
+   {
+    "w": "chunk",
+    "start": 4.72,
+    "end": 5.0,
+    "onset": 4.8
+   },
+   {
+    "w": "split",
+    "start": 5.0,
+    "end": 5.42,
+    "onset": 5.08
+   },
+   {
+    "w": "from",
+    "start": 5.42,
+    "end": 5.62,
+    "onset": 5.52
+   },
+   {
+    "w": "its",
+    "start": 5.62,
+    "end": 5.78,
+    "onset": 5.62
+   },
+   {
+    "w": "filing",
+    "start": 5.78,
+    "end": 6.18,
+    "onset": 5.79
+   },
+   {
+    "w": "loses",
+    "start": 6.18,
+    "end": 6.62,
+    "onset": 6.3
+   },
+   {
+    "w": "the",
+    "start": 6.62,
+    "end": 6.9,
+    "onset": 6.82
+   },
+   {
+    "w": "company",
+    "start": 6.9,
+    "end": 7.32,
+    "onset": 6.94
+   },
+   {
+    "w": "and",
+    "start": 7.32,
+    "end": 7.64,
+    "onset": 7.36
+   },
+   {
+    "w": "the",
+    "start": 7.64,
+    "end": 7.76,
+    "onset": 7.64
+   },
+   {
+    "w": "quarter.",
+    "start": 7.76,
+    "end": 8.06,
+    "onset": 7.79
+   }
+  ]
+ },
+ "L2": {
+  "duration": 6.26,
+  "level_db": -24.36,
+  "text": "Contextual retrieval fixes that at indexing time, by having Claude explain each chunk using the full document.",
+  "transcript": "Contextual retrieval fixes that at indexing time, by having Claude explain each chunk using the full document.",
+  "words": [
+   {
+    "w": "Contextual",
+    "start": 0.0,
+    "end": 0.74,
+    "onset": 0.08
+   },
+   {
+    "w": "retrieval",
+    "start": 0.74,
+    "end": 1.26,
+    "onset": 0.9
+   },
+   {
+    "w": "fixes",
+    "start": 1.26,
+    "end": 1.6,
+    "onset": 1.37
+   },
+   {
+    "w": "that",
+    "start": 1.6,
+    "end": 1.94,
+    "onset": 1.6
+   },
+   {
+    "w": "at",
+    "start": 1.94,
+    "end": 2.1,
+    "onset": 1.97
+   },
+   {
+    "w": "indexing",
+    "start": 2.1,
+    "end": 2.66,
+    "onset": 2.15
+   },
+   {
+    "w": "time,",
+    "start": 2.66,
+    "end": 2.98,
+    "onset": 2.71
+   },
+   {
+    "w": "by",
+    "start": 3.24,
+    "end": 3.34,
+    "onset": 3.25
+   },
+   {
+    "w": "having",
+    "start": 3.34,
+    "end": 3.62,
+    "onset": 3.41
+   },
+   {
+    "w": "Claude",
+    "start": 3.62,
+    "end": 3.96,
+    "onset": 3.67
+   },
+   {
+    "w": "explain",
+    "start": 3.96,
+    "end": 4.36,
+    "onset": 3.96
+   },
+   {
+    "w": "each",
+    "start": 4.36,
+    "end": 4.68,
+    "onset": 4.51
+   },
+   {
+    "w": "chunk",
+    "start": 4.68,
+    "end": 4.98,
+    "onset": 4.65
+   },
+   {
+    "w": "using",
+    "start": 4.98,
+    "end": 5.26,
+    "onset": 5.07
+   },
+   {
+    "w": "the",
+    "start": 5.26,
+    "end": 5.46,
+    "onset": 5.26
+   },
+   {
+    "w": "full",
+    "start": 5.46,
+    "end": 5.66,
+    "onset": 5.43
+   },
+   {
+    "w": "document.",
+    "start": 5.66,
+    "end": 6.06,
+    "onset": 5.76
+   }
+  ]
+ },
+ "L3": {
+  "duration": 7.44,
+  "level_db": -22.2,
+  "text": "That explanation goes in front of the chunk, so embeddings and BM25 can find it by the company and the quarter.",
+  "transcript": "That explanation goes in front of the chunk, so embeddings and BM25 can find it by the company and the quarter.",
+  "words": [
+   {
+    "w": "That",
+    "start": 0.0,
+    "end": 0.32,
+    "onset": 0.08
+   },
+   {
+    "w": "explanation",
+    "start": 0.32,
+    "end": 0.76,
+    "onset": 0.32
+   },
+   {
+    "w": "goes",
+    "start": 0.76,
+    "end": 1.28,
+    "onset": 0.97
+   },
+   {
+    "w": "in",
+    "start": 1.28,
+    "end": 1.46,
+    "onset": 1.36
+   },
+   {
+    "w": "front",
+    "start": 1.46,
+    "end": 1.66,
+    "onset": 1.47
+   },
+   {
+    "w": "of",
+    "start": 1.66,
+    "end": 1.8,
+    "onset": 1.67
+   },
+   {
+    "w": "the",
+    "start": 1.8,
+    "end": 1.92,
+    "onset": 1.86
+   },
+   {
+    "w": "chunk,",
+    "start": 1.92,
+    "end": 2.26,
+    "onset": 1.96
+   },
+   {
+    "w": "so",
+    "start": 2.5,
+    "end": 3.02,
+    "onset": 2.68
+   },
+   {
+    "w": "embeddings",
+    "start": 3.02,
+    "end": 3.8,
+    "onset": 3.24
+   },
+   {
+    "w": "and",
+    "start": 3.8,
+    "end": 4.18,
+    "onset": 3.97
+   },
+   {
+    "w": "BM25",
+    "start": 4.18,
+    "end": 4.98,
+    "onset": 4.29
+   },
+   {
+    "w": "can",
+    "start": 4.98,
+    "end": 5.44,
+    "onset": 4.97
+   },
+   {
+    "w": "find",
+    "start": 5.44,
+    "end": 5.74,
+    "onset": 5.45
+   },
+   {
+    "w": "it",
+    "start": 5.74,
+    "end": 5.86,
+    "onset": 5.77
+   },
+   {
+    "w": "by",
+    "start": 5.86,
+    "end": 5.98,
+    "onset": 5.91
+   },
+   {
+    "w": "the",
+    "start": 5.98,
+    "end": 6.12,
+    "onset": 6.05
+   },
+   {
+    "w": "company",
+    "start": 6.12,
+    "end": 6.48,
+    "onset": 6.15
+   },
+   {
+    "w": "and",
+    "start": 6.48,
+    "end": 6.84,
+    "onset": 6.66
+   },
+   {
+    "w": "the",
+    "start": 6.84,
+    "end": 7.02,
+    "onset": 6.89
+   },
+   {
+    "w": "quarter.",
+    "start": 7.02,
+    "end": 7.28,
+    "onset": 7.03
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.99,
+  "level_db": -23.84,
+  "text": "In Anthropic's tests, that cut top-20 retrieval failure by 49%, but every chunk now costs more to index.",
+  "transcript": "In Anthropic's tests, that cut top-20 retrieval failure by 49%, but every chunk now costs more to index.",
+  "words": [
+   {
+    "w": "In",
+    "start": 0.0,
+    "end": 0.28,
+    "onset": 0.08
+   },
+   {
+    "w": "Anthropic's",
+    "start": 0.28,
+    "end": 1.06,
+    "onset": 0.57
+   },
+   {
+    "w": "tests,",
+    "start": 1.06,
+    "end": 1.52,
+    "onset": 1.12
+   },
+   {
+    "w": "that",
+    "start": 1.94,
+    "end": 2.04,
+    "onset": 1.9
+   },
+   {
+    "w": "cut",
+    "start": 2.04,
+    "end": 2.32,
+    "onset": 2.12
+   },
+   {
+    "w": "top",
+    "start": 2.32,
+    "end": 2.64,
+    "onset": 2.38
+   },
+   {
+    "w": "-20",
+    "start": 2.64,
+    "end": 3.0,
+    "onset": 2.73
+   },
+   {
+    "w": "retrieval",
+    "start": 3.0,
+    "end": 3.56,
+    "onset": 3.11
+   },
+   {
+    "w": "failure",
+    "start": 3.56,
+    "end": 3.94,
+    "onset": 3.57
+   },
+   {
+    "w": "by",
+    "start": 3.94,
+    "end": 4.14,
+    "onset": 4.07
+   },
+   {
+    "w": "49%,",
+    "start": 4.14,
+    "end": 5.06,
+    "onset": 4.17
+   },
+   {
+    "w": "but",
+    "start": 5.06,
+    "end": 5.64,
+    "onset": 5.51
+   },
+   {
+    "w": "every",
+    "start": 5.64,
+    "end": 5.9,
+    "onset": 5.63
+   },
+   {
+    "w": "chunk",
+    "start": 5.9,
+    "end": 6.26,
+    "onset": 6.0
+   },
+   {
+    "w": "now",
+    "start": 6.26,
+    "end": 6.6,
+    "onset": 6.32
+   },
+   {
+    "w": "costs",
+    "start": 6.6,
+    "end": 6.94,
+    "onset": 6.68
+   },
+   {
+    "w": "more",
+    "start": 6.94,
+    "end": 7.18,
+    "onset": 6.99
+   },
+   {
+    "w": "to",
+    "start": 7.18,
+    "end": 7.34,
+    "onset": 7.26
+   },
+   {
+    "w": "index.",
+    "start": 7.34,
+    "end": 7.7,
+    "onset": 7.36
+   }
+  ]
+ },
+ "L5": {
+  "duration": 7.26,
+  "level_db": -22.78,
+  "text": "So I'd check metadata first, and add the explanations only where a chunk still reads as anonymous.",
+  "transcript": "So I'd check metadata first, and add the explanations only where a chunk still reads as anonymous.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.36,
+    "onset": 0.08
+   },
+   {
+    "w": "I'd",
+    "start": 0.36,
+    "end": 1.12,
+    "onset": 0.73
+   },
+   {
+    "w": "check",
+    "start": 1.12,
+    "end": 1.3,
+    "onset": 1.05
+   },
+   {
+    "w": "metadata",
+    "start": 1.3,
+    "end": 1.76,
+    "onset": 1.34
+   },
+   {
+    "w": "first,",
+    "start": 1.76,
+    "end": 2.4,
+    "onset": 1.99
+   },
+   {
+    "w": "and",
+    "start": 2.62,
+    "end": 3.0,
+    "onset": 2.89
+   },
+   {
+    "w": "add",
+    "start": 3.0,
+    "end": 3.26,
+    "onset": 3.05
+   },
+   {
+    "w": "the",
+    "start": 3.26,
+    "end": 3.4,
+    "onset": 3.32
+   },
+   {
+    "w": "explanations",
+    "start": 3.4,
+    "end": 4.12,
+    "onset": 3.73
+   },
+   {
+    "w": "only",
+    "start": 4.12,
+    "end": 4.68,
+    "onset": 4.14
+   },
+   {
+    "w": "where",
+    "start": 4.68,
+    "end": 4.96,
+    "onset": 4.78
+   },
+   {
+    "w": "a",
+    "start": 4.96,
+    "end": 5.1,
+    "onset": 4.96
+   },
+   {
+    "w": "chunk",
+    "start": 5.1,
+    "end": 5.42,
+    "onset": 5.14
+   },
+   {
+    "w": "still",
+    "start": 5.42,
+    "end": 5.82,
+    "onset": 5.5
+   },
+   {
+    "w": "reads",
+    "start": 5.82,
+    "end": 6.28,
+    "onset": 5.98
+   },
+   {
+    "w": "as",
+    "start": 6.28,
+    "end": 6.46,
+    "onset": 6.29
+   },
+   {
+    "w": "anonymous.",
+    "start": 6.46,
+    "end": 6.82,
+    "onset": 6.46
+   }
+  ]
+ }
+}

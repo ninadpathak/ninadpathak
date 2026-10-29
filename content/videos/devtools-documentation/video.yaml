@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/devtools-documentation/, imported by tools/import_video.py from
+# ninadpathak-video films/devtools-documentation (render of 2026-10-29T04:17:28+05:30).
+name: Why devtools startups lose deals over docs in 40 seconds
+description: 'How bad docs cool a devtools trial before sales hears an objection: a broken quickstart install, an undocumented Retry-After header, and why to test every quickstart command and track which pages start trials.'
+upload_date: '2026-10-29T04:17:28+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: devtools-documentation.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 7.333
+  L3: 14.433
+  L4: 23.933
+  L5: 30.767
+transcript: Devtools startups lose deals over bad docs long before sales hears an objection, because the trial cools off quietly. For a technical product, buyers skip the marketing site and judge the risk of adopting it from the docs. So if the quickstart's npm install pulls a version that no longer exports the example's function, the evaluator opens a ticket, and the product already feels expensive. And if the rate limit's Retry-After header isn't documented, they learn it by getting throttled in a load test. So I'd test each quickstart command and publish the limits first, then track which docs pages start trials.

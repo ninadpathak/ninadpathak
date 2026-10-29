@@ -1,0 +1,41 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.333
+Why can a search for Acme's Q3 revenue miss the right chunk? Because a chunk split from its filing loses the company and the quarter.
+
+2
+00:00:08.333 --> 00:00:11.573
+Contextual retrieval fixes that at indexing time,
+
+3
+00:00:11.573 --> 00:00:14.667
+by having Claude explain each chunk using the full document.
+
+4
+00:00:14.667 --> 00:00:17.167
+That explanation goes in front of the chunk,
+
+5
+00:00:17.167 --> 00:00:22.167
+so embeddings and BM25 can find it by the company and the quarter.
+
+6
+00:00:22.167 --> 00:00:24.087
+In Anthropic's tests,
+
+7
+00:00:24.107 --> 00:00:27.227
+that cut top-20 retrieval failure by 49%,
+
+8
+00:00:27.227 --> 00:00:30.233
+but every chunk now costs more to index.
+
+9
+00:00:30.233 --> 00:00:32.853
+So I'd check metadata first,
+
+10
+00:00:32.853 --> 00:00:37.453
+and add the explanations only where a chunk still reads as anonymous.

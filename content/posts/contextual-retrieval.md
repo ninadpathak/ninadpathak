@@ -10,6 +10,7 @@ work_note: A research result needs its experimental conditions alongside the exp
 title: How Anthropic's Contextual Retrieval Changes RAG Architecture
 updated: '2026-08-17'
 slug: contextual-retrieval
+video: contextual-retrieval
 ---
 
 Anthropic took a chunk like `"The company's revenue grew by 3% over the previous quarter."`, asked Claude to explain that chunk using the full document, then prepended the explanation before indexing it. That one step cut top-20 retrieval failure by **49%** when Anthropic combined contextual embeddings with contextual BM25, according to [their writeup](https://www.anthropic.com/engineering/contextual-retrieval).

@@ -1,0 +1,45 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.080
+Devtools startups lose deals over bad docs long before sales hears an objection,
+
+2
+00:00:05.160 --> 00:00:07.320
+because the trial cools off quietly.
+
+3
+00:00:07.333 --> 00:00:08.993
+For a technical product,
+
+4
+00:00:08.993 --> 00:00:14.353
+buyers skip the marketing site and judge the risk of adopting it from the docs.
+
+5
+00:00:14.433 --> 00:00:19.693
+So if the quickstart's npm install pulls a version that no longer exports the example's function,
+
+6
+00:00:19.693 --> 00:00:21.313
+the evaluator opens a ticket,
+
+7
+00:00:21.313 --> 00:00:23.913
+and the product already feels expensive.
+
+8
+00:00:23.933 --> 00:00:27.873
+And if the rate limit's Retry-After header isn't documented,
+
+9
+00:00:27.873 --> 00:00:30.767
+they learn it by getting throttled in a load test.
+
+10
+00:00:30.767 --> 00:00:34.547
+So I'd test each quickstart command and publish the limits first,
+
+11
+00:00:34.547 --> 00:00:37.107
+then track which docs pages start trials.

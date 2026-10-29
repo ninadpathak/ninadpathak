@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/contextual-retrieval/, imported by tools/import_video.py from
+# ninadpathak-video films/contextual-retrieval (render of 2026-10-29T02:00:29+05:30).
+name: Contextual retrieval in 40 seconds
+description: How Anthropic's contextual retrieval prepends a Claude-written explanation to each chunk so embeddings and BM25 can find it, the 49% drop in top-20 retrieval failure, and why to check metadata first.
+upload_date: '2026-10-29T02:00:29+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: contextual-retrieval.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 8.333
+  L3: 14.667
+  L4: 22.167
+  L5: 30.233
+transcript: Why can a search for Acme's Q3 revenue miss the right chunk? Because a chunk split from its filing loses the company and the quarter. Contextual retrieval fixes that at indexing time, by having Claude explain each chunk using the full document. That explanation goes in front of the chunk, so embeddings and BM25 can find it by the company and the quarter. In Anthropic's tests, that cut top-20 retrieval failure by 49%, but every chunk now costs more to index. So I'd check metadata first, and add the explanations only where a chunk still reads as anonymous.
