@@ -1,0 +1,45 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.620
+Kill a DeerFlow workflow partway through,
+
+2
+00:00:02.720 --> 00:00:04.660
+and it resumes where it left off,
+
+3
+00:00:04.660 --> 00:00:08.433
+because each stage writes its outputs to a session file.
+
+4
+00:00:08.433 --> 00:00:12.633
+Each agent's working memory lives in its prompt and resets between stages,
+
+5
+00:00:12.633 --> 00:00:15.833
+so the next one reads that file back in.
+
+6
+00:00:15.833 --> 00:00:17.893
+The file is plain JSON,
+
+7
+00:00:17.893 --> 00:00:23.233
+so you can open it to see which stages finished and what each produced.
+
+8
+00:00:23.267 --> 00:00:27.227
+Findings that should outlast the session go to a store you plug in,
+
+9
+00:00:27.227 --> 00:00:30.867
+like pgvector, which the next run queries first.
+
+10
+00:00:30.867 --> 00:00:35.907
+So for a research pipeline that has to be auditable and resumable,
+
+11
+00:00:35.907 --> 00:00:37.267
+I'd reach for DeerFlow.

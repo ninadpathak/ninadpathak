@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/developer-onboarding-docs/, imported by tools/import_video.py from
+# ninadpathak-video films/developer-onboarding-docs (render of 2026-10-29T03:29:00+05:30).
+name: Developer onboarding docs in 40 seconds
+description: 'Why developer onboarding docs should end at a safe first merge: one supported setup path with a check after each step, fixes beside the command that fails, and a real, reversible first change.'
+upload_date: '2026-10-29T03:29:00+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: developer-onboarding-docs.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 6.9
+  L3: 15.1
+  L4: 22.433
+  L5: 30.4
+transcript: A reading list gives new engineers no finish line, so I end developer onboarding docs at a safe first merge. Getting there takes one supported setup path with a check after each step, because a clean exit only proves the command exited. So when the health check fails, the reader stops, and the fix sits beside that command, not in Slack. The first change is real and reversible, like rejecting an empty customer reference, with a test that fails first, then passes. So after someone runs the route, I'd note where they needed a rescue and fix that stage.

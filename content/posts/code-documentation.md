@@ -14,6 +14,7 @@ work_note: Technical writer [Ninad Pathak](/portfolio/) connects API reference e
   to integration guides, keeping exact function contracts available without making
   developers assemble the full procedure from scattered signatures.
 slug: code-documentation
+video: code-documentation
 ---
 
 A codebase starts to become hard to change when the reason for a line lives in a handbook, while the handbook repeats signatures the source already knows. I use a simpler boundary in this site's Python code: comments explain local reasoning, generated reference records stable contracts, and guides carry the decisions that connect several parts of the system.

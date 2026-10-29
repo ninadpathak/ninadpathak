@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/context-windows-vs-memory/, imported by tools/import_video.py from
+# ninadpathak-video films/context-windows-vs-memory (render of 2026-10-29T01:13:01+05:30).
+name: Context windows vs memory in 40 seconds
+description: Why a context window is a per-request budget and memory is state stored outside the model, why a bigger window does not guarantee recall, and how to decide what goes where.
+upload_date: '2026-10-29T01:13:01+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: context-windows-vs-memory.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 6.033
+  L3: 13.7
+  L4: 19.933
+  L5: 28.233
+transcript: Even a model that answers perfectly in one request can know nothing about it in the next. That's because a context window is a budget for one request, while memory is state stored outside the model and retrieved later. So a chat app that seems to remember is resending earlier turns into the context each time. And a bigger window doesn't guarantee recall, because even when a long contract fits, a clause halfway through can still go unused. So I'd ask how long the information must survive, keeping this request's evidence in context and storing what later requests need outside the model.

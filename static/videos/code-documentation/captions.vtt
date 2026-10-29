@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:01.760
+You go to change a line,
+
+2
+00:00:01.800 --> 00:00:04.320
+but its reason lives in a handbook,
+
+3
+00:00:04.320 --> 00:00:06.580
+so the code gets hard to change.
+
+4
+00:00:06.600 --> 00:00:11.000
+That's why my code documentation gives each answer one of three homes.
+
+5
+00:00:11.000 --> 00:00:13.040
+A comment holds local reasoning,
+
+6
+00:00:13.100 --> 00:00:16.633
+like the stable ordering a later edit could quietly break.
+
+7
+00:00:16.633 --> 00:00:20.353
+A docstring states what a function accepts or returns,
+
+8
+00:00:20.373 --> 00:00:23.767
+so the generated reference stays beside the code.
+
+9
+00:00:23.767 --> 00:00:29.367
+But generated pages can't reliably say what to do when a valid request fails,
+
+10
+00:00:29.367 --> 00:00:31.333
+so that goes in a guide.
+
+11
+00:00:31.333 --> 00:00:34.613
+So I'd ask what the reader needs at that moment,
+
+12
+00:00:34.613 --> 00:00:37.053
+because that decides where it belongs.

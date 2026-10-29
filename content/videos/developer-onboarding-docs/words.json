@@ -1,0 +1,636 @@
+{
+ "L1": {
+  "duration": 6.7,
+  "level_db": -20.46,
+  "text": "A reading list gives new engineers no finish line, so I end developer onboarding docs at a safe first merge.",
+  "transcript": "A reading list gives new engineers no finish line, so I end developer onboarding docs at a safe first merge.",
+  "words": [
+   {
+    "w": "A",
+    "start": 0.0,
+    "end": 0.32,
+    "onset": 0.08
+   },
+   {
+    "w": "reading",
+    "start": 0.32,
+    "end": 0.56,
+    "onset": 0.33
+   },
+   {
+    "w": "list",
+    "start": 0.56,
+    "end": 0.84,
+    "onset": 0.51
+   },
+   {
+    "w": "gives",
+    "start": 0.84,
+    "end": 1.14,
+    "onset": 0.95
+   },
+   {
+    "w": "new",
+    "start": 1.14,
+    "end": 1.4,
+    "onset": 1.21
+   },
+   {
+    "w": "engineers",
+    "start": 1.4,
+    "end": 1.88,
+    "onset": 1.47
+   },
+   {
+    "w": "no",
+    "start": 1.88,
+    "end": 2.18,
+    "onset": 1.97
+   },
+   {
+    "w": "finish",
+    "start": 2.18,
+    "end": 2.5,
+    "onset": 2.24
+   },
+   {
+    "w": "line,",
+    "start": 2.5,
+    "end": 2.84,
+    "onset": 2.6
+   },
+   {
+    "w": "so",
+    "start": 3.02,
+    "end": 3.28,
+    "onset": 3.12
+   },
+   {
+    "w": "I",
+    "start": 3.28,
+    "end": 3.48,
+    "onset": 3.25
+   },
+   {
+    "w": "end",
+    "start": 3.48,
+    "end": 3.74,
+    "onset": 3.52
+   },
+   {
+    "w": "developer",
+    "start": 3.74,
+    "end": 4.2,
+    "onset": 3.81
+   },
+   {
+    "w": "onboarding",
+    "start": 4.2,
+    "end": 4.84,
+    "onset": 4.16
+   },
+   {
+    "w": "docs",
+    "start": 4.84,
+    "end": 5.14,
+    "onset": 4.86
+   },
+   {
+    "w": "at",
+    "start": 5.14,
+    "end": 5.4,
+    "onset": 5.3
+   },
+   {
+    "w": "a",
+    "start": 5.4,
+    "end": 5.48,
+    "onset": 5.39
+   },
+   {
+    "w": "safe",
+    "start": 5.48,
+    "end": 5.78,
+    "onset": 5.45
+   },
+   {
+    "w": "first",
+    "start": 5.78,
+    "end": 6.1,
+    "onset": 5.92
+   },
+   {
+    "w": "merge.",
+    "start": 6.1,
+    "end": 6.48,
+    "onset": 6.14
+   }
+  ]
+ },
+ "L2": {
+  "duration": 8.01,
+  "level_db": -22.92,
+  "text": "Getting there takes one supported setup path with a check after each step, because a clean exit only proves the command exited.",
+  "transcript": "Getting there takes one supported setup path with a check after each step, because a clean exit only proves the command exited.",
+  "words": [
+   {
+    "w": "Getting",
+    "start": 0.0,
+    "end": 0.32,
+    "onset": 0.08
+   },
+   {
+    "w": "there",
+    "start": 0.32,
+    "end": 0.58,
+    "onset": 0.38
+   },
+   {
+    "w": "takes",
+    "start": 0.58,
+    "end": 1.02,
+    "onset": 0.71
+   },
+   {
+    "w": "one",
+    "start": 1.02,
+    "end": 1.4,
+    "onset": 1.14
+   },
+   {
+    "w": "supported",
+    "start": 1.4,
+    "end": 1.86,
+    "onset": 1.45
+   },
+   {
+    "w": "setup",
+    "start": 1.86,
+    "end": 2.16,
+    "onset": 1.92
+   },
+   {
+    "w": "path",
+    "start": 2.16,
+    "end": 2.52,
+    "onset": 2.28
+   },
+   {
+    "w": "with",
+    "start": 2.52,
+    "end": 2.72,
+    "onset": 2.61
+   },
+   {
+    "w": "a",
+    "start": 2.72,
+    "end": 2.86,
+    "onset": 2.75
+   },
+   {
+    "w": "check",
+    "start": 2.86,
+    "end": 3.18,
+    "onset": 2.86
+   },
+   {
+    "w": "after",
+    "start": 3.18,
+    "end": 3.58,
+    "onset": 3.35
+   },
+   {
+    "w": "each",
+    "start": 3.58,
+    "end": 3.86,
+    "onset": 3.54
+   },
+   {
+    "w": "step,",
+    "start": 3.86,
+    "end": 4.26,
+    "onset": 4.03
+   },
+   {
+    "w": "because",
+    "start": 4.46,
+    "end": 4.78,
+    "onset": 4.62
+   },
+   {
+    "w": "a",
+    "start": 4.78,
+    "end": 4.94,
+    "onset": 4.75
+   },
+   {
+    "w": "clean",
+    "start": 4.94,
+    "end": 5.18,
+    "onset": 4.96
+   },
+   {
+    "w": "exit",
+    "start": 5.18,
+    "end": 5.64,
+    "onset": 5.31
+   },
+   {
+    "w": "only",
+    "start": 5.64,
+    "end": 6.04,
+    "onset": 5.82
+   },
+   {
+    "w": "proves",
+    "start": 6.04,
+    "end": 6.5,
+    "onset": 6.15
+   },
+   {
+    "w": "the",
+    "start": 6.5,
+    "end": 6.66,
+    "onset": 6.59
+   },
+   {
+    "w": "command",
+    "start": 6.66,
+    "end": 7.1,
+    "onset": 6.69
+   },
+   {
+    "w": "exited.",
+    "start": 7.1,
+    "end": 7.86,
+    "onset": 7.39
+   }
+  ]
+ },
+ "L3": {
+  "duration": 7.14,
+  "level_db": -25.13,
+  "text": "So when the health check fails, the reader stops, and the fix sits beside that command, not in Slack.",
+  "transcript": "So when the health check fails, the reader stops, and the fix sits beside that command, not in Slack.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.24,
+    "onset": 0.08
+   },
+   {
+    "w": "when",
+    "start": 0.24,
+    "end": 0.44,
+    "onset": 0.2
+   },
+   {
+    "w": "the",
+    "start": 0.44,
+    "end": 0.58,
+    "onset": 0.44
+   },
+   {
+    "w": "health",
+    "start": 0.58,
+    "end": 0.84,
+    "onset": 0.61
+   },
+   {
+    "w": "check",
+    "start": 0.84,
+    "end": 1.14,
+    "onset": 0.95
+   },
+   {
+    "w": "fails,",
+    "start": 1.14,
+    "end": 1.66,
+    "onset": 1.2
+   },
+   {
+    "w": "the",
+    "start": 2.2,
+    "end": 2.24,
+    "onset": 2.17
+   },
+   {
+    "w": "reader",
+    "start": 2.24,
+    "end": 2.5,
+    "onset": 2.36
+   },
+   {
+    "w": "stops,",
+    "start": 2.5,
+    "end": 3.04,
+    "onset": 2.67
+   },
+   {
+    "w": "and",
+    "start": 3.24,
+    "end": 3.5,
+    "onset": 3.41
+   },
+   {
+    "w": "the",
+    "start": 3.5,
+    "end": 3.62,
+    "onset": 3.51
+   },
+   {
+    "w": "fix",
+    "start": 3.62,
+    "end": 3.96,
+    "onset": 3.74
+   },
+   {
+    "w": "sits",
+    "start": 3.96,
+    "end": 4.28,
+    "onset": 3.94
+   },
+   {
+    "w": "beside",
+    "start": 4.28,
+    "end": 4.7,
+    "onset": 4.35
+   },
+   {
+    "w": "that",
+    "start": 4.7,
+    "end": 4.94,
+    "onset": 4.8
+   },
+   {
+    "w": "command,",
+    "start": 4.94,
+    "end": 5.56,
+    "onset": 5.02
+   },
+   {
+    "w": "not",
+    "start": 5.7,
+    "end": 6.22,
+    "onset": 5.83
+   },
+   {
+    "w": "in",
+    "start": 6.22,
+    "end": 6.52,
+    "onset": 6.36
+   },
+   {
+    "w": "Slack.",
+    "start": 6.52,
+    "end": 6.94,
+    "onset": 6.52
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.77,
+  "level_db": -23.75,
+  "text": "The first change is real and reversible, like rejecting an empty customer reference, with a test that fails first, then passes.",
+  "transcript": "The first change is real and reversible, like rejecting an empty customer reference, with a test that fails first, then passes.",
+  "words": [
+   {
+    "w": "The",
+    "start": 0.0,
+    "end": 0.16,
+    "onset": 0.08
+   },
+   {
+    "w": "first",
+    "start": 0.16,
+    "end": 0.44,
+    "onset": 0.28
+   },
+   {
+    "w": "change",
+    "start": 0.44,
+    "end": 0.78,
+    "onset": 0.53
+   },
+   {
+    "w": "is",
+    "start": 0.78,
+    "end": 1.02,
+    "onset": 0.89
+   },
+   {
+    "w": "real",
+    "start": 1.02,
+    "end": 1.34,
+    "onset": 1.03
+   },
+   {
+    "w": "and",
+    "start": 1.34,
+    "end": 1.48,
+    "onset": 1.35
+   },
+   {
+    "w": "reversible,",
+    "start": 1.48,
+    "end": 1.92,
+    "onset": 1.66
+   },
+   {
+    "w": "like",
+    "start": 2.38,
+    "end": 2.56,
+    "onset": 2.4
+   },
+   {
+    "w": "rejecting",
+    "start": 2.56,
+    "end": 3.0,
+    "onset": 2.64
+   },
+   {
+    "w": "an",
+    "start": 3.0,
+    "end": 3.2,
+    "onset": 2.99
+   },
+   {
+    "w": "empty",
+    "start": 3.2,
+    "end": 3.48,
+    "onset": 3.25
+   },
+   {
+    "w": "customer",
+    "start": 3.48,
+    "end": 3.88,
+    "onset": 3.57
+   },
+   {
+    "w": "reference,",
+    "start": 3.88,
+    "end": 4.5,
+    "onset": 3.85
+   },
+   {
+    "w": "with",
+    "start": 4.62,
+    "end": 4.88,
+    "onset": 4.79
+   },
+   {
+    "w": "a",
+    "start": 4.88,
+    "end": 5.02,
+    "onset": 4.92
+   },
+   {
+    "w": "test",
+    "start": 5.02,
+    "end": 5.3,
+    "onset": 5.02
+   },
+   {
+    "w": "that",
+    "start": 5.3,
+    "end": 5.48,
+    "onset": 5.37
+   },
+   {
+    "w": "fails",
+    "start": 5.48,
+    "end": 5.84,
+    "onset": 5.48
+   },
+   {
+    "w": "first,",
+    "start": 5.84,
+    "end": 6.32,
+    "onset": 6.05
+   },
+   {
+    "w": "then",
+    "start": 6.54,
+    "end": 6.92,
+    "onset": 6.61
+   },
+   {
+    "w": "passes.",
+    "start": 6.92,
+    "end": 7.44,
+    "onset": 7.11
+   }
+  ]
+ },
+ "L5": {
+  "duration": 6.12,
+  "level_db": -24.69,
+  "text": "So after someone runs the route, I'd note where they needed a rescue and fix that stage.",
+  "transcript": "So after someone runs the route, I'd note where they needed a rescue and fix that stage.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.3,
+    "onset": 0.08
+   },
+   {
+    "w": "after",
+    "start": 0.3,
+    "end": 0.86,
+    "onset": 0.55
+   },
+   {
+    "w": "someone",
+    "start": 0.86,
+    "end": 1.22,
+    "onset": 0.85
+   },
+   {
+    "w": "runs",
+    "start": 1.22,
+    "end": 1.62,
+    "onset": 1.41
+   },
+   {
+    "w": "the",
+    "start": 1.62,
+    "end": 1.76,
+    "onset": 1.69
+   },
+   {
+    "w": "route,",
+    "start": 1.76,
+    "end": 2.08,
+    "onset": 1.84
+   },
+   {
+    "w": "I'd",
+    "start": 2.46,
+    "end": 2.68,
+    "onset": 2.39
+   },
+   {
+    "w": "note",
+    "start": 2.68,
+    "end": 2.88,
+    "onset": 2.64
+   },
+   {
+    "w": "where",
+    "start": 2.88,
+    "end": 3.1,
+    "onset": 2.95
+   },
+   {
+    "w": "they",
+    "start": 3.1,
+    "end": 3.26,
+    "onset": 3.17
+   },
+   {
+    "w": "needed",
+    "start": 3.26,
+    "end": 3.54,
+    "onset": 3.26
+   },
+   {
+    "w": "a",
+    "start": 3.54,
+    "end": 3.7,
+    "onset": 3.6
+   },
+   {
+    "w": "rescue",
+    "start": 3.7,
+    "end": 4.12,
+    "onset": 3.72
+   },
+   {
+    "w": "and",
+    "start": 4.12,
+    "end": 4.62,
+    "onset": 4.5
+   },
+   {
+    "w": "fix",
+    "start": 4.62,
+    "end": 5.04,
+    "onset": 4.86
+   },
+   {
+    "w": "that",
+    "start": 5.04,
+    "end": 5.3,
+    "onset": 5.13
+   },
+   {
+    "w": "stage.",
+    "start": 5.3,
+    "end": 5.7,
+    "onset": 5.33
+   }
+  ]
+ }
+}

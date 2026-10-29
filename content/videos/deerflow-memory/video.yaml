@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/deerflow-memory/, imported by tools/import_video.py from
+# ninadpathak-video films/deerflow-memory (render of 2026-10-29T02:47:58+05:30).
+name: DeerFlow memory in 40 seconds
+description: 'How DeerFlow keeps a workflow resumable: working memory resets between stages, a plain JSON session file carries each stage''s outputs forward, and a pluggable store like pgvector holds findings across runs.'
+upload_date: '2026-10-29T02:47:58+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: deerflow-memory.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 8.433
+  L3: 15.833
+  L4: 23.267
+  L5: 30.867
+transcript: Kill a DeerFlow workflow partway through, and it resumes where it left off, because each stage writes its outputs to a session file. Each agent's working memory lives in its prompt and resets between stages, so the next one reads that file back in. The file is plain JSON, so you can open it to see which stages finished and what each produced. Findings that should outlast the session go to a store you plug in, like pgvector, which the next run queries first. So for a research pipeline that has to be auditable and resumable, I'd reach for DeerFlow.

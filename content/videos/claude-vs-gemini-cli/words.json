@@ -1,0 +1,630 @@
+{
+ "L1": {
+  "duration": 4.2,
+  "level_db": -21.4,
+  "text": "Which is better for a refactor, Claude Code or Gemini CLI?",
+  "transcript": "Which is better for a refactor, Claude Code or Gemini CLI?",
+  "words": [
+   {
+    "w": "Which",
+    "start": 0.0,
+    "end": 0.3,
+    "onset": 0.09
+   },
+   {
+    "w": "is",
+    "start": 0.3,
+    "end": 0.48,
+    "onset": 0.29
+   },
+   {
+    "w": "better",
+    "start": 0.48,
+    "end": 0.76,
+    "onset": 0.56
+   },
+   {
+    "w": "for",
+    "start": 0.76,
+    "end": 1.02,
+    "onset": 0.73
+   },
+   {
+    "w": "a",
+    "start": 1.02,
+    "end": 1.18,
+    "onset": 1.02
+   },
+   {
+    "w": "refactor,",
+    "start": 1.18,
+    "end": 1.76,
+    "onset": 1.17
+   },
+   {
+    "w": "Claude",
+    "start": 2.08,
+    "end": 2.34,
+    "onset": 2.02
+   },
+   {
+    "w": "Code",
+    "start": 2.34,
+    "end": 2.62,
+    "onset": 2.38
+   },
+   {
+    "w": "or",
+    "start": 2.62,
+    "end": 2.96,
+    "onset": 2.87
+   },
+   {
+    "w": "Gemini",
+    "start": 2.96,
+    "end": 3.48,
+    "onset": 3.04
+   },
+   {
+    "w": "CLI?",
+    "start": 3.48,
+    "end": 4.08,
+    "onset": 3.53
+   }
+  ]
+ },
+ "L2": {
+  "duration": 7.86,
+  "level_db": -23.13,
+  "text": "I don't have evidence for a universal winner, so I'd compare how each tool shows you its plan and its failures.",
+  "transcript": "I don't have evidence for a universal winner, so I'd compare how each tool shows you its plan and its failures.",
+  "words": [
+   {
+    "w": "I",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.08
+   },
+   {
+    "w": "don't",
+    "start": 0.22,
+    "end": 0.56,
+    "onset": 0.3
+   },
+   {
+    "w": "have",
+    "start": 0.56,
+    "end": 0.8,
+    "onset": 0.66
+   },
+   {
+    "w": "evidence",
+    "start": 0.8,
+    "end": 1.3,
+    "onset": 0.93
+   },
+   {
+    "w": "for",
+    "start": 1.3,
+    "end": 1.64,
+    "onset": 1.41
+   },
+   {
+    "w": "a",
+    "start": 1.64,
+    "end": 1.82,
+    "onset": 1.64
+   },
+   {
+    "w": "universal",
+    "start": 1.82,
+    "end": 2.36,
+    "onset": 1.83
+   },
+   {
+    "w": "winner,",
+    "start": 2.36,
+    "end": 2.82,
+    "onset": 2.5
+   },
+   {
+    "w": "so",
+    "start": 3.14,
+    "end": 3.4,
+    "onset": 3.23
+   },
+   {
+    "w": "I'd",
+    "start": 3.4,
+    "end": 3.64,
+    "onset": 3.36
+   },
+   {
+    "w": "compare",
+    "start": 3.64,
+    "end": 4.08,
+    "onset": 3.67
+   },
+   {
+    "w": "how",
+    "start": 4.08,
+    "end": 4.34,
+    "onset": 4.08
+   },
+   {
+    "w": "each",
+    "start": 4.34,
+    "end": 4.66,
+    "onset": 4.47
+   },
+   {
+    "w": "tool",
+    "start": 4.66,
+    "end": 5.0,
+    "onset": 4.78
+   },
+   {
+    "w": "shows",
+    "start": 5.0,
+    "end": 5.48,
+    "onset": 5.34
+   },
+   {
+    "w": "you",
+    "start": 5.48,
+    "end": 5.66,
+    "onset": 5.6
+   },
+   {
+    "w": "its",
+    "start": 5.66,
+    "end": 5.84,
+    "onset": 5.66
+   },
+   {
+    "w": "plan",
+    "start": 5.84,
+    "end": 6.32,
+    "onset": 5.92
+   },
+   {
+    "w": "and",
+    "start": 6.32,
+    "end": 6.82,
+    "onset": 6.67
+   },
+   {
+    "w": "its",
+    "start": 6.82,
+    "end": 7.04,
+    "onset": 6.9
+   },
+   {
+    "w": "failures.",
+    "start": 7.04,
+    "end": 7.5,
+    "onset": 7.07
+   }
+  ]
+ },
+ "L3": {
+  "duration": 7.35,
+  "level_db": -23.28,
+  "text": "Claude Code lets you review its plan or approve sensitive tool calls first, which matters when a refactor crosses several files.",
+  "transcript": "Claude Code lets you review its plan or approve sensitive tool calls first, which matters when a refactor crosses several files.",
+  "words": [
+   {
+    "w": "Claude",
+    "start": 0.0,
+    "end": 0.4,
+    "onset": 0.08
+   },
+   {
+    "w": "Code",
+    "start": 0.4,
+    "end": 0.66,
+    "onset": 0.43
+   },
+   {
+    "w": "lets",
+    "start": 0.66,
+    "end": 0.94,
+    "onset": 0.8
+   },
+   {
+    "w": "you",
+    "start": 0.94,
+    "end": 1.08,
+    "onset": 0.94
+   },
+   {
+    "w": "review",
+    "start": 1.08,
+    "end": 1.38,
+    "onset": 1.1
+   },
+   {
+    "w": "its",
+    "start": 1.38,
+    "end": 1.56,
+    "onset": 1.38
+   },
+   {
+    "w": "plan",
+    "start": 1.56,
+    "end": 1.9,
+    "onset": 1.65
+   },
+   {
+    "w": "or",
+    "start": 1.9,
+    "end": 2.1,
+    "onset": 1.93
+   },
+   {
+    "w": "approve",
+    "start": 2.1,
+    "end": 2.46,
+    "onset": 2.24
+   },
+   {
+    "w": "sensitive",
+    "start": 2.46,
+    "end": 2.86,
+    "onset": 2.48
+   },
+   {
+    "w": "tool",
+    "start": 2.86,
+    "end": 3.2,
+    "onset": 3.03
+   },
+   {
+    "w": "calls",
+    "start": 3.2,
+    "end": 3.6,
+    "onset": 3.32
+   },
+   {
+    "w": "first,",
+    "start": 3.6,
+    "end": 4.0,
+    "onset": 3.67
+   },
+   {
+    "w": "which",
+    "start": 4.5,
+    "end": 4.76,
+    "onset": 4.6
+   },
+   {
+    "w": "matters",
+    "start": 4.76,
+    "end": 5.1,
+    "onset": 4.73
+   },
+   {
+    "w": "when",
+    "start": 5.1,
+    "end": 5.3,
+    "onset": 5.19
+   },
+   {
+    "w": "a",
+    "start": 5.3,
+    "end": 5.4,
+    "onset": 5.3
+   },
+   {
+    "w": "refactor",
+    "start": 5.4,
+    "end": 5.88,
+    "onset": 5.39
+   },
+   {
+    "w": "crosses",
+    "start": 5.88,
+    "end": 6.32,
+    "onset": 5.87
+   },
+   {
+    "w": "several",
+    "start": 6.32,
+    "end": 6.72,
+    "onset": 6.43
+   },
+   {
+    "w": "files.",
+    "start": 6.72,
+    "end": 7.14,
+    "onset": 6.75
+   }
+  ]
+ },
+ "L4": {
+  "duration": 8.53,
+  "level_db": -22.8,
+  "text": "Gemini CLI also supports an edit-and-verify loop, but automation isn't proof, so it depends on whether your checks catch the failures.",
+  "transcript": "Gemini CLI also supports an edit-and-verify loop, but automation isn't proof, so it depends on whether your checks catch the failures.",
+  "words": [
+   {
+    "w": "Gemini",
+    "start": 0.0,
+    "end": 0.44,
+    "onset": 0.08
+   },
+   {
+    "w": "CLI",
+    "start": 0.44,
+    "end": 0.96,
+    "onset": 0.58
+   },
+   {
+    "w": "also",
+    "start": 0.96,
+    "end": 1.4,
+    "onset": 1.11
+   },
+   {
+    "w": "supports",
+    "start": 1.4,
+    "end": 1.92,
+    "onset": 1.72
+   },
+   {
+    "w": "an",
+    "start": 1.92,
+    "end": 2.08,
+    "onset": 1.93
+   },
+   {
+    "w": "edit",
+    "start": 2.08,
+    "end": 2.32,
+    "onset": 2.14
+   },
+   {
+    "w": "-and",
+    "start": 2.32,
+    "end": 2.5,
+    "onset": 2.4
+   },
+   {
+    "w": "-verify",
+    "start": 2.5,
+    "end": 3.0,
+    "onset": 2.53
+   },
+   {
+    "w": "loop,",
+    "start": 3.0,
+    "end": 3.28,
+    "onset": 2.99
+   },
+   {
+    "w": "but",
+    "start": 3.46,
+    "end": 3.82,
+    "onset": 3.6
+   },
+   {
+    "w": "automation",
+    "start": 3.82,
+    "end": 4.52,
+    "onset": 4.0
+   },
+   {
+    "w": "isn't",
+    "start": 4.52,
+    "end": 5.0,
+    "onset": 4.56
+   },
+   {
+    "w": "proof,",
+    "start": 5.0,
+    "end": 5.36,
+    "onset": 5.05
+   },
+   {
+    "w": "so",
+    "start": 5.62,
+    "end": 5.7,
+    "onset": 5.56
+   },
+   {
+    "w": "it",
+    "start": 5.7,
+    "end": 5.84,
+    "onset": 5.72
+   },
+   {
+    "w": "depends",
+    "start": 5.84,
+    "end": 6.18,
+    "onset": 5.87
+   },
+   {
+    "w": "on",
+    "start": 6.18,
+    "end": 6.4,
+    "onset": 6.29
+   },
+   {
+    "w": "whether",
+    "start": 6.4,
+    "end": 6.68,
+    "onset": 6.54
+   },
+   {
+    "w": "your",
+    "start": 6.68,
+    "end": 6.9,
+    "onset": 6.68
+   },
+   {
+    "w": "checks",
+    "start": 6.9,
+    "end": 7.26,
+    "onset": 6.99
+   },
+   {
+    "w": "catch",
+    "start": 7.26,
+    "end": 7.62,
+    "onset": 7.43
+   },
+   {
+    "w": "the",
+    "start": 7.62,
+    "end": 7.84,
+    "onset": 7.76
+   },
+   {
+    "w": "failures.",
+    "start": 7.84,
+    "end": 8.24,
+    "onset": 7.81
+   }
+  ]
+ },
+ "L5": {
+  "duration": 7.84,
+  "level_db": -26.6,
+  "text": "So I'd run both on the same task and commit, and judge their patches with the same tests before picking a winner.",
+  "transcript": "So I'd run both on the same task and commit, and judge their patches with the same tests before picking a winner.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.32,
+    "onset": 0.08
+   },
+   {
+    "w": "I'd",
+    "start": 0.32,
+    "end": 0.76,
+    "onset": 0.53
+   },
+   {
+    "w": "run",
+    "start": 0.76,
+    "end": 1.04,
+    "onset": 0.84
+   },
+   {
+    "w": "both",
+    "start": 1.04,
+    "end": 1.5,
+    "onset": 1.3
+   },
+   {
+    "w": "on",
+    "start": 1.5,
+    "end": 1.7,
+    "onset": 1.54
+   },
+   {
+    "w": "the",
+    "start": 1.7,
+    "end": 1.82,
+    "onset": 1.73
+   },
+   {
+    "w": "same",
+    "start": 1.82,
+    "end": 2.1,
+    "onset": 1.89
+   },
+   {
+    "w": "task",
+    "start": 2.1,
+    "end": 2.8,
+    "onset": 2.24
+   },
+   {
+    "w": "and",
+    "start": 2.8,
+    "end": 3.1,
+    "onset": 2.85
+   },
+   {
+    "w": "commit,",
+    "start": 3.1,
+    "end": 3.6,
+    "onset": 3.2
+   },
+   {
+    "w": "and",
+    "start": 3.94,
+    "end": 4.24,
+    "onset": 4.11
+   },
+   {
+    "w": "judge",
+    "start": 4.24,
+    "end": 4.56,
+    "onset": 4.34
+   },
+   {
+    "w": "their",
+    "start": 4.56,
+    "end": 4.8,
+    "onset": 4.69
+   },
+   {
+    "w": "patches",
+    "start": 4.8,
+    "end": 5.28,
+    "onset": 4.91
+   },
+   {
+    "w": "with",
+    "start": 5.28,
+    "end": 5.54,
+    "onset": 5.46
+   },
+   {
+    "w": "the",
+    "start": 5.54,
+    "end": 5.7,
+    "onset": 5.6
+   },
+   {
+    "w": "same",
+    "start": 5.7,
+    "end": 5.96,
+    "onset": 5.81
+   },
+   {
+    "w": "tests",
+    "start": 5.96,
+    "end": 6.5,
+    "onset": 6.08
+   },
+   {
+    "w": "before",
+    "start": 6.5,
+    "end": 6.86,
+    "onset": 6.64
+   },
+   {
+    "w": "picking",
+    "start": 6.86,
+    "end": 7.26,
+    "onset": 6.85
+   },
+   {
+    "w": "a",
+    "start": 7.26,
+    "end": 7.48,
+    "onset": 7.23
+   },
+   {
+    "w": "winner.",
+    "start": 7.48,
+    "end": 7.68,
+    "onset": 7.45
+   }
+  ]
+ }
+}

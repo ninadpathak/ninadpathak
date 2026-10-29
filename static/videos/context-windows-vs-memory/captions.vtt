@@ -1,0 +1,37 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.033
+Even a model that answers perfectly in one request can know nothing about it in the next.
+
+2
+00:00:06.033 --> 00:00:09.713
+That's because a context window is a budget for one request,
+
+3
+00:00:09.713 --> 00:00:13.700
+while memory is state stored outside the model and retrieved later.
+
+4
+00:00:13.700 --> 00:00:19.933
+So a chat app that seems to remember is resending earlier turns into the context each time.
+
+5
+00:00:19.933 --> 00:00:23.293
+And a bigger window doesn't guarantee recall,
+
+6
+00:00:23.293 --> 00:00:25.673
+because even when a long contract fits,
+
+7
+00:00:25.673 --> 00:00:28.233
+a clause halfway through can still go unused.
+
+8
+00:00:28.233 --> 00:00:31.473
+So I'd ask how long the information must survive,
+
+9
+00:00:31.473 --> 00:00:37.093
+keeping this request's evidence in context and storing what later requests need outside the model.

@@ -1,0 +1,650 @@
+{
+ "L1": {
+  "duration": 6.53,
+  "level_db": -25.69,
+  "text": "You go to change a line, but its reason lives in a handbook, so the code gets hard to change.",
+  "transcript": "You go to change a line, but its reason lives in a handbook, so the code gets hard to change.",
+  "words": [
+   {
+    "w": "You",
+    "start": 0.0,
+    "end": 0.2,
+    "onset": 0.08
+   },
+   {
+    "w": "go",
+    "start": 0.2,
+    "end": 0.38,
+    "onset": 0.27
+   },
+   {
+    "w": "to",
+    "start": 0.38,
+    "end": 0.54,
+    "onset": 0.43
+   },
+   {
+    "w": "change",
+    "start": 0.54,
+    "end": 0.84,
+    "onset": 0.56
+   },
+   {
+    "w": "a",
+    "start": 0.84,
+    "end": 1.02,
+    "onset": 0.85
+   },
+   {
+    "w": "line,",
+    "start": 1.02,
+    "end": 1.36,
+    "onset": 1.03
+   },
+   {
+    "w": "but",
+    "start": 1.8,
+    "end": 2.04,
+    "onset": 1.78
+   },
+   {
+    "w": "its",
+    "start": 2.04,
+    "end": 2.5,
+    "onset": 2.29
+   },
+   {
+    "w": "reason",
+    "start": 2.5,
+    "end": 2.96,
+    "onset": 2.56
+   },
+   {
+    "w": "lives",
+    "start": 2.96,
+    "end": 3.32,
+    "onset": 3.12
+   },
+   {
+    "w": "in",
+    "start": 3.32,
+    "end": 3.5,
+    "onset": 3.41
+   },
+   {
+    "w": "a",
+    "start": 3.5,
+    "end": 3.62,
+    "onset": 3.5
+   },
+   {
+    "w": "handbook,",
+    "start": 3.62,
+    "end": 4.14,
+    "onset": 3.61
+   },
+   {
+    "w": "so",
+    "start": 4.32,
+    "end": 4.5,
+    "onset": 4.21
+   },
+   {
+    "w": "the",
+    "start": 4.5,
+    "end": 4.84,
+    "onset": 4.65
+   },
+   {
+    "w": "code",
+    "start": 4.84,
+    "end": 5.16,
+    "onset": 4.89
+   },
+   {
+    "w": "gets",
+    "start": 5.16,
+    "end": 5.4,
+    "onset": 5.25
+   },
+   {
+    "w": "hard",
+    "start": 5.4,
+    "end": 5.72,
+    "onset": 5.44
+   },
+   {
+    "w": "to",
+    "start": 5.72,
+    "end": 5.9,
+    "onset": 5.82
+   },
+   {
+    "w": "change.",
+    "start": 5.9,
+    "end": 6.18,
+    "onset": 5.94
+   }
+  ]
+ },
+ "L2": {
+  "duration": 4.32,
+  "level_db": -23.14,
+  "text": "That's why my code documentation gives each answer one of three homes.",
+  "transcript": "That's why my code documentation gives each answer one of three homes.",
+  "words": [
+   {
+    "w": "That's",
+    "start": 0.0,
+    "end": 0.42,
+    "onset": 0.08
+   },
+   {
+    "w": "why",
+    "start": 0.42,
+    "end": 0.58,
+    "onset": 0.43
+   },
+   {
+    "w": "my",
+    "start": 0.58,
+    "end": 0.78,
+    "onset": 0.58
+   },
+   {
+    "w": "code",
+    "start": 0.78,
+    "end": 1.06,
+    "onset": 0.86
+   },
+   {
+    "w": "documentation",
+    "start": 1.06,
+    "end": 1.66,
+    "onset": 1.33
+   },
+   {
+    "w": "gives",
+    "start": 1.66,
+    "end": 2.18,
+    "onset": 1.74
+   },
+   {
+    "w": "each",
+    "start": 2.18,
+    "end": 2.46,
+    "onset": 2.29
+   },
+   {
+    "w": "answer",
+    "start": 2.46,
+    "end": 2.86,
+    "onset": 2.5
+   },
+   {
+    "w": "one",
+    "start": 2.86,
+    "end": 3.16,
+    "onset": 2.84
+   },
+   {
+    "w": "of",
+    "start": 3.16,
+    "end": 3.32,
+    "onset": 3.16
+   },
+   {
+    "w": "three",
+    "start": 3.32,
+    "end": 3.58,
+    "onset": 3.35
+   },
+   {
+    "w": "homes.",
+    "start": 3.58,
+    "end": 4.0,
+    "onset": 3.58
+   }
+  ]
+ },
+ "L3": {
+  "duration": 5.58,
+  "level_db": -23.24,
+  "text": "A comment holds local reasoning, like the stable ordering a later edit could quietly break.",
+  "transcript": "A comment holds local reasoning, like the stable ordering a later edit could quietly break.",
+  "words": [
+   {
+    "w": "A",
+    "start": 0.0,
+    "end": 0.18,
+    "onset": 0.08
+   },
+   {
+    "w": "comment",
+    "start": 0.18,
+    "end": 0.5,
+    "onset": 0.2
+   },
+   {
+    "w": "holds",
+    "start": 0.5,
+    "end": 0.86,
+    "onset": 0.63
+   },
+   {
+    "w": "local",
+    "start": 0.86,
+    "end": 1.2,
+    "onset": 0.91
+   },
+   {
+    "w": "reasoning,",
+    "start": 1.2,
+    "end": 1.64,
+    "onset": 1.17
+   },
+   {
+    "w": "like",
+    "start": 2.1,
+    "end": 2.3,
+    "onset": 2.04
+   },
+   {
+    "w": "the",
+    "start": 2.3,
+    "end": 2.6,
+    "onset": 2.55
+   },
+   {
+    "w": "stable",
+    "start": 2.6,
+    "end": 2.94,
+    "onset": 2.59
+   },
+   {
+    "w": "ordering",
+    "start": 2.94,
+    "end": 3.44,
+    "onset": 3.09
+   },
+   {
+    "w": "a",
+    "start": 3.44,
+    "end": 3.66,
+    "onset": 3.65
+   },
+   {
+    "w": "later",
+    "start": 3.66,
+    "end": 3.84,
+    "onset": 3.64
+   },
+   {
+    "w": "edit",
+    "start": 3.84,
+    "end": 4.18,
+    "onset": 3.81
+   },
+   {
+    "w": "could",
+    "start": 4.18,
+    "end": 4.58,
+    "onset": 4.36
+   },
+   {
+    "w": "quietly",
+    "start": 4.58,
+    "end": 5.14,
+    "onset": 4.81
+   },
+   {
+    "w": "break.",
+    "start": 5.14,
+    "end": 5.44,
+    "onset": 5.1
+   }
+  ]
+ },
+ "L4": {
+  "duration": 7.07,
+  "level_db": -23.69,
+  "text": "A docstring states what a function accepts or returns, so the generated reference stays beside the code.",
+  "transcript": "A docstring states what a function accepts or returns, so the generated reference stays beside the code.",
+  "words": [
+   {
+    "w": "A",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.08
+   },
+   {
+    "w": "docstring",
+    "start": 0.22,
+    "end": 0.64,
+    "onset": 0.23
+   },
+   {
+    "w": "states",
+    "start": 0.64,
+    "end": 1.04,
+    "onset": 0.74
+   },
+   {
+    "w": "what",
+    "start": 1.04,
+    "end": 1.5,
+    "onset": 1.16
+   },
+   {
+    "w": "a",
+    "start": 1.5,
+    "end": 1.64,
+    "onset": 1.5
+   },
+   {
+    "w": "function",
+    "start": 1.64,
+    "end": 1.92,
+    "onset": 1.57
+   },
+   {
+    "w": "accepts",
+    "start": 1.92,
+    "end": 2.42,
+    "onset": 1.9
+   },
+   {
+    "w": "or",
+    "start": 2.42,
+    "end": 2.76,
+    "onset": 2.42
+   },
+   {
+    "w": "returns,",
+    "start": 2.76,
+    "end": 3.32,
+    "onset": 2.86
+   },
+   {
+    "w": "so",
+    "start": 3.74,
+    "end": 4.12,
+    "onset": 3.82
+   },
+   {
+    "w": "the",
+    "start": 4.12,
+    "end": 4.54,
+    "onset": 4.46
+   },
+   {
+    "w": "generated",
+    "start": 4.54,
+    "end": 5.02,
+    "onset": 4.55
+   },
+   {
+    "w": "reference",
+    "start": 5.02,
+    "end": 5.52,
+    "onset": 4.98
+   },
+   {
+    "w": "stays",
+    "start": 5.52,
+    "end": 5.98,
+    "onset": 5.61
+   },
+   {
+    "w": "beside",
+    "start": 5.98,
+    "end": 6.4,
+    "onset": 6.13
+   },
+   {
+    "w": "the",
+    "start": 6.4,
+    "end": 6.56,
+    "onset": 6.51
+   },
+   {
+    "w": "code.",
+    "start": 6.56,
+    "end": 6.84,
+    "onset": 6.6
+   }
+  ]
+ },
+ "L5": {
+  "duration": 7.5,
+  "level_db": -22.59,
+  "text": "But generated pages can't reliably say what to do when a valid request fails, so that goes in a guide.",
+  "transcript": "But generated pages can't reliably say what to do when a valid request fails, so that goes in a guide.",
+  "words": [
+   {
+    "w": "But",
+    "start": 0.0,
+    "end": 0.34,
+    "onset": 0.08
+   },
+   {
+    "w": "generated",
+    "start": 0.34,
+    "end": 0.98,
+    "onset": 0.57
+   },
+   {
+    "w": "pages",
+    "start": 0.98,
+    "end": 1.48,
+    "onset": 1.12
+   },
+   {
+    "w": "can't",
+    "start": 1.48,
+    "end": 1.96,
+    "onset": 1.45
+   },
+   {
+    "w": "reliably",
+    "start": 1.96,
+    "end": 2.44,
+    "onset": 2.08
+   },
+   {
+    "w": "say",
+    "start": 2.44,
+    "end": 2.82,
+    "onset": 2.62
+   },
+   {
+    "w": "what",
+    "start": 2.82,
+    "end": 2.98,
+    "onset": 2.86
+   },
+   {
+    "w": "to",
+    "start": 2.98,
+    "end": 3.12,
+    "onset": 3.03
+   },
+   {
+    "w": "do",
+    "start": 3.12,
+    "end": 3.36,
+    "onset": 3.2
+   },
+   {
+    "w": "when",
+    "start": 3.36,
+    "end": 3.8,
+    "onset": 3.59
+   },
+   {
+    "w": "a",
+    "start": 3.8,
+    "end": 4.1,
+    "onset": 4.01
+   },
+   {
+    "w": "valid",
+    "start": 4.1,
+    "end": 4.42,
+    "onset": 4.08
+   },
+   {
+    "w": "request",
+    "start": 4.42,
+    "end": 4.8,
+    "onset": 4.42
+   },
+   {
+    "w": "fails,",
+    "start": 4.8,
+    "end": 5.3,
+    "onset": 4.9
+   },
+   {
+    "w": "so",
+    "start": 5.6,
+    "end": 6.06,
+    "onset": 5.77
+   },
+   {
+    "w": "that",
+    "start": 6.06,
+    "end": 6.58,
+    "onset": 6.45
+   },
+   {
+    "w": "goes",
+    "start": 6.58,
+    "end": 6.82,
+    "onset": 6.66
+   },
+   {
+    "w": "in",
+    "start": 6.82,
+    "end": 7.06,
+    "onset": 6.95
+   },
+   {
+    "w": "a",
+    "start": 7.06,
+    "end": 7.16,
+    "onset": 7.09
+   },
+   {
+    "w": "guide.",
+    "start": 7.16,
+    "end": 7.36,
+    "onset": 7.17
+   }
+  ]
+ },
+ "L6": {
+  "duration": 5.72,
+  "level_db": -27.74,
+  "text": "So I'd ask what the reader needs at that moment, because that decides where it belongs.",
+  "transcript": "So I'd ask what the reader needs at that moment, because that decides where it belongs.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.36,
+    "onset": 0.08
+   },
+   {
+    "w": "I'd",
+    "start": 0.36,
+    "end": 0.94,
+    "onset": 0.75
+   },
+   {
+    "w": "ask",
+    "start": 0.94,
+    "end": 1.28,
+    "onset": 0.97
+   },
+   {
+    "w": "what",
+    "start": 1.28,
+    "end": 1.48,
+    "onset": 1.32
+   },
+   {
+    "w": "the",
+    "start": 1.48,
+    "end": 1.64,
+    "onset": 1.57
+   },
+   {
+    "w": "reader",
+    "start": 1.64,
+    "end": 1.98,
+    "onset": 1.66
+   },
+   {
+    "w": "needs",
+    "start": 1.98,
+    "end": 2.44,
+    "onset": 1.92
+   },
+   {
+    "w": "at",
+    "start": 2.44,
+    "end": 2.62,
+    "onset": 2.5
+   },
+   {
+    "w": "that",
+    "start": 2.62,
+    "end": 2.78,
+    "onset": 2.65
+   },
+   {
+    "w": "moment,",
+    "start": 2.78,
+    "end": 3.22,
+    "onset": 2.81
+   },
+   {
+    "w": "because",
+    "start": 3.28,
+    "end": 3.68,
+    "onset": 3.43
+   },
+   {
+    "w": "that",
+    "start": 3.68,
+    "end": 4.02,
+    "onset": 3.86
+   },
+   {
+    "w": "decides",
+    "start": 4.02,
+    "end": 4.6,
+    "onset": 4.11
+   },
+   {
+    "w": "where",
+    "start": 4.6,
+    "end": 4.88,
+    "onset": 4.76
+   },
+   {
+    "w": "it",
+    "start": 4.88,
+    "end": 5.02,
+    "onset": 4.95
+   },
+   {
+    "w": "belongs.",
+    "start": 5.02,
+    "end": 5.32,
+    "onset": 5.05
+   }
+  ]
+ }
+}

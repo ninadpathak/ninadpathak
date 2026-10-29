@@ -1,0 +1,45 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.080
+Which is better for a refactor,
+
+2
+00:00:02.080 --> 00:00:04.267
+Claude Code or Gemini CLI?
+
+3
+00:00:04.267 --> 00:00:07.407
+I don't have evidence for a universal winner,
+
+4
+00:00:07.407 --> 00:00:12.167
+so I'd compare how each tool shows you its plan and its failures.
+
+5
+00:00:12.200 --> 00:00:16.600
+Claude Code lets you review its plan or approve sensitive tool calls first,
+
+6
+00:00:16.700 --> 00:00:19.633
+which matters when a refactor crosses several files.
+
+7
+00:00:19.633 --> 00:00:23.093
+Gemini CLI also supports an edit-and-verify loop,
+
+8
+00:00:23.093 --> 00:00:25.253
+but automation isn't proof,
+
+9
+00:00:25.253 --> 00:00:28.233
+so it depends on whether your checks catch the failures.
+
+10
+00:00:28.233 --> 00:00:32.173
+So I'd run both on the same task and commit,
+
+11
+00:00:32.173 --> 00:00:36.313
+and judge their patches with the same tests before picking a winner.

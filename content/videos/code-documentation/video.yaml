@@ -1,0 +1,20 @@
+# Narrated explainer for /articles/code-documentation/, imported by tools/import_video.py from
+# ninadpathak-video films/code-documentation (render of 2026-10-29T00:01:58+05:30).
+name: Code documentation in 40 seconds
+description: 'Where each answer in code documentation belongs: comments for local reasoning, docstrings and generated reference for contracts, and guides for what to do when a valid request fails.'
+upload_date: '2026-10-29T00:01:58+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: code-documentation.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 6.6
+  L3: 11.0
+  L4: 16.633
+  L5: 23.767
+  L6: 31.333
+transcript: You go to change a line, but its reason lives in a handbook, so the code gets hard to change. That's why my code documentation gives each answer one of three homes. A comment holds local reasoning, like the stable ordering a later edit could quietly break. A docstring states what a function accepts or returns, so the generated reference stays beside the code. But generated pages can't reliably say what to do when a valid request fails, so that goes in a guide. So I'd ask what the reader needs at that moment, because that decides where it belongs.

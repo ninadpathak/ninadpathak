@@ -10,6 +10,7 @@ work_note: Comparing coding tools requires a task and a way to judge the patches
 title: Claude Code vs. Gemini CLI for Repository Refactoring
 updated: '2026-08-17'
 slug: claude-vs-gemini-cli
+video: claude-vs-gemini-cli
 ---
 
 Claude Code and Gemini CLI can both inspect a repository, edit files, and run verification commands. The useful comparison is how each tool exposes plans, permissions, tool calls, and failures during a refactor.

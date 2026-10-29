@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/claude-vs-gemini-cli/, imported by tools/import_video.py from
+# ninadpathak-video films/claude-vs-gemini-cli (render of 2026-10-28T23:06:45+05:30).
+name: Claude Code vs Gemini CLI in 40 seconds
+description: 'Why there is no universal winner between Claude Code and Gemini CLI for a refactor: compare how each shows its plan and failures, then run both on the same pinned task and judge the patches with the same tests.'
+upload_date: '2026-10-28T23:06:45+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: claude-vs-gemini-cli.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 4.267
+  L3: 12.2
+  L4: 19.633
+  L5: 28.233
+transcript: Which is better for a refactor, Claude Code or Gemini CLI? I don't have evidence for a universal winner, so I'd compare how each tool shows you its plan and its failures. Claude Code lets you review its plan or approve sensitive tool calls first, which matters when a refactor crosses several files. Gemini CLI also supports an edit-and-verify loop, but automation isn't proof, so it depends on whether your checks catch the failures. So I'd run both on the same task and commit, and judge their patches with the same tests before picking a winner.

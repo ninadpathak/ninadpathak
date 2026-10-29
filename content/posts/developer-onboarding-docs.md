@@ -14,6 +14,7 @@ takeaways:
 - Review the route when the product or development workflow changes.
 title: 'Developer Onboarding Documentation: End It in a Merged Change'
 updated: 2026-09-11
+video: developer-onboarding-docs
 ---
 
 Developer onboarding documentation takes a new engineer from a clean machine to a safe first merged change, with one supported setup path and a check after each step. I end it at the merge, because a reading list gives the reader no finish line to reach.

@@ -10,6 +10,7 @@ work_note: A state record can make a multi-agent workflow understandable. Develo
   receives the record and what the next step can change.
 title: How Memory Works in DeerFlow
 slug: deerflow-memory
+video: deerflow-memory
 ---
 
 Structured context passing is what I call the way DeerFlow organizes memory. Rather than relying on a central vector store or a global knowledge graph, DeerFlow passes memory between agents through explicit JSON state files and Markdown context documents.

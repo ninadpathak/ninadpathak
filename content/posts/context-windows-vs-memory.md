@@ -10,6 +10,7 @@ work_note: Developer content for memory APIs needs to explain what survives a se
 title: 'Context Windows vs Memory: Why They Are Not the Same Thing'
 updated: '2026-08-18'
 slug: context-windows-vs-memory
+video: context-windows-vs-memory
 ---
 
 A model can accept a long prompt and still fail to use the fact that answers the question. It can also answer perfectly during one request and know nothing about that exchange when the next request begins.
