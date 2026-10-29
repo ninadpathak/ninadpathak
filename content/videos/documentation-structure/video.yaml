@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/documentation-structure/, imported by tools/import_video.py from
+# ninadpathak-video films/documentation-structure (render of 2026-10-29T15:28:05+05:30).
+name: Documentation structure in 40 seconds
+description: 'Why documentation structure should follow reader routes, not the org chart: setup, use, failure and change, one canonical home per answer, labels tested with a reviewer before pages move, and ownership kept in repository metadata.'
+upload_date: '2026-10-29T15:28:05+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: documentation-structure.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 5.667
+  L3: 13.933
+  L4: 22.133
+  L5: 30.467
+transcript: Take a docs site with the same authentication steps under Getting Started, Developers and API. Menus like that follow the org chart, so I'd build the documentation structure around reader routes, through setup and use, then failure and change. Then I'd give authentication one canonical home, so the guide owns creating and rotating a key, and the reference owns status codes. Before moving pages, I'd hand a reviewer a task like a failing webhook check, and rename the route if two labels look equally right. So check that each label narrows the reader's next decision, because one that only shows ownership belongs in repository metadata.

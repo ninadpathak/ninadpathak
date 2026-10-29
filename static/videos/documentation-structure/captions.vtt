@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.940
+Take a docs site with the same authentication steps under Getting Started,
+
+2
+00:00:03.940 --> 00:00:05.660
+Developers and API.
+
+3
+00:00:05.667 --> 00:00:07.767
+Menus like that follow the org chart,
+
+4
+00:00:07.767 --> 00:00:11.027
+so I'd build the documentation structure around reader routes,
+
+5
+00:00:11.027 --> 00:00:12.427
+through setup and use,
+
+6
+00:00:12.427 --> 00:00:13.933
+then failure and change.
+
+7
+00:00:13.933 --> 00:00:16.653
+Then I'd give authentication one canonical home,
+
+8
+00:00:16.653 --> 00:00:19.653
+so the guide owns creating and rotating a key,
+
+9
+00:00:19.653 --> 00:00:22.133
+and the reference owns status codes.
+
+10
+00:00:22.133 --> 00:00:23.753
+Before moving pages,
+
+11
+00:00:23.753 --> 00:00:27.333
+I'd hand a reviewer a task like a failing webhook check,
+
+12
+00:00:27.333 --> 00:00:30.467
+and rename the route if two labels look equally right.
+
+13
+00:00:30.467 --> 00:00:33.807
+So check that each label narrows the reader's next decision,
+
+14
+00:00:33.807 --> 00:00:37.647
+because one that only shows ownership belongs in repository metadata.

@@ -15,6 +15,7 @@ takeaways:
 - Test labels and landing pages before rebuilding the documentation platform.
 title: Organize Documentation Around Reader Routes, Not Your Org Chart
 updated: 2026-09-11
+video: documentation-structure
 ---
 
 A documentation site begins with a product and a handful of pages. Then the product gets teams.
