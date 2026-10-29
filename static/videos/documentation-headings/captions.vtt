@@ -1,0 +1,53 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:02.740
+Under a heading like Configuration,
+
+2
+00:00:02.740 --> 00:00:04.940
+a reader learns only the topic,
+
+3
+00:00:04.940 --> 00:00:08.933
+but Configure the client with an API key says what they'll do.
+
+4
+00:00:08.933 --> 00:00:15.473
+So the rule for documentation headings is that a heading tells a scanning reader what its section contains.
+
+5
+00:00:15.567 --> 00:00:16.687
+For a procedure,
+
+6
+00:00:16.727 --> 00:00:19.027
+I'd name the task or its result,
+
+7
+00:00:19.027 --> 00:00:22.133
+like Create the project and install the CLI.
+
+8
+00:00:22.133 --> 00:00:24.733
+But that doesn't mean a verb in every heading,
+
+9
+00:00:24.733 --> 00:00:28.413
+because a concept or reference section gets a descriptive noun phrase,
+
+10
+00:00:28.413 --> 00:00:30.467
+like Webhook signature headers.
+
+11
+00:00:30.467 --> 00:00:32.387
+So before you publish,
+
+12
+00:00:32.387 --> 00:00:34.507
+read the headings without the body copy,
+
+13
+00:00:34.507 --> 00:00:37.827
+and check that each one says why its section exists.

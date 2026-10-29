@@ -1,0 +1,19 @@
+# Narrated explainer for /articles/documentation-headings/, imported by tools/import_video.py from
+# ninadpathak-video films/documentation-headings (render of 2026-10-29T13:39:38+05:30).
+name: Documentation headings in 40 seconds
+description: 'The rule for documentation headings: tell a scanning reader what the section contains, name the task or result for procedures, use a descriptive noun phrase for concepts and reference, and read the headings alone before publishing.'
+upload_date: '2026-10-29T13:39:38+05:30'
+duration_seconds: 40
+width: 1920
+height: 1080
+file: documentation-headings.mp4
+poster: poster.png
+poster_webp: poster.webp
+captions: captions.vtt
+line_offsets:
+  L1: 0.0
+  L2: 8.933
+  L3: 15.567
+  L4: 22.133
+  L5: 30.467
+transcript: Under a heading like Configuration, a reader learns only the topic, but Configure the client with an API key says what they'll do. So the rule for documentation headings is that a heading tells a scanning reader what its section contains. For a procedure, I'd name the task or its result, like Create the project and install the CLI. But that doesn't mean a verb in every heading, because a concept or reference section gets a descriptive noun phrase, like Webhook signature headers. So before you publish, read the headings without the body copy, and check that each one says why its section exists.

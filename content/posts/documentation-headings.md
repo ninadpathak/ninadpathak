@@ -15,6 +15,7 @@ takeaways:
 - Review the heading outline separately from the body copy before publishing.
 title: How to Write Task-Based Documentation Headings
 updated: 2026-08-10
+video: documentation-headings
 ---
 
 A heading should tell a scanning reader what the section contains. For a procedure, name the result or task.

@@ -1,0 +1,666 @@
+{
+ "L1": {
+  "duration": 8.87,
+  "level_db": -21.37,
+  "text": "Under a heading like Configuration, a reader learns only the topic, but Configure the client with an API key says what they'll do.",
+  "transcript": "Under a heading like Configuration, a reader learns only the topic, but Configure the client with an API key says what they'll do.",
+  "words": [
+   {
+    "w": "Under",
+    "start": 0.0,
+    "end": 0.32,
+    "onset": 0.08
+   },
+   {
+    "w": "a",
+    "start": 0.32,
+    "end": 0.6,
+    "onset": 0.32
+   },
+   {
+    "w": "heading",
+    "start": 0.6,
+    "end": 0.88,
+    "onset": 0.51
+   },
+   {
+    "w": "like",
+    "start": 0.88,
+    "end": 1.4,
+    "onset": 1.04
+   },
+   {
+    "w": "Configuration,",
+    "start": 1.4,
+    "end": 2.5,
+    "onset": 1.59
+   },
+   {
+    "w": "a",
+    "start": 2.74,
+    "end": 2.98,
+    "onset": 2.86
+   },
+   {
+    "w": "reader",
+    "start": 2.98,
+    "end": 3.2,
+    "onset": 3.0
+   },
+   {
+    "w": "learns",
+    "start": 3.2,
+    "end": 3.72,
+    "onset": 3.21
+   },
+   {
+    "w": "only",
+    "start": 3.72,
+    "end": 4.08,
+    "onset": 3.86
+   },
+   {
+    "w": "the",
+    "start": 4.08,
+    "end": 4.24,
+    "onset": 4.17
+   },
+   {
+    "w": "topic,",
+    "start": 4.24,
+    "end": 4.58,
+    "onset": 4.27
+   },
+   {
+    "w": "but",
+    "start": 4.94,
+    "end": 5.16,
+    "onset": 4.91
+   },
+   {
+    "w": "Configure",
+    "start": 5.16,
+    "end": 5.8,
+    "onset": 5.35
+   },
+   {
+    "w": "the",
+    "start": 5.8,
+    "end": 5.92,
+    "onset": 5.86
+   },
+   {
+    "w": "client",
+    "start": 5.92,
+    "end": 6.36,
+    "onset": 6.07
+   },
+   {
+    "w": "with",
+    "start": 6.36,
+    "end": 6.6,
+    "onset": 6.48
+   },
+   {
+    "w": "an",
+    "start": 6.6,
+    "end": 6.74,
+    "onset": 6.62
+   },
+   {
+    "w": "API",
+    "start": 6.74,
+    "end": 7.16,
+    "onset": 6.99
+   },
+   {
+    "w": "key",
+    "start": 7.16,
+    "end": 7.56,
+    "onset": 7.46
+   },
+   {
+    "w": "says",
+    "start": 7.56,
+    "end": 7.96,
+    "onset": 7.78
+   },
+   {
+    "w": "what",
+    "start": 7.96,
+    "end": 8.24,
+    "onset": 8.07
+   },
+   {
+    "w": "they'll",
+    "start": 8.24,
+    "end": 8.48,
+    "onset": 8.32
+   },
+   {
+    "w": "do.",
+    "start": 8.48,
+    "end": 8.72,
+    "onset": 8.58
+   }
+  ]
+ },
+ "L2": {
+  "duration": 6.56,
+  "level_db": -25.0,
+  "text": "So the rule for documentation headings is that a heading tells a scanning reader what its section contains.",
+  "transcript": "So the rule for documentation headings is that a heading tells a scanning reader what its section contains.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.22,
+    "onset": 0.08
+   },
+   {
+    "w": "the",
+    "start": 0.22,
+    "end": 0.4,
+    "onset": 0.17
+   },
+   {
+    "w": "rule",
+    "start": 0.4,
+    "end": 0.72,
+    "onset": 0.55
+   },
+   {
+    "w": "for",
+    "start": 0.72,
+    "end": 0.98,
+    "onset": 0.9
+   },
+   {
+    "w": "documentation",
+    "start": 0.98,
+    "end": 1.58,
+    "onset": 1.07
+   },
+   {
+    "w": "headings",
+    "start": 1.58,
+    "end": 2.32,
+    "onset": 1.6
+   },
+   {
+    "w": "is",
+    "start": 2.32,
+    "end": 2.54,
+    "onset": 2.38
+   },
+   {
+    "w": "that",
+    "start": 2.54,
+    "end": 2.72,
+    "onset": 2.6
+   },
+   {
+    "w": "a",
+    "start": 2.72,
+    "end": 2.96,
+    "onset": 2.8
+   },
+   {
+    "w": "heading",
+    "start": 2.96,
+    "end": 3.24,
+    "onset": 3.0
+   },
+   {
+    "w": "tells",
+    "start": 3.24,
+    "end": 3.66,
+    "onset": 3.42
+   },
+   {
+    "w": "a",
+    "start": 3.66,
+    "end": 3.84,
+    "onset": 3.74
+   },
+   {
+    "w": "scanning",
+    "start": 3.84,
+    "end": 4.2,
+    "onset": 3.97
+   },
+   {
+    "w": "reader",
+    "start": 4.2,
+    "end": 4.58,
+    "onset": 4.4
+   },
+   {
+    "w": "what",
+    "start": 4.58,
+    "end": 5.04,
+    "onset": 4.55
+   },
+   {
+    "w": "its",
+    "start": 5.04,
+    "end": 5.32,
+    "onset": 5.22
+   },
+   {
+    "w": "section",
+    "start": 5.32,
+    "end": 5.66,
+    "onset": 5.3
+   },
+   {
+    "w": "contains.",
+    "start": 5.66,
+    "end": 6.14,
+    "onset": 5.6
+   }
+  ]
+ },
+ "L3": {
+  "duration": 6.49,
+  "level_db": -22.48,
+  "text": "For a procedure, I'd name the task or its result, like Create the project and install the CLI.",
+  "transcript": "For a procedure, I'd name the task or its result, like Create the project and install the CLI.",
+  "words": [
+   {
+    "w": "For",
+    "start": 0.0,
+    "end": 0.18,
+    "onset": 0.09
+   },
+   {
+    "w": "a",
+    "start": 0.18,
+    "end": 0.32,
+    "onset": 0.29
+   },
+   {
+    "w": "procedure,",
+    "start": 0.32,
+    "end": 0.72,
+    "onset": 0.29
+   },
+   {
+    "w": "I'd",
+    "start": 1.16,
+    "end": 1.42,
+    "onset": 1.11
+   },
+   {
+    "w": "name",
+    "start": 1.42,
+    "end": 1.7,
+    "onset": 1.4
+   },
+   {
+    "w": "the",
+    "start": 1.7,
+    "end": 1.9,
+    "onset": 1.81
+   },
+   {
+    "w": "task",
+    "start": 1.9,
+    "end": 2.32,
+    "onset": 1.94
+   },
+   {
+    "w": "or",
+    "start": 2.32,
+    "end": 2.6,
+    "onset": 2.47
+   },
+   {
+    "w": "its",
+    "start": 2.6,
+    "end": 2.74,
+    "onset": 2.71
+   },
+   {
+    "w": "result,",
+    "start": 2.74,
+    "end": 3.22,
+    "onset": 2.71
+   },
+   {
+    "w": "like",
+    "start": 3.46,
+    "end": 3.6,
+    "onset": 3.44
+   },
+   {
+    "w": "Create",
+    "start": 3.6,
+    "end": 4.06,
+    "onset": 3.84
+   },
+   {
+    "w": "the",
+    "start": 4.06,
+    "end": 4.22,
+    "onset": 4.14
+   },
+   {
+    "w": "project",
+    "start": 4.22,
+    "end": 4.62,
+    "onset": 4.3
+   },
+   {
+    "w": "and",
+    "start": 4.62,
+    "end": 4.9,
+    "onset": 4.78
+   },
+   {
+    "w": "install",
+    "start": 4.9,
+    "end": 5.32,
+    "onset": 4.9
+   },
+   {
+    "w": "the",
+    "start": 5.32,
+    "end": 5.56,
+    "onset": 5.43
+   },
+   {
+    "w": "CLI.",
+    "start": 5.56,
+    "end": 6.38,
+    "onset": 5.47
+   }
+  ]
+ },
+ "L4": {
+  "duration": 8.25,
+  "level_db": -26.12,
+  "text": "But that doesn't mean a verb in every heading, because a concept or reference section gets a descriptive noun phrase, like Webhook signature headers.",
+  "transcript": "But that doesn't mean a verb in every heading, because a concept or reference section gets a descriptive noun phrase, like Webhook signature headers.",
+  "words": [
+   {
+    "w": "But",
+    "start": 0.0,
+    "end": 0.18,
+    "onset": 0.08
+   },
+   {
+    "w": "that",
+    "start": 0.18,
+    "end": 0.4,
+    "onset": 0.24
+   },
+   {
+    "w": "doesn't",
+    "start": 0.4,
+    "end": 0.92,
+    "onset": 0.56
+   },
+   {
+    "w": "mean",
+    "start": 0.92,
+    "end": 1.12,
+    "onset": 0.93
+   },
+   {
+    "w": "a",
+    "start": 1.12,
+    "end": 1.34,
+    "onset": 1.12
+   },
+   {
+    "w": "verb",
+    "start": 1.34,
+    "end": 1.58,
+    "onset": 1.38
+   },
+   {
+    "w": "in",
+    "start": 1.58,
+    "end": 1.74,
+    "onset": 1.63
+   },
+   {
+    "w": "every",
+    "start": 1.74,
+    "end": 2.0,
+    "onset": 1.76
+   },
+   {
+    "w": "heading,",
+    "start": 2.0,
+    "end": 2.34,
+    "onset": 2.12
+   },
+   {
+    "w": "because",
+    "start": 2.6,
+    "end": 3.04,
+    "onset": 2.82
+   },
+   {
+    "w": "a",
+    "start": 3.04,
+    "end": 3.2,
+    "onset": 3.08
+   },
+   {
+    "w": "concept",
+    "start": 3.2,
+    "end": 3.64,
+    "onset": 3.22
+   },
+   {
+    "w": "or",
+    "start": 3.64,
+    "end": 3.84,
+    "onset": 3.74
+   },
+   {
+    "w": "reference",
+    "start": 3.84,
+    "end": 4.14,
+    "onset": 3.96
+   },
+   {
+    "w": "section",
+    "start": 4.14,
+    "end": 4.5,
+    "onset": 4.16
+   },
+   {
+    "w": "gets",
+    "start": 4.5,
+    "end": 4.78,
+    "onset": 4.48
+   },
+   {
+    "w": "a",
+    "start": 4.78,
+    "end": 4.9,
+    "onset": 4.77
+   },
+   {
+    "w": "descriptive",
+    "start": 4.9,
+    "end": 5.28,
+    "onset": 4.91
+   },
+   {
+    "w": "noun",
+    "start": 5.28,
+    "end": 5.58,
+    "onset": 5.28
+   },
+   {
+    "w": "phrase,",
+    "start": 5.58,
+    "end": 6.02,
+    "onset": 5.78
+   },
+   {
+    "w": "like",
+    "start": 6.28,
+    "end": 6.64,
+    "onset": 6.4
+   },
+   {
+    "w": "Webhook",
+    "start": 6.64,
+    "end": 7.26,
+    "onset": 6.93
+   },
+   {
+    "w": "signature",
+    "start": 7.26,
+    "end": 7.6,
+    "onset": 7.25
+   },
+   {
+    "w": "headers.",
+    "start": 7.6,
+    "end": 8.0,
+    "onset": 7.68
+   }
+  ]
+ },
+ "L5": {
+  "duration": 7.2,
+  "level_db": -26.51,
+  "text": "So before you publish, read the headings without the body copy, and check that each one says why its section exists.",
+  "transcript": "So before you publish, read the headings without the body copy, and check that each one says why its section exists.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.0,
+    "end": 0.36,
+    "onset": 0.1
+   },
+   {
+    "w": "before",
+    "start": 0.36,
+    "end": 1.0,
+    "onset": 0.79
+   },
+   {
+    "w": "you",
+    "start": 1.0,
+    "end": 1.18,
+    "onset": 0.97
+   },
+   {
+    "w": "publish,",
+    "start": 1.18,
+    "end": 1.64,
+    "onset": 1.26
+   },
+   {
+    "w": "read",
+    "start": 1.92,
+    "end": 2.22,
+    "onset": 2.06
+   },
+   {
+    "w": "the",
+    "start": 2.22,
+    "end": 2.36,
+    "onset": 2.29
+   },
+   {
+    "w": "headings",
+    "start": 2.36,
+    "end": 2.74,
+    "onset": 2.31
+   },
+   {
+    "w": "without",
+    "start": 2.74,
+    "end": 3.0,
+    "onset": 2.79
+   },
+   {
+    "w": "the",
+    "start": 3.0,
+    "end": 3.22,
+    "onset": 3.17
+   },
+   {
+    "w": "body",
+    "start": 3.22,
+    "end": 3.48,
+    "onset": 3.28
+   },
+   {
+    "w": "copy,",
+    "start": 3.48,
+    "end": 3.88,
+    "onset": 3.57
+   },
+   {
+    "w": "and",
+    "start": 4.04,
+    "end": 4.36,
+    "onset": 4.26
+   },
+   {
+    "w": "check",
+    "start": 4.36,
+    "end": 4.58,
+    "onset": 4.39
+   },
+   {
+    "w": "that",
+    "start": 4.58,
+    "end": 4.76,
+    "onset": 4.67
+   },
+   {
+    "w": "each",
+    "start": 4.76,
+    "end": 5.02,
+    "onset": 4.84
+   },
+   {
+    "w": "one",
+    "start": 5.02,
+    "end": 5.22,
+    "onset": 5.09
+   },
+   {
+    "w": "says",
+    "start": 5.22,
+    "end": 5.56,
+    "onset": 5.4
+   },
+   {
+    "w": "why",
+    "start": 5.56,
+    "end": 5.9,
+    "onset": 5.74
+   },
+   {
+    "w": "its",
+    "start": 5.9,
+    "end": 6.12,
+    "onset": 5.96
+   },
+   {
+    "w": "section",
+    "start": 6.12,
+    "end": 6.44,
+    "onset": 6.08
+   },
+   {
+    "w": "exists.",
+    "start": 6.44,
+    "end": 6.96,
+    "onset": 6.47
+   }
+  ]
+ }
+}
