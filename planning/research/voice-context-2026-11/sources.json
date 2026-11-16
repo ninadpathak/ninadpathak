@@ -19,7 +19,8 @@
         "Facts should be rewritten when truth changes. No appending.",
         "At the start of every session, Operator only injects this lean catalog into context",
         "to record only what the code cannot provide",
-        "Not some background \"dreamer\" agent."
+        "Not some background \"dreamer\" agent.",
+        "an explicit .operator-shared/ shared partition that you can commit with the repository, so that specs, guides, and standards can be shared with every coworker, intern, or cloud AI agent."
       ],
       "connects": [
         "rag-vs-memory",
@@ -76,7 +77,8 @@
         "Fable 5, by comparison, wrote nine files in two folders, plus a single top-level file called global.md, and earned four badges.",
         "it helps to tell Claude what memory is for, but not how to use it.",
         "a note that's wrong from the start or that drifts as the environment changes can be read, and trusted, by Claude in a later session.",
-        "a wiki, a collection of pages written and maintained by Claude"
+        "a wiki, a collection of pages written and maintained by Claude",
+        "wrote 413 memory files across 225 folders and earned one badge"
       ],
       "connects": [
         "rag-vs-memory",
@@ -186,7 +188,8 @@
         "Change the inference engine and its settings, and you change the model's output quality.",
         "a bug in the interplay between constrained decoding and speculative decoding can result in speculative tokens being wrongly rejected by the grammar",
         "from 92% to 100%",
-        "Later, vLLM added the --tool-strict-level flag so that users can enable tool-call strictness for their deployments."
+        "Later, vLLM added the --tool-strict-level flag so that users can enable tool-call strictness for their deployments.",
+        "In other words, 2 out of every 25 attempted tool calls failed."
       ],
       "connects": [
         "llm-inference-optimization",
@@ -427,7 +430,8 @@
         "code-documentation",
         "claude-md",
         "claude-code-subagents",
-        "agentic-workflows"
+        "agentic-workflows",
+        "internal-vs-external-docs"
       ]
     },
     {
@@ -475,6 +479,381 @@
         "writing-technical-tutorials",
         "quickstart-guide"
       ]
+    },
+    {
+      "id": "xscreensaver-agents-md",
+      "url": "https://raw.githubusercontent.com/Zygo/xscreensaver/master/AGENTS.md",
+      "author": "XScreenSaver project (file shipped in the 6.16 source tarball; GitHub mirror by Zygo Blaxell)",
+      "date": "2026-09-04",
+      "title": "XScreenSaver AGENTS.md",
+      "quotes": [
+        "You are in a project that does not want AI contributions of any kind."
+      ],
+      "connects": [
+        "internal-vs-external-docs",
+        "documentation-types",
+        "claude-md"
+      ],
+      "date_note": "Date of the mirror commit that imported xscreensaver-6.16.tar.gz. Submitted to Hacker News on 2026-10-20 (item 50165158). The post links the GitHub blob page."
+    },
+    {
+      "id": "bowen-xfce-docs-volunteer",
+      "url": "https://hachyderm.io/api/v1/statuses/117510355078652698",
+      "author": "Kevin Bowen (Mastodon, hachyderm.io; profile says Xfce documentation supervisor)",
+      "date": "2026-10-27",
+      "title": "Mastodon post on onboarding an Xfce documentation volunteer",
+      "quotes": [
+        "I got my first documentation volunteer in two years to assist with the",
+        "I presented my introductory info dump to onboard them."
+      ],
+      "connects": [
+        "developer-onboarding-docs"
+      ],
+      "permalink": "https://hachyderm.io/@kevinbowen/117510355078652698",
+      "date_note": "Fetched for internal-vs-external-docs and cut after review as decoration; kept as a lead."
+    },
+    {
+      "id": "kapa-company-knowledge-bench",
+      "url": "https://www.kapa.ai/blog/company-knowledge-bench",
+      "author": "Finn Bauer (kapa.ai)",
+      "date": "2026-10-02",
+      "title": "Benchmarking retrieval for agents on messy real-world company knowledge",
+      "quotes": [
+        "a frontier model with nothing but grep matches a tuned modern retrieval pipeline at 0.61, but takes five times as long.",
+        "Cursor recently stopped searching your code via embeddings in favor of relying only on grep and indexed search.",
+        "1,000 eval cases annotated from real production data",
+        "A note on bias: retrieval is core to our product, and all seven retrievers were built by us"
+      ],
+      "connects": [
+        "hybrid-search",
+        "contextual-retrieval",
+        "rag-reranking",
+        "rag-evaluation"
+      ],
+      "discussion": "https://news.ycombinator.com/item?id=49933381"
+    },
+    {
+      "id": "kapa-retrieval-bottleneck",
+      "url": "https://www.kapa.ai/blog/retrieval-bottleneck",
+      "author": "Matteo Bortoletto and Janis Fluri (kapa.ai)",
+      "date": "2026-10-26",
+      "title": "Retrieval's bottleneck is moving from finding to selecting",
+      "quotes": [
+        "Models have become good enough at using grep that the semantic search path no longer helps coding agents in a meaningful way.",
+        "Grep, however, does no selection. It returns every match, so all filtering happens inside the model's context window.",
+        "identifiers are distinctive and spelled the same way everywhere",
+        "Of all the gold chunks search found, 34% were never shown to the agentic retriever.",
+        "for grep, only about one in twenty-five of the chunks it returns is needed",
+        "the difficulty in retrieval is shifting from finding to selecting",
+        "Today, about half of the failed test cases are caused by search."
+      ],
+      "connects": [
+        "hybrid-search",
+        "contextual-retrieval",
+        "rag-reranking",
+        "rag-evaluation"
+      ],
+      "discussion": "https://news.ycombinator.com/item?id=50248422"
+    },
+    {
+      "id": "beir-paper",
+      "url": "https://arxiv.org/abs/2104.08663",
+      "author": "Nandan Thakur and co-authors",
+      "date": "2021-04-17",
+      "title": "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      "quotes": [
+        "often underperform other approaches",
+        "Our results show BM25 is a robust baseline"
+      ],
+      "connects": [
+        "hybrid-search",
+        "rag-reranking"
+      ],
+      "date_note": "arXiv submission date; an older paper cited for a standing result, not as news."
+    },
+    {
+      "id": "anthropic-contextual-retrieval",
+      "url": "https://www.anthropic.com/research/contextual-retrieval",
+      "author": "Anthropic",
+      "date": "2024-09-19",
+      "title": "Introducing Contextual Retrieval",
+      "quotes": [
+        "usually 50-100 tokens",
+        "reducing latency by > 2x and costs by up to 90%",
+        "you can just include the entire knowledge base in the prompt",
+        "the one-time cost to generate contextualized chunks is $1.02 per million document tokens",
+        "Contextual Embeddings reduced the top-20-chunk retrieval failure rate by 35% (5.7% → 3.7%)",
+        "reduced the top-20-chunk retrieval failure rate by 49% (5.7% → 2.9%)",
+        "reduced the top-20-chunk retrieval failure rate by 67% (5.7% → 1.9%)",
+        "(codebases, fiction, ArXiv papers, Science Papers)",
+        "We use 1 minus recall@20 as our evaluation metric",
+        "we used the top 150",
+        "the top-performing embedding configuration (Gemini Text 004)"
+      ],
+      "connects": [
+        "contextual-retrieval",
+        "hybrid-search",
+        "rag-reranking",
+        "rag-vs-memory"
+      ],
+      "date_note": "A 2024 source, dated as such in the post. The post links the older /engineering/ URL, which redirects here."
+    },
+    {
+      "id": "stripe-engineering-blog-index",
+      "url": "https://stripe.dev/blog/topic/engineering",
+      "author": "Stripe",
+      "date": "2026-11-17",
+      "title": "Stripe developer blog, Engineering topic",
+      "quotes": [
+        "Engineering ( 28 )",
+        "2026.11.02 Claimable sandboxes: Frictionless Stripe accounts for agents",
+        "2026.10.19 Scaling Radar: Fighting fraud with agent-assisted machine learning",
+        "2026.9.30 Stripe's Payment Method Factory: Orchestrating agents for repeated, custom integrations",
+        "2026.9.22 How Stripe is designing Checkout for AI agents",
+        "How Stripe used WebMCP to accelerate agent purchases from the browser.",
+        "2026.9.14 Harbor: Stripe's AI-assisted prototyping tool",
+        "Harbor is the internal tool Stripe teams use to prototype with an AI agent."
+      ],
+      "connects": [
+        "stripe-technical-blog"
+      ],
+      "date_note": "Date fetched; the listing shows each post with its date."
+    },
+    {
+      "id": "stripe-claimable-sandboxes",
+      "url": "https://stripe.dev/blog/claimable-sandboxes-frictionless-stripe-accounts-for-agents",
+      "author": "Mathew Varughese and Cara Mecozzi (Stripe)",
+      "date": "2026-11-02",
+      "title": "Claimable sandboxes: Frictionless Stripe accounts for agents",
+      "quotes": [
+        "When it takes 40 minutes to build a payments integration, spending a minute signing up isn't that big of a deal. But when an agent only takes a few minutes to build an integration, suddenly the signup friction becomes more apparent.",
+        "it requires careful consideration of security and cost implications"
+      ],
+      "connects": [
+        "stripe-technical-blog",
+        "quickstart-guide",
+        "devtools-documentation"
+      ]
+    },
+    {
+      "id": "stripe-payment-api-design",
+      "url": "https://stripe.dev/blog/payment-api-design",
+      "author": "Michelle Bu (Stripe)",
+      "date": "2020-12-15",
+      "title": "Stripe's payments APIs: The first 10 years",
+      "quotes": [
+        "took almost two years",
+        "The hardest part of realizing the PaymentIntent migration was not a technical challenge, but a perception challenge"
+      ],
+      "connects": [
+        "stripe-technical-blog"
+      ],
+      "date_note": "A 2020 source, dated as such in the post."
+    },
+    {
+      "id": "stripe-annual-letter-2025",
+      "url": "https://stripe.com/annual-updates/2025",
+      "author": "Stripe",
+      "date": "2026-11-17",
+      "title": "Stripe's 2025 annual letter",
+      "quotes": [
+        "In 2025, businesses on Stripe generated $1.9 trillion"
+      ],
+      "connects": [
+        "stripe-technical-blog"
+      ],
+      "date_note": "Date fetched; the letter covers 2025."
+    },
+    {
+      "id": "rachel-andrew-more-than-words",
+      "url": "https://rachelandrew.co.uk/archives/2026/09/30/more-than-words/",
+      "author": "Rachel Andrew",
+      "date": "2026-09-30",
+      "title": "More than words",
+      "quotes": [
+        "AI seems to be particularly bad at creating this kind of content.",
+        "The majority of the time I spend writing a tutorial, isn't spent writing.",
+        "Knowing what to leave out is as important as understanding what to explain."
+      ],
+      "connects": [
+        "documentation-types",
+        "writing-technical-tutorials",
+        "quickstart-guide",
+        "shorter-documentation"
+      ],
+      "date_note": "Federated from her own site as rachelandrew@rachelandrew.co.uk, which is how it surfaced on the Mastodon #documentation tag."
+    },
+    {
+      "id": "claude-code-changelog-agents-md",
+      "url": "https://code.claude.com/docs/en/changelog",
+      "author": "Anthropic",
+      "date": "2026-09-18",
+      "title": "Claude Code changelog, 2.1.277",
+      "quotes": [
+        "Added AGENTS.md support: in a project with no CLAUDE.md, Claude Code reads AGENTS.md instead"
+      ],
+      "connects": [
+        "documentation-types",
+        "claude-md",
+        "internal-vs-external-docs"
+      ],
+      "discussion": "https://news.ycombinator.com/item?id=49760187"
+    },
+    {
+      "id": "breunig-state-of-context-engineering",
+      "url": "https://www.dbreunig.com/2026/10/24/the-state-of-context-engineering.html",
+      "author": "Drew Breunig",
+      "date": "2026-10-24",
+      "title": "The State of Context Engineering",
+      "quotes": [
+        "How many of you keep memory on in ChatGPT or Claude? I turn it off. I hate it.",
+        "The model will take notes on both, mix up those contexts, and the confusion grows from there.",
+        "Over time, overly precise memories become conflicted and messy, and nobody has yet figured out how to handle this.",
+        "As we focus more on memory, we also need to think about strategic forgetting.",
+        "I have a book coming out in a bit, The Context Engineering Handbook.",
+        "I turn it off."
+      ],
+      "connects": [
+        "ai-memory-management",
+        "context-windows-vs-memory",
+        "llm-context-windows",
+        "short-term-agent-memory",
+        "agent-memory-2026"
+      ],
+      "discussion": "https://news.ycombinator.com/item?id=50235780",
+      "date_note": "Transcript of a talk at AGNTCon given that week."
+    },
+    {
+      "id": "hn-ubicloud-hansvm",
+      "url": "https://hn.algolia.com/api/v1/items/50245187",
+      "author": "hansvm (Hacker News)",
+      "date": "2026-10-26",
+      "title": "Comment on 'Fixing Tool-Call Accuracy in vLLM'",
+      "quotes": [
+        "Schema-constrained decoding changes the distribution the LLM will output.",
+        "I'd be curious how a back-up-and-retry method for tool calls (which also doesn't pollute the context and also has 100% tool-call accuracy) would compare."
+      ],
+      "connects": [
+        "llm-structured-outputs",
+        "llm-inference-optimization"
+      ],
+      "permalink": "https://news.ycombinator.com/item?id=50245187"
+    },
+    {
+      "id": "anthropic-structured-outputs-docs",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+      "author": "Anthropic",
+      "date": "2026-11-17",
+      "title": "Structured outputs, Claude Platform Docs",
+      "quotes": [
+        "The output_format parameter has moved to output_config.format, and beta headers are no longer required."
+      ],
+      "connects": [
+        "llm-structured-outputs"
+      ],
+      "date_note": "Date fetched; documentation page without its own date."
+    },
+    {
+      "id": "willison-october-inflection-bluesky",
+      "url": "https://public.api.bsky.app/xrpc/app.bsky.feed.getPosts?uris=at://did:plc:kft6lu4trxowqmter2b6vg6z/app.bsky.feed.post/3mywwaogdac23",
+      "author": "Simon Willison (Bluesky)",
+      "date": "2026-10-28",
+      "title": "Bluesky post on the October inflection point",
+      "quotes": [
+        "I think October represents another inflection point in capabilities for coding agents and the models that drive them: Claude Opus 5.5 can now build video games that are actually fun"
+      ],
+      "connects": [
+        "coding-models-new-code-vs-change",
+        "best-llms-for-coding"
+      ],
+      "permalink": "https://bsky.app/profile/simonwillison.net/post/3mywwaogdac23"
+    },
+    {
+      "id": "willison-vibe-game-development",
+      "url": "https://simonwillison.net/2026/Oct/28/vibe-game-development/",
+      "author": "Simon Willison",
+      "date": "2026-10-28",
+      "title": "The October inflection point for vibe game development",
+      "quotes": [
+        "no looking at the code at all",
+        "four games that I've genuinely enjoyed playing"
+      ],
+      "connects": [
+        "coding-models-new-code-vs-change",
+        "best-llms-for-coding"
+      ]
+    },
+    {
+      "id": "horthy-slopcodebench-october",
+      "url": "https://raw.githubusercontent.com/humanlayer/advanced-context-engineering-for-coding-agents/main/benchmarking-new-models-on-slop-code-bench.md",
+      "author": "Dex Horthy, with contributions from Gabe Orlanski",
+      "date": "2026-10-15",
+      "title": "SlopCodeBench update 10/2026",
+      "quotes": [
+        "It writes a program, gets new requirements, and changes the existing code. Later checkpoints test both new behavior and old behavior.",
+        "higher effort was not a reliable way to buy more strict passes in these runs",
+        "| GPT-6 Astra XHigh | 32/196 | 16.33% | 69.39% |",
+        "| Opus 5.5 Medium | 28/196 | 14.29% | 73.98% |",
+        "| Opus 5.5 | 28 → 25 | 145 → 141 | 4.22x |",
+        "| GPT-6 Astra XHigh | 3 | 1,435 | 1,178 |",
+        "One campaign per setting can't tell me how much is run-to-run variation."
+      ],
+      "connects": [
+        "coding-models-new-code-vs-change",
+        "best-llms-for-coding",
+        "agent-harnesses"
+      ],
+      "discussion": "https://news.ycombinator.com/item?id=50108717",
+      "date_note": "The post links the GitHub blob page; the verifier reads the raw file."
+    },
+    {
+      "id": "real-swe-1-1",
+      "url": "https://withspecific.com/blog/real-swe",
+      "author": "Specific Labs",
+      "date": "2026-10",
+      "title": "Introducing Real-SWE 1.1",
+      "quotes": [
+        "This release expands the benchmark to 25 tasks across TypeScript, Go, Python, Ruby and Java codebases and compares 18 models.",
+        "Resolution rate: 56.80%, one standard error either side: 53.5% to 60.1%",
+        "Resolution rate: 56.00%, one standard error either side: 54.4% to 57.6%",
+        "1 Opus 5.5 56.80% $13.95 2 GPT 6 Astra 56.00% $3.78"
+      ],
+      "connects": [
+        "coding-models-new-code-vs-change",
+        "best-llms-for-coding"
+      ],
+      "date_note": "The page gives the month only."
+    },
+    {
+      "id": "danluu-bad-benchmarks",
+      "url": "https://danluu.com/exercise-7/",
+      "author": "Dan Luu",
+      "date": "2026-07",
+      "title": "Bad benchmarks and evals: Senior SWE-Bench, napkin math, and winter tires",
+      "quotes": [
+        "very few of the publicly available benchmarks seem like reasonable things to rely on for getting a general idea of how good coding agents are."
+      ],
+      "connects": [
+        "coding-models-new-code-vs-change",
+        "best-llms-for-coding"
+      ],
+      "date_note": "The page carries no date. First submitted to Hacker News on 2026-07-28; the submission of 2026-09-11 reached 56 points."
+    },
+    {
+      "id": "parsimony-benchmark",
+      "url": "https://parsimony.lasu.dev/",
+      "author": "Parsimony (lasu.dev)",
+      "date": "2026-10-13",
+      "title": "Parsimony: which AI coding agent changes the least code?",
+      "quotes": [
+        "Existing benchmarks measure solve rate and cost, but don't punish excess code, which makes a codebase harder to work with in the long term."
+      ],
+      "connects": [
+        "coding-models-new-code-vs-change",
+        "best-llms-for-coding",
+        "code-documentation"
+      ],
+      "date_note": "Date of the Hacker News submission (item 50077619)."
     }
   ],
   "unused_leads": [
@@ -560,6 +939,34 @@
     "shorter-documentation": [
       "This page explains"
     ],
-    "agents-reading-docs": []
+    "agents-reading-docs": [],
+    "internal-vs-external-docs": [],
+    "hybrid-search": [
+      "What causes memory leaks in Go?",
+      "what are the differences between TCP and UDP?",
+      "ERROR_CODE_4291 stack trace"
+    ],
+    "contextual-retrieval": [
+      "The company's revenue grew by 3% over the previous quarter.",
+      "Acme Q3 revenue",
+      "Acme third-quarter revenue"
+    ],
+    "ai-memory-management": [
+      "we will fit everything.",
+      "the new pricing",
+      "user prefers dark mode",
+      "user prefers light mode",
+      "what does this agent know about this user, session, or context?",
+      "I prefer Python over Java,"
+    ],
+    "llm-structured-outputs": [
+      "what's the weather in Paris?",
+      "what's a nice thing to say to a coworker?",
+      "no violation found.",
+      "expiry_date must be after issue_date"
+    ],
+    "coding-models-new-code-vs-change": [
+      "best coding model"
+    ]
   }
 }

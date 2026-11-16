@@ -24,7 +24,9 @@ def norm(s):
     s = s.replace("\\u003c", "<").replace("\\u003e", ">").replace('\\"', '"')
     for a, b in (("’", "'"), ("‘", "'"), ("“", '"'), ("”", '"'), (" ", " ")):
         s = s.replace(a, b)
-    s = re.sub(r"<[^>]+>", " ", s)
+    # Second pass for markup that was escaped in the source (API JSON). Only strip things
+    # shaped like tags: a bare "<" in prose, as in "A <-> B ... x > y", must not swallow text.
+    s = re.sub(r"</?[a-zA-Z][^<>]*>", " ", s)
     return re.sub(r"\s+", " ", s)
 
 
