@@ -82,6 +82,20 @@ Pieces: internal-vs-external-docs, contextual-retrieval, stripe-technical-blog, 
 - llm-structured-outputs: OpenAI and Gemini API details and the 10-30% latency overhead.
 - One carried-over quotation was wrong and is fixed: hybrid-search quoted BEIR as calling BM25 a "strong generalizable baseline", and the abstract's words are "Our results show BM25 is a robust baseline".
 
+### Batch 2b (2026-11-17)
+
+hybrid-search, llm-structured-outputs and ai-memory-management were rewritten to the reviewer's standard: every vendor, benchmark and API claim confirmed on its linked page that day and dated when older than a year, or cut, and every code block run with its output printed. The second review found three places where that still fell short (one OpenAI latency note read from a single tab, one unsupported comparison, one undated 2024 paper), and all three are corrected. The list of carried-over material below is therefore closed for these three posts.
+
+- ai-memory-management film, mismatches with the text after the rewrite (the film is not changed in this batch):
+  - Narration L4 (fourth of five lines in `video.yaml`): "So I'd score each entry by its relevance to the task and by whether the user asked to remember it." The text says a frontier model should decide what to write and limits hand-written rules to smaller or older models. The second half of the line, keeping what the user asked to remember, still matches the pinned-entry example.
+  - On-screen caption in the L4 scenes: "THE SCORE ALSO WEIGHS ACCESS FREQUENCY ACROSS SESSIONS", with score bars. The text has no access-frequency scoring.
+  - End card: "AI Memory Management for LLMs: What Actually Works". The title is now "...: What Works".
+  - Narration L5: "add eviction on day one". The text puts eviction fifth of six build steps, before the first long session. Compatible in outcome.
+  - Fixed in text: the `video.yaml` description no longer mentions scoring, so the page's VideoObject markup agrees with the article.
+  - L1 to L3 agree with the text.
+- ai-memory-management title lost the word "Actually" (Search Console shows no query containing it for the URL over 16 months).
+- verify_quotes.py reads PDFs through pdftotext, used for the 2009 RRF paper.
+
 ### Videos checked against their text
 
 - contextual-retrieval: no mismatch. My first note here said the film presents code as the best use case, and that was wrong: the reviewer's contact sheet and the narration show a 10-Q filing, the 49% figure and the metadata check, all of which the article still says.

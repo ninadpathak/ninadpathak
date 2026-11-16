@@ -78,7 +78,11 @@
         "it helps to tell Claude what memory is for, but not how to use it.",
         "a note that's wrong from the start or that drifts as the environment changes can be read, and trusted, by Claude in a later session.",
         "a wiki, a collection of pages written and maintained by Claude",
-        "wrote 413 memory files across 225 folders and earned one badge"
+        "wrote 413 memory files across 225 folders and earned one badge",
+        "summaries written by Claude that replace its older turns so it can continue working in a new context window",
+        "both Opus 5 and Opus 4.7 lost much of the performance boost that memory gave them",
+        "nearly doubled its benchmark score",
+        "For stronger models, giving them freedom to judge salience was more effective than setting fixed rules in advance"
       ],
       "connects": [
         "rag-vs-memory",
@@ -189,7 +193,8 @@
         "a bug in the interplay between constrained decoding and speculative decoding can result in speculative tokens being wrongly rejected by the grammar",
         "from 92% to 100%",
         "Later, vLLM added the --tool-strict-level flag so that users can enable tool-call strictness for their deployments.",
-        "In other words, 2 out of every 25 attempted tool calls failed."
+        "In other words, 2 out of every 25 attempted tool calls failed.",
+        "this runtime enforcement adds negligible performance overhead."
       ],
       "connects": [
         "llm-inference-optimization",
@@ -522,7 +527,18 @@
         "a frontier model with nothing but grep matches a tuned modern retrieval pipeline at 0.61, but takes five times as long.",
         "Cursor recently stopped searching your code via embeddings in favor of relying only on grep and indexed search.",
         "1,000 eval cases annotated from real production data",
-        "A note on bias: retrieval is core to our product, and all seven retrievers were built by us"
+        "A note on bias: retrieval is core to our product, and all seven retrievers were built by us",
+        "Plain hybrid search scores 0.41.",
+        "Retrieving 100 candidates and reranking them down to 15 lifts that to 0.50, for a third of a second more",
+        "Splitting the query into sub-queries first lifts the score to 0.56.",
+        "more than doubling the time to 1.8 seconds",
+        "It scores 0.61 in 3.3 seconds, the same score as the strongest grep agent in a fifth of the time",
+        "gpt-6.1-sol reaches 0.61, the same score as Kapa Default, and the smaller gpt-6-luna reaches 0.54",
+        "the grep agents taking 13 to 17 seconds per query",
+        "It has the highest score, at 0.65 in about five seconds",
+        "If you change one thing in a basic RAG pipeline, add a reranker.",
+        "gpt-6.1-sol with a single tool: full-text and regex search over the chunks. No embeddings at all",
+        "Each sub-query retrieves its top 50 chunks through hybrid search, and the pooled results are reranked together down to the top 15."
       ],
       "connects": [
         "hybrid-search",
@@ -746,7 +762,8 @@
       "date": "2026-11-17",
       "title": "Structured outputs, Claude Platform Docs",
       "quotes": [
-        "The output_format parameter has moved to output_config.format, and beta headers are no longer required."
+        "The output_format parameter has moved to output_config.format, and beta headers are no longer required.",
+        "guarantee schema-compliant responses through constrained decoding"
       ],
       "connects": [
         "llm-structured-outputs"
@@ -854,6 +871,285 @@
         "code-documentation"
       ],
       "date_note": "Date of the Hacker News submission (item 50077619)."
+    },
+    {
+      "id": "azure-hybrid-reranking-2023",
+      "url": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/azure-ai-search-outperforming-vector-search-with-hybrid-retrieval-and-reranking/3929167",
+      "author": "Alec Berntson (Microsoft)",
+      "date": "2023-09-18",
+      "title": "Azure AI Search: Outperforming vector search with hybrid retrieval and reranking",
+      "quotes": [
+        "We used Azure Open AI text-embedding-ada-002 (Ada-002) embeddings and cosine similarity for all our tests in this post.",
+        "Keyword 40.6 40.6 49.6 Vector (Ada-002) 43.8 45.0 58.3 Hybrid (Keyword + Vector) 48.4 48.4 58.8 Hybrid + Semantic ranker 60.1 50.0 72.0"
+      ],
+      "connects": [
+        "hybrid-search"
+      ],
+      "date_note": "Older than a year and dated as such in the post."
+    },
+    {
+      "id": "elastic-hybrid-retrieval-2023",
+      "url": "https://www.elastic.co/search-labs/blog/improving-information-retrieval-elastic-stack-hybrid",
+      "author": "Quentin Herreros and Thomas Veasey (Elastic)",
+      "date": "2023-07-20",
+      "title": "Improving information retrieval in the Elastic Stack: Hybrid retrieval",
+      "quotes": [
+        "Reciprocal Rank Fusion increases average NDCG@10 by 1.4% over Elastic Learned Sparse Encoder alone and 18% over BM25 alone.",
+        "as the two queries are performed sequentially in Elasticsearch"
+      ],
+      "connects": [
+        "hybrid-search"
+      ],
+      "date_note": "Older than a year and dated as such in the post."
+    },
+    {
+      "id": "rrf-paper-2009",
+      "url": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf",
+      "author": "G. V. Cormack, C. L. A. Clarke and Stefan Büttcher",
+      "date": "2009-07",
+      "title": "Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods",
+      "quotes": [
+        "k = 60 was fixed during a pilot investigation",
+        "SIGIR’09, July 19–23, 2009, Boston, Massachusetts, USA."
+      ],
+      "connects": [
+        "hybrid-search"
+      ],
+      "date_note": "A PDF; the verifier reads it through pdftotext."
+    },
+    {
+      "id": "elastic-rrf-retriever-reference",
+      "url": "https://www.elastic.co/docs/reference/elasticsearch/rest-apis/retrievers/rrf-retriever",
+      "author": "Elastic",
+      "date": "2026-11-17",
+      "title": "RRF retriever reference",
+      "quotes": [
+        "This value must be greater than or equal to 1. Defaults to 60."
+      ],
+      "connects": [
+        "hybrid-search"
+      ],
+      "date_note": "Date fetched; reference page."
+    },
+    {
+      "id": "qdrant-hybrid-queries",
+      "url": "https://qdrant.tech/documentation/concepts/hybrid-queries/",
+      "author": "Qdrant",
+      "date": "2026-11-17",
+      "title": "Hybrid Queries",
+      "quotes": [
+        "$k$ is a constant (set to 2 by default)",
+        "Qdrant uses zero-based rank positions",
+        "Available as of v1.11.0 DBSF keeps the raw scores from each query but normalizes their distributions before combining."
+      ],
+      "connects": [
+        "hybrid-search"
+      ],
+      "date_note": "Date fetched; documentation page. The page writes k in LaTeX delimiters, which the post drops."
+    },
+    {
+      "id": "weaviate-hybrid-docs",
+      "url": "https://docs.weaviate.io/weaviate/search/hybrid",
+      "author": "Weaviate",
+      "date": "2026-11-17",
+      "title": "Hybrid search documentation",
+      "quotes": [
+        "Relative Score Fusion is the default fusion method starting in v1.24.",
+        "An alpha of 1 is a pure vector search. An alpha of 0 is a pure keyword search.",
+        "If you do not set alpha, the effective weighting depends on your client."
+      ],
+      "connects": [
+        "hybrid-search"
+      ],
+      "date_note": "Date fetched; documentation page."
+    },
+    {
+      "id": "openai-structured-outputs-guide",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Structured Outputs guide",
+      "quotes": [
+        "Structured Outputs is the evolution of JSON mode.",
+        "We recommend always using Structured Outputs instead of JSON mode when possible.",
+        "Structured Outputs constrains completed, non-refusal model output to your supplied JSON Schema. Your application still needs to handle refusals, incomplete responses, and API errors, and validate any business rules that the schema does not express.",
+        "Older models like gpt-4-turbo and earlier may use JSON mode instead.",
+        "the first request you make with any schema will have additional latency as our API processes the schema",
+        "Other models do not have this limitation.",
+        "When to use Structured Outputs via function calling vs via text.format",
+        "Note: the first request you make with any schema will have additional latency as our API processes the schema, but subsequent requests with the same schema will not have additional latency.",
+        "Note: for fine tuned models, the first request you make with any schema will have additional latency",
+        "incomplete_details"
+      ],
+      "connects": [
+        "llm-structured-outputs"
+      ],
+      "date_note": "Date fetched; documentation page. platform.openai.com/docs/guides/structured-outputs serves the same guide."
+    },
+    {
+      "id": "openai-function-calling-guide",
+      "url": "https://developers.openai.com/api/docs/guides/function-calling",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Function calling guide",
+      "quotes": [
+        "Whether to enforce strict mode for the function call",
+        "and JSON-encoded arguments"
+      ],
+      "connects": [
+        "llm-structured-outputs"
+      ],
+      "date_note": "Date fetched; documentation page."
+    },
+    {
+      "id": "google-gemini-3-api-updates",
+      "url": "https://developers.googleblog.com/new-gemini-api-updates-for-gemini-3/",
+      "author": "Google",
+      "date": "2025-11-25",
+      "title": "New Gemini API updates for Gemini 3",
+      "quotes": [
+        "You can now combine Gemini hosted tools, specifically Grounding with Google Search and URL context with structured outputs."
+      ],
+      "connects": [
+        "llm-structured-outputs"
+      ]
+    },
+    {
+      "id": "outlines-readme",
+      "url": "https://raw.githubusercontent.com/dottxt-ai/outlines/main/README.md",
+      "author": "Outlines (dottxt-ai)",
+      "date": "2026-11-17",
+      "title": "Outlines README",
+      "quotes": [
+        "Guaranteed valid structure",
+        "Same code runs across OpenAI, Ollama, vLLM, and more"
+      ],
+      "connects": [
+        "llm-structured-outputs"
+      ],
+      "date_note": "Date fetched. The post links the repository page."
+    },
+    {
+      "id": "instructor-docs",
+      "url": "https://python.useinstructor.com/",
+      "author": "Instructor",
+      "date": "2026-11-17",
+      "title": "Instructor documentation home",
+      "quotes": [
+        "Extract structured data from any LLM with type safety, validation, and automatic retries."
+      ],
+      "connects": [
+        "llm-structured-outputs"
+      ],
+      "date_note": "Date fetched; documentation page."
+    },
+    {
+      "id": "pagedattention-paper",
+      "url": "https://arxiv.org/abs/2309.06180",
+      "author": "Woosuk Kwon and co-authors",
+      "date": "2023-09-12",
+      "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+      "quotes": [
+        "near-zero waste in KV cache memory",
+        "we build vLLM, an LLM serving system"
+      ],
+      "connects": [
+        "ai-memory-management",
+        "llm-inference-optimization"
+      ],
+      "date_note": "Older than a year and dated as such in the post."
+    },
+    {
+      "id": "letta-memory-docs",
+      "url": "https://docs.letta.com/guides/agents/memory",
+      "author": "Letta",
+      "date": "2026-11-17",
+      "title": "Letta documentation: stateful agents and memory",
+      "quotes": [
+        "memory blocks that are attached to an agent are in-context (pinned to the system prompt)",
+        "The Letta API stores all messages, so even after a compaction / eviction, an agent's old messages are still retrievable",
+        "editable by agents via memory tools"
+      ],
+      "connects": [
+        "ai-memory-management"
+      ],
+      "date_note": "Date fetched; documentation page."
+    },
+    {
+      "id": "letta-archival-memory-docs",
+      "url": "https://docs.letta.com/guides/agents/archival-memory",
+      "author": "Letta",
+      "date": "2026-11-17",
+      "title": "Letta documentation: archival memory",
+      "quotes": [
+        "Archival memory is a semantically searchable database where agents can store facts, knowledge, and information for long-term retrieval."
+      ],
+      "connects": [
+        "ai-memory-management"
+      ],
+      "date_note": "Date fetched; documentation page."
+    },
+    {
+      "id": "letta-github-repo",
+      "url": "https://github.com/letta-ai/letta",
+      "author": "Letta",
+      "date": "2026-11-17",
+      "title": "letta-ai/letta repository page",
+      "quotes": [
+        "Letta (f.k.a. MemGPT) is actively developed."
+      ],
+      "connects": [
+        "ai-memory-management"
+      ],
+      "date_note": "Date fetched."
+    },
+    {
+      "id": "anthropic-compaction-docs",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/compaction",
+      "author": "Anthropic",
+      "date": "2026-11-17",
+      "title": "Compaction overview, Claude Platform Docs",
+      "quotes": [
+        "it keeps the active context small, because response quality degrades as a conversation grows",
+        "The API, when input tokens reach the trigger you set",
+        "Use on-demand compaction wherever it is available."
+      ],
+      "connects": [
+        "ai-memory-management"
+      ],
+      "date_note": "Date fetched; documentation page."
+    },
+    {
+      "id": "redis-vector-docs",
+      "url": "https://redis.io/docs/latest/develop/ai/search-and-query/vectors/",
+      "author": "Redis",
+      "date": "2026-11-17",
+      "title": "Vectors, Redis documentation",
+      "quotes": [
+        "Redis stores vectors and metadata in hashes or JSON objects.",
+        "Redis supports FLAT, HNSW and SVS-VAMANA vector index types."
+      ],
+      "connects": [
+        "ai-memory-management"
+      ],
+      "date_note": "Date fetched; documentation page."
+    },
+    {
+      "id": "llama-3-paper",
+      "url": "https://arxiv.org/pdf/2407.21783",
+      "author": "Meta (Aaron Grattafiori and co-authors)",
+      "date": "2024-07-31",
+      "title": "The Llama 3 Herd of Models",
+      "quotes": [
+        "Key/Value Heads 8 8 8",
+        "Layers 32 80 126",
+        "Attention Heads 32 64 128"
+      ],
+      "connects": [
+        "ai-memory-management",
+        "llm-inference-optimization"
+      ],
+      "date_note": "Older than a year and dated in the post. Table 3 of the PDF holds the layer and head counts; the head dimension of 128 is 8,192 divided by 64 and is not printed in the paper. The post links the abstract page."
     }
   ],
   "unused_leads": [
@@ -944,7 +1240,12 @@
     "hybrid-search": [
       "What causes memory leaks in Go?",
       "what are the differences between TCP and UDP?",
-      "ERROR_CODE_4291 stack trace"
+      "ERROR_CODE_4291 stack trace",
+      "a third of a second more",
+      "k is a constant (set to 2 by default)",
+      "keeps the raw scores from each query but normalizes their distributions before combining.",
+      "ORA-00942 runbook\", \"grants guide\", \"schema FAQ\", \"tuning notes",
+      "permissions overview\", \"grants guide\", \"ORA-00942 runbook\", \"roles tutorial"
     ],
     "contextual-retrieval": [
       "The company's revenue grew by 3% over the previous quarter.",
@@ -957,13 +1258,28 @@
       "user prefers dark mode",
       "user prefers light mode",
       "what does this agent know about this user, session, or context?",
-      "I prefer Python over Java,"
+      "I prefer Python over Java,",
+      "remember this",
+      "every entry is pinned; raise capacity or unpin something",
+      "Deploy region is eu-west-1",
+      "User said good morning",
+      "User mentioned rain",
+      "User is back from lunch",
+      "hallucinated memory",
+      "are in-context (pinned to the system prompt)",
+      "a semantically searchable database where agents can store facts, knowledge, and information for long-term retrieval.",
+      "f.k.a. MemGPT",
+      "keeps the active context small, because response quality degrades as a conversation grows.",
+      "when input tokens reach the trigger you set",
+      "Redis stores vectors and metadata in hashes or JSON objects"
     ],
     "llm-structured-outputs": [
       "what's the weather in Paris?",
       "what's a nice thing to say to a coworker?",
       "no violation found.",
-      "expiry_date must be after issue_date"
+      "expiry_date must be after issue_date",
+      "the evolution of JSON mode",
+      "for fine tuned models"
     ],
     "coding-models-new-code-vs-change": [
       "best coding model"
