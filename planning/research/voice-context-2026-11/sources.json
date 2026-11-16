@@ -1,0 +1,565 @@
+{
+  "$comment": "Industry context for the voice rewrite. Every item was fetched on 2026-11-16. Quotes are verbatim from the fetched page, with curly quotes and apostrophes straightened. Run verify_quotes.py to refetch every URL and re-check every quote. 'connects' lists post slugs.",
+  "sources": [
+    {
+      "id": "liao-docs-not-memory",
+      "url": "https://liao.gg/blog/agents-dont-need-memory",
+      "author": "Kevin Liao",
+      "date": "2026-10-03",
+      "title": "Agents Don't Need Memory. They Need Documentation.",
+      "discussion": "https://news.ycombinator.com/item?id=49945933",
+      "quotes": [
+        "Because agents don't need memory. They need documentation.",
+        "On every prompt, retrieve the top 5 and inject",
+        "Memories are surfaced by similarity. Similarity search ranks how close two snippets are in embedding space.",
+        "The past is treated as truth.",
+        "Agents can't search for what they don't know.",
+        "People write things down and use those records instead.",
+        "It's All Just RAG",
+        "Facts should be rewritten when truth changes. No appending.",
+        "At the start of every session, Operator only injects this lean catalog into context",
+        "to record only what the code cannot provide",
+        "Not some background \"dreamer\" agent."
+      ],
+      "connects": [
+        "rag-vs-memory",
+        "coding-agent-memory",
+        "claude-code-memory",
+        "claude-md",
+        "internal-vs-external-docs",
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "hn-liao-kaydub",
+      "url": "https://hn.algolia.com/api/v1/items/49955753",
+      "permalink": "https://news.ycombinator.com/item?id=49955753",
+      "author": "kaydub (Hacker News)",
+      "date": "2026-10-04",
+      "title": "Comment on 'Agents don't need memory, they need documentation'",
+      "quotes": [
+        "The code IS the documentation.",
+        "I kept tons of markdown docs and decision docs. Now those things are just causing problems because they got stale."
+      ],
+      "connects": [
+        "rag-vs-memory",
+        "code-documentation",
+        "claude-md"
+      ]
+    },
+    {
+      "id": "hn-liao-capitalistcartr",
+      "url": "https://hn.algolia.com/api/v1/items/49953780",
+      "permalink": "https://news.ycombinator.com/item?id=49953780",
+      "author": "CapitalistCartr (Hacker News)",
+      "date": "2026-10-04",
+      "title": "Comment on 'Agents don't need memory, they need documentation'",
+      "quotes": [
+        "it look to me like his objections apply to his own solution.",
+        "How does the \"agent\" know which documents are relevant before it starts?",
+        "The agent doesn't pick documents blind. Every scope has a catalog file"
+      ],
+      "connects": [
+        "rag-vs-memory"
+      ]
+    },
+    {
+      "id": "anthropic-components-of-agent-memory",
+      "url": "https://www.anthropic.com/research/components-of-agent-memory",
+      "author": "Anthropic",
+      "date": "2026-11-06",
+      "title": "The components of agent memory",
+      "discussion": "https://news.ycombinator.com/item?id=50402212",
+      "quotes": [
+        "Memory is, occasionally, a prediction.",
+        "Sonnet 3.7 wrote 413 memory files across 225 folders and earned one badge",
+        "Fable 5, by comparison, wrote nine files in two folders, plus a single top-level file called global.md, and earned four badges.",
+        "it helps to tell Claude what memory is for, but not how to use it.",
+        "a note that's wrong from the start or that drifts as the environment changes can be read, and trusted, by Claude in a later session.",
+        "a wiki, a collection of pages written and maintained by Claude"
+      ],
+      "connects": [
+        "rag-vs-memory",
+        "agent-memory-2026",
+        "claude-code-memory",
+        "ai-memory-management",
+        "memory-compression",
+        "agent-memory-types"
+      ]
+    },
+    {
+      "id": "hn-memory-yfontana",
+      "url": "https://hn.algolia.com/api/v1/items/50402919",
+      "permalink": "https://news.ycombinator.com/item?id=50402919",
+      "author": "yfontana (Hacker News)",
+      "date": "2026-11-07",
+      "title": "Comment on 'The Components of Agent Memory'",
+      "quotes": [
+        "Claude Code sometimes creates some anyway, and I probably delete 95% of them.",
+        "The memories it creates are almost always relevant only to the specific task that it is currently working on."
+      ],
+      "connects": [
+        "rag-vs-memory",
+        "claude-code-memory",
+        "coding-agent-memory"
+      ]
+    },
+    {
+      "id": "lorekit-otel-moment",
+      "url": "https://www.lorekit.io/blog/open-agent-memory-format",
+      "author": "Mads Thines",
+      "date": "2026-11-07",
+      "title": "Agent memory needs its OpenTelemetry moment",
+      "discussion": "https://news.ycombinator.com/item?id=50411467",
+      "quotes": [
+        "a note an agent left for its future self, stored at some address, true for a while.",
+        "It's a missing agreement",
+        "Deleted after 28 days unused"
+      ],
+      "connects": [
+        "rag-vs-memory",
+        "agent-memory-2026",
+        "memory-serialization",
+        "memory-versioning",
+        "shared-vs-isolated-memory"
+      ]
+    },
+    {
+      "id": "modelplane-field-guide",
+      "url": "https://docs.modelplane.ai/guides/inference-guide",
+      "author": "Modelplane maintainers (Upbound)",
+      "date": "2026-11-10",
+      "date_note": "Posted to Hacker News on 2026-11-10; the page says its numbers are as of October 2026.",
+      "title": "An Open Field Guide to Inference Engineering",
+      "discussion": "https://news.ycombinator.com/item?id=50443714",
+      "quotes": [
+        "Most engines turn on continuous batching and paged KV cache by default.",
+        "Check it, don't build it.",
+        "found that vLLM and scheduling worked. The time went to TLS, identity, timeouts, storage, IAM and observability.",
+        "The median prompt was 59K tokens and the p90 was 125K.",
+        "About two-thirds of prompt tokens hit the prefix cache, because agents resend their transcript on every turn.",
+        "Broken tool calls, cut-off answers and empty responses usually reach you as user complaints while the serving dashboards look normal.",
+        "If acceptance collapses, every pass still pays for the guesses and the model slows while other panels look normal.",
+        "Weight-only formats such as AWQ and GPTQ speed up decode alone.",
+        "Use the lowest precision your hardware runs natively and your evals accept.",
+        "vLLM cut KV cache waste from 60 to 80% to under 4%.",
+        "Throughput that still meets your latency targets",
+        "The number to plan capacity with",
+        "Plan capacity in requests in flight rather than seats.",
+        "Individual responses stream too slowly, even at low load",
+        "reported 36.9x over a static baseline at the same latency."
+      ],
+      "connects": [
+        "llm-inference-optimization",
+        "kv-cache-eviction",
+        "time-to-first-token",
+        "speculative-decoding",
+        "llm-token-budgets",
+        "mixture-of-experts"
+      ]
+    },
+    {
+      "id": "hn-fieldguide-zenogantner",
+      "url": "https://hn.algolia.com/api/v1/items/50451403",
+      "permalink": "https://news.ycombinator.com/item?id=50451403",
+      "author": "zenogantner (Hacker News)",
+      "date": "2026-11-11",
+      "title": "Comment on 'An Open Field Guide to Inference Engineering'",
+      "quotes": [
+        "Gives me the impression of being agent-written",
+        "the signal-to-noise ratio seems to be off."
+      ],
+      "connects": [
+        "llm-inference-optimization",
+        "shorter-documentation"
+      ]
+    },
+    {
+      "id": "ubicloud-tool-call-accuracy",
+      "url": "https://www.ubicloud.com/blog/fixing-tool-call-accuracy-in-vllm",
+      "author": "Jesse Donkervliet and Junhao Li",
+      "date": "2026-10-20",
+      "title": "Fixing Tool-Call Accuracy in vLLM",
+      "discussion": "https://news.ycombinator.com/item?id=50242870",
+      "quotes": [
+        "when we served Kimi K2.6 with vLLM version 0.28, we got the expected tool call schema only 92% of the time.",
+        "Change the inference engine and its settings, and you change the model's output quality.",
+        "a bug in the interplay between constrained decoding and speculative decoding can result in speculative tokens being wrongly rejected by the grammar",
+        "from 92% to 100%",
+        "Later, vLLM added the --tool-strict-level flag so that users can enable tool-call strictness for their deployments."
+      ],
+      "connects": [
+        "llm-inference-optimization",
+        "llm-structured-outputs",
+        "speculative-decoding",
+        "agent-error-handling"
+      ]
+    },
+    {
+      "id": "hn-ubicloud-aurornis",
+      "url": "https://hn.algolia.com/api/v1/items/50245479",
+      "permalink": "https://news.ycombinator.com/item?id=50245479",
+      "author": "Aurornis (Hacker News)",
+      "date": "2026-10-26",
+      "title": "Comment on 'Fixing Tool-Call Accuracy in vLLM'",
+      "quotes": [
+        "really they just needed to configure it correctly."
+      ],
+      "connects": [
+        "llm-inference-optimization"
+      ]
+    },
+    {
+      "id": "nvidia-glm-two-stations",
+      "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/",
+      "author": "Fatima Fall",
+      "date": "2026-11-13",
+      "title": "When One GPU Isn't Enough: Serving GLM-5.3 Across Two NVIDIA DGX Stations with vLLM",
+      "discussion": "https://news.ycombinator.com/item?id=50497155",
+      "quotes": [
+        "Overall throughput peaks at 607.8 tok/s at C16. It falls to 385.0 tok/s at C32, where mean request latency is 453.5 s.",
+        "Higher concurrency also reduces mean per-user throughput, from 115.3 tok/s at C1 to 13.0 tok/s at C32.",
+        "16 607.8 136.46 482.90 23.77 32 385.0 453.54 899.36 77.90",
+        "has 753 billion parameters, with 40 billion activated per token",
+        "At about 464 GB, the checkpoint exceeds the 252 GB of HBM3e on a single GB300 GPU.",
+        "1 107.4 49.84 479.75 8.78 8 386.0 114.17 433.79 19.01",
+        "set --max-num-seqs to 16 or 32 for the corresponding group",
+        "--block-size 128 --max-num-seqs 16"
+      ],
+      "connects": [
+        "llm-inference-optimization",
+        "time-to-first-token",
+        "mixture-of-experts"
+      ]
+    },
+    {
+      "id": "fern-state-of-docs",
+      "url": "https://buildwithfern.com/post/state-of-docs",
+      "author": "Emmanuel Etienne and Kapil Gowru",
+      "date": "2026-11-10",
+      "title": "State of Docs: Agents are your top readers",
+      "discussion": "https://news.ycombinator.com/item?id=50445501",
+      "quotes": [
+        "Agents now make up more than half of the requests to the docs we host",
+        "Agents spend 31% of their reading on API reference, while people spend 18%.",
+        "In September, Claude Code sent 1.03 million requests to Fern-hosted docs.",
+        "On those same sites, agents went from 13.5% of requests to 51.7%.",
+        "Agent requests are server-side requests for Markdown routes and llms.txt. Human page loads are browser page views from client-side analytics.",
+        "68% of September's agent requests carry a browser or generic user agent, so for those requests \"agent\" rests on the route rule.",
+        "If you count only requests whose user agent names an AI agent or crawler, agents still made up 32.8% of September requests, up from 2.3% in January.",
+        "Put the next round of work into the reference and the changelog, not just more guides.",
+        "an agent reads llms.txt once, then fetches the Markdown for the pages it needs.",
+        "The file was designed with crawlers in mind, but it found its audience in coding agents.",
+        "That's why anyone publishing a number like this should say what they threw out.",
+        "Agent requests grew from 1.3 million a month to 7.9 million, while human page loads slipped from 5.9 million to 5.1 million.",
+        "Every error code says what causes it and how to fix it.",
+        "Among the 89 Fern sites with at least 5,000 human page loads in September, agents made up less than 10% of traffic on some sites and more than 90% on others.",
+        "On Fern sites, llms.txt was fetched 448,667 times in September.",
+        "Claude Code asked for it most, with 32,812 requests.",
+        "How Fern helps",
+        "In September, agents made up 60.6% of requests across all sites.",
+        "93% Of agent requests go to Markdown, not HTML.",
+        "Agents read it twice as much as people to understand what's changed on your platform.",
+        "In September, that removed 17 million requests, which is more than double the agent count.",
+        "steps from landing on the docs to a first successful API call",
+        "We also stopped generating llms-full.txt.",
+        "6x Agent requests to Fern-hosted docs in September vs. January.",
+        "Human page loads miss people with ad blockers, which raises agent share. Agents that fetch HTML instead of Markdown aren't counted, which lowers it.",
+        "ChatGPT, Gemini and Perplexity fetch only HTML",
+        "up from 2.3% in January."
+      ],
+      "connects": [
+        "agents-top-readers-of-docs",
+        "llms-txt",
+        "ai-crawlers",
+        "aeo-for-developer-docs",
+        "api-documentation",
+        "release-notes-template",
+        "writing-changelogs",
+        "docs-seo",
+        "documentation-types"
+      ]
+    },
+    {
+      "id": "i-have-adhd-skill",
+      "url": "https://github.com/ayghri/i-have-adhd",
+      "author": "ayghri (GitHub)",
+      "date": "2026-09-08",
+      "date_note": "Date of the Hacker News submission, 542 points.",
+      "title": "i-have-adhd: a skill to stop your coding agent from burying the answer",
+      "discussion": "https://news.ycombinator.com/item?id=49610631",
+      "quotes": [
+        "A skill for your coding assistant that stops it from burying the answer.",
+        "Lead with the next action.",
+        "No preamble. No recap. No closers."
+      ],
+      "connects": [
+        "shorter-documentation",
+        "technical-writing-for-engineers",
+        "writing-for-ai-products",
+        "claude-md"
+      ]
+    },
+    {
+      "id": "hn-adhd-sleazebreeze",
+      "url": "https://hn.algolia.com/api/v1/items/49611957",
+      "permalink": "https://news.ycombinator.com/item?id=49611957",
+      "author": "sleazebreeze (Hacker News)",
+      "date": "2026-09-08",
+      "title": "Comment on 'I-have-ADHD'",
+      "quotes": [
+        "I don't think we can skill our way out of this one."
+      ],
+      "connects": [
+        "shorter-documentation"
+      ]
+    },
+    {
+      "id": "hn-adhd-jp57",
+      "url": "https://hn.algolia.com/api/v1/items/49613789",
+      "permalink": "https://news.ycombinator.com/item?id=49613789",
+      "author": "jp57 (Hacker News)",
+      "date": "2026-09-08",
+      "title": "Comment on 'I-have-ADHD'",
+      "quotes": [
+        "There's a whole cottage industry of skills and CLAUDE.md instructions trying to push it toward writing better"
+      ],
+      "connects": [
+        "shorter-documentation",
+        "technical-writing-for-engineers"
+      ]
+    },
+    {
+      "id": "hn-adhd-ryandrake",
+      "url": "https://hn.algolia.com/api/v1/items/49613881",
+      "permalink": "https://news.ycombinator.com/item?id=49613881",
+      "author": "ryandrake (Hacker News)",
+      "date": "2026-09-08",
+      "title": "Comment on 'I-have-ADHD'",
+      "quotes": [
+        "I don't care what the code doesn't do.",
+        "This code returns true if the user clicked on a button -- not on the list view."
+      ],
+      "connects": [
+        "code-documentation",
+        "shorter-documentation"
+      ]
+    },
+    {
+      "id": "willison-details-summary",
+      "url": "https://simonwillison.net/2026/Nov/9/details-summary/",
+      "author": "Simon Willison",
+      "date": "2026-11-09",
+      "title": "Hide your slop PR descriptions behind <details><summary>",
+      "quotes": [
+        "It's not necessarily slop, but it reads like slop!",
+        "I'm not reading all of that",
+        "I want human editorial judgement.",
+        "the shortest text a human can read that will help get them up to speed."
+      ],
+      "connects": [
+        "shorter-documentation",
+        "writing-release-notes",
+        "writing-changelogs",
+        "documentation-review"
+      ]
+    },
+    {
+      "id": "mishra-technical-writing-ai-era",
+      "url": "https://rsbh.dev/notes/technical-writing-in-the-ai-era",
+      "author": "Rishabh Mishra",
+      "date": "2026-11-10",
+      "title": "Technical writing in the AI Era",
+      "quotes": [
+        "It is too big for no reason.",
+        "AI writes in a zig-zag flow. It doesn't know about the reader."
+      ],
+      "connects": [
+        "shorter-documentation",
+        "technical-writing-for-engineers",
+        "design-doc-template",
+        "engineer-to-writer"
+      ]
+    },
+    {
+      "id": "adamczewski-shut-up-swe-bench",
+      "url": "https://bayes.net/shut-up-and-swe-bench/",
+      "author": "Tom Adamczewski",
+      "date": "2026-09-24",
+      "title": "Shut up and SWE-bench",
+      "quotes": [
+        "AIs have such poor judgement for when to write a code comment that I prefer to have them write none at all.",
+        "Don't add any comments or documentation unless I explicitly ask for them.",
+        "Fable 5.1 added a new comment or docstring in 33 of the 100 tasks, and so did Gemini 3.8 Flash.",
+        "all 6 comments seem legitimate to me"
+      ],
+      "connects": [
+        "code-documentation",
+        "claude-md",
+        "best-llms-for-coding"
+      ]
+    },
+    {
+      "id": "kqr-ai-comment-classifier",
+      "url": "https://entropicthoughts.com/better-ai-comment-classifier",
+      "author": "kqr (Entropic Thoughts)",
+      "date": "2026-09-09",
+      "title": "Better AI code comment detector",
+      "quotes": [
+        "the headline number is the balanced accuracy of 77 %."
+      ],
+      "connects": [
+        "code-documentation"
+      ]
+    },
+    {
+      "id": "docspring-ponytail-agents-md",
+      "url": "https://docspring.com/blog/posts/ponytail-vs-agents-md/",
+      "author": "Nathan Broadbent",
+      "date": "2026-11-13",
+      "title": "Ponytail vs a good AGENTS.md: What we found on our real codebase",
+      "quotes": [
+        "We have 42 AGENTS.md files, about 65,000 words in all: a root file with the rules every change follows, and a nested file next to each part of the code that has its own pitfalls (migrations, background jobs, the public API, CI).",
+        "leave a shortcut: comment naming any limit you accepted and when to revisit it.",
+        "Claude Code found about twice as many complaints that an agent had built too much as complaints that it had built too little."
+      ],
+      "connects": [
+        "code-documentation",
+        "claude-md",
+        "claude-code-subagents",
+        "agentic-workflows"
+      ]
+    },
+    {
+      "id": "wikipedia-minimalism",
+      "url": "https://en.wikipedia.org/wiki/Minimalism_(technical_communication)",
+      "author": "Wikipedia",
+      "date": "2026-11-16",
+      "date_note": "Date fetched. The article carries a 2023 notice that it lacks inline citations, so it is used only for its one-sentence summary of Carroll.",
+      "title": "Minimalism (technical communication)",
+      "quotes": [
+        "Carroll argues that training materials should present short task-oriented chunks, not lengthy, monolithic documentation that tries to explain everything in a long narrative."
+      ],
+      "connects": [
+        "shorter-documentation",
+        "writing-technical-tutorials",
+        "quickstart-guide"
+      ]
+    },
+    {
+      "id": "hn-fieldguide-author",
+      "url": "https://hn.algolia.com/api/v1/items/50453146",
+      "permalink": "https://news.ycombinator.com/item?id=50453146",
+      "author": "d-ramdass (Hacker News), who submitted the guide and writes as one of its maintainers",
+      "date": "2026-11-11",
+      "title": "Reply on 'An Open Field Guide to Inference Engineering'",
+      "quotes": [
+        "We certainly used agents to help us put a draft together"
+      ],
+      "connects": [
+        "llm-inference-optimization"
+      ]
+    },
+    {
+      "id": "wikipedia-carroll-bibliography",
+      "url": "https://en.wikipedia.org/wiki/John_M._Carroll_(information_scientist)",
+      "author": "Wikipedia",
+      "date": "2026-11-16",
+      "date_note": "Date fetched. Used only to confirm the title, subtitle, year and publisher of Carroll's 1990 book; the post links the Open Library record https://openlibrary.org/works/OL4792482W, whose search API returned the same title, MIT Press and 1990. The book itself was not fetched, so the post quotes only its subtitle.",
+      "title": "John M. Carroll (information scientist), bibliography",
+      "quotes": [
+        "Designing Minimalist Instruction for Practical Computer Skill"
+      ],
+      "connects": [
+        "shorter-documentation",
+        "writing-technical-tutorials",
+        "quickstart-guide"
+      ]
+    }
+  ],
+  "unused_leads": [
+    {
+      "url": "https://www.cockroachlabs.com/blog/experiment-running-hospital-code/",
+      "date": "2026-10-09",
+      "note": "Five months treating bugs like patients and coding agents like a medical team. HN 219 points. Not fetched yet. Candidate for agentic-workflows, multi-agent-vs-single-agent."
+    },
+    {
+      "url": "https://mtlynch.io/why-are-coding-agents-so-dumb/",
+      "date": "2026-10-09",
+      "note": "HN 105 points, 103 comments. Not fetched yet. Candidate for ai-agent-failures."
+    },
+    {
+      "url": "https://harnesstax.github.io/",
+      "date": "2026-09-16",
+      "note": "HarnessTax: how much the harness matters for coding agents. HN 233 points. Not fetched yet. Candidate for agent-harnesses."
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.20804",
+      "date": "2026-09-18",
+      "note": "An empirical study of harness design for coding agents. Not fetched yet. Candidate for agent-harnesses, agent-loop-anatomy."
+    },
+    {
+      "url": "https://machinelearning.apple.com/research/faster-retrieval",
+      "date": "2026-11-11",
+      "note": "Faster Retrieval for Better, More Efficient RAG. HN 241 points. Not fetched yet. Candidate for rag-reranking, hybrid-search, contextual-retrieval."
+    },
+    {
+      "url": "https://www.phpied.com/llms-txt-agent-optimization-wishful-thinking/",
+      "date": "2026-09-30",
+      "note": "llms.txt: agent-optimization wishful thinking. Not fetched yet. Candidate for llms-txt."
+    },
+    {
+      "url": "https://supabase.com/blog/are-supabase-docs-agent-friendly",
+      "date": "2026-09-08",
+      "note": "Not fetched yet. Candidate for aeo-for-developer-docs, docs-seo."
+    },
+    {
+      "url": "https://newsletter.posthog.com/p/your-agentsmd-is-holding-you-back",
+      "date": "2026-10-16",
+      "note": "Read this before deleting your AGENTS.md. Not fetched yet. Candidate for claude-md."
+    },
+    {
+      "url": "https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/",
+      "date": "2026-09-23",
+      "note": "HN 486 points. Not fetched yet. Candidate for claude-md."
+    },
+    {
+      "url": "https://claude.dev/blog/solving-code-review-at-anthropic/",
+      "date": "2026-10-16",
+      "note": "How the Claude Code team does code review. HN 488 points. Not fetched yet. Candidate for documentation-review, agentic-workflows."
+    },
+    {
+      "url": "https://vllm.ai/blog/2026-08-23-speculative-decoding-amd-gpus",
+      "date": "2026-08-23",
+      "note": "Not fetched yet. Candidate for speculative-decoding."
+    },
+    {
+      "url": "https://technicalwriting.dev/blog/2026/10/polyglot/index.html",
+      "date": "2026-10-09",
+      "note": "The Wild West of polyglot docs sites. Not fetched yet. Candidate for documentation-structure."
+    },
+    {
+      "url": "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
+      "date": "2026-10-03",
+      "note": "Not fetched yet. Candidate for llm-token-budgets."
+    }
+  ],
+  "own_phrases": {
+    "rag-vs-memory": [
+      "what do the sources say about this question",
+      "what is still true about this user or task",
+      "What were the deployment steps for this service?",
+      "What failed last time?",
+      "RAG vs memory"
+    ],
+    "llm-inference-optimization": [],
+    "code-documentation": [
+      "Detect by CLASS, not by embed type. Gating visuals.css on \"<iframe\"",
+      "has_visuals\": ('class=\"visual-' in html) or (\"<iframe\" in html),"
+    ],
+    "shorter-documentation": [
+      "This page explains"
+    ],
+    "agents-reading-docs": []
+  }
+}
