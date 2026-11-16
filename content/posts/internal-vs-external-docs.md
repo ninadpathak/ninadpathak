@@ -16,12 +16,14 @@ takeaways:
 - Give every page an owner and an update trigger so public product guidance and private
   operating knowledge stay aligned.
 title: 'Internal vs. External Documentation: What Belongs Where'
-updated: 2026-08-06
+updated: 2026-11-17
 ---
 
-Internal documentation helps your team operate the system. External documentation helps customers, partners, and public developers use the supported product.
+Internal documentation helps your team operate the system, and external documentation helps customers, partners and public developers use the supported product. When a subject has both readers, publish a public task page, keep a separate private operating record, and classify the subject as **internal**, **external** or **split**.
 
-When both tasks exist, publish a public task page and keep a separate private operating record. Classify each subject as **internal**, **external**, or **split**.
+That line used to follow access, and a file that surfaced this autumn shows why access no longer settles it. The XScreenSaver source release ships an [AGENTS.md](https://github.com/Zygo/xscreensaver/blob/master/AGENTS.md), mirrored to GitHub on September 4, that opens "You are in a project that does not want AI contributions of any kind."
+
+A contribution policy is about as internal as documentation gets, and this one sits in a public tarball addressed to a reader who is neither a team member nor a customer. Coding agents are that third reader, and the section on agent instructions below is where I think the old table needs a new row.
 
 ## Internal vs. external documentation: choose by reader task
 
@@ -52,6 +54,8 @@ Ask four questions:
 IBM's [code documentation overview](https://www.ibm.com/think/topics/code-documentation) makes the same practical distinction. Coding standards and development-environment setup serve internal work, while public API reference, integration notes, configuration, and README files can serve external work.
 
 ## What belongs in internal documentation
+
+Internal documentation is everything the team needs to build, operate and change the system that an outside reader has no task for. It can be candid, because its access boundary is the team.
 
 ### Architecture decisions and system design
 
@@ -94,13 +98,30 @@ A split is not a redacted internal page. It is a public document with a customer
 
 Link the private source to the public contract it maintains. Give each page its own owner and update trigger, because a supported authentication flow can change without changing the internal key-rotation runbook.
 
+## Where do AGENTS.md and other agent instructions belong?
+
+Agent instruction files are internal documentation by task and often external by access, so treat them as a split. The task is internal because the file tells a contributor how to work in the repository, and the access is whatever the repository's is.
+
+A private monorepo never raises the question. Nathan Broadbent [described DocSpring's setup](https://docspring.com/blog/posts/ponytail-vs-agents-md/) on November 13 as "42 AGENTS.md files, about 65,000 words in all", which is a large body of internal documentation that happens to have agents as its heaviest readers.
+
+A public repository publishes every line of the file. Question two from the list above (credentials, private topology, unpublished plans) applies to it exactly as it applies to a README, and it is the check an agent-written instruction file is least likely to have had.
+
+<!-- evidence-three: October 3, 2026 is the publication date printed on liao.gg/blog/agents-dont-need-memory -->
+Kevin Liao's Operator, a documentation workspace for coding agents, has the same idea one level in. [Liao's post of October 3](https://liao.gg/blog/agents-dont-need-memory) separates an agent's private working notes from what a team shares, through "an explicit .operator-shared/ shared partition that you can commit with the repository, so that specs, guides, and standards can be shared with every coworker, intern, or cloud AI agent."
+
+| Agent instruction content | Placement | Why |
+| --- | --- | --- |
+| Build, test and style rules a new contributor also needs | Committed file in the repository | Safe to publish and useful to people |
+| Internal hostnames, credentials handling, escalation paths | Private file or internal docs | Fails question two |
+| Contribution policy, including whether agents may contribute | Committed file | It is addressed to outsiders, as XScreenSaver's is |
+
 ## Documentation placement audit template
 
 Start with an inventory. Record whether an external reader has a task, whether private context exists, whether an internal operator has a separate task, who owns the page, and what makes it stale.
 
 <!-- receipt-backed-first-person -->
 
-I encoded that inventory in a small [documentation placement audit](/static/templates/documentation_placement_audit.py) and ran it against an eight-artifact [sample manifest](/static/templates/documentation-placement-audit.json). The run classified three artifacts as internal, three as external, and two as split.
+I encoded that inventory in a small [documentation placement audit](/static/templates/documentation_placement_audit.py) and ran it against an eight-artifact [sample manifest](/static/templates/documentation-placement-audit.json). The run sorted the eight artifacts into internal, external and split, with the counts in the output below.
 
 ```bash
 python3 documentation_placement_audit.py
