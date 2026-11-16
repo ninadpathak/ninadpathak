@@ -15,17 +15,31 @@ takeaways:
 - Agent instructions add a new audience to a documentation system without replacing
   human-facing docs.
 title: 'Types of Technical Documentation: 8 Essential Types, Plus Agent Instructions'
-updated: 2026-08-05
+updated: 2026-11-17
 ---
 
-Technical documentation is not one thing. It is the set of documents that help someone use a product, understand a system, operate it safely, or change it without losing important context.
+Technical documentation is the set of documents that help someone use a product, understand a system, operate it safely, or change it without losing context. The types below differ by the reader's task, and this year they also started to differ by who reads them and by whether a model can write them.
+
+| Type | The reader's question | Group |
+| --- | --- | --- |
+| Getting-started guide or quickstart | How do I get a first result? | User-facing |
+| Tutorial | How do I learn this capability? | User-facing |
+| How-to guide | How do I do this one job? | User-facing |
+| Reference | What exactly does this accept and return? | User-facing |
+| Troubleshooting guide | Why did this fail, and what is safe to try? | User-facing |
+| Release notes and migration guide | What changed, and what must I do? | User-facing |
+| Architecture and design document | Why is the system built this way? | Process |
+| Runbook, onboarding guide, test plan, standard | How do we do this safely again? | Process |
+| Agent instructions | What must a coding agent know before editing here? | Agent |
+
+[Fern's State of Docs report](https://buildwithfern.com/post/state-of-docs) from November 10 found agents reading reference far more than people do. Rachel Andrew [wrote on September 30](https://rachelandrew.co.uk/archives/2026/09/30/more-than-words/) about tutorials and how-to content that "AI seems to be particularly bad at creating this kind of content."
 
 
-## The three audiences for technical documentation
+## Who technical documentation is for
 
-The most useful classification separates [technical documentation](/articles/technical-documentation/) by the person who needs it. ClickHelp makes a similar distinction between process documents and user documents, while Squarespace Engineering frames documentation around reader behavior, patience, experience, and goal.
+The classification I use separates [technical documentation](/articles/technical-documentation/) by the person who needs it. ClickHelp makes a similar distinction between process documents and user documents, while Squarespace Engineering frames documentation around reader behavior, patience, experience, and goal.
 
-That gives you three useful groups. User-facing documents help customers or developers adopt a product.
+That gives you the groups in the table above. User-facing documents help customers or developers adopt a product.
 
 Process documents help the people building and operating it. Agent instructions give coding agents repository-specific context that would be distracting or irrelevant in a human-facing guide.
 
@@ -33,7 +47,7 @@ Process documents help the people building and operating it. Agent instructions 
 
 These are the documents a customer, developer, administrator, or new user opens when they want to get started, complete a task, find a precise answer, or fix a failure.
 
-### 1. Getting-started guides and quickstarts
+### Type 1: Getting-started guides and quickstarts
 
 A getting-started guide takes someone from no working setup to a first result. It should name prerequisites, show the smallest supported path, and make success visible.
 
@@ -41,7 +55,7 @@ React’s [Learn section](https://react.dev/learn) moves from an introduction to
 
 Its job is to establish confidence and give the reader a sensible next page.
 
-### 2. Tutorials
+### Type 2: Tutorials
 
 A tutorial teaches a capability through a guided sequence. It can combine several tasks because the reader is learning a skill, not only changing one setting.
 
@@ -49,13 +63,15 @@ Squarespace Engineering distinguishes tutorials from how-to guides on that point
 
 Keep checkpoints in the path so the reader can see whether they are still on track.
 
-### 3. How-to guides
+Tutorials, with how-to guides, are the types Andrew finds models worst at. The explanation given is that "The majority of the time I spend writing a tutorial, isn't spent writing", because the work is understanding the subject and the audience before any words exist.
+
+### Type 3: How-to guides
 
 A how-to guide answers a specific operational question such as “rotate an API key,” “configure single sign-on,” or “add a webhook endpoint.” The reader already understands enough of the product to name the job.
 
 A strong guide states the starting condition, required access, procedure, success state, and recovery boundary. It does not repeat the product introduction or explain every adjacent feature.
 
-### 4. Reference documentation
+### Type 4: Reference documentation
 
 Reference is where exact details live. API endpoints, request fields, SDK methods, configuration values, defaults, limits, return types, and error conditions belong here because readers need information they can scan and depend on.
 
@@ -63,13 +79,15 @@ Stripe’s [API reference](https://docs.stripe.com/api) shows the central contra
 
 Reference can include examples, but the examples should clarify the contract rather than turn the page into a learning path.
 
-### 5. Troubleshooting guides
+Reference is now the type agents read hardest. Fern's report puts agent reading of API reference at 31%, against 18% for people, and [a separate essay](/articles/agents-reading-docs/) looks at how far its figures go.
+
+### Type 5: Troubleshooting guides
 
 Troubleshooting starts with a symptom, not a feature. The reader has already hit a failure and needs a way to identify the cause, recover safely, or know when to escalate.
 
 Kubernetes’ [troubleshooting documentation](https://kubernetes.io/docs/tasks/debug/) organizes debugging work around the problem a user must diagnose. Good troubleshooting pages include the observable symptom, a diagnostic check, likely causes, a safe fix, and the point where guessing becomes risky.
 
-### 6. Release notes and migration guides
+### Type 6: Release notes and migration guides
 
 Release notes tell people what changed. Migration guides tell them what they need to do about that change.
 
@@ -77,13 +95,15 @@ Treat those as related but different documents. A release note can announce a de
 
 A migration guide should provide the affected starting state, replacement path, compatibility boundary, and a way to confirm completion.
 
+The same Fern report has agents reading the changelog twice as much as people do, which makes dated, per-endpoint entries worth the effort.
+
 ## Process documentation helps a team build and operate the system
 
 Product documentation is only one part of technical documentation. Teams also need durable records that explain why a system exists in its current form and how to maintain it.
 
 Use the [internal vs. external documentation decision](/articles/internal-vs-external-docs/) to keep private operating context separate from the public task or contract.
 
-### 7. Architecture and design documents
+### Type 7: Architecture and design documents
 
 Architecture documents describe the system’s components, boundaries, data flows, dependencies, and important decisions. A design document is often narrower, explaining a proposed change before implementation begins.
 
@@ -91,7 +111,7 @@ These documents should answer questions that source code cannot answer quickly. 
 
 For example, explain why a queue was selected over a synchronous call, which service owns a data set, and what assumptions make a deployment safe. A diagram can help, but it does not replace those decisions and constraints.
 
-### 8. Runbooks, onboarding guides, test plans, and standards
+### Type 8: Runbooks, onboarding guides, test plans, and standards
 
 Some process documents exist because somebody must perform the same work safely more than once. Runbooks describe routine or incident procedures.
 
@@ -103,19 +123,21 @@ Tango’s [collection of technical document types](https://www.tango.ai/blog/typ
 
 ## The newer type: instructions for coding agents
 
-A repository can now have another reader that needs documentation: a coding agent.
+A repository can now have another reader that needs documentation: a coding agent. The convention settled further on September 18, 2026, when Claude Code 2.1.277 shipped with the [changelog line](https://code.claude.com/docs/en/changelog) "Added AGENTS.md support: in a project with no CLAUDE.md, Claude Code reads AGENTS.md instead".
 
 [AGENTS.md](https://agents.md/) is an open Markdown convention for repository instructions aimed at coding agents. Its purpose is not to replace a README.
 
 A README still helps people understand a project, install it, contribute to it, and find the public interface. An AGENTS.md file can hold the build commands, test commands, code conventions, security concerns, deployment details, and local rules that an agent needs when changing the repository.
 
-This is a useful addition because human contributors and coding agents need overlapping but different context. A human may need a project overview and contribution path.
+The addition is useful because human contributors and coding agents need overlapping but different context. A human may need a project overview and contribution path.
 
 An agent may need the exact command sequence, test scope, nearest-file instruction rule, and prohibited changes before it edits code.
 
 Keep the boundary visible. Do not hide human onboarding inside an agent file, and do not expect a long README to provide the focused instruction an agent needs during an edit.
 
 If both audiences work in the repository, maintain both documents and link between them where the information overlaps.
+
+An agent file in a public repository is also published, whatever its intended reader. The internal vs. external documentation page linked above works through that case, starting from a project that uses its AGENTS.md to turn agents away.
 
 [CLAUDE.md and AGENTS.md](/articles/claude-md/) covers which agent reads which instruction file, with a template you can copy.
 
@@ -139,6 +161,6 @@ A changed build command should trigger README and agent-instruction review.
 
 I reviewed the ranking pages for this query, including ClickHelp, Tango, and Squarespace Engineering, alongside the AGENTS.md guidance. The useful conclusion is not that every team needs the same list.
 
-Documentation becomes easier to maintain when each type has a named audience, a distinct job, and a change that tells its owner when to revisit it.
+Documentation costs less to maintain when each type has a named audience, a distinct job, and a change that tells its owner when to revisit it.
 
 Use the [technical documentation template](/articles/documentation-template/) to turn that inventory into a working plan. Then use the [technical documentation best practices](/articles/documentation-best-practices/) to test whether each page helps someone complete the job it promises.
