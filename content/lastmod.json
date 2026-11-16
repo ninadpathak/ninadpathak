@@ -91,13 +91,17 @@
     "lastmod": "2026-10-22",
     "sources": "9b3847613bce99c179b200ad85d8d18b84c993b66c1f216ade698cf1656cee66"
   },
+  "coding-models-new-code-vs-change": {
+    "lastmod": "2026-11-17",
+    "sources": "a2642fc1fe891a85a5a5839935280c2f5db28a125508c10cb58634eb6e476f5f"
+  },
   "context-windows-vs-memory": {
     "lastmod": "2026-10-29",
     "sources": "75161e7d6e4d9112e156a8a444e2c5c4d968aac47d804fec26d60f088a98a80a"
   },
   "contextual-retrieval": {
-    "lastmod": "2026-10-29",
-    "sources": "4ea1490e209ca65492543c43888b4241fcc886274be9606706eb7cf5623ae4d9"
+    "lastmod": "2026-11-17",
+    "sources": "4262089761146107d0bd9a07e8f13b35c638285e714fa1420ef970b39a9c8d6f"
   },
   "deerflow-memory": {
     "lastmod": "2026-10-29",
@@ -144,8 +148,8 @@
     "sources": "15c527cec29bf455e8af69bf8b767605dc8105828d3f6ed26908474f072d7308"
   },
   "documentation-types": {
-    "lastmod": "2026-10-29",
-    "sources": "d428d1d23b7e2dfa0a99038edd03b38218bb5e977305f4067660aaa8c812a898"
+    "lastmod": "2026-11-17",
+    "sources": "3779892595447a12ff4a43f1241d8016b1aa4c8b2971200e94029b42f81d9bab"
   },
   "documentation-velocity": {
     "lastmod": "2026-10-27",
@@ -168,8 +172,8 @@
     "sources": "6bc1ecded1f695cc1d1048eaf2d04a1d44f41d6897faa281db6fd4d6c9752644"
   },
   "internal-vs-external-docs": {
-    "lastmod": "2026-10-29",
-    "sources": "6d1c9176a4f5fc58429478f2ac3395e27074bcd3e44fac00bc9cc19cd77b6cdc"
+    "lastmod": "2026-11-17",
+    "sources": "e1e952eb55b98bf847c738e842768b59520a932279cd52cc4b25adb43dc96d1d"
   },
   "kv-cache-eviction": {
     "lastmod": "2026-10-27",
@@ -272,8 +276,8 @@
     "sources": "9fd81ff32228fd85b0b57f7780970df3ebef990004eda929e168063516bb1739"
   },
   "stripe-technical-blog": {
-    "lastmod": "2026-10-29",
-    "sources": "1b1b19f33cbcd10bfb8958f9e81d13387026f534f03e25627a75b43dba57637a"
+    "lastmod": "2026-11-17",
+    "sources": "31a47266f63f5523e25dbaa6a823e3f8f70f25cfaf4ef3a5f01a72d49e16ed1f"
   },
   "technical-docs": {
     "lastmod": "2026-10-29",
