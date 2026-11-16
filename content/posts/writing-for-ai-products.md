@@ -146,6 +146,8 @@ I wrote recently about [how to write a changelog developers actually read](/arti
 
 Readers evaluating an AI writer should ask one uncomfortable question: can this person write migration notes for model behavior as well as feature release notes? Plenty of otherwise competent SaaS writers cannot.
 
+My page as a [freelance technical writer for AI companies](/services/freelance-technical-writer-for-ai-companies/) links the work I've published for Firecrawl, Mem0 and OpenComputer.
+
 ## Retrieval and agent use change what “clear docs” means
 
 Search-friendly documentation used to mean headings, metadata, and sane page structure. Those basics still matter, though modern AI products add another constraint: your docs will be read piecemeal by agents, retrieval systems, support copilots, and developer tools that grab a single paragraph with none of its surrounding context.

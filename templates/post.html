@@ -219,7 +219,7 @@
       <div>
         <h2 class="cta-title-compact">Hire a freelance technical writer</h2>
         <p>I'm Ninad Pathak, a freelance technical writer for {{ hire.audience }}: I write <a href="/services/">developer documentation, tutorials and technical articles</a>, and I run the product before I write about it. My <a href="/work/">case studies</a> include 50+ developer guides for Centus that its engineers approved without a revision round.</p>
-        {% include "_hire_line.html" %}
+        {% with hire_line_lead = post.category.hire_note if post.category else "" %}{% include "_hire_line.html" %}{% endwith %}
       </div>
       <div class="cta-actions">
         <a href="{{ contact.booking_url }}" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>

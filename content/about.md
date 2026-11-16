@@ -4,7 +4,7 @@ title: About Ninad Pathak
 
 ## What I do and who I do it for
 
-I'm a technical writer. I write developer documentation, tutorials and technical articles for AI and developer-tool companies, and I run the product before I write about it.
+I'm a freelance technical writer. My [technical writing services](/services/) cover developer documentation, tutorials and technical articles for AI and developer-tool companies, and I run the product before I write about it.
 
 Over the last eight years I've worked with Semrush, Adobe, TinyFish, Mastra, Manicule, OpenComputer, Firecrawl, Graphite, Mem0 and Centus.
 

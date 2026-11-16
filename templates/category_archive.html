@@ -25,6 +25,7 @@
     <div class="label">Articles / {{ category.label }}</div>
     <h1>{{ category.title }}</h1>
     <p class="lead">{{ category.intro }}</p>
+    {% with hire_line_lead = category.hire_note %}{% include "_hire_line.html" %}{% endwith %}
   </div>
 </section>
 

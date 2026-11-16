@@ -23,7 +23,7 @@ CONTACT = BUILDER.config["contact"]
 HIRE = BUILDER.config["hire"]
 BASE = BUILDER.config["site"]["url"].rstrip("/")
 LD_JSON = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
-SERVICE_ROUTES = ("services", "services/technical-writer-for-ai-companies", "services/ai-ready-docs-audit")
+SERVICE_ROUTES = ("services", "services/freelance-technical-writer-for-ai-companies", "services/ai-ready-documentation-audit")
 # On Ninad's claims-to-check list. Existing instances stay; no hiring surface repeats them.
 UNVERIFIED = ("30+", "740%")
 
@@ -269,6 +269,51 @@ class BuiltSiteTests(unittest.TestCase):
         self.assertIn(f'>{CONTACT["email"]}</a>', main)
         self.assertIn(f'>{CONTACT["booking_url"]}</a>', main)
         self.assertIn('href="/services/"', main)
+
+    def test_each_money_page_gets_contextual_links_with_descriptive_anchors(self):
+        """Ranking needs internal links whose anchor names the page's query, from the
+        pages on the same subject: the cluster page, its articles, the tools, home."""
+        audit = ('href="/services/ai-ready-documentation-audit/">AI-ready documentation audit', (
+            "articles/ai-search-optimization", "articles/llms-txt", "articles/ai-crawlers",
+            "articles/aeo-for-developer-docs", "tools", "ai-overviews-checker", "ai-crawler-checker",
+            "llms-txt-validator", "llms-txt-generator", "services", ""))
+        ai = ('href="/services/freelance-technical-writer-for-ai-companies/">freelance technical writer for AI companies', (
+            "articles/ai-engineering", "articles/writing-for-ai-products", "articles/agent-harnesses",
+            "services", "services/ai-ready-documentation-audit", ""))
+        services = ('href="/services/">technical writing services', (
+            "articles/technical-documentation", "articles/developer-experience", "articles/devtools-documentation",
+            "articles/api-documentation", "work/centus", "about", "services/ai-ready-documentation-audit",
+            "services/freelance-technical-writer-for-ai-companies", ""))
+        for anchor, sources in (audit, ai, services):
+            for route in sources:
+                html = (OUTPUT / route / "index.html").read_text(encoding="utf-8")
+                main = html.split("<main", 1)[1].split("</main>", 1)[0]
+                with self.subTest(anchor=anchor, source=route or "/"):
+                    self.assertIn(anchor.lower(), main.lower())
+
+    def test_one_primary_query_per_money_page(self):
+        """The query wording sits in the slug, title, H1, description and first sentence,
+        and no two money pages share a title or an H1."""
+        targets = {
+            "services": "technical writing services",
+            "services/freelance-technical-writer-for-ai-companies": "freelance technical writer for ai companies",
+            "services/ai-ready-documentation-audit": "ai-ready documentation audit",
+        }
+        seen = set()
+        for route, query in targets.items():
+            html = self.page(route).lower()
+            title = re.search(r"<title>(.*?)</title>", html, re.S).group(1)
+            h1 = re.sub(r"<[^>]+>", "", re.search(r"<h1>(.*?)</h1>", html, re.S).group(1))
+            description = re.search(r'<meta name="description" content="([^"]*)"', html).group(1)
+            lead = re.search(r'<p class="lead">(.*?)</p>', html, re.S).group(1)
+            with self.subTest(route=route):
+                for place in (title, h1, description, lead.split(". ")[0]):
+                    self.assertIn(query, place)
+                if route != "services":
+                    self.assertIn(query.replace(" ", "-"), route)
+                self.assertNotIn(title, seen)
+                self.assertNotIn(h1, seen)
+                seen.update((title, h1))
 
     def test_pages_dev_hosts_are_noindex(self):
         """The form in Cloudflare's Pages headers documentation. A rule that starts with

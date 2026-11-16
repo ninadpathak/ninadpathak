@@ -112,7 +112,7 @@ Underestimating how often bad docs force prospects into pseudo-consulting mode i
 
 That detective work reads as a preview of future maintenance cost. Tools that are difficult to understand hand a real advantage to competitors with clearer documentation.
 
-One reason I write for devtools companies is that docs quality improves sales and support simultaneously. Good docs reduce the labor required to believe in the product.
+One reason I offer [technical writing services](/services/) to devtools companies is that docs quality improves sales and support simultaneously. Good docs reduce the labor required to believe in the product.
 
 [My work page](/work/) covers the kind of writing work I mean.
 

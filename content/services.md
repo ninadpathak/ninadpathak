@@ -1,9 +1,9 @@
 ---
 title: "Technical Writing Services for AI and Developer-Tool Companies"
 nav_title: "Services"
-seo_title: "Freelance Technical Writing Services for AI and Developer-Tool Companies | Ninad Pathak"
-description: "Hire a freelance technical writer who runs your product before writing about it: developer documentation, tutorials and technical articles for AI and developer-tool companies."
-lead: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it."
+seo_title: "Technical Writing Services for AI and Developer-Tool Companies | Ninad Pathak"
+description: "Technical writing services for AI and developer-tool companies: developer documentation, tutorials and technical articles from a freelance writer who runs your product first."
+lead: "My technical writing services cover developer documentation, tutorials and technical articles for AI and developer-tool companies. I'm Ninad Pathak, a freelance technical writer, and I run the product before I write about it."
 status: published
 proof:
   - value: "50+"
@@ -21,14 +21,14 @@ You can hire me for a single guide or an ongoing content program:
 - **Developer documentation.** Quickstarts and reference pages, plus the troubleshooting page that tells a developer what to do when a request fails, which is where [devtools startups lose deals over bad docs](/articles/devtools-documentation/).
 - **Tutorials and integration guides.** One reader goes from an empty project to a working result, like [setting up Firecrawl MCP in Cursor](https://www.firecrawl.dev/blog/firecrawl-mcp-in-cursor) or [self-hosting Mem0 with Docker](https://mem0.ai/library/integrations/self-host-mem0-docker).
 - **Technical articles.** Comparisons and explainers for engineers who will check the claims, like [where a Claude Agent SDK agent runs](https://opencomputer.dev/guides/claude-agent-sdk-sandbox) for OpenComputer.
-- **AI-ready documentation audits.** I check answer structure, AI crawler access and llms.txt with the checkers I built, described on the [AI-ready documentation audit](/services/ai-ready-docs-audit/) page.
+- **AI-ready documentation audits.** I check answer structure, AI crawler access and llms.txt with the checkers I built, described on the [AI-ready documentation audit](/services/ai-ready-documentation-audit/) page.
 - **Content programs.** The keyword map and review process behind a library of articles, and managing the writers when one person is not enough.
 
 ## Who I write for
 
 I write for AI and developer-tool companies whose readers are engineers. That reader opens a terminal next to your page and tries the first command, so I run it first.
 
-The [portfolio](/portfolio/) links my published work for Firecrawl and Mem0. The page on [writing for AI agent and LLM companies](/services/technical-writer-for-ai-companies/) lists the work in that field by company.
+The [portfolio](/portfolio/) links my published work for Firecrawl and Mem0. My page as a [freelance technical writer for AI companies](/services/freelance-technical-writer-for-ai-companies/) lists the work in that field by company.
 
 ## How to hire me
 

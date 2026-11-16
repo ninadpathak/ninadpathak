@@ -568,6 +568,7 @@ class SiteBuilder:
                 "label": raw.get("label", raw["title"]),
                 "description": raw["description"],
                 "intro": raw.get("intro", raw["description"]),
+                "hire_note": raw.get("hire_note", ""),
                 "preserve_empty_route": raw.get("preserve_empty_route", False),
                 "tag_matches": {str(tag).lower() for tag in raw.get("tag_matches", [])},
                 "posts": [],

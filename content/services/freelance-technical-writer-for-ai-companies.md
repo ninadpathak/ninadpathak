@@ -1,10 +1,10 @@
 ---
-title: "Technical Writer for AI Agent and LLM Companies"
-nav_title: "Writing for AI agent and LLM companies"
-seo_title: "Freelance Technical Writer for AI Agent and LLM Companies | Ninad Pathak"
-description: "Hire a freelance technical writer for AI agent, memory and LLM infrastructure products. Published work for Firecrawl, Mem0 and OpenComputer, linked at the publisher."
-lead: "I write tutorials, documentation and technical articles for companies that build AI agents, agent memory and LLM infrastructure. My published work for Firecrawl, Mem0 and OpenComputer is linked below, and I run each product before I write about it."
-service_type: "Technical writing for AI agent and LLM companies"
+title: "Freelance Technical Writer for AI Companies"
+nav_title: "Freelance technical writer for AI companies"
+seo_title: "Freelance Technical Writer for AI Companies: Agents, Memory, LLMs | Ninad Pathak"
+description: "Freelance technical writer for AI companies that build agents, agent memory and LLM infrastructure. Published work for Firecrawl, Mem0 and OpenComputer, linked at the publisher."
+lead: "I'm a freelance technical writer for AI companies that build agents, agent memory and LLM infrastructure. My published work for Firecrawl, Mem0 and OpenComputer is linked below, and I run each product before I write about it."
+service_type: "Technical writing for AI companies"
 status: published
 proof:
   - value: "Firecrawl"
@@ -42,19 +42,19 @@ The [Mem0 case study](/work/mem0/) covers the workflow and the Search Console re
 
 ## What I write on this site
 
-I publish my own articles on agents, memory and retrieval under [AI engineering](/articles/ai-engineering/). The [MCP server tutorial](/articles/mcp-server-tutorial/) and the guide to [writing for AI products](/articles/writing-for-ai-products/) show how I handle the subject without a client brief.
+I publish my own articles on agents, memory and retrieval under [AI engineering](/articles/ai-engineering/), and docs for these products can be checked with my [AI-ready documentation audit](/services/ai-ready-documentation-audit/). The [MCP server tutorial](/articles/mcp-server-tutorial/) and the guide to [writing for AI products](/articles/writing-for-ai-products/) show how I handle the subject without a client brief.
 
 ## How to hire me
 
-Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the product, the reader and the pages you need. You can also book a 30-minute call at [https://zcal.co/i/AGG1iJtv](https://zcal.co/i/AGG1iJtv), and the [services page](/services/) covers the process and pricing.
+Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the product, the reader and the pages you need. You can also book a 30-minute call at [https://zcal.co/i/AGG1iJtv](https://zcal.co/i/AGG1iJtv), and my [technical writing services](/services/) page covers the process and pricing.
 
 ## FAQ
 
 Email hello@ninadpathak.com with any question this list leaves out.
 
-### Do you write for AI agent companies?
+### Which AI companies have you written for?
 
-Yes. I've published tutorials and technical articles for Firecrawl, Mem0 and OpenComputer on agent tools, agent memory and agent sandboxes.
+I've published tutorials and technical articles for Firecrawl, Mem0 and OpenComputer on agent tools, agent memory and agent sandboxes. LambdaTest published my articles on AI agent testing.
 
 ### Do you test the product before writing?
 
