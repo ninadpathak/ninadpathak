@@ -126,6 +126,10 @@ class BuiltSiteTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         if not (OUTPUT / "sitemap.xml").is_file():
+            # CI builds before it tests. A missing build there means these checks did
+            # not run, which must read as a failure and not as a skip.
+            if os.environ.get("CI"):
+                raise AssertionError("output/ is missing in CI: build.py must run before the tests")
             raise unittest.SkipTest("run `python build.py` first: these read the built site")
         cls.sitemap = (OUTPUT / "sitemap.xml").read_text(encoding="utf-8")
         cls.llms = (OUTPUT / "llms.txt").read_text(encoding="utf-8")
@@ -243,6 +247,34 @@ class BuiltSiteTests(unittest.TestCase):
                 self.assertIn(f"Canonical: {BASE}/articles/{slug}/", text)
                 self.assertIn(BUILDER.hire_line(), text)
 
+    def test_service_pages_have_markdown_alternates(self):
+        for route in SERVICE_ROUTES:
+            html = self.page(route)
+            text = (OUTPUT / route / "index.md").read_text(encoding="utf-8")
+            with self.subTest(route=route):
+                self.assertIn(f'<link rel="alternate" type="text/markdown" title=', html)
+                self.assertIn(f'href="/{route}/index.md"', html)
+                self.assertTrue(text.startswith("# "))
+                self.assertIn(f"Canonical: {BASE}/{route}/", text)
+                self.assertIn(BUILDER.hire_line(), text)
+                self.assertNotIn("](/", text)
+
+    def test_markdown_alternates_carry_no_root_relative_url(self):
+        """Raw HTML figures, images and iframes too: the file is read away from the site."""
+        pattern = re.compile(r"""\]\(/(?!/)|\b(?:src|href|poster|srcset)=["']/(?!/)|,\s*/static/""")
+        for path in sorted(OUTPUT.rglob("index.md")):
+            with self.subTest(file=str(path.relative_to(OUTPUT))):
+                self.assertIsNone(pattern.search(path.read_text(encoding="utf-8")))
+
+    def test_no_redirect_chain_or_loop(self):
+        rules = [line.split() for line in (OUTPUT / "_redirects").read_text(encoding="utf-8").splitlines()
+                 if line.strip() and not line.startswith("#")]
+        sources = {rule[0] for rule in rules}
+        for source, target, *_ in rules:
+            with self.subTest(source=source):
+                self.assertNotIn(target, sources, "a redirect target is itself redirected")
+                self.assertNotEqual(source.rstrip("/"), target.rstrip("/"))
+
     def test_hiring_aliases_redirect_to_services(self):
         redirects = (OUTPUT / "_redirects").read_text(encoding="utf-8").splitlines()
         aliases = {
@@ -281,8 +313,7 @@ class BuiltSiteTests(unittest.TestCase):
             "articles/ai-engineering", "articles/writing-for-ai-products", "articles/agent-harnesses",
             "services", "services/ai-ready-documentation-audit", ""))
         services = ('href="/services/">technical writing services', (
-            "articles/technical-documentation", "articles/developer-experience", "articles/devtools-documentation",
-            "articles/api-documentation", "work/centus", "about", "services/ai-ready-documentation-audit",
+            "articles/devtools-documentation", "work/centus", "about", "services/ai-ready-documentation-audit",
             "services/freelance-technical-writer-for-ai-companies", ""))
         for anchor, sources in (audit, ai, services):
             for route in sources:
@@ -290,6 +321,27 @@ class BuiltSiteTests(unittest.TestCase):
                 main = html.split("<main", 1)[1].split("</main>", 1)[0]
                 with self.subTest(anchor=anchor, source=route or "/"):
                     self.assertIn(anchor.lower(), main.lower())
+
+    def test_article_cta_links_services_once(self):
+        """A cluster without its own hiring page gets no second sentence to /services/."""
+        html = self.page("articles/api-documentation")
+        cta = html[html.index("<!-- CTA -->"):html.index("</main>")]
+        self.assertEqual(cta.count('href="/services/"'), 1)
+
+    def test_services_page_states_the_contact_route_once_per_place(self):
+        main = self.page("services").split("<main", 1)[1].split("</main>", 1)[0]
+        # The hire line under the H1, the "How to hire me" section and the CTA band.
+        self.assertEqual(main.count(f'>{CONTACT["email"]}</a>'), 3)
+        for route in SERVICE_ROUTES[1:]:
+            child = self.page(route).split("<main", 1)[1].split("</main>", 1)[0]
+            with self.subTest(route=route):
+                self.assertEqual(child.count(f'>{CONTACT["email"]}</a>'), 3)
+
+    def test_services_page_states_no_pricing_method(self):
+        text = (ROOT / "content/services.md").read_text(encoding="utf-8")
+        self.assertIn("This page lists no rate", text)
+        for phrase in ("I quote each project", "from its scope", "fixed rate"):
+            self.assertNotIn(phrase, text)
 
     def test_one_primary_query_per_money_page(self):
         """The query wording sits in the slug, title, H1, description and first sentence,
@@ -324,7 +376,9 @@ class BuiltSiteTests(unittest.TestCase):
         self.assertRegex(headers, r"(?m)^" + re.escape("https://:version.:project.pages.dev/*") + r"\n\s+X-Robots-Tag: noindex$")
         self.assertNotRegex(headers, r"(?m)^https://:project\.pages\.dev/")
         self.assertNotRegex(headers, r"(?m)^/\*\n\s+X-Robots-Tag")
-        self.assertRegex(headers, r"(?m)^/articles/:slug/index\.md\n\s+Content-Type: text/markdown; charset=utf-8\n\s+X-Robots-Tag: noindex$")
+        for rule in ("/articles/:slug/index.md", "/services/index.md", "/services/:slug/index.md"):
+            with self.subTest(rule=rule):
+                self.assertRegex(headers, r"(?m)^" + re.escape(rule) + r"\n\s+Content-Type: text/markdown; charset=utf-8\n\s+X-Robots-Tag: noindex$")
 
 
 if __name__ == "__main__":

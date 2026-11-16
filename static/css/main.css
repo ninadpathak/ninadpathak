@@ -958,7 +958,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
 .cta-title-compact { font-size: var(--font-size-4xl); margin-bottom: var(--space-2); }
 
 /* The contact route as a plain sentence (templates/_hire_line.html). It follows a
-   paragraph wherever it appears, so it carries its own gap. */
+   paragraph wherever it appears, so it carries its own top margin. */
 .hire-line { margin-top: var(--space-3); }
 
 /* =====================================================================

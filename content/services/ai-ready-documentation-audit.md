@@ -1,7 +1,7 @@
 ---
 title: "AI-Ready Documentation Audit"
 nav_title: "AI-ready documentation audit"
-seo_title: "AI-Ready Documentation Audit: Answers, AI Crawlers, llms.txt | Ninad Pathak"
+seo_title: "AI-Ready Documentation Audit | Ninad Pathak"
 description: "An AI-ready documentation audit for developer docs: answer structure, AI crawler access in robots.txt and llms.txt validity, run with four free checkers."
 lead: "An AI-ready documentation audit checks what a publisher controls in AI search: whether a page's answers can be extracted, whether AI crawlers may fetch it, and whether its llms.txt is valid. I run it with four tools I built and published, so you can rerun every finding yourself."
 service_type: "Documentation audit"
@@ -68,16 +68,14 @@ Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the documentati
 
 ## FAQ
 
-Email hello@ninadpathak.com with any question this list leaves out.
-
-### What is an AI-ready documentation audit?
+**What is an AI-ready documentation audit?**
 
 It is a check of whether documentation can be fetched, extracted and indexed by AI search systems. Mine covers answer structure, AI crawler rules in robots.txt and llms.txt validity.
 
-### Will the audit get my docs cited by ChatGPT or AI Overviews?
+**Will the audit get my docs cited by ChatGPT or AI Overviews?**
 
 No audit can promise that. The audit reports structure and access, and the AI Overviews checker states that it does not predict placement.
 
-### Can I run the checks myself?
+**Can I run the checks myself?**
 
 Yes. All four tools are free, run in the browser and need no signup, at [ninadpathak.com/tools/](/tools/).

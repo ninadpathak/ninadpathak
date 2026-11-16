@@ -62,8 +62,10 @@ description = "Paste a technical article. Get a linter report: condescension wor
 # right call for an empty category and the wrong conclusion about the niche; the niche
 # was widened the same day. See CHARTER.md section 2c-bis.
 #
-# hire_note is the one sentence that links a cluster to the hiring page for the same work.
-# It follows the intro on the cluster page and opens the contact line under each article.
+# hire_note is the one sentence that links a cluster to its own hiring page, where one
+# exists. It follows the intro on the cluster page and opens the contact line under each
+# article. A cluster without one gets the plain contact line: the article CTA already
+# links /services/, so a second sentence to the same page would repeat it.
 #
 # ORDER MATTERS: build.py takes the first category whose tag_matches intersect a post's
 # tags, so the most specific cluster comes first. Tag matching is only the fallback.
@@ -114,7 +116,6 @@ tag_matches = ["ai-agents", "ai agents", "agents", "agent-memory", "agent-archit
 # not a starting allocation, and it must not grow on the strength of a floor figure.
 [[content.categories]]
 slug = "distribution"
-hire_note = "My <a href=\"/services/\">technical writing services</a> cover documentation, tutorials and technical articles for developer products."
 preserve_empty_route = true
 title = "Reaching Developers"
 description = "How to reach developers without barging into their communities with a campaign wearing a fake moustache."
@@ -123,7 +124,6 @@ tag_matches = ["reddit", "reddit-marketing", "community", "community-building", 
 
 [[content.categories]]
 slug = "developer-experience"
-hire_note = "My <a href=\"/services/\">technical writing services</a> cover documentation, tutorials and technical articles for developer products."
 label = "Developer Experience"
 title = "Developer Experience and DevRel"
 description = "Arguments about developer trust, technical content, and the decisions that make a product feel credible before a sales call."
@@ -132,7 +132,6 @@ tag_matches = ["developer-experience", "devtools", "developer-tools", "developer
 
 [[content.categories]]
 slug = "technical-documentation"
-hire_note = "My <a href=\"/services/\">technical writing services</a> cover documentation, tutorials and technical articles for developer products."
 label = "Technical Documentation"
 title = "Technical Documentation"
 description = "Technical documentation built from product behavior, working examples, and a writer willing to decide what the reader needs."
@@ -210,7 +209,6 @@ description = "Step-by-step guides that take a developer from an empty project t
 [[hire.offers]]
 name = "Technical articles"
 description = "Comparisons and explainers for engineers who will check the claims."
-url = "/services/freelance-technical-writer-for-ai-companies/"
 
 [[hire.offers]]
 name = "AI-ready documentation audit"

@@ -1,8 +1,8 @@
 ---
 title: "Freelance Technical Writer for AI Companies"
 nav_title: "Freelance technical writer for AI companies"
-seo_title: "Freelance Technical Writer for AI Companies: Agents, Memory, LLMs | Ninad Pathak"
-description: "Freelance technical writer for AI companies that build agents, agent memory and LLM infrastructure. Published work for Firecrawl, Mem0 and OpenComputer, linked at the publisher."
+seo_title: "Freelance Technical Writer for AI Companies | Ninad Pathak"
+description: "Freelance technical writer for AI companies building agents, memory and LLM infrastructure. Published work for Firecrawl, Mem0 and OpenComputer."
 lead: "I'm a freelance technical writer for AI companies that build agents, agent memory and LLM infrastructure. My published work for Firecrawl, Mem0 and OpenComputer is linked below, and I run each product before I write about it."
 service_type: "Technical writing for AI companies"
 status: published
@@ -50,16 +50,14 @@ Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the product, th
 
 ## FAQ
 
-Email hello@ninadpathak.com with any question this list leaves out.
-
-### Which AI companies have you written for?
+**Which AI companies have you written for?**
 
 I've published tutorials and technical articles for Firecrawl, Mem0 and OpenComputer on agent tools, agent memory and agent sandboxes. LambdaTest published my articles on AI agent testing.
 
-### Do you test the product before writing?
+**Do you test the product before writing?**
 
 Yes. I build the example and run it before drafting, so the engineer who reviews the draft sees working code.
 
-### Can you manage other writers?
+**Can you manage other writers?**
 
 Yes. At Mem0 I managed 13 writers and handled hiring and technical reviews.

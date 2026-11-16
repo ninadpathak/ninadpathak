@@ -98,7 +98,6 @@
         </div>
 
         <div class="about-sidebar-links">
-          <a href="mailto:{{ contact.email }}" class="arrow-link arrow-link-block">{{ contact.email }} →</a>
           <a href="{{ contact.booking_url }}" class="arrow-link arrow-link-block booking-modal-trigger" rel="noopener">Book a Call →</a>
           {% for page in service_pages if page.url != service.url %}
           <a href="{{ page.url }}" class="arrow-link arrow-link-block">{{ page.nav_title or page.title }} →</a>

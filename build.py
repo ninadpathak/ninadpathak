@@ -645,7 +645,7 @@ class SiteBuilder:
                 raise ValueError(f"{md_file} still contains a [TODO marker")
             paragraph_issues = paragraph_sentence_violations(post.content)
             if paragraph_issues:
-                details = "\n".join(f"    line {line}: {count} sentences — {snippet}"
+                details = "\n".join(f"    line {line}: {count} sentences: {snippet}"
                                     for line, count, snippet in paragraph_issues)
                 raise ValueError(f"{md_file} violates the two-sentence paragraph rule:\n{details}")
             self.md.reset()
@@ -806,10 +806,15 @@ class SiteBuilder:
                 f"{contact['booking_url']}")
 
     def absolute_links(self, markdown_text: str) -> str:
-        """Root-relative Markdown links as full URLs: a text file is read away from
-        the site, where /work/centus/ resolves to nothing."""
+        """Root-relative links as full URLs: a text file is read away from the site,
+        where /work/centus/ resolves to nothing. Covers Markdown links and the src,
+        href, poster and srcset of raw HTML figures, images and iframes."""
         base = self.config["site"]["url"].rstrip("/")
-        return re.sub(r"\]\(/(?!/)", f"]({base}/", markdown_text)
+        text = re.sub(r"\]\(/(?!/)", f"]({base}/", markdown_text)
+        text = re.sub(r"""\b(src|href|poster|srcset)=(["'])/(?!/)""", rf"\1=\2{base}/", text)
+        # Later candidates in a srcset: "..., /static/a.png 2x".
+        return re.sub(r"""(\bsrcset=(["'])[^"']*)""",
+                      lambda m: re.sub(r",\s*/(?!/)", f", {base}/", m.group(1)), text)
 
     def markdown_alternate(self, title: str, description: str, url: str, body: str, dates: str = "") -> str:
         """A page as markdown: title, summary, canonical URL, the source body, then the
@@ -1328,9 +1333,10 @@ class SiteBuilder:
         for page in service_pages:
             lines += section(page["title"], page["url"], page["markdown"])
         lines += section(about.get("title", "About"), "/about/", about.content)
-        # Case studies go in as their one-line summaries with a link. Their bodies carry
-        # headline figures still waiting on a stated source (build_work_pages prints the
-        # list), and this file should not repeat a number the site cannot yet back.
+        # Case studies go in as their one-line summaries with a link, which keeps the
+        # file short. The summaries still quote headline figures, and build_work_pages
+        # reports every case study as having no headline_source yet, so those numbers
+        # rest on the case studies' own word here as they do on /work/.
         lines += ["## Case studies", ""]
         for case in work_cases:
             lines.append(f"- [{case['client']}: {case['title']}]({base}{case['url']}): {case['summary']}")
