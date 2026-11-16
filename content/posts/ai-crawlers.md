@@ -145,8 +145,6 @@ Allow: /
 
 Pasted into the [AI crawler checker](/ai-crawler-checker/), it reports "citation allowed, training opted out," with all 7 search agents allowed and all 7 training agents blocked at `/`. A docs team that wants its pages in model training too can keep a wildcard-only file like the docs hosts above.
 
-My [AI-ready documentation audit](/services/ai-ready-documentation-audit/) runs the same robots.txt check, next to the answer-structure and llms.txt checks.
-
 Google-Extended isn't a training-only control, because Google says it also governs grounding in Gemini apps and in Grounding with Google Search on Vertex AI. Drop its line if you want Gemini to ground answers in your docs, and Google Search's AI features follow Googlebot either way.
 
 Crawler access is the first of the [checks for AI search](/articles/aeo-for-developer-docs/), and it doesn't make a page quotable on its own. The [technical SEO checklist for documentation](/articles/docs-seo/) covers indexing, and an [llms.txt file](/articles/llms-txt/) is a separate, optional index that grants or blocks nothing.

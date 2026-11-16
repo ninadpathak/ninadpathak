@@ -23,7 +23,7 @@ CONTACT = BUILDER.config["contact"]
 HIRE = BUILDER.config["hire"]
 BASE = BUILDER.config["site"]["url"].rstrip("/")
 LD_JSON = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
-SERVICE_ROUTES = ("services", "services/freelance-technical-writer-for-ai-companies", "services/ai-ready-documentation-audit")
+SERVICE_ROUTES = ("services", "services/freelance-technical-writer-for-ai-companies")
 # On Ninad's claims-to-check list. Existing instances stay; no hiring surface repeats them.
 UNVERIFIED = ("30+", "740%")
 
@@ -305,17 +305,13 @@ class BuiltSiteTests(unittest.TestCase):
     def test_each_money_page_gets_contextual_links_with_descriptive_anchors(self):
         """Ranking needs internal links whose anchor names the page's query, from the
         pages on the same subject: the cluster page, its articles, the tools, home."""
-        audit = ('href="/services/ai-ready-documentation-audit/">AI-ready documentation audit', (
-            "articles/ai-search-optimization", "articles/llms-txt", "articles/ai-crawlers",
-            "articles/aeo-for-developer-docs", "tools", "ai-overviews-checker", "ai-crawler-checker",
-            "llms-txt-validator", "llms-txt-generator", "services", ""))
         ai = ('href="/services/freelance-technical-writer-for-ai-companies/">freelance technical writer for AI companies', (
             "articles/ai-engineering", "articles/writing-for-ai-products", "articles/agent-harnesses",
-            "services", "services/ai-ready-documentation-audit", ""))
+            "services", ""))
         services = ('href="/services/">technical writing services', (
-            "articles/devtools-documentation", "work/centus", "about", "services/ai-ready-documentation-audit",
+            "articles/devtools-documentation", "work/centus", "about",
             "services/freelance-technical-writer-for-ai-companies", ""))
-        for anchor, sources in (audit, ai, services):
+        for anchor, sources in (ai, services):
             for route in sources:
                 html = (OUTPUT / route / "index.html").read_text(encoding="utf-8")
                 main = html.split("<main", 1)[1].split("</main>", 1)[0]
@@ -349,7 +345,6 @@ class BuiltSiteTests(unittest.TestCase):
         targets = {
             "services": "technical writing services",
             "services/freelance-technical-writer-for-ai-companies": "freelance technical writer for ai companies",
-            "services/ai-ready-documentation-audit": "ai-ready documentation audit",
         }
         seen = set()
         for route, query in targets.items():

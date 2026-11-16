@@ -81,8 +81,6 @@ The [llms.txt generator](/llms-txt-generator/) drafts a file from a site's disco
 
 The [validator](/llms-txt-validator/) checks the structure, and your server logs show whether anything requests `/llms.txt`. For the checks Google and OpenAI do document for AI search, see [AEO vs GEO vs SEO for developer docs](/articles/aeo-for-developer-docs/).
 
-The validator, the crawler-access check and the answer-structure checks together make up my [AI-ready documentation audit](/services/ai-ready-documentation-audit/).
-
 ## FAQ
 
 ### What is llms.txt?

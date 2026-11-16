@@ -56,8 +56,6 @@ I'd check access first, partly with the tools on this site, then read each passa
 
 The snippet, Search Console and crawler checks are about access, and Google documents the snippet and Search Console checks as requirements. The opening, section and evidence checks are editing heuristics: the AI Overviews checker flags likely problems, and neither tool predicts whether a page will be cited.
 
-The snippet and crawler checks are also the core of my [AI-ready documentation audit](/services/ai-ready-documentation-audit/).
-
 ## What a documentation team adds
 
 An indexed, snippet-eligible docs page on a site included in the Search generative AI control meets both documented eligibility conditions for Google's AI features. What it may still need is a `robots.txt` rule per crawler, and an editing pass for passages that lose their meaning when lifted out.

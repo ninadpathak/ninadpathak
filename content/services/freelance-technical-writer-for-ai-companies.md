@@ -42,7 +42,7 @@ The [Mem0 case study](/work/mem0/) covers the workflow and the Search Console re
 
 ## What I write on this site
 
-I publish my own articles on agents, memory and retrieval under [AI engineering](/articles/ai-engineering/), and docs for these products can be checked with my [AI-ready documentation audit](/services/ai-ready-documentation-audit/). The [MCP server tutorial](/articles/mcp-server-tutorial/) and the guide to [writing for AI products](/articles/writing-for-ai-products/) show how I handle the subject without a client brief.
+I publish my own articles on agents, memory and retrieval under [AI engineering](/articles/ai-engineering/). The [MCP server tutorial](/articles/mcp-server-tutorial/) and the guide to [writing for AI products](/articles/writing-for-ai-products/) show how I handle the subject without a client brief.
 
 ## How to hire me
 
