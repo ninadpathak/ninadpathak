@@ -1,186 +1,144 @@
 ---
 category: ai-engineering
 date: 2026-03-29
-description: Hybrid search combines BM25 sparse retrieval with dense vector search.
-  Here's how reciprocal rank fusion works, what it costs, and when the combination
-  actually beats either method alone.
+description: 'Hybrid search fuses BM25 and vector retrieval. How it scores on a 2026 production benchmark, how reciprocal rank fusion works with runnable code, and what to add after it.'
 status: published
-work_note: For search products, [Ninad Pathak](/portfolio/) writes developer content
-  that tests exact identifiers alongside paraphrased questions, explaining why different
-  retrieval configurations return different results.
+work_note: '[Ninad Pathak](/portfolio/) writes developer content that explains why two retrieval configurations can return different results for one query.'
 title: 'Hybrid Search: Combining BM25 and Vector Search'
 slug: hybrid-search
+updated: 2026-11-17
 ---
 
-Dense vector search became the default for RAG systems almost overnight. Embeddings capture semantic meaning, handle paraphrase and synonym matching, and outperform keyword search on most standard retrieval benchmarks.
+Hybrid search runs a keyword retriever, usually BM25, and a dense vector retriever over the same corpus and fuses the two ranked lists into one. On the latest production benchmark I can find, that fused list is the lowest-scoring retriever in the table.
 
-Where dense retrieval falls down is predictable: exact keyword queries like product codes, error messages, proper nouns, and technical identifiers that have no semantic neighbors in embedding space. The first time I watched a vector-only RAG system fail to surface a doc containing a literal Stripe webhook event name a user had pasted in verbatim, the limitation stopped being theoretical.
+Kapa's Finn Bauer [published the benchmark on October 2, 2026](https://www.kapa.ai/blog/company-knowledge-bench). It scores seven retrievers on "1,000 eval cases annotated from real production data", and plain hybrid search comes last.
 
-BM25 handles all of those queries well. Hybrid search runs both retrievers and fuses their results.
+## How does hybrid search score on a 2026 benchmark?
 
-**Short answer:** Hybrid search runs BM25 and dense vector retrieval in parallel, then merges ranked results using reciprocal rank fusion (RRF) or a weighted linear combination. On BEIR benchmarks, hybrid search improves NDCG@10 by 18% over BM25 alone and produces consistent gains across domains.
+Plain hybrid search scores 0.41 on Kapa's Company Knowledge Bench, below every other retriever tested. The rows above it either draw a deeper pool from the same search and select from it, or replace the search with a model that greps.
 
-The tradeoff is higher retrieval infrastructure complexity and roughly 2x the compute per query.
+| Retriever | Score | Time per query, where the post states it |
+| --- | --- | --- |
+| Hybrid search | 0.41 | |
+| Hybrid search, 100 candidates reranked to 15 | 0.50 | "a third of a second more" |
+| Query decomposition, hybrid search and a reranker | 0.56 | 1.8 seconds |
+| Agent with grep, OpenAI's smaller Luna model | 0.54 | 13 to 17 seconds |
+| Agent with grep, OpenAI's Sol model | 0.61 | 13 to 17 seconds |
+| Kapa Default, a tuned fixed pipeline | 0.61 | 3.3 seconds |
+| Kapa Deep, a tuned agentic retriever | 0.65 | about five seconds |
 
-## Why dense retrieval alone misses obvious queries
+Kapa sells retrieval and says so: "A note on bias: retrieval is core to our product, and all seven retrievers were built by us". The fixed-pipeline rows don't depend on its product, and the post's advice from them is "If you change one thing in a basic RAG pipeline, add a reranker."
 
-Dense vector search encodes queries and documents into a continuous embedding space and retrieves documents by geometric proximity. That works well for natural language queries where meaning is what matters.
+I read the 0.41 as the score for stopping too early. Hybrid search generates candidates, and the plain row returns its top 15 as they come.
 
-"What causes memory leaks in Go?" maps cleanly to documents about garbage collection, reference counting, and runtime profilers even without the exact words.
+The second row pulls 100 from the same search and reranks them to 15, and the third pools 50 for each of up to three sub-queries, so both gain from a deeper pool and from a step that chooses.
 
-Exact-match queries break this. An error code like `ORA-00942` has no semantic neighborhood, so the embedding lands in an arbitrary spot with nothing meaningful nearby.
+## Why fuse a keyword retriever with a vector retriever?
 
-A product SKU like `B08N5WRWNW` doesn't cluster with semantically related products in embedding space. A function name like `getStatefulPartitionedCall` appears once in a codebase and won't retrieve based on meaning because there's no meaning to encode beyond the string itself.
+The two retrievers miss different documents, so their union contains more of what a query needs than either list. Dense retrieval matches a question about memory leaks to a page on garbage collection that shares none of its words, and it has nothing to hold on to for an error code like `ORA-00942`, which BM25 matches exactly.
 
-BM25 handles these cases directly. BM25 (Best Matching 25) is a probabilistic relevance model derived from TF-IDF that scores documents based on term frequency, inverse document frequency, and document length normalization.
+The published evidence for the gain is older than a year, so read it with its dates. Microsoft's [Azure AI Search comparison](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/azure-ai-search-outperforming-vector-search-with-hybrid-retrieval-and-reranking/3929167) from September 18, 2023 used the Ada-002 embedding model.
 
-A query for `ORA-00942` scores documents containing that exact string very highly and ignores documents that are semantically related but don't contain the term.
+<!-- evidence-three: NDCG@3 is the metric Microsoft's Table 1 reports for its customer datasets -->
+| Azure AI Search mode, 2023 | Customer datasets, NDCG@3 | BEIR, NDCG@10 | MIRACL, NDCG@10 |
+| --- | --- | --- | --- |
+| Keyword | 40.6 | 40.6 | 49.6 |
+| Vector (Ada-002) | 43.8 | 45.0 | 58.3 |
+| Hybrid | 48.4 | 48.4 | 58.8 |
+| Hybrid and semantic ranker | 60.1 | 50.0 | 72.0 |
 
-The BEIR benchmark authors explicitly note that BM25 is a "strong generalizable baseline," with many dense single-vector embedding models trained on MS MARCO labels being outperformed by BM25 in out-of-domain settings. Dense retrieval generalizes well when your query distribution looks like its training distribution.
+Elastic's [hybrid retrieval post](https://www.elastic.co/search-labs/blog/improving-information-retrieval-elastic-stack-hybrid) from July 20, 2023 fused BM25 with Elastic's own learned sparse encoder, with no dense vectors involved. It reports that "Reciprocal Rank Fusion increases average NDCG@10 by 1.4% over Elastic Learned Sparse Encoder alone and 18% over BM25 alone."
 
-Point it at a corpus of legal contracts or firmware logs that look nothing like the web text it learned on, and BM25 is often the better retriever.
+Both posts predate the models in Kapa's table, and the shape of the result has held: fusion beats either retriever alone, and on Azure's customer datasets the reranker added more than fusion had.
 
-## Reciprocal rank fusion: the merge algorithm that doesn't require score normalization
+The background for all of it is the [BEIR benchmark paper](https://arxiv.org/abs/2104.08663) from April 2021, which compared single retrievers and tested no fusion. Its abstract says dense and learned-sparse models "often underperform other approaches" outside their training domain, which is the case against relying on one family.
 
-Running two retrievers is straightforward. Merging their ranked result lists is where the design problem actually lives.
+## How does reciprocal rank fusion work?
 
-A naive linear combination of scores fails because BM25 scores and embedding similarity scores exist on completely different scales. A BM25 score of 8.5 and a cosine similarity of 0.87 mean nothing relative to each other without normalization, the way you can't average a temperature in Celsius with one in Fahrenheit and expect a sensible result.
+Reciprocal rank fusion (RRF) scores each document by summing `1 / (k + rank)` over every list it appears in, and ignores the retrievers' own scores. That sidesteps the problem that a BM25 score of 8.5 and a cosine similarity of 0.87 share no scale.
 
-Min-max normalization addresses this but requires knowing the score distribution for each retriever on each query, which means you can't compute the final score until all candidates are returned.
+The method and its constant come from [a SIGIR 2009 paper](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf) by Cormack, Clarke and Büttcher, which says "k = 60 was fixed during a pilot investigation". The whole algorithm fits in a few lines of Python.
 
-Reciprocal Rank Fusion (RRF) avoids the normalization problem entirely. RRF scores each document by summing `1 / (k + rank)` across all result lists the document appears in, where `k=60` is a constant from [the original Cormack et al.
+```python
+def rrf(rankings, k=60):
+    """Fuse ranked lists of document ids. Ranks start at 1, as in the 2009 paper."""
+    scores = {}
+    for ranking in rankings:
+        for rank, doc in enumerate(ranking, start=1):
+            scores[doc] = scores.get(doc, 0.0) + 1.0 / (k + rank)
+    return sorted(scores.items(), key=lambda item: item[1], reverse=True)
 
-SIGIR 2009 paper](https://opensearch.org/blog/introducing-reciprocal-rank-fusion-hybrid-search/). Rank position is all that matters.
 
-The underlying scores are discarded.
+bm25 = ["ORA-00942 runbook", "grants guide", "schema FAQ", "tuning notes"]
+dense = ["permissions overview", "grants guide", "ORA-00942 runbook", "roles tutorial"]
 
-Working through the formula, a document ranked first in one list and missing from the other scores `1/(60+1) = 0.0164`. A document ranked first in both lists scores `0.0164 + 0.0164 = 0.0328` and will almost always win.
+for doc, score in rrf([bm25, dense]):
+    print(f"{score:.4f}  {doc}")
 
-Sitting at rank 100 in both lists, a document scores `0.0099 + 0.0099 = 0.0198` and stays near the bottom. Documents that appear in only one list score modestly and get natural deranking relative to the ones both retrievers agreed on.
+print()
+print(f"first in one list only    {1 / 61:.4f}")
+print(f"first in both lists       {2 / 61:.4f}")
+print(f"rank 100 in both lists    {2 / 160:.4f}")
+```
 
-Agreement between the two retrievers becomes the strongest signal, which is exactly the behavior you want.
+Running it with `python3 rrf.py` prints the fused order and the reference scores.
+
+```text
+0.0323  ORA-00942 runbook
+0.0323  grants guide
+0.0164  permissions overview
+0.0159  schema FAQ
+0.0156  tuning notes
+0.0156  roles tutorial
+
+first in one list only    0.0164
+first in both lists       0.0328
+rank 100 in both lists    0.0125
+```
+
+The two documents both retrievers returned finish well ahead of the one that topped a single list. A document at rank 100 in both lists scores 0.0125, below a document ranked first in only one, so agreement helps and deep agreement helps less.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/hybrid-search/rrf-fusion.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/hybrid-search/rrf-fusion.narrow.svg" width="288" height="536"><img class="np-has-narrow" src="/static/images/diagrams/hybrid-search/rrf-fusion.svg" width="720" height="392" alt="A BM25 keyword list and a vector list each rank the same documents differently. Reciprocal rank fusion discards their scores and adds 1/(60 + rank) from each list, so the document both retrievers rank highly rises to the top of the fused list." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Agreement between the two retrievers becomes the strongest signal; the underlying scores are discarded.</figcaption>
+  <figcaption>Agreement between the two retrievers becomes the strongest signal, and the underlying scores are discarded.</figcaption>
 </figure>
 
-The practical advantage of RRF is that it needs no tuning for initial deployment. The `k=60` constant generalizes well across domains, and you don't need labeled data to set weights.
+Engines disagree on the constant. Elasticsearch's [RRF retriever reference](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/retrievers/rrf-retriever) says of `rank_constant` that it "Defaults to 60.", and Qdrant's [hybrid queries documentation](https://qdrant.tech/documentation/concepts/hybrid-queries/) counts ranks from zero and says "k is a constant (set to 2 by default)".
 
-[Elasticsearch recommends RRF as the starting point](https://www.elastic.co/search-labs/blog/improving-information-retrieval-elastic-stack-hybrid) precisely because of this robustness, which matches my experience: I have shipped RRF on day one of a project and only revisited fusion months later, if ever.
+A small constant rewards the top of each list much more sharply, so the same two result lists can fuse into different orders on the two engines. Check the default before comparing results across them.
 
-## Benchmark numbers: what the gains actually look like
+## Should you use RRF or score-based fusion?
 
-[Elastic's benchmarks](https://www.elastic.co/search-labs/blog/improving-information-retrieval-elastic-stack-hybrid) show RRF increasing average NDCG@10 by 1.4% over their Learned Sparse Encoder alone and 18% over BM25 alone across the BEIR benchmark suite.
+Start with whatever your engine defaults to, and treat fusion tuning as a late step. RRF needs no labeled data, and score-based fusion keeps information RRF throws away, such as how far ahead the top result was.
 
-[Azure AI Search benchmarks](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/azure-ai-search-outperforming-vector-search-with-hybrid-retrieval-and-reranking/3929167) show hybrid retrieval plus semantic reranking consistently outperforming pure vector search even with OpenAI's `text-embedding-3-large` as the dense retriever. The combination of hybrid search and a cross-encoder reranker on top produces the strongest results.
+Weaviate has moved to the second kind: its [hybrid search documentation](https://docs.weaviate.io/weaviate/search/hybrid) says "Relative Score Fusion is the default fusion method starting in v1.24." The same page defines the `alpha` weight that balances the two retrievers.
 
-On the WANDS furniture e-commerce benchmark, RRF added only +1.7% NDCG over dense-only. On domain-specific scientific literature benchmarks, the gains reach +24%.
+"An alpha of 1 is a pure vector search. An alpha of 0 is a pure keyword search."
 
-How big the improvement gets tracks how much exact-match terminology your corpus carries, things like gene names, chemical formulas, or citation keys that a generic embedding model has never properly learned.
+Qdrant offers a score-based option called Distribution-Based Score Fusion, available from v1.11.0, which "keeps the raw scores from each query but normalizes their distributions before combining."
 
-[Weaviate's search mode benchmarking](https://weaviate.io/blog/search-mode-benchmarking) compares pure keyword, pure vector, and hybrid across their own benchmarks and shows hybrid consistently at the top, though the margins vary.
+My opinion is that routing queries to different alpha values by query type is complexity few systems need. Kapa's table puts the larger win after fusion, and a wrong route sends an identifier query to the retriever least able to match it.
 
-## Implementation differences across the major systems
+## Do agents with grep make hybrid search unnecessary?
 
-**Weaviate** has the most ergonomic hybrid search API. A single `hybrid()` call takes an `alpha` parameter: `alpha=0` means pure BM25, `alpha=1` means pure vector search, and `alpha=0.5` runs both with equal weighting using RRF.
+For code, largely yes, and for mixed company knowledge, no. The Kapa post notes that "Cursor recently stopped searching your code via embeddings in favor of relying only on grep and indexed search.", and its own grep agent with a strong model ties the tuned pipeline at 0.61.
 
-You don't need to manage separate retrieval calls or merge logic. Weaviate handles the BM25 index internally.
+The tie costs 13 to 17 seconds a query against 3.3, and a second Kapa post, [by Matteo Bortoletto and Janis Fluri on October 26](https://www.kapa.ai/blog/retrieval-bottleneck), measures what the grep agent hands back: "for grep, only about one in twenty-five of the chunks it returns is needed". Grep finds things and leaves every selection decision to the model reading the results.
 
-```python
-results = collection.query.hybrid(
-    query="memory leak debugging",
-    alpha=0.5,
-    limit=10
-)
-```
+Selection is also where fixed pipelines now lose. That post traced each needed chunk through a test pipeline and found "Of all the gold chunks search found, 34% were never shown to the agentic retriever."
 
-**Qdrant** takes a more explicit approach. You run sparse and dense retrievals separately and apply fusion in the query.
+A third of the right material was retrieved and then dropped. That is the same conclusion as the first table, reached from the other direction, and the [reranking guide](/articles/rag-reranking/) covers the step where it happens.
 
-Qdrant supports both RRF and its Distribution-Based Score Fusion (DBSF), which attempts to normalize scores before combining them. DBSF can outperform RRF when you have domain knowledge to calibrate it, but it requires more setup.
+## What does hybrid search cost?
 
-Qdrant also supports SPLADE sparse vectors as a BM25 alternative for richer sparse representations.
+Hybrid search costs a second index, a second query per request and a fusion step. Elastic's 2023 post named the latency side of that, noting that query latency rose "as the two queries are performed sequentially in Elasticsearch" at the time.
 
-**Elasticsearch** supports hybrid search through the `sub_searches` + `rank` API. [Elasticsearch's linear retriever](https://www.elastic.co/search-labs/blog/linear-retriever-hybrid-search) supports weighted linear combination as an alternative to RRF, which can outperform RRF once you have enough annotated queries to tune the weights.
-
-Their data suggests roughly 40 annotated queries is the threshold where tuned weights beat untuned RRF.
-
-**Vespa** combines BM25 and neural retrieval natively in its ranking framework. Vespa's advantage is that the fusion happens at the ranking expression level, which gives you fine-grained control over how features from both retrievers interact.
-
-The tradeoff is Vespa's steeper learning curve compared to managed services.
-
-## Score normalization vs RRF: when to switch
-
-RRF's rank-only approach discards information. When one retriever is far more confident about a document than the other, RRF treats a rank-1 result the same whether the underlying score was a near-certain 0.99 or a lukewarm 0.55.
-
-Score-based fusion preserves that signal.
-
-Linear combination with min-max normalization can outperform RRF when the score distributions are stable and you have labeled data for weight tuning. [Elasticsearch's benchmarks](https://www.elastic.co/search-labs/blog/weighted-reciprocal-rank-fusion-rrf) found hybrid dismax with name boosting achieved a mean NDCG of 0.7497 versus RRF's 0.7068 on one e-commerce dataset, with the difference closing as document diversity increased.
-
-My recommendation is to start with RRF. It requires no labeled data, no score distribution assumptions, and no calibration.
-
-Move to weighted linear combination only once you have enough labeled queries to tune it properly and your benchmark results show the gain clears the maintenance overhead of keeping those weights honest as the corpus drifts.
-
-## The alpha parameter and query type routing
-
-Not every query should use the same alpha. A query like "what are the differences between TCP and UDP?" benefits from semantic retrieval (alpha closer to 1).
-
-A query like "ERROR_CODE_4291 stack trace" benefits from keyword retrieval (alpha closer to 0).
-
-Some systems route queries to different alpha values based on query classification. A classifier labels queries as "keyword-style" or "semantic-style" and adjusts alpha accordingly.
-
-[LlamaIndex has a writeup on alpha tuning](https://medium.com/llamaindex-blog/llamaindex-enhancing-retrieval-performance-with-alpha-tuning-in-hybrid-search-in-rag-135d0c9b8a00) that shows the performance gains from per-query-type tuning versus a fixed alpha.
-
-My opinion on this is that query routing for alpha adds complexity not worth carrying unless you're running production traffic at scale and have the labeled data to validate the classifier. A misclassified query is worse than a fixed alpha, since you've now actively steered a keyword lookup toward the semantic retriever that was going to miss it.
-
-For most teams, a fixed alpha of 0.5 to 0.7 gets you 90% of the hybrid search benefit.
-
-## Reranking on top of hybrid search
-
-Hybrid search improves recall. Reranking improves precision.
-
-The combination is stronger than either alone.
-
-Once hybrid retrieval returns a top-K candidate set of typically 20 to 100 documents, a cross-encoder reranker scores each document against the query independently. A cross-encoder reads the query and document together in one pass and can attend to how specific query words line up against the document, which produces sharper relevance scores at the cost of being slower than the bi-encoder that fetched the candidates.
-
-[Azure's benchmark data](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/azure-ai-search-outperforming-vector-search-with-hybrid-retrieval-and-reranking/3929167) shows the hybrid + rerank combination consistently outperforming hybrid alone by a significant margin. I wrote about reranking mechanics in depth at [Reranking in RAG](/articles/rag-reranking/).
-
-The ordering matters. Always hybrid-retrieve a larger candidate set first, then rerank down to the final top-K you'll send to the LLM.
-
-Running a cross-encoder over your full corpus would mean a fresh forward pass per document on every query, which is too slow to be practical past a few thousand records.
-
-## The honest tradeoff
-
-Hybrid search is not universally better than dense-only. On workloads where your queries read like natural language and your documents are plain prose, say a support knowledge base of how-to articles answered with conversational questions, well-trained dense embeddings often match or exceed hybrid search.
-
-The real gains show up on mixed corpora that splice code, product names, and technical identifiers into prose documentation.
-
-Paying for that requires real infrastructure. You're running two indexes for BM25 and vectors, two retrieval passes per query, and a merge operation.
-
-Latency roughly doubles against single-retriever approaches before any reranking enters the picture. For a search box that needs to feel instant under a user's keystrokes, that doubling is the difference between fast and noticeably laggy.
-
-The [embedding models guide](/articles/vector-embeddings/) explains the model-selection trade-offs behind the dense retriever. Read it as background, not benchmark evidence that BM25 can rescue a weak retriever.
-
-The combination amplifies both retrievers' strengths, not their weaknesses.
+Engines differ on whether the two queries run in sequence or in parallel, so measure your own. The choice of dense model is its own decision, and the [embedding models guide](/articles/vector-embeddings/) covers it.
 
 ## FAQ
 
-**Should I always use hybrid search for RAG?** For general-purpose document retrieval over mixed corpora, yes. For narrow semantic workloads where your queries are always natural language and your documents are prose, a well-tuned dense-only retriever can match hybrid performance with half the infrastructure cost.
+**Should I always use hybrid search for RAG?** Use it as the candidate generator for mixed corpora that combine prose with code, product names and identifiers, and put a reranker after it. On Kapa's 2026 benchmark that pairing scored 0.50, up from 0.41.
 
-Benchmark your specific corpus before committing to the added complexity.
+**Is RRF always better than score normalization?** No. RRF is the safer start because it needs no labeled data, and engines disagree on the default: Elasticsearch's RRF retriever uses a rank constant of 60, and Weaviate has defaulted to Relative Score Fusion since v1.24.
 
-**Is RRF always better than score normalization?** RRF is better when you don't have labeled data for weight calibration. Score normalization with tuned weights can outperform RRF, but only with enough annotated queries to validate the tuning.
-
-Elasticsearch's data suggests 40+ annotated queries as the practical minimum. Below that, use RRF.
-
-**What is SPLADE and when should I use it instead of BM25?** SPLADE is a learned sparse model that produces sparse vector representations rather than BM25's explicit term statistics. SPLADE typically outperforms BM25 on semantic queries while retaining the exact-match properties of sparse retrieval.
-
-Use SPLADE if you want a stronger sparse component and are willing to run a model at query time. Use BM25 if you want zero ML inference cost on the sparse side.
-
-**What alpha value should I start with in Weaviate?** Start at 0.5 (balanced BM25 and vector) and evaluate on a representative query set. Move toward 1.0 (more vector) for semantic workloads, toward 0.0 (more BM25) for keyword-heavy workloads.
-
-Avoid spending time on fine-grained tuning until you've measured that it moves your benchmark metric meaningfully.
-
-**Does hybrid search help with multi-lingual retrieval?** Dense multilingual models handle translation-equivalent queries better than BM25. For multi-lingual corpora, the contribution of BM25 drops unless your queries and documents share the same language.
-
-For cross-lingual retrieval, a strong multilingual dense retriever with no BM25 typically outperforms hybrid.
+**What alpha value should I start with in Weaviate?** Set it explicitly, because Weaviate's documentation says "If you do not set alpha, the effective weighting depends on your client." Start at 0.5, evaluate on a representative query set, and move toward 1 for paraphrase-heavy queries or toward 0 for identifier-heavy ones.
