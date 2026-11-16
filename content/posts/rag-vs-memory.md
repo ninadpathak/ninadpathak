@@ -1,192 +1,116 @@
 ---
 category: ai-engineering
 date: 2026-04-19
-description: Understand the fundamental differences between RAG and memory systems
-  for LLM applications, when to use each, and how to combine them in production.
+description: RAG selects evidence for one request and memory governs state across requests. Why memory that only recalls is RAG over old chats, and how to run both.
 status: published
 work_note: '[Ninad Pathak](/contact/) writes technical content for AI products that
   separates retrieved source evidence from saved user state, following where each
   enters a request and how memory gets updated.'
 title: 'RAG vs Memory: What AI Developers Need to Know'
-updated: '2026-08-18'
+updated: '2026-11-16'
 slug: rag-vs-memory
 ---
 
-RAG and memory both put useful context in front of a model, but they govern different things. RAG selects external source evidence for the current request.
+<!-- evidence-three: October 3, 2026 is the publication date printed on liao.gg/blog/agents-dont-need-memory -->
+"It's All Just RAG" is a section heading in [a post Kevin Liao published on October 3](https://liao.gg/blog/agents-dont-need-memory) about memory plugins for coding agents. RAG selects source evidence for the current request, and memory governs state that has to survive, change or expire across requests, so the heading is an accusation that these products store and recall and do nothing else.
 
-Memory governs state that must survive, change, expire, or return across requests.
-
-That boundary matters more than the storage technology. A vector index can retrieve product documentation for RAG or past events for memory.
-
-A conversation buffer can hold recent state, but it is not a complete memory system unless the application also controls what enters it, how long it remains valid, and when it may return.
+I joined Mem0 in February 2026 and ran a team of 13 writers there, and Mem0 sells this kind of memory layer, so weigh what follows with that in mind. My argument is that the replacement Liao built is a memory system by that definition, and a better one than the plugins the post attacks.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/rag-vs-memory/two-inputs.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-vs-memory/two-inputs.narrow.svg" width="288" height="560"><img class="np-has-narrow" src="/static/images/diagrams/rag-vs-memory/two-inputs.svg" width="720" height="600" alt="Two inputs feed one bounded context window before the model. Retrieval selects source evidence from documents for the current request. Memory supplies saved state that must survive, change, expire, or return across requests." loading="lazy" decoding="async"></picture></a>
   <figcaption>RAG selects evidence for this request; memory governs state across requests. Both land in the same bounded context.</figcaption>
 </figure>
 
-## RAG and memory have different owners
+## What is the difference between RAG and memory?
 
-### RAG owns evidence selection for one request
+RAG answers "what do the sources say about this question", and memory answers "what is still true about this user or task". Both put text in front of the model, and both can sit on the same vector index.
 
-A RAG pipeline starts with an information need and a corpus. It forms a retrieval query, selects source records, and passes a bounded set of those records to the model.
+| | RAG | Memory |
+| --- | --- | --- |
+| Job | Select evidence for one request | Keep state across requests |
+| Source of truth | A corpus someone else maintains | Records the application wrote itself |
+| Goes stale when | The corpus is reindexed late | A later fact contradicts an earlier one |
+| Needs | Retrieval, ranking, citation | Write rules, supersession, expiry, access scope |
+| Failure looks like | A confident answer from the wrong passage | An old preference returning as if it were current |
 
-The answer should be traceable to what the retriever returned, not to the wording of the query or to an unsupported model guess.
+A retriever isn't supposed to decide whether a document is still true, because the corpus owner is meant to have done that. A memory layer has nobody else to ask.
 
-The corpus can change and the retriever can use more than one index. Neither fact turns RAG into memory.
+The [context window](/articles/llm-context-windows/) owns neither job. It is the container both land in, and a large one doesn't decide which of its contents is authoritative.
 
-Its defining job is selecting evidence that can answer the current request.
+## Is agent memory just RAG?
 
-A vector store is therefore not synonymous with RAG. Dense vectors are one retrieval path.
+A memory system that recalls by similarity alone is RAG over transcripts, and the plugins Liao describes work that way: they cut session transcripts into snippets, store them in a vector database, and "On every prompt, retrieve the top 5 and inject". The post's two sharpest complaints about the result are "The past is treated as truth." and "Agents can't search for what they don't know."
 
-Lexical indexes, metadata filters, rerankers, and direct database lookups can all take part in the same evidence-selection step.
+Liao's replacement is Operator, a workspace of Markdown documents the agent reads before a task and maintains after it. The storage is the least interesting part, and the rules are where the post answers its own complaints.
 
-### Memory owns state across requests
+| Liao's complaint about memory plugins | Operator's rule, in the post's words | What that rule is |
+| --- | --- | --- |
+| "The past is treated as truth." | "Facts should be rewritten when truth changes. No appending." | Supersession |
+| "Agents can't search for what they don't know." | "At the start of every session, Operator only injects this lean catalog into context" | A read policy |
+| Every transcript is mined into snippets | Agents are directed "to record only what the code cannot provide" | A write rule |
 
-A memory system decides which observations become durable state, where that state belongs, how it can be retrieved, and when it should be superseded or removed. A preference, a completed action, and a temporary tool result have different lifecycles even if each can be represented as text.
+Those are the lifecycle decisions in the table further up, so the post titled against memory specifies one. What it shows is that recall without lifecycle rules fails, which is a criticism of those products and an endorsement of the category.
 
-The [five-layer memory hierarchy](/articles/ai-memory-management/) makes those lifecycle decisions explicit. The current event and working context can expire quickly, while episodic, semantic, and procedural records need separate inclusion, retrieval, and retention rules.
+A Hacker News commenter, CapitalistCartr, made the same turn inside a single reply the next day. It [starts with the obvious objection](https://news.ycombinator.com/item?id=49953780), "it look to me like his objections apply to his own solution", and ends, after a look at the repository, on "Every scope has a catalog file".
 
-A recent-message buffer covers only one part of that design. It does not decide whether a record remains valid next week, whether a later record replaces it, or whether another user may read it.
+Anthropic's [The components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), from November 6, adds a result on the write rule. Each model got one run of Pokémon Red with a folder of memory files, and "Sonnet 3.7 wrote 413 memory files across 225 folders and earned one badge", and Fable 5 wrote nine files plus a top-level `global.md` and earned four.
 
-### The context window owns neither job
+A pair of runs from very different models proves little about retrieval, and the comparison never varies it. They do show what the stronger model chose to write: strategy and tested rules, with nothing it could read off the screen.
 
-The context window is the container the model reads during one inference call. It can contain retrieved evidence, selected memories, instructions, tool results, and the current request.
+The two sources disagree on who should repair a bad note. Liao wants documentation written by the working agent with the full picture still in context, "Not some background "dreamer" agent.", and Anthropic's post calls its repair pass dreaming and uses it to check notes against the original transcripts.
 
-It does not decide which of those inputs are authoritative or durable.
+Anthropic's reason is that "a note that's wrong from the start or that drifts as the environment changes can be read, and trusted, by Claude in a later session." A note that was wrong when the working agent wrote it is the case a rewrite-on-change rule can't catch, so I think a serious memory system ends up needing both.
 
-That distinction is easy to lose when a large window can hold a long transcript. The [context-window guide](/articles/llm-context-windows/) explains why capacity alone does not guarantee that every included fact will be used reliably.
+"RAG vs memory" is a question about who is responsible for truth over time. Under RAG the corpus owner is, and under memory your application is, whatever the files look like.
 
-Selection and placement still belong to the application.
+## How do RAG and memory work together in one request?
 
-## A hybrid request loop keeps evidence and state separate
+A RAG pipeline with memory reads memory first to shape the question, retrieves evidence second, and treats the memory write as a separate decision at the end.
 
-### Read relevant durable state first
+1. **Read scoped memory.** Apply identity and access rules before any similarity search, and return only state relevant to this task.
+2. **Retrieve evidence.** Use that state to form a better query against the external corpus, because a stored constraint can name the service and only the documentation can say what the service supports.
+3. **Assemble a bounded context.** Label which passages are memory and which are sources, and decide in advance which wins when they conflict.
+4. **Answer from evidence.** Citations point at source records, never at a memory summary of them.
+5. **Decide the write separately.** Nothing becomes durable because the model said it, so the application decides what is worth storing and what it replaces.
 
-The application begins with a scoped memory read. Identity and access rules apply before similarity search, and the result should include only state relevant to the current task.
+Step five is where the 413-file run went wrong. The [five-layer memory hierarchy](/articles/ai-memory-management/) covers which kinds of record deserve which rules.
 
-The system can then recover a user-approved constraint, an earlier task outcome, or another record that must influence the next step.
+## Which retrieval methods does agent memory need?
 
-Reading memory does not yet answer the request. The returned state helps the application understand the task and form a better retrieval query.
+Agent memory needs dense search for meaning, lexical search for exact identifiers, and metadata filters for anything that must never be approximate. Agents make retrieval harder than human search does, because an agent forms its query partway through a task.
 
-### Retrieve source evidence for the current question
+A person asks "What were the deployment steps for this service?", and an agent that has already tried the deployment asks "What failed last time?" Both need the same record from different starting points, so a test set built from polished human questions hides the mismatch.
 
-The application then searches the external corpus. Current task state can improve the query, but it is not a substitute for the source records the answer needs.
+| Problem | Method | What it can't do |
+| --- | --- | --- |
+| Query and record use different words | Dense retrieval | Match an exact error code |
+| An identifier must match exactly | Lexical retrieval such as BM25 | Find a paraphrase |
+| Tenant, time range or permission | A metadata filter applied before ranking | Rank by relevance |
+| The query lacks the document's vocabulary | [HyDE](/glossary/hypothetical-document-embeddings-hyde/), which embeds a drafted answer | Serve as evidence, since the draft is invented |
+| Constraints are buried in a sentence | [Self-querying retrieval](/glossary/self-querying-retrieval/), which splits search text from typed filters | Grant access the caller lacks |
 
-The two inputs should remain distinguishable in the assembled prompt. Memory can say which service and deployment the request concerns.
+Anthropic's [Contextual Retrieval explanation](https://www.anthropic.com/engineering/contextual-retrieval) uses an error code to show the dense and lexical split, and the [hybrid search guide](/articles/hybrid-search/) covers merging the two result lists. The filter row is the one that can't be traded away, because an embedding score can't prove a record belongs to the current tenant.
 
-Retrieved documentation can say what that service supports. If they conflict, the application needs an explicit authority rule rather than one undifferentiated block of text.
+## How do you test RAG and memory together?
 
-### Build a bounded context and answer from evidence
+Test retrieval, answer use and memory writes as separate assertions, on queries captured from the agent mid-task. Each fixture holds the agent's goal and partial state at that step, the exact query it generated, and the records and access scope that should apply.
 
-The host selects the useful memory records and retrieved passages, labels their provenance, and fits them within a deliberate context budget. More retrieved text is not automatically safer.
+Retrieval checks ask whether expected records appear and forbidden ones stay out. Answer checks ask whether the model used that evidence and respected the stored constraints.
 
-Irrelevant passages compete with the records that actually answer the question.
+The write gets its own assertions about eligibility, support and expiry. A correct answer can produce no durable update at all, and the Pokémon runs suggest that is often the right outcome.
 
-The model can now answer from the selected evidence while respecting the durable constraints supplied by memory. Citations should point to source records, not to a memory summary unless that memory record is itself the evidence being discussed.
+## Should you use RAG, memory or both?
 
-### Make the memory write a separate decision
+Use RAG when the answer lives in a corpus, memory when state has to return later, and both when stored state shapes the question and outside evidence answers it. Storage comes last in that decision.
 
-An answer should not become durable memory merely because the model produced it. After the response, the application decides whether anything new is worth storing, which layer owns it, what source supports it, and when it expires.
+| The request needs | Use | Because |
+| --- | --- | --- |
+| Documentation, code, policy or another corpus | RAG | The answer can be checked against the selected records |
+| A preference, a prior outcome or a standing constraint | Memory | Something has to own inclusion, supersession, expiry and access |
+| Stored state to form the question and sources to answer it | The loop above | Each input keeps its own authority |
 
-Separating the write prevents retrieval noise and model wording from silently becoming future state. It also gives the system a clear boundary where validation, attribution, access control, and supersession rules can run.
+Mads Thines's [Agent memory needs its OpenTelemetry moment](https://www.lorekit.io/blog/open-agent-memory-format), from November 7, compares nine memory formats and reduces them to one idea: "a note an agent left for its future self, stored at some address, true for a while." The last four words are the definition of memory worth keeping, and they are the part no retriever supplies.
 
-## Hybrid retrieval for agent memory starts with asymmetric queries
+The same survey shows how little agreement there is on forgetting. Instruction files such as AGENTS.md forget only when a person edits them, and GitHub Copilot's repository facts are "Deleted after 28 days unused".
 
-### Agent queries come from partial task state
-
-A human usually phrases the missing information directly. An agent often forms a query while partway through a plan, using the observations and vocabulary available at that step.
-
-Consider a deployment record. A person might ask, "What were the deployment steps for this service?"
-
-An agent that has already attempted the deployment may ask, "What failed last time?" Both queries can need the same record, but their language and starting state differ.
-
-That is the retrieval asymmetry: the generated query and the stored record describe the same task from different positions. Evaluation data made only from polished human questions will not expose the mismatch.
-
-### Dense retrieval finds meaning while lexical retrieval protects exact terms
-
-Dense retrieval helps when the query and record use different words for the same idea. Lexical retrieval protects error codes, configuration keys, service names, and other identifiers that should match exactly.
-
-Anthropic's primary [Contextual Retrieval explanation](https://www.anthropic.com/engineering/contextual-retrieval) uses an error-code example to show this split. An embedding can return material about error codes and miss the exact code.
-
-BM25 can match the identifier.
-
-The site's [hybrid-search guide](/articles/hybrid-search/) covers how dense and lexical result lists can be combined without pretending their raw scores share one scale.
-
-For agent memory, the useful question is not whether dense or lexical search wins in general. It is whether their combined candidate set recovers the records required by the queries the agent actually forms.
-
-### Metadata filters enforce boundaries similarity cannot
-
-Some requirements are constraints, not relevance signals. Identity, service, event type, time, and access boundaries should be represented as typed fields and enforced before a result reaches the model.
-
-An embedding score cannot prove that a record belongs to the current tenant. A lexical match on a service name cannot prove that the record was valid during the requested time range.
-
-Search can rank candidates only after the host has applied the boundaries that must never be approximate.
-
-Hybrid retrieval for agent memory therefore uses dense search for semantic similarity, lexical search for exact terms, and metadata filters for enforceable scope.
-
-## Query transformation must match the kind of mismatch
-
-### HyDE moves a query toward document language
-
-[Hypothetical Document Embeddings, or HyDE](/glossary/hypothetical-document-embeddings-hyde/), asks a model to draft an answer-like passage and embeds that passage for retrieval. The extra language can bring a short or indirect query closer to the language used by stored documents.
-
-The hypothetical passage is a search representation, never evidence for the final answer. The system still has to retrieve real source records and ground its response in them.
-
-HyDE is useful when the query lacks the terms a relevant passage is likely to contain. It does not enforce tenant identity, dates, permissions, or other exact constraints.
-
-### Self-querying separates semantic text from typed constraints
-
-[Self-querying retrieval](/glossary/self-querying-retrieval/) parses a natural-language request into semantic search text and structured filters. A request for a tenant's failed deployments during a particular time range can keep the failure description in the search text while moving tenant, event type, service, and time into validated fields.
-
-The host should validate those fields against an allowed schema and the caller's permissions. The model can propose a filter, but it cannot grant itself access or invent a field the retrieval layer does not support.
-
-HyDE and self-querying solve different problems. HyDE shifts vocabulary toward document language.
-
-Self-querying moves exact boundaries out of fuzzy similarity and into enforceable structure. A pipeline can use either or both, but their outputs need different validation.
-
-## Evaluation has to reproduce production query formation
-
-### Capture the state present when each query is formed
-
-A useful retrieval fixture includes the agent's goal, the partial task state available at that step, the exact generated query, and the source records expected to satisfy it. Keeping only the final human-readable question removes the conditions that caused the agent to phrase the query as it did.
-
-The fixture should also retain the identity and access scope that governs the search. A result can be semantically relevant and still be wrong because it belongs to another user, service, event type, or time period.
-
-### Score retrieval and answer use separately
-
-Retrieval evaluation asks whether the expected records appear and whether forbidden records stay out. Answer evaluation asks whether the model uses the returned evidence correctly, preserves the memory constraints, and avoids treating a HyDE passage or generated query as a source.
-
-Those checks catch different failures. A strong answer cannot repair a missing source record, and high retrieval recall does not prove that the final response used the evidence rather than a plausible prior.
-
-Human-authored questions can supplement this set. They cannot substitute for agent-generated queries because they omit the partial task state that creates the asymmetry.
-
-### Test memory writes independently
-
-The same fixture can end with a proposed memory update, but that update needs its own assertions. The test should check whether the record is eligible for storage, whether it has a source, which layer owns it, and what would supersede or expire it.
-
-Separate assertions keep answer quality from becoming a proxy for memory quality. A correct answer may produce no durable update at all.
-
-## Choose the owner before choosing the storage
-
-### Use RAG when the request needs external evidence
-
-If the answer depends on documentation, code, policy, or another corpus, RAG owns the evidence-selection step. The retrieval implementation can be dense, lexical, filtered, reranked, or a combination of those methods.
-
-The important property is provenance: the final answer can be checked against the records selected for that request.
-
-### Use memory when state must survive or change
-
-If the application needs a preference, prior outcome, task constraint, or other state to return later, memory owns the lifecycle. Storage is only one part of that job.
-
-The application also needs inclusion, retrieval, supersession, expiry, deletion, and access rules.
-
-A vector index may help retrieve those records, but using vectors does not turn the memory layer into ordinary RAG.
-
-### Use the hybrid loop when one request needs both
-
-Many agent requests need durable state to form the right question and external evidence to answer it. Read scoped memory, retrieve sources with a query shaped by current task state, assemble a bounded context, answer from evidence, and evaluate any memory write separately.
-
-That sequence preserves the boundary even when both systems share infrastructure. RAG determines what evidence the model sees now.
-
-Memory determines what state is allowed to matter again later.
+That disagreement gives a practical test for any memory product, and Operator has an answer to it where the top-five-snippets pipeline has none. Ask what happens to a fact after it stops being true.
