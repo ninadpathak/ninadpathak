@@ -1,7 +1,7 @@
 # Narrated explainer for /articles/ai-memory-management/, imported by tools/import_video.py from
 # ninadpathak-video films/ai-memory-management (render of 2026-10-28T19:32:02+05:30).
 name: AI memory management in 40 seconds
-description: Why a large context window is not memory, why LRU eviction drops the facts that matter, and how scoring entries by task relevance and explicit user signals decides what an agent keeps.
+description: Why a large context window is not memory, why LRU eviction drops the facts that matter, and why an agent should protect the facts a user asked it to remember.
 upload_date: '2026-10-28T19:32:02+05:30'
 duration_seconds: 40
 width: 1920

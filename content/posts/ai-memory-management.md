@@ -1,515 +1,242 @@
 ---
 category: ai-engineering
 date: 2026-04-19
-description: 'A senior engineer''s breakdown of what memory management for LLMs actually
-  looks like in production: eviction strategies, KV cache management, importance-weighted
-  retention, and why your agent keeps forgetting things.'
+description: 'AI memory management for LLMs: the memory layers, who should decide what gets written, eviction and scope with runnable examples, and the smallest system worth building.'
 status: published
 work_note: Creation is only part of a memory API's documentation. Technical writer
   [Ninad Pathak](/contact/) explains correction and deletion too, including what a
   later request can still retrieve.
-title: 'AI Memory Management for LLMs: What Actually Works'
+title: 'AI Memory Management for LLMs: What Works'
 slug: ai-memory-management
 video: ai-memory-management
+updated: 2026-11-17
 ---
 
-Having a context window does not mean an LLM has memory. When I started building agentic pipelines in 2023, I watched junior engineers assume that a 128K token context meant their agent could "remember" previous interactions.
+AI memory management for LLMs is the set of decisions about what an application writes down, which scope each fact belongs to, when it loads into the context window and when it is replaced or dropped. A context window is a buffer for one request, so anything that has to outlive the window or the session needs those decisions made on purpose.
 
-It cannot. A 128K context is a static buffer, and what happens inside it is determined entirely by how you manage it.
-
-The moment you exceed that window, or the moment you need a customer support agent to recall what a user told it yesterday, you need an explicit memory system.
-
-Across production pipelines handling tens of thousands of agent sessions, I have shipped memory management layers, benchmarked eviction strategies, debugged summarization drift, and watched KV caches eat GPU memory faster than anything else. Here is what I have learned.
-
-<figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/ai-memory-management/memory-operations.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/ai-memory-management/memory-operations.narrow.svg" width="288" height="744"><img class="np-has-narrow" src="/static/images/diagrams/ai-memory-management/memory-operations.svg" width="720" height="520" alt="A new turn arrives in a full context window, and the memory layer has three moves: prioritize by importance so the most valuable records stay, compress older records into a smaller summary, or evict the lowest-value records from memory entirely." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Eviction, compression, and importance-weighted retention are separate policies, and each fails in its own way.</figcaption>
-</figure>
+The clearest account of what happens without them came from Drew Breunig, who is writing a handbook on context engineering. Breunig's [talk transcript, posted on October 24, 2026](https://www.dbreunig.com/2026/10/24/the-state-of-context-engineering.html), asks the audience who keeps memory switched on in ChatGPT or Claude and answers "I turn it off.", because with work and family projects in one account "The model will take notes on both, mix up those contexts, and the confusion grows from there."
 
 ## Memory hierarchy separates active context from persistent state
 
+Memory in an LLM system lives in two places: state the application stores and retrieves, and state the model holds while it processes one request. The first is explicit memory, the second is the attention state kept in the KV cache, and retrieval over a document corpus is a separate job that the [RAG vs memory](/articles/rag-vs-memory/) comparison covers.
+
 ### Explicit and implicit memory solve different constraints
 
-Every LLM agent operates with two distinct memory mechanisms. Calling them both "memory" causes confusion, so let me be precise.
+Explicit memory is whatever your application decides to keep between requests, such as session logs, extracted facts and notes a model wrote to a folder. Implicit memory is built inside a forward pass, and the only control you have over it is what you put in the context window.
 
-**Explicit memory** is managed by your application layer. You decide what to store, how to index it, and when to retrieve it.
+Anthropic's [The components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), from November 6, 2026, draws the same line from the other side. It defines agent memory as knowledge retained between sessions and excludes compaction, which it describes as "summaries written by Claude that replace its older turns so it can continue working in a new context window".
 
-Vector databases, key-value stores, session logs, and any custom retrieval layer you build all fall here. Explicit memory is where your agent's long-term knowledge lives between sessions, such as the fact that a particular user is on the enterprise plan and runs Postgres.
+The [Claude Code memory](/articles/claude-code-memory/) article shows one product's version of the explicit side.
 
-**Implicit memory** is what the model generates internally during a forward pass. As tokens flow through layers, the attention mechanism builds and maintains representations.
+Implicit memory is paid for in GPU memory, at 2 × layers × KV heads × head dimension × bytes per value for every token in the window. Meta's [Llama paper](https://arxiv.org/abs/2407.21783), from July 2024, lists 80 layers, a model dimension of 8,192, 64 attention heads and 8 key/value heads for its 70B model, which gives a head dimension of 128.
 
-The KV cache is the physical manifestation of implicit memory on GPU memory. You do not directly control what the model "remembers" within a forward pass, since the transformer's attention patterns determine that.
+At 16-bit precision that is 2 × 80 × 8 × 128 × 2 bytes, or 327,680 bytes per token, so a 128,000-token context holds about 42 GB of attention state for one sequence. Serving engines manage that with paging, and the [PagedAttention paper](https://arxiv.org/abs/2309.06180) of September 2023, which introduced vLLM, reports "near-zero waste in KV cache memory".
 
-You only control what enters the context window.
+That layer belongs to the serving engine, and the [LLM inference optimization guide](/articles/llm-inference-optimization/) covers sizing it. The application's lever is a smaller context, which is what the explicit layers are for.
 
-The distinction matters because different strategies apply to each type. You can build sophisticated explicit memory layers, but if you ignore implicit memory management, you will still hit performance walls when the KV cache balloons during long inference runs.
+### The five layers answer five memory questions
 
-See also: [How Memory Works in Claude Code](/articles/claude-code-memory/).
+This page splits explicit memory into five layers: an input buffer, working context, episodic memory, semantic memory and procedural memory.
 
-### Five layers answer five different memory questions
+| Layer | Question it answers | Typical lifetime |
+| --- | --- | --- |
+| Input buffer | What just arrived? | One step |
+| Working context | What does the current step need? | One task |
+| Episodic memory | What happened, and when? | Until superseded or expired |
+| Semantic memory | What is known to be true? | Until a newer fact replaces it |
+| Procedural memory | How should the agent act here? | Until the rule changes |
 
-The Atkinson-Shiffrin model separates sensory input, short-term storage, and long-term storage. An agent system needs a more operational version of that hierarchy: a sensory input buffer for the current event, working context for active reasoning, episodic memory for what happened, semantic memory for what is known, and procedural memory for how the agent should act.
-
-Each layer answers a different question. The input buffer asks what just arrived, working context asks what the current step needs, episodic memory records what happened, semantic memory holds facts that remain valid, and procedural memory defines how the system may act.
+The [short-term memory guide](/articles/short-term-agent-memory/) covers the first two layers, and [agent memory in 2026](/articles/agent-memory-2026/) surveys products across all five.
 
 ### Inclusion, retrieval, and lifecycle need separate policies
 
-An inclusion policy decides whether an observation should move beyond the input buffer or working context. Source authority, subject, scope, and expected future use belong in that decision.
+An inclusion policy decides whether an observation leaves the input buffer at all. A tool's progress message can expire with the step, and a user-approved deployment constraint deserves an attributed record.
 
-For example, a tool's progress message can expire with the current step, while a user-approved deployment constraint may deserve an attributed persistent record. Storing both without a selection rule turns raw activity into durable memory.
+A retrieval policy filters by subject, scope and time before it ranks by similarity. A lifecycle policy covers supersession, expiry, eviction and deletion, and it should keep a path back to the original record when a summary might support a consequential decision.
 
-A retrieval policy starts with the layer that owns the question. Episodic recall filters by subject, session, and time before semantic similarity, while semantic memory also needs validity and version constraints.
+## Who should decide what gets written?
 
-A lifecycle policy defines promotion, supersession, expiry, eviction, deletion, and compression. Compression should retain the original record or a path back to it when the result may support a consequential decision.
+With a frontier model, the model should decide what to write and the application should decide scope and lifecycle. Anthropic's post says "it helps to tell Claude what memory is for, but not how to use it", and its evidence is a rule test on the CL-Bench benchmark.
 
-Keeping these jobs separate makes failures traceable. The system can show whether a bad result came from admitting the wrong record, retrieving outside its scope, or retaining it after it became stale.
+When the researchers imposed a fixed rule to record only failures, "both Opus 5 and Opus 4.7 lost much of the performance boost that memory gave them". The same post reports the opposite for an older model: prompting Sonnet 4.6 to read its memory files and test its theories "nearly doubled its benchmark score".
 
-## Eviction strategies decide what gets kicked out first
+My reading is that hand-written write rules belong with smaller or older models and with stores no model curates. Anthropic's post doesn't test that directly: it shows a fixed rule hurting strong models and steering helping a weaker one read and test its notes.
 
-When your memory buffer fills, something has to go. The strategy you choose determines what your agent loses and how gracefully it degrades.
+The earlier version of this page presented scoring every entry as the default, and for current frontier models the sources no longer support that.
 
-That decision needs more than an age check. Agent memory has to balance recency against task relevance and explicit instructions about what must survive.
+What stays with the application in every case is the part a model can't see from inside one session: which user and project a fact belongs to, what it replaces, and who can read it back.
 
-### LRU is simple, predictable, and wrong for agents
+## Eviction, compression and retention decide what stays
 
-Least Recently Used (LRU) is the default eviction strategy for most caching systems. It tracks when each memory entry was last accessed and evicts the oldest one when space runs out.
+Retention should protect what a person asked the system to keep, let recency sort the rest, and compress before it deletes. Least recently used (LRU) eviction alone fails for agents because the fact that matters is often the oldest one in the buffer.
 
-LRU is fast to implement and O(1) for lookups, which makes it attractive.
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/ai-memory-management/memory-operations.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/ai-memory-management/memory-operations.narrow.svg" width="288" height="744"><img class="np-has-narrow" src="/static/images/diagrams/ai-memory-management/memory-operations.svg" width="720" height="520" alt="A new turn arrives in a full context window, and the memory layer has three moves: prioritize what a person asked to keep so those records stay, compress older records into a smaller summary, or evict the lowest-value records from memory entirely." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Keeping what someone asked for, compressing older records and evicting the rest are separate policies, and each fails in its own way.</figcaption>
+</figure>
 
-Here is a basic LRU implementation for a memory buffer:
+The example below runs the same four-entry session twice through a buffer one slot too small. The deployment region is written first and marked as pinned, which is the "remember this" case, and the greeting is touched again before the last write.
 
 ```python
 from collections import OrderedDict
-from typing import Any, Optional
 
-class LRUMemoryBuffer:
-    def __init__(self, capacity: int):
+
+class Buffer:
+    """A bounded memory buffer. Pinned entries are never evicted."""
+
+    def __init__(self, capacity, respect_pins):
         self.capacity = capacity
-        self.store = OrderedDict()
+        self.respect_pins = respect_pins
+        self.entries = OrderedDict()  # key -> (text, pinned), least recently used first
 
-    def get(self, key: str) -> Optional[Any]:
-        if key in self.store:
-            self.store.move_to_end(key)
-            return self.store[key]
-        return None
+    def put(self, key, text, pinned=False):
+        if key not in self.entries and len(self.entries) >= self.capacity:
+            self._evict()
+        self.entries[key] = (text, pinned)
+        self.entries.move_to_end(key)
 
-    def put(self, key: str, value: Any) -> None:
-        if key in self.store:
-            self.store.move_to_end(key)
-            self.store[key] = value
-            return
-        if len(self.store) >= self.capacity:
-            self.store.popitem(last=False)
-        self.store[key] = value
+    def touch(self, key):
+        self.entries.move_to_end(key)
+
+    def _evict(self):
+        for key, (_, pinned) in self.entries.items():
+            if not (self.respect_pins and pinned):
+                del self.entries[key]
+                return
+        raise RuntimeError("every entry is pinned; raise capacity or unpin something")
+
+
+def session(buffer):
+    buffer.put("region", "Deploy region is eu-west-1", pinned=True)
+    buffer.put("greeting", "User said good morning")
+    buffer.put("weather", "User mentioned rain")
+    buffer.touch("greeting")  # the small talk comes up again
+    buffer.put("lunch", "User is back from lunch")
+    return list(buffer.entries)
+
+
+print("plain LRU:  ", session(Buffer(capacity=3, respect_pins=False)))
+print("with pins:  ", session(Buffer(capacity=3, respect_pins=True)))
+
+full = Buffer(capacity=1, respect_pins=True)
+full.put("region", "Deploy region is eu-west-1", pinned=True)
+try:
+    full.put("lunch", "User is back from lunch")
+except RuntimeError as error:
+    print("all pinned: ", error, "| still holds", list(full.entries))
 ```
 
-LRU fails for agents because recency has nothing to do with importance. The most relevant memory for the current task might be from six sessions ago.
+Running it with `python3 mem_evict.py` prints which entries survive.
 
-Picture an agent that handled a flurry of small talk this morning and learned a load-bearing detail last Tuesday, like the user's deployment region. LRU will keep the small talk and evict the region, because the region has not been touched recently even though it decides every answer the agent gives next.
-
-### A sliding window can carry importance signals
-
-A better approach for agents combines a sliding window with importance signals. Each memory entry carries a score derived from relevance to the current task context, frequency of access across sessions, and explicit user signals (e.g., "remember this").
-
-```python
-import time
-from dataclasses import dataclass
-from typing import Dict, List
-
-@dataclass
-class MemoryEntry:
-    key: str
-    value: any
-    importance_score: float
-    last_accessed: float
-    access_count: int
-    created_at: float
-
-class ImportanceWeightedBuffer:
-    def __init__(self, capacity: int, decay_factor: float = 0.95):
-        self.capacity = capacity
-        self.decay_factor = decay_factor
-        self.entries: Dict[str, MemoryEntry] = {}
-
-    def _compute_relevance(self, entry: MemoryEntry, current_context: str) -> float:
-        base_score = entry.importance_score
-        recency_bonus = 1.0 / (1.0 + (time.time() - entry.last_accessed) / 3600)
-        frequency_boost = min(entry.access_count / 10.0, 1.0)
-        return base_score * recency_bonus * self.decay_factor + frequency_boost
-
-    def evict_worst(self, current_context: str) -> None:
-        if len(self.entries) < self.capacity:
-            return
-        scored = [
-            (key, self._compute_relevance(e, current_context))
-            for key, e in self.entries.items()
-        ]
-        scored.sort(key=lambda x: x[1])
-        worst_key = scored[0][0]
-        del self.entries[worst_key]
-
-    def put(self, key: str, value: any, importance: float = 0.5) -> None:
-        now = time.time()
-        if key in self.entries:
-            e = self.entries[key]
-            e.value = value
-            e.last_accessed = now
-            e.access_count += 1
-            e.importance_score = max(e.importance_score, importance)
-        else:
-            self.entries[key] = MemoryEntry(
-                key=key,
-                value=value,
-                importance_score=importance,
-                last_accessed=now,
-                access_count=1,
-                created_at=now
-            )
-        self.evict_worst(current_context="")
+```text
+plain LRU:   ['weather', 'greeting', 'lunch']
+with pins:   ['region', 'greeting', 'lunch']
+all pinned:  every entry is pinned; raise capacity or unpin something | still holds ['region']
 ```
 
-Notice the `decay_factor`. Memory that is not reinforced decays over time, the way a phone number you looked up once and never dialed slips away while one you call weekly stays sharp.
+Plain LRU kept the small talk, because it had been used more recently, and dropped the region. The pinned version kept the region, and when every slot is pinned it refuses the new write and leaves the buffer as it was, which is the signal to raise capacity.
 
-That decay keeps old, stale entries from dominating the buffer indefinitely.
+Compression is the step before deletion. It keeps a shorter stand-in for older material, and summarizing old turns is the common form, the one Anthropic's definition of compaction above describes.
 
-For more on how different agent frameworks handle eviction, see [How Memory Works in HyperAgents](/articles/hyperagents-memory/).
+Anthropic's [compaction documentation](https://platform.claude.com/docs/en/build-with-claude/compaction) gives the reason to do it early: it "keeps the active context small, because response quality degrades as a conversation grows." A summary of a summary loses detail the next pass can't recover, so keep the original record or a pointer to it.
 
-## KV cache management controls the implicit-memory budget
-
-### Token history becomes stored attention state
-
-Where most engineers get surprised is the KV cache. Attention mechanisms store key and value tensors for every token position in every layer.
-
-For a 4K context, you are caching 4,000 positions across 32 to 96 layers (depending on your model). For a 128K context, that number explodes.
-
-A 70B parameter model running on 8xA100 with a full 128K context can dedicate 40GB+ of GPU memory just to the KV cache, and that is before you load the model weights. Engineers at mistral.cc and meta's Llama team have published benchmarks showing KV cache consuming 60-70% of available GPU memory during long-context inference.
-
-### Paged attention changes the allocation
-
-vLLM introduced paged attention in 2023, and it reworked how the KV cache spends memory. Rather than pre-allocating a contiguous block for the full context, paged attention manages the KV cache in fixed-size pages (typically 16 tokens per page), the same trick an operating system uses to hand a process virtual pages instead of one giant contiguous slab.
-
-The cache grows and shrinks dynamically without fragmentation.
-
-```python
-# Conceptual example of how paged attention reduces memory waste
-# Real implementation lives in vLLM's BlockManager
-
-class PagedKVCache:
-    def __init__(self, block_size: int = 16, max_blocks: int = 8192):
-        self.block_size = block_size
-        self.max_blocks = max_blocks
-        self.blocks: Dict[int, torch.Tensor] = {}
-        self.block_refcount: Dict[int, int] = {}
-
-    def append(self, physical_block_id: int, kv_data: torch.Tensor):
-        assert kv_data.shape[0] <= self.block_size
-        self.blocks[physical_block_id] = kv_data
-        self.block_refcount[physical_block_id] = 1
-
-    def evict_least_referenced(self) -> int:
-        lru_block = min(self.block_refcount, key=self.block_refcount.get)
-        if self.block_refcount[lru_block] == 0:
-            del self.blocks[lru_block]
-            del self.block_refcount[lru_block]
-            return lru_block
-        return None
-```
-
-The memory savings are real. With paged attention, you typically see 30-50% reduction in KV cache memory usage compared to contiguous allocation, because you only use what you need.
-
-For agents running long conversations, this means you can fit 2-3x more tokens in the same GPU memory budget.
-
-Nvidia's TensorRT-LLM also handles KV cache management aggressively. It pre-allocates a memory pool and dynamically assigns cache segments to new token positions.
-
-Running inference without TensorRT-LLM or vLLM almost certainly means you are wasting GPU memory you already paid for, often enough to force a smaller batch size or a bigger box than the workload needs.
-
-## Compression and summarization shrink what stays
-
-Eviction is not always an option. When the memory is genuinely important and you need to keep it but cannot afford the full space, compression and summarization step in.
-
-Both methods save capacity by discarding information, so the choice depends on which errors the workload can tolerate and which facts must remain exact.
-
-### Text summarization trades detail for space
-
-Summarizing older memory entries before they fill your buffer is the simplest approach. If you have 50 interactions from the last week and room for only 10, you compress the 50 into 10 dense entries that preserve the facts and patterns, the way you would turn a week of standup notes into a few bullet points before a planning meeting.
-
-```python
-from openai import OpenAI
-
-client = OpenAI()
-
-def summarize_memory_entries(entries: List[str], target_count: int = 10) -> List[str]:
-    if len(entries) <= target_count:
-        return entries
-    
-    # Group entries by topic/thread
-    grouped = {}
-    for entry in entries:
-        topic = extract_topic(entry)
-        if topic not in grouped:
-            grouped[topic] = []
-        grouped[topic].append(entry)
-    
-    summaries = []
-    for topic, topic_entries in grouped.items():
-        prompt = f"""Summarize the following memory entries about {topic}.
-Preserve all facts, decisions, and preferences mentioned.
-Output a single coherent summary:
-
-Entries:
-{chr(10).join(topic_entries)}"""
-        
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.3
-        )
-        summaries.append(response.choices[0].message.content)
-    
-    return summaries
-```
-
-Semantic drift is the problem with summarization. Each round loses some information, and summarizing a summary is like photocopying a photocopy until the text turns to mush.
-
-You need to track summarization depth and either block re-summarization of already-summarized entries or store the original version alongside the summary.
-
-### Embedding compression trades precision for space
-
-[Product quantization](/glossary/product-quantization/) compresses the embeddings used for retrieval. Keep the original memory text and its attribution separately when they are needed to verify a recalled claim.
-
-Compressing at the embedding level is another option. Rather than storing full text, you store a compressed representation of the semantic meaning.
-
-Techniques like product quantization (PQ) or residual quantization can shrink 768-dimensional embeddings from 3KB per vector down to 50-100 bytes with acceptable recall degradation.
-
-```python
-import numpy as np
-from sklearn.decomposition import PCA
-
-class CompressedMemoryStore:
-    def __init__(self, original_dim: int = 768, compressed_dim: int = 64):
-        self.compressed_dim = compressed_dim
-        self.pca = PCA(n_components=compressed_dim)
-        self.memory_vectors: List[np.ndarray] = []
-        self.memory_texts: List[str] = []
-
-    def compress_and_store(self, text: str, embedding: np.ndarray) -> None:
-        compressed = self.pca.fit_transform([embedding])[0]
-        self.memory_vectors.append(compressed)
-        self.memory_texts.append(text)
-
-    def retrieve_compressed(self, query_embedding: np.ndarray, top_k: int = 5):
-        query_compressed = self.pca.transform([query_embedding])[0]
-        similarities = [
-            np.dot(query_compressed, v) / (np.linalg.norm(query_compressed) * np.linalg.norm(v))
-            for v in self.memory_vectors
-        ]
-        top_indices = np.argsort(similarities)[-top_k:][::-1]
-        return [(self.memory_texts[i], similarities[i]) for i in top_indices]
-```
-
-Retrieval-heavy workloads where you care about semantic similarity more than exact text recall are a good fit for this. For factual memory (names, dates, configuration values like a webhook URL or a port number), embedding compression introduces error rates I would never ship, since "remembering" a port as 5433 instead of 5432 is worse than not remembering it at all.
-
-For voice agents specifically, see [Memory for Voice AI Agents](/articles/voice-agent-memory/) where compression latency becomes critical due to real-time constraints.
+Vector stores have their own version in [product quantization](/glossary/product-quantization/), which stores smaller approximate vectors and gives up some precision in what similarity search returns.
 
 ## Letta and MemGPT make memory tiers explicit
 
-Letta (formerly MemGPT) is the most widely used open-source system for managing LLM memory beyond the context window. Having deployed it across several production pipelines, I can tell you what actually happens when you run it.
+Letta, the project its [repository](https://github.com/letta-ai/letta) says was formerly known as MemGPT, names the tiers as memory blocks, stored messages and archival memory. Its [documentation](https://docs.letta.com/guides/agents/memory) says attached memory blocks "are in-context (pinned to the system prompt)", and that the agent edits them through memory tools.
 
-Multiple memory tiers are how Letta works: a "core memory" that stays in the context window at all times, a "recent memory" retrieved dynamically based on relevance, and an "archive memory" stored externally and retrieved only when specifically queried. It behaves like the desk-drawer-shelf split most people use without thinking, where the few things you need every minute stay on the desk and the rest gets filed away until you go looking for it.
+Messages that fall out of the window are kept: "The Letta API stores all messages, so even after a compaction / eviction, an agent's old messages are still retrievable". The third tier is [archival memory](https://docs.letta.com/guides/agents/archival-memory), "a semantically searchable database where agents can store facts, knowledge, and information for long-term retrieval."
 
-```python
-# Simplified Letta-style memory management
-class LettaMemoryManager:
-    def __init__(self, core_memory_limit: int = 8192, recent_memory_limit: int = 32_000):
-        self.core_memory = []
-        self.core_limit = core_memory_limit  # tokens
-        self.recent_memory = []
-        self.recent_limit = recent_memory_limit
-        self.archive = []
-        
-    def update_core(self, new_content: str, current_tokens: int) -> None:
-        estimated_tokens = len(new_content.split()) * 1.3
-        if current_tokens + estimated_tokens > self.core_limit:
-            # Evict lowest priority from core
-            evicted = self._evict_lowest_priority(self.core_memory)
-            self.archive.append(evicted)
-        
-        self.core_memory.append({
-            "content": new_content,
-            "priority": 1.0,
-            "timestamp": time.time()
-        })
-    
-    def retrieve_relevant(self, query: str, embedding_model) -> List[dict]:
-        query_emb = embedding_model.encode(query)
-        scored = []
-        for entry in self.recent_memory:
-            sim = cosine_similarity(query_emb, entry["embedding"])
-            scored.append((entry, sim))
-        scored.sort(key=lambda x: x[1], reverse=True)
-        return [s[0] for s in scored[:10]]
-    
-    def _evict_lowest_priority(self, memory_list: List[dict]) -> dict:
-        # Priority decays over time
-        for entry in memory_list:
-            age_hours = (time.time() - entry["timestamp"]) / 3600
-            entry["priority"] *= (0.9 ** age_hours)
-        memory_list.sort(key=lambda x: x["priority"])
-        return memory_list.pop(0)
-```
-
-The core memory limit forces real decisions about what matters. You cannot cheat and say "we will fit everything."
-
-Engineers coming from traditional software backgrounds, where you just add another index or a bigger disk, tend to fight this for a week before it clicks. Memory management in LLM agents is the discipline of deciding what to forget, not the discipline of storing everything.
-
-For a comparison with other agent frameworks, see [How Memory Works in DeerFlow](/articles/deerflow-memory/) and [Short-Term Memory for AI Agents](/articles/short-term-agent-memory/).
+Other frameworks draw the tiers in different places, and the [DeerFlow](/articles/deerflow-memory/), [HyperAgents](/articles/hyperagents-memory/) and [voice agent](/articles/voice-agent-memory/) memory articles walk through other designs.
 
 ## Forgetting has four distinct failure modes
 
-The forgetting problem is the difference between what you want your agent to remember and what it actually retains across interactions. Calling it a single problem hides the truth, since it is really a stack of related failures.
+Memory fails by not finding a fact, by attaching it to the wrong scope, by keeping it after it stopped being true, or by loading facts that contradict each other.
 
-The remedy depends on where the memory lost its meaning or scope.
+| Failure | What it looks like | Guard |
+| --- | --- | --- |
+| Retrieval | The fact exists and the query never surfaces it | Filter by scope and time before similarity |
+| Scope | A work detail appears in a personal chat | Address every fact by user and project |
+| Temporal decay | An expired fact is still returned as current | Supersede on write, and expire what nobody confirms |
+| Contamination | Incompatible facts load together | Keep one current value per key, with history kept apart |
 
-### Retrieval fails before the store is queried
-
-Retrieval failure happens when the agent needs a memory but does not query for it. The storage layer is fine, and the entry is sitting right there.
-
-What broke is the trigger: the agent must decide to look for relevant memory before it can retrieve it, and with poor trigger logic it operates blind, answering a question about last month's invoice without ever checking the billing notes it already saved.
-
-### Attribution fails when identity or session scope is lost
-
-Attribution failure happens when the agent retrieves a memory but cannot correctly attribute the information. It knows someone asked for a refund but pins it to the wrong account, or recalls a deployment preference and applies it to a different user entirely.
-
-Thin metadata on memory entries is the usual cause. A useful record carries the subject, source, session, write time, and validity window so retrieval can reject a plausible memory that belongs to the wrong user or the wrong session.
-
-Semantic similarity cannot enforce those boundaries by itself. Scope filters belong in the memory query, before the retrieved material reaches the model.
-
-### Temporal decay leaves expired facts active
-
-Temporal decay failure happens when memory entries survive too long without reinforcement. Over time, they drift semantically as you swap the embedding model or as related context shifts under them.
-
-The memory technically exists, but the meaning has warped, like a note that says "the new pricing" two years after the pricing changed again.
-
-### Context contamination surfaces incompatible memories together
-
-Context contamination happens when retrieved memories contradict each other. Say the agent learned "user prefers dark mode" in session 3 and "user prefers light mode" in session 7, and both surface together.
-
-It now holds a conflict it must resolve, and absent explicit conflict resolution logic, it typically grabs the most recent entry and silently drops the older one, which is wrong as often as it is right.
-
-Here is a conflict resolution module I have used in production:
+Breunig's complaint is the scope failure. The store below addresses each fact by scope and key, replaces a value when a newer one arrives, and keeps what it replaced in a separate history.
 
 ```python
-class MemoryConflictResolver:
-    def resolve(self, memories: List[MemoryEntry]) -> List[MemoryEntry]:
-        if len(memories) <= 1:
-            return memories
-        
-        # Group by fact type (simplified - real implementation needs NER)
-        fact_groups: Dict[str, List[MemoryEntry]] = {}
-        for mem in memories:
-            key = extract_key_fact(mem.content)
-            if key not in fact_groups:
-                fact_groups[key] = []
-            fact_groups[key].append(mem)
-        
-        resolved = []
-        for group in fact_groups.values():
-            if len(group) == 1:
-                resolved.append(group[0])
-            else:
-                # Prefer: explicit user correction > recent high confidence > aggregate
-                explicit_corrections = [g for g in group if g.is_user_correction]
-                if explicit_corrections:
-                    resolved.append(explicit_corrections[0])
-                else:
-                    # Weighted recency
-                    scored = [(g, g.confidence * recency_weight(g)) for g in group]
-                    scored.sort(key=lambda x: x[1], reverse=True)
-                    resolved.append(scored[0][0])
-        
-        return resolved
+from datetime import date
+
+
+class MemoryStore:
+    """Facts are addressed by (scope, key). A new write supersedes the old one."""
+
+    def __init__(self):
+        self.current = {}
+        self.history = []
+
+    def write(self, scope, key, value, source, on):
+        old = self.current.get((scope, key))
+        if old:
+            self.history.append({**old, "superseded_on": on})
+        self.current[(scope, key)] = {"scope": scope, "key": key, "value": value, "source": source, "written_on": on}
+
+    def read(self, scope):
+        return {key: fact["value"] for (s, key), fact in self.current.items() if s == scope}
+
+
+store = MemoryStore()
+store.write("work/billing-api", "database", "Postgres 15", "session 12", date(2026, 9, 1))
+store.write("home/robot-kit", "language", "MicroPython", "session 13", date(2026, 9, 2))
+store.write("work/billing-api", "database", "Postgres 17", "session 40", date(2026, 11, 3))
+
+print("work scope:", store.read("work/billing-api"))
+print("home scope:", store.read("home/robot-kit"))
+print("superseded:", [(h["value"], str(h["superseded_on"])) for h in store.history])
 ```
 
-For a broader view of how the industry is addressing this, see [State of AI Agent Memory 2026](/articles/agent-memory-2026/).
+Running it with `python3 mem_scope.py` shows each scope reading only its own facts.
 
-## RAG and memory answer different questions
+```text
+work scope: {'database': 'Postgres 17'}
+home scope: {'language': 'MicroPython'}
+superseded: [('Postgres 15', '2026-11-03')]
+```
 
-### RAG retrieves document-shaped knowledge
-
-RAG and explicit memory management solve different problems, and conflating them causes architecture problems.
-
-RAG (Retrieval Augmented Generation) answers specific questions by searching a large document corpus. You have a question, you retrieve relevant documents, you include them in the context.
-
-RAG is optimized for question answering against large external knowledge bases.
-
-Memory management answers a different question: "what does this agent know about this user, session, or context?" Memory maintains a running model of state that the agent uses to behave consistently across time, the way a good waiter remembers you are allergic to shellfish without you re-explaining it every course.
-
-[RAG vs Memory](/articles/rag-vs-memory/) goes deep on this distinction. Storing documentation to answer questions calls for RAG.
-
-### Episodic recall needs attribution and persistence
-
-Storing interaction history to maintain identity and continuity calls for memory management. An episodic record must preserve who or what the observation concerns, which session produced it, and whether a later event replaced it.
-
-RAG alone does not create that record or carry it across sessions. Production systems usually need semantic retrieval for document-shaped knowledge alongside explicit episodic storage for events, preferences, and state that the agent learned while acting.
+A note can also be wrong from the moment it is written, which no write rule catches. Anthropic's post describes a repair pass that checks notes against the original transcripts, and Breunig expects the problem to grow: "Over time, overly precise memories become conflicted and messy, and nobody has yet figured out how to handle this."
 
 ## A practical implementation starts with session state
 
-Building a production agent today with no memory management layer, you want this minimum viable implementation order.
+Build the smallest version in this order, and add a layer only when its absence causes a failure you can name.
 
-Session-scoped memory comes first. Capture the current session's conversation history and make it available to the agent in every turn.
-
-Do not rely on the context window to preserve it naturally. Store it explicitly in a session store and inject it at each turn.
-
-Cross-session memory for user preferences and facts comes next. When the user says "I prefer Python over Java," store that as a preference entry with high importance and retrieve it at session start.
-
-A lightweight eviction strategy belongs in the build before you hit overflow problems. Waiting until you are at 95% context utilization to add eviction is how a demo that worked all week falls over in the first long customer session.
-
-Design it on day one.
-
-Watch your retrieval hit rate, the percentage of memory queries that return something useful. A hit rate below 60% points at retrieval logic, not the storage layer, and rebuilding the database when the query trigger is the culprit wastes a week.
-
-Production-grade memory management is genuinely involved as a full architecture. The minimum viable version, though, is achievable in a sprint, and it fixes the most common failure mode I see with LLM agents in production.
+1. **Store session state explicitly.** Keep the conversation in a session store and inject it each turn.
+2. **Scope every durable fact.** Address facts by user and project before you store the first one.
+3. **Let the model write, and tell it why.** Give a frontier model a memory folder and a statement of what memory is for.
+4. **Supersede on write.** Replace the current value and keep the old one in history.
+5. **Add eviction before the first long session.** Protect what users asked to keep, and let recency sort the rest.
+6. **Make the store readable.** Someone has to be able to see what was saved and delete it.
 
 ## FAQ
 
 **How does context window size affect memory management decisions?**
 
-A larger context window delays the need for aggressive eviction, and it raises KV cache pressure and inference latency at the same time. A 200K context window gives you more room to breathe, yet it does nothing for cross-session continuity, because that window starts empty when the user's next session opens the following morning.
-
-You still need explicit memory management to carry anything across that boundary.
+A larger window delays the point where something has to be dropped, and it does not decide what is still true or whose fact it is. The KV cache cost also grows with every token kept in the window.
 
 **What is the difference between memory and context?**
 
-Context is whatever sits in the model's input buffer right now. Memory is what you have stored outside the model to retrieve later.
-
-Context resets between sessions, and memory persists. That single split drives nearly every architectural decision in agent design.
+Context is what the model reads during one request. Memory is state the application keeps across requests and chooses to load into that context.
 
 **How often should memory entries be summarized?**
 
-Summarization should happen when you approach 70-80% of your active buffer capacity. Do not wait for overflow.
-
-Summarize early and summarize incrementally. Avoid multi-level summarization chains where you summarize a summary.
-
-Store original entries alongside summaries and use the summary only when the original is archived.
+Summarize before the context is full, on a trigger you choose. Anthropic's compaction documentation describes two modes, on demand and "when input tokens reach the trigger you set", and recommends "Use on-demand compaction wherever it is available."
 
 **Can I use Redis for LLM memory management?**
 
-Yes, Redis works well for explicit memory storage at small to medium scale. For vectors, use Redis Stack with the SEARCH module.
-
-For session state, use standard Redis key-value with TTLs. At very high session counts (100K+ simultaneous), Redis becomes a bottleneck and dedicated stores like Cassandra or DynamoDB perform better.
-
-The memory management logic is the same regardless of the backing store.
+Yes. A key-value store is enough for session state and for scoped facts like the example above, and for similarity retrieval Redis's [vector search documentation](https://redis.io/docs/latest/develop/ai/search-and-query/vectors/) says "Redis stores vectors and metadata in hashes or JSON objects" and "Redis supports FLAT, HNSW and SVS-VAMANA vector index types."
 
 **How do I prevent my agent from retrieving contradictory memories?**
 
-Build a conflict resolution layer that detects factual contradictions in retrieved memories and resolves them before injecting into context. Key signals: recency, explicit user correction flags, confidence scores from the embedding retrieval system.
-
-See the MemoryConflictResolver code above for a production-ready implementation pattern.
+Keep one current value per scope and key, supersede on write, and store history apart from what gets loaded. The `MemoryStore` example above is that pattern in its smallest form.
 
 **What causes the "hallucinated memory" problem where the agent invents facts?**
 
-Hallucinated memories occur when the agent generates factual statements about past interactions that never happened, like confidently telling a user they upgraded last month when they never did. The root cause sits in model behavior rather than your memory layer.
-
-A generated claim with no supporting stored record needs a different diagnosis from a retrieval failure, where the record exists but was not fetched. Attribution failure is different again: the retrieved record belongs to another subject or session.
-
-Verify recalled claims against stored evidence before accepting them. Prompt wording alone cannot establish whether an interaction happened.
+A model asked to recall something with no stored record can produce a plausible one. Verify recalled claims against stored evidence before accepting them, because prompt wording alone cannot establish whether an interaction happened.
