@@ -16,6 +16,11 @@
     "doc*",
     "core"
   ],
+  "coding-models-new-code-vs-change": [
+    "core",
+    "loop*",
+    "doc check"
+  ],
   "agent-design-space": [
     "reader",
     "loop*",
