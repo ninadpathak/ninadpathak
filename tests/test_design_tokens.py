@@ -34,8 +34,6 @@ RAW_SPACING_EXCEPTIONS = {
     ("main.css", "margin-top: 3.25rem"),          # .post-content h3
     ("main.css", "margin-top: 2.25rem"),          # .post-content h4
     ("main.css", "margin: 0.8rem 5% 0"),          # .visual-caption
-    ("main.css", "margin-top: 0.45rem"),          # .task-status-dot optical alignment
-    ("main.css", "margin-top: 0.15rem"),          # .task-badge optical alignment
 }
 RAW_LINE_HEIGHT_EXCEPTIONS = {
     ("main.css", "0"),      # .tcard-quote::before decorative glyph
