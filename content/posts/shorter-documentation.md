@@ -1,193 +1,108 @@
 ---
 category: technical-documentation
 date: 2026-04-04
-description: I think technical docs are often too long for the wrong reasons. Here’s
-  why shorter docs usually work better, and where longer docs still earn their keep.
+description: 'Why shorter technical documentation works better, why AI-written docs run long, how to cut a page without losing detail, and when length is earned.'
 status: published
 work_note: When a retry instruction is buried under background reading, technical
   writer [Ninad Pathak](/contact/) edits the page around that decision while preserving
   the conditions that make the instruction safe to follow.
 title: The Case for Shorter Technical Documentation
-updated: 2026-08-17
+updated: 2026-11-16
 slug: shorter-documentation
 ---
 
-Technical documentation often suffers from information obesity. Fearing the support ticket that an omission might trigger, teams expand a manual to cover every possible edge case.
+Simon Willison wrote on November 9 about [hiding agent-written pull request descriptions behind a details tag](https://simonwillison.net/2026/Nov/9/details-summary/). The descriptions are accurate and thorough, and the reaction the post reports is one I've had to agent-written text all year: "I'm not reading all of that".
 
-Reviewers pile on historical context that serves internal egos rather than reader outcomes. A writer who inherits a sprawling legacy page tends to append a new section without restructuring the old ones, and the page grows another ring like a tree.
+Shorter documentation works better because a reader arrives with one task, and every sentence that doesn't serve it is something they have to read past and you have to keep true. Willison's fix applies that to pull requests by keeping the full text one click away and choosing an opening that is "the shortest text a human can read that will help get them up to speed."
 
-Shorter documentation respects the reader's cognitive limits, which is why I keep arguing for it. Someone opening a page on rate limits wants the limit and the retry header, not three paragraphs admiring the author's thoroughness.
+That was the argument before 2026 too. What changed this year is what a long page says about its author.
 
-Excessive length forces the reader to do the work the writer should have done, which is separating the essential from the incidental.
+## Why is shorter technical documentation better?
 
-**Short answer:** Shorter documentation improves success rates by narrowing scope and surfacing answers early. Good docs use progressive disclosure to defer complex details to secondary layers.
-
-Keeping pages brief and modular cuts both maintenance cost and localization errors. Longer formats remain necessary for formal specifications and migration guides, and even those need rigid structural discipline to stay usable.
-
-## Shorter docs manage cognitive load effectively
-
-Cognitive Load Theory (CLT) defines the mental effort required to process information. Research from 2020 to 2025 identifies three types of load: intrinsic, extraneous, and germane.
-
-Intrinsic load is the inherent difficulty of the technical task, like reasoning about an OAuth refresh flow. Extraneous load is the mental energy wasted on poor documentation design, such as a wall-of-text paragraph or a navigation scheme where the auth section sits four clicks from the quickstart that depends on it.
+Shorter documentation is better because it spends the reader's attention on the task and leaves you fewer sentences to keep accurate. Cognitive load theory has a name for the waste, extraneous load, which is effort spent decoding the page that should have gone to the work.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/shorter-documentation/cognitive-load.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/shorter-documentation/cognitive-load.narrow.svg" width="288" height="440"><img class="np-has-narrow" src="/static/images/diagrams/shorter-documentation/cognitive-load.svg" width="720" height="432" alt="Three kinds of cognitive load share a reader's limited working memory. Intrinsic load is the difficulty of the task itself. Extraneous load is effort wasted on poor documentation design, marked as the load to remove. Germane load is the productive effort of building a mental model of the system, drawn as the path that should get the freed capacity." loading="lazy" decoding="async"></picture></a>
   <figcaption>Good docs zero out extraneous load so the reader's bandwidth goes to the task and the mental model.</figcaption>
 </figure>
 
-Documentation should aim to zero out extraneous load. Research in clinical training and EHR systems shows that reducing extraneous load correlates with higher task accuracy.
+The idea is older than the web. John Carroll's [The Nurnberg Funnel](https://openlibrary.org/works/OL4792482W), published by MIT Press in 1990, carries the subtitle "Designing Minimalist Instruction for Practical Computer Skill".
 
-A page that runs too long makes the reader spend limited mental bandwidth just parsing it, energy that should have gone into executing the work, like a developer who finishes a 2,000-word setup guide and still cannot tell which environment variable is actually required.
+Maintenance is the second cost, and writers undercount it. A button gets renamed and a parameter gets deprecated, so a page with one job has one promise to re-check, and a page with five has five.
 
-For assessing documentation I borrow the **NASA-TLX (Task Load Index)** as a mental framework. Studies confirm that minimalist prototypes produce lower NASA-TLX scores than complex, verbose interfaces.
+## Why is AI-written documentation so long?
 
-A shorter doc lets the reader spend their bandwidth on germane load, the productive effort of building a mental model of the system.
+AI-written documentation runs long because a model can produce every true sentence about a subject and has no way to know which one this reader came for. Rishabh Mishra put the reader's side of it bluntly on November 10: "It is too big for no reason."
 
-## Minimalism is an action-oriented design choice
+The same [short note](https://rsbh.dev/notes/technical-writing-in-the-ai-era) names the cause better than the longer essays I've read: "AI writes in a zig-zag flow. It doesn't know about the reader."
 
-John Carroll's "The Minimal Manual" remains the foundational text for this approach. His research found that shorter manuals helped users make faster progress and recover from errors more effectively.
+Until recently a long page was at least evidence of work, because someone had to type it. Agents took that cost to zero, so length now tells the reader nothing about care, and Willison's phrase for the result is exact: "It's not necessarily slop, but it reads like slop!"
 
-Carroll argued that users are naturally active and want to poke at the system rather than read about it, the way most developers paste the curl example and run it before reading a word above it.
+Developers are already trying to fix this in the tools. A plugin called [i-have-adhd](https://github.com/ayghri/i-have-adhd) reached 542 points on Hacker News on September 8, and its README describes it as "A skill for your coding assistant that stops it from burying the answer."
 
-Minimalism does not mean a lack of information. It means a better choice of information.
+Its rules read like a documentation style guide written for a machine, and the same list would serve a human writer. The first is "Lead with the next action." and the last bans preamble, recaps and closers.
 
-I follow four minimalist principles in my work.
+The thread under it was less hopeful than the README. A user there, sleazebreeze, reported that the skill holds for a few turns before the verbosity returns, and concluded "I don't think we can skill our way out of this one."
 
-1. Focus on the user's immediate goal.
-2. Cut verbiage that describes obvious UI elements.
-3. Prioritize error recognition and recovery steps.
-4. Guide exploration instead of narrating every possible branch.
+A human writer handed a style guide hits the same limit. A style rule can shorten sentences, and it can't decide what a page is for, which is where the length comes from.
 
-A 2024 study by Thakker warns against "aesthetic minimalism" where essential cues are removed for the sake of a clean look. A document stripped too far sends the reader's cognitive load surging back up, because now they have to fill in the blanks themselves, like a quickstart that shows the API call but never says where to find the key.
+## How do you shorten documentation without losing detail?
 
-I am after essentialism, retaining only what serves a crucial function.
+Give each page one job, answer it on the first screen, and move everything else to a page with its own job. The detail survives because it moves, and the reader who needs it follows a link.
 
-## Progressive disclosure balances power and simplicity
+A page that feels long gets four questions.
 
-Progressive disclosure is the primary tool for keeping documentation short without losing depth. It defers advanced or rarely used information to secondary screens or layers, the way a camera ships with a one-page quickstart in the box and a 200-page manual on the support site.
-
-The happy path stays clear of edge cases that belong in reference or troubleshooting.
-
-I separate the primary task from supporting context and deep reference.
-
-- **Level 1:** Essential instructions for the primary task.
-- **Level 2:** Contextual sidebars explaining "Why this matters" or common pitfalls.
-- **Level 3:** Deep technical references and edge-case documentation.
-
-The layers are useful only when each one gives the reader a clear route back to the task. Hiding detail without providing that route merely moves the confusion into navigation.
-
-To implement this I reach for HTML `<details>` tags or contextual "Read More" toggles. The page stays visually short for the majority of readers, and the detailed technical specifications stay one click away for the power users who need them.
-
-## Brevity makes maintenance cheaper and accuracy higher
-
-Every paragraph you publish is a future maintenance liability. GitLab's style guide treats documentation as an operational system.
-
-Link out when the information already exists elsewhere, and add it in a focused way when it does not. Verifying accuracy works only when a page is tight enough for one person to hold in their head.
-
-Long pages rot faster because they carry a larger surface area of potentially stale facts. Product names change.
-
-A button labeled "Settings" becomes "Preferences." An API parameter gets deprecated two releases later.
-
-A small page with one job is easier to update than a massive page carrying five separate intents, since you always know what the page was promising in the first place.
-
-Stripe's documentation stack offers a model for managing this. They built their platform on **Markdoc**, which supports interactive components and conditional content without cluttering the prose.
-
-Markdoc helps Stripe keep a page focused and still handle complex use cases through reusable structures. Shorter docs age better because they contain the blast radius of any single change.
-
-## Readers punish long docs when the payoff is slow
-
-Google's technical writing guidance notes that busy readers often only read the first paragraph. My own behavior matches this.
-
-When the first screen of a webhook doc does not prove it will tell me the payload shape and the signing header, I start scanning for keywords or I close the tab.
-
-That is why I care so much about compression at the top of the page. I aim for three specific sentences in the opening block.
-
-- A one-sentence scope statement.
-- A one-sentence audience cue.
-- A one-sentence payoff or direct answer.
-
-GitLab's style guide warns against self-referential phrases like "This page explains." I agree.
-
-A sentence like that wastes valuable space. Readers already know they are on a page, and they want the substance of the information immediately.
-
-A shorter doc forces a stronger opening because there is no room for ceremony.
-
-## Conciseness improves global accessibility
-
-GitLab and Google both emphasize that concise language improves translation quality. Shorter sentences with fewer ambiguous pronouns and idioms are easier for human translators and machine translation systems to process.
-
-A phrase like "spin up an instance" can survive in English and turn into nonsense in five other languages, so trimming the idioms reduces the risk of dangerous errors in localized documentation.
-
-Clear, shorter docs also make exact answers easier to find within a page. A bloated page can bury the sentence a reader needs under unrelated preamble.
-
-Infrastructure topics attract vague abstractions, so I organized [Agent harnesses](/articles/agent-harnesses/) as focused sections rather than one sprawling essay.
-
-Readers with cognitive disabilities benefit too. Dense, long-form prose creates a barrier to entry that a modular, structured approach avoids.
-
-Every time you cut a redundant paragraph, you make your documentation more inclusive.
-
-## Where longer documentation earns its place
-
-I am not suggesting that every technical document should be a list of bullets. Some formats require length to be effective.
-
-- **Migration guides:** These must cover irreversible changes and every possible breakage path.
-- **Formal specifications:** Precision requires exhaustive detail that cannot be summarized.
-- **Architecture references:** Understanding a complex system requires a broad view of its components.
-- **Incident runbooks:** Branching decision paths need to be documented in full to be useful under pressure.
-
-Even in these cases, I still demand page discipline. A long migration guide earns its length when every section maps to a real decision the user must make, such as whether to run the backfill before or after flipping the feature flag.
-
-A long spec is useful when every section provides a stable reference target. Length should be a function of task coverage, not a symptom of a writer's inability to edit.
-
-## The practical editing checklist
-
-I use four questions to determine if a page is too long during the editing phase.
-
-1. What exactly does the reader need to do or decide after reading this?
-2. Does every paragraph directly support that outcome?
-3. Should this detail live on a separate troubleshooting or reference page?
+1. What does the reader need to do or decide after reading it?
+2. Does every paragraph support that outcome?
+3. Should this detail live on a troubleshooting or reference page?
 4. Does this sentence exist because I was afraid to cut it?
 
-That final question matters most. Many teams feel a nervous compulsion to include "just in case" information, the stray paragraph about a legacy flag nobody has set since 2021.
+The fourth question matters more than the others, because fear is what writes the paragraph about a legacy flag nobody has set in years. My post on [changelogs](/articles/writing-changelogs/) applies the same cut to release entries, where not every commit deserves a line.
 
-That instinct is what creates the wall of text readers eventually ignore.
+The opening block carries the heaviest load. A line such as "This page explains" spends that room telling readers they are on a page.
 
-Strong documentation comes from subtraction. A team that already knows its product cold still struggles most with deciding what *not* to say on a given page.
+Willison's details tag is a good patch for a pull request and a poor fit for docs. A collapsed section still has to be kept true, and a toggle gives it no URL and no title of its own.
 
-My post on [changelogs](/articles/writing-changelogs/) makes a similar point: developers reward signal density and they punish filler instantly.
+Splitting by page does the same job with those problems solved. Sections with their own headings are the halfway step, and [agent harnesses](/articles/agent-harnesses/) is built that way, as one page whose seven sections can each be linked.
 
-## My position on documentation length
+## Does shorter documentation matter when agents read it?
 
-I would rather publish three sharp, modular pages than one majestic page that nobody can scan under pressure.
+Yes, because an agent pays for every token it fetches, and the Markdown it asks for has no toggles. [Fern's State of Docs report](https://buildwithfern.com/post/state-of-docs), from November 10, says "Agents now make up more than half of the requests to the docs we host" and that they ask for the Markdown version of a page.
 
-Readers rarely complain that a tutorial was too short or too clear. The complaints come when the path is buried, when the answer arrives too late, or when one page tries to serve the curious newcomer and the migrating power user in the same breath.
+I argue with that headline in [a separate essay](/articles/agents-reading-docs/), and the Markdown finding holds either way.
 
-Documentation is a tool, and a tool works best when it is lean and pointed at one job.
+A collapsed section is plain text in Markdown, so progressive disclosure by toggle doesn't exist for that reader. Disclosure by page still does: Fern describes the pattern as "an agent reads llms.txt once, then fetches the Markdown for the pages it needs."
+
+Small pages with one job are therefore the unit an agent can select, and a page that mixes five intents makes it buy four it didn't want.
+
+## When should documentation be long?
+
+Documentation can be long when nobody reads it from the top, and reference is the clear case. Fern's report has agents spending 31% of their reading on API reference, a page type that is exhaustive by design and entered at one parameter.
+
+DocSpring shows the same thing at a larger size. Nathan Broadbent [wrote on November 13](https://docspring.com/blog/posts/ponytail-vs-agents-md/) that "We have 42 AGENTS.md files, about 65,000 words in all: a root file with the rules every change follows, and a nested file next to each part of the code that has its own pitfalls (migrations, background jobs, the public API, CI)."
+
+At 65,000 words that is a book, and its structure means no reader, human or agent, meets more than the root file and the one beside the code being changed. Specifications, architecture references and incident runbooks earn their length the same way, by giving every section an address.
+
+A migration guide is the exception that gets read in order, and there each section should map to a decision, such as whether to run the backfill before or after flipping the feature flag. The length this page argues against is the kind that comes from never editing.
 
 ## FAQ
 
-**How short should a technical doc actually be?**
+**How short should a technical doc be?**
 
-There is no universal word count. A quickstart may be brief, while a deep migration guide needs enough space to cover every consequential decision.
-
-The target is the smallest amount of information that allows the reader to succeed without guesswork.
+There is no universal word count. The target is the smallest amount of information that lets the reader succeed without guessing, which is brief for a quickstart and substantial for a migration guide.
 
 **Do shorter docs risk leaving out important edge cases?**
 
-Only if you delete them without a plan. Edge cases should move to dedicated troubleshooting or reference pages.
-
-Routing them there keeps the primary path clean for the majority of users and still provides the answer for the minority who hit the edge case.
+Only if you delete them without a plan. Edge cases move to dedicated troubleshooting or reference pages, which keeps the primary path clean and still answers the reader who hits one.
 
 **Should I split one long page into many tiny pages?**
 
-Only if those tiny pages have a clear, independent job. Excessive fragmentation is as bad as excessive length.
-
-I want fewer mixed-purpose pages, not a disorganized pile of fragments.
+Only when each small page has a clear, independent job. Excessive fragmentation is as bad as excessive length, and the goal is fewer mixed-purpose pages.
 
 **What kind of documentation should always stay long?**
 
-Specifications and formal standards. These documents serve as the "source of truth" and must be exhaustive to prevent ambiguity in implementation.
+Specifications and formal standards. They are the source of truth for an implementation and have to be exhaustive to prevent ambiguity.
 
 **How can I tell if my page is too long?**
 
-If the first screen does not answer the user’s immediate question and the content mixes three or more different user intents, the page is likely too long for its purpose.
+Check the first screen and count the intents. If the first screen doesn't answer the reader's immediate question, or the page serves several different reader tasks, it is too long for its purpose.
