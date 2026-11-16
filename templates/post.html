@@ -18,6 +18,8 @@
 {% block tw_card %}{% if post.og_image %}summary_large_image{% else %}summary{% endif %}{% endblock %}
 {% block tw_image %}{% if post.og_image %}{{ post.og_image if post.og_image.startswith("http") else site.url ~ post.og_image }}{% else %}{{ site.url }}/static/favicon.png{% endif %}{% endblock %}
 
+{% block alternates %}<link rel="alternate" type="text/markdown" title="{{ post.title | e }}" href="/articles/{{ post.slug }}/index.md">{% endblock %}
+
 {% block extra_css %}
 {% if post.has_code %}<link rel="stylesheet" href="/static/css/code-blocks.css?v=1"><link rel="stylesheet" href="/static/css/highlight.css?v=brand-1">{% endif %}
 {% if post.has_visuals %}<link rel="stylesheet" href="/static/css/visuals.css?v=design-tokens-1">{% endif %}
@@ -215,8 +217,9 @@
   <div class="prose-container">
     <div class="cta-inner">
       <div>
-        <h2 class="cta-title-compact">Need a technical writer?</h2>
-        <p>I write for DevTools and B2B SaaS companies. Let's talk.</p>
+        <h2 class="cta-title-compact">Hire a freelance technical writer</h2>
+        <p>I'm Ninad Pathak, a freelance technical writer for {{ hire.audience }}: I write <a href="/services/">developer documentation, tutorials and technical articles</a>, and I run the product before I write about it. My <a href="/work/">case studies</a> include 50+ developer guides for Centus that its engineers approved without a revision round.</p>
+        {% include "_hire_line.html" %}
       </div>
       <div class="cta-actions">
         <a href="{{ contact.booking_url }}" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>

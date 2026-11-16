@@ -8,3 +8,27 @@
 # Article videos: WebVTT must be served as text/vtt or Firefox ignores the captions track.
 /static/videos/:slug/captions.vtt
   Content-Type: text/vtt; charset=utf-8
+
+# Markdown alternates of articles and hiring pages. Agents fetch them; search engines
+# should index the HTML page, not its source.
+/articles/:slug/index.md
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: noindex
+
+/services/index.md
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: noindex
+
+/services/:slug/index.md
+  Content-Type: text/markdown; charset=utf-8
+  X-Robots-Tag: noindex
+
+# The pages.dev copy of the site outranked ninadpathak.com on the brand query. Keep the
+# production alias and every preview deployment out of the index. This is the form the
+# Cloudflare Pages headers documentation gives (checked 2026-11-16):
+# https://developers.cloudflare.com/pages/configuration/headers/
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex

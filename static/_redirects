@@ -78,3 +78,16 @@
 # MCP server tutorial: the setup guide archived on 2026-09-11 points to the rewritten tutorial.
 /articles/mcp-server-setup-guide/ /articles/mcp-server-tutorial/ 301
 /blog/mcp-server-setup-guide/ /articles/mcp-server-tutorial/ 301
+# Hiring aliases: addresses a buyer or an agent guesses. Cloudflare zone analytics for the
+# 30 days to 2026-11-16 showed clients requesting these and getting a 404. build.py adds
+# the form without the trailing slash.
+/hire/ /services/ 301
+/hire-me/ /services/ 301
+/work-with-me/ /services/ 301
+/pricing/ /services/ 301
+/technical-writing-services/ /services/ 301
+/about-us/ /about/ 301
+/about-me/ /about/ 301
+/contact-us/ /contact/ 301
+/contact-me/ /contact/ 301
+/contact-form/ /contact/ 301

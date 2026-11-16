@@ -1,7 +1,30 @@
 {% extends "base.html" %}
 
-{% block title %}Contact | Ninad Pathak{% endblock %}
-{% block description %}Talk to Ninad Pathak about technical documentation or developer content that needs product understanding, testing, and a point of view.{% endblock %}
+{% block title %}Hire Ninad Pathak | Contact{% endblock %}
+{% block description %}Hire me for developer documentation, tutorials and technical articles for AI and developer-tool companies. Email hello@ninadpathak.com or book a 30-minute call.{% endblock %}
+{% block og_title %}Hire Ninad Pathak | Contact{% endblock %}
+{% block og_description %}Hire me for developer documentation, tutorials and technical articles for AI and developer-tool companies. Email hello@ninadpathak.com or book a 30-minute call.{% endblock %}
+{% block tw_title %}Hire Ninad Pathak | Contact{% endblock %}
+{% block tw_desc %}Hire me for developer documentation, tutorials and technical articles for AI and developer-tool companies. Email hello@ninadpathak.com or book a 30-minute call.{% endblock %}
+{% block og_image %}
+  <meta property="og:image"       content="{{ site.url }}/static/images/diagrams/services/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"   content="Freelance technical writer for AI and developer-tool companies">
+{% endblock %}
+{% block tw_card %}summary_large_image{% endblock %}
+{% block tw_image %}{{ site.url }}/static/images/diagrams/services/og.png{% endblock %}
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "url": "{{ site.url }}/contact/",
+  "name": "Hire Ninad Pathak | Contact",
+  "mainEntity": {{ person_ref | tojson }}
+}
+</script>
+{% endblock %}
 {% block canonical %}/contact/{% endblock %}
 {% block og_url %}/contact/{% endblock %}
 
@@ -12,9 +35,11 @@
     <div class="label">Contact</div>
     <h1>Show me where it breaks.</h1>
     <p class="lead">
-      Send the product, the reader, and the page that is making people guess. If the
-      brief asks for polished words before anyone understands the behavior, I'll say so.
+      You can hire me to write developer documentation, tutorials and technical articles
+      for {{ hire.audience }}, and the <a href="/services/">services page</a> lists what each covers.
+      Send the product, the reader, and the page that is making people guess.
     </p>
+    {% include "_hire_line.html" %}
   </div>
 </section>
 
@@ -69,7 +94,7 @@
         <!-- Who I work best with -->
         <div class="contact-secondary-box">
           <div class="contact-method-label contact-subsection-label">// I work best with</div>
-          <div class="expect-item">DevTools companies whose audience is developers</div>
+          <div class="expect-item">AI and developer-tool companies whose audience is developers</div>
           <div class="expect-item">Technical teams willing to let the writer inspect the product</div>
           <div class="expect-item">Teams willing to trade empty volume for tested work</div>
           <div class="expect-item">Founders who want a real argument, not consensus dressed as insight</div>

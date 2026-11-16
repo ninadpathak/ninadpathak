@@ -57,11 +57,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/static/css/main.css?v=codeblocks-1">
+  <link rel="stylesheet" href="/static/css/main.css?v=agent-access-1">
   {% block extra_css %}{% endblock %}
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="/feed.xml">
+  {% block alternates %}{% endblock %}
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-23WKEJ8P2N"></script>
@@ -87,6 +88,7 @@
     <a href="/" class="nav-logo">ninad pathak</a>
 
     <ul class="nav-links" role="list">
+      <li><a href="/services/"  class="nav-link {% if current_page == 'services' %}active{% endif %}">Services</a></li>
       <li><a href="/work/"      class="nav-link {% if current_page == 'work' %}active{% endif %}">Work</a></li>
       <li><a href="/portfolio/" class="nav-link {% if current_page == 'portfolio' %}active{% endif %}">Portfolio</a></li>
       <li><a href="/projects/"  class="nav-link {% if current_page == 'projects' %}active{% endif %}">Projects</a></li>
@@ -116,6 +118,7 @@
     </button>
   </div>
   <nav class="mobile-nav-links">
+    <a href="/services/"  class="mobile-nav-link">Services</a>
     <a href="/work/"      class="mobile-nav-link">Work</a>
     <a href="/portfolio/" class="mobile-nav-link">Portfolio</a>
     <a href="/projects/"  class="mobile-nav-link">Projects</a>
@@ -160,12 +163,13 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="footer-logo">ninad pathak</div>
-        <p class="footer-desc">Technical writing with tested examples, strong opinions, and an actual person behind it.</p>
+        <p class="footer-desc">Freelance technical writing for {{ hire.audience }}, with tested examples, strong opinions, and an actual person behind it.</p>
       </div>
 
       <nav class="footer-group" aria-label="Important links">
         <div class="footer-heading">Important links</div>
         <div class="footer-links">
+          <a href="/services/" class="footer-link">Services</a>
           <a href="/work/" class="footer-link">Work</a>
           <a href="/portfolio/" class="footer-link">Portfolio</a>
           <a href="/projects/" class="footer-link">Projects</a>
@@ -198,6 +202,7 @@
     </div>
     <div class="footer-meta">
       <span class="footer-copy">© {{ build_year }} Ninad Pathak</span>
+      {% with hire_line_class = "footer-copy" %}{% include "_hire_line.html" %}{% endwith %}
     </div>
   </div>
 </footer>

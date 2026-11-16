@@ -174,3 +174,41 @@ knows_about = [
   "AI-Ready Documentation",
   "Technical Content Strategy",
 ]
+
+# THE OFFER. One wording for what he sells, who to, and the proof, read by the Person
+# node's makesOffer, llms.txt, llms-full.txt and the hiring templates.
+#
+# Only facts already published on this site go here: the client list is the one on
+# /about/, and each proof line restates a case study under content/work/. No price,
+# turnaround or availability appears, because none is published.
+[hire]
+audience = "AI and developer-tool companies"
+statement = "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it."
+clients = ["Semrush", "Adobe", "TinyFish", "Mastra", "Manicule", "OpenComputer", "Firecrawl", "Graphite", "Mem0", "Centus"]
+proof = [
+  "For Centus I wrote 50+ developer guides that its engineers approved without a revision round: https://ninadpathak.com/work/centus/",
+  "At Mem0 I managed a team of 13 writers and handled hiring and technical reviews: https://ninadpathak.com/work/mem0/",
+  "LinuxForDevices grew from 487 to 203,400 monthly visits in 15 months on the content program I built: https://ninadpathak.com/work/linuxfordevices/",
+]
+
+[[hire.offers]]
+name = "Developer documentation"
+description = "Quickstarts, reference pages and troubleshooting pages for developer products, written after running the product."
+
+[[hire.offers]]
+name = "Tutorials and integration guides"
+description = "Step-by-step guides that take a developer from an empty project to a working result, with the code tested first."
+
+[[hire.offers]]
+name = "Technical articles"
+description = "Comparisons and explainers for engineers who will check the claims."
+url = "/services/technical-writer-for-ai-companies/"
+
+[[hire.offers]]
+name = "AI-ready documentation audit"
+description = "A check of documentation for answer structure, AI crawler access in robots.txt, and llms.txt validity."
+url = "/services/ai-ready-docs-audit/"
+
+[[hire.offers]]
+name = "Technical content programs"
+description = "The keyword map, review process and writer management behind a library of technical articles."

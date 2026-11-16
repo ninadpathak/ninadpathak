@@ -457,6 +457,7 @@ class SiteBuilder:
         # the post-template tests do, must still carry the one Person node.
         self.env.globals["person_schema"] = self.person_schema()
         self.env.globals["person_ref"] = self.person_ref()
+        self.env.globals["hire"] = self.config["hire"]
 
         self.md = markdown.Markdown(
             extensions=["extra", "codehilite", "toc", "tables"],
@@ -517,6 +518,7 @@ class SiteBuilder:
                 "status": status,
                 "source_stem": source_stem,
                 "content": html,
+                "markdown": post.content,
                 "slug": slug,
                 "reading_time": estimate_reading_time(post.content),
                 "word_count": count_words(post.content),
@@ -618,6 +620,46 @@ class SiteBuilder:
         post = frontmatter.load(path)
         self.md.reset()
         return post.metadata, render_content_html(self.md.convert(post.content))
+
+    def load_service_pages(self) -> list[dict]:
+        """Load the hiring pages: content/services.md, then content/services/*.md.
+
+        services.md renders at /services/ and each file beside it at /services/<slug>/,
+        all through services.html. They are the pages a buyer or an agent quotes, so
+        they are held to the article rules: the two-sentence paragraph cap applies, and
+        a page carrying a [TODO marker fails the build instead of reaching a buyer. A
+        draft is skipped unless the build runs with --drafts, and then renders noindex.
+        """
+        index = Path("content/services.md")
+        if not index.exists():
+            return []
+        pages = []
+        for md_file in [index, *sorted(Path("content/services").glob("*.md"))]:
+            post = frontmatter.load(md_file)
+            published = post.get("status", "draft") == "published"
+            if not published and not self.include_drafts:
+                print(f"  i {md_file} is a draft: not built (use --drafts to review it)")
+                continue
+            if "[TODO" in post.content + str(post.metadata):
+                raise ValueError(f"{md_file} still contains a [TODO marker")
+            paragraph_issues = paragraph_sentence_violations(post.content)
+            if paragraph_issues:
+                details = "\n".join(f"    line {line}: {count} sentences — {snippet}"
+                                    for line, count, snippet in paragraph_issues)
+                raise ValueError(f"{md_file} violates the two-sentence paragraph rule:\n{details}")
+            self.md.reset()
+            is_index = md_file == index
+            slug = "" if is_index else (post.get("slug") or md_file.stem)
+            pages.append({
+                **post.metadata,
+                "content": render_content_html(self.md.convert(post.content)),
+                "markdown": post.content,
+                "faqs": extract_faqs(post.content),
+                "published": published,
+                "is_index": is_index,
+                "url": "/services/" if is_index else f"/services/{slug}/",
+            })
+        return pages
 
     def load_legal_pages(self) -> list[dict]:
         pages = []
@@ -731,7 +773,60 @@ class SiteBuilder:
             "disambiguatingDescription": identity["disambiguating_description"],
             "knowsAbout": identity["knows_about"],
             "sameAs": identity["same_as"],
+            "email": self.config["contact"]["email"],
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "sales",
+                "email": self.config["contact"]["email"],
+                "url": f"{base}/contact/",
+            },
+            # What he can be hired for, as Service items. No price fields: rates are
+            # quoted per project and nothing published states one.
+            "makesOffer": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": offer["name"],
+                        "description": offer["description"],
+                        "url": base + offer.get("url", "/services/"),
+                        "audience": {"@type": "Audience", "audienceType": self.config["hire"]["audience"]},
+                    },
+                }
+                for offer in self.config["hire"]["offers"]
+            ],
         }
+
+    def hire_line(self) -> str:
+        """The contact route as one plain sentence, for the text files agents read.
+        templates/_hire_line.html is the same sentence with links."""
+        contact = self.config["contact"]
+        return (f"Hire me: email {contact['email']}, or book a 30-minute call at "
+                f"{contact['booking_url']}")
+
+    def absolute_links(self, markdown_text: str) -> str:
+        """Root-relative Markdown links as full URLs: a text file is read away from
+        the site, where /work/centus/ resolves to nothing."""
+        base = self.config["site"]["url"].rstrip("/")
+        return re.sub(r"\]\(/(?!/)", f"]({base}/", markdown_text)
+
+    def markdown_alternate(self, title: str, description: str, url: str, body: str, dates: str = "") -> str:
+        """A page as markdown: title, summary, canonical URL, the source body, then the
+        contact line, so an agent that fetches only this file can still reach him."""
+        base = self.config["site"]["url"].rstrip("/")
+        byline = f"By {self.config['identity']['name']} ({base}/about/)."
+        lines = [f"# {title}", ""]
+        if description:
+            lines += [description.strip().replace("\n", " "), ""]
+        lines += [f"Canonical: {base}{url}", "", " ".join(part for part in (byline, dates) if part), "",
+                  self.absolute_links(body.strip()), "", "---", "", self.hire_line(), "",
+                  f"Services: {base}/services/", ""]
+        return "\n".join(lines)
+
+    def write_text(self, output_path: str, text: str):
+        out = self.output / output_path
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(text, encoding="utf-8")
 
     def person_ref(self) -> dict:
         """A pointer to the Person node, for author and publisher fields. The name
@@ -844,6 +939,11 @@ class SiteBuilder:
                 post=post,
                 related=related,
             )
+            dates = f"Published {format_date_iso(post['date'])}, updated {format_date_iso(post['updated'])}."
+            self.write_text(
+                f"articles/{post['slug']}/index.md",
+                self.markdown_alternate(post["title"], post["description"], post["url"], post["markdown"], dates),
+            )
 
     def build_work_list(self, work_cases):
         self.render(
@@ -894,6 +994,19 @@ class SiteBuilder:
             "contact.html", "contact/index.html",
             page="contact",
         )
+
+    def build_services(self, service_pages):
+        for service in service_pages:
+            self.render(
+                "services.html", f"{service['url'].strip('/')}/index.html",
+                page="services",
+                service=service,
+                service_pages=[page for page in service_pages if page["published"]],
+            )
+            self.write_text(
+                f"{service['url'].strip('/')}/index.md",
+                self.markdown_alternate(service["title"], service.get("lead", ""), service["url"], service["markdown"]),
+            )
 
     def build_404(self):
         self.render(
@@ -973,7 +1086,7 @@ class SiteBuilder:
                 term=term,
             )
 
-    def build_sitemap(self, posts, work_cases, glossary_terms, pillars=None, categories=None):
+    def build_sitemap(self, posts, work_cases, glossary_terms, pillars=None, categories=None, service_pages=None):
         base = self.config["site"]["url"].rstrip("/")
         pillars = pillars or []
         categories = categories or []
@@ -995,6 +1108,8 @@ class SiteBuilder:
             ("/projects/", "0.7", "monthly", None),
             ("/about/", "0.6", "monthly", None),
             ("/contact/", "0.5", "yearly", None),
+            # Drafts render noindex under --drafts and stay out of the sitemap.
+            *[(page["url"], "0.9", "monthly", None) for page in service_pages or [] if page["published"]],
             ("/tools/", "0.9", "monthly", None),
             ("/linter/", "0.9", "monthly", None),
             ("/llms-txt-generator/", "0.9", "monthly", None),
@@ -1071,7 +1186,7 @@ class SiteBuilder:
         feed_path = self.output / "feed.xml"
         tree.write(feed_path, xml_declaration=True, encoding="utf-8")
 
-    def build_llms_txt(self, posts, glossary_terms, work_cases, pillars=None, categories=None):
+    def build_llms_txt(self, posts, glossary_terms, work_cases, pillars=None, categories=None, service_pages=None):
         """Emit /llms.txt — a clean, link-first map of the site for AI crawlers
         and answer engines. Follows the llms.txt convention (H1, summary
         blockquote, then sectioned bullet links)."""
@@ -1084,21 +1199,34 @@ class SiteBuilder:
         # under "Other Writing" because no post carried the tags it looked for, while
         # the file's own intro claimed the list was grouped by topic.
         identity = self.config["identity"]
+        hire = self.config["hire"]
+        service_pages = [page for page in service_pages or [] if page["published"]]
+        # The offer, the proof and the contact route sit above the first H2, so an agent
+        # that reads only this file can answer "what does he sell and how do I hire
+        # him". Prose under an H2 would be flagged by this site's own validator.
         lines = [
             f"# {site['author']}",
             "",
             f"> {identity['description']}",
             "",
+            hire["statement"],
+            "",
+            f"Clients include {', '.join(hire['clients'][:-1])} and {hire['clients'][-1]}.",
+            "",
+            *[line for proof in hire["proof"] for line in (proof, "")],
+            self.hire_line(),
+            "",
             ("Articles below are grouped by topic cluster, and each links to its "
-             "canonical URL. The About, Work and Contact pages say who writes them "
-             "and how to hire me."),
+             "canonical URL."),
             "",
             "## About",
             "",
+            *[f"- [{page.get('nav_title') or page['title']}]({base}{page['url']}): {page['description']}"
+              for page in service_pages],
             f"- [About]({base}/about/): Who I am, what I write, and who I write it for.",
             f"- [Work]({base}/work/): Case studies with the result each piece of work produced.",
             f"- [Portfolio]({base}/portfolio/): Published articles and documentation, linked at the publisher.",
-            f"- [Contact]({base}/contact/): Get in touch or book a call.",
+            f"- [Contact]({base}/contact/): Email {self.config['contact']['email']} or book a 30-minute call.",
             "",
         ]
 
@@ -1162,7 +1290,51 @@ class SiteBuilder:
         lines.append(f"- [Projects]({base}/projects/): Working tools and software.")
         lines.append("")
 
+        if service_pages:
+            lines.append("## Optional")
+            lines.append("")
+            lines.append(f"- [Hiring pages in full]({base}/llms-full.txt): The services and about pages in full, with case study summaries, as one Markdown file.")
+            lines.append("")
+
         (self.output / "llms.txt").write_text("\n".join(lines), encoding="utf-8")
+
+    def build_llms_full_txt(self, service_pages, work_cases):
+        """Emit /llms-full.txt: the pages that answer a hiring question as one Markdown
+        file. Articles are left out on purpose. Each has its own index.md, and
+        putting 78 of them here would bury the offer the file exists to carry."""
+        service_pages = [page for page in service_pages if page["published"]]
+        if not service_pages:
+            return
+        base = self.config["site"]["url"].rstrip("/")
+        hire = self.config["hire"]
+        about = frontmatter.load("content/about.md")
+
+        def section(title, url, body):
+            # Page headings drop one level so each page sits under its own H2.
+            body = re.sub(r"(?m)^(#{2,5}) ", r"#\1 ", self.absolute_links(body.strip()))
+            return [f"## {title}", "", f"Source: {base}{url}", "", body, ""]
+
+        lines = [
+            f"# {self.config['site']['author']}",
+            "",
+            f"> {self.config['identity']['description']}",
+            "",
+            hire["statement"],
+            "",
+            self.hire_line(),
+            "",
+        ]
+        for page in service_pages:
+            lines += section(page["title"], page["url"], page["markdown"])
+        lines += section(about.get("title", "About"), "/about/", about.content)
+        # Case studies go in as their one-line summaries with a link. Their bodies carry
+        # headline figures still waiting on a stated source (build_work_pages prints the
+        # list), and this file should not repeat a number the site cannot yet back.
+        lines += ["## Case studies", ""]
+        for case in work_cases:
+            lines.append(f"- [{case['client']}: {case['title']}]({base}{case['url']}): {case['summary']}")
+        lines.append("")
+        (self.output / "llms-full.txt").write_text("\n".join(lines), encoding="utf-8")
 
     def build_redirects(self, posts):
         """Write Cloudflare Pages redirects at the deployment root.
@@ -1332,6 +1504,7 @@ class SiteBuilder:
         glossary_terms = self.load_glossary()
         pillars = self.load_pillars(posts)
         categories = self.load_categories(posts)
+        service_pages = self.load_service_pages()
 
         self.build_homepage(posts, work_cases, categories)
         self.build_blog_list(posts, categories)
@@ -1343,6 +1516,7 @@ class SiteBuilder:
         self.build_projects(projects)
         self.build_about()
         self.build_contact()
+        self.build_services(service_pages)
         self.build_404()
         self.build_linter()
         self.build_tools_index()
@@ -1353,9 +1527,10 @@ class SiteBuilder:
         self.build_legal_pages(legal_pages)
         self.build_glossary(glossary_terms)
 
-        self.build_sitemap(posts, work_cases, glossary_terms, pillars, categories)
+        self.build_sitemap(posts, work_cases, glossary_terms, pillars, categories, service_pages)
         self.build_rss(posts)
-        self.build_llms_txt(posts, glossary_terms, work_cases, pillars, categories)
+        self.build_llms_txt(posts, glossary_terms, work_cases, pillars, categories, service_pages)
+        self.build_llms_full_txt(service_pages, work_cases)
         self.build_redirects(posts)
         self.build_pygments_css()
         self.build_visual_embed_css()

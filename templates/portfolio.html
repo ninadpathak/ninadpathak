@@ -2,6 +2,36 @@
 
 {% block title %}Portfolio | Ninad Pathak{% endblock %}
 {% block description %}Published tutorials and technical articles by Ninad Pathak across developer tools, AI systems, localization, and infrastructure.{% endblock %}
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "url": "{{ site.url }}/portfolio/",
+  "name": "Portfolio | Ninad Pathak",
+  "author": {{ person_ref | tojson }},
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{ portfolio.entries | length }},
+    "itemListElement": [
+      {% for item in portfolio.entries %}
+      {
+        "@type": "ListItem",
+        "position": {{ loop.index }},
+        "item": {
+          "@type": "CreativeWork",
+          "name": {{ item.title | tojson }},
+          "url": {{ (item.url if item.url.startswith("http") else site.url ~ item.url) | tojson }},
+          "author": {{ person_ref | tojson }},
+          "sourceOrganization": { "@type": "Organization", "name": {{ item.client | tojson }} }
+        }
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+}
+</script>
+{% endblock %}
 {% block canonical %}/portfolio/{% endblock %}
 {% block og_url %}/portfolio/{% endblock %}
 

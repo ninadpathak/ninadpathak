@@ -2,6 +2,36 @@
 
 {% block title %}Work | Ninad Pathak{% endblock %}
 {% block description %}Case studies from Centus, Mem0, Kiwi Sizing, LinuxForDevices and DelightChat: who the client was, what I wrote or ran, and the number that shows it.{% endblock %}
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "url": "{{ site.url }}/work/",
+  "name": "Work | Ninad Pathak",
+  "author": {{ person_ref | tojson }},
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{ cases | length }},
+    "itemListElement": [
+      {% for case in cases %}
+      {
+        "@type": "ListItem",
+        "position": {{ loop.index }},
+        "item": {
+          "@type": "CreativeWork",
+          "name": {{ (case.client ~ ": " ~ case.title) | tojson }},
+          "url": "{{ site.url }}{{ case.url }}",
+          "description": {{ case.summary | tojson }},
+          "author": {{ person_ref | tojson }}
+        }
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+}
+</script>
+{% endblock %}
 {% block canonical %}/work/{% endblock %}
 {% block og_url %}/work/{% endblock %}
 

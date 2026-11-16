@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% set page_title = service.seo_title or (service.title ~ " | Ninad Pathak") %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block description %}{{ service.description }}{% endblock %}
+{% block robots %}{% if service.published %}{{ super() }}{% else %}noindex, follow{% endif %}{% endblock %}
+{% block og_title %}{{ page_title }}{% endblock %}
+{% block og_description %}{{ service.description }}{% endblock %}
+{% block tw_title %}{{ page_title }}{% endblock %}
+{% block tw_desc %}{{ service.description }}{% endblock %}
+{% block canonical %}{{ service.url }}{% endblock %}
+{% block og_url %}{{ service.url }}{% endblock %}
+{% block og_image %}
+  <meta property="og:image"       content="{{ site.url }}/static/images/diagrams/services/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"   content="Freelance technical writer for AI and developer-tool companies">
+{% endblock %}
+{% block tw_card %}summary_large_image{% endblock %}
+{% block tw_image %}{{ site.url }}/static/images/diagrams/services/og.png{% endblock %}
+{% block alternates %}<link rel="alternate" type="text/markdown" title="{{ service.title | e }}" href="{{ service.url }}index.md">{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "{{ site.url }}{{ service.url }}#service",
+  "name": {{ service.title | tojson }},
+  "serviceType": {{ (service.service_type or "Technical writing") | tojson }},
+  "url": "{{ site.url }}{{ service.url }}",
+  "description": {{ service.description | tojson }},
+  "provider": {{ person_ref | tojson }},
+  "audience": { "@type": "Audience", "audienceType": {{ hire.audience | tojson }} }{% if service.is_index %},
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Technical writing services",
+    "itemListElement": [
+      {% for offer in hire.offers %}
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": {{ offer.name | tojson }},
+          "description": {{ offer.description | tojson }},
+          "url": "{{ site.url }}{{ offer.url or '/services/' }}"
+        }
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }{% endif %}
+
+}
+</script>
+{% if service.faqs %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+{% for faq in service.faqs %}
+    {
+      "@type": "Question",
+      "name": {{ faq.question | tojson }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ faq.answer | tojson }}
+      }
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<section class="page-intro">
+  <div class="container">
+    <div class="label">Services</div>
+    <h1>{{ service.title }}</h1>
+    <p class="lead">{{ service.lead }}</p>
+    {% include "_hire_line.html" %}
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="about-layout">
+
+      <aside class="about-sidebar">
+        <div class="about-sidebar-name">// Hire Ninad Pathak</div>
+        <div class="about-stats">
+          {% for item in service.proof %}
+          <div class="about-stat"><div class="about-stat-num">{{ item.value }}</div><div class="about-stat-label">{{ item.label }}</div></div>
+          {% endfor %}
+        </div>
+
+        <div class="about-sidebar-links">
+          <a href="mailto:{{ contact.email }}" class="arrow-link arrow-link-block">{{ contact.email }} →</a>
+          <a href="{{ contact.booking_url }}" class="arrow-link arrow-link-block booking-modal-trigger" rel="noopener">Book a Call →</a>
+          {% for page in service_pages if page.url != service.url %}
+          <a href="{{ page.url }}" class="arrow-link arrow-link-block">{{ page.nav_title or page.title }} →</a>
+          {% endfor %}
+          <a href="/work/" class="arrow-link arrow-link-block">Case Studies →</a>
+          <a href="/portfolio/" class="arrow-link arrow-link-block">Portfolio →</a>
+        </div>
+      </aside>
+
+      <div class="post-content">
+        {{ service.content }}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Tell me what needs writing.</h2>
+        <p>Bring the product and the reader you have in mind, or send me a draft developers get stuck on.</p>
+        {% include "_hire_line.html" %}
+      </div>
+      <div class="cta-actions">
+        <a href="{{ contact.booking_url }}" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a 30-min Call →</a>
+        <a href="/work/" class="btn btn-outline">See My Work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -51,9 +51,20 @@ class ShareCardTests(unittest.TestCase):
                     self.assertIn('<meta name="twitter:card"        content="summary">', html)
 
     def test_pages_without_a_card_keep_the_site_default(self):
-        html = (OUTPUT / "index.html").read_text(encoding="utf-8")
+        html = (OUTPUT / "about" / "index.html").read_text(encoding="utf-8")
         self.assertIn(f'<meta property="og:image"       content="{SITE}/static/favicon.png">', html)
         self.assertIn('<meta name="twitter:card"        content="summary">', html)
+
+    def test_hiring_pages_share_the_services_card(self):
+        """Home, contact and the services pages are not posts, so their card is the
+        hand-written content/diagrams/services/og.mmd."""
+        card = "/static/images/diagrams/services/og.png"
+        self.assertEqual(png_size(ROOT / card.lstrip("/")), (1200, 630))
+        for page in ("index.html", "contact/index.html", "services/index.html"):
+            html = (OUTPUT / page).read_text(encoding="utf-8")
+            with self.subTest(page=page):
+                self.assertIn(f'<meta property="og:image"       content="{SITE}{card}">', html)
+                self.assertIn('<meta name="twitter:card"        content="summary_large_image">', html)
 
 
 @unittest.skipUnless((OUTPUT / "articles").exists(), "run python build.py first")
