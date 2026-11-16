@@ -11,6 +11,11 @@
     "core*",
     "doc check"
   ],
+  "agents-reading-docs": [
+    "reader",
+    "doc*",
+    "core"
+  ],
   "agent-design-space": [
     "reader",
     "loop*",
