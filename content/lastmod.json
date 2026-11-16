@@ -52,8 +52,8 @@
     "sources": "2c62957b2835ce0a4b295ac8643798142ab7fe45bf3edb5e19abc25288ace1b7"
   },
   "ai-memory-management": {
-    "lastmod": "2026-10-28",
-    "sources": "58f92b7a808934b2bfb097833169077a8648c7b5dda67139486cc5cbae5a356b"
+    "lastmod": "2026-11-17",
+    "sources": "44335c02fc5059eafde7c554ab37168900108ceef82f3932edee5bd65635a989"
   },
   "api-documentation": {
     "lastmod": "2026-10-28",
@@ -164,8 +164,8 @@
     "sources": "1842f7cb1ac7254a501b3de8df9e7a1519231c77cb91264af8119b0759f0a728"
   },
   "hybrid-search": {
-    "lastmod": "2026-10-22",
-    "sources": "6086f7261c2471a78443371853b4a2886bf1c16beeaffa50555ff686dd6ecec8"
+    "lastmod": "2026-11-17",
+    "sources": "26061fcb028427c0112a5c54b2154ce8a0cb4b8d44dded2bcda449b06731c586"
   },
   "hyperagents-memory": {
     "lastmod": "2026-10-27",
@@ -192,8 +192,8 @@
     "sources": "6f7508b2dfa1dac7c9a47ca690eab34b8153b73c2119e0cd5a0f372eb347d60b"
   },
   "llm-structured-outputs": {
-    "lastmod": "2026-10-27",
-    "sources": "3746c25a5bfdb7f04f28e617656a7ba8d2084a8e094d3b8b28bf3b830f4fc1aa"
+    "lastmod": "2026-11-17",
+    "sources": "2d4926481937f922cf575d97159f410dbf5e8e41d73dd2b45dbf38f1d9368180"
   },
   "llm-token-budgets": {
     "lastmod": "2026-10-22",
