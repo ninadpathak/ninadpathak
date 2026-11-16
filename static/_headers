@@ -23,12 +23,13 @@
   Content-Type: text/markdown; charset=utf-8
   X-Robots-Tag: noindex
 
-# The pages.dev copy of the site outranked ninadpathak.com on the brand query. Keep the
-# production alias and every preview deployment out of the index. This is the form the
-# Cloudflare Pages headers documentation gives (checked 2026-11-16):
+# Keep preview deployments (<hash or branch>.<project>.pages.dev) out of the index. This
+# is the form the Cloudflare Pages headers documentation gives (checked 2026-11-16):
 # https://developers.cloudflare.com/pages/configuration/headers/
-https://:project.pages.dev/*
-  X-Robots-Tag: noindex
-
+#
+# The production alias <project>.pages.dev is left indexable on purpose. It holds
+# rankings for hiring queries and canonicalises to ninadpathak.com; a noindex would drop
+# those entries, where a 301 (a Cloudflare rule, not something this file can do) passes
+# them on.
 https://:version.:project.pages.dev/*
   X-Robots-Tag: noindex

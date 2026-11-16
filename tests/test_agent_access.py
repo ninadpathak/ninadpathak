@@ -315,12 +315,14 @@ class BuiltSiteTests(unittest.TestCase):
                 self.assertNotIn(h1, seen)
                 seen.update((title, h1))
 
-    def test_pages_dev_hosts_are_noindex(self):
+    def test_preview_deployments_are_noindex_and_the_production_alias_is_not(self):
         """The form in Cloudflare's Pages headers documentation. A rule that starts with
-        a path instead of https:// would apply to ninadpathak.com too."""
+        a path instead of https:// would apply to ninadpathak.com too. The production
+        alias stays indexable: it holds rankings a noindex would drop, and it waits on a
+        301 instead."""
         headers = (OUTPUT / "_headers").read_text(encoding="utf-8")
-        for host in ("https://:project.pages.dev/*", "https://:version.:project.pages.dev/*"):
-            self.assertRegex(headers, r"(?m)^" + re.escape(host) + r"\n\s+X-Robots-Tag: noindex$")
+        self.assertRegex(headers, r"(?m)^" + re.escape("https://:version.:project.pages.dev/*") + r"\n\s+X-Robots-Tag: noindex$")
+        self.assertNotRegex(headers, r"(?m)^https://:project\.pages\.dev/")
         self.assertNotRegex(headers, r"(?m)^/\*\n\s+X-Robots-Tag")
         self.assertRegex(headers, r"(?m)^/articles/:slug/index\.md\n\s+Content-Type: text/markdown; charset=utf-8\n\s+X-Robots-Tag: noindex$")
 
