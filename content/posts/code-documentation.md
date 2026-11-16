@@ -2,9 +2,8 @@
 category: technical-documentation
 title: 'Code Documentation: Comments, Generated Reference, and External Guides'
 date: 2026-08-18
-updated: 2026-08-18
-description: Decide what belongs in code comments, generated reference, and written
-  guides so each reader can find the right kind of answer.
+updated: 2026-11-16
+description: 'Code documentation has three homes: comments, generated reference and guides. Real examples, where each fact belongs, and whether agents should write comments.'
 takeaways:
 - Put local rationale beside the code that needs it to be read correctly.
 - Generate reference from stable contracts that source can expose.
@@ -17,76 +16,93 @@ slug: code-documentation
 video: code-documentation
 ---
 
-A codebase starts to become hard to change when the reason for a line lives in a handbook, while the handbook repeats signatures the source already knows. I use a simpler boundary in this site's Python code: comments explain local reasoning, generated reference records stable contracts, and guides carry the decisions that connect several parts of the system.
+Claude Fable 5.1 was told not to add code comments and added a comment or docstring anyway in 33 of 100 tasks. The count comes from [Shut up and SWE-bench](https://bayes.net/shut-up-and-swe-bench/), a small benchmark Tom Adamczewski published on September 24 out of one frustration: "AIs have such poor judgement for when to write a code comment that I prefer to have them write none at all."
 
-That division keeps each form honest about what it can maintain. A comment can travel with a branch, a reference page can follow a public interface, and a guide can explain a reader's task without pretending that every answer belongs beside one function.
+Code documentation is the written material that explains source code, and it has three homes: comments for local reasoning, docstrings and generated reference for contracts, and guides for decisions that cross several parts of a system. The benchmark is an argument about the first home, and the post weakens its own no-comments rule when it says of the comments GPT-6 Astra added that "all 6 comments seem legitimate to me".
 
-## Put local reasoning beside the code that needs it
+I believe the measurement and would throw out the rule. Models fill that first home with narration, which human teams have always done too, and the fix is the same for both.
 
-A comment belongs near code when removing it would make a careful reader misread the implementation. It should explain a constraint, an invariant, a surprising choice, or a boundary that the names and control flow cannot make obvious.
+## What is code documentation?
 
-### Comments explain intent that syntax cannot carry
+Code documentation is any text whose job is to help someone read, call or change source code. The forms differ in who reads them and in what makes them wrong.
 
-In this site's [build script](https://github.com/ninadpathak/ninadpathak/blob/main/build.py), I keep comments next to decisions such as stable ordering and class-based stylesheet detection because those rules protect output that a later edit could quietly break. The comment earns its place because a reader changing that code needs the reason before changing the condition.
+| Form | Answers | Reader | Goes stale when |
+| --- | --- | --- | --- |
+| Comment | Why this branch, guard or ordering rule exists | Whoever edits these lines next | The lines change |
+| Docstring and generated reference | What a callable unit accepts and returns | A caller | The public contract changes |
+| Guide, README or runbook | How to finish work that spans several units | Someone with a task | The workflow changes |
 
-A line-by-line translation of the code adds maintenance work without adding meaning. Google's [API reference guidance](https://developers.google.com/style/api-reference-comments) makes the same distinction in another form: documentation comments should describe behavior and required details instead of repeating a name that already says what the symbol does.
+The [types of technical documentation](/articles/documentation-types/) covers the wider set that sits outside the code.
 
-### Docstrings define the unit a caller can depend on
+## Code documentation examples from a real build script
 
-A docstring belongs on a module, class, function, or method when it states the unit's contract in language a caller can use. Python's [pydoc documentation](https://docs.python.org/3/library/pydoc.html) explains that its displayed documentation for modules, classes, functions, and methods is derived from each object's docstring.
+A useful comment states a reason the code can't show, and a useful docstring states a contract a caller can rely on. Both examples below come from [this site's build script](https://github.com/ninadpathak/ninadpathak/blob/main/build.py).
 
-That makes a docstring more than an internal note. When the contract is stable enough for a caller or contributor to rely on, the same source-adjacent text can feed generated reference without copying it into another file.
+```python
+# Detect by CLASS, not by embed type. Gating visuals.css on "<iframe"
+# missed five published pages that wrap an <img> or <picture> in a
+# .visual-container, and they shipped unstyled. The class is what needs
+# the stylesheet; the element inside it is irrelevant.
+"has_visuals": ('class="visual-' in html) or ("<iframe" in html),
+```
 
-## Generate reference from contracts that source can expose
+Delete that comment and the next editor will tidy the condition back into the bug it fixed. The opposite kind is the one ryandrake [quoted on Hacker News](https://news.ycombinator.com/item?id=49613881) on September 8, "This code returns true if the user clicked on a button -- not on the list view.", with the verdict "I don't care what the code doesn't do."
 
-Generated reference is the home for facts that need exact names, types, defaults, return values, and error behavior. It is strongest when the source, annotations, or structured comments can provide those facts directly.
+A docstring is the comment a caller reads, so it describes the unit from outside.
 
-### Generated reference keeps exact facts close to change
+```python
+def render_work_note(note) -> str:
+    """Render plain text and one internal link, separate from the article body."""
+```
 
-A reference page can show the interface without asking a reader to infer details from prose. [Python's documentation tooling](https://docs.python.org/3/library/pydoc.html) can present documentation in text or HTML, which is useful because the generated surface stays attached to the object it describes.
+Python's [pydoc](https://docs.python.org/3/library/pydoc.html) builds reference from that string, so one sentence serves the source reader and the generated page. Running it from the repository root prints the entry.
 
-The same rule applies to APIs and configuration. Google asks API reference authors to document methods, parameters, return values, and exceptions because those details are part of the contract a developer implements.
+```bash
+python -c "import build, pydoc; print(pydoc.render_doc(build.render_work_note, renderer=pydoc.plaintext))"
+```
 
-The [API documentation guide](/articles/api-documentation/) writes one such entry out in full and checks it against the running service.
+```text
+Python Library Documentation: function render_work_note in module build
 
-### A generated page cannot explain a multi-step decision
+render_work_note(note) -> str
+    Render plain text and one internal link, separate from the article body.
+```
 
-Generated output can tell a reader what a parameter accepts. It cannot reliably decide which operation proves an integration is working, which prerequisite changes the order of setup, or what a team should do when an otherwise valid request fails in production.
+Google's [API reference guidance](https://developers.google.com/style/api-reference-comments) asks for the same thing at scale: describe behavior, parameters, return values and exceptions, and skip text that repeats what the name already says. The [API documentation guide](/articles/api-documentation/) writes one reference entry out in full and checks it against a running service.
 
-That limit matters because a reference page can be complete and still leave a new reader stranded. The distinction between reference and explanation is useful in the site's [guide to technical documentation types](/articles/documentation-types/), where each document earns its place through a different reader task.
+## Should coding agents write code comments?
 
-## Write guides for decisions that cross symbols
+Yes, when the comment records a reason, and a ban is the wrong fix for the ones that don't. The rule in Adamczewski's own AGENTS.md, "Don't add any comments or documentation unless I explicitly ask for them.", would also have blocked the stylesheet comment above.
 
-A written guide belongs where the reader needs a path through several symbols, files, systems, or roles. Guides explain sequence, context, tradeoffs, and recovery, all of which exceed the scope of one callable interface.
+I think model comments read wrong because they narrate the change. A sentence about what the diff did is addressed to whoever reviews this session, and the reader of a comment is whoever opens the file next year.
 
-### Guides connect a task to the contract it needs
+Machine-written comments are regular enough to detect, whatever the tell turns out to be. The [classifier](https://entropicthoughts.com/better-ai-comment-classifier) kqr published on September 9 separates them from human ones, and "the headline number is the balanced accuracy of 77 %."
 
-A setup guide can show a reader where to begin, what must already exist, how to recognize success, and where to look when the result differs. A [quick start guide template](/articles/quickstart-guide/) is that guide for a first run.
+A better instruction turned up in Nathan Broadbent's November 13 [review of the Ponytail plugin](https://docspring.com/blog/posts/ponytail-vs-agents-md/). Broadbent summarises one Ponytail rule as telling an agent to "leave a shortcut: comment naming any limit you accepted and when to revisit it.", which is a rationale comment with a required shape.
 
-The guide should link into reference at the exact point where a stable name or constraint becomes necessary.
+DocSpring's repository, which Broadbent describes in the same post, applies the placement idea to whole directories. It has a root AGENTS.md and "a nested file next to each part of the code that has its own pitfalls (migrations, background jobs, the public API, CI)."
 
-The guide also has to establish what the reader can safely assume when a request fails, because a signature alone cannot justify a retry.
+## Why the code alone isn't enough documentation
 
-That relationship keeps the guide readable and keeps the reference dependable. The site's [technical documentation template](/articles/documentation-template/) uses the same split by giving task pages and reference pages separate jobs within one documentation system.
+Code records what the program does and has no place to record what was rejected. The strongest version of the opposite view came from kaydub, in the [thread on Kevin Liao's documentation post](https://news.ycombinator.com/item?id=49955753) on October 4: "The code IS the documentation."
 
-### Guides preserve context that source cannot reveal
+The reason given was experience with the alternative: "I kept tons of markdown docs and decision docs. Now those things are just causing problems because they got stale."
 
-Source code can show that a build copies deployment controls into an output directory. It cannot tell a new contributor which release responsibility owns those controls, why that handoff matters to a hosted platform, or what to inspect after a deployment changes.
+That evidence supports a narrower claim than the conclusion. Documents kept far from the code went stale, and that argues for moving each fact next to the change that can invalidate it.
 
-Put that knowledge in a guide, README, architecture note, or runbook according to the reader's task. IBM's [code documentation overview](https://www.ibm.com/think/topics/code-documentation) also separates in-code material from broader documentation that explains how people use, maintain, and collaborate around software.
+Generated reference has the matching limit from the other side. It can list what a parameter accepts, and it can't say which call proves an integration works or what to do when a valid request fails in production.
 
-## Use one placement test before you document code
+## Where should each piece of code documentation go?
 
-Ask what kind of answer the reader needs at the moment they discover the information. The answer determines the document's home more reliably than the format you happen to be editing.
+Put each fact next to the change that would make it wrong.
 
-| If the reader needs to know | Put it in | Why it belongs there |
+| If the reader needs to know | Put it in | Because |
 | --- | --- | --- |
-| Why this branch, guard, or ordering rule exists | A nearby comment | The explanation changes how that local code should be read or edited. |
-| What a public callable unit accepts or returns | A docstring and generated reference | The contract needs exact, searchable facts that can remain close to source. |
-| How to complete work across several units or recover from failure | A written guide | The reader needs sequence, context, and a decision that no single symbol owns. |
+| Why this branch, guard or ordering rule exists | A comment beside it | The explanation changes how those lines should be edited |
+| What a public unit accepts or returns | A docstring and generated reference | The contract needs exact, searchable facts that stay close to source |
+| How to finish work across several units, or recover from a failure | A written guide | The reader needs sequence, context and a decision no single symbol owns |
+| Which pitfalls apply to everything in a directory | A README or AGENTS.md in that directory | Agents and people both load it when they start work there |
 
-There is a practical objection to this boundary: maintaining several documentation forms can sound like duplicated work. It becomes duplication only when each form repeats the same answer, because the local rationale, contract facts, and reader path have different update triggers.
+Guides are where a [quick start](/articles/quickstart-guide/) or a page from the [technical documentation template](/articles/documentation-template/) lives, and each should link into reference at the point where an exact name becomes necessary. A change that breaks a public contract also owes its callers an entry in the [release notes](/articles/release-notes-template/).
 
-Keep the source of truth close to the change that can invalidate it. A change that breaks a public contract also owes its callers an entry in the [release notes](/articles/release-notes-template/).
-
-Then let the comment, reference, and guide send the reader to the next question instead of trying to answer every question in one place.
+Maintaining several forms sounds like duplicated work, and it becomes duplication only when each form repeats the same answer. A comment, a contract and a reader's route have different update triggers, so keep each beside its own trigger and let it hand the reader to the next one.
