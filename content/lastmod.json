@@ -35,6 +35,10 @@
     "lastmod": "2026-10-28",
     "sources": "51413041731bf139c989e1e7f460ffffcddbd35b02e449215bb35ec71f12bfb2"
   },
+  "agents-reading-docs": {
+    "lastmod": "2026-11-16",
+    "sources": "f35c4876e639fbef8fccee45ad16c683fbbfb38afa03269328d7aa0606b7bf00"
+  },
   "ai-agent-failures": {
     "lastmod": "2026-10-28",
     "sources": "8b19ba4f1046752c3ecd7ebe3e9f94c63b49648e8353045e040d19336e2bae6e"
@@ -80,8 +84,8 @@
     "sources": "11fbdd6c32d363dd886dec15e075902fdef01c6aa9edce3d31dc189b40751cf7"
   },
   "code-documentation": {
-    "lastmod": "2026-10-29",
-    "sources": "fb0335795d114179ed977af40accbb22468bcb79145debd328a4ae0ac995fb00"
+    "lastmod": "2026-11-16",
+    "sources": "903cfe0b6edd34bf419f7bd4743d6e092cf463a08cd644f5cd53fa49b8f9dd75"
   },
   "coding-agent-memory": {
     "lastmod": "2026-10-22",
@@ -180,8 +184,8 @@
     "sources": "786311d0e4e4b5dcb429b8f35678992b07f76f9b6a3bfb5d70c54a74e943f2f8"
   },
   "llm-inference-optimization": {
-    "lastmod": "2026-10-22",
-    "sources": "475a151323b512ece53e0949ba1d3903337d4e67e6880b6506aef8e1fb844979"
+    "lastmod": "2026-11-16",
+    "sources": "6f7508b2dfa1dac7c9a47ca690eab34b8153b73c2119e0cd5a0f372eb347d60b"
   },
   "llm-structured-outputs": {
     "lastmod": "2026-10-27",
@@ -236,8 +240,8 @@
     "sources": "20ad8473db2b0a7fec553edec203c4ec5edc0a3fafc91fbc9e460678466c010c"
   },
   "rag-vs-memory": {
-    "lastmod": "2026-10-27",
-    "sources": "9319ed5d05c4ae009a98cdcd657664ed76565264f70e7f6f2bd148f07808573f"
+    "lastmod": "2026-11-16",
+    "sources": "3a38f1d32cb5cfae0a76ffed9b91d175dcc95d95ddc081d43be13f3050399a3c"
   },
   "release-notes-template": {
     "lastmod": "2026-10-27",
@@ -260,8 +264,8 @@
     "sources": "a29666e5fd2f42b556f3d0e348461d9dc8ca9676defa20206e4df1b44dd6d2c6"
   },
   "shorter-documentation": {
-    "lastmod": "2026-10-27",
-    "sources": "990e9a1c6fc3550bff5b7dd67043e4d64da7d53d6a531d798c483f586f654c11"
+    "lastmod": "2026-11-16",
+    "sources": "910db30a31749654077ffb5e763245966c31fcd9d63c6288d6e144a8e829c177"
   },
   "speculative-decoding": {
     "lastmod": "2026-10-27",
