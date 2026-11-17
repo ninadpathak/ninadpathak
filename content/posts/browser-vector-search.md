@@ -3,7 +3,7 @@ category: ai-engineering
 date: 2026-04-13
 description: 'PGlite vs SQLite-vec for vector search in the browser: how the two engines differ, and what to measure on your own data before you pick one.'
 status: published
-work_note: 'Part of my job at Mem0 was hiring writers who understood vector embeddings well enough to draft accurately. Here I take the same subject into the browser and compare two engines. The Mem0 case study is [in my portfolio](/portfolio/).'
+work_note: 'I wrote Firecrawl''s roundup of semantic search APIs. Vector search in the browser is a smaller version of the same choice, and I compare two engines for it here. [The roundup is in my portfolio](/portfolio/).'
 title: 'PGlite vs SQLite-vec: Vector Search in the Browser'
 updated: '2026-08-17'
 slug: browser-vector-search

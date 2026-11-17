@@ -5,7 +5,7 @@ description: AI agents juggle three distinct memory types. Getting them wrong is
   source of most agent memory failures I see in production.
 slug: agent-memory-types
 status: published
-work_note: 'At Mem0 I ran the team of 13 writers behind its agent memory guides and did the technical reviews. The split by memory type here is my own, and [my portfolio](/portfolio/) links to the Mem0 case study.'
+work_note: 'At Mem0, a memory infrastructure company, I ran a team of 13 writers. The split by memory type on this page is my own, and [my portfolio](/portfolio/) links to the Mem0 case study.'
 title: 'Episodic, Semantic, and Working Memory in AI Agents: A Practical Map'
 video: agent-memory-types
 ---
