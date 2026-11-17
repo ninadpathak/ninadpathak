@@ -100,7 +100,7 @@ tag_matches = ["documentation", "technical-writing", "api-documentation", "docs-
 [[content.categories]]
 slug = "ai-search-optimization"
 label = "AI Search"
-card = "AI search optimization for documentation: crawler access and answer structure, with a free checker for each."
+card = "Crawler access and answer structure for AI search optimization, with a free checker for each."
 glyph = "ranked rows=5 hi=0"
 title = "AI Search Optimization for Documentation"
 seo_title = "AI Search Optimization for Documentation | Ninad Pathak"
@@ -114,7 +114,7 @@ tag_matches = ["ai-search", "ai-overviews", "llms-txt", "answer-engines", "docum
 slug = "developer-experience"
 label = "Developer Content"
 card = "What to publish and who should write it, for readers who check each claim."
-glyph = "reader badge=check"
+glyph = "bubble"
 title = "Developer Content and DevRel"
 seo_title = "Developer Content and DevRel | Ninad Pathak"
 description = "Developer content and DevRel for readers who check each claim, covering what to publish and who should write it."
@@ -126,7 +126,7 @@ tag_matches = ["developer-experience", "devtools", "developer-tools", "developer
 [[content.categories]]
 slug = "ai-agents"
 label = "AI Agents"
-card = "AI agent architecture as a loop around a model and the harness that runs it, with MCP and the ways agents fail."
+card = "The loop and the harness behind AI agent architecture, with MCP and the ways agents fail."
 glyph = "loop"
 title = "AI Agent Architecture"
 seo_title = "AI Agent Architecture: The Loop and the Harness | Ninad Pathak"
@@ -139,7 +139,7 @@ tag_matches = ["ai-agents", "ai agents", "agents", "agent-architecture", "agent 
 [[content.categories]]
 slug = "agent-memory"
 label = "Agent Memory"
-card = "AI agent memory from what gets written to what gets read back, with the failure at each stage."
+card = "What gets written and what gets read back in AI agent memory, with the failure at each stage."
 glyph = "cells"
 title = "AI Agent Memory"
 seo_title = "AI Agent Memory: The Write Path and the Read Path | Ninad Pathak"

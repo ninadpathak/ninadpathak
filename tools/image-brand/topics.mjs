@@ -61,15 +61,47 @@ function hubs() {
   });
 }
 
+// Half the stroke each class draws with (static/css/main.css), so the left edge measured
+// below is the painted edge and not the path's centre line.
+const HALF_STROKE = { 'gl-thick': 0.875, 'gl-accent-line': 0.75, 'gl-fill': 0.625, 'gl-fill2': 0.625, 'gl-line': 0.625, 'gl-ink': 0.625, 'gl-cell': 0.5, 'gl-hair': 0.375 };
+
+// The leftmost painted x of a drawing. Paths count their end points and control points,
+// which bounds every glyph in the library: no arc or curve bulges left of its own points.
+function leftEdge(n, dx = 0) {
+  const a = n.attrs, num = (k) => Number(a[k] || 0);
+  const shift = dx + Number((a.transform || '').match(/translate\((-?[\d.]+)/)?.[1] || 0);
+  const half = Math.max(0, ...(a.class || '').split(' ').map((name) => HALF_STROKE[name] || 0));
+  let xs = [];
+  if (n.name === 'rect') xs = [num('x')];
+  else if (n.name === 'circle') xs = [num('cx') - num('r')];
+  else if (n.name === 'ellipse') xs = [num('cx') - num('rx')];
+  else if (n.name === 'path') {
+    let x = 0;
+    for (const [, cmd, args] of a.d.matchAll(/([a-zA-Z])([^a-zA-Z]*)/g)) {
+      const v = (args.match(/-?\d*\.?\d+/g) || []).map(Number), rel = cmd === cmd.toLowerCase() ? x : 0;
+      const C = cmd.toUpperCase();
+      if (C === 'H') { x = rel + v[0]; xs.push(x); }
+      else if (C === 'A') { x = rel + v[5]; xs.push(x); }
+      else if (C !== 'V' && C !== 'Z') { for (let i = 0; i < v.length; i += 2) xs.push(rel + v[i]); x = rel + v[v.length - 2]; }
+      else if (C === 'V') xs.push(x);
+    }
+  }
+  const own = xs.length ? Math.min(...xs) + shift - half : Infinity;
+  return Math.min(own, ...n.children.map((child) => leftEdge(child, shift)));
+}
+
 function draw({ slug, glyph }) {
   if (!glyph) throw new Error(`config.toml: hub ${slug} has no glyph`);
   const [name, opts] = parseSpec(glyph);
   if (!glyphs[name]) throw new Error(`config.toml: hub ${slug} names glyph "${name}", which lib/glyphs.js does not define as a tile glyph`);
   const hatch = `topic-${slug}-hatch`;
   const svg = node('svg');
-  for (const [k, v] of Object.entries({ class: 'topic-glyph', viewBox: `${-W / 2} ${-H / 2} ${W} ${H}`, width: W, height: H, 'aria-hidden': 'true', focusable: 'false' })) svg.setAttribute(k, v);
   const body = node('g');
   glyphs[name](body, W, H, { ...opts, accent: true, hatch });
+  // Glyphs are drawn centred, so each has a different inset. The box stays 56 x 48 and
+  // starts at the drawing's left edge, which lines the glyph up with the text under it.
+  const left = Math.round(leftEdge(body) * 100) / 100;
+  for (const [k, v] of Object.entries({ class: 'topic-glyph', viewBox: `${left} ${-H / 2} ${W} ${H}`, width: W, height: H, 'aria-hidden': 'true', focusable: 'false' })) svg.setAttribute(k, v);
   const markup = body.children.map(serialize).join('');
   // The 45° hatch of GUIDELINE.md §6, defined only for a glyph that uses it.
   const defs = markup.includes(`url(#${hatch})`)

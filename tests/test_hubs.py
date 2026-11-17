@@ -158,7 +158,7 @@ class HubPageTests(BuiltSite):
                 self.assertEqual(main.count(f'<li><a href="/articles/{member}/"'), 1, f"{slug} -> {member}")
             for section in pillar(slug)["sections"]:
                 self.assertIn(f">{section['heading']}</h2>", main)
-            self.assertNotIn("More in this hub", main, f"{slug} has a spoke outside its sections")
+            self.assertNotIn("More in this topic", main, f"{slug} has a spoke outside its sections")
 
     def test_each_hub_opens_with_its_lead_and_argument_before_the_map(self):
         for slug in HUBS:
@@ -275,6 +275,7 @@ class TopicGridTests(BuiltSite):
             self.assertEqual(len(rows), per_page if number < total else len(self.posts) - per_page * (total - 1))
             for slug, row in rows:
                 self.assertIn(f'<span class="tag">{HUBS[self.posts[slug]["category"]]["label"]}</span>', row, slug)
+                self.assertIn(f'datetime="{str(self.posts[slug]["date"])[:10]}"', row, slug)
             linked += [slug for slug, _ in rows]
             self.assertIn(f"Page {number} of {total}", html)
         self.assertEqual(sorted(linked), sorted(self.posts))
@@ -292,15 +293,17 @@ class TopicGridTests(BuiltSite):
             self.assertIn(f"| `{name}` |", guideline, f"{name} is not in the guideline's glyph table")
         for slug, svg in self.GLYPHS.items():
             # Fixed width and height reserve the box, so the glyph cannot shift the layout.
-            self.assertTrue(svg.startswith('<svg class="topic-glyph" viewBox="-28 -24 56 48" width="56" height="48" '
-                                           'aria-hidden="true" focusable="false">'), slug)
+            # The viewBox starts at the drawing's left edge, so every glyph lines up with
+            # the text under it; only that x-origin differs between glyphs.
+            self.assertRegex(svg, r'^<svg class="topic-glyph" viewBox="-\d+(\.\d+)? -24 56 48" width="56" height="48" '
+                                  r'aria-hidden="true" focusable="false">', slug)
             for banned in ("<script", "<style", " style=", "<text", "<image", "href="):
                 self.assertNotIn(banned, svg, slug)
 
     def test_the_stylesheet_colours_every_class_a_topic_glyph_uses(self):
         css = (ROOT / "static" / "css" / "main.css").read_text(encoding="utf-8")
         used = {name for svg in self.GLYPHS.values() for attr in re.findall(r'class="([^"]+)"', svg)
-                for name in attr.split()} - {"topic-glyph"}
+                for name in attr.split()} - {"topic-glyph", "gl-hatch"}  # the hatch rect is filled by its pattern
         styled = set(re.findall(r"\.topic-glyph \.([\w-]+)", css))
         self.assertEqual(used, styled, "a glyph class without a rule draws black; a rule without a glyph is dead CSS")
 
@@ -317,6 +320,7 @@ class TopicGridTests(BuiltSite):
             self.assertNotIn("\u2014", line)
             self.assertLessEqual(len(line), 120, f"{slug}: the line has to fit a box")
             self.assertIn(hub["primary_query"], f"{hub['label']} {line}".lower(), slug)
+            self.assertFalse(line.lower().startswith(hub["label"].lower()[:-1]), f"{slug}: the line repeats the box name")
 
 
 class SpokePageTests(BuiltSite):
@@ -485,7 +489,7 @@ class HubLoaderTests(unittest.TestCase):
 
     def test_a_post_missing_from_the_sections_still_gets_a_link(self):
         category = self.load(self.OPENING + self.SECTION, posts=("a", "b"))
-        self.assertEqual([s["heading"] for s in category["sections"]], ["One", "More in this hub"])
+        self.assertEqual([s["heading"] for s in category["sections"]], ["One", "More in this topic"])
         self.assertEqual([spoke["url"] for spoke in category["spokes"]], ["/articles/a/", "/articles/b/"])
         self.assertEqual(category["sections"][1]["spokes"][0]["note"], "About b.")
 

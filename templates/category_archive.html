@@ -109,7 +109,7 @@
     <div class="prose-container">
       {% if category.sections %}
       <nav class="toc" aria-label="Table of contents">
-        <div class="toc-title">In this hub</div>
+        <div class="toc-title">In this topic</div>
         <div class="toc">
           <ul>
             {% for section in category.sections %}
@@ -119,7 +119,7 @@
             {% for faq in category.faqs %}
             <li><a href="#{{ faq.question | slugify }}">{{ faq.question }}</a></li>
             {% endfor %}
-            {% if category.bridges %}<li><a href="#related-hubs">Related hubs</a></li>{% endif %}
+            {% if category.bridges %}<li><a href="#related-topics">Related topics</a></li>{% endif %}
           </ul>
         </div>
       </nav>
@@ -137,7 +137,7 @@
           {% endfor %}
         </ul>
         {% else %}
-        <p class="empty-state">No articles are currently published in this hub. <a href="/articles/">Browse all articles.</a></p>
+        <p class="empty-state">No articles are currently published in this topic. <a href="/articles/">Browse all articles.</a></p>
         {% endfor %}
 
         {% if category.templates %}
@@ -163,7 +163,7 @@
         {% endfor %}
 
         {% if category.bridges %}
-        <h2 id="related-hubs">Related hubs</h2>
+        <h2 id="related-topics">Related topics</h2>
         {% for bridge in category.bridges %}
         <p>{{ bridge.html }}</p>
         {% endfor %}

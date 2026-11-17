@@ -773,7 +773,7 @@ class SiteBuilder:
             unlisted = [post for post in category["posts"] if post["slug"] not in seen]
             if unlisted:
                 print(f"  ! hub '{slug}': not in any section yet: {', '.join(post['slug'] for post in unlisted)}")
-                sections.append({"heading": "More in this hub", "blurb": "", "spokes": [
+                sections.append({"heading": "More in this topic", "blurb": "", "spokes": [
                     {"url": post["url"], "title": post["title"], "note": escape(post["description"]), "post": post}
                     for post in unlisted]})
                 ordered += unlisted
