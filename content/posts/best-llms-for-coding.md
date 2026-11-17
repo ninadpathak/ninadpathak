@@ -1,12 +1,11 @@
 ---
 category: ai-engineering
 date: 2026-03-12
-description: 'The best LLMs for coding as of November 2026, read from Real-SWE 1.1: the leaders, the cost per resolved task, open-weight options and a test for your own repo.'
+description: 'The best LLMs for coding on Real-SWE 1.1 (October 2026): the leaders, the cost per resolved task, open-weight options and a test for your own repo.'
 status: published
 work_note: 'I''ve written about coding agents for Firecrawl, including why CLIs suit them better than IDEs. This page is about choosing the model underneath one, and [my portfolio](/portfolio/) has that piece.'
 title: 'The Best LLMs for Coding in 2026: An Engineering Review'
 slug: best-llms-for-coding
-video: best-llms-for-coding
 updated: 2026-11-17
 ---
 
@@ -33,10 +32,13 @@ Claude Opus 5.5 and GPT 6 Astra lead Real-SWE 1.1 at 56.80% and 56.00%, and thei
 | Muse Wonder 1.0 | Muse Code | 42.40% | 3.76 |
 | Gemini 4 Argon | Antigravity CLI | 39.20% | 4.66 |
 | Kimi K3.1 Pro | Kimi Code | 39.20% | 2.03 |
+| Particle-1 | mini-swe-agent | 38.40% | 0.56 |
 | DeepSeek V4.1 Flash | mini-swe-agent | 38.40% | 0.19 |
 | GLM-5.3 | Claude Code | 26.40% | 3.35 |
 
-The table has limits the page states itself. "Resolution rate is equivalent to pass@1, averaged over five independent runs per task.", so each score rests on 125 runs, and "All runs use the highest effort possible for each model with its harness."
+I kept the ten highest-ranked rows and added GLM-5.3 from thirteenth place, since it ran in a harness built for another model. The other seven rows are on the linked page.
+
+Each score rests on 125 runs, since "Resolution rate is equivalent to pass@1, averaged over five independent runs per task.", and "All runs use the highest effort possible for each model with its harness."
 
 It is also already old. Google [announced Gemini 4 Hydrogen on November 12](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/), after the table was published, and Artificial Analysis lists [Claude Fable 5.2](https://artificialanalysis.ai/models/claude-fable-5-2) as a November release, so neither model has a row.
 
@@ -50,6 +52,7 @@ rows = [
     ("Claude Sonnet 5.5", 51.20, 10.09),
     ("GPT 6.1 Sol", 47.20, 0.79),
     ("Kimi K3.1 Pro", 39.20, 2.03),
+    ("Particle-1", 38.40, 0.56),
     ("DeepSeek V4.1 Flash", 38.40, 0.19),
 ]
 
@@ -58,7 +61,7 @@ for name, rate, cost in rows:
     print(f"{name:<22}{rate:>8.1f}%{cost:>9.2f}{cost / (rate / 100):>19.2f}")
 ```
 
-Running it with `python3 cost_per_pass.py` prints the table.
+Saved as `cost_per_pass.py`, it gives these figures.
 
 ```text
 model                  resolved  per run  per resolved task
@@ -67,16 +70,17 @@ GPT 6 Astra               56.0%     3.78               6.75
 Claude Sonnet 5.5         51.2%    10.09              19.71
 GPT 6.1 Sol               47.2%     0.79               1.67
 Kimi K3.1 Pro             39.2%     2.03               5.18
+Particle-1                38.4%     0.56               1.46
 DeepSeek V4.1 Flash       38.4%     0.19               0.49
 ```
 
-A resolved task costs about fifty times as much on Opus 5.5 as on DeepSeek V4.1 Flash. The cheap model fails more often, and a failed run still has to be noticed by someone, which the cost column doesn't price.
+A resolved task costs about fifty times as much on Opus 5.5 as on DeepSeek V4.1 Flash, and Particle-1 undercuts GPT 6.1 Sol per resolved task while resolving fewer. The cheap models fail more often, and a failed run still has to be noticed by someone, which the cost column doesn't price.
 
 ## Why does a coding benchmark rank a model and its harness together?
 
 A coding model never runs alone, so every row is a model inside one agent program. Real-SWE says so directly: "We use native harnesses to reflect how enterprise engineers work in practice, evaluating model-and-harness combinations rather than models in isolation."
 
-The harness column in the table shows what that means. GLM-5.3 ran inside Claude Code and DeepSeek V4.1 Flash ran in mini-swe-agent, so their rows measure those pairings and say little about the same weights in another tool.
+GLM-5.3 ran inside Claude Code and DeepSeek V4.1 Flash ran in mini-swe-agent, so their rows measure those pairings and say little about the same weights in another tool.
 
 The [agent harness](/articles/agent-harnesses/) decides which files the model sees and when it runs the tests, and my [Claude Code and Gemini CLI comparison](/articles/claude-vs-gemini-cli/) walks through how two harnesses handle one refactoring task. When you change the model inside a harness you already use, expect a different number from the one in the table.
 
@@ -104,7 +108,7 @@ A leaderboard of single tasks can't show that cost. I take up Merz's point about
 
 ## What is the best open source LLM for coding?
 
-On Real-SWE 1.1 the best open-weight entries are Kimi K3.1 Pro at 39.20% and DeepSeek V4.1 Flash at 38.40%, about 17 points behind the leaders. DeepSeek publishes [its weights under an MIT license](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash), and the [Kimi K3.1 Pro weights](https://huggingface.co/moonshotai/Kimi-K3.1-Pro) carry Moonshot's own license, so "open weight" is the accurate term for both.
+On Real-SWE 1.1 the best open-weight entries are Kimi K3.1 Pro at 39.20% and DeepSeek V4.1 Flash at 38.40%, 17 to 18 points behind the leaders. DeepSeek publishes [its weights under an MIT license](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash), and the [Kimi K3.1 Pro weights](https://huggingface.co/moonshotai/Kimi-K3.1-Pro) carry Moonshot's own license, so "open weight" is the accurate term for both.
 
 Vendor numbers tell a closer story than that. <!-- evidence-three: the Kimi launch post prints no date; October 23 is when it was submitted to Hacker News (item 50212065) --> The [Kimi K3.1 Pro launch post](https://www.kimi.ai/blog/kimi-k3-1-pro), which appeared on October 23, says that on Terminal-Bench 4.0 "K3.1 Pro scores 65.7%, ahead of GPT-6 Astra (58.2%) and narrowly behind Claude Opus 5.5 (66.4%)."
 
@@ -138,7 +142,7 @@ The cost column argues against it, because GPT 6.1 Sol resolved 47.20% of Real-S
 
 **Can I run a coding LLM on my own hardware?**
 
-Yes, if the license and your hardware allow it. DeepSeek V4.1 Flash, Kimi K3.1 Pro and Ripple-65B Preview all publish weights on Hugging Face, and Ripple's maker says its model can "run efficiently on local devices such as NVIDIA DGX Spark".
+Only the small one, on ordinary hardware. Hugging Face lists Kimi K3.1 Pro at 2.8 trillion parameters and DeepSeek V4.1 Flash at 763 billion, which is data-centre scale, and Ripple-65B Preview at 65 billion, which its maker says can "run efficiently on local devices such as NVIDIA DGX Spark".
 
 **How important is context window size?**
 
