@@ -58,4 +58,6 @@ My own [best LLMs for coding](/articles/best-llms-for-coding/) page, written in 
 
 The question worth a test of your own is the other one. Take a change you made last month, give a model the repository as it stood before, and count a pass only if your whole suite stays green afterwards.
 
+A suite tells you that only as long as a red result still stops someone, which is the argument of [the red build nobody stops for](/articles/red-build-nobody-reads/).
+
 Run it at medium effort first, since the [token bill](/articles/llm-token-budgets/) for the highest setting bought nothing for Opus or SOL in Horthy's runs and a handful of extra passes for Astra. Until a public benchmark prints strict regression passes beside its headline number, read every "best coding model" claim as a claim about new code.
