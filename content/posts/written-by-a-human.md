@@ -12,7 +12,7 @@ description: Release notes and blog posts now carry a line saying a human wrote 
 slug: written-by-a-human
 status: published
 title: 'Written by a Human Proves Little. Last Tested Proves More'
-work_note: 'I sell technical writing, so I have an interest in what makes a page worth trusting now that text is free to produce. This essay is my answer, and [my portfolio](/portfolio/) has the work.'
+work_note: 'I write technical content for a living, so I have an interest in what makes a page worth trusting now that text is free to produce. This essay is my answer, and [my portfolio](/portfolio/) has the work.'
 ---
 
 Ghostty's [1.4.0 release notes](https://ghostty.org/docs/install/release-notes/1-4-0), published on October 27, pause after thanking contributors to say something release notes never used to say.

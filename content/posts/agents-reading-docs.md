@@ -14,7 +14,7 @@ description: Fern says agents are now over half of the requests to the docs it h
 slug: agents-reading-docs
 status: published
 title: 'A Request Is Not a Reader: What Fern''s Agent Traffic Data Shows'
-work_note: 'I sell AI-ready documentation audits, so a report on what agents fetch from docs sites bears on my own work. [Write to me](/contact/) about an audit of your docs.'
+work_note: 'I help teams with AI-ready documentation audits, so a report on what agents fetch from docs sites bears on my own work. [Write to me](/contact/) about an audit of your docs.'
 ---
 
 My llms.txt article from October cites one study as its main evidence on whether anything fetches the file, an Ahrefs finding that 97% of published llms.txt files got no request in May 2026. On November 10 Fern published [State of Docs: Agents are your top readers](https://buildwithfern.com/post/state-of-docs), built on logs from January to September across the docs sites it hosts, and those logs say something my article didn't.

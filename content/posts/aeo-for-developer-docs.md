@@ -17,7 +17,7 @@ takeaways:
 - Google's AI features need an indexed page that can show a snippet and a site included in Search Console's generative AI control, with no special schema or AI text files.
 - Check crawler access by agent and whether each passage survives being quoted alone.
 title: 'AEO vs GEO vs SEO: What Changes for Developer Docs'
-work_note: 'I sell AI-ready documentation audits, which is why this page sticks to what Google and OpenAI document about AI search. [Write to me](/contact/) to have the six checks run on your docs.'
+work_note: 'I run AI-ready documentation audits, which is why this page sticks to what Google and OpenAI document about AI search. [Write to me](/contact/) to have the six checks run on your docs.'
 video: aeo-for-developer-docs
 ---
 

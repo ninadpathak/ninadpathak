@@ -283,3 +283,7 @@ The review found 2 blockers, 8 should-fix items and 6 notes. Two added sentences
 
 Rule for later batches: the hub link goes where the paragraph flow allows it, and never between a paragraph and the one that refers back to it.
 
+## Standing rule: no "sell" about his own work (2026-11-17)
+
+Ninad, through root: "'I sell' noo lol pls no sells. I help with... or something like this is better." First-person copy about his services never uses sell, sells or selling. Write "I run AI-ready documentation audits", "I help teams with", "I write technical content for a living" and the like. Sentences about other companies selling things are unaffected.
+
