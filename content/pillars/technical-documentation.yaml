@@ -56,6 +56,8 @@ sections:
         note: "A release checklist for accessibility failures in docs, with a checker for the structural ones."
       - post: written-by-a-human
         note: "Reads Ghostty's written-by-humans label as an invitation that is fading as agents become the readers, and says who should keep writing by hand."
+      - post: agents-on-call-runbooks
+        note: "Responds to SigNoz's post on AI deskilling SREs by asking the on-call agent to write down what it did."
   - heading: "Ship changes"
     spokes:
       - post: writing-release-notes

@@ -159,6 +159,8 @@ With realistic report queries, every agent cleared only the leak, and the differ
 
 Four runs per cell on one model and one incident show how an agent used each runbook. They don't measure a failure rate.
 
+What a team stops learning when an agent takes every incident like this one is a separate question, in [my notes on AI deskilling SREs](/articles/agents-on-call-runbooks/).
+
 ## Check a runbook before it goes on call
 
 Run the checker on the finished runbook. `--filled` also fails on any `{{placeholder}}` left in the text:

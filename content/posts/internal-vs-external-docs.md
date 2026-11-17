@@ -102,6 +102,8 @@ A split is not a redacted internal page. It is a public document with a customer
 
 Link the private source to the public contract it maintains. Give each page its own owner and update trigger, because a supported authentication flow can change without changing the internal key-rotation runbook.
 
+The same split applies when an agent resolves the incident, and [my essay on agents on call](/articles/agents-on-call-runbooks/) argues that its account of what it did belongs on the internal side.
+
 ## Where do AGENTS.md and other agent instructions belong?
 
 Agent instruction files are internal documentation by task and often external by access, so treat them as a split. The task is internal because the file tells a contributor how to work in the repository, and the access is whatever the repository's is.
