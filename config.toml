@@ -79,6 +79,7 @@ description = "Paste a technical article. Get a linter report: condescension wor
 
 [[content.categories]]
 slug = "ai-search-optimization"
+hire_note = "For documentation, I run an <a href=\"/services/ai-ready-documentation-audit/\">AI-ready documentation audit</a> that covers these checks."
 preserve_empty_route = true
 title = "AI Search and Citation"
 description = "Tests and arguments about what answer engines can extract, what crawlers can access, and what publishers cannot honestly promise."
@@ -208,6 +209,11 @@ description = "Step-by-step guides that take a developer from an empty project t
 [[hire.offers]]
 name = "Technical articles"
 description = "Comparisons and explainers for engineers who will check the claims."
+
+[[hire.offers]]
+name = "AI-ready documentation audit"
+description = "A check of documentation for answer structure, AI crawler access in robots.txt, and llms.txt validity."
+url = "/services/ai-ready-documentation-audit/"
 
 [[hire.offers]]
 name = "Technical content programs"
