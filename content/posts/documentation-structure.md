@@ -19,9 +19,9 @@ updated: 2026-09-11
 video: documentation-structure
 ---
 
-Melvin Conway wrote in 1967 that organizations produce designs which are "copies of the communication structures of these organizations", and programmers have called that [Conway's law](https://en.wikipedia.org/wiki/Conway%27s_law) since. A docs sidebar with one section per engineering team is Conway's law applied to documentation.
+Melvin Conway wrote in [a 1968 paper](https://www.melconway.com/Home/Committees_Paper.html) that organizations produce designs which are "copies of the communication structures of these organizations", and programmers have called that [Conway's law](https://en.wikipedia.org/wiki/Conway%27s_law) since. A docs sidebar with one section per engineering team is Conway's law applied to documentation.
 
-A documentation structure works when it follows the reader through setup and use, then through failure and change. I call each of those paths a route, and I'd organize [technical documentation](/articles/technical-documentation/) around routes and keep team ownership out of the menu.
+A documentation structure works when it follows what the reader is doing: setting the product up, using it, fixing a failure or upgrading. I call the pages a reader passes through for one of those jobs a route, and I'd organize [technical documentation](/articles/technical-documentation/) around routes and keep team ownership out of the menu.
 
 My test for any navigation label is that it narrows the reader's next decision. A label that only shows which team owns the pages, say "Platform Services", belongs in repository metadata such as a CODEOWNERS file.
 
@@ -95,8 +95,6 @@ Developer: I have an approved role and need to send an authenticated request.
 
 Those two sentences lead to different actions, so the split is justified. If both led to the same task, the second section would exist only because the product has a second role.
 
-Vendors can also use one word for different things with no role involved, as they do with [the word harness in agent docs](/articles/what-agent-harness-means/).
-
 ### Where do tutorials, how-to guides, reference and explanation go?
 
 The [Diataxis framework](https://diataxis.fr/start-here/) names four kinds of documentation, each answering a different reader need: tutorials, how-to guides, reference and explanation. I wouldn't turn those four kinds into the four top-level sections of a site.
@@ -109,7 +107,7 @@ If a reader has to leave "Deploy" for a general "Concepts" section to understand
 
 A docs page has a global bar, a sidebar and a page outline, and each answers a different question. The global bar picks a kind of content, the sidebar shows where the page sits in one product area, and the page outline lists the sections of the current page.
 
-A link that repeats the layer above it without narrowing the choice can go.
+Remove a sidebar link that repeats a global-bar destination.
 
 ### The global bar picks a kind of content
 
@@ -129,9 +127,9 @@ The [AWS Lambda developer guide](https://docs.aws.amazon.com/lambda/latest/dg/we
     <img src="/static/images/visuals/aws-docs-density.png" alt="AWS Lambda documentation with global navigation, a guide sidebar, breadcrumbs, and a current-page outline" loading="lazy">
   </div>
 </div>
-<p class="visual-caption">The header chooses a destination. The sidebar locates the page inside Lambda, and the page outline exposes only the current document.</p>
+<p class="visual-caption">The AWS header leads to other services, the sidebar shows where the page sits in the Lambda guide, and the outline on the right lists this page's sections.</p>
 
-Remove a sidebar link when it opens the whole product library, or when it repeats a global destination without narrowing the reader's choice.
+Remove a sidebar link when it leads out of the product area, such as a link to every AWS service.
 
 ### The page outline lists the current page
 
@@ -147,13 +145,13 @@ A landing page should tell the reader what the section helps them do, where a ne
 
 A short decision table states the conditions. The API docs sections below are invented:
 
-| Reader state | Start here | Proof of fit |
+| Reader state | Start here | What the reader should find there |
 | --- | --- | --- |
 | Evaluating the API | API overview | Supported use cases and limits are visible |
 | Sending a first request | Quickstart | A test response is the finish line |
 | Adding one capability | How-to guides | The reader already has a working integration |
 | Looking up a field | API reference | Exact types and constraints are present |
-| Recovering from failure | Troubleshooting | Symptoms lead to diagnostics and recovery |
+| Recovering from failure | Troubleshooting | Each error message leads to a check and a fix |
 
 If the cards differ only by topic name, rewrite each one around where the reader starts and where they end up.
 
@@ -171,7 +169,7 @@ Copying the same instructions into each section gives a search engine [two pages
 
 GitLab's [documentation folder guidance](https://docs.gitlab.com/development/documentation/site_architecture/folder_structure/) gives each top-level folder a stated boundary: `doc/install/` holds "Instructions for installing GitLab" and `doc/update/` holds "Instructions for updating GitLab". The folder names are GitLab's own, and the part I'd copy is that every path says what belongs in it.
 
-### Split a shared subject by job
+### Split a guide and a reference that share a subject
 
 An authentication guide and an authentication reference share a subject without doing the same job. The split below is an example:
 
@@ -201,6 +199,8 @@ Don't redirect a removed page to the documentation homepage, because the homepag
 Test the labels on a spreadsheet, a plain-text tree or a clickable prototype before any page moves. A new documentation platform isn't needed to find out that a label like "Resources" tells a reader nothing.
 
 The test works only if a reviewer can pick a destination and explain the pick with no help from whoever designed the tree.
+
+A label can also fail because vendors use one word for different things, as they do with [the word harness in agent docs](/articles/what-agent-harness-means/).
 
 ### Give reviewers tasks without naming the section
 
@@ -274,7 +274,7 @@ Documentation
     `-- Release notes
 ```
 
-"Start" stays small. "Operate" and "Change" give the reader somewhere to go after the first successful response.
+"Start" holds only the pages a new reader needs before the first response. "Operate" and "Change" give the reader somewhere to go after the first successful response.
 
 ### Give authentication one canonical home
 
@@ -298,10 +298,10 @@ Each observation below suggests a defect without proving one, so each row ends i
 
 | Observation | Possible defect | Next check |
 | --- | --- | --- |
-| Search repeats a visible navigation label | Label may be hidden or misplaced | Run the same findability prompt |
+| Readers search for a term that is already a navigation label | Label may be hidden or misplaced | Run the same findability prompt |
 | Old URLs remain common entrances | Redirect or inbound links may be stale | Inspect referrers and redirect hops |
 | Readers move between two setup pages | Canonical task may be unclear | Compare the two page jobs |
-| Support links bypass landing pages | Landing route may not reach the answer | Ask why the direct link was needed |
+| Support replies link straight to deep pages | Landing route may not reach the answer | Ask why the direct link was needed |
 
 A lower bounce rate doesn't show that the structure works. The evidence I'd accept names a decision the reader had to make and the label or page that was changed to help with it.
 
@@ -314,7 +314,9 @@ The [documentation accessibility checklist](/articles/docs-accessibility/) cover
 - Give the global bar, the sidebar and the page outline one job each.
 - Test landing-page labels with reviewers before migrating.
 - Keep one canonical URL per answer and redirect each old URL straight to its new page.
-- After launch, turn each odd observation into a named check.
+- After launch, follow each odd search or support pattern with one check, such as rerunning the task prompt.
+
+Writing the quickstart, reference and troubleshooting pages that fill a structure like this one is work I take on, described under [developer documentation](/services/developer-documentation/).
 
 ## FAQ
 
@@ -324,7 +326,7 @@ Documentation structure is how a docs site groups and links its pages: the navig
 
 **Should documentation follow the Diataxis framework?**
 
-Diataxis is useful for deciding what kind of page you're writing. I wouldn't use its four kinds as the top-level sections, because readers arrive with a task, and an explanation often belongs beside the procedure it supports.
+Diataxis is useful for deciding what kind of page you're writing. I wouldn't use its four kinds as the top-level sections, because readers arrive with a task, and an explanation belongs beside the procedure it supports when the reader needs it to choose.
 
 **Do I need a new documentation platform to restructure docs?**
 

@@ -21,19 +21,21 @@ title: How to Write a Technical Tutorial a Reader Can Finish
 updated: 2026-09-10
 ---
 
-A famous first lesson in programming is a C program that prints "hello, world". It comes from a 1974 Bell Labs memo by Brian Kernighan that was itself titled [Programming in C: A Tutorial](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program), and it works because the reader can see on the screen whether they got it right.
+A famous first lesson in programming is [a C program that prints "hello, world"](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program). It comes from a 1974 Bell Labs memo by Brian Kernighan that was itself titled Programming in C: A Tutorial, and it works because the reader can see on the screen whether they got it right.
 
-To write a technical tutorial, pick one reader and one starting state, build a path to a result that reader can check, and run every step from a clean directory before you publish. I don't call a page a tutorial because it has numbered steps and code blocks.
+To write a technical tutorial, pick one reader and one starting state, build a path to a result that reader can check, and run every step from a clean directory before you publish. Numbered steps and code blocks don't make a page a tutorial.
 
-An earlier version of this page failed that test. Its example imported `verifyWebhook` from a package named `@example/webhooks` without telling the reader how to install it, so the first command failed in an empty directory.
+An earlier version of this page couldn't be run from an empty directory. Its example imported `verifyWebhook` from a package named `@example/webhooks` without telling the reader how to install it, so the first command failed in an empty directory.
 
-The example below replaces it, as part of my pages on [technical documentation](/articles/technical-documentation/). It's a small webhook receiver with no dependencies, and every command and output on this page comes from running it.
+The example below replaces it. It's a small webhook receiver with no dependencies, and every command and output on this page comes from running it.
+
+The page is one of my guides to [technical documentation](/articles/technical-documentation/).
 
 ## What makes a page a technical tutorial?
 
 A technical tutorial takes one reader from a stated starting point to a result they can see. A reference page answers a lookup, such as the format of a signature header, and a tutorial has the reader build something.
 
-An explainer has nothing for the reader to build, and [a short post about Docker](/articles/docker-is-weird-explainer/) shows the substitute: a command or file path beside each claim.
+An explainer gives the reader nothing to build, so it can give them a command or a file path to check, as [a short post about Docker](/articles/docker-is-weird-explainer/) does for two of its claims.
 
 If your reader only needs the definition of a signature field, give them a reference page. The [documentation types guide](/articles/documentation-types/) covers which page type fits which need.
 
@@ -43,11 +45,11 @@ Write down the starting state before you write a step. For the webhook example, 
 
 | Requirement | Check | If it fails |
 | --- | --- | --- |
-| Node.js 24.18.0, the recorded test version | `node --version` | Use the recorded version before comparing results |
+| Node.js 24 (recorded on 24.18.0, rerun on 24.22.3) | `node --version` | Install Node.js 24 before comparing output |
 | An extracted copy of the fixture | Confirm `service.mjs`, `webhook.mjs`, and `check.mjs` exist | Extract the complete archive |
 | A successful event and a rejected signature | Run `node check.mjs` | Inspect the failing assertion before describing the example as runnable |
 
-The result is small on purpose. The reader's receiver accepts an event signed with the fixture's test secret, rejects an event whose bytes were changed, and records only the accepted event.
+The reader's receiver accepts an event signed with the fixture's test secret, rejects an event whose bytes were changed, and records only the accepted event.
 
 I'd never call that a production webhook system in the tutorial. A tutorial that claims more than its example shows is teaching the reader something false.
 
@@ -72,15 +74,16 @@ If Node reports that a file can't be imported, compare your extracted folder wit
 node --input-type=module -e 'import { verifyWebhook } from "@example/webhooks"'
 ```
 
-Node answers with `ERR_MODULE_NOT_FOUND`, because the instructions never supplied that package. Swapping in another unexplained import would have left the same hole in the tutorial.
+Node answers with `ERR_MODULE_NOT_FOUND`, because the instructions never supplied that package. Replacing it with another package the page never installs would fail the same way.
 
-### Step 2: Keep the bytes attached to the signature
+### Step 2: Verify the signature over the raw request bytes
 
 The whole verifier is in `webhook.mjs`. The secret in it is public and belongs only to this local example.
 
 ```js
 import { createHmac, timingSafeEqual } from 'node:crypto';
 
+// This public value belongs only to this synthetic fixture.
 export const fixtureSecret = 'local-writing-example';
 export function sign(body) {
   return createHmac('sha256', fixtureSecret).update(body).digest('hex');
@@ -135,7 +138,7 @@ A tutorial should say what its example doesn't prove, in the tutorial itself. An
 
 | Production question | What this fixture establishes | What remains unresolved |
 | --- | --- | --- |
-| Can a changed body pass the original signature? | The tested changed-body request returns HTTP 401 | A complete security review |
+| Can a changed body pass the original signature? | The tested changed-body request returns HTTP 401 | Other tampering, such as a replayed request or a leaked secret |
 | Can a valid event be replayed? | Repeated valid requests are accepted | Timestamp policy and duplicate handling |
 | Is an accepted event durable? | It is appended to an in-memory array | Storage and crash recovery |
 | Does the code follow a vendor protocol? | It follows the protocol defined here | The actual provider's headers and signing rules |
@@ -151,8 +154,8 @@ Review a tutorial by running the archive from a new directory and comparing the 
 | Is every imported module supplied or installed? | Clean-directory command output | Hold if dependency resolution fails |
 | Can the reader start and stop the service? | The printed URL and health response | Repair the missing command or prerequisite |
 | Does the failure case actually fail? | Response status and stored-state assertion | Hold if rejected input changes accepted state |
-| Does the prose exceed the test? | A claim beside its assertion | Narrow the claim or add a relevant test |
-| Can an intended reader finish without help? | Their actual task log | Do not infer usability from the author's successful run |
+| Does the prose exceed the test? | Each claim on the page next to the assertion in `check.mjs` that tests it | Narrow the claim or add a relevant test |
+| Can an intended reader finish without help? | Their actual task log | Don't say readers can finish it until one has |
 
 The [recorded checks](/static/examples/writing-lab/validation.txt) are from September 10, 2026 on Node.js 24.18.0, and my rerun on Node.js 24.22.3 printed the same lines. I haven't tested the tutorial with outside readers, so the last row of that table is still open for this page.
 
@@ -164,7 +167,7 @@ Writing tutorials this way for a product is work I take on, described under [tec
 
 **How long should a technical tutorial be?**
 
-Long enough to reach one result the reader can check, and no longer. The webhook example here has four steps, and each step ends with output to compare.
+A technical tutorial should be long enough to reach one result the reader can check. The webhook example here has four steps, and each step ends with output to compare.
 
 **What is the difference between a tutorial and a how-to guide?**
 

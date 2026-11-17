@@ -21,11 +21,13 @@ title: A Technical Documentation Template With a Filled Example
 updated: 2026-09-10
 ---
 
-A page of [lorem ipsum](https://en.wikipedia.org/wiki/Lorem_ipsum) looks finished from across the room. A technical documentation template has the same problem: it gives you a getting-started page, a reference section and a troubleshooting page in seconds, and every one of them is still empty.
+The technical documentation template on this page comes in two parts. You get a blank starter to copy, and a filled example for a small export service, so you can see what each heading looks like once a real command and a real response are under it.
 
-So the technical documentation template on this page comes in two parts. You get a blank starter to copy, and a filled example for a small export service, so you can see what each heading looks like once a real command and a real response are under it.
+A page of [lorem ipsum](https://en.wikipedia.org/wiki/Lorem_ipsum) looks finished from across the room. A blank technical documentation template has the same problem: it gives you a getting-started page, a reference section and a troubleshooting page in seconds, and every one of them is still empty.
 
-I think a template is only useful if it makes the writer show how the product behaves. Each page in this one has a job, and I've listed the evidence that job needs, as part of my pages on [technical documentation](/articles/technical-documentation/).
+I think a template is only useful if it makes the writer show how the product behaves. Each page in this template has one job, such as getting the reader to a first accepted request, and the table below lists what the page has to show to do it.
+
+The template sits with my other guides to [technical documentation](/articles/technical-documentation/).
 
 ## What is in the technical documentation template?
 
@@ -39,11 +41,11 @@ The blank starter is a MkDocs site with a script that validates its links. The w
 
 | Page job | Filled example | Evidence the page must supply |
 | --- | --- | --- |
-| Choose where to begin | `docs/index.md` | Links from the reader's task to the owning page |
+| Choose where to begin | `docs/index.md` | A link from each task a reader arrives with to the page that covers it |
 | Reach first success | `docs/getting-started.md` | Startup commands and an observable response |
-| Perform a bounded task | `docs/send-a-request.md` | A complete request with its recovery branch |
-| Look up a contract | `docs/reference.md` | Input rules and response meanings |
-| Recover from a symptom | `docs/troubleshooting.md` | A diagnostic check and a justified next action |
+| Finish one task, such as sending an export request | `docs/send-a-request.md` | A complete request with its recovery branch |
+| Look up an exact rule, such as the allowed formats | `docs/reference.md` | Input rules and response meanings |
+| Recover from a symptom | `docs/troubleshooting.md` | A check that finds the cause, and the action to take for each result |
 
 If a page in your copy has no reader job yet, delete it until a task needs it. An empty "Concepts" section tells readers that an explanation exists when nobody has written one.
 
@@ -88,9 +90,9 @@ The reference page holds the exact rules that the getting-started page skipped. 
 | Request key | Required; 1 to 64 ASCII letters, digits, or hyphens | Missing key returns HTTP 400 |
 | Body size | Limit: 4096 bytes | A valid padded 4096-byte request is accepted; 4097 bytes return HTTP 413 |
 | Retention | The lifetime of this server instance | A new instance starts with no stored records |
-| Output | An accepted record identifier | The fixture contains no file-generation worker |
+| Output | An accepted record identifier | The service returns a record ID and never produces a file |
 
-Run `node check.mjs` to test every row of that table against the service. If an assertion fails, the row it tests is wrong and needs fixing before the page ships.
+Run `node check.mjs` to test the format, key, body-size and retention rows against the service. If an assertion fails, the row it tests is wrong and needs fixing before the page ships.
 
 The [API documentation guide](/articles/api-documentation/) writes out the full reference entry for this endpoint, with each response and a script that checks them against the service. When your reference is generated from source code, [code documentation](/articles/code-documentation/) covers what stays in comments and what moves into a guide.
 
@@ -117,10 +119,10 @@ If you get HTTP 200, the service already holds a record for that key, so pick a 
 | Observed state | Next action | Reason |
 | --- | --- | --- |
 | Response lost; same instance still running | Repeat with the saved key and format, omitting the fixture failure header | The retained record can be returned with HTTP 200 |
-| HTTP 409 | Compare the new format with the original request | The key identifies a different retained payload |
+| HTTP 409 | Compare the new format with the original request | The service already stored this key with a different format |
 | Process restarted after response loss | Stop the recovery experiment | The fixture cannot recover the previous record |
 
-"Retry failed requests" is an instruction that reads well in a review and causes duplicates in production. The [filled request guide](/static/examples/writing-lab/docs/send-a-request.md) has the exact retry command, and the [troubleshooting page](/static/examples/writing-lab/docs/troubleshooting.md) says when to stop retrying.
+"Retry failed requests" doesn't say which key to send, and in this fixture a retry with a new key returns 202 and a second record, `exp_2`. The [filled request guide](/static/examples/writing-lab/docs/send-a-request.md) has the exact retry command, and the [troubleshooting page](/static/examples/writing-lab/docs/troubleshooting.md) says when to stop retrying.
 
 A run of the lost-response request and the retry on November 18, 2026, with Node.js 24.22.3, matched the table. The retry with the same key and format returned HTTP 200, and the retry with the format changed to `json` returned HTTP 409.
 
@@ -142,18 +144,20 @@ python scripts/validate_docs.py
 mkdocs build --strict
 ```
 
-On my run, with MkDocs 1.6.1, the validator printed a `PASS` line for each of its checks across five pages, and the strict build finished without a warning. If the install or the validator fails for you, fix that before publishing the generated site.
+On my run, with MkDocs 1.6.1, the validator printed a `PASS` line for each of its checks across five pages, and the strict build finished without a warning.
 
 Those five commands never send a request to your product. The behavior test in the filled example is `node check.mjs`, and it doesn't test the starter's publishing setup.
 
 | Change | Page to review | Evidence to repeat |
 | --- | --- | --- |
 | Startup command changes | Getting started | Clean-directory startup and health request |
-| Input limit changes | Reference | Accepted boundary and rejected adjacent value |
+| Input limit changes | Reference | The largest accepted size and the first rejected one (4096 and 4097 bytes here) |
 | Storage lifetime changes | Reference and troubleshooting | Recovery before and after restart |
 | A link target moves | Index and referring pages | Link validation and rendered navigation |
 
-When one of those changes reaches users, release notes built on the [release notes template](/articles/release-notes-template/) tell them what to do about it. The [documentation review checklist](/articles/documentation-review/) adds the reader-facing checks.
+When one of those changes reaches users, release notes built on the [release notes template](/articles/release-notes-template/) tell them what to do about it. The [documentation review checklist](/articles/documentation-review/) covers the rendered page and the release state.
+
+Writing the request guide, reference and troubleshooting pages this template holds is work I take on, described under [developer documentation](/services/developer-documentation/).
 
 I'd also give each filled page a named owner, and keep the product change that triggers its review next to that name.
 

@@ -424,8 +424,8 @@
     "doc check"
   ],
   "docker-is-weird-explainer": [
-    "doc",
-    "stop*",
-    "doc check"
+    "outline*",
+    "doc check",
+    "reader"
   ]
 }

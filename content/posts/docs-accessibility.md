@@ -21,28 +21,28 @@ updated: 2026-08-09
 video: docs-accessibility
 ---
 
-Open a docs page in [Lynx](https://en.wikipedia.org/wiki/Lynx_(web_browser)), the text-only browser that has been maintained since 1992, and you see what the page is without its stylesheet. A heading that was only bold text becomes a plain line, and an image becomes its alt text or nothing.
-
 Documentation accessibility is whether a reader can finish the page's task with a screen reader, a keyboard or a zoomed-in browser. A page can look finished and still fail that reader, for example when a link is named "here" or a screenshot is the only place that shows the request succeeded.
 
-The checklist below is the one I'd run before a docs release, as part of [technical documentation](/articles/technical-documentation/). A small [checker script](/static/downloads/documentation-accessibility-checker.zip) covers the checks a parser can do, and the rest need a person.
+A quick first test is to open the page in [Lynx](https://en.wikipedia.org/wiki/Lynx_(web_browser)), the text-only browser that has been maintained since 1992, which shows the page without its stylesheet. A heading that was only bold text becomes a plain line, and an image becomes its alt text or nothing.
+
+The checklist below is the one I'd run before a docs release, and it sits with my other guides to [technical documentation](/articles/technical-documentation/). A small [checker script](/static/downloads/documentation-accessibility-checker.zip) covers the checks a parser can do, and the rest need a person.
 
 ## What should a documentation accessibility checklist cover?
 
 A documentation accessibility checklist should cover six page elements, checked against the generated HTML and the rendered page:
 
-| Page element | What must survive | Quick check |
+| Page element | What a screen-reader or keyboard user needs from it | Quick check |
 | --- | --- | --- |
 | Heading | Section structure | One page title, ordered heading levels, and no headings created only with visual styling |
 | Code | Copyable instructions | Actual text, a declared language, a starting state, and an observable result near the command |
-| Link | Destination and behavior | Link text names the destination and signals a download, new tab, or same-page jump when that behavior matters |
-| Table | Relationships between values | A simple data table has headers, and layout is not built with table markup |
-| Visual | Information beyond pixels | Meaningful images have useful alternatives, decorative images have empty alternatives, and complex visuals have nearby equivalent detail |
+| Link | Where the link goes and what it does | Link text names the destination and signals a download, new tab, or same-page jump when that behavior matters |
+| Table | Which header each value belongs to | A simple data table has headers, and layout is not built with table markup |
+| Visual | The image's information as text | Meaningful images have useful alternatives, decorative images have empty alternatives, and complex visuals have nearby equivalent detail |
 | Rendered page | Keyboard and zoom use | Focus remains visible, interactive controls work from a keyboard, and reflow does not hide the task |
 
 <p><a class="btn btn-primary" href="/static/downloads/documentation-accessibility-checker.zip" download>Download the documentation accessibility checker (.zip)</a></p>
 
-The script checks five things and nothing else: images without an `alt` attribute, vague link text, skipped heading levels, tables without header cells, and code elements without a language class. Keyboard use, contrast and screen-reader output are outside what it can test.
+The script checks six things: exactly one `h1`, images without an `alt` attribute, vague link text, skipped heading levels, tables without header cells, and code blocks without a language class. Keyboard use, contrast and screen-reader output are outside what it can test.
 
 ## How do you test headings, lists and tables?
 
@@ -52,7 +52,7 @@ Test them in the HTML, because a screen reader follows the markup and not the st
 
 Keep one page title, then use heading levels to lay out the task in the order a reader does it. Read the headings alone, without their paragraphs, and check that they tell you where to start, what to do next and where to confirm it worked.
 
-A visitor from search lands on the page without the sidebar, which is why the same headings-only test appears in my [SEO checklist for documentation sites](/articles/docs-seo/).
+The same headings-only test is in my [SEO checklist for documentation sites](/articles/docs-seo/), because a visitor from search reads the headings to decide whether the page answers them.
 
 ### Keep lists and tables semantic
 
@@ -66,15 +66,15 @@ Check that each command is real text with a declared language, and that each lin
 
 ### Put commands in text and name their language
 
-Never put a command in a screenshot. The MSU checklist's reason is that real text is "searchable, selectable, and recognized by assistive technologies", and an image of a terminal is none of those.
+Never put a command in a screenshot. Google's guidance says "Don't use images of text, code samples, or terminal output", and the MSU checklist's reason is that real text is "searchable, selectable, and recognized by assistive technologies", and an image of a terminal is none of those.
 
 Declare the language on the code fence, so the generated HTML carries a class such as `language-bash`. Put the prerequisites and the expected output in the text next to the block, where a screen reader will reach them.
 
 ### Give links text that names the destination
 
-Screen-reader users often move through a page by jumping from link to link. Google's guidance says links "should make sense when read out of context", so "click here" fails and "read the documentation review checklist" passes.
+Some screen-reader users scan a page by jumping from link to link. Google's guidance says links "should make sense when read out of context", so "click here" fails and "read the documentation review checklist" passes.
 
-Say so in the link text when a link does something unexpected. A download, a jump within the page and a new tab should each be named before the reader activates the link.
+When a link starts a download, jumps within the page or opens a new tab, say so in the link text.
 
 ## How do you make images accessible in documentation?
 
@@ -82,9 +82,9 @@ Write alt text that gives the information the image is there to give. If a scree
 
 [Open edX's accessibility checklist](https://docs.openedx.org/en/latest/educators/references/accessibility/accessibility_best_practices_checklist.html) sets the rule by the kind of image. A simple image gets alt text, a graph gets its information as text next to it, and a purely decorative image gets an empty `alt` so a screen reader skips it.
 
-Color needs the same treatment. A red error box also has to say in words that the request failed, because color can't be the only way a reader learns the status.
+A red error box also has to say in words that the request failed, because color can't be the only way a reader learns the status.
 
-The [WCAG 2.2 Quick Reference](https://www.w3.org/WAI/WCAG22/quickref/) lists the success criteria behind each of these checks, including text alternatives, contrast and keyboard operation. I use it to look up a criterion, and I still test the page's real task by hand.
+The [WCAG 2.2 Quick Reference](https://www.w3.org/WAI/WCAG22/quickref/) lists the success criteria behind each of these checks, including text alternatives, contrast and keyboard operation. It's the place to look up a criterion, and the page's real task still has to be tested by hand.
 
 ## What can an accessibility checker find, and what can't it?
 
@@ -102,13 +102,27 @@ A checker can find markup that is missing, and it can't tell whether the page is
 </body></html>
 ```
 
-Then I fixed all five and saved the result as `good.html`. Running the checker on both files on November 18, 2026 printed this:
+Then I fixed all five and saved the result as `good.html`:
+
+```html
+<!doctype html>
+<html lang="en"><head><title>Create an API key</title></head><body>
+<h1>Create an API key</h1>
+<h2>Run the command</h2>
+<p>Copy the command from the <a href="/docs/keys">API keys reference</a>.</p>
+<pre><code class="language-bash">acme keys create --name ci</code></pre>
+<img src="success.png" alt="Terminal showing the new key's ID, key_123, after the create command">
+<table><tr><th>Plan</th><th>Keys</th></tr><tr><td>Free</td><td>2</td></tr></table>
+</body></html>
+```
+
+Running the checker on both files on November 18, 2026 printed this:
 
 ```text
 $ python3 check_documentation_accessibility.py bad.html
 FAIL bad.html
 - link text is too vague: 'here'
-- code element has no declared language class
+- code block has no declared language class
 - image is missing an alt attribute
 - heading level jumps from h1 to h3
 - table 1 has no th header cells
@@ -126,7 +140,7 @@ The checker named each of the five mistakes on the first file and exited with co
     <img src="/static/images/articles/documentation-accessibility-checklist/checker-pass.png" alt="MacBook Air terminal window showing python3 check_documentation_accessibility.py rendered-page.html and a passing structural accessibility result" loading="lazy">
   </div>
 </div>
-<p class="visual-caption">The checker reports a passed structural check for the repaired fixture. It does not claim to test keyboard operation, color contrast, or screen-reader output.</p>
+<p class="visual-caption">An earlier run of the checker passing a repaired page.</p>
 
 Run the checker on the generated HTML and not on the Markdown source. Plugins, templates and syntax highlighters all change the markup between the two, and the generated page is what a reader's screen reader receives.
 
@@ -140,7 +154,9 @@ Then zoom the page to 200% and check that the task is still readable without scr
 
 Run the checker in the same preview step that already validates links and examples, and block the release when it fails. The manual tests go on the release checklist, with a named owner for each page template.
 
-I'd start with one task page, such as the page for creating an API key. Fix its headings, its code block and its images, and the fixes carry to every page built from the same template.
+I'd start with one task page, such as the page for creating an API key. Fix its headings, its code block and its images.
+
+A fix made in the template, such as the language class on code blocks, carries to every page built from it. Writing docs that pass these checks is work I take on, described under [developer documentation](/services/developer-documentation/).
 
 ## FAQ
 
@@ -158,4 +174,4 @@ No. A command in an image can't be copied, searched or read by a screen reader, 
 
 **Which accessibility standard applies to documentation?**
 
-WCAG 2.2 is the reference I use. Its Quick Reference lists the success criteria for text alternatives, contrast, keyboard operation and link purpose.
+WCAG 2.2 is the reference this checklist follows. Its Quick Reference lists the success criteria for text alternatives, contrast, keyboard operation and link purpose.

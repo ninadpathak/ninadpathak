@@ -21,17 +21,19 @@ video: developer-onboarding-docs
 
 Jeff Atwood published a badge in 2007 for software that had passed the [Works on My Machine certification program](https://blog.codinghorror.com/the-works-on-my-machine-certification-program/). A new engineer's first week is when a team finds out how much of its setup has only that certificate.
 
-Developer onboarding documentation takes a new engineer from a clean machine to a safe first merged change, with one supported setup path and a check after each step. I end the guide at the merge, because a reading list gives the reader no finish line to reach.
+Developer onboarding documentation takes a new engineer from a clean machine to a safe first merged change, with one supported setup path and a check after each step. I'd end the guide at the merge, because a reading list gives the reader no finish line to reach.
 
 Say a new engineer on day two asks which Node version to use, whether Docker is required and where the test credentials live. Suppose the first answer is in the README, the second is in a Slack thread and the third is an assumption inside the setup script.
 
 A teammate can walk the new engineer through all of it, and the machine will run by the afternoon. The onboarding guide is still wrong after that rescue, because it claims the setup is documented when part of the setup lives in one person's head.
 
-My rule for this kind of [technical documentation](/articles/technical-documentation/) is that the guide alone has to carry someone from a clean machine through setup, review and a verified change in a test environment. A guide that can't do that is company background with a checklist attached.
+My rule for this kind of [technical documentation](/articles/technical-documentation/) is that the guide alone has to carry someone from a clean machine through setup, review and a verified change in a test environment.
 
 ## Where should developer onboarding documentation end?
 
-Developer onboarding documentation should end at the new engineer's first merged change. "Learn the codebase" has no finish line, and "run the product, change one behavior, pass the checks, open a pull request and verify the merged result" has five.
+Developer onboarding documentation should end at the new engineer's first merged change.
+
+"Learn the codebase" has no finish line. "Run the product, change one behavior, pass the checks, open a pull request and verify the merged result" names five things a reviewer can check.
 
 A team may put architecture first because it wants the new engineer to understand the system before touching it. I'd reverse the order, because a diagram of the request flow makes more sense after the reader has sent one request through it.
 
@@ -69,7 +71,7 @@ Write the expected output next to each check. If the `curl` command returns anyt
 
 The guide should offer one setup path, the path the team tests. Setup pages collect alternatives over time: a bootstrap script that one person uses, a Docker setup that another prefers, and an old wiki page that still shows up in internal search.
 
-Calling that pile "flexible" hands the choice to the new engineer, who is the person with the least information to choose with. Pick one path and mark it as supported, give a required platform alternative its own heading, and move the old commands off the page.
+Calling that pile "flexible" hands the choice to the new engineer, who is the person with the least information to choose with. Pick one path and mark it as supported, if Windows needs different commands, give them their own heading, and move the old commands off the page.
 
 ### Name versions and access before a command needs them
 
@@ -96,7 +98,7 @@ Microsoft's [onboarding guide template](https://microsoft.github.io/code-with-en
     <img src="/static/images/visuals/microsoft-onboarding-template.png" alt="Microsoft Engineering Fundamentals onboarding template with separate areas for goals, contacts, team agreements, setup, project building blocks, and resources" loading="lazy">
   </div>
 </div>
-<p class="visual-caption">Setup has a distinct job. Contacts and project context remain available without blocking the first run.</p>
+<p class="visual-caption">Microsoft's template gives setup its own section, apart from contacts, team agreements and project building blocks.</p>
 
 ### Put the fix beside the step that fails
 
@@ -117,9 +119,9 @@ Replace "restart everything" with the specific thing to stop or reset, the fix, 
 
 ## What should a new engineer's first change be?
 
-The first change should be real, small and reversible, because its job is to take the new engineer through the team's actual branch, test, review and deploy steps. It isn't a way to get free work out of someone's first week.
+The first change should be real, small and reversible, because its job is to take the new engineer through the team's actual branch, test, review and deploy steps.
 
-GitLab's public [onboarding handbook](https://handbook.gitlab.com/handbook/people-group/general-onboarding/) runs onboarding as tasks in a GitLab issue, and each onboarding issue has a due date of 30 days. GitLab's process covers a whole company, and the part I'd copy for a first engineering change is that the onboarding work is assigned work with a visible state.
+GitLab's public [onboarding handbook](https://handbook.gitlab.com/handbook/people-group/general-onboarding/) runs onboarding as tasks in a GitLab issue, and each onboarding issue has a due date of 30 days. GitLab's process covers a whole company, and the part I'd copy for a first engineering change is that each onboarding task sits in an issue with a due date, so anyone can see what is done.
 
 <div class="visual-wrapper">
   <div class="visual-title">GitLab's public onboarding handbook</div>
@@ -127,15 +129,15 @@ GitLab's public [onboarding handbook](https://handbook.gitlab.com/handbook/peopl
     <img src="/static/images/visuals/gitlab-onboarding-handbook.png" alt="GitLab handbook describing onboarding issue tasks, ownership, and role-specific work" loading="lazy">
   </div>
 </div>
-<p class="visual-caption">The task has an owner and a completion state. It is not a folder of optional reading.</p>
+<p class="visual-caption">GitLab's handbook runs onboarding as tasks in an issue with a 30-day due date.</p>
 
 ### Choose a change that is real and reversible
 
 A good first issue goes through the normal branch, test, review and deploy steps without touching production data or credentials. I'd accept an issue as a first change only if all five of these hold:
 
-- The change affects behavior a reader can observe.
+- The change affects behavior the engineer can see, such as a response.
 - A failing test can describe the starting state.
-- The change stays inside one owned component.
+- The change stays inside one component with a named owner.
 - The test environment can prove the result.
 - Reverting the merge restores the earlier behavior.
 
@@ -211,13 +213,13 @@ The route teaches Orbit through the same steps the team uses to ship. Every cell
 
 ### Record where readers needed a rescue
 
-After someone follows the route, write down each stage where they needed a choice the page didn't make or help from a teammate. I wouldn't publish a "time to productivity" number that nobody measured.
+After someone follows the route, write down each stage where they needed a choice the page didn't make or help from a teammate.
 
 | Observed failure | Documentation decision |
 | --- | --- |
-| The vault role is requested after setup blocks | Move access before the repository step |
+| Setup stalls because the vault role wasn't requested first | Move access before the repository step |
 | The health check passes against the wrong build | Return the commit SHA in the response |
-| Starter issues cross component boundaries | Add ownership and rollback criteria |
+| Starter issues cross component boundaries | Accept a starter issue only if it stays in one owned component and its merge can be reverted |
 | Review waits with no assignee | Name the reviewer in the onboarding issue |
 
 Each failure in the left column leads to one change in the route. Page views can't show you that the vault role was requested too late, and a note from the person who ran the route can.
@@ -230,7 +232,7 @@ Each failure in the left column leads to one change in the route. Page views can
 - Each stage names the team that owns its facts and the change that triggers a review.
 - A run from a clean machine reproduces the documented path.
 
-Onboarding is one route inside a larger set of docs. The guide to [what technical documentation should include](/articles/technical-docs/) covers the questions that belong outside the onboarding guide.
+The guide to [what technical documentation should include](/articles/technical-docs/) covers the pages a product needs besides onboarding. A product's quickstart needs the same single setup path, and writing quickstarts is work I take on, described under [developer documentation](/services/developer-documentation/).
 
 Before the route ships, run it through the [documentation review checklist](/articles/documentation-review/), which tests the commands and the rendered page.
 

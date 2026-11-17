@@ -22,17 +22,19 @@ updated: 2026-09-11
 video: documentation-review
 ---
 
-Poul-Henning Kamp gave programmers the word bikeshedding in 1999, borrowing [Parkinson's story](https://en.wikipedia.org/wiki/Law_of_triviality) of a committee that waves through a nuclear plant and argues about the staff bicycle shed. A docs pull request with twelve comments about commas and none about whether the command works is the same committee.
+Poul-Henning Kamp gave programmers the word bikeshedding in [a 1999 email](https://phk.freebsd.dk/sagas/bikeshed/) to the FreeBSD project, borrowing [Parkinson's story](https://en.wikipedia.org/wiki/Law_of_triviality) of a committee that waves through a nuclear plant and argues about the staff bicycle shed. A docs pull request with twelve comments about commas and none about whether the command works is the same committee.
 
-A documentation review checklist should put the checks in the order of what can hurt a reader. I review in four passes: the product's behavior first, then the reader's route through the page, then the rendered page, then the release state, and I edit the prose after all four.
+A documentation review checklist should run its checks in order of the harm a miss does, so a command that fails comes before a comma. I'd review in four passes: the product's behavior first, then the reader's route through the page, then the rendered page, then the release state, with the prose edited after all four.
 
-Wording still matters to me. But a well-edited sentence makes a false instruction look trustworthy, so in my reviews of [technical documentation](/articles/technical-documentation/) the facts get checked before the sentences get polished.
+Wording still matters to me. But a well-edited sentence makes a false instruction look trustworthy, so in a review of [technical documentation](/articles/technical-documentation/) the facts get checked before the sentences get polished.
 
 ## What should a documentation review check first?
 
-A documentation review should check first that the product does what the page says. A technical page makes claims about names, defaults, permissions, versions, errors and recovery, and I list those claims before I touch the sentences that carry them.
+A documentation review should check first that the product does what the page says. A technical page makes claims, such as which role can create an API key and what an invalid key returns, so list those claims before you touch the sentences that carry them.
 
 Each claim that could break the reader's task needs a source outside the draft. Checking a draft against itself only tells you the draft is consistent.
+
+A 500-word Docker explainer shows what an unchecked claim costs. Its paragraphs were careful, and [its heading about root](/articles/docker-is-weird-explainer/) was seven years out of date.
 
 ### Build a claim ledger
 
@@ -45,7 +47,7 @@ Put the claims in a table where every row has to point at a source. The API, rol
 | Invalid keys return `401 invalid_api_key` | Reproduced response | Engineer | Pending |
 | The key is displayed once | Released UI | Product owner | Pending |
 
-I reject a row when its source is the draft itself, somebody's memory of a demo, or another page that repeats the same unsupported sentence.
+Reject a row when its source is the draft itself, somebody's memory of a demo, or another page that repeats the same unsupported sentence.
 
 If you ask an AI model about the product before you ask an engineer, treat its answers as questions to put to the engineer. A plausible explanation from a model is not a verification source.
 
@@ -71,13 +73,13 @@ If your run needed a credential, a global package or a feature flag that the pag
 
 Cause the error on purpose. Then confirm that the message, the status code, the diagnostic step and the fix all match what the page says.
 
-I record each recovery in four fields:
+Record each recovery in four fields:
 
 | Field | Required evidence |
 | --- | --- |
 | Symptom | Exact error or visible behavior |
 | Diagnostic | Command or observation that separates likely causes |
-| Recovery | Smallest supported action that restores progress |
+| Recovery | The smallest documented fix, such as revoking one key |
 | Proof | Signal that the recovery worked |
 
 Replace "Try again" with a command that tells the reader what went wrong. Keep "Restart the service" only if the page says what the restart clears and how the reader can tell it worked.
@@ -86,9 +88,7 @@ Replace "Try again" with a command that tells the reader what went wrong. Keep "
 
 Decide by asking whether the page answers one question that no other page answers. A draft can be correct and still be the wrong page, because it repeats an existing answer or tries to serve two different readers.
 
-A page can also be well aimed and carry one false claim, as a 500-word Docker explainer did [in its heading about root](/articles/docker-is-weird-explainer/).
-
-### Name one reader decision
+### Write the page's purpose in one sentence
 
 Before the review starts, write one sentence:
 
@@ -98,7 +98,7 @@ This page helps [reader with starting state] decide or do [specific outcome].
 
 If one reviewer fills in "create a key" and another fills in "understand authentication", the draft is doing two jobs. Split it into two pages or pick one job before anyone edits it.
 
-The [technical tutorial guide](/articles/writing-technical-tutorials/) shows how a tutorial differs from a task page. The difference matters in review because a tutorial may walk the reader through a build, and a reference page has to state behavior without a lesson attached.
+The [technical tutorial guide](/articles/writing-technical-tutorials/) shows how a tutorial differs from a task page. The difference matters in review because a reviewer runs a tutorial from start to finish and checks a reference page one field at a time.
 
 ### Search for the answer that already exists
 
@@ -128,7 +128,7 @@ Extract the outline. The file path below is an illustration and not a page in th
 rg '^#{2,3} ' content/posts/example.md
 ```
 
-[Google's heading guidance](https://developers.google.com/style/headings) asks for descriptive headings organized in a hierarchy, with no skipped levels. An outline that reads Overview, Setup, Configuration, Usage tells the reader nothing about the task, so I rewrite any heading that could be moved to another article without anyone noticing.
+[Google's heading guidance](https://developers.google.com/style/headings) asks for descriptive headings organized in a hierarchy, with no skipped levels. An outline that reads Overview, Setup, Configuration, Usage tells the reader nothing about the task, so I'd rewrite any heading that could be moved to another article without anyone noticing.
 
 [Task-based documentation headings](/articles/documentation-headings/) goes through that rewrite one heading type at a time.
 
@@ -146,7 +146,7 @@ A screenshot of the final screen doesn't prove the middle steps worked. If step 
 
 ### Separate advice from criteria a reviewer can apply
 
-"Keep paragraphs short" is advice. "Split the paragraph when setup, consequence, and exception compete inside it" is a criterion, because a reviewer can look at a paragraph and say whether it meets it.
+"Keep paragraphs short" is advice. "Split a paragraph that holds both a setup step and its exception" is a criterion, because a reviewer can look at a paragraph and say whether it meets it.
 
 Use a list for items of the same kind and a table to compare the same fields across rows, and keep the reasoning in prose. A page built only from cards and checklists can look organized and never explain why one choice is better than another.
 
@@ -174,9 +174,11 @@ Look at the title, the navigation, the tables, the code blocks, the images and t
 
 Fix anything that is clipped, overlapped or unreachable. A line that wraps is fine unless the wrap changes what the line means, as it does when a long command breaks in the middle of a flag.
 
-### Check the HTML structure and not a score
+### Check the HTML structure
 
-[W3C's page-structure tutorial](https://www.w3.org/WAI/tutorials/page-structure/) covers page regions, labels for those regions, headings and content structure. Check them in the page's HTML: one descriptive H1, heading levels in order, labeled navigation, keyboard access, table headers and image alternatives.
+[W3C's page-structure tutorial](https://www.w3.org/WAI/tutorials/page-structure/) covers page regions, labels for those regions, headings and content structure. Check them in the page's HTML: one descriptive H1, heading levels in order, labeled navigation, table headers and image alternatives.
+
+Test keyboard access in the browser, because the HTML doesn't show where the focus goes when a reader presses Tab.
 
 A script can report a missing `alt` attribute, and it can't tell whether the alt text carries the image's information. My [documentation accessibility checklist](/articles/docs-accessibility/) has a checker for the structural part and the manual tests for the rest.
 
@@ -229,11 +231,11 @@ Each reviewer should approve the facts they can check, and nothing else. A singl
 
 Each reviewer should say what evidence they looked at. An engineer's approval of the commands says nothing about the alt text.
 
-Terminology earns its place in the writer's row. The phrase agent harness currently [names different things](/articles/what-agent-harness-means/) depending on whose docs you read.
+Terminology is in the writer's row because one term can mean different things across vendors, as [the phrase agent harness](/articles/what-agent-harness-means/) does.
 
-## What do the four passes look like on one page?
+## What do the first two passes look like on one page?
 
-The example below runs the passes on an authentication guide for Orbit, an API I invented for this page. Orbit isn't a client project or a real service.
+The example below runs the product pass and the reader's-route pass on an authentication guide for Orbit, an API I invented for this page. Orbit isn't a client project or a real service.
 
 The draft under review says:
 
@@ -255,9 +257,7 @@ Missing scope: 403 insufficient_scope
 Cleanup: revoke the test key
 ```
 
-Those values belong to the invented fixture, so this page makes no claim about any real product.
-
-### Pass two: run the reader's request
+### Pass one, continued: run the reader's request
 
 The command below targets the made-up host `api.orbit.example` with a placeholder key. It isn't a live endpoint:
 
@@ -282,7 +282,7 @@ The response the fixture defines is:
 
 The pass condition is `"mode": "test"`. A response without that field doesn't show that the request reached the test environment.
 
-### Pass three: turn the outline into a route
+### Pass two: rewrite the headings as the reader's steps
 
 Replace the headings Setup, Usage, Errors and Security with headings that name what the reader does:
 
@@ -313,11 +313,13 @@ A check should report the file, the rule and the command that reproduces the fai
 
 Whether the product matches the page, and whether the page helps its reader, still take a person to approve.
 
+Writing a product's docs so they pass a review like this one is work I take on, described under [developer documentation](/services/developer-documentation/).
+
 ## Documentation review checklist
 
 - Block publication when a behavior, permission or recovery claim has no source a reviewer can inspect.
 - Run the commands from the documented starting state and record the success output and the error output.
-- Give one reader decision the title, the route and the canonical URL.
+- Give the page one question to answer, and name it in the title and the URL.
 - Review the rendered page from the branch under review at desktop and phone widths.
 - Match availability and version limits to the release.
 - Have each reviewer approve only the evidence they can inspect.

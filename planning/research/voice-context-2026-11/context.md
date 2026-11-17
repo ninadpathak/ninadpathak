@@ -842,9 +842,9 @@ Batch 11 holds the last six rewrites and one essay, written to the specificity r
 | --- | --- | --- |
 | writing-technical-tutorials, retitled "How to Write a Technical Tutorial a Reader Can Finish" | Kernighan's 1974 memo, the writing-lab fixture | fixture rerun on Node.js 24.22.3, `node check.mjs` PASS; no film |
 | documentation-template, retitled "A Technical Documentation Template With a Filled Example" | the downloadable template and its filled example site | fixture requests, validator and `mkdocs build --strict` (MkDocs 1.6.1) rerun; no film |
-| docs-accessibility, retitled "A Documentation Accessibility Checklist" | W3C tutorials, Michigan State University's guidance | checker run on a failing and a passing page, output on the page; film kept |
+| docs-accessibility, retitled "A Documentation Accessibility Checklist" | Google's accessibility guidance, Michigan State University's checklist, WCAG 2.2 Quick Reference | checker run on a failing and a passing page, both shown on the page with the output; film kept |
 | developer-onboarding-docs, retitled "Developer Onboarding Documentation That Ends in a Merged Change" | Corepack's README, Microsoft's repository guidance, GitLab's handbook and docs workflow | no code run; example blocks labelled; film kept |
-| documentation-review, retitled "A Documentation Review Checklist That Starts With the Product" | Google's heading guidance, GitLab's review apps and docs workflow, W3C's page-structure tutorial | `tools/verify_documentation_review_sources.py` PASS; Orbit example labelled as invented; film kept |
+| documentation-review, retitled "A Documentation Review Checklist That Starts With the Product" | Google's heading guidance, GitLab's review apps and docs workflow, W3C's page-structure tutorial | the Google, GitLab and W3C pages re-read by hand (the repo's verifier script checks another page's sources); Orbit example labelled as invented; film kept |
 | documentation-structure, retitled "A Documentation Structure Built Around What Readers Do" | Diataxis, GitLab's folder guidance, the AWS Lambda developer guide, W3C's page-structure tutorial | no code run; Orbit example labelled as invented; film kept |
 | docker-is-weird-explainer (new essay, technical-documentation) | the October 22 post Docker is weird, four Hacker News comments, Docker's release notes for 19.03 and 20.10 and its rootless page | opinion-led, one short quote per section |
 
@@ -852,7 +852,7 @@ Opening devices added to the ledger: hello, world and Kernighan's 1974 memo (wri
 
 Films: docs-accessibility, developer-onboarding-docs, documentation-review and documentation-structure keep their films, because each page still states every line the film narrates.
 
-What the earlier pages had wrong, for the record: docs-accessibility named "Microsoft State University" for Michigan State University, linked a Harvard page that returns 403 to a script, and credited Google with a claim about images of code that its page doesn't make. documentation-review failed the prose check on a sentence starting with a number, and documentation-structure carried a banned word.
+What the earlier pages had wrong, for the record: docs-accessibility named "Microsoft State University" for Michigan State University, linked a Harvard page that returns 403 to a script, and its sentence on images of code was right about Google, whose page says "Don't use images of text, code samples, or terminal output"; the new page cites Google for the rule and Michigan State University for the reason. documentation-review failed the prose check on a sentence starting with a number, and documentation-structure carried a banned word.
 
 Search Console showed no queries for documentation-review or documentation-structure in the 90 days to November 15, so their retitles cost no ranking.
 
@@ -861,3 +861,17 @@ Position taken in the new essay, for Ninad to confirm: an explainer's headings s
 Pages touched only for an inbound link: none outside the batch. The essay's two inbound links come from writing-technical-tutorials and documentation-review, and docs-accessibility gained its second inbound link from documentation-review.
 
 Facts that move: the Hacker News score of the Docker post (887 points on November 18), Node.js and MkDocs versions named on the two fixture pages, and GitLab's folder list.
+
+After the batch 11 review (2 blockers, 13 should-fix, 88 units): the essay now says the Docker post gives a command or path for two of its five claims, and its position is that an explainer should give one for every claim. The review checklist page states its method in the imperative or as "I'd", with no first-person line that claims a standing review practice. The accessibility checker in the download now tests only code blocks (`pre` with `code`) for a language class, because the earlier rule flagged every inline code element; its README and the page's output were updated to match. Kamp's 1999 email and Conway's 1968 paper are linked at their own pages. documentation-template and docs-accessibility now lead with the answer and bring the known thing in second, so the six pages no longer share one order of parts.
+
+Rules the batch 11 review added:
+
+- "Each" and "every" are counted against the source before they are written. If the source does a thing for two of five, the page says two of five.
+- A method page says what the method does in the imperative or as "I'd". Present-tense first person ("I review", "I use", "I end") claims a standing practice and needs Ninad's confirmation.
+- A services sentence names only work the linked service page lists (quickstarts, reference and troubleshooting pages for developer documentation).
+- A script's description on the page lists every check the script makes, and the script is run against a real built page before the page tells a team to block a release on it.
+- A link on a named work goes to the work where its own page exists, with Wikipedia kept for the summary.
+- Table cells and captions get the same cold read as paragraphs.
+
+For Ninad to confirm from this batch: whether he reviews client docs in these four passes (then the present tense can return), the onboarding film's line "I end developer onboarding docs at a safe first merge", the documentation-structure work note's "I rewrite them around what the reader came to do", and whether the drawn checker figure on docs-accessibility should stay now that the text output sits above it.
+

@@ -5225,7 +5225,8 @@
         "Don't skip levels of the heading hierarchy",
         "Links should make sense when read out of context",
         "To change the visual formatting of a heading, use CSS rather than using a heading level that doesn't fit the hierarchy",
-        "If the image is purely decorative, use empty alt text"
+        "If the image is purely decorative, use empty alt text",
+        "Don't use images of text, code samples, or terminal output"
       ],
       "connects": [
         "docs-accessibility"
@@ -5565,6 +5566,34 @@
       "connects": [
         "docker-is-weird-explainer"
       ]
+    },
+    {
+      "id": "phk-bikeshed-email",
+      "url": "https://phk.freebsd.dk/sagas/bikeshed/",
+      "author": "Poul-Henning Kamp",
+      "date": "1999-10-02",
+      "title": "The Bikeshed email",
+      "quotes": [
+        "In 1999 I had become sort of a de facto spiritual leader of the FreeBSD project",
+        "C. Northcote Parkinson wrote a book in the early 1960'ies"
+      ],
+      "connects": [
+        "documentation-review"
+      ]
+    },
+    {
+      "id": "conway-committees-paper",
+      "url": "https://www.melconway.com/Home/Committees_Paper.html",
+      "author": "Melvin E. Conway",
+      "date": "1968-04-01",
+      "title": "How Do Committees Invent?",
+      "quotes": [
+        "are constrained to produce designs which are copies of the communication structures of these organizations",
+        "Reprinted by permission of Datamation magazine, where it appeared April, 1968"
+      ],
+      "connects": [
+        "documentation-structure"
+      ]
     }
   ],
   "unused_leads": [
@@ -5836,7 +5865,8 @@
       "docs owner",
       "time to productivity",
       "flexible",
-      "Read the architecture overview, clone the repositories, set up the services, and choose a starter ticket."
+      "Read the architecture overview, clone the repositories, set up the services, and choose a starter ticket.",
+      "Run the product, change one behavior, pass the checks, open a pull request and verify the merged result"
     ],
     "documentation-review": [
       "Try again",
@@ -5844,13 +5874,13 @@
       "create a key",
       "understand authentication",
       "Keep paragraphs short",
-      "Split the paragraph when setup, consequence, and exception compete inside it",
       "Review annually",
       "the docs team",
       "LGTM",
       "high quality",
       "Generate an API key in Settings, add it to your request, and run the example. The API returns your account.",
-      "\"mode\": \"test\""
+      "\"mode\": \"test\"",
+      "Split a paragraph that holds both a setup step and its exception"
     ],
     "documentation-structure": [
       "Platform Services",
