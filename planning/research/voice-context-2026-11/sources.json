@@ -1247,7 +1247,8 @@
       ],
       "connects": [
         "best-llms-for-coding",
-        "nobody-understands-the-code"
+        "nobody-understands-the-code",
+        "written-by-a-human"
       ]
     },
     {
@@ -1625,11 +1626,13 @@
         "Release notes for Ghostty 1.4.0, released on October 27, 2026.",
         "This requires user interaction (copy-paste) to trigger.",
         "This affects Ghostty 1.3.0 and 1.3.1.",
-        "They take a combined 16+ hours to write"
+        "They take a combined 16+ hours to write",
+        "These release notes are painstakingly and lovingly hand-crafted by human Ghostty maintainers, including the full changelog. They take a combined 16+ hours to write, so please enjoy."
       ],
       "connects": [
         "writing-release-notes",
-        "writing-changelogs"
+        "writing-changelogs",
+        "written-by-a-human"
       ]
     },
     {
@@ -1933,6 +1936,50 @@
         "writing-for-ai-products",
         "writing-technical-tutorials"
       ]
+    },
+    {
+      "id": "hn-trust-auntienomen",
+      "url": "https://hn.algolia.com/api/v1/items/50487366",
+      "author": "auntienomen",
+      "date": "2026-11-13",
+      "title": "Comment on AI is destroying the trust between writers and readers",
+      "discussion": "https://news.ycombinator.com/item?id=50487366",
+      "quotes": [
+        "generate prose faster than readers can read it",
+        "This is a fundamental break in the bargain between readers and writers: However long it takes someone to consume a piece of writing, it almost certainly took the author longer to write it.",
+        "you should spend more time writing something than you expect the audience to spend reading it."
+      ],
+      "connects": [
+        "written-by-a-human"
+      ]
+    },
+    {
+      "id": "hn-trust-juanre",
+      "url": "https://hn.algolia.com/api/v1/items/50487329",
+      "author": "juanre",
+      "date": "2026-11-13",
+      "title": "Comment on AI is destroying the trust between writers and readers",
+      "discussion": "https://news.ycombinator.com/item?id=50487329",
+      "quotes": [
+        "The one thing that we can prove with reasonable ease is that the time it took to write was compatible with the author being a human"
+      ],
+      "connects": [
+        "written-by-a-human"
+      ]
+    },
+    {
+      "id": "hn-trust-samintheshell",
+      "url": "https://hn.algolia.com/api/v1/items/50484325",
+      "author": "SamInTheShell",
+      "date": "2026-11-13",
+      "title": "Comment on AI is destroying the trust between writers and readers",
+      "discussion": "https://news.ycombinator.com/item?id=50484325",
+      "quotes": [
+        "I can't trust that my coworkers are actually testing the crap they're generating before wasting my time with runbooks that aren't even validated."
+      ],
+      "connects": [
+        "written-by-a-human"
+      ]
     }
   ],
   "unused_leads": [
@@ -2098,6 +2145,9 @@
     "lambda-calculus-ai": [],
     "writing-for-ai-products": [
       "rate limits apply"
+    ],
+    "written-by-a-human": [
+      "written by a human"
     ]
   }
 }

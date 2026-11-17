@@ -210,7 +210,7 @@ Release tooling can already collect pull requests, contributors, labels, and lin
 
 Automation saves collection time, but the inventory remains a draft. It cannot reliably combine several pull requests into one user-facing change or spot migration work behind an innocent title.
 
-Ghostty's maintainers went the other way and say so in the notes: "They take a combined 16+ hours to write". That is the cost of the judgment, and a generated inventory doesn't remove it.
+Ghostty's maintainers went the other way and say so in the notes: "They take a combined 16+ hours to write". That is the cost of the judgment, and a generated inventory doesn't remove it. I look at what a line like theirs proves in [a separate essay](/articles/written-by-a-human/).
 
 ### Build the notes during development
 
