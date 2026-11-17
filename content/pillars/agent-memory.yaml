@@ -19,7 +19,7 @@ sections:
       - post: agent-memory-types
         note: "Names the four memory types, says where the names come from, and shows why the type decides the lookup."
       - post: context-windows-vs-memory
-        note: "Treats the context window as a per-request budget and memory as state retrieved into a later request."
+        note: "Separates what a model sees in one request from state stored for later ones, and counts what replaying a conversation costs."
       - post: rag-vs-memory
         note: "Draws the line between retrieval for one request and state kept across requests, and shows how to run both."
   - heading: "Short-term memory and compression"

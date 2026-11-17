@@ -45,7 +45,7 @@ sections:
   - heading: "Write and review"
     spokes:
       - post: documentation-best-practices
-        note: "A review card that checks a page for a clear reader task and a recovery path beside each step that can fail."
+        note: "Tests a page on whether a reader can finish a task and recover from the likeliest failure, with a review card."
       - post: documentation-headings
         note: "Shows when a heading should name a task and when a plain noun phrase serves the reader better."
       - post: shorter-documentation
@@ -75,7 +75,7 @@ sections:
   - heading: "Keep it found"
     spokes:
       - post: docs-seo
-        note: "A technical SEO checklist for docs sites, worked in dependency order from crawling to indexing."
+        note: "A technical SEO checklist for docs sites in dependency order, with an audit script and its output."
 templates_heading: "Template index"
 templates_intro: "Each file below is the download from its guide above."
 templates:
