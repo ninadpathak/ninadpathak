@@ -1,7 +1,7 @@
 %% @fig 01
 %% @kicker Semantic cache: hit vs miss
 %% @alt An incoming query is embedded and compared with cached queries by similarity. Above the threshold it is a hit and the cached response returns. Below it is a miss, and the full pipeline and model run.
-%% @caption On a miss the result is stored for next time. GPTCache reports API-call reductions of up to 68.8%, and hits come back 2–10× faster.
+%% @caption A hit returns the stored answer and skips retrieval and generation. A miss runs the pipeline and stores the result for next time.
 %% @spacing 20,40
 %% @path query>embed>match>cached
 %% @glyph query | reader

@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/semantic-caching/semantic-cache.mmd",
-  "hash": "348f3d304053eda6",
+  "hash": "b35718e367d35d98",
   "pele": "1.8.0",
   "width": 720,
   "height": 384,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "An incoming query is embedded and compared with cached queries by similarity. Above the threshold it is a hit and the cached response returns. Below it is a miss, and the full pipeline and model run.",
-  "caption": "On a miss the result is stored for next time. GPTCache reports API-call reductions of up to 68.8%, and hits come back 2–10× faster.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/semantic-caching/semantic-cache.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/semantic-caching/semantic-cache.narrow.svg\" width=\"288\" height=\"664\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/semantic-caching/semantic-cache.svg\" width=\"720\" height=\"384\" alt=\"An incoming query is embedded and compared with cached queries by similarity. Above the threshold it is a hit and the cached response returns. Below it is a miss, and the full pipeline and model run.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>On a miss the result is stored for next time. GPTCache reports API-call reductions of up to 68.8%, and hits come back 2–10× faster.</figcaption>\n</figure>"
+  "caption": "A hit returns the stored answer and skips retrieval and generation. A miss runs the pipeline and stores the result for next time.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/semantic-caching/semantic-cache.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/semantic-caching/semantic-cache.narrow.svg\" width=\"288\" height=\"664\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/semantic-caching/semantic-cache.svg\" width=\"720\" height=\"384\" alt=\"An incoming query is embedded and compared with cached queries by similarity. Above the threshold it is a hit and the cached response returns. Below it is a miss, and the full pipeline and model run.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>A hit returns the stored answer and skips retrieval and generation. A miss runs the pipeline and stores the result for next time.</figcaption>\n</figure>"
 }

@@ -183,6 +183,8 @@ Reranking costs one model pass per candidate, so latency grows with both the can
 
 Its passages average 14 words, far shorter than a real chunk, so both figures are a floor.
 
+A repeated question doesn't have to pay that cost twice, and [semantic caching](/articles/semantic-caching/) covers the cache that sits in front of retrieval.
+
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/rag-reranking/latency-tradeoff.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-reranking/latency-tradeoff.narrow.svg" width="288" height="616"><img class="np-has-narrow" src="/static/images/diagrams/rag-reranking/latency-tradeoff.svg" width="720" height="288" alt="A reranked request in four steps. Embedding the query and retrieving a hundred vectors each take milliseconds, so the first stage is fast. Reranking a hundred pairs with a cross-encoder adds from hundreds of milliseconds to more than a second, depending on the model, before the answer starts streaming." loading="lazy" decoding="async"></picture></a>
   <figcaption>Retrieval is fast, and the cross-encoder is where the time goes.</figcaption>

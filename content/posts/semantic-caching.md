@@ -4,173 +4,149 @@ primary_query: semantic caching
 siblings:
 - contextual-retrieval
 - rag-reranking
+bridges:
+- slug: llm-token-budgets
+  reason: Provider-side prompt caching is a different mechanism, and that page works out what it saves.
 date: 2026-03-28
-description: Semantic caching returns cached LLM responses for semantically similar
-  queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism
-  works and where it fails.
+description: 'Semantic caching returns a stored LLM answer when a new question is close enough to an old one. How it works, a threshold test on a real embedding model, and when to skip it.'
 status: published
 work_note: "Tutorials, explainers and comparisons for AI companies are my work as a freelance technical writer. I'm Ninad Pathak, and I build the example and run it before I draft, so your engineers review working code. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
-title: 'Semantic Caching: The RAG Optimization Nobody Talks About'
+title: 'Semantic Caching for LLM and RAG Applications'
 slug: semantic-caching
+updated: 2026-11-17
 ---
 
-Almost every conversation I see about RAG optimization centers on retrieval quality: better embeddings, rerankers, hybrid search, contextual chunking. The layer nobody talks about sits before retrieval even starts.
+Semantic caching stores the answer an LLM gave to a question and returns it again when a new question means the same thing. It decides "the same thing" by comparing embeddings, so two questions can match without sharing a word.
 
-Semantic caching intercepts a query, checks whether a sufficiently similar query has already been answered, and returns the stored response instead of running the full pipeline. Picture a support bot that has already answered "how do I reset my password" two hundred times this week.
+An HTTP cache has a simpler job. [RFC 9111](https://www.rfc-editor.org/rfc/rfc9111.html) builds the cache key from the request method and the target URI, and notes that many caches in common use key on the URI alone.
 
-Done well, semantic caching cuts 40-70% of LLM API calls on the right workloads.
-
-**Short answer:** Semantic caching embeds each query, searches a vector store of prior queries, and returns the cached response when cosine similarity exceeds a threshold (typically 0.85-0.92). It works well for FAQ-style, documentation, and support workloads where queries repeat with slight variations.
-
-It fails for conversational agents, personalized responses, and any workload where the answer must reflect current state.
-
-## Why exact-match caching doesn't work for LLM queries
-
-Traditional caching keys on the exact input string. "What is your return policy?" and "Can I return an item?" are different strings and produce separate cache misses, even though a support bot should give them the same answer.
-
-LLM query traffic doesn't repeat exactly. It repeats semantically.
-
-[Industry data puts 30-40% of LLM requests as semantically similar to previous ones](https://blog.premai.io/semantic-caching-for-llms-how-to-cut-api-bills-by-60-without-hurting-quality/). For high-repetition categories like documentation lookup, code explanation, and FAQ responses, that figure climbs to 40-60%.
-
-Conversational categories drop to 5-15%.
-
-Replacing string equality with embedding similarity is what makes the difference. The cache becomes a vector store of prior queries, and a hit occurs when a new query lands within a configurable similarity radius of a stored one.
-
-Think of an exact-match cache as a filing cabinet where the folder label has to be spelled character for character, against [semantic caching](/glossary/semantic-caching/) that files by what the question is about.
-
-## How the mechanism works
-
-The pipeline for semantic caching has four components:
-
-1. **Embedding layer**: Convert the incoming query to a vector using the same embedding model you'll use for comparisons. Consistency here matters. A mismatch between the embedding model at cache write time and cache read time produces unreliable similarity scores.
-
-2. **Vector search**: Run an approximate nearest-neighbor search over stored query embeddings. Redis LangCache, [GPTCache from Zilliz](https://github.com/zilliztech/GPTCache), and purpose-built LLM gateways all handle this step, though with different tradeoffs on throughput and latency.
-
-3. **Similarity evaluation**: Compare the nearest-neighbor distance against a threshold. A cosine similarity above 0.88-0.92 typically indicates semantic equivalence. Below 0.75-0.80 is a miss. The middle range is where you tune.
-
-4. **Response or pass-through**: On a hit, return the stored response. On a miss, run the full RAG pipeline, store the result, and add the query to the cache.
-
-Across query categories, [GPTCache](https://arxiv.org/abs/2411.05276) reports API call reduction of up to 68.8%, with cache hit rates from 61.6% to 68.8%. The system achieved positive hit rates exceeding 97%, meaning cached responses returned for genuine semantic matches were almost always appropriate.
-
-Speed improvement on hits is 2-10x depending on your LLM's baseline latency.
+Questions typed by people have no URI. The same request arrives in a hundred phrasings, so a cache in front of a [RAG pipeline](/articles/rag/) has to judge closeness, and that judgment is where it goes right or wrong.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/semantic-caching/semantic-cache.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/semantic-caching/semantic-cache.narrow.svg" width="288" height="664"><img class="np-has-narrow" src="/static/images/diagrams/semantic-caching/semantic-cache.svg" width="720" height="384" alt="An incoming query is embedded and compared with cached queries by similarity. Above the threshold it is a hit and the cached response returns. Below it is a miss, and the full pipeline and model run." loading="lazy" decoding="async"></picture></a>
-  <figcaption>On a miss the result is stored for next time. GPTCache reports API-call reductions of up to 68.8%, and hits come back 2–10× faster.</figcaption>
+  <figcaption>A hit returns the stored answer and skips retrieval and generation. A miss runs the pipeline and stores the result for next time.</figcaption>
 </figure>
 
-## Similarity threshold tuning: the number that determines everything
+## What is semantic caching?
 
-Most implementations go wrong at the threshold. Set it too high and you get almost no cache hits.
+It's a lookup that runs before retrieval and generation, keyed on meaning. The [glossary entry](/glossary/semantic-caching/) has the short definition, and the mechanism has four steps.
 
-Set it too low and you return wrong answers for queries that only superficially resemble the cached one, like serving the answer to "how do I cancel my subscription" when the user asked "how do I cancel my last order."
+1. Embed the incoming question with an embedding model.
+2. Search the stored questions for the nearest one.
+3. Compare the similarity score with a threshold.
+4. On a hit, return the stored answer, and on a miss, run the full pipeline and store the result.
 
-Starting at 0.88 cosine similarity for an FAQ-style cache is what [Redis LangCache documentation](https://redis.io/blog/10-techniques-for-semantic-cache-optimization/) recommends, then tuning down gradually as you observe false positive rates. A practical technique is confidence buffering: if your threshold is 0.90, only serve cache hits above 0.92.
+So a hit costs one embedding and one vector search. Everything after that in the pipeline is skipped.
 
-The buffer absorbs borderline cases without requiring you to tighten the primary threshold.
+## How much can a semantic cache save?
 
-My experience is that the threshold should vary by domain. Product documentation queries where phrasing variation is large but intent is narrow can tolerate 0.82-0.85.
+It depends on how much your traffic repeats, and the published figures come from favourable traffic. A paper from November 2024, [GPT Semantic Cache](https://arxiv.org/abs/2411.05276) by Sajal Regmi and Chetan Phakami Pun, reports that its cache "reduces API calls by up to 68.8% across various query categories".
 
-Legal or compliance queries where one swapped word ("may" for "must") changes the answer need 0.94-0.96. Treating the whole cache as a single threshold ignores this variance.
+The same abstract reports that over 97% of its hits were correct ones. Those are the authors' numbers on the query categories they chose, and I'd treat them as a ceiling for support-style questions.
 
-[Redis recommends domain partitioning](https://redis.io/blog/10-techniques-for-semantic-cache-optimization/) as an explicit technique: don't mix customer support queries with product documentation queries in the same cache namespace. Different domains have different similarity distributions, and a threshold calibrated for one domain will over-fire or under-fire on another.
+A conversation where every message depends on the last one repeats far less. So measure the repeat rate in your own logs before you build anything.
 
-## Production backends: why SQLite is not GPTCache's default in prod
+## How do you choose a similarity threshold?
 
-GPTCache ships with SQLite as its default storage backend, and SQLite doesn't handle concurrent writes well. Under production traffic with multiple workers, you'll see write contention, lock timeouts, and missed cache writes.
+Start high and lower it while you watch for wrong hits. Redis's [guide to semantic cache tuning](https://redis.io/blog/10-techniques-for-semantic-cache-optimization/) suggests 0.88 cosine similarity as a starting point for an FAQ cache, then moving down gradually.
 
-Swapping the backend to Redis or PostgreSQL fixes it.
+The trouble is that one number has to separate two kinds of near neighbour. The script below scores a handful of new questions against a small cache with an open embedding model, at several thresholds.
 
-The most common production backend for semantic caching is [Redis](https://redis.io/tutorials/semantic-caching-with-redis-langcache/). It keeps embeddings and responses in memory with optional persistence, supports native vector search, and handles the concurrent write load that kills SQLite.
+```python
+"""Score new questions against a small cache of answered ones, at three thresholds."""
+import numpy as np
+from fastembed import TextEmbedding
 
-Redis LangCache is the managed option. RedisVL is the open-source library.
+MODEL = "BAAI/bge-small-en-v1.5"
+CACHED = [
+    "How do I reset my password?",
+    "How do I cancel my subscription?",
+    "What is your return policy?",
+]
+NEW = [
+    ("I forgot my password, how can I change it?", "How do I reset my password?"),
+    ("Can I send an item back?", "What is your return policy?"),
+    ("How do I cancel my last order?", None),
+    ("When does my plan renew?", None),
+]
+THRESHOLDS = [0.80, 0.88, 0.92]
 
-One production deployment I've seen in enterprise inventory management processed over 10,000 queries with an average latency of 8.2 seconds end-to-end and 94.3% semantic accuracy at cache hits. The latency figure includes the cache lookup (under 50ms for Redis) plus the fallback LLM call on misses.
+model = TextEmbedding(MODEL)
 
-## Cache invalidation: where semantic caches fail quietly
 
-Exact-match caches have clean invalidation: delete the key. Semantic caches don't have keys in the same sense.
+def embed(texts):
+    vectors = np.array(list(model.embed(texts)))
+    return vectors / np.linalg.norm(vectors, axis=1, keepdims=True)
 
-A stored query embedding represents a region of semantic space, so invalidating responses for a changed document means finding all cached queries that pointed to that document and removing them.
 
-Handling this poorly is the norm, not the exception. The common failure modes:
+cache = embed(CACHED)
+print(f"model: {MODEL}")
+print(f"{'new question':<44}{'nearest cached question':<34}{'cosine':<8}" + "".join(f"{t:<7}" for t in THRESHOLDS))
+for question, right_answer in NEW:
+    scores = cache @ embed([question])[0]
+    best = int(scores.argmax())
+    cells = []
+    for t in THRESHOLDS:
+        if scores[best] < t:
+            cells.append("miss")
+        elif CACHED[best] == right_answer:
+            cells.append("hit")
+        else:
+            cells.append("WRONG")
+    print(f"{question:<44}{CACHED[best]:<34}{scores[best]:<8.3f}" + "".join(f"{c:<7}" for c in cells))
+```
 
-**Model version changes.** Your LLM provider updates the model. Cached responses from the old model version may now be inconsistent with what the new model would produce: different tone, different verbosity, updated safety thresholds.
+Run on November 17, it printed this.
 
-Serving them looks like a model regression to users.
+```text
+model: BAAI/bge-small-en-v1.5
+new question                                nearest cached question           cosine  0.8    0.88   0.92
+I forgot my password, how can I change it?  How do I reset my password?       0.914   hit    hit    miss
+Can I send an item back?                    What is your return policy?       0.761   miss   miss   miss
+How do I cancel my last order?              How do I cancel my subscription?  0.807   WRONG  miss   miss
+When does my plan renew?                    What is your return policy?       0.644   miss   miss   miss
+```
 
-**System prompt changes.** A cached response was generated under an old system prompt. The new system prompt changes product instructions, persona, or constraints.
+Look at the middle two rows. "Can I send an item back?" is a fair paraphrase of the return policy question and scores 0.761, and "How do I cancel my last order?" is a different request from cancelling a subscription and scores 0.807.
 
-The cached response reflects instructions you've since overridden.
+So the wrong match outscored a right one. No threshold serves the first without also serving the second, and at 0.80 the cache hands a customer the wrong answer.
 
-**Factual staleness.** Any time your underlying knowledge base changes, cached responses that drew on old documents become stale. A support bot that cached "the return window is 14 days" will keep serving that for semantically similar queries even after the policy changed to 30 days.
+A handful of questions and one small model prove nothing about your traffic. But they show why a threshold needs testing against labelled pairs from your own domain, wrong neighbours included.
 
-[Practical guidance](https://mbrenndoerfer.com/writing/caching-prompt-semantic-invalidation-hit-rates-llm) distinguishes three invalidation strategies: TTL-based (invalidate after N hours), event-based (invalidate when source documents change), and version keys (append a version string to cached entries and rotate on model or prompt updates). Production systems I trust combine all three.
+## What makes a cached answer wrong later?
 
-My recommendation: treat semantic caching as appropriate only for content that changes on a known schedule or not at all. FAQ responses with monthly review cycles, documentation that gets versioned on release, code examples tied to a library version.
+Anything the answer depended on that has since changed. An exact-match cache drops a key, and a semantic cache has no key to drop, only a region of similar questions.
 
-Don't cache responses for anything where the ground truth can change without a clear invalidation trigger.
+The usual causes are a changed source document, a changed system prompt and a changed model. The fix I'd reach for first is to store a version with each entry, made of the document version and the prompt version, and to treat a mismatch as a miss.
 
-## The embedding model selection problem
+A time limit on entries covers what versions don't. And changing the embedding model means rebuilding the cache, since scores from one model can't be compared with vectors from another.
 
-Semantic caching quality depends heavily on the embedding model you use for query similarity. A model that clusters paraphrases well at 0.88 cosine similarity for one domain may cluster them at 0.72 for another.
+## When should you skip semantic caching?
 
-Similarity thresholds do not transfer safely between embedding models. Calibrate the threshold on the target corpus each time the model changes.
+Skip it when two people asking the same words need different answers. "When does my plan renew?" is identical text for every customer, so a cache keyed on meaning alone will serve one customer's date to another.
 
-What follows in practice is that you have to calibrate your similarity threshold on your actual query distribution using your actual embedding model. A threshold validated on a generic FAQ corpus doesn't transfer to a medical documentation corpus, and a threshold validated on one embedding model doesn't transfer to a different one.
+Skip it for agent steps as well. A prompt that carries tool results and history is close to unique on every turn, so the lookup adds latency and seldom hits.
 
-Switching embedding models mid-production requires a full cache invalidation. Cached query embeddings were computed under the old model and won't compare correctly to new query embeddings computed under a different model.
+And skip it for anything live, such as a price or a queue length. A cached answer there is wrong as soon as the number moves.
 
-The two models lay out the same sentences in differently shaped coordinate spaces, so distances measured in one are meaningless in the other. Version your cache entries with the embedding model identifier, the same way you'd version them with the LLM version.
+## Where does a semantic cache sit in a RAG pipeline?
 
-## When semantic caching actively hurts
+It sits in front of everything. A hit skips the query embedding for retrieval, the search, the reranker and the model call, so it saves more than the model's bill.
 
-A few workload patterns where semantic caching creates more problems than it solves:
+That makes it a different kind of work from improving retrieval. [Contextual retrieval](/articles/contextual-retrieval/) and [reranking](/articles/rag-reranking/) make a miss cheaper or better, and the cache decides how often a miss happens.
 
-**Personalized responses.** A query from user A might be semantically identical to a query from user B, but the correct answer differs based on their account state, preferences, or history. "When does my plan renew?" embeds the same for both users and resolves to different dates.
-
-Serving user B the cached response for user A is a correctness failure. Add user context to the cache key or skip caching entirely for personalized workloads.
-
-**Agentic workflows.** An agent step where the prompt includes prior conversation history or tool outputs is almost never semantically identical across two runs. Cache hit rates drop to near zero, and the embedding computation per step adds latency with no benefit.
-
-**High-variance conversational queries.** Free-form conversation produces low cache hit rates (5-15% per the industry data above). Running embedding lookups on every conversational turn to get a 5% cache hit rate is negative-ROI.
-
-**Real-time data queries.** "What's the current price of X?" should never be cached beyond a few seconds, since the cached answer is wrong the moment the price moves.
-
-## Connecting to the broader RAG optimization picture
-
-Semantic caching is not a retrieval improvement. It sits before retrieval.
-
-When a query hits the cache, the retrieval system never runs at all.
-
-Where you put your effort changes once you see that. Retrieval improvements (better embeddings, hybrid search, reranking) reduce the cost and improve the quality of cache misses.
-
-Semantic caching reduces how often the retrieval system runs in the first place. They compound.
-
-I covered retrieval improvements with [contextual retrieval here](/articles/contextual-retrieval/) and [reranking here](/articles/rag-reranking/). Semantic caching fits in the layer above both.
-
-What people miss is that semantic caching doesn't just reduce LLM API calls. A cache hit skips the retrieval search, the reranker call, and the query-side embedding too.
-
-The full cost reduction is larger than the LLM API savings alone.
+It's also a different thing from the prompt caching that model providers offer, which discounts a repeated prefix inside a request that still runs. The [token budgets guide](/articles/llm-token-budgets/) works out what that one saves.
 
 ## FAQ
 
-**What similarity threshold should I start with?** Start at 0.88 cosine similarity for FAQ or documentation workloads. Use confidence buffering: only serve hits above 0.90 even if your threshold is 0.88.
+**What is semantic caching?**
 
-Lower thresholds (0.82-0.85) work for domains where phrasing varies widely but intent is narrow. Never go below 0.80 without labeling a validation set and measuring false positive rates.
+It's a cache for LLM answers keyed on the meaning of the question. A new question that is similar enough to a stored one gets the stored answer without the model being called.
 
-**Can I use semantic caching with streaming responses?** Yes, but with a tradeoff. Streaming responses require storing the full response before you can cache it, which means the first request for any query receives no latency benefit regardless of future cache hits.
+**What similarity threshold should I start with?**
 
-Some systems cache a non-streaming version and serve it on hits even if the original was streamed. Whether that's acceptable depends on your UX.
+Redis suggests 0.88 cosine similarity for an FAQ cache. Then test it against pairs of questions from your own domain, including pairs that look alike and need different answers.
 
-**How do I handle cache invalidation when my knowledge base changes?** Use event-based invalidation tied to your document versioning system. When a document is updated, delete or expire all cached queries whose stored embeddings have high similarity to the document's topic embedding.
+**How do I invalidate a semantic cache when the knowledge base changes?**
 
-For practical implementation, Redis LangCache supports namespace-level invalidation that lets you flush all entries in a domain partition at once.
-
-**Does semantic caching work with multi-turn conversation?** Rarely. Multi-turn prompts include conversation history, which makes them nearly unique on each turn.
-
-Cache hit rates for conversational workloads are typically 5-15%, making the overhead of embedding lookups per turn a net negative. Use semantic caching for single-turn, intent-driven queries instead.
-
-**What's the difference between GPTCache and Redis LangCache?** GPTCache is an open-source Python library from Zilliz, designed to integrate directly into LLM application code. Redis LangCache is a managed service from Redis with embedding controls, LLM-as-a-judge validation, adaptive TTL policies, and built-in observability.
-
-GPTCache gives you more control and costs you more operational work. Redis LangCache is faster to operationalize and has better support for production features like domain partitioning and confidence buffering.
+Store the source document's version with each entry and treat a mismatch as a miss. A time limit on entries catches the changes that versioning doesn't.

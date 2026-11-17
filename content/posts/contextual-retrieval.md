@@ -61,6 +61,8 @@ Without [prompt caching](https://platform.claude.com/docs/en/build-with-claude/p
 
 The expense lands at ingestion, and query-time retrieval barely changes unless you add reranking. Every chunk still gets longer, which raises embedding cost, BM25 index size and storage, so the bill is worth paying where a retrieval miss hurts, such as a support bot citing the wrong refund policy.
 
+Query-time cost has its own lever, a cache keyed on the meaning of the question, which my page on [semantic caching](/articles/semantic-caching/) tests.
+
 Static prefixes should be reused, which is the same rule that governs [context windows](/articles/llm-context-windows/) at generation time.
 
 ## What changed since 2024: code left, prose stayed
