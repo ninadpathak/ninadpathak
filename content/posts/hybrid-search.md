@@ -35,7 +35,9 @@ The second row pulls 100 from the same search and reranks them to 15, and the th
 
 ## Why fuse a keyword retriever with a vector retriever?
 
-The two retrievers miss different documents, so their union contains more of what a query needs than either list. Dense retrieval matches a question about memory leaks to a page on garbage collection that shares none of its words, and it has nothing to hold on to for an error code like `ORA-00942`, which BM25 matches exactly.
+The two retrievers miss different documents, so their union contains more of what a query needs than either list.
+
+Dense retrieval matches a question about memory leaks to a page on garbage collection that shares none of its words. Given an error code like `ORA-00942` it ranks the exact page first by a margin too thin to set a threshold on, 0.75 against 0.70 for a different Oracle code in [a run on the embeddings page](/articles/vector-embeddings/), and a keyword index matches the string outright.
 
 The published evidence for the gain is older than a year, so read it with its dates. Microsoft's [Azure AI Search comparison](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/azure-ai-search-outperforming-vector-search-with-hybrid-retrieval-and-reranking/3929167) from September 18, 2023 used the Ada-002 embedding model.
 
@@ -117,7 +119,7 @@ Weaviate has moved to the second kind: its [hybrid search documentation](https:/
 
 Qdrant offers a score-based option called Distribution-Based Score Fusion, available from v1.11.0, which "keeps the raw scores from each query but normalizes their distributions before combining."
 
-My opinion is that routing queries to different alpha values by query type is complexity few systems need. Kapa's table puts the larger win after fusion, and a wrong route sends an identifier query to the retriever least able to match it.
+My opinion is that routing queries to different alpha values by query type is complexity few systems need. Kapa's table puts the larger win after fusion, and a wrong route sends an identifier query to the retriever least able to tell it from its neighbours.
 
 ## Do agents with grep make hybrid search unnecessary?
 
@@ -133,7 +135,7 @@ A third of the right material was retrieved and then dropped. That is the same c
 
 Hybrid search costs a second index, a second query per request and a fusion step. Elastic's 2023 post named the latency side of that, noting that query latency rose "as the two queries are performed sequentially in Elasticsearch" at the time.
 
-Engines differ on whether the two queries run in sequence or in parallel, so measure your own. The choice of dense model is its own decision, and the [embedding models guide](/articles/vector-embeddings/) covers it.
+Engines differ on whether the two queries run in sequence or in parallel, so measure your own. The choice of dense model is its own decision, covered on the embeddings page linked above.
 
 ## FAQ
 
