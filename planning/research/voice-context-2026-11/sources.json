@@ -4580,6 +4580,140 @@
       "connects": [
         "what-agent-harness-means"
       ]
+    },
+    {
+      "id": "killed-by-google",
+      "url": "https://killedbygoogle.com/",
+      "author": "Killed by Google",
+      "date": "2026-11-18",
+      "title": "Killed by Google",
+      "quotes": [
+        "Google Gemini (CLI and Code Assist)",
+        "They were discontinued in favor of the unified Antigravity pl",
+        "a free and open source list of discontinued Google services, products, devices, and apps"
+      ],
+      "connects": [
+        "claude-vs-gemini-cli"
+      ]
+    },
+    {
+      "id": "google-gemini-cli-to-antigravity-2026-05",
+      "url": "https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli",
+      "author": "Google",
+      "date": "2026-05-19",
+      "title": "An important update: Transitioning Gemini CLI to Antigravity CLI",
+      "quotes": [
+        "On June 18, 2026, Gemini CLI and Gemini Code Assist IDE extensions will stop serving requests for Google AI Pro and Ultra",
+        "your access remains unchanged",
+        "Gemini CLI will remain accessible via paid Gemini and Gemini Enterprise Agent Platform API keys",
+        "Built in Go, Antigravity CLI is snappier and more responsive",
+        "Antigravity CLI shares the same agent harness as Antigravity 2.0"
+      ],
+      "connects": [
+        "claude-vs-gemini-cli"
+      ]
+    },
+    {
+      "id": "gemini-cli-plan-mode-docs",
+      "url": "https://geminicli.com/docs/cli/plan-mode/",
+      "author": "Gemini CLI",
+      "date": "2026-11-18",
+      "title": "Plan Mode",
+      "quotes": [
+        "has not been optimized for Gemini 4 Argon",
+        "Gemini CLI was replaced by Antigravity CLI on June 18th, 2026",
+        "Plan Mode is enabled by default",
+        "These are the only allowed tools"
+      ],
+      "connects": [
+        "claude-vs-gemini-cli"
+      ]
+    },
+    {
+      "id": "gemini-cli-checkpointing-docs",
+      "url": "https://geminicli.com/docs/cli/checkpointing/",
+      "author": "Gemini CLI",
+      "date": "2026-11-18",
+      "title": "Checkpointing",
+      "quotes": [
+        "The Checkpointing feature is disabled by default",
+        "A commit is made in a special, shadow Git repository located in your home directory (~/.gemini/history/"
+      ],
+      "connects": [
+        "claude-vs-gemini-cli"
+      ]
+    },
+    {
+      "id": "gemini-cli-sandbox-docs",
+      "url": "https://geminicli.com/docs/cli/sandbox/",
+      "author": "Gemini CLI",
+      "date": "2026-11-18",
+      "title": "Sandboxing",
+      "quotes": [
+        "You can enable sandboxing using a command flag, environment variable, or configuration file"
+      ],
+      "connects": [
+        "claude-vs-gemini-cli"
+      ]
+    },
+    {
+      "id": "gemini-cli-github-repo",
+      "url": "https://github.com/google-gemini/gemini-cli",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "google-gemini/gemini-cli",
+      "quotes": [
+        "An open-source AI agent that brings the power of Gemini directly into your terminal",
+        "Apache-2.0 license"
+      ],
+      "connects": [
+        "claude-vs-gemini-cli"
+      ]
+    },
+    {
+      "id": "claude-code-permission-modes-docs",
+      "url": "https://code.claude.com/docs/en/permission-modes.md",
+      "author": "Anthropic",
+      "date": "2026-11-18",
+      "title": "Permission modes",
+      "quotes": [
+        "reads files, runs shell commands to explore, and writes a plan, but does not edit your source",
+        "Isolated containers and VMs only"
+      ],
+      "connects": [
+        "claude-vs-gemini-cli"
+      ]
+    },
+    {
+      "id": "claude-code-checkpointing-docs",
+      "url": "https://code.claude.com/docs/en/checkpointing.md",
+      "author": "Anthropic",
+      "date": "2026-11-18",
+      "title": "Checkpointing",
+      "quotes": [
+        "Not a replacement for version control",
+        "Claude Code keeps file snapshots for the 100 most recent checkpoints in a session",
+        "A file that only Bash commands changed isn't tracked and stays as it is",
+        "captures the state of your code before each prompt you send that starts a turn"
+      ],
+      "connects": [
+        "claude-vs-gemini-cli"
+      ]
+    },
+    {
+      "id": "claude-code-sandboxing-docs",
+      "url": "https://code.claude.com/docs/en/sandboxing.md",
+      "author": "Anthropic",
+      "date": "2026-11-18",
+      "title": "Configure the sandboxed Bash tool",
+      "quotes": [
+        "The sandbox is off by default",
+        "sandboxing uses the built-in Seatbelt framework",
+        "the sandbox relies on `bubblewrap` and `socat`"
+      ],
+      "connects": [
+        "claude-vs-gemini-cli"
+      ]
     }
   ],
   "unused_leads": [

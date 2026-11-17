@@ -33,7 +33,7 @@ sections:
       - post: best-llms-for-coding
         note: "Reviews coding models on Real-SWE 1.1 with the cost per resolved task, and gives a test to run on your own repo."
       - post: claude-vs-gemini-cli
-        note: "Compares the workflows of Claude Code and Gemini CLI for repository refactoring, with no head-to-head benchmark claimed."
+        note: "Compares Claude Code and Gemini CLI on planning, undo and sandboxing from their docs, after Google moved consumer plans to Antigravity CLI."
   - heading: "What the code is worth"
     spokes:
       - post: coding-models-new-code-vs-change

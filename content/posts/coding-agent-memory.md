@@ -74,6 +74,8 @@ Codex and Cursor read it by name. Claude Code reads it too, with a condition the
 
 So if your repository has both files, Claude Code uses `CLAUDE.md` and ignores the other unless you import it. Gemini CLI needs a setting, since `GEMINI.md` is its default name and the `context.fileName` property is where you add `AGENTS.md`.
 
+Those two tools differ on permissions and undo as well, which [Claude Code vs Gemini CLI](/articles/claude-vs-gemini-cli/) compares.
+
 Which means one shared file works once each tool is pointed at it. [The CLAUDE.md guide](/articles/claude-md/) has the one-line import that makes Claude Code read the shared file.
 
 ## Is forgetting inside a session the same problem?
