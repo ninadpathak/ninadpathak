@@ -21,7 +21,7 @@ Zork let players save their position to disk, and BYTE magazine explained in 198
 
 Memory serialization is that feature for an agent. Persisting agent state across sessions means writing what the agent knows and what it was doing to storage, in a form that a later process can load and continue from.
 
-So I'll go through the usual ways to save an agent's state, run one of them, and then get to the catch a game never had, which is that the save itself can be wrong. That catch is the part of [AI agent memory](/articles/agent-memory/) worth your attention.
+So I'll go through the usual ways to save an agent's state, run one of them, and then get to the catch a game never had, which is that the save itself can be wrong. That catch is the part of [agent memory](/articles/agent-memory/) worth your attention.
 
 ## What are the ways to persist agent state?
 

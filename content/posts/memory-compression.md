@@ -23,7 +23,7 @@ A `.gitignore` file is where a repository says what it won't keep. [Git's docume
 
 Context compression asks the same thing of an agent's context: what gets carried forward, and what gets left to be looked up again. It happens in two places, inside a session when old turns are squeezed to fit the window, and between sessions when the agent decides what to write down.
 
-So I'll take both in turn. The rule I end up with for [AI agent memory](/articles/agent-memory/) is the `.gitignore` one, which is to keep what you can't regenerate.
+So I'll take both in turn. The rule I end up with for [memory in AI agents](/articles/agent-memory/) is the `.gitignore` one, which is to keep what you can't regenerate.
 
 ## What is context compression?
 
