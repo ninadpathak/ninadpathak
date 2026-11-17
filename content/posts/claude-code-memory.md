@@ -67,7 +67,7 @@ The location has a consequence the docs state in four words: "Auto memory is mac
 
 For auto memory, only the top of the index. "The first 200 lines of `MEMORY.md`, or the first 25KB, whichever comes first, are loaded at the start of every conversation", and the topic files are read when Claude decides it needs them.
 
-Instruction files load whole, which is why the docs ask you to "target under 200 lines per CLAUDE.md file." Their reason is that "Longer files consume more context and reduce adherence."
+Instruction files have a limit too, 40,000 characters per file in a 200K session for those that load on demand, and a far lower target, since the docs ask you to "target under 200 lines per CLAUDE.md file." Their reason is that "Longer files consume more context and reduce adherence."
 
 My [CLAUDE.md guide](/articles/claude-md/) covers what earns a line in that budget.
 

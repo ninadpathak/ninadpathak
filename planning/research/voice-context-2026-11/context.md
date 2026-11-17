@@ -289,7 +289,7 @@ Ninad, through root: "'I sell' noo lol pls no sells. I help with... or something
 
 ## Batch 6 (2026-11-17, owner voice-rewrite-2)
 
-Pieces: hyperagents-memory, coding-agent-memory, claude-code-memory, memory-compression, memory-serialization, multi-agent-vs-single-agent, and the essay agent-memory-evidence. The branch is stacked on batch 5.
+Pieces: hyperagents-memory, coding-agent-memory, claude-code-memory, memory-compression, memory-serialization, multi-agent-vs-single-agent, and the essay agent-memory-evidence. The branch sits on origin/main after the hub retrofit.
 
 ### What each piece is built on
 
@@ -324,3 +324,13 @@ Pieces: hyperagents-memory, coding-agent-memory, claude-code-memory, memory-comp
 
 - `sources.json` and the audit register were kept out of the piece commits in this batch and land in the record commit, so a rebase of the stack no longer conflicts on every commit.
 - Openers used: a film, a dated paper, a protocol, a dotfile, a game, an essay, a wiki tag. The Anthropic memory post feeds three pieces and the essay, each from a different section of it.
+
+### Batch 6 passes before review (2026-11-17)
+
+Applied before the first review, from the batch 5 and retrofit findings:
+
+- Openings: no sentence announces where a parallel breaks. claude-code-memory, coding-agent-memory and multi-agent-vs-single-agent now give the answer first and the known thing second; memory-compression and memory-serialization keep the known thing first and show the difference in a plain pair of sentences.
+- Hub model: each piece links its hub at the end of its introduction, above the first H2, and declares the siblings and bridges its body links. Stale bridge entries left by the old bodies are removed, and every reason describes its link.
+- The essay is in the agent-memory hub with `primary_query: none` and a line in `content/pillars/agent-memory.yaml`. memory-versioning links it from the end of its hash-chain section, and memory-serialization links it too.
+- A wrong claim caught in self-check: coding-agent-memory said Codex was the only tool with a documented size cap. Claude Code's memory page sets one of 40,000 characters per file, in a 200K session, on instruction files that load on demand. Both pages now say so.
+

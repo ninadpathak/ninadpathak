@@ -140,11 +140,11 @@ The chain alone catches a careless edit and misses a careful one. The run above 
 
 The chain lives in the same database as the data, so anyone who can edit a row can rewrite the chain. What makes it evidence is the anchor, a copy of the newest hash kept in a second system, in a signed export or with the auditor.
 
-A single note has the same need on a smaller scale, and [my essay on evidence in agent memory](/articles/agent-memory-evidence/) argues for storing how the agent knew.
-
 The last two results use it. With the anchor held outside, the rewritten chain no longer matches, and deleting the newest row is caught the same way.
 
 An earlier version of this script closed each row by writing an end time into it, and that field sat outside the hash. Moving it would have erased the November 10 answer with the chain intact, which is why this version stores no end time and derives it from the next row.
+
+A single note has the same need on a smaller scale, and [my essay on evidence in agent memory](/articles/agent-memory-evidence/) argues for storing how the agent knew.
 
 ## How do you link a memory to the reasoning behind it?
 

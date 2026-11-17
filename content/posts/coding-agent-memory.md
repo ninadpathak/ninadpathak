@@ -44,7 +44,9 @@ Each of the four reads instruction files from a personal location and from the p
 | Gemini CLI | `GEMINI.md` | `~/.gemini/GEMINI.md` | Concatenated and sent "to the model with every prompt" |
 | Cursor | Rules in `.cursor/rules`, or `AGENTS.md` | User rules, "Global to your Cursor environment" | Included "at the start of the model context" when applied |
 
-Codex's [AGENTS.md guide](https://developers.openai.com/codex/guides/agents-md) is the only one of the four that gives a hard size cap. It stops adding files "once the combined size reaches the limit defined by `project_doc_max_bytes` (32 KiB by default)", so a long file near the root can crowd out a nearer one.
+Codex and Claude Code both state a hard size limit. Codex's [AGENTS.md guide](https://developers.openai.com/codex/guides/agents-md) stops adding files "once the combined size reaches the limit defined by `project_doc_max_bytes` (32 KiB by default)", so a long file near the root can crowd out a nearer one.
+
+Claude Code's memory page sets its limit per file, for instruction files that load on demand: 40,000 characters in a session with a 200K context window. A file over the limit reaches the model only in part, with a note telling it to read the rest.
 
 Gemini CLI's [page on GEMINI.md](https://geminicli.com/docs/cli/gemini-md/) carries a banner saying that unpaid users were moved to another tool in June 2026. I've kept the row because the file convention is the point of comparison.
 
