@@ -1350,7 +1350,8 @@
       ],
       "connects": [
         "best-llms-for-coding",
-        "time-to-first-token"
+        "time-to-first-token",
+        "context-windows-vs-memory"
       ],
       "snapshot_2026_11_17": [
         "Intelligence # 1 / 81 (the count read 87 models later on 2026-11-17)",
