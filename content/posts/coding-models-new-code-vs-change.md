@@ -17,54 +17,48 @@ title: "Why I rebuilt my best-LLMs-for-coding page"
 work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it. [See how I work](/services/freelance-technical-writer-for-ai-companies/) and tell me what you're shipping."
 ---
 
-"I think October represents another inflection point in capabilities for coding agents and the models that drive them: Claude Opus 5.5 can now build video games that are actually fun". Simon Willison [posted that on Bluesky](https://bsky.app/profile/simonwillison.net/post/3mywwaogdac23) on October 28, with a [write-up](https://simonwillison.net/2026/Oct/28/vibe-game-development/) of four browser games built with "no looking at the code at all".
+Simon Willison [said on October 28](https://bsky.app/profile/simonwillison.net/post/3mywwaogdac23) that the month was another turning point for coding agents, because Claude Opus 5.5 can now build video games that are fun to play. His [write-up](https://simonwillison.net/2026/Oct/28/vibe-game-development/) covers four browser games built with "no looking at the code at all".
 
-I believe it, because the games are linked and playable. The same month produced a benchmark run in which the same model passed 28 of 196 checkpoints.
+I believe him, because the games are linked and playable. And in the same month, the same model passed 28 of 196 checkpoints on a benchmark that asks it to change code it wrote earlier.
 
-That run is Dex Horthy's [October SlopCodeBench update](https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/benchmarking-new-models-on-slop-code-bench.md), published on October 15. Its best result across every frontier model and effort setting belonged to OpenAI's Astra at the highest effort: 32 of 196, a strict pass rate of 16.33%.
+I think both results are true, and that the distance between them is the thing to know when you choose among [coding agents](/articles/coding-agents/). It's also why I rebuilt my [best LLMs for coding](/articles/best-llms-for-coding/) page this month.
 
-A model that can make a game fun on request and a model that fails six staged changes out of seven are the same model. The two results stop contradicting each other once you look at what each one asks for.
-
-The distance between those two results is the question for anyone choosing [coding agents](/articles/coding-agents/). It is also why I rebuilt my [best LLMs for coding](/articles/best-llms-for-coding/) page this month.
-
-## What the two results measure
+## These are two different jobs
 
 Willison's games are new code with one author and no reader. The test is whether the result is fun, and nobody has to change it next month.
 
-SlopCodeBench is built the other way round, and Horthy's summary of it runs to two sentences.
+The benchmark is Dex Horthy's [October SlopCodeBench update](https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/benchmarking-new-models-on-slop-code-bench.md), published on October 15, and it's built the other way round. A model writes a program, gets new requirements and has to change its own code, and later checkpoints test the old behaviour along with the new.
 
-"It writes a program, gets new requirements, and changes the existing code. Later checkpoints test both new behavior and old behavior."
+A strict pass means every test passed, regression tests included. The best result across every frontier model and effort setting was OpenAI's Astra at the highest effort, with 32 of 196, a strict pass rate of 16.33%.
 
-A strict pass means every test passed, including the regression tests from earlier checkpoints. The benchmark also reports a looser core rate, which asks only that a checkpoint's core tests pass, and on that measure the same campaigns score from 65.8% up to 74.0%.
+Now, the benchmark also reports a looser core rate, which only asks that a checkpoint's own core tests pass, and there the same campaigns score from 65.8% up to 74.0%. So the models built the new thing about seven times in ten, and built it without breaking the old thing about one time in seven.
 
-So the models built the new thing about seven times in ten and built it without breaking the old thing about one time in seven. The final snapshots say where the failures sit: for the leading campaign, 1,178 of 1,435 failing test cases at the end were regressions.
+That's the difference between producing software and changing it, to my mind. Maintenance is the second kind, and for the leading campaign 1,178 of the 1,435 test cases failing at the end were regressions.
 
-That is the difference between producing software and changing it. Maintenance is the second kind, and it is the kind the headline numbers leave out.
+## Paying more didn't buy the second kind
 
-## Paying more did not buy the second kind
+What struck me in the same run is the effort result, because it should change how a team budgets. Opus 5.5 passed 28 checkpoints strictly at medium effort and 25 at the highest setting, which cost 4.22 times as much.
 
-The same run tested effort settings, and the result should change how teams budget. Opus 5.5 passed 28 checkpoints strictly at medium effort and 25 at the highest setting, which cost 4.22 times as much.
+Horthy is careful here, and I'd repeat his careful version: "higher effort was not a reliable way to buy more strict passes in these runs". A single campaign per setting can't separate effort from run-to-run noise, and his post says so.
 
-Horthy is careful about the claim, and the careful version is the one to repeat: "higher effort was not a reliable way to buy more strict passes in these runs". A single campaign per setting can't separate effort from run-to-run noise, and the post says so.
+I also think the ranking matters less than it looks. Real-SWE 1.1, which Specific Labs [published in October](https://withspecific.com/blog/real-swe), compares 18 models on 25 tasks, and its top two sit inside each other's error bars: Opus 5.5 at 56.80% and Astra at 56.00%.
 
-Real-SWE 1.1, which Specific Labs [published in October](https://withspecific.com/blog/real-swe), shows why the ranking matters less than it looks. It "expands the benchmark to 25 tasks across TypeScript, Go, Python, Ruby and Java codebases and compares 18 models", and its top two, Opus 5.5 at 56.80% and Astra at 56.00%, sit inside each other's error bars.
+Astra's estimated cost per run in that table is under a third of Opus's. When a leaderboard ends in a tie at the top with a wide spread in price, I'd stop asking which model is best and start asking what a run costs.
 
-Astra's estimated cost per run in that table is under a third of Opus's. A leaderboard that ends in a tie at the top and a wide spread in price is telling you the ranking question is the wrong one to be asking.
+## What I think the leaderboards leave out
 
-## What the leaderboards don't charge for
+Nearly all of them score the patch and ignore what the patch costs the next person. Dan Luu went through two popular coding benchmarks in [a post from July](https://danluu.com/exercise-7/) and came away trusting very few public ones, and I agree for that narrower reason.
 
-Dan Luu went through two popular coding benchmarks in [a post from July](https://danluu.com/exercise-7/) and concluded that "very few of the publicly available benchmarks seem like reasonable things to rely on for getting a general idea of how good coding agents are." I agree, and my reason is narrower.
+[Parsimony](https://parsimony.lasu.dev/), a small project that reached Hacker News on October 13, exists to count the cost. Its complaint is that benchmarks measure solve rate and price and never punish excess code, which makes a codebase harder to work in later.
 
-Nearly all of them score the patch and ignore what the patch costs the next person. [Parsimony](https://parsimony.lasu.dev/), a small project that reached Hacker News on October 13, exists to count that: "Existing benchmarks measure solve rate and cost, but don't punish excess code, which makes a codebase harder to work with in the long term."
+I made the same complaint in the [code documentation guide](/articles/code-documentation/), where a model told to add no comments added them in a third of tasks. And excess code is what a regression is made of, since every extra branch is something the next change can break.
 
-Excess code is the same complaint I wrote about in the [code documentation guide](/articles/code-documentation/), where a model told to add no comments added them in a third of tasks. It is also what a regression failure is made of, since every extra branch is something the next change can break.
+So here's what I did about it. The March version of my best-LLMs page had a section headed "Why SWE-bench Verified is the only metric that matters" and ranked models on that one score, and a best result of 32 strict passes out of 196 made that ranking impossible to defend.
 
-The March version of my best-LLMs page had a section headed "Why SWE-bench Verified is the only metric that matters" and ranked models on that one score. A run in which the best result is 32 strict passes out of 196 made that ranking impossible to defend.
+A ranking by solve rate answers which model writes new code best, and Willison's games already answer that well enough. The rebuilt page dates its answer, reports the cost of a run beside the resolution rate on a newer benchmark, and ends on a test for your own repository.
 
-A ranking by solve rate answers which model writes new code best, and Willison's games already answer that well enough. So the rebuilt page dates its answer, reports the cost of a run beside the resolution rate on a newer benchmark, and ends on a test for your own repository.
+That test is the other question. Take a change you made last month, give a model the repository as it stood before, and count a pass only if your whole suite stays green afterwards.
 
-The question worth a test of your own is the other one. Take a change you made last month, give a model the repository as it stood before, and count a pass only if your whole suite stays green afterwards.
+A suite tells you that only as long as a red result still stops someone, which is the argument of [my essay on a build that is always red](/articles/red-build-nobody-reads/).
 
-A suite tells you that only as long as a red result still stops someone, which is the argument of [the red build nobody stops for](/articles/red-build-nobody-reads/).
-
-Run it at medium effort first, since the [token bill](/articles/llm-token-budgets/) for the highest setting bought nothing for Opus or SOL in Horthy's runs and a handful of extra passes for Astra. Until a public benchmark prints strict regression passes beside its headline number, read every "best coding model" claim as a claim about new code.
+And run it at medium effort first, since the [token bill](/articles/llm-token-budgets/) for the highest setting bought nothing for Opus or SOL in Horthy's runs and a handful of extra passes for Astra. Until a public benchmark prints strict regression passes beside its headline number, I read every "best coding model" claim as a claim about new code.
