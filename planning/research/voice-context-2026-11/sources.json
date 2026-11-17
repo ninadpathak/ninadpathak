@@ -4786,6 +4786,9 @@
       "agent",
       "configure the harness to retry failed tool calls",
       "the harness is the agent loop and the sandbox it runs in, and Anthropic hosts both"
+    ],
+    "agent-harnesses": [
+      "summarize every turn older than the last ten"
     ]
   }
 }
