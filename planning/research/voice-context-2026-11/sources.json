@@ -5445,6 +5445,137 @@
       "connects": [
         "documentation-structure"
       ]
+    },
+    {
+      "id": "simonwillison-til",
+      "url": "https://til.simonwillison.net/",
+      "author": "Simon Willison",
+      "date": "2026-11-18",
+      "title": "Simon Willison: TIL",
+      "quotes": [
+        "Things I've learned"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "codeandcake-docker-is-weird",
+      "url": "https://codeandcake.dev/posts/2026-10-22-docker-is-weird",
+      "author": "Code and Cake",
+      "date": "2026-10-22",
+      "title": "Docker is weird",
+      "quotes": [
+        "Images are just folders",
+        "a whole bunch of networking magic I don’t understand",
+        "Docker requires root!",
+        "I’ve only just started my own container runtime"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "docker-engine-19-03-release-notes",
+      "url": "https://docs.docker.com/engine/release-notes/19.03/",
+      "author": "Docker",
+      "date": "2019-07-22",
+      "title": "Docker Engine 19.03 release notes",
+      "quotes": [
+        "Running dockerd as a non-root user (Rootless mode) is now allowed."
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "docker-engine-20-10-release-notes",
+      "url": "https://docs.docker.com/engine/release-notes/20.10/",
+      "author": "Docker",
+      "date": "2020-12-08",
+      "title": "Docker Engine 20.10 release notes",
+      "quotes": [
+        "rootless: graduate from experimental"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "docker-rootless-mode-docs",
+      "url": "https://docs.docker.com/engine/security/rootless/",
+      "author": "Docker",
+      "date": "2026-11-18",
+      "title": "Rootless mode",
+      "quotes": [
+        "Rootless mode lets you run the Docker daemon and containers as a non-root user"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "hn-50202681-docker-is-weird",
+      "url": "https://news.ycombinator.com/item?id=50202681",
+      "author": "Hacker News",
+      "date": "2026-10-22",
+      "title": "Docker is weird",
+      "quotes": [],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "hn-50203265-j16sdiz",
+      "url": "https://news.ycombinator.com/item?id=50203265",
+      "author": "j16sdiz",
+      "date": "2026-10-23",
+      "title": "Comment on Docker is weird",
+      "quotes": [
+        "what's weird about it?"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "hn-50203658-0xbadcafebee",
+      "url": "https://news.ycombinator.com/item?id=50203658",
+      "author": "0xbadcafebee",
+      "date": "2026-10-23",
+      "title": "Comment on Docker is weird",
+      "quotes": [
+        "Docker hasn't required root for 7 years"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "hn-50203573-kazinator",
+      "url": "https://news.ycombinator.com/item?id=50203573",
+      "author": "kazinator",
+      "date": "2026-10-23",
+      "title": "Comment on Docker is weird",
+      "quotes": [
+        "you can run gdb outside of that docker and point it to a process in the docker"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "hn-50202931-shykes",
+      "url": "https://news.ycombinator.com/item?id=50202931",
+      "author": "Solomon Hykes",
+      "date": "2026-10-23",
+      "title": "Comment on Docker is weird",
+      "quotes": [
+        "I'm the creator of Docker and came across this post"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
     }
   ],
   "unused_leads": [

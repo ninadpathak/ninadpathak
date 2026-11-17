@@ -64,6 +64,8 @@ sections:
         note: "An essay on vocabulary: how vendor docs use the word harness, and why a product should define it on the page."
       - post: cloudflare-kv-cache-incident-report
         note: "Reads Cloudflare's report on a KV cache leak as writing: the count first, the wrong belief stated, and a title I would change."
+      - post: docker-is-weird-explainer
+        note: "Reads the post Docker is weird as an explainer: headings that make claims, a place to check each one, and one heading that is out of date."
   - heading: "Ship changes"
     spokes:
       - post: writing-release-notes

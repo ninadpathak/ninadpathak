@@ -422,5 +422,10 @@
     "doc",
     "stop*",
     "doc check"
+  ],
+  "docker-is-weird-explainer": [
+    "doc",
+    "stop*",
+    "doc check"
   ]
 }

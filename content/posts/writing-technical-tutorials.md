@@ -33,6 +33,8 @@ The example below replaces it, as part of my pages on [technical documentation](
 
 A technical tutorial takes one reader from a stated starting point to a result they can see. A reference page answers a lookup, such as the format of a signature header, and a tutorial has the reader build something.
 
+An explainer has nothing for the reader to build, and [a short post about Docker](/articles/docker-is-weird-explainer/) shows the substitute: a command or file path beside each claim.
+
 If your reader only needs the definition of a signature field, give them a reference page. The [documentation types guide](/articles/documentation-types/) covers which page type fits which need.
 
 ## How do you define the reader and the result?

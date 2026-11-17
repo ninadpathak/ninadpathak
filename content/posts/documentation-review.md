@@ -86,6 +86,8 @@ Replace "Try again" with a command that tells the reader what went wrong. Keep "
 
 Decide by asking whether the page answers one question that no other page answers. A draft can be correct and still be the wrong page, because it repeats an existing answer or tries to serve two different readers.
 
+A page can also be well aimed and carry one false claim, as a 500-word Docker explainer did [in its heading about root](/articles/docker-is-weird-explainer/).
+
 ### Name one reader decision
 
 Before the review starts, write one sentence:
