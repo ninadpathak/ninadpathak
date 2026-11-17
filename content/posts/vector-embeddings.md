@@ -187,7 +187,7 @@ Shortening works on models trained for it. The method is [Matryoshka Representat
     </div>
 </div>
 
-OpenAI exposes it as a `dimensions` parameter and reports that "a text-embedding-3-large embedding can be shortened to a size of 256 while still outperforming an unshortened text-embedding-ada-002 embedding with a size of 1536." Cohere's embed-v5.0-pro accepts output sizes of 256 up to 2048.
+OpenAI exposes it as a `dimensions` parameter and reports that "a text-embedding-3-large embedding can be shortened to a size of 256 while still outperforming a full-length text-embedding-ada-002 embedding with a size of 1536." Cohere's embed-v5.0-pro accepts output sizes of 256 up to 2048.
 
 The bge-small model in my run has 384 dimensions, and its model card describes no such training. Cutting its vectors to the first 128 values would discard information the model never arranged to keep at the front.
 

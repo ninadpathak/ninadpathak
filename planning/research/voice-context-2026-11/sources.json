@@ -1411,7 +1411,7 @@
         "OpenAI embeddings are normalized to length 1",
         "Cosine similarity and Euclidean distance will result in the identical rankings",
         "the length of the embedding vector is 1536 for text-embedding-3-small or 3072 for text-embedding-3-large.",
-        "a text-embedding-3-large embedding can be shortened to a size of 256 while still outperforming an unshortened text-embedding-ada-002 embedding with a size of 1536.",
+        "a text-embedding-3-large embedding can be shortened to a size of 256 while still outperforming a full-length text-embedding-ada-002 embedding with a size of 1536.",
         "text-embedding-3-small 62,500 62.3% 8192 text-embedding-3-large 9,615 64.6% 8192"
       ],
       "connects": [
@@ -3776,6 +3776,19 @@
       ],
       "connects": [
         "deerflow-memory"
+      ]
+    },
+    {
+      "id": "openai-agents-sdk-tools",
+      "url": "https://openai.github.io/openai-agents-python/tools/",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Tools",
+      "quotes": [
+        "To share client-managed history between the parent and nested runs, explicitly pass the same session to both."
+      ],
+      "connects": [
+        "shared-vs-isolated-memory"
       ]
     }
   ],
