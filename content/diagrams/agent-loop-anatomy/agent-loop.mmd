@@ -1,7 +1,7 @@
 %% @fig 01
 %% @kicker The four-phase agent loop
 %% @alt The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills with each pass until its newest tokens spill past the edge.
-%% @caption One pass through the loop. A tool call repeated without progress is an act failure, and a history that outgrows the context window is a remember failure.
+%% @caption One pass through the loop. A tool call with bad arguments is an act failure, and a history that outgrows the context window is a remember failure.
 %% @ring perceive>think>act>remember | 128
 %% @center context label=Context
 %% @glyph task | inbox

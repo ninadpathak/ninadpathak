@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/agent-loop-anatomy/agent-loop.mmd",
-  "hash": "c7d09654da87eeeb",
+  "hash": "08bab6d73d9ee294",
   "pele": "1.8.0",
   "width": 720,
   "height": 664,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills with each pass until its newest tokens spill past the edge.",
-  "caption": "One pass through the loop. A tool call repeated without progress is an act failure, and a history that outgrows the context window is a remember failure.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-loop-anatomy/agent-loop.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-loop-anatomy/agent-loop.narrow.svg\" width=\"288\" height=\"1064\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-loop-anatomy/agent-loop.svg\" width=\"720\" height=\"664\" alt=\"The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills with each pass until its newest tokens spill past the edge.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>One pass through the loop. A tool call repeated without progress is an act failure, and a history that outgrows the context window is a remember failure.</figcaption>\n</figure>"
+  "caption": "One pass through the loop. A tool call with bad arguments is an act failure, and a history that outgrows the context window is a remember failure.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-loop-anatomy/agent-loop.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-loop-anatomy/agent-loop.narrow.svg\" width=\"288\" height=\"1064\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-loop-anatomy/agent-loop.svg\" width=\"720\" height=\"664\" alt=\"The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills with each pass until its newest tokens spill past the edge.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>One pass through the loop. A tool call with bad arguments is an act failure, and a history that outgrows the context window is a remember failure.</figcaption>\n</figure>"
 }

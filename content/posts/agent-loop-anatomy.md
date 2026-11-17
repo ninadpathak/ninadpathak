@@ -13,18 +13,18 @@ bridges:
 - slug: context-windows-vs-memory
   reason: A loop that only appends runs into the context window, which is a different thing from memory.
 date: '2026-04-23'
-description: 'An agent loop is the cycle of model call, tool call and result that an agent repeats until it stops. The four phases, a loop in 30 lines, and how two SDKs end one.'
+description: 'An agent loop is the cycle of model call, tool call and result that an agent repeats until it stops. Perceive, think, act and remember, a loop you can run, and how two SDKs end one.'
 slug: agent-loop-anatomy
 status: published
 work_note: "Explainers like this one are what I write for AI companies as a freelance technical writer. I'm Ninad Pathak, and I run the product before I write about it. [Let's work on yours](/services/freelance-technical-writer-for-ai-companies/)."
-title: 'The Anatomy of an Agent Loop: Perceive, Think, Act, Remember'
+title: 'The Four Phases of an Agent Loop'
 video: agent-loop-anatomy
 updated: 2026-11-17
 ---
 
 An agent loop is the cycle an AI agent repeats until its task is done: the model reads the state so far, picks a tool call, the tool runs, and the result goes back into the state. A single pass is a turn, and an agent is whatever keeps taking turns without a person in between.
 
-Programmers have typed into a loop like this since 1964, when the phrase read-eval-print cycle was first used for a Lisp on the PDP-1. A [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) reads a line, evaluates it, prints the result and waits for you.
+Programmers have typed into a loop like this since at least 1964, when Deutsch and Berkeley's Lisp for the PDP-1 described its read-eval-print cycle. A [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) reads a line, evaluates it, prints the result and waits for you.
 
 An agent loop has nobody to wait for. The model reads the printed result itself and writes the next line.
 
@@ -32,14 +32,14 @@ That's the whole mechanism under [AI agent architecture](/articles/ai-agents/), 
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/agent-loop-anatomy/agent-loop.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-loop-anatomy/agent-loop.narrow.svg" width="288" height="1064"><img class="np-has-narrow" src="/static/images/diagrams/agent-loop-anatomy/agent-loop.svg" width="720" height="664" alt="The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills with each pass until its newest tokens spill past the edge." loading="lazy" decoding="async"></picture></a>
-  <figcaption>One pass through the loop. A tool call repeated without progress is an act failure, and a history that outgrows the context window is a remember failure.</figcaption>
+  <figcaption>One pass through the loop. A tool call with bad arguments is an act failure, and a history that outgrows the context window is a remember failure.</figcaption>
 </figure>
 
 ## What is an agent loop?
 
 It's a `while` loop around a model call. Both big vendor SDKs document theirs in a few lines, and the two descriptions agree.
 
-Anthropic's [Agent SDK docs](https://platform.claude.com/docs/en/agent-sdk/agent-loop) say Claude "evaluates your prompt, calls tools to take action, receives the results, and repeats until the task is complete." OpenAI's [Agents SDK docs](https://openai.github.io/openai-agents-python/running_agents/) list the same steps for its runner: call the model, return if the output is final, and otherwise run the tool calls, append the results and go round again.
+Anthropic's [Agent SDK docs](https://code.claude.com/docs/en/agent-sdk/agent-loop) say Claude "evaluates your prompt, calls tools to take action, receives the results, and repeats until the task is complete." OpenAI's [Agents SDK docs](https://openai.github.io/openai-agents-python/running_agents/) list the same steps for its runner: call the model, return if the output is final, and otherwise run the tool calls, append the results and go round again.
 
 Neither vendor uses the words perceive, think, act and remember. Those four names are a teaching split, and I keep them because each one points at a different place to look when a run goes wrong.
 
@@ -52,7 +52,7 @@ Neither vendor uses the words perceive, think, act and remember. Those four name
 
 ## What does an agent loop look like in code?
 
-About thirty lines. The script below swaps the model for a list of canned decisions, so the loop is the only moving part and anyone can run it.
+About thirty-five lines. The script below swaps the model for a list of canned decisions, so the loop is the only moving part, and its task follows the worked example in Anthropic's docs.
 
 ```python
 """A whole agent loop in one function, with a scripted stand-in for the model."""
@@ -64,11 +64,19 @@ def scripted_model(script):
     return lambda messages: next(turns)
 
 
-TOOLS = {
-    "run_tests": lambda arg: "2 failed: test_login, test_logout",
-    "read_file": lambda arg: f"contents of {arg}",
-    "edit_file": lambda arg: f"edited {arg}",
-}
+STATE = {"fixed": False}
+
+
+def run_tests(arg):
+    return "all tests pass" if STATE["fixed"] else "2 failed: test_login, test_logout"
+
+
+def edit_file(arg):
+    STATE["fixed"] = True
+    return f"edited {arg}"
+
+
+TOOLS = {"run_tests": run_tests, "read_file": lambda arg: f"contents of {arg}", "edit_file": edit_file}
 
 
 def run(model, task, max_turns):
@@ -88,11 +96,13 @@ fix = [
     {"tool": "run_tests", "arg": ""},
     {"tool": "read_file", "arg": "auth.py"},
     {"tool": "edit_file", "arg": "auth.py"},
+    {"tool": "run_tests", "arg": ""},
     {"tool": None, "text": "Both tests pass now."},
 ]
 print("run 1:", run(scripted_model(fix), "Fix the failing tests", max_turns=10))
 
-stuck = [{"tool": "edit_file", "arg": "auth.py"}] * 50
+STATE["fixed"] = False
+stuck = [{"tool": "read_file", "arg": "auth.py"}] * 50
 print("run 2:", run(scripted_model(stuck), "Fix the failing tests", max_turns=3))
 ```
 
@@ -102,23 +112,26 @@ print("run 2:", run(scripted_model(stuck), "Fix the failing tests", max_turns=3)
 turn 1: run_tests() -> 2 failed: test_login, test_logout
 turn 2: read_file(auth.py) -> contents of auth.py
 turn 3: edit_file(auth.py) -> edited auth.py
-turn 4: final answer: Both tests pass now.
+turn 4: run_tests() -> all tests pass
+turn 5: final answer: Both tests pass now.
 run 1: finished
-turn 1: edit_file(auth.py) -> edited auth.py
-turn 2: edit_file(auth.py) -> edited auth.py
-turn 3: edit_file(auth.py) -> edited auth.py
+turn 1: read_file(auth.py) -> contents of auth.py
+turn 2: read_file(auth.py) -> contents of auth.py
+turn 3: read_file(auth.py) -> contents of auth.py
 run 2: stopped at the turn limit
 ```
 
-The first run ends the way a healthy loop ends, with a turn that calls no tool. The second run is an agent editing one file forever, and the only thing that stops it is the number passed as `max_turns`.
+The first run ends the way a healthy loop ends, with a turn that calls no tool. The second run is an agent reading one file forever, and the only thing that stops it is the number passed as `max_turns`.
 
 ## How does an agent loop stop?
 
 It stops when the model answers without asking for a tool, or when your code says enough. The first is the model's judgment, so a production loop needs the second as well.
 
-Both SDKs give you that limit, and they report it differently. OpenAI's runner raises a `MaxTurnsExceeded` exception when a run passes `max_turns`.
+Both SDKs give you that limit, and both raise an error when a run hits it. OpenAI's runner raises a `MaxTurnsExceeded` exception when a run passes `max_turns`.
 
-Anthropic's SDK returns a result whose subtype is `error_max_turns`, with no final answer in it, and it has a second limit in dollars called `max_budget_usd`. Its docs are plain about leaving both off: the loop then runs until Claude decides it's finished, which they call fine for a well-scoped task and a risk on an open-ended prompt.
+Anthropic's SDK first yields a result whose subtype is `error_max_turns`, with the cost and session id and no final answer, and then raises. It also has a second limit in dollars called `max_budget_usd`.
+
+Its docs are plain about leaving both off: the loop then runs until Claude decides it's finished, which they call fine for a well-scoped task and a risk on an open-ended prompt.
 
 So set a limit, and treat hitting it as a result your code handles. What to do next is a policy question, which [error handling for agents](/articles/agent-error-handling/) takes up.
 
