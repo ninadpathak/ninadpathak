@@ -1,0 +1,50 @@
+# Hub copy for /articles/ai-engineering/. See technical-documentation.yaml for the fields.
+opening_source:
+  url: "https://en.wikipedia.org/wiki/Demoscene"
+  fact: "A 64K intro is a demo with an executable file size limit of 64 kibibytes, or 65,536 bytes."
+  checked: 2026-11-17
+lead: "LLM inference is the step where a trained model turns a prompt into output tokens, and it sets the latency and cost of a product built on the model. This hub covers the mechanisms behind both, plus the context window and the output format."
+intro: |
+  A [64K intro](https://en.wikipedia.org/wiki/Demoscene) is a demo whose executable is limited to 65,536 bytes. The demoscene turned that fixed budget into a craft, with competitions built around the limit.
+
+  Inference work has the same form. A token budget caps what a request may spend, and a latency budget caps how long the first word may take.
+
+  The parallel breaks at what gets traded away. A demo coder gives up bytes, and an inference engineer can give up answer quality, so the loss has to be measured before it ships.
+argument: "Latency and cost come from a small set of mechanisms, and each one trades against quality in a way that can be measured."
+sections:
+  - heading: "Latency"
+    spokes:
+      - post: time-to-first-token
+        note: "Covers how to measure and reduce the wait before the first word appears."
+      - post: speculative-decoding
+        note: "Explains how a smaller draft model predicts tokens for a larger one to speed up generation."
+      - post: voice-agent-latency
+        note: "Traces latency in a voice agent stage by stage, from endpointing through speech synthesis."
+  - heading: "Throughput and cost"
+    spokes:
+      - post: llm-inference-optimization
+        note: "Covers which optimizations are engine defaults in late 2026 and how to size the KV cache."
+      - post: kv-cache-eviction
+        note: "Compares KV cache eviction strategies and the accuracy each one puts at risk."
+      - post: mixture-of-experts
+        note: "Explains how a mixture-of-experts model activates a fraction of its parameters per token, and what that costs in memory."
+      - post: llm-token-budgets
+        note: "A guide to token budgets as a way to keep LLM spend predictable."
+  - heading: "Context and output"
+    spokes:
+      - post: llm-context-windows
+        note: "Explains why the middle of a long context gets less attention and what a long context costs."
+      - post: llm-structured-outputs
+        note: "Separates JSON mode from structured outputs and function calling by what each one guarantees."
+bridges:
+  - hub: agent-memory
+    text: "Memory holds what the context window cannot, and the [AI agent memory](/articles/agent-memory/) hub covers that system."
+  - hub: rag
+    text: "Retrieval decides which tokens enter the context in the first place, covered in the [RAG pipeline](/articles/rag/) hub."
+faqs:
+  - q: "What is LLM inference?"
+    a: "LLM inference is the step where a trained model turns a prompt into output tokens. It sets the latency and cost of a product built on the model."
+  - q: "What is time to first token?"
+    a: "Time to first token is the wait between sending a request and seeing the first word of the answer."
+  - q: "Does a mixture-of-experts model cost less to run?"
+    a: "A mixture-of-experts model activates a fraction of its parameters for each token, which cuts computation. The full model still has to sit in memory."

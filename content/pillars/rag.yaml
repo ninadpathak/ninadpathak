@@ -1,60 +1,52 @@
-slug: rag
-status: published
-title: "RAG and Retrieval: Building Pipelines That Return the Right Context"
-h1: "RAG & Retrieval"
-description: "A practitioner's guide to retrieval-augmented generation: embeddings, hybrid search, reranking, evaluation, and the optimizations that decide whether your RAG system works."
+# Hub copy for /articles/rag/. See technical-documentation.yaml for the fields.
+opening_source:
+  url: "https://en.wikipedia.org/wiki/Okapi_BM25"
+  fact: "Okapi was implemented at London's City University in the 1980s and 1990s; Robertson and colleagues presented 'Okapi at TREC-3' at TREC 1994."
+  checked: 2026-11-17
+lead: "A RAG pipeline retrieves text from an index and puts it in the prompt before the model answers. This hub follows the pipeline from embeddings through evaluation."
 intro: |
-  Retrieval-augmented generation is easy to demo and hard to ship. The demo works
-  because the answer sits in the top result. Production breaks because the right chunk
-  lands at rank 14, the embedding misses the intent, and nobody measured recall before
-  launch.
+  BM25 comes from the Okapi system at City University in London, which Stephen Robertson's team presented as [Okapi at TREC-3](https://en.wikipedia.org/wiki/Okapi_BM25) in 1994. It ranks documents by the query words they contain, and it is the keyword half of hybrid search today.
 
-  The posts below cover the retrieval stack end to end, from how embeddings encode
-  meaning to reranking, hybrid search, caching, and the evaluation metrics that tell you
-  whether any of it works.
+  A RAG pipeline puts that 1994 function beside a dense vector index and fuses the two rankings. The stages after it rerank the candidates and pass the survivors to the model.
 
+  The parallel with classic search breaks at the consumer. A person scanning ten results can skip a bad one, and a model reads whatever lands in the prompt as evidence.
+argument: "Retrieval quality is decided before generation, so each retrieval stage gets measured on its own before the generated answer is judged."
 sections:
   - heading: "Foundations"
-    blurb: "How retrieval encodes meaning and where it fits next to fine-tuning and memory."
-    posts:
-      - vector-embeddings
-      - rag-vs-memory
+    spokes:
+      - post: vector-embeddings
+        note: "Explains embeddings with a model run on six short texts, and shows why similarity scores mislead."
+      - post: fine-tuning-vs-rag
+        note: "Decides between fine-tuning and retrieval by which part of the problem each one solves."
   - heading: "Retrieval quality"
-    blurb: "Getting the right chunk to the top, not just a similar one."
-    posts:
-      - hybrid-search
-      - rag-reranking
-      - contextual-retrieval
-  - heading: "Optimization and cost"
-    blurb: "Cutting latency and spend without hurting answer quality."
-    posts:
-      - semantic-caching
-      - llm-structured-outputs
+    spokes:
+      - post: hybrid-search
+        note: "Fuses BM25 and vector retrieval with reciprocal rank fusion, with runnable code and benchmark scores."
+      - post: rag-reranking
+        note: "Tests a bi-encoder against two cross-encoders on one set of candidates and reports what reranking fixed."
+      - post: contextual-retrieval
+        note: "Covers Anthropic's method of prepending a model-written note to each chunk, with what it measured and what it costs."
+  - heading: "Cost"
+    spokes:
+      - post: semantic-caching
+        note: "Explains how a cache keyed on meaning returns stored responses for similar queries, and where it fails."
   - heading: "Evaluation"
-    blurb: "The metrics that separate a production RAG system from a demo."
-    posts:
-      - rag-evaluation
+    spokes:
+      - post: rag-evaluation
+        note: "Covers RAGAs along with recall and precision, the metrics for judging a retrieval system."
   - heading: "Benchmarks"
-    blurb: "Real numbers on retrieval running close to the user."
-    posts:
-      - browser-vector-search
-faqs:
-  - q: "What is the difference between RAG and fine-tuning?"
-    a: "RAG adds knowledge at query time by retrieving documents into the prompt. Fine-tuning bakes behavior or knowledge into the model weights through training. RAG suits facts that change often, and fine-tuning suits stable behavior and format. The decision-framework post covers how to choose."
-  - q: "Why are my top-k retrieval results wrong?"
-    a: "Vector similarity ranks by semantic closeness, which is not the same as relevance to the question. The fix is a reranking step that re-scores candidates with a model built for relevance. The reranking post shows the measured difference."
-  - q: "What is hybrid search?"
-    a: "Hybrid search combines keyword retrieval (BM25) with dense vector search and fuses the rankings, usually with reciprocal rank fusion. It catches exact terms that embeddings miss and meaning that keywords miss."
-  - q: "How do I evaluate a RAG system?"
-    a: "Measure retrieval and generation separately. Track recall and precision on retrieval, and faithfulness and answer relevance on generation. The evaluation-metrics post covers which numbers actually predict production quality."
-
+    spokes:
+      - post: browser-vector-search
+        note: "Compares PGlite and SQLite-vec for vector search in the browser, and says what to measure on real data."
 bridges:
-  - title: "AI Agent Memory"
-    url: "/ai-agent-memory/"
-    blurb: "Where retrieval meets memory"
-  - title: "LLM Inference & Cost"
-    url: "/llm-inference/"
-    blurb: "The cost of every token you retrieve"
-  - title: "AI Agent Architecture"
-    url: "/ai-agent-architecture/"
-    blurb: "Feeding agents the right context"
+  - hub: agent-memory
+    text: "Agent memory reuses this retrieval stack for a different job, and the [AI agent memory](/articles/agent-memory/) hub covers where the two differ."
+  - hub: ai-engineering
+    text: "A retrieved token costs latency and money like any other, and the [LLM inference](/articles/ai-engineering/) hub covers that budget."
+faqs:
+  - q: "What is a RAG pipeline?"
+    a: "A RAG pipeline retrieves text from an index and puts it in the prompt before the model answers. Its stages run from embedding and search through reranking to evaluation."
+  - q: "What is hybrid search?"
+    a: "Hybrid search fuses BM25 keyword retrieval with vector retrieval. Reciprocal rank fusion is the fusion method the guide in this hub implements."
+  - q: "How do you evaluate a RAG pipeline?"
+    a: "Measure retrieval apart from generation. Recall and precision score what was retrieved, and the evaluation guide in this hub covers RAGAs for the rest."

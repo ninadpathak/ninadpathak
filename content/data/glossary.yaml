@@ -122,6 +122,7 @@ terms:
   last_updated: '2026-08-17'
 - name: Model Context Protocol (MCP)
   slug: model-context-protocol
+  canonical_article: model-context-protocol
   opening_definition: Model Context Protocol, or MCP, is an open protocol for connecting AI applications to servers that expose tools, resources, and reusable prompts. It applies when a host needs a standard way to discover and invoke capabilities across process or network boundaries; MCP does not grant trust, authorization, or safe execution by itself.
   body_html: |
     <h2>Anthropic introduced MCP to reduce bespoke integrations</h2>
@@ -147,6 +148,7 @@ terms:
   last_updated: '2026-08-17'
 - name: Semantic Caching
   slug: semantic-caching
+  canonical_article: semantic-caching
   opening_definition: Semantic caching is an application cache that reuses a stored result when a new request is sufficiently similar in meaning to an earlier request. It applies when semantically equivalent inputs should produce the same valid response; it is unsafe when small differences in identity, time, permissions, or wording can change the correct answer.
   body_html: |
     <h2>A similarity decision replaces an exact-key decision</h2>
@@ -336,6 +338,7 @@ terms:
   last_updated: '2026-08-17'
 - name: KV Cache Eviction
   slug: kv-cache-eviction
+  canonical_article: kv-cache-eviction
   opening_definition: KV-cache eviction is the removal of selected key-value states retained from earlier tokens during autoregressive inference. It applies when a serving system cannot keep the full cache for a long sequence or many concurrent requests; eviction trades memory savings for a risk that later tokens can no longer attend to information the policy removed.
   body_html: |
     <h2>The cache grows once per generated token</h2>
@@ -635,6 +638,7 @@ terms:
   last_updated: '2026-08-17'
 - name: Speculative Decoding
   slug: speculative-decoding
+  canonical_article: speculative-decoding
   opening_definition: Speculative decoding is an inference technique in which a faster draft process proposes several tokens and the target model verifies those proposals in parallel while preserving the target model’s output distribution. It applies when draft tokens are accepted often enough to offset proposal and verification overhead; it changes generation speed, not the model’s knowledge or reasoning ability.
   body_html: |
     <h2>Drafting turns one-token steps into candidate runs</h2>

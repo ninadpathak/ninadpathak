@@ -26,117 +26,144 @@ posts_per_page = 20
 
 [[content.tools]]
 slug = "ai-overviews-checker"
+primary_query = "ai overviews checker"
 name = "AI Overviews Checker"
 description = "Check a page with nine sourced structural checks for snippet eligibility and extractability. Runs in your browser and never predicts AI Overview placement."
 
 [[content.tools]]
 slug = "ai-crawler-checker"
+primary_query = "ai crawler checker"
 name = "AI Crawler Access Checker"
 description = "Check whether your robots.txt lets AI assistants cite you, separately from whether it lets them train on you. Runs in the browser. No signup."
 
 [[content.tools]]
 slug = "llms-txt-validator"
+primary_query = "llms.txt validator"
 name = "llms.txt Validator"
 description = "Validate llms.txt against the v2 proposal. Paste a file or fetch one from a domain, then separate spec requirements from conventions in your browser."
 
 [[content.tools]]
 slug = "llms-txt-generator"
+primary_query = "llms.txt generator"
 name = "llms.txt Generator"
 description = "Scan your sitemap, review page titles and descriptions, and generate an editable llms.txt file. Free, fast, and no signup required."
 
 [[content.tools]]
 slug = "linter"
+primary_query = "technical writing linter"
 name = "Technical Writing Linter"
 description = "Paste a technical article. Get a linter report: condescension words, AI writing signals, buzzwords, passive voice, readability score. Free. No signup."
 
-# CLUSTER OWNER PAGES
+# HUB PAGES
 #
-# One category per cluster in campaign-90d.md section 3, and each one renders a real
-# page at /articles/<slug>/ with its own title, description, canonical, and
-# CollectionPage schema. That page is the cluster's owner.
+# One category per hub in the hub-and-spoke plan of 2026-11-17. Each renders a written
+# page at /articles/<slug>/, and a post joins a hub through `category:` in its
+# frontmatter. No post URL depends on its hub.
 #
-# Before this, all twelve topic pillars were anchors on one URL (/articles/#<slug>),
-# which meant twelve clusters shared one ranking surface and none of them could own a
-# head term. The ai-memory category was also removed on 2026-08-17 for matching zero
-# published posts while still emitting an empty page into the sitemap. That was the
-# right call for an empty category and the wrong conclusion about the niche; the niche
-# was widened the same day. See CHARTER.md section 2c-bis.
+# The page copy lives in content/pillars/<slug>.yaml: the lead, the argument, the
+# sectioned map with one sentence per spoke, the bridges to other hubs and the FAQ.
+# build.py fails on a hub that has no pillar file or no argument.
 #
-# hire_note is the one sentence that links a cluster to its own hiring page, where one
-# exists. It follows the intro on the cluster page and opens the contact line under each
-# article. A cluster without one gets the plain contact line: the article CTA already
-# links /services/, so a second sentence to the same page would repeat it.
+# primary_query is the one query the hub URL owns. tools/audit_clusters.py checks it is
+# unique across hubs, posts, tools and services pages.
 #
-# ORDER MATTERS: build.py takes the first category whose tag_matches intersect a post's
-# tags, so the most specific cluster comes first. Tag matching is only the fallback.
-# Cluster isolation requires every piece to declare exactly one cluster, so posts carry
-# an explicit `category:` in their frontmatter and that always wins.
+# money_page is the services page the hub feeds. hire_note is the sentence that links
+# it, shown under the hub's lead. Under an article it opens the contact line only when
+# the money page is not /services/, because the article CTA already links /services/.
 #
-# TODO (copy, for the Codex writer): `description` and `intro` below are scope
-# definitions written by the director to set the cluster boundary, not finished page
-# copy, and they are visible on each owner page. Rewrite them so each one states the
-# reader's job in that cluster and reads like the rest of the site. House rules apply.
-
-[[content.categories]]
-slug = "ai-search-optimization"
-hire_note = "For documentation, I run an <a href=\"/services/ai-ready-documentation-audit/\">AI-ready documentation audit</a> that covers these checks."
-preserve_empty_route = true
-title = "AI Search and Citation"
-description = "Tests and arguments about what answer engines can extract, what crawlers can access, and what publishers cannot honestly promise."
-intro = "Answer-engine advice is full of rituals. I test the parts a publisher can control and name the parts nobody can guarantee. None of it helps a page that ordinary search can't crawl, so the <a href=\"/articles/docs-seo/\">technical SEO checklist for documentation sites</a> comes first."
-tag_matches = ["ai-search", "ai-overviews", "llms-txt", "answer-engines", "documentation-seo", "generative-engine-optimization"]
-
-[[content.categories]]
-slug = "ai-engineering"
-hire_note = "I work as a <a href=\"/services/freelance-technical-writer-for-ai-companies/\">freelance technical writer for AI companies</a> that build these systems."
-label = "AI Engineering"
-title = "AI Agents, Memory, and Retrieval"
-description = "Agent architecture, memory, retrieval, and inference explained through the failure boundaries that change an engineering decision."
-intro = "AI systems look magical until state goes stale, retrieval lies, or latency eats the product. I write from those boundaries inward."
-tag_matches = ["ai-agents", "ai agents", "agents", "agent-memory", "agent-architecture", "agent architecture", "agent design", "multi-agent", "multi-agent systems", "rag", "retrieval", "memory", "memory-hierarchy", "memory-management", "memory-optimization", "vector-search", "llm", "llm-architecture", "inference", "kv-cache", "context-window", "context-windows", "transformers", "fine-tuning", "mcp", "ai reasoning", "voice-ai", "agentic-cli", "infrastructure"]
-
-# Distribution. Merged 2026-08-17 from three separate clusters: reddit-marketing,
-# community-building and technical-events. No topic was dropped and the settled scope in
-# CHARTER 2c-bis is unchanged; only the container changed.
+# incubating = true renders a hub noindex and keeps it out of the sitemap. A hub needs
+# five published spokes (posts plus tools) before that flag can come off.
 #
-# The isolation rule's own logic forced this. It requires every cluster to have one owner
-# page covering the whole job, and three clusters of 3, 4 and 5 rows cannot each have an
-# owner page that owns anything. Merging makes the rule satisfiable rather than aspirational,
-# and it REMOVES a cross-cluster exception instead of adding one.
-#
-# The empirical tell: a brief for the community owner page needed a stop instruction, because
-# it opened a cluster with no publishable siblings and could not meet the two-outbound minimum
-# honestly. That is a structural failure surfacing in the work, not a theory about it.
-#
-# None of the three old slugs ever rendered. Verified 2026-08-17: no directory in output/, no
-# sitemap entry, and zero commits in the entire history placed any of them in a built sitemap.
-# No post ever declared them. So no redirect is needed and nothing was indexed.
-#
-# Distribution is a CREDIBILITY cluster, not a traffic cluster. Twelve rows is its ceiling,
-# not a starting allocation, and it must not grow on the strength of a floor figure.
-[[content.categories]]
-slug = "distribution"
-preserve_empty_route = true
-title = "Reaching Developers"
-description = "How to reach developers without barging into their communities with a campaign wearing a fake moustache."
-intro = "Developers do not owe a product attention. Earn a place in the conversation or accept that the post deserves to disappear."
-tag_matches = ["reddit", "reddit-marketing", "community", "community-building", "forums", "discord", "events", "meetups", "workshops", "conferences", "distribution"]
-
-[[content.categories]]
-slug = "developer-experience"
-label = "Developer Experience"
-title = "Developer Experience and DevRel"
-description = "Arguments about developer trust, technical content, and the decisions that make a product feel credible before a sales call."
-intro = "Developer trust dies when marketing makes a technical claim the product cannot cash. These articles show where the debt starts, and the <a href=\"/articles/stripe-technical-blog/\">Stripe engineering blog</a> shows what paying it down looks like."
-tag_matches = ["developer-experience", "devtools", "developer-tools", "developer-marketing", "developer-productivity", "content-strategy", "engineering-culture", "career"]
+# ORDER is the order hubs appear on /articles/, the homepage and llms.txt. tag_matches
+# is only a fallback for a post with no `category:`, which the audit reports as an error.
 
 [[content.categories]]
 slug = "technical-documentation"
 label = "Technical Documentation"
 title = "Technical Documentation"
-description = "Technical documentation built from product behavior, working examples, and a writer willing to decide what the reader needs."
-intro = "Documentation is where a product either teaches people to win or leaves them alone with the error. I care about that choice."
+seo_title = "Technical Documentation: Templates and Review | Ninad Pathak"
+description = "Technical documentation treated as a product surface, with a template for each page type and a review process that starts from the product."
+primary_query = "technical documentation"
+money_page = "/services/"
+hire_note = "My <a href=\"/services/\">technical writing services</a> cover this documentation for developer products."
 tag_matches = ["documentation", "technical-writing", "api-documentation", "docs-as-code", "documentation-workflow", "information-architecture", "accessibility"]
+
+[[content.categories]]
+slug = "ai-search-optimization"
+label = "AI Search"
+title = "AI Search Optimization for Documentation"
+seo_title = "AI Search Optimization for Documentation | Ninad Pathak"
+description = "AI search optimization for documentation, covering crawler access and answer structure with a free checker for each."
+primary_query = "ai search optimization"
+money_page = "/services/ai-ready-documentation-audit/"
+hire_note = "For documentation, I run an <a href=\"/services/ai-ready-documentation-audit/\">AI-ready documentation audit</a> that covers these checks."
+tag_matches = ["ai-search", "ai-overviews", "llms-txt", "answer-engines", "documentation-seo", "generative-engine-optimization"]
+
+[[content.categories]]
+slug = "developer-experience"
+label = "Developer Content"
+title = "Developer Content and DevRel"
+seo_title = "Developer Content and DevRel | Ninad Pathak"
+description = "Developer content and DevRel for readers who check each claim, covering what to publish and who should write it."
+primary_query = "developer content"
+money_page = "/services/"
+hire_note = "My <a href=\"/services/\">technical writing services</a> cover technical articles and content programs for developer products."
+tag_matches = ["developer-experience", "devtools", "developer-tools", "developer-marketing", "developer-productivity", "content-strategy", "engineering-culture", "career"]
+
+[[content.categories]]
+slug = "ai-agents"
+label = "AI Agents"
+title = "AI Agent Architecture"
+seo_title = "AI Agent Architecture: The Loop and the Harness | Ninad Pathak"
+description = "AI agent architecture explained as a loop around a model and the harness that runs it, with MCP and the ways agents fail."
+primary_query = "ai agent architecture"
+money_page = "/services/freelance-technical-writer-for-ai-companies/"
+hire_note = "I work as a <a href=\"/services/freelance-technical-writer-for-ai-companies/\">freelance technical writer for AI companies</a> that build these systems."
+tag_matches = ["ai-agents", "ai agents", "agents", "agent-architecture", "agent architecture", "agent design", "multi-agent", "multi-agent systems", "mcp", "ai reasoning"]
+
+[[content.categories]]
+slug = "agent-memory"
+label = "Agent Memory"
+title = "AI Agent Memory"
+seo_title = "AI Agent Memory: The Write Path and the Read Path | Ninad Pathak"
+description = "AI agent memory as a pipeline the application owns, from what gets written to what gets read back, with the failure at each stage."
+primary_query = "ai agent memory"
+money_page = "/services/freelance-technical-writer-for-ai-companies/"
+hire_note = "I work as a <a href=\"/services/freelance-technical-writer-for-ai-companies/\">freelance technical writer for AI companies</a> that build these systems."
+tag_matches = ["agent-memory", "memory", "memory-hierarchy", "memory-management", "memory-optimization"]
+
+[[content.categories]]
+slug = "rag"
+label = "RAG and Retrieval"
+title = "The RAG Pipeline"
+seo_title = "RAG Pipeline: Embeddings to Evaluation | Ninad Pathak"
+description = "The RAG pipeline stage by stage, from embeddings and hybrid search to evaluation, with each stage measured apart from the others."
+primary_query = "rag pipeline"
+money_page = "/services/freelance-technical-writer-for-ai-companies/"
+hire_note = "I work as a <a href=\"/services/freelance-technical-writer-for-ai-companies/\">freelance technical writer for AI companies</a> that build these systems."
+tag_matches = ["rag", "retrieval", "vector-search"]
+
+[[content.categories]]
+slug = "coding-agents"
+label = "Coding Agents"
+title = "Coding Agents"
+seo_title = "Coding Agents: Instruction Files and Subagents | Ninad Pathak"
+description = "Coding agents are configured through files a person writes. Guides to instruction files and subagents, plus how to choose a model."
+primary_query = "coding agents"
+money_page = "/services/freelance-technical-writer-for-ai-companies/"
+hire_note = "I work as a <a href=\"/services/freelance-technical-writer-for-ai-companies/\">freelance technical writer for AI companies</a> that build these systems."
+tag_matches = ["agentic-cli"]
+
+[[content.categories]]
+slug = "ai-engineering"
+label = "LLM Inference"
+title = "LLM Inference and Context"
+seo_title = "LLM Inference: Latency and Cost Mechanisms | Ninad Pathak"
+description = "LLM inference explained by mechanism, with what sets latency and cost and how each mechanism trades against quality."
+primary_query = "llm inference"
+money_page = "/services/freelance-technical-writer-for-ai-companies/"
+hire_note = "I work as a <a href=\"/services/freelance-technical-writer-for-ai-companies/\">freelance technical writer for AI companies</a> that build these systems."
+tag_matches = ["llm", "llm-architecture", "inference", "kv-cache", "context-window", "context-windows", "transformers", "fine-tuning", "voice-ai", "infrastructure"]
 
 [contact]
 booking_url = "https://zcal.co/i/AGG1iJtv"

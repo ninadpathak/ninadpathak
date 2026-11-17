@@ -1,0 +1,44 @@
+# Hub copy for /articles/developer-experience/. See technical-documentation.yaml for the fields.
+opening_source:
+  url: "https://www.joelonsoftware.com/2008/09/15/stack-overflow-launches/"
+  fact: "Dated September 15, 2008: 'I thought the combination of my audience (#15 on Bloglines) and Jeff's (#89) would bring enough great developers'."
+  checked: 2026-11-17
+lead: "Developer content is the technical writing a company publishes for engineers, from blog posts to documentation. This hub covers what to publish and how to write it, then who should do the writing."
+intro: |
+  Stack Overflow launched on September 15, 2008, and Joel Spolsky [wrote that day](https://www.joelonsoftware.com/2008/09/15/stack-overflow-launches/) that he expected his audience combined with Jeff Atwood's to bring enough developers to the site. Those audiences came from Joel on Software and Coding Horror, two personal blogs written by working programmers.
+
+  Developer content at a company works on the same mechanism. Readers come back because an earlier post taught them something they could use.
+
+  The parallel breaks at the byline. Spolsky and Atwood wrote under their own names about their own work, and a company blog has to earn that trust while it has a product to sell.
+argument: "Developers check claims, so content earns trust by being runnable and loses it by overclaiming."
+sections:
+  - heading: "What to publish"
+    spokes:
+      - post: stripe-technical-blog
+        note: "Shows what the Stripe engineering blog publishes now and why the writing works as an advantage."
+      - post: devtools-documentation
+        note: "Argues that weak docs lose a devtools deal during evaluation, before sales hears an objection."
+      - post: documentation-velocity
+        note: "Uses DORA metrics and the Accelerate research to connect documentation quality to engineering throughput."
+  - heading: "How to write it"
+    spokes:
+      - post: technical-writing-for-engineers
+        note: "A short guide to the writing habits that fix common failures in engineering docs."
+      - post: writing-for-ai-products
+        note: "Covers what AI product docs now need, such as prompts and evals, and how to judge a writer for an AI company."
+      - tool: linter
+        note: "Paste a draft and get a report on the patterns that lose technical readers, such as condescension words."
+  - heading: "Who writes it"
+    spokes:
+      - post: engineer-to-writer
+        note: "My account of which engineering habits carried over into technical writing and which I dropped."
+bridges:
+  - hub: technical-documentation
+    text: "Documentation is the content developers trust first, and the [technical documentation](/articles/technical-documentation/) hub has a template for each page type."
+  - hub: ai-search-optimization
+    text: "An AI assistant now reads developer content on a developer's behalf, and [AI search optimization](/articles/ai-search-optimization/) covers what makes a page quotable."
+faqs:
+  - q: "What is developer content?"
+    a: "Developer content is the technical writing a company publishes for engineers, from blog posts to documentation. Its readers check claims against the product, so a runnable example carries more weight than an adjective."
+  - q: "Who should write developer content?"
+    a: "Someone who runs the product before writing about it, which is how I work. The engineer-to-writer page in this hub says which engineering habits help with that."

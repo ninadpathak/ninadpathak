@@ -317,8 +317,12 @@ class ToolDiscoverabilityTests(unittest.TestCase):
     def test_site_llms_txt_lists_every_tool(self):
         source = (self.repo_root / "build.py").read_text(encoding="utf-8")
         self.assertIn("## Tools", source)
-        for path in ("/llms-txt-generator/", "/llms-txt-validator/", "/linter/"):
-            self.assertIn(f"{{base}}{path}", source, f"{path} missing from llms.txt output")
+        # llms.txt lists each tool from the config.toml inventory, under the hub that
+        # lists it or under Tools. tests/test_hubs.py checks the built file lists every
+        # tool exactly once.
+        config = (self.repo_root / "config.toml").read_text(encoding="utf-8")
+        for slug in ("llms-txt-generator", "llms-txt-validator", "linter"):
+            self.assertIn(f'slug = "{slug}"', config, f"{slug} missing from the tools inventory")
 
     def test_footer_reaches_both_llms_txt_tools_through_the_tools_index(self):
         """The footer links /tools/, not five tools.
@@ -408,7 +412,6 @@ class ToolDiscoverabilityTests(unittest.TestCase):
         build = (self.repo_root / "build.py").read_text(encoding="utf-8")
         self.assertIn("build_ai_overviews_checker", build)
         self.assertIn('("/ai-overviews-checker/", "0.9", "monthly", None)', build)
-        self.assertIn("{base}/ai-overviews-checker/", build)
 
         base_html = (self.repo_root / "templates" / "base.html").read_text(encoding="utf-8")
         self.assertIn('href="/tools/"', base_html)
@@ -448,7 +451,6 @@ class ToolDiscoverabilityTests(unittest.TestCase):
         build = (self.repo_root / "build.py").read_text(encoding="utf-8")
         self.assertIn("build_ai_crawler_checker", build)
         self.assertIn('("/ai-crawler-checker/", "0.9", "monthly", None)', build)
-        self.assertIn("{base}/ai-crawler-checker/", build)
 
         # The footer links /tools/ rather than each tool, so reachability is asserted
         # against the tools index and its inventory instead of the footer.

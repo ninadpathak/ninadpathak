@@ -5,6 +5,30 @@
 {% block canonical %}{% if current_page_num > 1 %}/articles/page/{{ current_page_num }}/{% else %}/articles/{% endif %}{% endblock %}
 {% block og_url %}{% if current_page_num > 1 %}/articles/page/{{ current_page_num }}/{% else %}/articles/{% endif %}{% endblock %}
 
+{% block schema %}
+{% if current_page_num == 1 and categories %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Article hubs",
+  "url": "{{ site.url }}/articles/",
+  "itemListElement": [
+{% for category in categories if category.posts and not category.incubating %}
+    {
+      "@type": "ListItem",
+      "position": {{ loop.index }},
+      "url": "{{ site.url }}{{ category.url }}",
+      "name": {{ category.title | tojson }}
+    }{% if not loop.last %},{% endif %}
+
+{% endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
+
 {% block content %}
 
 <section class="page-intro">
@@ -19,8 +43,24 @@
   </div>
 </section>
 
+{% if current_page_num == 1 and categories %}
 <section class="blog-list-section">
   <div class="container">
+    <h2 class="label">Hubs</h2>
+    {% for category in categories if category.posts %}
+    <a href="{{ category.url }}" class="blog-row">
+      <div class="blog-row-title">{{ category.title }}</div>
+      <div class="blog-row-desc">{{ category.description }}</div>
+      <div class="blog-row-meta"><span class="read-time">{{ category.posts | length }} articles</span></div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="blog-list-section">
+  <div class="container">
+    {% if current_page_num == 1 and categories %}<h2 class="label">All articles</h2>{% endif %}
     {% if posts %}
       {% for post in posts %}
       <a href="/articles/{{ post.slug }}/" class="blog-row">

@@ -1,0 +1,66 @@
+# Hub copy for /articles/agent-memory/. See technical-documentation.yaml for the fields.
+opening_source:
+  url: "https://en.wikipedia.org/wiki/HTTP_cookie"
+  fact: "Lou Montulli had the idea of using cookies in web communications in June 1994, at Netscape, for MCI's e-commerce application; they solved the virtual shopping cart."
+  checked: 2026-11-17
+lead: "AI agent memory is the state an application saves outside the model and feeds back into later requests. A model call keeps nothing between requests, so the application decides what to write down and what to read back."
+intro: |
+  Lou Montulli had the idea of using [cookies](https://en.wikipedia.org/wiki/HTTP_cookie) in web communications in June 1994, while Netscape was building an e-commerce application for MCI. HTTP kept no state between requests, and a cookie gave a shopping cart somewhere to live.
+
+  A model call has the same property. Each request starts from the text it is given, and what the agent should know from last week has to be put there.
+
+  The parallel breaks at what gets stored. A cookie holds a value the server wrote on purpose, and agent memory is distilled from conversation, where a later fact can contradict an earlier one.
+
+  I ran a team of 13 writers at Mem0, which sells a memory layer, so weigh this hub with that in mind.
+argument: "Memory is a pipeline the application owns from the write to the read, and each stage has its own failure."
+sections:
+  - heading: "What memory is"
+    spokes:
+      - post: ai-memory-management
+        note: "Covers the memory layers and who decides what gets written, with runnable examples of eviction and scope."
+      - post: agent-memory-types
+        note: "Maps the three memory types an agent uses to what each one stores."
+      - post: context-windows-vs-memory
+        note: "Treats the context window as a per-request budget and memory as state retrieved into a later request."
+      - post: rag-vs-memory
+        note: "Draws the line between retrieval for one request and state kept across requests, and shows how to run both."
+  - heading: "Short-term memory and compression"
+    spokes:
+      - post: short-term-agent-memory
+        note: "Covers token budgets and overflow handling, and how short-term and long-term memory work together."
+      - post: memory-compression
+        note: "Compares three compression strategies for deciding what stays when context is finite."
+  - heading: "Persistence and audit"
+    spokes:
+      - post: memory-serialization
+        note: "Explains why an agent forgets on restart and the serialization patterns that carry state across sessions."
+      - post: memory-versioning
+        note: "Builds append-only memory versioning so an agent's reasoning can be traced in an audit."
+  - heading: "Several agents, and voice"
+    spokes:
+      - post: shared-vs-isolated-memory
+        note: "Chooses between shared and isolated memory for multi-agent systems by coordination and debugging cost."
+      - post: voice-agent-memory
+        note: "Covers memory across a real-time streaming pipeline, where a voice agent has constraints a text chatbot lacks."
+  - heading: "The field and its tools"
+    spokes:
+      - post: agent-memory-2026
+        note: "Surveys agent memory architectures in 2026 and ties the choice to the agent's task and risk."
+      - post: hyperagents-memory
+        note: "Walks through how HyperAgents layers memory and keeps session continuity."
+      - post: deerflow-memory
+        note: "Walks through DeerFlow's memory, from session state files to sub-agent isolation."
+bridges:
+  - hub: rag
+    text: "A memory read path is a retrieval problem, and the [RAG pipeline](/articles/rag/) hub covers the search stack it runs on."
+  - hub: ai-engineering
+    text: "Context window limits are the reason memory exists, and the [LLM inference](/articles/ai-engineering/) hub covers what a long context costs."
+  - hub: coding-agents
+    text: "Claude Code's memory files are one product's version of this design, covered in the [coding agents](/articles/coding-agents/) hub."
+faqs:
+  - q: "What is AI agent memory?"
+    a: "AI agent memory is the state an application saves outside the model and feeds back into later requests. The application decides what gets written and what gets read back, because a model call keeps nothing between requests."
+  - q: "Is a larger context window the same as memory?"
+    a: "No. Context is a per-request reasoning budget, and memory is persistent state retrieved into a later request."
+  - q: "Is RAG enough for agent memory?"
+    a: "RAG selects evidence for one request, and memory governs state across requests. Memory that only recalls is RAG over old chats."

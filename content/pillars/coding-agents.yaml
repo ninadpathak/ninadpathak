@@ -1,0 +1,56 @@
+# Hub copy for /articles/coding-agents/. See technical-documentation.yaml for the fields.
+opening_source:
+  url: "https://en.wikipedia.org/wiki/Editor_war"
+  fact: "The editor war is the rivalry between users of the Emacs and vi text editors; flame wars since at least 1985; one of the original holy wars on Usenet."
+  checked: 2026-11-17
+lead: "A coding agent is an AI agent that works inside a repository, editing files and running commands until a programming task is done. This hub covers how to configure one and how to choose one."
+intro: |
+  The [editor war](https://en.wikipedia.org/wiki/Editor_war) between Emacs and vi users has run since at least 1985, and it was one of the original holy wars on Usenet. Developers now argue about coding agents the way they argued about editors.
+
+  The parallel breaks at the stake. An editor changes how a person types code, and an agent writes the code.
+
+  That moves the skill from keystrokes to instructions. The CLAUDE.md guide in this hub tests four repositories and finds that Claude Code prefers CLAUDE.md by default and falls back to AGENTS.md, so what the agent knows about a project is what a person wrote in those files.
+argument: "A coding agent is configured through files a person writes, so getting good output from one is a documentation job."
+sections:
+  - heading: "Instruction files"
+    spokes:
+      - post: claude-md
+        note: "Tests which agent loads CLAUDE.md and which loads AGENTS.md by default, and gives a copyable AGENTS.md template."
+  - heading: "Delegation"
+    spokes:
+      - post: claude-code-subagents
+        note: "Shows what a Claude Code subagent starts with and when to pick one over a skill or a hook, with a tested example."
+      - post: agentic-workflows
+        note: "A five-stage playbook that scopes the task before the agent runs and reviews its diff before the change lands."
+  - heading: "Memory"
+    spokes:
+      - post: claude-code-memory
+        note: "Explains how Claude Code keeps context across sessions through project files."
+      - post: coding-agent-memory
+        note: "Covers the persistence patterns that stop a coding assistant from losing context between sessions."
+  - heading: "Choosing a model or tool"
+    spokes:
+      - post: best-llms-for-coding
+        note: "Reviews coding models on Real-SWE 1.1 with the cost per resolved task, and gives a test to run on your own repo."
+      - post: claude-vs-gemini-cli
+        note: "Compares Claude Code and Gemini CLI on a repository refactor, from verification to human review."
+  - heading: "What the code is worth"
+    spokes:
+      - post: coding-models-new-code-vs-change
+        note: "Sets the October jump in coding models beside a benchmark where the best of them passed one staged-change checkpoint in six."
+      - post: nobody-understands-the-code
+        note: "Argues that an agent can explain what code does, while the reason it exists has to be written down by a person."
+bridges:
+  - hub: ai-agents
+    text: "A coding agent is one agent loop with a harness around it, which the [AI agent architecture](/articles/ai-agents/) hub takes apart."
+  - hub: agent-memory
+    text: "Claude Code's memory is one case of a wider design, and the [AI agent memory](/articles/agent-memory/) hub covers the write and read paths behind it."
+  - hub: technical-documentation
+    text: "Instruction files are documentation, and the [technical documentation](/articles/technical-documentation/) hub covers the page types they sit beside."
+faqs:
+  - q: "What is a coding agent?"
+    a: "A coding agent is an AI agent that works inside a repository, editing files and running commands until a programming task is done. It takes its project knowledge from instruction files such as CLAUDE.md and AGENTS.md."
+  - q: "Does Claude Code read AGENTS.md?"
+    a: "With default settings, Claude Code prefers CLAUDE.md and falls back to AGENTS.md. Codex reads AGENTS.md, and reads CLAUDE.md only when it is configured as a fallback filename."
+  - q: "What does a Claude Code subagent know when it starts?"
+    a: "A custom subagent starts without the conversation history and runs in its own context window. The prompt in its file has to carry the rules the job needs."

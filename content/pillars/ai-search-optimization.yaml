@@ -1,0 +1,52 @@
+# Hub copy for /articles/ai-search-optimization/. See technical-documentation.yaml for the fields.
+opening_source:
+  url: "https://en.wikipedia.org/wiki/Robots.txt"
+  fact: "Martijn Koster proposed the standard in February 1994 on the www-talk mailing list; it relies on voluntary compliance."
+  checked: 2026-11-17
+lead: "AI search optimization for documentation is the work of making a page fetchable by AI crawlers and quotable by answer engines. A publisher controls crawler access and page structure, and has no control over placement."
+intro: |
+  Martijn Koster proposed [robots.txt](https://en.wikipedia.org/wiki/Robots.txt) on the www-talk mailing list in February 1994. The standard is a plain text file, and it relies on voluntary compliance by the crawlers that read it.
+
+  AI search runs on the same arrangement. GPTBot and OAI-SearchBot read that file, and a docs site states its terms there in plain text.
+
+  The crawler guide in this hub checked 12 developer documentation hosts on October 22, 2026. Each one allowed every AI agent the checker knows, and none named an AI agent in its file.
+
+  The parallel breaks at the result. An answer engine may quote one passage or leave the page out, and the publisher has no say in which.
+argument: "So this hub stays with the parts a publisher controls, and the access and extraction checks each come with a free tool that reruns them."
+sections:
+  - heading: "Access"
+    blurb: "A crawler that cannot fetch the page ends the process here."
+    spokes:
+      - post: ai-crawlers
+        note: "Separates the robots.txt rules that block AI training from the rules that block AI search, with what 12 documentation sites allow."
+      - tool: ai-crawler-checker
+        note: "Paste a robots.txt and see which AI platforms it lets cite the site and which it lets train on it."
+  - heading: "Extraction and files"
+    blurb: "Once the page is fetched, an engine has to lift an answer that still makes sense alone."
+    spokes:
+      - post: llms-txt
+        note: "Covers what the llms.txt proposal requires and what server logs say about its use, with four real files checked."
+      - tool: llms-txt-validator
+        note: "Checks a file against the v2 proposal and keeps specification findings apart from conventions."
+      - tool: llms-txt-generator
+        note: "Drafts an llms.txt from a sitemap for editing in the browser."
+      - post: aeo-for-developer-docs
+        note: "Sets AEO and GEO beside SEO, then gives six checks that decide whether docs can be found and quoted."
+      - tool: ai-overviews-checker
+        note: "Runs nine sourced structural checks on a page for snippet eligibility and extractable answers."
+  - heading: "Agents as readers"
+    spokes:
+      - post: agents-reading-docs
+        note: "A close read of Fern's claim that agents make over half the requests to the docs it hosts, and what the numbers leave out."
+bridges:
+  - hub: technical-documentation
+    text: "These checks cannot help a page that ordinary search fails to crawl, so the SEO checklist in the [technical documentation](/articles/technical-documentation/) hub comes first."
+  - hub: ai-agents
+    text: "An MCP server is one more way to serve documentation to an agent, and the [AI agent architecture](/articles/ai-agents/) hub has a tutorial that builds a docs search server."
+faqs:
+  - q: "What is AI search optimization?"
+    a: "AI search optimization is the work of making a page fetchable by AI crawlers and quotable by answer engines. Google says optimizing for its generative AI search is still SEO, so the work starts with an indexed page that can show a snippet."
+  - q: "Does llms.txt improve AI search visibility?"
+    a: "Google Search does not use llms.txt, and an Ahrefs study found that 97% of published files got no request in May 2026. A valid file and a fetched file are different facts, so validate the structure and read the server logs separately."
+  - q: "Does blocking GPTBot remove a site from ChatGPT search?"
+    a: "GPTBot collects training data, and ChatGPT search uses OAI-SearchBot. Blocking GPTBot alone leaves OAI-SearchBot free to fetch the site."

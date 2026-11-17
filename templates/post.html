@@ -40,6 +40,12 @@
   "wordCount": {{ post.word_count }},
 {% if post.category %}
   "articleSection": {{ post.category.label | tojson }},
+  "isPartOf": {
+    "@type": "CollectionPage",
+    "@id": "{{ site.url }}{{ post.category.url }}#hub",
+    "name": {{ post.category.title | tojson }},
+    "url": "{{ site.url }}{{ post.category.url }}"
+  },
 {% endif %}
   "author": {{ person_ref | tojson }},
   "datePublished": "{{ post.date | format_date_iso }}",
@@ -98,13 +104,21 @@
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Blog",
+      "name": "Articles",
       "item": "{{ site.url }}/articles/"
     },
+{% if post.category %}
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "{{ post.title }}",
+      "name": {{ post.category.title | tojson }},
+      "item": "{{ site.url }}{{ post.category.url }}"
+    },
+{% endif %}
+    {
+      "@type": "ListItem",
+      "position": {{ 4 if post.category else 3 }},
+      "name": {{ post.title | tojson }},
       "item": "{{ site.url }}/articles/{{ post.slug }}/"
     }
   ]
@@ -122,6 +136,10 @@
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
       <li class="breadcrumb-item"><a href="/articles/">Articles</a></li>
       <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      {% if post.category %}
+      <li class="breadcrumb-item"><a href="{{ post.category.url }}">{{ post.category.title }}</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      {% endif %}
       <li class="breadcrumb-item current" aria-current="page">{{ post.title }}</li>
     </ol>
   </div>
@@ -143,7 +161,7 @@
         <span class="post-meta-time">{{ post.reading_time }} min read</span>
       </div>
       {% if post.category %}
-      <p><a href="{{ post.category.url }}" class="tag">{{ post.category.label }}</a></p>
+      <p>Part of <a href="{{ post.category.url }}" class="tag">{{ post.category.title }}</a></p>
       {% endif %}
       <h1 class="post-title">{{ post.title }}</h1>
       {% if post.description %}
@@ -199,7 +217,7 @@
 {% if related %}
 <section class="post-related">
   <div class="prose-container">
-    <h3>Related Posts</h3>
+    <h3>More in {{ post.category.title }}</h3>
     <div class="related-grid">
       {% for p in related %}
       <a href="/articles/{{ p.slug }}/" class="related-card">
@@ -219,7 +237,7 @@
       <div>
         <h2 class="cta-title-compact">Hire a freelance technical writer</h2>
         <p>I'm Ninad Pathak, a freelance technical writer for {{ hire.audience }}: I write <a href="/services/">developer documentation, tutorials and technical articles</a>, and I run the product before I write about it. My <a href="/work/">case studies</a> include 50+ developer guides for Centus that its engineers approved without a revision round.</p>
-        {% with hire_line_lead = post.category.hire_note if post.category else "" %}{% include "_hire_line.html" %}{% endwith %}
+        {% with hire_line_lead = post.category.post_hire_note if post.category else "" %}{% include "_hire_line.html" %}{% endwith %}
       </div>
       <div class="cta-actions">
         <a href="{{ contact.booking_url }}" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a Call →</a>

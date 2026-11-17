@@ -1,0 +1,60 @@
+# Hub copy for /articles/ai-agents/. See technical-documentation.yaml for the fields.
+opening_source:
+  url: "https://en.wikipedia.org/wiki/Pipeline_(Unix)"
+  fact: "Ken Thompson added the pipe() system call and pipes to the shell in Version 3 Unix (1973); Doug McIlroy's 1964 memo proposed the concept."
+  checked: 2026-11-17
+lead: "An AI agent is a loop around a model, and AI agent architecture is the design of that loop and the harness that runs it. This hub maps the parts in order, from what an agent is to how one fails."
+intro: |
+  Ken Thompson added [pipes](https://en.wikipedia.org/wiki/Pipeline_(Unix)) to Unix in 1973, after Doug McIlroy's 1964 memo proposed the idea. A pipeline chains programs so the output of one becomes the input of the next.
+
+  An agent loop does the same with tools. The model reads the result of one tool call and decides which call comes next.
+
+  The parallel breaks at who wrote the pipeline. A shell pipeline is fixed by the person who typed it, and an agent composes its own at run time, so one input can take a different path on the next run.
+argument: "The engineering therefore sits outside the model, in the harness that runs the loop and the handling for when it goes wrong."
+sections:
+  - heading: "What an agent is"
+    spokes:
+      - post: ai-agent-taxonomy
+        note: "Groups agents into five types by autonomy and scope, to decide how much autonomy a task needs."
+      - post: agent-vs-ai-assistant
+        note: "Draws the line at who chooses the next step, then compares the cost and control of building each."
+      - post: agent-design-space
+        note: "Maps the patterns that agent designs cluster into."
+  - heading: "The loop and the harness"
+    spokes:
+      - post: agent-loop-anatomy
+        note: "Breaks the loop into four phases, which helps locate the phase where a run went wrong."
+      - post: agent-harnesses
+        note: "Lists what a harness contains and explains why a framework alone may not supply it."
+      - post: lambda-calculus-ai
+        note: "Uses lambda calculus problems with mechanically checkable answers to expose reasoning errors in model output."
+  - heading: "Protocols"
+    spokes:
+      - post: model-context-protocol
+        note: "Explains how MCP connects a model to data sources and tools."
+      - post: mcp-server-tutorial
+        note: "Builds a docs search server in Python and tests it without a model."
+  - heading: "A single agent or several"
+    spokes:
+      - post: multi-agent-vs-single-agent
+        note: "Weighs one agent against several on failure modes and latency."
+  - heading: "Failure"
+    spokes:
+      - post: agent-error-handling
+        note: "Covers the error patterns that break agents in production and the handling that contains them."
+      - post: ai-agent-failures
+        note: "Catalogs why agents fail in production and what the field is doing about it."
+bridges:
+  - hub: agent-memory
+    text: "The loop's remember step has a hub of its own, and [AI agent memory](/articles/agent-memory/) covers what gets written and read back."
+  - hub: coding-agents
+    text: "A coding agent is the agent a developer uses daily, and the [coding agents](/articles/coding-agents/) hub covers the files that configure one."
+  - hub: ai-engineering
+    text: "Each turn of the loop spends tokens and latency, which the [LLM inference](/articles/ai-engineering/) hub measures."
+faqs:
+  - q: "What is AI agent architecture?"
+    a: "AI agent architecture is the design of the loop around a model and of the harness that runs it. The agent loop page in this hub breaks that loop into four phases, starting at perceive and ending at remember."
+  - q: "What is the difference between an AI agent and an AI assistant?"
+    a: "An AI agent chooses its next steps toward a goal, and an AI assistant leaves the next step to the person using it."
+  - q: "What is the Model Context Protocol?"
+    a: "The Model Context Protocol is a standard for connecting AI models to data sources and tools. An MCP server exposes those tools, and the tutorial in this hub builds one in Python."

@@ -150,11 +150,15 @@ class LlmsTxtGroupingTests(unittest.TestCase):
 
     def test_every_built_article_is_listed_once(self):
         base = CONFIG["site"]["url"].rstrip("/")
-        listed = re.findall(r"\]\(" + re.escape(base) + r"/articles/([^/)]+)/\)", self.text)
+        hubs = {c["slug"] for c in CONFIG["content"]["categories"]}
+        linked = re.findall(r"\]\(" + re.escape(base) + r"/articles/([^/)]+)/\)", self.text)
+        listed = [slug for slug in linked if slug not in hubs]
         built = {p.parent.name for p in (OUTPUT / "articles").glob("*/index.html")
                  if any(o.get("@type") == "TechArticle" for o in schema_objects(p))}
         self.assertEqual(sorted(set(listed)), sorted(built))
         self.assertEqual(len(listed), len(set(listed)), "an article is listed twice")
+        # Each hub page is listed once, as the first link under its own heading.
+        self.assertEqual(sorted(slug for slug in linked if slug in hubs), sorted(hubs))
 
     @unittest.skipUnless(NODE, "node is required to run the shipped validator")
     def test_passes_this_sites_own_validator(self):

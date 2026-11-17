@@ -74,6 +74,10 @@
       <div class="post-content glossary-content">
         {{ term.body_html | safe }}
 
+        {% if term.owner_article %}
+        <p><strong>Full guide:</strong> <a href="{{ term.owner_article.url }}">{{ term.owner_article.title }}</a></p>
+        {% endif %}
+
         {% if term.related_terms %}
         <p><strong>Continue with these glossary entries:</strong></p>
         <ul class="related-terms-list">

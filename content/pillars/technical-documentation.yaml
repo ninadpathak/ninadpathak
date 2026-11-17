@@ -1,0 +1,104 @@
+# Hub copy for /articles/technical-documentation/. config.toml holds the title, the
+# description, the primary query and the money page. See build.py (load_hubs) for the
+# fields. opening_source records where the dated fact in `intro` was checked.
+opening_source:
+  url: "https://en.wikipedia.org/wiki/Man_page"
+  fact: "The Unix Programmer's Manual was published on November 3, 1971."
+  checked: 2026-11-17
+lead: "Technical documentation is the written record of how a product behaves, kept true by testing it against the product. This hub maps my guides and templates in the order a team does the work, from deciding what to write to keeping the pages found."
+intro: |
+  The first edition of the [Unix Programmer's Manual](https://en.wikipedia.org/wiki/Man_page) is dated November 3, 1971. It shipped with the system and described the commands that system had on that date.
+
+  Documentation for a product on the web follows the same contract. The page says what the product does today, and a reader runs the command and compares the output.
+
+  The parallel breaks at release speed. A printed manual had one edition of the system to match, and a hosted API can change between two visits by the same reader.
+argument: "Documentation is a product surface, so a page gets tested against the product before it ships and again when the product changes."
+sections:
+  - heading: "Decide what to write"
+    spokes:
+      - post: technical-docs
+        note: "Start here for the definition and a table of document types, each matched to the reader task it owns."
+      - post: documentation-types
+        note: "Covers eight document types with examples, plus the instruction files coding agents read."
+      - post: internal-vs-external-docs
+        note: "A decision table shows what goes public and what stays private, with incidents and releases as worked cases."
+      - post: documentation-structure
+        note: "Reorganizes a docs site around the routes readers take, with one canonical answer per question."
+  - heading: "Write each page type"
+    spokes:
+      - post: quickstart-guide
+        note: "A copyable template with a filled example against the GitHub REST API and a checklist to run before publishing."
+      - post: api-documentation
+        note: "Lists what an API docs set includes page by page, with a reference entry that a script checks against the running service."
+      - post: code-documentation
+        note: "Gives code documentation three homes and a rule for which fact goes in each."
+      - post: writing-technical-tutorials
+        note: "Builds a tutorial from one reader and one starting state to a result that reader can verify."
+      - post: documentation-template
+        note: "A downloadable docs template that says what each page must prove, with a worked example site."
+      - post: design-doc-template
+        note: "A Markdown template that requires a do-nothing alternative, with a filled example and a checker to run before review."
+      - post: runbook-template
+        note: "Each step pairs a command with the output that means it worked, shown on a tested Postgres example."
+      - post: developer-onboarding-docs
+        note: "Sets a safe first merged change as the finish line and gives the new engineer one setup path to reach it."
+  - heading: "Write and review"
+    spokes:
+      - post: documentation-best-practices
+        note: "A review card that checks a page for a clear reader task and a recovery path beside each step that can fail."
+      - post: documentation-headings
+        note: "Shows when a heading should name a task and when a plain noun phrase serves the reader better."
+      - post: shorter-documentation
+        note: "Argues for shorter pages and says when length is earned."
+      - post: documentation-review
+        note: "Runs review in four passes that start with product truth and leave prose for last."
+      - post: docs-accessibility
+        note: "A release checklist for accessibility failures in docs, with a checker for the structural ones."
+  - heading: "Ship changes"
+    spokes:
+      - post: writing-release-notes
+        note: "Puts compatibility and required action on the first screen so a developer can assess upgrade risk."
+      - post: release-notes-template
+        note: "A copyable Markdown template with a filled SDK example and a checker that fails a note with no rollback line."
+      - post: writing-changelogs
+        note: "Groups changes by version and leads each entry with its upgrade impact."
+  - heading: "Keep it found"
+    spokes:
+      - post: docs-seo
+        note: "A technical SEO checklist for docs sites, worked in dependency order from crawling to indexing."
+templates_heading: "Template index"
+templates_intro: "Each file below is the download from its guide above."
+templates:
+  - name: "Quickstart template"
+    use: "One reader reaching one working result"
+    file: "/static/templates/quickstart-template.md"
+  - name: "API documentation page outline"
+    use: "The pages an API docs set needs"
+    file: "/static/templates/api-documentation-page-outline.md"
+  - name: "Technical documentation template"
+    use: "A starter docs site with a job for each page"
+    file: "/static/templates/technical-documentation-template.zip"
+  - name: "Design doc template"
+    use: "A design review with a do-nothing alternative"
+    file: "/static/templates/design-doc-template.md"
+  - name: "Runbook template"
+    use: "On-call steps with their expected output"
+    file: "/static/templates/runbook-template.md"
+  - name: "Documentation review card"
+    use: "A page review before publishing"
+    file: "/static/templates/documentation-review-card.md"
+  - name: "Release notes template"
+    use: "An upgrade decision on the first screen"
+    file: "/static/templates/release-notes-template.md"
+bridges:
+  - hub: ai-search-optimization
+    text: "A docs page now has agent readers as well as human ones, and [AI search optimization for documentation](/articles/ai-search-optimization/) covers crawler access and answer structure."
+  - hub: coding-agents
+    text: "The instruction files a coding agent loads are documentation with a new reader, which is why CLAUDE.md and AGENTS.md sit in the [coding agents](/articles/coding-agents/) hub."
+faqs:
+  - q: "What is technical documentation?"
+    a: "Technical documentation is the set of pages that tell a reader how a product behaves and how to complete a task with it. It includes user guides and reference along with runbooks and release notes, and each type serves a distinct reader need."
+  - q: "What should a small team document first?"
+    a: "Start with an orientation page and one verified success path, then add the reference that path needs. Give each page an owner and a product change that triggers its review."
+  - q: "How do you keep technical documentation accurate?"
+    a: "Check the page against the running product. The API documentation guide in this hub checks a reference entry with a script, so a changed status code fails before a developer hits it."

@@ -31,7 +31,13 @@
   "url": "{{ site.url }}{{ service.url }}",
   "description": {{ service.description | tojson }},
   "provider": {{ person_ref | tojson }},
-  "audience": { "@type": "Audience", "audienceType": {{ hire.audience | tojson }} }{% if service.is_index %},
+  "audience": { "@type": "Audience", "audienceType": {{ hire.audience | tojson }} }{% if hubs %},
+  "subjectOf": [
+    {% for hub in hubs %}
+    { "@type": "CollectionPage", "@id": "{{ site.url }}{{ hub.url }}#hub", "name": {{ hub.title | tojson }}, "url": "{{ site.url }}{{ hub.url }}" }{% if not loop.last %},{% endif %}
+
+    {% endfor %}
+  ]{% endif %}{% if service.is_index %},
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Technical writing services",

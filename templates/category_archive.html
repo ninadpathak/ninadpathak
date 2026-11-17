@@ -1,45 +1,172 @@
 {% extends "base.html" %}
 
-{% block title %}{{ category.title }} Articles | Ninad Pathak{% endblock %}
+{# The hub page. config.toml names the hub and content/pillars/<slug>.yaml holds its copy;
+   build.py (load_hubs) joins the two. Every class here is one the article and glossary
+   templates already use. #}
+{% set page_title = category.seo_title or (category.title ~ " | Ninad Pathak") %}
+{% set indexable = posts and not category.incubating %}
+{% block title %}{{ page_title }}{% endblock %}
 {% block description %}{{ category.description }}{% endblock %}
 {% block canonical %}{{ category.url }}{% endblock %}
+{% block og_title %}{{ page_title }}{% endblock %}
+{% block og_description %}{{ category.description }}{% endblock %}
 {% block og_url %}{{ category.url }}{% endblock %}
-{% block robots %}{% if posts %}{{ super() }}{% else %}noindex, follow{% endif %}{% endblock %}
+{% block tw_title %}{{ page_title }}{% endblock %}
+{% block tw_desc %}{{ category.description }}{% endblock %}
+{% block robots %}{% if indexable %}{{ super() }}{% else %}noindex, follow{% endif %}{% endblock %}
 
 {% block schema %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
+  "@id": "{{ site.url }}{{ category.url }}#hub",
   "name": {{ category.title | tojson }},
   "description": {{ category.description | tojson }},
   "url": "{{ site.url }}{{ category.url }}",
-  "isPartOf": "{{ site.url }}/articles/"
+  "inLanguage": "en-US",
+  "isPartOf": "{{ site.url }}/articles/",
+  "author": {{ person_ref | tojson }}{% if category.argument_text %},
+  "abstract": {{ category.argument_text | tojson }}{% endif %}{% if category.spokes %},
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{ category.spokes | length }},
+    "itemListElement": [
+{% for spoke in category.spokes %}
+      {
+        "@type": "ListItem",
+        "position": {{ loop.index }},
+        "url": "{{ site.url }}{{ spoke.url }}",
+        "name": {{ spoke.title | tojson }}
+      }{% if not loop.last %},{% endif %}
+
+{% endfor %}
+    ]
+  }{% endif %}
+
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Articles", "item": "{{ site.url }}/articles/" },
+    { "@type": "ListItem", "position": 3, "name": {{ category.title | tojson }}, "item": "{{ site.url }}{{ category.url }}" }
+  ]
+}
+</script>
+{% if category.faqs %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+{% for faq in category.faqs %}
+    {
+      "@type": "Question",
+      "name": {{ faq.question | tojson }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ faq.answer | tojson }}
+      }
+    }{% if not loop.last %},{% endif %}
+
+{% endfor %}
+  ]
+}
+</script>
+{% endif %}
 {% endblock %}
 
 {% block content %}
-<section class="page-intro">
-  <div class="container">
-    <div class="label">Articles / {{ category.label }}</div>
-    <h1>{{ category.title }}</h1>
-    <p class="lead">{{ category.intro }}</p>
-    {% with hire_line_lead = category.hire_note %}{% include "_hire_line.html" %}{% endwith %}
-  </div>
-</section>
 
-<section class="blog-list-section">
-  <div class="container">
-    {% for post in posts %}
-    <a href="{{ post.url }}" class="blog-row">
-      <div class="blog-row-title">{{ post.title }}</div>
-      {% if post.description %}<div class="blog-row-desc">{{ post.description }}</div>{% endif %}
-      <div class="blog-row-meta"><span class="read-time">{{ post.reading_time }} min read</span></div>
-    </a>
-    {% else %}
-    <p class="empty-state">No articles are currently published in this category. <a href="/articles/">Browse all articles.</a></p>
-    {% endfor %}
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <div class="prose-container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item"><a href="/articles/">Articles</a></li>
+      <li class="breadcrumb-separator" aria-hidden="true">/</li>
+      <li class="breadcrumb-item current" aria-current="page">{{ category.title }}</li>
+    </ol>
   </div>
-</section>
+</nav>
+
+<article>
+  <header class="post-header">
+    <div class="prose-container">
+      <h1 class="post-title">{{ category.title }}</h1>
+      {% if category.lead %}
+      <p class="lead">{{ category.lead }}</p>
+      {% endif %}
+      {% with hire_line_lead = category.hire_note %}{% include "_hire_line.html" %}{% endwith %}
+    </div>
+  </header>
+
+  <div class="post-body">
+    <div class="prose-container">
+      {% if category.sections %}
+      <nav class="toc" aria-label="Table of contents">
+        <div class="toc-title">In this hub</div>
+        <div class="toc">
+          <ul>
+            {% for section in category.sections %}
+            <li><a href="#{{ section.heading | slugify }}">{{ section.heading }}</a></li>
+            {% endfor %}
+            {% if category.templates %}<li><a href="#{{ category.templates_heading | slugify }}">{{ category.templates_heading }}</a></li>{% endif %}
+            {% if category.bridges %}<li><a href="#related-hubs">Related hubs</a></li>{% endif %}
+          </ul>
+        </div>
+      </nav>
+      {% endif %}
+      <div class="post-content">
+        {{ category.intro_html }}
+        {% if category.argument %}<p>{{ category.argument }}</p>{% endif %}
+
+        {% for section in category.sections %}
+        <h2 id="{{ section.heading | slugify }}">{{ section.heading }}</h2>
+        {% if section.blurb %}<p>{{ section.blurb }}</p>{% endif %}
+        <ul>
+          {% for spoke in section.spokes %}
+          <li><a href="{{ spoke.url }}">{{ spoke.title }}</a>. {{ spoke.note }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty-state">No articles are currently published in this hub. <a href="/articles/">Browse all articles.</a></p>
+        {% endfor %}
+
+        {% if category.templates %}
+        <h2 id="{{ category.templates_heading | slugify }}">{{ category.templates_heading }}</h2>
+        {% if category.templates_intro %}<p>{{ category.templates_intro }}</p>{% endif %}
+        <table>
+          <thead>
+            <tr><th scope="col">Template</th><th scope="col">What it is for</th><th scope="col">Download</th></tr>
+          </thead>
+          <tbody>
+            {% for row in category.templates %}
+            <tr><td>{{ row.name }}</td><td>{{ row.use }}</td><td><a href="{{ row.file }}">{{ row.file.rsplit("/", 1)[-1] }}</a></td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endif %}
+
+        {# Each question is its own heading with the answer under it, so no heading
+           sits directly on another and the FAQPage markup matches visible text. #}
+        {% for faq in category.faqs %}
+        <h2 id="{{ faq.question | slugify }}">{{ faq.question }}</h2>
+        <p>{{ faq.answer_html }}</p>
+        {% endfor %}
+
+        {% if category.bridges %}
+        <h2 id="related-hubs">Related hubs</h2>
+        {% for bridge in category.bridges %}
+        <p>{{ bridge.html }}</p>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</article>
 {% endblock %}

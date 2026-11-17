@@ -513,6 +513,8 @@ class SiteBuilder:
                 "description": post.get("description", ""),
                 "tags": post.get("tags", []),
                 "declared_category": post.get("category", ""),
+                "primary_query": post.get("primary_query", ""),
+                "siblings": post.get("siblings") or [],
                 "takeaways": post.get("takeaways", []),
                 "work_note": render_work_note(post.get("work_note")),
                 "status": status,
@@ -566,14 +568,19 @@ class SiteBuilder:
                 "slug": raw["slug"],
                 "title": raw["title"],
                 "label": raw.get("label", raw["title"]),
+                "seo_title": raw.get("seo_title", ""),
                 "description": raw["description"],
-                "intro": raw.get("intro", raw["description"]),
+                "primary_query": raw.get("primary_query", ""),
+                "money_page": raw.get("money_page", ""),
                 "hire_note": raw.get("hire_note", ""),
+                "incubating": raw.get("incubating", False),
                 "preserve_empty_route": raw.get("preserve_empty_route", False),
                 "tag_matches": {str(tag).lower() for tag in raw.get("tag_matches", [])},
                 "posts": [],
             }
             category["url"] = f"/articles/{category['slug']}/"
+            # The article CTA already links /services/, so the note would repeat it there.
+            category["post_hire_note"] = category["hire_note"] if category["money_page"] != "/services/" else ""
             categories.append(category)
             by_slug[category["slug"]] = category
 
@@ -682,49 +689,157 @@ class SiteBuilder:
             })
         return pages
 
-    def load_pillars(self, posts) -> list[dict]:
-        """Load topic pillar/hub pages from content/pillars/*.yaml and resolve
-        their curated post-slug lists against the live post set."""
-        pillars_dir = Path("content/pillars")
-        if not pillars_dir.exists():
-            return []
-        by_slug = {p["slug"]: p for p in posts}
+    def inline_md(self, text: str) -> str:
+        """One line of Markdown as inline HTML, for the sentences in a hub's pillar file."""
+        self.md.reset()
+        html = self.md.convert(str(text).strip())
+        return re.sub(r"^<p>|</p>$", "", html.strip())
 
-        pillars = []
-        for f in sorted(pillars_dir.glob("*.yaml")):
-            data = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
-            if data.get("status", "published") != "published" and not self.include_drafts:
-                continue
+    def load_hubs(self, categories, posts) -> None:
+        """Attach each hub's written page to its category.
+
+        content/pillars/<slug>.yaml holds the copy: `lead` answers the hub's primary
+        query, `intro` and `argument` are the opening, `sections` is the curated map
+        with one sentence per spoke, `bridges` links neighbouring hubs and `faqs` is the
+        visible FAQ. A spoke is a post of this category or a tool from config.toml.
+
+        A hub with no pillar file, no argument, an opening under 150 words or a
+        paragraph over two sentences fails the build: a hub that renders as a bare list
+        is the page this model replaces. A published post missing from its hub's
+        sections still gets a link, in a last section built from its description, so a
+        post pushed before its hub is edited is never an orphan. The audit reports it.
+        """
+        tools = {tool["slug"]: tool for tool in self.config["content"].get("tools", [])}
+        hub_slugs = {category["slug"] for category in categories}
+        for category in categories:
+            slug = category["slug"]
+            path = Path("content/pillars") / f"{slug}.yaml"
+            if not path.is_file():
+                raise ValueError(f"hub {slug!r} has no {path}")
+            data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+            for field in ("lead", "argument", "intro"):
+                if not str(data.get(field) or "").strip():
+                    raise ValueError(f"{path} has no {field}")
+            opening = f"{data['lead']}\n\n{data['intro'].strip()}\n\n{data['argument']}"
+            words = len(_clean_inline_md(opening).split())
+            if words < 150:
+                raise ValueError(f"{path}: the opening before the first section is {words} words, under 150")
+            prose = [opening] + [str(faq.get("a", "")) for faq in data.get("faqs") or []]
+            prose += [str(bridge.get("text", "")) for bridge in data.get("bridges") or []]
+            for text in prose:
+                issues = paragraph_sentence_violations(text)
+                if issues:
+                    raise ValueError(f"{path} violates the two-sentence paragraph rule: {issues[0][2]}")
+            if "[TODO" in path.read_text(encoding="utf-8"):
+                raise ValueError(f"{path} still contains a [TODO marker")
+
+            by_slug = {post["slug"]: post for post in category["posts"]}
+            sections, ordered, hub_tools, seen = [], [], [], set()
+            for raw in data.get("sections") or []:
+                spokes = []
+                for entry in raw.get("spokes") or []:
+                    note = self.inline_md(entry.get("note", ""))
+                    if not note:
+                        raise ValueError(f"{path}: spoke {entry!r} has no note")
+                    if "post" in entry:
+                        post = by_slug.get(entry["post"])
+                        if post is None:
+                            print(f"  ! hub '{slug}': section names '{entry['post']}', which is not a published post of this hub")
+                            continue
+                        if post["slug"] in seen:
+                            raise ValueError(f"{path}: {post['slug']} is listed twice")
+                        seen.add(post["slug"])
+                        ordered.append(post)
+                        spokes.append({"url": post["url"], "title": post["title"], "note": note, "post": post})
+                    else:
+                        tool = tools.get(entry.get("tool"))
+                        if tool is None:
+                            raise ValueError(f"{path}: unknown tool {entry.get('tool')!r}")
+                        item = {"url": f"/{tool['slug']}/", "title": tool["name"], "note": note,
+                                "description": tool["description"]}
+                        hub_tools.append(item)
+                        spokes.append(item)
+                sections.append({"heading": raw["heading"], "blurb": self.inline_md(raw.get("blurb", "")),
+                                 "spokes": spokes})
+            unlisted = [post for post in category["posts"] if post["slug"] not in seen]
+            if unlisted:
+                print(f"  ! hub '{slug}': not in any section yet: {', '.join(post['slug'] for post in unlisted)}")
+                sections.append({"heading": "More in this hub", "blurb": "", "spokes": [
+                    {"url": post["url"], "title": post["title"], "note": escape(post["description"]), "post": post}
+                    for post in unlisted]})
+                ordered += unlisted
+            sections = [section for section in sections if section["spokes"]]
+
+            bridges = []
+            for bridge in data.get("bridges") or []:
+                target = bridge.get("hub")
+                if target not in hub_slugs or target == slug:
+                    raise ValueError(f"{path}: bridge to unknown hub {target!r}")
+                if f"](/articles/{target}/)" not in bridge.get("text", ""):
+                    raise ValueError(f"{path}: the bridge to {target!r} must link /articles/{target}/ in its sentence")
+                bridges.append({"hub": target, "html": self.inline_md(bridge["text"])})
 
             self.md.reset()
-            data["intro_html"] = self.md.convert(data["intro"]) if data.get("intro") else ""
+            category.update({
+                "lead": self.inline_md(data["lead"]),
+                "lead_text": _clean_inline_md(data["lead"]),
+                "argument": self.inline_md(data["argument"]),
+                "argument_text": _clean_inline_md(data["argument"]),
+                "intro_html": self.md.convert(data["intro"]),
+                "sections": sections,
+                "ordered_posts": ordered,
+                "tools": hub_tools,
+                "templates": data.get("templates") or [],
+                "templates_heading": data.get("templates_heading", ""),
+                "templates_intro": self.inline_md(data.get("templates_intro", "")),
+                "bridges": bridges,
+                "faqs": [{"question": faq["q"], "answer": _clean_inline_md(faq["a"]),
+                          "answer_html": self.inline_md(faq["a"])} for faq in data.get("faqs") or []],
+                "spokes": [spoke for section in sections for spoke in section["spokes"]],
+                "spoke_count": len(ordered) + len(hub_tools),
+            })
+            # A hub under five spokes cannot be indexed, whatever its flag says.
+            if category["spoke_count"] < 5:
+                category["incubating"] = True
+            for section in sections:
+                for position, spoke in enumerate(section["spokes"]):
+                    if "post" in spoke:
+                        spoke["post"]["section_neighbours"] = [
+                            other["post"] for other in sorted(
+                                (o for o in section["spokes"] if "post" in o and o is not spoke),
+                                key=lambda o: abs(section["spokes"].index(o) - position))]
 
-            resolved = []
-            all_posts = []
-            seen = set()
-            for sec in data.get("sections", []):
-                sec_posts = []
-                for slug in sec.get("posts", []):
-                    p = by_slug.get(slug)
-                    if not p:
-                        print(f"  ! pillar '{data['slug']}': unknown post slug '{slug}'")
-                        continue
-                    sec_posts.append(p)
-                    if slug not in seen:
-                        all_posts.append(p)
-                        seen.add(slug)
-                resolved.append({
-                    "heading": sec["heading"],
-                    "blurb": sec.get("blurb", ""),
-                    "posts": sec_posts,
-                })
-            data["resolved_sections"] = resolved
-            data["all_posts"] = all_posts
-            data["post_count"] = len(all_posts)
-            data["url"] = f"/articles/#{data['slug']}"
-            data.setdefault("h1", data.get("title", data["slug"]))
-            pillars.append(data)
-        return pillars
+    def related_posts(self, post) -> list[dict]:
+        """Three cards from the post's own hub: the siblings it declares, then its
+        neighbours in the hub's section, then the rest of the hub in map order."""
+        category = post.get("category")
+        if not category:
+            return []
+        by_slug = {p["slug"]: p for p in category["posts"]}
+        candidates = [by_slug[s] for s in post.get("siblings", []) if s in by_slug]
+        candidates += post.get("section_neighbours", [])
+        candidates += category.get("ordered_posts", category["posts"])
+        related = []
+        for candidate in candidates:
+            if candidate["slug"] != post["slug"] and candidate not in related:
+                related.append(candidate)
+        return related[:3]
+
+    def link_glossary_owners(self, terms, posts) -> None:
+        """Point each glossary term at the article that owns the fuller treatment.
+
+        `canonical_article` on a term names a post slug, and the term page links it. A
+        term whose slug is also a post slug must set it: two pages with one name and no
+        link between them compete for the same query.
+        """
+        by_slug = {post["slug"]: post for post in posts}
+        for term in terms:
+            owner = term.get("canonical_article")
+            if not owner and term["slug"] in by_slug:
+                raise ValueError(f"glossary term {term['slug']!r} shares a slug with an article and must set canonical_article")
+            if owner and owner not in by_slug:
+                raise ValueError(f"glossary term {term['slug']!r}: canonical_article {owner!r} is not a published post")
+            term["owner_article"] = by_slug.get(owner)
 
     def load_glossary(self) -> list[dict]:
         glossary_path = Path("content/data/glossary.yaml")
@@ -816,12 +931,16 @@ class SiteBuilder:
         return re.sub(r"""(\bsrcset=(["'])[^"']*)""",
                       lambda m: re.sub(r",\s*/(?!/)", f", {base}/", m.group(1)), text)
 
-    def markdown_alternate(self, title: str, description: str, url: str, body: str, dates: str = "") -> str:
-        """A page as markdown: title, summary, canonical URL, the source body, then the
-        contact line, so an agent that fetches only this file can still reach him."""
+    def markdown_alternate(self, title: str, description: str, url: str, body: str, dates: str = "",
+                           part_of: str = "") -> str:
+        """A page as markdown: title, the hub it belongs to, summary, canonical URL, the
+        source body, then the contact line, so an agent that fetches only this file can
+        still reach him."""
         base = self.config["site"]["url"].rstrip("/")
         byline = f"By {self.config['identity']['name']} ({base}/about/)."
         lines = [f"# {title}", ""]
+        if part_of:
+            lines += [part_of, ""]
         if description:
             lines += [description.strip().replace("\n", " "), ""]
         lines += [f"Canonical: {base}{url}", "", " ".join(part for part in (byline, dates) if part), "",
@@ -921,23 +1040,20 @@ class SiteBuilder:
             if not category["posts"] and not category.get("preserve_empty_route"):
                 print(f"  i category '{category['slug']}': no posts yet, not built")
                 continue
+            money = next((page for page in getattr(self, "service_pages", [])
+                          if page["url"] == category.get("money_page")), None)
             self.render(
                 "category_archive.html",
                 f"articles/{category['slug']}/index.html",
                 page="articles",
                 category=category,
                 posts=category["posts"],
+                money_page=money,
             )
 
     def build_posts(self, posts):
         for post in posts:
-            # Related reading follows the single declared category.
-            related = [
-                p for p in posts
-                if p["slug"] != post["slug"]
-                and post.get("category") is not None
-                and p.get("category") == post.get("category")
-            ][:3]
+            related = self.related_posts(post)
             self.render(
                 "post.html",
                 f"articles/{post['slug']}/index.html",
@@ -946,9 +1062,11 @@ class SiteBuilder:
                 related=related,
             )
             dates = f"Published {format_date_iso(post['date'])}, updated {format_date_iso(post['updated'])}."
+            hub = post.get("category")
+            part_of = f"Part of: [{hub['title']}]({self.config['site']['url'].rstrip('/')}{hub['url']})" if hub else ""
             self.write_text(
                 f"articles/{post['slug']}/index.md",
-                self.markdown_alternate(post["title"], post["description"], post["url"], post["markdown"], dates),
+                self.markdown_alternate(post["title"], post["description"], post["url"], post["markdown"], dates, part_of),
             )
 
     def build_work_list(self, work_cases):
@@ -1008,6 +1126,9 @@ class SiteBuilder:
                 page="services",
                 service=service,
                 service_pages=[page for page in service_pages if page["published"]],
+                hubs=[category for category in getattr(self, "categories", [])
+                      if category.get("money_page") == service["url"] and category["posts"]
+                      and not category.get("incubating")],
             )
             self.write_text(
                 f"{service['url'].strip('/')}/index.md",
@@ -1092,9 +1213,8 @@ class SiteBuilder:
                 term=term,
             )
 
-    def build_sitemap(self, posts, work_cases, glossary_terms, pillars=None, categories=None, service_pages=None):
+    def build_sitemap(self, posts, work_cases, glossary_terms, categories=None, service_pages=None):
         base = self.config["site"]["url"].rstrip("/")
-        pillars = pillars or []
         categories = categories or []
         # A listing page changes when anything it lists changes, so its lastmod is
         # the newest lastmod among its children. posts[0] is the newest by publish
@@ -1134,8 +1254,9 @@ class SiteBuilder:
             urls.append((f"/articles/page/{page_num}/", "0.6", "daily", newest(page_posts)))
         for category in categories:
             category_posts = category.get("posts", [])
-            if not category_posts:
-                # No page is rendered for an empty category, so it must not be listed.
+            if not category_posts or category.get("incubating"):
+                # No page is rendered for an empty category, and an incubating hub is
+                # noindex, so neither is listed.
                 continue
             urls.append((category["url"], "0.8", "weekly", newest(category_posts)))
         for post in posts:
@@ -1192,7 +1313,7 @@ class SiteBuilder:
         feed_path = self.output / "feed.xml"
         tree.write(feed_path, xml_declaration=True, encoding="utf-8")
 
-    def build_llms_txt(self, posts, glossary_terms, work_cases, pillars=None, categories=None, service_pages=None):
+    def build_llms_txt(self, posts, glossary_terms, work_cases, categories=None, service_pages=None):
         """Emit /llms.txt — a clean, link-first map of the site for AI crawlers
         and answer engines. Follows the llms.txt convention (H1, summary
         blockquote, then sectioned bullet links)."""
@@ -1222,8 +1343,8 @@ class SiteBuilder:
             *[line for proof in hire["proof"] for line in (proof, "")],
             self.hire_line(),
             "",
-            ("Articles below are grouped by topic cluster, and each links to its "
-             "canonical URL."),
+            ("Articles below are grouped by hub: each section opens with the hub page, "
+             "then lists that hub's articles and tools at their canonical URLs."),
             "",
             "## About",
             "",
@@ -1236,16 +1357,29 @@ class SiteBuilder:
             "",
         ]
 
+        # One H2 per hub: the hub page first, then its spokes in the order of the hub's
+        # own map, then the tools it lists. The spec makes an H2 section a file list, so
+        # a prose line under the heading is flagged by this site's own validator, and a
+        # URL listed twice is flagged too. The hub line therefore names the hiring page
+        # the hub feeds in words; its link is in the About section above.
+        money_titles = {page["url"]: page.get("nav_title") or page["title"] for page in service_pages}
+        listed_tools = set()
         for category in categories or []:
             if not category["posts"]:
                 continue
-            # The spec makes an H2 section a file list. A prose line under the heading
-            # is flagged by this site's own validator (non-list-content-in-section).
             lines.append(f"## {category['title']}")
             lines.append("")
-            for post in category["posts"]:
+            hub_line = f"- [{category['title']}]({base}{category['url']}): {category['description']}"
+            money_title = money_titles.get(category.get("money_page"))
+            if money_title:
+                hub_line += f" Hiring page for this topic: {money_title}."
+            lines.append(hub_line)
+            for post in category.get("ordered_posts", category["posts"]):
                 desc = (post.get("description") or "").strip().replace("\n", " ")
                 lines.append(f"- [{post['title']}]({base}{post['url']}): {desc}")
+            for tool in category.get("tools", []):
+                listed_tools.add(tool["url"])
+                lines.append(f"- [{tool['title']}]({base}{tool['url']}): {tool['description']}")
             lines.append("")
 
         # A post without a declared category still has to be listed somewhere.
@@ -1276,23 +1410,19 @@ class SiteBuilder:
                 lines.append(f"- [{title}]({base}{case['url']}): {desc}")
             lines.append("")
 
-        # Tools get their own section: they are a distinct reader intent from the
-        # articles, and an agent answering "how do I check my llms.txt" should be
-        # able to find them without reading the whole Pages list.
+        # The tools index, plus any tool no hub lists. A tool a hub lists sits under
+        # that hub above, since a URL appears once in this file.
         lines.append("## Tools")
         lines.append("")
         lines.append(f"- [Tools]({base}/tools/): Index of every tool on this site, each running in the browser with no signup.")
-        lines.append("")
-        lines.append(f"- [AI Crawler Access Checker]({base}/ai-crawler-checker/): Check which AI platforms a robots.txt lets cite a site, separately from which it lets train on it.")
-        lines.append(f"- [AI Overviews Checker]({base}/ai-overviews-checker/): Check whether a page's answers can be extracted by AI Overviews and answer engines, with the source behind each check.")
-        lines.append(f"- [llms.txt Generator]({base}/llms-txt-generator/): Scan a sitemap and generate an editable llms.txt file in the browser.")
-        lines.append(f"- [llms.txt Validator]({base}/llms-txt-validator/): Check an llms.txt file against the llms.txt v2 spec and get graded findings.")
-        lines.append(f"- [Technical Writing Linter]({base}/linter/): Paste a technical article and get a linter report on the patterns that lose readers.")
+        for tool in self.config["content"].get("tools", []):
+            if f"/{tool['slug']}/" not in listed_tools:
+                lines.append(f"- [{tool['name']}]({base}/{tool['slug']}/): {tool['description']}")
         lines.append("")
 
         lines.append("## Pages")
         lines.append("")
-        lines.append(f"- [Articles]({base}/articles/): Every article, newest first, with the topic archives.")
+        lines.append(f"- [Articles]({base}/articles/): Every article, newest first, with the eight hub pages.")
         lines.append(f"- [Projects]({base}/projects/): Working tools and software.")
         lines.append("")
 
@@ -1509,9 +1639,12 @@ class SiteBuilder:
         projects = self.load_projects()
         legal_pages = self.load_legal_pages()
         glossary_terms = self.load_glossary()
-        pillars = self.load_pillars(posts)
         categories = self.load_categories(posts)
+        self.load_hubs(categories, posts)
+        self.link_glossary_owners(glossary_terms, posts)
         service_pages = self.load_service_pages()
+        self.categories = categories
+        self.service_pages = service_pages
 
         self.build_homepage(posts, work_cases, categories)
         self.build_blog_list(posts, categories)
@@ -1534,9 +1667,9 @@ class SiteBuilder:
         self.build_legal_pages(legal_pages)
         self.build_glossary(glossary_terms)
 
-        self.build_sitemap(posts, work_cases, glossary_terms, pillars, categories, service_pages)
+        self.build_sitemap(posts, work_cases, glossary_terms, categories=categories, service_pages=service_pages)
         self.build_rss(posts)
-        self.build_llms_txt(posts, glossary_terms, work_cases, pillars, categories, service_pages)
+        self.build_llms_txt(posts, glossary_terms, work_cases, categories=categories, service_pages=service_pages)
         self.build_llms_full_txt(service_pages, work_cases)
         self.build_redirects(posts)
         self.build_pygments_css()
@@ -1549,7 +1682,7 @@ class SiteBuilder:
                   f"using frontmatter dates: {', '.join(sorted(self.stale_lastmod))}. "
                   "Run `python3 lastmod.py` and commit content/lastmod.json.")
         print(f"  {len(posts)} blog post(s)")
-        print(f"  {len(pillars)} article focus area(s)")
+        print(f"  {sum(1 for category in categories if category['posts'])} hub(s)")
         print(f"  {len(work_cases)} case stud(ies)")
         print(f"  {len(projects)} project(s)")
         print(f"  {len(glossary_terms)} glossary term(s)")
