@@ -1528,10 +1528,13 @@
       "title": "Headings and titles",
       "quotes": [
         "Write section headings based on the type of content that's in the section.",
-        "For a task-based heading, start with a bare infinitive"
+        "For a task-based heading, start with a bare infinitive",
+        "avoid skipping heading levels or using empty headings",
+        "Structure content with descriptive headings"
       ],
       "connects": [
-        "documentation-headings"
+        "documentation-headings",
+        "documentation-review"
       ]
     },
     {
@@ -5346,20 +5349,6 @@
       "quotes": [
         "it was popularized in the Berkeley Software Distribution community by the Danish software developer Poul-Henning Kamp in 1999",
         "such as what materials to use for the staff bicycle shed"
-      ],
-      "connects": [
-        "documentation-review"
-      ]
-    },
-    {
-      "id": "google-style-headings",
-      "url": "https://developers.google.com/style/headings",
-      "author": "Google",
-      "date": "2026-11-18",
-      "title": "Headings and titles",
-      "quotes": [
-        "avoid skipping heading levels or using empty headings",
-        "Structure content with descriptive headings"
       ],
       "connects": [
         "documentation-review"
