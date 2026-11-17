@@ -122,6 +122,7 @@ Each glyph lives in `lib/glyphs.js`, draws on a 56 × 48 box (strips: 360 × 46)
 | `doc` | Page with folded corner, heading bar, text lines | A document, page, or artifact | badge: `lock` private, `globe` public, `question` undecided, `check`, `cross`, `flag` |
 | `pair` | Private page behind a public page | Two documents with one contract | — |
 | `reader` | Head and shoulders | A person or audience | badge as above |
+| `bubble` | Speech bubble holding code brackets | Writing or speaking to developers: developer content, DevRel | — |
 | `window` | App window with title rule, sidebar, content lines | An application or caller | — |
 | `terminal` | Window with a prompt chevron, cursor, output lines | A terminal, command line, or coding agent | — |
 | `loop` | 300° track with chevron, particles, hub | A control loop or scheduler | — |

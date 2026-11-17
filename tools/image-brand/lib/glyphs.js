@@ -103,7 +103,13 @@
     [0.55, 0.35].forEach((k, i) => R(g, x0 + 6, y0 + 22 + i * 4.5, (ww - 12) * k, 1.6, 'gl-bar'));
   };
 
-  // A loop: a 300° track with a chevron, three particles, and a hub.
+  // A speech bubble holding code brackets: writing or speaking to developers.
+  G.bubble = (g, w, h, o) => {
+    P(g, 'M-16,-17H16A4,4 0 0 1 20,-13V5A4,4 0 0 1 16,9H-3L-12,17V9H-16A4,4 0 0 1 -20,5V-13A4,4 0 0 1 -16,-17Z', 'gl-fill');
+    P(g, 'M-7,-10L-13,-4L-7,2M7,-10L13,-4L7,2', 'gl-ink gl-thick');
+    P(g, 'M2.5,-11.5L-2.5,3.5', o.accent ? 'gl-accent-line' : 'gl-ink');
+  };
+
   G.loop = (g, w, h, o) => {
     const r = Math.min(w, h) * 0.34;
     const a0 = (-50 * Math.PI) / 180, a1 = (220 * Math.PI) / 180;
