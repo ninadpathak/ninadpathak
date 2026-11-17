@@ -47,7 +47,7 @@ The KV cache needs 2 × layers × KV heads × head dimension × bytes per value 
 
 A single 128,000-token sequence therefore takes about 42 GB of cache, and sixteen of them take about 671 GB. Context length and concurrency draw on the same memory, so every token of context you allow is a token another user can't have.
 
-Mixture-of-experts models add a sizing trap. The GLM-5.3 build in NVIDIA's tutorial "has 753 billion parameters, with 40 billion activated per token", and the full 464 GB checkpoint still has to sit in GPU memory because any token can route to any expert.
+[Mixture-of-experts models](/articles/mixture-of-experts/) add a sizing trap. The GLM-5.3 build in NVIDIA's tutorial "has 753 billion parameters, with 40 billion activated per token", and the full 464 GB checkpoint still has to sit in GPU memory because any token can route to any expert.
 
 The [KV cache eviction article](/articles/kv-cache-eviction/) covers which cached state goes when memory fills.
 

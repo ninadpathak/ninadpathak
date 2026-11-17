@@ -68,6 +68,8 @@ The table is the paper's formula evaluated as written, with no model run behind 
 
 Those are tokens per step, and a step costs more than a plain decoding step because the predictor has to run too. The paper explains why the trade can still pay: inference "is often not bottlenecked on arithmetic operations, but rather on memory bandwidth and communication".
 
+A [mixture of experts](/articles/mixture-of-experts/) model goes after the same per-token cost from the other side, by running only some of its parameters for each token.
+
 ## Do you need a separate draft model?
 
 No. The draft can come from a second, smaller model or from a prediction head built into the large one.
