@@ -601,3 +601,14 @@ State these as his view. Do not soften them or stretch them into claims he did n
 - `written-by-a-human`: "Written by human only makes me want to read it as a human but considering agents read changelogs more than humans do at this point, i think written by humans is going to be a fading aspect of the world unless someone really cares. It will be good for people that want developers to come back to them to read stories." The label is an invitation to a human reader; it is fading because changelog readers are increasingly agents; it keeps its value for teams that want developers to return for the writing. A statement that agents read changelogs more than people needs its source or is marked as his impression.
 - `agents-reading-docs` and the llms.txt article: "llms.txt is good to have but there's no evidence that llms actually fetch that." Present Fern's data beside it, and if the data contradicts the sentence as worded, tell root the exact conflict.
 
+
+## Essays rewritten as opinion (2026-11-17, branch voice-essays)
+
+The six live essays were rewritten to the rule above: his view leads each section, sources are paraphrased with a link, and each section keeps at most one short quote. Quoted phrases of three words or more, before and after: agents-reading-docs 16 to 3; coding-models-new-code-vs-change 9 to 4; nobody-understands-the-code 17 to 5; written-by-a-human 10 to 2; red-build-nobody-reads 16 to 4; agent-memory-evidence 13 to 3. Every passage behind a paraphrase is still in `sources.json`.
+
+Positions taken, for Ninad to confirm where they are not his own words:
+
+- `coding-models-new-code-vs-change`: models are good at new code and poor at changing code without breaking it; a ranking by solve rate answers only the first; paying for more effort did not buy the second in the one run published; so a "best coding model" claim is a claim about new code until a benchmark prints regression passes.
+- `red-build-nobody-reads`: a red build spends a team's attention, which Google's pager rule budgets at a few times a day; Laycock is right that production evidence takes time, and the build light need not wait for it; ration what reaches a person.
+- `agent-memory-evidence`: a shared memory format matters less than whether each note says how the agent knew; the source field should be required, and a note without one should be read as a guess.
+- `agents-reading-docs`: his sentence is "llms.txt is good to have but there's no evidence that llms actually fetch that." Fern's report counts 448,667 fetches of llms.txt in September on the docs it hosts, with Claude Code the largest named source, so the sentence as worded is contradicted for coding agents on one vendor's API docs. The same report says ChatGPT, Gemini and Perplexity fetch only HTML, and Ahrefs found 97% of files unrequested across 137,210 domains. The essay says "good to have, and the evidence that models fetch it is still thin", and reports all three facts.

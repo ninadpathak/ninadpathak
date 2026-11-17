@@ -55,7 +55,7 @@ sections:
       - post: docs-accessibility
         note: "A release checklist for accessibility failures in docs, with a checker for the structural ones."
       - post: written-by-a-human
-        note: "Argues that a last-tested date tells a technical reader more than a written-by-a-human label."
+        note: "Reads Ghostty's written-by-humans label as an invitation that is fading as agents become the readers, and says who should keep writing by hand."
   - heading: "Ship changes"
     spokes:
       - post: writing-release-notes
