@@ -1,7 +1,7 @@
 ---
 category: technical-documentation
 date: 2026-11-17
-description: A Reddit post said nobody understands the code after a year of agents. Anthropic's team says nobody needs to. Peter Naur's 1985 paper shows what both leave out.
+description: A Reddit post said nobody understands the code after a year of agents. The Claude Code team says nobody needs the whole picture. Naur's 1985 paper shows what both miss.
 slug: nobody-understands-the-code
 status: published
 title: 'An Agent Can Explain What Code Does. The Why Has to Be Written'
@@ -14,7 +14,7 @@ The complaint outlived its source, and a day later the same site was discussing 
 
 Merz notes that "every word of this article was written by a human", and he makes the charge from inside a large company: "The longer a company relies on AI agents to generate the code, the fewer developers are going to understand the codebase."
 
-I think Merz is describing something real, and that the best-known answer to him is right about half of it.
+I think Merz is describing something real, and that an answer published the month before his post is right about half of it.
 
 ## The answer from a team that ships this way
 
@@ -56,7 +56,7 @@ Somebody remembers the earlier decision. The people who hold the theory are pres
 
 So the explainer covers the what, and the why is carried by people who were there. A team that copies the explainer and lacks the rest should expect the result Merz describes.
 
-A reply to Merz argued that understanding "does not decrease, it just moves up a level or two", the way few programmers understand the kernel they run on. I think the comparison holds only where the level below has an owner and a written contract, and a service that agents generated last year has neither unless someone supplied them.
+[A reply to Merz](https://news.ycombinator.com/item?id=50446216) argued that understanding "does not decrease, it just moves up a level or two", the way few programmers understand the kernel they run on. I think the comparison holds only where the level below has an owner and a written contract, and a service that agents generated last year has neither unless someone supplied them.
 
 ## The part worth writing by hand
 
