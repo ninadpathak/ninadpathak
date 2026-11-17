@@ -4,20 +4,21 @@ primary_query: speculative decoding
 siblings:
 - kv-cache-eviction
 - time-to-first-token
+- llm-token-budgets
 date: 2026-03-07
 description: 'Speculative decoding has a fast predictor draft tokens and the large model verify them in one pass. How it works, what it gains and when it stops helping.'
 status: published
 work_note: 'I wrote this for my own site as an explainer of how a small draft model speeds up a large one. My client work covers agents and developer tools, and [my portfolio](/portfolio/) shows it.'
 title: 'Speculative Decoding: Speeding Up LLM Inference'
 slug: speculative-decoding
-video: speculative-decoding
+updated: 2026-11-17
 ---
 
-Processors have guessed ahead for decades. [Wikipedia's entry](https://en.wikipedia.org/wiki/Speculative_execution) on speculative execution says "work is done before it is known whether it is actually needed", and the Spectre attack later made the phrase famous by [taking its name](https://spectreattack.com/) from "the root cause, speculative execution".
+Speculative decoding has a cheap predictor draft the next few tokens of a model's output, and the large model check all of them in one pass. Every accepted draft is a token the large model didn't have to generate one at a time.
 
-Speculative decoding applies the same bet to LLM inference. A cheap predictor drafts the next few tokens, the large model checks all of them in one pass, and every accepted draft is a token the large model didn't have to generate one at a time.
+The name and the bet come from processors. [Wikipedia's entry](https://en.wikipedia.org/wiki/Speculative_execution) on speculative execution says "work is done before it is known whether it is actually needed", and the idea reached a wider audience in 2018, when the Spectre attack [took its name](https://spectreattack.com/) from "the root cause, speculative execution".
 
-The parallel breaks in the outcome of a wrong guess. A processor that mispredicts throws the work away out of sight, and a model that rejects a draft has spent compute you can measure, which is why the method helps some workloads and slows others.
+That entry also gives the condition under which the bet pays, which is "if extra resources are available". A processor usually has them, and a GPU server under load doesn't, so among [LLM inference](/articles/ai-engineering/) techniques this one helps some workloads and slows others.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/speculative-decoding/draft-verify.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/speculative-decoding/draft-verify.narrow.svg" width="288" height="736"><img class="np-has-narrow" src="/static/images/diagrams/speculative-decoding/draft-verify.svg" width="720" height="392" alt="A small draft model guesses the next few tokens in quick succession, and the large target model verifies all of the guesses in one parallel step. Tokens the target agrees with are kept; the first one it rejects, and everything after it, is discarded." loading="lazy" decoding="async"></picture></a>
@@ -63,6 +64,8 @@ acceptance   2 drafted   4 drafted   8 drafted
 
 At an acceptance rate of 0.5 the loop never averages more than two tokens a step however many are drafted. At 0.9 with four drafted it averages about four, so the quality of the guesses matters far more than their number.
 
+The table is the paper's formula evaluated as written, with no model run behind it.
+
 Those are tokens per step, and a step costs more than a plain decoding step because the predictor has to run too. The paper explains why the trade can still pay: inference "is often not bottlenecked on arithmetic operations, but rather on memory bandwidth and communication".
 
 ## Do you need a separate draft model?
@@ -71,13 +74,13 @@ No. The draft can come from a second, smaller model or from a prediction head bu
 
 NVIDIA's [GLM-5.3 tutorial](https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/) from November 13 uses the second kind, turned on in vLLM with one setting, `{"method":"mtp","num_speculative_tokens":4}`. It explains that "the model's MTP layer drafts four tokens per step, and vLLM verifies them with the full model before accepting them, so each step can produce several tokens."
 
-The same paragraph carries the caveat every deployment shares: "The gain depends on how often drafts are accepted, which varies with the prompt."
+The tutorial adds the caveat every deployment shares: "The gain depends on how often drafts are accepted, which varies with the prompt."
 
 ## When does speculative decoding stop helping?
 
 It stops helping when the server is busy or the drafts are bad.
 
-Modelplane's [inference field guide](https://docs.modelplane.ai/guides/inference-guide) from November 10 lists its cost as "Wasted compute when guesses are rejected. Its value shrinks as load rises and spare compute runs out."
+Modelplane's [inference field guide](https://docs.modelplane.ai/guides/inference-guide), which gives its figures as of October 2026, lists its cost as "Wasted compute when guesses are rejected. Its value shrinks as load rises and spare compute runs out."
 
 That makes it a tool for the case the guide names, "Individual responses stream too slowly, even at low load". On a server already batching many requests there is little spare compute to spend on guesses.
 
@@ -89,6 +92,6 @@ A falling acceptance rate is hard to spot from the outside, because requests sti
 
 ## Where does it sit among other optimizations?
 
-It is a decode-side technique, next to quantization and KV cache settings. [KV-cache eviction](/articles/kv-cache-eviction/) covers the memory that decoding reads, and the glossary entry on [speculative decoding](/glossary/speculative-decoding/) has the short definition.
+It is a decode-side technique, next to quantization and KV cache settings. The memory those settings manage is the subject of [KV-cache eviction](/articles/kv-cache-eviction/), and the glossary entry on [speculative decoding](/glossary/speculative-decoding/) has the short definition.
 
-I have not benchmarked the method for this page. The arithmetic above is the paper's formula run as written, and the serving behaviour is as NVIDIA and Modelplane describe it.
+The method changes speed and leaves the token count alone, since the large model has the final say on every token. What sets the bill is covered in [LLM token budgets](/articles/llm-token-budgets/).

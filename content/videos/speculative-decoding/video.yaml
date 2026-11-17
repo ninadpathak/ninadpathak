@@ -3,7 +3,7 @@
 # Every spoken claim is checked against the article in that repo's reviews/fact-check.md,
 # and re-checked against content/posts/speculative-decoding.md on 2026-10-27.
 name: "Speculative decoding in 40 seconds"
-description: "A 40-second narrated summary of an earlier version of the article on speculative decoding. Its narration differs from the current page in places and is due to be re-rendered."
+description: "A 40-second narrated explainer of speculative decoding, in which a small model drafts tokens and a large model verifies them in one pass."
 upload_date: "2026-10-27T14:25:00+05:30"
 duration_seconds: 40
 width: 1920
