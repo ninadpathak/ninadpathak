@@ -1,7 +1,7 @@
 ---
 category: ai-engineering
 date: 2026-04-19
-description: 'Short-term memory for AI agents is the context window during one run. What compaction keeps and loses, with a tested example of an instruction dropped at the limit.'
+description: 'Short-term memory for AI agents is the context window during one run. What compaction keeps and loses, with a tested example of a dropped instruction.'
 status: published
 work_note: 'I handled hiring and technical reviews for Mem0''s team of 13 writers. This page is my own explanation of short-term memory for agents, and [my portfolio](/portfolio/) links to the Mem0 case study.'
 title: 'Short-Term Memory for AI Agents: A Practical Guide'
@@ -73,7 +73,7 @@ for label, pinned in (("newest first", ()), ("turn 1 pinned", (1,))):
           f"rule present: {rule in [m['text'] for m in kept]}")
 ```
 
-Running `python3 window_demo.py` with `tiktoken` installed printed this.
+With `tiktoken` installed, `python3 window_demo.py` gives two result lines that differ in one word.
 
 ```text
 conversation: 40 messages, 1066 tokens

@@ -5,7 +5,7 @@ description: Write a changelog that helps developers assess an upgrade, find bre
   changes, and understand what each release means for their code.
 slug: writing-changelogs
 status: published
-work_note: 'I wrote this for the developer about to approve a dependency bump, and it ends in a worked example that turns pull requests into a release entry. For developer content written for your product, [write to me](/contact/).'
+work_note: 'I counted a month of one project''s changelog for this page, and it ends in a worked example that turns pull requests into a release entry. For developer content written for your product, [write to me](/contact/).'
 takeaways:
 - Lead with upgrade impact, not an undifferentiated list of commits.
 - Group releases by version, date, and consistent change categories.
@@ -21,7 +21,7 @@ A changelog that developers read has to make that entry findable by someone who 
 
 ## How much changelog can one person read?
 
-Far less than a fast-moving project now publishes. The script below counts the Claude Code changelog for the thirty days to November 16.
+Far less than a fast-moving project now publishes. The count for the thirty days to November 16 comes from a short script.
 
 ```python
 """Count releases and entries in the Claude Code changelog over a 30-day window."""
@@ -63,7 +63,7 @@ print(f"entries that open with Deprecated or Removed: {flagged}")
 print("section labels used:", ", ".join(f"{k} x{v}" for k, v in sorted(labels.items(), key=lambda kv: -kv[1])))
 ```
 
-Running `python3 changelog_stats.py` printed the totals.
+Its totals for the month, from `python3 changelog_stats.py`:
 
 ```text
 window: 2026-10-18 to 2026-11-16

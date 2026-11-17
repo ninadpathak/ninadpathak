@@ -87,7 +87,7 @@ db.execute("update memory set fact = 'risk tolerance is high' where id = 1")
 print("after editing row 1 in place:", verify())
 ```
 
-Running `python3 memory_ledger.py` printed this.
+The ledger's answers, from `python3 memory_ledger.py`:
 
 ```text
 as of Nov 10: ('risk tolerance is low', "turn 4: 'I can't afford to lose this money'")

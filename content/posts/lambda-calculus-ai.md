@@ -26,7 +26,9 @@ The skill is narrow, and it is one that agent work depends on. An [agent loop](/
 
 ## How do you check an answer mechanically?
 
-Run the expression through a reducer and compare normal forms. The script below parses lambda terms, reduces the leftmost outermost application first, renames variables to avoid capture, and stops after 50 steps.
+Run the expression through a reducer and compare normal forms.
+
+The reducer here parses lambda terms and reduces the leftmost outermost application first. It renames variables to avoid capture and stops after 50 steps.
 
 ```python
 """Normal-order beta reduction for untyped lambda calculus, with a step limit."""
@@ -136,7 +138,7 @@ for expression in [
     print(f"{expression:<28} -> {normalize(expression)}")
 ```
 
-Running `python3 reduce.py` printed the five results.
+Each line from `python3 reduce.py` is an expression and its normal form.
 
 ```text
 (λx.x) y                     -> y   (1 steps)

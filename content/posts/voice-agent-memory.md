@@ -70,7 +70,7 @@ for label, history in (("stores generated text", generated), ("stores heard text
     print(f"{label:<22} -> history claims the caller was told the time: {knows_time}")
 ```
 
-Running `python3 heard_demo.py` printed this.
+The two versions of the turn, as `python3 heard_demo.py` reports them:
 
 ```text
 generated : I have you booked for Tuesday the fourteenth at three in the afternoon with Dr Rao

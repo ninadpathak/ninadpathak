@@ -1,7 +1,7 @@
 ---
 category: technical-documentation
 date: 2026-11-17
-description: Release notes and blog posts now carry a line saying a human wrote them. For technical writing the label a reader can check is different, the date the page was last run.
+description: Release notes and blog posts now carry a line saying a human wrote them. A technical reader can check a different label, the date the page was last run.
 slug: written-by-a-human
 status: published
 title: 'Written by a Human Proves Little. Last Tested Proves More'

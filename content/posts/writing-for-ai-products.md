@@ -1,7 +1,7 @@
 ---
 category: developer-experience
 date: 2026-03-31
-description: 'Technical writing for AI products documents a contract the model can change: what a model name pins, the output contract, run examples and how to judge a writer.'
+description: 'Technical writing for AI products documents a contract the model can change: what a model name pins, the output contract and how to judge a writer.'
 status: published
 work_note: 'I write for AI companies such as Firecrawl, where a product''s output changes from one run to the next. The rules below are the ones I judge that writing by, and [my portfolio](/portfolio/) has the work.'
 title: 'Technical Writing for AI Products: The New Rules'
