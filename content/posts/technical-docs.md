@@ -13,9 +13,11 @@ title: What Is Technical Documentation, and What Should It Include?
 updated: 2026-11-17
 ---
 
-Matt Cockayne [reported on November 11](https://phpboyscout.uk/answer-first-then-everything-else/) that pages on his projects' docs sites sitting at search positions four to ten "were clicked 0.31% of the time", while assistants kept fetching those pages to answer questions. Technical documentation is the written material that explains how a product works and how to use it, and his post describes a reader that definition used to leave out: a program fetching the page for a person who "quite possibly never sees the page at all".
+Technical documentation is the written material that explains how a product works and how to use it, from a first install to the exact behavior of each API field. I give each [type of documentation](/articles/documentation-types/) one reader task, and the list of types is the same one it was before assistants started reading docs on people's behalf.
 
-What technical documentation should include is the same list it was before that reader arrived. I give each [type of documentation](/articles/documentation-types/) one reader task, and a later section measures on six real pages what the new reader changes inside two of them.
+That reader is new. Matt Cockayne [reported on November 11](https://phpboyscout.uk/answer-first-then-everything-else/) that pages on his projects' docs sites sitting at search positions four to ten "were clicked 0.31% of the time", while assistants kept fetching them for a person who "quite possibly never sees the page at all".
+
+A later section runs his check on seven real pages to see what that reader changes inside each document.
 
 ## What technical documentation should include
 
@@ -49,7 +51,7 @@ Google's [technical writing course](https://developers.google.com/tech-writing/o
 
 ## Give each document a boundary
 
-Each document type has one job and hands the reader to another type when the job ends. The list below gives the boundary for each.
+Each document type has one job and hands the reader to another type when the job ends.
 
 - **Orientation** helps a reader decide where to begin, so it says what the product does and where the first supported task starts.
 - **A quickstart** proves one supported path, and links to reference when exact options matter.
@@ -61,7 +63,7 @@ Each document type has one job and hands the reader to another type when the job
 
 Reference is where exactness is the whole job. Google's [API reference guidance](https://developers.google.com/style/api-reference-comments) says "API documentation must include descriptions for every class, constant, method, and parameter", because an implementation depends on exact behavior and a narrative approximation won't do.
 
-Troubleshooting is the type teams skip. A generic support link can't tell someone whether a retry is safe, and a troubleshooting page can.
+A generic support link can't tell someone whether a retry is safe, and a troubleshooting page can.
 
 ## What should the first screen of each document hold?
 
@@ -73,42 +75,29 @@ A how-to, in his words, "opens with whatever does the job, directly under the he
 
 The evidence is one person's sites and one month of reports, and the post publishes no data beyond the figures it quotes. What it does publish is a check anyone can run: "Count the words between the page's title and its first code block or table".
 
-The script below runs his one-line check on four vendor pages and two of my own, using the Markdown version each site serves.
+I saved the Markdown version of five vendor pages and two of my own as `page.md` in turn, and ran his one-liner on each.
 
 ```sh
-#!/bin/sh
-# Words between a page's title and its first code block or table (Matt Cockayne's check).
-while read -r name url; do
-  curl -sL -A "Mozilla/5.0" "$url" -o "$name.md"
-  printf "%-28s %s\n" "$name" "$(awk '/^# /{h=1; next} h && /^(```|\|)/{print n+0; exit} h{n+=NF}' "$name.md")"
-done <<'PAGES'
-stripe-create-charge https://docs.stripe.com/api/charges/create.md
-cohere-rerank-overview https://docs.cohere.com/docs/rerank-overview.md
-stripe-webhooks-guide https://docs.stripe.com/webhooks.md
-claude-code-hooks-reference https://code.claude.com/docs/en/hooks.md
-this-site-quickstart-guide https://ninadpathak.com/articles/quickstart-guide/index.md
-this-site-runbook-template https://ninadpathak.com/articles/runbook-template/index.md
-PAGES
+awk '/^# /{h=1; next} h && /^(```|\|)/{print n+0; exit} h{n+=NF}' page.md
 ```
 
-Running `sh first_screen.sh` printed the counts.
+| Page | Kind, by my classification | Words before the first code block or table |
+| --- | --- | --- |
+| Stripe, [Create a charge](https://docs.stripe.com/api/charges/create) | Reference | 33 |
+| Cohere, [Chat API](https://docs.cohere.com/docs/chat-api) | How-to | 77 |
+| Cohere, [Rerank overview](https://docs.cohere.com/docs/rerank-overview) | How-to | 108 |
+| Stripe, [subscription quickstart](https://docs.stripe.com/billing/quickstart) | Tutorial | 633 |
+| LiveKit, [Turns overview](https://docs.livekit.io/agents/build/turns/) | Explanation | 656 |
+| This site, [quickstart guide template](/articles/quickstart-guide/) | How-to | 376 |
+| This site, runbook template | How-to | 499 |
 
-```text
-stripe-create-charge         33
-cohere-rerank-overview       108
-stripe-webhooks-guide        267
-claude-code-hooks-reference  405
-this-site-quickstart-guide   376
-this-site-runbook-template   499
-```
+Cockayne's threshold is "Under a hundred is answer-first, several hundred is a page that explains before it helps." Stripe's reference page passes at 33 words, and those words are a deprecation notice, which a developer needs before the request.
 
-Cockayne's threshold is "Under a hundred is answer-first, several hundred is a page that explains before it helps." Stripe's API reference page passes at 33 words, and those words are a deprecation notice, which is what a developer needs to read before the request.
+The two vendor pages over 600 are a tutorial and an explanation, the kinds his rule leaves alone. His post says "A tutorial shouldn't open with the finished command.", so the count only means something beside the page type.
 
-Both of my pages fail. Each count includes about thirty words of description and byline that this site adds to its Markdown files, and the rest is explanation I put ahead of the template the reader came for.
+Both of my pages fail. Each count includes between thirty and forty words of description and byline that this site adds to its Markdown files, and the rest is explanation I put ahead of the template the reader came for.
 
-The two long vendor pages show where a single number runs out. Stripe's webhook guide spends its 267 words saying what an endpoint receives before the first URL format, and the Claude Code hooks reference explains the hook lifecycle before its first table, so both are orienting a reader who has to choose a path.
-
-My reading is that the check is right for pages with one job and blunt for pages that route. The number still belongs in a review, because a count gives an author and a reviewer something to disagree about that is smaller than taste.
+The check suits pages with one job, and it belongs in a review with the page type written next to it. A count gives an author and a reviewer something to disagree about that is smaller than taste.
 
 ## Assign an owner and an update trigger
 
