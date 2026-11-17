@@ -4476,10 +4476,12 @@
         "Older agents use a `system/` directory instead",
         "MemFS does not include a semantic or vector index by default",
         "Edits are local until committed and pushed",
-        "All Letta agents use MemFS"
+        "All Letta agents use MemFS",
+        "Directories with their own `MEMORY.md` index stay out of context until they are needed"
       ],
       "connects": [
-        "agent-memory-2026"
+        "agent-memory-2026",
+        "ai-memory-management"
       ]
     },
     {
@@ -4493,7 +4495,8 @@
         "a git-backed memory filesystem that they can inspect and edit"
       ],
       "connects": [
-        "agent-memory-2026"
+        "agent-memory-2026",
+        "ai-memory-management"
       ]
     },
     {
@@ -4533,7 +4536,8 @@
         "status: legacy"
       ],
       "connects": [
-        "agent-memory-2026"
+        "agent-memory-2026",
+        "ai-memory-management"
       ]
     },
     {

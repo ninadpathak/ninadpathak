@@ -156,9 +156,13 @@ Vector stores have their own version in [product quantization](/glossary/product
 
 ## Letta and MemGPT make memory tiers explicit
 
-Letta, the project its [repository](https://github.com/letta-ai/letta) says was formerly known as MemGPT, names the tiers as memory blocks, stored messages and archival memory. Its [documentation](https://docs.letta.com/guides/agents/memory) says attached memory blocks "are in-context (pinned to the system prompt)", and that the agent edits them through memory tools.
+Letta, the project its [repository](https://github.com/letta-ai/letta) says was formerly known as MemGPT, now draws the tiers as files. Its [MemFS documentation](https://docs.letta.com/concepts/memfs/) describes an agent's memory as a git repository of Markdown files, where the files at the root are loaded into the system prompt on every turn.
 
-Messages that fall out of the window are kept: "The Letta API stores all messages, so even after a compaction / eviction, an agent's old messages are still retrievable". The third tier is [archival memory](https://docs.letta.com/guides/agents/archival-memory), "a semantically searchable database where agents can store facts, knowledge, and information for long-term retrieval."
+Everything deeper is the second tier. Directories with their own index "stay out of context until they are needed", and the agent follows file names to read the right one.
+
+Writing has a second path as well. Letta's [memory docs](https://docs.letta.com/configuration/memory/) describe dreaming, in which background subagents review recent conversations and update the files while the main agent keeps working.
+
+The earlier design, with memory blocks pinned in the prompt and a searchable archival store behind them, is the one the MemGPT paper introduced. Letta still documents it, on pages marked as the legacy SDK.
 
 Other frameworks draw the tiers in different places, and the [DeerFlow](/articles/deerflow-memory/), [HyperAgents](/articles/hyperagents-memory/) and [voice agent](/articles/voice-agent-memory/) memory articles walk through other designs.
 

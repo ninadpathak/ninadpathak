@@ -771,5 +771,5 @@ Rules the batch 9 review added:
 - An explainer and an essay on one subject say which is which in their titles, descriptions and first paragraphs, and each links the other early.
 - When a quoted page changes, the fix is rerun from a fresh fetch and pasted whole, so the page prints what the command returns.
 
-After the batch 9 review: agent-memory-2026 describes Letta from its current docs (MemFS, files loaded into the prompt each turn, dreaming subagents, the hosted MCP server) and says the block-and-archive design is the legacy SDK; the essay is retitled "Agent docs don't agree on what a harness is". ai-memory-management on main still describes Letta from the legacy page and needs the same correction when its batch comes.
+After the batch 9 review: agent-memory-2026 describes Letta from its current docs (MemFS, files loaded into the prompt each turn, dreaming subagents, the hosted MCP server) and says the block-and-archive design is the legacy SDK; the essay is retitled "Agent docs don't agree on what a harness is". ai-memory-management described Letta from the same legacy page and was corrected in the same push.
 
