@@ -2,16 +2,11 @@
 category: agent-memory
 primary_query: voice agent memory
 siblings:
-- context-windows-vs-memory
-- hyperagents-memory
+- short-term-agent-memory
 - ai-memory-management
 bridges:
 - slug: voice-agent-latency
   reason: The context window limit is the reason an agent needs memory.
-- slug: contextual-retrieval
-  reason: A memory read path is a retrieval problem.
-- slug: agent-error-handling
-  reason: Memory is one step in the agent loop, and the agents hub covers the loop around it.
 date: 2026-04-19
 description: 'Memory for voice AI agents has one rule text chatbots skip: store what the caller heard. How OpenAI, LiveKit and Pipecat differ, with a simulated example.'
 status: published

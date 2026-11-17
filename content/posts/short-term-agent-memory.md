@@ -4,12 +4,10 @@ primary_query: short term memory ai agents
 siblings:
 - context-windows-vs-memory
 - ai-memory-management
-- hyperagents-memory
+- rag-vs-memory
 bridges:
-- slug: contextual-retrieval
-  reason: A memory read path is a retrieval problem.
-- slug: rag-evaluation
-  reason: A memory read path is a retrieval problem.
+- slug: llm-context-windows
+  reason: The context window limit is the reason an agent needs memory.
 date: 2026-04-19
 description: 'Short-term memory for AI agents is the context window during one run. What compaction keeps and loses, with a tested example of a dropped instruction.'
 status: published

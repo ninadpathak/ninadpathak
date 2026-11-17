@@ -54,6 +54,8 @@ sections:
         note: "Runs review in four passes that start with product truth and leave prose for last."
       - post: docs-accessibility
         note: "A release checklist for accessibility failures in docs, with a checker for the structural ones."
+      - post: written-by-a-human
+        note: "Argues that a last-tested date tells a technical reader more than a written-by-a-human label."
   - heading: "Ship changes"
     spokes:
       - post: writing-release-notes

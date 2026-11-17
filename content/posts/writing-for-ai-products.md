@@ -2,12 +2,14 @@
 category: developer-experience
 primary_query: technical writing for ai products
 bridges:
-- slug: llm-structured-outputs
-  reason: Writing about an AI product starts from how the model behaves.
 - slug: writing-changelogs
   reason: Documentation is the content developers trust first.
+- slug: llm-structured-outputs
+  reason: Writing about an AI product starts from how the model behaves.
+- slug: agents-reading-docs
+  reason: A docs page now has agent readers.
 - slug: agent-harnesses
-  reason: The agent harness page is the worked example behind the claim made here.
+  reason: Writing about an agent product starts from how the agent works.
 date: 2026-03-31
 description: 'Technical writing for AI products documents a contract the model can change: what a model name pins, the output contract and how to judge a writer.'
 status: published

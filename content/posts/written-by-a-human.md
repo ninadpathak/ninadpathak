@@ -1,5 +1,12 @@
 ---
 category: technical-documentation
+primary_query: none
+siblings:
+- shorter-documentation
+- runbook-template
+bridges:
+- slug: nobody-understands-the-code
+  reason: Both essays ask what a written page proves once text costs nothing to produce.
 date: 2026-11-17
 description: Release notes and blog posts now carry a line saying a human wrote them. A technical reader can check a different label, the date the page was last run.
 slug: written-by-a-human

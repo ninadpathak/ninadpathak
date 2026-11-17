@@ -1,6 +1,9 @@
 ---
 category: technical-documentation
 primary_query: how to write a changelog
+bridges:
+- slug: agents-reading-docs
+  reason: A docs page now has agent readers.
 date: 2026-03-30
 description: How to write a changelog developers can search. Put breaking changes, removals and deprecations first, with counts from a month of one real changelog.
 slug: writing-changelogs
