@@ -834,3 +834,30 @@ Rules the batch 10 review added:
 - A title names one thing. A query joined to a second clause with "and" is two things.
 - A page gets one depth of rewrite. A long page is not given a lighter pass because its facts were already sourced.
 
+## Batch 11 (2026-11-18, owner voice-rewrite-2)
+
+Batch 11 holds the last six rewrites and one essay, written to the specificity rule from the first draft.
+
+| Post | What it now rests on | Run or checked |
+| --- | --- | --- |
+| writing-technical-tutorials, retitled "How to Write a Technical Tutorial a Reader Can Finish" | Kernighan's 1974 memo, the writing-lab fixture | fixture rerun on Node.js 24.22.3, `node check.mjs` PASS; no film |
+| documentation-template, retitled "A Technical Documentation Template With a Filled Example" | the downloadable template and its filled example site | fixture requests, validator and `mkdocs build --strict` (MkDocs 1.6.1) rerun; no film |
+| docs-accessibility, retitled "A Documentation Accessibility Checklist" | W3C tutorials, Michigan State University's guidance | checker run on a failing and a passing page, output on the page; film kept |
+| developer-onboarding-docs, retitled "Developer Onboarding Documentation That Ends in a Merged Change" | Corepack's README, Microsoft's repository guidance, GitLab's handbook and docs workflow | no code run; example blocks labelled; film kept |
+| documentation-review, retitled "A Documentation Review Checklist That Starts With the Product" | Google's heading guidance, GitLab's review apps and docs workflow, W3C's page-structure tutorial | `tools/verify_documentation_review_sources.py` PASS; Orbit example labelled as invented; film kept |
+| documentation-structure, retitled "A Documentation Structure Built Around What Readers Do" | Diataxis, GitLab's folder guidance, the AWS Lambda developer guide, W3C's page-structure tutorial | no code run; Orbit example labelled as invented; film kept |
+| docker-is-weird-explainer (new essay, technical-documentation) | the October 22 post Docker is weird, four Hacker News comments, Docker's release notes for 19.03 and 20.10 and its rootless page | opinion-led, one short quote per section |
+
+Opening devices added to the ledger: hello, world and Kernighan's 1974 memo (writing-technical-tutorials); lorem ipsum (documentation-template); Lynx, 1992 (docs-accessibility); Works on My Machine, Atwood 2007 (developer-onboarding-docs); bikeshedding, Kamp 1999 after Parkinson (documentation-review); Conway's law, 1967 (documentation-structure); Simon Willison's TIL site (the essay).
+
+Films: docs-accessibility, developer-onboarding-docs, documentation-review and documentation-structure keep their films, because each page still states every line the film narrates.
+
+What the earlier pages had wrong, for the record: docs-accessibility named "Microsoft State University" for Michigan State University, linked a Harvard page that returns 403 to a script, and credited Google with a claim about images of code that its page doesn't make. documentation-review and documentation-structure failed the prose check on sentences starting with a number, and documentation-structure carried a banned word.
+
+Search Console showed no queries for documentation-review or documentation-structure in the 90 days to November 15, so their retitles cost no ranking.
+
+Position taken in the new essay, for Ninad to confirm: an explainer's headings should be claims a reader can check, each with a command or path to look at, and a claim heading needs a harder fact-check than the paragraph under it. The post's heading about Docker needing root is the example: Docker's release notes date rootless mode to July 22, 2019.
+
+Pages touched only for an inbound link: none outside the batch. The essay's two inbound links come from writing-technical-tutorials and documentation-review, and docs-accessibility gained its second inbound link from documentation-review.
+
+Facts that move: the Hacker News score of the Docker post (887 points on November 18), Node.js and MkDocs versions named on the two fixture pages, and GitLab's folder list.

@@ -23,7 +23,7 @@ sections:
       - post: internal-vs-external-docs
         note: "A decision table shows what goes public and what stays private, with incidents and releases as worked cases."
       - post: documentation-structure
-        note: "Reorganizes a docs site around the routes readers take, with one canonical answer per question."
+        note: "Organizes a docs site around what readers do, from setup to upgrade, with one canonical page per answer."
   - heading: "Write each page type"
     spokes:
       - post: quickstart-guide
@@ -51,7 +51,7 @@ sections:
       - post: shorter-documentation
         note: "Argues for shorter pages and says when length is earned."
       - post: documentation-review
-        note: "Runs review in four passes that start with product truth and leave prose for last."
+        note: "Runs a docs review in four passes, with the product's behavior checked first and the prose edited last."
       - post: docs-accessibility
         note: "A release checklist for accessibility failures in docs, with a checker for the structural ones."
       - post: written-by-a-human
