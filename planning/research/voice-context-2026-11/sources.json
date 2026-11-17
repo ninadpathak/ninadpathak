@@ -1833,7 +1833,8 @@
     "best-llms-for-coding": [],
     "vector-embeddings": [
       "keep anything over 0.5",
-      "might be noise"
+      "might be noise",
+      "charged"
     ],
     "rag-reranking": [],
     "documentation-headings": [
@@ -1847,7 +1848,7 @@
       "Deprecated soon",
       "Medium",
       "If a sentence cannot help someone decide, migrate, verify, or troubleshoot, it does not belong above the technical changes.",
-      "Keep version 3 deployed in the previous production slot. If error rates rise before v4 cursors are stored, shift traffic back; after that point, disable pagination writes and contact support before downgrading."
+      "Keep version 3 deployed in the previous production slot. If error rates rise before v4 cursors are stored, shift traffic back. After that point, disable pagination writes and contact support before downgrading."
     ],
     "nobody-understands-the-code": []
   }
