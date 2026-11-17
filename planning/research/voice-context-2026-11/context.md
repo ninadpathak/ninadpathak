@@ -375,3 +375,189 @@ Ninad, through root: "writing needs to have a bit of spoken fillers to feel like
 - Facts, sources, code, ranking and hub rules are unchanged, the query is still answered in the first two paragraphs, and the build still caps a paragraph at two sentences.
 - After batch 6 ships, the 36 pieces already live get a light pass for connectors and rhythm only, as its own batch.
 
+## Titles: what real ones do (research of 2026-11-17)
+
+Ninad's direction, verbatim: "the titles for the recent articles you wrote are pure AI slop ... Read titles in the noema magazine or paul graham or simon willison or the hundreds of trending essays on hackernews daily. You'll find a pattern which is basically an experience that someone is sharing with passion."
+
+The 100 titles below were fetched on 2026-11-17 from the Hacker News API, simonwillison.net, paulgraham.com and noemamag.com.
+
+| Source | Date | Title | URL |
+|---|---|---|---|
+| Hacker News front page, 2026-11-17 | 2026-11-15 | Japan's Hometown Tax (2018) | https://www.kalzumeus.com/2018/10/19/japanese-hometown-tax/ |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | BugMeNot has closed | https://www.bugmenot.com/ |
+| Hacker News front page, 2026-11-17 | 2026-11-17 | Why 3dfx 1 cards had such a washed out color output? | https://twitter.com/id_aa_carmack/status/2122478083319992513 |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | Chemistry is Actually Geometry | https://chillphysicsenjoyer.substack.com/p/chemistry-is-actually-geometry |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | The Fossils That Haunted Lovecraft | https://paleonerdish.wordpress.com/2026/10/30/halloween-special-xiv-the-fossils-that-haunted-lovecraft/ |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | What is w2rt6byl5nf1opmc-a.com? | https://jack.cab/blog/siterate |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | Grazing sheep in fields with solar arrays | https://news.cornell.edu/stories/2026/10/sheep-grazing-solar-fields-offers-farmers-economic-ecological-gains |
+| Hacker News front page, 2026-11-17 | 2026-11-15 | Why did modems have speakers? (2019) | https://retrocomputing.stackexchange.com/questions/11765 |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | Windows 11 is collecting data on which coding agents and developer tools you use | https://xusheng.dev/posts/windows-coding-agent-telemetry/ |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | Test/verification technique effectiveness with Astra | https://danluu.com/astra-testing/ |
+| Hacker News front page, 2026-11-17 | 2026-11-14 | Formal Verification Is Not Verifiable | https://alperenkeles.com/posts/formal-verification-is-not-verifiable/ |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | Stop Filming in Log? | https://digitalfilms.wordpress.com/2026/11/15/stop-filming-in-log/ |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | Do Repeat Yourself | https://arcentry.com/blog/do-repeat-yourself/ |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | Squircles | https://linebender.org/wiki/curves/squircle/ |
+| Hacker News front page, 2026-11-17 | 2026-11-17 | Mem Is Shutting Down | https://get.mem.ai/blog/mem-is-shutting-down |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | My Quest to push native Three.js quality match AAA Game Engines | https://ben3d.ca/blog/building-the-aaa-lighting-pipeline-in-threejs |
+| Hacker News front page, 2026-11-17 | 2026-11-17 | Running coding agents without handing them my credentials | https://blog.antonio.cx/running-agents-with-lend |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | Rust changed me as a developer | https://blog.startifact.com/posts/how-rust-changed-me/ |
+| Hacker News front page, 2026-11-17 | 2026-11-16 | Interpreting claims that a theorem is correct because it was checked in Lean | https://xenaproject.wordpress.com/2026/11/12/and-the-proof-is-checked-in-lean/ |
+| Hacker News, top of the week | 2026-11-12 | Jensen Huang resigns | https://apnews.com/article/nvidia-megaspeed-china-singapore-huang-5403f152a601cf82ce939f1d24fffa0f |
+| Hacker News, top of the week | 2026-11-14 | SpaceX catches the Starship to end Flight 15 | https://www.spacex.com/launches/starship-flight-15 |
+| Hacker News, top of the week | 2026-11-13 | FAA issues national ground stop – lifted 4.5 hours later | https://www.nbcnews.com/news/us-news/faa-orders-nationwide-ground-stop-departing-flights-reasons-safety-rcna609247 |
+| Hacker News, top of the week | 2026-11-16 | Carnegie Mellon is putting computer science courses on YouTube for free | https://www.cs.cmu.edu/learn/ |
+| Hacker News, top of the week | 2026-11-11 | Tim Peters has died | https://discuss.python.org/t/in-memoriam-tim-peters-1952-2026/110028 |
+| Hacker News, top of the week | 2026-11-15 | All AI-generated code should be Open Source | https://jakub.jankiewicz.org/blog/ai-code-open-source/ |
+| Hacker News, top of the week | 2026-11-11 | Nvidia is preparing to oust Jensen Huang | https://www.wsj.com/business/nvidia-is-preparing-to-oust-nvidia-ceo-jensen-huang-30f421ad |
+| Hacker News, top of the week | 2026-11-10 | Smart home devices should work without the internet | https://docodethatmatters.com/home-automation-overnight-success/ |
+| Hacker News, top of the week | 2026-11-12 | Service degradation on Microsoft 365 | https://status.cloud.microsoft/ |
+| Hacker News, top of the week | 2026-11-14 | Nvidia allegedly engineered scarcity by funding AI startups to buy its GPUs | https://www.techpowerup.com/354814/nvidia-allegedly-engineered-scarcity-by-funding-ai-startups-to-buy-its-gpus |
+| Hacker News, top of the week | 2026-11-11 | My AI agents found an unmapped Maya site? | https://pietromiotti.com/latest/maya-site |
+| Hacker News, top of the week | 2026-11-12 | Anthropic IPO | https://ipo.anthropic.com/us/ |
+| Hacker News, top of the week | 2026-11-14 | Lovable apps expose passport details and more than 200K private messages | https://www.crissyfield.de/research/lovable-en/ |
+| Hacker News, top of the week | 2026-11-11 | AWS emulator | https://github.com/aws/aws-emulator |
+| Hacker News, top of the week | 2026-11-13 | LibreOffice actually works 365 days a year | https://twitter.com/LibreOffice/status/2121205272479998268 |
+| Hacker News, top of the week | 2026-11-10 | .name Grandfathered | https://neil.fraser.name/news/2026/11/10/ |
+| Hacker News, top of the week | 2026-11-12 | Rust 1.100 | https://blog.rust-lang.org/2026/11/12/Rust-1.100.0/ |
+| Hacker News, top of the week | 2026-11-16 | Many of Amazon’s Black Friday and Cyber Monday “deals” offered no savings | http://groundworkcollaborative.org/news/amazons-decoy-deals-groundwork-investigation-reveals-nearly-1-in-3-black-friday-and-cyber-monday-deals-advertised-by-amazon-offered-no-savings-to-shoppers-nearly-1-in-10-w/ |
+| Hacker News, top of the week | 2026-11-16 | How to make almost anything | https://pub.cba.mit.edu/863.26/site/ |
+| Hacker News, top of the week | 2026-11-16 | Qwen4-Max | https://qwen.ai/blog?id=qwen4-max |
+| Hacker News, top of the week | 2026-11-13 | Nvidia employees petition to bring back Jensen Huang | https://www.wired.com/story/nvidia-employees-petition-for-jensen-huangs-return/ |
+| Hacker News, top of the week | 2026-11-12 | Reverse engineering my Coway air purifier to ditch the cloud | https://scottjg.com/posts/2026-11-11-reverse-engineering-my-coway-air-purifier-to-ditch-the-cloud/ |
+| Hacker News, top of the week | 2026-11-16 | Technical issue at JPMorgan Chase triggers online banking delays for US banks | https://apnews.com/article/bank-outage-chase-wells-fargo-truist-50fee2693c22f597fa6ca51a97ef2cda |
+| Hacker News, top of the week | 2026-11-12 | Show HN: My $300 embroidery machine needed a subscription, so I built my own app | https://github.com/simpsoka/zigzag |
+| Hacker News, top of the week | 2026-11-11 | United Airlines bans AI agents from booking flights on behalf of travelers | https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/ |
+| Hacker News, top of the week | 2026-11-10 | AlphaProof Code | https://deepmind.google/blog/introducing-alphaproof-code/ |
+| Hacker News, top of the week | 2026-11-10 | Why get an expensive Pi when I have an old phone? | https://so.long.thanks.fish/why-pi-when-i-have-an-old-phone/ |
+| Hacker News, top of the week | 2026-11-15 | Microsoft 365 outage leads to chlorine gas poisoning of 15 hotel guests | https://www1.wdr.de/nrw/rheinland/rhein-erft-kreis/technischer-defekt-chlor-phantasialand-100.html |
+| Simon Willison | 2026-11-09 | Locating the source of a mysterious beep with Claude | https://simonwillison.net/2026/Nov/9/mysterious-beeps/ |
+| Simon Willison | 2026-11-09 | Hide your slop PR descriptions behind <details><summary> | https://simonwillison.net/2026/Nov/9/details-summary/ |
+| Simon Willison | 2026-11-03 | Qwen 3.8 27B on my laptop can interpret model weights, too | https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/ |
+| Simon Willison | 2026-11-02 | The U.S. Census Bureau and “Super Intelligence” | https://simonwillison.net/2026/Nov/2/census-bureau-super-intelligence/ |
+| Simon Willison | 2026-10-28 | The October inflection point for vibe game development | https://simonwillison.net/2026/Oct/28/vibe-game-development/ |
+| Simon Willison | 2026-10-20 | Battle Drones - a vibe coded RTS with audio-based multiplayer | https://simonwillison.net/2026/Oct/20/battledrones/ |
+| Simon Willison | 2026-10-12 | Hello Python 3.15, goodbye 3.10, and now I can use 3.11 | https://simonwillison.net/2026/Oct/12/python-3-15/ |
+| Simon Willison | 2026-10-09 | A new feature for my blog, built using my voice | https://simonwillison.net/2026/Oct/9/built-using-my-voice/ |
+| Simon Willison | 2026-10-07 | Claude Haiku 5.5 | https://simonwillison.net/2026/Oct/7/claude-haiku-5-5/ |
+| Simon Willison | 2026-10-03 | We're going to need default hard budget caps on pretty much everything | https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/ |
+| Simon Willison | 2026-09-29 | OpenAI DevDay 2026 live blog | https://simonwillison.net/2026/Sep/29/openai-devday-2026-live-blog/ |
+| Simon Willison | 2026-09-22 | Claude Opus 5.5, GPT-6 Sol, GPT-6 Luna, and a new price war | https://simonwillison.net/2026/Sep/22/opus-and-sol-and-luna/ |
+| Simon Willison | 2026-09-21 | Jev introduces a new shape of LLM - System One, aka Decision Models | https://simonwillison.net/2026/Sep/21/jev/ |
+| Simon Willison | 2026-09-12 | Generating running routes with GPT-6 Astra and ChatGPT Work | https://simonwillison.net/2026/Sep/12/astra-running-routes/ |
+| Simon Willison | 2026-Sep-01 | Claude Fable 5.1 made me a really nice animated pelican | https://simonwillison.net/2026/Sep/1/claude-fable-5-1/ |
+| Simon Willison | 2026-Sep-02 | Claude’s new system prompt really doesn’t want to reproduce song lyrics | https://simonwillison.net/2026/Sep/2/claudes-new-system-prompt/ |
+| Simon Willison | 2026-Sep-04 | OpenAI’s rogue agents were caught communicating via public wikis | https://simonwillison.net/2026/Sep/4/rogue-agent-wikis/ |
+| Simon Willison | 2026-Sep-04 | The Pelican comparison grid for Astra is pretty interesting | https://simonwillison.net/2026/Sep/4/astra-pelicans/ |
+| Simon Willison | 2026-Aug-04 | New release of LLM adds support for reasoning traces, OpenAI Responses, server-side tools, and smarter logging | https://simonwillison.net/2026/Aug/4/new-release-of-llm/ |
+| Simon Willison | 2026-Aug-05 | One-shotting a Raccoon Heist game using Claude Fable 5 | https://simonwillison.net/2026/Aug/5/raccoon-heist/ |
+| Simon Willison | 2026-Aug-07 | Now we have a timeline of the OpenAI accidental attack against Hugging Face | https://simonwillison.net/2026/Aug/7/openai-timeline/ |
+| Simon Willison | 2026-Jul-05 | sqlite-utils 4.0rc2, mostly written by Claude Fable (for about $149.25) | https://simonwillison.net/2026/Jul/5/sqlite-utils-fable/ |
+| Simon Willison | 2026-Jul-07 | sqlite-utils 4.0, now with database schema migrations | https://simonwillison.net/2026/Jul/7/sqlite-utils-4/ |
+| Paul Graham | May 2025 | Good Writing | https://paulgraham.com/goodwriting.html |
+| Paul Graham | October 2024 | Writes and Write-Nots | https://paulgraham.com/writes.html |
+| Paul Graham | September 2024 | Founder Mode | https://paulgraham.com/foundermode.html |
+| Paul Graham | March 2024 | The Best Essay | https://paulgraham.com/best.html |
+| Paul Graham | October 2023 | Superlinear Returns | https://paulgraham.com/superlinear.html |
+| Paul Graham | July 2023 | How to Do Great Work | https://paulgraham.com/greatwork.html |
+| Paul Graham | January 2023 | How to Get New Ideas | https://paulgraham.com/getideas.html |
+| Paul Graham | November 2022 | The Need to Read | https://paulgraham.com/read.html |
+| Paul Graham | September 2022 | What I've Learned from Users | https://paulgraham.com/users.html |
+| Paul Graham | February 2022 | Putting Ideas into Words | https://paulgraham.com/words.html |
+| Paul Graham | June 2021 | How to Work Hard | https://paulgraham.com/hwh.html |
+| Paul Graham | June 2021 | A Project of One's Own | https://paulgraham.com/own.html |
+| Paul Graham | March 2021 | Write Simply | https://paulgraham.com/simply.html |
+| Paul Graham | February 2021 | What I Worked On | https://paulgraham.com/worked.html |
+| Noema | 2026-11-12 | A Generation Revolts | https://www.noemamag.com/a-generation-revolts |
+| Noema | 2026-11-13 | Serbia’s Experiment: Combining Democracy & Meritocracy | https://www.noemamag.com/serbias-experiment-combining-democracy-meritocracy |
+| Noema | 2026-09-29 | Noema’s AI Reading List | https://www.noemamag.com/noemas-ai-reading-list |
+| Noema | 2026-11-10 | When AIs Become Unruly Swarms | https://www.noemamag.com/when-ais-become-unruly-swarms |
+| Noema | 2026-11-05 | How Aristotle Anticipated The AI Era | https://www.noemamag.com/building-the-new-equilibrium-economy |
+| Noema | 2026-11-03 | In Praise Of Japan’s Failure To Keep Up | https://www.noemamag.com/in-praise-of-japans-failure-to-keep-up |
+| Noema | 2026-08-06 | Why Is Everyone In Tech So Sad? | https://www.noemamag.com/why-is-everyone-in-tech-so-sad |
+| Noema | 2025-09-02 | The Last Days Of Social Media | https://www.noemamag.com/the-last-days-of-social-media |
+| Noema | 2024-11-12 | The Making Of A New American Epidemic | https://www.noemamag.com/the-making-of-a-new-american-epidemic |
+| Noema | 2026-06-18 | The Mars Delusion | https://www.noemamag.com/the-mars-delusion |
+| Noema | 2026-07-14 | Why We Demand Perfect Machines Yet Tolerate Human Carnage | https://www.noemamag.com/why-we-demand-perfect-machines-yet-tolerate-human-carnage |
+| Noema | 2025-02-12 | A Radical New Proposal For How Mind Emerges From Matter | https://www.noemamag.com/a-radical-new-proposal-for-how-mind-emerges-from-matter |
+| Noema | 2026-01-14 | The Mythology Of Conscious AI | https://www.noemamag.com/the-mythology-of-conscious-ai |
+| Noema | 2026-05-12 | We May Be Entering A Second Axial Age | https://www.noemamag.com/we-may-be-entering-a-second-axial-age |
+| Noema | 2025-08-12 | How We Became Captives Of Social Media | https://www.noemamag.com/how-we-became-captives-of-social-media |
+| Noema | 2026-04-09 | How To Future-Proof Your Career In The Age Of AI | https://www.noemamag.com/why-a-liberal-arts-education-will-soon-be-more-valuable-than-ever |
+
+### What these titles do
+
+- They name one thing. A release, a product, a bug, a question or an act: "Jiff 1.0: A datetime library for Rust", "BugMeNot has closed", "Squircles", "What I Worked On".
+- Personal posts say what the writer did, in the first person and usually the present participle or simple past: "Reverse engineering my Coway air purifier to ditch the cloud", "Running coding agents without handing them my credentials", "Locating the source of a mysterious beep with Claude", "Rust changed me as a developer".
+- A question title is the writer's real question: "Why get an expensive Pi when I have an old phone?", "What is w2rt6byl5nf1opmc-a.com?", "Why Is Everyone In Tech So Sad?".
+- An opinion is stated once, flat, as a claim someone could disagree with: "Smart home devices should work without the internet", "All AI-generated code should be Open Source", "We're going to need default hard budget caps on pretty much everything".
+- Paul Graham's are two to five words and name the subject or the task: "Write Simply", "Founder Mode", "How to Do Great Work", "The Need to Read".
+- Noema's are a noun phrase or a question with one idea in it: "The Mars Delusion", "The Last Days Of Social Media", "In Praise Of Japan's Failure To Keep Up".
+- Length runs from one word to about twelve. A colon appears only to attach a product name to its description ("Jolt – Clojure that speaks C").
+
+### What they never do
+
+- Two sentences in one title.
+- A paired contrast ("X proves little. Y proves more", "X got better. Y is still").
+- A metaphor offered as the thesis ("A is a B").
+- A colon followed by a clever second half.
+- An aphorism, or a title that states the conclusion as a rule for everyone.
+
+### Rule for every title from now on
+
+A title is what a person would put on their own post about something they did, read, found or changed their mind about. It may be first person only for what the piece did. No two-sentence titles, no paired contrast, no metaphor as thesis, no colon followed by a kicker, no aphorism. An explainer keeps its search query and stays plain. Slugs do not change.
+
+## Pitch notes: Fly.io's patterns (research of 2026-11-17)
+
+Ninad's direction, verbatim, on the work note: "such a bullshit paragraph. It won't even grab people from the web. Read Fly.io's blog you'll see how they add a simple pitch paragraph at the top of every article." And on shape: "not the same shape always, pick the patterns from fly.io's blogs and use that."
+
+Lead paragraphs read from fly.io/blog on 2026-11-17 and from saved copies in `ninadpathak-research/flyio-blog-2026-10-23/`:
+
+- `/blog/sprites-mcp/`: "Sprites are disposable cloud computers. They appear instantly, always include durable filesystems, and cost practically nothing when idle. They’re the best and safest place on the Internet to run agents and we want you to create dozens of them ."
+- `/blog/kurt-scott-money-sprites/`: "We’re Fly.io, a public cloud platform that is both our favorite way to put an app on the Internet and our favorite way to safely let a frontier agent coding harness cook. This is a post about our company, the future, and Sprites, which are computers for agents that you can check out right now."
+- `/blog/litestream-writable-vfs/`: "I’m Ben Johnson, and I work on Litestream at Fly.io. Litestream is the missing backup/restore system for SQLite. It’s free, open-source software that should run anywhere, and you can read more about it here ."
+- `/blog/fly-io-has-gpus-now/`: "We’re Fly.io, we’re a new public cloud that lets you put your compute where it matters: near your users. Today we’re announcing that you can do this with GPUs too, allowing you to do AI workloads on the edge. Want to find out more? Keep reading. AI is pretty fly AI is apparently a bit of a thing (ma"
+- `/blog/scaling-llm-ollama/`: "We’re Fly.io. We have powerful servers worldwide to run your code close to your users. Including GPUs so you can self host your own AI. Open-source self-hosted AI tools have advanced a lot in the past 6 months. They allow you to create new methods of expression (with QR code generation and Stable Di"
+- `/blog/the-risks-of-building-apps-on-chatgpt/`: "We’re Fly.io. We put your code into lightweight microVMs on our own hardware around the world . Check us out —your app can be deployed in minutes. The topic of “AI” gets a lot of attention and press. Coverage ranges from apocalyptic warnings to Utopian predictions. The truth, as always, is likely so"
+- `/blog/sentry-partnership/`: "We’re Fly.io. We put your code into lightweight microVMs on our own hardware around the world , close to your users. We partnered with Sentry to bring error and performance monitoring to your apps. Deploy your first app, and automatically get a year’s worth of credits to Sentry’s Team Plan credits."
+- `/blog/flydotio-heart-js/`: "Fly.io is a great place to run fullstack applications. For most programming languages, there is a defacto default fullstack framework. For Ruby, there is Rails. For Elixir, there is Phoenix. For PHP there is Laravel. For Python, there is Django. If you don’t know where to look, Node.js appears to be"
+- `/blog/shipping-logs/`: "Fly.io runs apps (globally) in just few commands. That means a lot of log output! Centralizing logs is important. Fire up an app and follow along as we see just how easy it can be. Nearly all of our apps are puking output. Sometimes, it’s intentional. Often this output is in the form of structured l"
+- `/blog/launching-redis-by-upstash/`: "We’re Fly.io. We put your code into lightweight microVMs on our own hardware around the world , close to your users. Redis by Upstash is managed Redis living right next door to your Fly.io apps. Check us out —your app and database can be running close to your users within minutes. We love databases"
+- `/blog/love-letter-react/`: "We’re Fly.io. React, Phoenix, Rails, whatever you use: we put your code into lightweight microVMs on our own hardware in 26 cities and counting. Check us out —your app can be running close to your users within minutes. It’s hard to overstate the impact React has had since its release in 2013. For me"
+- `/blog/introducing-litefs/`: "Fly.io runs apps close to users by taking containers and upgrading them to full-fledged virtual machines running on our own hardware around the world. We’re also building an open-source distributed file system for SQLite called LiteFS which is pretty cool too. Give us a whirl and get up and running"
+- `/blog/sqlite-virtual-machine/`: "Fly.io runs apps close to users around the world, by taking containers and upgrading them to full-fledged virtual machines running on our own hardware around the world. Sometimes those containers run SQLite and we make that easy too. Give us a whirl and get up and running quickly. SQL is a weird con"
+- `/blog/the-serverless-server/`: "I’m Will Jordan, and I work on SRE at Fly.io. We transmogrify Docker containers into lightweight micro-VMs and run them on our own hardware in racks around the world, so your apps can run close to your users. Check it out —your app can be up and running in minutes. This is a post about how services"
+- `/blog/logbook-2022-06-01/`: "We’re Fly.io. We take container images and run them on our hardware around the world. It’s pretty neat, and you should check it out ; with an already-working Docker container, you can be up and running on Fly in well under 10 minutes. Here’s our latest changelog. Looking back over the week, our foru"
+- `/blog/fly-machines/`: "Fly.io turns Docker images into running VMs on physical servers all over the world. We built an API for booting VMs very quickly . Here’s what you need to know. Fly Machines are VMs with a fast REST API that can boot instances in about 300ms. Our proxy can boot Fly Machines for you, and you can shut"
+- `/blog/a-foolish-consistency/`: "Fly.io runs applications by transmogrifying Docker containers into Firecracker micro-VMs running on our hardware around the world, connected with WireGuard to a global Anycast network. Yours could be one of them! Check us out : from a working container, your app can be running worldwide in minutes."
+- `/blog/our-user-mode-wireguard-year/`: "We’re Fly.io . We run container images on our hardware around the world, linked to our Anycast network with a WireGuard mesh. It’s pretty neat, and you should check it out . You can be up and running on Fly.io in single-digit minutes. That’s the last thing we’re going to say about how great Fly.io i"
+- `/blog/self-service-account-deactivation/`: "Fly.io runs apps close to users, by transmuting Docker containers into micro-VMs that run on our own hardware around the world. This is a post about deactivating accounts on Fly.io, but if you’re new, you might like to try us out first; you can be up and running in just a couple of minutes . We’ve j"
+- `/blog/how-safari-ruined-my-tuesday/`: "Fly.io runs apps close to users, by transmuting Docker containers into micro-VMs that run on our own hardware around the world. This is a post about a bug in Safari, but if you just want to ship a Phoenix app, the easiest way to learn more is to try it out ; you can be up and running in just a coupl"
+- saved copy `old-carving-the-scheduler-out-of-our-orchestrator`: "We’re Fly.io, a global sandwich-rating company with a hosting problem. Even if you don’t have a sandwich to rate, you might benefit from the hosting platform we built. Check it out: with a working Docker image, you can be up and running on Fly.io in just minutes."
+- saved copy `old-api-tokens-a-tedious-survey`: "We’re Fly.io. This post isn’t about Fly.io, but you have to hear about us anyways, because my blog, my rules. Our users ship us Docker containers and we transmute them into Firecracker microvms, which we host on our own hardware around the world. With a working Dockerfile, getting up and running will take you less than 10 minutes."
+- saved copy `design-and-implementation`: "We’re Fly.io, and this is the place in the post where we’d normally tell you that our job is to take your containers and run them on our own hardware all around the world. But last week, we launched Sprites, and they don’t work that way at all."
+- saved copy `old-docker-without-docker`: "We’re Fly.io. We take container images and run them on our hardware around the world. It’s pretty neat, and you should check it out; with an already-working Docker container, you can be up and running on Fly in well under 10 minutes."
+- saved copy `litestream-vfs`: "I’m Ben Johnson, and I work on Litestream at Fly.io. Litestream is the missing backup/restore system for SQLite. It’s free, open-source software that should run anywhere, and you can read more about it here."
+
+Patterns, with the posts that show each:
+
+1. Company first, plain, then an invitation: `the-risks-of-building-apps-on-chatgpt`, `love-letter-react`, `old-docker-without-docker`.
+2. Company first with a joke: `old-carving-the-scheduler-out-of-our-orchestrator` ("a global sandwich-rating company with a hosting problem"), `old-api-tokens-a-tedious-survey` ("my blog, my rules").
+3. Author first: `litestream-vfs` ("I'm Ben Johnson, and I work on Litestream at Fly.io"), `the-serverless-server` ("I'm Will Jordan, and I work on SRE at Fly.io").
+4. What the product does, mechanism first: `a-foolish-consistency` ("Yours could be one of them!"), `fly-machines`, `introducing-litefs`.
+5. A pitch that leans into the post's subject: `how-safari-ruined-my-tuesday` ("This is a post about a bug in Safari, but if you just want to ship a Phoenix app"), `self-service-account-deactivation`, `launching-redis-by-upstash`.
+6. The self-aware aside: `our-user-mode-wireguard-year` ("That's the last thing we're going to say about how great Fly.io is in this post"), `design-and-implementation` ("this is the place in the post where we'd normally tell you").
+7. The one-line version: `shipping-logs` ("Fly.io runs apps (globally) in just few commands."), `flydotio-heart-js` ("Fly.io is a great place to run fullstack applications.").
+8. Tied to an announcement: `fly-io-has-gpus-now`, `sentry-partnership`.
+
+Rules for Ninad's notes: true to the about page, the services pages and his confirmations; plain spoken register; two or three sentences; one link to a /services/ page or /contact/; never "I sell", never "my portfolio has the work", no credential-dropping, no forced tie to the article. A real conflict of interest is disclosed once in the body where it bears on the argument.
+
+## Standing rule: show the reference, don't explain it (2026-11-17)
+
+Ninad, on an opening that described an xkcd comic and then said why the joke works: "If you have to explain why the joke works, you have failed the joke and people will already leave."
+
+- When a piece opens on a joke, comic, meme, screenshot or any cultural reference, show the thing itself and go straight to the point in the next sentence.
+- Never describe an image in prose when the image can be shown.
+- Never write a sentence that explains the reference or why the reader knows it ("the joke works because", "everyone knows", "developers already know").
+- If a reference needs explaining to this readership, choose another.
+- For an analogy, state the known thing, then the new thing, and leave out the sentence that says they are alike.
+
