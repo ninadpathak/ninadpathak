@@ -1409,6 +1409,92 @@
       "connects": [
         "rag-reranking"
       ]
+    },
+    {
+      "id": "stripe-webhooks-doc",
+      "url": "https://docs.stripe.com/webhooks.md",
+      "author": "Stripe",
+      "date": "2026-11-17",
+      "title": "Receive Stripe events in your webhook endpoint",
+      "quotes": [
+        "## Create a handler",
+        "## Event delivery behaviours",
+        "## Best practices for using webhooks",
+        "### Automatic retries",
+        "### Event ordering"
+      ],
+      "connects": [
+        "documentation-headings"
+      ]
+    },
+    {
+      "id": "google-style-headings",
+      "url": "https://developers.google.com/style/headings",
+      "author": "Google developer documentation style guide",
+      "date": "2026-11-17",
+      "title": "Headings and titles",
+      "quotes": [
+        "Write section headings based on the type of content that's in the section.",
+        "For a task-based heading, start with a bare infinitive"
+      ],
+      "connects": [
+        "documentation-headings"
+      ]
+    },
+    {
+      "id": "diataxis-how-to-guides",
+      "url": "https://diataxis.fr/how-to-guides/",
+      "author": "Daniele Procida",
+      "date": "2026-11-17",
+      "title": "How-to guides",
+      "quotes": [
+        "How-to guides are goal-oriented."
+      ],
+      "connects": [
+        "documentation-headings"
+      ]
+    },
+    {
+      "id": "dedox-mastodon-titles",
+      "url": "https://mastodon.social/api/v1/statuses/117540805753181893",
+      "author": "Dedox",
+      "date": "2026-11-01",
+      "title": "Mastodon post: title your articles the way customers ask",
+      "quotes": [
+        "\"How to change your plan\" beats \"Plan management\" every time.",
+        "match what people actually type into search"
+      ],
+      "connects": [
+        "documentation-headings"
+      ]
+    },
+    {
+      "id": "claude-code-hooks-reference",
+      "url": "https://code.claude.com/docs/en/hooks.md",
+      "author": "Anthropic",
+      "date": "2026-11-17",
+      "title": "Hooks reference",
+      "quotes": [
+        "## Hook input and output",
+        "### Matcher patterns",
+        "### PreToolUse"
+      ],
+      "connects": [
+        "documentation-headings"
+      ]
+    },
+    {
+      "id": "w3c-headings-tutorial",
+      "url": "https://www.w3.org/WAI/tutorials/page-structure/headings/",
+      "author": "W3C Web Accessibility Initiative",
+      "date": "2026-11-17",
+      "title": "Headings",
+      "quotes": [
+        "Headings communicate the organization of the content on the page"
+      ],
+      "connects": [
+        "documentation-headings"
+      ]
     }
   ],
   "unused_leads": [
@@ -1548,6 +1634,9 @@
       "keep anything over 0.5",
       "might be noise"
     ],
-    "rag-reranking": []
+    "rag-reranking": [],
+    "documentation-headings": [
+      "information about this topic"
+    ]
   }
 }
