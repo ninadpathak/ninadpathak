@@ -100,7 +100,14 @@
         "In the run with the uncorrected note, Claude dropped back onto that earlier route three times.",
         "can be read, and trusted, by Claude in a later session.",
         "included a rule (and also how it knew the rule was true)",
-        "VARY the timing (insert extra 'wait' presses between menu steps) - the catch landed right after doing this."
+        "VARY the timing (insert extra 'wait' presses between menu steps) - the catch landed right after doing this.",
+        "detailed record was continuously going out of date",
+        "had to spend more time and resources combing through its memories rather than playing the game.",
+        "Claude had included only 41 of the 57 facts (72%)",
+        "agents had overwritten one another's work.",
+        "Written by Lance Martin",
+        "57 of 57 facts survived",
+        "This process is often called dreaming"
       ],
       "connects": [
         "rag-vs-memory",
@@ -140,14 +147,22 @@
       "quotes": [
         "a note an agent left for its future self, stored at some address, true for a while.",
         "It's a missing agreement",
-        "Deleted after 28 days unused"
+        "Deleted after 28 days unused",
+        "none of them can read the others",
+        "where a memory is true, what its identity is (does a second write update it or duplicate it?), what it says, when it stops being true, and which version is current.",
+        "Should a record point at the code it depends on?",
+        "the best protection against stale memory",
+        "so a reader knows how much to trust what it reads",
+        "pairs citations you can check against the code with forgetting by default",
+        "A fact with code citations"
       ],
       "connects": [
         "rag-vs-memory",
         "agent-memory-2026",
         "memory-serialization",
         "memory-versioning",
-        "shared-vs-isolated-memory"
+        "shared-vs-isolated-memory",
+        "agent-memory-evidence"
       ]
     },
     {
@@ -1318,14 +1333,18 @@
       "quotes": [
         "Released November 2026",
         "has a 1M tokens context window",
-        "Time to first answer token 208.11s",
         "# 1 / 81",
-        "Claude Fable 5.2 has a time to first answer token of 208.11s (max), 48.22s (xhigh), 23.65s (high), 9.20s (medium), and 7.22s (low)"
+        "has a time to first answer token of"
       ],
       "connects": [
         "best-llms-for-coding",
         "time-to-first-token"
-      ]
+      ],
+      "snapshot_2026_11_17": [
+        "Time to first answer token 208.11s",
+        "Claude Fable 5.2 has a time to first answer token of 208.11s (max), 48.22s (xhigh), 23.65s (high), 9.20s (medium), and 7.22s (low)"
+      ],
+      "note": "The site re-measures: the effort-level figures read 208.11s (max) on the morning of 2026-11-17 and 211.56s later that day. Volatile figures are kept under snapshot_2026_11_17 and are not re-verified."
     },
     {
       "id": "lastmuseum-site",
@@ -1740,7 +1759,8 @@
         "documentation-review",
         "agentic-workflows",
         "agent-error-handling",
-        "red-build-nobody-reads"
+        "red-build-nobody-reads",
+        "multi-agent-vs-single-agent"
       ]
     },
     {
@@ -2542,7 +2562,12 @@
         "Learnings and patterns",
         "autoMemoryEnabled",
         "notes Claude writes itself based on your corrections and preferences",
-        "so a repository already set up for other coding agents works without adding a `CLAUDE.md`"
+        "so a repository already set up for other coding agents works without adding a `CLAUDE.md`",
+        "By default, Claude reads `AGENTS.md` only when you have no `CLAUDE.md` in your working directory or above it.",
+        "as long as the file is 4 MiB or smaller",
+        "/context all",
+        "The timestamp shows how current the fact is, both to you and to Claude when it reads the memory back.",
+        "Claude treats them as context, not enforced configuration"
       ],
       "connects": [
         "claude-code-memory",
@@ -2557,7 +2582,8 @@
       "title": "Memento (film)",
       "quotes": [
         "an elaborate system of photos, notes, and tattoos",
-        "they still prefer to trust that image"
+        "they still prefer to trust that image",
+        "willing to lie to himself to be happy"
       ],
       "connects": [
         "claude-code-memory"
@@ -2714,25 +2740,6 @@
       ]
     },
     {
-      "id": "lorekit-open-memory-format",
-      "url": "https://www.lorekit.io/blog/open-agent-memory-format",
-      "author": "Mads Thines",
-      "date": "2026-11-07",
-      "title": "Agent memory needs its OpenTelemetry moment",
-      "discussion": "https://news.ycombinator.com/item?id=50411467",
-      "quotes": [
-        "a note an agent left for its future self, stored at some address, true for a while.",
-        "none of them can read the others",
-        "where a memory is true, what its identity is (does a second write update it or duplicate it?), what it says, when it stops being true, and which version is current.",
-        "Should a record point at the code it depends on?",
-        "the best protection against stale memory"
-      ],
-      "connects": [
-        "memory-serialization",
-        "agent-memory-evidence"
-      ]
-    },
-    {
       "id": "fowler-monolith-first",
       "url": "https://martinfowler.com/bliki/MonolithFirst.html",
       "author": "Martin Fowler",
@@ -2759,7 +2766,8 @@
         "agents typically use about 4× more tokens than chat interactions, and multi-agent systems use about 15× more tokens than chats.",
         "the value of the task is high enough to pay for the increased performance.",
         "some domains that require all agents to share the same context or involve many dependencies between agents are not a good fit for multi-agent systems today.",
-        "Published Jun 13, 2025"
+        "Published Jun 13, 2025",
+        "some domains that require all agents to share the same context or involve many dependencies between agents"
       ],
       "connects": [
         "multi-agent-vs-single-agent"
@@ -2829,6 +2837,109 @@
       "title": "Hacker News comment on the shared memory format post",
       "quotes": [
         "it remembers the wrong things, and then turns them into an inane focus for each task."
+      ],
+      "connects": [
+        "agent-memory-evidence"
+      ]
+    },
+    {
+      "id": "cognition-multi-agents-working",
+      "url": "https://cognition.ai/blog/multi-agents-working",
+      "author": "Walden Yan",
+      "date": "2026-04-22",
+      "title": "Multi-Agents: What's Actually Working",
+      "quotes": [
+        "a narrower class of patterns",
+        "setups where multiple agents contribute intelligence to a task while writes stay single-threaded.",
+        "we found this technique to work best when the coding and review agents do not share any context beforehand.",
+        "is mostly a distraction.",
+        "came to similar conclusions about the first area of applicability being in readonly agents",
+        "Our original observations still hold today for parallel-writer swarms",
+        "writes stay single-threaded",
+        "By Walden Yan 2026.04.22"
+      ],
+      "connects": [
+        "multi-agent-vs-single-agent"
+      ]
+    },
+    {
+      "id": "dotenv-readme",
+      "url": "https://raw.githubusercontent.com/motdotla/dotenv/master/README.md",
+      "author": "dotenv",
+      "date": "2026-11-17",
+      "title": "dotenv README",
+      "quotes": [
+        "that loads environment variables from a `.env` file"
+      ],
+      "connects": [
+        "coding-agent-memory"
+      ]
+    },
+    {
+      "id": "codex-memories-docs",
+      "url": "https://developers.openai.com/codex/customization/memories.md",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Memories",
+      "quotes": [
+        "Local Codex memories are off by default",
+        "Codex can turn useful context from eligible prior\nchats into local memory files."
+      ],
+      "connects": [
+        "coding-agent-memory"
+      ]
+    },
+    {
+      "id": "gemini-cli-memory-tool",
+      "url": "https://geminicli.com/docs/tools/memory",
+      "author": "Google",
+      "date": "2026-05-13",
+      "title": "Memory files",
+      "quotes": [
+        "persists durable facts, user preferences, and project details by editing Markdown memory files directly"
+      ],
+      "connects": [
+        "coding-agent-memory"
+      ]
+    },
+    {
+      "id": "gemini-cli-auto-memory",
+      "url": "https://geminicli.com/docs/cli/auto-memory/",
+      "author": "Google",
+      "date": "2026-11-17",
+      "title": "Auto Memory",
+      "quotes": [
+        "an experimental feature",
+        "Auto Memory is off by default",
+        "in a project-local inbox until you approve or discard them.",
+        "scans those transcripts for durable facts"
+      ],
+      "connects": [
+        "coding-agent-memory"
+      ]
+    },
+    {
+      "id": "wikipedia-godel-machine",
+      "url": "https://en.wikipedia.org/wiki/G%C3%B6del_machine",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Gödel machine",
+      "quotes": [
+        "rewrites its own code when it can prove the new code provides a better strategy",
+        "first proposed in 2003"
+      ],
+      "connects": [
+        "hyperagents-memory"
+      ]
+    },
+    {
+      "id": "xkcd-285",
+      "url": "https://xkcd.com/285/info.0.json",
+      "author": "Randall Munroe",
+      "date": "2007-07",
+      "title": "xkcd 285: Wikipedian Protester",
+      "quotes": [
+        "[CITATION NEEDED]"
       ],
       "connects": [
         "agent-memory-evidence"

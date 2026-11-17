@@ -142,6 +142,7 @@ Every script was run in scratch on 2026-11-17 and its printed output pasted into
 
 - ai-memory-management (batch 2b): narration L4, an on-screen caption and the end card title.
 - best-llms-for-coding (batch 3): narration L2 to L5 name March models and SWE-bench Verified. The embed is off until it is redone.
+- claude-code-memory (batch 6): the narration says CLAUDE.md is "read only at startup, so a mid-session edit waits for the next session". Anthropic's docs say the root file is re-read after `/compact` and subdirectory files load on demand, and the page now says so. The closing line recommends `/memory` for seeing what is loaded, where the docs give `/context all`. The embed is off until it is redone.
 - speculative-decoding (batch 5): the narration claims ownership of a model ("my 70B", "So I use speculative decoding"), says a verification pass "costs about the same as making one token", and gives two to three times faster as a general result. The page gives 2X-3X for the paper's T5-XXL run only. The embed came off once hub-build's commit 3b177090 stopped the video and lastmod tests depending on this post; before that, removing the `video` field failed two tests in `tests/test_article_video.py`.
 - ai-agent-failures (batch 5): the first twelve seconds argue that agents fail because "the patterns for running them are still being invented" and call it "a distributed systems problem", the thesis the page dropped for Real-SWE's measured causes. The specifics after that still match the page. The embed is off until it is redone.
 - ai-agent-taxonomy (batch 5): L1 and L2 say cost and blast radius rise by roughly an order of magnitude per type, which no source backs and the page no longer says. The embed is off until it is redone.
@@ -314,7 +315,7 @@ Pieces: hyperagents-memory, coding-agent-memory, claude-code-memory, memory-comp
 
 ### Decisions the hub plan asked for
 
-- coding-agent-memory and claude-code-memory stay as two pages. The first now answers a cross-tool question, which Search Console shows at position 2 ("why does my coding agent forget everything as soon as i start a new session"); the second is the Claude Code reference.
+- coding-agent-memory and claude-code-memory stay as two pages. The first now answers a cross-tool question, which Search Console recorded once at position 2 for the query "why does my coding agent forget everything as soon as i start a new session" (one impression in 90 days; the URL's average position is 30.5); the second is the Claude Code reference.
 
 ### Films to check
 
@@ -329,8 +330,48 @@ Pieces: hyperagents-memory, coding-agent-memory, claude-code-memory, memory-comp
 
 Applied before the first review, from the batch 5 and retrofit findings:
 
-- Openings: no sentence announces where a parallel breaks. claude-code-memory, coding-agent-memory and multi-agent-vs-single-agent now give the answer first and the known thing second; memory-compression and memory-serialization keep the known thing first and show the difference in a plain pair of sentences.
+- Openings: no sentence announces where a parallel breaks. After the review, claude-code-memory, coding-agent-memory and multi-agent-vs-single-agent give the answer first and the known thing second, hyperagents-memory gives its finding and then the Gödel machine, and memory-compression and memory-serialization keep the known thing first and close the introduction on a preview.
 - Hub model: each piece links its hub at the end of its introduction, above the first H2, and declares the siblings and bridges its body links. Stale bridge entries left by the old bodies are removed, and every reason describes its link.
 - The essay is in the agent-memory hub with `primary_query: none` and a line in `content/pillars/agent-memory.yaml`. memory-versioning links it from the end of its hash-chain section, and memory-serialization links it too.
 - A wrong claim caught in self-check: coding-agent-memory said Codex was the only tool with a documented size cap. Claude Code's memory page sets one of 40,000 characters per file, in a 200K session, on instruction files that load on demand. Both pages now say so.
+
+### Batch 6 review fixes (2026-11-17)
+
+The independent review found 3 blockers, 15 should-fix items and 12 notes. What changed in response:
+
+- coding-agent-memory said only Claude Code's docs describe agent-written notes. That was true of the one page per tool it cited and false of the tools: Codex has opt-in memories generated from earlier chats, and Gemini CLI has a memory tool plus an experimental Auto Memory feature that asks for approval. The page is rebuilt on all four tools' memory documentation, with a column for who writes notes and what the default is.
+- claude-code-memory lost its film embed, and five statements were corrected against Anthropic's page: the resume exception, `/context all` for what loaded, the `modified` date as the check on stale auto memory, the 4 MiB limit on files loaded at launch, and the scope of the "plain markdown" quote.
+- multi-agent-vs-single-agent argued a conclusion Walden Yan had published himself on April 22, 2026. The page now cites that follow-up, credits him with the rule that only one agent should write, and adds a second vendor's confirmation and two cautions of its own.
+- memory-compression answers both meanings of its query, with a section on in-session compaction, and replaces a table that rag-vs-memory already prints with the contract-facts case from the same post.
+- memory-serialization no longer repeats a quote and gloss from rag-vs-memory, and its sentence about coding tools matches what the linked page now says.
+- hyperagents-memory opens its second paragraph on the Gödel machine, says the repository holds no memory code, and notes that the agent's own key naming avoided the overwrite the page demonstrates.
+- The essay credits Thines with the three places he raises provenance, stops short of claiming the Anthropic post isolates the effect, and opens on xkcd 285.
+
+### Rules added by this review
+
+- A comparison across vendors checks each vendor's documentation index before saying a product lacks something. One page per vendor is not enough.
+- No opening may reuse a known thing that a hub page or another post already opens on. Check the ledger below before writing.
+- No table, quote or gloss is repeated from another page on the site. Link to the page that has it, or make a different point.
+- A page answers what its primary query asks, near the top, in the sense a searcher means.
+
+### Ledger of opening devices
+
+Hub pages (owned by the pillar files): technical-documentation, the Unix Programmer's Manual of 1971; ai-search-optimization, robots.txt and Martijn Koster, 1994; developer-experience, a 2008 Stack Overflow founding post; ai-agents, Unix pipes, 1973; agent-memory, the HTTP cookie, 1994; rag, Okapi BM25 at TREC-3, 1994; coding-agents, the editor war; ai-engineering, the 64K intro and fr-08.
+
+Posts, by batch. Batch 5: AWS billing alarm (llm-token-budgets); web TTFB and Core Web Vitals (time-to-first-token); CPU speculative execution and Spectre (speculative-decoding); fallacies of distributed computing (agent-error-handling); the SRE postmortem (ai-agent-failures); SAE driving levels (ai-agent-taxonomy); the SRE pager rule, placed second (red-build-nobody-reads).
+
+Batch 6: Memento (claude-code-memory); `.env` files and dotenv (coding-agent-memory); the Gödel machine (hyperagents-memory); `.gitignore` (memory-compression); Zork's save feature (memory-serialization); Fowler's Monolith First (multi-agent-vs-single-agent); xkcd 285 and the citation needed tag (agent-memory-evidence).
+
+Reserved by the hub plan for new spokes, so not available to rewrites: Netscape badges, RSS, the Joel Test, `man`, the keywords meta tag, featured snippets, the Netcraft survey, the PageRank toolbar, "Docs or it didn't happen", Readme Driven Development, Chesterton's fence, RFC 1, the GitLab outage of 2017, PC LOAD LETTER, The IT Crowd, Python 2 to 3, gofmt, Procida's 2017 talk, No Silver Bullet, Swagger, Jekyll, Ballmer's chant, the Slashdot effect, High Scalability, the `ls` man page, FizzBuzz, Getting Real, Write Like You Talk, Eternal September, Kawasaki at Apple, the Bitcoin paper, Ethernet, the Confused Deputy, SQL injection and xkcd 327, left-pad, the Language Server Protocol, the password anti-pattern, Dapper, the Heisenbug, chroot, Selenium, sudo and xkcd 149, Brooks's law, CGI, JavaScript in 2016, pre-commit hooks, dotfiles, Royce's 1970 paper, git worktree, Linus's law, Stack Overflow copying, Vim against Emacs, tabs against spaces, kernel patch series, TCP packets, grep, "X is dead", "Just use Postgres", PageRank, `.bash_history`, benchmarketing, Karlton's two hard things, memcached, bit rot, MP3.
+
+## Standing direction: spoken prose (2026-11-17)
+
+Ninad, through root: "writing needs to have a bit of spoken fillers to feel like it was written as we speak rather than like rigid prose." It applies from the batch 6 fixes onward.
+
+- Write the body in the spoken form of the writing skill (`references/spoken.md`, `spoken-connectors.md`, `spoken-example.md`), which is that skill's stated exception to the core's ban on orienting sentences.
+- Use sentence-opening connectors matched to the relationship (So, Now, And, But, Which means, Here's why), an occasional question that the next sentence answers, contractions, a short aside in the author's voice, and "you" for the reader.
+- Keep a light hand. No run of the same opener, no connector that misstates the relationship, and never the banned softeners.
+- The first sentence under each H2 still answers the heading in plain words. Sentences that only point at a table or announce a quote are still cut.
+- Facts, sources, code, ranking and hub rules are unchanged, the query is still answered in the first two paragraphs, and the build still caps a paragraph at two sentences.
+- After batch 6 ships, the 36 pieces already live get a light pass for connectors and rhythm only, as its own batch.
 
