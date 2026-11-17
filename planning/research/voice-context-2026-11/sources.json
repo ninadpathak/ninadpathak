@@ -5292,7 +5292,8 @@
     ],
     "cloudflare-kv-cache-incident-report": [
       "our tests passed, so we assumed the error path worked",
-      "we fixed it"
+      "we fixed it",
+      "Cross-request data exposure from an undersized KV cache pool on Workers AI"
     ]
   }
 }
