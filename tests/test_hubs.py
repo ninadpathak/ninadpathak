@@ -249,7 +249,7 @@ class TopicGridTests(BuiltSite):
         main = main_of(page("/articles/"))
         for slug in HUBS:
             self.assertEqual(main.count(f'href="/articles/{slug}/"'), 1, slug)
-        self.assertEqual(re.findall(r'<h2 class="label">([^<]+)</h2>', main), ["Topics", "All articles, newest first"])
+        self.assertEqual(re.findall(r'<h2 class="label">([^<]+)</h2>', main), ["Topics", "All articles"])
         self.assertNotRegex(re.sub(r"<[^>]+>", " ", main), r"\b[Hh]ubs?\b")
         self.assertNotIn(" style=", main)
 

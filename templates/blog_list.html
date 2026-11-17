@@ -68,7 +68,7 @@
 
 <section class="blog-list-section">
   <div class="container">
-    {% if current_page_num == 1 and categories %}<h2 class="label">All articles, newest first</h2>{% endif %}
+    {% if current_page_num == 1 and categories %}<h2 class="label">All articles</h2>{% endif %}
     {% if posts %}
       {% for post in posts %}
       <a href="/articles/{{ post.slug }}/" class="blog-row">
