@@ -6,40 +6,37 @@ siblings:
 - documentation-headings
 - writing-changelogs
 date: 2026-07-30
-description: 'Review documentation in four passes: product truth, reader route, rendered
-  behavior, and release state, before polishing prose.'
+description: A documentation review checklist in four passes. Check the product's behavior
+  first, then the reader's route, the rendered page and the release state, and edit the
+  prose last.
 slug: documentation-review
 status: published
 work_note: "I run the product before I write a page, which is the review this post describes, done ahead of time. So your reviewers get commands that already worked. I'm Ninad Pathak, a freelance technical writer, and [we can work together](/services/)."
 takeaways:
-- Verify product behavior before editing sentences.
-- Run the reader's success and failure paths from the documented starting state.
-- Inspect the exact rendered output at desktop and mobile widths.
-- Split approval by evidence instead of asking one reviewer to bless the page.
-title: Documentation Review Should Start With the Product, Not the Prose
+- Check that the product does what the page says before you edit a sentence.
+- Run the page's success path and its error path from the starting state it documents.
+- Review the rendered page at desktop and phone widths, not the Markdown.
+- Have each reviewer approve only the facts they can check.
+title: A Documentation Review Checklist That Starts With the Product
 updated: 2026-09-11
 video: documentation-review
 ---
 
-Picture a documentation pull request where the comments are breeding around commas, heading length, and screenshot placement. The command remains untested in the rendered page.
+Poul-Henning Kamp gave programmers the word bikeshedding in 1999, borrowing [Parkinson's story](https://en.wikipedia.org/wiki/Law_of_triviality) of a committee that waves through a nuclear plant and argues about the staff bicycle shed. A docs pull request with twelve comments about commas and none about whether the command works is the same committee.
 
-So does the permission in the released product.
+A documentation review checklist should put the checks in the order of what can hurt a reader. I review in four passes: the product's behavior first, then the reader's route through the page, then the rendered page, then the release state, and I edit the prose after all four.
 
-Then a beautifully edited page ships with a broken path.
+Wording still matters to me. But a well-edited sentence makes a false instruction look trustworthy, so in my reviews of [technical documentation](/articles/technical-documentation/) the facts get checked before the sentences get polished.
 
-Documentation review should begin with product truth, move through the reader's route, inspect the rendered artifact, and end at release state. Prose comes after the behavior survives.
+## What should a documentation review check first?
 
-My objection to the usual copyedit-first review is not that wording is unimportant. Perfect wording can make a false instruction look trustworthy enough to hurt someone.
+A documentation review should check first that the product does what the page says. A technical page makes claims about names, defaults, permissions, versions, errors and recovery, and I list those claims before I touch the sentences that carry them.
 
-## Put the product on trial first
-
-A technical page makes claims about names, defaults, permissions, versions, side effects, errors, and recovery. Extract those claims before touching the sentences that carry them.
-
-The reviewer needs a source outside the draft for each claim that can break the task. Otherwise the review is one sentence asking another sentence whether it is true.
+Each claim that could break the reader's task needs a source outside the draft. Checking a draft against itself only tells you the draft is consistent.
 
 ### Build a claim ledger
 
-Use a table that forces each material claim to point somewhere. The following API, role, response, and interface claims are fictional examples, not facts about a public product:
+Put the claims in a table where every row has to point at a source. The API, role and response in this example are invented and don't describe a real product:
 
 | Page claim | Verification source | Reviewer | Result |
 | --- | --- | --- | --- |
@@ -48,15 +45,15 @@ Use a table that forces each material claim to point somewhere. The following AP
 | Invalid keys return `401 invalid_api_key` | Reproduced response | Engineer | Pending |
 | The key is displayed once | Released UI | Product owner | Pending |
 
-Reject a ledger row when its source is the draft itself, a remembered demo, or another page copying the same unsupported sentence.
+I reject a row when its source is the draft itself, somebody's memory of a demo, or another page that repeats the same unsupported sentence.
 
-When using AI before asking an expert, proposed explanations belong in the question pile, not the verified column. Plausible wording has no special claim on truth.
+If you ask an AI model about the product before you ask an engineer, treat its answers as questions to put to the engineer. A plausible explanation from a model is not a verification source.
 
-### Run the documented behavior
+### Run what the page documents
 
-Start in the environment the page promises. Follow the released UI path or run the API, CLI, and code samples with the documented inputs.
+Start in the environment the page promises its reader. Follow the released UI path, or run the API calls, CLI commands and code samples with the inputs the page gives.
 
-Record enough state for a second reviewer to reproduce the check:
+Record enough for a second reviewer to repeat your check:
 
 ```text
 Product version: [released version or commit]
@@ -68,13 +65,13 @@ Expected signal: [status, output, or screen state]
 Observed signal: [actual result]
 ```
 
-Move an unstated credential, global package, private feature flag, or unreachable product state into the prerequisites before rerunning the page.
+If your run needed a credential, a global package or a feature flag that the page doesn't mention, add it to the page's prerequisites and run the page again.
 
-### Attack the failure path
+### Trigger the error the page claims to fix
 
-Trigger the error the page claims to solve. Confirm the message, status or exit code, diagnostic, and recovery step.
+Cause the error on purpose. Then confirm that the message, the status code, the diagnostic step and the fix all match what the page says.
 
-Use a four-part recovery record:
+I record each recovery in four fields:
 
 | Field | Required evidence |
 | --- | --- |
@@ -83,71 +80,59 @@ Use a four-part recovery record:
 | Recovery | Smallest supported action that restores progress |
 | Proof | Signal that the recovery worked |
 
-Replace "Try again" with a diagnostic. Keep "Restart the service" only when the page names the state the restart clears and the signal that proves recovery.
+Replace "Try again" with a command that tells the reader what went wrong. Keep "Restart the service" only if the page says what the restart clears and how the reader can tell it worked.
 
-## Make the page earn its URL
+## How do you decide whether a page should exist?
 
-A technically correct draft can still be the wrong page. It may duplicate an existing answer, combine incompatible readers, or switch between tutorial and reference until neither job survives.
-
-The URL earns more authority only after the page owns one necessary question.
+Decide by asking whether the page answers one question that no other page answers. A draft can be correct and still be the wrong page, because it repeats an existing answer or tries to serve two different readers.
 
 ### Name one reader decision
 
-Write one sentence before review begins:
+Before the review starts, write one sentence:
 
 ```text
 This page helps [reader with starting state] decide or do [specific outcome].
 ```
 
-If one reviewer writes "create a key" and another writes "understand authentication," the page has two jobs fighting inside it. Split the jobs or choose one before editing the draft.
+If one reviewer fills in "create a key" and another fills in "understand authentication", the draft is doing two jobs. Split it into two pages or pick one job before anyone edits it.
 
-The [technical tutorial guide](/articles/writing-technical-tutorials/) shows how a learning path differs from a task page. The distinction matters because a tutorial can teach through a controlled build while reference must state behavior without dragging the reader through a lesson.
+The [technical tutorial guide](/articles/writing-technical-tutorials/) shows how a tutorial differs from a task page. The difference matters in review because a tutorial may walk the reader through a build, and a reference page has to state behavior without a lesson attached.
 
 ### Search for the answer that already exists
 
-Search titles, body copy, error strings, and product terms before granting the draft a new canonical URL.
-
-The command below is an illustrative repository search. Replace its terms and `content/` path with the project under review:
+Search existing titles, body text and error strings before you give the draft its own URL. The command below is an illustration, so replace its search terms and the `content/` path with your project's:
 
 ```bash
 rg -n -i 'create.*api key|invalid_api_key|authorization: bearer' content/
 ```
 
-If two pages satisfy the same intent, consolidate the useful material and prepare a direct redirect.
+If two pages answer the same question, merge the useful parts into one and redirect the other. Publishing a second answer because the first file is awkward to edit leaves readers with two versions to choose between.
 
-Do not publish a second answer because the first file is annoying to edit.
+### Find the starting state the author forgot to mention
 
-### Expose hidden starting state
+Mark everything the author already had when they wrote the page: an account role, a runtime, an installed package, a region, sample data, a credential.
 
-Reviewers should mark each noun the author already possessed: account role, runtime, package, region, sample data, credential, feature state, and existing resource.
+Move each prerequisite above the first step that needs it. A reader shouldn't learn that they need an access request from the error message of the command that required the access.
 
-Move a prerequisite before the first step that needs it. Do not make the reader discover an access request after the command that requires access.
+## How do you review the page as a reader would?
 
-## Review the route as a sequence of decisions
-
-Once the behavior is true and the page deserves its URL, follow it as a reader. The question is not whether the prose sounds smooth.
-
-Each section must give the reader enough state to choose the next action.
-
-Read the route in order, then scan it out of order as someone returning with a failed command would.
+Follow the page in order and check that each section gives you what you need to choose the next action. Then scan it out of order, the way someone returns to a page after a command has failed.
 
 ### Read the headings without the paragraphs
 
-Extract the outline. The path below is an illustrative Markdown file, not a live page in this repository:
+Extract the outline. The file path below is an illustration and not a page in this repository:
 
 ```bash
 rg '^#{2,3} ' content/posts/example.md
 ```
 
-[Google's heading guidance](https://developers.google.com/style/headings) recommends a logical hierarchy, descriptive headings, and content between a parent heading and its subsections. The outline should expose the route rather than repeat labels such as Overview, Setup, Configuration, Usage, and Conclusion.
+[Google's heading guidance](https://developers.google.com/style/headings) asks for descriptive headings organized in a hierarchy, with no skipped levels. An outline that reads Overview, Setup, Configuration, Usage tells the reader nothing about the task, so I rewrite any heading that could be moved to another article without anyone noticing.
 
-Rewrite headings that could move to another article without changing meaning. The outline should expose both progression and recovery.
+[Task-based documentation headings](/articles/documentation-headings/) goes through that rewrite one heading type at a time.
 
-[Task-based documentation headings](/articles/documentation-headings/) walks through that rewrite one heading type at a time.
+### Ask for proof after each step that matters
 
-### Demand proof after a consequential step
-
-Each procedure stage needs an observable success condition before the reader spends more state on the next one. The next API-key action, role, and interface label are fictional:
+Each stage of a procedure needs a result the reader can see before they go on to the next stage. The API-key action, the role and the button label below are invented:
 
 ```text
 Action: Create a test API key.
@@ -155,25 +140,21 @@ Proof: The key list shows the new key name and test scope.
 Failure: If the Create key control is absent, confirm the workspace-owner role.
 ```
 
-A final screenshot does not prove the middle steps. If step three can silently fail, step three needs its own check.
+A screenshot of the final screen doesn't prove the middle steps worked. If step three can fail without an error message, step three needs its own check.
 
-### Separate advice from decision criteria
+### Separate advice from criteria a reviewer can apply
 
-"Keep paragraphs short" is advice. "Split the paragraph when setup, consequence, and exception compete inside it" gives a reviewer something to inspect.
+"Keep paragraphs short" is advice. "Split the paragraph when setup, consequence, and exception compete inside it" is a criterion, because a reviewer can look at a paragraph and say whether it meets it.
 
-Lists should enumerate, and tables should compare repeated fields. Prose should carry judgment.
+Use a list for items of the same kind and a table to compare the same fields across rows, and keep the reasoning in prose. A page built only from cards and checklists can look organized and never explain why one choice is better than another.
 
-A page made entirely of cards and checklists can look organized while refusing to explain why one choice beats another.
+## Why review the rendered page and not the Markdown?
 
-## Inspect the page the reader receives
+Review the rendered page because it is what the reader gets, and it can break in ways the Markdown doesn't show. A rendered table can be clipped at phone width, and a fixed header can cover the heading a link jumps to.
 
-Markdown is source code for a page. It is not the page.
+### Build the page the way production builds it
 
-The rendered output can clip a table, swallow a character from copied code, hide a heading under a fixed header, or let a banner cover the only button that matters.
-
-### Build the exact artifact
-
-Use the same build path production uses:
+Use the same build that production uses. For this site the build, the SEO audit and a local server are these commands:
 
 ```bash
 python3 build.py
@@ -181,46 +162,36 @@ python3 seo_audit.py
 python3 -m http.server 8765 --directory output
 ```
 
-Build from the intended tree and stop on a missing page or canonical. Stop the server after review.
+The build has to come from the branch under review, and it should stop on a missing page or canonical. If the preview is serving an older build directory, your screenshots show the old page.
 
-If the preview uses an older build directory, the screenshots prove nothing about the change.
+GitLab's [documentation review apps](https://docs.gitlab.com/development/documentation/review_apps/) do this per merge request: team members can deploy a preview that shows how a docs change will look on the docs site before it merges. GitLab's [documentation workflow](https://docs.gitlab.com/development/documentation/workflow/) is built for a much larger docs set than a small static site has, and the part worth copying is reviewing the preview that belongs to the change.
 
-GitLab's [documentation review apps](https://docs.gitlab.com/development/documentation/review_apps/) build and deploy a documentation preview from a merge request. GitLab's broader [documentation workflow](https://docs.gitlab.com/development/documentation/workflow/) also splits technical, writing, and maintainer review.
+### Check a desktop width and a phone width
 
-The product-specific process is larger than a small static site needs, but the principle is sound: review the artifact attached to the change.
+Look at the title, the navigation, the tables, the code blocks, the images and the links at both widths. Copy a command from the rendered page and run it, because a renderer can drop or change a character.
 
-### Check desktop and narrow widths
+Fix anything that is clipped, overlapped or unreachable. A line that wraps is fine unless the wrap changes what the line means, as it does when a long command breaks in the middle of a flag.
 
-Inspect the title, local navigation, tables, code blocks, images, related links, and calls to action at both widths. Copy a command from the rendered page and run a syntax-safe check when the command is destructive or credentialed.
+### Check the HTML structure and not a score
 
-Fix clipping, overlap, unreadable code, hidden focus, or a control that moves outside the viewport. "It wraps" is not a defect by itself.
+[W3C's page-structure tutorial](https://www.w3.org/WAI/tutorials/page-structure/) covers page regions, labels for those regions, headings and content structure. Check them in the page's HTML: one descriptive H1, heading levels in order, labeled navigation, keyboard access, table headers and image alternatives.
 
-The question is whether the wrap destroys hierarchy or meaning.
+A script can report a missing `alt` attribute, and it can't tell whether the alt text carries the image's information. My [documentation accessibility checklist](/articles/docs-accessibility/) has a checker for the structural part and the manual tests for the rest.
 
-### Check semantics instead of trusting a score
+### Open every link from the rendered page
 
-[W3C's page-structure tutorial](https://www.w3.org/WAI/tutorials/page-structure/) covers page regions, labels, headings, and content structure. Inspect the actual semantics: one descriptive H1, ordered heading levels, labeled navigation regions, keyboard access, visible focus, table headers, and meaningful image alternatives.
-
-Automation can flag a missing `alt` attribute. It cannot decide whether the alt text carries the image's information or merely repeats the caption.
-
-### Open links in context
-
-Check internal paths, fragments, external sources, canonicals, and redirects from the rendered page.
-
-The `output/articles/example/` path below is illustrative. Use the page generated by the current change:
+Check internal links, fragment links, external sources, canonicals and redirects on the rendered page. The `output/articles/example/` path below is an illustration, so use the page your change generated:
 
 ```bash
 python3 seo_audit.py
 rg -n 'href="[^"]+#' output/articles/example/index.html
 ```
 
-Repair a fragment that misses its heading, a redirect that hides a stale internal link, or a canonical that points at a competing page. A `200` response alone does not prove the reader reached the intended answer.
+Fix a fragment that doesn't match a heading, a redirect that hides a stale internal link, and a canonical that points at a different page. A link that returns `200` can still land the reader on the wrong answer.
 
-## Match the page to the release
+## How do you match the page to the release?
 
-Documentation can be accurate in a preview and wrong in production because the feature has not shipped, the permission differs by plan, or an older supported version behaves differently.
-
-The release pass binds the reviewed behavior to the version and audience that will receive the page.
+Tie the page to the product version and the audience that will receive it. A page can be correct in a preview environment and wrong in production, for example when the feature hasn't shipped or the permission differs by plan.
 
 ### Record availability and timing
 
@@ -234,17 +205,17 @@ Add the release facts the page depends on:
 | Does an older supported version differ? | Versioned reference or compatibility test |
 | When should the page become indexable? | Release plan |
 
-Do not present preview behavior as the current answer. For a breaking change, make the compatibility statement agree with the [changelog](/articles/writing-changelogs/) and [release notes](/articles/writing-release-notes/).
+Don't describe preview behavior as current behavior. For a breaking change, the page's compatibility statement has to agree with the [changelog](/articles/writing-changelogs/) and the [release notes](/articles/writing-release-notes/).
 
-### Name the next review trigger
+### Name what triggers the next review
 
-"Review annually" lets eleven months of product changes walk past the page. Tie review to the events that can falsify it: a renamed control, dependency release, permission change, response-schema change, or supported-version change.
+"Review annually" lets eleven months of product changes go by. Tie the next review to the events that can make the page wrong: a renamed control, a dependency release, a permission change or a changed response schema.
 
-Name an owner who can recognize the trigger in their normal workflow. Replace "the docs team" when another team controls the fact.
+Name an owner who will see that event in their normal work. If another team controls the fact, put that team's name there and not "the docs team".
 
-## Split approval by evidence
+## Who should approve a documentation change?
 
-One reviewer should not impersonate an engineer, editor, accessibility specialist, and release owner in a single approval. A small team may combine people, but it should not combine the questions into one vague "LGTM."
+Each reviewer should approve the facts they can check, and nothing else. A single "LGTM" can't stand in for an engineer, an editor, an accessibility reviewer and a release owner, although on a small team the same person may answer more than one row:
 
 | Reviewer | Evidence owned |
 | --- | --- |
@@ -254,23 +225,23 @@ One reviewer should not impersonate an engineer, editor, accessibility specialis
 | Product or release owner | Scope, availability, timing, and migration state |
 | Maintainer | Build, metadata, navigation, redirects, and deployment readiness |
 
-Each reviewer should point to the evidence they checked. Do not treat one approval as proof of facts outside that reviewer's access.
+Each reviewer should say what evidence they looked at. An engineer's approval of the commands says nothing about the alt text.
 
 Terminology earns its place in the writer's row. The phrase agent harness currently [names different things](/articles/what-agent-harness-means/) depending on whose docs you read.
 
-## Run the passes on a fictional authentication guide
+## What do the four passes look like on one page?
 
-Orbit is a fictional API used to expose the review method. It is not client work, a product test, or evidence about a live service.
+The example below runs the passes on an authentication guide for Orbit, an API I invented for this page. Orbit isn't a client project or a real service.
 
-The draft says:
+The draft under review says:
 
 > Generate an API key in Settings, add it to your request, and run the example. The API returns your account.
 
-The sentence is grammatical and nearly useless. It hides the role, navigation path, header format, environment, expected response, error behavior, and cleanup.
+Those two sentences are grammatical and leave out nearly everything a reader needs. They don't give the role, the navigation path, the header format, the expected response, the errors or the cleanup.
 
-### Verify the fictional product contract
+### Pass one: check the product contract
 
-Assume the fixture defines this behavior:
+Suppose Orbit's behavior is defined like this:
 
 ```text
 Role: workspace owner
@@ -282,11 +253,11 @@ Missing scope: 403 insufficient_scope
 Cleanup: revoke the test key
 ```
 
-Because these values belong to the fictional fixture, the article makes no claim that a public product behaves this way.
+Those values belong to the invented fixture, so this page makes no claim about any real product.
 
-### Run the reader request
+### Pass two: run the reader's request
 
-The following command targets the fictional `api.orbit.example` host with a placeholder test key. It is not a live endpoint or credential:
+The command below targets the made-up host `api.orbit.example` with a placeholder key. It isn't a live endpoint:
 
 ```bash
 export ORBIT_API_KEY="replace-with-a-fictional-test-key"
@@ -297,7 +268,7 @@ curl --fail-with-body \
   --header "Authorization: Bearer $ORBIT_API_KEY"
 ```
 
-The fictional response expected by this fixture is:
+The response the fixture defines is:
 
 ```json
 {
@@ -307,11 +278,11 @@ The fictional response expected by this fixture is:
 }
 ```
 
-The fictional pass condition is `mode: test`. A JSON object without that field does not prove the request reached the intended environment.
+The pass condition is `"mode": "test"`. A response without that field doesn't show that the request reached the test environment.
 
-### Turn the outline into a route
+### Pass three: turn the outline into a route
 
-Replace Setup, Usage, Errors, and Security with headings that expose decisions:
+Replace the headings Setup, Usage, Errors and Security with headings that name what the reader does:
 
 - Create a test API key
 - Send an authenticated request
@@ -319,11 +290,11 @@ Replace Setup, Usage, Errors, and Security with headings that expose decisions:
 - Store the key outside source control
 - Revoke the test key
 
-Move cleanup before the page sends the reader elsewhere, and keep error recovery beside the request that produces the error.
+Put the cleanup step before any link that sends the reader to another page, and keep each error's fix next to the request that produces the error.
 
-## Automate mechanics without pretending to automate judgment
+## What can you automate in a documentation review?
 
-Machines are good at answers that should not depend on taste:
+You can automate the checks whose answer doesn't depend on judgment:
 
 - Markdown and frontmatter syntax
 - Internal link and fragment resolution
@@ -334,29 +305,35 @@ Machines are good at answers that should not depend on taste:
 - Canonical, sitemap, and robots rules
 - Redirect loops and chains
 
-External link checks need retries and bounded exceptions because a site can reject an automated client while remaining available to readers.
+External link checks need retries and a short list of allowed exceptions, because a site can refuse an automated client and still load for readers. The link checker for this site hit that with a Harvard accessibility page, which returned 403 to a script.
 
-A mechanical gate should report the file, rule, and local reproduction command. It should not declare a page "high quality" because it counted headings or found an aggressive adjective.
+A check should report the file, the rule and the command that reproduces the failure locally. It shouldn't call a page "high quality" because it counted the headings.
 
-Product truth and reader judgment remain human approval.
+Whether the product matches the page, and whether the page helps its reader, still take a person to approve.
 
 ## Documentation review checklist
 
-- Block publication when a behavior, permission, or recovery claim lacks an inspectable source.
-- Run commands from the documented starting state and record both success and failure signals.
-- Give one reader decision the title, route, and canonical URL.
-- Inspect the exact intended tree at desktop and mobile widths.
-- Match availability and version boundaries to the release.
-- Split approval by the evidence each reviewer can inspect.
+- Block publication when a behavior, permission or recovery claim has no source a reviewer can inspect.
+- Run the commands from the documented starting state and record the success output and the error output.
+- Give one reader decision the title, the route and the canonical URL.
+- Review the rendered page from the branch under review at desktop and phone widths.
+- Match availability and version limits to the release.
+- Have each reviewer approve only the evidence they can inspect.
 
-## Documentation review FAQ
+## FAQ
 
 **Should documentation block a product release?**
 
-It should block when a missing or false instruction prevents safe adoption, operation, migration, or recovery. A tracked wording improvement can follow when the published route remains truthful and usable.
+It should block the release when a missing or false instruction stops a reader from adopting, operating or recovering the product safely. A wording improvement can follow in a later change, as long as the published steps are true and usable.
 
-**Can automated checks replace review?**
+**Can automated checks replace documentation review?**
 
-No. Automation can verify deterministic structure and build behavior.
+No. Automation can verify structure, links and the build, and it can't confirm that the released product matches a claim on the page.
 
-It cannot prove that the released product matches the claim or that the page changes the reader's next decision.
+**Who should review documentation?**
+
+An engineer checks behavior and code, a writer or editor checks reader fit and terminology, and a release owner checks availability and timing. On a small team one person can take more than one of those roles, with each check recorded separately.
+
+**What is a claim ledger?**
+
+A claim ledger is a table that lists each factual claim on a page next to the source that verifies it and the reviewer who checked it. A row whose only source is the draft itself fails.

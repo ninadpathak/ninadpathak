@@ -5320,7 +5320,8 @@
         "strongly encourages including documentation in the same merge request as the code that it relates to"
       ],
       "connects": [
-        "developer-onboarding-docs"
+        "developer-onboarding-docs",
+        "documentation-review"
       ]
     },
     {
@@ -5334,6 +5335,60 @@
       ],
       "connects": [
         "developer-onboarding-docs"
+      ]
+    },
+    {
+      "id": "wikipedia-law-of-triviality",
+      "url": "https://en.wikipedia.org/wiki/Law_of_triviality",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "Law of triviality",
+      "quotes": [
+        "it was popularized in the Berkeley Software Distribution community by the Danish software developer Poul-Henning Kamp in 1999",
+        "such as what materials to use for the staff bicycle shed"
+      ],
+      "connects": [
+        "documentation-review"
+      ]
+    },
+    {
+      "id": "google-style-headings",
+      "url": "https://developers.google.com/style/headings",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "Headings and titles",
+      "quotes": [
+        "avoid skipping heading levels or using empty headings",
+        "Structure content with descriptive headings"
+      ],
+      "connects": [
+        "documentation-review"
+      ]
+    },
+    {
+      "id": "gitlab-docs-review-apps",
+      "url": "https://docs.gitlab.com/development/documentation/review_apps/",
+      "author": "GitLab",
+      "date": "2026-11-18",
+      "title": "Documentation review apps",
+      "quotes": [
+        "The review app lets you preview how your changes appear on the GitLab Docs site before merging"
+      ],
+      "connects": [
+        "documentation-review"
+      ]
+    },
+    {
+      "id": "w3c-page-structure-tutorial",
+      "url": "https://www.w3.org/WAI/tutorials/page-structure/",
+      "author": "W3C",
+      "date": "2026-11-18",
+      "title": "Page Structure Tutorial",
+      "quotes": [
+        "Label regions to allow users to distinguish and access them"
+      ],
+      "connects": [
+        "documentation-review"
       ]
     }
   ],
@@ -5597,6 +5652,20 @@
       "time to productivity",
       "flexible",
       "Read the architecture overview, clone the repositories, set up the services, and choose a starter ticket."
+    ],
+    "documentation-review": [
+      "Try again",
+      "Restart the service",
+      "create a key",
+      "understand authentication",
+      "Keep paragraphs short",
+      "Split the paragraph when setup, consequence, and exception compete inside it",
+      "Review annually",
+      "the docs team",
+      "LGTM",
+      "high quality",
+      "Generate an API key in Settings, add it to your request, and run the example. The API returns your account.",
+      "\"mode\": \"test\""
     ]
   }
 }
