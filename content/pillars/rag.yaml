@@ -17,7 +17,7 @@ sections:
       - post: vector-embeddings
         note: "Explains embeddings with a model run on six short texts, and shows why similarity scores mislead."
       - post: fine-tuning-vs-rag
-        note: "Decides between fine-tuning and retrieval by which part of the problem each one solves."
+        note: "Decides between retrieval and fine-tuning by whether the facts change, with the studies that compared the two."
   - heading: "Retrieval quality"
     spokes:
       - post: hybrid-search

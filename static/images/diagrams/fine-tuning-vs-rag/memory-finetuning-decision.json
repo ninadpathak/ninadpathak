@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.mmd",
-  "hash": "d3e1fa52c0cc31ee",
+  "hash": "da14fff3825b34e2",
   "pele": "1.8.0",
   "width": 720,
   "height": 640,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "A decision tree. If the knowledge changes frequently, use RAG. If it doesn't, ask whether the problem is behavioral, meaning how the model reasons: a behavioral problem means fine-tuning, and a factual problem means RAG.",
-  "caption": "Most production systems end up with both: RAG carries the facts, and fine-tuning adds the reasoning patterns retrieval can't teach.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.narrow.svg\" width=\"288\" height=\"520\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg\" width=\"720\" height=\"640\" alt=\"A decision tree. If the knowledge changes frequently, use RAG. If it doesn't, ask whether the problem is behavioral, meaning how the model reasons: a behavioral problem means fine-tuning, and a factual problem means RAG.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Most production systems end up with both: RAG carries the facts, and fine-tuning adds the reasoning patterns retrieval can't teach.</figcaption>\n</figure>"
+  "caption": "Facts that change go to RAG. Fine-tuning is for behaviour that has to hold on every request.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.narrow.svg\" width=\"288\" height=\"520\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg\" width=\"720\" height=\"640\" alt=\"A decision tree. If the knowledge changes frequently, use RAG. If it doesn't, ask whether the problem is behavioral, meaning how the model reasons: a behavioral problem means fine-tuning, and a factual problem means RAG.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Facts that change go to RAG. Fine-tuning is for behaviour that has to hold on every request.</figcaption>\n</figure>"
 }

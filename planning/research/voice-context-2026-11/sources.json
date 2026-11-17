@@ -1159,10 +1159,12 @@
       "quotes": [
         "memory blocks that are attached to an agent are in-context (pinned to the system prompt)",
         "The Letta API stores all messages, so even after a compaction / eviction, an agent's old messages are still retrievable",
-        "editable by agents via memory tools"
+        "editable by agents via memory tools",
+        "Memory blocks can be attached and detached from agents"
       ],
       "connects": [
-        "ai-memory-management"
+        "ai-memory-management",
+        "agent-memory-2026"
       ],
       "date_note": "Date fetched; documentation page."
     },
@@ -1176,7 +1178,8 @@
         "Archival memory is a semantically searchable database where agents can store facts, knowledge, and information for long-term retrieval."
       ],
       "connects": [
-        "ai-memory-management"
+        "ai-memory-management",
+        "agent-memory-2026"
       ],
       "date_note": "Date fetched; documentation page."
     },
@@ -1190,7 +1193,8 @@
         "Letta (f.k.a. MemGPT) is actively developed."
       ],
       "connects": [
-        "ai-memory-management"
+        "ai-memory-management",
+        "agent-memory-2026"
       ],
       "date_note": "Date fetched."
     },
@@ -4146,6 +4150,208 @@
       ],
       "connects": [
         "rag-evaluation"
+      ]
+    },
+    {
+      "id": "memgpt-paper-2023",
+      "url": "https://arxiv.org/abs/2310.08560",
+      "author": "Packer et al.",
+      "date": "2023-10-12",
+      "title": "MemGPT: Towards LLMs as Operating Systems",
+      "quotes": [
+        "drawing inspiration from hierarchical memory systems in traditional operating systems",
+        "data movement between fast and slow memory"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "mem0-docs-memory-types",
+      "url": "https://docs.mem0.ai/core-concepts/memory-types",
+      "author": "Mem0",
+      "date": "2026-11-18",
+      "title": "Memory types",
+      "quotes": [
+        "Your app decides which returned memories to include in the prompt.",
+        "By default, Mem0 stores extracted memories, not a verbatim transcript",
+        "Scope memory by user_id, agent_id, run_id, and metadata",
+        "I prefer aisle seats"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "mem0-docs-add",
+      "url": "https://docs.mem0.ai/core-concepts/memory-operations/add",
+      "author": "Mem0",
+      "date": "2026-11-18",
+      "title": "Add memory",
+      "quotes": [
+        "Controls whether Mem0 extracts structured memories (infer=True, default) or stores raw messages"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "mem0-docs-mcp",
+      "url": "https://docs.mem0.ai/platform/mem0-mcp",
+      "author": "Mem0",
+      "date": "2026-11-18",
+      "title": "Mem0 MCP",
+      "quotes": [
+        "Connect any AI client to Mem0 using Model Context Protocol in minutes"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "graphiti-overview",
+      "url": "https://help.getzep.com/graphiti/getting-started/overview",
+      "author": "Zep",
+      "date": "2026-11-18",
+      "title": "Graphiti overview",
+      "quotes": [
+        "primarily designed for static documents",
+        "the bi-temporal model, fact invalidation, and hybrid retrieval",
+        "Zep uses Graphiti to derive temporal graph artifacts"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "graphiti-mcp-server",
+      "url": "https://help.getzep.com/graphiti/getting-started/mcp-server",
+      "author": "Zep",
+      "date": "2026-11-18",
+      "title": "Graphiti MCP Server",
+      "quotes": [
+        "xperimental implementation that exposes Graphiti operations through the Model Context Protocol (MCP)"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "anthropic-memory-tool-docs",
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool",
+      "author": "Anthropic",
+      "date": "2026-11-18",
+      "title": "Memory tool",
+      "quotes": [
+        "The memory tool operates client-side: Claude requests file operations, and your application runs them",
+        "Claude stores what it learns in files under /memories",
+        "Claude can create, read, update, and delete files that persist between sessions"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "longmemeval-2024",
+      "url": "https://arxiv.org/abs/2410.10813",
+      "author": "Wu et al.",
+      "date": "2024-10-14",
+      "title": "LongMemEval",
+      "quotes": [
+        "a 30% accuracy drop",
+        "commercial chat assistants and long-context LLMs showing",
+        "three stages: indexing, retrieval, and reading"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "openai-model-optimization-2026-11",
+      "url": "https://developers.openai.com/api/docs/guides/model-optimization",
+      "author": "OpenAI",
+      "date": "2026-11-18",
+      "title": "Model optimization",
+      "quotes": [
+        "OpenAI is winding down the fine-tuning platform.",
+        "existing users of the fine-tuning platform will",
+        "be able to create training jobs for the coming months",
+        "All fine-tuned models will remain available for inference until their base",
+        "enable a model to consistently format responses in a certain way",
+        "You can provide more example inputs and outputs than could fit within the context window of a single request",
+        "You can use shorter prompts with fewer examples and context data, which saves on token costs at scale"
+      ],
+      "connects": [
+        "fine-tuning-vs-rag"
+      ]
+    },
+    {
+      "id": "twelve-factor-config",
+      "url": "https://12factor.net/config",
+      "author": "The Twelve-Factor App",
+      "date": "2026-11-18",
+      "title": "III. Config",
+      "quotes": [
+        "everything that is likely to vary between deploys",
+        "strict separation of config from code"
+      ],
+      "connects": [
+        "fine-tuning-vs-rag"
+      ]
+    },
+    {
+      "id": "rag-paper-2020",
+      "url": "https://arxiv.org/abs/2005.11401",
+      "author": "Lewis et al.",
+      "date": "2020-05-22",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "quotes": [
+        "providing provenance for their decisions and updating their world knowledge remain open research problems"
+      ],
+      "connects": [
+        "fine-tuning-vs-rag"
+      ]
+    },
+    {
+      "id": "ovadia-finetuning-or-retrieval-2023",
+      "url": "https://arxiv.org/abs/2312.05934",
+      "author": "Ovadia et al.",
+      "date": "2023-12-10",
+      "title": "Fine-Tuning or Retrieval? Comparing Knowledge Injection in LLMs",
+      "quotes": [
+        "RAG consistently outperforms it, both for existing knowledge encountered during training and entirely new knowledge",
+        "LLMs struggle to learn new factual information through unsupervised fine-tuning",
+        "exposing them to numerous variations of the same fact during training could alleviate this problem"
+      ],
+      "connects": [
+        "fine-tuning-vs-rag"
+      ]
+    },
+    {
+      "id": "rag-vs-finetuning-agriculture-2024",
+      "url": "https://arxiv.org/abs/2401.08406",
+      "author": "Balaguer et al.",
+      "date": "2024-01-16",
+      "title": "RAG vs Fine-tuning: Pipelines, Tradeoffs, and a Case Study on Agriculture",
+      "quotes": [
+        "We see an accuracy increase of over 6 p.p. when fine-tuning the model and this is cumulative with RAG, which increases accuracy by 5 p.p. further"
+      ],
+      "connects": [
+        "fine-tuning-vs-rag"
+      ]
+    },
+    {
+      "id": "lora-paper-2021",
+      "url": "https://arxiv.org/abs/2106.09685",
+      "author": "Hu et al.",
+      "date": "2021-06-17",
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "quotes": [
+        "LoRA can reduce the number of trainable parameters by 10,000 times and the GPU memory requirement by 3 times",
+        "freezes the pre-trained model weights and injects trainable rank decomposition matrices"
+      ],
+      "connects": [
+        "fine-tuning-vs-rag"
       ]
     }
   ],

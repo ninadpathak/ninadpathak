@@ -156,6 +156,8 @@ Fix retrieval recall first, because nothing downstream can use a passage that wa
 
 The order matters for reading the scores as well as for fixing them. A low faithfulness score on a question where recall failed is a retrieval bug that happens to show up in the answer.
 
+When retrieval is fine and the answer still strays, the model's behaviour is the problem, and that's the case [RAG vs fine-tuning](/articles/fine-tuning-vs-rag/) weighs.
+
 ## How do you set a pass threshold?
 
 Set it from your own labelled examples and from what a wrong answer costs you. I don't think a universal cutoff exists, and the precision column above is the reason: 0.33 was a perfect score on four of those six questions.

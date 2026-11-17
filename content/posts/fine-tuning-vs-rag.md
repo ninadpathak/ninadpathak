@@ -1,152 +1,109 @@
 ---
 category: rag
 primary_query: rag vs fine tuning
+siblings:
+- rag-evaluation
+- contextual-retrieval
+- rag-reranking
 bridges:
 - slug: agent-memory-types
-  reason: Memory reuses the retrieval stack for a different job.
+  reason: What one user said is per-user state, which neither retrieval over documents nor training covers.
 - slug: rag-vs-memory
-  reason: Memory reuses the retrieval stack for a different job.
-- slug: ai-memory-management
-  reason: Memory reuses the retrieval stack for a different job.
+  reason: What one user said is per-user state, which neither retrieval over documents nor training covers.
 date: '2026-05-12'
-description: Fine-tuning and RAG solve different parts of the agent memory problem.
-  Here is how to decide which one you actually need.
+description: RAG vs fine-tuning comes down to where knowledge lives. RAG puts changing
+  facts in the prompt, fine-tuning trains fixed behaviour into the weights, and the
+  papers that compared them say when each one works.
 slug: fine-tuning-vs-rag
 status: published
 work_note: "I'm Ninad Pathak. I work with AI companies as a freelance technical writer on setup tutorials, concept explainers and comparisons, and I run each product before I write about it. [See the work and get in touch](/services/freelance-technical-writer-for-ai-companies/)."
-title: 'Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense'
+title: 'RAG vs Fine-Tuning and When to Use Each'
 updated: '2026-08-17'
 ---
 
-Which approach wins depends on what problem you are actually solving. Fine-tuning and RAG do not compete on the same axis, and conflating them leads to expensive mistakes that take months to surface.
+OpenAI's [model optimization guide](https://developers.openai.com/api/docs/guides/model-optimization) now carries a notice above its fine-tuning section: "OpenAI is winding down the fine-tuning platform." New users can't get in, and existing ones can keep creating training jobs for some months yet.
 
-## The Fundamental Difference
+So the RAG vs fine-tuning question has a different shape than it had a year ago. RAG puts knowledge into the prompt at request time by retrieving it from an index, and fine-tuning puts it into the model's weights by training on examples.
 
-Fine-tuning modifies the model's weights. You train the model on examples and it changes how the model reasons on inputs it has never seen.
+Developers already have a rule for this kind of choice. [The Twelve-Factor App](https://12factor.net/config) says anything likely to vary between deploys is config and has to live outside the code, and I think knowledge splits the same way: what changes often belongs in the index, and what holds still can be trained in.
 
-The knowledge gets encoded in the weights, not in any external store. Think of it as changing how someone thinks rather than handing them a reference card.
+That's the answer I'll defend below, and it's why the page sits under [RAG](/articles/rag/). Retrieval is the default, and fine-tuning has to earn its place.
 
-RAG does not touch the model at all. You keep the model frozen and retrieve relevant context at inference time, so the knowledge lives in your vector store or document index and the model sees it only when you pass it in.
+## What is the difference between RAG and fine-tuning?
 
-That reference card stays in your hand, and you can swap it out between one question and the next.
+RAG changes what the model can see for one request, and fine-tuning changes how the model behaves on every request. The rest follows from where each one keeps the knowledge:
 
-For agent memory, this distinction matters more than in most applications. An agent operating in memory needs to retain three things simultaneously: factual knowledge about the domain, procedural knowledge about how to handle tasks, and episodic knowledge about what happened in specific sessions.
+| | RAG | Fine-tuning |
+|---|---|---|
+| Where the knowledge lives | In an index outside the model | In the model's weights |
+| How you update it | Re-index the document | Train again |
+| Can the answer cite a source | Yes, the passage is in the prompt | No |
+| What it's good at changing | Facts | Format and behaviour |
+| What you pay | Longer prompts on every request | A training run up front |
 
-Each of these has different update patterns and different failure costs. The [practical map of episodic, semantic, and working memory in agents](/articles/agent-memory-types/) is useful background here, because the layer boundaries determine which memory problems are solvable with RAG and which require changing the model's weights.
+The people who named RAG saw both columns coming. The [2020 paper](https://arxiv.org/abs/2005.11401) lists what a model with knowledge only in its weights can't do well, saying that "providing provenance for their decisions and updating their world knowledge remain open research problems".
 
-Factual knowledge about your product changes constantly: a pricing update, a new API endpoint, a renamed plan tier. Fine-tuning on those facts means retraining every time one of them moves.
+## When should you use RAG?
 
-RAG means your index updates and the agent sees the new pricing on the very next query.
+Use RAG when the facts change or when an answer has to show where it came from. A price that moved this morning is in the index by the next request, and the passage that states it can be linked from the answer.
 
-Procedural knowledge about how to handle a task stays far more stable. When you want the agent to follow a specific reasoning pattern or run a refund through legal review before it confirms anything, that is a behavior you want baked into the model, and that is where fine-tuning earns its cost.
+There's a measured case for RAG on knowledge as well. A 2023 study, [Fine-Tuning or Retrieval?](https://arxiv.org/abs/2312.05934), compared the two on knowledge-heavy tasks and found that RAG "consistently outperforms" unsupervised fine-tuning, for facts the model had seen in training and for new ones.
 
-Hardest of the three is episodic knowledge. What happened in this conversation, what preferences the user has expressed across sessions, what came of that troubleshooting step three weeks ago.
+The same authors report that models struggle to learn a new fact from fine-tuning unless they see it in many variations. I'd keep that in mind whenever someone proposes training the product docs into a model.
 
-None of it is knowledge you would fine-tune on even if you could, because it belongs to one user or one interaction, not to the domain.
+RAG has its own work, and it's the retrieval. Whether the right passage made it into the prompt is something you measure with [RAG evaluation](/articles/rag-evaluation/), and techniques like [contextual retrieval](/articles/contextual-retrieval/) exist because that step fails.
+
+## When should you use fine-tuning?
+
+Use fine-tuning when the model's behaviour is wrong and the facts are fine. OpenAI's guide names the cases: getting a model to format responses the same way every time, and giving it more examples than fit in one context window.
+
+The guide adds a cost argument I think gets overlooked. A fine-tuned model needs shorter prompts with fewer examples, which cuts token cost at scale, and that's the opposite of what RAG does to a prompt.
+
+Training has become cheaper as well. [LoRA](https://arxiv.org/abs/2106.09685) trains small added matrices and leaves the original weights frozen, and its authors report 10,000 times fewer trainable parameters than full fine-tuning of GPT-3.
+
+What's changed is where you can do it. With OpenAI closing its platform to new users, I read fine-tuning as something you now plan around open-weight models, or around a provider whose docs still offer it on the day you check.
+
+## Can you use RAG and fine-tuning together?
+
+Yes, and a study that measured both found the gains stack. A [2024 case study on agriculture data](https://arxiv.org/abs/2401.08406) reports an accuracy gain of over 6 percentage points from fine-tuning, and a further 5 points when RAG was added on top.
+
+That's one domain and one set of models, so I wouldn't carry the numbers anywhere else. What carries is the shape: the two fix different things, so the gains didn't cancel.
+
+When a RAG pipeline is already retrieving more than it needs, I'd tune the retrieval before the model. [Reranking](/articles/rag-reranking/) is cheaper than a training run and you can undo it in a deploy.
+
+## How do you decide between RAG and fine-tuning?
+
+Ask whether the facts change, and then whether the problem is behaviour. Those two questions settle nearly every case I can think of.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.narrow.svg" width="288" height="520"><img class="np-has-narrow" src="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg" width="720" height="640" alt="A decision tree. If the knowledge changes frequently, use RAG. If it doesn't, ask whether the problem is behavioral, meaning how the model reasons: a behavioral problem means fine-tuning, and a factual problem means RAG." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Most production systems end up with both: RAG carries the facts, and fine-tuning adds the reasoning patterns retrieval can't teach.</figcaption>
+  <figcaption>Facts that change go to RAG. Fine-tuning is for behaviour that has to hold on every request.</figcaption>
 </figure>
 
-## When RAG Is the Obvious Choice
+- **The facts change:** RAG, whatever else is true.
+- **The facts are stable and the model behaves wrongly:** fine-tuning, after you've tried fixing it in the prompt.
+- **The facts are stable and the model behaves well:** RAG again, or just a longer prompt.
 
-The clearest signal that RAG is right: your knowledge base changes faster than you can retrain.
+A last kind of knowledge fits neither branch, and that's what a single user told the system last week. It's per-user state, which makes it a memory problem, and [RAG vs memory](/articles/rag-vs-memory/) and the page on [types of agent memory](/articles/agent-memory-types/) pick it up from there.
 
-A customer support agent that needs current product features, last night's outage status, and today's pricing is a RAG problem, full stop. Retraining every time any of those move is not feasible.
+## FAQ
 
-RAG can expose an updated index on the next query. Fine-tuning requires another training and deployment cycle before the model reflects the change.
+**Is RAG cheaper than fine-tuning?**
 
-Standing up retrieval is not free either. You need an embedding model, a vector index, a retrieval pipeline, and reranking logic that keeps the relevant chunk at the top.
+It depends on volume. RAG costs extra tokens on every request, and fine-tuning costs a training run up front and then allows shorter prompts.
 
+**Can fine-tuning teach a model new facts?**
 
-Compare retrieval overhead with the tool-call and inference traces from the target workflow. Define retrieval recall and evidence-use checks before building the pipeline so the evaluation measures the failure the product needs to prevent.
+Poorly, on the evidence above. The 2023 comparison found that models struggle to learn new facts through unsupervised fine-tuning unless each fact appears in many variations.
 
-Verifiable sources make the second case for RAG. When an agent cites a refund policy, it should cite the actual clause, with a link a support lead can click.
+**Can I still fine-tune OpenAI models?**
 
-RAG makes that possible because the retrieved context sits right there in the prompt. Fine-tuning buries the same knowledge in the weights, and you cannot point to where any given sentence came from.
+Not as a new user, according to OpenAI's guide. Existing users can create training jobs for now, and fine-tuned models stay available until their base models are deprecated.
 
-For a bank or an insurer, citing the source document is not a nice-to-have, it is the thing a compliance review will ask for first.
+**Does RAG change the model?**
 
-[RAG versus memory](/articles/rag-vs-memory/) now treats agent-query asymmetry as part of the retrieval boundary. If the expected records do not reach the prompt, the model cannot ground the answer in them.
+No. The model's weights stay as they are, and only the prompt changes from one request to the next.
 
-## When Fine-Tuning Earns Its Cost
+**Should I start with RAG or fine-tuning?**
 
-Fine-tuning has a narrower case than the vendors selling it would have you believe.
-
-Reach for it when the model's behavior is wrong, not when information is missing. A base model that ignores your output format, misreads your domain, or fumbles your edge cases needs to be retrained on examples of the correct behavior.
-
-Adding more documents to a prompt cannot fix how a model defaults to reasoning, because that lives in the weights, not the context.
-
-For example, an agent may call a charge endpoint before creating the customer record. That is a behavior problem, so training examples of the correct sequence may help where retrieving another document would not.
-
-Fine-tuning cost varies by provider, model, and dataset, and changing facts force another training run. A retrieval index can be updated without retraining the model.
-
-There is a subtler cost. Fine-tuning on a narrow dataset risks catastrophic forgetting, where the model sheds capabilities from its pretraining because the fine-tuning set was too thin or the run too long.
-
-
-## The Memory Hierarchy Changes the Trade-Off
-
-Looking at agent memory through the [memory hierarchy lens](/articles/ai-memory-management/), the fine-tuning versus RAG decision maps cleanly onto different layers.
-
-Working memory is episodic and short-lived, and it is never a fine-tuning problem. No one retrains a model on what a user said two turns ago.
-
-A conversation window or session store handles it, and the context window itself becomes your working memory, managed with retrieval and eviction rather than weights.
-
-Semantic memory holds the stable domain knowledge, and that is where fine-tuning has its most legitimate use. The model's grasp of your domain, the reasoning steps it applies, the format it produces.
-
-When any of those are wrong at the level of how the model thinks, fine-tuning is the fix.
-
-Semantic memory also carries facts that move, though. Your product gains a feature, your pricing changes its structure, a plan gets renamed.
-
-Those facts belong in RAG, not in the weights, because they turn over too fast to bake in.
-
-The practical consequence is that you almost never pick one or the other for the whole memory system. You need both.
-
-The real question is which one carries the bulk of the memory load, and the answer is almost always RAG, with fine-tuning added selectively for the reasoning patterns retrieval cannot teach.
-
-## What I Actually See in Production
-
-A practical default is RAG for changing knowledge, with fine-tuning reserved for narrow behavior calibration.
-
-The retrieval pipeline carries current product information, the user's stored preferences, and session history pulled from a vector store. When the agent needs to know something, it looks it up.
-
-Fine-tuning, in those same systems, carries behavior. The model has been trained to run a refund through a specific escalation protocol, to format every response as the structured object the frontend expects, to check inventory before it promises a ship date.
-
-Knowledge about how to operate is stable, and it has no business living in a retrieval index.
-
-Adding more documents to RAG will not reliably correct behavior learned in model weights.
-
-The agent does read them, sometimes, and still misbehaves, because the broken behavior sits in the weights and no amount of context reaches it. Imagine handing a driver who keeps turning the wrong way down one-way streets a thicker map.
-
-The map was never the problem.
-
-Rarer but worse is the reverse: teams that fine-tune on domain facts and then cannot change a price without a retraining run. The agent turns brittle and expensive to keep current.
-
-## The Decision Framework
-
-Here is how I think through it now.
-
-Is the knowledge changing frequently? Yes means RAG.
-
-No means fine-tuning is worth considering.
-
-Is the problem behavioral (how the model reasons) or factual (what the model knows)? Behavioral means fine-tuning.
-
-Factual means RAG.
-
-Do you need to cite sources? Yes means RAG.
-
-The model weights do not give you provenance.
-
-What is your retraining budget? If you cannot afford to retrain monthly, RAG is probably the foundation.
-
-If retrieval latency breaks the service-level objective, test a different retrieval path or architecture rather than assuming a universal overhead.
-
-Compare retrieval time with the actual tool-call and inference traces from the target workflow.
-
-For most agent memory use cases in 2026, the honest answer is RAG as the foundation, with fine-tuning reserved for the reasoning patterns that refuse to stick through prompt engineering. [Anthropic's contextual retrieval](/articles/contextual-retrieval/) is worth reviewing before you finalize the architecture, because contextual embeddings lift retrieval accuracy enough to change whether you need fine-tuning for some reasoning tasks at all.
-
-Build the retrieval pipeline first, then add fine-tuning once you have real behavioral failures that retrieval cannot reach.
-
-Agent memory adds one constraint the general case does not: episodic and working memory are retrieval-and-state problems, not training-data problems. That pushes RAG and explicit state management to the primary layer even in systems where fine-tuning earns a real role.
+I'd start with RAG and a good prompt. Add fine-tuning when you can point to a behaviour that neither of those fixed.
