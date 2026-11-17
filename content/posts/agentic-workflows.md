@@ -13,7 +13,7 @@ bridges:
 - slug: multi-agent-vs-single-agent
   reason: Scoping a task includes deciding whether it needs more than one agent.
 date: 2026-06-14
-description: 'An agentic workflow puts an AI agent inside a fixed process. Five stages from prompt to pull request, and the five questions Anthropic asks before a run goes unattended.'
+description: 'An agentic workflow puts an AI agent inside a fixed process. This page covers the five stages from prompt to pull request, and the five questions Anthropic asks before a run goes unattended.'
 slug: agentic-workflows
 status: published
 work_note: "Your engineers shouldn't have to fix a tutorial's code in review. I'm Ninad Pathak, a freelance technical writer for AI companies, and I build and run every example before I draft. [Work with me on yours](/services/freelance-technical-writer-for-ai-companies/)."
@@ -25,20 +25,20 @@ An agentic workflow is a multi-step process that an AI agent plans and carries o
 
 On November 4 someone asked Hacker News [what everyone's agentic setup looks like](https://news.ycombinator.com/item?id=50366117), and several hundred people answered. The people who answered disagree about which model to use, which harness to run it in and whether to sandbox the agent at all.
 
-The answers agree on one practice, and it's the useful part of the thread. A top reply, from someone who had thrown out their custom skills, put it this way: "the biggest trick is just to tell it what complete looks like."
+The answers agree on one practice, which a top reply, from someone who had thrown out their custom skills, put this way: "the biggest trick is just to tell it what complete looks like."
 
 So this page covers the steps of a workflow that stay the same whichever model or harness you use, as those steps apply to [coding agents](/articles/coding-agents/).
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agentic-workflows/workflow-pipeline.narrow.svg" width="288" height="776"><img class="np-has-narrow" src="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg" width="720" height="264" alt="Five stages left to right: frame the task, scope it down, let the agent run with its own checks, review the diff, and land it. Framing and review are the human's stages, marked with a person; the work stage is the agent's own loop." loading="lazy" decoding="async"></picture></a>
-  <figcaption>A person frames the task and reviews the diff, the agent does the run, and the person and the agent share scoping and landing.</figcaption>
+  <figcaption>A person frames the task, sets its scope and reviews the diff. The agent does the run, then drafts the pull request for the person to approve.</figcaption>
 </figure>
 
 ## What is an agentic workflow?
 
-An agentic workflow is the process around an agent run, and the run itself is a separate thing. The agent's own cycle of model call and tool call is [the agent loop](/articles/agent-loop-anatomy/), and a workflow is the set of steps a person adds before and after that loop.
+An agentic workflow is the set of steps a person adds before and after an agent run. The run itself, the agent's own cycle of model call and tool call, is [the agent loop](/articles/agent-loop-anatomy/).
 
-For a coding task the workflow starts at a prompt and ends at a merged pull request. I split the workflow into five stages, and a person owns the first stage, framing, and the fourth, review.
+For a coding task the workflow starts at a prompt and ends at a merged pull request. I split the workflow into five stages, and a person owns framing, scoping and review.
 
 ## What are the five stages?
 
@@ -76,7 +76,7 @@ Scoping is also where you decide how many agents the task needs, and my answer i
 
 An agent run should leave behind a record you can read afterwards, with evidence for every claim the agent makes. Anthropic's advice is to ask for the command the agent ran and its output, because a bare "all tests pass" tells you very little.
 
-A run's limits should be set in the same layer that keeps the record. A turn limit and a spending limit stop a run that isn't getting anywhere, and the [agent harness](/articles/agent-harnesses/) is the layer that enforces both.
+Set the run's limits in the [agent harness](/articles/agent-harnesses/), the layer that also keeps the record. A turn limit and a spending limit stop a run that isn't getting anywhere.
 
 A side task, such as searching the codebase for every caller of a function, doesn't have to fill the main context window. A [Claude Code subagent](/articles/claude-code-subagents/) does its searching in its own window and hands back the answer.
 
@@ -84,7 +84,7 @@ A side task, such as searching the codebase for every caller of a function, does
 
 Review the diff because the summary reports what the agent believes it did, and the diff shows what it did. A summary that says "fixed the failing test" reads the same whether the agent fixed the bug or deleted the assertion.
 
-I'd read for the changes nobody asked for: a config flag flipped, an error swallowed, an assertion deleted so a test goes green. No tool flags a flipped flag, a swallowed error or a deleted assertion, and each of them passes every automated check the agent ran.
+I'd read for the changes nobody asked for: a config flag flipped, an error swallowed, an assertion deleted so a test goes green. None of those changes fails a test, so each passes every automated check the agent ran.
 
 Anthropic's docs suggest one more reader, a review by a fresh subagent that never saw the conversation and so isn't swayed by the reasoning that produced the code. I think a fresh subagent is a good second reviewer and a poor substitute for your own review.
 
@@ -92,24 +92,24 @@ Every step above assumes a person still has attention to spend on review. [My es
 
 ## How do you land the change?
 
-Land the change by reusing the frame from stage one. The acceptance check you wrote in stage one becomes the pull request description, so the reviewer checks the change against the acceptance check you wrote before the run.
+Land the change by reusing the frame. The acceptance check you wrote in stage one becomes the pull request description, so the reviewer judges the change against a test that was set before the run.
 
-Let the agent draft the commit message and the description from the diff, then edit them against what the diff does. A person approves the merge, because a merge to the main branch is hard to take back.
+Let the agent draft the commit message and the description from the diff, then edit them against what the diff does. A person approves the merge, because the merge is the step that ships the change.
 
 ## FAQ
 
 **What is an agentic workflow?**
 
-An agentic workflow is a multi-step process that an AI agent plans and carries out with tools. The workflow on this page puts a person's statement of what done means before it and a person's approval after it.
+An agentic workflow is a multi-step process that an AI agent plans and carries out with tools. The workflow on this page has a person state what done means before the agent runs, and a person approve the result before it merges.
 
 **Do I need a stronger model for an agentic workflow?**
 
-A stronger model finishes more in one pass. The frame and the review catch mistakes from any model, so both steps matter whichever model you run.
+No. A stronger model gets more of a task right in one pass, and the frame and the review catch mistakes from any model.
 
 **How big should a single agent task be?**
 
-Small enough that you can review the whole diff in one sitting. Split anything larger into changes that each stand alone.
+A single agent task should be small enough that you can review the whole diff in one sitting. Split anything larger into changes that each stand alone.
 
 **Should I use several agents for one feature?**
 
-Nearly always no, because a second agent adds coordination, and one agent with a clear frame and a reviewed diff is the simpler setup to trust.
+Nearly always no, because a second agent means deciding which agent owns which files and passing results between the two, and one agent with a clear frame and a reviewed diff is the simpler setup to trust.

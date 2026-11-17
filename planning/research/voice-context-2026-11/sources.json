@@ -5351,7 +5351,9 @@
       "When does my plan renew?",
       "the same thing",
       "What is your return policy?",
-      "Can I send an item back?"
+      "Can I send an item back?",
+      "How do I reset my password?",
+      "I forgot my password, how can I change it?"
     ],
     "agent-memory-types": [
       "The user deploys on Fridays",

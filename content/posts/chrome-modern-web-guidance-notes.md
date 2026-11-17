@@ -27,13 +27,13 @@ Cutting what the reader already knows is the right standard, and it applies to h
 
 The one guide I opened, on building a navigation drawer, follows that rule. The guide says which approach to use and why it beats animating with JavaScript, and it never stops to explain what a dialog element is.
 
-The navigation drawer guide also tells the agent what to assume when the user's request doesn't specify a detail. I'd add a line like that to human documentation as well, because two readers who each have to guess a default will guess two different defaults.
+The navigation drawer guide also tells the agent what to assume when the user's request doesn't specify a detail. I'd add a line like that to human documentation as well, because two readers who each have to guess a default can guess differently.
 
 ## They measured it, with their own ruler
 
-The README publishes a measurement of whether the guides work, and the fact that it publishes one impresses me more than the figure. The README carries a table of runs with and without the guides, and on November 8 Claude Code on Opus 5.5 went from 57% of checks passed to 88%, over 215 tasks.
+I'm more impressed that the README publishes a measurement of its guides than I am by the figure. Its table of runs with and without the guides shows Claude Code on Opus 5.5 going from 57% of checks passed to 88% on November 8, over 215 tasks.
 
-The Chrome team wrote the guides, the tasks and the graders, so I read the result, 88% against 57%, as a sign the guides help and not as a measured size of the help. A commenter in the thread ran the project's legacy scan on their own code and it found only two issues, and a maintainer replied that the scan covers about a fifth of the guides so far.
+The Chrome team wrote the guides, the tasks and the graders, so I read 88% against 57% as a sign that the guides help, and I wouldn't quote the 31-point gain as their effect. A commenter in the thread ran the project's legacy scan on their own code and it found only two issues, and a maintainer replied that the scan covers about a fifth of the guides so far.
 
 The legacy scan checks existing code and the eval table checks newly generated code, and I haven't run either one myself. Even so, I can't name many docs teams that publish a table of pass rates with and without their docs.
 
@@ -43,11 +43,11 @@ The README offers the guides first as an agent skill installed with an npm comma
 
 The guides can be read without installing anything, to be fair. The launch post links readable versions on Chrome's developer site, and the README links every guide's Markdown file.
 
-Simon Willison [asked in the thread](https://news.ycombinator.com/item?id=50444594) for one more step beyond readable pages: a plain Markdown index on a public URL, written to be searched with grep, so any agent that can make an HTTP request finds the right guide. The maintainers agreed, and one replied "We'll make this happen."
+Simon Willison [asked in the thread](https://news.ycombinator.com/item?id=50444594) for one more step beyond readable pages: a plain Markdown index on a public URL, written to be searched with grep, so any agent that can make an HTTP request finds the right guide. Paul Irish of the Chrome team replied "We'll make this happen", and added that the index costs too many tokens for regular use.
 
-So my disagreement is only with what the README presents first, and the maintainers' reply to Willison has made it smaller than it was on launch day. I'd put the Markdown index at the top of the README and present the npm install as an optional extra.
+So my disagreement is only with what the README presents first, and Irish's reply to Willison has made it smaller than it was on launch day. I'd still put the Markdown index at the top of the README, for the occasional users Irish agreed it suits, and present the npm install as the route for agents that read the guides on every task.
 
-Installing the tool also has a privacy cost that fetching a web page doesn't have. The README says the command-line tool sends Google anonymous usage data, including the search queries an agent generates, and gives an environment variable that turns it off.
+Installing the tool also has a privacy cost that fetching a web page doesn't have. The README says the command-line tool sends Google anonymous usage data, including the search queries an agent generates, and says that setting `DISABLE_TELEMETRY=1` turns it off.
 
 An index file plus one Markdown page per guide is also the shape agents already request from docs sites, going by the server logs in [my notes on Fern's agent traffic report](/articles/agents-reading-docs/).
 
@@ -55,7 +55,7 @@ An index file plus one Markdown page per guide is also the shape agents already 
 
 An objection in the thread stayed with me: Chrome already has a great deal of influence over the web, and these guides would let it steer the code that everyone's coding agent writes. I think that worry is fair, and I think it applies to anyone who writes docs for agents, not only to Chrome.
 
-The project's answer is that four browser and documentation teams steward it and that its guides lean on shared compatibility data. Shared stewardship answers part of the worry, though a Chrome engineer said in the same thread that Mozilla had joined only in the last few weeks.
+The project's answer is that four browser and documentation teams steward it and that its guides take their browser-support data from the Baseline project. Shared stewardship answers part of the worry, though a Chrome engineer said in the same thread that Mozilla had joined only in the last few weeks.
 
 Whoever writes the page an agent reads is setting a default for every codebase that agent works on. Documentation has always set defaults this way, one developer at a time over months, and an agent applies the same default within seconds of fetching the page.
 

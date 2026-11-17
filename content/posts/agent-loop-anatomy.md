@@ -28,7 +28,7 @@ Programmers have typed into a loop like this since at least 1964, when Deutsch a
 
 An agent loop removes the waiting step, because no person types the next line. The model reads the printed result and writes the next command itself.
 
-Read, decide, run and append is the whole mechanism underneath [AI agent architecture](/articles/ai-agents/). The four phases below split that mechanism into parts so that you can tell which part broke when a run fails.
+That cycle of model call, tool call and result is the whole mechanism underneath [AI agent architecture](/articles/ai-agents/). The four phases below split that mechanism into parts so that you can tell which part broke when a run fails.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/agent-loop-anatomy/agent-loop.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-loop-anatomy/agent-loop.narrow.svg" width="288" height="1064"><img class="np-has-narrow" src="/static/images/diagrams/agent-loop-anatomy/agent-loop.svg" width="720" height="664" alt="The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills with each pass until its newest tokens spill past the edge." loading="lazy" decoding="async"></picture></a>
@@ -37,7 +37,7 @@ Read, decide, run and append is the whole mechanism underneath [AI agent archite
 
 ## What is an agent loop?
 
-An agent loop is a `while` loop around a model call. Anthropic and OpenAI each document their SDK's loop in a few lines, and the two descriptions list the same steps.
+An agent loop is an ordinary program loop around a model call. Anthropic and OpenAI each document their SDK's loop in a few lines, and the two descriptions list the same steps.
 
 Anthropic's [Agent SDK docs](https://code.claude.com/docs/en/agent-sdk/agent-loop) say Claude "evaluates your prompt, calls tools to take action, receives the results, and repeats until the task is complete." OpenAI's [Agents SDK docs](https://openai.github.io/openai-agents-python/running_agents/) list the same steps for its runner: call the model, return if the output is final, and otherwise run the tool calls, append the results and go round again.
 
@@ -141,7 +141,7 @@ Each of the four phases fails in its own way, and from the outside the failures 
 
 **Perceive.** The model can only use what's in the request. If an old error message is still in the history, or the file it needs was never read, the decision that follows will be wrong for a reason the model can't see.
 
-**Think.** The model's response gives you the decision and not the reasoning behind it. Missing reasoning doesn't matter when a run succeeds, and for the runs that fail it's the reason the logging in an [agent harness](/articles/agent-harnesses/) records the request beside the response.
+**Think.** The model's response gives you the decision and not the reasoning behind it. When a run fails, the request is the only record of what the model was looking at, which is why the logging in an [agent harness](/articles/agent-harnesses/) stores the request beside the response.
 
 **Act.** A tool call fails when its arguments don't match what the tool accepts, such as a date sent as "next Tuesday". A strict schema catches that before the tool runs, and [structured outputs](/articles/llm-structured-outputs/) covers how.
 
@@ -157,7 +157,7 @@ So print the full request for the turn that went wrong. If the fact the model ne
 
 Once the request looks right, the next question is what the agent should keep between turns and between sessions. The context window holds one run, and [context windows vs memory](/articles/context-windows-vs-memory/) explains why that isn't the same thing as memory.
 
-How much of the loop an agent runs alone is what separates the [types of AI agents](/articles/ai-agent-taxonomy/).
+The [types of AI agents](/articles/ai-agent-taxonomy/) differ in how much of this loop the agent runs before a person checks its work.
 
 ## FAQ
 
