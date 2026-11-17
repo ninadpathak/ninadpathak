@@ -1,6 +1,12 @@
 ---
 category: ai-engineering
 primary_query: llm cost optimization
+siblings:
+- llm-context-windows
+- time-to-first-token
+bridges:
+- slug: short-term-agent-memory
+  reason: Compaction is the memory-side answer to a prompt that grows every turn.
 date: 2026-04-17
 description: 'LLM token budgets from real figures: what a token costs, why input dominates a bill, why a chat costs more each turn, and where to cut first.'
 status: published
@@ -12,7 +18,9 @@ updated: 2026-11-17
 
 AWS's billing alarm is the cost control developers already know, and its [documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html) is exact about when it fires. The alarm "triggers only when the current billing exceeds the threshold" and "doesn't use projections based on your usage so far in the month."
 
-An LLM token budget is the same control moved earlier: a limit on what one request or one period is allowed to spend, set before the spending happens. The alarm reports money that is already gone, and a token budget can refuse the request, because tokens can be counted before anything is sent.
+An LLM token budget is a limit on what one request or one period is allowed to spend, set before the spending happens. It can refuse a request where the alarm can only report money already gone, because [tokens can be counted](https://platform.claude.com/docs/en/build-with-claude/token-counting) before anything is sent.
+
+Budgets are the cost side of [LLM inference](/articles/ai-engineering/), where the other measures are about speed.
 
 Where such a budget has to look first shows in numbers two Amazon engineers [published on November 9](https://strandsagents.com/blog/amazon-saves-millions-replacing-sonnet-with-strands-decider/). Their ticket-labeling agent used 6,554 input tokens and 170 output tokens for each ticket on Claude Sonnet 4.6, which by my arithmetic put 89% of its model bill on input, the prompt that gets sent again on every call.
 
@@ -50,23 +58,35 @@ print(f"        ${(in_cost + out_cost) * 1e6:,.0f} per million tickets")
 IN, OUT, WRITE, READ = 2.00, 10.00, 2.50, 0.10
 system, user, reply, turns = 1_500, 150, 250, 20
 
-plain = cached = 0.0
-history = 0
-first = last = 0.0
-for turn in range(1, turns + 1):
-    prompt = system + history + user                      # everything sent this turn
-    new = user if turn > 1 else system + user             # tokens the cache has not seen
-    new += reply if turn > 1 else 0                       # last turn's reply is new to the cache too
-    cost = prompt * IN / 1e6 + reply * OUT / 1e6
-    plain += cost
-    cached += (prompt - new) * READ / 1e6 + new * WRITE / 1e6 + reply * OUT / 1e6
-    first = cost if turn == 1 else first
-    last = cost
-    history += user + reply
 
-print(f"chat:   turn 1 sends {system + user:,} input tokens, turn {turns} sends {system + history - reply:,}")
-print(f"        turn {turns} costs {last / first:.1f}x turn 1 without caching")
-print(f"        20 turns: ${plain:.4f} without caching, ${cached:.4f} with it ({1 - cached / plain:.0%} less)")
+
+def chat(expires_every=None):
+    """Cost of the chat. expires_every=5 means the cache has lapsed before every fifth turn."""
+    plain = cached = 0.0
+    history = 0
+    first = last = 0.0
+    for turn in range(1, turns + 1):
+        prompt = system + history + user                  # everything sent this turn
+        new = user + reply if turn > 1 else prompt        # tokens the cache has not seen
+        if expires_every and turn % expires_every == 0:
+            new = prompt                                  # cache lapsed: the whole prompt is written again
+        cost = prompt * IN / 1e6 + reply * OUT / 1e6
+        plain += cost
+        cached += (prompt - new) * READ / 1e6 + new * WRITE / 1e6 + reply * OUT / 1e6
+        first = cost if turn == 1 else first
+        last = cost
+        history += user + reply
+    return plain, cached, last / first, system + history - reply
+
+
+plain, cached, ratio, last_prompt = chat()
+print(f"chat:   turn 1 sends {system + user:,} input tokens, turn {turns} sends {last_prompt:,}")
+print(f"        turn {turns} costs {ratio:.1f}x turn 1 without caching")
+print(f"        20 turns: ${plain:.4f} without caching")
+for label, every in (("cache never lapses", None), ("lapses before every 5th turn", 5),
+                     ("lapses before every 2nd turn", 2), ("lapses before every turn", 1)):
+    _, cached, _, _ = chat(every)
+    print(f"        {label:<29} ${cached:.4f}  ({1 - cached / plain:+.0%} saved)")
 ```
 
 ```text
@@ -74,10 +94,16 @@ ticket: $0.0222 per call, 89% of it input
         $22,212 per million tickets
 chat:   turn 1 sends 1,650 input tokens, turn 20 sends 9,250
         turn 20 costs 3.6x turn 1 without caching
-        20 turns: $0.2680 without caching, $0.0831 with it (69% less)
+        20 turns: $0.2680 without caching
+        cache never lapses            $0.0831  (+69% saved)
+        lapses before every 5th turn  $0.1393  (+48% saved)
+        lapses before every 2nd turn  $0.2091  (+22% saved)
+        lapses before every turn      $0.3225  (-20% saved)
 ```
 
-The ticket cost in that output agrees with the post's own per-ticket figure. The post is published by the team that sells the replacement, a small decision model, and its headline is that the swap "performed just as well at 98% less cost".
+The ticket cost in that output agrees with the post's own per-ticket figure.
+
+The post has an interest to declare. AWS wrote both it and the replacement, a model with a public repository called [Strands Decider](https://github.com/strands-labs/strands-decider) that the team ran on SageMaker instances AWS bills for, and its headline is that the swap "performed just as well at 98% less cost".
 
 I'm using only the Sonnet side of their table. The lesson in it holds whatever replaces the model: the replacement prompt was 2,009 tokens and the output was one token, so the saving came from sending and asking for less.
 
@@ -90,9 +116,13 @@ Each turn resends the system prompt and the whole conversation so far, so the in
   <figcaption>A bot that replays its full history pays for the same tokens again on every message, so each turn costs more than the one before.</figcaption>
 </figure>
 
-Prompt caching is the direct answer, because the resent part is identical from one turn to the next. The same conversation cost 69% less in the run with the unchanged prefix read from cache, and Anthropic's page says "Caching saves money after a small number of cache reads".
+Prompt caching is the direct answer, because the resent part is identical from one turn to the next. With the unchanged prefix read from cache the conversation costs 69% less, and Anthropic's page says "Caching saves money after a small number of cache reads".
 
-The other answer is to stop resending everything. Compaction replaces old turns with a summary, as [short-term memory for agents](/articles/short-term-agent-memory/) describes, and the [context window guide](/articles/llm-context-windows/) covers how models use a long window.
+That figure assumes every turn arrives before the cache lapses, a window the price table gives as five minutes, and a chat is where people pause. With the cache lapsing before every fifth turn the saving in the run is 48%, and with a lapse before every turn caching costs 20% more than going without.
+
+A cached prefix shortens the wait as well as the bill, which is the subject of [time to first token](/articles/time-to-first-token/).
+
+The other answer is to stop resending everything. Compaction replaces old turns with a summary, as [short-term memory for agents](/articles/short-term-agent-memory/) describes, and how models use a long window is set out in the [context window guide](/articles/llm-context-windows/).
 
 ## What should a token budget enforce?
 
@@ -104,7 +134,7 @@ A per-request budget is the same idea at a smaller scale. Cap the output with th
 
 ## Where should you cut first?
 
-Cut in the order the run suggests, starting with what is sent on every call.
+Start with what is sent on every call. The run covers the first three steps, and the last two come from the price list and from Amazon's post.
 
 1. Shorten the standing prompt, since it is paid for on every request.
 2. Cache the part of the prompt that doesn't change between requests.
