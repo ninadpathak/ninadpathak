@@ -852,7 +852,7 @@ Opening devices added to the ledger: hello, world and Kernighan's 1974 memo (wri
 
 Films: docs-accessibility, developer-onboarding-docs, documentation-review and documentation-structure keep their films, because each page still states every line the film narrates.
 
-What the earlier pages had wrong, for the record: docs-accessibility named "Microsoft State University" for Michigan State University, linked a Harvard page that returns 403 to a script, and credited Google with a claim about images of code that its page doesn't make. documentation-review and documentation-structure failed the prose check on sentences starting with a number, and documentation-structure carried a banned word.
+What the earlier pages had wrong, for the record: docs-accessibility named "Microsoft State University" for Michigan State University, linked a Harvard page that returns 403 to a script, and credited Google with a claim about images of code that its page doesn't make. documentation-review failed the prose check on a sentence starting with a number, and documentation-structure carried a banned word.
 
 Search Console showed no queries for documentation-review or documentation-structure in the 90 days to November 15, so their retitles cost no ranking.
 
