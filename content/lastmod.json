@@ -1,7 +1,7 @@
 {
   "aeo-for-developer-docs": {
     "lastmod": "2026-11-17",
-    "sources": "cb6dbdb764290e21459da6de22153dd83fda8eee66b7f7495fdcad3e37b0ebb8"
+    "sources": "eacd08e40c6143de91d1d2868dd0409516812a418f5ca1c841b820c62927496f"
   },
   "agent-design-space": {
     "lastmod": "2026-11-17",
@@ -49,7 +49,7 @@
   },
   "ai-crawlers": {
     "lastmod": "2026-11-17",
-    "sources": "80d01afca4163c576ed65406b0e3a8348074be5f12cc820f01c1cd77fc890261"
+    "sources": "b3bef440c49e5e3ea6f6c533b6c8d469f8d8ae8158b90f44874cc084169b2f62"
   },
   "ai-memory-management": {
     "lastmod": "2026-11-17",
@@ -61,7 +61,7 @@
   },
   "best-llms-for-coding": {
     "lastmod": "2026-11-17",
-    "sources": "efbc10cb96e06debf54d57301d108b44b214c4b3d978fbbba8a7ec3cb9b187ec"
+    "sources": "5166925b3d609e0c6b72968ce3d2b1db9d1a6454e5f73cfd64cd6e2d73a51d41"
   },
   "browser-vector-search": {
     "lastmod": "2026-11-17",
@@ -133,7 +133,7 @@
   },
   "documentation-headings": {
     "lastmod": "2026-11-17",
-    "sources": "5b8f4e844790680d92300fc58eeb0c3488bd58260edba6a0124f459c2a6a8aa9"
+    "sources": "86fc48e236cb4642a84c310fc02defe85a220b1eb917e025e1b2b43574cc4aad"
   },
   "documentation-review": {
     "lastmod": "2026-11-17",
@@ -165,7 +165,7 @@
   },
   "hybrid-search": {
     "lastmod": "2026-11-17",
-    "sources": "01e3a2857045e9190bc131277256d26674f6643970d5329aa083d6d5e1164434"
+    "sources": "74abeb8bcb677af52e3d8b1170b40ac2c69e6cbb4f9aa115355c5fb61c09c7f7"
   },
   "hyperagents-memory": {
     "lastmod": "2026-11-17",
@@ -201,7 +201,7 @@
   },
   "llms-txt": {
     "lastmod": "2026-11-17",
-    "sources": "f82c1415f2773a5f37a777b2da3029fe5e7671aaf0d4375fba4aa00584cdfe2f"
+    "sources": "83d031eb35fb61133f40d9e95a63a82383f01520d3b950fc4ebcc33408f9350b"
   },
   "mcp-server-tutorial": {
     "lastmod": "2026-11-17",
@@ -231,6 +231,10 @@
     "lastmod": "2026-11-17",
     "sources": "7b4237666a6903f8da5b999ae336bec6e319c5182fd92a342f10d1f13623923a"
   },
+  "nobody-understands-the-code": {
+    "lastmod": "2026-11-17",
+    "sources": "5ac69f8fff58b5a95f9a836d3da04d5a2f59f730e282c19a388a41b6d05bb796"
+  },
   "quickstart-guide": {
     "lastmod": "2026-11-17",
     "sources": "04dc44fa17af6e31d7e6b3af12c964fc2610860e6a647a7328138d7b897e084c"
@@ -241,7 +245,7 @@
   },
   "rag-reranking": {
     "lastmod": "2026-11-17",
-    "sources": "f740507ab677418fd824dca2754377896e250232152bed2f8ae78b2e8a94e803"
+    "sources": "7ef5710af9ef18524e9c0c4d0a438da702976f95de0a48a241130f455bfeaa9c"
   },
   "rag-vs-memory": {
     "lastmod": "2026-11-17",
@@ -281,7 +285,7 @@
   },
   "technical-docs": {
     "lastmod": "2026-11-17",
-    "sources": "20930d60a61ab5d1a7336fb75089a796d70ba319c9a386cabb44446998b3e113"
+    "sources": "37c978d28f4b7f94027f6e9537c3673f1b385b3dbfc7e43d73c7c7bfaf272651"
   },
   "technical-writing-for-engineers": {
     "lastmod": "2026-11-17",
@@ -293,7 +297,7 @@
   },
   "vector-embeddings": {
     "lastmod": "2026-11-17",
-    "sources": "f9bf146187301b76961e547d85ade52cb1c5e37ef624d28c1ab134e5547d667d"
+    "sources": "b92902bfb28064f16fbcd42d3240e1f17e375d788429f88ce9710c6873ae4ced"
   },
   "voice-agent-latency": {
     "lastmod": "2026-11-17",
@@ -309,11 +313,11 @@
   },
   "writing-for-ai-products": {
     "lastmod": "2026-11-17",
-    "sources": "ad82b92dd26fcb8808be0bbf5505f893626038c85bb8ff79bfc3b48c1c6c8a2b"
+    "sources": "750f06ade5c55249d5b74ff51cfcc73a775086200a5cc4e8dc34a0e23e536304"
   },
   "writing-release-notes": {
     "lastmod": "2026-11-17",
-    "sources": "de2605b151ff41cbd77bfb3695aecab5245fa5fa2c541bbdde5883211bb31f2a"
+    "sources": "4d5e44578f09422a8a8e3e069541299c7c1368215eb31656d53daf6ed70368d0"
   },
   "writing-technical-tutorials": {
     "lastmod": "2026-11-17",
