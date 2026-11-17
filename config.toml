@@ -212,7 +212,7 @@ description = "Comparisons and explainers for engineers who will check the claim
 
 [[hire.offers]]
 name = "AI-ready documentation audit"
-description = "A check of documentation for answer structure, AI crawler access in robots.txt, and llms.txt validity."
+description = "A check of documentation for answer structure and AI crawler access in robots.txt, then llms.txt validity."
 url = "/services/ai-ready-documentation-audit/"
 
 [[hire.offers]]

@@ -91,6 +91,3 @@
 /contact-us/ /contact/ 301
 /contact-me/ /contact/ 301
 /contact-form/ /contact/ 301
-# A task board that was served from /static/ until 2026-11-17. Nothing on the site linked to it
-# and Search Console recorded no impressions; the rule keeps the old address from a 404.
-/static/phantom-tasks / 301

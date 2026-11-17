@@ -3,7 +3,9 @@
 The checker itself is a hand-run tool. These tests cover the parts that decide what a response
 means, and they prove the build and the test suite never reach for the network through it.
 """
+import contextlib
 import importlib.util
+import io
 import pathlib
 import tempfile
 import unittest
@@ -52,6 +54,38 @@ class ClassifyTests(unittest.TestCase):
         other = CAPTURE.replace("20260813143601", "20260407232030")
         self.assertEqual(links.classify(CAPTURE, 200, other)[0], "moved")
         self.assertEqual(links.classify(CAPTURE, 404, CAPTURE)[0], "dead")
+
+
+class StrictExitTests(unittest.TestCase):
+    def counts(self, **found):
+        return {"ok": 0, "dead": 0, "moved": 0, "blocked": 0, **found}
+
+    def test_without_strict_the_tool_always_exits_zero(self):
+        self.assertEqual(links.exit_code(self.counts(dead=3, moved=1, blocked=9), strict=False), 0)
+
+    def test_strict_passes_only_when_every_link_was_judged_ok(self):
+        self.assertEqual(links.exit_code(self.counts(ok=67), strict=True), 0)
+
+    def test_strict_fails_with_its_own_code_when_any_link_went_unjudged(self):
+        self.assertEqual(links.exit_code(self.counts(ok=65, blocked=2), strict=True), 3)
+        self.assertEqual(links.exit_code(self.counts(blocked=67), strict=True), 3)
+
+    def test_a_dead_or_moved_link_outranks_an_unjudged_one(self):
+        self.assertEqual(links.exit_code(self.counts(dead=1, blocked=5), strict=True), 1)
+        self.assertEqual(links.exit_code(self.counts(moved=1), strict=True), 1)
+
+    def test_main_returns_3_under_strict_when_every_request_fails(self):
+        def all_fail(urls):
+            return [{"url": u, "status": 0, "final": u, "verdict": "blocked", "reason": "TimeoutError"} for u in urls]
+        original = links.fetch_all
+        links.fetch_all = all_fail
+        try:
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                self.assertEqual(links.main(["--strict"]), 3)
+                self.assertEqual(links.main([]), 0)
+        finally:
+            links.fetch_all = original
+        self.assertIn("0 ok", out.getvalue())
 
 
 class CollectTests(unittest.TestCase):

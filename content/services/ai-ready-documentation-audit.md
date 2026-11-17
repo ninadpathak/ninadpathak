@@ -2,8 +2,8 @@
 title: "AI-Ready Documentation Audit"
 nav_title: "AI-ready documentation audit"
 seo_title: "AI-Ready Documentation Audit | Ninad Pathak"
-description: "An AI-ready documentation audit for developer docs: answer structure, AI crawler access in robots.txt and llms.txt validity, run with four free checkers."
-lead: "An AI-ready documentation audit checks what a publisher controls in AI search: whether a page's answers can be extracted, whether AI crawlers may fetch it, and whether its llms.txt is valid. I run it with four tools I built and published, so you can rerun every finding yourself."
+description: "An AI-ready documentation audit for developer docs. Four free checkers test answer structure and AI crawler access, then validate llms.txt."
+lead: "An AI-ready documentation audit tests whether a page's answers can be extracted and whether AI crawlers may fetch it, then validates llms.txt. I run it with four tools I built and published, so you can rerun every finding yourself."
 service_type: "Documentation audit"
 status: published
 proof:
@@ -45,7 +45,7 @@ Snippet eligibility is the only hard gate. The other eight are editing heuristic
 
 The audit reports page structure and access rules. It does not predict a placement in AI Overviews or a citation in an assistant, and the checker says the same on its own page.
 
-The robots.txt check reads the file and not the network. A CDN or firewall can block a crawler at the edge whatever the file says, so I tell you to confirm access there before you rely on a verdict.
+The robots.txt check reads the file only. A CDN or firewall can block a crawler at the edge whatever the file says, so I tell you to confirm access there before you rely on a verdict.
 
 ## The method is public
 
@@ -70,7 +70,7 @@ Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the documentati
 
 **What is an AI-ready documentation audit?**
 
-It is a check of whether documentation can be fetched, extracted and indexed by AI search systems. Mine covers answer structure, AI crawler rules in robots.txt and llms.txt validity.
+It is a check of whether AI search systems can fetch documentation and extract answers from it. Mine covers answer structure and AI crawler rules in robots.txt, then llms.txt validity.
 
 **Will the audit get my docs cited by ChatGPT or AI Overviews?**
 

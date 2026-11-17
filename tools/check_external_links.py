@@ -2,7 +2,8 @@
 """Report the health of the external links on the portfolio and hiring pages.
 
     python tools/check_external_links.py            # report, always exits 0
-    python tools/check_external_links.py --strict   # exit 1 if any link is dead or moved
+    python tools/check_external_links.py --strict   # exit 1 if a link is dead or moved,
+                                                    # exit 3 if none is but some went unjudged
     python tools/check_external_links.py --json out.json
 
 WHY THIS IS NOT PART OF THE BUILD
@@ -163,9 +164,19 @@ def fetch(url: str, timeout: int = 40) -> dict:
     return {"url": url, "status": status, "final": final, "title": title, "verdict": verdict, "reason": reason}
 
 
+def exit_code(counts: dict[str, int], strict: bool) -> int:
+    """0 without --strict. With it: 1 for a dead or moved link, 3 when the only problem is
+    links nobody could judge, so a run where every request failed never reads as a pass."""
+    if not strict:
+        return 0
+    if counts["dead"] or counts["moved"]:
+        return 1
+    return 3 if counts["blocked"] else 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
-    parser.add_argument("--strict", action="store_true", help="exit 1 when a link is dead or moved")
+    parser.add_argument("--strict", action="store_true", help="exit 1 when a link is dead or moved, 3 when one went unjudged")
     parser.add_argument("--json", type=pathlib.Path, help="also write the full results here")
     args = parser.parse_args(argv)
 
@@ -183,7 +194,7 @@ def main(argv: list[str] | None = None) -> int:
           f"{counts['blocked']} blocked and not judged")
     if args.json:
         args.json.write_text(json.dumps(results, indent=1), encoding="utf-8")
-    return 1 if args.strict and (counts["dead"] or counts["moved"]) else 0
+    return exit_code(counts, args.strict)
 
 
 if __name__ == "__main__":

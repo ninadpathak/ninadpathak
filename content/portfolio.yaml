@@ -1,6 +1,7 @@
 # url is where the card links. When the publisher took a piece down, url is the latest
 # Wayback Machine capture that still shows it and original_url keeps the publisher's address.
-# An entry with original_url and no url has no usable capture, so its card renders without a link.
+# An entry with original_url and no url has no usable capture, so its card renders without a link
+# and reads "no longer online". A card with both reads "archived copy".
 entries:
   # DevTools / Code Review
   - title: "Code Review Best Practices for Engineering Teams"
