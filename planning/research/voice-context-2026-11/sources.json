@@ -153,7 +153,16 @@
         "The number to plan capacity with",
         "Plan capacity in requests in flight rather than seats.",
         "Individual responses stream too slowly, even at low load",
-        "reported 36.9x over a static baseline at the same latency."
+        "reported 36.9x over a static baseline at the same latency.",
+        "Queueing plus prefill",
+        "how long the user waits before anything appears",
+        "Reads the whole input in parallel, including the system prompt and tool definitions as well as the conversation history",
+        "Measure the first token the user sees.",
+        "Because the phases have opposite bottlenecks, a technique that speeds one often does little for the other. That is why benchmarks report TTFT and tokens per second separately.",
+        "Reuse the work already done on repeated prompt openings",
+        "Users feel the tail, not the average",
+        "Wasted compute when guesses are rejected. Its value shrinks as load rises and spare compute runs out.",
+        "Watch speculative decoding acceptance. Acceptance depends on temperature, subject matter and the draft model."
       ],
       "connects": [
         "llm-inference-optimization",
@@ -232,12 +241,18 @@
         "At about 464 GB, the checkpoint exceeds the 252 GB of HBM3e on a single GB300 GPU.",
         "1 107.4 49.84 479.75 8.78 8 386.0 114.17 433.79 19.01",
         "set --max-num-seqs to 16 or 32 for the corresponding group",
-        "--block-size 128 --max-num-seqs 16"
+        "--block-size 128 --max-num-seqs 16",
+        "TTFT measures time to the first token, which may be reasoning",
+        "1 107.4 49.84 479.75 8.78 8 386.0 114.17 433.79 19.01 16 607.8 136.46 482.90 23.77 32 385.0 453.54 899.36 77.90",
+        "the model's MTP layer drafts four tokens per step, and vLLM verifies them with the full model before accepting them, so each step can produce several tokens.",
+        "The gain depends on how often drafts are accepted, which varies with the prompt.",
+        "{\"method\":\"mtp\",\"num_speculative_tokens\":4}"
       ],
       "connects": [
         "llm-inference-optimization",
         "time-to-first-token",
-        "mixture-of-experts"
+        "mixture-of-experts",
+        "speculative-decoding"
       ]
     },
     {
@@ -860,11 +875,14 @@
         "4 GPT 6.1 Sol 47.20% $0.79",
         "5 Fable 5.1 45.60% $14.24",
         "6 Muse Wonder 1.0 42.40% $3.76 7 Gemini 4 Argon 39.20% $4.66",
-        "3 Sonnet 5.5 51.20% $10.09"
+        "3 Sonnet 5.5 51.20% $10.09",
+        "pass@1, averaged over five independent runs per task"
       ],
       "connects": [
         "coding-models-new-code-vs-change",
-        "best-llms-for-coding"
+        "best-llms-for-coding",
+        "agent-error-handling",
+        "ai-agent-failures"
       ],
       "date_note": "The page gives the month only."
     },
@@ -1277,10 +1295,13 @@
       "title": "Claude Fable 5.2: Intelligence, Performance & Price Analysis",
       "quotes": [
         "Released November 2026",
-        "has a 1M tokens context window"
+        "has a 1M tokens context window",
+        "Time to first answer token 208.11s",
+        "# 1 / 81"
       ],
       "connects": [
-        "best-llms-for-coding"
+        "best-llms-for-coding",
+        "time-to-first-token"
       ]
     },
     {
@@ -1685,12 +1706,14 @@
         "Usually someone in the channel asks why, points at an earlier decision, or suggests a simpler route",
         "You land it, you own it",
         "PUBLISHED Oct 15, 2026",
-        "Code review's second job has always been to spread codebase understanding."
+        "Code review's second job has always been to spread codebase understanding.",
+        "Everything is reversible. Flags, reverts and staged releases undo most mistakes in minutes."
       ],
       "connects": [
         "nobody-understands-the-code",
         "documentation-review",
-        "agentic-workflows"
+        "agentic-workflows",
+        "agent-error-handling"
       ]
     },
     {
@@ -2073,6 +2096,310 @@
       "connects": [
         "writing-changelogs"
       ]
+    },
+    {
+      "id": "strands-amazon-decider",
+      "url": "https://strandsagents.com/blog/amazon-saves-millions-replacing-sonnet-with-strands-decider/",
+      "author": "Carr Onstott, Mehul Jaiswal, Strands Agents Team",
+      "date": "2026-11-09",
+      "title": "Amazon saves millions by replacing Sonnet 4.6 with Strands Decider",
+      "discussion": "https://news.ycombinator.com/item?id=50436640",
+      "quotes": [
+        "The agent ran with a long system prompt on every ticket, generating JSON and reasoning against a fixed set of labels.",
+        "performed just as well at 98% less cost",
+        "This worked because the task is a closed choice from a known catalog, the volume is high, and the latency of the old path mattered.",
+        "Input tokens per ticket 6,554 2,009 Output tokens per ticket 170 1",
+        "Per ticket $0.0222 about $0.0005",
+        "November 9, 2026"
+      ],
+      "connects": [
+        "llm-token-budgets"
+      ]
+    },
+    {
+      "id": "anthropic-pricing-page",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "author": "Anthropic",
+      "date": "2026-11-17",
+      "title": "Pricing",
+      "quotes": [
+        "produces approximately 30% more tokens for the same text",
+        "Caching saves money after a small number of cache reads",
+        "with a 50 percent discount on both input and output tokens",
+        "$2 / MTok $10 / MTok $2.50 / MTok $4 / MTok $0.10 / MTok"
+      ],
+      "connects": [
+        "llm-token-budgets"
+      ]
+    },
+    {
+      "id": "willison-hard-budget-caps",
+      "url": "https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/",
+      "author": "Simon Willison",
+      "date": "2026-10-03",
+      "title": "We're going to need default hard budget caps on pretty much everything",
+      "quotes": [
+        "after $X/month, cut this thing off and return errors",
+        "Soft caps, \"after $X/month, send me a warning email\", will not cut it."
+      ],
+      "connects": [
+        "llm-token-budgets"
+      ]
+    },
+    {
+      "id": "webdev-ttfb",
+      "url": "https://web.dev/articles/ttfb",
+      "author": "Jeremy Wagner",
+      "date": "2021-10-26",
+      "date_note": "Last updated November 18, 2025.",
+      "title": "Time to First Byte (TTFB)",
+      "quotes": [
+        "measures the time between starting navigating to a page and when the first byte of a response begins to arrive"
+      ],
+      "connects": [
+        "time-to-first-token"
+      ]
+    },
+    {
+      "id": "aa-methodology",
+      "url": "https://artificialanalysis.ai/methodology",
+      "author": "Artificial Analysis",
+      "date": "2026-11-17",
+      "title": "Methodology",
+      "quotes": [
+        "For reasoning models which return reasoning tokens, this will be the first reasoning token.",
+        "includes the time spent reasoning, so unlike time to first token, it measures the wait for an answer the same way for reasoning and non-reasoning models."
+      ],
+      "connects": [
+        "time-to-first-token"
+      ]
+    },
+    {
+      "id": "wikipedia-speculative-execution",
+      "url": "https://en.wikipedia.org/wiki/Speculative_execution",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Speculative execution",
+      "quotes": [
+        "work is done before it is known whether it is actually needed"
+      ],
+      "connects": [
+        "speculative-decoding"
+      ]
+    },
+    {
+      "id": "spectre-site",
+      "url": "https://spectreattack.com/",
+      "author": "Graz University of Technology",
+      "date": "2018",
+      "title": "Meltdown and Spectre",
+      "quotes": [
+        "the root cause, speculative execution"
+      ],
+      "connects": [
+        "speculative-decoding"
+      ]
+    },
+    {
+      "id": "leviathan-speculative-decoding-2022",
+      "url": "https://arxiv.org/abs/2211.17192",
+      "author": "Yaniv Leviathan, Matan Kalman, Yossi Matias",
+      "date": "2022-11-30",
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "quotes": [
+        "an algorithm to sample from autoregressive models faster without any changes to the outputs, by computing several tokens in parallel.",
+        "without changing the distribution",
+        "a 2X-3X acceleration"
+      ],
+      "connects": [
+        "speculative-decoding"
+      ]
+    },
+    {
+      "id": "leviathan-speculative-decoding-pdf",
+      "url": "https://arxiv.org/pdf/2211.17192",
+      "author": "Yaniv Leviathan, Matan Kalman, Yossi Matias",
+      "date": "2022-11-30",
+      "title": "Fast Inference from Transformers via Speculative Decoding (PDF)",
+      "quotes": [
+        "is often not bottlenecked on arithmetic operations, but rather on memory bandwidth and communication"
+      ],
+      "connects": [
+        "speculative-decoding"
+      ]
+    },
+    {
+      "id": "wikipedia-fallacies-distributed-computing",
+      "url": "https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Fallacies of distributed computing",
+      "quotes": [
+        "The network is reliable",
+        "first created a list of seven fallacies in 1994"
+      ],
+      "connects": [
+        "agent-error-handling"
+      ]
+    },
+    {
+      "id": "anthropic-handle-tool-calls",
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls",
+      "author": "Anthropic",
+      "date": "2026-11-17",
+      "title": "Handle tool calls",
+      "quotes": [
+        "is_error (optional): Set to true if the tool execution resulted in an error."
+      ],
+      "connects": [
+        "agent-error-handling"
+      ]
+    },
+    {
+      "id": "mcp-spec-tools-2025-06-18",
+      "url": "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+      "author": "Model Context Protocol",
+      "date": "2025-06-18",
+      "title": "Tools (specification revision 2025-06-18)",
+      "quotes": [
+        "Tools use two error reporting mechanisms"
+      ],
+      "connects": [
+        "agent-error-handling",
+        "model-context-protocol"
+      ]
+    },
+    {
+      "id": "stripe-idempotent-requests",
+      "url": "https://docs.stripe.com/api/idempotent_requests",
+      "author": "Stripe",
+      "date": "2026-11-17",
+      "title": "Idempotent requests",
+      "quotes": [
+        "Retries with the same key return the saved response, including 500 errors."
+      ],
+      "connects": [
+        "agent-error-handling"
+      ]
+    },
+    {
+      "id": "google-sre-postmortem-culture",
+      "url": "https://sre.google/sre-book/postmortem-culture/",
+      "author": "Google SRE book",
+      "date": "2026-11-17",
+      "title": "Postmortem Culture: Learning from Failure",
+      "quotes": [
+        "a written record of an incident, its impact, the actions taken to mitigate or resolve it, the root cause(s), and the follow-up actions to prevent the incident from recurring"
+      ],
+      "connects": [
+        "ai-agent-failures"
+      ]
+    },
+    {
+      "id": "mtlynch-coding-agents-dumb",
+      "url": "https://mtlynch.io/why-are-coding-agents-so-dumb/",
+      "author": "Michael Lynch",
+      "date": "2026-10-09",
+      "title": "Why are coding agents so dumb?",
+      "quotes": [
+        "stopped two minutes after I left to ask me what it should name a git branch and then sat all night waiting for my answer."
+      ],
+      "connects": [
+        "ai-agent-failures"
+      ]
+    },
+    {
+      "id": "wikipedia-self-driving-car",
+      "url": "https://en.wikipedia.org/wiki/Self-driving_car",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Self-driving car",
+      "quotes": [
+        "Level 2 (hands/on, eyes/on)",
+        "An ADAS requires a human driver to handle tasks that the ADAS does not support.",
+        "Level 4 robotaxi service"
+      ],
+      "connects": [
+        "ai-agent-taxonomy"
+      ]
+    },
+    {
+      "id": "wikipedia-intelligent-agent",
+      "url": "https://en.wikipedia.org/wiki/Intelligent_agent",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Intelligent agent",
+      "quotes": [
+        "Russell & Norvig (2003) group agents into five classes based on their degree of perceived intelligence and capability",
+        "Simple reflex agents",
+        "Model-based reflex agents",
+        "Goal-based agents",
+        "Utility-based agents",
+        "Learning agents"
+      ],
+      "connects": [
+        "ai-agent-taxonomy"
+      ]
+    },
+    {
+      "id": "anthropic-building-effective-agents",
+      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "author": "Anthropic",
+      "date": "2024-12-19",
+      "title": "Building effective agents",
+      "quotes": [
+        "systems where LLMs and tools are orchestrated through predefined code paths",
+        "systems where LLMs dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks.",
+        "The autonomous nature of agents means higher costs, and the potential for compounding errors.",
+        "we recommend finding the simplest solution possible, and only increasing complexity when needed.",
+        "Published Dec 19, 2024"
+      ],
+      "connects": [
+        "ai-agent-taxonomy"
+      ]
+    },
+    {
+      "id": "willison-agents-definition",
+      "url": "https://simonwillison.net/2025/Sep/18/agents/",
+      "author": "Simon Willison",
+      "date": "2025-09-18",
+      "title": "I think \"agent\" may finally have a widely enough agreed upon definition to be useful jargon now",
+      "quotes": [
+        "An LLM agent runs tools in a loop to achieve a goal."
+      ],
+      "connects": [
+        "ai-agent-taxonomy"
+      ]
+    },
+    {
+      "id": "cbs-united-bans-ai-agents",
+      "url": "https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/",
+      "author": "Megan Cerullo, CBS News",
+      "date": "2026-11-11",
+      "title": "United Airlines bans AI agents from booking flights on behalf of travelers",
+      "discussion": "https://news.ycombinator.com/item?id=50458900",
+      "quotes": [
+        "actions taken by these tools may result in unintended purchases, account changes, or use of MileagePlus miles.",
+        "Flight searches cost airlines money",
+        "United Airlines said on Wednesday that it is banning artificial intelligence agents from making flight reservations on behalf of travelers",
+        "to prohibit use by unauthorized, third-party personal AI agents or assistants"
+      ],
+      "connects": [
+        "ai-agent-taxonomy"
+      ]
+    },
+    {
+      "id": "aws-billing-alarm-docs",
+      "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html",
+      "author": "AWS",
+      "date": "2026-11-17",
+      "title": "Create a billing alarm to monitor your estimated AWS charges",
+      "quotes": [
+        "It triggers only when the current billing exceeds the threshold. It doesn't use projections based on your usage so far in the month."
+      ],
+      "connects": [
+        "llm-token-budgets"
+      ]
     }
   ],
   "unused_leads": [
@@ -2241,6 +2568,13 @@
     ],
     "written-by-a-human": [
       "written by a human"
-    ]
+    ],
+    "llm-token-budgets": [],
+    "time-to-first-token": [],
+    "speculative-decoding": [],
+    "agent-error-handling": [
+      "The charge may have gone through and has not been retried"
+    ],
+    "ai-agent-failures": []
   }
 }

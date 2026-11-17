@@ -2,337 +2,114 @@
 category: ai-engineering
 primary_query: llm cost optimization
 date: 2026-04-17
-description: Real numbers, real pricing, and concrete strategies for keeping your
-  LLM spend predictable.
+description: 'LLM token budgets from real figures: what a token costs, why input dominates a bill, why a chat costs more each turn, and where to cut first.'
 status: published
 work_note: 'I wrote this to make a token bill something you can predict before the invoice arrives. [My portfolio](/portfolio/) has the developer content I''ve published for AI companies.'
 title: 'LLM token budgets: a practical guide to cost control'
 slug: llm-token-budgets
+updated: 2026-11-17
 ---
 
-Token costs are the new EC2 bills. I learned that the expensive way after burning $200 on GPT-4 over a single weekend, chasing a bug with a loop that re-sent the whole conversation on every retry.
+AWS's billing alarm is the cost control developers already know, and its [documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html) is exact about when it fires. The alarm "triggers only when the current billing exceeds the threshold" and "doesn't use projections based on your usage so far in the month."
 
-A production RAG pipeline serving 10,000 queries per day can quietly climb to $1,000 per month, and nobody notices until the invoice lands. For the first few years of the LLM era, most engineers I worked with treated inference spend as a black box.
+An LLM token budget is the same control moved earlier: a limit on what one request or one period is allowed to spend, set before the spending happens. The alarm reports money that is already gone, and a token budget can refuse the request, because tokens can be counted before anything is sent.
 
-Input goes in, output comes out, invoice arrives at month end. That approach holds right up until traffic doubles or someone ships a chattier prompt.
+Where such a budget has to look first shows in numbers two Amazon engineers [published on November 9](https://strandsagents.com/blog/amazon-saves-millions-replacing-sonnet-with-strands-decider/). Their ticket-labeling agent used 6,554 input tokens and 170 output tokens for each ticket on Claude Sonnet 4.6, which by my arithmetic put 89% of its model bill on input, the prompt that gets sent again on every call.
 
-What follows is how I make token costs visible, predictable, and controllable. No fluff.
+## What does a token cost?
 
-Real numbers.
+A token costs whatever the model's price list says for its direction, and output is priced several times higher than input. Anthropic's [pricing page](https://platform.claude.com/docs/en/about-claude/pricing), read on November 17, 2026, lists these rates for Claude Sonnet 5.5 in USD per million tokens.
 
-## What a token actually costs
+| Token type | Price per million tokens, USD |
+| --- | --- |
+| Input | 2.00 |
+| Output | 10.00 |
+| Cache write, five minutes | 2.50 |
+| Cache read | 0.10 |
 
-Tokens are not bytes. English text averages about 4 characters per token.
+The count behind the price moves too. That page says of newer models that their tokenizer "produces approximately 30% more tokens for the same text", so a prompt measured on an old model is a low estimate on a new one.
 
-A sentence like "The pipeline failed at step three" is roughly 7 tokens. A typical email runs 75 to 100 tokens.
+## Where does the money go in one call?
 
-The model sees everything as tokens, and you pay per token, every time the model reads or writes one.
+For a call with a long standing prompt and a short answer, nearly all of it goes to input. Amazon's post describes the workload: "The agent ran with a long system prompt on every ticket, generating JSON and reasoning against a fixed set of labels."
 
-As of Q2 2026, here is the current pricing landscape, rounded to three significant figures. Numbers shift frequently, sometimes mid-quarter, so I check the API pricing pages before architecting around a specific rate.
+The script below reproduces their cost per ticket from the token counts, then prices a second workload, a 20-turn chat.
 
-Always.
+```python
+"""Two token budgets: one ticket-labeling call, and a 20-turn chat that replays its history."""
 
-| Model | Input (per 1M tokens) | Output (per 1M tokens) |
-|---|---|---|
-| GPT-5.4 Standard | $2.50 | $15 |
-| GPT-5.4 Mini | $0.75 | $4.50 |
-| GPT-5.4 Nano | $0.20 | $1.25 |
-| GPT-5.4 Pro | $30 | $180 |
-| GPT-5.2 | $1.75 | $14 |
-| GPT-5.1 | $1.25 | $10 |
-| Claude Opus 4.7 | $5 | $25 |
-| Claude Sonnet 4.6 | $3 | $15 |
-| Claude Haiku 4.5 | $1 | $5 |
-| Gemini 3.1 Pro (<=200K ctx) | $2 | $12 |
-| Gemini 3.1 Pro (>200K ctx) | $4 | $18 |
+# 1. Amazon's published figures for labeling one ticket with Claude Sonnet 4.6.
+IN_PRICE, OUT_PRICE = 3.00, 15.00            # USD per million tokens
+in_tokens, out_tokens = 6_554, 170
+in_cost = in_tokens * IN_PRICE / 1e6
+out_cost = out_tokens * OUT_PRICE / 1e6
+print(f"ticket: ${in_cost + out_cost:.4f} per call, {in_cost / (in_cost + out_cost):.0%} of it input")
+print(f"        ${(in_cost + out_cost) * 1e6:,.0f} per million tickets")
 
-A 1,000-token input with a 500-token output on GPT-5.4 Nano costs $0.000825. That sounds like a rounding error until you multiply it by 50,000 requests per day, which lands at $41.25 per day, or $1,237.50 per month.
+# 2. A chat on Claude Sonnet 5.5 list prices: 2.00 in, 10.00 out, cache write 1.25x, cache read 0.05x.
+IN, OUT, WRITE, READ = 2.00, 10.00, 2.50, 0.10
+system, user, reply, turns = 1_500, 150, 250, 20
 
-Context compounds too, and [bigger context windows are not always better for cost or accuracy](/articles/llm-context-windows/). A chatbot that grows its system prompt and replays the full history on every turn pays for those same tokens again on each message, so a 20-message conversation can cost twenty times what the first reply did.
+plain = cached = 0.0
+history = 0
+first = last = 0.0
+for turn in range(1, turns + 1):
+    prompt = system + history + user                      # everything sent this turn
+    new = user if turn > 1 else system + user             # tokens the cache has not seen
+    new += reply if turn > 1 else 0                       # last turn's reply is new to the cache too
+    cost = prompt * IN / 1e6 + reply * OUT / 1e6
+    plain += cost
+    cached += (prompt - new) * READ / 1e6 + new * WRITE / 1e6 + reply * OUT / 1e6
+    first = cost if turn == 1 else first
+    last = cost
+    history += user + reply
+
+print(f"chat:   turn 1 sends {system + user:,} input tokens, turn {turns} sends {system + history - reply:,}")
+print(f"        turn {turns} costs {last / first:.1f}x turn 1 without caching")
+print(f"        20 turns: ${plain:.4f} without caching, ${cached:.4f} with it ({1 - cached / plain:.0%} less)")
+```
+
+```text
+ticket: $0.0222 per call, 89% of it input
+        $22,212 per million tickets
+chat:   turn 1 sends 1,650 input tokens, turn 20 sends 9,250
+        turn 20 costs 3.6x turn 1 without caching
+        20 turns: $0.2680 without caching, $0.0831 with it (69% less)
+```
+
+The ticket cost in that output agrees with the post's own per-ticket figure. The post is published by the team that sells the replacement, a small decision model, and its headline is that the swap "performed just as well at 98% less cost".
+
+I'm using only the Sonnet side of their table. The lesson in it holds whatever replaces the model: the replacement prompt was 2,009 tokens and the output was one token, so the saving came from sending and asking for less.
+
+## Why does a chat cost more with every turn?
+
+Each turn resends the system prompt and the whole conversation so far, so the input grows while the question stays the same size. The twentieth turn in the run above sends 9,250 input tokens against 1,650 for the first, and costs 3.6 times as much.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/llm-token-budgets/token-budget.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/llm-token-budgets/token-budget.narrow.svg" width="288" height="248"><img class="np-has-narrow" src="/static/images/diagrams/llm-token-budgets/token-budget.svg" width="720" height="280" alt="Six turns of a chat, each drawn as one request: the system prompt, the replayed history of every earlier turn, the new message, and the answer. Because history is replayed on every turn, each request is longer than the last." loading="lazy" decoding="async"></picture></a>
-  <figcaption>A bot that replays its full history pays for the same tokens again on every message; a 20-message conversation can cost twenty times what the first reply did.</figcaption>
+  <figcaption>A bot that replays its full history pays for the same tokens again on every message, so each turn costs more than the one before.</figcaption>
 </figure>
 
-## Counting tokens before you spend them
+Prompt caching is the direct answer, because the resent part is identical from one turn to the next. The same conversation cost 69% less in the run with the unchanged prefix read from cache, and Anthropic's page says "Caching saves money after a small number of cache reads".
 
-Counting how many tokens a request will consume before you send it is the most basic cost control technique there is. Every major SDK ships a token counting utility for exactly this.
+The other answer is to stop resending everything. Compaction replaces old turns with a summary, as [short-term memory for agents](/articles/short-term-agent-memory/) describes, and the [context window guide](/articles/llm-context-windows/) covers how models use a long window.
 
-```python
-from anthropic import Anthropic
+## What should a token budget enforce?
 
-client = Anthropic()
+A budget should enforce a hard stop, per request and per month. Simon Willison [argued on October 3](https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/) for the monthly kind as a default on every paid API: "after $X/month, cut this thing off and return errors".
 
-# Count tokens without making a request
-message = client.messages.count_tokens(
-    model="claude-sonnet-4-20250514",
-    max_tokens=1024,
-    system="You are a code reviewer.",
-    messages=[
-        {"role": "user", "content": "Explain the difference between a mutex and a semaphore."}
-    ]
-)
+His reason is the failure a warning can't prevent. "Soft caps, "after $X/month, send me a warning email", will not cut it."
 
-print(f"Token count: {message}")
-```
+A per-request budget is the same idea at a smaller scale. Cap the output with the API's maximum-tokens parameter, and reject a prompt over a set size before it is sent.
 
-OpenAI provides the same capability:
+## Where should you cut first?
 
-```python
-import tiktoken
+Cut in the order the run suggests, starting with what is sent on every call.
 
-encoding = tiktoken.get_encoding("claude")
-tokens = encoding.encode("Explain the difference between a mutex and a semaphore.")
-print(f"Token count: {len(tokens)}")
-```
+1. Shorten the standing prompt, since it is paid for on every request.
+2. Cache the part of the prompt that doesn't change between requests.
+3. Cap the output length, because output tokens carry the higher price.
+4. Move work that can wait to a batch endpoint, which Anthropic prices "with a 50 percent discount on both input and output tokens".
+5. Try a smaller model where the task is a fixed choice.
 
-Fast and entirely offline, the tiktoken library needs no API call to do its job. I wire it into request pipelines to reject or queue anything that would blow past a budget threshold, like a user pasting a 40-page PDF into a chat box and expecting a free summary.
-
-Wiring it in takes about five minutes and spares you the end-of-month surprise.
-
-## Building a token budget system
-
-Raw token counting is table stakes. A real budget system needs three components working together: a budget allocation per time window, a running tally, and a circuit breaker that trips when limits are hit.
-
-Think of it like the fuel gauge, odometer, and engine cutoff on a rental scooter, where the cutoff is what stops you from running the tank dry without realizing it.
-
-Here is a lightweight implementation I have run in production:
-
-```python
-import time
-from dataclasses import dataclass
-from threading import Lock
-
-@dataclass
-class TokenBudget:
-    max_tokens_per_minute: int
-    window_seconds: int = 60
-
-    def __post_init__(self):
-        self.used_tokens = 0
-        self.window_start = time.time()
-        self.lock = Lock()
-
-    def consume(self, token_count: int) -> bool:
-        """Returns True if the tokens can be consumed, False if budget is exceeded."""
-        with self.lock:
-            now = time.time()
-            if now - self.window_start >= self.window_seconds:
-                self.used_tokens = 0
-                self.window_start = now
-
-            if self.used_tokens + token_count > self.max_tokens_per_minute:
-                return False
-
-            self.used_tokens += token_count
-            return True
-
-    def wait_time(self, token_count: int) -> float:
-        """Seconds to wait until enough budget is available."""
-        elapsed = time.time() - self.window_start
-        return max(0, self.window_seconds - elapsed)
-```
-
-Apply it to your LLM calls:
-
-```python
-budget = TokenBudget(max_tokens_per_minute=500_000)
-
-def llm_with_budget(prompt: str, model: str = "gpt-5.4") -> str:
-    estimated = estimate_tokens(prompt)
-
-    if not budget.consume(estimated):
-        wait = budget.wait_time(estimated)
-        time.sleep(wait)
-
-    response = call_model(model, prompt)
-    return response
-```
-
-Spend rate stays bounded even when traffic spikes without warning, say a launch post hitting the front page of a forum and sending 10x the usual load at your endpoint. I have watched a budget cap like this keep a $2,000 weekend bill from ballooning into a $12,000 one.
-
-## Prompt compression: the high-impact move
-
-Sending fewer tokens is the single most effective cost reduction technique I know. Every token you strip from the input is a token you never pay for, and in a multi-turn chat you avoid paying for it on every subsequent turn too.
-
-Three compression strategies earn their keep in practice.
-
-**Truncation with semantic loss detection.** Rather than chopping context at a token limit and hoping the useful part survived, identify and keep the most relevant chunks. An embedding similarity search ranks chunks before inclusion, so a question about refund policy pulls the refund docs instead of whichever paragraph happened to come first.
-
-```python
-def compress_context(chunks: list[str], query: str, max_tokens: int) -> list[str]:
-    from anthropic import Anthropic
-    client = Anthropic()
-
-    # Score each chunk against the query
-    scored = []
-    for chunk in chunks:
-        similarity = compute_embedding_similarity(query, chunk)
-        scored.append((similarity, chunk))
-
-    scored.sort(reverse=True)
-
-    selected = []
-    total_tokens = 0
-    for _, chunk in scored:
-        chunk_tokens = count_tokens(chunk)
-        if total_tokens + chunk_tokens > max_tokens:
-            break
-        selected.append(chunk)
-        total_tokens += chunk_tokens
-
-    return selected
-```
-
-**System prompt minimization.** System prompts accumulate like commented-out code nobody dares delete. A team I worked with started with a 200-token system prompt, and six months later it had grown to 1,500 tokens, half of it instructions like "be helpful" that the model already does and nobody could explain.
-
-Auditing system prompts quarterly catches this. I cut every instruction the model follows without being told, then re-test to confirm nothing regressed.
-
-**LLM distillation for routing.** Send simple queries to cheap models and complex ones to premium models, and let an LLM make the call:
-
-```python
-def route_query(query: str) -> str:
-    routing_prompt = f"""
-    Classify this query as 'simple' or 'complex'.
-    Simple: factual recall, short answers, well-defined tasks.
-    Complex: multi-step reasoning, ambiguous requirements, creative tasks.
-
-    Query: {query}
-    """
-
-    response = call_model("gpt-5.4-nano", routing_prompt)
-
-    if "simple" in response.lower():
-        return "gpt-5.4-nano"
-    return "gpt-5.4"
-```
-
-The routing call itself costs almost nothing. Sending 80% of queries to the $0.20/$1.25 model instead of the $2.50/$15 one, though, is where the bill actually drops.
-
-## Caching: when it pays off
-
-Token costs land on every new request. For applications fielding repetitive or near-identical queries, response caching can wipe out a large fraction of the bill.
-
-OpenAI, Anthropic, and Google all support some form of cached inference. You pass a set of tokens as a cache object, and the model processes them at a deep discount, typically 90% off input token pricing.
-
-The savings only materialize once the same prefix gets reused enough times to cover the small premium charged to write the cache.
-
-```python
-# Anthropic caching example
-cache_key = compute_cache_key(user_id, conversation_topic)
-
-if cached_context := redis.get(cache_key):
-    # Cache hit: use cached tokens at reduced cost
-    response = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=1024,
-        cache_control=[{"type": "hit", "value": cached_context}],
-        messages=[{"role": "user", "content": current_message}]
-    )
-else:
-    # Cache miss: build context, store for next time
-    context_tokens = build_context(user_id, conversation_topic)
-    response = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=1024,
-        messages=[
-            {"role": "user", "content": context_tokens},
-            {"role": "user", "content": current_message}
-        ]
-    )
-    redis.setex(cache_key, 3600, extract_tokens(response))
-```
-
-Hit rates above 40% are common in customer support bots, internal tooling, and any application with a finite set of recurring question patterns. On an internal dev-docs assistant where engineers kept asking the same "how do I deploy" and "where do logs go" questions, I have seen hit rates reach 60%.
-
-## Output token control
-
-Input costs dominate for most applications, yet output costs take over the moment your pipeline starts generating long responses. Code generation, document synthesis, and agentic reasoning loops all spill out large outputs.
-
-Hard-limit output tokens and set max_tokens conservatively. A question answerable in 50 tokens should never be free to ramble for 500 at Claude Sonnet 4.6's $15 per 1M output tokens.
-
-I learned this after a single debug session ran up $180 in output costs because nobody had set a max_tokens limit and the model kept "thinking out loud" on every retry.
-
-```python
-def bounded_completion(prompt: str, max_output: int = 150) -> str:
-    response = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=max_output,
-        messages=[{"role": "user", "content": prompt}]
-    )
-    return response.content[0].text
-```
-
-A longer answer gets truncated when it overruns the limit, which beats an unbounded bill every time.
-
-## Monitoring in production
-
-Cost control without monitoring is guesswork. Set up per-model, per-endpoint spend tracking so you can see which service is the one quietly draining the budget.
-
-```python
-import logging
-from datetime import datetime
-
-class SpendTracker:
-    def __init__(self):
-        self.logger = logging.getLogger("llm_spend")
-        self.daily_spend = {}
-        self.model_prices = {
-            "gpt-5.4": {"input": 2.50, "output": 15.00},
-            "gpt-5.4-mini": {"input": 0.75, "output": 4.50},
-            "gpt-5.4-nano": {"input": 0.20, "output": 1.25},
-            "claude-opus-4.7": {"input": 5.00, "output": 25.00},
-            "claude-sonnet-4.6": {"input": 3.00, "output": 15.00},
-            "gemini-3.1-pro": {"input": 2.00, "output": 12.00},
-        }
-
-    def record(self, model: str, input_tokens: int, output_tokens: int):
-        prices = self.model_prices.get(model)
-        if prices is None:
-            raise KeyError(f"no price for {model!r}; add it to model_prices")
-        cost = (input_tokens / 1_000_000 * prices["input"] +
-                output_tokens / 1_000_000 * prices["output"])
-
-        today = datetime.utcnow().date().isoformat()
-        self.daily_spend[today] = self.daily_spend.get(today, 0) + cost
-
-        self.logger.info(
-            f"model={model} input_tokens={input_tokens} "
-            f"output_tokens={output_tokens} cost=${cost:.4f} "
-            f"daily_total=${self.daily_spend[today]:.2f}"
-        )
-```
-
-Route the logs to your metrics system, alert when daily spend crosses a threshold, and set weekly budget caps that trip circuit breakers instead of mailing you a surprise invoice.
-
-## The multiplier problem
-
-Most cost control advice fixates on optimizing a single request. Scale is the problem that actually hurts.
-
-Run a pipeline that costs $0.001 per request 5 million times a month and you are at $5,000. A second pipeline at $0.002 per request pushes you to $15,000.
-
-Stack three pipelines, 20 million requests, and a different model behind each team, and suddenly nobody owns the full picture.
-
-Centralized spend governance is the fix. Every LLM call in every service should route through a thin proxy that records token counts and cost, aggregated by team, by product, by endpoint.
-
-Skip that visibility and you are managing a budget the way you would manage groceries by glancing at your bank balance once a quarter.
-
-Build the proxy, instrument every call, and tag every request with a cost center. None of it is glamorous.
-
-It is the work that separates teams blindsided by their invoice from teams that set budgets and hit them. I have yet to watch a team regret building it too early.
-
-## Where to cut first
-
-Starting from zero cost control, here is the priority order I would follow:
-
-1. Enable token counting on every request. You cannot manage what you cannot measure.
-2. Route simple queries to cheap models. Routing 60% of input tokens from GPT-5.4 to Nano saves about 55% of uncached input cost, before the routing call's own cost.
-3. Audit system prompts. Halve them first, then measure the difference.
-4. Enable caching. Target 30%+ cache hit rate on high-volume endpoints.
-5. Set hard output token limits. That single change can cut output costs by 20-40%.
-6. Build a spend dashboard. Alert on anomalies before they compound.
-
-The goal is not to use fewer models. It is to use the right model for each task at the right price, which takes visibility, discipline, and the willingness to measure what you spend.
-
-Token budgets are not optional. They are the cost accounting layer that makes LLM applications sustainable.
+A smaller model is Amazon's result, and their own caveat belongs with it: "This worked because the task is a closed choice from a known catalog, the volume is high, and the latency of the old path mattered."
