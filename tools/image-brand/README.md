@@ -6,7 +6,7 @@ Renders article figures from Mermaid source into the ninadpathak.com image brand
 cd tools/image-brand
 npm ci                                   # pele 1.8.0, playwright-core, @fontsource fonts, subset-font
 node og.mjs                              # share-card sources for every published post
-node topics.mjs                          # glyphs for the Topics grid on /articles/ (content/topic-glyphs.json)
+node topics.mjs                          # line icons for the Topics grid on /articles/ (content/topic-glyphs.json)
 node render.mjs                          # every content/diagrams/<slug>/<id>.mmd -> static/images/diagrams/<slug>/
 node render.mjs ../../content/diagrams/agent-loop-anatomy/agent-loop.mmd   # one figure
 node render.mjs --check                  # exit 1 if output is stale, contrast fails AA, a figure is over its word budget, or a source is invalid
@@ -27,7 +27,7 @@ Chromium comes from Playwright's browser cache (`npx playwright-core install chr
 | `render.mjs` | CLI: render, embed WOFF2 font subsets, write SVG, PNG 2x light/dark, JSON sidecar with embed markup |
 | `review.mjs` | Before/after sheets in live article pages |
 | `og-cards.json`, `og.mjs` | Share-card glyph chain per post; writes the og.mmd sources; `--check` fails on a post without a card |
-| `topics.mjs` | Draws each hub's `glyph` from `config.toml` as inline SVG for the Topics grid on `/articles/`; runs `lib/glyphs.js` without a browser; `--check` fails on stale output |
+| `topics.mjs` | Writes each hub's `glyph` from `config.toml` as inline SVG for the Topics grid on `/articles/`, from the line icons in `lib/topic-icons.mjs` (site chrome, separate from the figure glyphs and outside the figure hash); `--check` fails on stale output |
 | `contact.mjs` | Contact sheet of every share card |
 | `sweep.mjs` | Batch sweep: before (main) vs after (branch), plus 320/375/1366 × light/dark with overflow and load checks |
 

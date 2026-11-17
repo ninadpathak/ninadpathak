@@ -14,7 +14,6 @@
   --border:    #e0e0dc;
   --border-2:  #c8c8c4;
   --line:      #7d7d79;
-  --glyph-detail: var(--border-2);
   --text-1:    #0e0e0e;
   --text-2:    #3a3a3a;
   --text-3:    #6b6b6b;
@@ -141,8 +140,6 @@
   --border:    #1e1e1e;
   --border-2:  #2c2c2c;
   --line:      #6f6f6f;
-  /* --border-2 is 1.43:1 on the dark page, too faint for the lines inside a topic glyph. */
-  --glyph-detail: #4a4a4a;
   --text-1:    #f0f0f0;
   --text-2:    #c2c2c2;
   --text-3:    #8a8a8a;
@@ -1480,22 +1477,16 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
 }
 .topic-card .read-time { margin-top: auto; }
 
-/* The glyphs are tools/image-brand/lib/glyphs.js drawings at 1:1, and these rules are
-   theme/brand.css's .gl-* rules on the site tokens. Only the classes the eight topic
-   glyphs use are here; tests/test_hubs.py fails when a glyph needs one that is missing. */
-.topic-glyph { flex: none; margin-bottom: var(--space-4); }
-.topic-glyph .gl-fill     { fill: var(--bg-1); stroke: var(--line); stroke-width: 1.25; stroke-linejoin: round; }
-.topic-glyph .gl-fill2    { fill: var(--bg-2); stroke: var(--line); stroke-width: 1.25; stroke-linejoin: round; }
-.topic-glyph .gl-line     { fill: none; stroke: var(--line); stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
-.topic-glyph .gl-ink      { fill: none; stroke: var(--text-2); stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
-.topic-glyph .gl-accent-line { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-.topic-glyph .gl-thick    { stroke-width: 1.75; }
-.topic-glyph .gl-solid    { fill: var(--line); }
-.topic-glyph .gl-bar      { fill: var(--glyph-detail); }
-.topic-glyph .gl-accent   { fill: var(--accent); }
-.topic-glyph .gl-hair     { fill: none; stroke: var(--glyph-detail); stroke-width: 0.75; }
-.topic-glyph .gl-cell     { fill: var(--bg-1); stroke: var(--glyph-detail); stroke-width: 1; }
-.topic-glyph .np-hatch    { stroke: var(--glyph-detail); stroke-width: 1; }
+/* The icons are tools/image-brand/lib/topic-icons.mjs: line only, one weight, in the
+   text colour like the rest of the chrome. --text-2 is 10.7:1 on the box in the light
+   theme and 11.2:1 in the dark one, and above 10:1 on the hover fill in both. */
+.topic-glyph {
+  flex: none;
+  margin-bottom: var(--space-4);
+  fill: none;
+  stroke: var(--text-2);
+  stroke-width: 1.5;
+}
 
 .empty-state {
   padding: var(--space-16) 0;

@@ -283,29 +283,40 @@ class TopicGridTests(BuiltSite):
 
     def test_each_topic_has_its_own_decorative_glyph_at_a_fixed_size(self):
         self.assertEqual(list(self.GLYPHS), list(HUBS))
-        names = [hub["glyph"].split()[0] for hub in HUBS.values()]
+        names = [hub["glyph"] for hub in HUBS.values()]
         self.assertEqual(len(set(names)), len(names), "two topics share a glyph")
         self.assertEqual(len(set(self.GLYPHS.values())), len(HUBS))
-        library = (ROOT / "tools" / "image-brand" / "lib" / "glyphs.js").read_text(encoding="utf-8")
-        guideline = (ROOT / "tools" / "image-brand" / "GUIDELINE.md").read_text(encoding="utf-8")
+        icon_set = (ROOT / "tools" / "image-brand" / "lib" / "topic-icons.mjs").read_text(encoding="utf-8")
         for name in names:
-            self.assertIn(f"G.{name} = ", library)
-            self.assertIn(f"| `{name}` |", guideline, f"{name} is not in the guideline's glyph table")
+            self.assertRegex(icon_set, rf"(?m)^  {name}: \[", f"{name} is not in lib/topic-icons.mjs")
         for slug, svg in self.GLYPHS.items():
-            # Fixed width and height reserve the box, so the glyph cannot shift the layout.
-            # The viewBox starts at the drawing's left edge, so every glyph lines up with
-            # the text under it; only that x-origin differs between glyphs.
-            self.assertRegex(svg, r'^<svg class="topic-glyph" viewBox="-\d+(\.\d+)? -24 56 48" width="56" height="48" '
+            # Fixed width and height reserve the box, so the icon cannot shift the layout.
+            # Every icon shares one view box, which starts at the painted left edge so the
+            # drawing lines up with the text under it.
+            self.assertRegex(svg, r'^<svg class="topic-glyph" viewBox="2\.25 0 24 24" width="28" height="28" '
                                   r'aria-hidden="true" focusable="false">', slug)
             for banned in ("<script", "<style", " style=", "<text", "<image", "href="):
                 self.assertNotIn(banned, svg, slug)
 
-    def test_the_stylesheet_colours_every_class_a_topic_glyph_uses(self):
+    def test_topic_icons_are_plain_line_drawings_coloured_by_one_rule(self):
+        """The icons are chrome: one stroke, no fill, no accent, no figure-glyph classes."""
+        for slug, svg in self.GLYPHS.items():
+            inner = svg[svg.index(">") + 1:-len("</svg>")]
+            # Only bare paths: nothing that can carry its own colour, fill or pattern.
+            self.assertRegex(inner, r'^(<path d="[MLHVCSAZmlhvcsaz0-9 .,-]+"/>)+$', slug)
         css = (ROOT / "static" / "css" / "main.css").read_text(encoding="utf-8")
-        used = {name for svg in self.GLYPHS.values() for attr in re.findall(r'class="([^"]+)"', svg)
-                for name in attr.split()} - {"topic-glyph", "gl-hatch"}  # the hatch rect is filled by its pattern
-        styled = set(re.findall(r"\.topic-glyph \.([\w-]+)", css))
-        self.assertEqual(used, styled, "a glyph class without a rule draws black; a rule without a glyph is dead CSS")
+        rules = re.findall(r"(?m)^\.topic-glyph[^{]*\{([^}]*)\}", css)
+        self.assertEqual(len(rules), 1, "one rule draws the icons outside the phone layout")
+        for declaration in ("fill: none;", "stroke: var(--text-2);", "stroke-width: 1.5;"):
+            self.assertIn(declaration, rules[0])
+        # The figure treatment these icons replaced must not come back into the stylesheet.
+        for gone in (".gl-", "np-hatch", "--glyph-detail"):
+            self.assertNotIn(gone, css)
+
+    def test_the_figure_pipeline_does_not_hash_the_topic_icons(self):
+        """A topic icon edit must not make all the article figures stale."""
+        render = (ROOT / "tools" / "image-brand" / "render.mjs").read_text(encoding="utf-8")
+        self.assertNotIn("topic-icons", render)
 
     def test_the_committed_glyphs_match_the_library(self):
         result = subprocess.run(["node", str(ROOT / "tools" / "image-brand" / "topics.mjs"), "--check"],

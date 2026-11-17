@@ -76,9 +76,9 @@ description = "Paste a technical article. Get a linter report: condescension wor
 #
 # card and glyph are the hub's box in the Topics grid on /articles/. card is one line
 # saying what a reader finds there. It restates `description`, adds no claim, and keeps
-# the hub's primary_query in the link text where the label does not carry it. glyph is a
-# tile glyph from tools/image-brand/lib/glyphs.js with its options, one per hub;
-# `node tools/image-brand/topics.mjs` draws them into content/topic-glyphs.json and the
+# the hub's primary_query in the link text where the label does not carry it. glyph is the
+# name of a line icon in tools/image-brand/lib/topic-icons.mjs, one per hub;
+# `node tools/image-brand/topics.mjs` writes them into content/topic-glyphs.json and the
 # build inlines that SVG. Readers see the word "Topics"; "hub" stays in code and config.
 #
 # ORDER is the order hubs appear on /articles/, the homepage and llms.txt. tag_matches
@@ -101,7 +101,7 @@ tag_matches = ["documentation", "technical-writing", "api-documentation", "docs-
 slug = "ai-search-optimization"
 label = "AI Search"
 card = "Crawler access and answer structure for AI search optimization, with a free checker for each."
-glyph = "ranked rows=5 hi=0"
+glyph = "search"
 title = "AI Search Optimization for Documentation"
 seo_title = "AI Search Optimization for Documentation | Ninad Pathak"
 description = "AI search optimization for documentation, covering crawler access and answer structure with a free checker for each."
@@ -140,7 +140,7 @@ tag_matches = ["ai-agents", "ai agents", "agents", "agent-architecture", "agent 
 slug = "agent-memory"
 label = "Agent Memory"
 card = "What gets written and what gets read back in AI agent memory, with the failure at each stage."
-glyph = "cells"
+glyph = "store"
 title = "AI Agent Memory"
 seo_title = "AI Agent Memory: The Write Path and the Read Path | Ninad Pathak"
 description = "AI agent memory as a pipeline the application owns, from what gets written to what gets read back, with the failure at each stage."

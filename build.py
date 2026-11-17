@@ -575,7 +575,7 @@ class SiteBuilder:
     def load_categories(self, posts: list[dict]) -> list[dict]:
         """Resolve one editorial category per post without changing article URLs."""
         configured = self.config["content"].get("categories", [])
-        # One inline <svg> per hub, drawn from the article glyph library by
+        # One inline <svg> per hub, a line icon from lib/topic-icons.mjs written by
         # tools/image-brand/topics.mjs. build() stops on a hub that lacks one.
         glyph_path = Path("content/topic-glyphs.json")
         glyphs = json.loads(glyph_path.read_text(encoding="utf-8")) if glyph_path.is_file() else {}
