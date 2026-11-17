@@ -13,7 +13,7 @@ title: What Is Technical Documentation, and What Should It Include?
 updated: 2026-11-17
 ---
 
-On November 11 Matt Cockayne [wrote](https://phpboyscout.uk/answer-first-then-everything-else/) that pages on his projects' docs sites sitting at search positions four to ten "were clicked 0.31% of the time", while assistants kept fetching those pages to answer questions. Technical documentation is the written material that explains how a product works and how to use it, and his post describes a reader that definition used to leave out: a program fetching the page for a person who "quite possibly never sees the page at all".
+Matt Cockayne [reported on November 11](https://phpboyscout.uk/answer-first-then-everything-else/) that pages on his projects' docs sites sitting at search positions four to ten "were clicked 0.31% of the time", while assistants kept fetching those pages to answer questions. Technical documentation is the written material that explains how a product works and how to use it, and his post describes a reader that definition used to leave out: a program fetching the page for a person who "quite possibly never sees the page at all".
 
 What technical documentation should include is the same list it was before that reader arrived. I give each [type of documentation](/articles/documentation-types/) one reader task, and a later section measures on six real pages what the new reader changes inside two of them.
 

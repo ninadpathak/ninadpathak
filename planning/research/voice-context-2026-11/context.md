@@ -99,3 +99,49 @@ hybrid-search, llm-structured-outputs and ai-memory-management were rewritten to
 ### Videos checked against their text
 
 - contextual-retrieval: no mismatch. My first note here said the film presents code as the best use case, and that was wrong: the reviewer's contact sheet and the narration show a 10-Q filing, the 49% figure and the metadata check, all of which the article still says.
+
+## Batch 3 (2026-11-17, owner voice-rewrite-2)
+
+Pieces, highest Search Console impressions first among posts not yet rewritten: best-llms-for-coding, vector-embeddings, rag-reranking, documentation-headings, technical-docs, writing-release-notes, and the essay nobody-understands-the-code.
+
+### What each piece is built on
+
+| Piece | Spark | What was run |
+|---|---|---|
+| best-llms-for-coding | Real-SWE 1.1 (October), Kimi K3.1 Pro and Ripple-65B launches, Nathan Lambert on benchmarks (Oct 28), Evan X. Merz (Nov 7) | `cost_per_pass.py`: cost per resolved task from the Real-SWE table |
+| vector-embeddings | Hacker News thread on The Last Museum (Oct 22), Apple's retrieval post (Nov 5) | `embed_demo.py` (bge-small on six texts, float and sign-bit search) and `shell_demo.py` (random directions in 3, 384 and 1,536 dimensions) |
+| rag-reranking | The page's own March claims, tested | `rerank_demo.py`: one bi-encoder and two cross-encoders on four queries with marked answers, plus timings |
+| documentation-headings | Stripe's webhook guide outline, a Mastodon post by Dedox (Nov 1) | `outline.py` on the Stripe page |
+| technical-docs | Matt Cockayne, "Answer first, then everything else" (Nov 11) | `first_screen.sh`: his word-count check on four vendor pages and two of this site's |
+| writing-release-notes | OpenSSH 10.6p2 (Nov 5), Ghostty 1.4.0 (Oct 27), GitLab critical patch (Oct 21) | `first_warning.py`: words before each note first names affected users |
+| nobody-understands-the-code (essay) | Hacker News threads of Nov 9 and 10, the Claude Code team's review post (Oct 15), Naur 1985 | Nothing; quotes only |
+
+Every script was run in scratch on 2026-11-17 and its printed output pasted into the post. The embedding and reranking runs used fastembed 0.7.4 with onnxruntime 1.19.2 on an Apple M2 CPU.
+
+### Findings that contradicted the old pages
+
+- rag-reranking said a bi-encoder cannot tell error code E-4048 from E-4049 and a cross-encoder can. In the run the bi-encoder ranked E-4048 first, the small cross-encoder scored the neighbours within 0.35 of it, and only bge-reranker-base separated them. Neither reranker fixed the two queries the bi-encoder got wrong.
+- vector-embeddings said a 0.7 cosine score in 1,536 dimensions "might be noise". Random directions at that size topped out at 0.126 in two million pairs. The real floor is the model's own: unrelated texts scored 0.37 to 0.57 on bge-small.
+- best-llms-for-coding named Claude 4.6 Opus at 80.9% on SWE-bench Verified, "Engram Memory" in DeepSeek V4 and other details with no source. None of its picks appears in Real-SWE 1.1.
+- hybrid-search (live, not changed here) says dense retrieval "has nothing to hold on to for an error code like `ORA-00942`". In the bge-small run the exact code scored 0.75 and a different ORA code 0.70, so the accurate claim is that dense retrieval can't separate near-identical codes.
+
+### Skipped, with reasons
+
+| Post | Impressions (90 days) | Why |
+|---|---|---|
+| engineer-to-writer | 73 | The title and body are a personal career story the repo does not back. Needs Ninad's facts. |
+| browser-vector-search, quickstart-guide, release-notes-template | 435, 307, 114 | Unchanged from batch 2: held or newer-rules pages. |
+
+### Videos and figures checked against the new text
+
+- best-llms-for-coding film: narration L2 to L5 and the `video.yaml` description recommend SWE-bench Verified, Claude 4.6 Opus, Gemini 3.1 Pro and a small model for autocomplete. The text now uses Real-SWE 1.1 and makes no per-task pick. Its figure still draws the March pairings; the caption and alt say so.
+- documentation-headings film: no mismatch.
+- rag-reranking figures: the keyword-exactness drawing shows the textbook case; its caption now reports what the run found. The latency alt no longer states fifty milliseconds. The models-providers alt names bge-reranker-large and the page ran bge-reranker-base.
+
+### Notes for the next batch
+
+- The claims audit in CI counts any dollar figure outside a code fence as a candidate, and a changed post may not raise its count. Put the unit in a table header.
+- `node render.mjs <one file>` deletes the sibling narrow variant. Run the full render after editing any figure source.
+- A new post takes the newest slot in the latest-posts list, which is what had been giving runbook-template its only inbound link. technical-docs now links to it from its body.
+- Mastodon tag timelines for `technicalwriting` produced two usable posts this batch. X still returns nothing fetchable.
+- Openers used so far in this batch: own earlier page, a search result, a test stated purpose first, a vendor page's outline, a named person's count, a release note, a thread about a post. Do not reuse "On <date> someone".
