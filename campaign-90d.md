@@ -75,7 +75,7 @@ before the sweep.** Do not quote the old figure again.
 | 2 | Developer experience and DevRel for DevTools and B2B SaaS | 6,040 | Content that makes a developer product adoptable | `/articles/developer-experience/` | 8 |
 | 3 | AI agent architecture, agent memory, RAG, LLM inference | 149,790 | The revived cluster; the only search equity the domain has earned | `/articles/ai-engineering/` | 57 |
 | 4 | Optimising for AI Overviews and AI search citation | **30,980** | The tools cluster: `/linter/`, `/llms-txt-generator/`, the AI Overviews checker, the llms.txt validator | `/articles/ai-search-optimization/` | 3 |
-| 5 | Distribution: Reddit, forums, communities, and events | 52,680 *(floor)* | Credibility, first-hand. **Merged 2026-08-17** from three clusters | `/articles/distribution/` | 0 |
+| 5 | Distribution: Reddit, forums, communities, and events | 52,680 *(floor)* | Credibility, first-hand. **Merged 2026-08-17** from three clusters. Folded into the developer content hub on 2026-11-17 | `/articles/developer-experience/` | 0 |
 | | **Total** | **293,800** | | | **90** |
 
 **Clusters 5, 6 and 7 are floors, not measurements.** They hit the 250-row API cap before the
@@ -119,13 +119,44 @@ indexed.
 That 52,680/mo is three capped, cleaned floors added together. It is exactly the number that would
 justify overinvesting, which is why the ceiling is written down here rather than left to memory.
 
-### Cluster isolation — a hard structural rule
+### Hubs and spokes, from 2026-11-17
 
-1. Every piece belongs to **exactly one** cluster, named in its queue row. A page in two clusters owns neither.
-2. Each cluster has one owner page covering the whole job, plus supporting pages owning one sub-job each, linking back to the owner and sideways to genuine siblings.
-3. **Clusters do not link across boundaries.** A documentation piece does not link to a Reddit piece or an events piece. The single exception is when the link is the actual subject of the sentence — a documentation piece may link to a blog-writing piece if it is specifically discussing blogs as supporting material for docs. Convenience, "related reading", and keyword proximity never qualify.
-4. When a cross-cluster link genuinely earns its place it goes in the body sentence that makes the connection explicit, never in a sidebar or footer list.
-5. Audit this map every cycle.
+The five clusters in the table above became eight hubs on 2026-11-17, and the cluster isolation rule that stood here is replaced by declared bridges. The volumes in the table are the 2026-08-17 record and are kept as history.
+
+| Hub | Owner page | Primary query | Money page |
+|---|---|---|---|
+| Technical Documentation | `/articles/technical-documentation/` | technical documentation | `/services/` |
+| AI Search Optimization for Documentation | `/articles/ai-search-optimization/` | ai search optimization | `/services/ai-ready-documentation-audit/` |
+| Developer Content and DevRel | `/articles/developer-experience/` | developer content | `/services/` |
+| AI Agent Architecture | `/articles/ai-agents/` | ai agent architecture | `/services/freelance-technical-writer-for-ai-companies/` |
+| AI Agent Memory | `/articles/agent-memory/` | ai agent memory | `/services/freelance-technical-writer-for-ai-companies/` |
+| The RAG Pipeline | `/articles/rag/` | rag pipeline | `/services/freelance-technical-writer-for-ai-companies/` |
+| Coding Agents | `/articles/coding-agents/` | coding agents | `/services/freelance-technical-writer-for-ai-companies/` |
+| LLM Inference and Context | `/articles/ai-engineering/` | llm inference | `/services/freelance-technical-writer-for-ai-companies/` |
+
+The Distribution cluster never had a post. Its route `/articles/distribution/` now redirects to the developer content hub, and its planned pieces belong to that hub.
+
+`config.toml` defines the hubs, `content/pillars/<hub>.yaml` holds each hub page's copy and map, and `tools/audit_clusters.py --strict` enforces the rules below. The audit's docstring lists them by number.
+
+1. A piece belongs to **one** hub, named by `category` in its frontmatter. Its URL never depends on the hub.
+2. The hub page links each of its spokes once in its map, with one sentence of context, and the spoke links the hub in a body sentence within its first 200 words.
+3. A spoke links two or three siblings in its own hub and has two or more body links from posts in that hub.
+4. A link to a post in another hub is a bridge. It goes in the body sentence that makes the connection, and the frontmatter declares it with a reason. A post has no more bridges than same-hub links.
+5. The article template adds the breadcrumb, the "Part of" line and three related cards from the same hub. Related cards go to posts the body does not already link.
+
+**Frontmatter a post needs before it is published**
+
+| Field | Value | Required |
+|---|---|---|
+| `category` | The hub slug from the table above | yes |
+| `primary_query` | The one search query this URL owns, unique across the site. Use `none` for an essay that targets no query | yes |
+| `siblings` | Two or three slugs in the same hub that the body links | yes |
+| `bridges` | One `slug` and `reason` pair per body link to a post in another hub | when the body has such a link |
+| `money_link` | `true` when a body sentence links the hub's money page | on buyer-intent posts only |
+
+A new post also needs one line in its hub's pillar file, under the section it belongs to, with a `note` of one sentence. Until that line exists the hub page lists the post under "More in this hub" and the audit fails.
+
+These rules are errors for a post dated 2026-11-18 or later and warnings for older posts until their bodies are retrofitted. Rule 3's inbound half means a new post ships together with edits to two existing posts in its hub that link it.
 
 ### Depth, heading structure, and the components already built
 
@@ -721,7 +752,7 @@ Ahrefs `keywords-explorer-matching-terms` in terms mode with four or five seeds 
 2. Every piece has at least one **inbound** link from an existing page and at least two outbound.
 3. **Retrofit as you go.** When a piece publishes, update the existing pages that should now point at it. A link added in one direction only is half a link. This is a per-cycle job, not a cleanup.
 4. Links go inside sentences where they help a reader go deeper. Never a "Related posts" dump. Never "click here", "this article", or a bare keyword as anchor text.
-5. Respect cluster isolation, section 3.
+5. Follow the hub rules in section 3: one hub per piece, the hub link in the first 200 words, two or three siblings, and a declared bridge for each link into another hub.
 
 ---
 
