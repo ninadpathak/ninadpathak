@@ -5,6 +5,7 @@ seo_title: "AI-Ready Documentation Audit | Ninad Pathak"
 description: "An AI-ready documentation audit for developer docs. Four free checkers test answer structure and AI crawler access, then validate llms.txt."
 lead: "An AI-ready documentation audit tests whether a page's answers can be extracted and whether AI crawlers may fetch it, then validates llms.txt. I run it with four tools I built and published, so you can rerun every finding yourself."
 service_type: "Documentation audit"
+primary_query: ai-ready documentation audit
 status: published
 proof:
   - value: "9"
@@ -55,6 +56,8 @@ Each check is documented in an article on this site:
 - [llms.txt](/articles/llms-txt/) covers what the proposal requires and checks four real files against it.
 - [AEO, GEO and SEO for developer docs](/articles/aeo-for-developer-docs/) lists six checks that decide whether docs can be found and quoted.
 - [Technical SEO for documentation sites](/articles/docs-seo/) covers crawling, rendering and indexing, which come before any AI check.
+
+The [AI search optimization for documentation](/articles/ai-search-optimization/) hub lists these articles beside the four checkers.
 
 ## Fixing what the audit finds
 

@@ -24,18 +24,22 @@
 /articles/how-to-document-multiple-product-versions/ /articles/docs-seo/ 301
 /blog/how-to-document-multiple-product-versions /articles/docs-seo/ 301
 /blog/how-to-document-multiple-product-versions/ /articles/docs-seo/ 301
-# AI-cluster focus areas: collapsed into the /articles/ index during the
-# July 30 refocus. Redirected until each cluster gets its own owner page.
-/ai-agent-memory /articles/ai-engineering/ 301
-/ai-agent-memory/ /articles/ai-engineering/ 301
-/ai-agent-architecture /articles/ai-engineering/ 301
-/ai-agent-architecture/ /articles/ai-engineering/ 301
-/ai-workflows /articles/ai-engineering/ 301
-/ai-workflows/ /articles/ai-engineering/ 301
+# Old focus-area URLs. Each points at the hub that now owns its topic
+# (hub-and-spoke plan, 2026-11-17).
+/ai-agent-memory /articles/agent-memory/ 301
+/ai-agent-memory/ /articles/agent-memory/ 301
+/ai-agent-architecture /articles/ai-agents/ 301
+/ai-agent-architecture/ /articles/ai-agents/ 301
+/ai-workflows /articles/coding-agents/ 301
+/ai-workflows/ /articles/coding-agents/ 301
 /llm-inference /articles/ai-engineering/ 301
 /llm-inference/ /articles/ai-engineering/ 301
-/rag /articles/ai-engineering/ 301
-/rag/ /articles/ai-engineering/ 301
+/rag /articles/rag/ 301
+/rag/ /articles/rag/ 301
+# The empty distribution category folded into the developer content hub. The route
+# rendered a noindex empty page and never listed a post.
+/articles/distribution /articles/developer-experience/ 301
+/articles/distribution/ /articles/developer-experience/ 301
 /glossary/dspy /glossary/flow-engineering/ 301
 /glossary/dspy/ /glossary/flow-engineering/ 301
 /glossary/graphrag /glossary/context-engineering/ 301

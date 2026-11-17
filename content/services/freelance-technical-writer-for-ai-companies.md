@@ -5,6 +5,7 @@ seo_title: "Freelance Technical Writer for AI Companies | Ninad Pathak"
 description: "Freelance technical writer for AI companies building agents, memory and LLM infrastructure. Published work for Firecrawl and OpenComputer."
 lead: "I'm a freelance technical writer for AI companies that build agents, agent memory and LLM infrastructure. My published work for Firecrawl and OpenComputer is linked below, and I run each product before I write about it."
 service_type: "Technical writing for AI companies"
+primary_query: freelance technical writer for ai companies
 status: published
 proof:
   - value: "Firecrawl"
@@ -40,7 +41,17 @@ The [Mem0 case study](/work/mem0/) covers the workflow and the Search Console re
 
 ## What I write on this site
 
-I publish my own articles on agents, memory and retrieval under [AI engineering](/articles/ai-engineering/), and docs for these products can be checked with my [AI-ready documentation audit](/services/ai-ready-documentation-audit/). The [MCP server tutorial](/articles/mcp-server-tutorial/) and the guide to [writing for AI products](/articles/writing-for-ai-products/) show how I handle the subject without a client brief.
+I publish my own articles on these systems in five hubs:
+
+- [AI agent architecture](/articles/ai-agents/) covers the agent loop and the harness that runs it.
+- [AI agent memory](/articles/agent-memory/) covers what an application writes down and what it reads back.
+- [The RAG pipeline](/articles/rag/) covers retrieval from embeddings through evaluation.
+- [Coding agents](/articles/coding-agents/) covers the instruction files that configure an agent.
+- [LLM inference](/articles/ai-engineering/) covers the mechanisms behind latency and cost.
+
+The [MCP server tutorial](/articles/mcp-server-tutorial/) and the tested guide to [Claude Code subagents](/articles/claude-code-subagents/) show how I handle the subject without a client brief. So do the test of [reranking in RAG](/articles/rag-reranking/) and the guide to [writing for AI products](/articles/writing-for-ai-products/).
+
+Docs for these products can be checked with my [AI-ready documentation audit](/services/ai-ready-documentation-audit/).
 
 ## How to hire me
 

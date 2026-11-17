@@ -4,6 +4,7 @@ nav_title: "Services"
 seo_title: "Technical Writing Services for AI and Developer-Tool Companies"
 description: "Technical writing services for AI and developer-tool companies: developer documentation, tutorials and technical articles, written after I run the product."
 lead: "My technical writing services cover developer documentation, tutorials and technical articles for AI and developer-tool companies. I'm Ninad Pathak, a freelance technical writer, and I run the product before I write about it."
+primary_query: technical writing services
 status: published
 proof:
   - value: "50+"
@@ -27,6 +28,12 @@ proof:
 I write for AI and developer-tool companies whose readers are engineers. That reader opens a terminal next to your page and tries the first command, so I run it first.
 
 The [portfolio](/portfolio/) links my published work for Firecrawl and Centus. My page as a [freelance technical writer for AI companies](/services/freelance-technical-writer-for-ai-companies/) lists the work in that field by company.
+
+## What I publish on this site
+
+My own guides sit in two hubs. The [technical documentation](/articles/technical-documentation/) hub holds the templates, such as the [quick start guide template](/articles/quickstart-guide/) and the [release notes template](/articles/release-notes-template/).
+
+The [developer content](/articles/developer-experience/) hub covers what to publish and who should write it.
 
 ## How to hire me
 
