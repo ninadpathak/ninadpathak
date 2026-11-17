@@ -40,8 +40,8 @@
     "sources": "ff36ee27273001afd7fa5a378905a87a66698907ebf93c06b460ea36dddadf56"
   },
   "agents-on-call-runbooks": {
-    "lastmod": "2026-11-17",
-    "sources": "78809a654e17d79a8e901deabb3fa9d826f5a7a9d88fb9346f530f4987ef928c"
+    "lastmod": "2026-11-18",
+    "sources": "e60e44d1c1afac398d7fa8f79e22438583492003af7bf590ddcf7e3590f83424"
   },
   "agents-reading-docs": {
     "lastmod": "2026-11-17",
@@ -92,24 +92,28 @@
     "sources": "6e875f4f08c8974a7658ee99a14f219246fb8fcb4f129dea4ef7b5448849cad3"
   },
   "claude-vs-gemini-cli": {
-    "lastmod": "2026-11-17",
-    "sources": "3d9c47afc654af036d19025c88bd47553e3c3457006539ccdc90c1f881489e47"
+    "lastmod": "2026-11-18",
+    "sources": "c7a9c0fe5efb37f94bf3d5b803a94fb606219ad2496eb75d486990053e29415e"
+  },
+  "cloudflare-kv-cache-incident-report": {
+    "lastmod": "2026-11-18",
+    "sources": "645712f0fb5e48ed4222bfb32d311e3a2aa12fad154f4ff45cf808553f2cab84"
   },
   "code-documentation": {
     "lastmod": "2026-11-17",
     "sources": "69d5f51174dcb0a2f1331d8892200664644667f0821cc381dd503de4e6f8589c"
   },
   "coding-agent-memory": {
-    "lastmod": "2026-11-17",
-    "sources": "c134962fc0e4284c5f59a2afe07d3c735d708d4e4ba611e9601d93f5235a0040"
+    "lastmod": "2026-11-18",
+    "sources": "eb2c86e1e75f8812f59924b1bbc8f6b8f9cb599465cada20bb3caace5095b1b4"
   },
   "coding-models-new-code-vs-change": {
     "lastmod": "2026-11-17",
     "sources": "b3533102e1503132be0c43460b5fbc2a64a8f508409b7ed665cfbcf241269743"
   },
   "context-windows-vs-memory": {
-    "lastmod": "2026-11-17",
-    "sources": "f226edbf3e4de30c1c6938cff2abf5b63390d46b4aaa198af8366adf3b9c7f00"
+    "lastmod": "2026-11-18",
+    "sources": "c85cc9b860798279f7da11af0adbedfe0796a99d92c52604df08f1bbc798951e"
   },
   "contextual-retrieval": {
     "lastmod": "2026-11-18",
@@ -136,12 +140,12 @@
     "sources": "e8c397fd111eabc80a067b80295e3e7b76216b2f7bed6059f9da9f3692720c83"
   },
   "docs-seo": {
-    "lastmod": "2026-11-17",
-    "sources": "6a5c971ce433bef142a3d8b89af19c136b6eba859737dba58263653807bfc9eb"
+    "lastmod": "2026-11-18",
+    "sources": "ffab9f384153348eec1872d9dfa11f68449be5add774bde6fd9674a84e5741b3"
   },
   "documentation-best-practices": {
-    "lastmod": "2026-11-17",
-    "sources": "c544dd4fcc6269d2b2a744685da28e8b6eac8ca7b10796053e3adc06d8c55139"
+    "lastmod": "2026-11-18",
+    "sources": "2864eba8501deae1a048ebdf3cef526ce46d9ba5c7fe247f229f468e5de0055a"
   },
   "documentation-headings": {
     "lastmod": "2026-11-18",
@@ -188,8 +192,8 @@
     "sources": "7a9dc8ff27931cf5b9dbe721a48352ce3dd14c18854f649f972dc66f72419682"
   },
   "kv-cache-eviction": {
-    "lastmod": "2026-11-17",
-    "sources": "f10f6e7c75f05a5918d19c4441a68e9fe078b166b99d8be5e49279889b097a58"
+    "lastmod": "2026-11-18",
+    "sources": "16f2011c696941b861b463e0fbbacd1c52dd5a679dc483c5000f8b84f8d20d46"
   },
   "lambda-calculus-ai": {
     "lastmod": "2026-11-17",
@@ -308,8 +312,8 @@
     "sources": "18061856376f568a12650002cf6cf9913f49e0d8173f6a1269a1e26ebe1707bd"
   },
   "time-to-first-token": {
-    "lastmod": "2026-11-17",
-    "sources": "3e27f254f42dda10ceb90755f94fbd23d5d8844ff3a81199f3cd31140895f271"
+    "lastmod": "2026-11-18",
+    "sources": "56554a08985e3c16688e5a2fb821f653d0e22599b1855d91a0c5d8a3adb2c95d"
   },
   "vector-embeddings": {
     "lastmod": "2026-11-17",
@@ -317,7 +321,7 @@
   },
   "voice-agent-latency": {
     "lastmod": "2026-11-18",
-    "sources": "ad50b73d44d6385026896f14660c2be53da8cf7d699c7e3f6b3861f3594d6203"
+    "sources": "7065bfc8194b7d1a6d107fe3826fbcb2a64b18f6ab9c4bdb964652d11201e597"
   },
   "voice-agent-memory": {
     "lastmod": "2026-11-17",
@@ -336,8 +340,8 @@
     "sources": "c218e5e5e59241d9baa59b80d9fc0479ba0d262e888eee0260d8535f25c9db39"
   },
   "writing-release-notes": {
-    "lastmod": "2026-11-17",
-    "sources": "b534d41a72a770edfcec86e30adefdc210cd1353bbf2710d6778e4b9dc5a4f87"
+    "lastmod": "2026-11-18",
+    "sources": "60360c3ff093610ed39b56a8f36a32ced8f199b40f168d9118a68b86e4bfad69"
   },
   "writing-technical-tutorials": {
     "lastmod": "2026-11-17",

@@ -417,5 +417,10 @@
     "doc question*",
     "loop",
     "reader"
+  ],
+  "cloudflare-kv-cache-incident-report": [
+    "doc",
+    "stop*",
+    "doc check"
   ]
 }

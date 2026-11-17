@@ -86,6 +86,8 @@ A shorter prompt, a cached prompt prefix and a shorter queue all lower it. Each 
 
 The wider set of serving choices is in the [LLM inference optimization guide](/articles/llm-inference-optimization/).
 
+On a phone call TTFT is one stage of several, and [voice AI latency](/articles/voice-agent-latency/) adds up the ones around it.
+
 ## How should you measure TTFT?
 
 Measure it at the client and report percentiles, since a mean hides the slow requests that users remember. For any model that reasons, record time to first answer token beside it.

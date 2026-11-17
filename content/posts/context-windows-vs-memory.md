@@ -8,174 +8,138 @@ siblings:
 bridges:
 - slug: claude-code-memory
   reason: A coding agent is the memory system a developer uses every day.
+- slug: kv-cache-eviction
+  reason: The KV cache is a third thing that gets called memory, and it stores computation.
 date: '2026-04-19'
-description: Context is a per-request reasoning budget. Memory is persistent state
-  retrieved into a later request. Long input capacity does not make them interchangeable.
+description: "Context window vs memory: a context window is what a model can see during one request, and memory is
+  state an application stores and brings back later. Why a bigger window doesn't replace
+  memory, with the token cost of replaying a conversation counted."
 status: published
 work_note: "Building an AI product whose readers are engineers? I'm Ninad Pathak, a freelance technical writer, and I write tutorials and technical articles for companies like yours after running the product myself. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
-title: 'Context Windows vs Memory: Why They Are Not the Same Thing'
+title: 'Context Window vs Memory'
 updated: '2026-08-18'
 slug: context-windows-vs-memory
 video: context-windows-vs-memory
 ---
 
-A model can accept a long prompt and still fail to use the fact that answers the question. It can also answer perfectly during one request and know nothing about that exchange when the next request begins.
+On November 7 someone [asked Hacker News](https://news.ycombinator.com/item?id=50403153) how people manage their AI agents' context across clients and projects. The poster's complaint was the time spent re-explaining past decisions and client rules to the agent at the start of every session.
 
-Those failures have different causes. Context is a per-request reasoning budget, and memory is persistent state that a system stores and retrieves into a later request.
+The poster asked about "context", and what they were missing was memory. People use the word context for both things.
 
-| Property | Context window | Memory system |
+Context window vs memory comes down to this: the context window is the text a model can see during one request, and memory is information your application stores and puts back into a later request.
+
+Psychology, seventy years ago, separated holding something in mind from remembering it. George Miller's 1956 paper, [The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two), is about how few items a person can hold in mind at once, roughly seven, and nobody reads the paper as a limit on what a person can remember for years.
+
+A model's context window is a limit of Miller's kind, on what can be held at once. Remembering across sessions is a separate job called [agent memory](/articles/agent-memory/), and the code that stores a fact and brings it back is code you write.
+
+## What is the difference between a context window and memory?
+
+A context window holds the tokens of one request, and memory holds whatever has to outlive that request. The model reads the context window, and your application owns the memory.
+
+| | Context window | Memory |
 |---|---|---|
-| Scope | One request | Multiple requests or sessions |
-| Contents | Instructions, user input, retrieved evidence, and working state | Facts, events, preferences, summaries, and other durable state |
-| Selection | Prompt construction | Write, retrieval, ranking, expiry, and conflict policies |
-| Common failure | Relevant evidence is absent or used poorly | The wrong state is stored, retrieved, or allowed to outlive its validity |
+| Lifetime | One request | Across requests and sessions |
+| Who fills it | The code that builds the prompt | The code that writes to a store |
+| What goes wrong | The needed fact isn't there, or the model doesn't use it | The wrong fact is stored, or a stored fact is out of date |
 
-The distinction is the starting point for architecture decisions. A larger context window changes how much a model can receive at once, but it does not create persistence or guarantee recall.
+A model can answer perfectly in one request and know nothing about that exchange in the next request. The model didn't forget the exchange, because the model never stored it anywhere.
 
-## Context is the model's per-request workspace
+## How does a chat app seem to remember?
 
-A context window bounds the token sequence available to a model during a request. That sequence may include system instructions, conversation turns supplied again by the application, retrieved passages, tool results, and room for the response.
+A chat app seems to remember because it resends the conversation. The app puts every earlier turn back into the context window along with each new message, so the model rereads the whole conversation every time.
 
-The model does not independently carry that sequence into the next request. If an application appears to remember earlier turns, the application or serving layer has supplied the relevant state again.
+The script below counts what resending costs. It builds a 40-turn support conversation and counts the tokens sent, using the `o200k_base` tokenizer from tiktoken 0.14.0:
 
-### Accepted input and usable evidence are different limits
+```python
+"""Count the tokens a chat app sends when it replays the conversation on every turn."""
+import tiktoken
 
-An API accepting a token sequence proves that the input passed a capacity boundary. It does not prove that the model will use every relevant item equally well for a particular task.
+enc = tiktoken.get_encoding("o200k_base")
+USER = "Can you check the status of order {n} and tell me when it will arrive?"
+REPLY = "Order {n} left the warehouse this morning and should arrive within three business days."
 
-Document position, distractors, prompt structure, model version, and task type can all affect the answer. Long context windows can lose information in the middle, so advertised capacity is not a recall guarantee.
+history, sent_total = [], 0
+print("turn  tokens sent this turn  tokens sent so far")
+for turn in range(1, 41):
+    history.append(USER.format(n=1000 + turn))
+    sent = sum(len(enc.encode(message)) for message in history)   # the whole history goes in again
+    sent_total += sent
+    history.append(REPLY.format(n=1000 + turn))
+    if turn in (1, 10, 20, 40):
+        print(f"{turn:>4}  {sent:>21,}  {sent_total:>18,}")
+new_text = sum(len(enc.encode(message)) for message in history)
+print(f"tokens of new text in the whole conversation: {new_text:,}")
+```
 
-### Context is appropriate for immediate reasoning
+Running it printed:
 
-Context is the right place for evidence the model must compare in the current request. A code-editing task may need the target function, its interface, relevant tests, and the instruction that defines the change at the same time.
+```text
+turn  tokens sent this turn  tokens sent so far
+   1                     18                  18
+  10                    333               1,755
+  20                    683               7,010
+  40                  1,383              28,020
+tokens of new text in the whole conversation: 1,400
+```
 
-One-shot document analysis and in-context examples fit the same pattern. The input is useful now, and no later request should depend on the model retaining it without an explicit storage step.
+The 40-turn conversation contains 1,400 tokens of new text, and resending the history on every turn meant sending 28,020 tokens in total. At turn 40 a single message carries 1,383 tokens of history to deliver a question of about 18.
 
-## Memory preserves state beyond one request
+Resending everything works until the history no longer fits in the window or costs too much. After that point the application has to choose which earlier turns go back in, and [memory compression](/articles/memory-compression/) covers how to make that choice.
 
-A memory system records information outside the model invocation so that a later request can recover it. The store might be relational, key-value, vector, graph-based, append-only, or a combination chosen for the state being kept.
+## Does a bigger context window replace memory?
 
-Persistence alone is not enough. The application still needs policies for what to write, how to retrieve it, which version is current, when to expire it, and how to place selected state into context.
+No, for two separate reasons. A context window of any size is empty at the start of the next session, and a fact that fits inside the window isn't guaranteed to be used by the model.
 
-### Conversation replay is context construction, not model memory
+[Lost in the Middle](https://arxiv.org/abs/2307.03172), a 2023 paper, tested the second reason. Its authors moved the relevant passage around inside a long input and found that accuracy "significantly degrades when models must access relevant information in the middle of long contexts".
 
-A chat interface often resends prior turns on every request. That can provide continuity, but the continuity comes from replaying stored history into the current context.
+Suppose a contract fits in the window and the clause you need sits halfway through. The API accepts every page, and the clause sits in the position where the paper's models did worst.
 
-Once the history grows beyond the available budget, the application must select, summarize, or retrieve from it. [Contextual compression for agent memory](/articles/memory-compression/) covers that selection problem without treating every old token as equally useful.
+[RULER](https://arxiv.org/abs/2404.06654), a 2024 benchmark, measured how much of an advertised context window a model can use well. Its authors tested 17 long-context models that all claimed 32K tokens or more, and report that only half kept satisfactory performance at 32K.
 
-### Persistent state needs more than similarity search
+Lost in the Middle is from 2023 and RULER from 2024, so I wouldn't quote their figures against a current model. I'd keep their method: test your model with inputs as long as your real ones, and with the needed fact placed in the middle.
 
-A vector database can retrieve semantically related passages, but similarity is only one part of memory. Account state, temporal order, permissions, validity periods, and entity identity often need structured fields and explicit filters.
+## What belongs in the context window, and what belongs in memory?
 
-The useful question is not whether a vector store counts as memory. It is whether the complete storage and retrieval path can return the right state, for the right entity, at the right time.
+Decide by asking how long the information has to survive. Information that only the current request needs goes in the context window, and information that a later request will need gets stored outside the model.
 
-## Lost in the Middle shows why position matters
+The material for a code change belongs in the context window. The model needs the function, its tests and the instruction in the same request, and none of those has to be remembered tomorrow.
 
-The [Lost in the Middle paper](https://arxiv.org/abs/2307.03172) tested multi-document question answering and key-value retrieval while changing where the relevant information appeared. The authors observed that performance was often strongest when relevant information appeared near the beginning or end and weaker when it appeared in the middle, including for explicitly long-context models.
+A customer's subscription plan belongs in memory, and so do the client rules from the Hacker News question. A plan and a client rule both have to survive into a new session, so your application has to decide when to write each one down and how to find it again.
 
-That result is more precise than saying long prompts always fail. It shows that accepted length and robust use are separate properties, and that position can change retrieval reliability.
+Writing and finding are two different jobs, and a vector search over old messages does only the finding. [AI memory management](/articles/ai-memory-management/) covers the rest, including when to write a fact and when to expire it.
 
-### A document can fit and still be used poorly
+## Is the KV cache a kind of memory?
 
-Suppose a contract fits inside the advertised window and the clause needed for an answer sits halfway through it. Capacity says the clause can be submitted, but the Lost in the Middle result says its position can still affect whether the model uses it.
+No. The [KV cache](/articles/kv-cache-eviction/) stores the computation a model has already done over a run of tokens, so that the model can avoid doing the same computation again.
 
-Moving the clause, changing the distractors, or changing the question may alter performance. A single successful request therefore does not validate the rest of the window or the rest of the corpus.
+The KV cache gets called memory because it lives in GPU memory, and it holds no facts your application can look up. A cached prompt prefix makes the next request faster, and it can't tell you which plan a customer is on.
 
-### Retrieval reduces the search space but does not create persistence
+## How do coding agents handle the split?
 
-Retrieval can select a smaller set of passages before generation and place the strongest evidence where the prompt makes it easy to use. That is a context-construction improvement, even when the passages came from a persistent store.
+Coding agents write notes to files and read the files back at the start of a session. Claude Code, for example, loads a file named `CLAUDE.md` into the context window when a session starts, and that file is memory in the sense this page uses.
 
-The store solves availability across requests. The retriever and prompt builder decide which stored material becomes evidence for the current request.
+Each coding agent names and loads its files differently. [Claude Code's memory](/articles/claude-code-memory/) and [memory in HyperAgents](/articles/hyperagents-memory/) are two worked cases, and several replies in the Hacker News thread describe building the same thing by hand, with a wiki or an Obsidian vault of Markdown notes.
 
-## RULER tests effective context across task types
-
-The [RULER repository](https://github.com/NVIDIA/RULER) provides configurable synthetic examples for evaluating long-context models across sequence lengths and task complexity. Its tasks cover retrieval, multi-hop tracing, aggregation, and question answering rather than relying on a single needle-in-a-haystack check.
-
-RULER's paper distinguishes a claimed context length from an effective context length measured against its task suite. The distinction matters because a model can accept an input at a given length and still fall below a chosen performance threshold as the sequence grows.
-
-### Sequence-length sweeps expose where performance changes
-
-A useful long-context evaluation repeats the same task family at multiple sequence lengths. That reveals whether a model that succeeds on a short instance remains reliable as distractor material and reasoning distance increase.
-
-RULER also makes task complexity configurable. Multiple needles, variable-tracking hops, aggregation settings, and question-answering inputs test different behaviors that one simple retrieval example cannot cover.
-
-### Synthetic results narrow candidates rather than approve a deployment
-
-RULER itself describes its tasks as a test bed, not a replacement for realistic evaluation. Synthetic benchmark results can eliminate weak candidates and reveal length-related failure modes, but they do not reproduce a specific application's evidence, prompts, or serving path.
-
-The deployed model, serving setup, document structure, and query set still require a target-corpus test. A candidate should be exercised with the exact model identifier and configuration, representative documents, real query shapes, relevant positions, and an answer check tied to the product's failure cost.
-
-## Context and memory work as one request loop
-
-A practical system uses the two layers in sequence. It reads durable state, selects what the current task needs, constructs the context, invokes the model, and then decides whether any result deserves a durable write.
-
-That final write must be deliberate. Saving every generated sentence creates a larger store, but it does not make future retrieval more accurate or the stored claims more trustworthy.
-
-### The memory layer handles lifecycle and inclusion
-
-Memory policy decides which observations qualify for storage, how versions and conflicts are represented, and when old state expires. Retrieval policy then selects candidate memories using filters, recency, similarity, rules, or other signals appropriate to the job.
-
-[AI memory management for LLMs](/articles/ai-memory-management/) develops those inclusion, retrieval, and lifecycle decisions across the wider memory stack. The context window receives only the subset selected for the present request.
-
-### The context layer handles the current reasoning task
-
-Prompt construction decides how much retrieved material to include, how to order it, and how much budget to reserve for instructions, tool results, and the response. More retrieved text can introduce distractors even when every passage is topically related.
-
-Test the assembled prompt, not just retrieval hit rate. The end-to-end question is whether the model uses the selected evidence to produce an acceptable answer under the actual budget.
-
-## KV cache is not durable memory
-
-### KV cache reuses computation rather than facts
-
-A transformer KV cache stores intermediate key and value tensors so autoregressive generation can reuse work from earlier tokens. It is serving state associated with token processing, not an application record of facts, preferences, or events.
-
-Serving-layer prefix caching may reuse token-prefix computation across requests, but that optimization still does not provide semantic retrieval, identity, validity, or lifecycle rules. KV-cache eviction is therefore a separate inference-management problem from deciding what an agent should remember next week.
-
-### Keep context, KV cache, and memory separate
-
-Context contains the material available for the current reasoning step. KV cache accelerates computation over token prefixes, subject to the serving implementation.
-
-Memory persists application state and makes selected state available to later requests. Using “memory” for every layer hides where information was lost and makes debugging harder.
-
-## Choose the architecture from the state boundary
-
-Start by asking how long the information must survive and which request will need it. If the answer is only the current request, place the smallest sufficient evidence in context.
-
-If the information must survive a new request, process restart, or user session, store it outside the invocation and define how it returns. Context size does not remove that state boundary.
-
-### Test long-context retrieval on the target corpus
-
-Create fixtures from representative documents and questions, then vary the position of the answer-bearing evidence and add realistic distractors. Sweep the sequence lengths the application expects rather than testing only the advertised maximum.
-
-Score whether the answer uses the required evidence, not merely whether the request completes. Repeat the test for the deployed model and serving configuration because a paper or leaderboard result describes its own setup.
-
-### Test memory as a read-write lifecycle
-
-Evaluate writes, retrieval, conflicts, updates, deletion, and isolation between entities. A memory test should catch stale facts, missing state, cross-user leakage, and irrelevant material that consumes context without helping the answer.
-
-Framework-specific storage details differ, but the boundary remains the same. [Memory in Claude Code](/articles/claude-code-memory/) and [memory in HyperAgents](/articles/hyperagents-memory/) show how separate systems expose persistent state to later work.
+A current model such as Claude Fable 5.2 [lists a context window of 1M tokens](https://artificialanalysis.ai/models/claude-fable-5-2), and the developers in that thread still keep their client rules in Markdown files that they load by hand. I think that is where agent memory stands in 2026.
 
 ## FAQ
 
 **Is a longer context window always better?**
 
-No. A larger accepted input can help tasks that need more evidence at once, but it can also add cost, latency, and distractors depending on the model and serving setup.
+No. A longer context window helps a task that needs more evidence in one request, and it also adds cost and gives the model more unrelated text to read past.
 
-Evaluate the task at the lengths and positions it will encounter. The maximum accepted length alone does not establish reliable retrieval.
+**Does an LLM remember previous conversations?**
 
-**Can a vector database be the memory layer?**
+No, not without help from the application. Each request starts with only what the application puts in the context window, so anything remembered was stored and sent again by the application.
 
-It can be one component of the layer. Semantic retrieval is useful for unstructured passages, but structured state, identity, time, permissions, and version rules may require other storage and filters.
+**Can a vector database be the memory?**
 
-**How should information be split between context and memory?**
+A vector database can be one part of the memory. Similarity search finds related passages, and facts like a user's identity or which version is current need structured fields and filters.
 
-Put the evidence needed for the current reasoning step in context. Put state that must survive beyond the request in a persistent store, then retrieve only the relevant subset when a later request needs it.
+**Why does a model miss information that fits in its context window?**
 
-**Why can a model miss information that fits in its context window?**
+A model can miss it because fitting in the window isn't the same as being used. Lost in the Middle showed that the position of a fact in a long input changes whether a model uses it.
 
-Accepted capacity does not imply uniform use of every position. Lost in the Middle demonstrates positional effects, and RULER tests how retrieval and reasoning behavior changes across tasks and sequence lengths.
+**How do I decide between context and memory?**
 
-**Does KV cache give an agent memory between sessions?**
-
-No. KV cache is a token-processing optimization, and application memory is durable state with selection and lifecycle rules.
-
-An application must still store the information and retrieve it into a later context.
+Ask whether a later request will need the information. If a later request will need it, store the information outside the model and decide how it gets retrieved.

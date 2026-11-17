@@ -1,220 +1,144 @@
 ---
 category: ai-engineering
 primary_query: kv cache
+siblings:
+- llm-inference-optimization
+- time-to-first-token
+- llm-context-windows
 date: 2026-04-15
-description: A research-led comparison of KV-cache eviction strategies, including
-  their accuracy risks and implementation trade-offs.
+description: The KV cache stores each token's keys and values so a model doesn't recompute
+  them. How to size it from a model config, what eviction policies keep when it fills,
+  and why the leak Cloudflare reported in October 2026 makes it a security boundary.
 status: published
 work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it. [See how I work](/services/freelance-technical-writer-for-ai-companies/) and tell me what you're shipping."
-title: 'Context Engineering as Heap Management: Accuracy Risks in KV Cache Eviction'
+title: 'What Happens When the KV Cache Fills Up'
 updated: '2026-08-17'
 slug: kv-cache-eviction
 ---
 
-VRAM capacity dictates the boundary of what a Large Language Model (LLM) can actually do for you. The naive way to expand a context window is to scale hardware until you hit the physical ceiling of the GPU, then buy a bigger GPU.
+On October 26 Cloudflare published [a report](https://blog.cloudflare.com/kv-cache-exposure-remediation/) on a bug in which 155 responses from GLM-5.3, a model Cloudflare hosts on Workers AI, contained text from other customers' requests. The leaked text came from the KV cache, a block of GPU memory that the model reads while it generates.
 
-KV-cache memory grows with sequence length, layer count, KV-head count, head dimension, batch size, and precision. Calculate it from the deployed model's actual configuration before setting a context limit.
+The KV cache is the memory where a language model keeps the key and value vectors it has computed for every token so far. The cache exists so that generating the next token doesn't require recomputing every earlier token, and the cache grows by a fixed amount with each token in the context.
 
-For a lot of engineering teams, throwing more cluster at the problem stopped being a strategy somewhere around the point the monthly GPU bill outran the product roadmap.
+Cloudflare calls the bug a memory-safety bug, and it reminded me of [Heartbleed](https://en.wikipedia.org/wiki/Heartbleed), the OpenSSL bug disclosed in April 2014. A server with the Heartbleed bug read past the end of a buffer and sent back whatever was in memory there, and in Cloudflare's bug a model read cache pages that still held another customer's prompt.
 
-H2O and StreamingLLM show that retaining high-importance tokens and attention sinks can reduce KV-cache pressure, with quality depending on the model and task.
+So this page treats the KV cache the way you'd treat any block of memory: how many bytes it takes, what gets removed when it's full, and which request is allowed to read it. The page belongs with the other model-serving topics under [AI engineering](/articles/ai-engineering/).
+
+## What is the KV cache?
+
+The KV cache is a per-sequence store of the keys and values that each attention layer computed for earlier tokens. When the model generates token 1,001, it computes keys and values for that one token and reads the other 1,000 from the cache.
+
+Skipping that recomputation costs GPU memory, and the amount grows with the length of the conversation. The [H2O paper](https://arxiv.org/abs/2306.14048) describes the cache as state held in GPU memory besides the model's weights, "scaling linearly with the sequence length and batch size".
+
+Linear growth means a conversation twice as long needs twice the cache. A provider that offers a larger [context window](/articles/llm-context-windows/) therefore has to set aside more GPU memory for each conversation that uses it.
+
+## How big is the KV cache?
+
+The KV cache holds two vectors per token, a key and a value, for every KV head in every layer, so you can calculate its size from a model's config file. The script below does it for [Qwen2.5-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct/blob/main/config.json), using the numbers in its published config:
+
+```python
+"""Size the KV cache of a model from its config. Numbers are for Qwen2.5-7B-Instruct."""
+config = {"num_hidden_layers": 28, "num_attention_heads": 28, "num_key_value_heads": 4, "hidden_size": 3584}
+BYTES_PER_VALUE = 2          # bfloat16, the dtype in the same config
+head_dim = config["hidden_size"] // config["num_attention_heads"]
 
 
-The discussion explains the mechanisms and published research behind [KV-cache eviction](/glossary/kv-cache-eviction/). It does not report a model or hardware benchmark.
-
-## The architecture of the memory wall: why KV caches explode
-
-As tokens enter the model, they get transformed into Query, Key, and Value vectors. Caching the K and V vectors avoids recomputing them at every later generation step, which is the whole reason the cache exists.
-
-For a decoder-only transformer, KV-cache size is determined by layers, KV heads, head dimension, bytes per value, sequence length, and batch size.
+def kv_bytes(tokens, kv_heads):
+    # one key vector and one value vector per token, per KV head, per layer
+    return 2 * config["num_hidden_layers"] * kv_heads * head_dim * BYTES_PER_VALUE * tokens
 
 
-High-density deployments live and die on the throughput-versus-memory tradeoff. Bigger caches mean fewer concurrent users per GPU, full stop.
+per_token = kv_bytes(1, config["num_key_value_heads"])
+print(f"head dimension: {head_dim}")
+print(f"KV cache per token: {per_token:,} bytes")
+for tokens in (4_096, 32_768, 131_072):
+    grouped = kv_bytes(tokens, config["num_key_value_heads"]) / 2**30
+    ungrouped = kv_bytes(tokens, config["num_attention_heads"]) / 2**30
+    print(f"{tokens:>7,} tokens: {grouped:5.2f} GiB per sequence ({ungrouped:5.2f} GiB if every head kept its own keys and values)")
+```
 
+Running `python kv_size.py` printed:
 
-## The garbage collectors: H2O vs. StreamingLLM vs. Random
+```text
+head dimension: 128
+KV cache per token: 57,344 bytes
+  4,096 tokens:  0.22 GiB per sequence ( 1.53 GiB if every head kept its own keys and values)
+ 32,768 tokens:  1.75 GiB per sequence (12.25 GiB if every head kept its own keys and values)
+131,072 tokens:  7.00 GiB per sequence (49.00 GiB if every head kept its own keys and values)
+```
 
-Managed heaps in software engineering rest on identifying unreachable or low-utility objects and reclaiming their space. Managed context in LLMs rests on the same move applied to low-attention tokens.
+Qwen's [model card](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct) gives the model a 131,072-token context, and a single conversation that fills it needs 7 GiB of cache, in addition to the memory for the model's weights. A server running eight conversations of that length at once needs 56 GiB of cache.
 
-The comparison covers sliding-window, importance-based, and random eviction.
+The figure in brackets is what the same model would need if each of its 28 attention heads stored its own keys and values. The config sets `num_key_value_heads` to 4, so each group of 7 attention heads shares one set of keys and values, and the cache is a seventh of the size it would otherwise be.
 
-H2O uses accumulated attention as a utility signal and protects high-scoring tokens when the budget fills.
+The script counts only the key and value tensors, so I'd treat 7 GiB as the minimum for that conversation and not as the exact figure.
 
-When the budget fills up, tokens with low cumulative scores get evicted, which mirrors how a frequency-based collector keeps the hot objects and drops the cold ones. The [original H2O paper](https://arxiv.org/abs/2306.14048) showed that LLMs hold their performance on only 20% of the KV cache as long as the heavy hitters stay protected.
+## What happens when the KV cache fills up?
 
-StreamingLLM takes a different read: the first few tokens and the most recent tokens carry stability, so the algorithm evicts everything in between. With no importance-awareness for the historical span, you get middle-context amnesia.
-
-[StreamingLLM research](https://arxiv.org/abs/2309.17453) proved that "Attention Sinks" (the first 4 tokens) are mandatory for keeping perplexity from exploding.
-
+When a sequence's KV cache is full, the serving engine has two choices: refuse the request, or drop the keys and values of some tokens to make room. The research on [KV cache eviction](/glossary/kv-cache-eviction/) is about which tokens to drop, and each policy protects a different set:
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/kv-cache-eviction/eviction-policies.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/kv-cache-eviction/eviction-policies.narrow.svg" width="288" height="1000"><img class="np-has-narrow" src="/static/images/diagrams/kv-cache-eviction/eviction-policies.svg" width="720" height="544" alt="When the KV cache fills, StreamingLLM keeps the attention sinks, the first few tokens, plus the most recent tokens, and evicts everything in between. H2O keeps the heavy hitters, the tokens with the highest accumulated attention, wherever they sit, and evicts the low scorers." loading="lazy" decoding="async"></picture></a>
-  <figcaption>StreamingLLM keeps the boundaries and forgets the middle; H2O keeps whatever has drawn the most attention.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/kv-cache-eviction/eviction-policies.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/kv-cache-eviction/eviction-policies.narrow.svg" width="288" height="1000"><img class="np-has-narrow" src="/static/images/diagrams/kv-cache-eviction/eviction-policies.svg" width="720" height="544" alt="When the KV cache fills, StreamingLLM keeps the attention sinks, the first few tokens, plus the latest tokens, and evicts everything in between. H2O keeps the heavy hitters, the tokens with the highest accumulated attention, wherever they sit, and evicts the low scorers." loading="lazy" decoding="async"></picture></a>
+  <figcaption>StreamingLLM keeps the first tokens and the recent ones and forgets the middle. H2O keeps the tokens with the highest attention scores.</figcaption>
 </figure>
 
-## What the included simulation does
+Dropping the oldest tokens is the obvious policy, and the [StreamingLLM paper](https://arxiv.org/abs/2309.17453), from 2023, shows it fails once the text is longer than the cache. Its authors traced the failure to the first few tokens, which collect strong attention "even if they are not semantically important", and they named those tokens attention sinks.
 
-The included NumPy script simulates a 4,096-token sequence. It does not run a language model or measure hardware, and its needle is selected from the same high-weight tokens that H2O is designed to retain.
+StreamingLLM's policy keeps the attention sinks and the recent tokens and drops the rest. The paper reports stable language modeling at up to 4 million tokens with that policy, and the model can no longer attend to anything from the middle of the text.
 
+H2O, from 2023, keeps the tokens that have received the highest attention scores so far, wherever they sit in the text. Its authors observed that a small share of tokens accounts for the bulk of the attention score, and H2O keeps those tokens, which they call heavy hitters, along with the recent ones.
 
-## Attention entropy: an information theoretic perspective
-
-Attention scores follow a power-law distribution, with many tokens contributing near-zero weight to the softmax sum and a few informational hubs soaking up most of the probability mass. Quantify the entropy of that distribution and you can calculate a Theoretical Minimum Cache, the floor below which you start losing signal.
-
-High-entropy layers (usually the early ones) need larger caches to hold structural coherence, and low-entropy layers tolerate aggressive pruning. The same Zipf's law shape shows up everywhere: a small subset of tokens carries the bulk of the reasoning value, the way a handful of words account for most of the text in any natural-language corpus.
-
-
-## Attention decay: where importance concentrates
-
-Attention-sink research shows that retaining initial tokens can stabilize streaming generation. The visualization is illustrative and does not report measurements from this article.
-
-Local tokens form a diagonal band that represents the immediate context. Heavy hitters show up as columns of high attention that run down the entire sequence, visible from one end to the other.
+[SnapKV](https://arxiv.org/abs/2404.14469), from 2024, chooses which tokens to keep once, before generation starts. SnapKV looks at which earlier positions the last part of the prompt attends to and keeps those positions, and its authors report an 8.2x gain in memory efficiency on 16K-token inputs with comparable accuracy on 16 long-sequence datasets.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/kv-cache-eviction/attention-map.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/kv-cache-eviction/attention-map.narrow.svg" width="288" height="424"><img class="np-has-narrow" src="/static/images/diagrams/kv-cache-eviction/attention-map.svg" width="720" height="424" alt="An illustrative causal attention map, not measured data. Each row is a query and each column a key. The first column is the attention sink, the band along the diagonal is the immediate local context, and a few columns run the full height as heavy hitters that later tokens keep attending to." loading="lazy" decoding="async"></picture></a>
-  <figcaption>An illustration of the pattern, not observed attention data. Drop a heavy hitter and generation can destabilize.</figcaption>
+  <figcaption>An illustration of the pattern, not measured attention. The H2O paper reports that removing heavy hitters causes a significant drop in output quality.</figcaption>
 </figure>
 
-Attention-sink research shows that dropping tokens the model still needs can destabilize generation. The heatmap is an illustration, not observed attention data.
+Each of those results was measured by the paper's own authors on their own models and tasks, so I wouldn't compare 4 million tokens with 8.2x. An evicted token can't be attended to for the rest of the generation, so the test I'd run is whether my own task needs a token the policy dropped.
 
-A bad eviction policy can resemble a prompting or sampling failure when it drops tokens the model still needs.
+## Do serving engines evict tokens for you?
 
-## Bitmasking vs. Indexing: The implementation bottleneck
+vLLM's prefix caching page describes no H2O-style or SnapKV-style eviction setting. What it documents is reuse of the cache: its [automatic prefix caching](https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/) lets a new request skip computing a prefix it shares with an earlier one by reusing that prefix's KV cache.
 
-Managed heaps need efficient tracking of which objects are live, and KV caches need the same for which tokens are active. Two methods dominate the eviction-state problem.
+With prefix caching, a long system prompt is computed once and its keys and values serve every request that starts with it, which is how prefix caching shortens [time to first token](/articles/time-to-first-token/).
 
-Boolean Bitmasking keeps a binary tensor the same length as the sequence, where a one marks an active token in the cache and a zero marks an evicted one. For that to pay off, the attention kernel has to support masked lookups so it skips scoring the evicted tokens.
+A caller talking to a voice agent [hears that saving directly](/articles/voice-agent-latency/), because the caller is waiting in silence for the agent's first word.
 
-Bitmasking stays cheap on compute, the catch being that VRAM is not actually freed until a separate compaction step runs.
+So when you serve a model, the KV cache decisions are how many tokens the cache pool holds and which requests may reuse another request's cached prefix. The page on [LLM inference optimization](/articles/llm-inference-optimization/) covers both settings.
 
-Dynamic Indexing takes the opposite trade: reallocate the KV tensors at a smaller size and copy the live Heavy Hitters into a fresh contiguous block. Reallocation hands VRAM back right away.
+## Why is the KV cache a security boundary?
 
-Compaction should run only after fragmentation is high enough to justify the copy cost.
+The KV cache is a security boundary because it holds the computed keys and values of other customers' prompts, and a model that attends over them can write their text into a response. Cloudflare's incident report shows what happens when that boundary fails, and the failure started with a cache pool that was too small.
 
-## Memory coalescing and kernel fusion: the hardware wall
+The model was deployed with a 1,048,576-token context window, and the cache pool on the prefill GPUs had room for 681,280 tokens.
 
-Standard CUDA kernels for attention assume a contiguous linear memory layout. Evict random tokens and you punch gaps into the address space, and hardware threads can no longer coalesce those fragmented reads into a single transaction.
+The inference engine, SGLang, marked a prompt longer than 681,280 tokens as rejected. A bug in SGLang then let generation go ahead anyway, and the model attended over cache pages that still held earlier customers' requests.
 
-As fragmentation rises, memory bandwidth utilization falls. Sparse KV layouts therefore need custom Triton or CUDA kernels, or the alternative of periodic compaction that restores linear access patterns at the cost of a one-time copy.
+Cloudflare's report classifies the failure in one line: "This bug belongs to a class of KV cache memory-safety bugs". Cloudflare made two fixes: it made the pool about twice the size of the context window, and it patched SGLang so that a rejected prompt returns an error to the client.
 
-[FlashAttention-2](https://arxiv.org/abs/2307.08691) lifted throughput substantially and still wants contiguous memory for its tiling optimization.
+The lesson I take from the report is to size the cache pool for the context window you advertise. Cloudflare advertised 1,048,576 tokens and provisioned 681,280, and its tests of prompts between those two numbers checked the HTTP status code and never read the response.
 
-
-You pay a small throughput tax up front to dodge the far larger latency tax of an out-of-memory crash or a swap stall.
-
-## Distributed KV caches: eviction at scale
-
-Multi-GPU deployments complicate garbage collection. Pipeline parallelism splits model layers across devices, so each GPU manages its own slice of the KV cache.
-
-Attention patterns swing hard across layers: early layers fixate on structural syntax and attention sinks, deep layers track semantic relationships and heavy hitters. A global eviction strategy has to account for that layer-specific behavior, handing early layers a larger sink budget and deep layers more heavy-hitter slots.
-
-
-Centralizing that decision turns every eviction into a synchronization point, and those communication bottlenecks stall the whole generation loop.
-
-## Quantization hybridization: the precision frontier
-
-Not every KV pair earns the same precision. Heavy Hitters drive model accuracy, so they deserve FP16 or BF16.
-
-Background tokens that barely move the attention sum can be downsampled, and Int4 or Int8 quantization on those non-heavy-hitter tokens buys a second memory win on top of eviction. Hybrid caches that pair eviction with variable precision wring real utility out of every VRAM block, the way a photo archive keeps the keepers at full resolution and the throwaways as thumbnails.
-
-
-## Case study: Llama 3 vs. Mistral attention patterns
-
-Different model architectures carry distinct sparsity profiles. Llama 3 70B already trims the KV cache by sharing keys and values across query heads through Grouped Query Attention.
-
-Mistral 7B holds a constant memory footprint through Sliding Window Attention. Profiling shows Llama 3 raising more distinct attention pillars than Mistral, with heavy hitters that stay stable over long sequences, where Mistral's more localized attention makes it a natural fit for simple windowing.
-
-Any eviction strategy has to start from the specific model's attention entropy.
-
-
-Whenever I pick a pruning threshold for a model I haven't run before, I profile its attention map first.
-
-## Security implications: cache side-channel attacks
-
-Managed context opens a new attack surface for privacy leaks. The set of tokens preserved in the KV cache is a direct function of the input content, which means an attacker who times subsequent queries can infer which tokens are still cached.
-
-Those timing variances expose the session's "Heavy Hitter Profile." Differential-privacy techniques for KV eviction add noise to the attention scores, trading a small dip in retrieval accuracy for the guarantee that nobody can pin down exactly which tokens are cached.
-
-Any enterprise deployment has to weigh that memory-versus-privacy tradeoff deliberately, especially anywhere one tenant's timing can be measured against another's.
-
-Some research papers show sensitive data leaking from a KV cache through purpose-built "canary tokens." Pruning has to be robust on both fronts, memory and security.
-
-A random noise floor in the H2O ranking algorithm is a simple mitigation that works surprisingly well.
-
-## The softmax stability problem: why sinks are mandatory
-
-Softmax needs a denominator that sums over all historical tokens, so yanking the early ones causes radical shifts in the attention distribution. Attention sinks act as anchors for the mechanism.
-
-Retain the first four tokens and the softmax stays numerically stable no matter how deep you prune.
-
-The StreamingLLM paper shows that removing attention sinks destabilizes generation as the stream grows.
-
-Sinks are not optional.
-
-## Generational garbage collection: optimizing sorting overhead
-
-Ranking every cached token on every generation step burns CPU. Generational tracking reduces that work by moving tokens through tiers instead of re-sorting the whole set.
-
-New tokens land in a young-generation cache with a short sliding window. Frequent attention targets get promoted to an intermediate tier.
-
-Persistent heavy hitters settle into a rarely pruned long-term cache. Layering the cache this way shrinks the count of tokens you have to sort on any given step.
-
-
-The few that graduate to the long-term cache tend to live for the whole session. Java's generational collector and V8's both run on this exact observation.
-
-## Local hardware constraints
-
-
-Stability broke down once the system started paging out model weights to make room for KV cache bitmasks, which is the worst possible thing to evict. Local LLM development is a game of VRAM accounting, line by line.
-
-Cache memory saved can instead be used for model weights or concurrency.
-
-## State of open source memory 2026: vLLM vs. TensorRT-LLM
-
-
-The PagedAttention foundation in [vLLM](https://github.com/vllm-project/vllm) is a clean fit for heap-based context management. VRAM is already carved into pages, so eviction comes down to freeing the pages whose tokens score low on attention.
-
-## Practitioner's checklist: auditing your KV cache
-
-Optimizing context memory requires following these steps:
-1. Profile Attention Entropy: Measure the cumulative attention distribution across your typical prompts.
-2. Identify Sinks: Ensure your inference engine preserves at least the first 4 tokens of every sequence.
-3. Set a VRAM Budget: Define a hard limit for your KV cache based on your GPU's physical capacity.
-4. Implement H2O Pruning: Use cumulative attention scores to evict low-utility tokens once the budget is met.
-5. Monitor Recall: Run needle-in-a-haystack tests to verify that your pruning ratio does not erode factual accuracy.
-
-## Economic outcomes of importance-based pruning
-
-
-There's a quality bonus too: the ["Lost in the Middle" problem where the center of a long context gets ignored](/articles/llm-context-windows/) eases off. Stripping noise out of the KV cache lets the model spend its limited attention budget on high-signal tokens.
-
-
-## The future of context engineering
-
-Sequence length is going to stay a headline metric for model capability. The "Brute Force" era of context management, where you just buy more memory, is winding down.
-
-Sustainable AI scaling runs on dynamic, importance-aware eviction instead. We should stop treating context as a static buffer you fill and forget.
-
-Context behaves like a dynamic heap, and managing it deserves the same rigor as other memory systems. [My work page](/work/) shows how I explain dense infrastructure topics for developer-tool companies.
+My essay on [what I'd copy from Cloudflare's report](/articles/cloudflare-kv-cache-incident-report/) looks at how the report itself is written.
 
 ## FAQ
 
-**Does KV pruning affect fine-tuned models differently?** Yes. Models fine-tuned for long-context tasks tend to spread their attention more widely, so holding recall on them takes a larger Heavy Hitter budget than a standard base model needs.
+**What does KV stand for in KV cache?**
 
-**Is H2O compatible with FlashAttention?** Only partly. FlashAttention wants contiguous memory blocks, so keeping its hardware efficiency means running periodic compaction or block-sparse kernels alongside the eviction.
+KV stands for key and value. A key and a value are the two vectors each attention layer computes per token, and later tokens read them instead of recomputing them.
 
+**Is the KV cache the same as prompt caching?**
 
-**What is the Attention Pillar phenomenon?** Pillars are specific tokens that anchor the model's reasoning, the ones almost every later token points back at. Spotting and protecting those pillars is the core challenge of any importance-based eviction strategy.
+Prompt caching is built on the KV cache. A provider that caches a prompt prefix is keeping that prefix's keys and values so the next request can reuse them.
 
-**Can I use this for RAG?** Absolutely. Pruning the KV cache sidesteps the physical VRAM limit, so you can feed much larger document chunks into the LLM during the retrieval phase.
+**Does the KV cache grow with batch size?**
 
-Pruning also pairs well with prompt caching, which reuses the KV cache of a static prefix across requests.
+Yes. Each sequence in a batch has its own cache, so memory grows with both the length of each sequence and the number of them.
 
-### Sources
-*   [H2O: Heavy-Hitter Oracle for Efficient Generative Inference](https://arxiv.org/abs/2306.14048) - Foundational importance-based pruning paper.
-*   [Efficient Streaming Language Models with Attention Sinks](https://arxiv.org/abs/2309.17453) - Research on softmax stability and sinks.
-*   [SnapKV: LLM Knows What You Are Looking For](https://arxiv.org/abs/2404.14469) - Retrieval-focused KV compression.
-*   [FlashAttention-2: Faster Attention with Better Parallelism](https://arxiv.org/abs/2307.08691) - Technical specs for hardware-aware attention.
-*   [vLLM: High-Throughput Serving with PagedAttention](https://github.com/vllm-project/vllm) - Implementation of memory-managed LLM inference.
-*   [Llama 3 Technical Report](https://ai.meta.com/blog/meta-llama-3/) - Architecture details on context handling.
-*   [Choosing a resource storage mode for Apple GPUs](https://developer.apple.com/documentation/metal/choosing-a-resource-storage-mode-for-apple-gpus) - Hardware constraints for local benchmarks.
+**What is an attention sink?**
+
+An attention sink is one of the first few tokens of a sequence, which attract strong attention regardless of what the tokens say. StreamingLLM found that keeping them is what stops a sliding window from failing.
+
+**Can evicting tokens from the KV cache change the answer?**
+
+Yes. An evicted token can't be attended to again, so anything the answer needed from it is lost.

@@ -163,6 +163,8 @@ The Ghostty notes above do it in one line per advisory, and GitLab's add a warni
 
 Coordinate security wording with the security owner and link to the canonical advisory for updates. Leave out exploit detail that creates additional risk.
 
+Cloudflare's report on a cache leak in Workers AI shows that wording done with care, and I've noted [what I'd copy from it](/articles/cloudflare-kv-cache-incident-report/).
+
 ## Show the changed behavior
 
 Visuals help when they make a changed state or workflow quicker to understand. A focused before-and-after can do that, but a decorative dashboard screenshot usually can’t.

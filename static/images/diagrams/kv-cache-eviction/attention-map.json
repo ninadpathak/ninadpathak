@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/kv-cache-eviction/attention-map.mmd",
-  "hash": "987d76b725c669e3",
+  "hash": "3899d38a599b326e",
   "pele": "1.8.0",
   "width": 720,
   "height": 424,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "An illustrative causal attention map, not measured data. Each row is a query and each column a key. The first column is the attention sink, the band along the diagonal is the immediate local context, and a few columns run the full height as heavy hitters that later tokens keep attending to.",
-  "caption": "An illustration of the pattern, not observed attention data. Drop a heavy hitter and generation can destabilize.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/kv-cache-eviction/attention-map.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/kv-cache-eviction/attention-map.narrow.svg\" width=\"288\" height=\"424\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/kv-cache-eviction/attention-map.svg\" width=\"720\" height=\"424\" alt=\"An illustrative causal attention map, not measured data. Each row is a query and each column a key. The first column is the attention sink, the band along the diagonal is the immediate local context, and a few columns run the full height as heavy hitters that later tokens keep attending to.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>An illustration of the pattern, not observed attention data. Drop a heavy hitter and generation can destabilize.</figcaption>\n</figure>"
+  "caption": "An illustration of the pattern, not measured attention. The H2O paper reports that removing heavy hitters causes a significant drop in output quality.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/kv-cache-eviction/attention-map.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/kv-cache-eviction/attention-map.narrow.svg\" width=\"288\" height=\"424\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/kv-cache-eviction/attention-map.svg\" width=\"720\" height=\"424\" alt=\"An illustrative causal attention map, not measured data. Each row is a query and each column a key. The first column is the attention sink, the band along the diagonal is the immediate local context, and a few columns run the full height as heavy hitters that later tokens keep attending to.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>An illustration of the pattern, not measured attention. The H2O paper reports that removing heavy hitters causes a significant drop in output quality.</figcaption>\n</figure>"
 }
