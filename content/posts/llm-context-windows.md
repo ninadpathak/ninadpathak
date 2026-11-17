@@ -20,9 +20,9 @@ updated: 2026-11-17
 
 An LLM context window is the span of text a model can read at once: the system prompt, the conversation so far, tool results and the reply it is writing. Anthropic's [documentation](https://platform.claude.com/docs/en/build-with-claude/context-windows) calls it the model's "working memory", and on current Claude models it runs to a million tokens.
 
-DOS programmers lived with a small, hard version of this limit. [Wikipedia's entry](https://en.wikipedia.org/wiki/Conventional_memory) defines conventional memory as "the first 640 kilobytes of the memory on IBM PC or compatible systems", and years of software were written to fit under that line.
+DOS programs had a fixed budget to work in. [Wikipedia's entry](https://en.wikipedia.org/wiki/Conventional_memory) defines conventional memory as "the first 640 kilobytes of the memory on IBM PC or compatible systems", and years of software were written to fit under that line.
 
-Every byte under 640K could be read as reliably as any other. A context window can't promise that for its tokens, and the page that advertises the million says so itself: "more context isn't automatically better."
+A million tokens sounds like the end of fitting under lines. But the Anthropic page that lists the million also says "more context isn't automatically better."
 
 That sentence is the reason window size is a cost and quality decision in [LLM inference](/articles/ai-engineering/), and a larger number on a model card settles little.
 
@@ -43,7 +43,7 @@ Its authors found that "performance is often highest when relevant information o
   <figcaption>Recall follows a U shape across the context. Put the instruction and the data you care about at the two ends.</figcaption>
 </figure>
 
-The models in that paper date from 2023, and I don't assume the curve has the same depth today. The practical rule costs nothing to keep: put the instruction and the facts that matter at the start or the end of the prompt.
+The models in that paper date from 2023, and I don't assume the curve is as deep today. But the rule costs nothing to keep: put the instruction and the facts that matter at the start or the end of the prompt.
 
 ## What is context rot?
 
@@ -51,21 +51,21 @@ Context rot is the loss of accuracy as the input grows, wherever the important p
 
 The report starts from the assumption it then removes, that a model "should handle the 10,000th token just as reliably as the 100th." Its result is that models "do not use their context uniformly", and that "their performance grows increasingly unreliable as input length grows."
 
-Chroma sells a retrieval database, so it has a reason to find that stuffing the window fails. I give the finding more weight because Anthropic, which sells the tokens, now says the same in its own docs: "As token count grows, accuracy and recall degrade, a phenomenon known as context rot."
+Now, Chroma sells a retrieval database, so it has a reason to find that stuffing the window fails. But Anthropic sells the tokens, and its own docs now say the same: "As token count grows, accuracy and recall degrade, a phenomenon known as context rot."
 
-Failure also differs by model. On questions with distracting passages, the report found Claude models "tend to abstain when uncertain", and GPT models more often answered wrongly with confidence.
+And the failure differs by model. On questions with distracting passages, the report found Claude models "tend to abstain when uncertain", and GPT models more often answered wrongly with confidence.
 
 ## What does a long context cost?
 
 It costs money on every call and time before the first word. Input tokens are billed each time they are sent, and a chat that resends its history pays for the early turns again and again.
 
-My [token budgets guide](/articles/llm-token-budgets/) runs the arithmetic on a 20-turn chat, where the last turn costs 3.6 times the first. The wait grows as well, since the model has to read the whole prompt before it answers, the phase that [time to first token](/articles/time-to-first-token/) measures.
+My [token budgets guide](/articles/llm-token-budgets/) runs the arithmetic on a 20-turn chat, where the last turn costs 3.6 times the first. And the wait grows too, since the model has to read the whole prompt before it answers, the phase that [time to first token](/articles/time-to-first-token/) measures.
 
 ## Should you use a long context or retrieval?
 
 Use the window for material that has to be read together, and retrieval for material that has to be found. A contract and the question about it belong in one prompt, and a library of ten thousand documents doesn't.
 
-Retrieval puts a few passages in front of the model, which keeps the input short and brings its own failure, the right passage never being fetched. [Contextual retrieval](/articles/contextual-retrieval/) is one way to reduce that failure at indexing time.
+Retrieval puts a few passages in front of the model, which keeps the input short. It can also miss the right passage, and [contextual retrieval](/articles/contextual-retrieval/) is one way to reduce that failure at indexing time.
 
 Inside a long session the third option is to shrink what is already there. Compaction replaces old turns with a summary, and [short-term memory for agents](/articles/short-term-agent-memory/) covers what that can lose.
 

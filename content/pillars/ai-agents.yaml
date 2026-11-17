@@ -17,7 +17,7 @@ sections:
       - post: ai-agent-taxonomy
         note: "Groups agents into five types by autonomy and scope, to decide how much autonomy a task needs."
       - post: agent-vs-ai-assistant
-        note: "Draws the line at who chooses the next step, then compares the cost and control of building each."
+        note: "Draws the line at who chooses the next step, with an experiment in which six assistants were told to act alone."
       - post: agent-design-space
         note: "Sets Anthropic's six agent design patterns beside a second list and gives a grid for placing any pattern."
   - heading: "The loop and the harness"

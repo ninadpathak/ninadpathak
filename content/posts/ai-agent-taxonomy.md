@@ -118,7 +118,7 @@ Choose the lowest type that does the job. Anthropic's post gives the same advice
 
 Type 4 has no question of its own, because a second agent is a way to carry out a task and never a requirement of one. Add it when a single loop has been tried and measured.
 
-The ladder sorts agents by how much they decide alone. How to wire a chosen type is the subject of [AI agent design patterns](/articles/agent-design-space/).
+The ladder sorts agents by how much they decide alone. How to wire a chosen type is the subject of my guide to [design patterns for AI agents](/articles/agent-design-space/).
 
 Where an agent ends and an assistant begins is argued in [AI agent vs AI assistant](/articles/agent-vs-ai-assistant/), and the code around the model is described in [agent harnesses](/articles/agent-harnesses/).
 

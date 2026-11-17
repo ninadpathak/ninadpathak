@@ -19,9 +19,9 @@ updated: 2026-11-17
 
 An AI assistant leaves the next step to you, and an AI agent takes it. Both can call tools and both can run on one model, so the difference between an AI agent and an AI assistant comes down to who decides what happens after each result.
 
-Microsoft's Office Assistant, introduced in Office 97, sat at one end of that line. [Wikipedia's article](https://en.wikipedia.org/wiki/Office_Assistant) preserves the prompt it is remembered for, which began "It looks like you're writing a letter", and Clippy never sent the letter.
+Microsoft's Office Assistant shipped with Office 97. [Wikipedia's article](https://en.wikipedia.org/wiki/Office_Assistant) preserves the prompt it's remembered for, which began "It looks like you're writing a letter", and Clippy never sent the letter.
 
-A research group gave six modern assistants the opposite instruction in October. The user in [Vals AI's experiment](https://www.vals.ai/blogs/impossible-refund) told them "I won't do anything here myself", and what followed is the clearest picture I've seen of what changes when the loop passes from the person to the model.
+A research group told six modern assistants to act alone in October. The user in [Vals AI's experiment](https://www.vals.ai/blogs/impossible-refund) said "I won't do anything here myself", and what followed shows what changes when the loop passes from the person to the model.
 
 Where to draw that line is the first design decision in [AI agent architecture](/articles/ai-agents/).
 
@@ -34,7 +34,7 @@ Where to draw that line is the first design decision in [AI agent architecture](
 
 The difference is who drives the loop. With an assistant a person reads each reply and chooses the next request, and with an agent the model reads each result and chooses the next action until it judges the goal met.
 
-Tools don't settle it. An assistant that searches the web or queries a database on request is still an assistant, since a person looked at the answer before anything else happened.
+So tools don't settle it. An assistant that searches the web or queries a database on request is still an assistant, since a person looked at the answer before anything else happened.
 
 Simon Willison's definition, which my guide to the [types of AI agents](/articles/ai-agent-taxonomy/) uses for the same boundary, is "An LLM agent runs tools in a loop to achieve a goal." The loop is the part an assistant doesn't have.
 
@@ -42,7 +42,7 @@ Simon Willison's definition, which my guide to the [types of AI agents](/article
 
 It becomes an agent, and its judgment becomes the product. Vals AI published its experiment on October 15: six personal assistants were asked to recover a train refund of 350 pounds after the claim window had closed, with outgoing messages answered by simulated organisations.
 
-The instruction ended "keep trying anything you think of to get it", and the user then stopped responding. The report's summary of the runs is short enough to put in a table.
+The instruction ended "keep trying anything you think of to get it", and the user then stopped responding.
 
 | Model | What the report says it did |
 | --- | --- |
@@ -53,9 +53,11 @@ The instruction ended "keep trying anything you think of to get it", and the use
 
 No refund was available, so every run was a test of when to stop. Each of those models would have been a well-behaved assistant in the same inbox, because a person reading the first refusal would have decided what came next.
 
-The report is careful about its own weight, and I'll repeat the caution: "One trial per model in one scenario cannot establish typical behaviour or a reliable model ranking." Vals runs a benchmarking business, and the scenario was built to have no legitimate way through.
+Now, the report warns against reading a ranking into this: "One trial per model in one scenario cannot establish typical behaviour or a reliable model ranking." Vals runs a benchmarking business, and the scenario was built to have no legitimate way through.
 
-What it does establish is the mechanism. The same model with the same tools produced eight messages or 187 depending on nothing but its own sense of proportion, which is the thing a builder takes on by removing the person from the loop.
+But look at the spread. Given the same instruction, one model sent eight messages and another sent 187, and nothing set the number except each model's own sense of proportion.
+
+So that's what a builder takes on by removing the person from the loop.
 
 ## Why do products use the two words for one thing?
 
@@ -69,13 +71,13 @@ I think the label matters less than one question a buyer can ask of any such pro
 
 Build an assistant when a person is present for every step and wants to be. Reviewing a diff, exploring a dataset and working through a reading list all fit, since each answer changes what the person asks for next.
 
-An assistant is also cheaper to run and simpler to debug. A request produces a single response, and a bad response is seen by a person before it turns into an action.
+And an assistant is cheaper to run and simpler to debug. A request produces a single response, and a bad response is seen by a person before it turns into an action.
 
 ## When should you build an agent?
 
 Build an agent when the steps depend on results nobody can predict and the person can't sit through them. Tracing a failure across services is the usual example, since each finding decides where to look next.
 
-The cost comes with the loop. Each pass is another model call, which the [token budgets guide](/articles/llm-token-budgets/) adds up, and each pass is another place to fail, which is why [error handling for agents](/articles/agent-error-handling/) has to be designed before the agent is given anything that writes.
+But the cost comes with the loop. Each pass is another model call, which the [token budgets guide](/articles/llm-token-budgets/) adds up, and each pass is another place to fail, which is why [error handling for agents](/articles/agent-error-handling/) has to be designed before the agent is given anything that writes.
 
 The Vals runs suggest a rule for the brief as well. An instruction that says to try everything gives the model no stopping point, so write the limit into the task: how many attempts, which channels, and what must never be shared.
 

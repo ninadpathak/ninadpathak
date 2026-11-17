@@ -31,13 +31,13 @@ I think that proportion is right for [developer content](/articles/developer-exp
 
 It is writing that lets a reader carry out a task or make a decision without asking the author. An engineer already writes it in READMEs, pull request descriptions, design docs and runbooks, whether or not anyone calls it documentation.
 
-The standard it has to meet is the one the aerospace rules were written for. The STE80 README puts the original purpose in a sentence: "It was made for mechanics whose first language is not English, because a misread step on an aircraft can kill."
+The aerospace standard, in the STE80 README's words, "was made for mechanics whose first language is not English, because a misread step on an aircraft can kill."
 
-A misread step in a deploy guide costs less, and the reader is in the same position. They are mid-task and reading quickly, often in a second language.
+A misread step in a deploy guide costs less. But your reader is mid-task and reading quickly, often in a second language.
 
 ## Which rules do the work?
 
-The sentence is covered by four of the standard's rules, and Google's free course for engineers teaches the same four in other words.
+The sentence is covered by four of the standard's rules, and Google's free course for engineers teaches all but the last in other words.
 
 | Rule, as Wikipedia summarises the standard | Google's technical writing course |
 | --- | --- |
@@ -46,7 +46,7 @@ The sentence is covered by four of the standard's rules, and Google's free cours
 | "Use the active voice." | "The vast majority of sentences in technical writing should be in active voice." |
 | "Write only one topic per paragraph." | |
 
-The agreement is the useful part. An aerospace committee in the 1980s and a [Google course](https://developers.google.com/tech-writing/one/short-sentences) written for software engineers arrived at one list, which suggests the list comes from how people read instructions.
+So an aerospace committee in the 1980s and a [Google course](https://developers.google.com/tech-writing/one/short-sentences) written for software engineers arrived at nearly the same list, which suggests the list comes from how people read instructions.
 
 ## Can a script check them?
 
@@ -122,9 +122,9 @@ after
   problems: 0
 ```
 
-The verb list is short and the detection is crude, so treat the script as a demonstration that the rules are mechanical. A real setup would use a prose linter, and the [technical writing linter](/linter/) on this site checks a draft in the browser.
+Now, the verb list is short and the detection is crude, so treat the script as a demonstration that the rules are mechanical. A real setup would use a prose linter, and the [technical writing linter](/linter/) on this site checks a draft in the browser.
 
-The rewrite is also shorter, 19 words against 41. Splitting the steps removed the scaffolding that held them in one sentence.
+And the rewrite is shorter too, 19 words against 41. Splitting the steps removed the scaffolding that held them in one sentence.
 
 ## Why stop at 80%?
 
@@ -141,7 +141,7 @@ Whether the page helps. Sentence rules make text readable, and a readable page c
   <figcaption>The practices that reach the reader are the task up front, code that runs and a docs change in the same pull request.</figcaption>
 </figure>
 
-The habits in the figure are the ones I'd keep ahead of any style rule.
+I'd keep three habits ahead of any style rule.
 
 - **Lead with the task.** Open with what the reader is trying to do and the command that does it. The [guide to writing technical tutorials](/articles/writing-technical-tutorials/) builds a whole page that way.
 - **Ship code that runs.** Every sample should be copied from something that executed, with its output. The reasoning is in my [code documentation guide](/articles/code-documentation/).

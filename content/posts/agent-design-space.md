@@ -10,14 +10,14 @@ description: 'AI agent design patterns from chaining to the autonomous agent, se
 slug: agent-design-space
 status: published
 work_note: "I'm Ninad Pathak, a freelance technical writer. If your AI product's tutorials have fallen behind the product, I write them, and I run the product first. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
-title: 'AI Agent Design Patterns: A Map of the Agent Design Space'
+title: 'AI Agent Design Patterns'
 video: agent-design-space
 updated: 2026-11-17
 ---
 
 AI agent design patterns are the named ways to arrange model calls, tools and control flow into a working system. The list people cite comes from Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) of December 19, 2024, which describes five workflows and the autonomous agent.
 
-Software has done this naming once before. Design Patterns, the 1994 book whose authors are known as the Gang of Four, is summed up in [its Wikipedia entry](https://en.wikipedia.org/wiki/Design_Patterns) as "describing 23 classic software design patterns", and what lasted from it, in my reading, was the shared vocabulary.
+Design Patterns, the 1994 book whose authors are known as the Gang of Four, is summed up in [its Wikipedia entry](https://en.wikipedia.org/wiki/Design_Patterns) as "describing 23 classic software design patterns", and what lasted from it, I'd say, was the shared vocabulary.
 
 The agent lists are thirty years younger and don't yet agree with each other. Choosing among them is the wiring decision in [AI agent architecture](/articles/ai-agents/), and it comes after deciding how much the agent does alone.
 
@@ -28,7 +28,7 @@ The agent lists are thirty years younger and don't yet agree with each other. Ch
 
 ## What are the AI agent design patterns?
 
-Anthropic's post names six, and the table gives each in the post's own words.
+Anthropic's post names six.
 
 | Pattern | Anthropic's description |
 | --- | --- |
@@ -62,9 +62,9 @@ The grid is mine and neither source draws it. Its use is that a new pattern name
 
 Start from the top-left cell and move only when the task forces it. A path fixed in code can be tested step by step, and every move toward the model trades that for flexibility.
 
-Anthropic's own guidance on when to move is specific. Orchestrator-workers is for "complex tasks where you can't predict the subtasks needed", and evaluator-optimizer is "particularly effective when we have clear evaluation criteria".
+So when do you move? Anthropic's post says orchestrator-workers is for "complex tasks where you can't predict the subtasks needed", and evaluator-optimizer is "particularly effective when we have clear evaluation criteria".
 
-That second condition is stricter than it sounds. The clearest criteria are ones a program can check, which is why my [lambda calculus exercise](/articles/lambda-calculus-ai/) grades answers with a script.
+Now, that second condition is stricter than it sounds. The clearest criteria are ones a program can check, which is why my [lambda calculus exercise](/articles/lambda-calculus-ai/) grades answers with a script.
 
 A pattern is a separate choice from a type. My guide to the [types of AI agents](/articles/ai-agent-taxonomy/) ranks systems by how much they decide alone, and [AI agent vs AI assistant](/articles/agent-vs-ai-assistant/) covers the line below which no loop is needed at all.
 
@@ -72,9 +72,9 @@ A pattern is a separate choice from a type. My guide to the [types of AI agents]
 
 At the joins. A chain fails when one step's output isn't what the next expects, and an orchestrator fails when a worker misreads its brief, the handoff problem described in [multi-agent vs single-agent systems](/articles/multi-agent-vs-single-agent/).
 
-A loop adds its own failure, which is not knowing when to stop. The [anatomy of an agent loop](/articles/agent-loop-anatomy/) goes through one pass, and [error handling for agents](/articles/agent-error-handling/) covers what the code around the loop has to decide.
+A loop adds a failure of its own, which is never knowing when to stop. The [anatomy of an agent loop](/articles/agent-loop-anatomy/) goes through one pass, and [error handling for agents](/articles/agent-error-handling/) covers what the code around the loop has to decide.
 
-Shared state fails differently again. A pair of agents writing to one board can overwrite each other, and the board needs the rules any shared store needs.
+And shared state fails differently again. A pair of agents writing to one board can overwrite each other, and the board needs the rules any shared store needs.
 
 ## FAQ
 

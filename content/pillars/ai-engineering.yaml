@@ -33,7 +33,7 @@ sections:
   - heading: "Context and output"
     spokes:
       - post: llm-context-windows
-        note: "Explains why the middle of a long context gets less attention and what a long context costs."
+        note: "Explains why the middle of a long context gets less attention, what context rot is and what a long context costs."
       - post: llm-structured-outputs
         note: "Separates JSON mode from structured outputs and function calling by what each one guarantees."
 bridges:

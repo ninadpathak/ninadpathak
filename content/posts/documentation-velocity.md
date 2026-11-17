@@ -13,14 +13,14 @@ date: 2026-04-11
 description: 'Documentation ROI and engineering velocity: what DORA''s 2022 table shows, how far it can be pushed, and how to measure one document on your own team.'
 status: published
 work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. This post is for the person who has to argue for documentation with numbers, and once you've won that argument I can write the pages. [Hire me](/services/)."
-title: 'Documentation ROI: What the Evidence Says About Docs and Engineering Velocity'
+title: 'Documentation ROI and Engineering Velocity'
 slug: documentation-velocity
 updated: 2026-11-17
 ---
 
 Documentation ROI is hard to state as one number, and the best published evidence treats documentation as a multiplier on other engineering practices. DORA's 2022 data shows a team with above-average documentation quality getting a 750% lift in organizational performance from continuous integration, and a team below average getting 34%.
 
-Engineers have long had a name for the cost of unwritten knowledge. Wikipedia defines [the bus factor](https://en.wikipedia.org/wiki/Bus_factor) as "a measurement of the risk resulting from information and capabilities not being shared among team members", and every team knows roughly what its own number is.
+Wikipedia defines [the bus factor](https://en.wikipedia.org/wiki/Bus_factor) as "a measurement of the risk resulting from information and capabilities not being shared among team members".
 
 The bus factor counts people and DORA's table counts performance. Neither is a return in money, and I think the case for investing in [developer content](/articles/developer-experience/) is stronger when it says so.
 
@@ -44,7 +44,7 @@ It says documentation quality amplifies the payoff of every technical practice t
 | Trunk-based development | 36% | 1525% |
 | Version control | 27% | 278% |
 
-The page's summary is "The lift is significantly amplified for teams with above-average documentation quality." Quality was scored with "a set of eight metrics that assess documentation attributes like clarity, findability, and reliability."
+DORA's summary is "The lift is significantly amplified for teams with above-average documentation quality." Quality was scored with "a set of eight metrics that assess documentation attributes like clarity, findability, and reliability."
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/dora-multiplier.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/dora-multiplier.narrow.svg" width="288" height="416"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/dora-multiplier.svg" width="720" height="472" alt="The performance lift that continuous integration gives a team in DORA's 2022 data, by documentation quality: 34% for teams below average and 750% for teams above average. Each tile is 50 percentage points." loading="lazy" decoding="async"></picture></a>
@@ -57,9 +57,9 @@ Less far than its largest number invites. The data is a survey from 2022, the sc
 
 A team with strong documentation is plausibly strong at other things the survey didn't ask about. The table can't separate those, and DORA doesn't claim it does.
 
-What it supports is a narrower statement, and a more useful one for a budget discussion. A practice such as trunk-based development pays back far more where people can find out how it is meant to work, so documentation belongs in the plan for any practice a team is about to adopt.
+So what does it support? A narrower statement: a practice such as trunk-based development pays back far more where people can find out how it's meant to work, so documentation belongs in the plan for any practice a team is about to adopt.
 
-It gives no support to a sentence like "documentation makes a team seven times faster". No row measures a team before and after it wrote anything.
+And it gives no support to a sentence like "documentation makes a team seven times faster". No row measures a team before and after it wrote anything.
 
 ## Where does the time go without documentation?
 
@@ -90,11 +90,9 @@ That last case is the bus factor showing up in a recovery time. A [runbook](/art
 
 The volume changes, and the reader does too. Anthropic's [account of its code review](https://claude.dev/blog/solving-code-review-at-anthropic/) from October 15 says changes landing in its monorepo went "from about 2,500 in May to more than 30,000 in September this year."
 
-At that rate the first reader of a team's conventions is a model. The post describes fixing repeated review findings at the source, in files such as the one where "CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals."
+At that rate, the first reader of a team's conventions is a model. The post describes fixing repeated review findings at the source, in files such as the one where "CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals."
 
-That is documentation with a measurable return, since a line added to the file removes a class of review comment. My [CLAUDE.md guide](/articles/claude-md/) covers what belongs in it.
-
-Throughput is only half of DORA's picture, and the other half has gone the wrong way. Rachel Laycock of Thoughtworks summarised the newer research on October 29: "DORA's 2025 research found AI adoption is now linked to higher delivery throughput, but to lower delivery stability."
+Now that's documentation with a measurable return, since a line added to the file removes a class of review comment. My [CLAUDE.md guide](/articles/claude-md/) covers what belongs in it.
 
 ## How do you measure documentation ROI on your own team?
 
@@ -106,7 +104,7 @@ Pick one document, one metric and a period before and after. The measurements be
 
 Each of these ties a page to one of DORA's factors, which keeps the claim checkable. For a company whose buyers are developers, the same reasoning applies outside the team, and [devtools documentation](/articles/devtools-documentation/) makes that case.
 
-The writing itself doesn't need a specialist to start. [Technical writing for engineers](/articles/technical-writing-for-engineers/) covers the rules an engineer can apply to the first page.
+And the writing doesn't need a specialist to start. [Technical writing for engineers](/articles/technical-writing-for-engineers/) covers the rules an engineer can apply to the first page.
 
 ## FAQ
 
