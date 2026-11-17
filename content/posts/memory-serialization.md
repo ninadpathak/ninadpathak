@@ -137,6 +137,8 @@ They draw the conclusion themselves: "The transcript gave Claude a ground truth 
 
 That is one experiment by a vendor on its own model, and I think the design lesson holds anyway. A structured record with no log behind it can't be audited, so keep both and treat the record as a cache of the log.
 
+My essay on [storing how the agent knew](/articles/agent-memory-evidence/) argues the same for single notes.
+
 ## What belongs in the state record?
 
 Put in what the next session can't cheaply find out, and date every fact. A workable record has four parts.

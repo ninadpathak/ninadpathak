@@ -397,5 +397,10 @@
     "loop",
     "doc check*",
     "reader"
+  ],
+  "agent-memory-evidence": [
+    "doc",
+    "doc check*",
+    "store"
   ]
 }

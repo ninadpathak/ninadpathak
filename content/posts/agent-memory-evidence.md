@@ -1,0 +1,53 @@
+---
+category: ai-engineering
+date: 2026-11-17
+description: A proposal for a shared agent memory format lists five questions a record must answer. This essay argues for a sixth, how the agent knew, and puts it first.
+slug: agent-memory-evidence
+status: published
+title: 'A Memory Is a Claim, So Store How the Agent Knew'
+work_note: 'I ran Mem0''s team of 13 writers, and I write documentation where a claim needs a source a reader can check. This essay asks the same of an agent''s notes, and [my portfolio](/portfolio/) has the work.'
+---
+
+Wikipedia gives any reader a way to challenge a sentence. Its page on [the citation needed tag](https://en.wikipedia.org/wiki/Wikipedia:Citation_needed) says the template exists so that there is "a means for anyone to question an uncited claim."
+
+An agent's memory file is a page of uncited claims with one reader, and that reader believes all of them. Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, says a wrong note "can be read, and trusted, by Claude in a later session."
+
+On November 7 Mads Thines argued that [agent memory needs its OpenTelemetry moment](https://www.lorekit.io/blog/open-agent-memory-format). I think his proposal is right about the format and puts the field that matters at the bottom of the list.
+
+## What the proposal asks for
+
+Thines counts the places his coding tools keep what they remember and finds that "none of them can read the others". His remedy is the one observability reached in 2019, an agreed data model that vendors stop competing on.
+
+His reduction of that model is five questions every format answers: "where a memory is true, what its identity is (does a second write update it or duplicate it?), what it says, when it stops being true, and which version is current."
+
+The post is fair to its critics, and it prints the objection that traces and memories differ, since a trace is written once and a memory gets corrected. It ends on open questions, and one of them is the subject of this essay: "Should a record point at the code it depends on?"
+
+## The sixth question
+
+None of the five questions asks how the writer knew. A record can say where it applies and when it expires and still be wrong, and nothing in the envelope lets a reader find out.
+
+The evidence that this field does the work comes from the Anthropic post. On a benchmark where models built their own notes over many sessions, the first model to close the loop was one whose entries "included a rule (and also how it knew the rule was true)".
+
+The same post quotes a note written by a model playing Pokémon, a rule for what to do after several failed throws: "VARY the timing (insert extra 'wait' presses between menu steps) - the catch landed right after doing this."
+
+The last clause of that note is a citation. A later session reading it knows the rule came from one success, and can weigh it as that.
+
+The post's failure case is a note with no such clause. A model recorded a landmark on the wrong side of a mountain, trusted the note for the rest of the run, and was corrected only when a later pass checked it against the session log.
+
+## Why format comes second
+
+The commenters on [the Hacker News thread](https://news.ycombinator.com/item?id=50411467) made the case against a format better than I could. A commenter wrote that the need for a spec "is greatly reduced in the case of Agent memory because by definition it is read by agents", which can already read files in any shape.
+
+Another had given up on the feature: "it remembers the wrong things, and then turns them into an inane focus for each task." That is a complaint about trust, and a shared envelope would deliver the same wrong things to more tools.
+
+Thines half agrees. He calls a pointer to the code "the best protection against stale memory", and his draft record has room for a pull request number among its optional attributes.
+
+Optional is the part I'd change. A record with no source should be readable as a guess, the way an untagged sentence on Wikipedia is readable as unchallenged, and a model should be told the difference.
+
+## What a sourced note looks like
+
+It needs little. A note says what was observed, where, and when: the command and its output, the file and line, or the turn of the session in which the user said it.
+
+I hold a documentation page to that standard, and the reason is the same. A reader who can check a claim doesn't have to trust the writer, and for an agent the writer is an earlier session that can't be asked.
+
+My page on [memory serialization](/articles/memory-serialization/) keeps the log beside the record for this reason, and [memory versioning](/articles/memory-versioning/) covers what to keep when a note is corrected. A shared format would be worth having once the notes inside it can be checked.
