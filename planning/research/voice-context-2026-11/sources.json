@@ -3560,7 +3560,7 @@
     },
     {
       "id": "langgraph-memory-concepts",
-      "url": "https://docs.langchain.com/oss/python/langgraph/memory",
+      "url": "https://docs.langchain.com/oss/python/concepts/memory",
       "author": "LangChain",
       "date": "2026-11-17",
       "title": "Memory overview",

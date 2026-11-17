@@ -31,7 +31,7 @@ So in any design for [AI agent memory](/articles/agent-memory/), I'd decide whic
 
 ## What are the types of agent memory?
 
-There are four: working memory, which is short-term, and the long-term types episodic, semantic and procedural. The 2023 paper defines all four for agents built on language models, and LangGraph's [memory documentation](https://docs.langchain.com/oss/python/langgraph/memory) gives each long-term type a plain example.
+There are four: working memory, which is short-term, and the long-term types episodic, semantic and procedural. The 2023 paper defines all four for agents built on language models, and LangGraph's [memory documentation](https://docs.langchain.com/oss/python/concepts/memory) gives each long-term type a plain example.
 
 | Type | What it holds | An agent example |
 | --- | --- | --- |
