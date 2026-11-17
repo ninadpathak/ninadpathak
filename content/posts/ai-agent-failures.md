@@ -84,11 +84,13 @@ Timeouts, retries and lost state are, and they have known fixes. A tool call tha
 
 The fixes are the distributed-systems ones: idempotency keys and a cap on retries, with a circuit breaker that halts the loop after repeated errors. The [error handling guide](/articles/agent-error-handling/) works through them with a run example.
 
-Lost state is the same class of problem in a different place. A long session pushes early instructions out of the context window, which [short-term memory for AI agents](/articles/short-term-agent-memory/) covers, and the [state of agent memory](/articles/agent-memory-2026/) surveys the tools for keeping it.
+Lost state belongs to that class too. A long session pushes early instructions out of the context window, the failure [short-term memory for AI agents](/articles/short-term-agent-memory/) starts from, and the [state of agent memory](/articles/agent-memory-2026/) surveys the tools for keeping it.
 
 ## What reduces the guessing?
 
 Give the agent a way to check and a reason to use it. The measured failures are about verification, so the countermeasures are the things that make checking cheap: tests the agent can run, tool results that say what happened, and instructions that name the checks.
+
+A check only helps while a failing one still makes somebody stop. My essay on [a build that is red too often](/articles/red-build-nobody-reads/) is about how agent-rate change wears that signal out.
 
 Protocols help with the plumbing. The [Model Context Protocol](/articles/model-context-protocol/) gives tools a standard way to report an error, and that still leaves the decision about what to do next.
 

@@ -392,5 +392,10 @@
     "reader",
     "doc*",
     "tools"
+  ],
+  "red-build-nobody-reads": [
+    "loop",
+    "doc check*",
+    "reader"
   ]
 }
