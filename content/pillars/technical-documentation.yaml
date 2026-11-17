@@ -58,6 +58,8 @@ sections:
         note: "Reads Ghostty's written-by-humans label as an invitation that is fading as agents become the readers, and says who should keep writing by hand."
       - post: agents-on-call-runbooks
         note: "Responds to SigNoz's post on AI deskilling SREs by asking the on-call agent to write down what it did."
+      - post: chrome-modern-web-guidance-notes
+        note: "Reads Chrome's guides for coding agents as documentation, and argues with how they are packaged."
   - heading: "Ship changes"
     spokes:
       - post: writing-release-notes

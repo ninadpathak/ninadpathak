@@ -89,6 +89,8 @@ A collapsed section is plain text in Markdown, so progressive disclosure by togg
 
 Small pages with one job are therefore the unit an agent can select, and a page that mixes five intents makes it buy four it didn't want.
 
+Chrome's guides for coding agents are edited to that standard, and my [notes on Modern Web Guidance](/articles/chrome-modern-web-guidance-notes/) look at what they cut.
+
 ## When should documentation be long?
 
 Documentation can be long when nobody reads it from the top, and reference is the clear case. Fern's report has agents spending 31% of their reading on API reference, a page type that is exhaustive by design and entered at one parameter.
