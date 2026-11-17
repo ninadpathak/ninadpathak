@@ -5157,6 +5157,32 @@
       "connects": [
         "agent-harnesses"
       ]
+    },
+    {
+      "id": "wikipedia-hello-world",
+      "url": "https://en.wikipedia.org/wiki/%22Hello,_World!%22_program",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "\"Hello, World!\" program",
+      "quotes": [
+        "was inherited from a 1974 Bell Laboratories internal memorandum by Brian Kernighan, Programming in C: A Tutorial"
+      ],
+      "connects": [
+        "writing-technical-tutorials"
+      ]
+    },
+    {
+      "id": "node-crypto-timingsafeequal",
+      "url": "https://nodejs.org/api/crypto.html",
+      "author": "Node.js",
+      "date": "2026-11-18",
+      "title": "Crypto",
+      "quotes": [
+        "An error is thrown if a and b have different byte lengths"
+      ],
+      "connects": [
+        "writing-technical-tutorials"
+      ]
     }
   ],
   "unused_leads": [
@@ -5393,6 +5419,9 @@
     "agent-memory-2026": [
       "what happens to the old fact?",
       "which plan was this customer on in March?"
+    ],
+    "writing-technical-tutorials": [
+      "hello, world"
     ]
   }
 }
