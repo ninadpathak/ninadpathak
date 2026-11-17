@@ -108,6 +108,6 @@ Put each fact next to the change that would make it wrong.
 | How to finish work across several units, or recover from a failure | A written guide | The reader needs sequence, context and a decision no single symbol owns |
 | Which pitfalls apply to everything in a directory | A README or AGENTS.md in that directory | Agents and people both load it when they start work there |
 
-Guides are where a [quick start](/articles/quickstart-guide/) or a page from the [technical documentation template](/articles/documentation-template/) lives, and each should link into reference at the point where an exact name becomes necessary. A change that breaks a public contract also owes its callers an entry in the [release notes](/articles/release-notes-template/).
+Guides are where a [quick start](/articles/quickstart-guide/) or a page from the [technical documentation template](/articles/documentation-template/) lives, and each should link into reference at the point where an exact name becomes necessary. A change that breaks a public contract also owes its callers an entry in the release notes, written from the [release notes template](/articles/release-notes-template/).
 
 Maintaining several forms sounds like duplicated work, and it becomes duplication only when each form repeats the same answer. A comment, a contract and a reader's route have different update triggers, so keep each beside its own trigger and let it hand the reader to the next one.

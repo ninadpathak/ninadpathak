@@ -1,6 +1,9 @@
 ---
 category: agent-memory
 primary_query: agent memory audit trail
+siblings:
+- memory-serialization
+- ai-memory-management
 date: '2026-05-05'
 description: 'Memory versioning and audit trails for AI agents: append-only versions, a source for every write, and a hash chain anchored outside the database.'
 slug: memory-versioning

@@ -1,6 +1,9 @@
 ---
 category: coding-agents
 primary_query: none
+siblings:
+- best-llms-for-coding
+- red-build-nobody-reads
 bridges:
 - slug: code-documentation
   reason: The files that configure a coding agent are documentation.

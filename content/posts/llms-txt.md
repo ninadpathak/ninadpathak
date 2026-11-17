@@ -50,6 +50,8 @@ Server logs answer whether anything fetches the file. An [Ahrefs study published
 
 Ahrefs notes that its customers skew technical and SEO-aware, and it didn't check whether the files followed the proposal.
 
+Fern's figures for the docs it hosts point the other way, and [agents reading docs](/articles/agents-reading-docs/) sets the two studies side by side.
+
 ## Four real files, checked against the proposal
 
 The table comes from the same validation engine that powers the [llms.txt validator](/llms-txt-validator/), run on four public files fetched with curl at 14:58 UTC on 2026-10-22. Each owner can change its file at any time, and Stripe's server varies its response by request headers, so these counts are a snapshot of what that request received:

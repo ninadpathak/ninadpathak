@@ -159,6 +159,8 @@ Tell it what happened and what it is allowed to do next, in a result the harness
 
 Guessing is the largest single cause in the one breakdown of failed agent runs I know of. [Real-SWE 1.1](https://withspecific.com/blog/real-swe), an October benchmark of coding agents, classified its failed runs and found the biggest group to be the unverified assumption, a run that "Builds on a guess about the system instead of checking it in the workspace."
 
+A [lambda calculus exercise](/articles/lambda-calculus-ai/) is a small way to watch for the same habit, since each answer can be checked by a program.
+
 ## What else belongs in the harness?
 
 The pieces that make a failure recoverable belong there: a cap on retries per call, a log line for every tool call and result, and a checkpoint before any step that can't be undone. The [agent harness](/articles/agent-harnesses/) page describes where those live.

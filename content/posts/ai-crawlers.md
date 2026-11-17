@@ -27,6 +27,8 @@ Crawler access is the first check in [AI search optimization](/articles/ai-searc
 
 None of 12 developer documentation hosts blocks either one. Their robots.txt files, fetched on 2026-10-22, allowed all 17 AI and search agents the [AI crawler checker](/ai-crawler-checker/) knows.
 
+How much of a docs site's traffic those agents make up is the question in [what Fern's agent traffic figures show](/articles/agents-reading-docs/).
+
 ## What each AI crawler does
 
 Each platform names a separate agent for each job, and OpenAI and Anthropic separate their training crawlers from their search agents:

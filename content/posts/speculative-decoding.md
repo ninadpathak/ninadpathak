@@ -92,6 +92,6 @@ A falling acceptance rate is hard to spot from the outside, because requests sti
 
 ## Where does it sit among other optimizations?
 
-It is a decode-side technique, next to quantization and KV cache settings. The memory those settings manage is the subject of [KV-cache eviction](/articles/kv-cache-eviction/), and the glossary entry on [speculative decoding](/glossary/speculative-decoding/) has the short definition.
+It is a decode-side technique, next to quantization and KV cache settings, and constrained decoding for [structured outputs](/articles/llm-structured-outputs/) acts at the same step. The memory those settings manage is the subject of [KV-cache eviction](/articles/kv-cache-eviction/), and the glossary entry on [speculative decoding](/glossary/speculative-decoding/) has the short definition.
 
 The method changes speed and leaves the token count alone, since the large model has the final say on every token. What sets the bill is covered in [LLM token budgets](/articles/llm-token-budgets/).

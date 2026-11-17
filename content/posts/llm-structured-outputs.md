@@ -1,6 +1,9 @@
 ---
 category: ai-engineering
 primary_query: structured outputs
+siblings:
+- llm-inference-optimization
+- time-to-first-token
 bridges:
 - slug: agent-loop-anatomy
   reason: An agent loop multiplies every inference cost.
@@ -47,7 +50,7 @@ A refusal comes back outside the schema. The Responses API returns it as a conte
 
 A response cut off by a length limit is incomplete whatever the mode. The guide's Responses examples check `response.status` and `incomplete_details` before reading the result, and its Chat Completions examples check the finish reason.
 
-Latency has one documented cost today, and the guide states it differently in its two tabs. The Responses API tab says without qualification that "the first request you make with any schema will have additional latency as our API processes the schema, but subsequent requests with the same schema will not have additional latency."
+Latency has one documented cost today, which lands on [time to first token](/articles/time-to-first-token/), and the guide states it differently in its two tabs. The Responses API tab says without qualification that "the first request you make with any schema will have additional latency as our API processes the schema, but subsequent requests with the same schema will not have additional latency."
 
 The Chat Completions tab opens the same note with "for fine tuned models" and adds "Other models do not have this limitation." Until the two agree, assume a first-request cost for any new schema.
 

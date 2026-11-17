@@ -1,6 +1,9 @@
 ---
 category: coding-agents
 primary_query: none
+siblings:
+- red-build-nobody-reads
+- coding-models-new-code-vs-change
 bridges:
 - slug: design-doc-template
   reason: The files that configure a coding agent are documentation.
@@ -64,7 +67,7 @@ Somebody remembers the earlier decision. The people who hold the theory are pres
 
 So the explainer covers the what, and the why is carried by people who were there. A team that copies the explainer and lacks the rest should expect the result Merz describes.
 
-Change at that volume also wears on the signals a team relies on, and [my essay on red builds](/articles/red-build-nobody-reads/) takes up what happens to a build light.
+Change at that volume also wears on the signals a team relies on, and [my essay on red builds](/articles/red-build-nobody-reads/) takes up what happens to a build light. Whether the models change existing code as well as they write new code is a separate question, in [new code versus change](/articles/coding-models-new-code-vs-change/).
 
 [A reply to Merz](https://news.ycombinator.com/item?id=50446216) argued that understanding "does not decrease, it just moves up a level or two", the way few programmers understand the kernel they run on. I think the comparison holds only where the level below has an owner and a written contract, and a service that agents generated last year has neither unless someone supplied them.
 

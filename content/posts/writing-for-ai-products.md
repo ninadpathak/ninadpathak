@@ -1,6 +1,10 @@
 ---
 category: developer-experience
 primary_query: technical writing for ai products
+siblings:
+- stripe-technical-blog
+- devtools-documentation
+- technical-writing-for-engineers
 bridges:
 - slug: writing-changelogs
   reason: Documentation is the content developers trust first.
@@ -8,8 +12,6 @@ bridges:
   reason: Writing about an AI product starts from how the model behaves.
 - slug: agents-reading-docs
   reason: A docs page now has agent readers.
-- slug: agent-harnesses
-  reason: Writing about an agent product starts from how the agent works.
 date: 2026-03-31
 description: 'Technical writing for AI products documents a contract the model can change: what a model name pins, the output contract and how to judge a writer.'
 status: published
@@ -68,7 +70,7 @@ My arithmetic for a prompt set scored pass or fail at a true rate of 80% gives a
 
 Coding agents and retrieval systems read them, a paragraph at a time and without the surrounding page. A sentence such as "rate limits apply" sends a person to look up the number, and gives a coding assistant nothing to put in the client it is generating.
 
-Writing for that reader means stating defaults and limits in the sentence where they matter, and showing the exact shape of an error. My [reading of Fern's agent traffic report](/articles/agents-reading-docs/) looks at how much of docs traffic is agents, and the [agent harnesses](/articles/agent-harnesses/) post covers the runtime that feeds those pages to a model.
+Writing for that reader means stating defaults and limits in the sentence where they matter, and showing the exact shape of an error. My [reading of Fern's agent traffic report](/articles/agents-reading-docs/) looks at how much of docs traffic is agents.
 
 ## How I would evaluate a technical writer for an AI company
 
@@ -81,6 +83,10 @@ Ask for evidence in five areas before looking at a general portfolio.
 5. A record of getting the real contract from engineers, in place of a paraphrase of the launch brief.
 
 A further quality rarely appears in a job description, which is judgment about what to leave out. Strong AI writing omits guarantees the product can't keep and states uncertainty where the behavior is experimental.
+
+The habits carry over from older developer products. [Stripe's engineering blog](/articles/stripe-technical-blog/) is my reference for explaining the hard part to the person integrating, and [documentation for developer tools](/articles/devtools-documentation/) lists the pages every such product needs.
+
+Engineers writing these pages themselves can start from [technical writing for engineers](/articles/technical-writing-for-engineers/).
 
 My page as a [freelance technical writer for AI companies](/services/freelance-technical-writer-for-ai-companies/) links the work I've published for Firecrawl and OpenComputer. The [Centus case study](/work/centus/) covers the localization guides, and [my work page](/work/) has the rest.
 

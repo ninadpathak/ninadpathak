@@ -1,6 +1,10 @@
 ---
 category: agent-memory
 primary_query: rag vs memory
+siblings:
+- ai-memory-management
+- memory-versioning
+- voice-agent-memory
 bridges:
 - slug: llm-context-windows
   reason: The context window limit is the reason an agent needs memory.
@@ -80,6 +84,8 @@ A RAG pipeline with memory reads memory first to shape the question, retrieves e
 5. **Decide the write separately.** Nothing becomes durable because the model said it, so the application decides what is worth storing and what it replaces.
 
 Step five is where the 413-file run went wrong. The [five-layer memory hierarchy](/articles/ai-memory-management/) covers which kinds of record deserve which rules.
+
+Keeping every version of a record, so that a correction can be traced, is the job of [memory versioning](/articles/memory-versioning/). The rules change again for [voice agent memory](/articles/voice-agent-memory/), where a caller can cut a reply short.
 
 ## Which retrieval methods does agent memory need?
 

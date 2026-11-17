@@ -264,3 +264,16 @@ The independent review found 2 blockers, 16 should-fix items and 12 notes. What 
 - Openings: the review found one device in one shape across six pieces. The known thing now sits first, second or runs through the piece, no opening has a sentence announcing where a parallel breaks, and the three undated references carry dates.
 - Hub model: the branch was rebased onto the hub commit. All seven pieces link their hub in the first 200 words and declare siblings and bridges; the essay sits in the coding agents hub with a line in its pillar file.
 
+## Hub retrofit (2026-11-17, owner voice-rewrite-2)
+
+A links-only batch on the 38 posts the worklist marks "done or newer", which is the 29 rewrites plus the pages on the skip list. No argument, quote or script changed.
+
+- Every one of the 38 links its hub in the first 200 words, in a sentence written for that page.
+- Banned anchors replaced: "a separate essay" (three posts), "October article", two anchors ending in "piece", two full-title anchors, and "release notes" pointing at two URLs.
+- Siblings declared and same-hub links added where a post had fewer than two: shorter-documentation, writing-changelogs, writing-for-ai-products, rag-vs-memory, memory-versioning, claude-md, coding-models-new-code-vs-change, nobody-understands-the-code, llm-structured-outputs.
+- writing-for-ai-products lost its link to agent-harnesses so its bridges no longer outnumber its same-hub links.
+- Inbound links added from six posts outside the 38 or from batch 5 pieces: devtools-documentation, documentation-template, speculative-decoding, ai-agent-taxonomy, ai-agent-failures, agent-error-handling.
+- One stale reference fixed: release-notes-template pointed at a worked example that batch 4 removed from writing-changelogs.
+
+`audit_clusters --strict` reports 0 errors and no warning on any of the 38 or on the batch 5 pieces. The 111 warnings left are on posts the voice rewrite has not reached.
+

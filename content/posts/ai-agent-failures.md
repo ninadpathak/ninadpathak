@@ -103,6 +103,8 @@ Lost state belongs to that class too. A long session pushes early instructions o
 
 Give the agent a way to check and a reason to use it. The measured failures are about verification, so the countermeasures are the things that make checking cheap: tests the agent can run, tool results that say what happened, and instructions that name the checks.
 
+A task with one right answer shows the habit in miniature, and [reducing lambda calculus terms](/articles/lambda-calculus-ai/) is one a short script can grade.
+
 A check only helps while a failing one still makes somebody stop. My essay on [a build that is red too often](/articles/red-build-nobody-reads/) is about how agent-rate change wears that signal out.
 
 Protocols help with the plumbing. The [Model Context Protocol](/articles/model-context-protocol/) gives tools a standard way to report an error, and that still leaves the decision about what to do next.
