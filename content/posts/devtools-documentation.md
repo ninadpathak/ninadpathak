@@ -1,219 +1,169 @@
 ---
 category: developer-experience
 primary_query: devtools documentation
+siblings:
+- documentation-velocity
+- stripe-technical-blog
+- technical-writing-for-engineers
 bridges:
+- slug: quickstart-guide
+  reason: The quickstart is the first page a buyer runs, and that template shows how to write one.
 - slug: writing-changelogs
-  reason: Documentation is the content developers trust first.
-- slug: writing-release-notes
-  reason: Documentation is the content developers trust first.
+  reason: A buyer reads the changelog to see what an upgrade will cost them later.
+- slug: agents-reading-docs
+  reason: Fern's logs show what agents fetch from docs, and an agent is now often the first evaluator.
 money_link: true
 date: 2026-04-06
-description: DevTools startups lose deals long before sales hears the objection. I
-  explain how weak docs break evaluation, trials, and rollout confidence.
+description: 'Devtools documentation is read before the purchase. What the 2026 State of Docs survey says buyers do, the pages they check, and the agent that now reads first.'
 status: published
 work_note: "This post is about developer-tool companies losing deals because the docs didn't answer what the buyer's engineer asked. If you'd rather someone else find those missing answers and write them before the next evaluation, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Hire me for the job](/services/)."
-title: Why Devtools Startups Lose Deals Over Bad Docs
+title: How Developers Judge Devtools Documentation Before They Buy
 slug: devtools-documentation
 video: devtools-documentation
+updated: 2026-11-17
 ---
 
-DevTools startups lose deals over bad docs long before anyone writes "documentation" into a CRM field. A buyer hits a dead quickstart, an auth example leaves out a required scope, a pricing-sensitive limit like the free-tier request cap sits buried three pages deep, or the migration path for one breaking change reads as a single vague sentence.
+Devtools documentation is the part of a developer tool that a buyer uses first, before a trial and often before a sales call. GitBook's [State of Docs report for 2026](https://www.stateofdocs.com/2026/purchase-decisions-and-business-impact) found that "80% of decision-makers always or often review documentation before buying".
 
-The trial cools off quietly, sales blames timing, and product blames pricing. I think the docs were the real loss point more often than teams want to admit.
+Wikipedia's article on the [IBM PS/2](https://en.wikipedia.org/wiki/IBM_PS/2), a line released in 1987, records the motto of corporate buyers of the time, that nobody "got fired for buying an IBM".
+
+A devtools startup can't offer that kind of cover. What its buyer can check, without talking to anyone, is the docs.
+
+So this page is about what that buyer looks for, as the commercial end of [developer content](/articles/developer-experience/). I write documentation for a living, so read the argument knowing that.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/devtools-documentation/evaluation-friction.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/devtools-documentation/evaluation-friction.narrow.svg" width="288" height="776"><img class="np-has-narrow" src="/static/images/diagrams/devtools-documentation/evaluation-friction.svg" width="720" height="264" alt="A technical evaluator's path from the docs to a deal: a dead quickstart, an auth example that leaves out a required scope, and a usage limit buried three pages deep each mark a point where the trial quietly cools off before anyone signs." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Each crossed step is a place where docs lose the deal before sales hears an objection.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/devtools-documentation/evaluation-friction.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/devtools-documentation/evaluation-friction.narrow.svg" width="288" height="776"><img class="np-has-narrow" src="/static/images/diagrams/devtools-documentation/evaluation-friction.svg" width="720" height="264" alt="A technical evaluator's path from the docs to a deal, passing the quickstart, the auth page and the limits page. Each of the three is marked as a point where the evaluation can stop." loading="lazy" decoding="async"></picture></a>
+  <figcaption>The pages an evaluator meets on the way to a decision. A failure at any of them can end the trial before sales hears an objection.</figcaption>
 </figure>
 
-**Short answer:** DevTools buyers use docs as a proxy for product maturity, implementation risk, and post-sale support quality. The 2026 State of Docs report says 80% of decision-makers review documentation before buying, 88% rate docs extremely or somewhat important, and 51% say docs are important or essential for closing deals, yet 57% do not track leads from documentation.
+## What is devtools documentation for?
 
-Bad docs lose deals because they create friction exactly where technical buyers evaluate trust: setup speed, API clarity, edge-case disclosure, and upgrade confidence.
+It lets a developer who has never spoken to the company decide whether the tool will work for their case. CT Smith of Payabli says in the report that when they shop for software they skip the marketing site and go to the docs.
 
-## Buyers use docs as the product, not the brochure
+And Usha Mandya of Docker sees it from the vendor's side: "Developers don't start with the marketing site. They come to docs first."
 
-The [State of Docs 2026 purchase and business impact report](https://www.stateofdocs.com/2026/purchase-decisions-and-business-impact) makes the commercial case more directly than most product teams do internally. Eighty percent of decision-makers review docs before buying.
+## What does the survey say about docs and buying?
 
-Eighty-eight percent rate docs extremely or somewhat important. More than half of respondents say docs matter for closing deals, while most teams still do not instrument lead tracking from docs.
+It says buyers read the docs, and vendors don't count what happens next.
 
-What I have seen on technical evaluations lines up with those numbers. When a product is technical enough to change infrastructure, workflows, or how much time a team spends maintaining things, developers skip the marketing site entirely.
-
-They go straight to the docs because the docs answer the uncomfortable questions: how fast can I test this against a throwaway API key, what is hidden behind the first successful request, and what breaks when I move a working call from the sandbox to a production deploy? A buyer evaluating a payments API, for instance, will look for whether test-mode keys behave like live keys before they will trust the product with real card data.
-
-The same report includes operators from Gravitee, Docker, and Stripe describing docs as a sales tool, a developer enablement engine, and even infra. That language matters because it captures the real evaluation path.
-
-Buyers read documentation to judge the product team and solve immediate implementation problems at the same time.
-
-## The first broken quickstart can kill the trial
-
-Quickstarts carry more revenue weight than most startups give them. A quickstart is not an onboarding asset in the abstract.
-
-Think of it as a timed exam your product gives to a stranger who has never met your support team: can they paste five commands and see a real response before they lose interest?
-
-Stripe's [development quickstart](https://docs.stripe.com/development/quickstart) is a good example of what "serious" looks like. It starts with the CLI, shows the exact SDK version used, spells out what the reader will learn, and walks through the first successful request with real commands.
-
-<div class="visual-wrapper">
-  <div class="visual-title">Stripe Development Quickstart</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/stripe-quickstart.png" alt="Stripe Development Quickstart" loading="lazy">
-  </div>
-</div>
-
-Stripe's [quickstart index](https://docs.stripe.com/quickstarts) also makes path selection obvious across different integration shapes. The [Stripe engineering blog](/articles/stripe-technical-blog/) works a stage earlier, before anyone has created an API key, by showing how Stripe builds the systems those quickstarts call.
-
-Vercel's [Functions quickstart](https://vercel.com/docs/functions/quickstart) is much shorter, but it still does the essential job: prerequisites, a working code example, and the next technical steps.
-
-<div class="visual-wrapper">
-  <div class="visual-title">Vercel Functions Quickstart</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/vercel-quickstart.png" alt="Vercel Functions Quickstart" loading="lazy">
-  </div>
-</div>
-
-Cloudflare's [Workers getting started guide](https://developers.cloudflare.com/workers/get-started/) follows the same pattern.
-
-<div class="visual-wrapper">
-  <div class="visual-title">Cloudflare Workers Getting Started</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/cloudflare-quickstart.png" alt="Cloudflare Workers Getting Started" loading="lazy">
-  </div>
-</div>
-
-Reducing ambiguity fast is what good quickstarts do. Weak ones force the buyer to improvise the missing steps, like guessing which region flag the deploy command actually needs, and that improvisation is where doubt enters the evaluation.
-
-Engineering teams will shrug off a broken sample because "support can help." That help arrives too late to matter.
-
-Once the evaluator has to open a ticket just to finish the first ten minutes, say because the documented `npm install` pulls a package version that no longer exports the function in the example, the product feels expensive before procurement ever sees a quote.
-
-## Buyers read docs for signs of operational honesty
-
-A polished docs site does not close deals on its own. Honest docs close more deals because they show the team understands the ugly parts of adoption, like the fact that the webhook retry schedule doubles the delay each attempt and can leave events stuck for hours.
-
-Buyers look for questions like these, even if they never state them explicitly:
-
-- Which auth scopes or API keys do I need, exactly?
-- What are the rate limits, timeouts, and default quotas?
-- Which deployment environments are actually supported?
-- How do retries, idempotency, and failure states behave?
-- What changes when the next major version ships?
-
-Grouping versioning, API upgrades, testing, and error handling as core developer concerns is what Stripe's [developer resources page](https://docs.stripe.com/development) does, and that placement is not accidental. Mature docs acknowledge that adoption risk extends past basic implementation.
-
-Explicit limits and edge-case handling, such as documenting that a 429 carries a Retry-After header you are expected to honor, help the buyer map the full operational surface. When that header goes undocumented, the evaluator finds out the slow way, by getting throttled in a load test and reverse-engineering the backoff from response timestamps.
-
-A missing detail like that damages trust faster than any amount of poor visual design. Accurate constraints sell products.
-
-## Bad docs force evaluators into unpaid solution engineering
-
-Every missing prerequisite or unlabeled beta feature pushes cognitive load onto the evaluator. Vague migration notes and broken code samples increase implementation cost.
-
-That cost rarely appears in a forecast sheet, but it shapes deal momentum.
-
-State of Docs reports that onboarding and feature discovery are the highest-impact areas for documentation today. Feature discovery drives trial success.
-
-A buyer who cannot get through setup cleanly never reaches the internal champion phase, the moment when someone stands up in a team meeting and says we should pay for this, because they never got far enough to have anything worth defending.
-
-Underestimating how often bad docs force prospects into pseudo-consulting mode is a common startup blind spot. The buyer has to infer naming conventions, reconstruct request payloads from a half-shown example, and hunt through scattered changelog entries to figure out whether v3 of the SDK still talks to the v2 API.
-
-That detective work reads as a preview of future maintenance cost. Tools that are difficult to understand hand a real advantage to competitors with clearer documentation.
-
-One reason I offer [technical writing services](/services/) to devtools companies is that docs quality improves sales and support simultaneously. Good docs reduce the labor required to believe in the product.
-
-[My work page](/work/) covers the kind of writing work I mean.
-
-## Documentation quality signals product maturity
-
-Because docs expose coordination quality across product, engineering, and support, buyers use them as a maturity detector. I can usually tell a lot from four pages:
-
-1. Quickstart
-2. Authentication or API keys
-3. Limits, pricing, or quotas
-4. Changelog or release notes
-
-Those four pages reveal whether the team respects downstream implementation work. A startup can still be early and score well here.
-
-Perfect breadth is not something I expect from a small team. I do expect the essentials to be current, tested, and honest, the way a restaurant can be tiny and new yet still keep its kitchen clean.
-
-Release communication matters to founders. Vague update pages make buyers wonder how painful upgrades will become after adoption.
-
-I covered that problem from the user side in [my guide to writing a changelog](/articles/writing-changelogs/) and from the release side in [Writing release notes that developers trust](/articles/writing-release-notes/). Buyers read those surfaces as evidence that the product will age gracefully.
-
-## The hidden deal killer is post-sale fear
-
-A buyer does not need to prove your docs are bad to walk away. They only need to suspect that post-sale life will be harder than promised.
-
-That suspicion usually forms from small details:
-
-- The code sample uses a deprecated SDK version.
-- The limits page exists, but the defaults on it do not match the API behavior.
-- The changelog mentions removals without migration steps.
-- The auth guide assumes knowledge a new evaluator will not have.
-- The troubleshooting page explains symptoms without root causes.
-
-None of those issues alone sounds dramatic. Taken together they tell a story about the company's operational habits.
-
-Buyers notice the pattern because they have lived through painful integrations before, the kind where a deprecation note shipped with no migration path and cost a sprint of rewriting calls against an endpoint that vanished. Good docs lower perceived implementation risk.
-
-My less obvious view here is that docs act as a risk model. Buyers study them to estimate how the vendor will behave after signature, the way you read a landlord's lease for the clauses about what happens when something breaks.
-
-They are predicting behavior during outages, deprecations, and urgent support tickets.
-
-## What I would fix first on a startup docs site
-
-Given one week with a devtools startup whose docs were hurting conversion, I would start with the pages buyers hit during evaluation:
-
-| Page | What I would tighten first |
+| What respondents said | Share |
 | --- | --- |
-| Quickstart | Remove hidden prerequisites, test every command, show the first successful outcome |
-| Auth | Spell out exact scopes, token lifetimes, environment differences, and failure responses |
-| Limits | Publish defaults, rate limits, quotas, and upgrade paths clearly |
-| Release history | Separate breaking changes, deprecations, and migrations with dates and versions |
-| Troubleshooting | Cover top integration failures with symptom, cause, and fix |
+| Decision-makers who always or often review documentation before buying | 80% |
+| Rate documentation extremely or somewhat important to a purchase | 88% |
+| Say docs are important or essential for closing deals | 51% |
+| Don't track leads from their documentation | 57% |
 
-I would also instrument docs better. State of Docs shows a huge measurement difference between believing docs matter and proving where they matter.
+Now, GitBook makes a documentation platform and runs this survey, so it has a stake in the answer. So do I.
 
-Teams need to know which pages start trials, which pages correlate with activation, and which pages generate support.
+The report adds that the first two figures sit about where they did in 2025, and it has no row for deals lost. Christopher Gales raises that case in the same section and says "It's a very lagging indicator to find that out."
 
-Documentation affects a deal because engineers rank evidence before they trust a vendor's claim. Working technical material outranks polished promises.
+This page used to carry a title saying devtools startups lose deals over bad docs. I haven't found a published count of one, so the claim I'll stand behind is smaller: buyers check, and a page that fails the check gives them a reason to stop.
 
-## Strong docs allow smaller startups to compete with larger vendors
+## Which pages does a buyer check?
 
-Against established vendors, small companies can win on documentation alone. I have watched it happen because docs narrow the gulf between product quality and buyer confidence.
+I'd name four, and the choice is my judgment, since the survey doesn't ask. Each one answers a question the buyer has before they give the trial any more time.
 
-Great docs let a small team look operationally credible.
+| Page | The buyer's question |
+| --- | --- |
+| Quickstart | Can I get a real response today? |
+| Authentication | Which keys and scopes do I need, and how do test keys differ from live ones? |
+| Limits and pricing | What will this refuse to do, and what does it cost past the free tier? |
+| Changelog | What happens to my integration when the next version ships? |
 
-Tailwind often comes up in docs discussions for a reason: the docs make the product legible immediately, so a developer can copy a utility class out of the reference and see it work without reading a tutorial first. Plenty of startups could borrow that lesson.
+The [quick start guide template](/articles/quickstart-guide/) covers the first page, and my [changelog guide](/articles/writing-changelogs/) covers the last.
 
-Clear information architecture and tested examples create momentum.
+## What does a quickstart tell a first-time reader?
 
-Founders sometimes ask whether docs should wait until the product is more mature. I think the opposite is true for devtools.
+Less than you'd expect, and each vendor leaves out something different. The script below fetches the quickstarts of Stripe, Vercel and Cloudflare and searches each for four things a first-time reader needs.
 
-Early products need sharper docs because buyers already discount the company for age and roadmap uncertainty. Docs are one of the few places a startup can remove that discount.
+```python
+"""Fetch three vendor quickstarts and report what each page tells a first-time reader."""
+import gzip
+import html
+import re
+import urllib.request
+
+PAGES = {
+    "Stripe": "https://docs.stripe.com/development/quickstart",
+    "Vercel": "https://vercel.com/docs/functions/quickstart",
+    "Cloudflare": "https://developers.cloudflare.com/workers/get-started/guide/",
+}
+CHECKS = {
+    "prerequisites": r"prerequisites",
+    "success signal": r"if everything worked|you should see|expected output",
+    "next steps": r"next steps",
+    "agent entry": r"set up agent|agent prompt|agent setup|copy for llm",
+}
+
+
+def text_of(url):
+    request = urllib.request.Request(url, headers={
+        "User-Agent": "Mozilla/5.0 (quickstart-probe)", "Accept-Encoding": "gzip"})
+    body = urllib.request.urlopen(request, timeout=60).read()
+    if body[:2] == b"\x1f\x8b":
+        body = gzip.decompress(body)
+    page = re.sub(r"(?s)<(script|style)[^>]*>.*?</\1>", " ", body.decode("utf-8", "replace"))
+    return html.unescape(re.sub(r"<[^>]+>", " ", page)).lower()
+
+
+print(f"{'page':<11}" + "".join(f"{name:<16}" for name in CHECKS))
+for vendor, url in PAGES.items():
+    page = text_of(url)
+    cells = ("yes" if re.search(pattern, page) else "no" for pattern in CHECKS.values())
+    print(f"{vendor:<11}" + "".join(f"{cell:<16}" for cell in cells))
+```
+
+`python3 quickstart_probe.py`, run on November 17, printed this.
+
+```text
+page       prerequisites   success signal  next steps      agent entry
+Stripe     no              yes             no              yes
+Vercel     yes             no              yes             yes
+Cloudflare yes             no              yes             yes
+```
+
+Now, the checks are plain string searches, so a "no" means the page doesn't use those words and may still do the job another way. Stripe's page has no prerequisites heading and opens on a list titled "What you learn", which names the SDK version it installs.
+
+It's also the only page where the search found a success signal, in the sentence "If everything worked, the command-line displays the following response." That sentence is the one I'd add to any quickstart first.
+
+## Who reads the docs first now?
+
+Often an agent, and each of these quickstarts has made room for one. Stripe's page offers "Set up agent" and Cloudflare's links "Agent setup", and Vercel's prints a ready-made prompt to hand to a coding agent.
+
+Dachary Carey of MongoDB explains in the report why that matters. Developers now tell an agent what they want to build and the agent picks the tools, so a product the agent doesn't know about doesn't get its docs read at all.
+
+The report counts it too: 32% of respondents say their docs now serve to represent the product to LLMs, a category the survey didn't have in 2025. What agents request once they arrive is in my notes on [Fern's agent traffic report](/articles/agents-reading-docs/).
+
+## Can you measure what docs do for sales?
+
+Yes, and few teams do. The report says 57% of respondents don't track leads from documentation, and a further 17% don't know.
+
+Larry Ullman was Stripe's first technical writer, and the report lists what his team tracked there, starting with the time from a first docs visit to a first paid transaction.
+
+So start with one of those. Inside an engineering team the same question has different evidence, which my page on [documentation ROI](/articles/documentation-velocity/) covers.
+
+## What should a small team fix first?
+
+I'd start with the quickstart and run every command in it on a clean machine. Then I'd publish the limits, because a limit found during a load test costs more trust than one read on a page.
+
+The writing can come from the engineers who built the product, and [technical writing for engineers](/articles/technical-writing-for-engineers/) covers the rules that matter. The [Stripe engineering blog](/articles/stripe-technical-blog/) shows the stage before all this, where a company's writing earns attention before anyone creates an API key.
+
+And if nobody on the team has the time, this is the work I do. My [technical writing services](/services/) cover these pages, and I run the product before I write about it.
 
 ## FAQ
 
-**Do bad docs really lose deals, or just slow onboarding?**
+**What is devtools documentation?**
 
-They do both. Bad docs slow onboarding first, then they lose deals when the buyer interprets that friction as future implementation and support cost.
+It is the documentation a developer-tool company publishes for the engineers who evaluate and use its product, from the quickstart and API reference to the changelog.
 
-The sales team often sees the slowdown without seeing the cause.
+**Do bad docs lose deals?**
 
-**Which docs page matters most for devtools conversion?**
+Nobody has published a count. The 2026 State of Docs survey found 51% of respondents calling docs important or essential for closing deals.
 
-Usually the quickstart, because it compresses setup, clarity, and trust into one session. After that, I would rank auth, limits, and release history very high because they reveal operational honesty.
+**Which docs page matters first for a devtools trial?**
 
-**Should startups invest in docs before they hire DevRel?**
+The quickstart, in my judgment, because it's the page that decides whether the trial starts.
 
-Yes. Docs are the cheapest durable technical explanation a startup can publish.
+**Does documentation for an AI product need anything extra?**
 
-DevRel can amplify and humanize the product later. Weak docs make every later channel work harder.
-
-**What is the biggest documentation mistake early-stage devtools teams make?**
-
-They document the happy path and assume support can cover the rest. Buyers are evaluating the unhappy path too.
-
-If docs do not explain constraints, migration, and failure handling, the product feels risky. For a product built on a model, the constraints include behavior that shifts between snapshots, the subject of [writing for AI products](/articles/writing-for-ai-products/).
-
-**How should teams measure whether docs influence revenue?**
-
-Track docs-to-signup paths, docs pages viewed before trial activation, support tickets opened after a docs view, and which docs pages correlate with first successful use. State of Docs shows that many teams still miss this measurement layer entirely.
+Yes. The model's behaviour can change under the same name, which [writing for AI products](/articles/writing-for-ai-products/) covers.

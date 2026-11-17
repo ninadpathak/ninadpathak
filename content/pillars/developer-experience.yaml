@@ -17,7 +17,7 @@ sections:
       - post: stripe-technical-blog
         note: "Shows what the Stripe engineering blog publishes now and why the writing works as an advantage."
       - post: devtools-documentation
-        note: "Argues that weak docs lose a devtools deal during evaluation, before sales hears an objection."
+        note: "What a buyer checks in a devtools company's docs before a trial, with survey figures and a script that probes vendor quickstarts."
       - post: documentation-velocity
         note: "Reads DORA's 2022 table on documentation quality, says how far it can be pushed, and shows how to measure one document on your own team."
   - heading: "How to write it"
