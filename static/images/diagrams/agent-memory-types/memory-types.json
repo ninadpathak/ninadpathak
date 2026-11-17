@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/agent-memory-types/memory-types.mmd",
-  "hash": "0a048ae23ba7f532",
+  "hash": "f586e5f7800e3e3a",
   "pele": "1.8.0",
   "width": 720,
   "height": 288,
@@ -12,13 +12,13 @@
   "narrow": {
     "rel": "/static/images/diagrams/agent-memory-types/memory-types.narrow",
     "width": 288,
-    "height": 488,
+    "height": 624,
     "minText": {
       "sans": 13,
       "mono": 9.5
     }
   },
-  "alt": "Working, episodic, and semantic memory side by side. Working memory is the scratchpad for the current turn, backed by the context window and gone when the turn ends. Episodic memory is the agent's autobiographical record of what happened across sessions, such as a task that failed on Friday with a given error, kept in an event store in time order. Semantic memory holds what is true, such as the fact that list.sort() is stable, in a durable knowledge base.",
-  "caption": "Working memory holds the current turn, episodic memory keeps what happened in order across sessions, and semantic memory holds facts until they stop being true.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-memory-types/memory-types.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-memory-types/memory-types.narrow.svg\" width=\"288\" height=\"488\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-memory-types/memory-types.svg\" width=\"720\" height=\"288\" alt=\"Working, episodic, and semantic memory side by side. Working memory is the scratchpad for the current turn, backed by the context window and gone when the turn ends. Episodic memory is the agent's autobiographical record of what happened across sessions, such as a task that failed on Friday with a given error, kept in an event store in time order. Semantic memory holds what is true, such as the fact that list.sort() is stable, in a durable knowledge base.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Working memory holds the current turn, episodic memory keeps what happened in order across sessions, and semantic memory holds facts until they stop being true.</figcaption>\n</figure>"
+  "alt": "Working, episodic, semantic and procedural memory side by side. Working memory is the context window, and it lasts until the session ends or the window is compacted. Episodic memory is the record of what happened across sessions, kept in time order. Semantic memory holds what is true, such as a fact about the user. Procedural memory holds the rules the agent acts by, such as its system prompt.",
+  "caption": "Working memory is the context window. Episodic memory keeps what happened, semantic memory keeps what is true, and procedural memory keeps the rules the agent acts by.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-memory-types/memory-types.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-memory-types/memory-types.narrow.svg\" width=\"288\" height=\"624\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-memory-types/memory-types.svg\" width=\"720\" height=\"288\" alt=\"Working, episodic, semantic and procedural memory side by side. Working memory is the context window, and it lasts until the session ends or the window is compacted. Episodic memory is the record of what happened across sessions, kept in time order. Semantic memory holds what is true, such as a fact about the user. Procedural memory holds the rules the agent acts by, such as its system prompt.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Working memory is the context window. Episodic memory keeps what happened, semantic memory keeps what is true, and procedural memory keeps the rules the agent acts by.</figcaption>\n</figure>"
 }
