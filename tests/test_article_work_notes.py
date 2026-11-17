@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 
 import frontmatter
+import yaml
 
 from build import SiteBuilder, render_work_note
 
@@ -94,11 +95,12 @@ FIRST_PERSON = re.compile(
 # design doc" and "the writer who reviews a draft" are ordinary nouns and stay allowed.
 # A first-person introduction, "I'm Ninad Pathak" or "I am Ninad Pathak", is the one place
 # the name may appear, and SELF_INTRODUCTION removes it before the bio check runs.
-SELF_INTRODUCTION = re.compile(r"\bI(?:['’]m| am) Ninad Pathak\b")
+SELF_INTRODUCTION = re.compile(r"\bI(?:['’]m| am) Ninad Pathak\b(?!['’]s)")
 THIRD_PERSON_BIO = re.compile(
     r"(?i)\bNinad\b|\bPathak\b|\b(?:he|she|his|hers|him|himself|herself)\b"
-    r"|\b(?:writer|creator|strategist|consultant|owner)(?: \w+){0,2} "
-    r"(?:writes|creates|documents|explains|develops|plans|edits|reviews|builds|turns|connects)\b"
+    r"|\b(?:writer|author|freelancer|creator|strategist|consultant|owner)(?: \w+){0,3} "
+    r"(?:writes|wrote|creates|documents|documented|explains|develops|plans|edits|reviews|builds|turns"
+    r"|connects|takes|took|has (?:written|documented|worked))\b"
 )
 LINK = re.compile(r"\[([^]]+)\]\([^)]+\)")
 
@@ -113,6 +115,50 @@ def note_outside_link(note: str) -> str:
     return LINK.sub(" ", note)
 
 
+# What a note may offer and where it may point. These rules fail closed: a note passes only
+# when it says "freelance", carries a hiring phrase, links a services page or the contact
+# page, names no company or person outside ALLOWED_NAMES, and gives no figure.
+SELLING = re.compile(r"(?i)\b(?:sell|sells|selling|sold|seller|sellers|sale|sales)\b")
+HIRING = re.compile(r"(?i)\bhire\b|\bwork with me\b|\bget in touch\b|\b(?:tell|ask|talk to) me\b")
+NOTE_TARGET = re.compile(r"\]\((?:/contact/|/services/(?:[a-z0-9-]+/)?)\)")
+# Work no services page offers. A first-person verb followed in the same sentence by one
+# of these subjects is an offer the site cannot back.
+UNBACKED_OFFER = re.compile(
+    r"(?i)\bI(?:['’]ll)?(?: also)? (?:run|do|offer|write|handle|take on|provide|manage)\b[^.?!]*"
+    r"\b(?:accessibility|SEO|design docs?|runbooks?)\b"
+)
+FIGURE = re.compile(r"(?i)\d|\byears?\b")
+ALLOWED_NAMES = {"I", "Ninad", "Pathak", "AI", "API", "LLM", "SEO", "README", "OpenAPI"}
+
+
+def unknown_names(text: str) -> list:
+    """Capitalised words that do not start a sentence and are not on the allowed list."""
+    found = []
+    for match in re.finditer(r"\b[A-Z][A-Za-z]*\b", text):
+        starts_sentence = match.start() == 0 or re.search(r"[.?!:] $", text[:match.start()])
+        if not starts_sentence and match.group(0) not in ALLOWED_NAMES:
+            found.append(match.group(0))
+    return found
+
+
+def offer_problems(note: str) -> list:
+    problems = []
+    text = note_text(note)
+    if SELLING.search(text):
+        problems.append("a form of sell")
+    if "freelance" not in text.lower():
+        problems.append("does not say freelance")
+    if not HIRING.search(text):
+        problems.append("no hiring phrase")
+    if not NOTE_TARGET.search(note):
+        problems.append("link is not a services page or the contact page")
+    if UNBACKED_OFFER.search(text):
+        problems.append("offers work no services page backs")
+    if FIGURE.search(text):
+        problems.append("a figure or a count of years")
+    if unknown_names(text):
+        problems.append("names outside the allowed list: " + ", ".join(unknown_names(text)))
+    return problems
 def voice_problems(note: str) -> list:
     problems = []
     if not FIRST_PERSON.search(note_outside_link(note)):
@@ -132,7 +178,7 @@ class WorkNoteVoiceRuleTests(unittest.TestCase):
             "I wrote this template so the author of a design doc argues with the proposal before review. [My portfolio](/portfolio/) has more.",
             "I wrote this page for the writer who has to review an engineer's draft. [My portfolio](/portfolio/) has more.",
             "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [See how I work](/services/).",
-            "This post is about changelogs. If you'd rather hand yours over, that's what I do. I am Ninad Pathak, and [this is how I work](/services/).",
+            "Handed the docs along with everything else? I am Ninad Pathak, a freelance technical writer, and [you can hire me](/services/).",
         ):
             with self.subTest(value=value):
                 self.assertEqual(voice_problems(value), [])
@@ -147,6 +193,10 @@ class WorkNoteVoiceRuleTests(unittest.TestCase):
             "I'm Ninad Pathak. Ninad writes technical documentation, and [the work is here](/services/).",
             "I'm Ninad Pathak, and I'm Ninad Pathak again in [the same note](/services/).",
             "I work with Ninad Pathak, who writes documentation. [Get in touch](/contact/).",
+            "The author of this site documents developer products, as [my page](/services/) shows.",
+            "A freelance technical writer for AI companies wrote this post, in my view. [Hire me](/services/).",
+            "This site's writer has documented fifty products, and my inbox is open. [Hire me](/services/).",
+            "I'm Ninad Pathak's biggest fan, and I say so often. [Hire me](/services/).",
         ):
             with self.subTest(value=value):
                 self.assertIn("third-person bio wording", voice_problems(value))
@@ -162,12 +212,42 @@ class WorkNoteVoiceRuleTests(unittest.TestCase):
                 self.assertIn("no first person outside the link label", voice_problems(value))
 
 
+class WorkNoteOfferRuleTests(unittest.TestCase):
+    GOOD = "I'm Ninad Pathak, a freelance technical writer, and I run the product before I write about it. [Hire me](/services/)."
+
+    def test_a_backed_offer_passes(self):
+        self.assertEqual(offer_problems(self.GOOD), [])
+        self.assertEqual(voice_problems(self.GOOD), [])
+
+    def test_unbacked_or_unhirable_notes_fail(self):
+        cases = {
+            "I'm Ninad Pathak, a freelance technical writer, and I run accessibility audits and SEO campaigns. [Hire me](/services/).": "offers work no services page backs",
+            "I'm Ninad Pathak, a freelance technical writer. I write runbooks for your team. [Hire me](/services/).": "offers work no services page backs",
+            "I'm Ninad Pathak, a freelance writer with documentation for Stripe and Google behind me. [Hire me](/services/).": "names outside the allowed list: Stripe, Google",
+            "I'm Ninad Pathak, a freelance writer for twenty years. [Hire me](/services/).": "a figure or a count of years",
+            "I'm Ninad Pathak, a freelance writer, and I sold documentation packages. [Hire me](/services/).": "a form of sell",
+            "I'm Ninad Pathak, a freelance writer and a seller of documentation. [Hire me](/services/).": "a form of sell",
+            "I'm Ninad Pathak, a freelance writer, and my sales pitch is short. [Hire me](/services/).": "a form of sell",
+            "I'm Ninad Pathak, a freelance writer. [Hire me](/portfolio/).": "link is not a services page or the contact page",
+            "I'm Ninad Pathak, and I write for AI companies. [See what I do](/services/).": "does not say freelance",
+            "I'm Ninad Pathak, a freelance technical writer. [See what I do](/services/).": "no hiring phrase",
+        }
+        for value, expected in cases.items():
+            with self.subTest(value=value):
+                self.assertIn(expected, offer_problems(value))
+
+
 class PublishedWorkNoteTests(unittest.TestCase):
-    def test_published_notes_are_present_short_first_person_and_varied(self):
-        """A pitch note may repeat across the site, as a company's pitch does on its blog.
-        Two posts next to each other in a topic may not carry the same one, and a note
-        that opens on its post's subject belongs to that post alone."""
-        notes = []
+    # Topics whose posts are about work clients hire for. Each of their notes is written
+    # for its post, so none may repeat anywhere on the site.
+    WRITTEN_PER_POST = {"technical-documentation", "developer-experience", "ai-search-optimization"}
+    MOST_POSTS_PER_NOTE = 7
+
+    def test_published_notes_are_present_short_first_person_and_backed(self):
+        self.assertTrue(self.published_notes())
+
+    def published_notes(self):
+        notes = {}
         for path in Path("content/posts").glob("*.md"):
             post = frontmatter.load(path)
             if post.get("status") != "published":
@@ -180,15 +260,39 @@ class PublishedWorkNoteTests(unittest.TestCase):
                 self.assertLessEqual(len(text.split()), 70)
                 self.assertGreaterEqual(len(text.split()), 15)
                 self.assertEqual(voice_problems(note), [])
-                self.assertNotRegex(text, r"(?i)\bsell(?:s|ing)?\b")
-                notes.append((str(post.get("category")), str(post.get("date")), path.stem, note))
-        self.assertTrue(notes)
-        notes.sort()
-        for (category, _, earlier, first), (next_category, _, later, second) in zip(notes, notes[1:]):
-            if category == next_category:
-                self.assertNotEqual(first, second, f"{earlier} and {later} sit together and share a note")
-        subject_notes = [note for *_, note in notes if note.startswith("This post")]
-        self.assertEqual(len(subject_notes), len(set(subject_notes)))
+                self.assertEqual(offer_problems(note), [])
+                notes[post.get("slug") or path.stem] = (str(post.get("category")), note)
+        return notes
+
+    def test_notes_differ_from_the_next_post_on_the_topic_page(self):
+        """A pitch may repeat across the site, as a company's pitch does on its blog. The
+        reader meets posts in the order a topic page lists them, so that order decides
+        which notes are neighbours."""
+        notes = self.published_notes()
+        pillars = sorted(Path("content/pillars").glob("*.yaml"))
+        self.assertTrue(pillars)
+        listed = set()
+        for pillar in pillars:
+            spokes = [spoke["post"] for section in yaml.safe_load(pillar.read_text())["sections"]
+                      for spoke in section.get("spokes", []) if "post" in spoke]
+            listed.update(spokes)
+            for earlier, later in zip(spokes, spokes[1:]):
+                self.assertIn(earlier, notes)
+                self.assertIn(later, notes)
+                self.assertNotEqual(notes[earlier][1], notes[later][1],
+                                    f"{earlier} and {later} sit together on {pillar.stem} and share a note")
+        self.assertEqual(listed, set(notes), "every published post must sit on a topic page")
+
+    def test_notes_written_for_a_post_are_unique_and_no_note_is_overused(self):
+        notes = self.published_notes()
+        uses = {}
+        for slug, (category, note) in notes.items():
+            uses.setdefault(note, []).append((slug, category))
+        for note, posts in uses.items():
+            self.assertLessEqual(len(posts), self.MOST_POSTS_PER_NOTE, note)
+            if len(posts) > 1:
+                shared = [slug for slug, category in posts if category in self.WRITTEN_PER_POST]
+                self.assertEqual(shared, [], f"a note written for one post is reused: {note}")
 
 
 if __name__ == "__main__":

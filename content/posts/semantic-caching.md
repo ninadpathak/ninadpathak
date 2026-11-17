@@ -9,7 +9,7 @@ description: Semantic caching returns cached LLM responses for semantically simi
   queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism
   works and where it fails.
 status: published
-work_note: "I'm Ninad Pathak, and I write for AI companies whose readers are engineers. I build the example and run it before I draft. [See what I do](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Tutorials, explainers and comparisons for AI companies are my work as a freelance technical writer. I'm Ninad Pathak, and I build the example and run it before I draft, so your engineers review working code. [Hire me](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Semantic Caching: The RAG Optimization Nobody Talks About'
 slug: semantic-caching
 ---

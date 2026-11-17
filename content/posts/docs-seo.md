@@ -12,7 +12,7 @@ description: 'Technical SEO for developer documentation: crawling, rendering, in
   canonicals, internal links, Core Web Vitals, structured data, and search visibility.'
 slug: docs-seo
 status: published
-work_note: "This post is a technical SEO checklist for a documentation site. If you also want to know whether AI crawlers can fetch your docs and answer engines can quote them, I run that check as an AI-ready documentation audit. I'm Ninad Pathak, a freelance technical writer, and [the audit is described here](/services/ai-ready-documentation-audit/)."
+work_note: "Passing a technical SEO checklist doesn't tell you whether AI crawlers can fetch your docs or whether an answer engine can quote them. I check that in an AI-ready documentation audit, with four tools I built and published so you can rerun every finding. I'm Ninad Pathak, a freelance technical writer. [See what the audit covers and ask me for one](/services/ai-ready-documentation-audit/)."
 takeaways:
 - A useful technical SEO audit follows dependency order instead of chasing one score.
 - Discovery, crawling, indexing, and page quality need separate evidence.

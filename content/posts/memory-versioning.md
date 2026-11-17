@@ -8,7 +8,7 @@ date: '2026-05-05'
 description: 'Memory versioning and audit trails for AI agents: append-only versions, a source for every write, and a hash chain anchored outside the database.'
 slug: memory-versioning
 status: published
-work_note: "Need documentation or tutorials for an agent, memory or inference product? I'm Ninad Pathak, a freelance technical writer, and I build and run the example before I draft. [Here's how to hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer. If your AI product's tutorials have fallen behind the product, I write them, and I run the product first. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
 title: Memory Versioning and Audit Trails for Regulated AI Agents
 updated: 2026-11-17
 ---

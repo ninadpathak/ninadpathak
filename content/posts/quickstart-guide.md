@@ -13,7 +13,7 @@ takeaways:
 - Put tool versions and access first, then show the exact output the reader should see.
 - Run every command in a fresh directory before publishing, and compare the output with the page.
 title: 'Quick Start Guide Template: Write a Quickstart Developers Can Run'
-work_note: "This post is about a quickstart a developer can run, with the requirements listed before the first command. If you'd rather have someone run your product first and then write that page, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies, and [here's how I work](/services/)."
+work_note: "Before I write a quickstart I run the product from its first command, so the page your engineers review has already worked once. I'm Ninad Pathak, a freelance technical writer, and you can [hire me to write yours](/services/)."
 video: quickstart-guide
 ---
 

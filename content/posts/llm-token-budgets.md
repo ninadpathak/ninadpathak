@@ -10,7 +10,7 @@ bridges:
 date: 2026-04-17
 description: 'LLM token budgets from real figures: what a token costs, why input dominates a bill, why a chat costs more each turn, and where to cut first.'
 status: published
-work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it. [See how I work](/services/) and tell me what you're shipping."
+work_note: "I'm Ninad Pathak, and I freelance as a technical writer for AI companies. I build the example and run it before I draft a tutorial, so your engineers review working code. [Here's how to hire me](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'LLM token budgets: a practical guide to cost control'
 slug: llm-token-budgets
 updated: 2026-11-17

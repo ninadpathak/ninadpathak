@@ -18,7 +18,7 @@ takeaways:
 - Keep AGENTS.md as the shared file and put a CLAUDE.md beside it that imports it with @AGENTS.md.
 - Write commands and rules an agent cannot infer from the code, and keep the file under 200 lines.
 title: 'CLAUDE.md and AGENTS.md: Which File Loads, and a Template'
-work_note: "Need documentation or tutorials for an agent, memory or inference product? I'm Ninad Pathak, a freelance technical writer, and I build and run the example before I draft. [Here's how to hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer for AI companies that build agents, agent memory and LLM infrastructure. I write their tutorials and technical articles, and I run each product before I write about it. [Hire me for yours](/services/freelance-technical-writer-for-ai-companies/)."
 video: claude-md
 ---
 

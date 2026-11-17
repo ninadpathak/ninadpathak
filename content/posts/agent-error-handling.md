@@ -10,7 +10,7 @@ bridges:
 date: 2026-04-16
 description: 'Error handling in production AI agents: classify tool errors in code, make ambiguous failures safe with idempotency keys, and tell the model what happened.'
 status: published
-work_note: "Need documentation or tutorials for an agent, memory or inference product? I'm Ninad Pathak, a freelance technical writer, and I build and run the example before I draft. [Here's how to hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer for AI companies that build agents, agent memory and LLM infrastructure. I write their tutorials and technical articles, and I run each product before I write about it. [Hire me for yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: "Error Handling in Production AI Agents"
 slug: agent-error-handling
 video: agent-error-handling

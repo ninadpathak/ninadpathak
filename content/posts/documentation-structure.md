@@ -9,7 +9,7 @@ description: Reorganize a documentation site around reader routes, canonical ans
   tested labels, and direct redirects instead of mirroring the org chart.
 slug: documentation-structure
 status: published
-work_note: "This post is about docs organised around the company's teams, where a reader has to know who owns a feature to find its page. If you'd rather someone else rewrite them around what readers are trying to do, hand them to me. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Tell me about your docs](/contact/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer for developer-tool companies. Docs that mirror the org chart make a reader guess which team owns a feature before they can find its page, and I rewrite them around what the reader came to do. [Hire me for yours](/services/)."
 takeaways:
 - Inventory page jobs and evidence before drawing a new navigation tree.
 - Organize around reader routes through setup, use, failure, and change.

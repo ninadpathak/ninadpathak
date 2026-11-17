@@ -21,7 +21,7 @@ description: After surveying production agents across industries, the design spa
   clusters into patterns. Here is what I found.
 slug: agent-design-space
 status: published
-work_note: "I write developer documentation and technical articles for AI and developer-tool companies. I'm Ninad Pathak, and I work by one rule, which is to run the product before I write about it. [Work with me](/services/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer. If your AI product's tutorials have fallen behind the product, I write them, and I run the product first. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'The Agent Design Space: A Map of What Engineers Are Actually Building'
 video: agent-design-space
 ---

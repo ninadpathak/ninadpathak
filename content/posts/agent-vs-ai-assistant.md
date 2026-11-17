@@ -11,7 +11,7 @@ date: '2026-04-26'
 description: 'An AI agent chooses its next steps toward a goal, and an AI assistant leaves the next step to you. I compare the cost and control you trade when you build each.'
 slug: agent-vs-ai-assistant
 status: published
-work_note: "I'm Ninad Pathak, and I write for AI companies whose readers are engineers. I build the example and run it before I draft. [See what I do](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Your engineers shouldn't have to fix a tutorial's code in review. I'm Ninad Pathak, a freelance technical writer for AI companies, and I build and run every example before I draft. [Hire me to write yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'AI Agent vs AI Assistant: When to Build Each'
 video: agent-vs-ai-assistant
 ---

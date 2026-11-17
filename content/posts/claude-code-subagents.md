@@ -17,7 +17,7 @@ takeaways:
 - A custom subagent starts without your conversation history, so the prompt in its file has to carry every rule the job needs.
 - The tools field is enforced, and a read-only subagent asked to fix links got "No such tool available" on every Edit call it made.
 title: 'Claude Code Subagents: What Each One Sees, With a Tested Example'
-work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies, and I run the product before I write about it. [My services are here](/services/)."
+work_note: "I'm Ninad Pathak. AI companies hire me as a freelance technical writer for setup tutorials, concept explainers and comparisons, and I run each product before I write about it. [See the work and get in touch](/services/freelance-technical-writer-for-ai-companies/)."
 video: claude-code-subagents
 ---
 

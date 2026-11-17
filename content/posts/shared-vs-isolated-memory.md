@@ -15,7 +15,7 @@ description: How to choose between shared and isolated memory architectures for 
   systems, including their coordination and debugging trade-offs.
 slug: shared-vs-isolated-memory
 status: published
-work_note: "I'm Ninad Pathak, a freelance technical writer. If your docs or tutorials have fallen behind the product, I write them, and I run the product first. [Start here](/services/)."
+work_note: "I'm Ninad Pathak, and I freelance as a technical writer for AI companies. I build the example and run it before I draft a tutorial, so your engineers review working code. [Here's how to hire me](/services/freelance-technical-writer-for-ai-companies/)."
 title: Shared Memory vs Isolated Memory in Multi-Agent Workflows
 updated: '2026-08-17'
 ---

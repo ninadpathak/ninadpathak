@@ -13,7 +13,7 @@ takeaways:
 - A reference entry documents each response the endpoint returns, with the fix for each error.
 - Check the reference against the running service, so a changed status code fails before a developer hits it.
 title: 'API Documentation: What to Include, With a Tested Reference Example'
-work_note: "This post is about the API reference a generator can produce from an OpenAPI file and the jobs it still leaves to a writer. If you'd rather hand those jobs to someone who calls the API before describing it, that's my work. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [See my services](/services/)."
+work_note: "A generator can turn an OpenAPI file into reference pages, and it still leaves the first request and the error guidance to a writer. I'm Ninad Pathak, and I take on those pages as a freelance technical writer, calling the API before I describe it. [Work with me](/services/)."
 video: api-documentation
 ---
 

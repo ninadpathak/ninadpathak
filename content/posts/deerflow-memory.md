@@ -13,7 +13,7 @@ description: 'A deep dive into the memory architecture of DeerFlow: layered cont
   passing, session state files, sub-agent isolation, and how it compares to Letta,
   AutoGen, and CrewAI.'
 status: published
-work_note: "Need documentation or tutorials for an agent, memory or inference product? I'm Ninad Pathak, a freelance technical writer, and I build and run the example before I draft. [Here's how to hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "I write tutorials and technical articles for AI companies, and I run the product before I write a line. I'm Ninad Pathak, a freelance technical writer, and [you can hire me](/services/freelance-technical-writer-for-ai-companies/)."
 title: How Memory Works in DeerFlow
 slug: deerflow-memory
 video: deerflow-memory

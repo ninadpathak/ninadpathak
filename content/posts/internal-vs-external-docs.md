@@ -9,7 +9,7 @@ description: 'Internal vs. external documentation, with a decision table for inc
   architecture, auth and releases: what goes public, what stays private, what splits.'
 slug: internal-vs-external-docs
 status: published
-work_note: "This post is about deciding what goes in the public docs and what stays internal when a subject has both readers. If you'd rather someone else write the public half while your team keeps the private one, I take that on. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Tell me about your docs](/contact/)."
+work_note: "This post is about deciding what goes in the public docs and what stays internal when a subject has both readers. If you'd rather someone else write the public half while your team keeps the private one, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Tell me about your docs](/contact/)."
 takeaways:
 - Choose internal or external documentation by the reader's task, not by the file's
   technical depth.

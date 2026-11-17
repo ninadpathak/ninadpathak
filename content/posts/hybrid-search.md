@@ -7,7 +7,7 @@ siblings:
 date: 2026-03-29
 description: 'Hybrid search fuses BM25 and vector retrieval. How it scores on a 2026 production benchmark, how reciprocal rank fusion works with runnable code, and what to add after it.'
 status: published
-work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies, and I run the product before I write about it. [My services are here](/services/)."
+work_note: "Your engineers shouldn't have to fix a tutorial's code in review. I'm Ninad Pathak, a freelance technical writer for AI companies, and I build and run every example before I draft. [Hire me to write yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Hybrid Search: Combining BM25 and Vector Search'
 slug: hybrid-search
 updated: 2026-11-17

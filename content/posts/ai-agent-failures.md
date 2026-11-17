@@ -16,7 +16,7 @@ date: '2026-04-22'
 description: 'Why AI agents fail in production: a measured breakdown of failed runs, why they resist postmortems, how chains of agents compound errors, and what helps.'
 slug: ai-agent-failures
 status: published
-work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it. [See how I work](/services/) and tell me what you're shipping."
+work_note: "I write tutorials and technical articles for AI companies, and I run the product before I write a line. I'm Ninad Pathak, a freelance technical writer, and [you can hire me](/services/freelance-technical-writer-for-ai-companies/)."
 title: Why AI Agents Fail in Production
 updated: 2026-11-17
 ---

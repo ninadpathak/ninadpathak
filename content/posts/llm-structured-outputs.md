@@ -10,7 +10,7 @@ bridges:
 date: 2026-03-27
 description: 'JSON mode, structured outputs and function calling promise different things. What each guarantees, what is left to your code, and what changes on self-hosted models.'
 status: published
-work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies, and I run the product before I write about it. [My services are here](/services/)."
+work_note: "I write tutorials and technical articles for AI companies, and I run the product before I write a line. I'm Ninad Pathak, a freelance technical writer, and [you can hire me](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use
   Each'
 slug: llm-structured-outputs

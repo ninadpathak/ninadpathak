@@ -9,7 +9,7 @@ description: Test developer documentation for release-blocking accessibility fai
   in structure, code, links, visuals, keyboard use, and rendered output.
 slug: docs-accessibility
 status: published
-work_note: "This post is a release checklist for accessible documentation, for the team that has never opened its docs in a screen reader. If you'd rather hand the docs themselves to someone who tests a page before it ships, that's my work. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Tell me about your docs](/contact/)."
+work_note: "This post is a release checklist for accessible documentation, for the team that has never opened its docs in a screen reader. If you'd rather hand the docs themselves to someone who runs every command on a page before it ships, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Tell me about your docs](/contact/)."
 takeaways:
 - Accessibility testing catches documentation failures that a visual review can miss.
 - A documentation-specific checker removes repeatable structural defects before manual

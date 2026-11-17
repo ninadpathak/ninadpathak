@@ -9,7 +9,7 @@ description: Write release notes that let developers assess upgrade risk, unders
   product impact, and migrate without surprises.
 slug: writing-release-notes
 status: published
-work_note: "This post is about release notes that make a developer read hundreds of words before learning whether the upgrade will break them. If you'd rather someone else write yours while you ship the release, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Here's how I work](/services/)."
+work_note: "Release notes shouldn't make a developer read hundreds of words before learning whether the upgrade will break them. If you'd rather someone else write yours while you ship the release, I do that. I'm Ninad Pathak, a freelance technical writer. [Hire me](/services/)."
 takeaways:
 - Put compatibility, affected users, and required action on the first screen.
 - Separate product impact from launch language and implementation detail.

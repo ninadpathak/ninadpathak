@@ -11,7 +11,7 @@ date: 2026-04-16
 description: A systems-level guide to tracing latency across endpointing, transcription,
   model inference, speech synthesis, and transport.
 status: published
-work_note: "I'm Ninad Pathak, a freelance technical writer. If your docs or tutorials have fallen behind the product, I write them, and I run the product first. [Start here](/services/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer. If your AI product's tutorials have fallen behind the product, I write them, and I run the product first. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
 title: How to Trace Latency in a Real-Time Voice Agent
 updated: '2026-08-17'
 slug: voice-agent-latency

@@ -9,7 +9,7 @@ description: Context windows are expanding to millions of tokens. Here is why th
   middle of your context still gets ignored, what long context actually costs, and
   how to build production systems that use these massive windows effectively.
 status: published
-work_note: "I'm Ninad Pathak, and I write for AI companies whose readers are engineers. I build the example and run it before I draft. [See what I do](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Building an AI product whose readers are engineers? I'm Ninad Pathak, a freelance technical writer, and I write tutorials and technical articles for companies like yours after running the product myself. [Hire me](/services/freelance-technical-writer-for-ai-companies/)."
 title: "LLM Context Windows Explained"
 slug: llm-context-windows
 ---

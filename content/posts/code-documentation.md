@@ -14,7 +14,7 @@ takeaways:
 - Generate reference from stable contracts that source can expose.
 - Use guides for decisions, sequences, and operating context that no symbol can contain.
 status: published
-work_note: "This post is about where each fact about your code belongs, whether that's a comment, the generated reference or a guide. If the guides are the part nobody on your team has time for, hand them to me. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies, and I run the code before I write about it. [Here's how I work](/services/)."
+work_note: "Some facts about your code belong in a comment and others in a guide, and this post sorts out which. If the guides are the part nobody on your team has time for, hand them to me. I'm Ninad Pathak, a freelance technical writer, and I run the code before I write about it. [Get in touch](/contact/)."
 slug: code-documentation
 video: code-documentation
 ---

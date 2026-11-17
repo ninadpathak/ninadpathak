@@ -13,7 +13,7 @@ takeaways:
 - Give each breaking change a migration step, a verification check and a calendar deadline.
 - Run the checker with --filled before publishing, so a missing field fails the build.
 title: 'Release Notes Template: Copyable Markdown With a Pre-Publish Check'
-work_note: "This post is a release notes template for the team that starts each release's notes from a blank file. If you'd rather hand the notes to someone who'll put the upgrade decision first, that's my job. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Talk to me](/contact/)."
+work_note: "Starting each release's notes from a blank file? This template fixes that, and so can I. I'm Ninad Pathak, a freelance technical writer, and I write release notes that put the upgrade decision first. [Talk to me](/contact/)."
 video: release-notes-template
 ---
 

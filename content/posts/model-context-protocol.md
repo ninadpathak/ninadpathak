@@ -12,7 +12,7 @@ description: Model Context Protocol (MCP) is the new standard for connecting AI 
   to data sources and tools. Here is why it matters, how it works, and why it is the
   missing link for agentic infrastructure.
 status: published
-work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies, and I run the product before I write about it. [My services are here](/services/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it. [See how I work](/services/freelance-technical-writer-for-ai-companies/) and tell me what you're shipping."
 title: 'Model Context Protocol (MCP): Connecting AI Tools'
 slug: model-context-protocol
 ---

@@ -10,7 +10,7 @@ bridges:
 date: 2026-03-26
 description: 'Contextual Retrieval (contextual RAG) prepends a model-written note to each chunk before indexing. What Anthropic measured, what it costs, and where it still fits.'
 status: published
-work_note: "I write developer documentation and technical articles for AI and developer-tool companies. I'm Ninad Pathak, and I work by one rule, which is to run the product before I write about it. [Work with me](/services/)."
+work_note: "Explainers like this one are what I write for AI companies as a freelance technical writer. I'm Ninad Pathak, and I run the product before I write about it. [Hire me for yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: How Anthropic's Contextual Retrieval Changes RAG Architecture
 updated: '2026-11-17'
 slug: contextual-retrieval

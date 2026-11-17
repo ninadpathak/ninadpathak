@@ -564,16 +564,40 @@ Ninad, on an opening that described an xkcd comic and then said why the joke wor
 
 ## Work notes rewritten as pitch notes (2026-11-17, branch voice-notes)
 
-Ninad approved three patterns and corrected a fourth. Every post's `work_note` now uses one of them.
+Ninad approved three patterns and corrected a fourth, and told us "not the same shape always". Every post's `work_note` follows these rules after the independent review.
 
-- Subject-leaning, 28 posts: the technical-documentation pages, the developer-content pages about client-type work, `mcp-server-tutorial` and `aeo-for-developer-docs`. Each names what its post is about and the reader's situation, offers to take that job, then says who I am and links. Ninad's model: "This post is about building sustainable changelogs as you have more PRs being shipped than humanly processable. If you'd rather someone else handle the changelogs while you work on the product, that's what I do. I'm Ninad Pathak, a freelance technical writer ..."
-- Mechanism first, 2 posts: `llms-txt` and `ai-crawlers`, the pages about the audit's own checks.
-- Plain and author-first, 54 posts: eight wordings rotated by topic and date so two neighbours in a topic differ. The same note may appear on posts that are not neighbours, as Fly.io's pitch does.
-- The offer in every note is work the repo backs: developer documentation, tutorials, technical articles, AI-ready documentation audits. Where a post's subject is outside that list (design docs, runbooks, accessibility, technical SEO), the note offers the nearest work on the list and does not offer the post's subject.
-- Links: `/services/` for developer-tool subjects, `/services/freelance-technical-writer-for-ai-companies/` for AI subjects, `/services/ai-ready-documentation-audit/` for the audit, `/contact/` on some subject-leaning notes.
-- `tests/test_article_work_notes.py`: "I'm Ninad Pathak" or "I am Ninad Pathak" passes once per note and every other use of the name still fails as a bio line; length is 15 to 70 words; no form of "sell"; neighbours in a topic must differ; a note that starts "This post" must be unique.
+- Confirmed by Ninad as work he takes: handling a company's changelog ("If you'd rather someone else handle the changelogs while you work on the product, that's what I do" is his own sentence) and writing release notes. Both may be offered in a note.
+- Notes written for one post, 33 of them: all of technical-documentation, developer-experience and ai-search-optimization, plus `mcp-server-tutorial`. The 29 that lean on the post's subject use five shapes, and no shape or sentence frame is on more than a third of them: the post, the offer, then the name (Ninad's own example, 6 posts); the reader's situation as a question (5); the problem as a plain statement (9); name first (5); the method first with what the client gets (4).
+- Plain and author-first notes, 51 posts in the five AI topics: ten wordings, each linking `/services/freelance-technical-writer-for-ai-companies/`. They are assigned so no post shares a wording, or a wording that opens the same way, with the next post on its topic page or with a related card at the foot of the article.
+- Every note says "freelance" and carries a hiring phrase ("hire", "work with me", "get in touch", "tell me", "ask me", "talk to me"), which may sit in the link label.
+- The offer is work the repo backs: developer documentation, tutorials, technical articles, AI-ready documentation audits, changelogs, release notes. For AI companies say "tutorials and technical articles", which the AI-companies page shows, and not "documentation". On posts about design docs, runbooks, accessibility and technical SEO the note offers the nearest backed work.
+- Where the repo backs a concrete promise, state it: "I build the example and run it before I draft, so your engineers review working code", and "you can rerun every finding with the four tools I built and published". No number, turnaround or client count is invented.
+- `tests/test_article_work_notes.py` fails closed on: a missing note; a link outside `/services/`, `/services/<slug>/` and `/contact/`; no "freelance"; no hiring phrase; any form of sell, sold, seller or sale; a digit or a count of years; a capitalised name outside a short allowed list; a first-person verb offering accessibility, SEO, design docs or runbooks; the name outside one "I'm Ninad Pathak"; a job title followed by a third-person verb. Neighbours come from the pillar files, notes in the three per-post topics must be unique, and no note may sit on more than seven posts.
 - A note says what its post is about today. When a later batch rebuilds a page, reread its note against the new page.
 
 ## Visible wording: topic, not hub (2026-11-17)
 
 The reader sees "topic". The lead, fact, argument and bridge text of every `content/pillars/*.yaml` now says "this topic" and "the [query] topic". Field names (`hub:`), audit output and JSON-LD ids keep "hub". New prose for readers never says "hub".
+
+
+## Standing rule: an essay is his opinion of what he read (2026-11-17)
+
+Ninad, on a stretch of `nobody-understands-the-code`: "okay while the direction is right, it feels like quote after quote after quote. Essays need to be my opinion of the posts that I read from across the web. If I read something I am not going to keep quoting the person or the author. I am going to write what I feel what I think etc and use the quotes to support my arguments or contrast their arguments or state what was mentioned for clarity sake."
+
+- His view leads every section of an essay, in first person and plainly: what he thinks of what he read, what he makes of it, where he disagrees and why.
+- A quote appears only to support that view, to set up something he argues against, or to pin down exact wording when the wording is the point. Everything else is paraphrased accurately in his own words, with a link.
+- Never two quotes in a row, never a paragraph that is only a quote plus attribution, and never a source narrated sentence by sentence ("It says", "then asks", "The reply opens", "The post brings").
+- Working limit: one short quote per section, and a reader can delete every quote and still follow the argument.
+- Opinions and judgments need no source. Facts about the world keep their link. An experience he has not had still cannot be claimed, so the opinion comes from reading and reasoning and says so ("I think", "I don't buy", "what struck me").
+- Accuracy now comes from faithful paraphrase and a link. `sources.json` still records the exact passage behind each paraphrase so a reviewer can check it.
+- Explainers from batch 7 on take a lighter version: the page's own explanation and judgment carry it, quotes are occasional, and no section is one source quoted back.
+
+### His own positions, to build three essays on
+
+State these as his view. Do not soften them or stretch them into claims he did not make.
+
+- `nobody-understands-the-code`, first statement: "yes people need to know what the codebase does at the very least. if it's just code written by someone with zero understanding of what's happening underneath it, there's no way someone can pinpoint what function or file actually caused an issue because the context doesn't exist in the developer's head."
+- `nobody-understands-the-code`, his correction of how that was summarised: "debugging isn't a problem but knowing what the code does so we can actually work more effectively on the code is helpful. If we extrapolate the future, then we probably don't need humans to remember what code does but it's always going to be beneficial to know what happened and how things were shipped." Read together: knowing what the code does lets people work on it more effectively, and having no context has a cost; he expects people probably won't need to hold the code in their heads, so he does not flatly oppose Anthropic's position; the essay's centre is that a record of what happened and how things were shipped stays valuable either way. It is not a debugging piece, and the title still fits.
+- `written-by-a-human`: "Written by human only makes me want to read it as a human but considering agents read changelogs more than humans do at this point, i think written by humans is going to be a fading aspect of the world unless someone really cares. It will be good for people that want developers to come back to them to read stories." The label is an invitation to a human reader; it is fading because changelog readers are increasingly agents; it keeps its value for teams that want developers to return for the writing. A statement that agents read changelogs more than people needs its source or is marked as his impression.
+- `agents-reading-docs` and the llms.txt article: "llms.txt is good to have but there's no evidence that llms actually fetch that." Present Fern's data beside it, and if the data contradicts the sentence as worded, tell root the exact conflict.
+

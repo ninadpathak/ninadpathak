@@ -17,7 +17,7 @@ takeaways:
 - All 12 developer documentation hosts checked on 2026-10-22 allowed every AI and search agent the site's checker knows, and none named an AI agent.
 - A crawler follows only the user-agent group that names it, so a named group drops the wildcard rules for that crawler.
 title: 'GPTBot, ClaudeBot and OAI-SearchBot: AI Crawlers in robots.txt'
-work_note: "An AI-ready documentation audit starts with the check on this page, whether AI crawlers may fetch your docs, and goes on to whether an answer engine can lift the answers. I'm Ninad Pathak, and I run it with four tools I built and published. [Ask me for one](/services/ai-ready-documentation-audit/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer, and I run AI-ready documentation audits. The audit includes the check on this page, whether AI crawlers may fetch your docs, and you can rerun every finding with the four tools I built and published. [Ask me for one](/services/ai-ready-documentation-audit/)."
 video: ai-crawlers
 ---
 

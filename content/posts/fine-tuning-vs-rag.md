@@ -13,7 +13,7 @@ description: Fine-tuning and RAG solve different parts of the agent memory probl
   Here is how to decide which one you actually need.
 slug: fine-tuning-vs-rag
 status: published
-work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it. [See how I work](/services/) and tell me what you're shipping."
+work_note: "I'm Ninad Pathak. AI companies hire me as a freelance technical writer for setup tutorials, concept explainers and comparisons, and I run each product before I write about it. [See the work and get in touch](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Fine-Tuning vs RAG for Agent Memory: When Each Approach Makes Sense'
 updated: '2026-08-17'
 ---

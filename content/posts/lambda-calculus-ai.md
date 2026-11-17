@@ -12,7 +12,7 @@ date: '2026-04-25'
 description: 'Lambda calculus as an AI reasoning exercise: reduction problems with one checkable answer each, and a short Python checker that was run on six of them.'
 slug: lambda-calculus-ai
 status: published
-work_note: "I'm Ninad Pathak. I write the docs and tutorials an AI company needs when its readers are engineers, and I run the product before I write a line. [Hire me for yours](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "I'm Ninad Pathak, and I freelance as a technical writer for AI companies. I build the example and run it before I draft a tutorial, so your engineers review working code. [Here's how to hire me](/services/freelance-technical-writer-for-ai-companies/)."
 title: Lambda Calculus as an AI Reasoning Exercise
 updated: 2026-11-17
 ---

@@ -16,7 +16,7 @@ takeaways:
 - Resolve every path a tool receives before checking it against the folder it may read, because relative segments and symlinks both arrive as plain strings.
 - Return what the model has to cite, because Claude cited the right line in every run once the tool numbered its lines.
 title: 'MCP Server Tutorial: Build a Docs Search Server in Python'
-work_note: "This post builds a docs search MCP server in Python and tests it without a model. If you want tutorials like it for your own product, built and run before they're published, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Here's what that looks like](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "This tutorial was built and run before it was published, and I write the same kind for clients, so their engineers review working code. I'm Ninad Pathak, a freelance technical writer for AI companies. [Hire me to write yours](/services/freelance-technical-writer-for-ai-companies/)."
 video: mcp-server-tutorial
 ---
 
