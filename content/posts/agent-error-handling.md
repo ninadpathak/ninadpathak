@@ -8,247 +8,139 @@ bridges:
 - slug: ai-memory-management
   reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
 date: 2026-04-16
-description: 'Hard-won lessons from running AI agents in production: the error patterns
-  that actually break systems, and the patterns that fix them.'
+description: 'Error handling in production AI agents: classify tool errors in code, make ambiguous failures safe with idempotency keys, and tell the model what happened.'
 status: published
 work_note: 'I''ve written guides to agent tools and agent APIs for Firecrawl. This page covers what an agent should do after a tool call fails, and [those guides are in my portfolio](/portfolio/).'
 title: What Nobody Tells You About Error Handling in Production AI Agents
 slug: agent-error-handling
 video: agent-error-handling
+updated: 2026-11-17
 ---
 
-Two years of running AI agents in production taught me that error handling separates a system that survives reality from one that falls over the moment something goes wrong. Reasoning and tool use get all the attention.
+Peter Deutsch began a list at Sun Microsystems in 1994 of assumptions that programmers new to networked software get wrong, now known as the [fallacies of distributed computing](https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing). The first is "The network is reliable", and thirty years of retry logic and timeouts exist because it isn't.
 
-Error handling, the part that keeps your on-call phone quiet at 2 AM, gets almost none.
+An AI agent that calls tools is a distributed system and inherits every item on that list. Error handling in production AI agents differs in one respect: in ordinary software the code that reacts to a failure is code someone wrote, and in an agent the error text goes back to a model that decides what to do next.
 
-The failures are predictable, and they line up with [the broader pattern of why agents keep failing in production](/articles/ai-agent-failures/). An agent loops forever because a tool returned JSON wrapped in a markdown code fence and the parser choked.
-
-Another silently drops a step because a downstream API throttled for 200 milliseconds and the agent treated the empty response as "done." A third corrupts state because it retried a charge endpoint without checking whether the first attempt had already gone through.
-
-I have hit all three myself, usually at the worst possible time.
-
-What follows are the error patterns that actually break agents in production, and the concrete patterns that fix them. My focus is LLM-based agents that call tools to interact with external systems, which covers the majority of production agents I have run into.
-
-## The core problem: agents are undefined state machines
-
-Nearly every agent implementation I have seen looks like this: receive message, call LLM, parse tool call, execute tool, append result, repeat. Error handling is a try-except that logs the error and tells the LLM something went wrong.
-
-Tool failure leaves the agent in an undefined state, and that is where things fall apart. The LLM picked that tool based on everything it knew at the time.
-
-Hand it back a raw error string and it improvises a recovery. Sometimes it recovers cleanly.
-
-More often it retries the same tool with the arguments nudged slightly, say swapping `user_id` for `userId` because the error mentioned a missing field. Occasionally it moves on to a different tool that assumes the first one succeeded, like calling `send_invoice` after `create_charge` actually failed, and now you have a cascading failure that takes an hour to trace back.
-
-Classifying errors before you decide how to respond is what breaks the cycle. A short classification function, the kind you can write over a coffee, has saved me more debugging time than anything else in my agent infrastructure.
-
-## Classify errors first
-
-Three categories cover most cases.
-
-**Transient**: timeouts, rate limits, overloaded servers. These are candidates for retry with backoff.
-
-**Permanent**: missing parameters, invalid API keys, nonexistent resources. Retrying these wastes time and causes cascading failures.
-
-Fail fast.
-
-**Ambiguous**: the request timed out, and you have no idea whether the server processed it. Picture submitting a payment, getting no response, and not knowing if the customer was charged.
-
-That uncertainty is what makes this category demand idempotency-aware retry logic.
-
-```python
-from enum import Enum
-import httpx
-
-class ErrorCategory(Enum):
-    TRANSIENT = "transient"
-    PERMANENT = "permanent"
-    AMBIGUOUS = "ambiguous"
-
-def classify_error(error: Exception, response: httpx.Response = None) -> ErrorCategory:
-    if isinstance(error, httpx.TimeoutException):
-        return ErrorCategory.AMBIGUOUS
-    if isinstance(error, httpx.ConnectError):
-        return ErrorCategory.TRANSIENT
-    if isinstance(error, httpx.HTTPStatusError) and response:
-        if response.status_code in (429, 502, 503, 504):
-            return ErrorCategory.TRANSIENT
-        if response.status_code in (400, 401, 403, 404):
-            return ErrorCategory.PERMANENT
-        if response.status_code >= 500:
-            return ErrorCategory.AMBIGUOUS
-    return ErrorCategory.AMBIGUOUS
-```
-
-## Idempotent tool design
-
-Agents retry. When a tool call fails ambiguously, the agent calls it again, and a tool that is not idempotent turns that retry into duplicate side effects: two welcome emails, two records, two charges.
-
-Design tools to be safe to call twice.
-
-```python
-# Bad: creates a new record every time
-def create_user(email: str) -> dict:
-    return api.post("/users", {"email": email})
-
-# Good: checks for existing user first
-def create_user(email: str) -> dict:
-    existing = api.get(f"/users?email={email}")
-    if existing:
-        return existing
-    return api.post("/users", {"email": email})
-```
-
-When a tool cannot be made naturally idempotent, a deduplication layer keyed on the operation ID does the job. The dedup cache works like a coat check ticket: the first call hands back a stub, and every later call with the same ticket gets the original result instead of running the operation again.
-
-I have watched this exact pattern stop a retrying agent from double-charging a customer, which is reason enough to treat it as mandatory rather than nice-to-have.
-
-```python
-def execute_with_deduplication(tool_fn, operation_id: str, **kwargs):
-    if cache.has(operation_id):
-        return cache.get(operation_id)
-    result = tool_fn(**kwargs)
-    cache.set(operation_id, result, ttl=3600)
-    return result
-```
-
-## Explicit state transitions
-
-When a tool fails, the agent needs an explicit recovery path rather than a raw error string to puzzle over. Your code, not the model, decides the recovery strategy.
-
-The LLM then receives a clean state transition, something like "retrying, attempt 2 of 3," and acts on that instead of guessing.
-
-```python
-class AgentState(Enum):
-    RUNNING = "running"
-    WAITING_ON_RETRY = "waiting_on_retry"
-    RECOVERING = "recovering"
-    FAILED = "failed"
-
-def handle_tool_error(state: AgentState, error: Exception, context: dict) -> AgentState:
-    category = classify_error(error)
-    if category == ErrorCategory.PERMANENT:
-        context["failure_reason"] = str(error)
-        return AgentState.FAILED
-    if category == ErrorCategory.TRANSIENT:
-        if context.get("retry_count", 0) >= 3:
-            context["failure_reason"] = f"Max retries exceeded: {error}"
-            return AgentState.FAILED
-        context["retry_count"] = context.get("retry_count", 0) + 1
-        return AgentState.WAITING_ON_RETRY
-    # Ambiguous: checkpoint before retry
-    checkpoint_state(context)
-    return AgentState.RECOVERING
-```
-
-## Checkpointing for long-horizon tasks
-
-Agents running dozens of steps need state persistence, which is one of the core responsibilities of a well-designed [agent harness, the infrastructure layer your agent actually needs](/articles/agent-harnesses/). Lose that, and a failure at step 40 of a data migration restarts from step 1, redoing 39 steps that already committed.
-
-Few things are more demoralizing to debug at 1 AM than watching an agent cheerfully redo work it already finished.
-
-```python
-import json
-from datetime import datetime
-import os
-
-def checkpoint_state(context: dict):
-    checkpoint = {
-        "step": context.get("current_step"),
-        "history": context.get("message_history"),
-        "tool_results": context.get("tool_results"),
-        "checkpointed_at": datetime.utcnow().isoformat()
-    }
-    path = f"/tmp/agent_checkpoint_{context['task_id']}.json"
-    with open(path, "w") as f:
-        json.dump(checkpoint, f)
-
-def restore_if_exists(task_id: str) -> dict | None:
-    path = f"/tmp/agent_checkpoint_{task_id}.json"
-    if os.path.exists(path):
-        with open(path) as f:
-            return json.load(f)
-    return None
-```
-
-Write checkpoints after each successful step. On restart, restore from the most recent checkpoint before retrying.
-
-## Timeout strategy
-
-LLM API timeouts sit squarely in the ambiguous bucket, since a request that times out at the client may still have been processed on the provider's side and billed to you. Set conservative timeouts and pass idempotency keys so a retry collapses onto the same completion instead of generating and charging for a second one.
-
-```python
-import httpx
-
-client = httpx.Client(
-    timeout=httpx.Timeout(30.0, connect=5.0),
-    follow_redirects=True
-)
-
-def llm_call_with_idempotency(prompt: str, operation_id: str) -> str:
-    headers = {"Idempotency-Key": operation_id}
-    response = client.post(
-        "https://api.llm.provider/v1/completions",
-        json={"prompt": prompt},
-        headers=headers
-    )
-    return response.json()["completion"]
-```
-
-## What actually breaks in practice
-
-Five failure modes show up consistently across production incidents.
+That decision is the part nobody can unit-test. The rest of this page is about taking it away from the model for the cases where a wrong guess costs money.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/agent-error-handling/error-taxonomy.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-error-handling/error-taxonomy.narrow.svg" width="288" height="704"><img class="np-has-narrow" src="/static/images/diagrams/agent-error-handling/error-taxonomy.svg" width="720" height="264" alt="Five failure modes that recur in production agent incidents. Context exhaustion: tool results pile up until the context window is full and the next call is rejected. Schema drift: the model calls a tool with parameters from an older schema version. Partial failure: some parallel tool calls succeed and some fail. Ambiguous timeout: a request times out after the server may already have processed it, so a retry can execute it twice. Observability gaps: without structured logs of tool calls there is no record of what the agent tried." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Each mode has its own fix: a hard cap on tool history, versioned schemas, per-call tracking, idempotency keys, and a log line for every tool call.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/agent-error-handling/error-taxonomy.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-error-handling/error-taxonomy.narrow.svg" width="288" height="704"><img class="np-has-narrow" src="/static/images/diagrams/agent-error-handling/error-taxonomy.svg" width="720" height="264" alt="Five failure modes of an agent that calls tools. Context exhaustion: tool results pile up until the context window is full and the next call is rejected. Schema drift: the model calls a tool with parameters from an older schema version. Partial failure: some parallel tool calls succeed and some fail. Ambiguous timeout: a request times out after the server may already have processed it, so a retry can execute it twice. Observability gaps: without structured logs of tool calls there is no record of what the agent tried." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Each mode has its own fix: a hard cap on tool history, versioned schemas, per-call tracking, idempotency keys and a log line for every tool call.</figcaption>
 </figure>
 
-**Context window exhaustion**: the agent piles up tool results, say twenty paginated API responses, until the context is full and the next call rejects. Set a hard limit on total tool call history and fail explicitly when you approach it rather than letting the provider error out mid-task.
+## Why can't the model handle its own tool errors?
 
-**Tool schema drift**: the LLM calls a tool with parameters from an older version of the schema, passing `customer` long after you renamed the field to `customer_id`. Version your tool schemas and validate inputs against the expected version before executing.
+A model handed a raw error string will improvise, and improvising is the wrong behaviour when an action may already have happened. It can retry a call that succeeded, or move on to a step that assumes the failed one worked.
 
-**Partial failure in parallel tool calls**: the agent fires off five tools at once, three succeed and two fail. Track each one independently and never assume all-or-nothing semantics, because the agent will happily build its next step on the three that worked.
+The protocols give the model very little to go on. Anthropic's [tool use documentation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls) offers one flag on a tool result, "is_error (optional): Set to true if the tool execution resulted in an error."
 
-**Ambiguous timeouts**: a timeout fires while the server may have processed the request anyway. Non-idempotent operations then risk duplication, so always attach idempotency keys to them.
+The June 2025 revision of the [Model Context Protocol specification](https://modelcontextprotocol.io/specification/2025-06-18/server/tools) is similar. It says "Tools use two error reporting mechanisms", protocol errors and tool execution errors, and the second kind is a text message with `isError: true`.
 
-**Observability gaps**: without structured logs of tool inputs and outputs, debugging a failed run turns into archaeology, sifting through stack traces to reconstruct what the agent even tried. Log every tool call with its input, output, latency, and error.
+Neither says whether the call can be repeated. That knowledge sits with whoever wrote the tool, so the tool or the harness around it has to carry it.
+
+## How should an agent classify errors?
+
+Classify every tool error in code as transient, permanent or ambiguous, and let that label decide the recovery before the model sees anything.
+
+| Kind | Example | What the harness does |
+| --- | --- | --- |
+| Transient | Rate limit, overloaded server | Retry with backoff |
+| Permanent | Invalid API key, missing resource | Fail fast and report |
+| Ambiguous | Timeout after the request was sent | Retry only if the call is idempotent |
+
+The ambiguous kind is the dangerous one. A timeout says the answer didn't arrive and nothing about whether the work was done.
+
+## What does an idempotency key change?
+
+It makes an ambiguous failure safe to retry, because the server recognises the repeat and returns the first result. Stripe's [API reference](https://docs.stripe.com/api/idempotent_requests) describes the behaviour: "Retries with the same key return the saved response, including 500 errors."
+
+The simulation below runs three retry policies against a payment API that charges the customer and then times out on the first call.
 
 ```python
-def logged_tool_call(tool_name: str, tool_fn, **kwargs):
-    start = time.time()
-    try:
-        result = tool_fn(**kwargs)
-        logger.info("tool_call", extra={
-            "tool": tool_name,
-            "latency_ms": (time.time() - start) * 1000,
-            "status": "success",
-            "input_params": list(kwargs.keys())
-        })
-        return result
-    except Exception as e:
-        logger.error("tool_call", extra={
-            "tool": tool_name,
-            "latency_ms": (time.time() - start) * 1000,
-            "status": "error",
-            "error": str(e)
-        })
-        raise
+"""A charge tool that times out after it has charged, called three ways."""
+import uuid
+
+
+class PaymentAPI:
+    def __init__(self):
+        self.charges, self.seen, self.calls = [], {}, 0
+
+    def charge(self, customer, cents, idempotency_key=None):
+        self.calls += 1
+        if idempotency_key in self.seen:
+            return self.seen[idempotency_key]          # replay the saved response
+        self.charges.append((customer, cents))
+        receipt = {"status": "charged", "cents": cents}
+        if idempotency_key:
+            self.seen[idempotency_key] = receipt
+        if self.calls == 1:
+            raise TimeoutError("no response from payment API")   # the work was done
+        return receipt
+
+
+def classify(error):
+    if isinstance(error, TimeoutError):
+        return "ambiguous"      # the server may have acted
+    if isinstance(error, PermissionError):
+        return "permanent"      # retrying cannot help
+    return "transient"
+
+
+def run(label, use_key, retry_ambiguous):
+    api = PaymentAPI()
+    key = str(uuid.uuid4()) if use_key else None
+    for attempt in (1, 2):
+        try:
+            api.charge("cus_42", 4_900, idempotency_key=key)
+            break
+        except Exception as error:
+            kind = classify(error)
+            if kind == "permanent" or (kind == "ambiguous" and not retry_ambiguous):
+                break
+    print(f"{label:<34} attempts: {api.calls}  charges made: {len(api.charges)}")
+
+
+run("blind retry", use_key=False, retry_ambiguous=True)
+run("classified, no key: stop and ask", use_key=False, retry_ambiguous=False)
+run("classified, with idempotency key", use_key=True, retry_ambiguous=True)
 ```
 
-Some failures come from retrieving a valid memory for the wrong subject. [AI memory management for LLMs](/articles/ai-memory-management/) separates that attribution failure from a generic retrieval miss.
+Each line of output from `python3 retry_demo.py` is one policy.
 
-## The non-negotiables
+```text
+blind retry                        attempts: 2  charges made: 2
+classified, no key: stop and ask   attempts: 1  charges made: 1
+classified, with idempotency key   attempts: 2  charges made: 1
+```
 
-Five things will break your agent in production if you skip them.
+The blind retry charges twice. Classifying the timeout as ambiguous stops the loop after one charge, and the key lets the retry go through with the customer still charged once.
 
-Classify errors before deciding how to respond, because returning raw errors to the LLM and hoping it sorts them out is not error handling.
+The simulation is a toy with one failure in it. The model was never asked what to do in any of the runs.
 
-Whether through naturally idempotent design or a deduplication layer, make every tool safe to call twice. Non-idempotent tools get called twice eventually.
+## Which other failure modes need their own fix?
 
-Checkpoint long-horizon tasks so a failure at step 40 resumes near step 40. Restarting from step 1 is not acceptable.
+The figure at the top of this page names five, and the ambiguous timeout is only one of them. Each has a fix that lives in the harness.
 
-Explicit timeout and retry policies matter more than any default the SDK ships with, since those defaults were never tuned for your latency or your cost ceiling.
+| Failure mode | What goes wrong | Fix |
+| --- | --- | --- |
+| Context exhaustion | Tool results fill the window until a call is rejected | A hard cap on tool history |
+| Schema drift | The model calls a tool with an old parameter set | Versioned schemas |
+| Partial failure | Some parallel calls succeed and some fail | Per-call tracking |
+| Ambiguous timeout | A retry can run the action twice | Idempotency keys |
+| Missing logs | No record of what the agent tried | A log line for every tool call |
 
-Log every tool call with inputs, outputs, latency, and errors. Skip the observability and your next debugging session becomes archaeology.
+## What should the model be told after a failure?
 
-These patterns hold regardless of which LLM or framework you reach for, because the error modes stay the same across providers.
+Tell it what happened and what it is allowed to do next, as a result the harness wrote. "The charge may have gone through and has not been retried" is a statement the model can act on, and a stack trace is an invitation to guess.
+
+Guessing is the common failure in agent work generally. Real-SWE 1.1, an October benchmark of coding agents, classified failed runs and found the largest group to be the unverified assumption, a run that "Builds on a guess about the system instead of checking it in the workspace."
+
+## What else belongs in the harness?
+
+The pieces that make a failure recoverable belong there: a cap on retries per call, a log line for every tool call and result, and a checkpoint before any step that can't be undone. The [agent harness](/articles/agent-harnesses/) page covers where those live.
+
+Reversibility is worth more than prevention where it is available.
+
+The Claude Code team's [account of its review process](https://claude.dev/blog/solving-code-review-at-anthropic/) from October 15 lists it among the reasons a mistake stays cheap. "Everything is reversible", it says, with flags, reverts and staged releases named as the means.
+
+Long sessions add one more source of error, which is state the agent no longer has in view. [AI memory management for LLMs](/articles/ai-memory-management/) covers that side, and the [wider pattern of agent failures](/articles/ai-agent-failures/) has its own page.
