@@ -5255,6 +5255,86 @@
       "connects": [
         "docs-accessibility"
       ]
+    },
+    {
+      "id": "codinghorror-works-on-my-machine-2007",
+      "url": "https://blog.codinghorror.com/the-works-on-my-machine-certification-program/",
+      "author": "Jeff Atwood",
+      "date": "2007-03-15",
+      "title": "The \"Works on My Machine\" Certification Program",
+      "quotes": [
+        "Jeff Atwood 15 Mar 2007"
+      ],
+      "connects": [
+        "developer-onboarding-docs"
+      ]
+    },
+    {
+      "id": "corepack-readme",
+      "url": "https://raw.githubusercontent.com/nodejs/corepack/main/README.md",
+      "author": "Node.js",
+      "date": "2026-11-18",
+      "title": "Corepack README",
+      "quotes": [
+        "Set your package's manager with the `packageManager` field in `package.json`",
+        "Run `corepack enable` to install the required Yarn and pnpm binaries on your path"
+      ],
+      "connects": [
+        "developer-onboarding-docs"
+      ]
+    },
+    {
+      "id": "microsoft-onboarding-guide-template",
+      "url": "https://microsoft.github.io/code-with-engineering-playbook/developer-experience/onboarding-guide-template/",
+      "author": "Microsoft",
+      "date": "2026-11-18",
+      "title": "Onboarding Guide Template",
+      "quotes": [
+        "an index to project specific content if it already exists elsewhere"
+      ],
+      "connects": [
+        "developer-onboarding-docs"
+      ]
+    },
+    {
+      "id": "gitlab-general-onboarding",
+      "url": "https://handbook.gitlab.com/handbook/people-group/general-onboarding/",
+      "author": "GitLab",
+      "date": "2026-11-18",
+      "title": "GitLab Onboarding",
+      "quotes": [
+        "all onboarding tasks are completed in a GitLab issue",
+        "a due date of 30 days"
+      ],
+      "connects": [
+        "developer-onboarding-docs"
+      ]
+    },
+    {
+      "id": "gitlab-docs-workflow",
+      "url": "https://docs.gitlab.com/development/documentation/workflow/",
+      "author": "GitLab",
+      "date": "2026-11-18",
+      "title": "Documentation workflow",
+      "quotes": [
+        "strongly encourages including documentation in the same merge request as the code that it relates to"
+      ],
+      "connects": [
+        "developer-onboarding-docs"
+      ]
+    },
+    {
+      "id": "microsoft-playbook-repo-docs",
+      "url": "https://microsoft.github.io/code-with-engineering-playbook/documentation/guidance/project-and-repositories/",
+      "author": "Microsoft",
+      "date": "2026-11-18",
+      "title": "Projects and repositories",
+      "quotes": [
+        "Documentation Specific to a Repository"
+      ],
+      "connects": [
+        "developer-onboarding-docs"
+      ]
     }
   ],
   "unused_leads": [
@@ -5503,6 +5583,20 @@
       "click here",
       "read the documentation review checklist",
       "here"
+    ],
+    "developer-onboarding-docs": [
+      "Learn the codebase",
+      "run the product, change one behavior, pass the checks, open a pull request and verify the merged result",
+      "understand the architecture",
+      "explore the repository",
+      "Install Node",
+      "ask the team",
+      "Ask in Slack if you get stuck",
+      "restart everything",
+      "docs owner",
+      "time to productivity",
+      "flexible",
+      "Read the architecture overview, clone the repositories, set up the services, and choose a starter ticket."
     ]
   }
 }
