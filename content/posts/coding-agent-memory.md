@@ -46,7 +46,7 @@ Each of the four reads instruction files you write, and all but Cursor can also 
 | Gemini CLI | `GEMINI.md` | A memory tool that edits its Markdown files, plus Auto Memory | Auto Memory off |
 | Cursor | Rules in `.cursor/rules`, or `AGENTS.md` | None documented | |
 
-Codex and Claude Code both state a size limit on the files you write. Codex's [AGENTS.md guide](https://developers.openai.com/codex/guides/agents-md) stops adding files "once the combined size reaches the limit defined by `project_doc_max_bytes` (32 KiB by default)", so a long file near the root can crowd out a nearer one.
+Codex and Claude Code both state a size limit on the files you write. Codex's [AGENTS.md guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md) stops adding files "once the combined size reaches the limit defined by `project_doc_max_bytes` (32 KiB by default)", so a long file near the root can crowd out a nearer one.
 
 Claude Code loads a launch file whole as long as it is 4 MiB or smaller, and puts a tighter limit on instruction files that load on demand, 40,000 characters in a session with a 200K context window. A file over that second limit reaches the model only in part, with a note telling it to read the rest.
 
@@ -56,7 +56,7 @@ Claude Code, Codex and Gemini CLI all do, and they disagree about how much to tr
 
 Claude Code trusts the agent furthest, with auto memory on by default. Anthropic describes it as "notes Claude writes itself based on your corrections and preferences", and [my guide to Claude Code's memory files](/articles/claude-code-memory/) goes through how much of it loads.
 
-Codex makes you opt in. Its [Memories page](https://developers.openai.com/codex/customization/memories) says "Local Codex memories are off by default", and once enabled, "Codex can turn useful context from eligible prior chats into local memory files."
+Codex makes you opt in. Its [Memories page](https://learn.chatgpt.com/docs/customization/memories) says "Local Codex memories are off by default", and once enabled, "Codex can turn useful context from eligible prior chats into local memory files."
 
 Gemini CLI splits the job in two. Its [memory tool](https://geminicli.com/docs/tools/memory) "persists durable facts, user preferences, and project details by editing Markdown memory files directly", and a separate feature called [Auto Memory](https://geminicli.com/docs/cli/auto-memory/) mines old sessions for more.
 

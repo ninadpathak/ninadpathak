@@ -23,7 +23,7 @@ Radio operators solved the hardest part of voice AI latency with one word. On a 
 
 A voice agent doesn't get that word. It has to guess when the caller has finished, and voice AI latency is the time from the caller's last word to the first sound the agent makes, with that guess included.
 
-People are quick at the same guess. A [2015 review of turn-taking research](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4464110/) puts the usual pause between speakers at around 200 ms, while planning a spoken reply takes over 600 ms, so listeners must be predicting the end of a turn before it arrives.
+People are quick at the same guess. A [2015 review of turn-taking research](https://pmc.ncbi.nlm.nih.gov/articles/PMC4464110/) puts the usual pause between speakers at around 200 ms, while planning a spoken reply takes over 600 ms, so listeners must be predicting the end of a turn before it arrives.
 
 That's the bar, and it explains where the time goes in a voice pipeline. I've laid the stages out below with a budget you can rerun, and the model-side pieces link to the rest of [AI engineering](/articles/ai-engineering/).
 
@@ -114,7 +114,7 @@ The 500 ms in my script is OpenAI's default. Its [Realtime API guide](https://de
 
 The way out is to predict the end of the turn the way a listener does. OpenAI's second mode, `semantic_vad`, scores how likely it is that the speaker is done from the words so far, and waits longer on a sentence that trails off than on a definite statement.
 
-LiveKit has landed in the same place. Its [turn detection docs](https://docs.livekit.io/agents/build/turns/) make a turn detector model the default, one that "Predicts end of turn from both the meaning of speech and its acoustic properties", and keep silence-only detection for when you need minimal latency.
+LiveKit has landed in the same place. Its [turn detection docs](https://docs.livekit.io/agents/logic/turns/) make a turn detector model the default, one that "Predicts end of turn from both the meaning of speech and its acoustic properties", and keep silence-only detection for when you need minimal latency.
 
 I think that's the right default, and I'd go further. If I had one week to make a voice agent feel faster, I'd spend it on endpointing before touching the model.
 
