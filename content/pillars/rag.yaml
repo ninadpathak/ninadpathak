@@ -7,9 +7,9 @@ lead: "A RAG pipeline retrieves text from an index and puts it in the prompt bef
 intro: |
   BM25 comes from the Okapi system at City University in London, which Stephen Robertson's team presented as [Okapi at TREC-3](https://en.wikipedia.org/wiki/Okapi_BM25) in 1994. It ranks documents by the query words they contain, and it is the keyword half of hybrid search today.
 
-  A RAG pipeline puts that 1994 function beside a dense vector index and fuses the two rankings. The stages after it rerank the candidates and pass the survivors to the model.
+  A RAG pipeline fuses that ranking with one from a dense vector index, then reranks the candidates and passes the survivors to the model. A person scanning ten search results can skip a bad one, and a model reads whatever lands in the prompt as evidence.
 
-  The parallel with classic search breaks at the consumer. A person scanning ten results can skip a bad one, and a model reads whatever lands in the prompt as evidence.
+  Plain hybrid search came last of seven retrievers in the production benchmark the hybrid search guide reports, which is why this hub goes on to the stages after fusion.
 argument: "Retrieval quality is decided before generation, so each retrieval stage gets measured on its own before the generated answer is judged."
 sections:
   - heading: "Foundations"
@@ -21,7 +21,7 @@ sections:
   - heading: "Retrieval quality"
     spokes:
       - post: hybrid-search
-        note: "Fuses BM25 and vector retrieval with reciprocal rank fusion, with runnable code and benchmark scores."
+        note: "Fuses BM25 and vector retrieval with reciprocal rank fusion in runnable code, and reports a benchmark where plain hybrid search scored last."
       - post: rag-reranking
         note: "Tests a bi-encoder against two cross-encoders on one set of candidates and reports what reranking fixed."
       - post: contextual-retrieval
@@ -44,9 +44,5 @@ bridges:
   - hub: ai-engineering
     text: "A retrieved token costs latency and money like any other, and the [LLM inference](/articles/ai-engineering/) hub covers that budget."
 faqs:
-  - q: "What is a RAG pipeline?"
-    a: "A RAG pipeline retrieves text from an index and puts it in the prompt before the model answers. Its stages run from embedding and search through reranking to evaluation."
-  - q: "What is hybrid search?"
-    a: "Hybrid search fuses BM25 keyword retrieval with vector retrieval. Reciprocal rank fusion is the fusion method the guide in this hub implements."
-  - q: "How do you evaluate a RAG pipeline?"
-    a: "Measure retrieval apart from generation. Recall and precision score what was retrieved, and the evaluation guide in this hub covers RAGAs for the rest."
+  - q: "Which stage of a RAG pipeline should be measured first?"
+    a: "Measure retrieval before generation, because a wrong chunk in the prompt reads as evidence. The guide to [RAG evaluation](/articles/rag-evaluation/) covers recall and precision for the retrieved set."

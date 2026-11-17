@@ -113,6 +113,40 @@ class HubModelTests(BuiltSite):
             for mention in re.findall(r"[^.\n]*Mem0[^.\n]*", text):
                 self.assertIn("I ran a team of 13 writers at Mem0", mention, slug)
 
+    def test_hub_copy_does_not_assert_the_engineer_to_writer_career_story(self):
+        # The repo does not back that history (voice context, engineer-to-writer is held),
+        # so the hub may describe the page and may not claim the story in first person.
+        text = (ROOT / "content" / "pillars" / "developer-experience.yaml").read_text(encoding="utf-8")
+        for claim in ("My account", "I dropped", "I kept", "engineer-to-writer page"):
+            self.assertNotIn(claim, text)
+
+    def test_no_sentence_repeats_across_hub_openings(self):
+        seen = {}
+        for slug in HUBS:
+            data = pillar(slug)
+            self.assertNotIn("parallel breaks", data["intro"])
+            opening = f"{data['lead']} {data['intro']} {data['argument']}"
+            for sentence in re.split(r"(?<=[.!?])\s+", re.sub(r"\s+", " ", opening)):
+                key = sentence.strip().lower()
+                if len(key.split()) < 4:
+                    continue
+                self.assertNotIn(key, seen, f"{slug} repeats a sentence from {seen.get(key)}")
+                seen[key] = slug
+            # The argument is also the CollectionPage abstract, so it has to stand alone.
+            self.assertNotRegex(data["argument"], r"^(So|Therefore|That|This)\b")
+            self.assertNotIn("therefore", data["argument"].split(",")[0])
+
+    def test_each_faq_answer_links_a_spoke_and_no_question_restates_the_lead(self):
+        for slug in HUBS:
+            data = pillar(slug)
+            members = {s for s, post in self.posts.items() if post["category"] == slug}
+            self.assertTrue(data["faqs"], slug)
+            lead_opening = data["lead"].split(". ")[0]
+            for faq in data["faqs"]:
+                linked = set(re.findall(r"\]\(/articles/([^/)]+)/\)", faq["a"]))
+                self.assertTrue(linked and linked <= members, f"{slug}: {faq['q']} links {linked}")
+                self.assertNotIn(lead_opening, faq["a"], f"{slug}: {faq['q']} repeats the lead")
+
 
 class HubPageTests(BuiltSite):
     def test_each_hub_page_links_every_spoke_once_in_a_section(self):
@@ -121,7 +155,7 @@ class HubPageTests(BuiltSite):
             members = [s for s, post in self.posts.items() if post["category"] == slug]
             self.assertGreaterEqual(len(members), 4, slug)
             for member in members:
-                self.assertEqual(main.count(f'href="/articles/{member}/"'), 1, f"{slug} -> {member}")
+                self.assertEqual(main.count(f'<li><a href="/articles/{member}/"'), 1, f"{slug} -> {member}")
             for section in pillar(slug)["sections"]:
                 self.assertIn(f">{section['heading']}</h2>", main)
             self.assertNotIn("More in this hub", main, f"{slug} has a spoke outside its sections")
@@ -175,7 +209,7 @@ class HubPageTests(BuiltSite):
             crumbs = next(b for b in blocks if b.get("@type") == "BreadcrumbList")["itemListElement"]
             self.assertEqual([c["item"] for c in crumbs], [f"{BASE}/", f"{BASE}/articles/", f"{BASE}/articles/{slug}/"])
             faq = next(b for b in blocks if b.get("@type") == "FAQPage")
-            visible = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", main_of(html)))
+            visible = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", re.sub(r"</?a\b[^>]*>", "", main_of(html))))
             for question in faq["mainEntity"]:
                 self.assertIn(question["name"], visible)
                 self.assertIn(question["acceptedAnswer"]["text"], visible, f"{slug}: FAQ answer is not visible")
@@ -207,7 +241,7 @@ class SpokePageTests(BuiltSite):
             crumb = re.search(r'<nav aria-label="Breadcrumb".*?</nav>', html, re.S).group(0)
             self.assertIn(f'<a href="{url}">{hub["title"]}</a>', crumb, slug)
             header = re.search(r'<header class="post-header">.*?</header>', html, re.S).group(0)
-            self.assertIn(f'Part of <a href="{url}" class="tag">{hub["title"]}</a>', header, slug)
+            self.assertIn(f'<a href="{url}" class="tag">Part of {hub["label"]}</a>', header, slug)
             self.assertLess(header.index("Part of"), header.index("<h1"), slug)
             blocks = schema(html)
             crumbs = next(b for b in blocks if b.get("@type") == "BreadcrumbList")["itemListElement"]
@@ -217,17 +251,35 @@ class SpokePageTests(BuiltSite):
             article = next(b for b in blocks if b.get("@type") == "TechArticle")
             self.assertEqual(article["isPartOf"]["@id"], f"{BASE}{url}#hub", slug)
 
-    def test_related_cards_come_from_the_same_hub_siblings_first(self):
+    def body_links(self, slug):
+        aliases = json.loads((ROOT / "content" / "post-slug-aliases.json").read_text(encoding="utf-8"))
+        found = re.findall(r"\]\(/articles/([a-z0-9][a-z0-9\-\.]*)/?(?:#[^)\s]*)?\)", self.posts[slug].content)
+        return {aliases.get(s, s) for s in found} & set(self.posts) - {slug}
+
+    def test_related_cards_stay_in_the_hub_and_add_links_the_body_lacks(self):
+        """Rule L11 as changed in review: cards come from the post's own hub and go to
+        posts the body does not already link, so each card is a new path."""
+        card_inbound = dict.fromkeys(self.posts, 0)
+        repeats = 0
         for slug, post in self.posts.items():
             related = re.search(r'<section class="post-related".*?</section>', page(f"/articles/{slug}/"), re.S)
             self.assertIsNotNone(related, slug)
             targets = re.findall(r'href="/articles/([^/]+)/"', related.group(0))
             self.assertEqual(len(targets), 3, slug)
+            self.assertEqual(len(set(targets)), 3, slug)
             self.assertNotIn(slug, targets)
+            linked = self.body_links(slug)
+            hub = [s for s, other in self.posts.items() if other["category"] == post["category"] and s != slug]
+            unlinked = [s for s in hub if s not in linked]
             for target in targets:
                 self.assertEqual(self.posts[target]["category"], post["category"], f"{slug} -> {target}")
-            siblings = [s for s in post.get("siblings") or [] if s in self.posts][:3]
-            self.assertEqual(targets[:len(siblings)], siblings, slug)
+                card_inbound[target] += 1
+                if target in linked:
+                    repeats += 1
+                    # Allowed only where the hub has too few posts the body does not link.
+                    self.assertLess(len(unlinked), 3, f"{slug} repeats body link {target}")
+        self.assertEqual([s for s, n in card_inbound.items() if n == 0], [], "posts no related card points at")
+        self.assertLess(repeats, 25)
 
     def test_hire_note_under_an_article_links_the_hub_money_page(self):
         for slug, post in self.posts.items():
@@ -241,6 +293,30 @@ class SpokePageTests(BuiltSite):
             hub = HUBS[post["category"]]
             lines = (OUTPUT / "articles" / slug / "index.md").read_text(encoding="utf-8").splitlines()
             self.assertEqual(lines[2], f"Part of: [{hub['title']}]({BASE}/articles/{post['category']}/)", slug)
+
+
+class ToolPageTests(BuiltSite):
+    def test_each_tool_a_hub_lists_links_that_hub_above_its_title(self):
+        listed = {}
+        for slug in HUBS:
+            for section in pillar(slug)["sections"]:
+                for entry in section["spokes"]:
+                    if "tool" in entry:
+                        listed[entry["tool"]] = slug
+        self.assertEqual(sorted(listed), sorted(TOOLS))
+        for tool, hub in listed.items():
+            main = main_of(page(f"/{tool}/"))
+            link = f'<a href="/articles/{hub}/" class="tag">Part of {HUBS[hub]["label"]}</a>'
+            self.assertEqual(main.count(link), 1, tool)
+            self.assertLess(main.index(link), main.index("<h1"), tool)
+            self.assertNotIn(" style=", main[:main.index("<h1")])
+
+    def test_template_index_links_use_the_template_name(self):
+        main = main_of(page("/articles/technical-documentation/"))
+        for row in pillar("technical-documentation")["templates"]:
+            self.assertIn(f'<a href="{row["file"]}">{row["name"]}</a>', main)
+            self.assertTrue((ROOT / row["file"].lstrip("/")).is_file(), row["file"])
+        self.assertNotIn(">Download<", main)
 
 
 class GlossaryTests(BuiltSite):

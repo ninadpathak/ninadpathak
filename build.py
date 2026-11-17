@@ -458,6 +458,8 @@ class SiteBuilder:
         self.env.globals["person_schema"] = self.person_schema()
         self.env.globals["person_ref"] = self.person_ref()
         self.env.globals["hire"] = self.config["hire"]
+        # tool slug -> the hub that lists it, filled by load_hubs.
+        self.env.globals["tool_hubs"] = {}
 
         self.md = markdown.Markdown(
             extensions=["extra", "codehilite", "toc", "tables"],
@@ -758,6 +760,7 @@ class SiteBuilder:
                         item = {"url": f"/{tool['slug']}/", "title": tool["name"], "note": note,
                                 "description": tool["description"]}
                         hub_tools.append(item)
+                        self.env.globals["tool_hubs"][tool["slug"]] = category
                         spokes.append(item)
                 sections.append({"heading": raw["heading"], "blurb": self.inline_md(raw.get("blurb", "")),
                                  "spokes": spokes})
@@ -809,21 +812,69 @@ class SiteBuilder:
                                 (o for o in section["spokes"] if "post" in o and o is not spoke),
                                 key=lambda o: abs(section["spokes"].index(o) - position))]
 
-    def related_posts(self, post) -> list[dict]:
-        """Three cards from the post's own hub: the siblings it declares, then its
-        neighbours in the hub's section, then the rest of the hub in map order."""
-        category = post.get("category")
-        if not category:
-            return []
-        by_slug = {p["slug"]: p for p in category["posts"]}
-        candidates = [by_slug[s] for s in post.get("siblings", []) if s in by_slug]
-        candidates += post.get("section_neighbours", [])
-        candidates += category.get("ordered_posts", category["posts"])
-        related = []
-        for candidate in candidates:
-            if candidate["slug"] != post["slug"] and candidate not in related:
-                related.append(candidate)
-        return related[:3]
+    def assign_related(self, posts) -> None:
+        """Choose three related cards per post, from its own hub (rule L11).
+
+        A card is worth a link only where the body has none, so a post the body already
+        links is used last. Among the rest, neighbours in the hub's section come first,
+        then the rest of the hub, and within each group the post with the fewest inbound
+        links so far wins, so the cards carry links to the pages that have few. A last
+        pass gives a card to any post that still has none pointing at it.
+        """
+        aliases_path = Path("content/post-slug-aliases.json")
+        aliases = json.loads(aliases_path.read_text()) if aliases_path.exists() else {}
+        slugs = {post["slug"] for post in posts}
+        links = {}
+        for post in posts:
+            found = re.findall(r"\]\(/articles/([a-z0-9][a-z0-9\-\.]*)/?(?:#[^)\s]*)?\)", post.get("markdown", ""))
+            links[post["slug"]] = {aliases.get(slug, slug) for slug in found} & slugs - {post["slug"]}
+        inbound = {slug: 0 for slug in slugs}
+        for targets in links.values():
+            for target in targets:
+                inbound[target] += 1
+        card_inbound = {slug: 0 for slug in slugs}
+
+        for post in sorted(posts, key=lambda p: p["slug"]):
+            category = post.get("category")
+            post["related"] = []
+            if not category:
+                continue
+            order = category.get("ordered_posts") or category["posts"]
+            position = {other["slug"]: index for index, other in enumerate(order)}
+            neighbours = {other["slug"] for other in post.get("section_neighbours", [])}
+            here = position.get(post["slug"], 0)
+            pool = [other for other in order if other["slug"] != post["slug"]]
+            pool.sort(key=lambda other: (
+                other["slug"] in links[post["slug"]],
+                other["slug"] not in neighbours,
+                inbound[other["slug"]] + card_inbound[other["slug"]],
+                abs(position[other["slug"]] - here),
+                other["slug"],
+            ))
+            post["related"] = pool[:3]
+            for other in post["related"]:
+                card_inbound[other["slug"]] += 1
+
+        # Repair: a post no card points at takes the place of the most-carded target on
+        # a same-hub page whose body does not link it.
+        by_slug = {post["slug"]: post for post in posts}
+        for slug in sorted(slug for slug, count in card_inbound.items() if count == 0):
+            target = by_slug[slug]
+            category = target.get("category")
+            if not category:
+                continue
+            hosts = [post for post in category["posts"]
+                     if post["slug"] != slug and slug not in links[post["slug"]] and post.get("related")]
+            swaps = [(card_inbound[card["slug"]], host["slug"], index)
+                     for host in hosts for index, card in enumerate(host["related"])
+                     if card_inbound[card["slug"]] > 1]
+            if not swaps:
+                continue
+            _count, host_slug, index = max(swaps, key=lambda swap: (swap[0], swap[1], -swap[2]))
+            host = by_slug[host_slug]
+            card_inbound[host["related"][index]["slug"]] -= 1
+            host["related"][index] = target
+            card_inbound[slug] += 1
 
     def link_glossary_owners(self, terms, posts) -> None:
         """Point each glossary term at the article that owns the fuller treatment.
@@ -1040,20 +1091,17 @@ class SiteBuilder:
             if not category["posts"] and not category.get("preserve_empty_route"):
                 print(f"  i category '{category['slug']}': no posts yet, not built")
                 continue
-            money = next((page for page in getattr(self, "service_pages", [])
-                          if page["url"] == category.get("money_page")), None)
             self.render(
                 "category_archive.html",
                 f"articles/{category['slug']}/index.html",
                 page="articles",
                 category=category,
                 posts=category["posts"],
-                money_page=money,
             )
 
     def build_posts(self, posts):
         for post in posts:
-            related = self.related_posts(post)
+            related = post.get("related", [])
             self.render(
                 "post.html",
                 f"articles/{post['slug']}/index.html",
@@ -1362,7 +1410,7 @@ class SiteBuilder:
         # a prose line under the heading is flagged by this site's own validator, and a
         # URL listed twice is flagged too. The hub line therefore names the hiring page
         # the hub feeds in words; its link is in the About section above.
-        money_titles = {page["url"]: page.get("nav_title") or page["title"] for page in service_pages}
+        money_titles = {page["url"]: page["title"] for page in service_pages}
         listed_tools = set()
         for category in categories or []:
             if not category["posts"]:
@@ -1641,10 +1689,10 @@ class SiteBuilder:
         glossary_terms = self.load_glossary()
         categories = self.load_categories(posts)
         self.load_hubs(categories, posts)
+        self.assign_related(posts)
         self.link_glossary_owners(glossary_terms, posts)
         service_pages = self.load_service_pages()
         self.categories = categories
-        self.service_pages = service_pages
 
         self.build_homepage(posts, work_cases, categories)
         self.build_blog_list(posts, categories)

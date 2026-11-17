@@ -45,7 +45,7 @@ def post_html(hub, n):
 
 def hub_html(hub):
     items = [{"url": f"{BASE}/articles/{hub}-{n}/"} for n in range(1, 6)]
-    links = "".join(f'<a href="/articles/{hub}-{n}/">p</a>' for n in range(1, 6))
+    links = "".join(f'<li><a href="/articles/{hub}-{n}/">p</a></li>' for n in range(1, 6))
     return (
         '<html><head><meta name="robots" content="index, follow"><script type="application/ld+json">'
         + json.dumps({"@type": "CollectionPage", "mainEntity": {"@type": "ItemList", "itemListElement": items}})
@@ -212,11 +212,28 @@ class HubTests(AuditFixture):
         self.assertRule("L1", "has no sentence of context")
 
     def test_l1_built_page_links_each_spoke_once(self):
-        self.edit("output/articles/alpha/index.html", '<a href="/articles/alpha-1/">p</a>', "")
-        self.edit("output/articles/beta/index.html", '<a href="/articles/beta-1/">p</a>',
-                  '<a href="/articles/beta-1/">p</a><a href="/articles/beta-1/">again</a>')
+        self.edit("output/articles/alpha/index.html", '<li><a href="/articles/alpha-1/">p</a></li>', "")
+        self.edit("output/articles/beta/index.html", '<li><a href="/articles/beta-1/">p</a></li>',
+                  '<li><a href="/articles/beta-1/">p</a></li><li><a href="/articles/beta-1/">again</a></li>')
         self.assertRule("L1", "links /articles/alpha-1/ 0 times")
         self.assertRule("L1", "links /articles/beta-1/ 2 times")
+
+    def test_l1_a_second_link_outside_the_map_is_allowed(self):
+        self.edit("output/articles/alpha/index.html", "</main>", '<p><a href="/articles/alpha-1/">in an answer</a></p></main>')
+        self.assertEqual(self.errors("L1"), [])
+
+    def test_l3_a_tool_spoke_must_link_its_hub(self):
+        self.edit("config.toml", "[content]\n", '[content]\n[[content.tools]]\nslug = "checker"\nprimary_query = "checker"\n\n')
+        self.edit("content/pillars/alpha.yaml", "bridges:", "      - tool: checker\n        note: Runs the check.\nbridges:")
+        self.edit("output/articles/alpha/index.html", '{"url": "https://example.com/articles/alpha-5/"}',
+                  '{"url": "https://example.com/articles/alpha-5/"}, {"url": "https://example.com/checker/"}')
+        self.assertRule("L3", "tool checker: is not built")
+        (self.root / "output" / "checker").mkdir()
+        (self.root / "output" / "checker" / "index.html").write_text("<html><body><main>tool</main></body></html>")
+        self.assertRule("L3", "tool checker: is a spoke of hub alpha and does not link /articles/alpha/")
+        (self.root / "output" / "checker" / "index.html").write_text(
+            '<html><body><main><a href="/articles/alpha/">Part of alpha</a></main></body></html>')
+        self.assertEqual(self.errors("L3"), [])
 
     def test_l2_argument_and_opening_length(self):
         self.edit("content/pillars/alpha.yaml", "argument: " + "word " * 40, "argument: ''")
@@ -298,6 +315,9 @@ class SpokeTests(AuditFixture):
         (term / "index.html").write_text("<html><body><main>definition</main></body></html>")
         self.assertRule("L12", "/glossary/alpha-1/: shares a slug with an article")
         (term / "index.html").write_text('<html><body><main><a href="/articles/alpha-1/">guide</a></main></body></html>')
+        self.assertRule("L12", "alpha-1: does not link its glossary term /glossary/alpha-1/")
+        path = self.root / "content/posts/alpha-1.md"
+        path.write_text(path.read_text() + "\nThe [term](/glossary/alpha-1/) is defined there.\n")
         self.assertEqual(self.errors("L12"), [])
 
     def test_anchor_rules(self):

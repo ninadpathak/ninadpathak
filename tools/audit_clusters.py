@@ -8,9 +8,9 @@ the built site in output/, and reports where they disagree.
 
 Rules, by the numbers the plan gives them (hub-and-spoke plan, 2026-11-17, section 4):
 
-  L1   a hub lists every one of its spokes once, in a named section
+  L1   a hub lists every one of its spokes once in its map, in a named section
   L2   a hub opens with 150 words or more and states an argument
-  L3   a spoke shows its hub in the breadcrumb
+  L3   a spoke shows its hub in the breadcrumb, and a tool a hub lists links that hub
   L4   a spoke links its hub in its first 200 words
   L5   a spoke names two or three siblings and links them, and has two or more body
        links to and from its own hub
@@ -20,7 +20,8 @@ Rules, by the numbers the plan gives them (hub-and-spoke plan, 2026-11-17, secti
   L9   a hub links its money page, and the money page links the hub
   L10  a post flagged `money_link: true` links the money page in its body
   L11  related cards under a post come from its own hub
-  L12  a glossary term that shares a slug with an article links that article
+  L12  a glossary term that shares a slug with an article links that article, and
+       the article's body links the term
 
 Plus: every post has a category and a `primary_query`, no two indexable URLs share a
 query, a hub has five spokes or is marked incubating, anchors follow the anchor rules,
@@ -388,10 +389,17 @@ def audit(site: Site) -> tuple[list[Finding], dict]:
             add("error", "L1", f"hub {hub}", f"{url} is not built")
             continue
         main = main_html(html)
+        # The map is the list items; an FAQ answer or a bridge may link a spoke again.
         for slug in members:
-            count = main.count(f'href="/articles/{slug}/"')
+            count = main.count(f'<li><a href="/articles/{slug}/"')
             if count != 1:
-                add("error", "L1", f"hub {hub}", f"the built page links /articles/{slug}/ {count} times; it must be once")
+                add("error", "L1", f"hub {hub}", f"the built map links /articles/{slug}/ {count} times; it must be once")
+        for tool in listed_tools:
+            tool_html = site.page(f"/{tool}/")
+            if tool_html is None:
+                add("error", "L3", f"tool {tool}", "is not built")
+            elif f'href="{url}"' not in main_html(tool_html):
+                add("error", "L3", f"tool {tool}", f"is a spoke of hub {hub} and does not link {url}")
         money = raw.get("money_page")
         if not money:
             add("error", "L9", f"hub {hub}", "has no money_page in config.toml")
@@ -438,10 +446,14 @@ def audit(site: Site) -> tuple[list[Finding], dict]:
                 add("error", "L11", slug, f"related card /articles/{target}/ is from hub {posts[target]['hub']}")
 
     # --- glossary twins -----------------------------------------------------------
-    for slug in posts:
+    for slug, post in posts.items():
         term = site.page(f"/glossary/{slug}/")
-        if term is not None and f'href="/articles/{slug}/"' not in main_html(term):
+        if term is None:
+            continue
+        if f'href="/articles/{slug}/"' not in main_html(term):
             add("error", "L12", f"/glossary/{slug}/", f"shares a slug with an article and does not link /articles/{slug}/")
+        if not re.search(rf"\]\(/glossary/{re.escape(slug)}/?\)", post["content"]):
+            hand_written(slug, "L12", f"does not link its glossary term /glossary/{slug}/ in the body")
 
     # --- llms.txt -------------------------------------------------------------------
     llms = site.output / "llms.txt"

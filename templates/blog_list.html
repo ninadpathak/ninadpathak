@@ -47,7 +47,7 @@
 <section class="blog-list-section">
   <div class="container">
     <h2 class="label">Hubs</h2>
-    {% for category in categories if category.posts %}
+    {% for category in categories if category.posts and not category.incubating %}
     <a href="{{ category.url }}" class="blog-row">
       <div class="blog-row-title">{{ category.title }}</div>
       <div class="blog-row-desc">{{ category.description }}</div>

@@ -161,7 +161,7 @@
         <span class="post-meta-time">{{ post.reading_time }} min read</span>
       </div>
       {% if post.category %}
-      <p>Part of <a href="{{ post.category.url }}" class="tag">{{ post.category.title }}</a></p>
+      <p><a href="{{ post.category.url }}" class="tag">Part of {{ post.category.label }}</a></p>
       {% endif %}
       <h1 class="post-title">{{ post.title }}</h1>
       {% if post.description %}

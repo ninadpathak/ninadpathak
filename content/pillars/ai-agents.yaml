@@ -1,16 +1,16 @@
 # Hub copy for /articles/ai-agents/. See technical-documentation.yaml for the fields.
 opening_source:
   url: "https://en.wikipedia.org/wiki/Pipeline_(Unix)"
-  fact: "Ken Thompson added the pipe() system call and pipes to the shell in Version 3 Unix (1973); Doug McIlroy's 1964 memo proposed the concept."
+  fact: "Ken Thompson added the pipe() system call and pipes to the shell and several utilities in Version 3 Unix (1973)."
   checked: 2026-11-17
 lead: "An AI agent is a loop around a model, and AI agent architecture is the design of that loop and the harness that runs it. This hub maps the parts in order, from what an agent is to how one fails."
 intro: |
-  Ken Thompson added [pipes](https://en.wikipedia.org/wiki/Pipeline_(Unix)) to Unix in 1973, after Doug McIlroy's 1964 memo proposed the idea. A pipeline chains programs so the output of one becomes the input of the next.
+  Ken Thompson added [pipes](https://en.wikipedia.org/wiki/Pipeline_(Unix)) to Unix in 1973, in Version 3. A pipeline chains programs so the output of one becomes the input of the next.
 
-  An agent loop does the same with tools. The model reads the result of one tool call and decides which call comes next.
+  A shell pipeline is fixed by the person who types it. An agent composes its own at run time, because the model reads the result of one tool call and decides which call comes next.
 
-  The parallel breaks at who wrote the pipeline. A shell pipeline is fixed by the person who typed it, and an agent composes its own at run time, so one input can take a different path on the next run.
-argument: "The engineering therefore sits outside the model, in the harness that runs the loop and the handling for when it goes wrong."
+  A single input can therefore take a different path on the next run, and the code around the model has to expect that and recover from it.
+argument: "The engineering in an agent sits outside the model, in the harness that runs the loop and the handling for when it goes wrong."
 sections:
   - heading: "What an agent is"
     spokes:
@@ -52,9 +52,5 @@ bridges:
   - hub: ai-engineering
     text: "Each turn of the loop spends tokens and latency, which the [LLM inference](/articles/ai-engineering/) hub measures."
 faqs:
-  - q: "What is AI agent architecture?"
-    a: "AI agent architecture is the design of the loop around a model and of the harness that runs it. The agent loop page in this hub breaks that loop into four phases, starting at perceive and ending at remember."
-  - q: "What is the difference between an AI agent and an AI assistant?"
-    a: "An AI agent chooses its next steps toward a goal, and an AI assistant leaves the next step to the person using it."
-  - q: "What is the Model Context Protocol?"
-    a: "The Model Context Protocol is a standard for connecting AI models to data sources and tools. An MCP server exposes those tools, and the tutorial in this hub builds one in Python."
+  - q: "How do the parts of an AI agent fit together?"
+    a: "The model chooses the next tool call, the loop carries the result back to it, and the harness runs the loop. The [agent loop](/articles/agent-loop-anatomy/) page covers the four phases, and the [agent harness](/articles/agent-harnesses/) page covers the layer around them."

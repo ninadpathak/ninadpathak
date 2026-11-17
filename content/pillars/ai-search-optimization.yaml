@@ -3,16 +3,14 @@ opening_source:
   url: "https://en.wikipedia.org/wiki/Robots.txt"
   fact: "Martijn Koster proposed the standard in February 1994 on the www-talk mailing list; it relies on voluntary compliance."
   checked: 2026-11-17
-lead: "AI search optimization for documentation is the work of making a page fetchable by AI crawlers and quotable by answer engines. A publisher controls crawler access and page structure, and has no control over placement."
+lead: "AI search optimization for documentation is the work of making a page fetchable by AI crawlers and quotable by answer engines. This hub covers the two parts a publisher controls, which are crawler access and page structure."
 intro: |
   Martijn Koster proposed [robots.txt](https://en.wikipedia.org/wiki/Robots.txt) on the www-talk mailing list in February 1994. The standard is a plain text file, and it relies on voluntary compliance by the crawlers that read it.
 
-  AI search runs on the same arrangement. GPTBot and OAI-SearchBot read that file, and a docs site states its terms there in plain text.
+  GPTBot and OAI-SearchBot read that file today. The crawler guide in this hub checked 12 developer documentation hosts on October 22, 2026, and every robots.txt that existed allowed every AI agent the checker knows.
 
-  The crawler guide in this hub checked 12 developer documentation hosts on October 22, 2026. Each one allowed every AI agent the checker knows, and none named an AI agent in its file.
-
-  The parallel breaks at the result. An answer engine may quote one passage or leave the page out, and the publisher has no say in which.
-argument: "So this hub stays with the parts a publisher controls, and the access and extraction checks each come with a free tool that reruns them."
+  What happens after the fetch is the engine's choice. It may quote one passage or leave the page out.
+argument: "A publisher controls access and page structure and nothing after that, so the access and extraction checks in this hub each come with a free tool that reruns them."
 sections:
   - heading: "Access"
     blurb: "A crawler that cannot fetch the page ends the process here."
@@ -44,9 +42,7 @@ bridges:
   - hub: ai-agents
     text: "An MCP server is one more way to serve documentation to an agent, and the [AI agent architecture](/articles/ai-agents/) hub has a tutorial that builds a docs search server."
 faqs:
-  - q: "What is AI search optimization?"
-    a: "AI search optimization is the work of making a page fetchable by AI crawlers and quotable by answer engines. Google says optimizing for its generative AI search is still SEO, so the work starts with an indexed page that can show a snippet."
-  - q: "Does llms.txt improve AI search visibility?"
-    a: "Google Search does not use llms.txt, and an Ahrefs study found that 97% of published files got no request in May 2026. A valid file and a fetched file are different facts, so validate the structure and read the server logs separately."
-  - q: "Does blocking GPTBot remove a site from ChatGPT search?"
-    a: "GPTBot collects training data, and ChatGPT search uses OAI-SearchBot. Blocking GPTBot alone leaves OAI-SearchBot free to fetch the site."
+  - q: "What can a publisher control in AI search?"
+    a: "A publisher controls which crawlers may fetch a page and how the page is structured for quoting. The guide to [AI crawlers](/articles/ai-crawlers/) covers the robots.txt rules, and placement in an answer stays with the engine."
+  - q: "Is AI search optimization different from SEO?"
+    a: "Google says optimizing for its generative AI search is still SEO, so the work starts with an indexed page that can show a snippet. The comparison of [AEO vs SEO](/articles/aeo-for-developer-docs/) lists the six checks that follow from that."

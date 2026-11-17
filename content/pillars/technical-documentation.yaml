@@ -7,11 +7,11 @@ opening_source:
   checked: 2026-11-17
 lead: "Technical documentation is the written record of how a product behaves, kept true by testing it against the product. This hub maps my guides and templates in the order a team does the work, from deciding what to write to keeping the pages found."
 intro: |
-  The first edition of the [Unix Programmer's Manual](https://en.wikipedia.org/wiki/Man_page) is dated November 3, 1971. It shipped with the system and described the commands that system had on that date.
+  The first edition of the [Unix Programmer's Manual](https://en.wikipedia.org/wiki/Man_page) is dated November 3, 1971. It described the commands the system had on that date.
 
-  Documentation for a product on the web follows the same contract. The page says what the product does today, and a reader runs the command and compares the output.
+  A reader of that manual could type a command and compare what came back. Product documentation on the web still gets judged by that test, and a hosted API can change between two visits by one reader, where a printed manual had one edition to match.
 
-  The parallel breaks at release speed. A printed manual had one edition of the system to match, and a hosted API can change between two visits by the same reader.
+  The runbook and release notes templates in this hub ship with a checker script, so a page can be tested again after the next release.
 argument: "Documentation is a product surface, so a page gets tested against the product before it ships and again when the product changes."
 sections:
   - heading: "Decide what to write"
@@ -98,9 +98,7 @@ bridges:
   - hub: coding-agents
     text: "The instruction files a coding agent loads are documentation with a new reader, which is why CLAUDE.md and AGENTS.md sit in the [coding agents](/articles/coding-agents/) hub."
 faqs:
-  - q: "What is technical documentation?"
-    a: "Technical documentation is the set of pages that tell a reader how a product behaves and how to complete a task with it. It includes user guides and reference along with runbooks and release notes, and each type serves a distinct reader need."
   - q: "What should a small team document first?"
-    a: "Start with an orientation page and one verified success path, then add the reference that path needs. Give each page an owner and a product change that triggers its review."
+    a: "Start with an orientation page and one verified success path, then add the reference that path needs. The guide to [what technical documentation includes](/articles/technical-docs/) matches each document type to the reader task it owns."
   - q: "How do you keep technical documentation accurate?"
-    a: "Check the page against the running product. The API documentation guide in this hub checks a reference entry with a script, so a changed status code fails before a developer hits it."
+    a: "Check the page against the running product. The [API documentation](/articles/api-documentation/) guide checks a reference entry with a script, so a changed status code fails before a developer hits it."

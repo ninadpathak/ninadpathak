@@ -1,0 +1,2 @@
+{# The hub a tool belongs to, set by the hub's pillar file. Same tag the articles use. #}
+{% set hub = tool_hubs.get(current_page) %}{% if hub %}<p><a href="{{ hub.url }}" class="tag">Part of {{ hub.label }}</a></p>{% endif %}

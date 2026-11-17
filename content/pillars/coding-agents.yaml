@@ -7,9 +7,9 @@ lead: "A coding agent is an AI agent that works inside a repository, editing fil
 intro: |
   The [editor war](https://en.wikipedia.org/wiki/Editor_war) between Emacs and vi users has run since at least 1985, and it was one of the original holy wars on Usenet. Developers now argue about coding agents the way they argued about editors.
 
-  The parallel breaks at the stake. An editor changes how a person types code, and an agent writes the code.
+  An editor changes how a person types code, and an agent writes the code. That moves the skill from keystrokes to instructions.
 
-  That moves the skill from keystrokes to instructions. The CLAUDE.md guide in this hub tests four repositories and finds that Claude Code prefers CLAUDE.md by default and falls back to AGENTS.md, so what the agent knows about a project is what a person wrote in those files.
+  The CLAUDE.md guide in this hub tests four repositories and finds that Claude Code prefers CLAUDE.md by default and falls back to AGENTS.md. What the agent knows about a project is what a person wrote in those files.
 argument: "A coding agent is configured through files a person writes, so getting good output from one is a documentation job."
 sections:
   - heading: "Instruction files"
@@ -33,7 +33,7 @@ sections:
       - post: best-llms-for-coding
         note: "Reviews coding models on Real-SWE 1.1 with the cost per resolved task, and gives a test to run on your own repo."
       - post: claude-vs-gemini-cli
-        note: "Compares Claude Code and Gemini CLI on a repository refactor, from verification to human review."
+        note: "Compares the workflows of Claude Code and Gemini CLI for repository refactoring, with no head-to-head benchmark claimed."
   - heading: "What the code is worth"
     spokes:
       - post: coding-models-new-code-vs-change
@@ -48,9 +48,5 @@ bridges:
   - hub: technical-documentation
     text: "Instruction files are documentation, and the [technical documentation](/articles/technical-documentation/) hub covers the page types they sit beside."
 faqs:
-  - q: "What is a coding agent?"
-    a: "A coding agent is an AI agent that works inside a repository, editing files and running commands until a programming task is done. It takes its project knowledge from instruction files such as CLAUDE.md and AGENTS.md."
-  - q: "Does Claude Code read AGENTS.md?"
-    a: "With default settings, Claude Code prefers CLAUDE.md and falls back to AGENTS.md. Codex reads AGENTS.md, and reads CLAUDE.md only when it is configured as a fallback filename."
-  - q: "What does a Claude Code subagent know when it starts?"
-    a: "A custom subagent starts without the conversation history and runs in its own context window. The prompt in its file has to carry the rules the job needs."
+  - q: "What does a person have to write for a coding agent?"
+    a: "A person writes the instruction file the agent loads and the prompt file for each subagent. The [CLAUDE.md](/articles/claude-md/) guide tests which file each agent loads, and [Claude Code subagents](/articles/claude-code-subagents/) start without the conversation history, so the prompt file has to carry the rules."

@@ -116,6 +116,9 @@
             <li><a href="#{{ section.heading | slugify }}">{{ section.heading }}</a></li>
             {% endfor %}
             {% if category.templates %}<li><a href="#{{ category.templates_heading | slugify }}">{{ category.templates_heading }}</a></li>{% endif %}
+            {% for faq in category.faqs %}
+            <li><a href="#{{ faq.question | slugify }}">{{ faq.question }}</a></li>
+            {% endfor %}
             {% if category.bridges %}<li><a href="#related-hubs">Related hubs</a></li>{% endif %}
           </ul>
         </div>
@@ -142,11 +145,11 @@
         {% if category.templates_intro %}<p>{{ category.templates_intro }}</p>{% endif %}
         <table>
           <thead>
-            <tr><th scope="col">Template</th><th scope="col">What it is for</th><th scope="col">Download</th></tr>
+            <tr><th scope="col">Template to download</th><th scope="col">What it is for</th></tr>
           </thead>
           <tbody>
             {% for row in category.templates %}
-            <tr><td>{{ row.name }}</td><td>{{ row.use }}</td><td><a href="{{ row.file }}">{{ row.file.rsplit("/", 1)[-1] }}</a></td></tr>
+            <tr><td><a href="{{ row.file }}">{{ row.name }}</a></td><td>{{ row.use }}</td></tr>
             {% endfor %}
           </tbody>
         </table>
