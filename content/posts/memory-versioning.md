@@ -35,6 +35,8 @@ An overwrite destroys the state that explains earlier decisions. Suppose an advi
 
 A reviewer who asks why the agent recommended bonds finds a store that says the user's tolerance is high. The recommendation now looks like an error, and nothing in the database can show otherwise.
 
+With two agents writing to that store, an overwrite can also happen by accident, which [shared vs isolated memory](/articles/shared-vs-isolated-memory/) shows in a short run.
+
 Software has had the remedy for a long time. Martin Fowler's [Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html), dated December 12, 2005, describes it as ensuring "that all changes to application state are stored as a sequence of events", so that "we can also use the event log to reconstruct past states".
 
 ## What does an append-only memory ledger look like?

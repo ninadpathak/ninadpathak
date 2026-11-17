@@ -165,6 +165,8 @@ You can see it in [coding agent memory](/articles/coding-agent-memory/), where C
 
 And it doesn't decide what the model sees. Loading state puts it in the context window, and [context windows vs memory](/articles/context-windows-vs-memory/) explains why a large record crowds out the work.
 
+Nor does it settle who may write. When several agents use one store, that becomes its own question, in [shared vs isolated memory](/articles/shared-vs-isolated-memory/).
+
 ## FAQ
 
 **What is memory serialization in an AI agent?**
