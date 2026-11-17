@@ -14,7 +14,7 @@ title: 'AI Agent Design Patterns'
 updated: 2026-11-17
 ---
 
-AI agent design patterns are the named ways to arrange model calls, tools and control flow into a working system. The list people cite comes from Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) of December 19, 2024, which describes five workflows and the autonomous agent.
+AI agent design patterns are the named ways to arrange model calls, tools and control flow into a working system. The list people cite comes from Anthropic's [Building effective agents](https://www.anthropic.com/research/building-effective-agents) of December 19, 2024, which describes five workflows and the autonomous agent.
 
 [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns), the 1994 book by the authors known as the Gang of Four, described 23 patterns, and what lasted from it was the vocabulary, since programmers still say singleton and observer without explaining either.
 

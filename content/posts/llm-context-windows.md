@@ -49,7 +49,7 @@ The models in that paper date from 2023, and I don't assume current models lose 
 
 ## What is context rot?
 
-Context rot is the loss of accuracy as the input grows, wherever the important part sits. Chroma's [technical report](https://research.trychroma.com/context-rot) of July 14, 2025 tested 18 models and made the term common.
+Context rot is the loss of accuracy as the input grows, wherever the important part sits. Chroma's [technical report](https://www.trychroma.com/research/context-rot) of July 14, 2025 tested 18 models and made the term common.
 
 The term context rot is a month older than Chroma's report. Simon Willison [credits a Hacker News comment](https://simonwillison.net/2025/Jun/18/context-rot/) with coining it in June 2025.
 

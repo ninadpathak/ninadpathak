@@ -2429,7 +2429,7 @@
     },
     {
       "id": "anthropic-building-effective-agents",
-      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "url": "https://www.anthropic.com/research/building-effective-agents",
       "author": "Anthropic",
       "date": "2024-12-19",
       "title": "Building effective agents",
@@ -3062,7 +3062,7 @@
     },
     {
       "id": "chroma-context-rot-2025",
-      "url": "https://research.trychroma.com/context-rot",
+      "url": "https://www.trychroma.com/research/context-rot",
       "author": "Kelly Hong, Anton Troynikov, Jeff Huber",
       "date": "2025-07-14",
       "title": "Context Rot: How Increasing Input Tokens Impacts LLM Performance",

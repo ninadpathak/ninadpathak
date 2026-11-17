@@ -58,7 +58,7 @@ A support chatbot and a coding agent can run on one model and differ only in wha
 
 ## Where Anthropic and Simon Willison draw the line
 
-Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents), published on December 19, 2024, splits the field in two. Workflows are "systems where LLMs and tools are orchestrated through predefined code paths", and agents are "systems where LLMs dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks."
+Anthropic's [Building effective agents](https://www.anthropic.com/research/building-effective-agents), published on December 19, 2024, splits the field in two. Workflows are "systems where LLMs and tools are orchestrated through predefined code paths", and agents are "systems where LLMs dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks."
 
 Simon Willison [settled on a definition](https://simonwillison.net/2025/Sep/18/agents/) on September 18, 2025: "An LLM agent runs tools in a loop to achieve a goal." Under his wording types 1 and 2 are no agents at all, and the word begins at the loop.
 
