@@ -9,20 +9,20 @@ slug: short-term-agent-memory
 updated: 2026-11-17
 ---
 
-Short-term memory for an AI agent is whatever sits in the context window during the current run, and the step that manages it has moved out of application code and into the vendor's API. The earlier version of this page taught a hand-written sliding window with a scoring function for each message, which is now the wrong place to start.
+Short-term memory for an AI agent is whatever sits in the context window during the current run, and on Anthropic's API, for one, the step that manages it can now run on the server. A hand-written sliding window with a scoring function for each message, which this page used to teach, is the wrong place to start there.
 
-A [changelog entry](https://code.claude.com/docs/en/changelog) shows where the risk went. Claude Code 2.1.323, released on November 12, fixed a bug in which running `/compact` a second time could end up "summarizing away a message that Claude had not answered yet".
+The risk moved with it. Claude Code 2.1.323, released on November 12, [fixed a bug](https://code.claude.com/docs/en/changelog) in which running `/compact` a second time could end up "summarizing away a message that Claude had not answered yet".
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/short-term-agent-memory/context-fill.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/short-term-agent-memory/context-fill.narrow.svg" width="288" height="632"><img class="np-has-narrow" src="/static/images/diagrams/short-term-agent-memory/context-fill.svg" width="720" height="424" alt="Four inputs fill one fixed-size context window: the system prompt, the conversation history, retrieved documents, and the agent's scratchpad. Whatever capacity is left is the headroom for the model's next response and tool calls. When it overflows, naive truncation cuts the oldest messages first." loading="lazy" decoding="async"></picture></a>
-  <figcaption>The context window is a fixed buffer. Memory is what you build on top of it.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/short-term-agent-memory/context-fill.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/short-term-agent-memory/context-fill.narrow.svg" width="288" height="632"><img class="np-has-narrow" src="/static/images/diagrams/short-term-agent-memory/context-fill.svg" width="720" height="424" alt="A fixed-size context window is filled by four inputs: the system prompt, the conversation history, retrieved documents, and the agent's scratchpad. Whatever capacity is left is the headroom for the model's next response and tool calls. When it overflows, naive truncation cuts the oldest messages first." loading="lazy" decoding="async"></picture></a>
+  <figcaption>The context window is a fixed buffer, and short-term memory is whatever it holds during one run.</figcaption>
 </figure>
 
 ## What is short-term memory in an AI agent?
 
 Short-term memory is the working state of one run: the instructions, the conversation so far, tool results and any notes the agent has written to itself, all held as tokens in the context window. It ends when the run ends, unless something copies it out.
 
-That makes it a budget before it is anything else. Every tool result and every reply spends from the same window, and [the context window guide](/articles/llm-context-windows/) covers how models use a long one.
+That makes it a budget before it is anything else. Every tool result and every reply spends from the same window, and how models use a long one is the subject of [the context window guide](/articles/llm-context-windows/).
 
 Anything meant to outlive the run belongs to long-term memory, which has its own decisions about what to write and when to replace it. [Context windows vs memory](/articles/context-windows-vs-memory/) draws that line, and [AI memory management for LLMs](/articles/ai-memory-management/) covers the storage side.
 
@@ -30,7 +30,7 @@ Anything meant to outlive the run belongs to long-term memory, which has its own
 
 Something has to leave the window, and there are two ways to choose it: drop the oldest turns, or replace them with a summary. Dropping is simple and loses whatever was said early, which is often where the instructions were.
 
-A small script shows the failure. It builds a 40-message conversation whose first message is a rule, then fits it into a 400-token budget twice.
+The script below builds a 40-message conversation whose first message is a rule, then fits it into a 400-token budget twice.
 
 ```python
 """Fit a conversation into a token budget, with and without a pinned instruction."""
@@ -89,11 +89,13 @@ Compaction keeps a model-written summary of the older turns and loses whatever t
 
 "Compaction replaces the older turns of a conversation with a summary that Claude writes on the server, so you need no summarization code of your own."
 
-The same page gives a second reason to use it, saying it keeps the active context small "because response quality degrades as a conversation grows". Both of its modes "are in beta", and in one of them the summary happens when "input tokens reach the trigger you set".
+It gives a second reason to use it, saying it keeps the active context small "because response quality degrades as a conversation grows". Both of its modes "are in beta".
 
-So the sliding window and the summarizer I used to describe here are now one request parameter. I think that is the right default, and the changelog is a useful record of how the step fails.
+The page's own advice is "Use on-demand compaction wherever it is available", a mode it describes as "A compaction loop that requests the summary and swaps it in". The other mode fires when "input tokens reach the trigger you set" and is the one that takes "One parameter on your ordinary requests".
 
-The entry quoted in the introduction is one case. Another, in version 2.1.326 from November 16, fixed compaction on some providers "sometimes replying to one of your messages instead of summarizing, or leaving Claude's last reply out of the summary".
+Either way the summarizer is no longer code you write. I think that is the right default, and the changelog is a useful record of how the step fails.
+
+The `/compact` fix above is one case. Another, in version 2.1.326 from November 16, fixed compaction on Bedrock, Vertex and Foundry "sometimes replying to one of your messages instead of summarizing, or leaving Claude's last reply out of the summary".
 
 Both bugs lost recent material, the part a summary is supposed to protect. A summary is a lossy copy made by a model, so anything that must survive word for word needs to live outside it.
 
@@ -101,17 +103,21 @@ Both bugs lost recent material, the part a summary is supposed to protect. A sum
 
 Put it where compaction doesn't reach, and keep the raw history so a summary can be checked. Standing instructions belong in the system prompt or an instruction file, which is reloaded whole on every request.
 
-For facts that come up mid-conversation, the habits worth copying come from a Hacker News thread of November 7 titled ["How do you manage your AI agents' context across clients and projects?"](https://news.ycombinator.com/item?id=50403153) One commenter wrote "I let agents read their own pre-compaction history often", which treats the transcript as the record and the summary as an index to it.
+The compaction page lists two options for the rest. "Compaction that keeps recent turns" leaves the last few turns word for word, and a custom summarization prompt is for the case "when the default summary drops something a later turn needs."
+
+For facts that come up mid-conversation, the habits worth copying come from replies posted on November 9 to a Hacker News thread titled ["How do you manage your AI agents' context across clients and projects?"](https://news.ycombinator.com/item?id=50403153) A commenter there wrote "I let agents read their own pre-compaction history often", which treats the transcript as the record and the summary as an index to it.
 
 Another ends each session by asking the agent to "prep a handoff so we can resume from here in a fresh session". A handoff note is short-term memory written down on purpose, by the model before the full context is gone.
 
 A third practice in the thread is less comfortable: "at the end ask the agent to summarize what it learned and write it down." Anything written that way has crossed into long-term memory, and a note that was wrong when it was written will be loaded as fact next time.
 
+The commenter's answer is to keep decisions as records with a state such as approved or rejected, and both this commenter and the previous one link tools of their own.
+
 ## How does short-term memory relate to long-term memory?
 
 Short-term memory is what the model can see now, and long-term memory is what the application chooses to store and bring back later. The handoff note and the compaction summary are the two places where one turns into the other.
 
-That crossing is where to spend review effort. [RAG vs memory](/articles/rag-vs-memory/) covers what makes stored state different from retrieved documents, and the [state of agent memory](/articles/agent-memory-2026/) surveys the products that manage it.
+That crossing is where to spend review effort. Stored state differs from retrieved documents in ways [RAG vs memory](/articles/rag-vs-memory/) sets out, and the [state of agent memory](/articles/agent-memory-2026/) surveys the products that manage it.
 
 ## FAQ
 

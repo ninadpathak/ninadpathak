@@ -1,7 +1,7 @@
 %% @fig 01
 %% @kicker What fills the window
-%% @alt Four inputs fill one fixed-size context window: the system prompt, the conversation history, retrieved documents, and the agent's scratchpad. Whatever capacity is left is the headroom for the model's next response and tool calls. When it overflows, naive truncation cuts the oldest messages first.
-%% @caption The context window is a fixed buffer. Memory is what you build on top of it.
+%% @alt A fixed-size context window is filled by four inputs: the system prompt, the conversation history, retrieved documents, and the agent's scratchpad. Whatever capacity is left is the headroom for the model's next response and tool calls. When it overflows, naive truncation cuts the oldest messages first.
+%% @caption The context window is a fixed buffer, and short-term memory is whatever it holds during one run.
 %% @glyph sys | doc
 %% @glyph hist | ledger rows=4
 %% @glyph ret | ranked rows=5 hi=1

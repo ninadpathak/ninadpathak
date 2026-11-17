@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/short-term-agent-memory/context-fill.mmd",
-  "hash": "e745f89e97170af4",
+  "hash": "02b1e2748cc92ef7",
   "pele": "1.8.0",
   "width": 720,
   "height": 424,
@@ -18,7 +18,7 @@
       "mono": 11
     }
   },
-  "alt": "Four inputs fill one fixed-size context window: the system prompt, the conversation history, retrieved documents, and the agent's scratchpad. Whatever capacity is left is the headroom for the model's next response and tool calls. When it overflows, naive truncation cuts the oldest messages first.",
-  "caption": "The context window is a fixed buffer. Memory is what you build on top of it.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/short-term-agent-memory/context-fill.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/short-term-agent-memory/context-fill.narrow.svg\" width=\"288\" height=\"632\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/short-term-agent-memory/context-fill.svg\" width=\"720\" height=\"424\" alt=\"Four inputs fill one fixed-size context window: the system prompt, the conversation history, retrieved documents, and the agent's scratchpad. Whatever capacity is left is the headroom for the model's next response and tool calls. When it overflows, naive truncation cuts the oldest messages first.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The context window is a fixed buffer. Memory is what you build on top of it.</figcaption>\n</figure>"
+  "alt": "A fixed-size context window is filled by four inputs: the system prompt, the conversation history, retrieved documents, and the agent's scratchpad. Whatever capacity is left is the headroom for the model's next response and tool calls. When it overflows, naive truncation cuts the oldest messages first.",
+  "caption": "The context window is a fixed buffer, and short-term memory is whatever it holds during one run.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/short-term-agent-memory/context-fill.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/short-term-agent-memory/context-fill.narrow.svg\" width=\"288\" height=\"632\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/short-term-agent-memory/context-fill.svg\" width=\"720\" height=\"424\" alt=\"A fixed-size context window is filled by four inputs: the system prompt, the conversation history, retrieved documents, and the agent's scratchpad. Whatever capacity is left is the headroom for the model's next response and tool calls. When it overflows, naive truncation cuts the oldest messages first.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The context window is a fixed buffer, and short-term memory is whatever it holds during one run.</figcaption>\n</figure>"
 }
