@@ -181,7 +181,7 @@
   },
   "lambda-calculus-ai": {
     "lastmod": "2026-11-17",
-    "sources": "3ac39f7c78fb84fba37db5cbba8c79be41e8fa5390e75212f2079b86a2b8c718"
+    "sources": "a74af8ba77921f8eb7609c74e0f40df08b49063977d04af6aeb4039816cd6936"
   },
   "llm-context-windows": {
     "lastmod": "2026-11-17",
@@ -217,7 +217,7 @@
   },
   "memory-versioning": {
     "lastmod": "2026-11-17",
-    "sources": "7a42e3fe1413425093f28a4d0dc57ef6c712bb2d93e12f8ccffcb79ec43e92ce"
+    "sources": "194a5e431468f9c1b55456ae72e5160b521973f117fb1cccd8e27f7401ba6af1"
   },
   "mixture-of-experts": {
     "lastmod": "2026-11-17",
@@ -269,7 +269,7 @@
   },
   "short-term-agent-memory": {
     "lastmod": "2026-11-17",
-    "sources": "d8747104f802f1549afb1b7f81aa10c6e7af39ca7e33366cf605516b5ff64a4a"
+    "sources": "c5a7d633842d99ef0ac16fa308c811f0cbb0cd95e9b76da20385a7f38df06979"
   },
   "shorter-documentation": {
     "lastmod": "2026-11-17",
@@ -305,22 +305,26 @@
   },
   "voice-agent-memory": {
     "lastmod": "2026-11-17",
-    "sources": "22b286b753bf910abde344c6614de8a0e7b7cb6892166d81be642fafc3475609"
+    "sources": "404faf01dd8091a29b46f01bcbe42bfb306359eccd91c297de66d0796923c385"
   },
   "writing-changelogs": {
     "lastmod": "2026-11-17",
-    "sources": "cc3b12b59181a7308046b4b10cf8e9efc21d3f47c4212a8830b44f75ae59819e"
+    "sources": "ec0b6c0ae5c16cdf4ddfc7af4e3dad42ef7de314b3a2989a9da17f7d07df3c1a"
   },
   "writing-for-ai-products": {
     "lastmod": "2026-11-17",
-    "sources": "750f06ade5c55249d5b74ff51cfcc73a775086200a5cc4e8dc34a0e23e536304"
+    "sources": "c6a5405de8b1164877fcac1104c5f69ef269452883559222f01d74d81bcb298a"
   },
   "writing-release-notes": {
     "lastmod": "2026-11-17",
-    "sources": "4d5e44578f09422a8a8e3e069541299c7c1368215eb31656d53daf6ed70368d0"
+    "sources": "4aabc21beab5a7fed41dc213f20c3136d3919b784dc23e30d70d5976e9e812a0"
   },
   "writing-technical-tutorials": {
     "lastmod": "2026-11-17",
     "sources": "1c8305ec6ecaf3e5674b93ccbed03aee7843e01dd445890133bfa90182bae829"
+  },
+  "written-by-a-human": {
+    "lastmod": "2026-11-17",
+    "sources": "a5d60024250d8b5d5a502a4523fff27732fa88e093ae36520ca16c1a47db9ac1"
   }
 }
