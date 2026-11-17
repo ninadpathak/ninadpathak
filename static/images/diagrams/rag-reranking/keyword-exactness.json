@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/rag-reranking/keyword-exactness.mmd",
-  "hash": "0a6cff7ccb5a4195",
+  "hash": "ef309ff78e706191",
   "pele": "1.8.0",
   "width": 720,
   "height": 376,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "A query for error code E-4048 goes to vector search, which returns both E-4048 and the near-identical E-4049 as close matches. A cross-encoder then reads the query and each document together: it rejects the document about E-4049 and keeps the document about E-4048.",
-  "caption": "To a bi-encoder, E-4049 looks as close as E-4048. The cross-encoder reads the exact string and keeps only the match.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-reranking/keyword-exactness.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-reranking/keyword-exactness.narrow.svg\" width=\"288\" height=\"688\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-reranking/keyword-exactness.svg\" width=\"720\" height=\"376\" alt=\"A query for error code E-4048 goes to vector search, which returns both E-4048 and the near-identical E-4049 as close matches. A cross-encoder then reads the query and each document together: it rejects the document about E-4049 and keeps the document about E-4048.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>To a bi-encoder, E-4049 looks as close as E-4048. The cross-encoder reads the exact string and keeps only the match.</figcaption>\n</figure>"
+  "caption": "The textbook case for exact identifiers. The run on this page had the bi-encoder put E-4048 first already, and the larger cross-encoder is what pushed E-4049 well below it.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-reranking/keyword-exactness.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-reranking/keyword-exactness.narrow.svg\" width=\"288\" height=\"688\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-reranking/keyword-exactness.svg\" width=\"720\" height=\"376\" alt=\"A query for error code E-4048 goes to vector search, which returns both E-4048 and the near-identical E-4049 as close matches. A cross-encoder then reads the query and each document together: it rejects the document about E-4049 and keeps the document about E-4048.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The textbook case for exact identifiers. The run on this page had the bi-encoder put E-4048 first already, and the larger cross-encoder is what pushed E-4049 well below it.</figcaption>\n</figure>"
 }

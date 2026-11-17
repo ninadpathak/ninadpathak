@@ -538,7 +538,8 @@
         "It has the highest score, at 0.65 in about five seconds",
         "If you change one thing in a basic RAG pipeline, add a reranker.",
         "gpt-6.1-sol with a single tool: full-text and regex search over the chunks. No embeddings at all",
-        "Each sub-query retrieves its top 50 chunks through hybrid search, and the pooled results are reranked together down to the top 15."
+        "Each sub-query retrieves its top 50 chunks through hybrid search, and the pooled results are reranked together down to the top 15.",
+        "about five seconds"
       ],
       "connects": [
         "hybrid-search",
@@ -1394,6 +1395,20 @@
       "connects": [
         "vector-embeddings"
       ]
+    },
+    {
+      "id": "cohere-rerank-overview",
+      "url": "https://docs.cohere.com/docs/rerank-overview",
+      "author": "Cohere",
+      "date": "2026-11-17",
+      "title": "An Overview of Cohere's Rerank Model",
+      "quotes": [
+        "Given a query and a list of documents, Rerank indexes the documents from most to least semantically relevant to the query.",
+        "model=\"rerank-v5.0-pro\""
+      ],
+      "connects": [
+        "rag-reranking"
+      ]
     }
   ],
   "unused_leads": [
@@ -1532,6 +1547,7 @@
     "vector-embeddings": [
       "keep anything over 0.5",
       "might be noise"
-    ]
+    ],
+    "rag-reranking": []
   }
 }
