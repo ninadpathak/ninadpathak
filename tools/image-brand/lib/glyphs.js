@@ -92,6 +92,17 @@
     [0.6, 0.45, 0.55].forEach((k, i) => R(g, x0 + ww * 0.34, y0 + 12 + i * 6, (ww * 0.6) * k, 1.6, 'gl-bar'));
   };
 
+  // A terminal: window frame, a prompt chevron with its cursor, and two lines of output.
+  G.terminal = (g, w, h, o) => {
+    const ww = w * 0.78, wh = h * 0.66, x0 = -ww / 2, y0 = -wh / 2;
+    R(g, x0, y0, ww, wh, 'gl-fill', 3);
+    P(g, `M${r2(x0)},${r2(y0 + 7)}H${r2(x0 + ww)}`, 'gl-hair');
+    R(g, x0 + 3, y0 + 2.2, 2.6, 2.6, 'gl-solid', 1.3);
+    P(g, `M${r2(x0 + 6)},${r2(y0 + 11.5)}l3.5,3l-3.5,3`, 'gl-ink gl-thick');
+    R(g, x0 + 13.5, y0 + 12, 4, 5.5, o.accent ? 'gl-accent' : 'gl-solid', 1);
+    [0.55, 0.35].forEach((k, i) => R(g, x0 + 6, y0 + 22 + i * 4.5, (ww - 12) * k, 1.6, 'gl-bar'));
+  };
+
   // A loop: a 300° track with a chevron, three particles, and a hub.
   G.loop = (g, w, h, o) => {
     const r = Math.min(w, h) * 0.34;

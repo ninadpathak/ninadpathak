@@ -123,6 +123,7 @@ Each glyph lives in `lib/glyphs.js`, draws on a 56 × 48 box (strips: 360 × 46)
 | `pair` | Private page behind a public page | Two documents with one contract | — |
 | `reader` | Head and shoulders | A person or audience | badge as above |
 | `window` | App window with title rule, sidebar, content lines | An application or caller | — |
+| `terminal` | Window with a prompt chevron, cursor, output lines | A terminal, command line, or coding agent | — |
 | `loop` | 300° track with chevron, particles, hub | A control loop or scheduler | — |
 | `tokens` | Rows of tiles: solid, hatched, outline, newest in accent | A prompt or token stream | `rows=a,b,c` |
 | `context` | Token rows inside a bracketed window; the newest tokens spill past the right bracket | A context window filling up (92 px wide tile) | `rows=a,b,c`, `inside=n` (window width in tokens, default 7; set `w` to match) |
