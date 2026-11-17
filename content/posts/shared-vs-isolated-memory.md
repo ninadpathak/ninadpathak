@@ -115,7 +115,7 @@ Agents should share memory when they work at the same time on parts of one probl
 
 Even for parallel research I'd share less than everything. Keep each agent's working notes private, and let agents read a common store of confirmed facts that only the orchestrator writes to.
 
-A single writer gives every write to the common store one author and one order. It also keeps other agents' drafts out of each context window, which matters for the reasons in [context windows vs memory](/articles/context-windows-vs-memory/).
+A single writer gives every write to the common store one author and one order. A single writer also keeps other agents' drafts out of each context window, which matters for the reasons in [context windows vs memory](/articles/context-windows-vs-memory/).
 
 Before choosing either design, check that the task needs several agents at all. [Multi-agent vs single-agent systems](/articles/multi-agent-vs-single-agent/) goes through what the extra agents cost.
 

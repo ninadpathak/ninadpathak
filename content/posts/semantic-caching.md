@@ -135,7 +135,7 @@ A semantic cache sits in front of every other stage of the pipeline. A hit skips
 
 Tuning a cache is therefore separate work from improving retrieval. [Contextual retrieval](/articles/contextual-retrieval/) and [reranking](/articles/rag-reranking/) make a miss cheaper or better, and the cache decides how often a miss happens.
 
-A semantic cache is also different from the prompt caching that model providers offer, which discounts a repeated prefix inside a request that still runs. The [token budgets guide](/articles/llm-token-budgets/) works out what that one saves.
+A semantic cache is also different from the prompt caching that model providers offer, which discounts a repeated prefix inside a request that still runs. The [token budgets guide](/articles/llm-token-budgets/) works out what prompt caching saves.
 
 ## FAQ
 
