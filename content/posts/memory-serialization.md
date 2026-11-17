@@ -5,9 +5,7 @@ description: Why agents forget everything on restart, and the serialization patt
   that actually solve it
 slug: memory-serialization
 status: published
-work_note: Technical writer [Ninad Pathak](/portfolio/) documents persistence through
-  saved records and restore procedures, including how developers recognize data that
-  the current application version can no longer read.
+work_note: 'I wrote Mem0''s guide to long-term memory for agents. This page goes one level down, to how state gets written out and read back, and [the guide is in my portfolio](/portfolio/).'
 title: 'Memory Serialization: How Agents Persist State Across Sessions'
 ---
 

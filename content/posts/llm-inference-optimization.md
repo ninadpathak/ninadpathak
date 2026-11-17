@@ -4,9 +4,7 @@ date: '2026-05-06'
 description: 'LLM inference optimization in late 2026, covering which techniques are engine defaults, how to size the KV cache and where more throughput stops helping.'
 slug: llm-inference-optimization
 status: published
-work_note: Developer content creator [Ninad Pathak](/portfolio/) explains inference
-  configuration through the workload behind it, connecting batching decisions to the
-  response time a customer needs from an application.
+work_note: 'I''m a technical writer, and I don''t run an inference fleet. The measurements on this page come from linked sources, and [my portfolio](/portfolio/) shows the work I do for AI companies.'
 title: 'LLM Inference Optimization: What Actually Works in Production'
 updated: '2026-11-16'
 ---

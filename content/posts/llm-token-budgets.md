@@ -4,9 +4,7 @@ date: 2026-04-17
 description: Real numbers, real pricing, and concrete strategies for keeping your
   LLM spend predictable.
 status: published
-work_note: Technical documentation for an AI API should show what a conversation costs,
-  including repeated input. [Ninad Pathak](/contact/) writes usage guides with worked
-  calculations and explicit pricing assumptions.
+work_note: 'I write developer content for AI companies. This page works through what a long conversation costs in tokens, and [my portfolio](/portfolio/) links to the published work.'
 title: 'LLM token budgets: a practical guide to cost control'
 slug: llm-token-budgets
 ---

@@ -4,9 +4,7 @@ date: 2026-08-05
 description: 'Technical documentation explained: the document types it includes and the reader task each one owns, in a table you can check a docs set against.'
 slug: technical-docs
 status: published
-work_note: For a developer product launch, [Ninad Pathak](/contact/) writes technical
-  documentation from the prerequisites for a first request to the reference that explains
-  its response.
+work_note: 'I write developer documentation and tutorials for a living. This page defines the field by the reader task each document type owns, and [my portfolio](/portfolio/) links to published examples.'
 takeaways:
 - Technical documentation gives each reader task one useful home.
 - Start with orientation, one verified success path, and the reference that path needs.

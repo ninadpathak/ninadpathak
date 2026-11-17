@@ -5,9 +5,7 @@ description: 'Technical SEO for developer documentation: crawling, rendering, in
   canonicals, internal links, Core Web Vitals, structured data, and search visibility.'
 slug: docs-seo
 status: published
-work_note: Documentation discovery starts with the question a developer searches for.
-  [Ninad Pathak](/contact/) plans technical content that connects that search to a
-  working example, with measurement tied to the relevant pages.
+work_note: 'I built the content programs behind LinuxForDevices and DelightChat, and both grew through search. This checklist applies that kind of work to documentation sites, and [you can write to me](/contact/) about yours.'
 takeaways:
 - A useful technical SEO audit follows dependency order instead of chasing one score.
 - Discovery, crawling, indexing, and page quality need separate evidence.

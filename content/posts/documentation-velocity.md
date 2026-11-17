@@ -5,9 +5,7 @@ description: I analyze the structural correlation between documentation quality 
   engineering throughput, using DORA metrics and Accelerate research to quantify the
   ROI of technical writing.
 status: published
-work_note: A release procedure should outlast the person who remembers it. [Ninad
-  Pathak](/contact/) creates technical documentation that records deployment checks
-  and recovery instructions for the next engineer carrying out the work.
+work_note: 'I write developer documentation, so I have an interest in the claim this page examines: that docs change how fast a team ships. [My portfolio](/portfolio/) links to the work.'
 title: Quantifying the Engineering Velocity Impact of Technical Documentation
 slug: documentation-velocity
 ---

@@ -4,9 +4,7 @@ date: 2026-04-19
 description: A deep dive into how HyperAgents retain context across interactions,
   layer memory architectures, and handle session continuity in production.
 status: published
-work_note: Technical writer [Ninad Pathak](/portfolio/) turns agent architecture diagrams
-  into product explanations that trace a tool result from execution to the memory
-  a later step retrieves.
+work_note: 'I ran Mem0''s team of 13 writers, so I come to another project''s memory design with a vendor''s bias. This page describes how HyperAgents handles memory, and [my Mem0 work is in my portfolio](/portfolio/).'
 title: How Memory Works in HyperAgents
 slug: hyperagents-memory
 ---

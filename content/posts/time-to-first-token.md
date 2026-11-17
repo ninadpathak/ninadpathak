@@ -5,9 +5,7 @@ description: Users do not care about total throughput. They care about how fast 
   first word appears. Here is the engineering guide to measuring and optimizing Time
   to First Token (TTFT) in production.
 status: published
-work_note: '[Ninad Pathak](/portfolio/)''s technical content puts measurement boundaries
-  and test conditions beside performance figures, so developers can compare a provider''s
-  latency claim with the application they need to run.'
+work_note: 'I write about AI infrastructure for developer companies. This page explains what time to first token measures and where the wait comes from, and [my portfolio](/portfolio/) links to that client work.'
 title: 'Time to First Token (TTFT): The Metric That Determines AI Snappiness'
 slug: time-to-first-token
 ---

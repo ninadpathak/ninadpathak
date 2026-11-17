@@ -9,7 +9,7 @@ takeaways:
 - Give each breaking change a migration step, a verification check and a calendar deadline.
 - Run the checker with --filled before publishing, so a missing field fails the build.
 title: 'Release Notes Template: Copyable Markdown With a Pre-Publish Check'
-work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation that starts from the behavior a release changed and the check that proves a migration worked.'
+work_note: 'I wrote this template with a checker that fails a note missing its rollback line. For the developer content I write for clients, see [my portfolio](/portfolio/).'
 video: release-notes-template
 ---
 

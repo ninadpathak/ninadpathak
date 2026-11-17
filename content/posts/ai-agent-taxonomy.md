@@ -4,9 +4,7 @@ date: 2026-04-21
 description: 'I group AI agents into five types, from reactive information agents to persistent-goal agents, to decide how much autonomy a task needs and which tools and memory it gets.'
 slug: ai-agent-taxonomy
 status: published
-work_note: 'Developer content creator [Ninad Pathak](/portfolio/) explains agent architectures
-  through the decisions developers need to make: which actions a system can take and
-  where human approval belongs.'
+work_note: 'I group agents on this page by how much they decide alone, because that decides which tools and memory a task needs. For the agent guides I''ve written for Firecrawl, see [my portfolio](/portfolio/).'
 title: 'Types of AI Agents: Five Types by Autonomy and Scope'
 video: ai-agent-taxonomy
 ---

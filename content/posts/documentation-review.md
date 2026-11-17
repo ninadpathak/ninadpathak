@@ -5,9 +5,7 @@ description: 'Review documentation in four passes: product truth, reader route, 
   behavior, and release state, before polishing prose.'
 slug: documentation-review
 status: published
-work_note: '[Ninad Pathak](/contact/) reviews technical documentation against the
-  product version it describes, checking the instructions and missing steps before
-  editing the wording that carries them.'
+work_note: 'I run a product before I write about it, and this page applies the same order to review, with the product checked before the prose. For a review of your docs, [write to me](/contact/).'
 takeaways:
 - Verify product behavior before editing sentences.
 - Run the reader's success and failure paths from the documented starting state.

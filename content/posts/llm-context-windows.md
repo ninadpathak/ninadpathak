@@ -5,9 +5,7 @@ description: Context windows are expanding to millions of tokens. Here is why th
   middle of your context still gets ignored, what long context actually costs, and
   how to build production systems that use these massive windows effectively.
 status: published
-work_note: An advertised context limit needs a worked request budget. [Ninad Pathak](/contact/)
-  writes developer content that accounts for input and response allocation when explaining
-  model usage.
+work_note: 'I wrote Firecrawl''s guide to the context layer for AI agents. This page covers the limit underneath it, the context window, and [the guide is in my portfolio](/portfolio/).'
 title: 'LLM Context Windows Explained: Why More Is Not Always Better'
 slug: llm-context-windows
 ---

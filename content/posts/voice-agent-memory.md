@@ -5,9 +5,7 @@ description: Voice AI agents live or die by how they manage memory across a real
   streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something
   different.
 status: published
-work_note: An interruption changes what a voice application should remember. [Ninad
-  Pathak](/contact/) creates developer content that follows conversation events into
-  the state an application needs to update or discard.
+work_note: 'I''ve written about voice agent platforms for Firecrawl and about agent memory for Mem0. This page is where those two subjects meet, and [my portfolio](/portfolio/) has both.'
 title: 'Memory for Voice AI Agents: What Text Chatbots Cannot Do'
 updated: '2026-08-17'
 slug: voice-agent-memory

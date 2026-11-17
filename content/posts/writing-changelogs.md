@@ -5,9 +5,7 @@ description: Write a changelog that helps developers assess an upgrade, find bre
   changes, and understand what each release means for their code.
 slug: writing-changelogs
 status: published
-work_note: Technical writer [Ninad Pathak](/contact/) turns merged changes into changelogs
-  that name the affected behavior and link developers to the migration instructions
-  required for an upgrade.
+work_note: 'I write developer content for a living. This page is about the changelog, written for the developer deciding whether to upgrade, and [my portfolio](/portfolio/) links to published work.'
 takeaways:
 - Lead with upgrade impact, not an undifferentiated list of commits.
 - Group releases by version, date, and consistent change categories.

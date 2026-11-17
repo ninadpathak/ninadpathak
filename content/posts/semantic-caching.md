@@ -5,9 +5,7 @@ description: Semantic caching returns cached LLM responses for semantically simi
   queries, cutting API costs by 40-70% on the right workloads. Here's how the mechanism
   works and where it fails.
 status: published
-work_note: Technical writer [Ninad Pathak](/portfolio/) creates caching-product guides
-  with an invalidation example alongside a successful cache hit, explaining when a
-  stored answer stops being usable.
+work_note: 'I wrote Firecrawl''s piece on agentic search and why cached results fall short there. This page looks at caching from the other side, where a stored answer is good enough, and [the piece is in my portfolio](/portfolio/).'
 title: 'Semantic Caching: The RAG Optimization Nobody Talks About'
 slug: semantic-caching
 ---

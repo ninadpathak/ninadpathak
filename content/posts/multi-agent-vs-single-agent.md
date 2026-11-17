@@ -5,9 +5,7 @@ description: The decision between one agent and many is not about capability. It
   about failure modes, latency, and operational complexity.
 slug: multi-agent-vs-single-agent
 status: published
-work_note: A second agent introduces a handoff that a developer needs to understand.
-  [Ninad Pathak](/portfolio/) creates technical content comparing orchestration patterns
-  through their coordination costs and failure behavior.
+work_note: 'I wrote OpenComputer''s piece on where a Claude Agent SDK agent runs. This page takes the question before that one, whether a job needs more than one agent, and [my portfolio](/portfolio/) has the piece.'
 title: 'Multi-Agent vs Single-Agent Systems: The Real Trade-offs'
 ---
 

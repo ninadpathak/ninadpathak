@@ -4,9 +4,7 @@ date: 2026-04-15
 description: A research-led comparison of KV-cache eviction strategies, including
   their accuracy risks and implementation trade-offs.
 status: published
-work_note: '[Ninad Pathak](/portfolio/) creates technical content about inference
-  infrastructure that connects memory-saving techniques to evaluation conditions,
-  giving developers the context needed to judge the quality tradeoff.'
+work_note: 'At Mem0 I hired and reviewed writers who had to understand KV cache eviction. This page is my own read of the research on it, and [my portfolio](/portfolio/) has the Mem0 work.'
 title: 'Context Engineering as Heap Management: Accuracy Risks in KV Cache Eviction'
 updated: '2026-08-17'
 slug: kv-cache-eviction

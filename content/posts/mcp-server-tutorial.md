@@ -9,7 +9,7 @@ takeaways:
 - Resolve every path a tool receives before checking it against the folder it may read, because relative segments and symlinks both arrive as plain strings.
 - Return what the model has to cite, because Claude cited the right line in every run once the tool numbered its lines.
 title: 'MCP Server Tutorial: Build a Docs Search Server in Python'
-work_note: '[Ninad Pathak](/portfolio/) wrote Firecrawl''s technical guides to its MCP server in Cursor and in ChatGPT. The server here is smaller on purpose, because it exists to test which tool decisions change what a model does with the output.'
+work_note: 'I wrote Firecrawl''s guides to its MCP server in Cursor and in ChatGPT. The server on this page is smaller on purpose, built to test which tool decisions change what a model does with the output. [Those guides are in my portfolio](/portfolio/).'
 video: mcp-server-tutorial
 ---
 

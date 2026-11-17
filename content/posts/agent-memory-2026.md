@@ -4,9 +4,7 @@ date: 2026-04-19
 description: Agent memory spans working state, episodic history, retrieval, and consistency
   controls. The right architecture depends on the agent's task and risk.
 status: published
-work_note: For memory products, [Ninad Pathak](/portfolio/) writes technical comparisons
-  that answer questions about state ownership and portability, including how a developer
-  would move stored records elsewhere.
+work_note: 'I joined Mem0 in February 2026 and ran its team of 13 writers, so I read the agent memory field from inside one vendor. Weigh this page with that in mind. [My Mem0 work is in my portfolio](/portfolio/).'
 title: State of AI Agent Memory in 2026
 updated: '2026-08-17'
 slug: agent-memory-2026

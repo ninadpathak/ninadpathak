@@ -4,9 +4,7 @@ date: 2026-03-31
 description: AI product docs now need prompts, schemas, evals, and version boundaries.
   I explain the rules I would use to judge a technical writer for an AI company.
 status: published
-work_note: Technical writer [Ninad Pathak](/contact/) documents AI products through
-  their supported output contracts and evaluation examples, helping developers understand
-  what they can depend on when responses vary.
+work_note: 'I write for AI companies, including Mem0 and Firecrawl, where a product''s output changes from one run to the next. This page holds the rules I judge that writing by, and [my portfolio](/portfolio/) has the work.'
 title: 'Technical Writing for AI Products: The New Rules'
 slug: writing-for-ai-products
 ---

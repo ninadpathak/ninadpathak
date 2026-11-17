@@ -5,9 +5,7 @@ description: 'Internal vs. external documentation, with a decision table for inc
   architecture, auth and releases: what goes public, what stays private, what splits.'
 slug: internal-vs-external-docs
 status: published
-work_note: Customer recovery instructions and private incident records have different
-  readers. Technical writer [Ninad Pathak](/contact/) separates those documents while
-  keeping the description of supported product behavior consistent.
+work_note: 'I write the external half of this split for a living, the documentation a developer product publishes. This page is about deciding what stays private, and [my portfolio](/portfolio/) links to the public work.'
 takeaways:
 - Choose internal or external documentation by the reader's task, not by the file's
   technical depth.

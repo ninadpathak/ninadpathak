@@ -9,7 +9,7 @@ takeaways:
 - Keep AGENTS.md as the shared file and put a CLAUDE.md beside it that imports it with @AGENTS.md.
 - Write commands and rules an agent cannot infer from the code, and keep the file under 200 lines.
 title: 'CLAUDE.md and AGENTS.md: Which File Loads, and a Template'
-work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for developer tools, including the instruction files coding agents read before they change a repository.'
+work_note: 'I tested which agent loads which instruction file in four repositories before writing this page. I''ve also written about SKILL.md files for Firecrawl, and [that piece is in my portfolio](/portfolio/).'
 video: claude-md
 ---
 

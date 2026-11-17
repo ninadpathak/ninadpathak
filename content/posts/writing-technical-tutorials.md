@@ -5,9 +5,7 @@ description: Write a technical tutorial that takes one reader from a clear start
   point to a tested, useful result.
 slug: writing-technical-tutorials
 status: published
-work_note: '[Ninad Pathak](/portfolio/) creates developer tutorials that teach readers
-  to adapt an example, checking prerequisite knowledge before introducing the next
-  implementation decision.'
+work_note: 'For Centus I built or tested a working example before writing each localization guide. This page is about writing tutorials that way, and [the guides are in my portfolio](/portfolio/).'
 takeaways:
 - Choose one reader, one starting state, and one result they can verify.
 - Build the working path before writing the explanation around it.

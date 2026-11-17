@@ -5,9 +5,7 @@ description: AI agents juggle three distinct memory types. Getting them wrong is
   source of most agent memory failures I see in production.
 slug: agent-memory-types
 status: published
-work_note: Developer content creator [Ninad Pathak](/portfolio/) explains memory SDKs
-  through concrete operations, distinguishing how an application saves a preference
-  from how it records an action.
+work_note: 'I wrote Mem0''s guides to short-term and long-term agent memory. This page splits the same ground by memory type, and [those guides are in my portfolio](/portfolio/).'
 title: 'Episodic, Semantic, and Working Memory in AI Agents: A Practical Map'
 video: agent-memory-types
 ---

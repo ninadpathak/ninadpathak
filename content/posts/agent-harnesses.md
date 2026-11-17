@@ -5,9 +5,7 @@ description: Every production AI agent needs a harness. Here is what one contain
   why frameworks often are not enough, and how to build the layer that actually determines
   reliability.
 status: published
-work_note: An interrupted run makes checkpointing visible. [Ninad Pathak](/contact/)
-  writes developer content that shows what resumes, which steps repeat, and where
-  the operator needs to intervene.
+work_note: 'I wrote Firecrawl''s explainer on agent harnesses, and this page is my own take on the same layer. [The Firecrawl piece is in my portfolio](/portfolio/).'
 title: 'Agent Harnesses: The Infrastructure Your LLM Agent Needs'
 slug: agent-harnesses
 video: agent-harnesses

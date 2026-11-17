@@ -5,9 +5,7 @@ description: How agents decide what to keep in memory when context space is fini
   and the three compression strategies that actually work.
 slug: memory-compression
 status: published
-work_note: '[Ninad Pathak](/portfolio/)''s developer content for memory products uses
-  before-and-after records to explain compression, giving readers a concrete way to
-  judge which discarded details matter to an application.'
+work_note: 'I''ve written agent memory guides for Mem0. This page covers one decision inside any memory system, what a compressed record is allowed to drop, and [the guides are in my portfolio](/portfolio/).'
 title: 'Contextual Compression for Agent Memory: What Stays and What Goes'
 ---
 

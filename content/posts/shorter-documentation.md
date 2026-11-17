@@ -3,9 +3,7 @@ category: technical-documentation
 date: 2026-04-04
 description: 'Why shorter technical documentation works better, why AI-written docs run long, how to cut a page without losing detail, and when length is earned.'
 status: published
-work_note: When a retry instruction is buried under background reading, technical
-  writer [Ninad Pathak](/contact/) edits the page around that decision while preserving
-  the conditions that make the instruction safe to follow.
+work_note: 'I write documentation and tutorials for developer products, and this page is my case for cutting them. [My portfolio](/portfolio/) links to published work you can judge for length.'
 title: The Case for Shorter Technical Documentation
 updated: 2026-11-16
 slug: shorter-documentation

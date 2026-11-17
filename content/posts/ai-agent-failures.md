@@ -5,9 +5,7 @@ description: I have spent two years watching agents fail in production. Here is 
   I keep seeing and what the field is starting to do about it.
 slug: ai-agent-failures
 status: published
-work_note: A failed tool call belongs in an agent framework's tutorial, alongside
-  the successful run. [Ninad Pathak](/contact/) writes technical documentation that
-  explains retry limits and the recovery steps available to the developer.
+work_note: 'I''ve written about agent testing for LambdaTest and about agent sandboxes for Firecrawl. This page collects the ways agents fail once they run, and [those guides are in my portfolio](/portfolio/).'
 title: Why AI Agents Fail in Production
 video: ai-agent-failures
 ---

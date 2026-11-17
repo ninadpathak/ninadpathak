@@ -4,9 +4,7 @@ date: 2026-04-06
 description: DevTools startups lose deals long before sales hears the objection. I
   explain how weak docs break evaluation, trials, and rollout confidence.
 status: published
-work_note: '[Ninad Pathak](/contact/) connects developer content strategy with product
-  documentation, taking the use case that attracts an evaluator through setup and
-  the limits needed to assess the product.'
+work_note: 'I write documentation and tutorials for developer-tool companies, including Firecrawl and Graphite. This page is my argument for why that work decides evaluations, and [my portfolio](/portfolio/) has the work.'
 title: Why Devtools Startups Lose Deals Over Bad Docs
 slug: devtools-documentation
 video: devtools-documentation

@@ -5,7 +5,7 @@ description: Simon Willison says coding models hit an inflection point in Octobe
 slug: coding-models-new-code-vs-change
 status: published
 title: 'Coding Models Got Better at New Code. Changing Code Is Still at 16%'
-work_note: 'This essay sets one optimistic post beside two October benchmarks. [Ninad Pathak](/portfolio/) writes technical content for AI and developer-tool companies.'
+work_note: 'I write about coding agents for developer-tool companies, and this essay is my reading of two October results that seem to disagree. [My portfolio](/portfolio/) has the client work.'
 ---
 
 "I think October represents another inflection point in capabilities for coding agents and the models that drive them: Claude Opus 5.5 can now build video games that are actually fun". Simon Willison [posted that on Bluesky](https://bsky.app/profile/simonwillison.net/post/3mywwaogdac23) on October 28, with a [write-up](https://simonwillison.net/2026/Oct/28/vibe-game-development/) of four browser games built with "no looking at the code at all".

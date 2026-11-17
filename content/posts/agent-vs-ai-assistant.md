@@ -4,9 +4,7 @@ date: '2026-04-26'
 description: 'An AI agent chooses its next steps toward a goal, and an AI assistant leaves the next step to you. I compare the cost and control you trade when you build each.'
 slug: agent-vs-ai-assistant
 status: published
-work_note: 'For AI companies explaining product autonomy, [Ninad Pathak](/contact/)
-  writes developer content that makes the interaction model explicit: what the software
-  decides and what still requires the user''s instruction.'
+work_note: 'I wrote this page for teams deciding how much a product should do without being asked. For the agent guides I''ve written for Firecrawl and OpenComputer, see [my portfolio](/portfolio/).'
 title: 'AI Agent vs AI Assistant: When to Build Each'
 video: agent-vs-ai-assistant
 ---

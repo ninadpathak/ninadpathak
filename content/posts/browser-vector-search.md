@@ -3,9 +3,7 @@ category: ai-engineering
 date: 2026-04-13
 description: 'PGlite vs SQLite-vec for vector search in the browser: how the two engines differ, and what to measure on your own data before you pick one.'
 status: published
-work_note: '[Ninad Pathak](/portfolio/)''s developer content for browser tools covers
-  the initial download as well as the first query, helping readers evaluate startup
-  costs before adopting a database.'
+work_note: 'I wrote Mem0''s guide to vector embeddings. This page takes vector search into the browser and compares two engines for it, and [the Mem0 guide is in my portfolio](/portfolio/).'
 title: 'PGlite vs SQLite-vec: Vector Search in the Browser'
 updated: '2026-08-17'
 slug: browser-vector-search

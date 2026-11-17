@@ -5,9 +5,7 @@ description: Vector databases return results based on semantic similarity. I exp
   why that is rarely enough for production RAG and how a cross-encoder reranker fixes
   the problem.
 status: published
-work_note: A retrieval API comparison should show why a relevant-looking result can
-  still be useless. Developer content creator [Ninad Pathak](/portfolio/) explains
-  that behavior through examples customers can use to evaluate the product.
+work_note: 'I wrote Firecrawl''s roundups of semantic search APIs and of search tools for agents. This page covers the step that reorders what search returns, and [my portfolio](/portfolio/) has both roundups.'
 title: 'Reranking in RAG: Why Your Top-K Results Are Probably Wrong'
 slug: rag-reranking
 ---

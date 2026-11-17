@@ -4,9 +4,7 @@ date: 2026-04-16
 description: 'Hard-won lessons from running AI agents in production: the error patterns
   that actually break systems, and the patterns that fix them.'
 status: published
-work_note: Did the tool fail before or after changing external state? Technical writer
-  [Ninad Pathak](/portfolio/) documents agent API errors with the checks developers
-  need before risking a duplicate action.
+work_note: 'I''ve written guides to agent tools and agent APIs for Firecrawl. This page covers what an agent should do after a tool call fails, and [those guides are in my portfolio](/portfolio/).'
 title: What Nobody Tells You About Error Handling in Production AI Agents
 slug: agent-error-handling
 video: agent-error-handling

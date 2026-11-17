@@ -5,9 +5,7 @@ description: Understand the main types of technical documentation, study useful 
   and build a documentation system for users, teams, and coding agents.
 slug: documentation-types
 status: published
-work_note: Reference pages and tutorials serve different tasks. Technical writer [Ninad
-  Pathak](/contact/) plans documentation that gives each a defined job and connects
-  the pages a customer needs to use a product.
+work_note: 'I write tutorials and technical articles for developer products, two of the types on this page. [My portfolio](/portfolio/) links to published examples of both.'
 takeaways:
 - Technical documentation includes user guides, tutorials, how-to guides, reference,
   troubleshooting, release notes, runbooks, and architecture documents.

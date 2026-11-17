@@ -5,9 +5,7 @@ description: Lambda calculus exposes substitution, scope, and composition errors
   AI outputs through problems with mechanically checkable answers.
 slug: lambda-calculus-ai
 status: published
-work_note: Technical evaluation articles need problems readers can check, with scoring
-  rules attached. Technical writer [Ninad Pathak](/portfolio/) develops explanations
-  around worked examples that let developers question the conclusion.
+work_note: 'I use problems with checkable answers on this page because a model''s fluent explanation proves nothing by itself. For the technical writing I do for AI companies, see [my portfolio](/portfolio/).'
 title: Lambda Calculus as an AI Reasoning Exercise
 updated: '2026-08-17'
 ---

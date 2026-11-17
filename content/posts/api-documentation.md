@@ -9,7 +9,7 @@ takeaways:
 - A reference entry documents each response the endpoint returns, with the fix for each error.
 - Check the reference against the running service, so a changed status code fails before a developer hits it.
 title: 'API Documentation: What to Include, With a Tested Reference Example'
-work_note: 'Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for APIs, checking each documented request and response against the service it describes.'
+work_note: 'I wrote the reference entry on this page against a running service, and a script checks every documented response. For developer documentation written the same way, [write to me](/contact/).'
 video: api-documentation
 ---
 

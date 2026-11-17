@@ -5,9 +5,7 @@ description: 'A deep dive into the memory architecture of DeerFlow: layered cont
   passing, session state files, sub-agent isolation, and how it compares to Letta,
   AutoGen, and CrewAI.'
 status: published
-work_note: A state record can make a multi-agent workflow understandable. Developer
-  content creator [Ninad Pathak](/contact/) writes walkthroughs showing which agent
-  receives the record and what the next step can change.
+work_note: 'I''ve written agent memory guides for Mem0, which makes me a biased reader of another framework''s memory design. This page describes DeerFlow''s, and [my portfolio](/portfolio/) has the Mem0 work.'
 title: How Memory Works in DeerFlow
 slug: deerflow-memory
 video: deerflow-memory

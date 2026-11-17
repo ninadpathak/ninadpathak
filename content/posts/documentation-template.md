@@ -5,9 +5,7 @@ description: Download a technical documentation template, learn what each page m
   prove, and turn its placeholders into trustworthy product docs.
 slug: documentation-template
 status: published
-work_note: A template supplies structure; the product supplies behavior. [Ninad Pathak](/portfolio/)
-  writes technical documentation that turns that behavior into a quickstart and reference,
-  with troubleshooting for unexpected responses.
+work_note: 'I made the template on this page to be downloaded and filled in. If you would rather hand the writing over, [my portfolio](/portfolio/) shows the guides and tutorials I''ve published for clients.'
 takeaways:
 - A documentation template should define page jobs and evidence requirements, not
   only headings.

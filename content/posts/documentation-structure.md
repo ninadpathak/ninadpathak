@@ -5,9 +5,7 @@ description: Reorganize a documentation site around reader routes, canonical ans
   tested labels, and direct redirects instead of mirroring the org chart.
 slug: documentation-structure
 status: published
-work_note: When documentation sends readers between competing answers, page ownership
-  needs attention before more pages are added. [Ninad Pathak](/portfolio/) plans technical
-  documentation around reader tasks and a clear home for each answer.
+work_note: 'I write documentation for developer products. This page is about where each answer should live once a docs site has grown past its first outline, and [my portfolio](/portfolio/) links to published work.'
 takeaways:
 - Inventory page jobs and evidence before drawing a new navigation tree.
 - Organize around reader routes through setup, use, failure, and change.

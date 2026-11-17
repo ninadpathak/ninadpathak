@@ -9,9 +9,7 @@ takeaways:
 - Generate reference from stable contracts that source can expose.
 - Use guides for decisions, sequences, and operating context that no symbol can contain.
 status: published
-work_note: Technical writer [Ninad Pathak](/portfolio/) connects API reference entries
-  to integration guides, keeping exact function contracts available without making
-  developers assemble the full procedure from scattered signatures.
+work_note: 'The comment and docstring examples on this page come from this site''s own build script. I write developer documentation for a living, and [my portfolio](/portfolio/) links to the published work.'
 slug: code-documentation
 video: code-documentation
 ---

@@ -4,9 +4,7 @@ date: 2026-04-19
 description: A practical guide to understanding how Claude Code retains context across
   sessions, uses project files, and manages long-term memory for coding tasks.
 status: published
-work_note: '[Ninad Pathak](/contact/) is a technical writer who has worked with Mem0
-  and creates developer guides for memory integrations, explaining how persistent
-  state connects to a coding workflow.'
+work_note: 'I wrote Mem0''s setup guide for adding persistent memory to Claude Code. This page covers what Claude Code remembers without any add-on, and [the Mem0 guide is in my portfolio](/portfolio/).'
 title: How Memory Works in Claude Code
 updated: '2026-08-17'
 slug: claude-code-memory

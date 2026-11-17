@@ -3,9 +3,7 @@ category: developer-experience
 date: 2026-04-07
 description: 'Where the Stripe engineering blog lives, what it publishes now (its five newest posts are about agents), and why the writing works as an advantage.'
 status: published
-work_note: '[Ninad Pathak](/contact/) develops technical content strategies around
-  a company''s engineering decisions, turning domain explanations into articles that
-  connect potential customers to a supported implementation.'
+work_note: 'I write technical articles for developer-tool companies, the kind of work this page studies at Stripe. [My portfolio](/portfolio/) links to what I''ve published for Firecrawl and Graphite.'
 title: 'Stripe Engineering Blog: How It Became a Competitive Moat'
 updated: '2026-11-17'
 slug: stripe-technical-blog

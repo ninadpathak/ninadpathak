@@ -5,9 +5,7 @@ description: The agent loop is not one thing. It is four distinct phases that ru
   in sequence, and understanding each one is how you debug what breaks.
 slug: agent-loop-anatomy
 status: published
-work_note: '[Ninad Pathak](/portfolio/) creates developer content that follows an
-  agent SDK through execution, showing how a returned tool result informs the next
-  action and which condition stops the run.'
+work_note: 'I write developer guides about agents for Firecrawl and OpenComputer. This page walks through the agent loop one phase at a time, and [my portfolio](/portfolio/) has the guides.'
 title: 'The Anatomy of an Agent Loop: Perceive, Think, Act, Remember'
 video: agent-loop-anatomy
 ---

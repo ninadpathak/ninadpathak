@@ -3,9 +3,7 @@ category: ai-engineering
 date: 2026-03-26
 description: 'Contextual Retrieval (contextual RAG) prepends a model-written note to each chunk before indexing. What Anthropic measured, what it costs, and where it still fits.'
 status: published
-work_note: A research result needs its experimental conditions alongside the explanation.
-  [Ninad Pathak](/portfolio/) creates technical content that follows an engineering
-  change through its mechanism and the evidence supporting the claim.
+work_note: 'I wrote Mem0''s explainer on agentic RAG and Firecrawl''s guide to semantic search APIs. This page reads one retrieval result closely, and [my portfolio](/portfolio/) has both guides.'
 title: How Anthropic's Contextual Retrieval Changes RAG Architecture
 updated: '2026-11-17'
 slug: contextual-retrieval

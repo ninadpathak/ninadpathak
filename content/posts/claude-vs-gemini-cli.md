@@ -4,9 +4,7 @@ date: 2026-04-12
 description: A workflow comparison of Claude Code and Gemini CLI for repository refactoring,
   verification, and human review.
 status: published
-work_note: Comparing coding tools requires a task and a way to judge the patches.
-  Developer content creator [Ninad Pathak](/portfolio/) writes comparisons with verification
-  criteria that readers can apply to their own repositories.
+work_note: 'I wrote Firecrawl''s comparison of CLIs and IDEs for coding agents. This page compares two of those CLIs on repository refactoring, and [the Firecrawl piece is in my portfolio](/portfolio/).'
 title: Claude Code vs. Gemini CLI for Repository Refactoring
 updated: '2026-08-17'
 slug: claude-vs-gemini-cli

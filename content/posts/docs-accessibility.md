@@ -5,9 +5,7 @@ description: Test developer documentation for release-blocking accessibility fai
   in structure, code, links, visuals, keyboard use, and rendered output.
 slug: docs-accessibility
 status: published
-work_note: Developer content has to work when a reader cannot use a screenshot. [Ninad
-  Pathak](/portfolio/) writes technical documentation with copyable commands, descriptive
-  links, and text explanations of the expected result.
+work_note: 'I wrote this checklist for documentation releases, where a code block or a link can fail a reader before the prose does. For documentation work, [write to me](/contact/).'
 takeaways:
 - Accessibility testing catches documentation failures that a visual review can miss.
 - A documentation-specific checker removes repeatable structural defects before manual
