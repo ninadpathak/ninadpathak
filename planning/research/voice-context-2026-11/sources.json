@@ -384,7 +384,8 @@
         "shorter-documentation",
         "writing-release-notes",
         "writing-changelogs",
-        "documentation-review"
+        "documentation-review",
+        "red-build-nobody-reads"
       ]
     },
     {
@@ -1707,13 +1708,17 @@
         "You land it, you own it",
         "PUBLISHED Oct 15, 2026",
         "Code review's second job has always been to spread codebase understanding.",
-        "Everything is reversible. Flags, reverts and staged releases undo most mistakes in minutes."
+        "Everything is reversible. Flags, reverts and staged releases undo most mistakes in minutes.",
+        "We want to preserve human time and attention for issues only humans can solve and make sure automated checks catch the rest.",
+        "Every pull request gets a Claude review before a person looks.",
+        "Noise costs more when the author is an agent."
       ],
       "connects": [
         "nobody-understands-the-code",
         "documentation-review",
         "agentic-workflows",
-        "agent-error-handling"
+        "agent-error-handling",
+        "red-build-nobody-reads"
       ]
     },
     {
@@ -2399,6 +2404,55 @@
       ],
       "connects": [
         "llm-token-budgets"
+      ]
+    },
+    {
+      "id": "sre-book-monitoring",
+      "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+      "author": "Rob Ewaschuk, Google",
+      "date": "2017",
+      "title": "Monitoring Distributed Systems (Site Reliability Engineering, chapter 6)",
+      "quotes": [
+        "Every time the pager goes off, I should be able to react with a sense of urgency. I can only react with a sense of urgency a few times a day before I become fatigued.",
+        "Every page should be actionable.",
+        "Copyright © 2017 Google, Inc."
+      ],
+      "connects": [
+        "red-build-nobody-reads"
+      ]
+    },
+    {
+      "id": "laycock-good-devs-wary",
+      "url": "https://martinfowler.com/rachels-ramblings/good-devs-wary.html",
+      "author": "Rachel Laycock",
+      "date": "2026-10-29",
+      "title": "Why are good developers so wary of agentic development?",
+      "discussion": "https://news.ycombinator.com/item?id=50289162",
+      "quotes": [
+        "No code written by anyone. Everything built by agents.",
+        "The application ran. The build was red.",
+        "A red build should mean something: stop, investigate, fix it. If it's red so often that people stop paying attention, how do we spot the next real failure?",
+        "were changes simply arriving faster than the checks could finish?",
+        "built isn't the same as working in production",
+        "DORA's 2025 research found AI adoption is now linked to higher delivery throughput, but to lower delivery stability.",
+        "about ⅔ of their time at the whiteboard and ⅓ on the harness",
+        "I'm Rachel Laycock, CTO at Thoughtworks."
+      ],
+      "connects": [
+        "red-build-nobody-reads"
+      ]
+    },
+    {
+      "id": "hn-50291974-x3haloed",
+      "url": "https://hn.algolia.com/api/v1/items/50291974",
+      "author": "x3haloed",
+      "date": "2026-10-29",
+      "title": "Hacker News comment on Laycock's post",
+      "quotes": [
+        "becomes much harder when an automated system is pushing through 10x as much code."
+      ],
+      "connects": [
+        "red-build-nobody-reads"
       ]
     }
   ],

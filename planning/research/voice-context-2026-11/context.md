@@ -208,3 +208,42 @@ Pages written on 2026-10-22 or 2026-10-28 under the newer rules, with their own 
 - A description regex that ran from `description:` to `status:` deleted the `slug:` line on one post, caught by rule_checker. Replace only up to the next key.
 - Openers in this batch: a count from a changelog, a definition, an auditor's question, a call cut off mid-sentence, a single expression, a thread, a release note. Six of seven first drafts opened on a dated artifact, and three were changed.
 - The Atlantic returned 403 and theregister.com 404, so neither is quoted.
+
+## Batch 5 (2026-11-17, owner voice-rewrite-2)
+
+Pieces: llm-token-budgets, time-to-first-token, speculative-decoding, agent-error-handling, ai-agent-failures, ai-agent-taxonomy, and the essay red-build-nobody-reads. Root put these six posts first because each claimed experience the repo does not back.
+
+Openings follow Ninad's direction of 2026-11-17: start from something developers already know, state the parallel, say where it breaks.
+
+### What each piece is built on
+
+| Piece | Opens from | Current source | What was run |
+|---|---|---|---|
+| llm-token-budgets | The AWS billing alarm, which fires after the money is spent | Amazon's ticket-agent figures (Strands blog, November 9), Anthropic's pricing page, Simon Willison on hard caps (October 3) | `token_budget.py`: cost per ticket and a 20-turn chat with and without caching |
+| time-to-first-token | Time to First Byte on the web | Artificial Analysis's methodology page, NVIDIA's GLM-5.3 serving post, Modelplane's inference guide | Nothing; quotes only |
+| speculative-decoding | Speculative execution in processors | The 2022 paper (arXiv 2211.17192), NVIDIA's GLM-5.3 serving post, Modelplane's inference guide | `spec_tokens.py`: expected tokens per step from the paper's formula |
+| agent-error-handling | The fallacies of distributed computing (1994) | Stripe's idempotency reference, Anthropic's tool-use docs, the MCP tools specification | `retry_demo.py`: three retry policies against a payment call that times out after charging |
+| ai-agent-failures | The SRE postmortem | Real-SWE's breakdown of failed runs, Michael Lynch on coding agents | `compound.py`: success rate of a chain of steps |
+| ai-agent-taxonomy | SAE driving levels and a product named Full Self-Driving at Level 2 | United Airlines' ban on booking agents (CBS News, November 11), Anthropic's workflow and agent split, Simon Willison's definition | Nothing; quotes only |
+| red-build-nobody-reads (essay) | A dated post, since ai-agent-failures already opens on the SRE book | Rachel Laycock (October 29) and its Hacker News thread, the SRE pager rule, the Claude Code team's review post | Nothing; quotes only |
+
+### What was removed as unbacked
+
+- llm-token-budgets: "burning $200 on GPT-4 over a single weekend", a RAG pipeline climbing to $1,000 a month, and a price table for models whose prices were not checked.
+- time-to-first-token: "Every interactive AI app I have shipped" and "I have watched the same chat UI".
+- speculative-decoding: unsourced acceptance claims about boilerplate and JSON.
+- agent-error-handling: "Two years of running AI agents in production" and "Nearly every agent implementation I have seen".
+- ai-agent-failures: "Across two years of debugging production AI agents", "I have watched this happen for real", and "in my experience".
+- ai-agent-taxonomy: "Having spent the last year building agents for production", "talking to teams", and the claim that cost and blast radius climb an order of magnitude per type.
+
+### Decisions the hub plan asked for
+
+- agent-error-handling and ai-agent-failures answer different questions after the rewrite. The first is what the harness should do after one tool call fails; the second is why runs fail, from a measured breakdown. My recommendation is to keep both and skip the 301.
+- ai-agent-taxonomy states its boundary with agent-design-space in its closing section: types by how much the agent decides alone, against how to wire a chosen type.
+
+### Notes for the next batch
+
+- `sources.json` is edited in nearly every commit, so a rebase conflicts on each one. Keep source additions out of piece commits and land them in the record commit.
+- Batch 4's review lessons were applied before review: no reading of output by line position, no "The same X" pivots, descriptive link anchors, descriptions that claim only what the page ran.
+- Two pieces in one batch must not open on the same book. The essay first opened on the SRE book, which ai-agent-failures already uses.
+
