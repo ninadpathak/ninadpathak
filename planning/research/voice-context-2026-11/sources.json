@@ -5196,6 +5196,65 @@
       "connects": [
         "documentation-template"
       ]
+    },
+    {
+      "id": "wikipedia-lynx-browser",
+      "url": "https://en.wikipedia.org/wiki/Lynx_(web_browser)",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "Lynx (web browser)",
+      "quotes": [
+        "it is the oldest web browser still being maintained",
+        "having started in 1992",
+        "images are displayed as orange alt text"
+      ],
+      "connects": [
+        "docs-accessibility"
+      ]
+    },
+    {
+      "id": "google-style-accessibility",
+      "url": "https://developers.google.com/style/accessibility",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "Write accessible documentation",
+      "quotes": [
+        "Don't skip levels of the heading hierarchy",
+        "Links should make sense when read out of context",
+        "To change the visual formatting of a heading, use CSS rather than using a heading level that doesn't fit the hierarchy",
+        "If the image is purely decorative, use empty alt text"
+      ],
+      "connects": [
+        "docs-accessibility"
+      ]
+    },
+    {
+      "id": "msu-basic-accessibility-checklist",
+      "url": "https://webaccess.msu.edu/tutorials/basics/checklist",
+      "author": "Michigan State University",
+      "date": "2026-11-18",
+      "title": "Basic Accessibility Checklist",
+      "quotes": [
+        "Format and use simple tables with column and row headers",
+        "Text is searchable, selectable, and recognized by assistive technologies"
+      ],
+      "connects": [
+        "docs-accessibility"
+      ]
+    },
+    {
+      "id": "openedx-accessibility-checklist",
+      "url": "https://docs.openedx.org/en/latest/educators/references/accessibility/accessibility_best_practices_checklist.html",
+      "author": "Open edX",
+      "date": "2026-11-18",
+      "title": "Accessibility best practices checklist",
+      "quotes": [
+        "include the information contained in the image as accessible text adjacent to the image",
+        "an empty alt attribute is also acceptable"
+      ],
+      "connects": [
+        "docs-accessibility"
+      ]
     }
   ],
   "unused_leads": [
@@ -5439,6 +5498,11 @@
     "documentation-template": [
       "Retry failed requests",
       "Reader check: pick an action for each row of the table using only the filled pages, then find the sentence that supports it. If you need information from outside the pages to choose, write down what was missing."
+    ],
+    "docs-accessibility": [
+      "click here",
+      "read the documentation review checklist",
+      "here"
     ]
   }
 }
