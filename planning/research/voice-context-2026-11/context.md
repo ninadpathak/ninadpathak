@@ -688,3 +688,15 @@ Ninad: "remember I have OCD so the designs need to be logical but symmetrical as
 - Diagrams sit on a symmetric axis where the logic allows, with equal spacing between nodes of equal rank.
 - Logic comes first. Break symmetry only where the content forces it, and list each case with its reason in the handoff.
 - Measure alignment and centring in coordinates and put the measurements in the evidence.
+
+## Services pages (2026-11-17, branch services-boxes)
+
+Ninad on /services/: "on the services page it's not obvious these are other services. Can we do individual services that people can click through maybe?" And on the audit page's sidebar numbers: "what does this mean?"
+
+- /services/ shows each service as its own box, in the frame of the topic boxes on /articles/, and each box opens its own page: developer documentation, tutorials, technical articles, changelogs and release notes, the AI-ready documentation audit and technical content programs. Six boxes fill the grid evenly. The page for AI companies is an audience page and sits apart in one full-width box.
+- Sidebar numbers are plain statements a buyer can read without decoding, such as "4, free tools I built, so you can rerun every finding".
+- The process a page may state is Ninad's own and nothing beyond it: a 30-minute call; a written brief and timeline within 24 hours of it; a demo account, API keys and an account with real data; a paid trial piece once the brief is agreed, continuing only if the client is happy; about 5 days from brief to draft and 2 for revisions, one working week before the client can publish, coming down to 4 days end to end once the work is routine; two rounds of review at most; delivery in Google Docs or a Markdown pull request or whatever the client uses, loaded into their CMS if they want.
+- Topic choice, in his words: "I listen to calls, talk to them, ask them for a sales call transcript, and use Claude and other AI tools to summarize the topics people are commonly discussing." Keyword research is in Semrush. Reporting names Google Search Console.
+- "Don't show my Search Console numbers because they are extremely tiny." No chart or figure from this site's own Search Console appears anywhere.
+- The LinuxForDevices, DelightChat and Kiwi Sizing traffic figures are Semrush's: LinuxForDevices 2019 to 2022, DelightChat 2021, Kiwi Sizing 2022. A page that prints one names the source and the years.
+- No price, no turnaround beyond the above, no "hire me", no "I sell".

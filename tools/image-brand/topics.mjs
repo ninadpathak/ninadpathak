@@ -16,11 +16,13 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { assertFits, icons, iconSvg } from './lib/topic-icons.mjs';
+import { assertFits, icons, iconSvg, serviceIcons } from './lib/topic-icons.mjs';
 
 const TOOL_DIR = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(TOOL_DIR, '../..');
 const OUT = path.join(ROOT, 'content/topic-glyphs.json');
+// The service boxes on /services/ draw from the same set, keyed by icon name.
+const SERVICE_OUT = path.join(ROOT, 'content/service-glyphs.json');
 
 function hubs() {
   const blocks = readFileSync(path.join(ROOT, 'config.toml'), 'utf8').split('[[content.categories]]').slice(1);
@@ -42,10 +44,21 @@ if (repeated) throw new Error(`config.toml: glyph "${repeated}" is used by two h
 // Runs for --check too, so CI stops on an icon that is clipped or out of line.
 Object.keys(icons).forEach(assertFits);
 const fresh = JSON.stringify(Object.fromEntries(list.map((hub) => [hub.slug, iconSvg(hub.glyph)])), null, 2) + '\n';
+for (const name of serviceIcons) {
+  if (!icons[name]) throw new Error(`lib/topic-icons.mjs: serviceIcons names "${name}", which is not defined`);
+  if (used.includes(name)) throw new Error(`lib/topic-icons.mjs: service icon "${name}" is already a topic's icon`);
+}
+const freshServices = JSON.stringify(Object.fromEntries(serviceIcons.map((name) => [name, iconSvg(name)])), null, 2) + '\n';
 
 if (process.argv.includes('--check')) {
   let committed = '';
   try { committed = readFileSync(OUT, 'utf8'); } catch { /* reported below */ }
+  let committedServices = '';
+  try { committedServices = readFileSync(SERVICE_OUT, 'utf8'); } catch { /* reported below */ }
+  if (committedServices !== freshServices) {
+    console.error('content/service-glyphs.json is stale: run `node tools/image-brand/topics.mjs` and commit the result');
+    process.exit(1);
+  }
   if (committed !== fresh) {
     console.error('content/topic-glyphs.json is stale: run `node tools/image-brand/topics.mjs` and commit the result');
     process.exit(1);
@@ -53,5 +66,6 @@ if (process.argv.includes('--check')) {
   console.log(`topic glyphs: ${list.length} current`);
 } else {
   writeFileSync(OUT, fresh);
+  writeFileSync(SERVICE_OUT, freshServices);
   console.log(`topic glyphs: wrote ${list.length} to ${path.relative(ROOT, OUT)} (${Buffer.byteLength(fresh)} bytes)`);
 }

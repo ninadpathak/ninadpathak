@@ -6,22 +6,19 @@ description: "Technical writing services for AI and developer-tool companies: de
 lead: "My technical writing services cover developer documentation, tutorials and technical articles for AI and developer-tool companies. I'm Ninad Pathak, a freelance technical writer, and I run the product before I write about it."
 primary_query: technical writing services
 status: published
+kind: index
 proof:
   - value: "50+"
-    label: "Centus guides, zero revision rounds"
+    label: "Developer guides I wrote for Centus"
   - value: "13"
-    label: "Writers managed at Mem0"
+    label: "Writers I managed at Mem0"
   - value: "203K"
-    label: "Monthly visits, LinuxForDevices"
+    label: "Monthly visits at LinuxForDevices (Semrush, 2019 to 2022)"
 ---
 
-## What I write
+## What each service covers
 
-- **Developer documentation.** Quickstarts and reference pages, plus the troubleshooting page that tells a developer what to do when a request fails, and the quickstart is the first of the [pages a buyer checks before a trial](/articles/devtools-documentation/).
-- **Tutorials and integration guides.** One reader goes from an empty project to a working result, like [setting up Firecrawl MCP in Cursor](https://www.firecrawl.dev/blog/firecrawl-mcp-in-cursor), or [localizing a Svelte app](https://centus.com/blog/svelte-localization) for Centus.
-- **Technical articles.** Comparisons and explainers for engineers who will check the claims, like [Playwright vs Puppeteer](https://www.firecrawl.dev/blog/playwright-vs-puppeteer) for Firecrawl.
-- **AI-ready documentation audits.** I check answer structure, AI crawler access and llms.txt with the checkers I built, described on the [AI-ready documentation audit](/services/ai-ready-documentation-audit/) page.
-- **Content programs.** The keyword map and review process behind a library of articles, and managing the writers when one person is not enough.
+Each box above opens a page for one kind of work, with what I write, how I do it and published pieces you can check. The [AI-ready documentation audit](/services/ai-ready-documentation-audit/) is the one that reviews pages you already have.
 
 ## Who I write for
 
@@ -39,15 +36,15 @@ The [developer content](/articles/developer-experience/) topic covers what to pu
 
 Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the product, the reader and the pages you need, and ask for a quote. This page lists no rate, and you can also book a 30-minute call at [https://zcal.co/ninadpathak/meet](https://zcal.co/ninadpathak/meet).
 
-## How a piece gets made
+1. We talk for 30 minutes about the reader and the decision the page has to support.
+2. You get a written brief and a timeline within 24 hours of that call.
+3. I need a demo account, API keys and an account with real data in it, because I run the product before I write about it.
+4. Once the brief is agreed, the first piece is a paid trial, and we carry on only if you're happy with it.
+5. A draft takes about 5 days from the brief and revisions take 2, so you can publish in one working week.
+6. There are two rounds of review at most.
+7. I deliver in Google Docs or as a Markdown pull request, or in whatever your team uses, and I can load it into your CMS if you'd like.
 
-I build and test the example before drafting, so your engineers review a draft with working code:
-
-1. We talk for 30 minutes about the reader decision the page needs to support.
-2. I ask what evidence, product access and engineering review exist.
-3. I build or test a working example locally and note the edge cases past the happy path.
-4. I write the draft in the order a developer follows it.
-5. Your engineers review it for accuracy, the same [product-first review](/articles/documentation-review/) I run on documentation.
+Once we've worked together for a while, the same cycle comes down to 4 days end to end. Your engineers review each draft for accuracy, the same [product-first review](/articles/documentation-review/) I run on documentation.
 
 For Centus, building each example first produced more than 50 localization guides across more than ten frameworks, and the engineering team approved them without a round of revisions.
 
@@ -59,8 +56,8 @@ For Centus, building each example first produced more than 50 localization guide
 
 - [Centus](/work/centus/): 50+ developer guides with zero rounds of engineering revision.
 - [Mem0](/work/mem0/): I wrote 11 guides, such as the ones on [AI agent memory](https://web.archive.org/web/20260209224933/https://mem0.ai/blog/what-is-ai-agent-memory) and [agentic RAG](https://web.archive.org/web/20260311051406/https://mem0.ai/blog/what-is-agentic-rag) (archived copies), and managed 13 writers.
-- [LinuxForDevices](/work/linuxfordevices/): monthly visits went from 487 to 203,400 in 15 months.
-- [DelightChat](/work/delightchat/): a content program built from zero to 50,000 monthly organic visits in 12 months.
+- [LinuxForDevices](/work/linuxfordevices/): monthly visits went from 487 to 203,400 in 15 months, by Semrush's figures for 2019 to 2022.
+- [DelightChat](/work/delightchat/): a content program built from zero to 50,000 monthly organic visits in 12 months, by Semrush's figures for 2021.
 
 The [portfolio](/portfolio/) links each published article at the publisher, or at an archived copy where the publisher took it down.
 
@@ -86,4 +83,4 @@ I use AI to prepare research, check a corpus and attack a draft. I check the pro
 
 **What do you need from us to start?**
 
-I ask what product access and engineering review exist, and who the reader is. Bring the page that is making people guess.
+A demo account, API keys and an account with real data in it, plus a word on who the reader is. Bring the page that is making people guess.

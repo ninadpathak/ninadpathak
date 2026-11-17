@@ -23,7 +23,9 @@ CONTACT = BUILDER.config["contact"]
 HIRE = BUILDER.config["hire"]
 BASE = BUILDER.config["site"]["url"].rstrip("/")
 LD_JSON = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
-SERVICE_ROUTES = ("services", "services/freelance-technical-writer-for-ai-companies", "services/ai-ready-documentation-audit")
+SERVICE_ROUTES = ("services", "services/freelance-technical-writer-for-ai-companies", "services/ai-ready-documentation-audit",
+                  "services/developer-documentation", "services/technical-tutorials", "services/technical-articles",
+                  "services/changelogs-and-release-notes", "services/technical-content-programs")
 # On Ninad's claims-to-check list. Existing instances stay; no hiring surface repeats them.
 UNVERIFIED = ("30+", "740%")
 
@@ -64,11 +66,24 @@ class ServiceLoaderTests(unittest.TestCase):
     def test_index_and_child_pages_get_their_routes(self):
         pages = self._load({
             "services.md": "---\ntitle: S\nstatus: published\n---\n\n## FAQ\n\n### Q?\n\nA.\n",
-            "services/audit.md": "---\ntitle: A\nstatus: published\n---\n\nBody.\n",
+            "services/audit.md": "---\ntitle: A\nkind: service\nglyph: checks\ncard: A check.\nstatus: published\n---\n\nBody.\n",
+            "service-glyphs.json": '{"checks": "<svg></svg>"}',
         })
         self.assertEqual([page["url"] for page in pages], ["/services/", "/services/audit/"])
         self.assertTrue(pages[0]["is_index"])
         self.assertEqual(pages[0]["faqs"], [{"question": "Q?", "answer": "A."}])
+
+    def test_a_child_page_needs_its_box_fields(self):
+        """Every page under /services/ is shown as a box on the index, so it must say
+        whether it is a service or an audience and carry the box's line and icon."""
+        glyphs = {"service-glyphs.json": '{"checks": "<svg></svg>"}'}
+        index = {"services.md": "---\ntitle: S\nstatus: published\n---\n\nBody.\n"}
+        for front in ("title: A\nstatus: published",
+                      "title: A\nkind: service\nglyph: checks\nstatus: published",
+                      "title: A\nkind: service\ncard: A check.\nglyph: missing\nstatus: published",
+                      "title: A\nkind: other\ncard: A check.\nglyph: checks\nstatus: published"):
+            with self.subTest(front=front), self.assertRaises(ValueError):
+                self._load({**index, **glyphs, "services/audit.md": f"---\n{front}\n---\n\nBody.\n"})
 
     def test_a_todo_marker_fails_the_build(self):
         with self.assertRaises(ValueError):
@@ -326,6 +341,30 @@ class BuiltSiteTests(unittest.TestCase):
         html = self.page("articles/api-documentation")
         cta = html[html.index("<!-- CTA -->"):html.index("</main>")]
         self.assertEqual(cta.count('href="/services/"'), 1)
+
+    def test_services_index_shows_each_service_as_its_own_box(self):
+        """Six service boxes fill a three-column grid evenly (3 x 2, then 2 x 3), and the
+        audience page sits apart in one full-width box. Each box links a built page."""
+        main = self.page("services").split("<main", 1)[1].split("</main>", 1)[0]
+        grids = re.findall(r'<ul class="topic-grid (topic-grid-\d)">(.*?)</ul>', main, re.S)
+        self.assertEqual([name for name, _ in grids], ["topic-grid-3", "topic-grid-1"])
+        services = re.findall(r'<a href="(/services/[a-z-]+/)" class="topic-card">', grids[0][1])
+        audiences = re.findall(r'<a href="(/services/[a-z-]+/)" class="topic-card">', grids[1][1])
+        self.assertEqual(len(services), 6, "six boxes fill the grid with no stranded box")
+        self.assertEqual(len(set(services)), 6)
+        self.assertEqual(audiences, ["/services/freelance-technical-writer-for-ai-companies/"])
+        self.assertEqual({url.strip("/") for url in services + audiences}, set(SERVICE_ROUTES[1:]))
+        for _, body in grids:
+            self.assertEqual(body.count('<svg class="topic-glyph"'), body.count('class="topic-card"'))
+        css = (Path(__file__).resolve().parent.parent / "static" / "css" / "main.css").read_text(encoding="utf-8")
+        self.assertIn(".topic-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; }", css)
+
+    def test_no_service_page_states_a_price_or_says_hire(self):
+        for route in SERVICE_ROUTES:
+            html = self.page(route)
+            with self.subTest(route=route):
+                self.assertNotRegex(html, r'"price[A-Za-z]*"')
+                self.assertNotRegex(html, r"(?i)hire me|hire ninad")
 
     def test_services_page_states_the_contact_route_once_per_place(self):
         main = self.page("services").split("<main", 1)[1].split("</main>", 1)[0]

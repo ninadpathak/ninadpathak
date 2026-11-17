@@ -6,14 +6,18 @@ description: "An AI-ready documentation audit for developer docs. Four free chec
 lead: "An AI-ready documentation audit tests whether a page's answers can be extracted and whether AI crawlers may fetch it, then validates llms.txt. I run it with four tools I built and published, so you can rerun every finding yourself."
 service_type: "Documentation audit"
 primary_query: ai-ready documentation audit
+kind: service
+glyph: checks
+card: "A check of whether AI crawlers can fetch your docs and answer engines can quote them."
+order: 5
 status: published
 proof:
-  - value: "9"
-    label: "Sourced checks per page"
   - value: "4"
-    label: "Checkers, free in the browser"
+    label: "Free tools I built, so you can rerun every finding"
+  - value: "9"
+    label: "Checks on each page for a quotable answer"
   - value: "0"
-    label: "Placement predictions"
+    label: "Promises about where an AI will cite you"
 ---
 
 ## What the audit checks

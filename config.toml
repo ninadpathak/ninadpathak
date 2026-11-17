@@ -254,14 +254,22 @@ proof = [
 [[hire.offers]]
 name = "Developer documentation"
 description = "Quickstarts, reference pages and troubleshooting pages for developer products, written after running the product."
+url = "/services/developer-documentation/"
 
 [[hire.offers]]
-name = "Tutorials and integration guides"
+name = "Tutorials"
 description = "Step-by-step guides that take a developer from an empty project to a working result, with the code tested first."
+url = "/services/technical-tutorials/"
 
 [[hire.offers]]
 name = "Technical articles"
 description = "Comparisons and explainers for engineers who will check the claims."
+url = "/services/technical-articles/"
+
+[[hire.offers]]
+name = "Changelogs and release notes"
+description = "Release notes that put the upgrade decision first, and a changelog that stays searchable as releases add up."
+url = "/services/changelogs-and-release-notes/"
 
 [[hire.offers]]
 name = "AI-ready documentation audit"
@@ -270,4 +278,5 @@ url = "/services/ai-ready-documentation-audit/"
 
 [[hire.offers]]
 name = "Technical content programs"
-description = "The keyword map, review process and writer management behind a library of technical articles."
+description = "The topic plan, review process and writer management behind a library of technical articles."
+url = "/services/technical-content-programs/"

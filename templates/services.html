@@ -91,6 +91,42 @@
   </div>
 </section>
 
+{% if service.is_index %}
+{# One box per service, in the frame and type of the topic boxes on /articles/. Six boxes
+   sit 3 x 2, then 2 x 3, then one column, so no row ends on a single box. The audience
+   page sits apart in a box of its own, the full width of the grid. #}
+<section class="blog-list-section">
+  <div class="container">
+    <h2 class="label">What I do</h2>
+    <ul class="topic-grid topic-grid-3">
+      {% for page in service_pages if page.kind == "service" %}
+      <li>
+        <a href="{{ page.url }}" class="topic-card">
+          {{ page.glyph_svg }}
+          <h3 class="blog-row-title">{{ page.nav_title }}</h3>
+          <p class="blog-row-desc">{{ page.card }}</p>
+          <span class="read-time">See this service →</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    <h2 class="label label-spaced">Who I do it for</h2>
+    <ul class="topic-grid topic-grid-1">
+      {% for page in service_pages if page.kind == "audience" %}
+      <li>
+        <a href="{{ page.url }}" class="topic-card">
+          {{ page.glyph_svg }}
+          <h3 class="blog-row-title">{{ page.nav_title }}</h3>
+          <p class="blog-row-desc">{{ page.card }}</p>
+          <span class="read-time">See this page →</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
 <section>
   <div class="container">
     <div class="about-layout">
@@ -105,9 +141,7 @@
 
         <div class="about-sidebar-links">
           <a href="{{ contact.booking_url }}" class="arrow-link arrow-link-block booking-modal-trigger" rel="noopener">Book a Call →</a>
-          {% for page in service_pages if page.url != service.url %}
-          <a href="{{ page.url }}" class="arrow-link arrow-link-block">{{ page.nav_title or page.title }} →</a>
-          {% endfor %}
+          {% if not service.is_index %}<a href="/services/" class="arrow-link arrow-link-block">All services →</a>{% endif %}
           <a href="/work/" class="arrow-link arrow-link-block">Case Studies →</a>
           <a href="/portfolio/" class="arrow-link arrow-link-block">Portfolio →</a>
           <a href="/projects/" class="arrow-link arrow-link-block">Projects →</a>

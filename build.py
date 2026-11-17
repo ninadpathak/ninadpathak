@@ -662,6 +662,9 @@ class SiteBuilder:
         if not index.exists():
             return []
         pages = []
+        # One inline <svg> per service box, written by tools/image-brand/topics.mjs.
+        glyph_path = Path("content/service-glyphs.json")
+        glyphs = json.loads(glyph_path.read_text(encoding="utf-8")) if glyph_path.is_file() else {}
         for md_file in [index, *sorted(Path("content/services").glob("*.md"))]:
             post = frontmatter.load(md_file)
             published = post.get("status", "draft") == "published"
@@ -686,7 +689,19 @@ class SiteBuilder:
                 "published": published,
                 "is_index": is_index,
                 "url": "/services/" if is_index else f"/services/{slug}/",
+                "glyph_svg": glyphs.get(post.get("glyph", ""), ""),
             })
+        for page in pages:
+            # Every page other than the index is shown as a box on /services/, so it
+            # needs the box's line and icon. "service" pages are things he does;
+            # "audience" pages are who he does them for.
+            if page["is_index"]:
+                continue
+            if page.get("kind") not in ("service", "audience"):
+                raise ValueError(f"{page['url']}: front matter needs kind: service or kind: audience")
+            if not page.get("card") or not page["glyph_svg"]:
+                raise ValueError(f"{page['url']}: front matter needs a card line and a glyph from lib/topic-icons.mjs")
+        pages.sort(key=lambda page: (not page["is_index"], page.get("order", 99), page["url"]))
         return pages
 
     def load_legal_pages(self) -> list[dict]:

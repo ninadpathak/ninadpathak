@@ -35,7 +35,36 @@ export const icons = {
   terminal: ['M3 3.75h18v16.5H3z', 'M7 8.5l3 3-3 3', 'M12.5 15.5h4.5'],
   // LLM inference: a chip, its pins and its core.
   chip: ['M7 7h10v10H7z', 'M10 3v4', 'M14 3v4', 'M10 17v4', 'M14 17v4', 'M3 10h4', 'M3 14h4', 'M17 10h4', 'M17 14h4', 'M10.5 10.5h3v3h-3z'],
+
+  // The service boxes on /services/. Each drawing is symmetric about x = 12 or steps evenly.
+  // Developer documentation: an open book, two mirrored pages on one spine.
+  book: [
+    'M12 7.5v13.75',
+    'M3 4h5.5a3.5 3.5 0 0 1 3.5 3.5v13.75a2.5 2.5 0 0 0-2.5-2.5H3z',
+    'M21 4h-5.5a3.5 3.5 0 0 0-3.5 3.5v13.75a2.5 2.5 0 0 1 2.5-2.5H21z',
+  ],
+  // Tutorials: three equal steps from an empty project to a working result.
+  steps: ['M3 21.25h6v-6h6v-6h6v-6'],
+  // Technical articles: a page with a headline, a figure and a column of text.
+  article: ['M3 2.75h18v18.5H3z', 'M7 7.5h10', 'M7 11.5h3.5v6H7z', 'M13.5 11.5H17', 'M13.5 14.5H17', 'M13.5 17.5H17'],
+  // AI-ready documentation audit: three checks, each ticked.
+  checks: ['M3 6l2.25 2.25L9 4.5', 'M12.5 6.5H21', 'M3 12.5l2.25 2.25L9 11', 'M12.5 13H21', 'M3 19l2.25 2.25L9 17.5', 'M12.5 19.5H21'],
+  // Changelogs and release notes: three releases on one line of history.
+  releases: [
+    'M7 6a2 2 0 1 1-4 0a2 2 0 0 1 4 0z', 'M7 12a2 2 0 1 1-4 0a2 2 0 0 1 4 0z', 'M7 18a2 2 0 1 1-4 0a2 2 0 0 1 4 0z',
+    'M5 8v2', 'M5 14v2', 'M11 6h10', 'M11 12h10', 'M11 18h10',
+  ],
+  // Technical content programs: an editorial calendar.
+  calendar: ['M3 4.75h18v16.5H3z', 'M3 9.75h18', 'M9 9.75v11.5', 'M15 9.75v11.5', 'M8 2.75v4', 'M16 2.75v4'],
+  // The audience page for AI companies: a group of three people's heads and shoulders.
+  team: [
+    'M14.75 8a2.75 2.75 0 1 1-5.5 0a2.75 2.75 0 0 1 5.5 0z', 'M6.5 20.25v-2a5.5 5.5 0 0 1 11 0v2',
+    'M3 15.5v-1.25a3.25 3.25 0 0 1 3.25-3.25', 'M21 15.5v-1.25A3.25 3.25 0 0 0 17.75 11',
+  ],
 };
+
+// The icons the service pages may name in their front matter (`glyph: book`).
+export const serviceIcons = ['book', 'steps', 'article', 'checks', 'releases', 'calendar', 'team'];
 
 // The inline <svg> for one icon. The view box starts at the painted left edge (the
 // leftmost point less half the stroke), so the drawing is flush with the text column.

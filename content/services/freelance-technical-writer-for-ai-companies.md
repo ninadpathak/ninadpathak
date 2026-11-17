@@ -6,14 +6,18 @@ description: "Freelance technical writer for AI companies building agents, memor
 lead: "I'm a freelance technical writer for AI companies that build agents, agent memory and LLM infrastructure. My published work for Firecrawl, Mem0 and OpenComputer is linked below, and I run each product before I write about it."
 service_type: "Technical writing for AI companies"
 primary_query: freelance technical writer for ai companies
+kind: audience
+glyph: team
+card: "Tutorials and technical articles for teams building agents, agent memory and LLM infrastructure."
+order: 7
 status: published
 proof:
-  - value: "Firecrawl"
-    label: "Agent tooling and web data"
-  - value: "Mem0"
-    label: "Team of 13 writers managed"
-  - value: "OpenComputer"
-    label: "Agent sandboxes"
+  - value: "27"
+    label: "Articles under my name on the Firecrawl blog"
+  - value: "11"
+    label: "Guides I wrote for Mem0, in archived copies"
+  - value: "13"
+    label: "Writers I managed at Mem0"
 ---
 
 ## What I write for AI companies
