@@ -9,7 +9,9 @@ slug: writing-for-ai-products
 updated: 2026-11-17
 ---
 
-A thread on Hacker News on November 8 gathered user reports that Claude Opus 5.5 had been "nerfed", and the reply that stayed with me asked a documentation question: ["Do you run evals as a matter of course?"](https://news.ycombinator.com/item?id=50420515) The commenter went on to say that "without any measurement it's a non-interesting assertion", while allowing that labs do sometimes downgrade a model.
+A thread on Hacker News on November 8 gathered user reports that Claude Opus 5.5 had been "nerfed", and the reply that stayed with me asked a documentation question: ["Do you run evals as a matter of course?"](https://news.ycombinator.com/item?id=50420515)
+
+The commenter's next sentence is the awkward one for anyone who does: "Everyone I know that does shows high levels of variance across them under the best case." The comment allows that labs sometimes downgrade a model, and ends that "without any measurement it's a non-interesting assertion".
 
 Technical writing for AI products exists to make that argument answerable. A reader of ordinary API docs needs to know what a call returns, and a reader of AI product docs also needs to know what stays fixed behind a model name and how to check it.
 
@@ -17,21 +19,7 @@ Technical writing for AI products exists to make that argument answerable. A rea
 
 It promises only what the page says it does, so the page has to say. OpenAI's [prompt engineering guide](https://developers.openai.com/api/docs/guides/prompt-engineering) is direct about the risk: "Even different snapshots of models within the same family could produce different results."
 
-<div class="visual-wrapper">
-  <div class="visual-title">OpenAI Prompt Engineering Guide</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/openai-prompt-engineering.png" alt="OpenAI Prompt Engineering Guide" loading="lazy">
-  </div>
-</div>
-
-<div class="visual-wrapper">
-  <div class="visual-title">Anthropic Prompt Engineering Guide</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/anthropic-prompt-engineering.png" alt="Anthropic Prompt Engineering Guide" loading="lazy">
-  </div>
-</div>
-
-The same guide recommends "Pinning your production applications to specific model snapshots", and tests that "measure prompt behavior". Both OpenAI and Anthropic publish prompt engineering guides, pictured above, and both treat the model version as part of the instruction.
+It recommends "Pinning your production applications to specific model snapshots", and tests that "measure prompt behavior".
 
 That gives the writer a rule for every page with a model identifier on it. State whether the identifier is a snapshot or a moving alias, and give the date the example was last run against it.
 
@@ -39,7 +27,7 @@ Retirement dates belong in the docs too. Anthropic's [model deprecations page](h
 
 ## What is the output contract of an AI feature?
 
-It is the schema the output follows, the cases where it won't, and what the caller has to check itself. OpenAI's structured outputs guide puts all of that in two sentences, which I hold up as the model for any AI reference page.
+It is the schema the output follows, the cases where it won't, and what the caller has to check itself. OpenAI's [structured outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs) puts all of that in two sentences, which I hold up as the model for any AI reference page.
 
 "Structured Outputs constrains completed, non-refusal model output to your supplied JSON Schema. Your application still needs to handle refusals, incomplete responses, and API errors, and validate any business rules that the schema does not express."
 
@@ -56,17 +44,19 @@ The pattern in the figure is the smallest complete example for an AI endpoint. I
 
 It runs, its output is shown, and the page says which model produced that output.
 
-Google's [technical writing course](https://developers.google.com/tech-writing/two/sample-code) sets the base requirement for any sample: "Build without errors. Perform the task it claims to perform."
+Google's [technical writing course](https://developers.google.com/tech-writing/two/sample-code) lists what a correct sample must do, starting with "Build without errors." and "Perform the task it claims to perform."
 
 An AI sample needs one thing more, because the same code returns different text next quarter. Print the output the sample produced, with the model snapshot and the date, so a reader whose result differs can tell a changed model from a broken integration.
 
-That is also the answer to the thread I opened with. A docs page that ships a small eval, a handful of prompts with expected properties, gives every user the measurement the commenter asked for.
+A docs page can also ship a small eval, a set of prompts with expected properties, which gives every user the measurement that commenter asked for. The variance in the same comment sets its size.
+
+My arithmetic for a prompt set scored pass or fail at a true rate of 80% gives a standard error near nine points at 20 runs and 2.8 points at 200. A handful of prompts run once can't show a five-point drop, so the page should say how many runs its numbers rest on.
 
 ## Who reads AI product docs besides developers?
 
 Coding agents and retrieval systems read them, a paragraph at a time and without the surrounding page. A sentence such as "rate limits apply" sends a person to look up the number, and gives a coding assistant nothing to put in the client it is generating.
 
-Writing for that reader means stating defaults and limits in the sentence where they matter, and showing the exact shape of an error. I looked at how much of docs traffic is agents in [a separate essay](/articles/agents-reading-docs/), and the [agent harnesses](/articles/agent-harnesses/) post covers the runtime that feeds those pages to a model.
+Writing for that reader means stating defaults and limits in the sentence where they matter, and showing the exact shape of an error. My [reading of Fern's agent traffic report](/articles/agents-reading-docs/) looks at how much of docs traffic is agents, and the [agent harnesses](/articles/agent-harnesses/) post covers the runtime that feeds those pages to a model.
 
 ## How I would evaluate a technical writer for an AI company
 
@@ -80,7 +70,7 @@ Ask for evidence in five areas before looking at a general portfolio.
 
 A further quality rarely appears in a job description, which is judgment about what to leave out. Strong AI writing omits guarantees the product can't keep and states uncertainty where the behavior is experimental.
 
-My page as a [freelance technical writer for AI companies](/services/freelance-technical-writer-for-ai-companies/) links the work I've published for Firecrawl and OpenComputer, along with the Centus guides. [My work page](/work/) has the case studies.
+My page as a [freelance technical writer for AI companies](/services/freelance-technical-writer-for-ai-companies/) links the work I've published for Firecrawl and OpenComputer. The [Centus case study](/work/centus/) covers the localization guides, and [my work page](/work/) has the rest.
 
 ## FAQ
 
@@ -94,7 +84,7 @@ Yes, at a practical level. A writer who can't read eval output can't say accurat
 
 **Do AI product docs need more tutorials or more reference pages?**
 
-Reference quality breaks first. Parameter defaults, schema guarantees and refusal handling are the details teams skip, and they are the ones an integration depends on.
+Fix reference first. Parameter defaults, schema guarantees and refusal handling are the details an integration depends on.
 
 **Should writers own prompt libraries and system prompts?**
 
