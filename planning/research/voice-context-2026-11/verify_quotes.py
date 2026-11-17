@@ -22,6 +22,8 @@ def norm(s):
     for _ in range(2):
         s = html.unescape(s)
     s = s.replace("\\u003c", "<").replace("\\u003e", ">").replace('\\"', '"')
+    # JSON API bodies escape non-ASCII characters, so a curly apostrophe arrives as \\u2019.
+    s = re.sub(r"\\u([0-9a-fA-F]{4})", lambda m: chr(int(m.group(1), 16)), s)
     for a, b in (("’", "'"), ("‘", "'"), ("“", '"'), ("”", '"'), (" ", " ")):
         s = s.replace(a, b)
     # Second pass for markup that was escaped in the source (API JSON). Only strip things

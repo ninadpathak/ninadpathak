@@ -1874,6 +1874,65 @@
       "connects": [
         "lambda-calculus-ai"
       ]
+    },
+    {
+      "id": "hn-opus-nerfed-kasey-junk",
+      "url": "https://hn.algolia.com/api/v1/items/50420515",
+      "author": "kasey_junk",
+      "date": "2026-11-09",
+      "title": "Comment on Tell HN: A flood of reports of Opus 5.5 being nerfed",
+      "discussion": "https://news.ycombinator.com/item?id=50420515",
+      "quotes": [
+        "Do you run evals as a matter of course?",
+        "without any measurement it's a non-interesting assertion",
+        "That's not to say that the labs don't downgrade models at times"
+      ],
+      "connects": [
+        "writing-for-ai-products"
+      ]
+    },
+    {
+      "id": "openai-prompt-engineering-guide",
+      "url": "https://developers.openai.com/api/docs/guides/prompt-engineering",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Prompt engineering guide",
+      "quotes": [
+        "Even different snapshots of models within the same family could produce different results.",
+        "Pinning your production applications to specific model snapshots",
+        "measure prompt behavior"
+      ],
+      "connects": [
+        "writing-for-ai-products"
+      ]
+    },
+    {
+      "id": "anthropic-model-deprecations",
+      "url": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+      "author": "Anthropic",
+      "date": "2026-11-17",
+      "title": "Model deprecations",
+      "quotes": [
+        "at least 60 days' notice before model retirement for publicly released models"
+      ],
+      "connects": [
+        "writing-for-ai-products",
+        "writing-changelogs"
+      ]
+    },
+    {
+      "id": "google-tech-writing-sample-code",
+      "url": "https://developers.google.com/tech-writing/two/sample-code",
+      "author": "Google",
+      "date": "2026-11-17",
+      "title": "Technical Writing Two: Creating sample code",
+      "quotes": [
+        "Build without errors. Perform the task it claims to perform."
+      ],
+      "connects": [
+        "writing-for-ai-products",
+        "writing-technical-tutorials"
+      ]
     }
   ],
   "unused_leads": [
@@ -2036,6 +2095,9 @@
     "short-term-agent-memory": [],
     "memory-versioning": [],
     "voice-agent-memory": [],
-    "lambda-calculus-ai": []
+    "lambda-calculus-ai": [],
+    "writing-for-ai-products": [
+      "rate limits apply"
+    ]
   }
 }
