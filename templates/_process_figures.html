@@ -171,7 +171,7 @@
 {{ lead_in() }}
 {{ tile("person", "pa pa-pop s1") }}
 {{ run('2 rounds at most', "s1 d2") }}
-<div class="pf-panel pf-wide pa s2">
+<div class="pf-panel pf-wider pa s2">
   <span class="pf-guides">{% for n in range(50) %}<i class="pf-guide pa pa-pop s2 d{{ n // 10 + 1 }}"></i>{% endfor %}</span>
   <span class="pf-thirds">
     <span class="pf-stat"><span class="pf-stat-num" data-count>50+</span><span class="pf-tag">Guides</span></span>
@@ -180,7 +180,7 @@
   </span>
 </div>
 <i class="pf-wire pa pa-y s3"></i>
-<div class="pf-panel pf-wide pa s3 d1">
+<div class="pf-panel pf-wider pa s3 d1">
   <span class="pf-team">{% for n in range(13) %}{% set edge = [loop.index0, 12 - loop.index0] | min %}<i class="pf-dot pa pa-pop s3 d{{ [6 - edge, 5] | min }}"></i>{% endfor %}</span>
   <span class="pf-tag">13 writers at Mem0</span>
 </div>

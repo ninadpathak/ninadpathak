@@ -432,8 +432,8 @@
 /* Equal columns. Their centres are where the buses land. */
 .pf-thirds,
 .pf-side { display: grid; flex: none; justify-items: center; width: 100%; }
-.pf-thirds { grid-template-columns: repeat(3, 1fr); }
-.pf-side { grid-template-columns: repeat(2, 1fr); }
+.pf-thirds { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pf-side { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .pf-thirds > .pf-panel { width: calc(var(--u) * 120); }
 
 /* A row the axis wire passes through, with one thing on each side of it. */
@@ -495,6 +495,7 @@
   padding: calc(var(--u) * 12);
 }
 .pf-wide { width: calc(var(--u) * 260); }
+.pf-wider { width: calc(var(--u) * 330); }
 
 /* A row of tiles with arrows between them. Captions sit in a second row so every
    tile centre stays on one line. */
