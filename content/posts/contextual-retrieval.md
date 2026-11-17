@@ -37,7 +37,7 @@ That is why I read it as better input for [hybrid search](/articles/hybrid-searc
 
 ## What Anthropic's benchmark shows
 
-Anthropic's result is a stack of separate reductions in retrieval failure, measured as 1 minus recall@20 and averaged across codebases, fiction, ArXiv papers and science papers.
+Anthropic's result is a stack of separate reductions in retrieval failure, measured as 1 minus [recall@20](/articles/rag-evaluation/) and averaged across codebases, fiction, ArXiv papers and science papers.
 
 | Setup | Top-20 retrieval failure | Reduction |
 | --- | --- | --- |

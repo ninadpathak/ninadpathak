@@ -222,7 +222,7 @@ I don't think so, and the reason is in how each is built. A larger embedding sti
 
 Passing all hundred candidates to the language model moves the selection problem into the prompt. The [context window guide](/articles/llm-context-windows/) covers what models do with long inputs, and the comparison of [fine-tuning and RAG](/articles/fine-tuning-vs-rag/) covers the cost side.
 
-Neither argument is measured on this page. The run adds one thing to it: reranker scores spread far enough to cut on once they have been checked against marked answers, and a long prompt offers no cut at all.
+Neither argument is measured on this page. The run adds one thing to it: reranker scores spread far enough to cut on once they have been checked against [marked answers](/articles/rag-evaluation/), and a long prompt offers no cut at all.
 
 ## How do you add a reranker to an existing pipeline?
 

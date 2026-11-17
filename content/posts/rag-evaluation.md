@@ -6,232 +6,182 @@ siblings:
 - contextual-retrieval
 - vector-embeddings
 date: 2026-04-16
-description: A practical guide to RAGAs, recall, precision, and the metrics that separate
-  production RAG systems from prototypes.
+description: RAG evaluation scores retrieval and the generated answer separately. What
+  recall, precision, MRR, nDCG, faithfulness and response relevancy each measure, with
+  a retrieval scorer you can run.
 status: published
 work_note: "I'm Ninad Pathak, and I freelance as a technical writer for AI companies. I build the example and run it before I draft a tutorial, so your engineers review working code. [Here's how we'd work together](/services/freelance-technical-writer-for-ai-companies/)."
-title: 'RAG Evaluation Metrics: What Actually Matters'
+title: 'RAG Evaluation Metrics and What Each One Measures'
 updated: '2026-08-17'
 slug: rag-evaluation
 ---
 
-Building a RAG system is the part every tutorial covers. Measuring whether it works is the part almost none of them touch.
+The method behind RAG evaluation was worked out on index cards. Cyril Cleverdon ran the [Cranfield experiments](https://en.wikipedia.org/wiki/Cranfield_experiments) at a college of aeronautics in England in the 1960s, comparing indexing systems by putting questions to a fixed collection of abstracts and checking whether relevant ones came back.
 
+Neither phase of that work used a computer, and the setup hasn't changed much since. You still need a fixed set of questions and a human judgment of which documents answer each one.
 
-RAG evaluation is genuinely hard because you're scoring a pipeline that chains retrieval, passage selection, and generation. A failure at any stage compounds into the next.
+RAG evaluation is the practice of scoring a retrieval-augmented generation pipeline in two parts: whether retrieval returned the right passages, and whether the generated answer sticks to them. The second part is the new one, and [Ragas](https://arxiv.org/abs/2309.15217) arrived in September 2023 with metrics for it that don't need a human-written reference answer.
 
+Below are the RAG evaluation metrics for both halves of a [RAG](/articles/rag/) pipeline, with a retrieval scorer and the output it printed on a small labelled set.
 
-The useful metrics separate retrieval, context selection, and answer quality so a failure can be traced to the stage that produced it. The guide does not report article-specific benchmark results.
+## What are the main RAG evaluation metrics?
 
-## The RAG Evaluation Stack
+The main RAG evaluation metrics split into retrieval metrics, which compare a ranked list against labelled passages, and answer metrics, which need a model to judge the text:
 
-Three distinct failure modes live inside a RAG system, and an evaluation strategy worth running has to catch all three.
+| Metric | Stage | The question it answers | What it needs |
+|---|---|---|---|
+| Recall@k | Retrieval | Did the relevant passages make the top k? | Labelled relevant passages |
+| Precision@k | Retrieval | How much of the top k is relevant? | Labelled relevant passages |
+| MRR | Retrieval | How high is the first relevant passage? | Labelled relevant passages |
+| nDCG@k | Retrieval | Are the relevant passages ranked near the top? | Labelled relevant passages |
+| Faithfulness | Answer | Is each claim in the answer supported by the retrieved context? | A judge model |
+| Response relevancy | Answer | Does the answer address the question that was asked? | A judge model and embeddings |
 
-### Stage 1: Retrieval Quality
+The names on the answer side move around. Ragas's [list of RAG metrics](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/) reads this way today, and a tutorial written against an older release may use other names:
 
-Everything downstream is capped by retrieval quality. When the retrieved passages don't contain the answer, no amount of clever prompting will conjure it.
+- Context Precision
+- Context Recall
+- Context Entities Recall
+- Noise Sensitivity
+- Response Relevancy
+- Faithfulness
 
-A generator can be blamed for hallucination when the supporting passage never reached the top results.
+## How do you measure retrieval quality?
 
-**Recall@K** measures what fraction of all relevant passages appear in the top-K results. For a question with multiple supporting facts spread across documents, recall tells you whether the system even has access to the information it needs.
-
-```
-recall@k = (number of relevant documents in top-k) / (total number of relevant documents)
-```
-
-Treat recall@K as a lower bound and nothing more. A system can score perfect recall and still hand the generator passages packed with noise, so recall alone never tells the whole story.
-
-**Precision@K** measures how many of the top-K results are actually relevant. High precision means the model wastes less of its context budget on irrelevant material, and low precision dilutes the signal the generator has to work with.
-
-A larger context window can tolerate more retrieved passages, while a tight latency or token budget puts more pressure on precision.
-
-When you're squeezing ten passages into a tight budget for a latency-sensitive chatbot, precision earns its keep.
-
-**NDCG@K** (Normalized Discounted Cumulative Gain) weights ranked results by relevance. A relevant document at rank 1 scores higher than the same document at rank 5.
-
-Use NDCG when rank order matters for your pipeline, which is exactly the case once you add [a reranking stage to fix wrong top-k ordering](/articles/rag-reranking/).
-
-### Stage 2: Passage Selection
-
-Retrieval finds candidate passages. Selection decides which of them actually reach the context.
-
-**Context Precision** measures whether relevant content ranks higher within a passage. A retrieved passage might be 80% relevant and 20% noise, and context precision penalizes the ones where the useful sentence sits buried under boilerplate the generator has to wade through first.
-
-Comparing the retrieved context against a ground-truth answer is what **Context Recall** does. It checks whether every fact needed to answer is present in the context you actually assembled, not merely sitting somewhere in the raw document store.
-
-Cutting corners here is where many tutorials go wrong. They test retrieval against a document store rather than against the context fed to the generator, and those two things diverge constantly.
-
-Retrieval and assembled-context scores can disagree when chunking splits supporting facts across passages that never reach the generator together.
-
-### Stage 3: Response Quality
-
-Whatever the generator produces is the only thing the user ever sees, so the final answer needs its own evaluation.
-
-**RAGAs** (Retrieval-Augmented Generation Assessment) is a framework built specifically for this. It breaks response evaluation into three scores:
-
-Faithfulness measures whether the generated answer stays consistent with the retrieved context. A faithful answer doesn't invent a date or a figure that appears nowhere in the passages it was given.
-
-Answer Relevancy measures whether the response actually addresses the question. A relevant answer provides information the user was asking for, not a plausible-sounding tangent.
-
-Context Relevancy measures whether the retrieved context is useful for answering the question. High context relevancy means the passages selected actually contain information needed to construct the answer.
-
-RAGAs metrics use bounded scores, but a deployment threshold must come from labeled examples and the cost of each failure type. Do not copy a universal cutoff.
-
-### The Hallucination Problem
-
-Hallucination lives in generation, not retrieval. Retrieval metrics can be flawless and the model will still confidently fabricate, which is exactly why answer-level evaluation has to go beyond context faithfulness.
-
-**Self-RAG** and similar approaches attack this by having the model critique its own responses against the retrieved context. The model learns to raise a flag when it's pulling an answer from parametric knowledge rather than the passages in front of it, like a writer pausing to check whether a claim came from the source on their desk or from memory.
-
-Latency and cost are the price of these approaches, since each critique is another model call. For factual Q&A where retrieval is already strong, that extra round trip rarely pays for itself.
-
-It earns its place in open-ended generation, where the model is far more tempted to extrapolate past what the passages support.
-
-## Metrics That Look Good But Mislead
-
-**BLEU** and **ROUGE** score surface-level overlap between generated and reference answers. They're popular because they're automated and easy.
-
-They're also nearly useless for RAG evaluation.
-
-Two answers can mean the exact same thing and score 0.3 on BLEU, and two answers can say flatly opposite things and score 0.7 on ROUGE. These metrics measure text similarity, not whether the answer is correct.
-
-Optimizing BLEU or ROUGE can improve surface overlap without improving factual correctness. Treat that divergence as a metric-design failure.
-
-**Perplexity** on the generated text misleads in the same way. Low perplexity means the model is confident in its phrasing, and a confidently wrong answer sails right past a perplexity-based check.
-
-## Building a Practical Evaluation Pipeline
-
-A practical pipeline combines automated metrics with human evaluation, each covering what the other misses.
-
-### Automated Metrics You Can Run in CI
-
-Set up automated scoring on every commit:
+You measure retrieval quality by running each test question through the retriever and comparing the ranked results with the passages a person marked as relevant. The script below does that for six questions over eight documents, with fastembed 0.7.4 and the `BAAI/bge-small-en-v1.5` embedding model:
 
 ```python
-from ragas import evaluate
-from ragas.metrics import faithfulness, answer_relevancy, context_precision
+"""Score a small retriever with recall@k, precision@k, MRR and nDCG@k. No LLM involved."""
+import math
 
-def evaluate_rag_response(question, answer, contexts, ground_truth):
-    metrics = [
-        faithfulness,
-        answer_relevancy,
-        context_precision,
-    ]
-    
-    result = evaluate(
-        question=question,
-        answer=answer,
-        contexts=contexts,
-        ground_truth=ground_truth,
-        metrics=metrics
-    )
-    
-    return {
-        "faithfulness": result["faithfulness"],
-        "answer_relevancy": result["answer_relevancy"],
-        "context_precision": result["context_precision"],
-    }
+import numpy as np
+from fastembed import TextEmbedding
+
+DOCS = {
+    "d1": "Refunds are issued to the original payment method within 5 business days.",
+    "d2": "To request a refund, open Billing, pick the invoice and choose Request refund.",
+    "d3": "Annual plans can be refunded in full within 30 days of purchase.",
+    "d4": "API keys are created under Settings, then Developer, then Keys.",
+    "d5": "Rotate an API key by creating a new key and deleting the old one.",
+    "d6": "The API allows 100 requests per minute for each key.",
+    "d7": "A 429 response means the rate limit was hit. Wait and retry.",
+    "d8": "Invoices are emailed on the first day of each month.",
+}
+# Each question with the documents a person marked as needed to answer it.
+QUERIES = [
+    ("How do I get my money back?", {"d1", "d2", "d3"}),
+    ("How long does a refund take?", {"d1"}),
+    ("Where do I make an API key?", {"d4"}),
+    ("My key leaked, what now?", {"d5"}),
+    ("Why am I getting 429 errors?", {"d6", "d7"}),
+    ("When do I get billed?", {"d8"}),
+]
+K = 3
+
+model = TextEmbedding("BAAI/bge-small-en-v1.5")
+ids = list(DOCS)
+doc_vecs = np.array(list(model.embed([DOCS[i] for i in ids])))
+
+
+def retrieve(query):
+    q = next(iter(model.embed([query])))
+    scores = doc_vecs @ q / (np.linalg.norm(doc_vecs, axis=1) * np.linalg.norm(q))
+    return [ids[i] for i in np.argsort(-scores)]
+
+
+def ndcg(ranked, relevant, k):
+    dcg = sum(1 / math.log2(rank + 1) for rank, doc in enumerate(ranked[:k], start=1) if doc in relevant)
+    ideal = sum(1 / math.log2(rank + 1) for rank in range(1, min(len(relevant), k) + 1))
+    return dcg / ideal
+
+
+rows = []
+print(f"{'query':<30} {'top ' + str(K):<12} recall@{K}  precision@{K}  RR    nDCG@{K}")
+for query, relevant in QUERIES:
+    ranked = retrieve(query)
+    hits = [doc for doc in ranked[:K] if doc in relevant]
+    recall = len(hits) / len(relevant)
+    precision = len(hits) / K
+    rr = 1 / next(rank for rank, doc in enumerate(ranked, start=1) if doc in relevant)
+    score = ndcg(ranked, relevant, K)
+    rows.append((recall, precision, rr, score))
+    print(f"{query:<30} {' '.join(ranked[:K]):<12} {recall:<9.2f} {precision:<12.2f} {rr:<5.2f} {score:.2f}")
+means = np.mean(rows, axis=0)
+print(f"{'mean':<30} {'':<12} {means[0]:<9.2f} {means[1]:<12.2f} {means[2]:<5.2f} {means[3]:.2f}")
 ```
 
-The code above is an implementation sketch, not a runnable evaluation artifact. A real pipeline still needs a versioned dataset, current RAGAs API integration, judge configuration, and stored outputs.
+Running it printed:
 
-LLM-based grading also adds cost. Route or sample evaluations according to risk, and send borderline cases to a stronger judge or a human reviewer.
-
-### Human Evaluation Traps
-
-Human evaluation is necessary and expensive, and the way it usually goes wrong is asking humans the wrong question.
-
-Bad question: "Rate this answer from 1-5 on quality."
-
-Open-ended ratings like that produce inconsistent, subjective scores that don't generalize. A 4 from a careful annotator and a 4 from a generous one mean nothing in common, so the average is noise dressed up as a number.
-
-Good question: "Does this answer contain any factual errors compared to the retrieved context? (Yes/No)"
-
-Binary factual checks are fast, consistent, and actionable. When an annotator marks yes, that single row becomes a concrete bug I can pull up and trace back through retrieval and generation.
-
-### Evaluating Retrieval in Isolation
-
-Test retrieval separately before touching generation:
-
-```python
-def evaluate_retrieval(test_dataset, k_values=[1, 3, 5, 10]):
-    """Measure retrieval quality independent of generation."""
-    
-    results = []
-    for item in test_dataset:
-        query = item["query"]
-        relevant_docs = set(item["relevant_doc_ids"])
-        
-        retrieved = retrieval_model.query(query, k=max(k_values))
-        retrieved_ids = set(retrieved["doc_ids"])
-        
-        for k in k_values:
-            retrieved_k = set(retrieved_ids[:k])
-            
-            precision = len(retrieved_k & relevant_docs) / k
-            recall = len(retrieved_k & relevant_docs) / len(relevant_docs)
-            
-            results.append({
-                "k": k,
-                "precision": precision,
-                "recall": recall,
-                "query": query,
-            })
-    
-    return pd.DataFrame(results)
+```text
+query                          top 3        recall@3  precision@3  RR    nDCG@3
+How do I get my money back?    d2 d1 d3     1.00      1.00         1.00  1.00
+How long does a refund take?   d1 d3 d2     1.00      0.33         1.00  1.00
+Where do I make an API key?    d4 d5 d6     1.00      0.33         1.00  1.00
+My key leaked, what now?       d5 d4 d6     1.00      0.33         1.00  1.00
+Why am I getting 429 errors?   d7 d6 d4     1.00      0.67         1.00  1.00
+When do I get billed?          d2 d8 d3     1.00      0.33         0.50  0.63
+mean                                        1.00      0.50         0.92  0.94
 ```
 
-Retrieval scoring can run without generation, which makes it useful for isolating index and ranking failures before tuning the answer model.
+The recall column reads 1.00 on every row, so by that metric this retriever is finished. It isn't, and the last row shows why: for "When do I get billed?" the refund instructions ranked first and the right document came second.
 
-## The Most Common Failure Mode
+Only the rank-aware columns caught that. Reciprocal rank fell to 0.50 and nDCG to 0.63 on that question, which is the case for reading nDCG once you [add a reranking stage](/articles/rag-reranking/) and order is the thing you're tuning.
 
-One failure mode shows up more than any other: evaluation looks great in testing and collapses in production.
+Now look at the precision column, because it's the one that misleads. A question with one relevant document can't score above 0.33 when k is 3, so the mean of 0.50 here says more about how many answers each question has than about the retriever.
 
-Distribution shift is the culprit. Test datasets sit frozen while production queries drift, as users discover new ways to phrase questions, as documents go stale, as the corpus grows and changes shape underneath you.
+That's also why I'd read the rows before the mean. The mean nDCG of 0.94 looks healthy, and the row under it is a billing question answered with refund steps.
 
-A FAQ bot tuned on last quarter's questions starts fielding queries about a feature that shipped two weeks ago and has no good passage to retrieve.
+If recall itself is low, the fix is upstream of everything on this page, in chunking or in the [embedding model](/articles/vector-embeddings/). [Contextual retrieval](/articles/contextual-retrieval/) is one such fix, and Anthropic reported its results as a drop in exactly this kind of top-k retrieval failure.
 
-Monitor retrieval and answer quality on a recurring sample of production queries so distribution shift appears in the evaluation record before it becomes a support pattern.
+## How do you measure answer quality?
 
-## What to Actually Optimize
+You measure answer quality with a judge model that checks the answer against the retrieved context and against the question. Ragas defines the two metrics that carry this, and both are scored between 0 and 1.
 
-If you're starting from scratch, optimize in this order:
+[Faithfulness](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/) breaks the answer into claims and checks each against the context. The score is the number of supported claims divided by the total, and Ragas counts an answer as faithful "if all its claims can be supported by the retrieved context".
 
-1. **Retrieval recall first.** No generation improvement fixes missing context. Measure what percentage of your knowledge base the system can actually surface for any given query, and remember that techniques like [Anthropic's contextual retrieval can cut top-20 retrieval failures by 49%](/articles/contextual-retrieval/).
+[Response relevancy](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/answer_relevance/) works backwards. The judge writes a few questions that the answer would fit, and the score is the average cosine similarity between those and the user's question.
 
-2. **Context precision second.** Once recall is solid, reduce noise. High precision means the generator spends its context budget on signal, not noise.
+Read that method again and you'll see what it can't catch. The docs say the metric works "without evaluating factual accuracy", so a wrong answer that stays on topic scores well, and I wouldn't report it without faithfulness beside it.
 
-3. **Faithfulness third.** Faithful generation keeps users trusting the system. Measure it, set a threshold, reject generations that fall below it.
+Ragas has retrieval-side metrics of its own too. Its [context recall](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_recall/) splits a reference answer into claims and checks whether the retrieved context supports each, which means it needs a reference where faithfulness doesn't.
 
-4. **Answer relevancy fourth.** Everything above this point measures parts of the system. Answer relevancy measures the whole thing working together.
+## Which metric should you fix first?
 
-Starting with answer relevancy alone hides upstream failures. The [embedding models guide](/articles/vector-embeddings/) explains one possible failure in the retrieval layer, but it does not provide benchmark evidence for a particular model.
+Fix retrieval recall first, because nothing downstream can use a passage that was never retrieved. After that I'd go in the order of the pipeline: precision and ranking, then faithfulness, then relevancy.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/rag-evaluation/eval-order.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-evaluation/eval-order.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/rag-evaluation/eval-order.svg" width="720" height="256" alt="Four RAG metrics in the order to fix them: context recall first, so the right chunks are retrieved; context precision second, so the context carries signal rather than noise; faithfulness third, so the answer sticks to the context; answer relevancy last, because it measures the whole system working together." loading="lazy" decoding="async"></picture></a>
   <figcaption>Each stage only means something once the one before it holds. Starting with answer relevancy hides upstream failures.</figcaption>
 </figure>
 
-## Setting thresholds
+The order matters for reading the scores as well as for fixing them. A low faithfulness score on a question where recall failed is a retrieval bug that happens to show up in the answer.
 
-Set thresholds from labeled queries, reviewer agreement, and the cost of false positives and false negatives in the target domain. A medical or legal system will need different operating points from a brainstorming assistant.
+## How do you set a pass threshold?
 
-A legal RAG tool that misses one controlling statute can sink a brief, so it demands higher recall than a product FAQ bot where a near-miss answer still helps.
+Set it from your own labelled examples and from what a wrong answer costs you. I don't think a universal cutoff exists, and the precision column above is the reason: 0.33 was a perfect score on four of those six questions.
 
-## The Human Feedback Loop
+A threshold is also only as good as the test set under it. The questions are frozen on the day you write them and your users keep asking new ones, so I'd treat adding fresh production questions to the set as part of the evaluation work.
 
-Metrics don't capture everything. A system that scores well on RAGAs can still hand back answers that read as cold, evasive, or technically-correct-but-useless, the kind that satisfies faithfulness yet makes a user rephrase the same question three times.
+That worry is as old as the method. Wikipedia's account of Cranfield says the experiments were "the topic of continual debate for years", and the debate was over whether the test setup measured the right thing.
 
-Capturing user feedback at scale is what closes that loop. Thumbs up and down on answers, a "this was helpful" button, and the follow-up questions themselves, which tell you whether the first answer actually resolved the need or just stalled it.
+## FAQ
 
-User feedback can become a human-labeled evaluation set when it is sampled, reviewed, and versioned. Refresh that set as the product and query distribution change.
+**Do I need ground-truth answers for RAG evaluation?**
 
-## The Real Takeaway
+For retrieval metrics you need labelled relevant passages. Faithfulness and response relevancy run without a reference answer, and Ragas's context recall requires one.
 
-No single metric solves RAG evaluation. The cheap automated ones (BLEU, ROUGE, perplexity) are exactly the metrics that fail to measure correctness, and the ones that do measure it (faithfulness, answer relevancy) lean on LLM-based judges that cost real money and still get things wrong sometimes.
+**What is a good faithfulness score?**
 
-A multi-layered strategy is the answer. Automated metrics catch regressions, human evaluation catches misalignment, and production monitoring catches the distribution shift the other two will never see.
+No single number applies everywhere. A score of 1.0 means every claim in the answer was supported by the retrieved context, and how far below that you can accept depends on what a wrong claim costs.
 
-Score retrieval, generation, and end-to-end quality as separate things, because a failure in retrieval compounds through generation and the end-to-end number alone won't tell you where it started. Fix the foundation before polishing the surface.
+**How is context precision different from precision@k?**
 
-A RAG system worth trusting treats evaluation as a first-class concern. Version the dataset, store the outputs, and keep monitoring production drift so failures turn into traceable fixes.
+Precision@k is the share of the top k results that are relevant. Ragas's context precision averages precision@k over the positions of the retrieved chunks, so it also rewards putting relevant chunks higher.
+
+**Are BLEU and ROUGE useful for RAG?**
+
+They score word overlap with a reference answer, so a correct answer in different words scores low. I'd use them only where the wording itself is what you're checking.
+
+**Can I evaluate retrieval without calling an LLM?**
+
+Yes. The script on this page computes recall, precision, reciprocal rank and nDCG from document ids alone.

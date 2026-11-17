@@ -4051,6 +4051,102 @@
       "connects": [
         "mixture-of-experts"
       ]
+    },
+    {
+      "id": "wikipedia-cranfield",
+      "url": "https://en.wikipedia.org/wiki/Cranfield_experiments",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "Cranfield experiments",
+      "quotes": [
+        "conducted by Cyril W. Cleverdon in the 1960s at the College of Aeronautics",
+        "neither of which was computerized",
+        "It was the topic of continual debate for years"
+      ],
+      "connects": [
+        "rag-evaluation"
+      ]
+    },
+    {
+      "id": "ragas-paper-2023",
+      "url": "https://arxiv.org/abs/2309.15217",
+      "author": "Es et al.",
+      "date": "2023-09-26",
+      "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+      "quotes": [
+        "a framework for reference-free evaluation of Retrieval Augmented Generation (RAG) pipelines"
+      ],
+      "connects": [
+        "rag-evaluation"
+      ]
+    },
+    {
+      "id": "ragas-metrics-list",
+      "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/",
+      "author": "Ragas",
+      "date": "2026-11-18",
+      "title": "Available metrics",
+      "quotes": [
+        "Context Precision Context Recall Context Entities Recall Noise Sensitivity Response Relevancy Faithfulness"
+      ],
+      "connects": [
+        "rag-evaluation"
+      ]
+    },
+    {
+      "id": "ragas-faithfulness",
+      "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/",
+      "author": "Ragas",
+      "date": "2026-11-18",
+      "title": "Faithfulness",
+      "quotes": [
+        "if all its claims can be supported by the retrieved context",
+        "It ranges from 0 to 1"
+      ],
+      "connects": [
+        "rag-evaluation"
+      ]
+    },
+    {
+      "id": "ragas-response-relevancy",
+      "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/answer_relevance/",
+      "author": "Ragas",
+      "date": "2026-11-18",
+      "title": "Response Relevancy",
+      "quotes": [
+        "without evaluating factual accuracy",
+        "Generate a set of artificial questions (default is 3) based on the response"
+      ],
+      "connects": [
+        "rag-evaluation"
+      ]
+    },
+    {
+      "id": "ragas-context-recall",
+      "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_recall/",
+      "author": "Ragas",
+      "date": "2026-11-18",
+      "title": "Context Recall",
+      "quotes": [
+        "calculating context recall always requires a reference to compare against",
+        "the reference is broken down into claims"
+      ],
+      "connects": [
+        "rag-evaluation"
+      ]
+    },
+    {
+      "id": "ragas-context-precision",
+      "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_precision/",
+      "author": "Ragas",
+      "date": "2026-11-18",
+      "title": "Context Precision",
+      "quotes": [
+        "It is calculated as the mean of the precision@k for each chunk in the context"
+      ],
+      "connects": [
+        "rag-evaluation"
+      ]
     }
   ],
   "unused_leads": [
@@ -4247,6 +4343,9 @@
       "The deploy on Friday failed on a migration timeout",
       "migrations on this database need a longer timeout",
       "somewhere else"
+    ],
+    "rag-evaluation": [
+      "When do I get billed?"
     ]
   }
 }

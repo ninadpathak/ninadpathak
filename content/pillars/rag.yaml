@@ -33,7 +33,7 @@ sections:
   - heading: "Evaluation"
     spokes:
       - post: rag-evaluation
-        note: "Covers RAGAs along with recall and precision, the metrics for judging a retrieval system."
+        note: "Explains what recall, precision, nDCG, faithfulness and response relevancy each measure, with a retrieval scorer and its output."
   - heading: "Benchmarks"
     spokes:
       - post: browser-vector-search
