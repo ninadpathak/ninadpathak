@@ -158,7 +158,9 @@ Resuming from a checkpoint is only safe when running a step twice does no harm. 
 
 ## What should a harness do when the context fills up?
 
-A harness should apply a rule that you chose in advance for a full context window. A harness with no rule still has to do something when the window fills, and whatever it does then is a rule nobody chose. Here are four rules to choose from, starting with the one that takes the least code:
+A harness should apply a rule that you chose in advance for a full context window. A harness with no rule still has to do something when the window fills, and whatever it does then is a rule nobody chose.
+
+Here are four rules to choose from, starting with the one that takes the least code:
 
 - **Truncate:** drop the oldest messages.
 - **Summarize:** replace old turns with a summary before dropping them.
