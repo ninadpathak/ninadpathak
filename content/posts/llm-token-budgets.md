@@ -4,7 +4,7 @@ date: 2026-04-17
 description: Real numbers, real pricing, and concrete strategies for keeping your
   LLM spend predictable.
 status: published
-work_note: 'I write developer content for AI companies. This page works through what a long conversation costs in tokens, and [my portfolio](/portfolio/) links to the published work.'
+work_note: 'I wrote this to make a token bill something you can predict before the invoice arrives. [My portfolio](/portfolio/) has the developer content I''ve published for AI companies.'
 title: 'LLM token budgets: a practical guide to cost control'
 slug: llm-token-budgets
 ---

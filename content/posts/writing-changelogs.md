@@ -5,7 +5,7 @@ description: Write a changelog that helps developers assess an upgrade, find bre
   changes, and understand what each release means for their code.
 slug: writing-changelogs
 status: published
-work_note: 'I write developer content for a living. This page is about the changelog, written for the developer deciding whether to upgrade, and [my portfolio](/portfolio/) links to published work.'
+work_note: 'I wrote this for the developer about to approve a dependency bump, and it ends in a worked example that turns pull requests into a release entry. For developer content written for your product, [write to me](/contact/).'
 takeaways:
 - Lead with upgrade impact, not an undifferentiated list of commits.
 - Group releases by version, date, and consistent change categories.

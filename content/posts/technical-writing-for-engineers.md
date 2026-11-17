@@ -4,7 +4,7 @@ date: 2026-04-18
 description: Most engineering documentation fails for the same reasons. Here is what
   actually moves the needle.
 status: published
-work_note: 'For Centus I wrote 50+ localization guides, and its engineers sent them to publish without a rewrite. This page is for engineers who write their own docs, and [my portfolio](/portfolio/) has the Centus guides.'
+work_note: 'For Centus I wrote 50+ localization guides, and its engineers sent them to publish without a rewrite. I wrote this page for engineers who write their own docs, and [my portfolio](/portfolio/) links to six of the guides.'
 title: 'Technical Writing for Engineers: The 80/20 Guide'
 slug: technical-writing-for-engineers
 ---

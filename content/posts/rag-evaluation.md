@@ -4,7 +4,7 @@ date: 2026-04-16
 description: A practical guide to RAGAs, recall, precision, and the metrics that separate
   production RAG systems from prototypes.
 status: published
-work_note: 'I''ve written about agent testing for LambdaTest and agentic RAG for Mem0. This page is about the metrics that say whether a RAG system is working, and [both pieces are in my portfolio](/portfolio/).'
+work_note: 'I led a team of 13 writers at Mem0, whose product sits beside RAG in an agent''s stack. The metrics here are for judging the RAG side, and [my portfolio](/portfolio/) has my Firecrawl pieces on search for agents.'
 title: 'RAG Evaluation Metrics: What Actually Matters'
 updated: '2026-08-17'
 slug: rag-evaluation

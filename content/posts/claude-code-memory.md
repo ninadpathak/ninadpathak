@@ -4,7 +4,7 @@ date: 2026-04-19
 description: A practical guide to understanding how Claude Code retains context across
   sessions, uses project files, and manages long-term memory for coding tasks.
 status: published
-work_note: 'I wrote Mem0''s setup guide for adding persistent memory to Claude Code. This page covers what Claude Code remembers without any add-on, and [the Mem0 guide is in my portfolio](/portfolio/).'
+work_note: 'I ran the content team at Mem0, which sells a memory layer for agents, so I have a commercial reason to care what Claude Code remembers without one. Read this with that in mind. [My portfolio](/portfolio/) has the case study.'
 title: How Memory Works in Claude Code
 updated: '2026-08-17'
 slug: claude-code-memory

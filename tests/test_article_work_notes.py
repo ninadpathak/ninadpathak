@@ -62,47 +62,75 @@ class WorkNoteRenderingTests(unittest.TestCase):
         self.assertIn("Original opening.", legacy)
 
 
-FIRST_PERSON = re.compile(r"\b(?:I|I['’](?:ve|m|d|ll)|[Mm]y|me)\b")
-# The banned form: a bio line that names the author and describes him from outside,
-# such as "Technical writer Ninad Pathak writes ...".
-THIRD_PERSON_BIO = re.compile(
-    r"(?i)\bNinad\b|\bPathak\b|\b(?:he|his|him|himself)\b|\bthe (?:author|writer)\b"
+# A first-person subject or possessive: "I wrote", "I've", "I'm", "my", "me". A bare capital I
+# is not enough, so "part I" and "disk I/O" do not count.
+FIRST_PERSON = re.compile(
+    r"(?<![Pp]art )(?<![Pp]hase )(?<![Tt]ype )\bI(?:['’](?:ve|m|d|ll)\b| (?=[a-z]))|\b[Mm]y\b|\bme\b"
 )
+# The banned form is a bio line that describes the author from outside, such as
+# "Technical writer Ninad Pathak writes ...". The name, third-person pronouns for a
+# person, and a job title followed by a third-person verb all mark it. "The author of a
+# design doc" and "the writer who reviews a draft" are ordinary nouns and stay allowed.
+THIRD_PERSON_BIO = re.compile(
+    r"(?i)\bNinad\b|\bPathak\b|\b(?:he|she|his|hers|him|himself|herself)\b"
+    r"|\b(?:writer|creator|strategist|consultant|owner)(?: \w+){0,2} "
+    r"(?:writes|creates|documents|explains|develops|plans|edits|reviews|builds|turns|connects)\b"
+)
+LINK = re.compile(r"\[([^]]+)\]\([^)]+\)")
 
 
 def note_text(note: str) -> str:
-    return re.sub(r"\[([^]]+)\]\([^)]+\)", r"\1", note)
+    return LINK.sub(r"\1", note)
+
+
+def note_outside_link(note: str) -> str:
+    """The note with its link label removed. First person has to appear here, because
+    nearly every note links "my portfolio" and the label alone would satisfy the rule."""
+    return LINK.sub(" ", note)
+
+
+def voice_problems(note: str) -> list:
+    problems = []
+    if not FIRST_PERSON.search(note_outside_link(note)):
+        problems.append("no first person outside the link label")
+    if THIRD_PERSON_BIO.search(note_text(note)):
+        problems.append("third-person bio wording")
+    return problems
 
 
 class WorkNoteVoiceRuleTests(unittest.TestCase):
     def test_first_person_notes_pass(self):
         for value in (
-            "I wrote Mem0's guide to vector embeddings, and the guide is in my portfolio.",
-            "At Mem0 I ran a team of 13 writers.",
-            "I've written about agent tools for Firecrawl.",
-            "This page is about headings. My portfolio links to published work.",
+            "I wrote Firecrawl's roundup of semantic search APIs, and [the roundup is in my portfolio](/portfolio/).",
+            "At Mem0 I ran a team of 13 writers. [My portfolio](/portfolio/) has the case study.",
+            "I've written about agent tools for Firecrawl. [Those guides](/portfolio/) are online.",
+            "My rule for headings fits in three sentences. [The portfolio](/portfolio/) has examples.",
+            "I wrote this template so the author of a design doc argues with the proposal before review. [My portfolio](/portfolio/) has more.",
+            "I wrote this page for the writer who has to review an engineer's draft. [My portfolio](/portfolio/) has more.",
         ):
             with self.subTest(value=value):
-                self.assertRegex(value, FIRST_PERSON)
-                self.assertNotRegex(value, THIRD_PERSON_BIO)
+                self.assertEqual(voice_problems(value), [])
 
     def test_third_person_bio_lines_fail(self):
         for value in (
-            "Technical writer Ninad Pathak writes technical documentation for developer products.",
-            "Ninad Pathak's developer content covers the first query.",
-            "The author documents agent API errors for developers.",
-            "A technical writer who explains his process in my portfolio.",
+            "Technical writer [Ninad Pathak](/portfolio/) writes technical documentation for developer products.",
+            "I agree, and [Ninad Pathak](/portfolio/)'s developer content covers the first query.",
+            "This site's owner writes technical documentation for developer products, and I link it from [my portfolio](/portfolio/).",
+            "I know that she writes technical documentation, and her work is in [my portfolio](/portfolio/).",
+            "A technical writer who explains his process, as I do in [my portfolio](/portfolio/).",
         ):
             with self.subTest(value=value):
-                self.assertRegex(value, THIRD_PERSON_BIO)
+                self.assertIn("third-person bio wording", voice_problems(value))
 
-    def test_a_note_with_no_first_person_fails(self):
+    def test_first_person_in_the_link_label_alone_fails(self):
         for value in (
-            "Reference pages and tutorials serve different tasks for developers.",
-            "Documentation that explains what the software decides.",
+            "A freelance technical writer with eight years of developer content for Firecrawl. See [my portfolio](/portfolio/) for the published work.",
+            "This page is about headings. [My portfolio](/portfolio/) links to published work.",
+            "Reference pages and tutorials serve different tasks for developers. [Get in touch](/contact/).",
+            "Developers will find that part I of this page covers disk I/O. [Get in touch](/contact/) to hear more about it.",
         ):
             with self.subTest(value=value):
-                self.assertNotRegex(value, FIRST_PERSON)
+                self.assertIn("no first person outside the link label", voice_problems(value))
 
 
 class PublishedWorkNoteTests(unittest.TestCase):
@@ -119,11 +147,11 @@ class PublishedWorkNoteTests(unittest.TestCase):
                 text = note_text(note)
                 self.assertLessEqual(len(text.split()), 50)
                 self.assertGreaterEqual(len(text.split()), 15)
-                self.assertRegex(text, FIRST_PERSON)
-                self.assertNotRegex(text, THIRD_PERSON_BIO)
+                self.assertEqual(voice_problems(note), [])
                 notes.append(note)
         self.assertTrue(notes)
         self.assertEqual(len(notes), len(set(notes)))
+
 
 if __name__ == "__main__":
     unittest.main()

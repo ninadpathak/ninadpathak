@@ -5,7 +5,7 @@ description: The decision between one agent and many is not about capability. It
   about failure modes, latency, and operational complexity.
 slug: multi-agent-vs-single-agent
 status: published
-work_note: 'I wrote OpenComputer''s piece on where a Claude Agent SDK agent runs. This page takes the question before that one, whether a job needs more than one agent, and [my portfolio](/portfolio/) has the piece.'
+work_note: 'For Firecrawl I wrote about agent harnesses and agent tools, the parts an agent needs whether there is one or five. Whether a job needs more than one is the question here, and [those pieces are in my portfolio](/portfolio/).'
 title: 'Multi-Agent vs Single-Agent Systems: The Real Trade-offs'
 ---
 

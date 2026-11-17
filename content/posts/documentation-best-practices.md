@@ -5,7 +5,7 @@ description: Use a tested review card to make documentation tasks, failure state
   limits, and ownership clear before readers need support.
 slug: documentation-best-practices
 status: published
-work_note: 'For Centus I wrote 50+ localization guides that its engineers sent straight to publish. The review card on this page rests on the same idea, checking docs against the product, and [my portfolio](/portfolio/) has those guides.'
+work_note: 'For Centus I wrote 50+ localization guides that its engineers sent straight to publish. The review card on this page rests on the same idea, checking docs against the product, and [my portfolio](/portfolio/) links to some of those guides.'
 takeaways:
 - Give every page one reader task and an observable success state.
 - Put recovery guidance beside the action that can fail.

@@ -5,7 +5,7 @@ description: 'A deep dive into the memory architecture of DeerFlow: layered cont
   passing, session state files, sub-agent isolation, and how it compares to Letta,
   AutoGen, and CrewAI.'
 status: published
-work_note: 'I''ve written agent memory guides for Mem0, which makes me a biased reader of another framework''s memory design. This page describes DeerFlow''s, and [my portfolio](/portfolio/) has the Mem0 work.'
+work_note: 'I ran the writing team at Mem0, a memory vendor, which makes me a biased reader of another framework''s memory design. The description of DeerFlow''s is below, and the Mem0 case study is [in my portfolio](/portfolio/).'
 title: How Memory Works in DeerFlow
 slug: deerflow-memory
 video: deerflow-memory

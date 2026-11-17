@@ -4,7 +4,7 @@ date: 2026-04-06
 description: DevTools startups lose deals long before sales hears the objection. I
   explain how weak docs break evaluation, trials, and rollout confidence.
 status: published
-work_note: 'I write documentation and tutorials for developer-tool companies, including Firecrawl and Graphite. This page is my argument for why that work decides evaluations, and [my portfolio](/portfolio/) has the work.'
+work_note: 'I write tutorials and guides for developer-tool companies, Firecrawl among them, so I''m arguing for my own trade here. Judge the argument on its evidence and the work by [my portfolio](/portfolio/).'
 title: Why Devtools Startups Lose Deals Over Bad Docs
 slug: devtools-documentation
 video: devtools-documentation

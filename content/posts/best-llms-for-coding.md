@@ -5,7 +5,7 @@ description: Not all models are created equal for software development. Here is 
   benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic
   logic, and repository-scale refactoring as of March 2026.
 status: published
-work_note: 'I''ve written about coding agents for Firecrawl and OpenComputer. This page is about choosing the model underneath one, and [my portfolio](/portfolio/) has those pieces.'
+work_note: 'I''ve written about coding agents for Firecrawl, including why CLIs suit them better than IDEs. This page is about choosing the model underneath one, and [my portfolio](/portfolio/) has that piece.'
 title: 'The Best LLMs for Coding in 2026: An Engineering Review'
 slug: best-llms-for-coding
 video: best-llms-for-coding

@@ -3,7 +3,7 @@ category: ai-engineering
 date: 2026-04-19
 description: 'AI memory management for LLMs: the memory layers, who should decide what gets written, eviction and scope with runnable examples, and the smallest system worth building.'
 status: published
-work_note: 'At Mem0 I ran a team of 13 writers covering agent memory. This page is independent of that work, and every code block on it was run with its output shown. [My portfolio](/portfolio/) has the Mem0 guides.'
+work_note: 'At Mem0 I ran a team of 13 writers covering agent memory. This page is independent of that work, and every code block on it was run with its output shown. [My portfolio](/portfolio/) has the Mem0 case study.'
 title: 'AI Memory Management for LLMs: What Works'
 slug: ai-memory-management
 video: ai-memory-management

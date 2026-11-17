@@ -3,7 +3,7 @@ category: ai-engineering
 date: 2026-03-27
 description: 'JSON mode, structured outputs and function calling promise different things. What each guarantees, what is left to your code, and what changes on self-hosted models.'
 status: published
-work_note: 'I checked every API detail on this page against the vendor''s current docs on the day I rewrote it. For developer content held to that standard, see [my portfolio](/portfolio/).'
+work_note: 'I built this page from the vendors'' own guides, and it quotes OpenAI and Anthropic where their guarantees differ. For my published developer content, see [my portfolio](/portfolio/).'
 title: 'Structured Outputs with LLMs: JSON Mode, Function Calling, and When to Use
   Each'
 slug: llm-structured-outputs

@@ -4,7 +4,7 @@ date: 2026-04-05
 description: I explain which engineering habits still make me better at technical
   writing, which ones I had to drop, and how the day-to-day work changed.
 status: published
-work_note: 'I''ve been a technical writer for eight years, and I still write code. [My portfolio](/portfolio/) links to what that combination produces.'
+work_note: 'I write code and technical content, and this page is about which engineering habits help the writing and which get in its way. [My portfolio](/portfolio/) links to the results.'
 title: 'From Engineer to Technical Writer: What I Kept and What I Left Behind'
 updated: 2026-08-17
 slug: engineer-to-writer

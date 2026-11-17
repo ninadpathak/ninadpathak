@@ -9,7 +9,7 @@ takeaways:
 - Generate reference from stable contracts that source can expose.
 - Use guides for decisions, sequences, and operating context that no symbol can contain.
 status: published
-work_note: 'The comment and docstring examples on this page come from this site''s own build script. I write developer documentation for a living, and [my portfolio](/portfolio/) links to the published work.'
+work_note: 'The comment and docstring examples on this page come from this site''s own build script. For my published client work, see [my portfolio](/portfolio/).'
 slug: code-documentation
 video: code-documentation
 ---

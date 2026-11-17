@@ -5,7 +5,7 @@ description: The memory persistence patterns that actually work for AI coding as
   and why most agents lose context between sessions.
 slug: coding-agent-memory
 status: published
-work_note: 'I wrote Mem0''s guide to giving Claude Code persistent memory, so I have a stake in how this problem gets framed. [That guide is in my portfolio](/portfolio/).'
+work_note: 'Mem0 sells memory for agents, and I joined it in February 2026 to run its writers. That makes me an interested party on why coding agents forget, and [my portfolio](/portfolio/) shows the work.'
 title: 'Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI
   Coding Assistants'
 ---

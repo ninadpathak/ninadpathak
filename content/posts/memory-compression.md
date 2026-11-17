@@ -5,7 +5,7 @@ description: How agents decide what to keep in memory when context space is fini
   and the three compression strategies that actually work.
 slug: memory-compression
 status: published
-work_note: 'I''ve written agent memory guides for Mem0. This page covers one decision inside any memory system, what a compressed record is allowed to drop, and [the guides are in my portfolio](/portfolio/).'
+work_note: 'At Mem0 I ran 13 writers, and compression is one of the decisions any memory layer makes out of sight. Here I look at what a compressed record is allowed to drop. [My portfolio](/portfolio/) has the case study.'
 title: 'Contextual Compression for Agent Memory: What Stays and What Goes'
 ---
 

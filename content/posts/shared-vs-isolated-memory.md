@@ -5,7 +5,7 @@ description: How to choose between shared and isolated memory architectures for 
   systems, including their coordination and debugging trade-offs.
 slug: shared-vs-isolated-memory
 status: published
-work_note: 'I''ve written agent memory guides for Mem0. This page takes the multi-agent version of the problem, which agent may write to a record another one reads, and [the guides are in my portfolio](/portfolio/).'
+work_note: 'I ran Mem0''s writing team, so I come to this from the memory side. The question below is which agent may write to a record another one reads. [My portfolio](/portfolio/) has the Mem0 case study.'
 title: Shared Memory vs Isolated Memory in Multi-Agent Workflows
 updated: '2026-08-17'
 ---

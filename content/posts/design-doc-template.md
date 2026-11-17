@@ -9,7 +9,7 @@ takeaways:
 - Every alternative needs a reason it was rejected, and one of them should be doing nothing.
 - Run the checker before review, so a doc marked Accepted with open questions fails.
 title: 'Design Doc Template: Sections, a Filled Example and a Review Check'
-work_note: 'I built the template on this page with a filled example and a checker to run before review. For the documentation and tutorials I write for clients, see [my portfolio](/portfolio/).'
+work_note: 'I built the template on this page with a filled example and a checker to run before review. For the guides and tutorials I write for clients, see [my portfolio](/portfolio/).'
 video: design-doc-template
 ---
 

@@ -9,7 +9,7 @@ takeaways:
 - All 12 developer documentation hosts checked on 2026-10-22 allowed every AI and search agent the site's checker knows, and none named an AI agent.
 - A crawler follows only the user-agent group that names it, so a named group drops the wildcard rules for that crawler.
 title: 'GPTBot, ClaudeBot and OAI-SearchBot: AI Crawlers in robots.txt'
-work_note: 'I checked what 12 developer documentation sites allow in robots.txt for this page. I also sell AI-ready documentation audits, and [you can write to me](/contact/) about one.'
+work_note: 'I went through the robots.txt files of 12 developer documentation sites for this page. I also sell AI-ready documentation audits, and [you can write to me](/contact/) about one.'
 video: ai-crawlers
 ---
 

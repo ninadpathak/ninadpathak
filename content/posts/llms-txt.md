@@ -9,7 +9,7 @@ takeaways:
 - Google Search does not use it, and an Ahrefs study found 97% of published files got no request in May 2026.
 - Validate the structure and read your server logs separately, because a clean file and a fetched file are different facts.
 title: 'llms.txt: What It Is, What It Does, and Four Real Files Checked'
-work_note: 'For this page I checked four published llms.txt files against the proposal. An AI-ready documentation audit covers the same ground for your site, and [you can ask me for one](/contact/).'
+work_note: 'For this page I checked four published llms.txt files against the proposal. I also sell AI-ready documentation audits, and [you can ask me for one](/contact/).'
 video: llms-txt
 ---
 

@@ -5,7 +5,7 @@ description: If your agent overwrites its memory, you cannot pass a compliance a
   How to build append-only memory versioning and trace agent reasoning.
 slug: memory-versioning
 status: published
-work_note: 'I''ve written about agent memory for Mem0, and this page takes the question an auditor would ask: what did the agent know when it decided? [My portfolio](/portfolio/) has the Mem0 guides.'
+work_note: 'I led content at a memory vendor, Mem0, and here I take the question an auditor would ask of any such product: what did the agent know when it decided? The case study is [in my portfolio](/portfolio/).'
 title: Memory Versioning and Audit Trails for Regulated AI Agents
 ---
 

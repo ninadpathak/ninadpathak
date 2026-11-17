@@ -5,7 +5,7 @@ description: Reorganize a documentation site around reader routes, canonical ans
   tested labels, and direct redirects instead of mirroring the org chart.
 slug: documentation-structure
 status: published
-work_note: 'I write documentation for developer products. This page is about where each answer should live once a docs site has grown past its first outline, and [my portfolio](/portfolio/) links to published work.'
+work_note: 'I reorganize a fictional API documentation site at the end of this page, so the method is shown as well as described. [My portfolio](/portfolio/) links to the guides I''ve published for clients.'
 takeaways:
 - Inventory page jobs and evidence before drawing a new navigation tree.
 - Organize around reader routes through setup, use, failure, and change.

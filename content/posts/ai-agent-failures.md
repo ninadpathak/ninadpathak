@@ -5,7 +5,7 @@ description: I have spent two years watching agents fail in production. Here is 
   I keep seeing and what the field is starting to do about it.
 slug: ai-agent-failures
 status: published
-work_note: 'I''ve written about agent testing for LambdaTest and about agent sandboxes for Firecrawl. This page collects the ways agents fail once they run, and [those guides are in my portfolio](/portfolio/).'
+work_note: 'I wrote Firecrawl''s guide to agent sandboxes, which exist because agents fail in ways worth containing. The failures themselves are collected here, and [the guide is in my portfolio](/portfolio/).'
 title: Why AI Agents Fail in Production
 video: ai-agent-failures
 ---

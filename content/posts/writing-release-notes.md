@@ -5,7 +5,7 @@ description: Write release notes that let developers assess upgrade risk, unders
   product impact, and migrate without surprises.
 slug: writing-release-notes
 status: published
-work_note: 'I write developer content, and this page treats the release note as an upgrade decision. For help with the writing around a release, [get in touch](/contact/).'
+work_note: 'I wrote this around one scene: someone wants to upgrade the SDK before the weekend, and the notes have to say whether that is safe. For help with the writing around a release, [get in touch](/contact/).'
 takeaways:
 - Put compatibility, affected users, and required action on the first screen.
 - Separate product impact from launch language and implementation detail.

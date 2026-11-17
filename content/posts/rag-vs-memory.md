@@ -3,7 +3,7 @@ category: ai-engineering
 date: 2026-04-19
 description: RAG selects evidence for one request and memory governs state across requests. Why memory that only recalls is RAG over old chats, and how to run both.
 status: published
-work_note: 'At Mem0 I ran a team of 13 writers and wrote explainers on agent memory and agentic RAG, so I''m not neutral on this question. [Those explainers are in my portfolio](/portfolio/).'
+work_note: 'I joined Mem0 in February 2026 to run its team of 13 writers, and Mem0 sells a memory layer, so I''m not neutral on this question. The case study is [in my portfolio](/portfolio/).'
 title: 'RAG vs Memory: What AI Developers Need to Know'
 updated: '2026-11-16'
 slug: rag-vs-memory

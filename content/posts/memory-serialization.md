@@ -5,7 +5,7 @@ description: Why agents forget everything on restart, and the serialization patt
   that actually solve it
 slug: memory-serialization
 status: published
-work_note: 'I wrote Mem0''s guide to long-term memory for agents. This page goes one level down, to how state gets written out and read back, and [the guide is in my portfolio](/portfolio/).'
+work_note: 'I led Mem0''s team of 13 writers and did its technical reviews. What follows is my own account of how an agent''s state gets written out and read back. [My portfolio](/portfolio/) has the case study.'
 title: 'Memory Serialization: How Agents Persist State Across Sessions'
 ---
 

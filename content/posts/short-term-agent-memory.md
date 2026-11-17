@@ -5,7 +5,7 @@ description: Context windows are not memory. Here is what every production AI ag
   engineer needs to understand about token budgets, overflow handling, and how short-term
   and long-term memory actually work together.
 status: published
-work_note: 'I wrote Mem0''s guide to short-term memory for AI agents. This is my own version of that topic, written for this site, and [the Mem0 guide is in my portfolio](/portfolio/).'
+work_note: 'At Mem0 I vetted and reviewed the writers covering agent memory, short-term memory included. This is how I explain the topic myself, and [my portfolio](/portfolio/) links to the Mem0 case study.'
 title: 'Short-Term Memory for AI Agents: A Practical Guide'
 slug: short-term-agent-memory
 ---

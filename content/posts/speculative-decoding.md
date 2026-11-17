@@ -5,7 +5,7 @@ description: LLM inference is memory-bound, not compute-bound. Speculative decod
   uses this fact to speed up generation by 2-3x using a smaller draft model to predict
   tokens for a larger one.
 status: published
-work_note: 'I write explainers on AI infrastructure for developer companies. This page covers how a small draft model speeds up a large one, and [my portfolio](/portfolio/) links to the client work.'
+work_note: 'I wrote this for my own site as an explainer of how a small draft model speeds up a large one. My client work covers agents and developer tools, and [my portfolio](/portfolio/) shows it.'
 title: 'Speculative Decoding: Speeding Up LLM Inference'
 slug: speculative-decoding
 video: speculative-decoding
