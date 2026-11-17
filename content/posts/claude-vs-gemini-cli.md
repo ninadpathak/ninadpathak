@@ -18,7 +18,7 @@ video: claude-vs-gemini-cli
 
 Developers keep a public graveyard for products that Google has shut down. The site is called [Killed by Google](https://killedbygoogle.com/), and its entry for "Google Gemini (CLI and Code Assist)" went up this year.
 
-So a Claude Code vs Gemini CLI comparison now has to start with whether you can still use Gemini CLI. Claude Code is Anthropic's coding agent for the terminal and Gemini CLI is Google's, and on June 18 Gemini CLI [stopped serving requests](https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli) for Google's consumer plans in favour of a successor called Antigravity CLI.
+So a Claude Code vs Gemini CLI comparison now has to start with whether you can still use Gemini CLI. Claude Code is Anthropic's coding agent for the terminal and Gemini CLI is Google's, and on June 18 Gemini CLI [stopped serving requests](https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/) for Google's consumer plans in favour of a successor called Antigravity CLI.
 
 The Killed by Google entry makes Gemini CLI sound more dead than it is. Google's post says enterprise licences are unchanged and that Gemini CLI still works with a paid API key, and the Gemini CLI docs and open-source repository are still online.
 
@@ -38,39 +38,41 @@ Claude Code and Gemini CLI have the same control features and ship them with dif
 
 | | Claude Code | Gemini CLI |
 |---|---|---|
-| Planning before edits | [Plan mode](https://code.claude.com/docs/en/permission-modes), one of six permission modes | [Plan Mode](https://geminicli.com/docs/cli/plan-mode/), enabled by default |
+| Planning before edits | [Plan mode](https://code.claude.com/docs/en/permission-modes), one of six permission modes; a new install starts in `auto` | [Plan Mode](https://geminicli.com/docs/cli/plan-mode/), enabled by default |
 | Undoing edits | [Checkpoints](https://code.claude.com/docs/en/checkpointing) are automatic, with `/rewind` | [Checkpointing](https://geminicli.com/docs/cli/checkpointing/) is off until you enable it in `settings.json`, then `/restore` |
-| Sandbox for shell commands | [Built in](https://code.claude.com/docs/en/sandboxing), off by default | [Several methods](https://geminicli.com/docs/cli/sandbox/), enabled with a flag or a setting |
+| Sandbox for shell commands | [Built in](https://code.claude.com/docs/en/sandboxing), off by default | [Seatbelt, Docker or Podman, gVisor and two more](https://geminicli.com/docs/cli/sandbox/); off until you pass `--sandbox` or set it in `settings.json` |
 | Project instructions | `CLAUDE.md`, or `AGENTS.md` when there's no `CLAUDE.md` | `GEMINI.md` by default |
 | Source | Closed | Open source under Apache 2.0 |
 
-The row I'd look at first is undoing edits. Claude Code snapshots your files before each prompt from the first session, and Gemini CLI takes snapshots only after you enable checkpointing in `settings.json`.
+The row I'd look at first is undoing edits. Claude Code snapshots the files its edit tools change from the first session on, and Gemini CLI snapshots the whole project only after you enable checkpointing in `settings.json`.
 
 ## What does plan mode do in each?
 
 Both tools' plan modes let the agent read and propose while edits are held back. Claude Code's docs say that in plan mode Claude "reads files, runs shell commands to explore, and writes a plan, but does not edit your source".
 
-Gemini CLI's Plan Mode allows fewer tools than Claude Code's. Gemini CLI's docs list the only tools allowed in Plan Mode, and they cover reading and searching, so a shell command isn't among them.
+Gemini CLI's Plan Mode allows fewer tools. Its docs list the only tools allowed: file reads, search, read-only MCP tools, and writes to the plan's own Markdown file, and `run_shell_command` isn't on the list.
 
-Whether a planner can run shell commands decides what the plan is based on. Claude Code can run `npm test` while planning and see which tests fail, and Gemini CLI in Plan Mode can only read the test files and infer what would fail.
+Whether a planner can run shell commands decides what the plan is based on. Claude Code can run `npm test` while planning and see which tests fail. Gemini CLI in Plan Mode reads the test files and infers what would fail, unless you add a policy rule that allows that one command.
 
-Claude Code has six permission modes, which range from `default`, where Claude asks before every edit and command, to `bypassPermissions`, where Claude asks about nothing. The docs recommend `bypassPermissions` for "Isolated containers and VMs only", and I'd follow that advice to the letter.
+Claude Code has six permission modes. A new install on v2.1.283 or later starts in `auto`, where a classifier reviews each action in place of a prompt, while `default` asks you before edits and commands and `bypassPermissions` asks about nothing.
+
+The docs recommend `bypassPermissions` for "Isolated containers and VMs only", and I'd follow that advice to the letter.
 
 ## How does undo work, and what does it miss?
 
-Both tools snapshot your files so you can go back to an earlier state, and both miss some changes that only Git will catch. Claude Code keeps snapshots for the 100 latest checkpoints in a session and restores them with `/rewind`.
+Both tools snapshot your files so you can go back to an earlier state, and they differ in what a snapshot covers. Claude Code keeps snapshots for the 100 latest checkpoints in a session and restores them with `/rewind`.
 
 Claude Code's docs state the limits of checkpoints, which I appreciate. A file that was changed only by a shell command, such as a file rewritten by a formatter, isn't tracked, and the docs say plainly that checkpoints are "Not a replacement for version control".
 
-Gemini CLI saves more in each snapshot than Claude Code does. Each Gemini CLI checkpoint is a commit in a shadow Git repository under `~/.gemini/history/`, taken before a tool modifies files, together with the conversation up to that point.
+Gemini CLI snapshots the whole project. Each checkpoint is a commit in a shadow Git repository under `~/.gemini/history/`, taken when you approve a tool that modifies files, and `/restore` reverts every file in the project to that commit.
 
-So I'd make a Git commit before a long run with either tool. Each tool's undo feature covers the edits its own file tools made, and a refactor that runs a code generator or a formatter changes files that neither tool's undo will restore.
+So I'd make a Git commit before a long run with either tool. Claude Code's `/rewind` leaves alone any file that only a shell command changed, and Gemini CLI takes no checkpoint during a turn that only runs shell commands.
 
 ## Which one should you pick for a refactor?
 
-I don't have evidence for a universal winner, and I'd distrust any page that named one without publishing the run it's based on. The docs support a narrower statement about defaults.
+I don't have evidence for a universal winner, and I'd distrust any page that named one without publishing the run it's based on.
 
-Claude Code gives you more out of the box for a refactor that crosses several files: you can review its plan or approve sensitive tool calls first, and undo is on from the first prompt. Gemini CLI also supports an edit-and-verify loop, but automation isn't proof, so the result depends on whether your checks catch the failures.
+For a refactor that crosses several files, Claude Code has undo on from the first prompt, and you can switch to plan mode to review its plan before any edit. Gemini CLI can also edit, run your tests and fix what fails without stopping, and a green run from either tool proves only what your tests check.
 
 If you have access to both tools, run both on the same task from the same commit and judge the two patches with the same tests. The model matters as much as the interface, and [which LLM to use for coding](/articles/best-llms-for-coding/) is a separate choice.
 
@@ -80,7 +82,7 @@ Claude Code and Gemini CLI also share one setup step. Each tool reads a project 
 
 **Is Gemini CLI discontinued?**
 
-Gemini CLI is discontinued for consumer plans and still available to businesses. Google stopped serving Gemini CLI requests for its Pro and Ultra plans and for free use on June 18, 2026, and kept Gemini CLI available for enterprise licences and paid API keys.
+Gemini CLI is discontinued for Google's consumer plans and free use, and still works with an enterprise licence or a paid API key. Google stopped serving Gemini CLI requests for its Pro and Ultra plans and for free use on June 18, 2026, and kept Gemini CLI available for enterprise licences and paid API keys.
 
 **What replaced Gemini CLI?**
 
@@ -96,4 +98,4 @@ Yes, Claude Code has a sandbox for shell commands, and the sandbox is off by def
 
 **Can either tool undo its changes?**
 
-Both tools can undo the edits their own file tools made. Claude Code does this automatically with `/rewind`, and Gemini CLI needs checkpointing enabled before `/restore` has anything to restore.
+Both can. Claude Code does it automatically for files its edit tools changed, with `/rewind`, and Gemini CLI restores the whole project with `/restore`, once you've enabled checkpointing in `settings.json`.
