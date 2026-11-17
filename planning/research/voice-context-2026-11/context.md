@@ -777,11 +777,11 @@ After the batch 9 review: agent-memory-2026 describes Letta from its current doc
 
 | Post | What it now rests on | Run or checked |
 | --- | --- | --- |
-| kv-cache-eviction, retitled "What the KV Cache Is and What Happens When It Fills Up" | Cloudflare's October 26 incident report, the H2O, StreamingLLM and SnapKV abstracts, Qwen2.5-7B-Instruct's config, vLLM's prefix caching docs | `kv_size.py` run, output on the page; both figures kept with reworded captions |
-| voice-agent-latency, retitled "Voice AI Latency and Where a Voice Agent's Time Goes" | Levinson and Torreira 2015 on turn-taking, OpenAI's Realtime VAD guide, LiveKit's turn detection docs | `voice_trace.py` run, output on the page; its stage times are stated as assumed |
-| context-windows-vs-memory, retitled "Context Window vs Memory, and What Each One Is For" | the November 7 Ask HN on agent context, Lost in the Middle, RULER | `replay_cost.py` run with tiktoken 0.14.0, output on the page; film kept |
+| kv-cache-eviction, retitled "What Happens When the KV Cache Fills Up" | Cloudflare's October 26 incident report, the H2O, StreamingLLM and SnapKV abstracts, Qwen2.5-7B-Instruct's config, vLLM's prefix caching docs | `kv_size.py` run, output on the page; both figures kept with reworded captions |
+| voice-agent-latency, retitled "Where Voice AI Latency Comes From" | Levinson and Torreira 2015 on turn-taking, OpenAI's Realtime VAD guide, LiveKit's turn detection docs | `voice_trace.py` run, output on the page; its stage times are stated as assumed |
+| context-windows-vs-memory, retitled "Context Window vs Memory" | the November 7 Ask HN on agent context, Lost in the Middle, RULER | `replay_cost.py` run with tiktoken 0.14.0, output on the page; film kept |
 | claude-vs-gemini-cli, retitled "Claude Code vs Gemini CLI in Late 2026" | Google's May 19 post on Antigravity CLI, Killed by Google, both tools' docs on plan mode, checkpoints and sandboxing as read on 2026-11-18 | no code and no head-to-head run; film kept |
-| docs-seo, retitled "SEO for Documentation Sites, Checked in Order" | Google Search Central pages, re-read | `static/tools/docs-seo-audit.py` rerun against Cloudflare's Workers guide, output on the page; film kept |
+| docs-seo, retitled "An SEO Checklist for Documentation Sites" | Google Search Central pages, re-read | `static/tools/docs-seo-audit.py` rerun against Cloudflare's Workers guide, output on the page; film kept |
 | documentation-best-practices, title kept | FastAPI's, Stripe's and GitHub's docs, re-read; Gauge's README | no code; film kept |
 | cloudflare-kv-cache-incident-report (new essay, technical-documentation) | Cloudflare's report and one Hacker News comment on its title | opinion-led, one short quote per section |
 
@@ -791,7 +791,7 @@ The order of parts differs across the six: a dated event first on kv-cache-evict
 
 Films: context-windows-vs-memory, claude-vs-gemini-cli, docs-seo and documentation-best-practices keep their films, because each page still states every line the film narrates. kv-cache-eviction and voice-agent-latency have none.
 
-Depth of rewrite: docs-seo got a lighter pass than the rest, since its claims were already sourced to Google's docs and its script already ran. The work there was the opening, first-person leads, a fresh run and a FAQ.
+Depth of rewrite: docs-seo first got a lighter pass, and the batch 10 review sent it back for the full one. Steps 1 to 8 and the checklist are now rewritten in the first person, sentence by sentence.
 
 What the earlier pages had wrong, for the record: kv-cache-eviction carried a run of sections with no source, among them hardware, security and cost claims; voice-agent-latency asserted transport behavior with no source; claude-vs-gemini-cli compared a tool that Google had withdrawn from its consumer plans five months earlier without saying so.
 
@@ -799,8 +799,20 @@ Facts that move: Gemini CLI's status (consumer plans ended June 18, 2026; enterp
 
 A page the site now lacks: the comparison a new user wants is Claude Code against Antigravity CLI, and claude-vs-gemini-cli says so without making it.
 
-Position taken in the new essay, for Ninad to confirm: an incident report should put the count of affected customers before the explanation and state the belief that turned out wrong; Cloudflare's report does both and lists fixes by pull request; its title names a model for a bug in configuration and an engine, and the cause belongs in the title with the model in the first sentence.
+Position taken in the new essay, for Ninad to confirm: an incident report should put the count of affected responses before the explanation and state the belief that turned out wrong; Cloudflare's report does both and lists fixes by pull request; its title names a model for a bug in configuration and an engine, and the cause belongs in the title with the model in the first sentence.
 
 Pages touched only for an inbound link: time-to-first-token, coding-agent-memory, agents-on-call-runbooks, writing-release-notes.
 
 Batch 10 was also run through `check_vendor_links.py`, which found four redirected links on its pages (LiveKit, PubMed Central and two OpenAI Codex pages); each now points at the page it lands on.
+
+After the batch 10 review: the comparison page describes Gemini CLI's undo from its checkpointing page (a checkpoint is a commit of the whole project, taken when a file-modifying tool is approved, and `/restore` reverts every file) and Claude Code's starting permission mode (`auto` on v2.1.283 or later). The first version got both wrong after reading only part of each page. The essay quotes Cloudflare's title in full, counts responses and not customers, and gains a second criticism: the report gives the customers whose text leaked nothing to check. The claude-vs-gemini-cli film no longer has one of its lines on the page word for word and is on the re-render list; it stays embedded because nothing it says is false.
+
+Rules the batch 10 review added:
+
+- A quoted title is quoted whole, and a criticism of a title is checked against the whole title.
+- A product's undo, permissions and defaults are described from the page that documents them, read to the end, and the starting state of a new install is stated.
+- A phrase of the page's own never sits in quote marks near a real quote from the same source.
+- A count is given in the unit the source uses (responses, not customers).
+- A title names one thing. A query joined to a second clause with "and" is two things.
+- A page gets one depth of rewrite. A long page is not given a lighter pass because its facts were already sourced.
+

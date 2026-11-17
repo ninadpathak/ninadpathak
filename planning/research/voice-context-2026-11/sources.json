@@ -4959,7 +4959,8 @@
       "date": "2026-11-18",
       "title": "Make your links crawlable",
       "quotes": [
-        "with an href attribute"
+        "with an href attribute",
+        "Generally, Google can only crawl your link if it's an HTML"
       ],
       "connects": [
         "docs-seo"
@@ -5113,6 +5114,33 @@
       ],
       "connects": [
         "kv-cache-eviction"
+      ]
+    },
+    {
+      "id": "google-js-seo-basics",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "Understand the JavaScript SEO basics",
+      "quotes": [
+        "Googlebot queues pages for both crawling and rendering",
+        "Google processes JavaScript web apps in three main phases"
+      ],
+      "connects": [
+        "docs-seo"
+      ]
+    },
+    {
+      "id": "google-mobile-first-indexing",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "Mobile-first indexing best practices",
+      "quotes": [
+        "Google uses the mobile version of a site's content, crawled with the smartphone agent, for indexing and ranking"
+      ],
+      "connects": [
+        "docs-seo"
       ]
     }
   ],
