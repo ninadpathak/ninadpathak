@@ -9,9 +9,9 @@ slug: short-term-agent-memory
 updated: 2026-11-17
 ---
 
-Claude Code 2.1.323, released on November 12, fixed a bug in which running `/compact` a second time could end up "summarizing away a message that Claude had not answered yet". Short-term memory for an AI agent is whatever sits in the context window during the current run, and that [changelog entry](https://code.claude.com/docs/en/changelog) shows where it is now managed and where it gets lost.
+Short-term memory for an AI agent is whatever sits in the context window during the current run, and the step that manages it has moved out of application code and into the vendor's API. The earlier version of this page taught a hand-written sliding window with a scoring function for each message, which is now the wrong place to start.
 
-The earlier version of this page taught a hand-written sliding window with a scoring function for each message. Vendors have since moved that job into the API, so the decisions left to you are fewer and matter more.
+A [changelog entry](https://code.claude.com/docs/en/changelog) shows where the risk went. Claude Code 2.1.323, released on November 12, fixed a bug in which running `/compact` a second time could end up "summarizing away a message that Claude had not answered yet".
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/short-term-agent-memory/context-fill.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/short-term-agent-memory/context-fill.narrow.svg" width="288" height="632"><img class="np-has-narrow" src="/static/images/diagrams/short-term-agent-memory/context-fill.svg" width="720" height="424" alt="Four inputs fill one fixed-size context window: the system prompt, the conversation history, retrieved documents, and the agent's scratchpad. Whatever capacity is left is the headroom for the model's next response and tool calls. When it overflows, naive truncation cuts the oldest messages first." loading="lazy" decoding="async"></picture></a>
@@ -93,7 +93,7 @@ The same page gives a second reason to use it, saying it keeps the active contex
 
 So the sliding window and the summarizer I used to describe here are now one request parameter. I think that is the right default, and the changelog is a useful record of how the step fails.
 
-The entry quoted at the top is one case. Another, in version 2.1.326 from November 16, fixed compaction on some providers "sometimes replying to one of your messages instead of summarizing, or leaving Claude's last reply out of the summary".
+The entry quoted in the introduction is one case. Another, in version 2.1.326 from November 16, fixed compaction on some providers "sometimes replying to one of your messages instead of summarizing, or leaving Claude's last reply out of the summary".
 
 Both bugs lost recent material, the part a summary is supposed to protect. A summary is a lossy copy made by a model, so anything that must survive word for word needs to live outside it.
 
@@ -103,7 +103,7 @@ Put it where compaction doesn't reach, and keep the raw history so a summary can
 
 For facts that come up mid-conversation, the habits worth copying come from a Hacker News thread of November 7 titled ["How do you manage your AI agents' context across clients and projects?"](https://news.ycombinator.com/item?id=50403153) One commenter wrote "I let agents read their own pre-compaction history often", which treats the transcript as the record and the summary as an index to it.
 
-Another ends each session by asking the agent to "prep a handoff so we can resume from here in a fresh session". A handoff note is short-term memory written down on purpose, by the model while it still has the full context.
+Another ends each session by asking the agent to "prep a handoff so we can resume from here in a fresh session". A handoff note is short-term memory written down on purpose, by the model before the full context is gone.
 
 A third practice in the thread is less comfortable: "at the end ask the agent to summarize what it learned and write it down." Anything written that way has crossed into long-term memory, and a note that was wrong when it was written will be loaded as fact next time.
 

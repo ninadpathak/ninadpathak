@@ -9,9 +9,9 @@ title: Memory Versioning and Audit Trails for Regulated AI Agents
 updated: 2026-11-17
 ---
 
-Stroq, a tool shown on Hacker News on November 5, scans a coding agent's sessions and promises to ["trace risky commands to the content that dictated them"](https://github.com/AGGIB/Stroq). An auditor asks the same thing of an agent's memory: for any past decision, what did the agent know, and what put each fact there.
+An auditor asks two things about any decision an agent made: what the agent knew at that moment, and what put each fact there. Memory versioning is how a store answers, by keeping every version of a fact with the time it held and the source that produced it, and never overwriting one.
 
-Memory versioning is how a store answers that. It keeps every version of a fact with the time it held and the source that produced it, and it never overwrites one.
+The same demand is showing up in tools for coding agents. Stroq, shown on Hacker News on November 5, scans an agent's sessions and promises to ["trace risky commands to the content that dictated them"](https://github.com/AGGIB/Stroq).
 
 ## How do you make agent memory auditable?
 

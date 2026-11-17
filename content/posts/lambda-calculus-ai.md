@@ -10,9 +10,11 @@ title: Lambda Calculus as an AI Reasoning Exercise
 updated: 2026-11-17
 ---
 
-DeepMind's [AlphaProof Code announcement](https://deepmind.google/blog/introducing-alphaproof-code/) of November 10 describes agents that wrote "over six million lines of Lean" to verify Signal's protocol code, and one sentence in it carries the whole method: "Every proof is checked by Lean to verify the agents' work." Lambda calculus as an AI reasoning exercise rests on the same property at toy scale, since a model's answer to a reduction problem can be checked by a hundred lines of Python.
+Ask a model to reduce `(λx.λy.x) y` and there is one right answer, a function that ignores its input and returns the outer `y`. Lambda calculus works as an AI reasoning exercise because a hundred lines of Python can check that answer, which is why I prefer it to asking a model to explain its reasoning.
 
-That is why I prefer it to asking a model to explain its reasoning. An explanation can be fluent and wrong, and a normal form is right or it isn't.
+The same property carries far larger work. DeepMind's [AlphaProof Code announcement](https://deepmind.google/blog/introducing-alphaproof-code/) of November 10 describes agents that wrote "over six million lines of Lean" to verify Signal's protocol code, and rests the result on one sentence: "Every proof is checked by Lean to verify the agents' work."
+
+An explanation can be fluent and wrong, and a normal form is right or it isn't.
 
 ## What does lambda calculus test in a model?
 

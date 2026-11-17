@@ -161,3 +161,38 @@ The independent review passed the batch with fixes. What changed after it:
 - vector-embeddings corrects "shares no keyword" (both texts contain "charged") and the description's count of texts.
 - writing-release-notes lost its section-closing morals, and its FAQ heading is now "FAQ" so the build emits FAQPage markup.
 - fastembed resolves `BAAI/bge-small-en-v1.5` to a quantized ONNX build, which both pages now state.
+
+## Batch 4 (2026-11-17, owner voice-rewrite-2)
+
+Pieces: writing-changelogs, short-term-agent-memory, memory-versioning, voice-agent-memory, lambda-calculus-ai, writing-for-ai-products, and the essay written-by-a-human. The branch is stacked on batch 3.
+
+### What each piece is built on
+
+| Piece | Spark | What was run |
+|---|---|---|
+| writing-changelogs | The Claude Code changelog for the 30 days to November 16, Keep a Changelog 1.1.0, Fern's report | `changelog_stats.py`: 20 releases, 1,807 entries, 11 that open with Deprecated or Removed |
+| short-term-agent-memory | Anthropic's compaction documentation, two November changelog fixes, an Ask HN thread of November 7 | `window_demo.py`: a 400-token window over 40 messages, with and without a pinned rule (tiktoken 0.14.0) |
+| memory-versioning | Stroq (Show HN, November 5), Fowler 2005, EU AI Act Article 12, LangGraph persistence docs | `memory_ledger.py`: append-only SQLite ledger, as-of query, hash chain, a detected in-place edit |
+| voice-agent-memory | Interruption and truncation rules in OpenAI's Realtime guide, LiveKit Agents and Pipecat | `heard_demo.py`: a labelled simulation of truncating a reply to what was played |
+| lambda-calculus-ai | DeepMind's AlphaProof Code post (November 10) | `reduce.py`: normal-order reducer with capture-avoiding substitution on five expressions |
+| writing-for-ai-products | Hacker News thread on perceived model drift (November 8), OpenAI and Anthropic guidance on snapshots and retirements | Nothing; quotes only |
+| written-by-a-human (essay) | Hacker News thread of November 13, Ghostty 1.4.0 release notes, Merz | Nothing; quotes only |
+
+### What was removed as unbacked
+
+- short-term-agent-memory: "Every production AI agent I have shipped", context limits for GPT-4o, Claude 3.5 Sonnet and Gemini 1.5 Pro, and two untested code blocks. Its H2 lines were written `##Heading` with no space and did not render as headings.
+- memory-versioning: "Building a diagnostic agent for a compliance workflow taught me this", "We needed an append-only audit trail", retention figures of 30 to 90 days and 7 years, the claim that LangGraph checkpoints cannot hold long-term knowledge (its docs describe stores for that).
+- voice-agent-memory: untested pipeline code and unsourced VAD and RTP advice.
+- lambda-calculus-ai: unsourced comparisons with MMLU, HumanEval and ARC-AGI. The page states that no model was run.
+- writing-for-ai-products: "I once watched a docs example ... pasted into three internal services", and "Mem0" in the services sentence.
+
+### Proposed skips for root to confirm
+
+Pages written on 2026-10-22 or 2026-10-28 under the newer rules, with their own tests and receipts: mcp-server-tutorial, design-doc-template, api-documentation, claude-md, claude-code-subagents, llms-txt, ai-crawlers, aeo-for-developer-docs, runbook-template. They sit in the same class as quickstart-guide and release-notes-template, which are already on the skip list. A voice pass on them would mean re-running each page's test.
+
+### Notes for the next batch
+
+- Algolia's Hacker News API escapes curly apostrophes as `’`; `verify_quotes.py` now decodes those, and requests and decompresses gzip.
+- A description regex that ran from `description:` to `status:` deleted the `slug:` line on one post, caught by rule_checker. Replace only up to the next key.
+- Openers in this batch: a count from a changelog, a definition, an auditor's question, a call cut off mid-sentence, a single expression, a thread, a release note. Six of seven first drafts opened on a dated artifact, and three were changed.
+- The Atlantic returned 403 and theregister.com 404, so neither is quoted.
