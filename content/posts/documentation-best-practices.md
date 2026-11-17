@@ -20,9 +20,7 @@ updated: 2026-08-02
 video: documentation-best-practices
 ---
 
-RTFM is the oldest reply in developer support. It stands for "read the manual", with a ruder word in the middle, and [Wikipedia's entry](https://en.wikipedia.org/wiki/RTFM) describes it as the answer given when a question is already covered in the documentation.
-
-Telling someone to read the manual assumes the manual answers their question. A documentation page can be accurate in every sentence and still fail the moment a reader leaves the happy path, for example when their first request returns a 401, and proofreading the page won't reveal that failure.
+[RTFM](https://en.wikipedia.org/wiki/RTFM) is the oldest reply in developer support, and it assumes the manual answers the question. A documentation page can be accurate in every sentence and still fail the moment a reader leaves the happy path, for example when their first request returns a 401, and proofreading the page won't reveal that failure.
 
 So my version of technical documentation best practices is one test: can a reader finish a task, see that it worked, and recover from the failure likeliest to interrupt them? I've applied that test below against real [technical documentation](/articles/technical-documentation/): FastAPI's and Stripe's docs and GitHub's rate-limit guide, all read again on November 18.
 
@@ -39,11 +37,11 @@ I'd put four practices ahead of everything else, and each of the four answers a 
 | Make limits something a client can inspect | How close am I to being cut off? |
 | Give every question one page that owns it | Which of these pages is right? |
 
-A style guide such as [Google's developer documentation style guide](https://developers.google.com/style) covers tone and terminology, and tone and terminology matter. The four practices in the table come first for me because a reader who can't finish the task stops reading before tone makes any difference.
+A style guide such as [Google's developer documentation style guide](https://developers.google.com/style) covers tone and terminology, and both matter. The four practices in the table come first for me because a reader who can't finish the task stops reading before tone makes any difference.
 
 ## How do you start a page with a task?
 
-Start a page by naming the job the reader came to do and showing the result that proves the job is done. A reader doesn't open your docs to learn how the docs are organized, and does open them needing to return an error from an endpoint or retry a payment safely.
+Start a page by naming the job the reader came to do and showing the result that proves the job is done. A reader opens your docs needing to return an error from an endpoint or retry a payment safely.
 
 [FastAPI's error-handling guide](https://fastapi.tiangolo.com/tutorial/handling-errors/) is my example of a page that starts with the task. The guide opens with the errors a client has to be told about, introduces the `HTTPException` class after that, and then shows the JSON response the client receives.
 
@@ -53,7 +51,7 @@ The result that proves the job is done depends on the type of page:
 | --- | --- | --- |
 | Tutorial | Complete a first useful action | A command, response, or screen state |
 | How-to | Change one system behavior | The input and expected result |
-| Reference | Resolve a stable question | A field, default, constraint, or type |
+| Reference | Look up a fact that stays the same between tasks | A field, default, constraint, or type |
 | Troubleshooting | Recover from a known failure | Symptom, diagnostic, cause, and recovery |
 
 ## Where should recovery guidance go?
@@ -86,13 +84,13 @@ For each limit in your product, I'd answer these four questions on one page:
 - What marks exhaustion?
 - What should the client do next, and when should it stop retrying?
 
-The review card has a table with one row per limit. If you can't fill in the signal column and the recovery column for a limit, the page doesn't yet tell a reader how to see the limit coming or what to do after hitting it.
+The review card has a table with one row per limit. If you can't fill in the signal column and the next-action column for a limit, the page doesn't yet tell a reader how to see the limit coming or what to do after hitting it.
 
 ## Who should own each question?
 
 A single page should own each question, and every other page that touches the question should link to the owner. Docs drift apart when a tutorial, a reference page and a support article each explain the same behavior in slightly different words.
 
-Pick the owning page for a question such as "how do I rotate an API key?", then link from it to the pages that hold prerequisites and parameter detail. [Documentation structure](/articles/documentation-structure/) covers how to split those roles, and [documentation review](/articles/documentation-review/) covers the checks before release.
+Pick the owning page for a question such as "how do I rotate an API key?", then link from it to the pages that hold prerequisites and parameter detail. [Documentation structure](/articles/documentation-structure/) covers how to split one topic across a tutorial, a how-to and a reference page, and [documentation review](/articles/documentation-review/) covers the checks before release.
 
 The person who owns a page also needs to know which product changes make the page wrong. A changed permission or a new response shape should send the page back for review on the day it ships, and a calendar reminder every six months would catch neither change in time.
 
@@ -100,11 +98,11 @@ The person who owns a page also needs to know which product changes make the pag
 
 Test a page by doing the task it describes, from a clean account, while filling in the review card. The card has a row for each thing covered above, from the reader and the task down to the limit signal and the owner, and every blank cell is a change to make.
 
-I'd start with the page where a reader's mistake costs the highest price. Testing a payment guide or an authentication guide will show you more missing recovery steps than testing a glossary entry.
+I'd start with the page where a reader's mistake is costliest. Testing a payment guide or an authentication guide will show you more missing recovery steps than testing a glossary entry.
 
 You can also give the task to a coding agent and watch where the agent fails. A tool called [Gauge](https://github.com/gauge-sh/gauge-cli), posted to Hacker News on November 4, "runs real agents against your product, captures where they get stuck", which is my one-task test with an agent as the reader.
 
-Whether a person or an agent runs the test, the goal isn't longer documentation. The goal is a page that tells the reader whether the next step is safe, and you can [download the review card](/static/templates/documentation-review-card.md) to find the steps where your page doesn't.
+Whether a person or an agent runs the test, the goal is a page that tells the reader whether the next step is safe. [Download the review card](/static/templates/documentation-review-card.md) to find the steps where your page doesn't.
 
 ## FAQ
 

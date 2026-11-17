@@ -10,11 +10,11 @@ bridges:
   reason: A memory lookup in the middle of a turn is added silence on the line.
 date: 2026-04-16
 description: Voice AI latency is the time from the caller's last word to the agent's first
-  sound. Where that time goes, why endpointing is the largest fixed cost, and a stage-by-stage
-  budget you can rerun with your own numbers.
+  sound. Where that time goes, why endpointing can cost more than the model's first token, and a
+  stage-by-stage budget you can rerun with your own numbers.
 status: published
 work_note: "I'm Ninad Pathak, a freelance technical writer. If your AI product's tutorials have fallen behind the product, I write them, and I run the product first. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
-title: Voice AI Latency and Where a Voice Agent's Time Goes
+title: Where Voice AI Latency Comes From
 updated: '2026-08-17'
 slug: voice-agent-latency
 ---
@@ -25,7 +25,9 @@ A caller on the phone with a voice agent never says "over". The agent has to gue
 
 People make the same guess in conversation and make it fast. A [2015 review of turn-taking research](https://pmc.ncbi.nlm.nih.gov/articles/PMC4464110/) puts the usual pause between speakers at around 200 ms, while planning a spoken reply takes over 600 ms, so a listener must be predicting the end of the speaker's turn before the speaker reaches it.
 
-A reply after about 200 ms is what callers are used to from other people, and a voice agent that waits for silence can't reach it. Below I've laid out the four stages of a voice agent's turn with a time budget you can rerun, as part of [AI engineering](/articles/ai-engineering/).
+A reply after about 200 ms is what callers are used to from other people, and a voice agent that waits for silence can't reach it.
+
+Below I've laid out the four stages of a voice agent's turn with a time budget you can rerun. The page sits with the other model-serving pages under [AI engineering](/articles/ai-engineering/).
 
 ## What is voice AI latency?
 
@@ -40,12 +42,12 @@ A speech-to-speech model, such as the one behind OpenAI's Realtime API, merges t
 
 ## Where does the time go in a voice agent turn?
 
-The largest share of a turn in the budget below goes to waiting for silence, and the model's first token takes less. The script adds up one turn under stage times I've assumed, so the numbers show the structure and aren't measurements of any service:
+Waiting for silence takes 500 ms of the 1,370 ms turn in the budget below, and the model's first token takes 300 ms. The script adds up one turn from stage times I've assumed, so its totals show how the stages add up and aren't measurements of any service:
 
 ```python
 """Add up one voice-agent turn stage by stage. The stage times are assumed, not measured."""
 STT_MS, LLM_FIRST_TOKEN_MS, LLM_PER_TOKEN_MS, TTS_FIRST_AUDIO_MS = 150, 300, 20, 120
-REPLY = "Your refund was issued on Monday. It should reach your card within five business days.".split()
+REPLY = "Your refund was issued on Monday. It should reach your card within five business days.".split()   # words stand in for tokens
 FIRST_SENTENCE = REPLY.index("Monday.") + 1
 
 
@@ -110,23 +112,23 @@ The third run cuts the silence wait from 500 ms to 200 ms, which brings the firs
 
 Endpointing is hard because a pause doesn't tell the agent whether the caller is finished or only thinking. An agent that waits 200 ms interrupts callers in the middle of a thought, and an agent that waits 800 ms starts every reply late.
 
-The 500 ms silence wait in my script is OpenAI's default. OpenAI's [Realtime API guide](https://developers.openai.com/api/docs/guides/realtime-vad) shows `silence_duration_ms` set to 500 for the default mode, which chunks audio on periods of silence, and that 500 ms is more than twice the 200 ms pause that people leave each other.
+The 500 ms silence wait in my script is the value OpenAI's [Realtime API guide](https://developers.openai.com/api/docs/guides/realtime-vad) uses for `silence_duration_ms` in `server_vad`, the default mode, which chunks audio on periods of silence. That 500 ms is more than twice the 200 ms pause that people leave each other.
 
 The alternative to waiting for silence is to predict the end of the turn from the words, the way a human listener does. OpenAI's second mode, `semantic_vad`, scores how likely it is that the speaker is done from the words so far, and waits longer on a sentence that trails off than on a definite statement.
 
 LiveKit made the same choice for its voice agent framework. LiveKit's [turn detection docs](https://docs.livekit.io/agents/logic/turns/) make a turn detector model the default, one that "Predicts end of turn from both the meaning of speech and its acoustic properties", and keep silence-only detection for when you need minimal latency.
 
-I think predicting the end of the turn from meaning is the right default, and I'd rank it above model speed. If I had one week to make a voice agent feel faster, I'd spend it on endpointing before touching the model.
+I think predicting the end of the turn from meaning is the right default. If I had one week to make a voice agent feel faster, I'd spend it on endpointing before touching the model.
 
 ## How do you cut the model's share?
 
 You cut the model's share in two ways: shorten the wait for the model's first token, and hand text to the speech engine before the reply is finished. Shortening the first-token wait is ordinary [time to first token](/articles/time-to-first-token/) work, and on a phone call every 100 ms of it is silence the caller hears.
 
-Prompt length is the part of first-token time that you control. The model has to process the whole conversation history before it produces a first token, and a cached prompt prefix lets it skip the part it has already processed, as the [KV cache](/articles/kv-cache-eviction/) page describes.
+Prompt length is the part of first-token time you can change without changing the model. The model has to process the whole conversation history before it produces a first token, and a cached prompt prefix lets it skip the part it has already processed, as the [KV cache](/articles/kv-cache-eviction/) page describes.
 
 Handing text to the speech engine early carries a risk. If the agent starts speaking the first half of a sentence and the model then finishes the sentence differently, the caller has already heard the wrong half.
 
-[Speculative decoding](/articles/speculative-decoding/) makes a similar bet inside the model, where a wrong guess can be thrown away before anyone sees it.
+[Speculative decoding](/articles/speculative-decoding/) takes the same risk inside the model: a small model drafts the next tokens and the large model checks them, so a wrong guess is thrown away before the caller hears it.
 
 Tool calls also lengthen a turn. When the agent looks up an order status in the middle of a reply, the caller hears silence for as long as the lookup takes, and [voice agent memory](/articles/voice-agent-memory/) covers ways to do such lookups before the caller is waiting.
 
@@ -134,7 +136,7 @@ Tool calls also lengthen a turn. When the agent looks up an order status in the 
 
 Measure voice AI latency by recording a timestamp at the end of each stage and reporting the stages separately, the way the script prints them. A single end-to-end number such as 1,370 ms can't tell you whether to shorten the silence wait or speed up the model.
 
-OpenAI's and LiveKit's APIs both emit events at those stage boundaries. OpenAI's Realtime API emits `input_audio_buffer.speech_stopped` when it decides a turn has ended, and I'd start the clock for transcription, inference and synthesis at that event.
+OpenAI's Realtime API emits `input_audio_buffer.speech_stopped` when it decides a turn has ended, and I'd start the clock for transcription, inference and synthesis at that event.
 
 Test with recordings of real callers, who pause in the middle of sentences. A scripted test caller who speaks in complete sentences without pausing will never be interrupted by a 200 ms silence setting, and a real caller will be.
 
@@ -142,7 +144,7 @@ Test with recordings of real callers, who pause in the middle of sentences. A sc
 
 **What is a good latency for a voice agent?**
 
-Human conversation sets the reference, and people leave around 200 ms between turns. The fastest run in my script takes 890 ms, so the practical target is the lowest delay at which the agent doesn't cut callers off.
+People leave around 200 ms between turns, and an agent that waits for silence can't match that. The practical target is the shortest delay at which your agent doesn't cut callers off, and you find it by testing with recordings of real callers.
 
 **What is the biggest contributor to voice AI latency?**
 
@@ -154,7 +156,7 @@ Endpointing is deciding that a speaker has finished their turn. An agent does it
 
 **Does a speech-to-speech model remove the latency problem?**
 
-A speech-to-speech model removes the handoffs between transcription, inference and synthesis. A speech-to-speech model doesn't remove turn detection, which is why OpenAI's speech-to-speech sessions still have a turn-detection setting.
+A speech-to-speech model removes the handoffs between transcription, inference and synthesis. It doesn't remove turn detection, which is why OpenAI's speech-to-speech sessions still have a turn-detection setting.
 
 **Is time to first token the same as voice latency?**
 

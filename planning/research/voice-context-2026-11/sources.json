@@ -4633,7 +4633,8 @@
         "has not been optimized for Gemini 4 Argon",
         "Gemini CLI was replaced by Antigravity CLI on June 18th, 2026",
         "Plan Mode is enabled by default",
-        "These are the only allowed tools"
+        "These are the only allowed tools",
+        "commandPrefix = [\"git status\", \"git diff\"]"
       ],
       "connects": [
         "claude-vs-gemini-cli"
@@ -4647,7 +4648,10 @@
       "title": "Checkpointing",
       "quotes": [
         "The Checkpointing feature is disabled by default",
-        "A commit is made in a special, shadow Git repository located in your home directory (~/.gemini/history/"
+        "A commit is made in a special, shadow Git repository located in your home directory (~/.gemini/history/",
+        "This snapshot captures the complete state of your project files at that moment",
+        "Revert all files in your project to the state captured in the snapshot",
+        "When you approve a tool that modifies the file system"
       ],
       "connects": [
         "claude-vs-gemini-cli"
@@ -4660,7 +4664,9 @@
       "date": "2026-11-18",
       "title": "Sandboxing",
       "quotes": [
-        "You can enable sandboxing using a command flag, environment variable, or configuration file"
+        "You can enable sandboxing using a command flag, environment variable, or configuration file",
+        "Command flag: -s or --sandbox",
+        "gVisor / runsc (Linux only)"
       ],
       "connects": [
         "claude-vs-gemini-cli"
@@ -4688,7 +4694,9 @@
       "title": "Permission modes",
       "quotes": [
         "reads files, runs shell commands to explore, and writes a plan, but does not edit your source",
-        "Isolated containers and VMs only"
+        "Isolated containers and VMs only",
+        "With Claude Code v2.1.283 or later, auto mode is the built-in starting permission mode for interactive terminal and VS Code sessions",
+        "Claude Code stops and asks you before most actions that edit files, run shell commands, or reach the network"
       ],
       "connects": [
         "claude-vs-gemini-cli"
@@ -4704,7 +4712,8 @@
         "Not a replacement for version control",
         "Claude Code keeps file snapshots for the 100 most recent checkpoints in a session",
         "A file that only Bash commands changed isn't tracked and stays as it is",
-        "captures the state of your code before each prompt you send that starts a turn"
+        "captures the state of your code before each prompt you send that starts a turn",
+        "**Restore code and conversation**: revert both code and conversation to that point"
       ],
       "connects": [
         "claude-vs-gemini-cli"
@@ -4742,7 +4751,11 @@
         "We found no evidence of deliberate exploitation",
         "consistent in timing and volume with ordinary long-context use",
         "All times UTC",
-        "Cross-request KV cache exposure in the GLM-5.3 Workers AI model"
+        "Cross-request KV cache exposure in the GLM-5.3 Workers AI model",
+        "Cross-request KV cache exposure in the GLM-5.3 Workers AI model, and our remediation with SGLang",
+        "a small number of customers using the GLM 5.3 Workers AI model received responses that contained data from other customers' requests made to the same model shortly before theirs",
+        "we only validated HTTP response codes and engine performance at long contexts, without validating model output and coherence",
+        "We assumed that the engine was capable of gracefully handling the difference"
       ],
       "connects": [
         "kv-cache-eviction",
@@ -4772,7 +4785,8 @@
       "quotes": [
         "scaling linearly with the sequence length and batch size",
         "a small portion of tokens contributes most of the value when computing attention scores",
-        "a KV cache eviction policy that dynamically retains a balance of recent and H$_2$ tokens"
+        "a KV cache eviction policy that dynamically retains a balance of recent and H$_2$ tokens",
+        "removing them results in significant performance degradation"
       ],
       "connects": [
         "kv-cache-eviction"
@@ -5086,6 +5100,19 @@
       ],
       "connects": [
         "documentation-best-practices"
+      ]
+    },
+    {
+      "id": "qwen25-7b-model-card",
+      "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
+      "author": "Qwen",
+      "date": "2026-11-18",
+      "title": "Qwen2.5-7B-Instruct model card",
+      "quotes": [
+        "Context Length: Full 131,072 tokens and generation 8192 tokens"
+      ],
+      "connects": [
+        "kv-cache-eviction"
       ]
     }
   ],

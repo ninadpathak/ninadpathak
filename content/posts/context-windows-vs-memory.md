@@ -11,12 +11,12 @@ bridges:
 - slug: kv-cache-eviction
   reason: The KV cache is a third thing that gets called memory, and it stores computation.
 date: '2026-04-19'
-description: A context window is what a model can see during one request, and memory is
+description: "Context window vs memory: a context window is what a model can see during one request, and memory is
   state an application stores and brings back later. Why a bigger window doesn't replace
-  memory, with the token cost of replaying a conversation counted.
+  memory, with the token cost of replaying a conversation counted."
 status: published
 work_note: "Building an AI product whose readers are engineers? I'm Ninad Pathak, a freelance technical writer, and I write tutorials and technical articles for companies like yours after running the product myself. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
-title: 'Context Window vs Memory, and What Each One Is For'
+title: 'Context Window vs Memory'
 updated: '2026-08-18'
 slug: context-windows-vs-memory
 video: context-windows-vs-memory
@@ -24,9 +24,11 @@ video: context-windows-vs-memory
 
 On November 7 someone [asked Hacker News](https://news.ycombinator.com/item?id=50403153) how people manage their AI agents' context across clients and projects. The poster's complaint was the time spent re-explaining past decisions and client rules to the agent at the start of every session.
 
-The poster asked about "context", and what they were missing was memory. People use the word context for both things, which is why context window vs memory needs a page: the context window is the text a model can see during one request, and memory is information your application stores and puts back into a later request.
+The poster asked about "context", and what they were missing was memory. People use the word context for both things.
 
-Psychology separated holding something in mind from remembering it seventy years ago. George Miller's 1956 paper, [The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two), is about how few items a person can hold in mind at once, roughly seven, and nobody reads the paper as a limit on what a person can remember for years.
+Context window vs memory comes down to this: the context window is the text a model can see during one request, and memory is information your application stores and puts back into a later request.
+
+Psychology, seventy years ago, separated holding something in mind from remembering it. George Miller's 1956 paper, [The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two), is about how few items a person can hold in mind at once, roughly seven, and nobody reads the paper as a limit on what a person can remember for years.
 
 A model's context window is a limit of Miller's kind, on what can be held at once. Remembering across sessions is a separate job called [agent memory](/articles/agent-memory/), and the code that stores a fact and brings it back is code you write.
 
@@ -38,7 +40,7 @@ A context window holds the tokens of one request, and memory holds whatever has 
 |---|---|---|
 | Lifetime | One request | Across requests and sessions |
 | Who fills it | The code that builds the prompt | The code that writes to a store |
-| What goes wrong | The needed fact isn't there, or the model doesn't use it | The wrong fact is stored, or an old one outlives the truth |
+| What goes wrong | The needed fact isn't there, or the model doesn't use it | The wrong fact is stored, or a stored fact is out of date |
 
 A model can answer perfectly in one request and know nothing about that exchange in the next request. The model didn't forget the exchange, because the model never stored it anywhere.
 
@@ -46,7 +48,7 @@ A model can answer perfectly in one request and know nothing about that exchange
 
 A chat app seems to remember because it resends the conversation. The app puts every earlier turn back into the context window along with each new message, so the model rereads the whole conversation every time.
 
-Resending the whole conversation costs tokens, and the cost can be counted. The script below builds a 40-turn support conversation and counts what gets sent, using the `o200k_base` tokenizer from tiktoken 0.14.0:
+The script below counts what resending costs. It builds a 40-turn support conversation and counts the tokens sent, using the `o200k_base` tokenizer from tiktoken 0.14.0:
 
 ```python
 """Count the tokens a chat app sends when it replays the conversation on every turn."""
@@ -88,9 +90,9 @@ Resending everything works until the history no longer fits in the window or cos
 
 No, for two separate reasons. A context window of any size is empty at the start of the next session, and a fact that fits inside the window isn't guaranteed to be used by the model.
 
-The second reason, that a model can ignore a fact it was given, has a paper behind it. [Lost in the Middle](https://arxiv.org/abs/2307.03172) moved the relevant passage around inside a long input and found that accuracy "significantly degrades when models must access relevant information in the middle of long contexts".
+[Lost in the Middle](https://arxiv.org/abs/2307.03172), a 2023 paper, tested the second reason. Its authors moved the relevant passage around inside a long input and found that accuracy "significantly degrades when models must access relevant information in the middle of long contexts".
 
-Suppose a contract fits in the window and the clause you need sits halfway through. The model accepted every page of the contract, and Lost in the Middle found that the middle of a long input is where models did worst.
+Suppose a contract fits in the window and the clause you need sits halfway through. The API accepts every page, and the clause sits in the position where the paper's models did worst.
 
 [RULER](https://arxiv.org/abs/2404.06654), a 2024 benchmark, measured how much of an advertised context window a model can use well. Its authors tested 17 long-context models that all claimed 32K tokens or more, and report that only half kept satisfactory performance at 32K.
 
@@ -100,9 +102,9 @@ Lost in the Middle is from 2023 and RULER from 2024, so I wouldn't quote their f
 
 Decide by asking how long the information has to survive. Information that only the current request needs goes in the context window, and information that a later request will need gets stored outside the model.
 
-A code change belongs in the context window. The model needs the function, its tests and the instruction in the same request, and none of those has to be remembered tomorrow.
+The material for a code change belongs in the context window. The model needs the function, its tests and the instruction in the same request, and none of those has to be remembered tomorrow.
 
-A customer's plan belongs in memory, and so do the client rules from the Hacker News question. A plan and a client rule both have to survive into a new session, so your application has to decide when to write each one down and how to find it again.
+A customer's subscription plan belongs in memory, and so do the client rules from the Hacker News question. A plan and a client rule both have to survive into a new session, so your application has to decide when to write each one down and how to find it again.
 
 Writing and finding are two different jobs, and a vector search over old messages does only the finding. [AI memory management](/articles/ai-memory-management/) covers the rest, including when to write a fact and when to expire it.
 
@@ -118,7 +120,7 @@ Coding agents write notes to files and read the files back at the start of a ses
 
 Each coding agent names and loads its files differently. [Claude Code's memory](/articles/claude-code-memory/) and [memory in HyperAgents](/articles/hyperagents-memory/) are two worked cases, and several replies in the Hacker News thread describe building the same thing by hand, with a wiki or an Obsidian vault of Markdown notes.
 
-I think those replies show where agent memory stands in 2026. A current model such as Claude Fable 5.2 [lists a context window of 1M tokens](https://artificialanalysis.ai/models/claude-fable-5-2), and developers still keep their client rules in Markdown files that they load by hand.
+A current model such as Claude Fable 5.2 [lists a context window of 1M tokens](https://artificialanalysis.ai/models/claude-fable-5-2), and the developers in that thread still keep their client rules in Markdown files that they load by hand. I think that is where agent memory stands in 2026.
 
 ## FAQ
 

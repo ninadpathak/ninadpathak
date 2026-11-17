@@ -52,7 +52,9 @@ Both tools' plan modes let the agent read and propose while edits are held back.
 
 Gemini CLI's Plan Mode allows fewer tools. Its docs list the only tools allowed: file reads, search, read-only MCP tools, and writes to the plan's own Markdown file, and `run_shell_command` isn't on the list.
 
-Whether a planner can run shell commands decides what the plan is based on. Claude Code can run `npm test` while planning and see which tests fail. Gemini CLI in Plan Mode reads the test files and infers what would fail, unless you add a policy rule that allows that one command.
+Whether a planner can run shell commands decides what the plan is based on.
+
+Claude Code can run `npm test` while planning and see which tests fail. Gemini CLI in Plan Mode reads the test files and infers what would fail, unless you add a policy rule that allows that one command.
 
 Claude Code has six permission modes. A new install on v2.1.283 or later starts in `auto`, where a classifier reviews each action in place of a prompt, while `default` asks you before edits and commands and `bypassPermissions` asks about nothing.
 
