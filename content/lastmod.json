@@ -13,7 +13,7 @@
   },
   "agent-harnesses": {
     "lastmod": "2026-11-18",
-    "sources": "cce4e6d60ca58e8152c8939c77d5b7888dc1addd179d2852f1401119514e2cc2"
+    "sources": "23a710c9c05c7e665bfa458bc17afd090c8d65b69828988dca6b6089fa9f2f5f"
   },
   "agent-loop-anatomy": {
     "lastmod": "2026-11-17",
@@ -21,7 +21,7 @@
   },
   "agent-memory-2026": {
     "lastmod": "2026-11-18",
-    "sources": "06e855e865d0235fd2459e4da49bc17c5b96f14154df813b9a9bba4627939b10"
+    "sources": "22b4b9f199cda9b62d7ac85deffdebdc87bb322a4731f30b805c9f443a4fd930"
   },
   "agent-memory-evidence": {
     "lastmod": "2026-11-17",
@@ -145,7 +145,7 @@
   },
   "documentation-headings": {
     "lastmod": "2026-11-18",
-    "sources": "2a03c12a8f6a87fe3bfec0a619ff5dff2c379adf45515d900b866153ce62a8da"
+    "sources": "ac3784d952550ef9d9b37deb1c1258d2c2849aa54d5e2ddafddd286438cba3f3"
   },
   "documentation-review": {
     "lastmod": "2026-11-18",
@@ -173,7 +173,7 @@
   },
   "fine-tuning-vs-rag": {
     "lastmod": "2026-11-18",
-    "sources": "934f20fa5792dbd9859b3e8bc8ed1d253f8625c4cd5307ebe9bb32c5f879ea9b"
+    "sources": "a337f575c1f4294881c06cca37e2ee98a37f027c7d8aeee588a0db8411ee77b1"
   },
   "hybrid-search": {
     "lastmod": "2026-11-17",
@@ -233,11 +233,11 @@
   },
   "mixture-of-experts": {
     "lastmod": "2026-11-18",
-    "sources": "3e87ad38584d89e86f8baed0cef44fc33f9c451db77bfaa4c52067103460eeac"
+    "sources": "a5b9428407b21f8d39a2f77dbaaa3d2f078ebf03a86fcd58963ecbadf78326da"
   },
   "model-context-protocol": {
     "lastmod": "2026-11-18",
-    "sources": "1f0ad6b2b6e89ce00c0cd546af5955ab1c3af327e9799dce91c151be35099594"
+    "sources": "c8be71f1063f9773fabef87d53d6dff3f8cb4e6d104d5b193830e6f4396065d6"
   },
   "multi-agent-vs-single-agent": {
     "lastmod": "2026-11-17",
@@ -253,7 +253,7 @@
   },
   "rag-evaluation": {
     "lastmod": "2026-11-18",
-    "sources": "ab0192a356383572fa52e6ae3a7eb9b70cdca2e8c6acecb51f35bf2a2642fd21"
+    "sources": "9e4f196c1cff5a6a2d1cbb402d809035107b59ff1e20b8bc2cfca68b185ca530"
   },
   "rag-reranking": {
     "lastmod": "2026-11-18",
@@ -325,7 +325,7 @@
   },
   "what-agent-harness-means": {
     "lastmod": "2026-11-18",
-    "sources": "6d17151b4bb704450f28a4464efb1f2fa367b5f9495d17a05b797cfaa61ece60"
+    "sources": "57ad7e98bdd3c109376ef322cc989fa4242e991b37b6c6a9a663cd4a7c906325"
   },
   "writing-changelogs": {
     "lastmod": "2026-11-17",
