@@ -1,7 +1,7 @@
 ---
 category: ai-engineering
 date: 2026-04-19
-description: 'Memory for voice AI agents has one rule text chatbots skip: store what the caller heard. How OpenAI, LiveKit and Pipecat handle it, with a run example.'
+description: 'Memory for voice AI agents has one rule text chatbots skip: store what the caller heard. How OpenAI, LiveKit and Pipecat differ, with a simulated example.'
 status: published
 work_note: 'I wrote Firecrawl''s comparison of AI voice agent platforms and ran the writing team at Mem0. Voice and memory meet on this page, and [the Firecrawl comparison](/portfolio/) is in my portfolio.'
 title: 'Memory for Voice AI Agents: What Text Chatbots Cannot Do'
@@ -9,13 +9,13 @@ slug: voice-agent-memory
 updated: 2026-11-17
 ---
 
-A voice agent can generate a full sentence and be cut off after the fifth word. What it stores as its side of the conversation decides whether the rest of the call makes sense, and the documentation for the voice stacks compared below agrees on what that should be: the words the caller heard.
+Phone agents got a shorter path to production this month. OpenAI's [SIP guide](https://developers.openai.com/api/docs/guides/voice-sip) now says "Outbound SIP calling is available to all organizations through the Live API", a change that reached Hacker News on November 6, and every agent placed on a call inherits a problem text chatbots never had.
 
-Memory for voice AI agents has the layers a text agent has, plus that one rule a text chatbot never needs. A reader sees every word the model wrote, and a caller hears only what was played before they spoke.
+A caller can interrupt, and a voice agent can have generated a full sentence when it is cut off after the seventh word. Memory for voice AI agents has the layers a text agent has, plus one rule: the record of the agent's side has to match what was played, because a reader sees every word the model wrote and a caller hears only part.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/voice-agent-memory/voice-pipeline.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/voice-agent-memory/voice-pipeline.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/voice-agent-memory/voice-pipeline.svg" width="720" height="392" alt="A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Working memory lives inside the pipeline stages and updates on every audio frame. Retrieved memory is fetched in parallel with generation, drawn as a dashed input to the model, so it arrives before the first token is spoken instead of blocking the turn." loading="lazy" decoding="async"></picture></a>
-  <figcaption>The caller hears every pause, so retrieved memory runs alongside generation, never in front of it.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/voice-agent-memory/voice-pipeline.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/voice-agent-memory/voice-pipeline.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/voice-agent-memory/voice-pipeline.svg" width="720" height="392" alt="A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Stored memory is drawn as a dashed input to the model." loading="lazy" decoding="async"></picture></a>
+  <figcaption>A voice pipeline. What the model generates and what the caller hears part ways at the last stage, text-to-speech.</figcaption>
 </figure>
 
 ## What can a text chatbot ignore that a voice agent can't?
@@ -28,20 +28,21 @@ The guide gives the reason in the caller's words: the model should know where it
 
 ## How do voice frameworks record what the caller heard?
 
-They track playback and cut the stored reply at the point of interruption. Who does the tracking depends on the transport.
+They differ, and the difference decides what ends up in memory. The stacks I read fall into two groups.
 
-| Stack | What its documentation says |
+| Stack | What is kept after an interruption |
 | --- | --- |
-| OpenAI Realtime API over WebRTC or SIP | "The server will automatically truncate unplayed audio when there's a user interruption." |
-| OpenAI Realtime API over WebSocket | The client must "Record how many milliseconds of that item's audio the user actually heard." |
-| [LiveKit Agents](https://docs.livekit.io/agents/build/turns/) | The agent "automatically truncates its conversation history to include only the portion of the speech that the user heard before interruption." |
-| [Pipecat](https://docs.pipecat.ai/guides/learn/context-management) | Context is built from the text the speech service reports as spoken: "This ensures context matches what users actually hear." |
+| OpenAI Realtime API | Played audio only. Truncation "will cut the audio at a given place and remove the text transcript for the unplayed portion", and the guide adds that this "doesn't provide a truncated transcript." |
+| [LiveKit Agents](https://docs.livekit.io/agents/build/turns/) | Text of the heard part. The agent "automatically truncates its conversation history to include only the portion of the speech that the user heard before interruption." |
+| [Pipecat](https://docs.pipecat.ai/guides/learn/context-management) | Text of the heard part, word by word. Its documentation says "Your context stays updated at the word level in case an interruption occurs". |
 
-The WebSocket row is the one that fails without anyone noticing. Nothing breaks if the client skips the truncation event, and the conversation history fills with sentences that were never played.
+On the Realtime API the transport also matters. Over WebRTC or SIP "The server will automatically truncate unplayed audio when there's a user interruption.", and over WebSocket the client must "Record how many milliseconds of that item's audio the user actually heard."
+
+OpenAI's guide explains the missing transcript: the model "doesn't have enough information to precisely align transcript and audio". So an application on that API that wants the heard words as text has to produce them itself.
 
 ## What does the difference look like in the history?
 
-A short simulation makes it concrete. It gives each word of one reply a playback time, interrupts at 1.7 seconds, and compares the two versions of the stored turn.
+The simulation below gives each word of one reply a playback time, interrupts at 1.7 seconds, and compares two versions of the stored turn. It models the bookkeeping only, with made-up word timings and no audio.
 
 ```python
 """What a voice agent should remember after an interruption: the words the caller heard."""
@@ -70,8 +71,6 @@ for label, history in (("stores generated text", generated), ("stores heard text
     print(f"{label:<22} -> history claims the caller was told the time: {knows_time}")
 ```
 
-The two versions of the turn, as `python3 heard_demo.py` reports them:
-
 ```text
 generated : I have you booked for Tuesday the fourteenth at three in the afternoon with Dr Rao
 heard     : I have you booked for Tuesday the
@@ -80,31 +79,29 @@ stores generated text  -> history claims the caller was told the time: True
 stores heard text      -> history claims the caller was told the time: False
 ```
 
-The script models the bookkeeping only, with made-up word timings and no audio. The outcome is the point: the first history says the caller was told an appointment time, and the caller heard seven words that stop before the date.
+A history that stores the generated text says the caller was told an appointment time. The caller heard seven words that stop before the date.
 
-When the caller then says "no, Wednesday", a model reading the first history believes the time is settled and only the day is in dispute. A model reading the second knows it has to give the day and the time again.
+When the caller then says "no, Wednesday", a model given the first history has no way to know the time was never spoken. Given the second, the missing half of the sentence is visible in the record.
 
 ## Can a voice agent remember context from earlier in the same call?
 
-Yes. Everything said earlier in the call sits in the conversation history that is sent to the model on each turn, the same [short-term memory](/articles/short-term-agent-memory/) a text agent has.
+Yes. Everything said earlier in the call sits in the conversation history sent to the model on each turn, the same [short-term memory](/articles/short-term-agent-memory/) a text agent has, with the same limit on length.
 
-A long call brings the same limit a long chat does. The history has to be shortened at some point, and [context windows vs memory](/articles/context-windows-vs-memory/) covers what that costs.
-
-The voice-specific risk is a wrong entry, more than a missing one. A turn recorded as spoken when it was cut off stays in the history for the rest of the call.
+The voice-specific risk is a wrong entry more than a missing one. A turn recorded as spoken when it was cut off stays in the history for the rest of the call.
 
 ## What should a voice agent remember across calls?
 
-Facts the caller would expect a person to remember, written after the call from the corrected history. That ordering matters, because a summary of a transcript that contains unplayed sentences will store things the caller was never told.
+Facts the caller would expect a person to remember, written after the call from a history that matches what was played. On LiveKit or Pipecat that history is the framework's own.
 
-Retrieval of those facts has a constraint text doesn't share. A lookup in the middle of a turn is silence on the line, and [tracing voice agent latency](/articles/voice-agent-latency/) covers where that time goes.
+On the Realtime API it isn't available as text, so the choice is between transcribing the played audio and accepting that long-term notes are built from a transcript with holes. My choice is the first for anything a caller will be held to, such as a booking.
 
-The write side works as it does for any agent. [AI memory management for LLMs](/articles/ai-memory-management/) covers what to store and when to replace it, and the [state of agent memory](/articles/agent-memory-2026/) surveys the products that do it.
+Retrieval has a constraint text doesn't share, since a lookup in the middle of a turn is silence on the line. [Tracing voice agent latency](/articles/voice-agent-latency/) follows where that time goes, and [AI memory management for LLMs](/articles/ai-memory-management/) covers what to store.
 
 ## FAQ
 
 **Does the Realtime API handle interruptions for me?**
 
-It depends on the connection. OpenAI's guide says the server truncates unplayed audio on WebRTC and SIP, and that with a WebSocket connection the client "must stop playback and handle truncation".
+It handles the audio, depending on the connection. OpenAI's guide says the server truncates unplayed audio on WebRTC and SIP, and that with a WebSocket connection the client "must stop playback and handle truncation".
 
 **What is the unplayed portion of a response?**
 
