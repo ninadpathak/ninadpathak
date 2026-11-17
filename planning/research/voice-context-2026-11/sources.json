@@ -154,7 +154,10 @@
         "the best protection against stale memory",
         "so a reader knows how much to trust what it reads",
         "pairs citations you can check against the code with forgetting by default",
-        "A fact with code citations"
+        "A fact with code citations",
+        "In 2019 they merged into OpenTelemetry.",
+        "A span is written once and never changes.",
+        "attributes: { vcs.pr: 482"
       ],
       "connects": [
         "rag-vs-memory",
@@ -324,7 +327,10 @@
         "6x Agent requests to Fern-hosted docs in September vs. January.",
         "Human page loads miss people with ad blockers, which raises agent share. Agents that fetch HTML instead of Markdown aren't counted, which lowers it.",
         "ChatGPT, Gemini and Perplexity fetch only HTML",
-        "up from 2.3% in January."
+        "up from 2.3% in January.",
+        "Agents make up the most traffic on docs for APIs that developers call from code, because coding agents read those docs while they write the integration.",
+        "If agents are the larger share, prioritize the reference, the changelog and Markdown over new guides.",
+        "Among agents that name themselves, Claude Code asked for it most, with 32,812 requests. That is more than GPTBot, ClaudeBot and OAI-SearchBot combined."
       ],
       "connects": [
         "agents-top-readers-of-docs",
@@ -335,7 +341,9 @@
         "release-notes-template",
         "writing-changelogs",
         "docs-seo",
-        "documentation-types"
+        "documentation-types",
+        "agents-reading-docs",
+        "written-by-a-human"
       ]
     },
     {
@@ -845,7 +853,8 @@
       "title": "The October inflection point for vibe game development",
       "quotes": [
         "no looking at the code at all",
-        "four games that I've genuinely enjoyed playing"
+        "four games that I've genuinely enjoyed playing",
+        "All four are built in HTML and JavaScript and run entirely in the browser."
       ],
       "connects": [
         "coding-models-new-code-vs-change",
@@ -1303,7 +1312,9 @@
         "AI tends to solve the problems that can fit within its context window very well, but it's totally oblivious to the long term issues that can't be understood in that relatively small frame.",
         "every word of this article was written by a human",
         "The longer a company relies on AI agents to generate the code, the fewer developers are going to understand the codebase.",
-        "2026-11-07, Evan X. Merz"
+        "2026-11-07, Evan X. Merz",
+        "AI generated codebases have more incidents",
+        "Now I'm employed at another large tech company"
       ],
       "connects": [
         "best-llms-for-coding",
@@ -1752,7 +1763,8 @@
         "Everything is reversible. Flags, reverts and staged releases undo most mistakes in minutes.",
         "We want to preserve human time and attention for issues only humans can solve and make sure automated checks catch the rest.",
         "Every pull request gets a Claude review before a person looks.",
-        "Noise costs more when the author is an agent."
+        "Noise costs more when the author is an agent.",
+        "Our culture of defaulting to working on open Slack channels helps too, since you see what others are building while they build it."
       ],
       "connects": [
         "nobody-understands-the-code",
@@ -2943,6 +2955,22 @@
       ],
       "connects": [
         "agent-memory-evidence"
+      ]
+    },
+    {
+      "id": "ahrefs-llmstxt-study",
+      "url": "https://ahrefs.com/blog/llmstxt-study/",
+      "author": "Louise Linehan, Ahrefs",
+      "date": "2026-06-15",
+      "title": "We Analyzed 137K Sites: 97% of llms.txt Files Never Get Read",
+      "quotes": [
+        "Our study focuses on all 137,210 domains in Ahrefs Web Analytics that received traffic in May 2026.",
+        "97% of llms.txt Files Never Get Read",
+        "June 15, 2026"
+      ],
+      "connects": [
+        "agents-reading-docs",
+        "llms-txt"
       ]
     }
   ],

@@ -10,7 +10,7 @@ bridges:
 - slug: llm-token-budgets
   reason: Context limits and token cost decide how a coding agent is configured.
 date: 2026-11-17
-description: My March ranking of coding models rested on one benchmark score. An October run with 32 strict passes out of 196 is why I rebuilt the page, and what it does now.
+description: My March ranking of coding models rested on one benchmark score. An October run with 32 strict passes out of 196 made me rebuild the page, and this essay says what it does now.
 slug: coding-models-new-code-vs-change
 status: published
 title: "Why I rebuilt my best-LLMs-for-coding page"
@@ -31,7 +31,7 @@ The benchmark is Dex Horthy's [October SlopCodeBench update](https://github.com/
 
 A strict pass means every test passed, regression tests included. The best result across every frontier model and effort setting was OpenAI's Astra at the highest effort, with 32 of 196, a strict pass rate of 16.33%.
 
-Now, the benchmark also reports a looser core rate, which only asks that a checkpoint's own core tests pass, and there the same campaigns score from 65.8% up to 74.0%. So the models built the new thing about seven times in ten, and built it without breaking the old thing about one time in seven.
+The benchmark also reports a looser core rate, which only asks that a checkpoint's own core tests pass, and there the same campaigns score from 65.8% up to 74.0%. So the models built the new thing about seven times in ten, and built it without breaking the old thing about one time in seven.
 
 That's the difference between producing software and changing it, to my mind. Maintenance is the second kind, and for the leading campaign 1,178 of the 1,435 test cases failing at the end were regressions.
 
@@ -53,7 +53,7 @@ Nearly all of them score the patch and ignore what the patch costs the next pers
 
 I made the same complaint in the [code documentation guide](/articles/code-documentation/), where a model told to add no comments added them in a third of tasks. And excess code is what a regression is made of, since every extra branch is something the next change can break.
 
-So here's what I did about it. The March version of my best-LLMs page had a section headed "Why SWE-bench Verified is the only metric that matters" and ranked models on that one score, and a best result of 32 strict passes out of 196 made that ranking impossible to defend.
+So I changed the page. The March version of my best-LLMs page had a section headed "Why SWE-bench Verified is the only metric that matters" and ranked models on that one score, and a best result of 32 strict passes out of 196 made that ranking impossible to defend.
 
 A ranking by solve rate answers which model writes new code best, and Willison's games already answer that well enough. The rebuilt page dates its answer, reports the cost of a run beside the resolution rate on a newer benchmark, and ends on a test for your own repository.
 

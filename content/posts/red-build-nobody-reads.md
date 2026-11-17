@@ -15,9 +15,9 @@ title: "Applying Google's pager rule to a build that is always red"
 work_note: "I write tutorials and technical articles for AI companies, and I run the product before I write a line. I'm Ninad Pathak, a freelance technical writer, and [you can hire me](/services/freelance-technical-writer-for-ai-companies/)."
 ---
 
-On October 29 Rachel Laycock, the CTO of Thoughtworks, published [Why are good developers so wary of agentic development?](https://martinfowler.com/rachels-ramblings/good-devs-wary.html), and the middle of it reports an experiment. A group of senior engineers and consultants built an airline application for a week with agents writing every line, and by her account they finished about four fifths of it.
+On October 29 Rachel Laycock, the CTO of Thoughtworks, published [Why are good developers so wary of agentic development?](https://martinfowler.com/rachels-ramblings/good-devs-wary.html), and the middle of it reports an experiment. A group of senior engineers, infrastructure consultants and product people built an airline application for a week with agents writing every line, and by her account they finished about four fifths of it.
 
-What I can't stop thinking about is one detail of the result: "The application ran. The build was red."
+They ended the week with a result I keep coming back to: "The application ran. The build was red."
 
 I think that red build is the part of her post a team working with [coding agents](/articles/coding-agents/) can act on today. On-call engineers met the same failure years ago and wrote down the fix.
 
@@ -27,13 +27,13 @@ Her larger argument is that experienced developers hold back because nobody know
 
 ## A red build spends attention
 
-Here's how I see it. A red build asks every engineer on a team to stop and look, so it spends something the team has little of.
+A red build asks every engineer on a team to stop and look, so it spends something the team has little of.
 
 Google's Site Reliability Engineering book, published in 2016, says how little. Rob Ewaschuk wrote the pager rule in [its chapter on monitoring](https://sre.google/sre-book/monitoring-distributed-systems/) in the first person: "I can only react with a sense of urgency a few times a day before I become fatigued."
 
 So that's the budget, a few times a day. Continuous integration depends on a failure being rare enough that somebody stops, and a build that is always red has spent the budget before the real failure arrives.
 
-Now, the comparison is loose in one respect. A pager wakes one named person, and a red build addresses a whole team, where each person can assume somebody else is looking.
+The comparison is loose in one respect. A pager wakes one named person, and a red build addresses a whole team, where each person can assume somebody else is looking.
 
 And the build light isn't the only signal agents are wearing down. The count in [my guide to writing changelogs](/articles/writing-changelogs/) found 1,807 entries in thirty days of the Claude Code changelog, and the project folds 1,372 of them into collapsed lists.
 

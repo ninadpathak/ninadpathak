@@ -17,7 +17,7 @@ title: "What I'd still write by hand in a codebase agents can explain"
 work_note: "Building an AI product whose readers are engineers? I'm Ninad Pathak, a freelance technical writer, and I write tutorials and technical articles for companies like yours after running the product myself. [Hire me](/services/freelance-technical-writer-for-ai-companies/)."
 ---
 
-On November 9 a Reddit post titled "A year after the 100% AI mandate nobody understands our code" [reached Hacker News](https://news.ycombinator.com/item?id=50433079). The first thing commenters settled was that the post itself looked machine-written, so I wouldn't lean on it.
+On November 9 a Reddit post titled "A year after the 100% AI mandate nobody understands our code" [reached Hacker News](https://news.ycombinator.com/item?id=50433079). Commenters flagged the post itself as machine-written, on a detector score that others disputed, so I wouldn't lean on it.
 
 The complaint is real, though.
 
@@ -35,9 +35,9 @@ I think he's describing something real. If code is written by someone with zero 
 
 And I'd put the cost more broadly than a bad incident. Knowing what the code does is what lets you work on it effectively, and a team without that knowledge is slower at everything it touches.
 
-Now, Merz says incidents rise and recovery slows in agent-written codebases, and he gives no counts for either. So I agree with the worry and I can't call it proven.
+Merz says incidents rise and recovery slows in agent-written codebases, and he gives no counts for either. So I agree with the worry and I can't call it proven.
 
-## Where I don't oppose Anthropic
+## Where Anthropic has a point
 
 The other side has numbers. The Claude Code team [wrote on October 15](https://claude.dev/blog/solving-code-review-at-anthropic/) about reviewing code at the volume agents produce it, and they report that merged pull requests more than doubled between June and September while the share that had to be reverted fell by over 40 percent.
 
@@ -81,6 +81,6 @@ A [design doc](/articles/design-doc-template/) keeps exactly that when it has no
 
 Naur would say even this falls short of the theory, and he may be right. But it lets a successor put a question to a page, where otherwise they could only put it to the code.
 
-So here's a test for any team. Pick a module that agents have changed many times this year, and ask why it's built the way it is and what was decided against.
+A test for any team follows from that. Pick a module that agents have changed many times this year, and ask why it's built the way it is and what was decided against.
 
 If a document answers, the history has a second home. If only one person can answer, write it down before they leave the team.

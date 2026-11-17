@@ -6,7 +6,7 @@ siblings:
 - runbook-template
 bridges:
 - slug: nobody-understands-the-code
-  reason: Both essays ask what a written page proves once text costs nothing to produce.
+  reason: That essay starts from a complaint a detector scored as machine-written, which is why nobody can check the label.
 date: 2026-11-17
 description: Ghostty's release notes say people wrote them. I read that as an invitation, I think it's fading as agents become the readers, and I say who should keep doing it.
 slug: written-by-a-human
@@ -35,23 +35,25 @@ I made the related point in [the case for shorter documentation](/articles/short
 
 The invitation is addressed to people, and people are a shrinking share of who reads a changelog. Fern's [State of Docs report](https://buildwithfern.com/post/state-of-docs) from November 10 found agents reading the changelog about twice as often as people do, across the docs sites Fern hosts.
 
-Now, that's one vendor's logs, and beyond them I'm going on impression. But the direction seems plain to me, and my guide on [how to write a changelog](/articles/writing-changelogs/) goes through what it changes about each entry.
+That's one vendor's logs, and beyond them I'm going on impression. But the direction seems plain to me, and my [changelog guide](/articles/writing-changelogs/) goes through what it changes about each entry.
 
 An agent doesn't care who typed the notes. It wants to know which versions are affected and what to change, and sixteen hours of craft are invisible to it.
 
 So I expect the label to fade. Hand-written release notes cost hours every release, and once the first reader is a tool, fewer teams will find a reason to spend them.
 
-## What the label can't do
+## A further thought on what the label can't prove
 
-Even for a human reader the label has a limit, which is that nobody can check it. The Reddit complaint in [my essay on code nobody understands](/articles/nobody-understands-the-code/) read to me like a tired engineer, and a commenter reported that a detector scored it as fully machine-written.
+This part is my own aside, and the argument above doesn't depend on it. Even for a human reader the label has a limit, which is that nobody can check it.
 
-And a technical reader wants something else proved anyway. A commenter in that thread complained about coworkers who send round generated runbooks without testing them, and a runbook typed by hand and never run fails the engineer on call in the same way.
+The Reddit complaint in [my essay on code nobody understands](/articles/nobody-understands-the-code/) read to me like a tired engineer, and a commenter reported that a detector scored it as fully machine-written.
+
+And a technical reader wants something else proved anyway. A commenter in the November 13 thread complained about coworkers who send round generated runbooks without testing them, and a runbook typed by hand and never run fails the engineer on call in the same way.
 
 What I want evidence of is the checking. Somebody ran the command, on a stated version, and it printed a stated result.
 
 Ghostty's notes carry that too, in advisory lines such as "This affects Ghostty 1.3.0 and 1.3.1." You can check your installed version against a line like that, and so can an agent.
 
-It's why the [runbook template](/articles/runbook-template/) on this site has a header field called Last tested, for the date someone last ran every step. I'd copy that field onto other kinds of page before I'd copy the label.
+It's why the [runbook template](/articles/runbook-template/) on this site has a header field called Last tested, for the date someone last ran every step. I'd copy that field onto other kinds of page before I'd copy the label, and my [about page](/about/) says how AI figures in the writing on this site.
 
 ## Who should keep writing by hand
 
@@ -60,5 +62,3 @@ Teams that want developers to come back and read. That's where I think the label
 Ghostty is that kind of project. Its release notes read to me like the story of a release, and the line about sixteen hours is part of why.
 
 If your changelog is a place developers return to for the writing, say that people wrote it, and mean it. If it's a list an agent will parse on its way to an upgrade, spend the hours on lines that are tested and exact.
-
-My [about page](/about/) says how AI figures in the writing on this site, for research and for attacking a draft. So I'd sooner show you a command and its output than tell you who typed the page.

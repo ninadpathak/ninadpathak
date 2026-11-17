@@ -26,13 +26,9 @@ So when Mads Thines argued on November 7 that [agent memory needs its OpenTeleme
 
 ## What I make of the proposal
 
-I like the problem he starts from. Thines counts the places his coding tools keep what they remember and finds that none of them can read the others, and his remedy is the one observability reached in 2019, an agreed data model that vendors stop competing on.
+I like the problem Thines starts from, and I think his five questions are the right ones for moving a memory between tools. His coding tools each keep what they remember where the others can't read it, and he wants what observability got in 2019: an agreed data model, here covering everything from where a memory is true to which version is current.
 
-He boils that model down to five questions every format answers: where a memory is true, what its identity is, what it says, when it stops being true, and which version is current. I think those are the right five for moving a memory between tools.
-
-He's also fair to his critics. He prints the objection that traces and memories differ, since a trace is written once and a memory gets corrected.
-
-And he gets close to my point more than once. He wants a record to say who wrote it, and he praises GitHub's Copilot Memory for pairing citations with forgetting, but he leaves the idea as an open question: "Should a record point at the code it depends on?"
+He's fair to his critics, printing the objection that a trace is written once and a memory gets corrected, and he gets close to my point more than once. He wants a record to say who wrote it and he praises GitHub's Copilot Memory for pairing citations with forgetting, but he leaves the idea as an open question: "Should a record point at the code it depends on?"
 
 ## The question I'd add
 
@@ -42,7 +38,7 @@ Is there evidence that such a field does the work? Only a hint, and it comes fro
 
 On a benchmark where models built their own notes across sessions, the first model to close the loop wrote entries that carried a rule along with how it knew the rule was true. That describes what a stronger model wrote, and the post doesn't test the clause in isolation, so I won't claim it does.
 
-But look at the note Anthropic quotes from a model playing Pokémon, a rule for what to do after several failed throws: "VARY the timing (insert extra 'wait' presses between menu steps) - the catch landed right after doing this."
+Then there's the note Anthropic quotes from a model playing Pokémon, a rule for what to do after several failed throws: "VARY the timing (insert extra 'wait' presses between menu steps) - the catch landed right after doing this."
 
 To me the last clause of that note is a citation. A later session reading it knows the rule came from one success, and can weigh it as that.
 
@@ -50,13 +46,11 @@ The post's failure case runs the other way. A model recorded a landmark on the w
 
 ## Why I'd settle trust before format
 
-I don't think a shared format is the urgent part, and the commenters on [the Hacker News thread](https://news.ycombinator.com/item?id=50411467) made that case better than I could. A commenter argued that a spec matters less here because the reader is an agent, which can already read files in any shape.
+I don't think a shared format is the urgent part, and the commenters on [the Hacker News thread](https://news.ycombinator.com/item?id=50411467) made that case well. A commenter argued that a spec matters less here because the reader is an agent, which can already read files in any shape.
 
 Another had given up on memory as a feature: "it remembers the wrong things, and then turns them into an inane focus for each task." I read that as a complaint about trust, and a shared envelope would deliver the same wrong things to more tools.
 
-Thines half agrees. He treats a pointer to the code as the best guard against stale memory, and his draft record has room for a pull request number among its optional attributes.
-
-And a shipped product already goes further. His own table describes Copilot Memory as storing facts with code citations and deleting them after 28 days unused.
+Thines half agrees, since his draft record has room for a pull request number among its optional attributes. And a shipped product already goes further: Copilot Memory, in his own table, stores facts with code citations and deletes them after 28 days unused.
 
 So optional is the part I'd change. A record with no source should be readable as a guess, the way an untagged sentence on Wikipedia is readable as unchallenged, and a model should be told the difference.
 
