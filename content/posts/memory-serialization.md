@@ -6,148 +6,166 @@ siblings:
 - rag-vs-memory
 - memory-versioning
 date: '2026-04-30'
-description: Why agents forget everything on restart, and the serialization patterns
-  that actually solve it
+description: 'Memory serialization is how an agent persists state across sessions. Three ways to do it, a run of a versioned state record, and why to keep the log.'
 slug: memory-serialization
 status: published
-work_note: 'I led Mem0''s team of 13 writers and did its technical reviews. What follows is my own account of how an agent''s state gets written out and read back. [My portfolio](/portfolio/) has the case study.'
+work_note: 'I led Mem0''s team of 13 writers and did its technical reviews. This page is my own account of how an agent''s state gets written out and read back, with a run of one small record. [My portfolio](/portfolio/) has the case study.'
 title: 'Memory Serialization: How Agents Persist State Across Sessions'
+updated: 2026-11-17
 ---
 
-An agent can handle every conversation in one process and still lose its state at the next restart. That is a persistence failure, not a model failure.
+Zork let players save their position to disk, and BYTE magazine explained in 1981 what the feature was for, in a line [Wikipedia's article on saved games](https://en.wikipedia.org/wiki/Saved_game) preserves: "it was intended to let players play over many weeks". A game too long for one sitting needed a way to write down where the player stood.
 
-The next morning the agent greeted the same users as if it had never seen them, asking one person their timezone for the second time after they had spelled it out the day before. No memory of preferences they had confirmed.
+Memory serialization is the same feature for an agent. Persisting agent state across sessions means writing what the agent knows and what it was doing to storage, in a form that a later process can load and continue from.
 
-No record of issues already resolved. Back to zero.
+The parallel breaks on who writes the save. A game engine dumps its own exact state, and an agent's saved state is the model's account of where things stand, which can be wrong when it is written and wrong again by the time it is read.
 
-Burned by that, I learned the rule that governs agent memory: a session that cannot be serialized will not survive a restart. The whole conversation you just had, the facts you established, the reasoning you built across dozens of turns, all of it lives only in the context window of a running process.
+## What are the ways to persist agent state?
 
-Kill that process and you have nothing left to greet anyone with.
+The usual ones are in the table, and they differ in what is stored and what the next session has to do with it.
 
-Serialization is the problem underneath all of it, and it fights back harder than a first pass suggests.
+| Approach | What is stored | What the next session does | Main cost |
+| --- | --- | --- | --- |
+| Full replay | Every message and tool result | Reads the whole history again | Tokens and time on every restart |
+| Log plus recent window | Every message, in a database | Loads the last few and searches the rest | Has to work out where things stand |
+| Structured state | A small record of facts, task and open items | Loads the record and continues | Someone has to design the record |
+
+Full replay loses nothing and scales worst, since a long history is paid for again at each start. A log is cheap to write and leaves the next session to reconstruct the situation from raw messages.
+
+Structured state is the one that behaves like a save file. It is small and quick to load, and its weakness is the one named above: the record holds only what the writer thought to put in it.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/memory-serialization/serialize-restore.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/memory-serialization/serialize-restore.narrow.svg" width="288" height="1176"><img class="np-has-narrow" src="/static/images/diagrams/memory-serialization/serialize-restore.svg" width="720" height="544" alt="Two sessions across a restart. With serialization, the agent writes its state to a store at session end and restores it after the restart, so the new session starts where the old one stopped. Without it, the restart wipes the session and the agent starts from zero." loading="lazy" decoding="async"></picture></a>
   <figcaption>A session that cannot be serialized will not survive a restart.</figcaption>
 </figure>
 
-## The Three Approaches Engineers Actually Use
+## What goes wrong after a restart?
 
-Three real patterns have shown up across the production systems I have worked on. Each one solves the problem and bills you in a different currency.
-
-**Full state serialization** means dumping the entire conversation history plus the system prompt into a structured format on disk. JSON works.
-
-So does msgpack if you want speed. The agent restarts, reads the file, and gets its full context back.
-
-Completeness is what you buy here. Nothing gets lost.
-
-The cost lands in latency and tokens. A six-month support thread, say a customer who has filed eleven tickets and changed plans twice, becomes enormous.
-
-Even when the full history fits in the context window, replaying it on every restart makes the model process those input tokens again and adds latency.
-
-Cheaper than that is **conversation log storage**, where you write every message to a database as it happens. On restart, you retrieve the recent messages and hand the agent the raw log.
-
-A common first approach is a Postgres table with one row per message and a session identifier.
-
-Reconstruction from a raw log is where it gets imprecise. The agent still has to work out what matters, what to act on first, what to ignore.
-
-A short conversation reconstructs fine. For a months-long relationship with a user, the agent burns a real slice of its tokens figuring out where things stand before it can help with anything.
-
-It is like asking someone to resume a project by handing them the full email thread and saying "you were on this," instead of a one-line status.
-
-**Selective serialization** is the pattern I recommend once you know your agent well enough. You define a state schema that captures what actually matters.
-
-User preferences, confirmed facts, current task status, unresolved issues. The agent updates this schema as it goes.
+Old state meets new code, and old facts meet a changed world. The script below saves a record the way last week's code would have, then loads it with a loader that expects a newer shape.
 
 ```python
-# A minimal serialization schema for a research agent
-{
-    "user_preferences": {
-        "communication_style": "concise",
-        "timezone": "America/New_York"
-    },
-    "confirmed_facts": [
-        {"fact": "user is working on a RAG pipeline",
-         "confirmed_at": "2026-04-28T14:22:00Z"},
-        {"fact": "user prefers pgvector over Pinecone",
-         "confirmed_at": "2026-04-29T09:15:00Z"}
-    ],
-    "active_task": {
-        "description": "benchmark hybrid search accuracy",
-        "status": "in_progress",
-        "last_action": "ran evaluation script, results pending"
+"""Save an agent's state, restart with newer code, and load it back.
+
+The loader migrates an old schema version and marks facts that are too old
+to act on without checking. Dates are fixed so the output is repeatable.
+"""
+import json
+import os
+import tempfile
+from datetime import date
+
+SCHEMA_VERSION = 2
+RECHECK_AFTER_DAYS = 3
+
+
+def save_v1(path):
+    """What last week's code wrote: version 1, with no plan field."""
+    state = {
+        "version": 1,
+        "saved_on": "2026-11-10",
+        "task": "migrate billing service to the v2 payments API",
+        "facts": [
+            {"text": "customer is on the enterprise plan", "confirmed_on": "2026-11-03"},
+            {"text": "invoices table has been backfilled", "confirmed_on": "2026-11-10"},
+        ],
+        "open_items": ["switch webhook handler", "remove v1 client"],
     }
-}
+    with open(path, "w") as f:
+        json.dump(state, f, indent=2)
+
+
+def migrate(state):
+    if state["version"] == 1:
+        state["plan"] = None  # field added in version 2
+        state["version"] = 2
+    if state["version"] != SCHEMA_VERSION:
+        raise ValueError(f"cannot read state version {state['version']}")
+    return state
+
+
+def load(path, today):
+    with open(path) as f:
+        state = migrate(json.load(f))
+    for fact in state["facts"]:
+        age = (today - date.fromisoformat(fact["confirmed_on"])).days
+        fact["status"] = "recheck" if age > RECHECK_AFTER_DAYS else "trusted"
+    return state
+
+
+path = os.path.join(tempfile.mkdtemp(), "state.json")
+save_v1(path)
+state = load(path, today=date(2026, 11, 12))
+
+print("loaded version:", state["version"], "| plan:", state["plan"])
+for fact in state["facts"]:
+    print(f"  {fact['status']:<8} {fact['text']} (confirmed {fact['confirmed_on']})")
+print("open items:", ", ".join(state["open_items"]))
+
+with open(path, "w") as f:
+    json.dump({"version": 3}, f)
+try:
+    load(path, today=date(2026, 11, 12))
+except ValueError as error:
+    print("newer file, older code:", error)
 ```
 
-What you pay upfront is design work. Knowing what your agent needs to remember has to come before you can define the schema, which usually means running the agent in the messy way first and watching what it keeps relearning.
+Run as `python3 state_roundtrip.py`, it loads the old record and then refuses a newer one.
 
-The resulting state, though, is small, fast to load, and semantically meaningful. A 200-message support thread that compresses into a 2KB state object loads in a few milliseconds and tells the agent exactly where it stood.
+```text
+loaded version: 2 | plan: None
+  recheck  customer is on the enterprise plan (confirmed 2026-11-03)
+  trusted  invoices table has been backfilled (confirmed 2026-11-10)
+open items: switch webhook handler, remove v1 client
+newer file, older code: cannot read state version 3
+```
 
-## When Serialization Fails in Practice
+The version field is what let the loader add the missing `plan` key, and it is also what let older code refuse a file from the future. Without it, a missing key reads as a fact that was never established.
 
-Schema mismatch is a common persistence failure. The serialized state can outlive the schema that originally wrote it.
+The `recheck` label is the other half. A fact confirmed nine days earlier is loaded and marked as unverified, so the agent can ask before acting on it.
 
-You added new capabilities, maybe a field for tracking which integrations the user connected. The new code writes state using keys that did not exist in the original schema, so old sessions deserialize with those keys missing.
+Mads Thines described a memory note on November 7, in a post proposing [a shared format for agent memory](https://www.lorekit.io/blog/open-agent-memory-format), as "a note an agent left for its future self, stored at some address, true for a while." A serialized fact needs its date for exactly that last clause.
 
-The agent does not crash. It quietly behaves as if certain facts were never established, like greeting a long-time user who once confirmed they were on the enterprise plan as a brand-new free-tier signup.
+## Can a saved state be wrong from the start?
 
-Version the schema explicitly. The serialized state should carry a version field, and deserialization should migrate old versions before the agent processes anything.
+Yes, and a save from a game shows it. Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, follows a model playing Pokémon Red that recorded the wrong side of a mountain for a landmark.
 
-A database migration does the same job for table columns, and the discipline transfers directly.
+The model then updated its notes with the words "Mt Moon DONE." The mountain was still ahead of it, and in the run that kept the bad note the model fell back to an earlier route repeatedly and never reached the next city.
 
-Stale state is a separate problem. A customer support agent serialized three days ago holds state that may no longer match reality.
+The fix in the post is a pass the authors call dreaming, in which the model rereads its notes against the session log. "Claude checked the note against the session transcript, caught its error, and rewrote it."
 
-The customer might have resolved their issue through live chat, or the product might have shipped a change that voids the agent's last assumption. An agent proceeding from stale state can do more damage than an agent with no memory at all, since it acts with false confidence.
+They draw the conclusion themselves: "The transcript gave Claude a ground truth to validate its memory against." The run with the corrected note went back into the cave and got through.
 
-Validating and refreshing on deserialization is the fix. Check timestamps.
+That is one experiment by a vendor on its own model, and I think the design lesson holds anyway. A structured record with no log behind it can't be audited, so keep both and treat the record as a cache of the log.
 
-Confirm critical facts before acting on them, the way a good support rep opens with "I see you reported a billing error last week, is that still happening?" rather than assuming. Give the agent a way to flag that it needs to re-verify something instead of treating old state as gospel.
+## What belongs in the state record?
 
-## The Schema Design Decisions That Matter
+Put in what the next session can't cheaply find out, and date every fact. A workable record has four parts.
 
-Context window size drives a lot of the serialization strategy. A 1M token context window from Gemini 2.5 Pro changes what you can serialize compared to a 200k window from Claude 3.5 Sonnet.
+- **Task.** What the agent was asked to do, in a sentence.
+- **Facts.** What has been established, each with the date it was confirmed.
+- **Open items.** What is left, in the order to do it.
+- **Version.** The schema number, so a loader can migrate or refuse.
 
-Given a large window, you can afford to serialize full recent history and let the agent sort through it on load. A smaller window forces you to be surgical about what goes into serialized state.
+Leave out anything the agent can read again from its environment, such as file contents. [Contextual compression for agent memory](/articles/memory-compression/) makes that argument at length.
 
-Separating the conversation log from structured state is a habit I always keep. The log is append-only and grows unbounded, a transcript of everything said.
+History is a separate decision. A record that overwrites a fact loses what was believed before, and [memory versioning](/articles/memory-versioning/) covers keeping every version when someone may ask later.
 
-The structured state is the small set of facts the agent actively uses to make decisions. A sliding window of recent log entries covers reconstruction, and the structured state gets serialized on its own track.
+## What can't serialization fix?
 
-Running multiple agent instances is where cloud-native serialization starts to matter. SQLite is plenty for a single instance.
+It can't make a bad note good, and it can't share one. A record written by one tool is unreadable by the next, which is the complaint Thines's post starts from, and [coding agent memory](/articles/coding-agent-memory/) shows how four tools each keep their own files.
 
-Spread across containers or regions, the serialized state needs to live somewhere shared. S3 with JSON covers most of my projects.
+It also doesn't decide what the model sees. Loading state puts it in the context window, and [context windows vs memory](/articles/context-windows-vs-memory/) explains why a large record crowds out the work.
 
-The added latency for a GET on startup typically stays under 50ms for a well-designed schema under 100KB.
+## FAQ
 
-## What Serialization Cannot Solve
+**What is memory serialization in an AI agent?**
 
-Serialization handles session continuity. Retrieval is a different problem it leaves untouched.
+It is writing the agent's state to storage in a form a later session can load. The state is usually a small structured record, a message log, or both.
 
-Serialize a conversation with no way to find the relevant parts quickly, and you end up with context that is technically present but practically unusable, like a filing cabinet stuffed with every document you own and no folder labels.
+**Why does an agent forget after a restart?**
 
-The memory hierarchy matters here. Serialized state is one layer.
+The conversation lived in the memory of one process. Unless something wrote it to disk, a new process starts with nothing.
 
-How you index and retrieve from that state is another. [My post on AI memory management](/articles/ai-memory-management/) goes into this in detail, and the short version is that serialization and retrieval are separate problems you have to design together.
+**Should an agent store the full transcript or a summary?**
 
-Agent memory retrieval is also asymmetric. What you serialize is not always what you retrieve.
-
-[RAG versus memory](/articles/rag-vs-memory/) shows how task-state queries and stored-record language diverge. The schema used for serialization shapes retrieval, and a schema that drops identity, time, or event type creates predictable retrieval errors.
-
-The serialization format itself matters less than the discipline of using it consistently. JSON is fine for most cases.
-
-A write-heavy agent may need a binary format such as msgpack or Protocol Buffers to reduce serialization overhead. JSON with a clear schema remains easier to read and debug, so the format choice depends on whether throughput or inspectability is the tighter constraint.
-
-Serialization preserves the latest state, but an audit trail must preserve the states it replaced. [Memory versioning and audit trails](/articles/memory-versioning/) covers that history instead of overwriting it on every save.
-
-## Where This Leaves You
-
-Building an agent that users come back to over days or weeks makes serialization non-negotiable. It is the mechanism that lets a long-term relationship exist at all.
-
-Whichever pattern you choose shapes everything downstream: retrieval quality, context window utilization, latency on restart, and the agent's ability to actually use what it learned.
-
-Start with a clear state schema. Serialize what matters.
-
-Validate on deserialization. Test your restart path on purpose, by actually killing the process mid-conversation and watching what comes back.
-
-An agent that performs flawlessly in a long-running session and loses everything on restart is an agent your users will stop trusting the morning after.
+Both, where it can. The summary is what gets loaded, and the transcript is what the summary can be checked against.
