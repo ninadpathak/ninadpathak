@@ -813,7 +813,10 @@
         "| Opus 5.5 Medium | 28/196 | 14.29% | 73.98% |",
         "| Opus 5.5 | 28 → 25 | 145 → 141 | 4.22x |",
         "| GPT-6 Astra XHigh | 3 | 1,435 | 1,178 |",
-        "One campaign per setting can't tell me how much is run-to-run variation."
+        "One campaign per setting can't tell me how much is run-to-run variation.",
+        "changes the existing code",
+        "XHigh costs **2.11-4.22x** as much as Medium",
+        "writes a program, gets new requirements, and changes the existing code"
       ],
       "connects": [
         "coding-models-new-code-vs-change",
@@ -833,7 +836,30 @@
         "This release expands the benchmark to 25 tasks across TypeScript, Go, Python, Ruby and Java codebases and compares 18 models.",
         "Resolution rate: 56.80%, one standard error either side: 53.5% to 60.1%",
         "Resolution rate: 56.00%, one standard error either side: 54.4% to 57.6%",
-        "1 Opus 5.5 56.80% $13.95 2 GPT 6 Astra 56.00% $3.78"
+        "1 Opus 5.5 56.80% $13.95 2 GPT 6 Astra 56.00% $3.78",
+        "expands the benchmark to 25 tasks across TypeScript, Go, Python, Ruby and Java codebases and compares 18 models",
+        "Resolution rate is equivalent to pass@1, averaged over five independent runs per task.",
+        "All runs use the highest effort possible for each model with its harness.",
+        "We use native harnesses to reflect how enterprise engineers work in practice, evaluating model-and-harness combinations rather than models in isolation.",
+        "Unverified assumptions are the most common failure",
+        "Builds on a guess about the system instead of checking it in the workspace.",
+        "All models 33.1% 28.7% 16.4% 14.7% 4.4% 2.0% 0.8%",
+        "GPT 6 Astra 58.2% 0% 16.4% 23.6% 0% 1.8% 0%",
+        "Opus 5.5 22.2% 11.1% 38.9% 18.5% 1.9% 5.6% 1.9%",
+        "GPT 6.1 Sol 53.0% 1.5% 13.6% 22.7% 0% 9.1% 0%",
+        "Muse Wonder 1.0 12.5% 55.6% 13.9% 16.7% 1.4% 0% 0%",
+        "GLM-5.3 Claude Code",
+        "DeepSeek V4.1 Flash mini-swe-agent",
+        "Kimi K3.1 Pro Kimi Code",
+        "Gemini 4 Argon Antigravity CLI",
+        "Muse Wonder 1.0 Muse Code",
+        "8 Kimi K3.1 Pro 39.20% $2.03",
+        "10 DeepSeek V4.1 Flash 38.40% $0.19",
+        "13 GLM-5.3 26.40% $3.35",
+        "4 GPT 6.1 Sol 47.20% $0.79",
+        "5 Fable 5.1 45.60% $14.24",
+        "6 Muse Wonder 1.0 42.40% $3.76 7 Gemini 4 Argon 39.20% $4.66",
+        "3 Sonnet 5.5 51.20% $10.09"
       ],
       "connects": [
         "coding-models-new-code-vs-change",
@@ -1150,6 +1176,95 @@
         "llm-inference-optimization"
       ],
       "date_note": "Older than a year and dated in the post. Table 3 of the PDF holds the layer and head counts; the head dimension of 128 is 8,192 divided by 64 and is not printed in the paper. The post links the abstract page."
+    },
+    {
+      "id": "lambert-aa-v5-benchmarkers-dilemma",
+      "url": "https://www.interconnects.ai/p/artificial-analysis-v5-and-the-benchmarkers",
+      "author": "Nathan Lambert",
+      "date": "2026-10-28",
+      "title": "Artificial Analysis v5 and the benchmarker's dilemma",
+      "quotes": [
+        "The best open models do benchmax a little.",
+        "the best OpenAI and Anthropic models have been a major step ahead in their flexibility and reliability.",
+        "The most proven use-case is coding, where open models are far more competitive and likely to keep up."
+      ],
+      "connects": [
+        "best-llms-for-coding"
+      ]
+    },
+    {
+      "id": "kimi-k3-1-pro-launch",
+      "url": "https://www.kimi.ai/blog/kimi-k3-1-pro",
+      "author": "Moonshot AI",
+      "date": "2026-10-23",
+      "date_note": "The page prints no date; this is the Hacker News submission date (item 50212065).",
+      "title": "Introducing Kimi K3.1 Pro",
+      "quotes": [
+        "K3.1 Pro scores 65.7%, ahead of GPT-6 Astra (58.2%) and narrowly behind Claude Opus 5.5 (66.4%).",
+        "our most capable 3T-class open-weight model to date, with a 1-million-token context window"
+      ],
+      "connects": [
+        "best-llms-for-coding"
+      ]
+    },
+    {
+      "id": "ricursive-ripple-65b",
+      "url": "https://www.ricursive.com/ripple",
+      "author": "Ricursive Intelligence",
+      "date": "2026-11-04",
+      "date_note": "The page prints no date; this is the Hugging Face repo creation date and the Hacker News submission date (item 50369925).",
+      "title": "Introducing Ripple-65B Preview, a Frontier Open-Weight Model",
+      "quotes": [
+        "U.S. open-weight state-of-the-art (80.52) on TerminalBench 2.1",
+        "run efficiently on local devices such as NVIDIA DGX Spark",
+        "we chose to train a modernized dense Transformer model rather than use Mixture-of-Experts (MoE) like other labs",
+        "support for up to 1M context length"
+      ],
+      "connects": [
+        "best-llms-for-coding",
+        "mixture-of-experts"
+      ]
+    },
+    {
+      "id": "merz-fragile-codebase",
+      "url": "https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/",
+      "author": "Evan X. Merz",
+      "date": "2026-11-07",
+      "title": "AI usage generates a fragile codebase",
+      "discussion": "https://news.ycombinator.com/item?id=50438318",
+      "quotes": [
+        "AI tends to solve the problems that can fit within its context window very well, but it's totally oblivious to the long term issues that can't be understood in that relatively small frame."
+      ],
+      "connects": [
+        "best-llms-for-coding"
+      ]
+    },
+    {
+      "id": "google-gemini-4-hydrogen",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+      "author": "Koray Kavukcuoglu",
+      "date": "2026-11-12",
+      "title": "Introducing Gemini 4 Hydrogen",
+      "quotes": [
+        "Introducing Gemini 4 Hydrogen Nov 12, 2026"
+      ],
+      "connects": [
+        "best-llms-for-coding"
+      ]
+    },
+    {
+      "id": "aa-claude-fable-5-2",
+      "url": "https://artificialanalysis.ai/models/claude-fable-5-2",
+      "author": "Artificial Analysis",
+      "date": "2026-11-17",
+      "title": "Claude Fable 5.2: Intelligence, Performance & Price Analysis",
+      "quotes": [
+        "Released November 2026",
+        "has a 1M tokens context window"
+      ],
+      "connects": [
+        "best-llms-for-coding"
+      ]
     }
   ],
   "unused_leads": [
@@ -1283,6 +1398,7 @@
     ],
     "coding-models-new-code-vs-change": [
       "best coding model"
-    ]
+    ],
+    "best-llms-for-coding": []
   }
 }

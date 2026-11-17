@@ -1,128 +1,149 @@
 ---
 category: ai-engineering
 date: 2026-03-12
-description: Not all models are created equal for software development. Here is a
-  benchmark-backed guide to choosing the right LLM for autonomous agents, algorithmic
-  logic, and repository-scale refactoring as of March 2026.
+description: 'The best LLMs for coding as of November 2026, read from Real-SWE 1.1: the leaders, the cost per resolved task, open-weight options and a test for your own repo.'
 status: published
 work_note: 'I''ve written about coding agents for Firecrawl, including why CLIs suit them better than IDEs. This page is about choosing the model underneath one, and [my portfolio](/portfolio/) has that piece.'
 title: 'The Best LLMs for Coding in 2026: An Engineering Review'
 slug: best-llms-for-coding
 video: best-llms-for-coding
+updated: 2026-11-17
 ---
 
-Evaluating models for software engineering stopped being about snippet generation a while ago. Production coding now leans on long-range reasoning, autonomous tool interaction, and deep algorithmic logic all at once.
+The March version of this page named a best LLM for coding in each of five kinds of work, and none of the models it picked is among the 18 in the benchmark I now trust for this question. A list like that lasted eight months, so this version dates its answer and spends its length on reading the evidence, which ages slower.
 
-A model that aces a Python quiz can still fall apart the moment you ask it to rename a function used across forty files or to split a monolithic service into two without breaking the test suite.
-
-This review separates coding work into four engineering personas, from autonomous changes to repository-scale reasoning. The persona that fits your work decides which model evidence matters, and the rest of this post walks through each one.
-
-## Why SWE-bench Verified is the only metric that matters
-
-HumanEval and the other snippet-based benchmarks are obsolete. They measure whether a model can solve a self-contained puzzle like "reverse a linked list," which is maybe two percent of what I actually do in a day.
-
-Real engineering happens at the repository level. The [Claude Code and Gemini CLI comparison](/articles/claude-vs-gemini-cli/) is a walkthrough of an autonomous refactoring task, not reproducible benchmark evidence.
-
-SWE-bench Verified gives the most honest signal I have found today. To pass, a model has to resolve an actual GitHub issue end to end: read its way around an unfamiliar codebase, trace a bug back to the line that causes it, write a patch, and prove the patch holds by running the existing tests.
-
-Watching a model do that is the closest thing I have to watching it think like an engineer. Claude 4.6 Opus currently leads this benchmark with a score of 80.9%.
+As of November 17, 2026, the best LLMs for coding work that resembles a job are Claude Opus 5.5 and GPT 6 Astra, which tie near 57% on [Real-SWE 1.1](https://withspecific.com/blog/real-swe), a benchmark Specific Labs published in October. GPT 6.1 Sol resolves 47% of the same tasks for under a dollar a run, and the strongest open-weight entries sit near 39%.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/best-llms-for-coding/coding-personas.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/best-llms-for-coding/coding-personas.narrow.svg" width="288" height="648"><img class="np-has-narrow" src="/static/images/diagrams/best-llms-for-coding/coding-personas.svg" width="720" height="328" alt="Five kinds of coding work matched to the model the article recommends for each: autonomous agentic coding to Claude 4.6 Opus, which leads SWE-bench Verified at 80.9%; repository-scale context and complex logic to Gemini 3.1 Pro; cost-sensitive production use to DeepSeek V4; multi-step reasoning and planning to GPT-5.4 Codex; and everyday IDE autocomplete to the OpenAI and Cursor ecosystem." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Claude 4.6 Opus leads SWE-bench Verified at 80.9%, but the right model depends on the kind of work.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/best-llms-for-coding/coding-personas.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/best-llms-for-coding/coding-personas.narrow.svg" width="288" height="648"><img class="np-has-narrow" src="/static/images/diagrams/best-llms-for-coding/coding-personas.svg" width="720" height="328" alt="Five kinds of coding work, each paired with the model family the March 2026 version of this article picked for it: autonomous work with Claude Opus, repository-scale reasoning with Gemini Pro, cost-sensitive use with DeepSeek, planning with GPT Codex and autocomplete with Cursor." loading="lazy" decoding="async"></picture></a>
+  <figcaption>The pairings this page made in March 2026. Choosing by the kind of work still holds, and the table below replaces the picks.</figcaption>
 </figure>
 
+## Which LLM is best for coding right now?
 
-## For agentic and autonomous coding: Claude 4.6 Opus
+Claude Opus 5.5 and GPT 6 Astra lead Real-SWE 1.1 at 56.80% and 56.00%, and their error ranges overlap, so the benchmark doesn't separate them. Real-SWE "expands the benchmark to 25 tasks across TypeScript, Go, Python, Ruby and Java codebases and compares 18 models", with every task taken from a private company codebase.
 
-For autonomous engineering agents, Claude 4.6 Opus is the model I trust to run unattended. It reasons through a multi-step plan without losing the thread, and it does not panic when a tool call returns something it did not expect.
+| Model | Harness | Resolution rate | Estimated cost per run, USD |
+| --- | --- | --- | --- |
+| Claude Opus 5.5 | Claude Code | 56.80% | 13.95 |
+| GPT 6 Astra | Codex CLI | 56.00% | 3.78 |
+| Claude Sonnet 5.5 | Claude Code | 51.20% | 10.09 |
+| GPT 6.1 Sol | Codex CLI | 47.20% | 0.79 |
+| Claude Fable 5.1 | Claude Code | 45.60% | 14.24 |
+| Muse Wonder 1.0 | Muse Code | 42.40% | 3.76 |
+| Gemini 4 Argon | Antigravity CLI | 39.20% | 4.66 |
+| Kimi K3.1 Pro | Kimi Code | 39.20% | 2.03 |
+| DeepSeek V4.1 Flash | mini-swe-agent | 38.40% | 0.19 |
+| GLM-5.3 | Claude Code | 26.40% | 3.35 |
 
-The behavior I keep noticing is recovery: when a build fails because Opus assumed a package was already installed, it reads the error, walks back the assumption, and adds the install step instead of retrying the same broken command. A weaker model loops on the same failure until it runs out of turns.
+The table has limits the page states itself. "Resolution rate is equivalent to pass@1, averaged over five independent runs per task.", so each score rests on 125 runs, and "All runs use the highest effort possible for each model with its harness."
 
-That recovery instinct is why so many agentic frameworks now default to Claude. The model exposes "effort controls" that let you dial reasoning depth up for a thorny migration and down for a routine rename.
+It is also already old. Google [announced Gemini 4 Hydrogen on November 12](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/), after the table was published, and Artificial Analysis lists [Claude Fable 5.2](https://artificialanalysis.ai/models/claude-fable-5-2) as a November release, so neither model has a row.
 
-Building an agent that needs to own a multi-file pull request from issue to merge, Claude is the one I reach for, though the model is only half the story without the [agent harness that supplies the infrastructure layer](/articles/agent-harnesses/) around it.
+The price column says more than the rank column. Dividing each cost by its resolution rate gives the price of one resolved task, and I computed it with a few lines of Python.
 
+```python
+# Real-SWE 1.1 (October 2026): resolution rate and estimated cost per run.
+rows = [
+    ("Claude Opus 5.5", 56.80, 13.95),
+    ("GPT 6 Astra", 56.00, 3.78),
+    ("Claude Sonnet 5.5", 51.20, 10.09),
+    ("GPT 6.1 Sol", 47.20, 0.79),
+    ("Kimi K3.1 Pro", 39.20, 2.03),
+    ("DeepSeek V4.1 Flash", 38.40, 0.19),
+]
 
-## For complex logic and repository-scale context: Gemini 3.1 Pro
+print(f"{'model':<22}{'resolved':>9}{'per run':>9}{'per resolved task':>19}")
+for name, rate, cost in rows:
+    print(f"{name:<22}{rate:>8.1f}%{cost:>9.2f}{cost / (rate / 100):>19.2f}")
+```
 
-Where Gemini 3.1 Pro pulls ahead is the gnarly architectural question: untangling a circular dependency between three services, or reasoning about whether a change to a shared schema will cascade somewhere unexpected. Google has wired in "Antigravity" agents that plan across the terminal and browser together.
+Running it with `python3 cost_per_pass.py` prints the table.
 
-Its logic density also lets it crack the kind of dense algorithmic puzzle, a tricky dynamic-programming problem or a constraint solver, that sends other models in circles.
+```text
+model                  resolved  per run  per resolved task
+Claude Opus 5.5           56.8%    13.95              24.56
+GPT 6 Astra               56.0%     3.78               6.75
+Claude Sonnet 5.5         51.2%    10.09              19.71
+GPT 6.1 Sol               47.2%     0.79               1.67
+Kimi K3.1 Pro             39.2%     2.03               5.18
+DeepSeek V4.1 Flash       38.4%     0.19               0.49
+```
 
-The two million token context window is the real headline. You can drop an entire documentation site plus a full legacy repository into a single prompt and ask Gemini why a deprecated config flag still gets read at startup, and it will find the line.
+A resolved task costs about fifty times as much on Opus 5.5 as on DeepSeek V4.1 Flash. The cheap model fails more often, and a failed run still has to be noticed by someone, which the cost column doesn't price.
 
-Think of it as the engineer who has read every file in the repo before the meeting starts rather than skimming a few on the way in. Retrieval accuracy holds up across that whole range, which makes Gemini my pick for architectural reviews and large-scale code migrations.
+## Why does a coding benchmark rank a model and its harness together?
 
+A coding model never runs alone, so every row is a model inside one agent program. Real-SWE says so directly: "We use native harnesses to reflect how enterprise engineers work in practice, evaluating model-and-harness combinations rather than models in isolation."
 
-## For cost-sensitive production use: DeepSeek V4
+The harness column in the table shows what that means. GLM-5.3 ran inside Claude Code and DeepSeek V4.1 Flash ran in mini-swe-agent, so their rows measure those pairings and say little about the same weights in another tool.
 
-DeepSeek V4 rewrote the economics of high-performance AI coding. It lands close to Claude 4.6 on quality at a sliver of the per-token cost, built on a [Mixture-of-Experts architecture that is cheap to run but expensive to host](/articles/mixture-of-experts/) and tuned hard for efficiency.
+The [agent harness](/articles/agent-harnesses/) decides which files the model sees and when it runs the tests, and my [Claude Code and Gemini CLI comparison](/articles/claude-vs-gemini-cli/) walks through how two harnesses handle one refactoring task. When you change the model inside a harness you already use, expect a different number from the one in the table.
 
-My own use for DeepSeek is the high-volume, repetitive work: pointing it at every file in a pull request to flag obvious smells, or having it backfill unit tests across a module that someone shipped without any. It carries "Engram Memory" too, so after a few sessions it stops suggesting tabs in a repo that uses spaces and starts matching your naming conventions.
+## How do the top coding models fail?
 
-Running millions of tokens through DeepSeek costs about what a few thousand tokens cost on a proprietary model, and for a startup burning budget on automated reviews that difference decides whether the workflow ships at all.
+They fail differently, and the failure mode predicts the review work a model leaves you. Real-SWE classified every failed run, and the largest group is the unverified assumption, a run that "Builds on a guess about the system instead of checking it in the workspace."
 
+| Share of each model's failed runs | Unverified assumption | Missed requirement | Misunderstood task | Integration error |
+| --- | --- | --- | --- | --- |
+| All 18 models | 33.1% | 28.7% | 16.4% | 14.7% |
+| Claude Opus 5.5 | 22.2% | 11.1% | 38.9% | 18.5% |
+| GPT 6 Astra | 58.2% | 0% | 16.4% | 23.6% |
+| GPT 6.1 Sol | 53.0% | 1.5% | 13.6% | 22.7% |
+| Muse Wonder 1.0 | 12.5% | 55.6% | 13.9% | 16.7% |
 
-## For multi-step reasoning and planning: GPT-5.4 Codex
+The two leaders tie on score and split on cause. Astra's failures are guesses it didn't check, and Opus more often misreads what was asked, so the same pass rate calls for different instructions and a different review.
 
-GPT-5.4 Codex stays my reliable choice when the plan matters more than the raw score. It rarely tops the headline benchmark, yet it behaves the same way whether I hand it Python, Go, or a pile of legacy PHP, and that predictability is worth more to me than a point or two on a leaderboard.
+A row in that analysis cuts against something I wrote this month. Regressions are 2.0% of failures across all models on Real-SWE, and my [essay on coding models](/articles/coding-models-new-code-vs-change/) leaned on Dex Horthy's [SlopCodeBench run](https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/benchmarking-new-models-on-slop-code-bench.md) from October 15, where regressions were the bulk of the failing tests.
 
-OpenAI's "Adaptive Reasoning" decides on its own when a step deserves slow, deliberate thought and when it can answer in one pass.
+My reading is that the two benchmarks ask different things, since Real-SWE grades one change to code that people wrote. The SlopCodeBench agent "writes a program, gets new requirements, and changes the existing code", so that benchmark measures a model living with its own output.
 
-Structured outputs and predicted tokens are where GPT-5.4 quietly shines. Asking it to return a strict JSON object for a code-mod tool, it gives me valid JSON every time instead of wrapping the answer in an apology, which is the feature that makes a low-latency coding tool possible at all.
+Evan X. Merz described the second situation from inside a large company in [a post dated November 7](https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/): "AI tends to solve the problems that can fit within its context window very well, but it's totally oblivious to the long term issues that can't be understood in that relatively small frame."
 
-Deep integration into the OpenAI ecosystem rounds it out, so for a team that wants a stable, well-supported platform it is a safe bet.
+A leaderboard of single tasks can't show that cost, and a composition-level check like the one in my [lambda calculus exercise](/articles/lambda-calculus-ai/) is a small way to look for it.
 
-## For everyday IDE autocomplete: the OpenAI and Cursor ecosystem
+## What is the best open source LLM for coding?
 
-For real-time autocomplete the integration matters far more than which model sits behind it. GitHub Copilot and Cursor run custom-trained versions of OpenAI and Anthropic models, tuned for the narrow job of guessing the next few lines you are about to type.
+On Real-SWE 1.1 the best open-weight entries are Kimi K3.1 Pro at 39.20% and DeepSeek V4.1 Flash at 38.40%, about 17 points behind the leaders. DeepSeek publishes [its weights under an MIT license](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash), and the [Kimi K3.1 Pro weights](https://huggingface.co/moonshotai/Kimi-K3.1-Pro) carry Moonshot's own license, so "open weight" is the accurate term for both.
 
-A suggestion that arrives 400 milliseconds after you stop typing is useless because you have already written the line yourself, so the whole system is built around shaving that delay.
+Vendor numbers tell a closer story than that. <!-- evidence-three: the Kimi launch post prints no date; October 23 is when it was submitted to Hacker News (item 50212065) --> The [Kimi K3.1 Pro launch post](https://www.kimi.ai/blog/kimi-k3-1-pro), which appeared on October 23, says that on Terminal-Bench 4.0 "K3.1 Pro scores 65.7%, ahead of GPT-6 Astra (58.2%) and narrowly behind Claude Opus 5.5 (66.4%)."
 
-Latency, then, is the metric that decides everything here. These tools reach for smaller models or speculative decoding precisely because a slightly-worse suggestion that appears instantly beats a perfect one that lags.
+Both numbers can be true, since they come from different benchmarks. Nathan Lambert, who tracks open models, wrote [on October 28](https://www.interconnects.ai/p/artificial-analysis-v5-and-the-benchmarkers) that "The best open models do benchmax a little." and that "the best OpenAI and Anthropic models have been a major step ahead in their flexibility and reliability."
 
-That is the tooling most of us touch every hour without thinking about it, the thing that keeps the typing-and-reading rhythm from breaking.
+Lambert's post also makes the case for the other side, calling coding the use case "where open models are far more competitive and likely to keep up." The cost table agrees with him, because a model at 38% for 19 cents a run is a reasonable first attempt on any task you can verify with tests.
 
-## The closing difference of open source
+<!-- evidence-three: the Ripple page prints no date; November 4 is the creation date of ricursiveAI/Ripple-65B-Preview on Hugging Face and of Hacker News item 50369925 --> The newest entry is [Ripple-65B Preview](https://www.ricursive.com/ripple), released on November 4 [under Apache 2.0](https://huggingface.co/ricursiveAI/Ripple-65B-Preview), which is too recent for Real-SWE. Its maker claims "U.S. open-weight state-of-the-art (80.52) on TerminalBench 2.1" for a dense 65-billion-parameter model, having chosen against the [mixture-of-experts design](/articles/mixture-of-experts/) other labs use.
 
-Open-source coding models are closing in fast. Llama 4.0 and Qwen 2.5 Coder are real alternatives to the proprietary models now, not toys, and you can run them on your own hardware.
+Read that claim with its two qualifiers, the country and the benchmark version. The Kimi figure above is on Terminal-Bench 4.0, so the two scores can't be compared.
 
-A bank or a hospital that cannot legally send a single line of patient-adjacent code to an external API can stand up its own coding assistant behind the firewall, which is the whole reason these models matter to regulated teams.
+## How should you choose an LLM for software development?
 
-Every month the performance difference shrinks a little more. The open-weight models trace down genuine bugs and produce clean, idiomatic code, and they improve in the open because the whole research community keeps poking at them.
+Choose by running candidates on changes your own team already made, because no public table contains your codebase. The steps below can be rerun whenever a model ships.
 
-My expectation is that open weights become the default for most enterprise coding work by the end of 2026.
+1. Pick two models from different price rows of the table.
+2. Run each in the harness its row names, since that pairing is what was measured.
+3. Take five changes merged last month and reset the repository to the commit before each one.
+4. Give the model the original task description and count a pass only when your whole test suite is green afterwards.
+5. Record the cost of each run, then divide by the pass rate as the script above does.
 
-## Summary decision framework
+Leave the effort setting at its default for the first round. Horthy's October run compared medium and extra-high effort and concluded that "higher effort was not a reliable way to buy more strict passes in these runs", at up to 4.22 times the cost.
 
-Which model is right for you comes down to the work in front of you. Answer three questions to land on a direct recommendation.
-
-Are you running an agent unattended on multi-file pull requests? Reach for Claude 4.6 Opus.
-
-Do you need to reason over an entire repository at once, or are you paying per token at high volume? That points to Gemini 3.1 Pro and DeepSeek V4 respectively.
-
-
-Benchmark totals can hide a reasoning failure that matters in code. The [lambda-calculus article](/articles/lambda-calculus-ai/) explains a composition-level test, but it does not provide a reproducible model comparison.
+Real-SWE ran every model at its highest effort, so its cost column is close to the ceiling for each model. I report no run of that procedure here, and the published table is the evidence it starts from.
 
 ## FAQ
 
 **Should I use one model for everything?**
 
-No. A multi-model pipeline costs less and performs better.
+The cost column argues against it, because GPT 6.1 Sol resolved 47.20% of Real-SWE tasks at 79 cents a run and Opus 5.5 resolved 56.80% at nearly fourteen dollars. Sending every task to the leader pays about eighteen times more per run for under ten points.
 
-Route autocomplete to a small fast model and save the large model for architectural decisions where the extra reasoning earns its price.
+**Can I run a coding LLM on my own hardware?**
 
-**Does model performance vary by programming language?**
-
-Yes. The strongest results show up in Python and JavaScript, since that is where the training data is thickest.
-
-Expect quality to dip on niche languages or frameworks released in the last few months.
+Yes, if the license and your hardware allow it. DeepSeek V4.1 Flash, Kimi K3.1 Pro and Ripple-65B Preview all publish weights on Hugging Face, and Ripple's maker says its model can "run efficiently on local devices such as NVIDIA DGX Spark".
 
 **How important is context window size?**
 
-Critical once a project grows past a handful of files. The model can only reason about dependencies it can actually see, so a tiny window forces it to guess at code it never loaded.
+It no longer separates the models on this page. Kimi K3.1 Pro, Ripple-65B Preview and Claude Fable 5.2 each list a context window of one million tokens on the pages linked above, so the window is rarely the limit that decides between them.
 
-**Is DeepSeek V4 safe for corporate data?**
+**How often does the answer change?**
 
-Check their current data privacy policy before you send anything sensitive. Many teams route the API through a managed provider that adds the security controls their compliance team requires.
+Within weeks. Real-SWE 1.1 came out in October, and by mid-November two vendors had shipped models it doesn't cover.
