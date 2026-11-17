@@ -212,7 +212,7 @@ Automation saves collection time, but the inventory remains a draft. It cannot r
 
 Ghostty's maintainers went the other way and say so in the notes: "They take a combined 16+ hours to write". That is the cost of the judgment, and a generated inventory doesn't remove it.
 
-I look at what a line like theirs proves in [a separate essay](/articles/written-by-a-human/).
+My essay on [what a written-by-a-human label proves](/articles/written-by-a-human/) starts from a line like theirs.
 
 ### Build the notes during development
 
@@ -265,7 +265,7 @@ The [release notes template](/articles/release-notes-template/) turns this order
 
 ## Worked example: write the notes for a breaking SDK release
 
-Take the same hypothetical `4.0.0` release used in the [changelog example](/articles/writing-changelogs/). The changelog records pagination, runtime, webhook retry, validation, and login changes in compact form.
+Take a hypothetical `4.0.0` release of an SDK, with a [changelog](/articles/writing-changelogs/) kept alongside it. The changelog records pagination, runtime, webhook retry, validation, and login changes in compact form.
 
 Release notes turn that record into an upgrade plan. They need more context than the changelog, especially around order, verification, and rollback.
 
