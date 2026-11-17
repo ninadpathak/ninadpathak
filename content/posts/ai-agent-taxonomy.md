@@ -6,10 +6,8 @@ siblings:
 - agent-loop-anatomy
 - agent-error-handling
 bridges:
-- slug: agent-memory-2026
-  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
-- slug: claude-vs-gemini-cli
-  reason: A coding agent is the agent a developer uses daily.
+- slug: context-windows-vs-memory
+  reason: The stateful label on an agent type depends on what counts as kept state, which that page defines.
 - slug: llm-structured-outputs
   reason: Each turn of the agent loop spends tokens and latency.
 - slug: ai-memory-management
@@ -23,11 +21,13 @@ title: 'Types of AI Agents: Five Types by Autonomy and Scope'
 updated: 2026-11-17
 ---
 
-Tesla sells a feature called Full Self-Driving, and [Wikipedia's article on self-driving cars](https://en.wikipedia.org/wiki/Self-driving_car), as it read on November 17, files it as a "Level 2 (hands/on, eyes/on)" system. Waymo's robotaxis sit two levels higher, because the SAE levels rank a system by how much of the driving a human still has to do and say nothing about how clever the software is.
+Tesla sells a feature called Full Self-Driving, and [Wikipedia's article on self-driving cars](https://en.wikipedia.org/wiki/Self-driving_car), as it read on November 17, files it as a "Level 2 (hands/on, eyes/on)" system. Waymo's robotaxis sit two levels higher, because the SAE levels, published in 2014, rank a system by how much of the driving a human still has to do and say nothing about how clever the software is.
 
-Types of AI agents sort the same way. The question that separates them is how much an agent decides and does before a person looks, and by that measure there are five types, set out in the table below.
+Types of AI agents are worth ranking by that measure too, by how much an agent decides and does before a person looks. The first two are reactive and tool-using agents, and above them come loop agents and multi-agent systems, with persistent-goal agents at the top.
 
-The parallel breaks in one place. A car's level is fixed when the feature ships, and an agent's type is set by configuration, so one model can answer a single question in one deployment and work unattended for a week in another.
+A car's level changes rarely, though the article records Mercedes withdrawing its Level 3 feature in January 2026. An agent's type is a configuration, so one model can answer a single question in one deployment and work unattended for a week in another.
+
+That makes the type a decision in [AI agent architecture](/articles/ai-agents/), made per deployment, and the table sets out what each one decides alone.
 
 | Type | What it decides alone | Labelled example | Failure it adds |
 | --- | --- | --- | --- |
@@ -44,7 +44,7 @@ The parallel breaks in one place. A car's level is fixed when the feature ships,
 
 ## The textbook list answers a different question
 
-The textbook answer to the same question is a different five. Wikipedia's [article on intelligent agents](https://en.wikipedia.org/wiki/Intelligent_agent) gives the source: "Russell & Norvig (2003) group agents into five classes based on their degree of perceived intelligence and capability".
+Textbooks give a different five. Wikipedia's [article on intelligent agents](https://en.wikipedia.org/wiki/Intelligent_agent) gives the source: "Russell & Norvig (2003) group agents into five classes based on their degree of perceived intelligence and capability".
 
 - Simple reflex agents
 - Model-based reflex agents
@@ -62,11 +62,11 @@ Anthropic's [Building effective agents](https://www.anthropic.com/engineering/bu
 
 Simon Willison [settled on a definition](https://simonwillison.net/2025/Sep/18/agents/) on September 18, 2025: "An LLM agent runs tools in a loop to achieve a goal." Under his wording types 1 and 2 are no agents at all, and the word begins at the loop.
 
-Both lines fall in the same place, between the tool-using type and the loop, and I agree that it is the largest step on the ladder.
+Willison's line falls between my tool-using type and the loop. Anthropic's cuts across the ladder, since it asks who directs the steps: the post files an orchestrator with workers under workflows, so a multi-agent system can sit on either side of it.
 
-I keep the two rungs below it because the word is used well below that line. United Airlines, quoted in the next section, bans "personal AI agents or assistants" as one group.
+I agree with both that handing the loop to the model is the largest step. I keep the two rungs below it because the word is used well below that line, and United Airlines' ban covers "personal AI agents or assistants" as one group.
 
-I also think one line is too few for a build decision. Anthropic's post treats several agents under an orchestrator as a workflow pattern, and it has no rung for an agent that keeps a goal across sessions, though each of those adds a failure the single loop doesn't have.
+I also think one line is too few for a build decision. Neither definition has a rung for several agents sharing a task or for an agent that keeps a goal across sessions, and each of those adds a failure the single loop doesn't have.
 
 ## Reading and acting are separate risks
 
@@ -74,9 +74,11 @@ On November 11 United Airlines said it was banning AI agents from booking flight
 
 Everything in that sentence is a write. An agent that compares fares and an agent that buys the ticket can be the same type on the ladder, and only the second can spend the customer's money.
 
-The same report cuts against a clean split. It quotes an aviation analyst saying "Flight searches cost airlines money", so a read-only agent still costs the system it reads from, and the [Hacker News thread](https://news.ycombinator.com/item?id=50458900) on the ban ran to more than 700 comments.
+The report also cuts against a clean split. It quotes an aviation analyst saying "Flight searches cost airlines money", so a read-only agent still costs the system it reads from, and the [Hacker News thread](https://news.ycombinator.com/item?id=50458900) on the ban ran to more than 700 comments.
 
-So each type carries a second label, read-only or acting. A third label says whether the agent keeps state between requests, and [context windows vs memory](/articles/context-windows-vs-memory/) explains what that state is.
+So each type carries a second label, read-only or acting.
+
+A third label, whether the agent keeps state between requests, applies below type 5 as well, since a tool-using assistant can remember a user's preferences without holding a goal. [Context windows vs memory](/articles/context-windows-vs-memory/) explains what that state is.
 
 ## What each type adds
 
@@ -110,15 +112,15 @@ The agent holds a goal across sessions, saves its progress and resumes after an 
 
 Choose the lowest type that does the job. Anthropic's post gives the same advice for the whole field: "we recommend finding the simplest solution possible, and only increasing complexity when needed."
 
-The questions below place a task on the ladder.
-
 1. Does it need information the model doesn't have, or an action in another system? If so it is at least type 2, and the acting label applies when a tool writes.
 2. Can the number of steps be fixed in advance? If it can't, the task needs a loop.
 3. Does the work outlast one session? If it does, the agent needs stored state and belongs at type 5.
 
 Type 4 has no question of its own, because a second agent is a way to carry out a task and never a requirement of one. Add it when a single loop has been tried and measured.
 
-The ladder sorts agents by how much they decide alone. How to wire a chosen type is the subject of [AI agent design patterns](/articles/agent-design-space/), where an [AI agent stops and an AI assistant begins](/articles/agent-vs-ai-assistant/) has a page of its own, and [agent harnesses](/articles/agent-harnesses/) covers the code around the model.
+The ladder sorts agents by how much they decide alone. How to wire a chosen type is the subject of [AI agent design patterns](/articles/agent-design-space/).
+
+Where an agent ends and an assistant begins is argued in [AI agent vs AI assistant](/articles/agent-vs-ai-assistant/), and the code around the model is described in [agent harnesses](/articles/agent-harnesses/).
 
 ## FAQ
 
