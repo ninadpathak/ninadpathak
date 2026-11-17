@@ -65,7 +65,7 @@ The post is clear about the order of things, though. The model explains 92.8% of
 
 The line I'd take to a budget meeting is another one. The post reports that "64.5% of the list-price cost of the scored runs went to trials that did not pass", which is money a harness spends before anyone learns the run failed.
 
-Runta published the benchmark and ran it on its own runtime, and the post lists its limits as open models and one provider. Its per-model winners are soft too: only one of the five held up in nearly every resample of the tasks, and the others won between 25% and 53% of the time.
+Runta published the benchmark and ran it on its own runtime, and the post lists its limits as open models and one provider. Its per-model winners are soft too: only one of the five held up in nearly every resample of the tasks, and the best of the other four won 53% of the resamples.
 
 I'd treat the rankings as theirs and the lesson as general: test harnesses with your model on your own tasks.
 
