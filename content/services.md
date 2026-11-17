@@ -48,6 +48,8 @@ Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the product, th
 
 Once we've worked together for a while, the same cycle comes down to 4 days end to end. Your engineers review each draft for accuracy, the same [product-first review](/articles/documentation-review/) I run on documentation.
 
+My [technical writing process](/technical-writing-process/) page shows each stage of the work, from keyword strategy to a measured result.
+
 For Centus, building each example first produced more than 50 localization guides across more than ten frameworks, and the engineering team approved them without a round of revisions.
 
 > "Our devs called it awesome and just sent it ahead for publishing."

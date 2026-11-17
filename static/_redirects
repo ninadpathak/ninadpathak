@@ -86,6 +86,8 @@
 # 30 days to 2026-11-16 showed clients requesting these and getting a 404. build.py adds
 # the form without the trailing slash.
 /hire/ /services/ 301
+/process/ /technical-writing-process/ 301
+/writing-process/ /technical-writing-process/ 301
 /hire-me/ /services/ 301
 /work-with-me/ /services/ 301
 /pricing/ /services/ 301

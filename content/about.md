@@ -49,3 +49,5 @@ I refuse to:
 ## You can inspect the work
 
 The [portfolio](/portfolio/) links to published articles, and the [projects](/projects/) expose the tools I build around documentation and AI search. Read those before believing a claim on this page. Work should carry its own proof.
+
+My [technical writing process](/technical-writing-process/) shows each stage a page goes through, from keyword strategy to a measured result.
