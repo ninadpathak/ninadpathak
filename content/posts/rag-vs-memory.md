@@ -101,7 +101,7 @@ A person asks "What were the deployment steps for this service?", and an agent t
 | The query lacks the document's vocabulary | [HyDE](/glossary/hypothetical-document-embeddings-hyde/), which embeds a drafted answer | Serve as evidence, since the draft is invented |
 | Constraints are buried in a sentence | [Self-querying retrieval](/glossary/self-querying-retrieval/), which splits search text from typed filters | Grant access the caller lacks |
 
-Anthropic's [Contextual Retrieval explanation](https://www.anthropic.com/engineering/contextual-retrieval) uses an error code to show the dense and lexical split, and the [hybrid search guide](/articles/hybrid-search/) covers merging the two result lists. The filter row is the one that can't be traded away, because an embedding score can't prove a record belongs to the current tenant.
+Anthropic's [Contextual Retrieval explanation](https://www.anthropic.com/research/contextual-retrieval) uses an error code to show the dense and lexical split, and the [hybrid search guide](/articles/hybrid-search/) covers merging the two result lists. The filter row is the one that can't be traded away, because an embedding score can't prove a record belongs to the current tenant.
 
 ## How do you test RAG and memory together?
 

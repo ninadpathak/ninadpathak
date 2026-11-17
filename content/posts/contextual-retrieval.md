@@ -17,7 +17,7 @@ slug: contextual-retrieval
 video: contextual-retrieval
 ---
 
-Anthropic took a chunk like `"The company's revenue grew by 3% over the previous quarter."`, asked Claude to explain that chunk using the full document, and prepended the explanation before indexing it. That step is Contextual Retrieval, often searched for as contextual RAG, and in [the writeup Anthropic published on September 19, 2024](https://www.anthropic.com/engineering/contextual-retrieval) it cut top-20 retrieval failure by **49%** once contextual embeddings were paired with contextual BM25.
+Anthropic took a chunk like `"The company's revenue grew by 3% over the previous quarter."`, asked Claude to explain that chunk using the full document, and prepended the explanation before indexing it. That step is Contextual Retrieval, often searched for as contextual RAG, and in [the writeup Anthropic published on September 19, 2024](https://www.anthropic.com/research/contextual-retrieval) it cut top-20 retrieval failure by **49%** once contextual embeddings were paired with contextual BM25.
 
 The mechanism changes the chunk before any query runs, where nearly all RAG tuning happens at query time. I still think that is the right end of the pipeline to push on, and coding agents have since changed my mind about which corpora it is for.
 
@@ -51,7 +51,7 @@ Anthropic's result is a stack of separate reductions in retrieval failure, measu
   <figcaption>From Anthropic's contextual retrieval writeup. Each layer still helps on top of the one before it; each tile is 5 points.</figcaption>
 </figure>
 
-The breakdown is worth more than the headline because it shows each layer still helping on top of the last. Anthropic did not claim that one chunking trick made the rest of the stack irrelevant, and the full per-domain numbers are in [Appendix II](https://assets.anthropic.com/m/1632cded0a125333/original/Contextual-Retrieval-Appendix-2.pdf).
+The breakdown is worth more than the headline because it shows each layer still helping on top of the last. Anthropic did not claim that one chunking trick made the rest of the stack irrelevant, and the full per-domain numbers are in [Appendix II](https://assets.claude.com/5722e7658c9302d8b97a3238de1bb8e6afdf04b9.pdf).
 
 The corpora are Anthropic's, and the averages use the embedding configuration that performed best in 2024, so a 49% measured there will not carry over cleanly to a support archive or an internal wiki.
 
