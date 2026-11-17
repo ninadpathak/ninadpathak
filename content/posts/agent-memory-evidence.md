@@ -5,20 +5,18 @@ siblings:
 - memory-serialization
 - memory-versioning
 date: 2026-11-17
-description: A proposal for a shared agent memory format lists five questions a record must answer. This essay argues for a sixth, how the agent knew, and puts it first.
+description: A proposal for a shared agent memory format lists five questions a record must answer. This essay argues for a sixth, how the agent knew, as a required field.
 slug: agent-memory-evidence
 status: published
 title: 'A Memory Is a Claim, So Store How the Agent Knew'
 work_note: 'I ran Mem0''s team of 13 writers, and I write documentation where a claim needs a source a reader can check. This essay asks the same of an agent''s notes, and [my portfolio](/portfolio/) has the work.'
 ---
 
-Wikipedia gives any reader a way to challenge a sentence. Its page on [the citation needed tag](https://en.wikipedia.org/wiki/Wikipedia:Citation_needed) says the template exists so that there is "a means for anyone to question an uncited claim."
+A man in a crowd holds up a sign at a politician's speech in [xkcd 285](https://xkcd.com/285/), from 2007, and the sign reads "[CITATION NEEDED]". The joke works because everyone knows the tag from Wikipedia, whose [page on it](https://en.wikipedia.org/wiki/Wikipedia:Citation_needed) says it exists as "a means for anyone to question an uncited claim."
 
-An agent's memory file is a page of uncited claims with one reader, and that reader believes all of them. Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, says a wrong note "can be read, and trusted, by Claude in a later session."
+Now picture an agent's memory file. It's a page of uncited claims with one reader, and Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, says what that reader does with a wrong one: it "can be read, and trusted, by Claude in a later session."
 
-On November 7 Mads Thines argued that [agent memory needs its OpenTelemetry moment](https://www.lorekit.io/blog/open-agent-memory-format). I think his proposal is right about the format and puts the field that matters at the bottom of the list.
-
-That field is evidence, and it is the thing [AI agent memory](/articles/agent-memory/) is shortest of.
+So when Mads Thines argued on November 7 that [agent memory needs its OpenTelemetry moment](https://www.lorekit.io/blog/open-agent-memory-format), I read it looking for the citation field. He has it, and he leaves it optional, which is the one thing in his proposal for [AI agent memory](/articles/agent-memory/) I'd change.
 
 ## What the proposal asks for
 
@@ -26,19 +24,27 @@ Thines counts the places his coding tools keep what they remember and finds that
 
 His reduction of that model is five questions every format answers: "where a memory is true, what its identity is (does a second write update it or duplicate it?), what it says, when it stops being true, and which version is current."
 
-The post is fair to its critics, and it prints the objection that traces and memories differ, since a trace is written once and a memory gets corrected. It ends on open questions, and one of them is the subject of this essay: "Should a record point at the code it depends on?"
+The post is fair to its critics, and it prints the objection that traces and memories differ, since a trace is written once and a memory gets corrected.
+
+And Thines gets close to my point more than once. He wants a record to say who wrote it, "so a reader knows how much to trust what it reads", and he praises GitHub's Copilot Memory because it "pairs citations you can check against the code with forgetting by default".
+
+But he ends with it as an open question: "Should a record point at the code it depends on?"
 
 ## The sixth question
 
-None of the five questions asks how the writer knew. A record can say where it applies and when it expires and still be wrong, and nothing in the envelope lets a reader find out.
+None of the five questions asks how the writer knew. A record can say where it applies, who wrote it and when it expires, and still be wrong, and the fields that would let a reader find out are the optional ones.
 
-The evidence that this field does the work comes from the Anthropic post. On a benchmark where models built their own notes over many sessions, the first model to close the loop was one whose entries "included a rule (and also how it knew the rule was true)".
+Is there evidence that this field does the work? Only a hint, from the Anthropic post.
+
+On a benchmark where models built their own notes across sessions, the first model to close the loop was one whose entries "included a rule (and also how it knew the rule was true)".
+
+That describes what a stronger model wrote, and the post doesn't test the clause in isolation, so I won't claim it does.
 
 Anthropic also quotes a note written by a model playing Pokémon, a rule for what to do after several failed throws: "VARY the timing (insert extra 'wait' presses between menu steps) - the catch landed right after doing this."
 
 The last clause of that note is a citation. A later session reading it knows the rule came from one success, and can weigh it as that.
 
-The post's failure case is a note with no such clause. A model recorded a landmark on the wrong side of a mountain, trusted the note for the rest of the run, and was corrected only when a later pass checked it against the session log.
+The post's failure case is a wrong note that got trusted. A model recorded a landmark on the wrong side of a mountain and kept acting on it, and in a separate run, a pass that checked the note against the session log caught the error.
 
 ## Why format comes second
 
@@ -46,9 +52,11 @@ The commenters on [the Hacker News thread](https://news.ycombinator.com/item?id=
 
 Another had given up on the feature: "it remembers the wrong things, and then turns them into an inane focus for each task." That is a complaint about trust, and a shared envelope would deliver the same wrong things to more tools.
 
-Thines half agrees. He calls a pointer to the code "the best protection against stale memory", and his draft record has room for a pull request number among its optional attributes.
+Thines half agrees, as I said. He calls a pointer to the code "the best protection against stale memory", and his draft record has room for a pull request number among its optional attributes.
 
-Optional is the part I'd change. A record with no source should be readable as a guess, the way an untagged sentence on Wikipedia is readable as unchallenged, and a model should be told the difference.
+A shipped product already goes further. His own table lists Copilot Memory's unit as "A fact with code citations", and its forgetting rule as "Deleted after 28 days unused".
+
+So optional is the part I'd change. A record with no source should be readable as a guess, the way an untagged sentence on Wikipedia is readable as unchallenged, and a model should be told the difference.
 
 ## What a sourced note looks like
 

@@ -144,11 +144,11 @@ The last two results use it. With the anchor held outside, the rewritten chain n
 
 An earlier version of this script closed each row by writing an end time into it, and that field sat outside the hash. Moving it would have erased the November 10 answer with the chain intact, which is why this version stores no end time and derives it from the next row.
 
-A single note has the same need on a smaller scale, and [my essay on evidence in agent memory](/articles/agent-memory-evidence/) argues for storing how the agent knew.
-
 ## How do you link a memory to the reasoning behind it?
 
 Record the source at write time, as a required field, because it can't be recovered afterwards. The `source` column in the ledger above holds the turn and the words that justified the fact.
+
+That argument applies to any note an agent keeps, and [my essay on evidence in agent memory](/articles/agent-memory-evidence/) makes it for a shared memory format.
 
 Where the model writes memory through a tool, make the tool's source parameter required, so a write without one is rejected by the schema. A fact with no source is one nobody can tell apart from an inference the model made out of a passing remark.
 
