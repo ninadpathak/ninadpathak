@@ -1696,6 +1696,35 @@
         "nobody-understands-the-code",
         "code-documentation"
       ]
+    },
+    {
+      "id": "claude-code-changelog-2026-11",
+      "url": "https://code.claude.com/docs/en/changelog.md",
+      "author": "Anthropic",
+      "date": "2026-11-16",
+      "title": "Claude Code changelog",
+      "quotes": [
+        "CHANGELOG.md on GitHub",
+        "Longer releases are grouped by type of change, with long lists of improvements and bug fixes collapsed.",
+        "Deprecated fast mode for Opus 4.8 as of October 30, 2026; it will be removed on November 30, 2026. After removal, fast mode requests on Opus 4.8 return an error and do not fall back to standard Opus 4.8.",
+        "Migrate to Opus 5.5 to keep the speedup"
+      ],
+      "connects": [
+        "writing-changelogs"
+      ]
+    },
+    {
+      "id": "keep-a-changelog-1-1-0",
+      "url": "https://keepachangelog.com/en/1.1.0/",
+      "author": "Olivier Lacan",
+      "date": "2026-11-17",
+      "title": "Keep a Changelog 1.1.0",
+      "quotes": [
+        "Changelogs are for humans, not machines."
+      ],
+      "connects": [
+        "writing-changelogs"
+      ]
     }
   ],
   "unused_leads": [
@@ -1850,6 +1879,10 @@
       "If a sentence cannot help someone decide, migrate, verify, or troubleshoot, it does not belong above the technical changes.",
       "Keep version 3 deployed in the previous production slot. If error rates rise before v4 cursors are stored, shift traffic back. After that point, disable pagination writes and contact support before downgrading."
     ],
-    "nobody-understands-the-code": []
+    "nobody-understands-the-code": [],
+    "writing-changelogs": [
+      "**Breaking:** `client.retryCount` has been replaced by `client.retry.maxAttempts`. Rename the field before upgrading or the client will fall back to its default retry limit.",
+      "This release is backward compatible for REST API users. The JavaScript SDK now requires Node.js 20 or later."
+    ]
   }
 }

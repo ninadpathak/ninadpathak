@@ -12,16 +12,82 @@ takeaways:
 - Describe the consequence of each change and link to migration details.
 - Keep an Unreleased section and update it as the product changes.
 title: How to Write a Changelog That Developers Actually Read
-updated: 2026-07-30
+updated: 2026-11-17
 ---
 
-You are about to approve a dependency bump and someone asks, “Is this actually safe to ship?” The changelog says “improved pagination,” “updated authentication,” and “internal maintenance.”
+Claude Code published 20 releases between October 18 and November 16, and its [changelog](https://code.claude.com/docs/en/changelog) lists 1,807 entries for them, about sixty a day. An entry among them tells people who use fast mode on Opus 4.8 that their requests will start returning errors after November 30.
 
-Now the team is opening pull requests to find out whether a config key changed. The approach below makes the changelog answer the upgrade question before that conversation starts.
+A changelog that developers read has to make that entry findable by someone who will never read the other 1,806. Writing a changelog means recording each change so that a person can assess an upgrade from it, and at this release rate the person gets there by searching the file or by asking a tool that read it for them.
+
+## How much changelog can one person read?
+
+Far less than a fast-moving project now publishes. The script below counts the Claude Code changelog for the thirty days to November 16.
+
+```python
+"""Count releases and entries in the Claude Code changelog over a 30-day window."""
+import datetime
+import re
+import sys
+import urllib.request
+
+url = "https://code.claude.com/docs/en/changelog.md"
+request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+text = urllib.request.urlopen(request, timeout=60).read().decode("utf-8")
+
+end = datetime.date(2026, 11, 16)
+start = end - datetime.timedelta(days=29)
+release = re.compile(r"^\*\*(\d+\.\d+\.\d+)\*\*\s+(\w+ \d+, \d{4})\s*$", re.M)
+matches = list(release.finditer(text))
+
+releases = entries = flagged = 0
+labels = {}
+for i, match in enumerate(matches):
+    day = datetime.datetime.strptime(match.group(2), "%B %d, %Y").date()
+    if not start <= day <= end:
+        continue
+    body = text[match.end(): matches[i + 1].start() if i + 1 < len(matches) else len(text)]
+    releases += 1
+    for line in body.splitlines():
+        label = re.match(r"^\*\*([A-Z][a-z ]+)\*\*$", line.strip())
+        if label:
+            labels[label.group(1)] = labels.get(label.group(1), 0) + 1
+        if line.lstrip().startswith("* "):
+            entries += 1
+            if re.match(r"\* (\\\[[^]]+\] )?(Deprecated|Removed) ", line.lstrip()):
+                flagged += 1
+
+print(f"window: {start} to {end}")
+print(f"releases: {releases}")
+print(f"entries: {entries}  ({entries / releases:.1f} per release, {entries / 30:.1f} per day)")
+print(f"entries that open with Deprecated or Removed: {flagged}")
+print("section labels used:", ", ".join(f"{k} x{v}" for k, v in sorted(labels.items(), key=lambda kv: -kv[1])))
+```
+
+Running `python3 changelog_stats.py` printed the totals.
+
+```text
+window: 2026-10-18 to 2026-11-16
+releases: 20
+entries: 1807  (90.3 per release, 60.2 per day)
+entries that open with Deprecated or Removed: 11
+section labels used: Added x16, Changed x16, Improved x1
+```
+
+The project knows nobody reads all of it. The page describes itself as generated from the CHANGELOG.md file in the project's GitHub repository, and says "Longer releases are grouped by type of change, with long lists of improvements and bug fixes collapsed."
+
+[Keep a Changelog](https://keepachangelog.com/en/1.1.0/), the format that page loosely follows, opens its principles with "Changelogs are for humans, not machines." I think that is still right about who makes the upgrade decision and out of date about who reads first.
+
+Fern's [State of Docs report](https://buildwithfern.com/post/state-of-docs) from November 10 says of the changelog that "Agents read it twice as much as people to understand what's changed on your platform." That figure comes from the docs sites Fern hosts, and I looked at how it was counted in [a separate essay](/articles/agents-reading-docs/).
+
+The fast mode entry shows what survives being read by search.
+
+"Deprecated fast mode for Opus 4.8 as of October 30, 2026; it will be removed on November 30, 2026. After removal, fast mode requests on Opus 4.8 return an error and do not fall back to standard Opus 4.8."
+
+It names the feature, gives both dates and states the failure a user will see, so it makes sense with nothing around it. It sits in a list headed "Changed", though, and the script found only eleven entries in the month that open with the word Deprecated or Removed, none of them under a heading of their own.
 
 ## Start with the upgrade decision
 
-That means version, date, breaking changes, security impact, and required action all need to be easy to spot. A developer shouldn’t have to infer the risk from the eighth bullet.
+The version and date come first, and breaking changes and required action sit above everything else in the entry. A developer shouldn’t have to infer the risk from the eighth bullet.
 
 The beginning of a release entry should answer:
 
@@ -43,7 +109,7 @@ Lead with the consequence and include implementation detail only when it helps s
 
 Use a consistent label for breaking changes and required migrations. A generic “Changed” heading is too quiet for work that can break an integration.
 
-> **Breaking:** `client.retryCount` has been replaced by `client.retry.maxAttempts`. Rename the field before upgrading or the client will use the default of three attempts.
+> **Breaking:** `client.retryCount` has been replaced by `client.retry.maxAttempts`. Rename the field before upgrading or the client will fall back to its default retry limit.
 
 The label catches attention, while the second sentence gives a consequence and a next step. A link can carry the full migration procedure.
 
@@ -82,7 +148,7 @@ At release time, move those entries under a version and date. The release proces
 
 If a release is withdrawn, keep its entry and mark it as yanked. Explain why it should not be used and which version contains the fix or replacement.
 
-Deleting the entry creates a gap for anyone who already installed that version. A changelog is a record, including when the record is uncomfortable.
+Deleting the entry leaves anyone who already installed that version with no record of it. A changelog is a record, including when the record is uncomfortable.
 
 ## Make the version number agree with the prose
 
@@ -92,7 +158,9 @@ The changelog must make the same promise. A breaking configuration change descri
 
 ### Treat deprecation as a sequence
 
-A deprecation entry needs four facts: what is deprecated, what replaces it, when removal is expected, and how to migrate. Repeat the warning in later releases as the removal date approaches.
+A deprecation entry needs four facts, which are the feature, its replacement, the removal date and the migration. The fast mode entry quoted above has all four, ending "Migrate to Opus 5.5 to keep the speedup".
+
+Repeat the warning in later releases as the removal date approaches.
 
 When the feature is removed, link back to the first deprecation entry. The sequence gives users evidence that the change was announced and time to act.
 
@@ -114,7 +182,7 @@ Brief works when it remains specific. Behavior, affected user, and action give y
 
 | Weak entry | Useful entry |
 |---|---|
-| Improved retries | The client now retries `429` responses up to three times with exponential backoff; disable this with `retry.maxAttempts: 0`. |
+| Improved retries | The client now retries `429` responses up to 4 times with exponential backoff; disable this with `retry.maxAttempts: 0`. |
 | Fixed login bug | Fixed OAuth login failures for accounts whose email address contains a plus sign. |
 | Updated pagination | List endpoints now return a cursor in `next_page`; integrations using numeric page offsets must migrate before v4. |
 | Security improvements | Requests with invalid webhook signatures now return `401` before the handler processes them. |
@@ -192,7 +260,7 @@ Before writing, ask the owners for the behavior behind each change:
 | Cursor helper and legacy parameter | `page` is removed; list endpoints accept `cursor` only |
 | Page size validation | Requests above 100 items return `400`; the API no longer silently caps them. |
 | Node matrix | Node.js 18 support is removed; Node.js 20 is the minimum |
-| Webhook retry | Failed deliveries retry three times over 15 minutes |
+| Webhook retry | Failed deliveries retry 4 times over 15 minutes |
 | Email normalization | Login now accepts uppercase characters in email addresses |
 
 The cursor helper and removed parameter form one breaking pagination change. The refactor disappears because users cannot observe it.
@@ -215,7 +283,7 @@ The resulting entry could read:
 
 - List requests with `limit` values above 100 now return `400
   invalid_page_size`. Previous versions silently reduced the value to 100.
-- Failed webhook deliveries now retry three times over 15 minutes. Endpoints
+- Failed webhook deliveries now retry 4 times over 15 minutes. Endpoints
   may receive the same event more than once, so handlers must remain idempotent.
 
 ### Fixed
