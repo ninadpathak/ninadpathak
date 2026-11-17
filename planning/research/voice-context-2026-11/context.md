@@ -287,3 +287,40 @@ Rule for later batches: the hub link goes where the paragraph flow allows it, an
 
 Ninad, through root: "'I sell' noo lol pls no sells. I help with... or something like this is better." First-person copy about his services never uses sell, sells or selling. Write "I run AI-ready documentation audits", "I help teams with", "I write technical content for a living" and the like. Sentences about other companies selling things are unaffected.
 
+## Batch 6 (2026-11-17, owner voice-rewrite-2)
+
+Pieces: hyperagents-memory, coding-agent-memory, claude-code-memory, memory-compression, memory-serialization, multi-agent-vs-single-agent, and the essay agent-memory-evidence. The branch is stacked on batch 5.
+
+### What each piece is built on
+
+| Piece | Opens from | Current source | What was run |
+|---|---|---|---|
+| hyperagents-memory | A dated paper, since the finding is the surprise | Meta's Hyperagents paper, arXiv 2603.19461, revised November 1 | `hyper_memory.py`: the MemoryTool printed in the paper's appendix, with a labelled loader |
+| coding-agent-memory | The HTTP cookie (1994) | Vendor docs for Claude Code, Codex, Gemini CLI and Cursor; agents.md; Atuin Threads (October 27, Hacker News November 11) | Nothing; quotes only |
+| claude-code-memory | Memento | Anthropic's memory documentation and a changelog fix of October 26 | Nothing; quotes only |
+| memory-compression | `.gitignore` | Anthropic, "The components of agent memory" (November 6) | Nothing; quotes only |
+| memory-serialization | Zork's save feature, via BYTE in 1981 | The same Anthropic post; Mads Thines on a shared memory format (November 7) | `state_roundtrip.py`: a versioned state record, migrated and checked for stale facts |
+| multi-agent-vs-single-agent | Fowler's Monolith First (2015) | Anthropic and Cognition, both June 2025 and dated on the page; a guide discussed on Hacker News on November 5 | Nothing; quotes only |
+| agent-memory-evidence (essay) | Wikipedia's citation needed tag | Thines's post and its Hacker News thread; the Anthropic post | Nothing; quotes only |
+
+### What was removed as unbacked
+
+- hyperagents-memory: the whole page. It described a three-layer architecture with parameters such as `max_turns` that the paper and repository do not contain, plus "I watched one of my early agents". The figure drew the same invention and is redrawn.
+- coding-agent-memory: a Django migration anecdote, a SQLite database at `~/.claude/memory.db` and a `--memory` flag. Anthropic's docs describe neither; auto memory lives in a per-project directory of Markdown files.
+- claude-code-memory: invented example memory files and the statement that CLAUDE.md is never re-read during a session. The docs say subdirectory files load on demand and the root file is re-read after compaction.
+- memory-compression: "Around week three", a memory payload at 40% of the window, a 30-day half-life "I used", and a support agent "I watched".
+- memory-serialization: the morning-after restart story and "the production systems I have worked on".
+- multi-agent-vs-single-agent: "The first time I split a single agent into two", an event-bus incident and "One failure burned me badly".
+
+### Decisions the hub plan asked for
+
+- coding-agent-memory and claude-code-memory stay as two pages. The first now answers a cross-tool question, which Search Console shows at position 2 ("why does my coding agent forget everything as soon as i start a new session"); the second is the Claude Code reference.
+
+### Films to check
+
+- claude-code-memory: the narration says CLAUDE.md is "read only at startup, so a mid-session edit waits for the next session." The page no longer says this, and the docs say the root file is re-read after `/compact`.
+
+### Notes for the next batch
+
+- `sources.json` and the audit register were kept out of the piece commits in this batch and land in the record commit, so a rebase of the stack no longer conflicts on every commit.
+- Openers used: a film, a dated paper, a protocol, a dotfile, a game, an essay, a wiki tag. The Anthropic memory post feeds three pieces and the essay, each from a different section of it.

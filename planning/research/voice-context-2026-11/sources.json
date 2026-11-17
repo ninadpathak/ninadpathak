@@ -82,7 +82,25 @@
         "summaries written by Claude that replace its older turns so it can continue working in a new context window",
         "both Opus 5 and Opus 4.7 lost much of the performance boost that memory gave them",
         "nearly doubled its benchmark score",
-        "For stronger models, giving them freedom to judge salience was more effective than setting fixed rules in advance"
+        "For stronger models, giving them freedom to judge salience was more effective than setting fixed rules in advance",
+        "knowledge that Claude gains from experience",
+        "saved as context it can read later.",
+        "can be read off the screen every turn, so storing it is redundant.",
+        "memory files about strategy, plans, and tested rules exist only if Claude works them out, and they disappear unless Claude writes them down.",
+        "one run each",
+        "the wiki grew larger than the documents themselves",
+        "an extremely detailed wiki that effectively abstracted nothing.",
+        "an incorrect note can be carried into every session",
+        "It loads only the first 200 lines or 25 KB of MEMORY.md.",
+        "wrote nine files in two folders, plus a single top-level file called global.md, and earned four badges",
+        "Published Nov 6, 2026",
+        "The transcript gave Claude a ground truth to validate its memory against.",
+        "Mt Moon DONE.",
+        "Claude checked the note against the session transcript, caught its error, and rewrote it.",
+        "In the run with the uncorrected note, Claude dropped back onto that earlier route three times.",
+        "can be read, and trusted, by Claude in a later session.",
+        "included a rule (and also how it knew the rule was true)",
+        "VARY the timing (insert extra 'wait' presses between menu steps) - the catch landed right after doing this."
       ],
       "connects": [
         "rag-vs-memory",
@@ -90,7 +108,9 @@
         "claude-code-memory",
         "ai-memory-management",
         "memory-compression",
-        "agent-memory-types"
+        "agent-memory-types",
+        "memory-serialization",
+        "agent-memory-evidence"
       ]
     },
     {
@@ -1763,11 +1783,13 @@
         "Changed organization settings and policy requests to no longer use a proxy set only by `ALL_PROXY`; set `HTTPS_PROXY` if your network needs a proxy for them",
         "because the v1 MCP client is removed",
         "Deprecated a plugin's `agent` setting: it still applies, and now warns at startup, in `claude plugin list` and in `claude plugin validate`",
-        "Deprecated fast mode for Opus 4.8 as of October 30, 2026; it will be removed on November 30, 2026. After removal, fast mode requests on Opus 4.8 return an error and do not fall back to standard Opus 4.8. Migrate to Opus 5.5 to keep the speedup"
+        "Deprecated fast mode for Opus 4.8 as of October 30, 2026; it will be removed on November 30, 2026. After removal, fast mode requests on Opus 4.8 return an error and do not fall back to standard Opus 4.8. Migrate to Opus 5.5 to keep the speedup",
+        "Fixed Claude seeing stale MEMORY.md and CLAUDE.md content right after automatic compaction when those files were edited earlier in the session"
       ],
       "connects": [
         "writing-changelogs",
-        "short-term-agent-memory"
+        "short-term-agent-memory",
+        "claude-code-memory"
       ]
     },
     {
@@ -2493,6 +2515,323 @@
       ],
       "connects": [
         "agent-error-handling"
+      ]
+    },
+    {
+      "id": "claude-code-memory-docs",
+      "url": "https://code.claude.com/docs/en/memory.md",
+      "author": "Anthropic",
+      "date": "2026-11-17",
+      "title": "How Claude remembers your project",
+      "quotes": [
+        "Each Claude Code session begins with a fresh context window.",
+        "plain markdown you can edit or delete at any time.",
+        "Claude doesn't save something every session",
+        "Files in subdirectories load on demand.",
+        "Auto memory is machine-local.",
+        "The first 200 lines of `MEMORY.md`, or the first 25KB, whichever comes first, are loaded at the start of every conversation",
+        "target under 200 lines per CLAUDE.md file.",
+        "Longer files consume more context and reduce adherence.",
+        "Claude treats them as context, not enforced configuration.",
+        "CLAUDE.md content is delivered as a user message after the system prompt, not as part of the system prompt itself",
+        "Claude may pick one arbitrarily.",
+        "Project-root CLAUDE.md survives compaction: after `/compact`, Claude re-reads it from disk and re-injects it into the session.",
+        "references to files or commands that don't exist, and files that contradict each other.",
+        "Per repository, shared across worktrees",
+        "Every session (first 200 lines or 25KB)",
+        "Learnings and patterns",
+        "autoMemoryEnabled",
+        "notes Claude writes itself based on your corrections and preferences",
+        "so a repository already set up for other coding agents works without adding a `CLAUDE.md`"
+      ],
+      "connects": [
+        "claude-code-memory",
+        "coding-agent-memory"
+      ]
+    },
+    {
+      "id": "wikipedia-memento",
+      "url": "https://en.wikipedia.org/wiki/Memento_(film)",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Memento (film)",
+      "quotes": [
+        "an elaborate system of photos, notes, and tattoos",
+        "they still prefer to trust that image"
+      ],
+      "connects": [
+        "claude-code-memory"
+      ]
+    },
+    {
+      "id": "hyperagents-paper-html",
+      "url": "https://arxiv.org/html/2603.19461v1",
+      "author": "Jenny Zhang et al.",
+      "date": "2026-03-19",
+      "title": "Hyperagents (arXiv 2603.19461, v1 HTML; v2 revised 2026-11-01)",
+      "quotes": [
+        "Without explicit instruction to do so, the agent creates mechanisms for storing and retrieving insights across sessions.",
+        "a task agent (which solves the target task) and a meta agent (which modifies itself and the task agent)",
+        "persistent memory, performance tracking",
+        "structured storage of performance insights",
+        "Instead of merely logging numerical scores, the hyperagent stores synthesized insights, causal hypotheses, and forward-looking plans",
+        "gen65 changes over-corrected.",
+        "the transfer hyperagents have features such as performance tracking and persistent memory",
+        "Tool for persistent memory storage across agent interactions.",
+        "Work done at Meta"
+      ],
+      "connects": [
+        "hyperagents-memory"
+      ]
+    },
+    {
+      "id": "hyperagents-paper-abs",
+      "url": "https://arxiv.org/abs/2603.19461",
+      "author": "Jenny Zhang et al.",
+      "date": "2026-11-01",
+      "title": "Hyperagents (arXiv abstract page)",
+      "quotes": [
+        "[v2] Sun, 1 Nov 2026",
+        "Thu, 19 Mar 2026",
+        "persistent memory, performance tracking"
+      ],
+      "connects": [
+        "hyperagents-memory"
+      ]
+    },
+    {
+      "id": "wikipedia-http-cookie",
+      "url": "https://en.wikipedia.org/wiki/HTTP_cookie",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "HTTP cookie",
+      "quotes": [
+        "with every request, introducing states (memory of previous events) into otherwise stateless HTTP transactions.",
+        "had the idea of using them in web communications in June 1994"
+      ],
+      "connects": [
+        "coding-agent-memory"
+      ]
+    },
+    {
+      "id": "cursor-rules-docs",
+      "url": "https://cursor.com/docs/rules",
+      "author": "Cursor",
+      "date": "2026-11-17",
+      "title": "Rules",
+      "quotes": [
+        "Large language models don't retain memory between completions. Rules provide persistent, reusable context at the prompt level.",
+        "at the start of the model context",
+        "Global to your Cursor environment"
+      ],
+      "connects": [
+        "coding-agent-memory"
+      ]
+    },
+    {
+      "id": "codex-agents-md-guide",
+      "url": "https://developers.openai.com/codex/guides/agents-md.md",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Custom instructions with AGENTS.md",
+      "quotes": [
+        "once per run",
+        "once the combined size reaches the limit defined by `project_doc_max_bytes` (32 KiB by default)",
+        "codex --ask-for-approval never \"Summarize the current instructions.\""
+      ],
+      "connects": [
+        "coding-agent-memory"
+      ]
+    },
+    {
+      "id": "gemini-cli-gemini-md",
+      "url": "https://geminicli.com/docs/cli/gemini-md/",
+      "author": "Google",
+      "date": "2026-11-17",
+      "title": "Provide context with GEMINI.md files",
+      "quotes": [
+        "to the model with every prompt",
+        "Gemini CLI was replaced by Antigravity CLI on June 18th, 2026."
+      ],
+      "connects": [
+        "coding-agent-memory"
+      ]
+    },
+    {
+      "id": "agents-md-site",
+      "url": "https://agents.md/",
+      "author": "AGENTS.md",
+      "date": "2026-11-17",
+      "title": "AGENTS.md",
+      "quotes": [
+        "A simple, open format for guiding coding agents, used by over 60k open-source projects",
+        "Think of AGENTS.md as a README for agents",
+        "is now stewarded by the Agentic AI Foundation under the Linux Foundation."
+      ],
+      "connects": [
+        "coding-agent-memory"
+      ]
+    },
+    {
+      "id": "atuin-threads",
+      "url": "https://blog.atuin.sh/threads-agent-sessions/",
+      "author": "Ellie Huxtable",
+      "date": "2026-10-27",
+      "title": "Atuin Threads: All your agent sessions on every machine",
+      "quotes": [
+        "Agent sessions store the lot of it. Every command, its output, my intent, and everything I tried along the way to the eventual solution.",
+        "while my shell history follows me everywhere, my agent sessions do not."
+      ],
+      "connects": [
+        "coding-agent-memory"
+      ]
+    },
+    {
+      "id": "git-gitignore-docs",
+      "url": "https://git-scm.com/docs/gitignore",
+      "author": "Git",
+      "date": "2026-11-17",
+      "title": "gitignore documentation",
+      "quotes": [
+        "specifies intentionally untracked files that Git should ignore."
+      ],
+      "connects": [
+        "memory-compression"
+      ]
+    },
+    {
+      "id": "wikipedia-saved-game",
+      "url": "https://en.wikipedia.org/wiki/Saved_game",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Saved game",
+      "quotes": [
+        "it was intended to let players play over many weeks",
+        "BYTE magazine stated in 1981"
+      ],
+      "connects": [
+        "memory-serialization"
+      ]
+    },
+    {
+      "id": "lorekit-open-memory-format",
+      "url": "https://www.lorekit.io/blog/open-agent-memory-format",
+      "author": "Mads Thines",
+      "date": "2026-11-07",
+      "title": "Agent memory needs its OpenTelemetry moment",
+      "discussion": "https://news.ycombinator.com/item?id=50411467",
+      "quotes": [
+        "a note an agent left for its future self, stored at some address, true for a while.",
+        "none of them can read the others",
+        "where a memory is true, what its identity is (does a second write update it or duplicate it?), what it says, when it stops being true, and which version is current.",
+        "Should a record point at the code it depends on?",
+        "the best protection against stale memory"
+      ],
+      "connects": [
+        "memory-serialization",
+        "agent-memory-evidence"
+      ]
+    },
+    {
+      "id": "fowler-monolith-first",
+      "url": "https://martinfowler.com/bliki/MonolithFirst.html",
+      "author": "Martin Fowler",
+      "date": "2015-06-03",
+      "title": "Monolith First",
+      "quotes": [
+        "Almost all the successful microservice stories have started with a monolith that got too big and was broken up",
+        "it has ended up in serious trouble",
+        "3 June 2015"
+      ],
+      "connects": [
+        "multi-agent-vs-single-agent"
+      ]
+    },
+    {
+      "id": "anthropic-multi-agent-research-system",
+      "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+      "author": "Anthropic",
+      "date": "2025-06-13",
+      "title": "How we built our multi-agent research system",
+      "quotes": [
+        "outperformed single-agent Claude Opus 4 by 90.2% on our internal research eval.",
+        "token usage by itself explains 80% of the variance",
+        "agents typically use about 4× more tokens than chat interactions, and multi-agent systems use about 15× more tokens than chats.",
+        "the value of the task is high enough to pay for the increased performance.",
+        "some domains that require all agents to share the same context or involve many dependencies between agents are not a good fit for multi-agent systems today.",
+        "Published Jun 13, 2025"
+      ],
+      "connects": [
+        "multi-agent-vs-single-agent"
+      ]
+    },
+    {
+      "id": "cognition-dont-build-multi-agents",
+      "url": "https://cognition.ai/blog/dont-build-multi-agents",
+      "author": "Walden Yan",
+      "date": "2025-06-12",
+      "title": "Don't Build Multi-Agents",
+      "quotes": [
+        "these two miscommunications.",
+        "Actions carry implicit decisions, and conflicting decisions carry bad results",
+        "Share context, and share full agent traces, not just individual messages",
+        "By Walden Yan 2025.06.12"
+      ],
+      "connects": [
+        "multi-agent-vs-single-agent"
+      ]
+    },
+    {
+      "id": "kadhar-multi-agent-patterns",
+      "url": "https://kadhar.dev/blog/multi-agent-systems-from-scratch",
+      "author": "Kadharmoideen Fadurudeen",
+      "date": "2026-06-08",
+      "title": "Building a Multi-Agent System: 3 Patterns, Explained Simply",
+      "discussion": "https://news.ycombinator.com/item?id=50380658",
+      "quotes": [
+        "You can't yet say what each agent would own."
+      ],
+      "connects": [
+        "multi-agent-vs-single-agent"
+      ]
+    },
+    {
+      "id": "wikipedia-citation-needed",
+      "url": "https://en.wikipedia.org/wiki/Wikipedia:Citation_needed",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Wikipedia:Citation needed",
+      "quotes": [
+        "a means for anyone to question an uncited claim."
+      ],
+      "connects": [
+        "agent-memory-evidence"
+      ]
+    },
+    {
+      "id": "hn-50411680-imgyuri",
+      "url": "https://hn.algolia.com/api/v1/items/50411680",
+      "author": "imgyuri",
+      "date": "2026-11-08",
+      "title": "Hacker News comment on the shared memory format post",
+      "quotes": [
+        "is greatly reduced in the case of Agent memory because by definition it is read by agents"
+      ],
+      "connects": [
+        "agent-memory-evidence"
+      ]
+    },
+    {
+      "id": "hn-50411672-slopinthebag",
+      "url": "https://hn.algolia.com/api/v1/items/50411672",
+      "author": "slopinthebag",
+      "date": "2026-11-08",
+      "title": "Hacker News comment on the shared memory format post",
+      "quotes": [
+        "it remembers the wrong things, and then turns them into an inane focus for each task."
+      ],
+      "connects": [
+        "agent-memory-evidence"
       ]
     }
   ],
