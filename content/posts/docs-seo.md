@@ -8,8 +8,7 @@ bridges:
 - slug: llms-txt
   reason: A docs page now has agent readers.
 date: 2026-07-30
-description: 'Technical SEO for developer documentation: crawling, rendering, indexing,
-  canonicals, internal links, Core Web Vitals, structured data, and search visibility.'
+description: 'SEO for documentation is a chain of checks: one page per task, a crawlable link, source HTML that holds the content, and one canonical URL. A checklist in dependency order, with an audit script you can rerun.'
 slug: docs-seo
 status: published
 work_note: "Passing a technical SEO checklist doesn't tell you whether AI crawlers can fetch your docs or whether an answer engine can quote them. I check that in an AI-ready documentation audit, with four tools I built and published so you can rerun every finding. I'm Ninad Pathak, a freelance technical writer. [See what the audit covers and ask me for one](/services/ai-ready-documentation-audit/)."
@@ -18,16 +17,22 @@ takeaways:
 - Discovery, crawling, indexing, and page quality need separate evidence.
 - Source HTML and rendered output can fail independently.
 - A before-and-after record connects search movement to meaningful changes.
-title: Technical SEO Checklist for Documentation Sites
+title: SEO for Documentation Sites, Checked in Order
 updated: 2026-08-17
 video: docs-seo
 ---
 
-I built the audit for this guide around Cloudflare's live Workers CLI guide. Its source and rendered page show which checks a reader can rerun and which still need browser or Search Console evidence.
+Every developer has used View Source to find out what a page is really made of. It's the oldest debugging tool on the web, and it's still the first thing I'd open in an SEO audit, because a crawler starts from that same source and the browser's finished picture can hide what's missing from it.
 
-A page succeeds when search engines can discover and interpret it, the right developer recognizes the task from the result, and the instructions carry that person to a working state. That is what this audit checks through search intent, discovery, crawling, indexing, canonicalization, page quality, performance, and measurement.
+SEO for documentation is the work of making sure a docs page can be found, read and chosen by a search engine for the task it documents. I treat it as a chain: one page owns each task, a crawler can reach it through a plain link, the source HTML holds the content, and every signal names one URL.
 
-## Technical SEO audit checklist: what to check
+The order matters more than any single check. A page with a perfect title does nothing for you while a duplicate outranks it or its canonical points somewhere else, so this checklist for [technical documentation](/articles/technical-documentation/) runs in dependency order and stops at the first blocking failure.
+
+I built a small audit script for the source-level checks and reran it this week against Cloudflare's Workers CLI guide. The output is further down, along with what the script can't see.
+
+## What does SEO for documentation need to check?
+
+It needs to check seven things, and each has a failure that blocks the ones after it:
 
 | Area | Question | Blocking evidence |
 |---|---|---|
@@ -39,13 +44,13 @@ A page succeeds when search engines can discover and interpret it, the right dev
 | Page quality | Can the reader identify and complete the task? | Generic title, stale version, missing prerequisites, broken example |
 | Measurement | Can the team see what happened after release? | No baseline, change annotation, or page owner |
 
-## Step-by-step SEO audit for documentation sites
+## How do you audit a documentation page for SEO?
 
-Work through these eight checks in order. Fix the first blocking failure before moving to the next check.
+Work through these eight checks in order, and fix the first blocking failure before moving to the next one. I've put search intent first because it's the check that can make all the others pointless.
 
-### 1. Search intent and page ownership
+### Step 1. Search intent and page ownership
 
-Make page ownership the first thing in your audit because developer searches usually contain a task, command, error, product, parameter, or version. The page that owns the query should name that task and make the successful state easy to recognize.
+Start with page ownership, because a developer's search nearly always names a task, an error or a version. The page that owns the query should name that task and show what success looks like.
 
 | Search | Page that should own it | Successful outcome |
 |---|---|---|
@@ -55,11 +60,11 @@ Make page ownership the first thing in your audit because developer searches usu
 | `oauth refresh token expiry` | Concept plus implementation guide | The application renews access safely |
 | `migrate sdk v2 to v3` | Versioned migration guide | The application runs on the supported version |
 
-If two pages complete the same task, compare the documentation, marketing site, support center, changelog, and older versions before writing anything new. One page should become the canonical owner, with useful material from the weaker page moved into it before the duplicate is redirected or demoted.
+If two pages complete the same task, compare the documentation, marketing site, support center, changelog, and older versions before writing anything new. A single page should become the canonical owner, with useful material from the weaker page moved into it before the duplicate is redirected or demoted.
 
 The [documentation organization guide](/articles/documentation-structure/) covers that consolidation work in detail.
 
-### 2. Internal links and XML sitemaps
+### Step 2. Internal links and XML sitemaps
 
 Google's [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide) identifies links as a primary way crawlers discover pages. Trace every important documentation URL back to a relevant hub, guide, or sibling page instead of treating its XML sitemap entry as the entire discovery strategy.
 
@@ -91,9 +96,9 @@ Google ignores `<priority>` and `<changefreq>`, so those fields do not need rele
 
 An [llms.txt file](/articles/llms-txt/) is a separate, optional index for AI tools, and Google Search doesn't read it, so it doesn't replace the sitemap.
 
-### 3. Crawling, rendering, and indexing
+### Step 3. Crawling, rendering, and indexing
 
-The browser can make a broken page look healthy after JavaScript has run. Read the server response before reviewing the layout because it shows whether the content, links, and canonical metadata exist without asking a renderer to repair the page.
+A browser can make a broken page look healthy once JavaScript has run. So I read the server's response before I look at the layout, because it shows whether the content and the canonical tag exist without a renderer's help.
 
 #### HTTP response and rendered HTML
 
@@ -118,7 +123,7 @@ Google's [JavaScript SEO guidance](https://developers.google.com/search/docs/cra
 
 Resolve duplicates through redirects or canonical signals rather than hiding them in `robots.txt`. A `noindex` directive fits pages that should remain accessible but should not appear in search.
 
-### 4. Canonical URLs and documentation versions
+### Step 4. Canonical URLs and documentation versions
 
 Redirects and `rel="canonical"` are strong canonicalization signals. Sitemap inclusion is weaker, so compare the signals together because disagreement usually reveals that templates, navigation, and deployment rules are describing different preferred URLs.
 
@@ -149,7 +154,7 @@ Versioned documentation is where policy becomes more important than a universal 
 
 If the instructions materially differ, keep the older page distinct rather than canonicalizing it to the current version. The pages are not interchangeable when following the wrong one can break an integration, and the URL policy should preserve that distinction.
 
-### 5. Page titles, headings, and task content
+### Step 5. Page titles, headings, and task content
 
 Labels such as “Overview,” “Configuration,” and “Usage” lose meaning when they leave their section. A useful label should still identify the task in a search result, browser tab, documentation tree, or copied URL.
 
@@ -171,7 +176,7 @@ The task is complete only when the page carries a reader through the required ac
 
 Return version-sensitive pages to the review queue when an SDK release, renamed field, changed permission, UI move, deprecation, support pattern, or ranking loss makes the instructions suspect. The updated date should change when the page itself changes meaningfully, not merely because the review took place.
 
-### 6. Performance, mobile, and structured data
+### Step 6. Performance, mobile, and structured data
 
 Documentation sites reuse a small number of templates across many URLs, which makes template choice part of the evidence. Sample a task guide, API reference, search-results page, and versioned page because a fast homepage says little about how those heavier layouts behave.
 
@@ -179,13 +184,13 @@ Documentation sites reuse a small number of templates across many URLs, which ma
 
 Field data shows whether visitors experienced a problem, while lab tests reproduce it on the affected template. Documentation regressions often come from client-side search, syntax highlighting, large navigation trees, embedded consoles, chat widgets, and layout shifts when code or fonts load.
 
-Those three measurements become useful when they sit beside the element or script responsible. Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift should lead to a specific template change and another test of the same page, not another generic score on a release checklist.
+Those measurements become useful when they sit beside the element or script responsible. Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift should lead to a specific template change and another test of the same page, not another generic score on a release checklist.
 
 #### Mobile documentation pages
 
 Test a narrow viewport and browser zoom because code, tables, and navigation often fail there before the prose does. The page passes when code blocks and tables scroll inside their container, while drawers, copy controls, search, feedback, and chat overlays leave the task visible.
 
-The same pass follows a few heading anchors and looks at long endpoint names near sticky navigation. These details matter even when most developers first discover the page on desktop because the template and indexing signals still serve every device.
+The same pass follows a few heading anchors and looks at long endpoint names near sticky navigation. These details matter even when a developer first finds the page on desktop, because the template and indexing signals still serve every device.
 
 #### HTTPS and structured data
 
@@ -193,9 +198,9 @@ A clean documentation path loads the canonical page and its required resources o
 
 Structured data should follow the visible page rather than inventing a richer result. When `Article` or `TechArticle` and `BreadcrumbList` fit, compare the URL, headline, dates, author, and breadcrumb path with the canonical page before validating the markup.
 
-### 7. Run the documentation SEO audit script
+### Step 7. Run the documentation SEO audit script
 
-I built a small standard-library Python auditor for this guide. It checks one page's response, `robots.txt` access, index directives, title, description, canonical, H1, language, internal links, anchor text, image alt attributes, and sitemap membership.
+I wrote a small Python auditor for this page, using only the standard library. It fetches one URL and runs twelve source-level checks on it, from the HTTP response and `robots.txt` through the canonical tag to sitemap membership.
 
 The [documentation SEO audit script](/static/tools/docs-seo-audit.py) runs as a standalone file:
 
@@ -209,7 +214,42 @@ The command makes read-only requests and returns a human-readable report plus a 
 
 #### Cloudflare Workers audit result
 
-A rerun against Cloudflare's Workers CLI getting-started guide on 17 August 2026 returned 12 passes, zero warnings, and zero errors.
+I reran it against Cloudflare's Workers CLI getting-started guide on November 18, 2026, and it printed this:
+
+```text
+Documentation SEO audit
+URL: https://developers.cloudflare.com/workers/get-started/guide/
+Result: 12 pass, 0 warning, 0 error
+
+[PASS] HTTP response: HTTP 200
+       https://developers.cloudflare.com/workers/get-started/guide/
+[PASS] robots.txt access: Allowed
+       https://developers.cloudflare.com/robots.txt
+[PASS] Indexing directive: No noindex directive
+       none
+[PASS] Page title: Present
+       Get started - CLI · Cloudflare Workers docs
+[PASS] Meta description: Present
+       Set up and deploy your first Cloudflare Worker using Wrangler, the command-line interface.
+[PASS] Canonical: Self-referencing
+       https://developers.cloudflare.com/workers/get-started/guide/
+[PASS] Main heading: 1 H1 element(s)
+       CLI
+[PASS] Document language: en
+       html[lang]
+[PASS] Crawlable internal links: 453 links
+       417 unique targets
+[PASS] Generic anchor text: 0 generic anchors
+       none
+[PASS] Image alt attributes: 0 missing of 3 images
+       none
+[PASS] Sitemap membership: Listed
+       https://developers.cloudflare.com/sitemap-index.xml: listed via https://developers.cloudflare.com/sitemap-0.xml
+
+Scope: single-page source HTML. Confirm rendering and index state separately.
+```
+
+That's the same result as the August run in the screenshot below.
 
 ![Terminal receipt showing 12 passing documentation SEO checks for the Cloudflare Workers CLI guide, including canonical, title, links, image alt attributes, and sitemap membership](/static/images/articles/seo-for-technical-documentation/cloudflare-docs-seo-audit.png)
 
@@ -225,17 +265,17 @@ The rendered page also exposes its place in the wider documentation system throu
 
 The script inspects one page's source HTML. It does not crawl the entire site, execute JavaScript, test Core Web Vitals, confirm Google's selected canonical, or prove that the page deserves to rank.
 
-Use the script as the first gate because it turns obvious source-level failures into an inspectable receipt. The wider audit still needs a rendered-browser review, a link crawl, Search Console URL Inspection, field performance data, and a human attempt to complete the task.
+I'd use the script as the first gate, because it turns the obvious source-level failures into a receipt you can keep. The wider audit still needs a rendered-browser review, Search Console's URL Inspection and a person trying to complete the task.
 
-### 8. Measure documentation search performance
+### Step 8. Measure documentation search performance
 
 A baseline gives the team a point of comparison before a title, canonical, internal-link path, template, or version policy changes. Save the page and query data with the release date, then compare equivalent windows after search engines have had time to recrawl the page.
 
 Clicks, impressions, CTR, average position, index state, and the URL selected for the query each describe a different part of the result. The process has worked when the team can explain what moved, test the likely cause against the page and competing results, and choose the next change without guessing.
 
-## Technical SEO checklist for documentation sites
+## A technical SEO checklist for documentation sites
 
-Use this checklist during the release review.
+Here's the same audit as a list you can run during a release review.
 
 ### Search intent
 
@@ -290,6 +330,28 @@ Use this checklist during the release review.
 - [ ] The page has an owner and product-triggered update conditions.
 - [ ] Review dates match the site's crawl rate and query volume.
 
-## Start with one documentation path
+## Where should you start?
 
-Begin with one setup, authentication, deployment, troubleshooting, or migration path that affects product use. Complete and measure that path before expanding the audit to the rest of the documentation site.
+Start with one path that affects product use, such as setup or authentication. I'd finish and measure that one path before widening the audit, because a fixed path teaches you which of your templates cause the failures.
+
+## FAQ
+
+**Is SEO different for documentation sites?**
+
+The rules are the same and the failures are different. Docs sites tend to break on duplicate versions, JavaScript-rendered content and pages that share one generic title like "Overview".
+
+**Does Google use the priority field in a sitemap?**
+
+No. Google's sitemap guidance says it ignores `<priority>` and `<changefreq>`, and uses `<lastmod>` when the value is consistently accurate.
+
+**Should old documentation versions be indexed?**
+
+Only when their instructions still work for someone. A supported version gets its own URL and a self-canonical, and a retired one is better redirected.
+
+**Can `robots.txt` remove a page from Google?**
+
+No. It stops crawling, and a blocked page can still appear in results, so removal needs a `noindex` that the crawler is allowed to see.
+
+**Does llms.txt help with Google rankings?**
+
+No. Google Search doesn't read it, so it sits beside the sitemap as an optional index for AI tools.
