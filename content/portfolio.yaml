@@ -70,16 +70,6 @@ entries:
     original_url: "https://graphite.dev/blog/pull-request-guidelines"
 
   # AI / Testing
-  - title: "AI Agent Testing: A Complete Guide"
-    client: "LambdaTest"
-    category: "AI Systems"
-    url: "https://www.testmu.ai/learning-hub/ai-agent-testing"
-
-  - title: "AI Adoption Challenges and How to Overcome Them"
-    client: "LambdaTest"
-    category: "AI Systems"
-    url: "https://www.testmu.ai/blog/ai-adoption-challenges/"
-
   # Localization / i18n
   - title: "Svelte Localization with svelte-i18n"
     client: "Centus"
@@ -315,13 +305,8 @@ entries:
     url: "https://web.archive.org/web/20260725153900/https://graphite.com/blog/pull-request-merge-strategy"
     original_url: "https://graphite.com/blog/pull-request-merge-strategy"
 
-  - title: "How AI Testing Agents Accelerate QA"
-    client: "LambdaTest"
-    category: "AI Systems"
-    original_url: "https://www.testmu.ai/blog/ai-testing-agents-accelerate-qa"
-
   - title: "AI Testing vs Traditional Testing: What's The Difference?"
-    client: "LambdaTest"
+    client: "LambdaTest (now TestMu AI)"
     category: "AI Systems"
     url: "https://www.testmuai.com/blog/traditional-testing-vs-ai-testing/"
 
@@ -562,21 +547,31 @@ entries:
 
   # LambdaTest (now TestMu AI), further articles
   - title: "Software Testing Certifications: Which Are Worth It in 2026"
-    client: "LambdaTest"
+    client: "LambdaTest (now TestMu AI)"
     category: "DevTools"
     url: "https://www.testmuai.com/blog/best-software-testing-certifications/"
 
   - title: "TestMu AI Named Strong Performer in Forrester Wave™ Autonomous Testing Q4 2025"
-    client: "LambdaTest"
+    client: "LambdaTest (now TestMu AI)"
     category: "Growth & Marketing"
     url: "https://www.testmuai.com/blog/testmu-forrester-wave-autonomous-testing-2025/"
 
   - title: "TestMu AI Named a Challenger in Gartner® First Magic Quadrant™ for AI-Augmented Software Testing"
-    client: "LambdaTest"
+    client: "LambdaTest (now TestMu AI)"
     category: "Growth & Marketing"
     url: "https://www.testmuai.com/blog/testmu-gartner-magic-quadrant-2025/"
 
+  - title: "Test Execution in Software Testing: A Complete Guide"
+    client: "LambdaTest (now TestMu AI)"
+    category: "DevTools"
+    url: "https://www.testmuai.com/learning-hub/test-execution/"
+
+  - title: "What Is Agentic AI Testing? A Complete Guide"
+    client: "LambdaTest (now TestMu AI)"
+    category: "AI Systems"
+    url: "https://www.testmuai.com/blog/agentic-ai-testing/"
+
   - title: "AI UI Testing Techniques & Tools for Intelligent Automation"
-    client: "LambdaTest"
+    client: "LambdaTest (now TestMu AI)"
     category: "AI Systems"
     url: "https://www.testmuai.com/learning-hub/ai-ui-testing/"
