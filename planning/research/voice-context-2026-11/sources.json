@@ -1144,7 +1144,12 @@
         "because response quality degrades as a conversation grows",
         "are in beta",
         "input tokens reach the trigger you set",
-        "so you need no summarization code of your own"
+        "so you need no summarization code of your own",
+        "Use on-demand compaction wherever it is available",
+        "A compaction loop that requests the summary and swaps it in",
+        "One parameter on your ordinary requests",
+        "Compaction that keeps recent turns",
+        "when the default summary drops something a later turn needs."
       ],
       "connects": [
         "ai-memory-management",
@@ -1718,7 +1723,17 @@
         "Deprecated fast mode for Opus 4.8 as of October 30, 2026; it will be removed on November 30, 2026. After removal, fast mode requests on Opus 4.8 return an error and do not fall back to standard Opus 4.8.",
         "Migrate to Opus 5.5 to keep the speedup",
         "summarizing away a message that Claude had not answered yet",
-        "sometimes replying to one of your messages instead of summarizing, or leaving Claude's last reply out of the summary"
+        "sometimes replying to one of your messages instead of summarizing, or leaving Claude's last reply out of the summary",
+        "233 bug fixes",
+        "Bug fixes and reliability improvements",
+        "Changed some `cp` and `mv` commands to ask first",
+        "Changed nested skill loading: `.claude/skills` folders in `--plugin-dir` plugins no longer load from a session started above them; start Claude Code in the plugin folder instead",
+        "Removed the `--sandbox` and `--no-sandbox` flags from `claude remote-control`, which had no effect; passing either now exits with an error. Set `sandbox.enabled` in settings to sandbox sessions",
+        "Removed the `subagentStatusLine` setting: subagent rows always use the default look, and settings files that still hold the key load as before",
+        "Changed organization settings and policy requests to no longer use a proxy set only by `ALL_PROXY`; set `HTTPS_PROXY` if your network needs a proxy for them",
+        "because the v1 MCP client is removed",
+        "Deprecated a plugin's `agent` setting: it still applies, and now warns at startup, in `claude plugin list` and in `claude plugin validate`",
+        "Deprecated fast mode for Opus 4.8 as of October 30, 2026; it will be removed on November 30, 2026. After removal, fast mode requests on Opus 4.8 return an error and do not fall back to standard Opus 4.8. Migrate to Opus 5.5 to keep the speedup"
       ],
       "connects": [
         "writing-changelogs",
@@ -1732,7 +1747,21 @@
       "date": "2026-11-17",
       "title": "Keep a Changelog 1.1.0",
       "quotes": [
-        "Changelogs are for humans, not machines."
+        "Changelogs are for humans, not machines.",
+        "If you do nothing else, list deprecations, removals, and any breaking changes in your changelog.",
+        "for new features.",
+        "for changes in existing functionality.",
+        "for soon-to-be removed features.",
+        "for now removed features.",
+        "for any bug fixes.",
+        "in case of vulnerabilities.",
+        "Keep an Unreleased section at the top to track upcoming changes.",
+        "Often these versions don't even appear in change logs.",
+        "Mention whether you follow Semantic Versioning.",
+        "Using commit log diffs as changelogs is a bad idea: they're full of noise.",
+        "the version where the deprecations become removals.",
+        "[1.1.0] - 2019-02-15",
+        "[0.0.5] - 2014-12-13 [YANKED]"
       ],
       "connects": [
         "writing-changelogs"
@@ -1766,7 +1795,8 @@
       "title": "Stroq",
       "discussion": "https://news.ycombinator.com/item?id=50380704",
       "quotes": [
-        "trace risky commands to the content that dictated them"
+        "trace risky commands to the content that dictated them",
+        "Matching is text-level, so a command the model writes from scratch does not trace back to a source."
       ],
       "connects": [
         "memory-versioning"
@@ -1827,7 +1857,10 @@
         "the user says \"what was that last thing?\"",
         "The server will automatically truncate unplayed audio when there's a user interruption.",
         "Record how many milliseconds of that item's audio the user actually heard.",
-        "must stop playback and handle truncation"
+        "must stop playback and handle truncation",
+        "will cut the audio at a given place and remove the text transcript for the unplayed portion",
+        "doesn't provide a truncated transcript.",
+        "doesn't have enough information to precisely align transcript and audio"
       ],
       "connects": [
         "voice-agent-memory",
@@ -1856,7 +1889,8 @@
       "title": "Context management",
       "quotes": [
         "This ensures context matches what users actually hear.",
-        "represents what was actually spoken"
+        "represents what was actually spoken",
+        "Your context stays updated at the word level in case an interruption occurs"
       ],
       "connects": [
         "voice-agent-memory"
@@ -1888,7 +1922,8 @@
       "quotes": [
         "Do you run evals as a matter of course?",
         "without any measurement it's a non-interesting assertion",
-        "That's not to say that the labs don't downgrade models at times"
+        "That's not to say that the labs don't downgrade models at times",
+        "Everyone I know that does shows high levels of variance across them under the best case."
       ],
       "connects": [
         "writing-for-ai-products"
@@ -1930,7 +1965,9 @@
       "date": "2026-11-17",
       "title": "Technical Writing Two: Creating sample code",
       "quotes": [
-        "Build without errors. Perform the task it claims to perform."
+        "Build without errors. Perform the task it claims to perform.",
+        "Build without errors.",
+        "Perform the task it claims to perform."
       ],
       "connects": [
         "writing-for-ai-products",
@@ -1979,6 +2016,62 @@
       ],
       "connects": [
         "written-by-a-human"
+      ]
+    },
+    {
+      "id": "openai-voice-sip-guide",
+      "url": "https://developers.openai.com/api/docs/guides/voice-sip",
+      "author": "OpenAI",
+      "date": "2026-11-06",
+      "date_note": "Hacker News submission date, item 50399695; the page prints no date.",
+      "title": "Voice SIP guide",
+      "discussion": "https://news.ycombinator.com/item?id=50399695",
+      "quotes": [
+        "Outbound SIP calling is available to all organizations through the Live API"
+      ],
+      "connects": [
+        "voice-agent-memory",
+        "voice-agent-latency"
+      ]
+    },
+    {
+      "id": "site-about-page",
+      "url": "https://ninadpathak.com/about/",
+      "author": "Ninad Pathak",
+      "date": "2026-11-17",
+      "title": "About Ninad Pathak",
+      "quotes": [
+        "I use AI to prepare research, inspect a corpus, try variations, and attack a draft."
+      ],
+      "connects": [
+        "written-by-a-human"
+      ]
+    },
+    {
+      "id": "semver-2-0-0",
+      "url": "https://semver.org/",
+      "author": "Tom Preston-Werner",
+      "date": "2026-11-17",
+      "title": "Semantic Versioning 2.0.0",
+      "quotes": [
+        "MAJOR version when you make incompatible API changes",
+        "Before you completely remove the functionality in a new major release there should be at least one minor release that contains the deprecation"
+      ],
+      "connects": [
+        "writing-changelogs"
+      ]
+    },
+    {
+      "id": "github-generated-release-notes",
+      "url": "https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes",
+      "author": "GitHub",
+      "date": "2026-11-17",
+      "title": "Automatically generated release notes",
+      "quotes": [
+        "include a list of merged pull requests, a list of contributors to the release, and a link to a full changelog."
+      ],
+      "connects": [
+        "writing-changelogs"
       ]
     }
   ],

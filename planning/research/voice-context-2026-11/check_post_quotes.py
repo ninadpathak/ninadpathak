@@ -23,6 +23,7 @@ def main():
     data = json.loads((HERE / "sources.json").read_text())
     recorded = [norm(q) for s in data["sources"] for q in s["quotes"]]
     failures = 0
+    total = 0
     for name in sys.argv[1:]:
         path = pathlib.Path(name)
         own = [norm(p) for p in data.get("own_phrases", {}).get(path.stem, [])]
@@ -49,6 +50,10 @@ def main():
                 print(f"UNTRACED {path.stem}: {phrase}")
                 failures += 1
         print(f"{path.stem}: {found} quoted phrases checked")
+        total += 1
+    if not total:
+        print("FAIL: no post was given, so nothing was checked")
+        return 1
     print("FAIL" if failures else "PASS")
     return 1 if failures else 0
 

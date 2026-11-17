@@ -63,9 +63,11 @@ def main():
     wanted = set(sys.argv[1:])
     failures = 0
     checked = 0
+    seen = set()
     for source in json.loads((HERE / "sources.json").read_text())["sources"]:
         if wanted and source["id"] not in wanted:
             continue
+        seen.add(source["id"])
         try:
             page = norm(fetch(source["url"]))
         except Exception as error:
@@ -77,6 +79,12 @@ def main():
             if norm(quote).strip() not in page:
                 print(f"MISSING {source['id']}: {quote}")
                 failures += 1
+    for missing in sorted(wanted - seen):
+        print(f"UNKNOWN SOURCE {missing}")
+        failures += 1
+    if not checked:
+        print("FAIL: 0 quotes checked")
+        return 1
     print(f"{'FAIL' if failures else 'PASS'}: {checked} quotes checked, {failures} problems")
     return 1 if failures else 0
 
