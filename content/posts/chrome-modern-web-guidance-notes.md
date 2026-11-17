@@ -15,50 +15,52 @@ title: "Notes on Chrome's Modern Web Guidance for coding agents"
 work_note: "Docs for coding agents are still docs, and someone has to run the product before writing them. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Work with me on yours](/services/)."
 ---
 
-On November 10 a member of the Chrome team posted [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) to [Hacker News](https://news.ycombinator.com/item?id=50443812): more than 200 guides, shipped in collaboration with Firefox, Edge and MDN, that tell a coding agent to use what browsers now do natively. The reader they're written for is a model.
+On November 10 a member of the Chrome team posted [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) to [Hacker News](https://news.ycombinator.com/item?id=50443812): more than 200 guides, shipped in collaboration with Firefox, Edge and MDN, that tell a coding agent to use what browsers now do natively. The guides are written for a model to read, not a person.
 
-I read the project as [technical documentation](/articles/technical-documentation/) with a new kind of reader, and I think it's the best-edited example of that I've come across. I also think it puts the wrong door at the front.
+I read the project as [technical documentation](/articles/technical-documentation/) with a new kind of reader, and I think its guides are tightly edited in a way human docs should copy. I also think the project leads with the wrong way to get the guides, an npm install where a plain web page would do.
 
 ## The editing is the part to copy
 
-What I'd take from this project first is a rule about what to leave out. The README says the team runs evals so it can "prune lowest-common-denominator content that models already know".
+The first thing I'd take from Modern Web Guidance is its rule about what to leave out of a guide. The README says the team runs evals so it can "prune lowest-common-denominator content that models already know".
 
-I think that's the right standard, and it isn't new. It's what you owe any expert reader, and I argued for it with people in mind in [the case for shorter documentation](/articles/shorter-documentation/).
+Cutting what the reader already knows is the right standard, and it applies to human readers as much as to models. I argued for the same standard, with expert human readers in mind, in [the case for shorter documentation](/articles/shorter-documentation/).
 
-The guide I opened holds to it. Written for a navigation drawer, it says which approach to use and why it beats animating with JavaScript, and it never stops to explain what a dialog element is.
+The one guide I opened, on building a navigation drawer, follows that rule. The guide says which approach to use and why it beats animating with JavaScript, and it never stops to explain what a dialog element is.
 
-It also tells the agent what to assume when the request is silent. That's a line I'd add to a lot of human documentation, because a reader who has to guess will guess differently every time.
+The navigation drawer guide also tells the agent what to assume when the user's request doesn't specify a detail. I'd add a line like that to human documentation as well, because two readers who each have to guess a default will guess two different defaults.
 
 ## They measured it, with their own ruler
 
-I'm more impressed that there's a number at all than by the number. The README carries a table of runs with and without the guides, and on November 8 Claude Code on Opus 5.5 went from 57% of checks passed to 88%, over 215 tasks.
+The README publishes a measurement of whether the guides work, and the fact that it publishes one impresses me more than the figure. The README carries a table of runs with and without the guides, and on November 8 Claude Code on Opus 5.5 went from 57% of checks passed to 88%, over 215 tasks.
 
-That's the vendor grading its own documentation with its own graders, so I read it as a direction and not a result. A commenter in the thread ran the project's legacy scan on their own code and it found only two issues, and a maintainer replied that the scan covers about a fifth of the guides so far.
+The Chrome team wrote the guides, the tasks and the graders, so I read the jump from 57% to 88% as a sign the guides help and not as a measured size of the help. A commenter in the thread ran the project's legacy scan on their own code and it found only two issues, and a maintainer replied that the scan covers about a fifth of the guides so far.
 
-The scan and the eval table measure different things, and I haven't run either myself. But I can't name many docs teams that publish any measure of whether a page changes what its reader does next.
+The legacy scan checks existing code and the eval table checks newly generated code, and I haven't run either one myself. Even so, I can't name many docs teams that publish a table of pass rates with and without their docs.
 
 ## The front door is where I disagree
 
-The guides are offered first as an agent skill and an npm command, and I think that's the wrong way round. Documentation should be readable with nothing installed.
+The README offers the guides first as an agent skill installed with an npm command, and I think a web page should come first. Documentation should be readable by a person or an agent that has installed nothing.
 
-These can be, to be fair. The launch post links readable versions on Chrome's developer site, and the README links every guide's Markdown file.
+The guides can be read without installing anything, to be fair. The launch post links readable versions on Chrome's developer site, and the README links every guide's Markdown file.
 
-Simon Willison [asked in the thread](https://news.ycombinator.com/item?id=50444594) for the step beyond that: a plain Markdown index on a public URL, written to be searched with grep, so any agent that can make an HTTP request finds the right guide. The maintainers agreed, and one replied "We'll make this happen."
+Simon Willison [asked in the thread](https://news.ycombinator.com/item?id=50444594) for one more step beyond readable pages: a plain Markdown index on a public URL, written to be searched with grep, so any agent that can make an HTTP request finds the right guide. The maintainers agreed, and one replied "We'll make this happen."
 
-So my disagreement is with the default, and it's smaller than it was on launch day. I'd document the index as the way in and the install as the upgrade.
+So my disagreement is only with what the README presents first, and the maintainers' reply to Willison has made it smaller than it was on launch day. I'd put the Markdown index at the top of the README and present the npm install as an optional extra.
 
-The install also asks for something a fetch doesn't. The README says the command-line tool sends Google anonymous usage data, including the search queries an agent generates, and gives an environment variable that turns it off.
+Installing the tool also has a privacy cost that fetching a web page doesn't have. The README says the command-line tool sends Google anonymous usage data, including the search queries an agent generates, and gives an environment variable that turns it off.
 
-An index plus single pages is also what agents already ask docs sites for, going by the logs in [my notes on Fern's agent traffic report](/articles/agents-reading-docs/).
+An index file plus one Markdown page per guide is also the shape agents already request from docs sites, going by the server logs in [my notes on Fern's agent traffic report](/articles/agents-reading-docs/).
 
 ## Who writes the agent's defaults
 
-An objection in the thread stayed with me, which is that Chrome already has a great deal of say over the web, and now it would be steering what everyone's agent writes. I think the worry is fair, and I don't think it's special to Chrome.
+An objection in the thread stayed with me: Chrome already has a great deal of influence over the web, and these guides would let it steer the code that everyone's coding agent writes. I think that worry is fair, and I think it applies to anyone who writes docs for agents, not only to Chrome.
 
-The project's answer is that four browser and documentation teams steward it and that its guides lean on shared compatibility data. That helps, though a Chrome engineer said in the same thread that Mozilla had joined only in the last few weeks.
+The project's answer is that four browser and documentation teams steward it and that its guides lean on shared compatibility data. Shared stewardship answers part of the worry, though a Chrome engineer said in the same thread that Mozilla had joined only in the last few weeks.
 
-But whoever writes the page an agent reads is setting a default for every codebase that agent touches. Documentation always did that, slowly, one developer at a time, and now it happens at the speed of a tool call.
+Whoever writes the page an agent reads is setting a default for every codebase that agent works on. Documentation has always set defaults this way, one developer at a time over months, and an agent applies the same default within seconds of fetching the page.
 
-The post called the guides hand-crafted, which is the word Ghostty used for its release notes. I said in [my thoughts on that label](/articles/written-by-a-human/) that it was fading as agents became the readers, and here it's on writing made for agents, addressed to the people who choose what their agent reads.
+The post called the guides hand-crafted, which is the word Ghostty used for its release notes.
 
-So I'd read the label as a claim about care, and then ask for what this project does supply: the date of the last eval run, and the tasks it was run on.
+I said in [my thoughts on that label](/articles/written-by-a-human/) that "hand-crafted" was losing its meaning as agents became the readers. Here the label is attached to writing made for agents, and it's aimed at the developers who choose which guides their agent reads.
+
+So I'd read "hand-crafted" as a claim that people took care over the guides, and then I'd ask for the evidence, which this project does supply: the date of the last eval run, and the tasks it was run on.
