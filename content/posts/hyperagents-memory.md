@@ -11,7 +11,7 @@ bridges:
 date: 2026-04-19
 description: 'HyperAgents memory was written by the agent itself: a key-value JSON store printed in the paper. This page runs it and shows what it keeps and omits.'
 status: published
-work_note: 'I ran Mem0''s team of 13 writers, so I read another project''s memory design with a vendor''s bias. This page runs the memory tool that Meta''s hyperagent wrote for itself, and [my Mem0 work is in my portfolio](/portfolio/).'
+work_note: "I'm Ninad Pathak, a freelance technical writer. If your docs or tutorials have fallen behind the product, I write them, and I run the product first. [Start here](/services/)."
 title: How Memory Works in HyperAgents
 slug: hyperagents-memory
 updated: 2026-11-17

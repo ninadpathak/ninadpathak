@@ -13,7 +13,7 @@ takeaways:
 - Every alternative needs a reason it was rejected, and one of them should be doing nothing.
 - Run the checker before review, so a doc marked Accepted with open questions fails.
 title: 'Design Doc Template: Sections, a Filled Example and a Review Check'
-work_note: 'I built the template on this page with a filled example and a checker to run before review. For the guides and tutorials I write for clients, see [my portfolio](/portfolio/).'
+work_note: "This post is a design doc template that makes the author write down what happens if the team does nothing. If the feature that comes out of your design doc then needs documentation, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Get in touch](/contact/)."
 video: design-doc-template
 ---
 

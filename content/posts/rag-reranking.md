@@ -11,7 +11,7 @@ bridges:
 date: 2026-03-21
 description: 'Reranking in RAG, tested: a bi-encoder and two cross-encoders ranked the same candidates. What the reranker fixed, what it left wrong, and what 100 pairs cost.'
 status: published
-work_note: 'I wrote Firecrawl''s roundups of semantic search APIs and of search tools for agents. This page covers the step that reorders what search returns, and [my portfolio](/portfolio/) has both roundups.'
+work_note: "I'm Ninad Pathak. I write the docs and tutorials an AI company needs when its readers are engineers, and I run the product before I write a line. [Hire me for yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Reranking in RAG: Why Your Top-K Results Are Probably Wrong'
 slug: rag-reranking
 updated: 2026-11-17

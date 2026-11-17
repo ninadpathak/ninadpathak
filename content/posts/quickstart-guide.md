@@ -13,7 +13,7 @@ takeaways:
 - Put tool versions and access first, then show the exact output the reader should see.
 - Run every command in a fresh directory before publishing, and compare the output with the page.
 title: 'Quick Start Guide Template: Write a Quickstart Developers Can Run'
-work_note: 'I filled in this template against the GitHub REST API so the example can be run as written. For quickstarts and tutorials written for your product, [write to me](/contact/).'
+work_note: "This post is about a quickstart a developer can run, with the requirements listed before the first command. If you'd rather have someone run your product first and then write that page, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies, and [here's how I work](/services/)."
 video: quickstart-guide
 ---
 

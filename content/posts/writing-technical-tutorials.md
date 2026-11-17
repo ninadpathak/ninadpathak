@@ -10,7 +10,7 @@ description: Write a technical tutorial that takes one reader from a clear start
   point to a tested, useful result.
 slug: writing-technical-tutorials
 status: published
-work_note: 'For Centus I built or tested a working example before writing each localization guide. This page is about writing tutorials that way, and [my portfolio](/portfolio/) links to six of the guides.'
+work_note: "This post is about tutorials a reader can finish, for the product whose tutorial stops working partway through. If you'd rather hand your tutorials to someone who builds each one before writing it up, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Here's how I work](/services/)."
 takeaways:
 - Choose one reader, one starting state, and one result they can verify.
 - Build the working path before writing the explanation around it.

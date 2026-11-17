@@ -7,7 +7,7 @@ siblings:
 date: 2026-03-29
 description: 'Hybrid search fuses BM25 and vector retrieval. How it scores on a 2026 production benchmark, how reciprocal rank fusion works with runnable code, and what to add after it.'
 status: published
-work_note: 'I wrote Firecrawl''s roundup of semantic search APIs. This page covers one retrieval method in depth, fusing keyword and vector results, and [the roundup is in my portfolio](/portfolio/).'
+work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies, and I run the product before I write about it. [My services are here](/services/)."
 title: 'Hybrid Search: Combining BM25 and Vector Search'
 slug: hybrid-search
 updated: 2026-11-17

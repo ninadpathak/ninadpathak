@@ -11,7 +11,7 @@ description: I analyze the structural correlation between documentation quality 
   engineering throughput, using DORA metrics and Accelerate research to quantify the
   ROI of technical writing.
 status: published
-work_note: 'Documentation is how I earn a living, so I have an interest in the claim examined here: that docs change how fast a team ships. [My portfolio](/portfolio/) links to the work.'
+work_note: "This post is about the evidence that documentation speeds up an engineering team. If you've already made that case at your company and now need the pages written, that's my job. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [See my services](/services/)."
 title: Quantifying the Engineering Velocity Impact of Technical Documentation
 slug: documentation-velocity
 ---

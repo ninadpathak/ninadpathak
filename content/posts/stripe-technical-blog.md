@@ -13,7 +13,7 @@ bridges:
 date: 2026-04-07
 description: 'Where the Stripe engineering blog lives, what it publishes now (its five newest posts are about agents), and why the writing works as an advantage.'
 status: published
-work_note: 'I write technical articles for developer-tool companies, the kind of work this page studies at Stripe. [My portfolio](/portfolio/) links to what I''ve published for Firecrawl.'
+work_note: "This post is about why Stripe's engineering blog works as an advantage. If you want technical articles like those for your own product and your engineers don't have the time to write them, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Here's how I work](/services/)."
 title: 'Stripe Engineering Blog: How It Became a Competitive Moat'
 updated: '2026-11-17'
 slug: stripe-technical-blog

@@ -3,13 +3,13 @@ opening_source:
   url: "https://www.joelonsoftware.com/2008/09/15/stack-overflow-launches/"
   fact: "Dated September 15, 2008: 'I thought the combination of my audience (#15 on Bloglines) and Jeff's (#89) would bring enough great developers'."
   checked: 2026-11-17
-lead: "Developer content is the technical writing a company publishes for engineers, from blog posts to documentation. This hub covers what to publish and how to write it, then who should do the writing."
+lead: "Developer content is the technical writing a company publishes for engineers, from blog posts to documentation. This topic covers what to publish and how to write it, then who should do the writing."
 intro: |
   Stack Overflow launched on September 15, 2008, and Joel Spolsky [wrote that day](https://www.joelonsoftware.com/2008/09/15/stack-overflow-launches/) that he expected his audience combined with Jeff Atwood's to bring enough developers to the site. Those audiences came from Joel on Software and Coding Horror, two personal blogs written by working programmers.
 
   A company blog asks for that kind of attention with a product to sell. Its reader is an engineer who can run the example, so each claim gets checked against the product before the next one is trusted.
 
-  The Stripe engineering blog is the worked example in this hub of a company whose writing passed that check.
+  The Stripe engineering blog is the worked example in this topic of a company whose writing passed that check.
 argument: "Developers check claims, so content earns trust by being runnable and loses it by overclaiming."
 sections:
   - heading: "What to publish"
@@ -34,7 +34,7 @@ sections:
         note: "Sorts engineering habits into the ones that help technical writing and the ones to drop."
 bridges:
   - hub: technical-documentation
-    text: "Documentation is the content developers trust first, and the [technical documentation](/articles/technical-documentation/) hub has a template for each page type."
+    text: "Documentation is the content developers trust first, and the [technical documentation](/articles/technical-documentation/) topic has a template for each page type."
   - hub: ai-search-optimization
     text: "An AI assistant now reads developer content on a developer's behalf, and [AI search optimization](/articles/ai-search-optimization/) covers what makes a page quotable."
 faqs:

@@ -10,7 +10,7 @@ description: 'Review documentation in four passes: product truth, reader route, 
   behavior, and release state, before polishing prose.'
 slug: documentation-review
 status: published
-work_note: 'I run a product before I write about it, and this page applies the same order to review, with the product checked before the prose. For a review of your docs, [write to me](/contact/).'
+work_note: "This post is about reviewing a docs page by running the product first, for teams whose reviews catch commas and miss the command that fails. If you'd rather have the page written that way to begin with, that's my job. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [See my services](/services/)."
 takeaways:
 - Verify product behavior before editing sentences.
 - Run the reader's success and failure paths from the documented starting state.

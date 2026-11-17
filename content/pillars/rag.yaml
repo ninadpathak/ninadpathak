@@ -3,13 +3,13 @@ opening_source:
   url: "https://en.wikipedia.org/wiki/Okapi_BM25"
   fact: "Okapi was implemented at London's City University in the 1980s and 1990s; Robertson and colleagues presented 'Okapi at TREC-3' at TREC 1994."
   checked: 2026-11-17
-lead: "A RAG pipeline retrieves text from an index and puts it in the prompt before the model answers. This hub follows the pipeline from embeddings through evaluation."
+lead: "A RAG pipeline retrieves text from an index and puts it in the prompt before the model answers. This topic follows the pipeline from embeddings through evaluation."
 intro: |
   BM25 comes from the Okapi system at City University in London, which Stephen Robertson's team presented as [Okapi at TREC-3](https://en.wikipedia.org/wiki/Okapi_BM25) in 1994. It ranks documents by the query words they contain, and it is the keyword half of hybrid search today.
 
   A RAG pipeline fuses that ranking with one from a dense vector index, then reranks the candidates and passes the survivors to the model. A person scanning ten search results can skip a bad one, and a model reads whatever lands in the prompt as evidence.
 
-  Plain hybrid search came last of seven retrievers in the production benchmark the hybrid search guide reports, which is why this hub goes on to the stages after fusion.
+  Plain hybrid search came last of seven retrievers in the production benchmark the hybrid search guide reports, which is why this topic goes on to the stages after fusion.
 argument: "Retrieval quality is decided before generation, so each retrieval stage gets measured on its own before the generated answer is judged."
 sections:
   - heading: "Foundations"
@@ -40,9 +40,9 @@ sections:
         note: "Compares PGlite and SQLite-vec for vector search in the browser, and says what to measure on real data."
 bridges:
   - hub: agent-memory
-    text: "Agent memory reuses this retrieval stack for a different job, and the [AI agent memory](/articles/agent-memory/) hub covers where the two differ."
+    text: "Agent memory reuses this retrieval stack for a different job, and the [AI agent memory](/articles/agent-memory/) topic covers where the two differ."
   - hub: ai-engineering
-    text: "A retrieved token costs latency and money like any other, and the [LLM inference](/articles/ai-engineering/) hub covers that budget."
+    text: "A retrieved token costs latency and money like any other, and the [LLM inference](/articles/ai-engineering/) topic covers that budget."
 faqs:
   - q: "Which stage of a RAG pipeline should be measured first?"
     a: "Measure retrieval before generation, because a wrong chunk in the prompt reads as evidence. The guide to [RAG evaluation](/articles/rag-evaluation/) covers recall and precision for the retrieved set."

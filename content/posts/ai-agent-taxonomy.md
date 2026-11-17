@@ -16,7 +16,7 @@ date: 2026-04-21
 description: 'Types of AI agents sorted by how much each decides without a person, from reactive to persistent-goal, set against the textbook classes and Anthropic''s split.'
 slug: ai-agent-taxonomy
 status: published
-work_note: 'I group agents on this page by how much they decide alone, because that decides which tools and memory a task needs. For the agent guides I''ve written for Firecrawl, see [my portfolio](/portfolio/).'
+work_note: "I'm Ninad Pathak, a freelance technical writer. If your docs or tutorials have fallen behind the product, I write them, and I run the product first. [Start here](/services/)."
 title: 'Types of AI Agents: Five Types by Autonomy and Scope'
 updated: 2026-11-17
 ---

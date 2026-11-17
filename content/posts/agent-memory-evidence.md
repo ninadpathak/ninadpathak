@@ -9,7 +9,7 @@ description: A proposal for a shared agent memory format lists five questions a 
 slug: agent-memory-evidence
 status: published
 title: "I went looking for the citation field in a proposed agent memory format"
-work_note: 'I ran Mem0''s team of 13 writers, and I write documentation where a claim needs a source a reader can check. This essay asks the same of an agent''s notes, and [my portfolio](/portfolio/) has the work.'
+work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it. [See how I work](/services/) and tell me what you're shipping."
 ---
 
 <div class="visual-wrapper">

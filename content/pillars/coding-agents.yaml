@@ -3,13 +3,13 @@ opening_source:
   url: "https://en.wikipedia.org/wiki/Editor_war"
   fact: "The editor war is the rivalry between users of the Emacs and vi text editors; flame wars since at least 1985; one of the original holy wars on Usenet."
   checked: 2026-11-17
-lead: "A coding agent is an AI agent that works inside a repository, editing files and running commands until a programming task is done. This hub covers how to configure one and how to choose one."
+lead: "A coding agent is an AI agent that works inside a repository, editing files and running commands until a programming task is done. This topic covers how to configure one and how to choose one."
 intro: |
   The [editor war](https://en.wikipedia.org/wiki/Editor_war) between Emacs and vi users has run since at least 1985, and it was one of the original holy wars on Usenet. Developers now argue about coding agents the way they argued about editors.
 
   An editor changes how a person types code, and an agent writes the code. That moves the skill from keystrokes to instructions.
 
-  The CLAUDE.md guide in this hub tests four repositories and finds that Claude Code prefers CLAUDE.md by default and falls back to AGENTS.md. What the agent knows about a project is what a person wrote in those files.
+  The CLAUDE.md guide in this topic tests four repositories and finds that Claude Code prefers CLAUDE.md by default and falls back to AGENTS.md. What the agent knows about a project is what a person wrote in those files.
 argument: "A coding agent is configured through files a person writes, so getting good output from one is a documentation job."
 sections:
   - heading: "Instruction files"
@@ -44,11 +44,11 @@ sections:
         note: "Argues that a build light is a pager, and that agent-rate change wears it out unless a team rations what reaches a person."
 bridges:
   - hub: ai-agents
-    text: "A coding agent is one agent loop with a harness around it, which the [AI agent architecture](/articles/ai-agents/) hub takes apart."
+    text: "A coding agent is one agent loop with a harness around it, which the [AI agent architecture](/articles/ai-agents/) topic takes apart."
   - hub: agent-memory
-    text: "Claude Code's memory is one case of a wider design, and the [AI agent memory](/articles/agent-memory/) hub covers the write and read paths behind it."
+    text: "Claude Code's memory is one case of a wider design, and the [AI agent memory](/articles/agent-memory/) topic covers the write and read paths behind it."
   - hub: technical-documentation
-    text: "Instruction files are documentation, and the [technical documentation](/articles/technical-documentation/) hub covers the page types they sit beside."
+    text: "Instruction files are documentation, and the [technical documentation](/articles/technical-documentation/) topic covers the page types they sit beside."
 faqs:
   - q: "What does a person have to write for a coding agent?"
     a: "A person writes the instruction file the agent loads and the prompt file for each subagent. The [CLAUDE.md](/articles/claude-md/) guide tests which file each agent loads, and [Claude Code subagents](/articles/claude-code-subagents/) start without the conversation history, so the prompt file has to carry the rules."

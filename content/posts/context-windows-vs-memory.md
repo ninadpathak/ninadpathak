@@ -12,7 +12,7 @@ date: '2026-04-19'
 description: Context is a per-request reasoning budget. Memory is persistent state
   retrieved into a later request. Long input capacity does not make them interchangeable.
 status: published
-work_note: 'I joined Mem0, a memory infrastructure company, in February 2026 and ran its writers. Memory products exist because a context window forgets, and this page is my own explanation of the difference. [My portfolio](/portfolio/) has the case study.'
+work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies, and I run the product before I write about it. [My services are here](/services/)."
 title: 'Context Windows vs Memory: Why They Are Not the Same Thing'
 updated: '2026-08-18'
 slug: context-windows-vs-memory

@@ -10,7 +10,7 @@ description: Every production AI agent needs a harness. Here is what one contain
   why frameworks often are not enough, and how to build the layer that actually determines
   reliability.
 status: published
-work_note: 'I wrote Firecrawl''s explainer on agent harnesses, and this page is my own take on the same layer. [The Firecrawl piece is in my portfolio](/portfolio/).'
+work_note: "I'm Ninad Pathak, and I write for AI companies whose readers are engineers. I build the example and run it before I draft. [See what I do](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Agent Harnesses: The Infrastructure Your LLM Agent Needs'
 slug: agent-harnesses
 video: agent-harnesses

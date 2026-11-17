@@ -13,7 +13,7 @@ bridges:
 date: 2026-04-19
 description: 'Claude Code memory is two sets of files read into each new session: CLAUDE.md files you write and auto memory Claude writes. Where they live and what loads.'
 status: published
-work_note: 'This page is my reading of how Claude Code keeps memory in plain files, checked against Anthropic''s documentation on the day I wrote it. For the developer content I''ve published, see [my portfolio](/portfolio/).'
+work_note: "I'm Ninad Pathak. I write the docs and tutorials an AI company needs when its readers are engineers, and I run the product before I write a line. [Hire me for yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: How Memory Works in Claude Code
 updated: 2026-11-17
 slug: claude-code-memory

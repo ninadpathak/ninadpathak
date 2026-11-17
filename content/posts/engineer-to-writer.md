@@ -10,7 +10,7 @@ date: 2026-04-05
 description: I explain which engineering habits still make me better at technical
   writing, which ones I had to drop, and how the day-to-day work changed.
 status: published
-work_note: 'I write code and technical content, and this page is about which engineering habits help the writing and which get in its way. [My portfolio](/portfolio/) links to the results.'
+work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies, and I run the product before I write about it. [My services are here](/services/)."
 title: 'From Engineer to Technical Writer: What I Kept and What I Left Behind'
 updated: 2026-08-17
 slug: engineer-to-writer

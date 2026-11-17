@@ -9,7 +9,7 @@ date: 2026-04-16
 description: A practical guide to RAGAs, recall, precision, and the metrics that separate
   production RAG systems from prototypes.
 status: published
-work_note: 'I led a team of 13 writers at Mem0, whose product sits beside RAG in an agent''s stack. The metrics here are for judging the RAG side, and [my portfolio](/portfolio/) has my Firecrawl pieces on search for agents.'
+work_note: "I'm Ninad Pathak, a freelance technical writer. If your docs or tutorials have fallen behind the product, I write them, and I run the product first. [Start here](/services/)."
 title: 'RAG Evaluation Metrics: What Actually Matters'
 updated: '2026-08-17'
 slug: rag-evaluation

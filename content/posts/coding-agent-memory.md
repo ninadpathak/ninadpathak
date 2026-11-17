@@ -13,7 +13,7 @@ date: '2026-05-06'
 description: 'Coding agent memory compared across Claude Code, Codex, Gemini CLI and Cursor: the files each loads into a new session, and which ones write their own notes.'
 slug: coding-agent-memory
 status: published
-work_note: 'Mem0 sells memory for agents, and I joined it in February 2026 to run its writers. That makes me an interested party on why coding agents forget, and [my portfolio](/portfolio/) shows the work.'
+work_note: "I write developer documentation and technical articles for AI and developer-tool companies. I'm Ninad Pathak, and I work by one rule, which is to run the product before I write about it. [Work with me](/services/)."
 title: 'Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI
   Coding Assistants'
 updated: 2026-11-17

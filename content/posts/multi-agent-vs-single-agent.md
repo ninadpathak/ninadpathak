@@ -14,7 +14,7 @@ date: '2026-04-27'
 description: 'Multi-agent systems vs a single agent: what a second agent buys, what it costs, and the 2026 rule from Cognition that only one agent should write.'
 slug: multi-agent-vs-single-agent
 status: published
-work_note: 'For Firecrawl I wrote about agent harnesses and agent tools, the parts an agent needs whether there is one or five. Whether a job needs more than one is the question here, and [those pieces are in my portfolio](/portfolio/).'
+work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies, and I run the product before I write about it. [My services are here](/services/)."
 title: 'Multi-Agent vs Single-Agent Systems: The Real Trade-offs'
 updated: 2026-11-17
 ---

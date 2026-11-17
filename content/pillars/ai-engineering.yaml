@@ -3,7 +3,7 @@ opening_source:
   url: "https://en.wikipedia.org/wiki/Demoscene"
   fact: "A 64K intro is a demo with an executable file size limit of 64 kibibytes, or 65,536 bytes. fr-08, a 64k PC demo by Farbrausch, was released at The Party 2000."
   checked: 2026-11-17
-lead: "LLM inference is the step where a trained model turns a prompt into output tokens, and it sets the latency and cost of a product built on the model. This hub covers the mechanisms behind both, plus the context window and the output format."
+lead: "LLM inference is the step where a trained model turns a prompt into output tokens, and it sets the latency and cost of a product built on the model. This topic covers the mechanisms behind both, plus the context window and the output format."
 intro: |
   A [64K intro](https://en.wikipedia.org/wiki/Demoscene) is a demo whose executable is limited to 65,536 bytes, and Farbrausch released fr-08 in that category at The Party in 2000. The demoscene turned a fixed budget into a craft.
 
@@ -38,9 +38,9 @@ sections:
         note: "Separates JSON mode from structured outputs and function calling by what each one guarantees."
 bridges:
   - hub: agent-memory
-    text: "Memory holds what the context window cannot, and the [AI agent memory](/articles/agent-memory/) hub covers that system."
+    text: "Memory holds what the context window cannot, and the [AI agent memory](/articles/agent-memory/) topic covers that system."
   - hub: rag
-    text: "Retrieval decides which tokens enter the context in the first place, covered in the [RAG pipeline](/articles/rag/) hub."
+    text: "Retrieval decides which tokens enter the context in the first place, covered in the [RAG pipeline](/articles/rag/) topic."
 faqs:
   - q: "Where should inference optimization start?"
     a: "Start by measuring the wait a user sees, which is [time to first token](/articles/time-to-first-token/). The guide to [LLM inference optimization](/articles/llm-inference-optimization/) then says which techniques are already engine defaults."

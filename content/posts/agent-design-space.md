@@ -21,7 +21,7 @@ description: After surveying production agents across industries, the design spa
   clusters into patterns. Here is what I found.
 slug: agent-design-space
 status: published
-work_note: 'I write developer content for agent platforms, including Firecrawl''s guides to agent tools and agent harnesses. This page maps the designs those products keep choosing between, and [my portfolio](/portfolio/) has the guides.'
+work_note: "I write developer documentation and technical articles for AI and developer-tool companies. I'm Ninad Pathak, and I work by one rule, which is to run the product before I write about it. [Work with me](/services/)."
 title: 'The Agent Design Space: A Map of What Engineers Are Actually Building'
 video: agent-design-space
 ---

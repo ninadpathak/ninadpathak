@@ -7,7 +7,7 @@ siblings:
 date: 2026-03-15
 description: 'Vector embeddings explained with a model run on six short texts: what an embedding is, why similarity scores mislead, and what binary embeddings cost.'
 status: published
-work_note: 'At Mem0 I hired writers capable of understanding vector embeddings, and I handled the technical reviews. This guide to embeddings is my own, written for this site, and [the Mem0 case study](/portfolio/) is in my portfolio.'
+work_note: "I'm Ninad Pathak, and I write documentation for companies building agents, agent memory and LLM infrastructure. I build the example and run it before I draft, so your engineers review working code. [Here's what that looks like](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Vector Embeddings: A Guide to the Geometry of Meaning in AI'
 updated: 2026-11-17
 slug: vector-embeddings

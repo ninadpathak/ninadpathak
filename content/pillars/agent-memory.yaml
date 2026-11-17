@@ -9,7 +9,7 @@ intro: |
 
   A model call is stateless in that way too, so what an agent should know from last week has to be put into the request. A cookie holds a value the server wrote on purpose, though, and agent memory is distilled from conversation, where a later fact can contradict an earlier one.
 
-  I ran a team of 13 writers at Mem0, which sells a memory layer, so weigh this hub with that in mind.
+  I ran a team of 13 writers at Mem0, which sells a memory layer, so weigh this topic with that in mind.
 argument: "Memory is a pipeline the application owns from the write to the read, and each stage has its own failure."
 sections:
   - heading: "What memory is"
@@ -52,11 +52,11 @@ sections:
         note: "Walks through DeerFlow's memory, from session state files to sub-agent isolation."
 bridges:
   - hub: rag
-    text: "A memory read path is a retrieval problem, and the [RAG pipeline](/articles/rag/) hub covers the search stack it runs on."
+    text: "A memory read path is a retrieval problem, and the [RAG pipeline](/articles/rag/) topic covers the search stack it runs on."
   - hub: ai-engineering
-    text: "Context window limits are the reason memory exists, and the [LLM inference](/articles/ai-engineering/) hub covers what a long context costs."
+    text: "Context window limits are the reason memory exists, and the [LLM inference](/articles/ai-engineering/) topic covers what a long context costs."
   - hub: coding-agents
-    text: "Claude Code's memory files are one product's version of this design, covered in the [coding agents](/articles/coding-agents/) hub."
+    text: "Claude Code's memory files are one product's version of this design, covered in the [coding agents](/articles/coding-agents/) topic."
 faqs:
   - q: "Does an agent need memory if it has RAG and a large context window?"
     a: "Yes, when state has to survive across requests. The page on [context window vs memory](/articles/context-windows-vs-memory/) treats context as a per-request budget, and [RAG vs memory](/articles/rag-vs-memory/) shows that RAG selects evidence for one request."

@@ -12,7 +12,7 @@ description: Release notes and blog posts now carry a line saying a human wrote 
 slug: written-by-a-human
 status: published
 title: "Thoughts on Ghostty's hand-crafted release notes"
-work_note: 'I write technical content for a living, so I have an interest in what makes a page worth trusting now that text is free to produce. This essay is my answer, and [my portfolio](/portfolio/) has the work.'
+work_note: "I'm Ninad Pathak, and I write for AI companies whose readers are engineers. I build the example and run it before I draft. [See what I do](/services/freelance-technical-writer-for-ai-companies/)."
 ---
 
 Ghostty's [1.4.0 release notes](https://ghostty.org/docs/install/release-notes/1-4-0), published on October 27, pause after thanking contributors to say something release notes never used to say.

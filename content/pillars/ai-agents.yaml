@@ -3,7 +3,7 @@ opening_source:
   url: "https://en.wikipedia.org/wiki/Pipeline_(Unix)"
   fact: "Ken Thompson added the pipe() system call and pipes to the shell and several utilities in Version 3 Unix (1973)."
   checked: 2026-11-17
-lead: "An AI agent is a loop around a model, and AI agent architecture is the design of that loop and the harness that runs it. This hub maps the parts in order, from what an agent is to how one fails."
+lead: "An AI agent is a loop around a model, and AI agent architecture is the design of that loop and the harness that runs it. This topic maps the parts in order, from what an agent is to how one fails."
 intro: |
   Ken Thompson added [pipes](https://en.wikipedia.org/wiki/Pipeline_(Unix)) to Unix in 1973, in Version 3. A pipeline chains programs so the output of one becomes the input of the next.
 
@@ -46,11 +46,11 @@ sections:
         note: "Catalogs why agents fail in production and what the field is doing about it."
 bridges:
   - hub: agent-memory
-    text: "The loop's remember step has a hub of its own, and [AI agent memory](/articles/agent-memory/) covers what gets written and read back."
+    text: "The loop's remember step has a topic of its own, and [AI agent memory](/articles/agent-memory/) covers what gets written and read back."
   - hub: coding-agents
-    text: "A coding agent is the agent a developer uses daily, and the [coding agents](/articles/coding-agents/) hub covers the files that configure one."
+    text: "A coding agent is the agent a developer uses daily, and the [coding agents](/articles/coding-agents/) topic covers the files that configure one."
   - hub: ai-engineering
-    text: "Each turn of the loop spends tokens and latency, which the [LLM inference](/articles/ai-engineering/) hub measures."
+    text: "Each turn of the loop spends tokens and latency, which the [LLM inference](/articles/ai-engineering/) topic measures."
 faqs:
   - q: "How do the parts of an AI agent fit together?"
     a: "The model chooses the next tool call, the loop carries the result back to it, and the harness runs the loop. The [agent loop](/articles/agent-loop-anatomy/) page covers the four phases, and the [agent harness](/articles/agent-harnesses/) page covers the layer around them."

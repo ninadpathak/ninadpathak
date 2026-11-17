@@ -9,7 +9,7 @@ description: Context windows are expanding to millions of tokens. Here is why th
   middle of your context still gets ignored, what long context actually costs, and
   how to build production systems that use these massive windows effectively.
 status: published
-work_note: 'I wrote Firecrawl''s guide to the context layer for AI agents. This page covers the limit underneath it, the context window, and [the guide is in my portfolio](/portfolio/).'
+work_note: "I'm Ninad Pathak, and I write for AI companies whose readers are engineers. I build the example and run it before I draft. [See what I do](/services/freelance-technical-writer-for-ai-companies/)."
 title: "LLM Context Windows Explained"
 slug: llm-context-windows
 ---

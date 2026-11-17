@@ -14,7 +14,7 @@ date: '2026-05-05'
 description: 'Context compression for agent memory: what an agent should keep between sessions and what to leave out, with Anthropic''s November 2026 memory tests.'
 slug: memory-compression
 status: published
-work_note: 'At Mem0 I ran 13 writers, and compression is one of the decisions any memory layer makes out of sight. Here I look at what a compressed record is allowed to drop. [My portfolio](/portfolio/) has the case study.'
+work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies, and I run the product before I write about it. [My services are here](/services/)."
 title: 'Contextual Compression for Agent Memory: What Stays and What Goes'
 updated: 2026-11-17
 ---

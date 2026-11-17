@@ -561,3 +561,19 @@ Ninad, on an opening that described an xkcd comic and then said why the joke wor
 - If a reference needs explaining to this readership, choose another.
 - For an analogy, state the known thing, then the new thing, and leave out the sentence that says they are alike.
 
+
+## Work notes rewritten as pitch notes (2026-11-17, branch voice-notes)
+
+Ninad approved three patterns and corrected a fourth. Every post's `work_note` now uses one of them.
+
+- Subject-leaning, 28 posts: the technical-documentation pages, the developer-content pages about client-type work, `mcp-server-tutorial` and `aeo-for-developer-docs`. Each names what its post is about and the reader's situation, offers to take that job, then says who I am and links. Ninad's model: "This post is about building sustainable changelogs as you have more PRs being shipped than humanly processable. If you'd rather someone else handle the changelogs while you work on the product, that's what I do. I'm Ninad Pathak, a freelance technical writer ..."
+- Mechanism first, 2 posts: `llms-txt` and `ai-crawlers`, the pages about the audit's own checks.
+- Plain and author-first, 54 posts: eight wordings rotated by topic and date so two neighbours in a topic differ. The same note may appear on posts that are not neighbours, as Fly.io's pitch does.
+- The offer in every note is work the repo backs: developer documentation, tutorials, technical articles, AI-ready documentation audits. Where a post's subject is outside that list (design docs, runbooks, accessibility, technical SEO), the note offers the nearest work on the list and does not offer the post's subject.
+- Links: `/services/` for developer-tool subjects, `/services/freelance-technical-writer-for-ai-companies/` for AI subjects, `/services/ai-ready-documentation-audit/` for the audit, `/contact/` on some subject-leaning notes.
+- `tests/test_article_work_notes.py`: "I'm Ninad Pathak" or "I am Ninad Pathak" passes once per note and every other use of the name still fails as a bio line; length is 15 to 70 words; no form of "sell"; neighbours in a topic must differ; a note that starts "This post" must be unique.
+- A note says what its post is about today. When a later batch rebuilds a page, reread its note against the new page.
+
+## Visible wording: topic, not hub (2026-11-17)
+
+The reader sees "topic". The lead, fact, argument and bridge text of every `content/pillars/*.yaml` now says "this topic" and "the [query] topic". Field names (`hub:`), audit output and JSON-LD ids keep "hub". New prose for readers never says "hub".

@@ -10,7 +10,7 @@ bridges:
 date: 2026-04-16
 description: 'Error handling in production AI agents: classify tool errors in code, make ambiguous failures safe with idempotency keys, and tell the model what happened.'
 status: published
-work_note: 'I''ve written guides to agent tools and agent APIs for Firecrawl. This page covers what an agent should do after a tool call fails, and [those guides are in my portfolio](/portfolio/).'
+work_note: "Need documentation or tutorials for an agent, memory or inference product? I'm Ninad Pathak, a freelance technical writer, and I build and run the example before I draft. [Here's how to hire me](/services/freelance-technical-writer-for-ai-companies/)."
 title: "Error Handling in Production AI Agents"
 slug: agent-error-handling
 video: agent-error-handling

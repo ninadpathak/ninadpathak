@@ -14,7 +14,7 @@ date: 2026-04-18
 description: Most engineering documentation fails for the same reasons. Here is what
   actually moves the needle.
 status: published
-work_note: 'For Centus I wrote 50+ localization guides, and its engineers sent them to publish without a rewrite. I wrote this page for engineers who write their own docs, and [my portfolio](/portfolio/) links to six of the guides.'
+work_note: "This post is for the engineer who has been handed the docs along with everything else. If you'd rather hand them on again, to someone who'll run your product before writing about it, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Here's how I work](/services/)."
 title: 'Technical Writing for Engineers: The 80/20 Guide'
 slug: technical-writing-for-engineers
 ---

@@ -16,7 +16,7 @@ date: 2026-06-14
 description: 'An agentic workflow puts an AI agent inside a fixed process. I frame and scope the task before the agent runs, and I review its diff before the change lands.'
 slug: agentic-workflows
 status: published
-work_note: 'I''ve written about code review and pull requests for Graphite. This playbook carries that concern into agent work, where a person still has to approve the diff. [My portfolio](/portfolio/) lists my client work.'
+work_note: "I'm Ninad Pathak, and I write for AI companies whose readers are engineers. I build the example and run it before I draft. [See what I do](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Agentic Workflows: A Five-Stage Playbook From Prompt to PR'
 video: agentic-workflows
 ---

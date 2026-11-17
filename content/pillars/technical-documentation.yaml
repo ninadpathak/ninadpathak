@@ -5,13 +5,13 @@ opening_source:
   url: "https://en.wikipedia.org/wiki/Man_page"
   fact: "The Unix Programmer's Manual was published on November 3, 1971."
   checked: 2026-11-17
-lead: "Technical documentation is the written record of how a product behaves, kept true by testing it against the product. This hub maps my guides and templates in the order a team does the work, from deciding what to write to keeping the pages found."
+lead: "Technical documentation is the written record of how a product behaves, kept true by testing it against the product. This topic maps my guides and templates in the order a team does the work, from deciding what to write to keeping the pages found."
 intro: |
   The first edition of the [Unix Programmer's Manual](https://en.wikipedia.org/wiki/Man_page) is dated November 3, 1971. It described the commands the system had on that date.
 
   A reader of that manual could type a command and compare what came back. Product documentation on the web still gets judged by that test, and a hosted API can change between two visits by one reader, where a printed manual had one edition to match.
 
-  The runbook and release notes templates in this hub ship with a checker script, so a page can be tested again after the next release.
+  The runbook and release notes templates in this topic ship with a checker script, so a page can be tested again after the next release.
 argument: "Documentation is a product surface, so a page gets tested against the product before it ships and again when the product changes."
 sections:
   - heading: "Decide what to write"
@@ -96,7 +96,7 @@ bridges:
   - hub: ai-search-optimization
     text: "A docs page now has agent readers as well as human ones, and [AI search optimization for documentation](/articles/ai-search-optimization/) covers crawler access and answer structure."
   - hub: coding-agents
-    text: "The instruction files a coding agent loads are documentation with a new reader, which is why CLAUDE.md and AGENTS.md sit in the [coding agents](/articles/coding-agents/) hub."
+    text: "The instruction files a coding agent loads are documentation with a new reader, which is why CLAUDE.md and AGENTS.md sit in the [coding agents](/articles/coding-agents/) topic."
 faqs:
   - q: "What should a small team document first?"
     a: "Start with an orientation page and one verified success path, then add the reference that path needs. The guide to [what technical documentation includes](/articles/technical-docs/) matches each document type to the reader task it owns."

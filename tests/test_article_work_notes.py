@@ -92,6 +92,9 @@ FIRST_PERSON = re.compile(
 # "Technical writer Ninad Pathak writes ...". The name, third-person pronouns for a
 # person, and a job title followed by a third-person verb all mark it. "The author of a
 # design doc" and "the writer who reviews a draft" are ordinary nouns and stay allowed.
+# A first-person introduction, "I'm Ninad Pathak" or "I am Ninad Pathak", is the one place
+# the name may appear, and SELF_INTRODUCTION removes it before the bio check runs.
+SELF_INTRODUCTION = re.compile(r"\bI(?:['’]m| am) Ninad Pathak\b")
 THIRD_PERSON_BIO = re.compile(
     r"(?i)\bNinad\b|\bPathak\b|\b(?:he|she|his|hers|him|himself|herself)\b"
     r"|\b(?:writer|creator|strategist|consultant|owner)(?: \w+){0,2} "
@@ -114,7 +117,7 @@ def voice_problems(note: str) -> list:
     problems = []
     if not FIRST_PERSON.search(note_outside_link(note)):
         problems.append("no first person outside the link label")
-    if THIRD_PERSON_BIO.search(note_text(note)):
+    if THIRD_PERSON_BIO.search(SELF_INTRODUCTION.sub("I am", note_text(note), count=1)):
         problems.append("third-person bio wording")
     return problems
 
@@ -128,6 +131,8 @@ class WorkNoteVoiceRuleTests(unittest.TestCase):
             "My rule for headings fits in three sentences. [The portfolio](/portfolio/) has examples.",
             "I wrote this template so the author of a design doc argues with the proposal before review. [My portfolio](/portfolio/) has more.",
             "I wrote this page for the writer who has to review an engineer's draft. [My portfolio](/portfolio/) has more.",
+            "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [See how I work](/services/).",
+            "This post is about changelogs. If you'd rather hand yours over, that's what I do. I am Ninad Pathak, and [this is how I work](/services/).",
         ):
             with self.subTest(value=value):
                 self.assertEqual(voice_problems(value), [])
@@ -139,6 +144,9 @@ class WorkNoteVoiceRuleTests(unittest.TestCase):
             "This site's owner writes technical documentation for developer products, and I link it from [my portfolio](/portfolio/).",
             "I know that she writes technical documentation, and her work is in [my portfolio](/portfolio/).",
             "A technical writer who explains his process, as I do in [my portfolio](/portfolio/).",
+            "I'm Ninad Pathak. Ninad writes technical documentation, and [the work is here](/services/).",
+            "I'm Ninad Pathak, and I'm Ninad Pathak again in [the same note](/services/).",
+            "I work with Ninad Pathak, who writes documentation. [Get in touch](/contact/).",
         ):
             with self.subTest(value=value):
                 self.assertIn("third-person bio wording", voice_problems(value))
@@ -155,7 +163,10 @@ class WorkNoteVoiceRuleTests(unittest.TestCase):
 
 
 class PublishedWorkNoteTests(unittest.TestCase):
-    def test_published_notes_are_present_unique_short_and_first_person(self):
+    def test_published_notes_are_present_short_first_person_and_varied(self):
+        """A pitch note may repeat across the site, as a company's pitch does on its blog.
+        Two posts next to each other in a topic may not carry the same one, and a note
+        that opens on its post's subject belongs to that post alone."""
         notes = []
         for path in Path("content/posts").glob("*.md"):
             post = frontmatter.load(path)
@@ -166,12 +177,18 @@ class PublishedWorkNoteTests(unittest.TestCase):
                 self.assertIsInstance(note, str)
                 self.assertTrue(render_work_note(note))
                 text = note_text(note)
-                self.assertLessEqual(len(text.split()), 50)
+                self.assertLessEqual(len(text.split()), 70)
                 self.assertGreaterEqual(len(text.split()), 15)
                 self.assertEqual(voice_problems(note), [])
-                notes.append(note)
+                self.assertNotRegex(text, r"(?i)\bsell(?:s|ing)?\b")
+                notes.append((str(post.get("category")), str(post.get("date")), path.stem, note))
         self.assertTrue(notes)
-        self.assertEqual(len(notes), len(set(notes)))
+        notes.sort()
+        for (category, _, earlier, first), (next_category, _, later, second) in zip(notes, notes[1:]):
+            if category == next_category:
+                self.assertNotEqual(first, second, f"{earlier} and {later} sit together and share a note")
+        subject_notes = [note for *_, note in notes if note.startswith("This post")]
+        self.assertEqual(len(subject_notes), len(set(subject_notes)))
 
 
 if __name__ == "__main__":

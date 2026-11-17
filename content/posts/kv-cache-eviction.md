@@ -5,7 +5,7 @@ date: 2026-04-15
 description: A research-led comparison of KV-cache eviction strategies, including
   their accuracy risks and implementation trade-offs.
 status: published
-work_note: 'At Mem0 I ran a team of 13 writers and hired people capable of understanding KV cache eviction. This page is my own read of the research on it, and [my portfolio](/portfolio/) has the Mem0 case study.'
+work_note: "Need documentation or tutorials for an agent, memory or inference product? I'm Ninad Pathak, a freelance technical writer, and I build and run the example before I draft. [Here's how to hire me](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Context Engineering as Heap Management: Accuracy Risks in KV Cache Eviction'
 updated: '2026-08-17'
 slug: kv-cache-eviction

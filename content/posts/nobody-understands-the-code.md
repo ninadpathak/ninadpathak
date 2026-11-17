@@ -14,7 +14,7 @@ description: A Reddit post said nobody understands the code after a year of agen
 slug: nobody-understands-the-code
 status: published
 title: "What I'd still write by hand in a codebase agents can explain"
-work_note: 'I write documentation for a living, so I have a stake in whether a generated explainer can replace it. This essay is my answer, and [my portfolio](/portfolio/) has the client work.'
+work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it. [See how I work](/services/) and tell me what you're shipping."
 ---
 
 On November 9 a Reddit post titled "A year after the 100% AI mandate nobody understands our code" [reached Hacker News](https://news.ycombinator.com/item?id=50433079), and the first thing commenters settled was that the post itself looked machine-written. "Pangram said the op post is 100% AI generated", one wrote, and another told readers not to "fall for the bait".

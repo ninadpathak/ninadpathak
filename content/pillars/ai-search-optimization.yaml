@@ -3,14 +3,14 @@ opening_source:
   url: "https://en.wikipedia.org/wiki/Robots.txt"
   fact: "Martijn Koster proposed the standard in February 1994 on the www-talk mailing list; it relies on voluntary compliance."
   checked: 2026-11-17
-lead: "AI search optimization for documentation is the work of making a page fetchable by AI crawlers and quotable by answer engines. This hub covers the two parts a publisher controls, which are crawler access and page structure."
+lead: "AI search optimization for documentation is the work of making a page fetchable by AI crawlers and quotable by answer engines. This topic covers the two parts a publisher controls, which are crawler access and page structure."
 intro: |
   Martijn Koster proposed [robots.txt](https://en.wikipedia.org/wiki/Robots.txt) on the www-talk mailing list in February 1994. The standard is a plain text file, and it relies on voluntary compliance by the crawlers that read it.
 
-  GPTBot and OAI-SearchBot read that file today. The crawler guide in this hub checked 12 developer documentation hosts on October 22, 2026, and every robots.txt that existed allowed every AI agent the checker knows.
+  GPTBot and OAI-SearchBot read that file today. The crawler guide in this topic checked 12 developer documentation hosts on October 22, 2026, and every robots.txt that existed allowed every AI agent the checker knows.
 
   What happens after the fetch is the engine's choice. It may quote one passage or leave the page out.
-argument: "A publisher controls access and page structure and nothing after that, so the access and extraction checks in this hub each come with a free tool that reruns them."
+argument: "A publisher controls access and page structure and nothing after that, so the access and extraction checks in this topic each come with a free tool that reruns them."
 sections:
   - heading: "Access"
     blurb: "A crawler that cannot fetch the page ends the process here."
@@ -38,9 +38,9 @@ sections:
         note: "A close read of Fern's claim that agents make over half the requests to the docs it hosts, and what the numbers leave out."
 bridges:
   - hub: technical-documentation
-    text: "These checks cannot help a page that ordinary search fails to crawl, so the SEO checklist in the [technical documentation](/articles/technical-documentation/) hub comes first."
+    text: "These checks cannot help a page that ordinary search fails to crawl, so the SEO checklist in the [technical documentation](/articles/technical-documentation/) topic comes first."
   - hub: ai-agents
-    text: "An MCP server is one more way to serve documentation to an agent, and the [AI agent architecture](/articles/ai-agents/) hub has a tutorial that builds a docs search server."
+    text: "An MCP server is one more way to serve documentation to an agent, and the [AI agent architecture](/articles/ai-agents/) topic has a tutorial that builds a docs search server."
 faqs:
   - q: "What can a publisher control in AI search?"
     a: "A publisher controls which crawlers may fetch a page and how the page is structured for quoting. The guide to [AI crawlers](/articles/ai-crawlers/) covers the robots.txt rules, and placement in an answer stays with the engine."

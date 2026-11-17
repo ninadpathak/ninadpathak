@@ -17,7 +17,7 @@ takeaways:
 - Google Search does not use it, and an Ahrefs study found 97% of published files got no request in May 2026.
 - Validate the structure and read your server logs separately, because a clean file and a fetched file are different facts.
 title: 'llms.txt: What It Is, What It Does, and Four Real Files Checked'
-work_note: 'For this page I checked four published llms.txt files against the proposal. I do AI-ready documentation audits as well, and [you can ask me for one](/contact/).'
+work_note: "An AI-ready documentation audit tests whether an answer engine can lift your page's answers and whether AI crawlers may fetch it, then validates your llms.txt. I'm Ninad Pathak, and I run it with four tools I built and published, so you can rerun every finding. [Yours could be next](/services/ai-ready-documentation-audit/)."
 video: llms-txt
 ---
 

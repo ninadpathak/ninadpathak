@@ -14,7 +14,7 @@ description: My March ranking of coding models rested on one benchmark score. An
 slug: coding-models-new-code-vs-change
 status: published
 title: "Why I rebuilt my best-LLMs-for-coding page"
-work_note: 'I write about coding agents for developer-tool companies, and this essay is my reading of two October results that seem to disagree. [My portfolio](/portfolio/) has the client work.'
+work_note: "I'm Ninad Pathak, a freelance technical writer. If your docs or tutorials have fallen behind the product, I write them, and I run the product first. [Start here](/services/)."
 ---
 
 "I think October represents another inflection point in capabilities for coding agents and the models that drive them: Claude Opus 5.5 can now build video games that are actually fun". Simon Willison [posted that on Bluesky](https://bsky.app/profile/simonwillison.net/post/3mywwaogdac23) on October 28, with a [write-up](https://simonwillison.net/2026/Oct/28/vibe-game-development/) of four browser games built with "no looking at the code at all".

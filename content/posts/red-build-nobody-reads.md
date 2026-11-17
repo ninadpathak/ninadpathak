@@ -12,7 +12,7 @@ description: A team that let agents write every line found its build frequently 
 slug: red-build-nobody-reads
 status: published
 title: "Applying Google's pager rule to a build that is always red"
-work_note: 'I write documentation, which is the trade of deciding what a busy reader has to see. This essay applies that to build lights and changelogs, and [my portfolio](/portfolio/) has the client work.'
+work_note: "I'm Ninad Pathak, and I write documentation for companies building agents, agent memory and LLM infrastructure. I build the example and run it before I draft, so your engineers review working code. [Here's what that looks like](/services/freelance-technical-writer-for-ai-companies/)."
 ---
 
 On October 29 Rachel Laycock, the CTO of Thoughtworks, published [Why are good developers so wary of agentic development?](https://martinfowler.com/rachels-ramblings/good-devs-wary.html), and the middle of it reports an experiment. A group of senior engineers, infrastructure consultants and product people built an airline application for a week under one constraint.

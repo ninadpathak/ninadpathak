@@ -8,7 +8,7 @@ date: 2026-04-01
 description: 'Developer onboarding documentation should take a new engineer from a clean machine to a safe first merged change, with one setup path and a check after each step.'
 slug: developer-onboarding-docs
 status: published
-work_note: 'I end onboarding docs at the first merged change, and this page tests that method on a fictional checkout API. [My portfolio](/portfolio/) has the tutorials I''ve written for clients.'
+work_note: "This post is about onboarding docs that end when a new engineer has merged a change. If the developers you're onboarding are your customers and you'd rather someone else write their first hour, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Get in touch](/contact/)."
 takeaways:
 - Make a safe first merged change the finish line instead of assigning a reading list.
 - Give the reader one supported setup path with proof after each stage.
