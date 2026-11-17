@@ -5,7 +5,7 @@ description: Everything in AI starts with a vector. Here is how embedding models
   human language into high-dimensional geometry, why dimensionality reduction matters,
   and how to choose between OpenAI, Cohere, and self-hosted models.
 status: published
-work_note: 'I joined Mem0 in February 2026 and handled hiring and technical reviews for its writers. This guide to vector embeddings is my own, written for this site, and [the Mem0 case study](/portfolio/) is in my portfolio.'
+work_note: 'At Mem0 I hired writers capable of understanding vector embeddings, and I handled the technical reviews. This guide to embeddings is my own, written for this site, and [the Mem0 case study](/portfolio/) is in my portfolio.'
 title: 'Vector Embeddings: A Guide to the Geometry of Meaning in AI'
 updated: '2026-08-17'
 slug: vector-embeddings
