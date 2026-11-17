@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/rag-reranking/latency-tradeoff.mmd",
-  "hash": "8fb6afc77461666d",
+  "hash": "e394575953f5f278",
   "pele": "1.8.0",
   "width": 720,
   "height": 288,
@@ -18,7 +18,7 @@
       "mono": 9.5
     }
   },
-  "alt": "A reranked request in four steps. Embedding the query and retrieving a hundred vectors each take milliseconds, so the first stage is fast. Reranking a hundred pairs with a cross-encoder adds hundreds of milliseconds before the answer starts streaming.",
+  "alt": "A reranked request in four steps. Embedding the query and retrieving a hundred vectors each take milliseconds, so the first stage is fast. Reranking a hundred pairs with a cross-encoder adds from hundreds of milliseconds to more than a second, depending on the model, before the answer starts streaming.",
   "caption": "Retrieval is fast, and the cross-encoder is where the time goes.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-reranking/latency-tradeoff.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-reranking/latency-tradeoff.narrow.svg\" width=\"288\" height=\"616\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-reranking/latency-tradeoff.svg\" width=\"720\" height=\"288\" alt=\"A reranked request in four steps. Embedding the query and retrieving a hundred vectors each take milliseconds, so the first stage is fast. Reranking a hundred pairs with a cross-encoder adds hundreds of milliseconds before the answer starts streaming.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Retrieval is fast, and the cross-encoder is where the time goes.</figcaption>\n</figure>"
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-reranking/latency-tradeoff.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-reranking/latency-tradeoff.narrow.svg\" width=\"288\" height=\"616\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-reranking/latency-tradeoff.svg\" width=\"720\" height=\"288\" alt=\"A reranked request in four steps. Embedding the query and retrieving a hundred vectors each take milliseconds, so the first stage is fast. Reranking a hundred pairs with a cross-encoder adds from hundreds of milliseconds to more than a second, depending on the model, before the answer starts streaming.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Retrieval is fast, and the cross-encoder is where the time goes.</figcaption>\n</figure>"
 }
