@@ -1,5 +1,9 @@
 ---
 category: ai-engineering
+primary_query: structured outputs
+bridges:
+- slug: agent-loop-anatomy
+  reason: An agent loop multiplies every inference cost.
 date: 2026-03-27
 description: 'JSON mode, structured outputs and function calling promise different things. What each guarantees, what is left to your code, and what changes on self-hosted models.'
 status: published

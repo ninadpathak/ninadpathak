@@ -1,5 +1,12 @@
 ---
-category: ai-engineering
+category: rag
+primary_query: pglite vs sqlite
+siblings:
+- vector-embeddings
+- hybrid-search
+bridges:
+- slug: llm-context-windows
+  reason: Every retrieved token costs latency and money.
 date: 2026-04-13
 description: 'PGlite vs SQLite-vec for vector search in the browser: how the two engines differ, and what to measure on your own data before you pick one.'
 status: published

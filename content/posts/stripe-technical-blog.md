@@ -1,5 +1,15 @@
 ---
 category: developer-experience
+primary_query: stripe engineering blog
+siblings:
+- devtools-documentation
+- documentation-velocity
+- writing-for-ai-products
+bridges:
+- slug: writing-changelogs
+  reason: Documentation is the content developers trust first.
+- slug: agent-harnesses
+  reason: The agent harness page is the worked example behind the claim made here.
 date: 2026-04-07
 description: 'Where the Stripe engineering blog lives, what it publishes now (its five newest posts are about agents), and why the writing works as an advantage.'
 status: published

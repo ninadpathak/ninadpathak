@@ -1,5 +1,10 @@
 ---
-category: ai-engineering
+category: rag
+primary_query: rag evaluation
+siblings:
+- rag-reranking
+- contextual-retrieval
+- vector-embeddings
 date: 2026-04-16
 description: A practical guide to RAGAs, recall, precision, and the metrics that separate
   production RAG systems from prototypes.

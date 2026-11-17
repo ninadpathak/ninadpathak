@@ -1,5 +1,13 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: context window vs memory
+siblings:
+- memory-compression
+- ai-memory-management
+- hyperagents-memory
+bridges:
+- slug: claude-code-memory
+  reason: A coding agent is the memory system a developer uses every day.
 date: '2026-04-19'
 description: Context is a per-request reasoning budget. Memory is persistent state
   retrieved into a later request. Long input capacity does not make them interchangeable.

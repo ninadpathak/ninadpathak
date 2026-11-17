@@ -1,5 +1,10 @@
 ---
 category: ai-engineering
+primary_query: llm inference optimization
+siblings:
+- kv-cache-eviction
+- time-to-first-token
+- llm-structured-outputs
 date: '2026-05-06'
 description: 'LLM inference optimization in late 2026, covering which techniques are engine defaults, how to size the KV cache and where more throughput stops helping.'
 slug: llm-inference-optimization

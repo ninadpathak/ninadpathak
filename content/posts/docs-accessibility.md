@@ -1,5 +1,9 @@
 ---
 category: technical-documentation
+primary_query: documentation accessibility
+siblings:
+- docs-seo
+- documentation-review
 date: 2026-08-09
 description: Test developer documentation for release-blocking accessibility failures
   in structure, code, links, visuals, keyboard use, and rendered output.

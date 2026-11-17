@@ -1,5 +1,9 @@
 ---
 category: technical-documentation
+primary_query: documentation headings
+siblings:
+- writing-technical-tutorials
+- documentation-review
 date: 2026-08-10
 description: Write documentation headings that tell a reader which task, decision,
   concept, or recovery path a section covers.

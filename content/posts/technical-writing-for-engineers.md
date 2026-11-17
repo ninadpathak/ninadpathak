@@ -1,5 +1,15 @@
 ---
 category: developer-experience
+primary_query: technical writing for engineers
+bridges:
+- slug: shorter-documentation
+  reason: Documentation is the content developers trust first.
+- slug: writing-technical-tutorials
+  reason: Documentation is the content developers trust first.
+- slug: code-documentation
+  reason: Documentation is the content developers trust first.
+- slug: developer-onboarding-docs
+  reason: Documentation is the content developers trust first.
 date: 2026-04-18
 description: Most engineering documentation fails for the same reasons. Here is what
   actually moves the needle.

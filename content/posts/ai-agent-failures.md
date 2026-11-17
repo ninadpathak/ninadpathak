@@ -1,5 +1,15 @@
 ---
-category: ai-engineering
+category: ai-agents
+primary_query: why ai agents fail
+siblings:
+- agent-error-handling
+- ai-agent-taxonomy
+- multi-agent-vs-single-agent
+bridges:
+- slug: short-term-agent-memory
+  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
+- slug: agent-memory-2026
+  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
 date: '2026-04-22'
 description: I have spent two years watching agents fail in production. Here is what
   I keep seeing and what the field is starting to do about it.

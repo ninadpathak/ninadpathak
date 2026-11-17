@@ -1,5 +1,9 @@
 ---
 category: technical-documentation
+primary_query: documentation structure
+siblings:
+- docs-seo
+- docs-accessibility
 date: 2026-07-30
 description: Reorganize a documentation site around reader routes, canonical answers,
   tested labels, and direct redirects instead of mirroring the org chart.

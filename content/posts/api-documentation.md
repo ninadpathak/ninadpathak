@@ -1,5 +1,9 @@
 ---
 category: technical-documentation
+primary_query: api documentation example
+siblings:
+- documentation-template
+- writing-changelogs
 date: 2026-10-22
 description: What API documentation includes, page by page, and a complete reference entry for one endpoint that a script checks against the running service.
 slug: api-documentation

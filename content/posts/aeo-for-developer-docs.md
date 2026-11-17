@@ -1,5 +1,13 @@
 ---
 category: ai-search-optimization
+primary_query: aeo vs seo
+siblings:
+- llms-txt
+- ai-crawlers
+bridges:
+- slug: docs-seo
+  reason: Crawling and page structure come before any AI search check.
+money_link: true
 date: 2026-10-22
 description: What AEO, GEO and SEO each mean, what Google and OpenAI document about AI search, and six checks that decide whether developer docs can be found and quoted.
 slug: aeo-for-developer-docs

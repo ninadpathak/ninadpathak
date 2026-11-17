@@ -1,5 +1,11 @@
 ---
-category: technical-documentation
+category: coding-agents
+primary_query: claude.md
+bridges:
+- slug: documentation-types
+  reason: The files that configure a coding agent are documentation.
+- slug: documentation-headings
+  reason: The files that configure a coding agent are documentation.
 date: 2026-10-22
 description: Which coding agent reads CLAUDE.md and which reads AGENTS.md with default settings, tested in four repositories, plus a copyable AGENTS.md template.
 slug: claude-md

@@ -1,5 +1,19 @@
 ---
-category: ai-engineering
+category: coding-agents
+primary_query: coding agent memory
+bridges:
+- slug: context-windows-vs-memory
+  reason: A coding agent's memory files follow the same write, store and read path.
+- slug: memory-serialization
+  reason: A coding agent's memory files follow the same write, store and read path.
+- slug: short-term-agent-memory
+  reason: A coding agent's memory files follow the same write, store and read path.
+- slug: ai-memory-management
+  reason: A coding agent's memory files follow the same write, store and read path.
+- slug: agent-memory-types
+  reason: A coding agent's memory files follow the same write, store and read path.
+- slug: agent-memory-2026
+  reason: A coding agent's memory files follow the same write, store and read path.
 date: '2026-05-06'
 description: The memory persistence patterns that actually work for AI coding assistants,
   and why most agents lose context between sessions.

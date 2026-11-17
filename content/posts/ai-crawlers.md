@@ -1,5 +1,13 @@
 ---
 category: ai-search-optimization
+primary_query: ai crawlers
+siblings:
+- aeo-for-developer-docs
+- llms-txt
+bridges:
+- slug: docs-seo
+  reason: Crawling and page structure come before any AI search check.
+money_link: true
 date: 2026-10-22
 description: Which robots.txt rules block AI training crawlers like GPTBot and which block AI search, plus what 12 developer documentation sites allow.
 slug: ai-crawlers

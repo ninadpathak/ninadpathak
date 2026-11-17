@@ -1,5 +1,9 @@
 ---
 category: technical-documentation
+primary_query: internal vs external documentation
+siblings:
+- documentation-types
+- documentation-structure
 date: 2026-08-06
 description: 'Internal vs. external documentation, with a decision table for incidents,
   architecture, auth and releases: what goes public, what stays private, what splits.'

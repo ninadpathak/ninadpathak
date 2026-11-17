@@ -1,5 +1,13 @@
 ---
 category: ai-search-optimization
+primary_query: llms.txt
+siblings:
+- aeo-for-developer-docs
+- ai-crawlers
+bridges:
+- slug: docs-seo
+  reason: Crawling and page structure come before any AI search check.
+money_link: true
 date: 2026-10-22
 description: What an llms.txt file is, what the proposal requires, what Google, Chrome and server logs say about its use, and four real files checked against the proposal.
 slug: llms-txt

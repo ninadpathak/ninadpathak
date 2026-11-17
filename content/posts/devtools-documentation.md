@@ -1,5 +1,12 @@
 ---
 category: developer-experience
+primary_query: devtools documentation
+bridges:
+- slug: writing-changelogs
+  reason: Documentation is the content developers trust first.
+- slug: writing-release-notes
+  reason: Documentation is the content developers trust first.
+money_link: true
 date: 2026-04-06
 description: DevTools startups lose deals long before sales hears the objection. I
   explain how weak docs break evaluation, trials, and rollout confidence.

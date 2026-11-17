@@ -1,5 +1,9 @@
 ---
 category: technical-documentation
+primary_query: technical documentation best practices
+siblings:
+- documentation-structure
+- documentation-review
 date: 2026-08-02
 description: Use a tested review card to make documentation tasks, failure states,
   limits, and ownership clear before readers need support.

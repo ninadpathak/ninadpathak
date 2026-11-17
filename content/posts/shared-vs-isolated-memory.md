@@ -1,5 +1,15 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: shared memory multi agent
+siblings:
+- ai-memory-management
+- context-windows-vs-memory
+- memory-serialization
+bridges:
+- slug: multi-agent-vs-single-agent
+  reason: Memory is one step in the agent loop, and the agents hub covers the loop around it.
+- slug: agent-error-handling
+  reason: Memory is one step in the agent loop, and the agents hub covers the loop around it.
 date: '2026-05-11'
 description: How to choose between shared and isolated memory architectures for multi-agent
   systems, including their coordination and debugging trade-offs.

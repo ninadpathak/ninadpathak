@@ -1,5 +1,13 @@
 ---
 category: developer-experience
+primary_query: technical writing for ai products
+bridges:
+- slug: llm-structured-outputs
+  reason: Writing about an AI product starts from how the model behaves.
+- slug: writing-changelogs
+  reason: Documentation is the content developers trust first.
+- slug: agent-harnesses
+  reason: The agent harness page is the worked example behind the claim made here.
 date: 2026-03-31
 description: AI product docs now need prompts, schemas, evals, and version boundaries.
   I explain the rules I would use to judge a technical writer for an AI company.

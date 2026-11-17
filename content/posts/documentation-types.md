@@ -1,5 +1,15 @@
 ---
 category: technical-documentation
+primary_query: types of documentation
+siblings:
+- internal-vs-external-docs
+- design-doc-template
+- documentation-template
+bridges:
+- slug: agents-reading-docs
+  reason: A docs page now has agent readers.
+- slug: claude-md
+  reason: Instruction files for coding agents are documentation.
 date: 2026-08-05
 description: Understand the main types of technical documentation, study useful examples,
   and build a documentation system for users, teams, and coding agents.

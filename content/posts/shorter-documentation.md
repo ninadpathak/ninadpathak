@@ -1,5 +1,11 @@
 ---
 category: technical-documentation
+primary_query: documentation length
+bridges:
+- slug: agent-harnesses
+  reason: The agent harness page is the worked example of the structure described here.
+- slug: agents-reading-docs
+  reason: A docs page now has agent readers.
 date: 2026-04-04
 description: 'Why shorter technical documentation works better, why AI-written docs run long, how to cut a page without losing detail, and when length is earned.'
 status: published

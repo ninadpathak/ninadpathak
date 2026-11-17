@@ -1,5 +1,17 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: voice agent memory
+siblings:
+- context-windows-vs-memory
+- hyperagents-memory
+- ai-memory-management
+bridges:
+- slug: voice-agent-latency
+  reason: The context window limit is the reason an agent needs memory.
+- slug: contextual-retrieval
+  reason: A memory read path is a retrieval problem.
+- slug: agent-error-handling
+  reason: Memory is one step in the agent loop, and the agents hub covers the loop around it.
 date: 2026-04-19
 description: Voice AI agents live or die by how they manage memory across a real-time
   streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something

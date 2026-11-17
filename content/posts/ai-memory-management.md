@@ -1,5 +1,15 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: llm memory
+siblings:
+- rag-vs-memory
+- short-term-agent-memory
+- agent-memory-2026
+bridges:
+- slug: claude-code-memory
+  reason: A coding agent is the memory system a developer uses every day.
+- slug: llm-inference-optimization
+  reason: The context window limit is the reason an agent needs memory.
 date: 2026-04-19
 description: 'AI memory management for LLMs: the memory layers, who should decide what gets written, eviction and scope with runnable examples, and the smallest system worth building.'
 status: published

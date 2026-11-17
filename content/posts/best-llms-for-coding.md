@@ -1,5 +1,17 @@
 ---
-category: ai-engineering
+category: coding-agents
+primary_query: best llm for coding
+siblings:
+- claude-vs-gemini-cli
+- coding-models-new-code-vs-change
+- nobody-understands-the-code
+bridges:
+- slug: agent-harnesses
+  reason: A coding agent is one agent loop with a harness around it.
+- slug: lambda-calculus-ai
+  reason: A coding agent is one agent loop with a harness around it.
+- slug: mixture-of-experts
+  reason: Context limits and token cost decide how a coding agent is configured.
 date: 2026-03-12
 description: 'The best LLMs for coding on Real-SWE 1.1 (October 2026): the leaders, the cost per resolved task, open-weight options and a test for your own repo.'
 status: published

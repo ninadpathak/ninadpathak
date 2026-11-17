@@ -1,5 +1,15 @@
 ---
-category: ai-engineering
+category: coding-agents
+primary_query: claude code memory
+bridges:
+- slug: agent-harnesses
+  reason: A coding agent is one agent loop with a harness around it.
+- slug: llm-context-windows
+  reason: Context limits and token cost decide how a coding agent is configured.
+- slug: multi-agent-vs-single-agent
+  reason: A coding agent is one agent loop with a harness around it.
+- slug: agent-error-handling
+  reason: A coding agent is one agent loop with a harness around it.
 date: 2026-04-19
 description: A practical guide to understanding how Claude Code retains context across
   sessions, uses project files, and manages long-term memory for coding tasks.

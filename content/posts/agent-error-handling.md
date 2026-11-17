@@ -1,5 +1,12 @@
 ---
-category: ai-engineering
+category: ai-agents
+primary_query: ai agent error handling
+siblings:
+- ai-agent-failures
+- agent-harnesses
+bridges:
+- slug: ai-memory-management
+  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
 date: 2026-04-16
 description: 'Hard-won lessons from running AI agents in production: the error patterns
   that actually break systems, and the patterns that fix them.'

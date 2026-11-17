@@ -1,5 +1,13 @@
 ---
-category: ai-engineering
+category: ai-agents
+primary_query: lambda calculus llm reasoning
+siblings:
+- agent-loop-anatomy
+- agent-error-handling
+- ai-agent-failures
+bridges:
+- slug: agent-memory-2026
+  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
 date: '2026-04-25'
 description: Lambda calculus exposes substitution, scope, and composition errors in
   AI outputs through problems with mechanically checkable answers.

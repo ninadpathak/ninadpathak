@@ -1,5 +1,12 @@
 ---
 category: ai-engineering
+primary_query: voice ai latency
+siblings:
+- kv-cache-eviction
+- speculative-decoding
+bridges:
+- slug: agent-memory-2026
+  reason: Memory holds what the context window cannot.
 date: 2026-04-16
 description: A systems-level guide to tracing latency across endpointing, transcription,
   model inference, speech synthesis, and transport.

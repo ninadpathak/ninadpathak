@@ -1,5 +1,12 @@
 ---
-category: ai-engineering
+category: ai-agents
+primary_query: how to build an mcp server
+siblings:
+- model-context-protocol
+- agent-harnesses
+bridges:
+- slug: claude-code-subagents
+  reason: A coding agent is the agent a developer uses daily.
 date: 2026-10-22
 description: 'Build an MCP server in Python, test it without a model, and see how numbering a tool''s output changed whether Claude cited the right line in a test run.'
 slug: mcp-server-tutorial

@@ -1,5 +1,13 @@
 ---
-category: ai-engineering
+category: coding-agents
+primary_query: claude code subagents
+siblings:
+- claude-md
+- agentic-workflows
+- claude-code-memory
+bridges:
+- slug: multi-agent-vs-single-agent
+  reason: A coding agent is one agent loop with a harness around it.
 date: 2026-10-22
 description: What a Claude Code subagent starts with and when to pick one over a skill or hook, with a link-checker subagent tested in Claude Code 2.1.308.
 slug: claude-code-subagents

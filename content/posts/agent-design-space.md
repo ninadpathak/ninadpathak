@@ -1,5 +1,21 @@
 ---
-category: ai-engineering
+category: ai-agents
+primary_query: ai agent design patterns
+siblings:
+- agent-loop-anatomy
+- agent-error-handling
+- multi-agent-vs-single-agent
+bridges:
+- slug: agent-memory-2026
+  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
+- slug: hybrid-search
+  reason: Retrieval is how an agent reads facts the model was never trained on.
+- slug: short-term-agent-memory
+  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
+- slug: llm-structured-outputs
+  reason: Each turn of the agent loop spends tokens and latency.
+- slug: rag-evaluation
+  reason: Retrieval is how an agent reads facts the model was never trained on.
 date: 2026-04-26
 description: After surveying production agents across industries, the design space
   clusters into patterns. Here is what I found.

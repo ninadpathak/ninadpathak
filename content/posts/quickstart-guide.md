@@ -1,5 +1,9 @@
 ---
 category: technical-documentation
+primary_query: quick start guide
+siblings:
+- writing-technical-tutorials
+- developer-onboarding-docs
 date: 2026-10-22
 description: A quick start guide template for developer products, with a filled example against the GitHub REST API and a checklist to run before you publish.
 slug: quickstart-guide

@@ -1,5 +1,12 @@
 ---
-category: ai-engineering
+category: ai-agents
+primary_query: ai agent vs ai assistant
+siblings:
+- agent-error-handling
+- ai-agent-taxonomy
+bridges:
+- slug: llm-token-budgets
+  reason: Each turn of the agent loop spends tokens and latency.
 date: '2026-04-26'
 description: 'An AI agent chooses its next steps toward a goal, and an AI assistant leaves the next step to you. I compare the cost and control you trade when you build each.'
 slug: agent-vs-ai-assistant

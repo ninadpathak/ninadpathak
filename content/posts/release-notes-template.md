@@ -1,5 +1,9 @@
 ---
 category: technical-documentation
+primary_query: release notes template
+siblings:
+- writing-release-notes
+- writing-changelogs
 date: 2026-10-22
 description: A release notes template in Markdown that puts the upgrade decision first, with a filled SDK example and a checker that fails a note missing its rollback line.
 slug: release-notes-template

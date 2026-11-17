@@ -1,5 +1,11 @@
 ---
-category: ai-engineering
+category: coding-agents
+primary_query: none
+bridges:
+- slug: code-documentation
+  reason: The files that configure a coding agent are documentation.
+- slug: llm-token-budgets
+  reason: Context limits and token cost decide how a coding agent is configured.
 date: 2026-11-17
 description: Simon Willison says coding models hit an inflection point in October. The same month, the best of them passed one staged-change checkpoint in six. Both are true.
 slug: coding-models-new-code-vs-change

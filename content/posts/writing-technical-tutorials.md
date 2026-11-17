@@ -1,5 +1,10 @@
 ---
 category: technical-documentation
+primary_query: how to write a technical tutorial
+siblings:
+- documentation-types
+- documentation-review
+- developer-onboarding-docs
 date: 2026-04-02
 description: Write a technical tutorial that takes one reader from a clear starting
   point to a tested, useful result.

@@ -1,5 +1,12 @@
 ---
-category: ai-engineering
+category: rag
+primary_query: contextual retrieval
+siblings:
+- hybrid-search
+- rag-reranking
+bridges:
+- slug: llm-context-windows
+  reason: Every retrieved token costs latency and money.
 date: 2026-03-26
 description: 'Contextual Retrieval (contextual RAG) prepends a model-written note to each chunk before indexing. What Anthropic measured, what it costs, and where it still fits.'
 status: published

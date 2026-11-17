@@ -1,5 +1,19 @@
 ---
-category: ai-engineering
+category: ai-agents
+primary_query: agent loop
+siblings:
+- ai-agent-taxonomy
+- agent-harnesses
+- agent-error-handling
+bridges:
+- slug: llm-token-budgets
+  reason: Each turn of the agent loop spends tokens and latency.
+- slug: llm-structured-outputs
+  reason: Each turn of the agent loop spends tokens and latency.
+- slug: ai-memory-management
+  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
+- slug: context-windows-vs-memory
+  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
 date: '2026-04-23'
 description: The agent loop is not one thing. It is four distinct phases that run
   in sequence, and understanding each one is how you debug what breaks.

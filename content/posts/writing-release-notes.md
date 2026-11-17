@@ -1,5 +1,9 @@
 ---
 category: technical-documentation
+primary_query: release notes
+siblings:
+- release-notes-template
+- writing-changelogs
 date: 2026-04-03
 description: Write release notes that let developers assess upgrade risk, understand
   product impact, and migrate without surprises.

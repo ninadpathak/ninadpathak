@@ -1,5 +1,9 @@
 ---
 category: ai-engineering
+primary_query: speculative decoding
+siblings:
+- kv-cache-eviction
+- time-to-first-token
 date: 2026-03-07
 description: LLM inference is memory-bound, not compute-bound. Speculative decoding
   uses this fact to speed up generation by 2-3x using a smaller draft model to predict

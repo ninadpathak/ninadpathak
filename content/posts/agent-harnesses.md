@@ -1,5 +1,10 @@
 ---
-category: ai-engineering
+category: ai-agents
+primary_query: agent harness
+siblings:
+- agent-loop-anatomy
+- agent-error-handling
+- ai-agent-taxonomy
 date: 2026-03-10
 description: Every production AI agent needs a harness. Here is what one contains,
   why frameworks often are not enough, and how to build the layer that actually determines

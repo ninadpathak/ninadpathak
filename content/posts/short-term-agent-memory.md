@@ -1,5 +1,15 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: short term memory ai agents
+siblings:
+- context-windows-vs-memory
+- ai-memory-management
+- hyperagents-memory
+bridges:
+- slug: contextual-retrieval
+  reason: A memory read path is a retrieval problem.
+- slug: rag-evaluation
+  reason: A memory read path is a retrieval problem.
 date: 2026-04-19
 description: Context windows are not memory. Here is what every production AI agent
   engineer needs to understand about token budgets, overflow handling, and how short-term

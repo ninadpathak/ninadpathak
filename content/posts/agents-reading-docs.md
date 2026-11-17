@@ -1,5 +1,14 @@
 ---
-category: technical-documentation
+category: ai-search-optimization
+primary_query: ai agent traffic to documentation
+siblings:
+- ai-crawlers
+- llms-txt
+bridges:
+- slug: api-documentation
+  reason: Crawling and page structure come before any AI search check.
+- slug: release-notes-template
+  reason: Crawling and page structure come before any AI search check.
 date: 2026-11-16
 description: Fern says agents are now over half of the requests to the docs it hosts. A close read of the numbers, what they change for docs teams, and what they leave out.
 slug: agents-reading-docs

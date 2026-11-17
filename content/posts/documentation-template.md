@@ -1,5 +1,10 @@
 ---
 category: technical-documentation
+primary_query: technical documentation template
+siblings:
+- documentation-types
+- quickstart-guide
+- api-documentation
 date: 2026-08-01
 description: Download a technical documentation template, learn what each page must
   prove, and turn its placeholders into trustworthy product docs.

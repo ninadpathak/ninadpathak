@@ -1,5 +1,16 @@
 ---
-category: ai-engineering
+category: ai-agents
+primary_query: multi agent systems
+siblings:
+- agent-error-handling
+- agent-design-space
+bridges:
+- slug: ai-memory-management
+  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
+- slug: shared-vs-isolated-memory
+  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
+- slug: llm-context-windows
+  reason: Each turn of the agent loop spends tokens and latency.
 date: '2026-04-27'
 description: The decision between one agent and many is not about capability. It is
   about failure modes, latency, and operational complexity.

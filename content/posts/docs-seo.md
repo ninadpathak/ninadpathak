@@ -1,5 +1,12 @@
 ---
 category: technical-documentation
+primary_query: seo for documentation
+siblings:
+- documentation-structure
+- writing-technical-tutorials
+bridges:
+- slug: llms-txt
+  reason: A docs page now has agent readers.
 date: 2026-07-30
 description: 'Technical SEO for developer documentation: crawling, rendering, indexing,
   canonicals, internal links, Core Web Vitals, structured data, and search visibility.'

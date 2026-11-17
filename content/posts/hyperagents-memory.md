@@ -1,5 +1,10 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: hyperagents memory
+siblings:
+- context-windows-vs-memory
+- ai-memory-management
+- short-term-agent-memory
 date: 2026-04-19
 description: A deep dive into how HyperAgents retain context across interactions,
   layer memory architectures, and handle session continuity in production.

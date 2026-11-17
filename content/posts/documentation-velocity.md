@@ -1,5 +1,11 @@
 ---
 category: developer-experience
+primary_query: documentation roi
+bridges:
+- slug: shorter-documentation
+  reason: Documentation is the content developers trust first.
+- slug: developer-onboarding-docs
+  reason: Documentation is the content developers trust first.
 date: 2026-04-11
 description: I analyze the structural correlation between documentation quality and
   engineering throughput, using DORA metrics and Accelerate research to quantify the

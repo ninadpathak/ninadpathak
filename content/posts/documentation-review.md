@@ -1,5 +1,10 @@
 ---
 category: technical-documentation
+primary_query: documentation review checklist
+siblings:
+- writing-technical-tutorials
+- documentation-headings
+- writing-changelogs
 date: 2026-07-30
 description: 'Review documentation in four passes: product truth, reader route, rendered
   behavior, and release state, before polishing prose.'

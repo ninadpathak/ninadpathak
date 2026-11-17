@@ -1,5 +1,9 @@
 ---
 category: technical-documentation
+primary_query: developer onboarding documentation
+siblings:
+- technical-docs
+- documentation-review
 date: 2026-04-01
 description: 'Developer onboarding documentation should take a new engineer from a clean machine to a safe first merged change, with one setup path and a check after each step.'
 slug: developer-onboarding-docs

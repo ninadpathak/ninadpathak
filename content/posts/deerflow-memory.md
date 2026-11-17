@@ -1,5 +1,13 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: deerflow memory
+bridges:
+- slug: agent-error-handling
+  reason: Memory is one step in the agent loop, and the agents hub covers the loop around it.
+- slug: agent-harnesses
+  reason: Memory is one step in the agent loop, and the agents hub covers the loop around it.
+- slug: contextual-retrieval
+  reason: A memory read path is a retrieval problem.
 date: 2026-04-19
 description: 'A deep dive into the memory architecture of DeerFlow: layered context
   passing, session state files, sub-agent isolation, and how it compares to Letta,

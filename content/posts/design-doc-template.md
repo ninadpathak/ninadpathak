@@ -1,5 +1,9 @@
 ---
 category: technical-documentation
+primary_query: design doc template
+siblings:
+- documentation-template
+- documentation-review
 date: 2026-10-22
 description: A design doc template in Markdown with goals, non-goals and a required "do nothing" alternative, a filled example, and a checker to run before review.
 slug: design-doc-template

@@ -1,5 +1,6 @@
 ---
 category: ai-engineering
+primary_query: kv cache
 date: 2026-04-15
 description: A research-led comparison of KV-cache eviction strategies, including
   their accuracy risks and implementation trade-offs.

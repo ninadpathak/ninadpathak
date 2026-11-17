@@ -1,5 +1,13 @@
 ---
-category: ai-engineering
+category: rag
+primary_query: reranking
+siblings:
+- vector-embeddings
+- hybrid-search
+- fine-tuning-vs-rag
+bridges:
+- slug: llm-context-windows
+  reason: Every retrieved token costs latency and money.
 date: 2026-03-21
 description: 'Reranking in RAG, tested: a bi-encoder and two cross-encoders ranked the same candidates. What the reranker fixed, what it left wrong, and what 100 pairs cost.'
 status: published

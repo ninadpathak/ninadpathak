@@ -1,5 +1,9 @@
 ---
 category: ai-engineering
+primary_query: llm context window
+siblings:
+- time-to-first-token
+- llm-token-budgets
 date: 2026-03-14
 description: Context windows are expanding to millions of tokens. Here is why the
   middle of your context still gets ignored, what long context actually costs, and

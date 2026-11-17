@@ -1,5 +1,9 @@
 ---
-category: ai-engineering
+category: rag
+primary_query: vector embeddings
+siblings:
+- hybrid-search
+- rag-reranking
 date: 2026-03-15
 description: 'Vector embeddings explained with a model run on six short texts: what an embedding is, why similarity scores mislead, and what binary embeddings cost.'
 status: published

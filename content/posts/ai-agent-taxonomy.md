@@ -1,5 +1,19 @@
 ---
-category: ai-engineering
+category: ai-agents
+primary_query: types of ai agents
+siblings:
+- model-context-protocol
+- agent-loop-anatomy
+- agent-error-handling
+bridges:
+- slug: agent-memory-2026
+  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
+- slug: claude-vs-gemini-cli
+  reason: A coding agent is the agent a developer uses daily.
+- slug: llm-structured-outputs
+  reason: Each turn of the agent loop spends tokens and latency.
+- slug: ai-memory-management
+  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
 date: 2026-04-21
 description: 'I group AI agents into five types, from reactive information agents to persistent-goal agents, to decide how much autonomy a task needs and which tools and memory it gets.'
 slug: ai-agent-taxonomy

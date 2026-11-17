@@ -1,5 +1,9 @@
 ---
-category: ai-engineering
+category: coding-agents
+primary_query: claude code vs gemini cli
+siblings:
+- coding-agent-memory
+- best-llms-for-coding
 date: 2026-04-12
 description: A workflow comparison of Claude Code and Gemini CLI for repository refactoring,
   verification, and human review.

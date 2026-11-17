@@ -1,5 +1,13 @@
 ---
 category: technical-documentation
+primary_query: runbook template
+siblings:
+- documentation-types
+- internal-vs-external-docs
+- release-notes-template
+bridges:
+- slug: claude-md
+  reason: Instruction files for coding agents are documentation.
 date: 2026-10-28
 description: A Markdown runbook template where each step has a command, its expected output and a branch, with a tested Postgres example and a checker to run first.
 slug: runbook-template

@@ -1,5 +1,12 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: types of agent memory
+siblings:
+- rag-vs-memory
+- ai-memory-management
+bridges:
+- slug: llm-context-windows
+  reason: The context window limit is the reason an agent needs memory.
 date: '2026-05-04'
 description: AI agents juggle three distinct memory types. Getting them wrong is the
   source of most agent memory failures I see in production.

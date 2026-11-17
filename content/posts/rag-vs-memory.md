@@ -1,5 +1,11 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: rag vs memory
+bridges:
+- slug: llm-context-windows
+  reason: The context window limit is the reason an agent needs memory.
+- slug: hybrid-search
+  reason: A memory read path is a retrieval problem.
 date: 2026-04-19
 description: RAG selects evidence for one request and memory governs state across requests. Why memory that only recalls is RAG over old chats, and how to run both.
 status: published

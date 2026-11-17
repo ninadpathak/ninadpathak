@@ -1,5 +1,17 @@
 ---
-category: ai-engineering
+category: coding-agents
+primary_query: agentic workflows
+bridges:
+- slug: agent-loop-anatomy
+  reason: A coding agent is one agent loop with a harness around it.
+- slug: multi-agent-vs-single-agent
+  reason: A coding agent is one agent loop with a harness around it.
+- slug: agent-harnesses
+  reason: A coding agent is one agent loop with a harness around it.
+- slug: ai-agent-failures
+  reason: A coding agent is one agent loop with a harness around it.
+- slug: agent-design-space
+  reason: A coding agent is one agent loop with a harness around it.
 date: 2026-06-14
 description: 'An agentic workflow puts an AI agent inside a fixed process. I frame and scope the task before the agent runs, and I review its diff before the change lands.'
 slug: agentic-workflows

@@ -1,5 +1,11 @@
 ---
 category: developer-experience
+primary_query: engineer to technical writer
+bridges:
+- slug: agent-harnesses
+  reason: The agent harness page is the worked example behind the claim made here.
+- slug: writing-changelogs
+  reason: Documentation is the content developers trust first.
 date: 2026-04-05
 description: I explain which engineering habits still make me better at technical
   writing, which ones I had to drop, and how the day-to-day work changed.

@@ -1,5 +1,11 @@
 ---
-category: technical-documentation
+category: coding-agents
+primary_query: none
+bridges:
+- slug: design-doc-template
+  reason: The files that configure a coding agent are documentation.
+- slug: code-documentation
+  reason: The files that configure a coding agent are documentation.
 date: 2026-11-17
 description: A Reddit post said nobody understands the code after a year of agents. The Claude Code team says nobody needs the whole picture. Naur's 1985 paper shows what both miss.
 slug: nobody-understands-the-code

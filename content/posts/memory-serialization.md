@@ -1,5 +1,10 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: agent state persistence
+siblings:
+- ai-memory-management
+- rag-vs-memory
+- memory-versioning
 date: '2026-04-30'
 description: Why agents forget everything on restart, and the serialization patterns
   that actually solve it

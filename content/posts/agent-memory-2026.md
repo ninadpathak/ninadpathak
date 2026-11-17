@@ -1,5 +1,19 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: agent memory frameworks
+siblings:
+- context-windows-vs-memory
+- ai-memory-management
+- short-term-agent-memory
+bridges:
+- slug: hybrid-search
+  reason: A memory read path is a retrieval problem.
+- slug: developer-onboarding-docs
+  reason: Onboarding documentation shows the same fragmentation problem in a field developers already know.
+- slug: model-context-protocol
+  reason: Memory is one step in the agent loop, and the agents hub covers the loop around it.
+- slug: rag-evaluation
+  reason: A memory read path is a retrieval problem.
 date: 2026-04-19
 description: Agent memory spans working state, episodic history, retrieval, and consistency
   controls. The right architecture depends on the agent's task and risk.

@@ -1,5 +1,13 @@
 ---
-category: ai-engineering
+category: rag
+primary_query: rag vs fine tuning
+bridges:
+- slug: agent-memory-types
+  reason: Memory reuses the retrieval stack for a different job.
+- slug: rag-vs-memory
+  reason: Memory reuses the retrieval stack for a different job.
+- slug: ai-memory-management
+  reason: Memory reuses the retrieval stack for a different job.
 date: '2026-05-12'
 description: Fine-tuning and RAG solve different parts of the agent memory problem.
   Here is how to decide which one you actually need.

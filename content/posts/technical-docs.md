@@ -1,5 +1,10 @@
 ---
 category: technical-documentation
+primary_query: what is technical documentation
+siblings:
+- documentation-types
+- internal-vs-external-docs
+- runbook-template
 date: 2026-08-05
 description: 'Technical documentation explained: the document types it includes and the reader task each one owns, in a table you can check a docs set against.'
 slug: technical-docs

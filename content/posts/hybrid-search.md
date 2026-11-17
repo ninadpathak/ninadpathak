@@ -1,5 +1,9 @@
 ---
-category: ai-engineering
+category: rag
+primary_query: hybrid search
+siblings:
+- vector-embeddings
+- rag-reranking
 date: 2026-03-29
 description: 'Hybrid search fuses BM25 and vector retrieval. How it scores on a 2026 production benchmark, how reciprocal rank fusion works with runnable code, and what to add after it.'
 status: published

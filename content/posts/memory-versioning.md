@@ -1,5 +1,6 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: agent memory audit trail
 date: '2026-05-05'
 description: If your agent overwrites its memory, you cannot pass a compliance audit.
   How to build append-only memory versioning and trace agent reasoning.

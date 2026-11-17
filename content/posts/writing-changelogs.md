@@ -1,5 +1,6 @@
 ---
 category: technical-documentation
+primary_query: how to write a changelog
 date: 2026-03-30
 description: Write a changelog that helps developers assess an upgrade, find breaking
   changes, and understand what each release means for their code.
