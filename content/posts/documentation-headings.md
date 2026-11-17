@@ -5,7 +5,7 @@ description: Write documentation headings that tell a reader which task, decisio
   concept, or recovery path a section covers.
 slug: documentation-headings
 status: published
-work_note: 'My rule for headings fits in three sentences, and they open this page. The rest is cases, and [my portfolio](/portfolio/) has guides where you can check whether I follow it.'
+work_note: 'I checked the heading rule on this page against the outline of Stripe''s webhook guide, pulled with one command. [My portfolio](/portfolio/) has guides where you can see whether I follow the rule myself.'
 takeaways:
 - Use a task heading when a section tells the reader how to reach a specific result.
 - Use a descriptive noun phrase when a section explains a concept or documents a reference
@@ -16,11 +16,13 @@ updated: 2026-11-17
 video: documentation-headings
 ---
 
-Stripe's [webhook guide](https://docs.stripe.com/webhooks) has nine second-level headings. Of those, six name an action, such as "Create a handler", and the rest name a subject, such as "Event delivery behaviours".
+Stripe's [webhook guide](https://docs.stripe.com/webhooks) has nine second-level headings. Of those, six name an action, such as "Create a handler", and the rest name a subject, such as "Event delivery behaviours", which is the British spelling Stripe served to my region.
 
-That split is the rule for documentation headings, taken from a page built on it. A heading should tell a scanning reader what the section contains: for a procedure, name the result or task.
+That split is the rule for documentation headings, taken from a page built on it. A heading should tell a scanning reader what the section contains.
 
-For a concept, name the concept. For a failure, name the condition and the recovery path.
+- For a procedure, name the result or task.
+- For a concept, name the concept.
+- For a failure, name the condition and the recovery path.
 
 A task-based heading belongs on a section that holds a task, and the rule stops there. It doesn't ask for a verb in every heading.
 
@@ -64,7 +66,9 @@ For example, `Delay retries after a rate-limit response` explains the intended b
 
 No. A verb helps when the reader is meant to act, and a section that explains a concept or documents one item needs a descriptive noun phrase.
 
-The opposite view was posted on Mastodon on November 1 by Dedox, which sells help-centre software: ["How to change your plan" beats "Plan management" every time.](https://mastodon.social/@dedox/117540805753181893) The example is right, because a help-centre article about changing a plan is a task.
+The opposite advice is a staple of help-centre marketing. Dedox, which sells help-centre software, put it this way in a promotional post on November 1: ["How to change your plan" beats "Plan management" every time.](https://mastodon.social/@dedox/117540805753181893)
+
+The example is right, because a help-centre article about changing a plan is a task.
 
 The words "every time" are where I disagree. The same post grounds the tip in search, saying task titles "match what people actually type into search", and people also type the names of things.
 
@@ -86,40 +90,22 @@ Choose a level for the structure it declares. CSS can change how a heading looks
 
 Read the headings without the body copy. The review asks a narrower question than an editorial review: does the outline show the tasks and recovery paths that the page promises to cover?
 
-A short script pulls the outline from any page published as Markdown. It prints headings down to a chosen depth and skips fenced code, where a `#` starts a comment.
+Where a site publishes its pages as Markdown, one command pulls the second-level outline.
 
-```python
-"""Print the heading outline of a Markdown page, skipping fenced code."""
-import sys
-import urllib.request
-
-request = urllib.request.Request(sys.argv[1], headers={"User-Agent": "outline-check"})
-text = urllib.request.urlopen(request, timeout=30).read().decode("utf-8")
-depth = int(sys.argv[2]) if len(sys.argv) > 2 else 2
-
-in_code = False
-for line in text.splitlines():
-    if line.lstrip().startswith("```"):
-        in_code = not in_code
-    elif not in_code and line.startswith("#"):
-        level = len(line) - len(line.lstrip("#"))
-        if level <= depth and line[level:level + 1] == " ":
-            print("  " * (level - 1) + line[level:].strip())
+```sh
+curl -sL https://docs.stripe.com/webhooks.md | grep '^## '
 ```
 
-Running it on the Stripe page with `python3 outline.py https://docs.stripe.com/webhooks.md` printed this.
-
 ```text
-Receive Stripe events in your webhook endpoint
-  Set up your endpoint
-  Create a handler
-  Test your handler
-  Optional: Create an event destination for Connect
-  Optional: Create an event destination for Organisations
-  Debug webhook integrations
-  Event delivery behaviours
-  Best practices for using webhooks
-  See also
+## Set up your endpoint
+## Create a handler
+## Test your handler
+## Optional: Create an event destination for Connect
+## Optional: Create an event destination for Organisations
+## Debug webhook integrations
+## Event delivery behaviours
+## Best practices for using webhooks
+## See also
 ```
 
 The outline reads as the job in order: set up, create, test, debug. The reference material sits under "Event delivery behaviours", and its own subheadings are noun phrases such as "Automatic retries" and "Event ordering".
