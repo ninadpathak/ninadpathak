@@ -16,7 +16,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { icons, iconSvg } from './lib/topic-icons.mjs';
+import { assertFits, icons, iconSvg } from './lib/topic-icons.mjs';
 
 const TOOL_DIR = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(TOOL_DIR, '../..');
@@ -39,6 +39,8 @@ for (const { slug, glyph } of list) {
 const used = list.map((hub) => hub.glyph);
 const repeated = used.find((name, i) => used.indexOf(name) !== i);
 if (repeated) throw new Error(`config.toml: glyph "${repeated}" is used by two hubs; each topic gets its own`);
+// Runs for --check too, so CI stops on an icon that is clipped or out of line.
+Object.keys(icons).forEach(assertFits);
 const fresh = JSON.stringify(Object.fromEntries(list.map((hub) => [hub.slug, iconSvg(hub.glyph)])), null, 2) + '\n';
 
 if (process.argv.includes('--check')) {

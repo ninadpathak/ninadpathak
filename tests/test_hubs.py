@@ -310,8 +310,35 @@ class TopicGridTests(BuiltSite):
         for declaration in ("fill: none;", "stroke: var(--text-2);", "stroke-width: 1.5;"):
             self.assertIn(declaration, rules[0])
         # The figure treatment these icons replaced must not come back into the stylesheet.
-        for gone in (".gl-", "np-hatch", "--glyph-detail"):
+        for gone in (".gl-", "np-hatch", "--glyph-detail", "--line"):
             self.assertNotIn(gone, css)
+
+    def test_an_icon_that_leaves_its_box_or_its_left_edge_fails_the_check(self):
+        """The inline svg clips at its view box, so the generator measures every icon."""
+        module = (ROOT / "tools" / "image-brand" / "lib" / "topic-icons.mjs").as_uri()
+        bad = {
+            "past the right edge": ["M3 4h23v16H3z"],
+            "above the top": ["M3 0.5h10v10H3z"],
+            "below the bottom": ["M3 4c0 30 10 30 10 0"],
+            "arc past the right edge": ["M3 12a12 12 0 1 1 0 .01"],
+            "arc above the top": ["M3 12a9 12.5 0 0 1 18 0"],
+            "not at the left edge": ["M6 7h10v10H6z"],
+            "unmeasured command": ["M3 3q4 4 8 0"],
+            "empty": [],
+        }
+        script = (
+            f"const m = await import({json.dumps(module)});"
+            "for (const name of Object.keys(m.icons)) m.assertFits(name);"
+            f"const bad = {json.dumps(bad)}; const missed = [];"
+            "for (const [name, paths] of Object.entries(bad)) {"
+            "  m.icons[name] = paths; try { m.assertFits(name); missed.push(name); } catch {} }"
+            "console.log(JSON.stringify(missed));"
+        )
+        result = subprocess.run(["node", "--input-type=module", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(result.stdout), [], "these drawings should have been refused")
+        topics = (ROOT / "tools" / "image-brand" / "topics.mjs").read_text(encoding="utf-8")
+        self.assertIn("Object.keys(icons).forEach(assertFits);", topics)
 
     def test_the_figure_pipeline_does_not_hash_the_topic_icons(self):
         """A topic icon edit must not make all the article figures stale."""

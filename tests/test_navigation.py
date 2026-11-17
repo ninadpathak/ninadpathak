@@ -121,9 +121,15 @@ class ProofStaysReachableTests(unittest.TestCase):
 
     def test_work_page_links_to_portfolio_and_projects_in_its_content(self):
         work = (REPO / "templates" / "work.html").read_text(encoding="utf-8")
+        lead = region(work, r'<p class="lead">.*?</p>')
         for href in ("/portfolio/", "/projects/"):
             self.assertIn(f'<a href="{href}" class="work-card">', work)
-            self.assertIn(f'<a href="{href}">', work, f"the lead paragraph should link {href}")
+            self.assertIn(f'<a href="{href}">', lead, f"the lead paragraph should link {href}")
+
+    def test_the_stylesheet_styles_the_menu_row_under_work(self):
+        css = (REPO / "static" / "css" / "main.css").read_text(encoding="utf-8")
+        for selector in (".mobile-nav-sub {", ".mobile-nav-sublink {", ".mobile-nav-link:has(+ .mobile-nav-sub) {"):
+            self.assertIn(selector, css, "without this rule Portfolio and Projects lose their place under Work")
 
     def test_service_pages_link_to_both(self):
         services = (REPO / "templates" / "services.html").read_text(encoding="utf-8")

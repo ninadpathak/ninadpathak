@@ -13,7 +13,6 @@
   --bg-2:      #efefed;
   --border:    #e0e0dc;
   --border-2:  #c8c8c4;
-  --line:      #7d7d79;
   --text-1:    #0e0e0e;
   --text-2:    #3a3a3a;
   --text-3:    #6b6b6b;
@@ -139,7 +138,6 @@
   --bg-2:      #1a1a1a;
   --border:    #1e1e1e;
   --border-2:  #2c2c2c;
-  --line:      #6f6f6f;
   --text-1:    #f0f0f0;
   --text-2:    #c2c2c2;
   --text-3:    #8a8a8a;
@@ -414,6 +412,8 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding-bottom: var(--space-5);
   transform: translateX(100%);
   transition: transform var(--t-slow) var(--ease);
 }
@@ -447,7 +447,9 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
 .mobile-nav-sublink:hover,
 .mobile-nav-links [aria-current] { color: var(--text-1); }
 
-/* Portfolio and Projects sit under Work, the door that leads to both. */
+/* Portfolio and Projects sit under Work, the door that leads to both, so Work gives up
+   its rule and the pair closes the group. */
+.mobile-nav-link:has(+ .mobile-nav-sub) { border-bottom: 0; padding-bottom: 0; }
 .mobile-nav-sub {
   display: flex;
   gap: var(--space-8);
