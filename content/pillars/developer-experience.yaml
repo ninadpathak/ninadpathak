@@ -23,7 +23,7 @@ sections:
   - heading: "How to write it"
     spokes:
       - post: technical-writing-for-engineers
-        note: "Takes four sentence rules from aerospace's Simplified Technical English, checks them with a script, and names the habits a script can't check."
+        note: "Takes four rules from aerospace's Simplified Technical English, checks two of them with a script, and names the habits a script can't check."
       - post: writing-for-ai-products
         note: "Covers what AI product docs now need, such as prompts and evals, and how to judge a writer for an AI company."
       - tool: linter

@@ -20,9 +20,7 @@ updated: 2026-11-17
 
 Documentation ROI is hard to state as one number, and the best published evidence treats documentation as a multiplier on other engineering practices. DORA's 2022 data shows a team with above-average documentation quality getting a 750% lift in organizational performance from continuous integration, and a team below average getting 34%.
 
-Wikipedia defines [the bus factor](https://en.wikipedia.org/wiki/Bus_factor) as "a measurement of the risk resulting from information and capabilities not being shared among team members".
-
-The bus factor counts people and DORA's table counts performance. Neither is a return in money, and I think the case for investing in [developer content](/articles/developer-experience/) is stronger when it says so.
+A team's [bus factor](https://en.wikipedia.org/wiki/Bus_factor) counts people, and DORA's table counts performance. Neither is a return in money, and I think the case for investing in [developer content](/articles/developer-experience/) is stronger when it says so.
 
 ## What is engineering velocity?
 
@@ -53,9 +51,9 @@ So the lift from every practice is far larger for teams with above-average docum
 
 ## How far can that table be pushed?
 
-Less far than its largest number invites. The data is a survey from 2022, the scores are self-reported, and the table shows a correlation between documentation quality and the payoff of other practices.
+Less far than its largest number invites. The data is from 2022, and I read the table as a correlation between documentation quality and the payoff of other practices, whatever verbs the page uses.
 
-A team with strong documentation is plausibly strong at other things the survey didn't ask about. The table can't separate those, and DORA doesn't claim it does.
+A team with strong documentation is plausibly strong at other things the table doesn't show. The table can't separate those.
 
 So what does it support? A narrower statement: a practice such as trunk-based development pays back far more where people can find out how it's meant to work, so documentation belongs in the plan for any practice a team is about to adopt.
 
@@ -76,23 +74,23 @@ A reviewer has to ask what a function is for. A new hire reconstructs the deploy
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/knowledge-silos.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/knowledge-silos.narrow.svg" width="288" height="736"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/knowledge-silos.svg" width="720" height="256" alt="A delivery pipeline from code through build and deploy. A single stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, however quick the build and deploy are." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Throughput is capped by the slowest station, and a fast pipeline still waits on the one person who understands a dependency.</figcaption>
+  <figcaption>A delivery pipeline in which one stage depends on a detail only one engineer knows.</figcaption>
 </figure>
 
 That last case is the bus factor showing up in a recovery time. A [runbook](/articles/runbook-template/) is the document that takes it out of one person's head.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/context-switching.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/context-switching.narrow.svg" width="288" height="432"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/context-switching.svg" width="720" height="528" alt="An engineer working in the IDE needs an answer. Documentation kept in the same repository answers it a few keystrokes away, so the engineer stays in flow. A question sent to Slack or a stale wiki page pulls the engineer out of the IDE and drops the mental state they were holding." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Docs that live next to the code put answers at the point of need, and a detour to chat or a wiki breaks the engineer's attention.</figcaption>
+  <figcaption>Two places an engineer can look for an answer: documentation beside the code, or a question in chat or a wiki.</figcaption>
 </figure>
 
 ## What changes when agents write the code?
 
-The volume changes, and the reader does too. Anthropic's [account of its code review](https://claude.dev/blog/solving-code-review-at-anthropic/) from October 15 says the changes landing in its monorepo went from about 2,500 in May to more than 30,000 in September.
+The volume changes, and the reader does too. Anthropic's [account of its code review](https://claude.dev/blog/solving-code-review-at-anthropic/) from October 15 says the changes landing in its monorepo each day went from about 2,500 in May to more than 30,000 in September.
 
 At that rate, the first reader of a team's conventions is a model. The post describes fixing repeated review findings at the source, in files such as the one where "CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals."
 
-Now that's documentation with a measurable return, since a line added to the file removes a class of review comment. My [CLAUDE.md guide](/articles/claude-md/) covers what belongs in it.
+I think of that as documentation with a visible return, since a line added to the file removes a class of review comment. My [CLAUDE.md guide](/articles/claude-md/) covers what belongs in it.
 
 ## How do you measure documentation ROI on your own team?
 
@@ -102,9 +100,9 @@ Pick one document, one metric and a period before and after. The measurements be
 - **Repeat questions.** How often the same question appears in the team's chat in a month, before and after its answer has a page.
 - **Recovery.** Time to recover from a recurring failure, with and without a runbook for it.
 
-Each of these ties a page to one of DORA's factors, which keeps the claim checkable. For a company whose buyers are developers, the same reasoning applies outside the team, and [devtools documentation](/articles/devtools-documentation/) makes that case.
+The last of these is close to DORA's recovery factor and the other two sit beside its factors, and each keeps the claim checkable. For a company whose buyers are developers, the same reasoning applies outside the team, and [devtools documentation](/articles/devtools-documentation/) makes that case.
 
-And the writing doesn't need a specialist to start. [Technical writing for engineers](/articles/technical-writing-for-engineers/) covers the rules an engineer can apply to the first page.
+And the writing doesn't need a specialist to start. My [guide to writing for engineers](/articles/technical-writing-for-engineers/) covers the rules an engineer can apply to the first page.
 
 ## FAQ
 

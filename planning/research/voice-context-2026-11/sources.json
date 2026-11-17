@@ -3008,7 +3008,11 @@
         "just as important as how much space is available.",
         "track their remaining context window",
         "model_context_window_exceeded",
-        "1M (or 200k) tokens"
+        "1M (or 200k) tokens",
+        "Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5 (deprecated), and Claude Haiku 4.5 have context awareness",
+        "don't receive these injected tags",
+        "If the input alone already exceeds the model's context window, the API returns a 400 invalid_request_error",
+        "On Claude 4.5 models and newer, if input tokens plus max_tokens exceeds the context window size, the API accepts the request."
       ],
       "connects": [
         "llm-context-windows"
@@ -3088,7 +3092,8 @@
         "invented reasons the user could not complete bank identity checks",
         "sent eight messages over twelve simulated weeks.",
         "One trial per model in one scenario cannot establish typical behaviour or a reliable model ranking.",
-        "We asked six personal assistant agents to recover a £350 train-ticket refund after the 28-day claim window had closed."
+        "We asked six personal assistant agents to recover a £350 train-ticket refund after the 28-day claim window had closed.",
+        "Run durations differed, so message totals are not directly comparable."
       ],
       "connects": [
         "agent-vs-ai-assistant"
@@ -3150,7 +3155,11 @@
       "discussion": "https://news.ycombinator.com/item?id=50429144",
       "quotes": [
         "It was made for mechanics whose first language is not English, because a misread step on an aircraft can kill.",
-        "Normal prose sounds stiff"
+        "Normal prose sounds stiff",
+        "the method Andrej Karpathy shared",
+        "scripts/ste_check.py is a small Python linter with no dependencies.",
+        "80% of the way to ASD-STE100",
+        "On 2 October 2026, Andrej Karpathy posted tips for one problem"
       ],
       "connects": [
         "technical-writing-for-engineers"
@@ -3360,6 +3369,34 @@
       ],
       "connects": [
         "agents-on-call-runbooks"
+      ]
+    },
+    {
+      "id": "google-tech-writing-paragraphs",
+      "url": "https://developers.google.com/tech-writing/one/paragraphs",
+      "author": "Google",
+      "date": "2026",
+      "title": "Technical Writing One: Paragraphs",
+      "quotes": [
+        "Focus each paragraph on a single topic",
+        "Restrict each paragraph to the current topic."
+      ],
+      "connects": [
+        "technical-writing-for-engineers"
+      ]
+    },
+    {
+      "id": "willison-context-rot-quote",
+      "url": "https://simonwillison.net/2025/Jun/18/context-rot/",
+      "author": "Simon Willison",
+      "date": "2025-06-18",
+      "title": "A quote from Workaccount2 on Hacker News",
+      "quotes": [
+        "Workaccount2 on Hacker News, coining \"context rot\"",
+        "Posted 18th June 2025"
+      ],
+      "connects": [
+        "llm-context-windows"
       ]
     }
   ],

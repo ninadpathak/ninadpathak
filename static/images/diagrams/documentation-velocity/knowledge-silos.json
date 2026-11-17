@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/documentation-velocity/knowledge-silos.mmd",
-  "hash": "f87b365420ea8ecb",
+  "hash": "77aaa80a83a37c0b",
   "pele": "1.8.0",
   "width": 720,
   "height": 256,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "A delivery pipeline from code through build and deploy. A single stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, however quick the build and deploy are.",
-  "caption": "Throughput is capped by the slowest station, and a fast pipeline still waits on the one person who understands a dependency.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/documentation-velocity/knowledge-silos.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/documentation-velocity/knowledge-silos.narrow.svg\" width=\"288\" height=\"736\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/documentation-velocity/knowledge-silos.svg\" width=\"720\" height=\"256\" alt=\"A delivery pipeline from code through build and deploy. A single stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, however quick the build and deploy are.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Throughput is capped by the slowest station, and a fast pipeline still waits on the one person who understands a dependency.</figcaption>\n</figure>"
+  "caption": "A delivery pipeline in which one stage depends on a detail only one engineer knows.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/documentation-velocity/knowledge-silos.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/documentation-velocity/knowledge-silos.narrow.svg\" width=\"288\" height=\"736\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/documentation-velocity/knowledge-silos.svg\" width=\"720\" height=\"256\" alt=\"A delivery pipeline from code through build and deploy. A single stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, however quick the build and deploy are.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>A delivery pipeline in which one stage depends on a detail only one engineer knows.</figcaption>\n</figure>"
 }

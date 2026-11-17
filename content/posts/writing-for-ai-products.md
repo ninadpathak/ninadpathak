@@ -86,7 +86,7 @@ A further quality rarely appears in a job description, which is judgment about w
 
 The habits carry over from older developer products. [Stripe's engineering blog](/articles/stripe-technical-blog/) is my reference for explaining the hard part to the person integrating, and [documentation for developer tools](/articles/devtools-documentation/) names the pages to fix first on a startup's docs site.
 
-Engineers writing these pages themselves can start from [technical writing for engineers](/articles/technical-writing-for-engineers/).
+Engineers writing these pages themselves can start from my [writing guide for engineers](/articles/technical-writing-for-engineers/).
 
 My page as a [freelance technical writer for AI companies](/services/freelance-technical-writer-for-ai-companies/) links the work I've published for Firecrawl and OpenComputer. The [Centus case study](/work/centus/) covers the localization guides, and [my work page](/work/) has the rest.
 

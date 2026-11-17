@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/documentation-velocity/context-switching.mmd",
-  "hash": "b4047ced954ddea1",
+  "hash": "896bd6033e617542",
   "pele": "1.8.0",
   "width": 720,
   "height": 528,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "An engineer working in the IDE needs an answer. Documentation kept in the same repository answers it a few keystrokes away, so the engineer stays in flow. A question sent to Slack or a stale wiki page pulls the engineer out of the IDE and drops the mental state they were holding.",
-  "caption": "Docs that live next to the code put answers at the point of need, and a detour to chat or a wiki breaks the engineer's attention.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/documentation-velocity/context-switching.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/documentation-velocity/context-switching.narrow.svg\" width=\"288\" height=\"432\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/documentation-velocity/context-switching.svg\" width=\"720\" height=\"528\" alt=\"An engineer working in the IDE needs an answer. Documentation kept in the same repository answers it a few keystrokes away, so the engineer stays in flow. A question sent to Slack or a stale wiki page pulls the engineer out of the IDE and drops the mental state they were holding.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Docs that live next to the code put answers at the point of need, and a detour to chat or a wiki breaks the engineer's attention.</figcaption>\n</figure>"
+  "caption": "Two places an engineer can look for an answer: documentation beside the code, or a question in chat or a wiki.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/documentation-velocity/context-switching.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/documentation-velocity/context-switching.narrow.svg\" width=\"288\" height=\"432\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/documentation-velocity/context-switching.svg\" width=\"720\" height=\"528\" alt=\"An engineer working in the IDE needs an answer. Documentation kept in the same repository answers it a few keystrokes away, so the engineer stays in flow. A question sent to Slack or a stale wiki page pulls the engineer out of the IDE and drops the mental state they were holding.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Two places an engineer can look for an answer: documentation beside the code, or a question in chat or a wiki.</figcaption>\n</figure>"
 }

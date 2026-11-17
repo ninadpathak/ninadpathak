@@ -19,17 +19,16 @@ status: published
 work_note: "This post is about what a buyer's engineer checks in your docs before a trial starts. If you'd rather someone else find those missing answers and write them before the next evaluation, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Hire me for the job](/services/)."
 title: How Developers Judge Devtools Documentation Before They Buy
 slug: devtools-documentation
-video: devtools-documentation
 updated: 2026-11-17
 ---
 
 Devtools documentation is the part of a developer tool that a buyer uses first, before a trial and often before a sales call. GitBook's [State of Docs report for 2026](https://www.stateofdocs.com/2026/purchase-decisions-and-business-impact) found that "80% of decision-makers always or often review documentation before buying".
 
-Wikipedia's article on the [IBM PS/2](https://en.wikipedia.org/wiki/IBM_PS/2), a line released in 1987, records the motto of corporate buyers of the time, that nobody "got fired for buying an IBM".
+Corporate buyers of the 1980s had a saying for the safe choice, that nobody got fired for [buying an IBM](https://en.wikipedia.org/wiki/IBM_PS/2).
 
 A devtools startup can't offer that kind of cover. What its buyer can check, without talking to anyone, is the docs.
 
-So this page is about what that buyer looks for, as the commercial end of [developer content](/articles/developer-experience/). I write documentation for a living, so read the argument knowing that.
+So this page is about what that buyer looks for, as the commercial end of [developer content](/articles/developer-experience/).
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/devtools-documentation/evaluation-friction.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/devtools-documentation/evaluation-friction.narrow.svg" width="288" height="776"><img class="np-has-narrow" src="/static/images/diagrams/devtools-documentation/evaluation-friction.svg" width="720" height="264" alt="A technical evaluator's path from the docs to a deal, passing the quickstart, the auth page and the limits page. Each of the three is marked as a point where the evaluation can stop." loading="lazy" decoding="async"></picture></a>
@@ -53,15 +52,15 @@ It says buyers read the docs, and vendors don't count what happens next.
 | Say docs are important or essential for closing deals | 51% |
 | Don't track leads from their documentation | 57% |
 
-Now, GitBook makes a documentation platform and runs this survey, so it has a stake in the answer. So do I.
+GitBook makes a documentation platform and runs this survey, and I write documentation for a living. Read the figures knowing both.
 
-The report adds that the first two figures sit about where they did in 2025, and it has no row for deals lost. Christopher Gales raises that case in the same section and says "It's a very lagging indicator to find that out."
+The report adds that the first two figures sit about where they did in 2025, and it has no row for deals lost. Christopher Gales asks in the same section whether a customer would fail to renew over doc quality, and says "It's a very lagging indicator to find that out."
 
 This page used to carry a title saying devtools startups lose deals over bad docs. I haven't found a published count of one, so the claim I'll stand behind is smaller: buyers check, and a page that fails the check gives them a reason to stop.
 
 ## Which pages does a buyer check?
 
-I'd name four, and the choice is my judgment, since the survey doesn't ask. Each one answers a question the buyer has before they give the trial any more time.
+I name four, and the choice is my judgment, since the survey doesn't ask. Each one answers a question the buyer has before they give the trial any more time.
 
 | Page | The buyer's question |
 | --- | --- |
@@ -74,7 +73,7 @@ The [quick start guide template](/articles/quickstart-guide/) covers the first p
 
 ## What does a quickstart tell a first-time reader?
 
-Less than you'd expect, and each vendor leaves out something different. The script below fetches the quickstarts of Stripe, Vercel and Cloudflare and searches each for four things a first-time reader needs.
+Stripe's page alone matched a success signal, and Stripe's alone has no prerequisites heading. The script below fetches the quickstarts of Stripe, Vercel and Cloudflare and searches each for four things a first-time reader needs.
 
 ```python
 """Fetch three vendor quickstarts and report what each page tells a first-time reader."""
@@ -83,10 +82,12 @@ import html
 import re
 import urllib.request
 
+# Each page is named with a phrase it must contain, so a bot challenge or an empty
+# shell stops the run instead of printing a row of "no".
 PAGES = {
-    "Stripe": "https://docs.stripe.com/development/quickstart",
-    "Vercel": "https://vercel.com/docs/functions/quickstart",
-    "Cloudflare": "https://developers.cloudflare.com/workers/get-started/guide/",
+    "Stripe": ("https://docs.stripe.com/development/quickstart", "set up your development environment"),
+    "Vercel": ("https://vercel.com/docs/functions/quickstart", "getting started with vercel functions"),
+    "Cloudflare": ("https://developers.cloudflare.com/workers/get-started/guide/", "deploy your first worker"),
 }
 CHECKS = {
     "prerequisites": r"prerequisites",
@@ -107,8 +108,10 @@ def text_of(url):
 
 
 print(f"{'page':<11}" + "".join(f"{name:<16}" for name in CHECKS))
-for vendor, url in PAGES.items():
+for vendor, (url, expected) in PAGES.items():
     page = text_of(url)
+    if expected not in page:
+        raise SystemExit(f"{vendor}: the fetched page lacks {expected!r}, so no row is printed")
     cells = ("yes" if re.search(pattern, page) else "no" for pattern in CHECKS.values())
     print(f"{vendor:<11}" + "".join(f"{cell:<16}" for cell in cells))
 ```
@@ -122,7 +125,7 @@ Vercel     yes             no              yes             yes
 Cloudflare yes             no              yes             yes
 ```
 
-Now, the checks are plain string searches, so a "no" means the page doesn't use those words and may still do the job another way. Stripe's page has no prerequisites heading and opens on a list titled "What you learn", which names the SDK version it installs.
+The checks are plain string searches, so a "no" means the page doesn't use those words and may still do the job another way. Stripe's page has no prerequisites heading and opens on a list titled "What you learn", which names the SDK version it installs.
 
 It's also the only page where the search found a success signal, in the sentence "If everything worked, the command-line displays the following response." That sentence is the one I'd add to any quickstart first.
 
@@ -144,9 +147,9 @@ So start with one of those. Inside an engineering team the same question has dif
 
 ## What should a small team fix first?
 
-I'd start with the quickstart and run every command in it on a clean machine. Then I'd publish the limits, because a limit found during a load test costs more trust than one read on a page.
+Start with the quickstart and run every command in it on a clean machine. Then publish the limits, because a limit found during a load test costs more trust than one read on a page.
 
-The writing can come from the engineers who built the product, and [technical writing for engineers](/articles/technical-writing-for-engineers/) covers the rules that matter. The [Stripe engineering blog](/articles/stripe-technical-blog/) shows the stage before all this, where a company's writing earns attention before anyone creates an API key.
+The writing can come from the engineers who built the product, and my [writing guide for engineers](/articles/technical-writing-for-engineers/) covers the rules that matter. The [Stripe engineering blog](/articles/stripe-technical-blog/) shows the stage before all this, where a company's writing earns attention before anyone creates an API key.
 
 And if nobody on the team has the time, this is the work I do. My [technical writing services](/services/) cover these pages, and I run the product before I write about it.
 
@@ -158,7 +161,7 @@ It is the documentation a developer-tool company publishes for the engineers who
 
 **Do bad docs lose deals?**
 
-Nobody has published a count. The 2026 State of Docs survey found 51% of respondents calling docs important or essential for closing deals.
+I haven't found a published count. The 2026 State of Docs survey found 51% of respondents calling docs important or essential for closing deals.
 
 **Which docs page matters first for a devtools trial?**
 

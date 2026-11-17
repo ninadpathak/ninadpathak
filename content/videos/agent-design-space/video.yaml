@@ -1,7 +1,7 @@
 # Narrated explainer for /articles/agent-design-space/, imported by tools/import_video.py from
 # ninadpathak-video films/agent-design-space (render of 2026-10-28T10:25:44+05:30).
 name: The agent design space in 40 seconds
-description: How production agents cluster around their constraints, from single-loop retrieval to persistent-goal agents whose state must survive restarts, and the questions that narrow the choice for a new agent.
+description: "A 40-second narrated film made for an earlier version of the AI agent design patterns page. It is not embedded on the page and is queued for a new render."
 upload_date: '2026-10-28T10:25:44+05:30'
 duration_seconds: 40
 width: 1920

@@ -43,7 +43,7 @@ The context window also caps how much working memory is available. As a session 
 
 It is like trying to keep a forty-item grocery list in your head while someone keeps adding to it: past a point you stop holding the early items at all.
 
-If you want to understand how context windows fit into this picture, I wrote about [LLM context windows explained](/articles/llm-context-windows/) and how they interact with different memory systems.
+If you want to understand how context windows fit into this picture, my page on [what a context window holds](/articles/llm-context-windows/) covers the limit that memory works around.
 
 ### Episodic memory: what happened
 

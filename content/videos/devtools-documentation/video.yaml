@@ -1,7 +1,7 @@
 # Narrated explainer for /articles/devtools-documentation/, imported by tools/import_video.py from
 # ninadpathak-video films/devtools-documentation (render of 2026-10-29T04:17:28+05:30).
 name: Why devtools startups lose deals over docs in 40 seconds
-description: 'How bad docs cool a devtools trial before sales hears an objection: a broken quickstart install, an undocumented Retry-After header, and why to test every quickstart command and track which pages start trials.'
+description: "A 40-second narrated film made for an earlier version of the devtools documentation page. It is not embedded on the page and is queued for a new render."
 upload_date: '2026-10-29T04:17:28+05:30'
 duration_seconds: 40
 width: 1920

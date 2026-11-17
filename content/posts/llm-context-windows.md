@@ -20,7 +20,7 @@ updated: 2026-11-17
 
 An LLM context window is the span of text a model can read at once: the system prompt, the conversation so far, tool results and the reply it is writing. Anthropic's [documentation](https://platform.claude.com/docs/en/build-with-claude/context-windows) calls it the model's "working memory", and on current Claude models it runs to a million tokens.
 
-DOS programs had a fixed budget to work in. [Wikipedia's entry](https://en.wikipedia.org/wiki/Conventional_memory) defines conventional memory as "the first 640 kilobytes of the memory on IBM PC or compatible systems", and years of software were written to fit under that line.
+DOS programs had a fixed budget to work in. On an IBM PC it was the first 640 kilobytes, known as [conventional memory](https://en.wikipedia.org/wiki/Conventional_memory), and years of software were written to fit under that line.
 
 A million tokens sounds like the end of fitting under lines. But the Anthropic page that lists the million also says "more context isn't automatically better."
 
@@ -30,7 +30,9 @@ That sentence is the reason window size is a cost and quality decision in [LLM i
 
 Everything the model can refer to while it generates, and that includes the response it's writing. So the reply spends the same budget as the prompt.
 
-A conversation fills it turn by turn, since each request resends the turns before it. When a request would run past the limit on recent Claude models, generation stops with the reason `model_context_window_exceeded`, and older models reject the request up front.
+A conversation fills it turn by turn, since each request resends the turns before it. An input that exceeds the window on its own gets a 400 error on every Claude model.
+
+On Claude 4.5 models and newer, a request whose input plus `max_tokens` would pass the limit is accepted. If generation then reaches the limit, it stops with the reason `model_context_window_exceeded`.
 
 ## Why does the middle of a long context get ignored?
 
@@ -47,11 +49,13 @@ The models in that paper date from 2023, and I don't assume the curve is as deep
 
 ## What is context rot?
 
-Context rot is the loss of accuracy as the input grows, wherever the important part sits. Chroma's [technical report](https://research.trychroma.com/context-rot) of July 14, 2025 tested 18 models and gave the effect its name.
+Context rot is the loss of accuracy as the input grows, wherever the important part sits. Chroma's [technical report](https://research.trychroma.com/context-rot) of July 14, 2025 tested 18 models and made the term common.
+
+The name is older than the report by a month. Simon Willison [credits a Hacker News comment](https://simonwillison.net/2025/Jun/18/context-rot/) with coining it in June 2025.
 
 The report starts from an assumption and then removes it: that a model handles its 10,000th token as reliably as its 100th. What it found is that models don't use their context evenly, and that they get less reliable as the input gets longer.
 
-Now, Chroma sells a retrieval database, so it has a reason to find that stuffing the window fails. But Anthropic sells the tokens, and its own docs now say the same: "As token count grows, accuracy and recall degrade, a phenomenon known as context rot."
+Chroma sells a retrieval database, so it has a reason to find that stuffing the window fails. But Anthropic sells the tokens, and its own docs now say the same: "As token count grows, accuracy and recall degrade, a phenomenon known as context rot."
 
 And the failure differs by model. On questions with distracting passages, the report found Claude models tending to abstain when unsure, and GPT models more often answering wrongly with confidence.
 
@@ -78,7 +82,7 @@ Treat the size as a ceiling and fill it by choice. Anthropic's own page says tha
 - Count tokens before sending, so a request is refused by your code and not by the API.
 - Measure answers at the lengths you will run, since a prompt that works at 2,000 tokens tells you little about 200,000.
 
-Newer models help with the bookkeeping. Anthropic says several current ones keep track of how much window is left through a conversation, which lets a long task plan against that space.
+Some models help with the bookkeeping. Anthropic lists four, including Sonnet 5 and Haiku 4.5, that keep track of how much window is left through a conversation, and says its newer ones take an explicit task budget instead.
 
 ## FAQ
 
@@ -92,4 +96,4 @@ No. A 2023 paper, a 2025 report and Anthropic's own documentation all say that a
 
 **What happens when the context window is full?**
 
-The request fails or generation stops, depending on the model. Applications avoid it by counting tokens, trimming input, or compacting old turns into a summary.
+An input that is too long on its own is rejected, and on newer Claude models a reply that runs into the limit stops early with a stop reason. Applications avoid both by counting tokens and by trimming or compacting old turns.

@@ -624,15 +624,24 @@ Written under every rule above, including the lighter quote rule for explainers:
 | llm-context-windows | Lost in the Middle (2023), Chroma's context rot report (2025), Anthropic's context window docs | quotes re-fetched |
 | agent-vs-ai-assistant | Vals AI's refund experiment (October 15), a post on Claude Duet (October 29) | quotes re-fetched; table paraphrases the report |
 | agent-design-space, retitled "AI Agent Design Patterns" | Anthropic's Building effective agents (2024), Fadurudeen's multi-agent guide | figure redrawn as three groups; grid labelled as the author's |
-| technical-writing-for-engineers | Simplified Technical English, the STE80 Humanizer (November 9), Google's technical writing course | `ste_check.py` run, output on the page |
+| technical-writing-for-engineers, retitled "Technical Writing for Engineers" (the only recorded query on the URL has no "80/20") | Simplified Technical English, Karpathy's 80% tip of October 2 through the STE80 Humanizer README, Google's technical writing course including its Paragraphs unit | `sentence_rules.py` run, output on the page; renamed so it is not taken for the STE80 project's own `ste_check.py` |
 | documentation-velocity, retitled "Documentation ROI and Engineering Velocity" | DORA's 2022 documentation table, DORA's metrics guide, Stripe's 2018 Developer Coefficient, Anthropic's code review post | every figure re-fetched; unverified 2.4x, 2.5x and 25% cut |
 | devtools-documentation, retitled "How Developers Judge Devtools Documentation Before They Buy" | State of Docs 2026 purchase section (GitBook), three vendor quickstarts fetched November 17 | `quickstart_probe.py` run, output on the page |
 | agents-on-call-runbooks (new essay, technical-documentation) | SigNoz's post of February 28 and its Hacker News thread of October 30, this site's runbook test | opinion-led, one quote |
 
 Opening devices added to the ledger: conventional memory and the 640K line (llm-context-windows); the Office Assistant, placed second (agent-vs-ai-assistant); the Gang of Four's Design Patterns (agent-design-space); Simplified Technical English (technical-writing-for-engineers); the bus factor (documentation-velocity); "Nobody got fired for buying an IBM" (devtools-documentation); Bainbridge's Ironies of Automation, credited to the post that uses it (agents-on-call-runbooks).
 
-Films that no longer match their page, added to the re-render list and left embedded pending root's word: agent-vs-ai-assistant (the narration opens on a ticket-routing anecdote the page no longer has), agent-design-space (the narration describes five patterns the page no longer lists), devtools-documentation (the first line states that startups lose deals over docs, and the page now says no source counts one).
+Films that no longer match their page. After the batch review all three were unembedded (the `video` field removed and each `video.yaml` given a plain description) and stay on the re-render list: agent-vs-ai-assistant (the narration opens on a ticket-routing anecdote the page no longer has), agent-design-space (the narration describes five patterns the page no longer lists), devtools-documentation (the first line states that startups lose deals over docs, and the page now says no source counts one).
 
 The three April screenshots of vendor quickstarts are no longer embedded on devtools-documentation. The files stay in `static/images/visuals/`.
 
 Position taken in the new essay, for Ninad to confirm: the deskilling risk is real and sharpest for juniors, the post's evidence is borrowed from medicine and aviation, and the cheap remedy it leaves out is making the agent write a short account of each incident it closes for a person to read.
+
+Rules the batch 7 review added:
+
+- When a page stops making a claim, check the film, the pillar line, the money page and every inbound anchor for the same claim before reporting.
+- A known thing in an opening is stated in his own words with the link on the noun. A Wikipedia citation with a quoted fragment is one shape among several and no batch may use it on more than two pieces.
+- The vendor-interest disclosure stays, and it does not open on "Now," more than once in a batch.
+- A script printed on a page asserts a known string on each page it fetches and exits non-zero without it.
+- A source's limits paragraph is reported whole when the page leans on the numbers it limits.
+

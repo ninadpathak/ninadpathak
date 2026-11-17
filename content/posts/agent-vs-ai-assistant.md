@@ -13,13 +13,12 @@ slug: agent-vs-ai-assistant
 status: published
 work_note: "Your engineers shouldn't have to fix a tutorial's code in review. I'm Ninad Pathak, a freelance technical writer for AI companies, and I build and run every example before I draft. [Hire me to write yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'AI Agent vs AI Assistant: When to Build Each'
-video: agent-vs-ai-assistant
 updated: 2026-11-17
 ---
 
 An AI assistant leaves the next step to you, and an AI agent takes it. Both can call tools and both can run on one model, so the difference between an AI agent and an AI assistant comes down to who decides what happens after each result.
 
-Microsoft's Office Assistant shipped with Office 97. [Wikipedia's article](https://en.wikipedia.org/wiki/Office_Assistant) preserves the prompt it's remembered for, which began "It looks like you're writing a letter", and Clippy never sent the letter.
+Microsoft's [Office Assistant](https://en.wikipedia.org/wiki/Office_Assistant) shipped with Office 97 and is remembered for one prompt, which began "It looks like you're writing a letter". Clippy never sent the letter.
 
 A research group told six modern assistants to act alone in October. The user in [Vals AI's experiment](https://www.vals.ai/blogs/impossible-refund) said "I won't do anything here myself", and what followed shows what changes when the loop passes from the person to the model.
 
@@ -36,13 +35,13 @@ The difference is who drives the loop. With an assistant a person reads each rep
 
 So tools don't settle it. An assistant that searches the web or queries a database on request is still an assistant, since a person looked at the answer before anything else happened.
 
-Simon Willison's definition, which my guide to the [types of AI agents](/articles/ai-agent-taxonomy/) uses for the same boundary, is "An LLM agent runs tools in a loop to achieve a goal." The loop is the part an assistant doesn't have.
+My guide to the [types of AI agents](/articles/ai-agent-taxonomy/) puts the word agent at the same boundary, following Simon Willison's definition from 2025. The loop is the part an assistant doesn't have.
 
 ## What happens when an assistant is told to act alone?
 
 It becomes an agent, and its judgment becomes the product. Vals AI published its experiment on October 15: six personal assistants were asked to recover a train refund of 350 pounds after the claim window had closed, with outgoing messages answered by simulated organisations.
 
-The instruction ended "keep trying anything you think of to get it", and the user then stopped responding.
+The instruction included "keep trying anything you think of to get it", and the user then stopped responding.
 
 | Model | What it did, per the report |
 | --- | --- |
@@ -53,9 +52,9 @@ The instruction ended "keep trying anything you think of to get it", and the use
 
 No refund was available, so every run was a test of when to stop. Each of those models would have been a well-behaved assistant in the same inbox, because a person reading the first refusal would have decided what came next.
 
-Now, the report warns against reading a ranking into this: "One trial per model in one scenario cannot establish typical behaviour or a reliable model ranking." Vals runs a benchmarking business, and the scenario was built to have no legitimate way through.
+The report warns against reading a ranking into this: "One trial per model in one scenario cannot establish typical behaviour or a reliable model ranking." It adds that the runs lasted different lengths of time, so the message totals aren't directly comparable.
 
-But look at the spread. Given the same instruction, one model sent eight messages and another sent 187, and nothing set the number except each model's own sense of proportion.
+Vals runs a benchmarking business, and it built the scenario to have no legitimate way through. Even so, the direction is hard to miss: the same instruction produced 187 messages in 15 simulated days from one model and eight in twelve weeks from another.
 
 So that's what a builder takes on by removing the person from the loop.
 
@@ -63,7 +62,7 @@ So that's what a builder takes on by removing the person from the loop.
 
 Because the products now do both. A post from October 29 on [why Claude Duet works](https://fig.blue/posts/duet-is-the-future/) calls its whole category "personal-assistant-type harnesses", and praises this one for storing no credentials and discouraging users from handing any over.
 
-That is an assistant in name with an agent's reach, and a design that limits the reach on purpose. United Airlines made no distinction either when it banned third-party tools from booking, a policy covering "personal AI agents or assistants" as one group.
+That is an assistant in name with an agent's reach, and a design that limits the reach on purpose.
 
 I think the label matters less than one question a buyer can ask of any such product: when I'm not there, what will it do next?
 

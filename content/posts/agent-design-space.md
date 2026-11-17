@@ -11,13 +11,12 @@ slug: agent-design-space
 status: published
 work_note: "I'm Ninad Pathak, a freelance technical writer. If your AI product's tutorials have fallen behind the product, I write them, and I run the product first. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'AI Agent Design Patterns'
-video: agent-design-space
 updated: 2026-11-17
 ---
 
 AI agent design patterns are the named ways to arrange model calls, tools and control flow into a working system. The list people cite comes from Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) of December 19, 2024, which describes five workflows and the autonomous agent.
 
-Design Patterns, the 1994 book whose authors are known as the Gang of Four, is summed up in [its Wikipedia entry](https://en.wikipedia.org/wiki/Design_Patterns) as "describing 23 classic software design patterns", and what lasted from it, I'd say, was the shared vocabulary.
+[Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns), the 1994 book by the authors known as the Gang of Four, described 23 patterns, and what lasted from it was the shared vocabulary.
 
 The agent lists are thirty years younger and don't yet agree with each other. Choosing among them is the wiring decision in [AI agent architecture](/articles/ai-agents/), and it comes after deciding how much the agent does alone.
 
@@ -43,7 +42,7 @@ The post files the first five under workflows, where "LLMs and tools are orchest
 
 ## Do other lists agree?
 
-Partly. Kadharmoideen Fadurudeen's [guide to multi-agent patterns](https://kadhar.dev/blog/multi-agent-systems-from-scratch), published in June and discussed on Hacker News on November 5, has three: pipeline, orchestrator and blackboard.
+Partly. Kadharmoideen Fadurudeen's [guide to multi-agent patterns](https://kadhar.dev/blog/multi-agent-systems-from-scratch), published in June and discussed on Hacker News in early November, has three: pipeline, orchestrator and blackboard.
 
 The first two map onto prompt chaining and orchestrator-workers. The third has no row in Anthropic's table, and the guide sums it up as "There's no boss."
 
@@ -64,7 +63,7 @@ Start from the top-left cell and move only when the task forces it. A path fixed
 
 So when do you move? Anthropic's post says to reach for orchestrator-workers when you can't predict the subtasks in advance, and for evaluator-optimizer when you have "clear evaluation criteria".
 
-Now, that second condition is stricter than it sounds. The clearest criteria are ones a program can check, which is why my [lambda calculus exercise](/articles/lambda-calculus-ai/) grades answers with a script.
+That second condition is stricter than it sounds. The clearest criteria are ones a program can check, which is why my [lambda calculus exercise](/articles/lambda-calculus-ai/) grades answers with a script.
 
 A pattern is a separate choice from a type. My guide to the [types of AI agents](/articles/ai-agent-taxonomy/) ranks systems by how much they decide alone, and [AI agent vs AI assistant](/articles/agent-vs-ai-assistant/) covers the line below which no loop is needed at all.
 

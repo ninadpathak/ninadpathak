@@ -138,7 +138,7 @@ Scoping and landing are the seams that connect them. Skip framing and the agent 
 
 Skip review and the wrong solution ships. Keep all five and the agent becomes the fastest reliable contributor I work with.
 
-The shape of what people build keeps shifting, and I mapped a lot of that in [the agent design space](/articles/agent-design-space/), but the outer loop has stayed the same since the first week I trusted an agent with real work. Get the structure right and the model becomes a detail you swap out.
+The shape of what people build keeps shifting, and my page on [the agent design space](/articles/agent-design-space/) lists the named patterns, but the outer loop has stayed the same since the first week I trusted an agent with real work. Get the structure right and the model becomes a detail you swap out.
 
 ## FAQ
 
