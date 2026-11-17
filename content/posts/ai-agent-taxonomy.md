@@ -15,123 +15,122 @@ bridges:
 - slug: ai-memory-management
   reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
 date: 2026-04-21
-description: 'I group AI agents into five types, from reactive information agents to persistent-goal agents, to decide how much autonomy a task needs and which tools and memory it gets.'
+description: 'Types of AI agents sorted by how much each decides without a person, from reactive to persistent-goal, set against the textbook classes and Anthropic''s split.'
 slug: ai-agent-taxonomy
 status: published
 work_note: 'I group agents on this page by how much they decide alone, because that decides which tools and memory a task needs. For the agent guides I''ve written for Firecrawl, see [my portfolio](/portfolio/).'
 title: 'Types of AI Agents: Five Types by Autonomy and Scope'
 video: ai-agent-taxonomy
+updated: 2026-11-17
 ---
 
-Every few months someone publishes a new taxonomy of AI agents. The diagrams look clean, the categories feel comprehensive, and then you try to use one to decide whether your customer support bot should run a single-agent loop or a multi-agent hierarchy, and the taxonomy dissolves into hand-waving.
+Tesla sells a feature called Full Self-Driving, and [Wikipedia's article on self-driving cars](https://en.wikipedia.org/wiki/Self-driving_car), as it read on November 17, files it as a "Level 2 (hands/on, eyes/on)" system. Waymo's robotaxis sit two levels higher, because the SAE levels rank a system by how much of the driving a human still has to do and say nothing about how clever the software is.
 
-Having spent the last year building agents for production, reading the research papers that vendors cite selectively, and talking to teams whose agents either work reliably or fail in ways nobody can debug, I keep coming back to a simpler classification scheme. I sort agents by the **degree of autonomy**, the **task type**, and the **operational scope**.
+Types of AI agents sort the same way. The question that separates them is how much an agent decides and does before a person looks, and by that measure there are five types, set out in the table below.
 
-Those three dimensions separate the agents that belong in your production pipeline from the ones that will page you at midnight because they mass-emailed your customer list.
+The parallel breaks in one place. A car's level is fixed when the feature ships, and an agent's type is set by configuration, so one model can answer a single question in one deployment and work unattended for a week in another.
 
-## The three dimensions
-
-**Autonomy** answers one question: how many decisions does this agent make without a human in the loop? A fully autonomous agent plans and executes a sequence of actions to reach a goal.
-
-A guided agent picks the next action from a fixed menu, the way a phone tree routes you to a department. A reactive agent responds to a single input with a single output.
-
-Cost and blast radius climb by roughly an order of magnitude at each step, because a reactive agent can only give a bad answer, and an autonomous one can give a bad answer and then act on it ten times.
-
-Take an agent that retrieves and synthesizes information, and set it next to one that takes actions in external systems. That split is what **task type** captures.
-
-Information agents answer questions, summarize documents, and generate content. Action agents modify state: they book meetings, send emails, update records, or trigger a deployment.
-
-Production agents usually do both, and the ratio drives how much care the tool layer needs. A summarizer that occasionally calls one read-only search tool is a different animal from a sales agent that writes to your CRM.
-
-Whether the agent handles a single session or carries state across many interactions is the question **operational scope** answers. A stateless agent treats every request as independent, like a calculator that forgets the previous sum.
-
-A stateful agent maintains memory of past interactions, within a conversation or across them. Why that distinction matters in practice is something I covered in my post on [state-of-ai-agent-memory-2026](/articles/agent-memory-2026/).
+| Type | What it decides alone | Labelled example | Failure it adds |
+| --- | --- | --- | --- |
+| 1. Reactive | The words of one reply | A docs question box that answers from the text pasted into its prompt | A wrong answer |
+| 2. Tool-using | Which tool to call, and with what arguments, inside one request | A weather question answered with a lookup | A wrong call |
+| 3. Loop | How many steps to take and when to stop | A coding agent that reruns a failing test until it passes | Errors that build on each other |
+| 4. Multi-agent | How to split the work between agents | An orchestrator handing subtasks to workers | A fault with several possible origins |
+| 5. Persistent-goal | What to do next across sessions and days | A service migration picked up again each morning | Decisions made on stale state |
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.narrow.svg" width="288" height="752"><img class="np-has-narrow" src="/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.svg" width="720" height="808" alt="The five agent types as a ladder of rising autonomy: reactive information agents, tool-using agents, loop agents, multi-agent systems, and persistent-goal agents. Cost and blast radius climb with each step." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Each step up makes more decisions without a human, and cost and blast radius climb by roughly an order of magnitude at each one.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.narrow.svg" width="288" height="752"><img class="np-has-narrow" src="/static/images/diagrams/ai-agent-taxonomy/agent-taxonomy.svg" width="720" height="808" alt="A ladder of agent types by rising autonomy, from reactive at the bottom through tool-using, loop and multi-agent to persistent-goal at the top." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Each step up decides more without a person, and adds a failure the step below cannot have.</figcaption>
 </figure>
 
-## Type 1: Reactive information agents
+## The textbook list answers a different question
 
-These are the simplest agents. You send a prompt, the model generates a response, and the only autonomy involved is the model's internal reasoning about which words to produce next.
+The textbook answer to the same question is a different five. Wikipedia's [article on intelligent agents](https://en.wikipedia.org/wiki/Intelligent_agent) gives the source: "Russell & Norvig (2003) group agents into five classes based on their degree of perceived intelligence and capability".
 
-Plenty of chatbots and assistants you see in production today are reactive information agents. They hold no state between calls, and they reach for no tools unless the tool call rides inside that single request-response cycle.
+- Simple reflex agents
+- Model-based reflex agents
+- Goal-based agents
+- Utility-based agents
+- Learning agents
 
-A docs Q&A box that answers from whatever you pasted into the prompt and nothing else is the canonical case. The [agentic CLI comparison](/articles/claude-vs-gemini-cli/) describes two agents in this category, but it is not reproducible benchmark evidence.
+That list sorts agents by how they choose an action internally. An agent built on a language model leaves the choosing to the model at every rung, so I find the textbook classes of little use for deciding what to build.
 
-Their failure mode is easy to spot: they hallucinate or produce generic filler when the answer was never in their training data, so a question about your internal pricing tiers gets you a confident, wrong number. Retrieval augmentation helps, and once you bolt it on you are halfway to a more complex architecture anyway.
+A support chatbot and a coding agent can run on one model and differ only in what they are permitted to do. The five types on this page sort by that permission.
 
-## Type 2: Tool-using agents
+## Where Anthropic and Simon Willison draw the line
 
-One step up sits an agent that can call external tools during a single interaction. The model decides which tool to call based on the input, the tool returns results, and the model folds those results into its final response.
+Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents), published on December 19, 2024, splits the field in two. Workflows are "systems where LLMs and tools are orchestrated through predefined code paths", and agents are "systems where LLMs dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks."
 
-Ask "what's the weather in Lisbon," it calls a weather lookup, and it answers with the number that came back instead of inventing one.
+Simon Willison [settled on a definition](https://simonwillison.net/2025/Sep/18/agents/) on September 18, 2025: "An LLM agent runs tools in a loop to achieve a goal." Under his wording types 1 and 2 are no agents at all, and the word begins at the loop.
 
-What makes or breaks this type is the tool schema. Define it before the agent loop, because the schema controls what the model can select and which arguments it must supply.
+Both lines fall in the same place, between the tool-using type and the loop, and I agree that it is the largest step on the ladder.
 
-The schema is the agent's job description. Underspecify it and the agent makes poor tool choices, the way a contractor handed "fix the kitchen" might rewire an outlet you never asked about.
+I keep the two rungs below it because the word is used well below that line. United Airlines, quoted in the next section, bans "personal AI agents or assistants" as one group.
 
-Overspecify it with twenty near-identical tools and the agent second-guesses itself and calls the wrong one anyway. My post on [structured outputs and function-calling schemas](/articles/llm-structured-outputs/) digs into exactly this.
+I also think one line is too few for a build decision. Anthropic's post treats several agents under an orchestrator as a workflow pattern, and it has no rung for an agent that keeps a goal across sessions, though each of those adds a failure the single loop doesn't have.
 
-The [model-context-protocol-explained](/articles/model-context-protocol/) post covers how standardized tool schemas change the agent-to-tool interface. When your tool schemas are consistent, swapping tools or adding new ones stops being a fragile operation.
+## Reading and acting are separate risks
 
-## Type 3: Loop agents
+On November 11 United Airlines said it was banning AI agents from booking flights for travellers, as [CBS News reported](https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/). The airline's statement names what it objects to: "actions taken by these tools may result in unintended purchases, account changes, or use of MileagePlus miles."
 
-Loop agents go past single request-response. They run a planning or action loop that iterates until a stopping condition is met.
+Everything in that sentence is a write. An agent that compares fares and an agent that buys the ticket can be the same type on the ladder, and only the second can spend the customer's money.
 
-The [agent-loop-anatomy](/articles/agent-loop-anatomy/) post breaks down what happens inside that loop: perceive, think, act, remember.
+The same report cuts against a clean split. It quotes an aviation analyst saying "Flight searches cost airlines money", so a read-only agent still costs the system it reads from, and the [Hacker News thread](https://news.ycombinator.com/item?id=50458900) on the ban ran to more than 700 comments.
 
-Nearly every implementation I see is a ReAct-style loop: the agent reasons about the current state, takes an action, observes the result, and repeats. Watching an agent debug a failing test by reading the error, editing a line, rerunning, and reading the next error is the moment these stop being sophisticated autocomplete and start behaving like agents.
+So each type carries a second label, read-only or acting. A third label says whether the agent keeps state between requests, and [context windows vs memory](/articles/context-windows-vs-memory/) explains what that state is.
 
-Failure modes get more expensive at this rung. A reactive agent produces a bad answer and stops.
+## What each type adds
 
-A loop agent can produce a bad answer and then burn fifty more iterations chasing it, like a GPS that missed a turn and keeps confidently recalculating you deeper into the wrong neighborhood. I documented the production errors I keep running into in [production-ai-agent-errors](/articles/agent-error-handling/), where tool-use failures inside loop agents show up again and again.
+Each rung keeps the failures of the rungs below it and adds one of its own.
 
-## Type 4: Multi-agent systems
+### Type 1: reactive
 
-Things get interesting at the multi-agent level. Several agents coordinate, through shared state or message passing, to handle tasks too big for a single agent to handle reliably.
+A prompt goes in and a reply comes out, with nothing kept between calls. The only thing that can go wrong is the answer, which makes this the type to choose whenever it does the job.
 
-A research agent gathers sources, a writer agent drafts from them, a critic agent flags weak claims, and a supervisor decides when the draft is done.
+### Type 2: tool-using
 
-I compared the trade-offs of multi-agent against single-agent architectures in [multi-agent versus single-agent architectures](/articles/multi-agent-vs-single-agent/). The short version: more agents buy you more task complexity at the price of coordination overhead and failure modes that are far harder to trace, since a wrong answer now has four places it could have originated.
+The model picks a tool and fills in its arguments, the tool runs, and the model writes its reply from the result. The tool definitions decide what the model can choose from, and [structured outputs](/articles/llm-structured-outputs/) are how the arguments are kept to a schema.
 
-A supervisor agent that delegates sub-tasks to specialized agents is the pattern I see most in production. The supervisor-agent setup covers where it works and where it breaks down.
+A shared format for those definitions is what the [Model Context Protocol](/articles/model-context-protocol/) provides.
 
-## Type 5: Persistent-goal agents
+### Type 3: loop
 
-The most autonomous category. These agents hold a long-running goal and work toward it across many sessions, sometimes over days or weeks.
+The agent acts, reads the result and decides again, until it judges the goal met or hits a limit. Anthropic's post puts the cost in one sentence: "The autonomous nature of agents means higher costs, and the potential for compounding errors."
 
-An agent assigned to "migrate this service off the deprecated payments API" might run for a week: opening pull requests, waiting on CI, and picking the work back up the next morning. They checkpoint their state, resume after interruptions, and adapt the plan as new information arrives.
+The [anatomy of an agent loop](/articles/agent-loop-anatomy/) walks through one pass, and [error handling for agents](/articles/agent-error-handling/) covers what to do when a step inside it fails.
 
-Memory stops being optional here, and it is where most teams underestimate the complexity. The [layered memory model for AI systems](/articles/ai-memory-management/) separates current context from persistent state.
+### Type 4: multi-agent
 
-Get the memory architecture wrong and persistent-goal agents either forget what they were doing or drag stale state forward that corrupts every later decision, like resuming a migration against a schema that changed two days ago.
+Several agents share one task, passing messages or working from shared state. Coordination becomes a cost of its own, and the comparison of [multi-agent and single-agent systems](/articles/multi-agent-vs-single-agent/) is about when that cost pays for itself.
 
-## Why the taxonomy matters for your architecture decision
+### Type 5: persistent-goal
 
-When someone asks me whether they should build an agent, I start by asking what they mean by agent. A Slack bot that answers slash commands with LLM-generated text is a reactive information agent.
+The agent holds a goal across sessions, saves its progress and resumes after an interruption. It depends on memory more than any other type, since a resumed run acts on whatever the last run wrote down, and [AI memory management](/articles/ai-memory-management/) describes the layers that state sits in.
 
-It needs no tool layer, no memory stack, no loop architecture. Building all of that for a reactive use case is overengineering, like pouring a foundation for a tool shed.
+## Which type does a task need?
 
-Mistakes run in both directions. Teams that ship a reactive chatbot and call it an agent hit a wall the day a stakeholder asks it to actually book the meeting it keeps describing.
+Choose the lowest type that does the job. Anthropic's post gives the same advice for the whole field: "we recommend finding the simplest solution possible, and only increasing complexity when needed."
 
-Teams that reach for a multi-agent supervisor architecture when the job fits in a single tool-using loop spend months debugging coordination failures that never needed to exist.
+The questions below place a task on the ladder.
 
-My [agent-design-space](/articles/agent-design-space/) survey covers what engineers are actually building across these categories. The data shows production deployments clustering in Types 2 and 3, with Type 4 held back for the genuinely complex workflows.
+1. Does it need information the model doesn't have, or an action in another system? If so it is at least type 2, and the acting label applies when a tool writes.
+2. Can the number of steps be fixed in advance? If it can't, the task needs a loop.
+3. Does the work outlast one session? If it does, the agent needs stored state and belongs at type 5.
 
-The classification starts one step earlier than this taxonomy. Decide [where the boundary between an agent and an AI assistant falls](/articles/agent-vs-ai-assistant/) before assigning an agent type.
+Type 4 has no question of its own, because a second agent is a way to carry out a task and never a requirement of one. Add it when a single loop has been tried and measured.
 
-## The taxonomy I actually use
+The ladder sorts agents by how much they decide alone. How to wire a chosen type is the subject of [AI agent design patterns](/articles/agent-design-space/), where an [AI agent stops and an AI assistant begins](/articles/agent-vs-ai-assistant/) has a page of its own, and [agent harnesses](/articles/agent-harnesses/) covers the code around the model.
 
-When I am sketching out a new agent system, I ask three questions in order:
+## FAQ
 
-1. Does this agent need to take actions or just generate information? When it only generates text, a reactive or tool-using agent probably suffices.
-2. Does this agent need to maintain state across multiple interactions? A yes drops you straight into the memory design business.
-3. Does the task complexity genuinely require multiple specialized agents working together? A yes means signing up for multi-agent coordination costs that the task had better justify.
+**What are the main types of AI agents?**
 
-Those three questions sort most agent designs into one of the five types. The taxonomy is not perfect, and hybrid cases refuse to sit cleanly in one box.
+The textbook answer is Russell and Norvig's five classes, from simple reflex agents to learning agents. For agents built on language models a more practical list sorts by autonomy: reactive, tool-using, loop, multi-agent and persistent-goal.
 
-As a working frame, though, it beats the category sprawl you find in most vendor documentation.
+**Is a chatbot an AI agent?**
 
-If you want to go deeper on the architectural patterns that hold these agent types together, the [agent-harnesses](/articles/agent-harnesses/) post covers what actually ties an AI agent together in production.
+By Simon Willison's definition it isn't, since it runs no tools in a loop. I count it as type 1 because the word is applied to such products anyway.
+
+**What is the difference between a workflow and an agent?**
+
+In Anthropic's terms a workflow follows code paths written in advance, and an agent directs its own steps. The split matters for testing, since a fixed path can be checked step by step.
