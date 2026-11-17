@@ -9,133 +9,92 @@ bridges:
 - slug: llm-context-windows
   reason: The context window limit is the reason an agent needs memory.
 date: '2026-05-05'
-description: How agents decide what to keep in memory when context space is finite,
-  and the three compression strategies that actually work.
+description: 'Context compression for agent memory: what an agent should keep between sessions and what to leave out, with Anthropic''s November 2026 memory tests.'
 slug: memory-compression
 status: published
 work_note: 'At Mem0 I ran 13 writers, and compression is one of the decisions any memory layer makes out of sight. Here I look at what a compressed record is allowed to drop. [My portfolio](/portfolio/) has the case study.'
 title: 'Contextual Compression for Agent Memory: What Stays and What Goes'
+updated: 2026-11-17
 ---
 
-Around week three, the problem shows up. After running long enough, the context window that once felt spacious has filled halfway with memory data, and the agent starts missing things it knew two weeks ago, or it loses track of what happened yesterday.
+Every repository has a `.gitignore`, and [Git's documentation](https://git-scm.com/docs/gitignore) gives its job in a sentence: it "specifies intentionally untracked files that Git should ignore." The usual entries are build output and installed dependencies, which a command can produce again.
 
-Either way, something has broken in how the agent manages memory over time.
+Context compression for agent memory is the same decision made about knowledge. It decides what an agent carries into its next step or its next session, and what it leaves behind to be looked up again when needed.
 
-A codebase navigation agent needs to remember which files it has analyzed, what it found, and which paths were dead ends. Keeping every raw tool response is a poor way to preserve that state.
+The parallel breaks on what can be rebuilt. A build directory comes back exactly from one command, and a lesson an agent learned by failing comes back only if it fails again, so that lesson is the thing worth the space.
 
-After about 200 interactions, the memory payload was eating 40% of the context window, and the agent spent more tokens looking up memory than doing the analysis I had asked for.
+## What counts as context compression?
 
-Compression stops being optional once context is finite. Something has to give.
+The name covers two different operations. Inside one session, compaction replaces old turns with a summary so the work can continue, and [short-term memory for agents](/articles/short-term-agent-memory/) covers that one.
+
+Across sessions, compression is the choice of what to write to a memory store and what to prune from it later. Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, keeps the two apart and leaves compaction out of its definition of memory.
+
+That definition is "knowledge that Claude gains from experience", kept between sessions and "saved as context it can read later." The second kind of compression is the subject here, since it decides what an agent knows next week.
+
+## What should stay?
+
+Keep what the environment can't hand back. Anthropic's evidence is a comparison of two models playing Pokémon Red, each with a folder it could write notes to, taken at about 10,000 steps into the game.
+
+| Model | Memory written | Badges earned |
+| --- | --- | --- |
+| Claude Sonnet 3.7 | 413 files across 225 folders | 1 |
+| Claude Fable 5 | 9 files in 2 folders, plus one top-level file | 4 |
+
+The older model recorded each battle and each item. The post explains why that failed: facts such as the player's money or position "can be read off the screen every turn, so storing it is redundant."
+
+The newer model wrote down the opposite kind of thing, and the post gives the reason: "memory files about strategy, plans, and tested rules exist only if Claude works them out, and they disappear unless Claude writes them down."
+
+That is the `.gitignore` rule again. State the agent can re-read stays out of memory, and conclusions it had to earn go in.
+
+The comparison is thin as evidence, and the post says so by describing it as "one run each". It is also a vendor writing about its own models, so I take it as an illustration of the rule and no more.
+
+## Do fixed rules decide it well?
+
+The same post suggests they don't, for strong models.
+
+Its authors tested giving models one rule each about what to write. With the rule set to record only failures, "both Opus 5 and Opus 4.7 lost much of the performance boost that memory gave them".
+
+Their summary of the lesson is "it helps to tell Claude what memory is for, but not how to use it." Older models went the other way in the same tests, and prompting Sonnet 4.6 to read its memory before answering "nearly doubled its benchmark score".
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/memory-compression/compression-pass.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/memory-compression/compression-pass.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/memory-compression/compression-pass.svg" width="720" height="392" alt="Raw agent memory, every tool response and interaction kept in full, goes through a scoring pass that weighs recency, how often each item was accessed, and explicit importance. High scorers stay in memory; low scorers are dropped." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Compression trades recall for capacity. Whatever the scorer can't see, the agent quietly forgets.</figcaption>
+  <figcaption>A scoring pass keeps what ranks high and drops the rest, so anything the scorer can't see is lost.</figcaption>
 </figure>
 
-## Why Standard RAG Compression Does Not Work Here
+A scoring pass is a fixed rule in code. It ranks stored items by recency, by how often they were read and by a flag set at write time, and it drops whatever ranks low.
 
-Anyone who has built a RAG system knows contextual compression is close to solved in that setting. You retrieve the relevant chunks, then run a compressor that strips out the parts that do not answer the query.
+I think the result above is a reason to be wary of that design. A half-life can't know that a rule written two months ago is the one that prevents today's mistake, and the model that wrote the note could have said so.
 
-Simple and effective.
+Where a scorer is still needed, give it the one signal the writer had. A note marked as a tested rule should outlive a note marked as an observation, whatever their ages.
 
-Agent memory compression works on a harder question. RAG lets you compress against what a query needs right now.
+## When does compression backfire?
 
-Agent memory forces you to compress against what the agent will need in some future situation you cannot see yet, so you are predicting relevance across time and shifting task context, never just a single query. The [three memory types in AI agents](/articles/agent-memory-types/) tolerate that compression very differently.
+When the compressed form is larger or less true than what it replaced. Anthropic's post has an example of each.
 
-Episodic memory loses precision on details, semantic memory risks going stale, and working memory cannot be compressed at all without breaking the task in progress.
+A model in one test built a wiki from a set of legal documents, and "the wiki grew larger than the documents themselves". The authors compare it to Borges's map the size of the empire and call it "an extremely detailed wiki that effectively abstracted nothing."
 
-Recency, frequency of use, and predicted future relevance all have to feed into the compression decision. A memory accessed ten times in the past week is far more likely to matter than one touched once three weeks ago.
+The other failure is a wrong note. The post warns that with notes loaded into every session, "an incorrect note can be carried into every session", and a summary is trusted in the same way once the turns behind it are gone.
 
-Knowledge about the user's primary project earns its space in a way that a memory about a one-off debugging session for a side repo does not.
+Both failures have the same defence, which is to keep the source. A summary that can be checked against the transcript can be corrected, a point [memory serialization](/articles/memory-serialization/) takes further.
 
-Different memory types serve different purposes, which I covered in [AI memory management for LLMs](/articles/ai-memory-management/). That hierarchy is the foundation.
+## How small should the loaded part be?
 
-The compression layer I am describing here sits on top of it and decides how much of each tier survives.
+Small enough to read every time, with pointers to the rest. Claude Code is the worked example in the post: "It loads only the first 200 lines or 25 KB of MEMORY.md."
 
-## The Three Approaches That Work
+That top layer is an index, and the detail sits in files the agent opens when it needs them. [How memory works in Claude Code](/articles/claude-code-memory/) describes the layout, and [AI memory management](/articles/ai-memory-management/) covers the layers in general.
 
-Three compression strategies are useful in production because each preserves a different kind of information.
+The budget is real because every loaded line is paid for in the [context window](/articles/llm-context-windows/) of every session. A note has to earn its place there, and the rest can wait on disk.
 
-### Summary-Based Compression
+## FAQ
 
-Store a generated summary of each memory item instead of the full content. When the agent needs the memory, it uses the summary and can optionally retrieve the full item on demand.
+**What is context compression?**
 
-Your savings track summary length directly. Squeezing a 512-token memory down to 64 tokens buys you an 8x storage gain, though the quality of that summary decides whether the compression is lossless or lossy.
+It is reducing what an agent carries forward, by summarizing old turns within a session or by choosing what to keep in memory between sessions.
 
-A sloppy summary drops the one detail you needed later.
+**Is compaction the same as memory?**
 
-Consider a customer support agent that must remember bug reports. Each memory item can preserve the bug and its resolution without retaining the full conversation that produced them.
+No. Compaction rewrites the current conversation so it fits, and memory is what a later session can read.
 
-Summarized to 50 tokens, the agent still recognized the bug type but lost the specific steps to reproduce it. It could route a ticket to the right queue and never walk an engineer through the repro.
+**What should an agent leave out of memory?**
 
-That is a real degradation in capability, the kind you only notice when a user asks the follow-up question the summary cannot answer.
-
-### Hierarchical Forgetting
-
-Keep detailed memory for recent items and progressively abstract older items. Recent memory stays at full fidelity.
-
-Memory older than 7 days gets summarized. Memory older than 30 days gets reduced to key facts only.
-
-Mapping cleanly onto how [LLM context windows](/articles/llm-context-windows/) actually behave, this approach treats recent context as both more accessible and more relevant. Older context that nobody has touched recently rarely surfaces in retrieval results anyway, so abstracting it costs little.
-
-A decay function drives the whole thing. For a task-tracking agent I used a simple exponential decay with a 30-day half-life, so a memory item scores 0.5 of its original relevance after 30 days and 0.25 after 60.
-
-That fit the task tracker, where last month's tickets really were dead weight. It needed retuning for a research assistant, where a paper I read two months ago still shaped the questions I was asking today.
-
-### Relevance-Gated Retention
-
-Only store memories that meet a minimum relevance threshold relative to the agent current goals. Everything else gets discarded.
-
-Of the three, this is the most aggressive and the one I find hardest to tune. The relevance score has to fuse several signals: embedding similarity to the current task, how often the memory was accessed before, and explicit importance flags the agent set when it first stored the item.
-
-A feedback loop is the danger. Any blind spot in the scoring function means the agent quietly drops every memory that falls outside the pattern the scorer favors.
-
-I watched this in a support agent that kept discarding memories about one class of issue, billing-related edge cases, because those tickets did not look like the dominant query patterns the scorer had learned. The agent got worse at that class month over month, and the cause traced back to relevant memories being filtered out before retrieval ever had a chance at them.
-
-## The Structured Memory Approach
-
-The approach I keep coming back to is designing memory for compression from the start, rather than compressing unstructured memory after the fact.
-
-Instead of storing a long narrative about what the agent did in a session, I store atomic facts with timestamps and access counts. Each fact is independently meaningful and compresses cleanly.
-
-A narrative memory might read: "The agent analyzed the authentication module and found that the token validation was using an outdated cryptographic library that had a known vulnerability."
-
-A structured version: `{"type": "finding", "subject": "auth-token-validation", "status": "vulnerable", "library": "crypto-1.4.2", "severity": "high", "session_id": 142}`
-
-The structured version is 256 bytes, the narrative is 180 tokens. Compressed, the structured record shrinks to 80 bytes and keeps every field.
-
-The narrative might compress to 60 tokens, and somewhere in that squeeze the specific library name and the severity level fall out, which are exactly the two facts you would reach for during an incident.
-
-That structured design is what I used in the memory serialization system I wrote about in [how agents persist state across sessions](/articles/memory-serialization/). Building for compression from the start beats bolting a compressor onto narrative memory after it already exists.
-
-## What I Would Do Differently
-
-If I were starting fresh on an agent memory system today, I would implement three things from day one.
-
-Tracking access frequency per memory item comes first, alongside content and timestamp rather than instead of them. Access frequency is the strongest signal I have for predicting future relevance, since a memory the agent keeps pulling up will almost certainly get pulled up again, where one sitting untouched for weeks usually stays untouched.
-
-The [short-term memory patterns](/articles/short-term-agent-memory/) I described elsewhere handle the in-session side, and the same access-frequency intuition decides what gets promoted from short-term into long-term storage.
-
-A two-tier storage model comes second. Hot storage holds full-fidelity recent memories, cold storage holds compressed summaries of older items, and a retrieval against cold storage returns the summary first so the agent can choose whether to decompress to full fidelity.
-
-Picture how a CPU cache hierarchy works: a small, fast L1 close to the core and a larger, slower main memory behind it, with the hardware constantly deciding which lines deserve the fast tier. Agent memory faces the identical squeeze, limited fast storage and a need to decide what stays close.
-
-A rare-event preservation rule comes third. Memories that capture infrequent but high-impact events should stay at full fidelity no matter how rarely they are accessed.
-
-A one-off failure that cost the user three hours of debugging is worth keeping verbatim, because access frequency alone would happily forget it.
-
-## The Honest Tradeoff
-
-No compression strategy is free. You trade recall for capacity, and each one drops something on the way.
-
-The [state of AI agent memory in 2026](/articles/agent-memory-2026/) catalogs tiered storage approaches, but it is not benchmark evidence that one compression policy wins. The choice still depends on what each memory tier must preserve.
-
-Summary-based compression sheds nuance, hierarchical forgetting sheds older detail, relevance-gated retention sheds coverage in the quiet corners of the input space. Your right choice depends on what your agent can afford to forget.
-
-A codebase navigation agent that loses the exact steps to reproduce a rare crash has a real problem on its hands. A research assistant that forgets a file path it opened once is barely inconvenienced.
-
-Decide what your agent cannot afford to lose, then build the compression strategy around that one constraint.
-
-The best agent memory systems I have seen layer all three approaches together. Summary compression runs as the baseline, hierarchical forgetting handles temporal decay, and relevance gating shields the high-value memories that decay would otherwise erode.
-
-No single strategy carries the load on its own. The combination is what holds up once the agent has been running for months.
+Anything it can read again from its environment, such as file contents or current state. Conclusions, plans and tested rules are what a store is for.
