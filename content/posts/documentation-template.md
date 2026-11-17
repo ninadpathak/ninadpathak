@@ -122,7 +122,7 @@ If you get HTTP 200, the service already holds a record for that key, so pick a 
 
 "Retry failed requests" is an instruction that reads well in a review and causes duplicates in production. The [filled request guide](/static/examples/writing-lab/docs/send-a-request.md) has the exact retry command, and the [troubleshooting page](/static/examples/writing-lab/docs/troubleshooting.md) says when to stop retrying.
 
-I ran the lost-response request and the retry on November 18, 2026 with Node.js 24.22.3. The retry with the same key and format returned HTTP 200, and the retry with the format changed to `json` returned HTTP 409, as the table says.
+A run of the lost-response request and the retry on November 18, 2026, with Node.js 24.22.3, matched the table. The retry with the same key and format returned HTTP 200, and the retry with the format changed to `json` returned HTTP 409.
 
 The [recorded fixture checks](/static/examples/writing-lab/validation.txt) are from September 10, 2026 on Node.js 24.18.0. I haven't tested these pages with outside readers.
 
