@@ -11,7 +11,6 @@ work_note: 'I wrote this for my own site as an explainer of how a small draft mo
 title: 'Speculative Decoding: Speeding Up LLM Inference'
 slug: speculative-decoding
 video: speculative-decoding
-updated: 2026-11-17
 ---
 
 Processors have guessed ahead for decades. [Wikipedia's entry](https://en.wikipedia.org/wiki/Speculative_execution) on speculative execution says "work is done before it is known whether it is actually needed", and the Spectre attack later made the phrase famous by [taking its name](https://spectreattack.com/) from "the root cause, speculative execution".
