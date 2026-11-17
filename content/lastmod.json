@@ -23,6 +23,10 @@
     "lastmod": "2026-11-17",
     "sources": "f2e26e7e0643f9406a31d80fc051d80d6d773a9a7596f315420479df8a7ae8f1"
   },
+  "agent-memory-evidence": {
+    "lastmod": "2026-11-17",
+    "sources": "b52aef6ee68bab00a9de76f5f2fce333f4028cd1ad96b05fa60a3c5750cad9b5"
+  },
   "agent-memory-types": {
     "lastmod": "2026-11-17",
     "sources": "20aaed99e12829fb71f6c4dfeef55ed7ffff68772f655000ee49a9e69bbe5ac2"
@@ -69,7 +73,7 @@
   },
   "claude-code-memory": {
     "lastmod": "2026-11-17",
-    "sources": "0add798478d48f8cfe2d173ff2c931f4b7b6300e2b9cb994d537d2ce1e2da456"
+    "sources": "4e27183619a3fb14c91471eb7b46fe80cc57c54dfaf44ae14f6999bbe0d0ee5d"
   },
   "claude-code-subagents": {
     "lastmod": "2026-11-17",
@@ -89,7 +93,7 @@
   },
   "coding-agent-memory": {
     "lastmod": "2026-11-17",
-    "sources": "94612ae90b66d0dd95c7e531451522e76758b10473e2a0ff3b63b3b87e1e66f8"
+    "sources": "36f6bc3ef7d3b2dc712d286f3f25d95962fabbca4bfa5545c4cd1c5b8c5de123"
   },
   "coding-models-new-code-vs-change": {
     "lastmod": "2026-11-17",
@@ -169,7 +173,7 @@
   },
   "hyperagents-memory": {
     "lastmod": "2026-11-17",
-    "sources": "94657dc50c54a8fe84f9fd2176a4c91773b840fc10f73bb62714c008ab96fd54"
+    "sources": "0a4ef8e720d8bf761063c47ec5342741b597463a2b68d4fcb449800a6e6bfadf"
   },
   "internal-vs-external-docs": {
     "lastmod": "2026-11-17",
@@ -209,15 +213,15 @@
   },
   "memory-compression": {
     "lastmod": "2026-11-17",
-    "sources": "8d9ddc5e805509e1476492bea82e2d9547bb24978715a0f1afeec41e843c4ccf"
+    "sources": "3b9681cb09852003a197b6e29b399a5e2ef446053a45229d1dafb61b0a968f43"
   },
   "memory-serialization": {
     "lastmod": "2026-11-17",
-    "sources": "e66b057e68232523ae48e2d23db4899268a922ab671dc3cfee7c354524aee737"
+    "sources": "8131ae65c4a044fde41f7e2ced85faa5261250a2ac6600e6e9aa521ccdb7bf13"
   },
   "memory-versioning": {
     "lastmod": "2026-11-17",
-    "sources": "3994b5bbd5d0cb22982cbac179c5112ffa176f74c9ab271445fbc96400d84422"
+    "sources": "35c17610b0152c3fe5929a54ad2613d245f759bfe7c8715250cc91c55cb6d3c3"
   },
   "mixture-of-experts": {
     "lastmod": "2026-11-17",
@@ -229,7 +233,7 @@
   },
   "multi-agent-vs-single-agent": {
     "lastmod": "2026-11-17",
-    "sources": "6d899058b57e54e1d14b2a45af17181d2b7e71b6ba608fdb4adf6bfe78dd77c9"
+    "sources": "a0d80e77b32b639e0391b33c2f4abd529ce3a5eda9cc15bd626768aab0c673d9"
   },
   "nobody-understands-the-code": {
     "lastmod": "2026-11-17",
@@ -297,7 +301,7 @@
   },
   "time-to-first-token": {
     "lastmod": "2026-11-17",
-    "sources": "d5f6114b8fe50cab77b004d7b56d2cc670e1b504f46b7f6fdae4ed43fd019a47"
+    "sources": "330e2f64f95af80be15af305a92b63c04198364595904de73c9d3975f6de1ef4"
   },
   "vector-embeddings": {
     "lastmod": "2026-11-17",
