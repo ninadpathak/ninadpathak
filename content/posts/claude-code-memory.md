@@ -11,244 +11,102 @@ bridges:
 - slug: agent-error-handling
   reason: A coding agent is one agent loop with a harness around it.
 date: 2026-04-19
-description: A practical guide to understanding how Claude Code retains context across
-  sessions, uses project files, and manages long-term memory for coding tasks.
+description: 'Claude Code memory is two sets of files read into each new session: CLAUDE.md files you write and auto memory Claude writes. Where they live and what loads.'
 status: published
 work_note: 'I ran a team of 13 writers at Mem0, which sells a memory layer for agents, so I have a commercial reason to care what Claude Code remembers without one. Read this with that in mind. [My portfolio](/portfolio/) has the case study.'
 title: How Memory Works in Claude Code
-updated: '2026-08-17'
+updated: 2026-11-17
 slug: claude-code-memory
 video: claude-code-memory
 ---
 
-Claude Code carries instructions across sessions through `CLAUDE.md` files and auto memory. Conversation context itself remains session-bound.
+Leonard Shelby, the lead of Christopher Nolan's Memento, can't form new long-term memories, and [Wikipedia's summary of the film](https://en.wikipedia.org/wiki/Memento_(film)) says he gets by on "an elaborate system of photos, notes, and tattoos". Claude Code is built the same way, and Anthropic's [memory documentation](https://code.claude.com/docs/en/memory) opens with the condition: "Each Claude Code session begins with a fresh context window."
 
-##Session Context: What Claude Holds In Ram
+Claude Code memory is the set of files that get read into that fresh window. There are two kinds, `CLAUDE.md` files that you write and auto memory that Claude writes for itself, and everything else from the last session is gone.
 
-Each session starts with a fresh context window whose size depends on the selected model.
+The parallel breaks where the film gets its plot. Leonard can't inspect his own system from outside, and you can open every one of these files, since the docs describe auto memory as "plain markdown you can edit or delete at any time."
 
-Conversation context disappears when the session ends. Project instructions and auto memory persist because Claude Code stores them on disk.
+## What does Claude Code remember between sessions?
 
-A fresh session does not retain the previous conversation unless the relevant information was saved in `CLAUDE.md` or auto memory.
+It remembers what is in two sets of files, and the docs compare them in one table. I've kept four of its rows.
 
-A [subagent](/articles/claude-code-subagents/) gets a fresh context window inside the session, and only its final report returns to the conversation.
+| | CLAUDE.md files | Auto memory |
+| --- | --- | --- |
+| Who writes it | You | Claude |
+| What it contains | Instructions and rules | Learnings and patterns |
+| Scope | Project, user, or org | Per repository, shared across worktrees |
+| Loaded into | Every session | Every session (first 200 lines or 25KB) |
 
-The new instance has zero knowledge of the previous one and will happily search for the old name. The session layer stays ephemeral on purpose, because project state changes constantly and a half-remembered file tree from yesterday causes more harm than a clean read today.
+The conversation is in neither column. A decision reached in yesterday's session exists today only if you put it in `CLAUDE.md` or Claude chose to save it.
 
-What does make it into session context? The contents of `CLAUDE.md` at the project root gets prepended to every new session.
+That choice is Claude's, and it is selective. The docs say "Claude doesn't save something every session", and that it skips what it can work out from the code.
 
-Any files you pass on the command line get injected. If you use the `/memory` command to show what Claude currently has loaded, it will display the full in-memory context snapshot.
+## Where do the files live?
 
-Here is what a minimal `CLAUDE.md` looks like for a Python project:
+Instruction files load from four scopes, and a session reads all that apply.
 
-```markdown
-# Project Context
+| Scope | Location | Who sees it |
+| --- | --- | --- |
+| Managed policy | A system path such as `/etc/claude-code/CLAUDE.md` on Linux | Everyone in the organization |
+| User | `~/.claude/CLAUDE.md` | You, in every project |
+| Project | `./CLAUDE.md` or `./.claude/CLAUDE.md` | The team, through source control |
+| Local | `./CLAUDE.local.md` | You, in this project |
 
-- Python 3.11, FastAPI, PostgreSQL
-- Stack:uv for dependency management
-- Tests live in `tests/` alongside source
-- Key files: `src/api/routes.py`, `src/db/models.py`
-- Never modify `migrations/` manually
-```
+Files above the working directory load at launch, and the docs add that "Files in subdirectories load on demand." A repository that already has an `AGENTS.md` for other tools works too, since Claude Code can read it as the project instructions.
 
-That file is the single most important memory artifact in a Claude Code project. It gets read on every session start, before any tool use, regardless of whether you mention it.
-
-Whenever Claude keeps making the same wrong assumption in a codebase, say it reaches for `requirements.txt` in a project that moved to `uv` months ago, the fix is almost always a better `CLAUDE.md`.
-
-##Claude.md: Your Project's Persistent Memory Layer
-
-`CLAUDE.md` is the backbone of Claude Code's memory system. It is a Markdown file in your project root that the agent reads on startup and treats as sacrosanct context.
-
-The file persists across invocations and lives inside your repository, so it travels with your code the way a `.gitignore` does, the same on every machine that checks out the repo.
-
-Deliberately unstructured, the format lets you write whatever you want Claude to know. It can include project conventions, architecture decisions, coding standards, environment setup instructions, or anything else that would take a human too long to figure out by reading code alone.
-
-A good rule I use: if I would say it to a new hire on their first afternoon, it belongs here.
-
-A more complete `CLAUDE.md` for a FastAPI project might look like this:
-
-```markdown
-# FastAPI Backend Context
-
-##Architecture
-- Monolith API with asyncpg for PostgreSQL
-- Background tasks via Celery with Redis broker
-- Migrate with `alembic upgrade head`, never touch SQL directly
-
-##Code Standards
-- All DB functions live in `src/db/`, return `dict` not ORM objects
-- Pydantic v2 for all request/response schemas
-- Type hints required on all public functions
-
-##Testing
-- pytest with `pytest-asyncio`
-- Fixtures in `tests/conftest.py`
-- Mock external APIs with `responses` library, never with real HTTP
-
-##People
-- Backend lead: Sarah (slack @sarah)
-- Onboarding: run `make setup`
-```
-
-A project `CLAUDE.md` can tell Claude Code to use an async database client and avoid blocking calls, so that constraint is present in each session.
-
-The agent does not update `CLAUDE.md` automatically. You write it yourself, on purpose. `CLAUDE.md` is meant to encode your decisions and reasoning, not have the agent infer and record its own understanding.
-
-The agent can suggest edits if you ask, and it will not rewrite the file based on what it observes in your codebase.
-
-One important constraint trips people up. Claude Code reads `CLAUDE.md` on every startup, and it does not re-read it mid-session unless you specifically reference it.
-
-Edit the file mid-session and the agent keeps running on the version it loaded at launch, until the next session starts.
-
+Auto memory sits outside the repository, in `~/.claude/projects/<project>/memory/`. A `MEMORY.md` file indexes the directory, with one topic file for each memory.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/claude-code-memory/memory-sources.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/claude-code-memory/memory-sources.narrow.svg" width="288" height="472"><img class="np-has-narrow" src="/static/images/diagrams/claude-code-memory/memory-sources.svg" width="720" height="416" alt="Three sources feed a Claude Code session's context. CLAUDE.md files, written and maintained by you, load at startup across managed, user, project, and local scopes. Auto memory, MEMORY.md plus topic files that Claude Code writes as it works, also loads at startup and is updated from the session. One-off context passed on the command line lasts only for that session." loading="lazy" decoding="async"></picture></a>
-  <figcaption>CLAUDE.md loads at startup and isn't re-read mid-session, so an edit takes effect in the next session.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/claude-code-memory/memory-sources.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/claude-code-memory/memory-sources.narrow.svg" width="288" height="472"><img class="np-has-narrow" src="/static/images/diagrams/claude-code-memory/memory-sources.svg" width="720" height="416" alt="A Claude Code session reads from three sources. CLAUDE.md files, written by you, load at launch from the managed, user, project and local scopes. Auto memory, a MEMORY.md index with topic files that Claude Code writes as it works, also loads at launch. Context passed on the command line lasts for that session only." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Instruction files above the working directory load at launch, and auto memory loads the first 200 lines of its index.</figcaption>
 </figure>
 
+The location has a consequence the docs state in four words: "Auto memory is machine-local." What Claude learned on a laptop is absent from a cloud session and from a colleague's checkout, so anything the team needs belongs in the project file.
 
-##Memory Files On Disk: The Claude.md Convention Across The Project
-Beyond the root `CLAUDE.md`, Claude Code loads instructions from managed, user, project, and local scopes. Anthropic documents the current scopes and load behavior in its [memory guide](https://code.claude.com/docs/en/memory).
+## How much of it gets loaded?
 
-Claude Code stores auto memory under `~/.claude/projects/<project>/memory/`. `MEMORY.md` is the entry point, and topic files hold additional notes.
+For auto memory, only the top of the index. "The first 200 lines of `MEMORY.md`, or the first 25KB, whichever comes first, are loaded at the start of every conversation", and the topic files are read when Claude decides it needs them.
 
+Instruction files load whole, which is why the docs ask you to "target under 200 lines per CLAUDE.md file." Their reason is that "Longer files consume more context and reduce adherence."
 
-An illustrative auto-memory file might look like this:
+My [CLAUDE.md guide](/articles/claude-md/) covers what earns a line in that budget.
 
-```markdown
-# Auto Memory Example
+## Is memory a rule or a suggestion?
 
-##Architecture (confirmed With Team)
-- Microservices: auth, billing, core-api, notifier
-- Auth service: JWT, 1-hour expiry, refresh tokens stored in Redis
-- Billing: Stripe webhook at `/webhooks/stripe`, signature verified with `STRIPE_WEBHOOK_SECRET`
+It is a suggestion, and I think this is the sentence in the docs to read first: "Claude treats them as context, not enforced configuration."
 
-##Decisions Made
-- 2026-04-15: Chose asyncpg over SQLAlchemy for auth service due to connection pooling needs
-- 2026-04-17: All timestamps stored as UTC, never as naive datetime
+The mechanism explains it. "CLAUDE.md content is delivered as a user message after the system prompt, not as part of the system prompt itself", so an instruction there competes with everything else in the window, and the docs warn that when two instructions conflict "Claude may pick one arbitrarily."
 
-##Current Work (as Of 2026-04-18)
-- Implementing Stripe subscription management
-- Done: webhook handler, proration logic
-- Todo: invoice PDF generation, email notifications via SendGrid
+For something that must never happen, the docs point away from memory and toward a hook that blocks the action before it runs. A memory file is the right place for how the team works and the wrong place for a guarantee.
 
-##Team Conventions
-- PRs require 1 review, squash merge to main
-- Deploys happen on merge to main via GitHub Actions
-```
+## What survives a long session?
 
-Claude Code can update auto memory while it works. Anthropic documents `MEMORY.md` as a concise index and recommends topic files for detailed notes.
+The project file does. When a session fills its window and is compacted, "Project-root CLAUDE.md survives compaction: after `/compact`, Claude re-reads it from disk and re-injects it into the session."
 
-`CLAUDE.md` remains owner-controlled. The agent may suggest additions, but project instructions should stay deliberate and reviewable.
+An instruction given only in conversation has no such protection, which is the failure [short-term memory for agents](/articles/short-term-agent-memory/) works through. The reload itself has had bugs, and the [changelog](https://code.claude.com/docs/en/changelog) entry for version 2.1.311 on October 26 reads "Fixed Claude seeing stale MEMORY.md and CLAUDE.md content right after automatic compaction when those files were edited earlier in the session".
 
-If you want to see what the agent has decided to remember, run the `/memory` command inside a Claude Code session:
+## What goes wrong with it?
 
-```
-/memory
-```
+Stale notes go wrong, because a note is trusted. Nolan said of Memento's audiences, in an interview the Wikipedia article quotes, that they had spent the film looking at a captioned photograph and "they still prefer to trust that image" after the film had shown it to be unreliable.
 
-Use `/memory` to inspect loaded memory and remove instructions that no longer match the codebase.
+A model reading `MEMORY.md` is in the same position. A line saying the project uses one package manager will be followed after the project has moved to another.
 
-##Importing External Context Into Memory
+The maintenance is a pair of commands. `/memory` lists the files a session has loaded and opens them for editing, and `/doctor prompt-audit` has Claude look for "references to files or commands that don't exist, and files that contradict each other."
 
-Claude Code supports several ways to inject external knowledge into the memory system. The most common is passing files or URLs on the command line:
+My work for Mem0, which sells a memory layer for agents, gives me a stake here, so weigh this accordingly: for one developer on one machine, I think the two file types are enough. The limits appear with a team, since auto memory doesn't travel, and with other tools, which [coding agent memory](/articles/coding-agent-memory/) compares.
 
-```bash
-claude "Explain this architecture" ./docs/architecture.md
-claude "Review this spec" https://internal.example.com/spec
-```
+A [subagent](/articles/claude-code-subagents/) starts with its own fresh window and can be given a separate memory directory. How the wider set of options is layered is the subject of [AI memory management](/articles/ai-memory-management/).
 
-The file contents get embedded in the session context rather than written to memory files, so they are available for that session only and gone the moment you exit.
+## FAQ
 
-For persistent imports, you can reference external resources in `CLAUDE.md`:
+**Does Claude Code remember previous conversations?**
 
-```markdown
-##Reference Materials
-- Architecture: `/docs/architecture.md`
-- API Spec: `https://internal.example.com/api-spec`
-- Runbook: `https://wiki.example.com/runbook`
-```
+No. Each session starts with a fresh context window, and only `CLAUDE.md` files and auto memory carry over.
 
-The agent will not read these files automatically on every session. You need to explicitly reference them in conversation or add a note to `CLAUDE.md` directing the agent to read them when relevant.
+**Where does Claude Code store memory?**
 
-##Memory And Context Windows: What Actually Gets Used
+Instruction files live in the project and in `~/.claude/`. Auto memory lives in `~/.claude/projects/<project>/memory/` on the machine where it was written.
 
-A common misconception holds that more memory means better performance. Cramming everything into context, in practice, makes the agent spend tokens on navigation rather than actual work.
+**Can I turn auto memory off?**
 
-
-Claude Code works best with precise, high-signal context. A short `CLAUDE.md` that says "we use PostgreSQL, FastAPI, and Redis" tells the agent exactly what it needs about the stack.
-
-A concise file with current instructions gives the agent less irrelevant context to sort through than a long project history.
-
-
-##Forgetting And Memory Pruning
-
-Anthropic says Claude Code loads the first 200 lines or 25KB of `MEMORY.md` at startup. Review `CLAUDE.md` and auto memory regularly so stale instructions do not survive refactors.
-
-Outdated memory is worse than no memory, because a confident agent acting on a note that says "auth tokens never expire" will write code that breaks the day the tokens start expiring.
-
-
-##Common Memory Mistakes And Fixes
-
-The most common mistake is relying on session context alone. Engineers who skip `CLAUDE.md` find that Claude Code forgets project conventions and re-derives the same wrong answers, and every new session opens with another round of re-explaining the stack.
-
-Writing a `CLAUDE.md` before you do anything else in a new project fixes that in one stroke.
-
-A second mistake is storing contradictory information across memory files. When `CLAUDE.md` says "we use SQLAlchemy" and `.claude/memory.md` says "we migrated to asyncpg", the agent has two bosses giving opposite orders and follows whichever it read last.
-
-Keep memory files consistent or clearly document which one wins.
-
-
-##How Memory Interacts With Tools And Task Execution
-
-
-##When To Use Each Memory Layer
-
-Here is a decision framework I use.
-
-Reach for `CLAUDE.md` when the context is stable and owner-controlled and changes rarely. Coding standards, architecture decisions, team conventions, environment setup.
-
-The file belongs to you, and you write and maintain it. The job resembles how you would [structure system prompts for AI coding agents](/articles/agent-harnesses/), with a longer shelf life.
-
-Use auto memory for useful project knowledge Claude Code discovers while working. Keep detailed notes in topic files and let `MEMORY.md` act as the index.
-
-
-Reach for command-line context when the information is a one-off that does not need to survive. Pass files, URLs, or conversation notes on the command line and let them disappear at the end of the session.
-
-##Monitoring Your Memory Footprint
-
-Use `/memory` to inspect the files and auto memory loaded into the current session. Keep the startup content concise enough that the important instructions remain visible.
-
-The same [context window optimization](/articles/llm-context-windows/) advice I give for LLM deployment applies here: quality over quantity.
-
-For larger teams, fold a `CLAUDE.md` convention into code review. Whoever changes the architecture updates `CLAUDE.md` in the same PR, which keeps memory current and spreads ownership across the people who actually make the changes.
-
-Teams building a [multi-agent system](/articles/multi-agent-vs-single-agent/) need these conventions even more, since several agents read and write the shared context at once and one stale line propagates to all of them.
-
-##Faq
-
-**How does Claude Code handle memory in very large codebases?**
-
-In a large codebase, Claude Code reads files on demand and uses scoped `CLAUDE.md` files for instructions. Keep `CLAUDE.md` concise and use imports or scoped files to document module boundaries and ownership.
-
-**Can I use Claude Code memory across different projects?**
-
-A user-level `~/.claude/CLAUDE.md` can provide instructions across projects. Project `CLAUDE.md` files and auto memory remain scoped to their projects.
-
-Use `/memory` to inspect and edit the active memory sources when an instruction is stale or conflicting.
-
-If you are debugging memory issues in a production AI agent, also check my post on [debugging AI agent errors](/articles/agent-error-handling/) which covers similar diagnostic patterns.
-
-**Does Claude Code learn from my codebase automatically?**
-
-Claude Code does not automatically update `CLAUDE.md`. Auto memory can record project knowledge while the agent works, and `/memory` shows the active memory sources.
-
-Session transcripts are separate from memory. Do not treat a transcript as an instruction that Claude Code will automatically load in a later session.
-
-**How often should I update CLAUDE.md?**
-
-Review `CLAUDE.md` when the architecture or team conventions change, or when Claude repeatedly makes an assumption that the file could correct. Treat it like documentation that lives next to the code.
-
-**Is memory encrypted or stored securely?**
-
-Memory files live on the local filesystem with the permissions of the current user. Do not store secrets or credentials in them.
+Yes. Open `/memory` and use the toggle, or set `autoMemoryEnabled` to false in the project's settings.
