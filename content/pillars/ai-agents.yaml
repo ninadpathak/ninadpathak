@@ -25,7 +25,7 @@ sections:
       - post: agent-loop-anatomy
         note: "Breaks the loop into four phases, runs one in a short script, and shows how two SDKs stop it."
       - post: agent-harnesses
-        note: "Lists what a harness contains and explains why a framework alone may not supply it."
+        note: "Lists the five parts of a harness, reads a benchmark that ranks harnesses by cost, and shows checkpointing with code you can run."
       - post: lambda-calculus-ai
         note: "Uses lambda calculus problems with mechanically checkable answers to expose reasoning errors in model output."
   - heading: "Protocols"

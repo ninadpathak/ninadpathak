@@ -156,7 +156,7 @@ Fix retrieval recall first, because nothing downstream can use a passage that wa
 
 The order matters for reading the scores as well as for fixing them. A low faithfulness score on a question where recall failed is a retrieval bug that happens to show up in the answer.
 
-When retrieval is fine and the answer still strays, the model's behaviour is the problem, and that's the case [RAG vs fine-tuning](/articles/fine-tuning-vs-rag/) weighs.
+When retrieval is fine and the answer still strays, the model's behavior is the problem, and that's the case [RAG vs fine-tuning](/articles/fine-tuning-vs-rag/) weighs.
 
 ## How do you set a pass threshold?
 

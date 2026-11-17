@@ -12,7 +12,7 @@ bridges:
   reason: What one user said is per-user state, which neither retrieval over documents nor training covers.
 date: '2026-05-12'
 description: RAG vs fine-tuning comes down to where knowledge lives. RAG puts changing
-  facts in the prompt, fine-tuning trains fixed behaviour into the weights, and the
+  facts in the prompt, fine-tuning trains fixed behavior into the weights, and the
   papers that compared them say when each one works.
 slug: fine-tuning-vs-rag
 status: published
@@ -38,7 +38,7 @@ RAG changes what the model can see for one request, and fine-tuning changes how 
 | Where the knowledge lives | In an index outside the model | In the model's weights |
 | How you update it | Re-index the document | Train again |
 | Can the answer cite a source | Yes, the passage is in the prompt | No |
-| What it's good at changing | Facts | Format and behaviour |
+| What it's good at changing | Facts | Format and behavior |
 | What you pay | Longer prompts on every request | A training run up front |
 
 The people who named RAG saw both columns coming. The [2020 paper](https://arxiv.org/abs/2005.11401) lists what a model with knowledge only in its weights can't do well, saying that "providing provenance for their decisions and updating their world knowledge remain open research problems".
@@ -55,7 +55,7 @@ RAG has its own work, and it's the retrieval. Whether the right passage made it 
 
 ## When should you use fine-tuning?
 
-Use fine-tuning when the model's behaviour is wrong and the facts are fine. OpenAI's guide names the cases: getting a model to format responses the same way every time, and giving it more examples than fit in one context window.
+Use fine-tuning when the model's behavior is wrong and the facts are fine. OpenAI's guide names the cases: getting a model to format responses the same way every time, and giving it more examples than fit in one context window.
 
 The guide adds a cost argument I think gets overlooked. A fine-tuned model needs shorter prompts with fewer examples, which cuts token cost at scale, and that's the opposite of what RAG does to a prompt.
 
@@ -73,11 +73,11 @@ When a RAG pipeline is already retrieving more than it needs, I'd tune the retri
 
 ## How do you decide between RAG and fine-tuning?
 
-Ask whether the facts change, and then whether the problem is behaviour. Those two questions settle nearly every case I can think of.
+Ask whether the facts change, and then whether the problem is behavior. Those two questions settle nearly every case I can think of.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.narrow.svg" width="288" height="520"><img class="np-has-narrow" src="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg" width="720" height="640" alt="A decision tree. If the knowledge changes frequently, use RAG. If it doesn't, ask whether the problem is behavioral, meaning how the model reasons: a behavioral problem means fine-tuning, and a factual problem means RAG." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Facts that change go to RAG. Fine-tuning is for behaviour that has to hold on every request.</figcaption>
+  <figcaption>Facts that change go to RAG. Fine-tuning is for behavior that has to hold on every request.</figcaption>
 </figure>
 
 - **The facts change:** RAG, whatever else is true.
@@ -106,4 +106,4 @@ No. The model's weights stay as they are, and only the prompt changes from one r
 
 **Should I start with RAG or fine-tuning?**
 
-I'd start with RAG and a good prompt. Add fine-tuning when you can point to a behaviour that neither of those fixed.
+I'd start with RAG and a good prompt. Add fine-tuning when you can point to a behavior that neither of those fixed.

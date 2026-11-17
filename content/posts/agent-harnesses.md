@@ -6,186 +6,191 @@ siblings:
 - agent-error-handling
 - ai-agent-taxonomy
 date: 2026-03-10
-description: Every production AI agent needs a harness. Here is what one contains,
-  why frameworks often are not enough, and how to build the layer that actually determines
-  reliability.
+description: An agent harness is the code around the model that runs the loop, calls the
+  tools, manages context and saves state. What it contains, why the choice of harness
+  shows up in benchmark cost, and a checkpointing example.
 status: published
 work_note: "Tutorials, explainers and comparisons for AI companies are my work as a freelance technical writer. I'm Ninad Pathak, and I build the example and run it before I draft, so your engineers review working code. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
-title: 'Agent Harnesses: The Infrastructure Your LLM Agent Needs'
+title: 'What an Agent Harness Is and What It Does'
 slug: agent-harnesses
 video: agent-harnesses
 ---
 
-Agents look impressive in demos because the happy path is easy to show. The problems start later, once a search tool times out, a task runs past the timeout you forgot to set, or the model has to pick up after a half-finished step instead of starting the whole run over.
+An agent harness is the code around a language model that turns it into an agent. It runs the loop, calls the tools the model asks for, decides what goes into the context window, and saves state so a run can survive a failure.
 
-That recovery work is what the harness is for. It sits as the runtime layer around the model and keeps the system steady once real execution starts.
+The word comes from testing. A [test harness](https://en.wikipedia.org/wiki/Test_harness) is the set of stubs and drivers you put around a component so it can be run and checked, and an agent harness does that job for a model, which can't run anything by itself.
 
-**What an agent harness is.** An agent harness is the runtime control layer between your application and the LLM. It manages the execution loop and gives the model tools and context.
+It's also the word of the week. On November 17 a benchmark called [FrontierHarness Eval](https://runta.com/blog/introducing-frontierharness-eval-v1-1/) reached the Hacker News front page after running 22 harnesses against 5 models, and it found that the best-value harness was a different one for each model.
 
-It handles tool results and tracks state across steps, then sends results and errors back upstream. The model handles reasoning.
+So the layer I used to describe as plumbing now has its own leaderboard. Below is what an agent harness contains and where it sits in [AI agent architecture](/articles/ai-agents/), with a small one you can run.
 
-The harness handles everything else.
+## What is an agent harness?
 
+An agent harness is the runtime layer between your application and the model's API. You need one because an API call is stateless: a prompt goes in, a completion comes out, and nothing is remembered.
 
+An agent isn't one call. A research agent might make thirty to fifty model calls in one task, and something has to carry the results from each call into the next, run the tools and stop the run when it's done.
 
-## Why the raw LLM API breaks down for agentic tasks
+That something is the harness, and vendors now use the word for their own products. Anthropic's [Agent SDK docs](https://platform.claude.com/docs/en/agent-sdk/overview) describe Managed Agents as "A hosted agent harness that runs the agent loop", and LangChain calls [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) an agent harness too.
 
-A direct API call is stateless. You send a prompt, receive a completion, and the interaction ends there.
+The division of labor is the thing to hold on to. The model reasons, and the harness does everything else.
 
-Agents need something more durable, because they make decisions across many sequential steps, call external tools, accumulate context as they go, and have to recover gracefully when one of those steps fails.
+## What does an agent harness contain?
 
-Picture a research agent that has to compile a market summary. It might make thirty to fifty API calls across a single task, invoke a browser tool twenty times, and manage a context window that grows with every page it reads.
+I split a harness into five parts, and you'll find each of them in any agent that works, whether somebody designed it or it grew:
 
-The API handles none of that coordination. With nothing built to manage it, the coordination code ends up scattered across your application layer: a custom execution loop in one file, ad-hoc tool call parsing in another, a retry handler someone bolted on after the first production incident.
-
-Scattered or not, that is still a harness. The real question is whether anyone designed it on purpose, or whether it grew organically around one use case until it became impossible to test or extend.
-
-## The five components every harness contains
-
-A well-designed harness is not one monolithic block of logic. It splits into five distinct components, each with a specific responsibility.
+- **Tool registry:** the list of tools with a schema and a description for each. Permissions live here too, including which calls need a person's approval, and the [Model Context Protocol](/articles/model-context-protocol/) is one way to fill it.
+- **Prompt assembler:** the code that builds the context window on every step from instructions, history, retrieved files and tool results.
+- **Execution loop:** the cycle that sends the context to the model and runs the tool it picks, which the [four phases of an agent loop](/articles/agent-loop-anatomy/) breaks down. Turn limits and spending limits are enforced here.
+- **State manager:** where the run's progress is written, so it exists somewhere other than the context window.
+- **Observer:** a log line for every prompt, completion and tool call, tagged with a run ID.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/agent-harnesses/harness-layers.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-harnesses/harness-layers.narrow.svg" width="288" height="1000"><img class="np-has-narrow" src="/static/images/diagrams/agent-harnesses/harness-layers.svg" width="720" height="936" alt="The agent harness sits between the application and the model. Its five components are the execution loop, the tool registry the loop calls in both directions, the prompt assembler that builds the prompt the model receives, the state manager that holds checkpoints, and the observer that logs every step. The model only reasons." loading="lazy" decoding="async"></picture></a>
   <figcaption>The model reasons. The harness handles everything else, including the checkpoint that lets an interrupted run resume.</figcaption>
 </figure>
 
-**Tool registry.** A catalog of available tools. Each tool carries a typed schema, a description the model can read, and an execution handler the harness calls when the model requests it.
+If you don't build these, you still have them. The loop ends up in one file and the retry logic in another, and I'd call that a harness nobody designed.
+
+## Does the harness matter as much as the model?
+
+It matters enough to measure, going by FrontierHarness Eval. The benchmark ran 22 harnesses with 5 open-weight models on 62 terminal tasks, and over all models the pass rates ran from 50.6% to 61.9%.
+
+Cost moved more than pass rate, and it didn't follow the harness from model to model. Ranking the harnesses by cost on two halves of the runs gave a rank correlation of 0.71 with the same model and 0.26 across different models.
 
-When a tool call comes in, the harness intercepts it, routes it to the right handler, and returns the result in the format the model expects. Easy to miss is that the registry is also where you enforce per-tool permissions and rate limits.
+The line I'd take to a budget meeting is another one. The post reports that "64.5% of the list-price cost of the scored runs went to trials that did not pass", which is money a harness spends before anyone learns the run failed.
 
-A web browsing tool with no cap on request volume is an incident waiting to happen, the kind where one runaway agent scrapes a site a thousand times in a minute and gets your IP block-listed.
+Runta published the benchmark and ran it on its own runtime, and the post lists its limits as open models and one provider. I'd treat the rankings as theirs and the lesson as general: test harnesses with your model on your own tasks.
 
-**Prompt assembler.** At inference time the harness builds the full context window from several sources: the system prompt and any cached instructions, retrieved documents, conversation history, the current task state, and pending tool results. Both the order of those pieces and how much of each you include change what the model does.
+## How does a harness recover from a failed step?
 
-Context engineering happens here, at runtime and on every step, rather than getting decided once at design time and never touched again.
+It saves state after every step and starts the next attempt from the last save. Say a run dies at step eighteen of twenty-five because a page server returned a 503: without a checkpoint, the retry begins at step one.
 
-**Execution loop.** The core of any harness, and where the [perceive, think, act, remember phases of the agent loop](/articles/agent-loop-anatomy/) actually run. Send the current context to the model.
+Here's that difference in a harness small enough to read. The plan is a fixed list standing in for the model's decisions, and one tool fails the first time it's called:
 
-Execute the tool if the response contains a tool call, append the result, and send it again. Surface the final answer once the response is complete.
+```python
+"""A small agent harness: run a loop, checkpoint after every step, resume after a crash."""
+import json
+import os
 
-Enforce the stop conditions: maximum iterations reached, context window full, an explicit completion signal, or an unrecoverable error. Describing the loop takes a sentence, getting it right at scale does not, especially once it has to handle concurrent runs and partial failures without corrupting shared state.
+CHECKPOINT = "run-42.json"
+PLAN = ["search", "read_a", "read_b", "summarize", "save"]   # stands in for the model's decisions
+calls = {"count": 0, "read_b_failures_left": 1}
 
 
+def run_tool(name):
+    calls["count"] += 1
+    if name == "read_b" and calls["read_b_failures_left"]:
+        calls["read_b_failures_left"] -= 1
+        raise ConnectionError("503 from the page server")
+    return f"{name} ok"
 
-**State manager.** Agents that span more than a few API calls need somewhere to store their working state: which subtasks are complete, what data has been gathered, what decisions got made along the way. Keeping all of it inside the context window works for short tasks and breaks for long ones.
 
-Writing to external storage after each step instead enables checkpoint-based recovery. That choice between in-context state and external state is the single biggest architectural decision in agent design, and the harness is where you make it.
+def run(max_steps=10, checkpoint=True):
+    state = {"step": 0, "results": []}
+    if checkpoint and os.path.exists(CHECKPOINT):
+        state = json.load(open(CHECKPOINT))
+        print(f"  resumed at step {state['step'] + 1} with {len(state['results'])} results saved")
+    while state["step"] < len(PLAN) and state["step"] < max_steps:
+        tool = PLAN[state["step"]]                # a real harness asks the model here
+        state["results"].append(run_tool(tool))   # act
+        state["step"] += 1
+        if checkpoint:
+            json.dump(state, open(CHECKPOINT, "w"))
+        print(f"  step {state['step']}: {tool}")
+    return state
 
-**Observer.** Structured logging of every step: what went into the prompt, what the model returned, which tool was called and what came back, how long each step took. Without that record, debugging a failed run means staring at an opaque error and guessing why the agent decided to delete the wrong file.
 
-With it, you can replay any run, pinpoint exactly where the reasoning went off, and build evaluation datasets straight from production traces. Observability is not a nice-to-have for production agents.
+for label, checkpoint in (("without checkpoints", False), ("with checkpoints", True)):
+    calls.update(count=0, read_b_failures_left=1)
+    if os.path.exists(CHECKPOINT):
+        os.remove(CHECKPOINT)
+    print(label)
+    for attempt in (1, 2):
+        try:
+            run(checkpoint=checkpoint)
+        except ConnectionError as error:
+            print(f"  attempt {attempt} died: {error}")
+    print(f"  tool calls made in total: {calls['count']}\n")
+os.remove(CHECKPOINT)
+```
 
-It is load-bearing infrastructure.
+Running `python harness_demo.py` on Python 3.13 printed:
 
-## Checkpointing: the part most harnesses get wrong
+```text
+without checkpoints
+  step 1: search
+  step 2: read_a
+  attempt 1 died: 503 from the page server
+  step 1: search
+  step 2: read_a
+  step 3: read_b
+  step 4: summarize
+  step 5: save
+  tool calls made in total: 8
 
-State recovery, not the execution loop, is the problem that eats the most design time. Agents fail partway through tasks for ordinary reasons: the model hallucinates a tool call argument, a downstream API returns a 503, context fills up at step eighteen of a twenty-five-step task, a network timeout drops the connection.
+with checkpoints
+  step 1: search
+  step 2: read_a
+  attempt 1 died: 503 from the page server
+  resumed at step 3 with 2 results saved
+  step 3: read_b
+  step 4: summarize
+  step 5: save
+  tool calls made in total: 6
+```
 
-Each of those failures means restarting from the beginning when there is no checkpointing. Throwing away a twenty-minute task that cost a dollar in API fees stings a little.
+The run without checkpoints made 8 tool calls and the run with them made 6. The two calls it saved are `search` and `read_a`, which had already succeeded and didn't need doing again.
 
-Throwing away a four-hour task that cost fifteen dollars, and doing it three times in an afternoon because the same flaky API keeps 503-ing, is what gets a project shelved. The waste compounds fast once failures are frequent enough to matter.
+A saving of two calls is nothing, and step eighteen of a long run isn't. LangGraph's [persistence docs](https://docs.langchain.com/oss/python/langgraph/persistence) put the same ability in a framework, saying a checkpointer lets an agent "resume after an interruption, recover from a failure".
 
-Checkpointing means writing the agent's full state to durable storage after each completed step: the message history, any external data gathered, decisions made, subtask completion status, and metadata like total token usage and elapsed time.
+Resuming only works if a repeated step is harmless. A tool that sends an invoice has to recognize the second attempt, which is the idempotency-key pattern in [agent error handling](/articles/agent-error-handling/).
 
+## What should a harness do when the context fills up?
 
+It should apply a rule you chose, because doing nothing is also a rule and a bad one. The options I know of, from least work to the largest amount of it:
 
-Three patterns work in practice.
+- **Truncate:** drop the oldest messages.
+- **Summarize:** replace old turns with a summary before dropping them.
+- **Retrieve:** keep the full history outside the window and fetch what the current step needs.
+- **Split the task:** give each subtask its own context and pass results between them.
 
-**Step-level persistence.** Write state after each tool call completes. You get maximum recovery granularity for the price of higher storage overhead, which suits long-running tasks with expensive tool calls.
+Whichever you pick, I'd keep the decision in the harness and out of the model's hands. A rule in code behaves the same on every run, and you can test it.
 
-**Phase-level persistence.** Write state at logical phase boundaries, after research finishes or analysis finishes, before writing begins. Simpler to implement, coarser recovery points.
+## What should you check before shipping an agent?
 
-A good fit for tasks with clear phases that take roughly equal time.
+Check the harness, part by part. I'd want a yes to each of these:
 
-**Idempotent tool design.** Build tools so calling them twice produces the same result as calling them once. Paired with step-level checkpointing, that design removes an entire class of [error patterns that break agents in production](/articles/agent-error-handling/).
+- Every tool has a schema, a timeout and an error the model can read.
+- The loop has a maximum number of turns, and the limit has been tested.
+- State is saved after each successful step, and a resume from that save has been tried.
+- Every log line carries the run ID.
 
-You re-run from the last checkpoint, the idempotent tools return the same results they did before, and the agent continues from where it left off. Picture a "send invoice email" tool that checks for an already-sent record before firing, so a replayed step does not double-bill the customer.
+That last one sounds small. Without a run ID, debugging one bad run means reading the interleaved logs of every run that happened beside it.
 
-Harder to build, but the reliability payoff is large.
+## When do you not need an agent harness?
 
-The harness owns the checkpointing logic. The model has no concept of checkpoints, and the application layer should not have to manage them either.
+You don't need one when your application controls the flow. A single model call, or a fixed sequence like summarize-then-translate, is a pipeline, and wrapping it in a harness adds parts with nothing to do.
 
-Pulling that responsibility into the harness as a core function is what separates a harness built for production from one built to get a demo working.
+You need one once the model decides which tool to call next. That's the property the [taxonomy of AI agents](/articles/ai-agent-taxonomy/) uses to separate an agent from an assistant.
 
-## Context management strategies for long-horizon tasks
+## FAQ
 
-The context window is a fixed resource, and long-running agents eat through it. Your harness needs a deliberate policy for what happens when it fills up.
+**What is a harness in an LLM system?**
 
-Doing nothing counts as a bug rather than a policy, the kind that surfaces at the worst possible moment, usually when the model silently drops the original instructions and starts answering a question nobody asked.
+A harness is the program around the model that runs it in a loop with tools. The model produces text, and the harness executes tool calls and feeds the results back.
 
+**Is an agent harness the same as an agent framework?**
 
+Not quite, though people use the words loosely. A framework is a library you build with, and a harness is the running layer you end up with, whether you built it from a framework or by hand.
 
-Four approaches work in order of implementation complexity.
+**Is Claude Code an agent harness?**
 
-**Truncation.** Drop the earliest messages as context approaches capacity. Simple and predictable, and lossy.
+In the sense used here, yes. Anthropic's docs say the Agent SDK gives you "the same tools, agent loop, and context management that power Claude Code".
 
-Acceptable when those early messages are genuinely low-value, like a stale tool result the agent already acted on.
+**Why is checkpointing the hard part?**
 
-**Summarization.** Run a compression step that condenses earlier turns into a compact summary before truncating, then keep the summary and drop the raw messages. You preserve more of the meaning, paid for with extra latency and API spend at compression time.
+Because the loop is a few lines and recovery isn't. A checkpoint has to capture enough state to continue, and every tool has to be safe to call again.
 
-**External memory with retrieval.** Keep the full message history in an external store, retrieve the most relevant past observations at each step, and inject them into context. The only approach that scales to truly long-horizon tasks, and the hardest to get right.
+**Does a better harness make the model smarter?**
 
-**Task decomposition.** Sidestep the problem by breaking a large task into smaller subtasks that each fit comfortably in context, then pass outputs between them explicitly rather than leaning on a shared context window. More upfront task design buys the most reliable results for complex workflows.
-
-Whichever policy fits your task belongs in the harness. Handling context management deterministically there gives you predictable behavior, where handing the same decision to the model gives you results that change from run to run.
-
-## What to check before deploying an agent to production
-
-A harness audit should cover specific ground before any agent ships.
-
-**Tool registry.**
-- All tools have typed schemas with input validation
-- Tool calls are logged with inputs and outputs and latency
-- Tools have per-call timeout enforcement
-- Tool errors return structured objects the model can reason about
-
-**Execution loop.**
-- Maximum iteration count is enforced and tested
-- Context window usage is tracked at each step
-- Loop exits cleanly on unrecoverable error with a structured error response
-- Stop conditions are explicit and not inferred from output format
-
-**State manager.**
-- Task state is fully serializable
-- Checkpoint write happens after each successful tool call
-- Recovery from checkpoint is tested and not assumed to work
-
-**Observer.**
-- Every prompt is logged with timestamp and token count
-- Every completion is logged with latency and finish reason
-- Every tool call is logged with full inputs and outputs
-- Traces are queryable by run ID
-
-That last item matters more than it looks. Production incidents in agent systems get diagnosed almost entirely by replaying traces, and replay falls apart without a run ID that threads through every log entry for a given execution.
-
-Lacking one, debugging an agent that misbehaved at 2pm means grepping through interleaved logs from forty concurrent runs, which is guesswork wearing a lab coat.
-
-
-
-## When you do not need a harness
-
-Not every LLM application is an agent. A harness adds real complexity, and piling complexity onto a system that does not need it is not good engineering.
-
-Skip the harness when an application takes a single user input, calls the model once, and returns a response. Skip it when the app calls the model a fixed number of times in a fixed sequence of prompts, like a "summarize then translate" pipeline.
-
-Skip it for plain retrieval-augmented generation, where a fixed retrieval step feeds a single synthesis step.
-
-Build the harness once the model decides which tools to call and in what order, the property that separates an agent from a smarter assistant across [the broader taxonomy of AI agents](/articles/ai-agent-taxonomy/). Build it once tasks span more than a handful of API calls, once partial failures need recovery without a full restart, or once you have to be able to audit what the agent did and why.
-
-The rough line is clear enough. Treat the harness as load-bearing infrastructure when the model controls the flow.
-
-Treat it as overhead when the application controls the flow and the model is just a subroutine.
-
-
-
-## The harness is not glamorous
-
-The agent harness is not where interesting AI capability lives. What the agent can actually do is the interesting part.
-
-The harness only decides whether that capability is reliable enough to run in production, whether it survives failures, and whether anyone can debug it when something goes wrong.
-
-Teams that treat the harness as throwaway scaffolding end up spending more time on reliability than teams that designed it deliberately from the start. A well-designed harness pays for itself by making failure modes predictable and recoverable.
-
-It does not make agents smarter.
-
-An agent that fails cleanly, checkpoints its progress, and leaves a readable trace behind is worth far more than one that is technically sharper but goes opaque the moment it breaks. Predictable failure beats opaque success in production.
+No. It makes failures cheaper and more visible, and FrontierHarness Eval suggests it changes what a passing run costs.

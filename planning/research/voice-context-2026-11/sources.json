@@ -1930,12 +1930,15 @@
       "date": "2026-11-17",
       "title": "LangGraph persistence",
       "quotes": [
-        "gives agents short-term memory through checkpointers and long-term memory through stores"
+        "gives agents short-term memory through checkpointers and long-term memory through stores",
+        "resume after an interruption, recover from a failure",
+        "Checkpointers persist a thread's graph state as checkpoints"
       ],
       "connects": [
         "memory-versioning",
         "memory-serialization",
-        "short-term-agent-memory"
+        "short-term-agent-memory",
+        "agent-harnesses"
       ]
     },
     {
@@ -4352,6 +4355,67 @@
       ],
       "connects": [
         "fine-tuning-vs-rag"
+      ]
+    },
+    {
+      "id": "runta-frontierharness-eval-2026-11",
+      "url": "https://runta.com/blog/introducing-frontierharness-eval-v1-1/",
+      "author": "Shilin Zhu, Runta",
+      "date": "2026-11-17",
+      "title": "Introducing FrontierHarness Eval v1.1 (HN 50532191)",
+      "quotes": [
+        "22 harnesses × 5 models × 62 tasks × 4 attempts",
+        "Each model had a different best-value (pass rate vs. cost) harness",
+        "With the same model, the two rankings had a mean rank correlation of 0.71. With two different models, it was 0.26.",
+        "64.5% of the list-price cost of the scored runs went to trials that did not pass",
+        "Open models, one provider. Closed models can give different results.",
+        "The others cost up to 1.6 times as much and passed 50.6% to 60.2%",
+        "ZCode (highest pass rate, 61.9%)",
+        "62 terminal tasks",
+        "Each trial gets a new Runta runtime"
+      ],
+      "connects": [
+        "agent-harnesses"
+      ]
+    },
+    {
+      "id": "wikipedia-test-harness",
+      "url": "https://en.wikipedia.org/wiki/Test_harness",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "Test harness",
+      "quotes": [
+        "a test harness is a collection of stubs and drivers configured to assist with the testing of an application or component"
+      ],
+      "connects": [
+        "agent-harnesses"
+      ]
+    },
+    {
+      "id": "claude-agent-sdk-overview",
+      "url": "https://platform.claude.com/docs/en/agent-sdk/overview",
+      "author": "Anthropic",
+      "date": "2026-11-18",
+      "title": "Agent SDK overview",
+      "quotes": [
+        "A hosted agent harness that runs the agent loop",
+        "the same tools, agent loop, and context management that power Claude Code"
+      ],
+      "connects": [
+        "agent-harnesses"
+      ]
+    },
+    {
+      "id": "langchain-deepagents-overview",
+      "url": "https://docs.langchain.com/oss/python/deepagents/overview",
+      "author": "LangChain",
+      "date": "2026-11-18",
+      "title": "Deep Agents overview",
+      "quotes": [
+        "Deep Agents is the agent harness for complex, multi-step work"
+      ],
+      "connects": [
+        "agent-harnesses"
       ]
     }
   ],
