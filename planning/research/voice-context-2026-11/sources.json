@@ -1495,6 +1495,81 @@
       "connects": [
         "documentation-headings"
       ]
+    },
+    {
+      "id": "cockayne-answer-first",
+      "url": "https://phpboyscout.uk/answer-first-then-everything-else/",
+      "author": "Matt Cockayne",
+      "date": "2026-11-11",
+      "title": "Answer first, then everything else",
+      "discussion": "https://hachyderm.io/@phpboyscout/117597285749916722",
+      "quotes": [
+        "were clicked 0.31% of the time",
+        "quite possibly never sees the page at all",
+        "it was the pages whose first screen was a quotable command",
+        "A how-to opens with whatever does the job, directly under the heading: the command, the config block, the API call, ten lines at most, and one sentence saying what it does. A reference page opens with whatever a person came to look up, the table or the field list or the exit codes.",
+        "Count the words between the page's title and its first code block or table",
+        "Under a hundred is answer-first, several hundred is a page that explains before it helps.",
+        "A tutorial shouldn't open with the finished command."
+      ],
+      "connects": [
+        "technical-docs",
+        "documentation-best-practices",
+        "writing-technical-tutorials"
+      ]
+    },
+    {
+      "id": "diataxis-home",
+      "url": "https://diataxis.fr/",
+      "author": "Daniele Procida",
+      "date": "2026-11-17",
+      "title": "Diátaxis",
+      "quotes": [
+        "identifies four distinct needs, and four corresponding forms of documentation - tutorials, how-to guides, technical reference and explanation."
+      ],
+      "connects": [
+        "technical-docs"
+      ]
+    },
+    {
+      "id": "google-tech-writing-documents",
+      "url": "https://developers.google.com/tech-writing/one/documents",
+      "author": "Google",
+      "date": "2026-11-17",
+      "title": "Technical Writing One: Documents",
+      "quotes": [
+        "A good document begins by defining its scope.",
+        "A better document additionally defines its non-scope"
+      ],
+      "connects": [
+        "technical-docs"
+      ]
+    },
+    {
+      "id": "google-api-reference-comments",
+      "url": "https://developers.google.com/style/api-reference-comments",
+      "author": "Google developer documentation style guide",
+      "date": "2026-11-17",
+      "title": "API reference code comments",
+      "quotes": [
+        "API documentation must include descriptions for every class, constant, method, and parameter"
+      ],
+      "connects": [
+        "technical-docs"
+      ]
+    },
+    {
+      "id": "gitlab-docs-contribute",
+      "url": "https://docs.gitlab.com/development/documentation/",
+      "author": "GitLab",
+      "date": "2026-11-17",
+      "title": "Contribute to the GitLab documentation",
+      "quotes": [
+        "the single source of truth (SSoT) for information about how to configure, use, and troubleshoot GitLab."
+      ],
+      "connects": [
+        "technical-docs"
+      ]
     }
   ],
   "unused_leads": [
@@ -1637,6 +1712,7 @@
     "rag-reranking": [],
     "documentation-headings": [
       "information about this topic"
-    ]
+    ],
+    "technical-docs": []
   }
 }
