@@ -127,7 +127,7 @@ The recall column reads 1.00 on every row, so by that metric this retriever is f
 
 Only the rank-aware columns caught that. Reciprocal rank fell to 0.50 and nDCG to 0.63 on that question, which is the case for reading nDCG once you [add a reranking stage](/articles/rag-reranking/) and order is the thing you're tuning.
 
-Now look at the precision column, because it's the one that misleads. A question with one relevant document can't score above 0.33 when k is 3, so the mean of 0.50 here says more about how many answers each question has than about the retriever.
+The precision column is the one that misleads. A question with one relevant document can't score above 0.33 when k is 3, so the mean of 0.50 here says more about how many answers each question has than about the retriever.
 
 That's also why I'd read the rows before the mean. The mean nDCG of 0.94 looks healthy, and the row under it is a billing question answered with refund steps.
 

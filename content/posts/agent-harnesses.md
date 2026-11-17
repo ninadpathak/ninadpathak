@@ -30,7 +30,7 @@ An agent harness is the runtime layer between your application and the model's A
 
 An agent isn't one call. A research agent might make thirty to fifty model calls in one task, and something has to carry the results from each call into the next, run the tools and stop the run when it's done.
 
-That something is the harness, and vendors now use the word for their own products. Anthropic's [Agent SDK docs](https://platform.claude.com/docs/en/agent-sdk/overview) describe Managed Agents as "A hosted agent harness that runs the agent loop", and LangChain calls [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) an agent harness too.
+That something is the harness, and vendors now use the word for their own products. Anthropic's [Agent SDK docs](https://platform.claude.com/docs/en/agent-sdk/overview) describe Managed Agents as a hosted agent harness, and LangChain calls [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) an agent harness too.
 
 The division of labor is the thing to hold on to. The model reasons, and the harness does everything else.
 

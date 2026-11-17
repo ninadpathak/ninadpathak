@@ -45,7 +45,7 @@ sections:
   - heading: "The field and its tools"
     spokes:
       - post: agent-memory-2026
-        note: "Compares Letta, Mem0, Graphiti and Anthropic's memory tool by who writes a memory and what shape it is stored in."
+        note: "Compares four agent memory frameworks by who writes a memory and what shape it is stored in, from their current docs."
       - post: hyperagents-memory
         note: "Walks through how HyperAgents layers memory and keeps session continuity."
       - post: deerflow-memory

@@ -142,7 +142,7 @@ The first message that server saw was a tool call, and it answered. There's no h
 
 That has a price you can read in the byte counts. Of the 255 bytes in the `tools/list` request, 181 are `_meta`.
 
-The fourth call is the one I'd show a new MCP author. A wrong argument name comes back as an ordinary result with `isError` set to true and a message the model can read, and the [tools spec](https://modelcontextprotocol.io/specification/2026-07-28/server/tools) says such errors exist so models can "self-correct and retry with adjusted parameters".
+The fourth call is the one I'd show a new MCP author. A wrong argument name comes back as an ordinary result with `isError` set to true and a message the model can read, and the [tools spec](https://modelcontextprotocol.io/specification/2026-07-28/server/tools) says such errors exist so that a model can correct its arguments and try again.
 
 Now look at the last call. I asked for the list again with a 2024 version string, and the server refused with error `-32022` and the one version it supports, so an old client gets a clear answer and nothing else from this SDK release.
 
