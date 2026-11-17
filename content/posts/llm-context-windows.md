@@ -4,119 +4,92 @@ primary_query: llm context window
 siblings:
 - time-to-first-token
 - llm-token-budgets
+bridges:
+- slug: contextual-retrieval
+  reason: Retrieval is the alternative to a long prompt, and that page reduces its main failure.
+- slug: short-term-agent-memory
+  reason: Compaction shrinks a full window, and that page covers what a summary can lose.
 date: 2026-03-14
-description: Context windows are expanding to millions of tokens. Here is why the
-  middle of your context still gets ignored, what long context actually costs, and
-  how to build production systems that use these massive windows effectively.
+description: 'An LLM context window is what a model can read at once. Why the middle gets ignored, what context rot is, what length costs, and how to fill a large window.'
 status: published
 work_note: "Building an AI product whose readers are engineers? I'm Ninad Pathak, a freelance technical writer, and I write tutorials and technical articles for companies like yours after running the product myself. [Hire me](/services/freelance-technical-writer-for-ai-companies/)."
 title: "LLM Context Windows Explained"
 slug: llm-context-windows
+updated: 2026-11-17
 ---
 
-Language models read and reason over a fixed span of text called the context window, and that span has grown from a few thousand tokens to several million in barely a year. On paper, you can now drop an entire codebase, or a shelf of books, into one prompt and ask a question across all of it.
+An LLM context window is the span of text a model can read at once: the system prompt, the conversation so far, tool results and the reply it is writing. Anthropic's [documentation](https://platform.claude.com/docs/en/build-with-claude/context-windows) calls it the model's "working memory", and on current Claude models it runs to a million tokens.
 
-Production behavior tells a messier story. Bigger windows bring new failure modes, and they rewrite the economics of every inference call.
+DOS programmers lived with a small, hard version of this limit. [Wikipedia's entry](https://en.wikipedia.org/wiki/Conventional_memory) defines conventional memory as "the first 640 kilobytes of the memory on IBM PC or compatible systems", and years of software were written to fit under that line.
 
-I have shipped enough features on top of these models to know that the trade-offs decide whether the system is reliable or merely impressive in a demo. A prompt that handles ten documents beautifully can quietly mangle the eleventh, and the bill for that capacity arrives whether or not the model actually used the room you paid for.
+Every byte under 640K could be read as reliably as any other. A context window can't promise that for its tokens, and the page that advertises the million says so itself: "more context isn't automatically better."
 
-## Why the middle of your context gets ignored
+That sentence is the reason window size is a cost and quality decision in [LLM inference](/articles/ai-engineering/), and a larger number on a model card settles little.
 
-Attention is not spread evenly across the prompt. Research has found a consistent U-shaped recall curve: models retrieve facts placed at the very start or the very end of the context far more reliably than anything buried between them.
+## What counts toward the context window?
 
-A detail dropped into the middle of a long prompt often gets quietly skipped, as if it were never sent.
+Everything the model can refer to while it generates, including what it generates. Anthropic's page defines the window as "all the text a language model can reference when generating a response, including the response itself."
+
+A conversation fills it turn by turn, since each request resends the turns before it. When a request would run past the limit on recent Claude models, generation stops with the reason `model_context_window_exceeded`, and older models reject the request up front.
+
+## Why does the middle of a long context get ignored?
+
+Because models recall the two ends of their input better than the middle. The finding has a name from the paper that reported it, [Lost in the Middle](https://arxiv.org/abs/2307.03172), submitted on July 6, 2023.
+
+Its authors found that "performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models."
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/llm-context-windows/lost-in-the-middle.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/llm-context-windows/lost-in-the-middle.narrow.svg" width="288" height="528"><img class="np-has-narrow" src="/static/images/diagrams/llm-context-windows/lost-in-the-middle.svg" width="720" height="544" alt="A long prompt split into its start, middle, and end. The model reliably recalls facts placed at the start, which frames the task, and at the end, which is the runway to the next token. Facts buried in the middle compete for whatever attention is left and often get skipped." loading="lazy" decoding="async"></picture></a>
   <figcaption>Recall follows a U shape across the context. Put the instruction and the data you care about at the two ends.</figcaption>
 </figure>
 
-Why this happens comes down to how attention rations a finite budget across thousands of tokens. The opening tokens frame the task, the closing tokens are the immediate runway to the next predicted word, and everything in between competes for whatever focus is left.
+The models in that paper date from 2023, and I don't assume the curve has the same depth today. The practical rule costs nothing to keep: put the instruction and the facts that matter at the start or the end of the prompt.
 
-Think of it like skimming a long contract: you read the first clause carefully, you read the signature block at the bottom, and your eyes glaze over the dense paragraphs in section 14. When I build long prompts, I put the actual instruction and the data I care about at the two ends, never in the soft middle.
+## What is context rot?
 
-The practical sting is that the same fact can be retrievable or invisible depending only on where it sits. Move a critical constraint from the bottom of the prompt to position 40,000 of 80,000 and recall can drop sharply, even though the words are identical and the model is the same.
+Context rot is the loss of accuracy as the input grows, wherever the important part sits. Chroma's [technical report](https://research.trychroma.com/context-rot) of July 14, 2025 tested 18 models and gave the effect its name.
 
-Layout, not just content, becomes something I tune deliberately.
+The report starts from the assumption it then removes, that a model "should handle the 10,000th token just as reliably as the 100th." Its result is that models "do not use their context uniformly", and that "their performance grows increasingly unreliable as input length grows."
 
-## Context rot: the volume problem
+Chroma sells a retrieval database, so it has a reason to find that stuffing the window fails. I give the finding more weight because Anthropic, which sells the tokens, now says the same in its own docs: "As token count grows, accuracy and recall degrade, a phenomenon known as context rot."
 
-Fill the window and quality slides, a decay people now call context rot. Position is only half of it.
+Failure also differs by model. On questions with distracting passages, the report found Claude models "tend to abstain when uncertain", and GPT models more often answered wrongly with confidence.
 
-The sheer total volume the model has to hold in its head matters just as much, and every extra token nudges up the odds of a reasoning slip somewhere in the chain.
+## What does a long context cost?
 
+It costs money on every call and time before the first word. Input tokens are billed each time they are sent, and a chat that resends its history pays for the early turns again and again.
 
+My [token budgets guide](/articles/llm-token-budgets/) runs the arithmetic on a 20-turn chat, where the last turn costs 3.6 times the first. The wait grows as well, since the model has to read the whole prompt before it answers, the phase that [time to first token](/articles/time-to-first-token/) measures.
 
-Give a model a 2,000-token prompt with a strict formatting rule, say "return only valid JSON, no prose," and it tends to obey. Pad that same prompt out to 100,000 tokens of supporting documents and it starts wrapping the JSON in commentary or dropping a required field.
+## Should you use a long context or retrieval?
 
-The signal thins out as the noise around it grows. The engineers I trust keep their prompts as lean as the task allows, large window or not.
+Use the window for material that has to be read together, and retrieval for material that has to be found. A contract and the question about it belong in one prompt, and a library of ten thousand documents doesn't.
 
-Rot rarely announces itself, which is what makes it dangerous in production. The model still returns a confident, fluent answer, so a casual eyeball test passes and the regression slips through.
+Retrieval puts a few passages in front of the model, which keeps the input short and brings its own failure, the right passage never being fetched. [Contextual retrieval](/articles/contextual-retrieval/) is one way to reduce that failure at indexing time.
 
-I have watched a summarization step quietly stop mentioning the last two of five attached documents once the combined input crossed a certain size, with no error and no warning, just an answer that looked complete and was not. The fix was never a bigger window.
+Inside a long session the third option is to shrink what is already there. Compaction replaces old turns with a summary, and [short-term memory for agents](/articles/short-term-agent-memory/) covers what that can lose.
 
-Trimming each document to its relevant section before assembling the prompt restored the behavior, because I was handing the model less to lose track of.
+## How should you fill a large window?
 
-## What long context actually costs
+Treat the size as a ceiling and fill it by choice. Anthropic's page puts the principle in a clause, that "curating what's in context" is "just as important as how much space is available."
 
-Bigger windows carry a tax you pay in dollars and in milliseconds. Standard attention scales quadratically with length, so doubling the context roughly quadruples the compute, the way doubling the side of a square quadruples its area.
+- Send what the task needs, and leave out documents included in case they help.
+- Place instructions and key facts at the start or the end.
+- Count tokens before sending, so a request is refused by your code and not by the API.
+- Measure answers at the lengths you will run, since a prompt that works at 2,000 tokens tells you little about 200,000.
 
-That curve shows up directly as slower responses and a fatter bill on every request.
+Newer models help with the bookkeeping. Anthropic says several current ones "track their remaining context window" through a conversation, which lets a long task plan against the space left.
 
-The cost has two faces, and they bite at different times. There is the steady drip of paying for input tokens on every call, which a chatty agent racks up fast when it resends a growing history each turn.
+## FAQ
 
-Then there is latency, the seconds a user spends staring at a blank cursor while the model digests a stuffed prompt before producing a single word. A nightly batch job can shrug off both.
+**What is a context window in an LLM?**
 
-A live coding assistant or a checkout helper cannot, and that constraint usually decides how much context I am willing to send at all.
+It is the text the model can read at once, measured in tokens, including the prompt, the conversation history and the reply being generated.
 
+**Is a bigger context window always better?**
 
+No. A 2023 paper, a 2025 report and Anthropic's own documentation all say that accuracy falls as the input grows.
 
-Prompt caching can mitigate some of these costs by reusing a static prefix, and it helps a lot when most of your prompt is boilerplate. Caching does not bend the underlying physics of attention, though, so the bottleneck stays.
+**What happens when the context window is full?**
 
-Every design decision becomes a weigh-in: more context against a slower reply. A chat assistant that has to feel instant simply cannot afford to load a full 128k window on each turn, because [a long prompt directly drives up time to first token](/articles/time-to-first-token/).
-
-## Long context vs RAG vs hybrid
-
-Before million-token windows existed, Retrieval-Augmented Generation (RAG) was the standard way to point a model at a large dataset. A few people now declare RAG obsolete, and that take falls apart the moment you operate at real scale.
-
-RAG still wins when the corpus dwarfs even the biggest window, like a support knowledge base of half a million articles that no context could hold, and it costs a fraction of streaming millions of tokens on every single query.
-
-Long context earns its keep on the opposite shape of problem: tasks that demand reasoning over everything at once. Summarizing a 200-page contract, or spotting that two functions in different files contradict each other, needs the model to hold the whole thing in view rather than fetch fragments.
-
-Retrieval struggles here because the answer is not in any single chunk. It lives in the relationship between chunks, and a similarity search has no way to know that clause 3 quietly overrides clause 41 unless both happen to surface together.
-
-Hand the model the entire document and the contradiction is at least in reach.
-
-What I reach for in production is a hybrid. RAG narrows a huge store down to the relevant neighborhood, then a medium-sized window hands the model enough of that neighborhood to answer accurately.
-
-Picture answering a question about a single tax form: retrieval pulls the handful of pages that mention it, and the long context then reads those pages together so the model can reconcile the instructions across them. That split keeps both precision and cost in a sane range, and it degrades gracefully when the corpus keeps growing, since you scale the retrieval index rather than the prompt.
-
-
-
-## What works in production
-
-Three habits have served me well when building on long-context models today.
-
-**Boundaries matter.** Put the task definition and the data you actually want answered at the two ends of the prompt, and let the soft middle carry the supporting material you can afford to lose a little fidelity on.
-
-**Measure recall.** Never assume the model sees everything you send. Run needle-in-a-haystack tests against your own data, for example planting a fake order ID deep in a batch of real records and checking whether the model can pull it back out.
-
-Whatever depth it starts failing at becomes your working context limit.
-
-**Optimize through chunking.** Split data into labeled units even when the whole thing fits, with clear delimiters like `### CUSTOMER PROFILE` between sections. Structure gives the attention mechanism handholds, the same way headings let a reader find their place in a long document.
-
-A million-token window is a genuinely powerful tool, and it retires none of the careful context engineering that came before it. Token space stays a scarce resource if you want dependable output, which is also the groundwork for [keeping your LLM spend predictable with token budgets](/articles/llm-token-budgets/).
-
-## Questions
-
-**Is million-token context useful for every app?**
-
-No. A customer-facing chatbot or an autocomplete feature gains far more from a fast, precise reply than from the ability to swallow a million tokens it will mostly ignore.
-
-**Does FlashAttention fix the quadratic cost?**
-
-It makes the computation much faster and far easier on memory, which is why long contexts are practical at all. The underlying quadratic relationship still asserts itself at extreme scales, so the cost curve bends but never goes flat.
-
-**Should I stop using vector databases?**
-
-Vector databases are still the most efficient way to scale to billions of documents. They complement long-context models rather than competing with them.
+The request fails or generation stops, depending on the model. Applications avoid it by counting tokens, trimming input, or compacting old turns into a summary.
