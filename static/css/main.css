@@ -416,6 +416,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
   transform: translateX(100%);
   transition: transform var(--t-slow) var(--ease);
 }
@@ -445,7 +446,23 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
   border-bottom: var(--rule);
   transition: color var(--t);
 }
-.mobile-nav-link:hover { color: var(--text-1); }
+.mobile-nav-link:hover,
+.mobile-nav-sublink:hover,
+.mobile-nav-links [aria-current] { color: var(--text-1); }
+
+/* Portfolio and Projects sit under Work, the door that leads to both. */
+.mobile-nav-sub {
+  display: flex;
+  gap: var(--space-8);
+  border-bottom: var(--rule);
+}
+.mobile-nav-sublink {
+  font-size: var(--font-size-body-lg);
+  font-weight: var(--weight-medium);
+  color: var(--text-3);
+  padding: var(--space-3) 0;
+  transition: color var(--t);
+}
 
 .mobile-nav-footer {
   margin-top: auto;
