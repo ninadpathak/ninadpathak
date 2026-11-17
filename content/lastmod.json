@@ -12,16 +12,16 @@
     "sources": "bebe332c8686fa0154b81729d2739c63e76045fd1037297a5eaeec309dce5c60"
   },
   "agent-harnesses": {
-    "lastmod": "2026-11-17",
-    "sources": "bac6409a0351bebb4a3004f11b351a52d6a338baf58ee5971e182e96c7c34779"
+    "lastmod": "2026-11-18",
+    "sources": "cce4e6d60ca58e8152c8939c77d5b7888dc1addd179d2852f1401119514e2cc2"
   },
   "agent-loop-anatomy": {
     "lastmod": "2026-11-17",
     "sources": "f01f21510ca3c279950f398195631598343e16275d519883ed29bf7014295b18"
   },
   "agent-memory-2026": {
-    "lastmod": "2026-11-17",
-    "sources": "f4ce65020a05aad3c1658e4f2113b4acb0d9baa329c4cfb789e058cadbdbe674"
+    "lastmod": "2026-11-18",
+    "sources": "06e855e865d0235fd2459e4da49bc17c5b96f14154df813b9a9bba4627939b10"
   },
   "agent-memory-evidence": {
     "lastmod": "2026-11-17",
@@ -60,8 +60,8 @@
     "sources": "36ca6d8c9b842b3c8e2a5e6eb51f541073f20dc0a6b01d3552ac42b4c1377dde"
   },
   "ai-memory-management": {
-    "lastmod": "2026-11-17",
-    "sources": "950e099f51b6cab719920d20f56c2de8528b7efa4bd15c1c810ae81131a45770"
+    "lastmod": "2026-11-18",
+    "sources": "2bb1fbe275f58172fc642d2cd93029b0fcae4bfe99e8838afa39085683879f43"
   },
   "api-documentation": {
     "lastmod": "2026-11-17",
@@ -112,8 +112,8 @@
     "sources": "f226edbf3e4de30c1c6938cff2abf5b63390d46b4aaa198af8366adf3b9c7f00"
   },
   "contextual-retrieval": {
-    "lastmod": "2026-11-17",
-    "sources": "db16964ba478c51d2dbd48a9a7cc9bf77979e03ff9746ceba91082bf5558966b"
+    "lastmod": "2026-11-18",
+    "sources": "801be7f7886e6b8dc1feed6e339ead24c215659f3788bb93a7e29a75f3d2d5f2"
   },
   "deerflow-memory": {
     "lastmod": "2026-11-17",
@@ -144,16 +144,16 @@
     "sources": "c544dd4fcc6269d2b2a744685da28e8b6eac8ca7b10796053e3adc06d8c55139"
   },
   "documentation-headings": {
-    "lastmod": "2026-11-17",
-    "sources": "39b6fc2d0194c27368e9908b2dbcaa9d2dfe336f864f1c21bffb5f474f572759"
+    "lastmod": "2026-11-18",
+    "sources": "2a03c12a8f6a87fe3bfec0a619ff5dff2c379adf45515d900b866153ce62a8da"
   },
   "documentation-review": {
-    "lastmod": "2026-11-17",
-    "sources": "1e05955845d126d119c26128aa7ca573f2b24d712881b374d10e3f71409c06ff"
+    "lastmod": "2026-11-18",
+    "sources": "e94705fc8b5f1b7ad2bfb9b1060147f41c6d6618df72e921d375b9952d041ce0"
   },
   "documentation-structure": {
-    "lastmod": "2026-11-17",
-    "sources": "9457f830930449cad800a9a40401e49fc56391b3bb57bbadd0bd5af439a0512b"
+    "lastmod": "2026-11-18",
+    "sources": "d3937cc28f7db590e2aacc32bea50d91be83a57ff068f2ca9f4cf4a0a46606c7"
   },
   "documentation-template": {
     "lastmod": "2026-11-17",
@@ -172,8 +172,8 @@
     "sources": "f0b2ec6d8e7158eb677e432e02f5c84886a948cfff675c12239acea41aa55879"
   },
   "fine-tuning-vs-rag": {
-    "lastmod": "2026-11-17",
-    "sources": "5aae22045738113da9a24d978d9c946f9d7b27a6f0108e808a6f00965edea3ff"
+    "lastmod": "2026-11-18",
+    "sources": "934f20fa5792dbd9859b3e8bc8ed1d253f8625c4cd5307ebe9bb32c5f879ea9b"
   },
   "hybrid-search": {
     "lastmod": "2026-11-17",
@@ -200,8 +200,8 @@
     "sources": "8500eeed42394694aa8fa7f132d4698ec7be0f039c354d4e998435639ce55642"
   },
   "llm-inference-optimization": {
-    "lastmod": "2026-11-17",
-    "sources": "e9dbbce61870ca6f7e2a44857c747f4688aff13746fdb09b2f553dbebe6189d8"
+    "lastmod": "2026-11-18",
+    "sources": "cad4c84da81f30bca0b05443c04918ca0cd26a6f50934810c07454fcad69c1a3"
   },
   "llm-structured-outputs": {
     "lastmod": "2026-11-17",
@@ -232,12 +232,12 @@
     "sources": "e080630840505cb23b5f00fd2c916328a514d8b844f881b8d7f1a722eecf662b"
   },
   "mixture-of-experts": {
-    "lastmod": "2026-11-17",
-    "sources": "98fed6d6ff3c16f0b9c9e977e9f613ea43e551fb7cef20b33c42319b53eab5d8"
+    "lastmod": "2026-11-18",
+    "sources": "3e87ad38584d89e86f8baed0cef44fc33f9c451db77bfaa4c52067103460eeac"
   },
   "model-context-protocol": {
-    "lastmod": "2026-11-17",
-    "sources": "0827e85225ce4fdbc21b344c14faddf9bab7afd3378386c50e1759b33690d175"
+    "lastmod": "2026-11-18",
+    "sources": "1f0ad6b2b6e89ce00c0cd546af5955ab1c3af327e9799dce91c151be35099594"
   },
   "multi-agent-vs-single-agent": {
     "lastmod": "2026-11-17",
@@ -252,16 +252,16 @@
     "sources": "bb4f8b3bcd6dd850f9d70cdd6724882af008c6e5e0d2c6c50709b950c10a1b80"
   },
   "rag-evaluation": {
-    "lastmod": "2026-11-17",
-    "sources": "82f6185d97da9183e5d685232b3f23c97e9ae63ffff5180c0f176e5b47e10169"
+    "lastmod": "2026-11-18",
+    "sources": "ab0192a356383572fa52e6ae3a7eb9b70cdca2e8c6acecb51f35bf2a2642fd21"
   },
   "rag-reranking": {
-    "lastmod": "2026-11-17",
-    "sources": "9d1dd09eb90f028f26d6cab30420728c86722741242af73f2c750d4ff15f8a60"
+    "lastmod": "2026-11-18",
+    "sources": "8851b9dab8f1dfe9e8aec76b17c34e1cd2680be9f9f0830462353bdbafdc4456"
   },
   "rag-vs-memory": {
-    "lastmod": "2026-11-17",
-    "sources": "3075b30b16ee99e336f30ab10cd97d126248b7fa47e5a2bb771f6ede0205ce3a"
+    "lastmod": "2026-11-18",
+    "sources": "5f1eafcd77a44c45aa0b2416c3640854fb6e78cb7890634539fc0031e0561e65"
   },
   "red-build-nobody-reads": {
     "lastmod": "2026-11-17",
@@ -292,8 +292,8 @@
     "sources": "b7b78890ad1c8badff665c760c62f9ae79d9ded149f9aabe70412940388a0222"
   },
   "speculative-decoding": {
-    "lastmod": "2026-11-17",
-    "sources": "a0cc4484fd28a8fd5dfa1c06a3bb24d3fe039efa971a4374ca49fd9e74b73b35"
+    "lastmod": "2026-11-18",
+    "sources": "9275166f10c3f26cc9e3fabf122b34067c878c4054d0302eb0c0374efec7088c"
   },
   "stripe-technical-blog": {
     "lastmod": "2026-11-17",
@@ -316,12 +316,16 @@
     "sources": "81b4e1021b387bf24f610b13eb330f869ff64b39fb23e6a28507d67e4ce683a1"
   },
   "voice-agent-latency": {
-    "lastmod": "2026-11-17",
-    "sources": "15fa05a64a1c59343d7657eced58dabfd197419d193c24cd67bd5fee58def24b"
+    "lastmod": "2026-11-18",
+    "sources": "ad50b73d44d6385026896f14660c2be53da8cf7d699c7e3f6b3861f3594d6203"
   },
   "voice-agent-memory": {
     "lastmod": "2026-11-17",
     "sources": "195bbc8d3b7aede93a797f2d8fa5181d6d0bc00c20e8689958e471deff6aadba"
+  },
+  "what-agent-harness-means": {
+    "lastmod": "2026-11-18",
+    "sources": "6d17151b4bb704450f28a4464efb1f2fa367b5f9495d17a05b797cfaa61ece60"
   },
   "writing-changelogs": {
     "lastmod": "2026-11-17",
