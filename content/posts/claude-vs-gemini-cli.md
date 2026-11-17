@@ -28,7 +28,7 @@ I've compared Claude Code and Gemini CLI below from their docs as they stood on 
 
 Yes, you can still use Gemini CLI if you pay for a Gemini API key or your company has a licence. Google's post keeps access for Gemini Code Assist Standard and Enterprise customers and for paid Gemini API keys, and ends access for the Google AI Pro and Ultra consumer plans and for free use.
 
-The Gemini CLI docs carry a second notice, and it matters more than the first for anyone starting a new project. A banner on every docs page says Gemini CLI "has not been optimized for Gemini 4 Argon" and sends you to Antigravity to use that model.
+The Gemini CLI docs carry a second notice, and it matters more than the June cutoff for anyone starting a new project. A banner on every docs page says Gemini CLI "has not been optimized for Gemini 4 Argon" and sends you to Antigravity to use that model.
 
 Taken together, the two notices tell me Google is maintaining Gemini CLI and building new features into Antigravity. If you're choosing a terminal agent today and you aren't already on Gemini CLI through work, the comparison you want is probably Claude Code against Antigravity CLI, which this page doesn't make.
 
@@ -96,4 +96,4 @@ Yes, Claude Code has a sandbox for shell commands, and the sandbox is off by def
 
 **Can either tool undo its changes?**
 
-Both can undo the edits their own tools made. Claude Code does this automatically with `/rewind`, and Gemini CLI needs checkpointing enabled before `/restore` has anything to restore.
+Both tools can undo the edits their own file tools made. Claude Code does this automatically with `/rewind`, and Gemini CLI needs checkpointing enabled before `/restore` has anything to restore.

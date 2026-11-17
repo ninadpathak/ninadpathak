@@ -22,7 +22,9 @@ updated: 2026-08-17
 video: docs-seo
 ---
 
-Every developer has used View Source to find out what a page is really made of. It's the oldest debugging tool on the web, and it's still the first thing I'd open in an SEO audit, because a crawler starts from that same source and the browser's finished picture can hide what's missing from it.
+Every developer has used View Source to find out what a page is really made of. View Source shows the HTML exactly as the server sent it, and it's the first thing I'd open in an SEO audit.
+
+A crawler starts from that same HTML, and the page a browser renders after running JavaScript can hide what the HTML is missing.
 
 SEO for documentation is the work of making sure a docs page can be found, read and chosen by a search engine for the task it documents. I treat it as a chain: one page owns each task, a crawler can reach it through a plain link, the source HTML holds the content, and every signal names one URL.
 
@@ -32,7 +34,7 @@ I built a small audit script for the source-level checks and reran it this week 
 
 ## What does SEO for documentation need to check?
 
-It needs to check seven things, and each has a failure that blocks the ones after it:
+SEO for documentation needs to check seven areas, and a failure in one area blocks the areas listed after it:
 
 | Area | Question | Blocking evidence |
 |---|---|---|
@@ -111,7 +113,7 @@ curl --silent --show-error --location \
   https://docs.example.com/api/authentication/
 ```
 
-The response reveals the status code, content type, redirect chain, `X-Robots-Tag`, and cache behavior before presentation enters the picture. It also exposes branded error pages that return `200` and risk being treated as soft 404s.
+The response reveals the status code, content type, redirect chain, `X-Robots-Tag`, and cache behavior before presentation enters the picture. The response also exposes branded error pages that return `200` and risk being treated as soft 404s.
 
 Open the page in a clean browser context and compare the rendered result with the source. The stage is complete when the task content, title, headings, navigation, code, links, and canonical appear without a logged-in state or extra interaction.
 
@@ -184,7 +186,7 @@ Documentation sites reuse a small number of templates across many URLs, which ma
 
 Field data shows whether visitors experienced a problem, while lab tests reproduce it on the affected template. Documentation regressions often come from client-side search, syntax highlighting, large navigation trees, embedded consoles, chat widgets, and layout shifts when code or fonts load.
 
-Those measurements become useful when they sit beside the element or script responsible. Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift should lead to a specific template change and another test of the same page, not another generic score on a release checklist.
+A Core Web Vitals number becomes useful when it's recorded next to the element or script that caused it, such as a Largest Contentful Paint of 4 seconds traced to the syntax-highlighting script. Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift should each lead to a specific template change and another test of the same page, not another generic score on a release checklist.
 
 #### Mobile documentation pages
 
@@ -200,7 +202,7 @@ Structured data should follow the visible page rather than inventing a richer re
 
 ### Step 7. Run the documentation SEO audit script
 
-I wrote a small Python auditor for this page, using only the standard library. It fetches one URL and runs twelve source-level checks on it, from the HTTP response and `robots.txt` through the canonical tag to sitemap membership.
+I wrote a small Python auditor for this page, using only the standard library. The auditor fetches one URL and runs twelve source-level checks on the page, from the HTTP response and `robots.txt` through the canonical tag to sitemap membership.
 
 The [documentation SEO audit script](/static/tools/docs-seo-audit.py) runs as a standalone file:
 
@@ -249,7 +251,7 @@ Result: 12 pass, 0 warning, 0 error
 Scope: single-page source HTML. Confirm rendering and index state separately.
 ```
 
-That's the same result as the August run in the screenshot below.
+The November result of 12 passes matches the August run shown in the screenshot below.
 
 ![Terminal receipt showing 12 passing documentation SEO checks for the Cloudflare Workers CLI guide, including canonical, title, links, image alt attributes, and sitemap membership](/static/images/articles/seo-for-technical-documentation/cloudflare-docs-seo-audit.png)
 
@@ -263,7 +265,7 @@ The rendered page also exposes its place in the wider documentation system throu
 
 #### Audit script limitations
 
-The script inspects one page's source HTML. It does not crawl the entire site, execute JavaScript, test Core Web Vitals, confirm Google's selected canonical, or prove that the page deserves to rank.
+The script inspects one page's source HTML. The script does not crawl the entire site, execute JavaScript, test Core Web Vitals, confirm Google's selected canonical, or prove that the page deserves to rank.
 
 I'd use the script as the first gate, because it turns the obvious source-level failures into a receipt you can keep. The wider audit still needs a rendered-browser review, Search Console's URL Inspection and a person trying to complete the task.
 
@@ -350,7 +352,7 @@ Only when their instructions still work for someone. A supported version gets it
 
 **Can `robots.txt` remove a page from Google?**
 
-No. It stops crawling, and a blocked page can still appear in results, so removal needs a `noindex` that the crawler is allowed to see.
+No. A `robots.txt` rule stops crawling, and a blocked page can still appear in results, so removal needs a `noindex` that the crawler is allowed to see.
 
 **Does llms.txt help with Google rankings?**
 

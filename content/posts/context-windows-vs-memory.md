@@ -26,7 +26,7 @@ On November 7 someone [asked Hacker News](https://news.ycombinator.com/item?id=5
 
 The poster asked about "context", and what they were missing was memory. People use the word context for both things, which is why context window vs memory needs a page: the context window is the text a model can see during one request, and memory is information your application stores and puts back into a later request.
 
-Psychology separated those two limits seventy years ago. George Miller's 1956 paper, [The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two), is about how few items a person can hold in mind at once, roughly seven, and nobody reads the paper as a limit on what a person can remember for years.
+Psychology separated holding something in mind from remembering it seventy years ago. George Miller's 1956 paper, [The Magical Number Seven, Plus or Minus Two](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two), is about how few items a person can hold in mind at once, roughly seven, and nobody reads the paper as a limit on what a person can remember for years.
 
 A model's context window is a limit of Miller's kind, on what can be held at once. Remembering across sessions is a separate job called [agent memory](/articles/agent-memory/), and the code that stores a fact and brings it back is code you write.
 

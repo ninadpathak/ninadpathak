@@ -103,7 +103,7 @@ I found no H2O-style or SnapKV-style eviction setting in vLLM's docs. What vLLM 
 
 Prefix caching is the KV cache saving you work across requests. A long system prompt is computed once and its keys and values serve every request that starts with it, which is how prefix caching shortens [time to first token](/articles/time-to-first-token/).
 
-A voice agent is where [that saving is heard](/articles/voice-agent-latency/), because the caller is waiting in silence for the first word.
+A caller talking to a voice agent [hears that saving directly](/articles/voice-agent-latency/), because the caller is waiting in silence for the agent's first word.
 
 So the KV cache decisions you make when serving a model are about size and sharing, not about eviction papers. You decide how many tokens the cache pool holds and which requests may reuse another request's cached prefix, and the page on [LLM inference optimization](/articles/llm-inference-optimization/) covers both settings.
 

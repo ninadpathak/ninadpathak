@@ -154,7 +154,7 @@ Endpointing is deciding that a speaker has finished their turn. An agent does it
 
 **Does a speech-to-speech model remove the latency problem?**
 
-A speech-to-speech model removes the handoffs between transcription, inference and synthesis. It doesn't remove turn detection, which is why OpenAI's speech-to-speech sessions still have a turn-detection setting.
+A speech-to-speech model removes the handoffs between transcription, inference and synthesis. A speech-to-speech model doesn't remove turn detection, which is why OpenAI's speech-to-speech sessions still have a turn-detection setting.
 
 **Is time to first token the same as voice latency?**
 
