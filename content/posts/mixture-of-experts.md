@@ -16,17 +16,19 @@ slug: mixture-of-experts
 
 On November 14 a Show HN put [DeepSeek-V3's architecture in 190 lines of JAX](https://github.com/Vaibhaav-Tiwari/deepseek-v3-jax), trained on a MacBook Air on public-domain detective fiction. Its README gives the model's size as 36.2M parameters, with 13.6M used per token.
 
-Those two numbers are the whole idea. A mixture of experts (MoE) model splits each layer's feed-forward network into many smaller networks called experts, and a router sends every token through only a few of them.
+A model that owns 36.2M parameters and uses 13.6M of them for each token is a mixture of experts. A mixture of experts (MoE) model splits each layer's feed-forward network into many smaller networks called experts, and a router sends every token through only a few of them.
 
-The idea is older than the transformer. It comes from a 1991 paper, [Adaptive Mixtures of Local Experts](https://en.wikipedia.org/wiki/Mixture_of_experts), and in 2017 [Shazeer and colleagues](https://arxiv.org/abs/1701.06538) made the gate sparse, so an expert that isn't chosen costs no compute at all.
+Mixture of experts is older than the transformer, which dates from 2017. The method comes from a 1991 paper, [Adaptive Mixtures of Local Experts](https://en.wikipedia.org/wiki/Mixture_of_experts), and in 2017 [Shazeer and colleagues](https://arxiv.org/abs/1701.06538) changed the router so that it picks only a few experts per input, which means an expert that isn't picked costs no compute at all.
 
-Mixture of experts is how DeepSeek-V3 computes with 37B parameters per token while owning 671B. It also sets the hardware bill in a way that surprises people, and that's the part of [AI engineering](/articles/ai-engineering/) this page is about: compute follows the active count, and memory follows the total.
+Mixture of experts is how DeepSeek-V3 computes with 37B parameters per token while owning 671B. The catch is in the hardware: the GPUs do the work of a 37B model on each token, and their memory still has to hold all 671B parameters.
+
+That split between compute and memory is the part of [AI engineering](/articles/ai-engineering/) this page covers, with a 16-expert layer you can run to see why it happens.
 
 ## What is a mixture of experts model?
 
 A mixture of experts model is a neural network that holds many expert sub-networks per layer and runs only a few of them for each token. A dense model runs every parameter for every token.
 
-The vendors publish both counts, and the ratio between them is the saving in compute:
+Model vendors publish both numbers, the total parameter count and the count used per token. Divide the second by the first and you get the share of the model that runs for each token, which is 5.5% for the largest model in this table:
 
 | Model | Total parameters | Used per token | Source |
 |---|---|---|---|
@@ -34,11 +36,13 @@ The vendors publish both counts, and the ratio between them is the saving in com
 | DeepSeek-V2 | 236B | 21B | [DeepSeek, May 2024](https://arxiv.org/abs/2405.04434) |
 | DeepSeek-V3 | 671B | 37B | [DeepSeek, December 2024](https://arxiv.org/abs/2412.19437) |
 
-Mistral's announcement states the claim plainly, saying Mixtral "processes input and generates output at the same speed and for the same cost as a 12.9B model". That sentence is about compute, and I'd keep it there, because nothing in it says the other 33.8B parameters can stay on disk.
+Mistral's announcement states the claim plainly, saying Mixtral "processes input and generates output at the same speed and for the same cost as a 12.9B model".
+
+Mistral's sentence is a claim about speed and compute cost. It says nothing about memory, and the 33.8B parameters that a token doesn't use still have to be loaded for the model to run.
 
 ## How does MoE routing work?
 
-A router scores every expert for the current token, keeps the top few, and mixes their outputs by score. Here's one such layer in NumPy, with 16 experts and 2 chosen per token:
+A router scores every expert for the current token, keeps the top few, and mixes their outputs by score. The script below builds one MoE layer in NumPy, with 16 experts and 2 experts chosen per token:
 
 ```python
 """One mixture-of-experts layer in NumPy: what a token computes with, and what must stay loaded."""
@@ -86,9 +90,9 @@ after 16 tokens: 13 of 16 experts have been needed
 after 64 tokens: 16 of 16 experts have been needed
 ```
 
-The router here has random weights, so it shows the mechanism and says nothing about what a trained router learns. Even so, the first two lines are the arithmetic every MoE model card is built on: one token touched 12.7% of the layer.
+The router in this script has random weights, so the output shows how routing works and not which experts a trained router would prefer. The first two lines of output are the same arithmetic as the table above: the layer has 525,312 parameters, and one token used 66,560 of them, or 12.7%.
 
-DeepSeek-V3 does the same thing at a larger size. Its [technical report](https://arxiv.org/html/2412.19437v2) describes each MoE layer as 1 shared expert that always runs plus 256 routed experts, with 8 of the routed ones activated per token.
+DeepSeek's 671B model routes tokens the same way with more experts. Its [technical report](https://arxiv.org/html/2412.19437v2) describes each MoE layer as 1 shared expert that always runs plus 256 routed experts, with 8 of the routed ones activated per token.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/mixture-of-experts/moe-routing.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/mixture-of-experts/moe-routing.narrow.svg" width="288" height="664"><img class="np-has-narrow" src="/static/images/diagrams/mixture-of-experts/moe-routing.svg" width="720" height="256" alt="Each token passes through a router that activates 8 of the 256 routed experts in a DeepSeek-V3 layer. The other 248 stay idle for that token." loading="lazy" decoding="async"></picture></a>
@@ -97,45 +101,45 @@ DeepSeek-V3 does the same thing at a larger size. Its [technical report](https:/
 
 ## Why does an MoE model still need all its memory?
 
-Every expert has to be loaded because the router picks per token, and nobody knows its pick until the token arrives. Look at the last four lines of that output: one token needed 2 experts, and 64 tokens needed all 16.
+An MoE model needs all its memory because the router chooses experts one token at a time, and the choice for a token isn't known until that token arrives. The last four lines of the script's output show the effect: 1 token needed 2 of the 16 experts, 16 tokens needed 13, and 64 tokens needed all 16.
 
-So the memory bill is plain multiplication on the total. DeepSeek's 671B parameters come to about 1.34 TB for the weights alone at 16 bits each, and about 671 GB at 8 bits.
+So the memory an MoE model needs is its total parameter count multiplied by the bits stored per parameter. DeepSeek's 671B parameters come to about 1.34 TB for the weights alone at 16 bits each, and about 671 GB at 8 bits.
 
-People do run these models on small machines, though, and it's worth seeing how. On November 8 a project called [llama-modchip](https://github.com/synchopate/llama-modchip) reached the Hacker News front page with a README reporting a 284B DeepSeek model in a 57.99 GiB file, and resident memory a little above that.
+People do run very large MoE models on desktop machines, and they do it by shrinking each weight, not by loading fewer experts. On November 8 a project called [llama-modchip](https://github.com/synchopate/llama-modchip) reached the Hacker News front page with a README reporting a 284B DeepSeek model in a 57.99 GiB file, and resident memory a little above that.
 
-Divide it out, which is my arithmetic and not the README's, and that's about 1.75 bits per parameter. Going by the file size, the memory came down by storing each weight in fewer bits, and the [first thing the thread asked](https://news.ycombinator.com/item?id=50412500) was at which quantization, and what the output looks like.
+Divide 57.99 GiB by 284B parameters, which is my arithmetic and not the README's, and each parameter gets about 1.75 bits, where an uncompressed weight uses 16. Going by the file size, the memory came down by storing each weight in fewer bits, and the [first thing the thread asked](https://news.ycombinator.com/item?id=50412500) was at which quantization, and what the output looks like.
 
-My page on [LLM inference optimization](/articles/llm-inference-optimization/) has the same trap in figures from an NVIDIA tutorial, a 753B model whose whole checkpoint sits in GPU memory while 40B run per token.
+My page on [LLM inference optimization](/articles/llm-inference-optimization/) has a second example from an NVIDIA tutorial. The model in that tutorial has 753B parameters and activates 40B per token, and its whole checkpoint still sits in GPU memory.
 
 ## How do MoE models keep every expert in use?
 
-They balance the load during training, because a router left alone tends to favour a few experts. DeepSeek's report calls the failure "routing collapse" and says the usual fix, an extra loss term that punishes uneven load, hurts model quality when it's set too high.
+MoE models keep every expert in use by balancing the load during training, because an untrained router tends to send nearly all tokens to a few experts. DeepSeek's report calls the failure "routing collapse" and says the usual fix, an extra loss term that punishes uneven load, hurts model quality when it's set too high.
 
-DeepSeek's answer is a bias per expert that's added to the routing score. An expert that's been getting too many tokens has its bias lowered, and an idle one has it raised.
+DeepSeek's fix is one bias number per expert, added to that expert's routing score. An expert that has been receiving too many tokens gets its bias lowered, and an expert that has been idle gets its bias raised.
 
-The JAX project measured this on its small model, which is why I opened with it. At step 2000, expert load ran from 5.7% to 6.9% with the bias, where an even split is 6.25%, and from 0.09% to 18.6% without it.
+The JAX project from the top of this page measured what the bias does on its 36.2M-parameter model. At step 2000 of training, expert load ran from 5.7% to 6.9% with the bias, where an even split is 6.25%, and from 0.09% to 18.6% without it.
 
-Validation loss was the same both ways, 3.921 against 3.923. That's one run of a 36.2M-parameter model on 207 books, so I'd take it as a clean picture of the mechanism and not as proof at DeepSeek's size.
+Validation loss was 3.921 with the bias and 3.923 without it, so balancing the experts cost nothing in quality on that run. The result comes from one training run on 207 books, so I'd read it as a demonstration of how the bias works and not as proof that it works at DeepSeek's size.
 
 ## What does MoE save, in DeepSeek's own numbers?
 
 DeepSeek-V2's paper compares the MoE model with the company's earlier dense 67B model. It reports 42.5% lower training cost, a KV cache 93.3% smaller and 5.76 times the maximum generation throughput.
 
-I wouldn't credit all of that to the experts. The same abstract assigns the KV cache saving to a change in the attention layers called Multi-head Latent Attention, so the throughput figure is the result of both changes together.
+I wouldn't credit all of those gains to mixture of experts. The same abstract assigns the KV cache saving to a change in the attention layers called Multi-head Latent Attention, so the throughput figure is the result of both changes together.
 
-Sparse routing isn't the only way to cut the cost of a token, either. [Speculative decoding](/articles/speculative-decoding/) keeps the model dense and has a cheap predictor draft tokens for it to check.
+Mixture of experts is one of several ways to make each token cheaper. [Speculative decoding](/articles/speculative-decoding/) is another, and it keeps the model dense while a small, fast predictor drafts tokens for the large model to check.
 
 ## When does the architecture matter to you?
 
-It matters when you're the one buying the memory. Behind an API you pay per token and the provider carries the weights, so I'd judge an MoE model there like any other model, on your own task.
+The architecture matters when you're the one paying for GPU memory. When you call an MoE model through an API, you pay per token and the provider holds the weights, so I'd evaluate the model the way I'd evaluate any other, by running it on my own task.
 
-Self-hosting flips that. Size the hardware from the total parameter count, and expect the saving in compute to show up as more tokens per second from hardware you've already filled.
+When you host the model yourself, you buy memory for the total parameter count, which is 671B for DeepSeek's model and not 37B. The compute saving then shows up as more tokens per second from those same GPUs.
 
 ## FAQ
 
 **Is an MoE model with 37B active parameters the same as a 37B dense model?**
 
-In compute per token, roughly yes. For what it can store, no, because each token draws on a different set of experts out of the full 671B.
+The two models do roughly the same amount of compute per token. They differ in how much they can store, because the MoE model picks a different set of experts for each token out of its full 671B parameters.
 
 **Can I run DeepSeek-V3 locally?**
 
