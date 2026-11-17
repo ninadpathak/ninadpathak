@@ -16,6 +16,8 @@ updated: 2026-11-17
 
 Structured outputs constrain a model's completed output to a JSON Schema you supply, JSON mode only promises that the output parses as JSON, and function calling lets the model decide whether to call a tool and with what arguments. OpenAI's [Structured Outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs) describes the first as "the evolution of JSON mode" and says "We recommend always using Structured Outputs instead of JSON mode when possible."
 
+Constrained decoding is the part of [LLM inference](/articles/ai-engineering/) that an application developer touches directly.
+
 The guarantee is narrower than the name suggests, and the same guide spells out the limits in two sentences.
 
 "Structured Outputs constrains completed, non-refusal model output to your supplied JSON Schema. Your application still needs to handle refusals, incomplete responses, and API errors, and validate any business rules that the schema does not express."

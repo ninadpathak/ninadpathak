@@ -23,6 +23,8 @@ video: llms-txt
 
 Cloudflare's root llms.txt lists its products, and each entry links to that product's own llms.txt with the full index of its pages. Stripe's file opens with prose instructions for coding agents before its first list of links.
 
+The file is the newest part of [AI search optimization](/articles/ai-search-optimization/) for documentation.
+
 Both are valid Markdown, and both answer to the same short proposal. They read nothing alike, and the validator on this site finds no errors in one and 21 in the other, though neither result says whether anything fetches the file.
 
 ## What llms.txt is
@@ -40,7 +42,7 @@ Everything after the H1 is optional. A file with a title and nothing else meets 
 
 ## Does llms.txt work?
 
-Google's [guide to generative AI search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide), updated 2026-07-10, says you don't need AI text files to appear in Google Search and that "Google Search itself doesn't use them." What gets a docs page into Search is the ordinary work in the [technical SEO checklist for documentation sites](/articles/docs-seo/): crawlable HTML, a correct canonical and internal links.
+Google's [guide to generative AI search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide), updated 2026-07-10, says you don't need AI text files to appear in Google Search and that "Google Search itself doesn't use them." What gets a docs page into Search is the ordinary work in the [SEO checklist for docs sites](/articles/docs-seo/): crawlable HTML, a correct canonical and internal links.
 
 Chrome's [Lighthouse llms.txt audit](https://developer.chrome.com/docs/lighthouse/agentic-browsing/llms-txt), updated 2026-05-05, treats the file as optional. A missing file gets a Not Applicable result, and the audit flags only a server error when the file is requested.
 

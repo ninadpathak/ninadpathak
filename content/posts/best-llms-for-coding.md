@@ -23,6 +23,8 @@ updated: 2026-11-17
 
 The March version of this page named a best LLM for coding in each of five kinds of work, and none of the models it picked is among the 18 in the benchmark I now trust for this question. A list like that lasted eight months, so this version dates its answer and spends its length on reading the evidence, which ages slower.
 
+The model is one of several choices a team makes about [coding agents](/articles/coding-agents/).
+
 As of November 17, 2026, the best LLMs for coding work that resembles a job are Claude Opus 5.5 and GPT 6 Astra, which tie near 57% on [Real-SWE 1.1](https://withspecific.com/blog/real-swe), a benchmark Specific Labs published in October. GPT 6.1 Sol resolves 47% of the same tasks for under a dollar a run, and the strongest open-weight entries sit near 39%.
 
 <figure class="np-figure">
@@ -116,7 +118,7 @@ My reading is that the two benchmarks ask different things, since Real-SWE grade
 
 Evan X. Merz described the second situation from inside a large company in [a post dated November 7](https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/): "AI tends to solve the problems that can fit within its context window very well, but it's totally oblivious to the long term issues that can't be understood in that relatively small frame."
 
-A leaderboard of single tasks can't show that cost. I take up Merz's point about understanding in [a separate essay](/articles/nobody-understands-the-code/), and a composition-level check like the one in my [lambda calculus exercise](/articles/lambda-calculus-ai/) is a small way to look for it.
+A leaderboard of single tasks can't show that cost. I take up Merz's point about understanding in [my essay on code nobody understands](/articles/nobody-understands-the-code/), and a composition-level check like the one in my [lambda calculus exercise](/articles/lambda-calculus-ai/) is a small way to look for it.
 
 ## What is the best open source LLM for coding?
 

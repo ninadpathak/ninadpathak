@@ -20,6 +20,8 @@ Phone agents got a shorter path to production this month. OpenAI's [SIP guide](h
 
 A caller can interrupt, and a voice agent can have generated a full sentence when it is cut off after the seventh word. Memory for voice AI agents has the layers a text agent has, plus one rule: the record of the agent's side has to match what was played, because a reader sees every word the model wrote and a caller hears only part.
 
+Everything else follows the general design of [AI agent memory](/articles/agent-memory/).
+
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/voice-agent-memory/voice-pipeline.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/voice-agent-memory/voice-pipeline.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/voice-agent-memory/voice-pipeline.svg" width="720" height="392" alt="A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Stored memory is drawn as a dashed input to the model." loading="lazy" decoding="async"></picture></a>
   <figcaption>A voice pipeline. What the model generates and what the caller hears part ways at the last stage, text-to-speech.</figcaption>

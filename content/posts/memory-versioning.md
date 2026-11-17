@@ -12,6 +12,8 @@ updated: 2026-11-17
 
 An auditor asks two things about any decision an agent made: what the agent knew at that moment, and what put each fact there. Memory versioning is how a store answers, by keeping every version of a fact with the time it held and the source that produced it, and never overwriting one.
 
+Among the parts of [AI agent memory](/articles/agent-memory/), it is the one built for people outside the team.
+
 Tools for coding agents are starting to ask a similar question about commands. Stroq, shown on Hacker News on November 5, scans an agent's sessions and promises to ["trace risky commands to the content that dictated them"](https://github.com/AGGIB/Stroq), and I use it here only as an analogy, since it guards against prompt injection and stores no memory.
 
 ## How do you make agent memory auditable?

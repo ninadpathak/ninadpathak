@@ -15,6 +15,8 @@ slug: vector-embeddings
 
 Someone typed "soviet" into [a semantic search over about 6.3 million museum artworks](https://lastmuseum.com/) and reported on Hacker News that it "matched cylinder seal 3500bc". Vector embeddings are the numbers behind a search like that: a model turns each text or image into a point in a space with hundreds or thousands of dimensions, and the search returns whatever points sit nearest the query.
 
+They are the first stage of a [RAG pipeline](/articles/rag/), and every later stage inherits their mistakes.
+
 [The thread](https://news.ycombinator.com/item?id=50194522), from October 22, teaches the geometry better than the king-and-queen diagram does, because each complaint in it is a property of the space. A commenter reported that the site "Completely failed if you search by Artist name", and another searched "holofernes" and got paintings "not-of-but-aesthetically-similar-to Judith beheading Holofernes".
 
 A third user praised the results for Art Deco, and the same geometry accounts for that too. The figure shows the textbook version of it, with the two senses of "bank" landing in different neighbourhoods.

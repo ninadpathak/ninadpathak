@@ -19,6 +19,8 @@ updated: 2026-11-17
 
 Ask a model to reduce `(λx.λy.x) y` and there is one right answer, a function that ignores its input and returns the outer `y`. Lambda calculus works as an AI reasoning exercise because a short Python program can check that answer, which makes it a better test than asking a model to explain its reasoning.
 
+An exercise like this belongs to the evaluation side of [AI agent architecture](/articles/ai-agents/).
+
 Much larger work rests on that property. DeepMind's [AlphaProof Code announcement](https://deepmind.google/blog/introducing-alphaproof-code/) of November 10 describes agents that wrote "over six million lines of Lean" to verify Signal's protocol code, and rests the result on one sentence: "Every proof is checked by Lean to verify the agents' work."
 
 An explanation can be fluent and wrong, and a normal form is right or it isn't.

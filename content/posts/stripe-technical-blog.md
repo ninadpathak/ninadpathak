@@ -23,6 +23,8 @@ The five newest posts on Stripe's engineering blog are all about agents. Between
 
 That run explains the blog better than the word moat does. Stripe's engineering blog became an advantage because it follows whoever is integrating Stripe at the moment and explains the hard part to them in public, and this autumn that reader is a developer working through a coding agent.
 
+It is the example I come back to for [developer content](/articles/developer-experience/) that keeps its readers.
+
 ## Where the Stripe engineering blog lives and what it publishes
 
 The Stripe engineering blog is at [stripe.dev/blog/topic/engineering](https://stripe.dev/blog/topic/engineering), the engineering section of Stripe's developer blog. The old address, stripe.com/blog/engineering, returned a 301 to it when I checked on 2026-10-29.

@@ -23,6 +23,8 @@ A thread on Hacker News on November 8 gathered user reports that Claude Opus 5.5
 
 The commenter's next sentence is the awkward one for anyone who does: "Everyone I know that does shows high levels of variance across them under the best case." The comment allows that labs sometimes downgrade a model, and ends that "without any measurement it's a non-interesting assertion".
 
+Documenting that variance is the hard part of [developer content](/articles/developer-experience/) for an AI product.
+
 Technical writing for AI products exists to make that argument answerable. A reader of ordinary API docs needs to know what a call returns, and a reader of AI product docs also needs to know what stays fixed behind a model name and how to check it.
 
 ## What does a model name promise in the docs?

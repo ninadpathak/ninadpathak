@@ -18,6 +18,8 @@ On November 9 a Reddit post titled "A year after the 100% AI mandate nobody unde
 
 The complaint outlived its source, and a day later the same site was discussing [AI usage generates a fragile codebase](https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/), a post by Evan X. Merz dated November 7.
 
+It is the standing objection to [coding agents](/articles/coding-agents/) at work.
+
 Merz notes that "every word of this article was written by a human", and he makes the charge from inside a large company: "The longer a company relies on AI agents to generate the code, the fewer developers are going to understand the codebase."
 
 I think Merz is describing something real, and that an answer published the month before his post is right about half of it.
@@ -72,7 +74,7 @@ This leaves a smaller documentation job than the one teams used to skip, and a m
 
 The decisions can't be regenerated, so they are the part to write, at the time they are made. Record what was chosen and what was rejected, with the outside fact that forced the choice.
 
-That is what a [design doc](/articles/design-doc-template/) keeps when it has non-goals and a rejected alternative. It is also the comment I argued for in the [code documentation piece](/articles/code-documentation/), the one that gives a reason the code can't show.
+That is what a [design doc](/articles/design-doc-template/) keeps when it has non-goals and a rejected alternative. It is also the comment I argued for in the [code documentation guide](/articles/code-documentation/), the one that gives a reason the code can't show.
 
 Naur would say even this falls short of the theory, and I agree with him. It is still the difference between a successor who can put a question to a page and one who can only put it to the code.
 

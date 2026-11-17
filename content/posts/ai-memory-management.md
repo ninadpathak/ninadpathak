@@ -22,6 +22,8 @@ updated: 2026-11-17
 
 AI memory management for LLMs is the set of decisions about what an application writes down, which scope each fact belongs to, when it loads into the context window and when it is replaced or dropped. A context window is a buffer for one request, so anything that has to outlive the window or the session needs those decisions made on purpose.
 
+This page is the overview for the [AI agent memory](/articles/agent-memory/) hub.
+
 The clearest account of what happens without them came from Drew Breunig, who is writing a handbook on context engineering. Breunig's [talk transcript, posted on October 24, 2026](https://www.dbreunig.com/2026/10/24/the-state-of-context-engineering.html), asks the audience who keeps memory switched on in ChatGPT or Claude and answers "I turn it off.", because with work and family projects in one account "The model will take notes on both, mix up those contexts, and the confusion grows from there."
 
 ## Memory hierarchy separates active context from persistent state

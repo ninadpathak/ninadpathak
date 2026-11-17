@@ -15,6 +15,8 @@ updated: 2026-11-17
 
 Hybrid search runs a keyword retriever, usually BM25, and a dense vector retriever over the same corpus and fuses the two ranked lists into one. On the latest production benchmark I can find, that fused list is the lowest-scoring retriever in the table.
 
+Within a [RAG pipeline](/articles/rag/) it is the retrieval stage, ahead of reranking.
+
 Kapa's Finn Bauer [published the benchmark on October 2, 2026](https://www.kapa.ai/blog/company-knowledge-bench). It scores seven retrievers on "1,000 eval cases annotated from real production data", and plain hybrid search comes last.
 
 ## How does hybrid search score on a 2026 benchmark?

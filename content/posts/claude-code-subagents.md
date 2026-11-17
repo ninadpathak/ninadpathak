@@ -23,6 +23,8 @@ video: claude-code-subagents
 
 Ask Claude Code to check every link in a docs folder and the search results land in your conversation, where they sit for the rest of the session. A subagent runs that search in its own context window and hands back only the answer.
 
+Subagents are how [coding agents](/articles/coding-agents/) keep a long job from filling one context window.
+
 The link-checker subagent below ran in Claude Code 2.1.308 on 2026-10-22. Its tool calls stayed in its own window, and the main conversation received a short report that listed each missing link target and ended its list with `broken: 3`.
 
 ## What a Claude Code subagent is

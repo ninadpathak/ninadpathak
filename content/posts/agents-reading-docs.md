@@ -21,6 +21,8 @@ My llms.txt article from October cites one study as its main evidence on whether
 
 They also say less than the title does. The report opens with "Agents now make up more than half of the requests to the docs we host", and a request is not a reader.
 
+The difference decides how much [AI search optimization](/articles/ai-search-optimization/) a docs team should take on.
+
 ## What the report counts
 
 Fern sells a docs platform, and nearly every finding is followed by a paragraph headed "How Fern helps". It also publishes its method, which is rarer than the sales copy and is the reason the report deserves a close read.
@@ -65,7 +67,7 @@ Agents only appear in such a count if they can fetch the pages, and the [AI craw
 
 Fern counted 448,667 fetches of llms.txt in September, with Claude Code the largest named source. Its summary is "The file was designed with crawlers in mind, but it found its audience in coding agents."
 
-Ahrefs and Fern can both be right, since Ahrefs sampled 137,210 domains across its analytics customers and Fern hosts API docs. My [October article](/articles/llms-txt/) ends by telling readers to check their own server logs, and Fern's are the largest set of docs logs I know of.
+Ahrefs and Fern can both be right, since Ahrefs sampled 137,210 domains across its analytics customers and Fern hosts API docs. My [llms.txt guide](/articles/llms-txt/) ends by telling readers to check their own server logs, and Fern's are the largest set of docs logs I know of.
 
 The usage pattern is the useful part: "an agent reads llms.txt once, then fetches the Markdown for the pages it needs." An index earns its place under that pattern, and a single file holding the whole site doesn't, which is why Fern says it stopped generating llms-full.txt.
 

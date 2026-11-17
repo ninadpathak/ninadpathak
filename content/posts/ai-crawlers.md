@@ -23,6 +23,8 @@ video: ai-crawlers
 
 GPTBot is the crawler OpenAI uses to collect content that may train its models, and ClaudeBot does the same job for Anthropic. Blocking either one leaves ChatGPT search and Claude's search untouched, because those run on separate agents called OAI-SearchBot and Claude-SearchBot.
 
+Crawler access is the first check in [AI search optimization](/articles/ai-search-optimization/), since a page that can't be fetched can't be cited.
+
 None of 12 developer documentation hosts blocks either one. Their robots.txt files, fetched on 2026-10-22, allowed all 17 AI and search agents the [AI crawler checker](/ai-crawler-checker/) knows.
 
 ## What each AI crawler does

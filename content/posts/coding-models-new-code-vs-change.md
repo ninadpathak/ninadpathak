@@ -18,6 +18,8 @@ work_note: 'I write about coding agents for developer-tool companies, and this e
 
 I believe it, because the games are linked and playable. The same month produced a benchmark run in which the same model passed 28 of 196 checkpoints.
 
+The distance between those two results is the question for anyone choosing [coding agents](/articles/coding-agents/).
+
 That run is Dex Horthy's [October SlopCodeBench update](https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/benchmarking-new-models-on-slop-code-bench.md), published on October 15. Its best result across every frontier model and effort setting belonged to OpenAI's Astra at the highest effort: 32 of 196, a strict pass rate of 16.33%.
 
 A model that can make a game fun on request and a model that fails six staged changes out of seven are the same model. The two results stop contradicting each other once you look at what each one asks for.
@@ -52,7 +54,7 @@ Dan Luu went through two popular coding benchmarks in [a post from July](https:/
 
 Nearly all of them score the patch and ignore what the patch costs the next person. [Parsimony](https://parsimony.lasu.dev/), a small project that reached Hacker News on October 13, exists to count that: "Existing benchmarks measure solve rate and cost, but don't punish excess code, which makes a codebase harder to work with in the long term."
 
-Excess code is the same complaint I wrote about in the [code documentation piece](/articles/code-documentation/), where a model told to add no comments added them in a third of tasks. It is also what a regression failure is made of, since every extra branch is something the next change can break.
+Excess code is the same complaint I wrote about in the [code documentation guide](/articles/code-documentation/), where a model told to add no comments added them in a third of tasks. It is also what a regression failure is made of, since every extra branch is something the next change can break.
 
 My own [best LLMs for coding](/articles/best-llms-for-coding/) page, written in March around a single benchmark score, needs rebuilding for that reason. A ranking by solve rate answers which model writes new code best, and Willison's games already answer that well enough.
 

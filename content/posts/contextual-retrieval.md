@@ -21,6 +21,8 @@ Anthropic took a chunk like `"The company's revenue grew by 3% over the previous
 
 The mechanism changes the chunk before any query runs, where nearly all RAG tuning happens at query time. I still think that is the right end of the pipeline to push on, and coding agents have since changed my mind about which corpora it is for.
 
+It works on the indexing stage of the [RAG pipeline](/articles/rag/).
+
 ## What is Contextual Retrieval?
 
 Contextual Retrieval adds one step after chunking: a model reads the full document and a single chunk, writes a short note saying where the chunk sits, and that note is prepended to the chunk before it is embedded and before the BM25 index is built. Anthropic's post puts the note at "usually 50-100 tokens".
@@ -71,7 +73,7 @@ I was wrong about code, or at least right only until coding agents learned to gr
 
 That post also changes the order of checks before adopting the technique. Contextual Retrieval improves finding, and Kapa reports that finding is now half the problem: "Today, about half of the failed test cases are caused by search."
 
-The other half fail after search, when the right chunk was retrieved and then cut. The last row of Anthropic's own table said as much in 2024, since reranking cut the remaining failures by about a third, and my [reranking piece](/articles/rag-reranking/) covers that stage.
+The other half fail after search, when the right chunk was retrieved and then cut. The last row of Anthropic's own table said as much in 2024, since reranking cut the remaining failures by about a third, and my [reranking guide](/articles/rag-reranking/) covers that stage.
 
 ## When to skip Contextual Retrieval
 

@@ -23,6 +23,8 @@ Put a CLAUDE.md and an AGENTS.md in the same repository and ask Claude Code and 
 
 So the file you write depends on which agents your team runs, and one `@AGENTS.md` line lets a single file serve both.
 
+Instruction files are the first thing to settle when a team adopts [coding agents](/articles/coding-agents/).
+
 ## What CLAUDE.md and AGENTS.md are
 
 CLAUDE.md is the Markdown file Claude Code loads at the start of a session as project instructions. AGENTS.md is the open format other agents read for the same job, Codex and Cursor among them, and [agents.md](https://agents.md/) describes it as "a simple, open format for guiding coding agents".
