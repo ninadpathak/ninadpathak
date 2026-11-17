@@ -127,6 +127,8 @@ The commenter's answer is to keep decisions as records with a state such as appr
 
 Short-term memory is what the model can see now, and long-term memory is what the application chooses to store and bring back later. The handoff note and the compaction summary are the two places where one turns into the other.
 
+Long-term memory comes in more than one kind, and the [types of agent memory](/articles/agent-memory-types/) differ in how they're read back.
+
 That crossing is where to spend review effort. Stored state differs from retrieved documents in ways [RAG vs memory](/articles/rag-vs-memory/) sets out, and the [state of agent memory](/articles/agent-memory-2026/) surveys the products that manage it.
 
 ## FAQ

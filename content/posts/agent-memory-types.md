@@ -6,138 +6,149 @@ siblings:
 - ai-memory-management
 bridges:
 - slug: llm-context-windows
-  reason: The context window limit is the reason an agent needs memory.
+  reason: Working memory is the context window, and that page covers what the window can hold.
 date: '2026-05-04'
-description: AI agents juggle three distinct memory types. Getting them wrong is the
-  source of most agent memory failures I see in production.
+description: 'The types of agent memory are working, episodic, semantic and procedural. What each holds, where the names come from, and a run showing why the type decides the lookup.'
 slug: agent-memory-types
 status: published
 work_note: "I'm Ninad Pathak, and I freelance as a technical writer for AI companies. I build the example and run it before I draft a tutorial, so your engineers review working code. [Here's how we'd work together](/services/freelance-technical-writer-for-ai-companies/)."
-title: 'Episodic, Semantic, and Working Memory in AI Agents: A Practical Map'
-video: agent-memory-types
+title: 'Types of AI Agent Memory'
+updated: 2026-11-17
 ---
 
-An agent can forget what it just did even when its logs look normal, retrieval is fast, and the context window has room.
+The types of agent memory are working memory, which is what the model can see right now, and three kinds of long-term memory: episodic for what happened, semantic for what is true, and procedural for how to act. The split comes from a 2023 paper, [Cognitive Architectures for Language Agents](https://arxiv.org/abs/2309.02427), which borrowed it from older work on human and machine cognition.
 
-The problem was a category error: the agent was storing episodic memories in a semantic memory system, and semantic facts in episodic storage. Everything was there.
+The two middle names are older still. Endel Tulving coined [episodic memory](https://en.wikipedia.org/wiki/Episodic_memory) in 1972 to separate remembering an event from knowing a fact.
 
-Nothing was useful. When I asked it what it had changed in the last hour, it answered with a vector-similarity dump of every config edit it had ever made, ranked by topic instead of by time.
+An agent needs the same separation for a practical reason. An event and a fact get looked up in different ways, and a store built for one answers badly for the other.
 
-That distinction is what I want to map out here, because it sits underneath most agent memory failures I see in code reviews and production postmortems.
-
-## The three memory types your agent is actually running
-
-### Working memory: the scratchpad
-
-Whatever the model has right now is working memory. For an LLM, that means the context window.
-
-I think of it as the agent's immediate scratchpad: what was said in the last few turns, what the current task is, what tools are available.
-
-Fast and volatile, working memory disappears when the context resets. Any long-running agent hits that boundary unless it persists state elsewhere.
-
-Without persisted working state, an agent can lose track of what the customer has already been told and repeat an offer from an earlier turn. A better document retriever cannot restore state that was never saved.
-
-Persisting a bounded session summary gives the next turn an explicit record to use.
-
-The context window also caps how much working memory is available. As a session grows, test whether early constraints still influence later answers instead of assuming that a successful request proves the full history remains usable.
-
-It is like trying to keep a forty-item grocery list in your head while someone keeps adding to it: past a point you stop holding the early items at all.
-
-If you want to understand how context windows fit into this picture, my page on [what a context window holds](/articles/llm-context-windows/) covers the limit that memory works around.
-
-### Episodic memory: what happened
-
-Specific experiences live in episodic memory. I think of it as the agent's autobiographical record: this task was attempted on this date, failed with this error, the user corrected it this way.
-
-When a DevOps agent recalls that "the last deployment on Friday failed because the database migration timed out," that is episodic retrieval. The agent is pulling a single event out of its history rather than a general fact about deployments.
-
-Treating episodic memory like a topic database creates a retrieval mismatch. A semantic query for "what went wrong with my deployments" can return similar past events when the user needs the latest runs in chronological order.
-
-Almost all of them are useless here, because the user wants a chronological account of the last few runs and gets a topic cluster spanning six months instead.
-
-[RAG versus memory](/articles/rag-vs-memory/) explains why agent-query asymmetry breaks retrieval when task state and stored records use different language. Episodic recall is directional in a way that semantic search alone cannot model.
-
-### Semantic memory: what is true
-
-Facts, knowledge, and learned abstractions live in semantic memory. Plenty of people mean exactly this when they say "knowledge base" or "world model."
-
-Nothing in it is tied to a specific time or experience.
-
-A coding agent's semantic memory holds facts like "Python's list.sort() is stable" or "React components re-render when state changes." Those are general truths that apply across contexts, with no date attached.
-
-A wrong semantic memory makes the agent confidently misinform you, citing a function signature that changed three versions ago. A wrong episodic memory makes the agent contradict itself, insisting it already ran the test suite when it never did.
-
-The error signatures look nothing alike, and debugging them takes different tools.
-
-Whenever I reason about where semantic memory sits relative to retrieval, I come back to the [layered memory model for AI systems](/articles/ai-memory-management/). The hierarchy framing helps because it makes one thing obvious: semantic memory is a single layer, the slow-changing reference shelf the agent reads from, far from the whole system.
-
-Treating it as the whole system is how teams end up dumping yesterday's task logs into the same store as their hard-won API facts and wondering why answers drift.
+That choice of store is the first design decision in [AI agent memory](/articles/agent-memory/).
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/agent-memory-types/memory-types.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-memory-types/memory-types.narrow.svg" width="288" height="488"><img class="np-has-narrow" src="/static/images/diagrams/agent-memory-types/memory-types.svg" width="720" height="288" alt="Working, episodic, and semantic memory side by side. Working memory is the scratchpad for the current turn, backed by the context window and gone when the turn ends. Episodic memory is the agent's autobiographical record of what happened across sessions, such as a task that failed on Friday with a given error, kept in an event store in time order. Semantic memory holds what is true, such as the fact that list.sort() is stable, in a durable knowledge base." loading="lazy" decoding="async"></picture></a>
   <figcaption>Working memory holds the current turn, episodic memory keeps what happened in order across sessions, and semantic memory holds facts until they stop being true.</figcaption>
 </figure>
 
-## Why agents get the types confused
+## What are the types of agent memory?
 
-Most agent frameworks expose a single "memory" interface and call it done. You hand it `agent.add_to_memory(message)` and the framework decides what to do with the message.
+There are four: working memory, which is short-term, and the long-term types episodic, semantic and procedural. The paper defines them for agents built on language models, and LangGraph's [memory documentation](https://docs.langchain.com/oss/python/langgraph/memory) gives each long-term type a plain example.
 
-That decision usually rides on token budget or retrieval latency, never on what kind of information you just handed it.
+| Type | What it holds | An agent example |
+| --- | --- | --- |
+| Working | What's active in the current decision: inputs, goals, intermediate results | The context window during a task |
+| Episodic | Experiences from earlier runs | A log of past actions and how they turned out |
+| Semantic | Facts about the world and the user | "The user deploys on Fridays" |
+| Procedural | The rules the agent acts by | The system prompt and the agent's own code |
 
-Storing every user message in episodic memory regardless of content mixes durable knowledge with conversational debris. Knowledge about Python, Git, and deployment pipelines should not sit in the same bucket as "ok thanks, try that again."
+Product names don't always follow the table. A feature called memory in one tool may store only facts, and in another only a history of sessions.
 
-Retrieval came back noisy because episodic memory had been flooded with transient chatter.
+## What is working memory in an agent?
 
-We fixed it with a content-type router. Factual statements and learned patterns went into semantic memory, session events and task outcomes went into episodic memory.
+It's the context window. Everything the model can use on this turn is there, and nothing else is.
 
-The framework gave us no hook for that distinction, so we patched it at the tool layer.
+So working memory is fast, complete and temporary. When the session ends or the window is compacted, whatever wasn't written somewhere else is gone, which is the limit my page on [context windows](/articles/llm-context-windows/) covers.
 
-## What this means for your retrieval pipeline
+Long-term memory is the "somewhere else". The long-term types differ in what gets written and in how it's read back.
 
-An agent that retrieves from a single vector store is almost certainly mixing memory types. A semantic query like "what is the architecture" comes back with episodic results, and an episodic query like "what happened in the last session" comes back with semantically similar events from weeks ago that have nothing to do with last night.
+## What is the difference between episodic and semantic memory?
 
-Splitting retrieval by memory type moved accuracy a long way for me. Semantic queries went to a knowledge base with relatively static embeddings, refreshed weekly.
+Episodic memory records events and semantic memory records facts. "The deploy on Friday failed on a migration timeout" is an episode, and "migrations on this database need a longer timeout" is the fact someone drew from it.
 
-Episodic queries went to an event store with recency weighting, fetched by time range or session ID rather than embedding similarity.
+The paper puts the two writes side by side, and LangGraph's docs repeat it: experiences go to episodic memory, and facts go to semantic memory. An agent that reflects on its episodes can turn them into facts.
 
-None of that is a novel architecture. It mirrors how human memory works.
+The name hides a trap. LangGraph's docs point out that semantic memory is a term from psychology for stored knowledge, and semantic search is a retrieval method, so a vector index doesn't make a store semantic memory.
 
-You do not run the same cognitive process to recall a phone number that you run to recall what you ate yesterday.
+## Why does the memory type decide the lookup?
 
-## A practical implementation pattern
+Because a question about events is usually a question about time, and similarity search doesn't know what time it is. The script below asks one question of a five-line event log I wrote for the purpose, first by meaning and then by time.
 
-After testing several variations, here is the pattern I settled on.
+```python
+"""Ask one question of the same event log two ways: by meaning, and by time."""
+from datetime import datetime, timedelta
 
-Three separate storage systems sit behind a routing layer. The router inspects each piece of information before storing it and decides which system handles it.
+import numpy as np
+from fastembed import TextEmbedding
 
-Factual knowledge that the agent has confirmed: semantic store. Task outcomes, user corrections, session events: episodic store.
+NOW = datetime(2026, 11, 17, 15, 0)
+EVENTS = [
+    (NOW - timedelta(days=41), "Changed the database pool size from 10 to 25 in config.yaml"),
+    (NOW - timedelta(days=12), "Changed the request timeout from 30s to 60s in config.yaml"),
+    (NOW - timedelta(days=3), "Changed the log level from INFO to DEBUG in config.yaml"),
+    (NOW - timedelta(minutes=50), "Deleted the stale feature flag for the old checkout page"),
+    (NOW - timedelta(minutes=20), "Renamed the billing worker queue to invoices"),
+]
+QUESTION = "What did you change in the last hour?"
 
-Current working context, summaries of recent events: working memory, refreshed every turn.
+model = TextEmbedding("BAAI/bge-small-en-v1.5")
 
-My routing rules are far from perfect, and I still catch cross-contamination, like a learned API quirk landing in the episodic store because the user happened to phrase it as a complaint. Even so, the error surface shrinks dramatically against a single-store approach, and the failure modes get easier to debug.
 
-## The failure signatures to watch for
+def embed(texts):
+    vectors = np.array(list(model.embed(texts)))
+    return vectors / np.linalg.norm(vectors, axis=1, keepdims=True)
 
-Working memory that is too small shows up as the agent losing track of the current task mid-execution, abandoning one step of a migration to re-ask what it was doing.
 
-A larger model does not recreate missing state. A validated session summary can make that state explicit on the next turn.
+scores = embed([text for _, text in EVENTS]) @ embed([QUESTION])[0]
+print(QUESTION)
+print("\nby meaning, top 2 of 5 (a semantic lookup):")
+for i in np.argsort(-scores)[:2]:
+    when, text = EVENTS[i]
+    print(f"  {scores[i]:.3f}  {(NOW - when).days:>2} days ago  {text}")
 
-Wrong episodic retrieval shows up as the agent contradicting itself across sessions. It claims it finished a task it never finished, or reports that a previous approach failed when that approach actually shipped.
+print("\nby time, last 60 minutes (an episodic lookup):")
+for when, text in EVENTS:
+    if NOW - when <= timedelta(hours=1):
+        print(f"  {int((NOW - when).total_seconds() // 60)} min ago  {text}")
+```
 
-You are looking at a retrieval ranking problem here, never a storage problem.
+Run on November 17, it printed this.
 
-Wrong semantic memory shows up as plausible, confident, incorrect information, the kind of answer that reads clean until you check the docs. The user catches it before the agent does.
+```text
+What did you change in the last hour?
 
-Updating the knowledge base fixes it. Touching the retrieval system does nothing.
+by meaning, top 2 of 5 (a semantic lookup):
+  0.592  12 days ago  Changed the request timeout from 30s to 60s in config.yaml
+  0.581   3 days ago  Changed the log level from INFO to DEBUG in config.yaml
 
-Those three failure modes look nothing alike. Debugging with a single memory system, you cannot tell them apart, and that blindness is the real cost of the category error.
+by time, last 60 minutes (an episodic lookup):
+  50 min ago  Deleted the stale feature flag for the old checkout page
+  20 min ago  Renamed the billing worker queue to invoices
+```
 
-## Conclusion
+The similarity lookup returned two old config edits, because they share the word "changed" with the question. The time lookup returned the two things that happened in the last hour, neither of which uses that word.
 
-These three memory types are no academic distinction. They carry different information, lean on different retrieval mechanisms, and break in different ways.
+I wrote the log to make the effect plain, so it shows the mechanism and says nothing about how often it bites. But the mechanism is general: episodes want an index on time or session, and facts want an index on meaning.
 
-An agent that files a learned fact the same way it files a past event will fail in predictable ways. An agent that routes information by type stays easier to debug and more reliable in production.
+How retrieval and memory differ beyond that is the subject of [RAG vs memory](/articles/rag-vs-memory/).
 
-[AI memory management for LLMs](/articles/ai-memory-management/) develops the wider hierarchy, including the inclusion, retrieval, and lifecycle rules that connect these memory types.
+## Where does procedural memory fit?
 
-What I cared about here is the set of architectural decisions that determine whether your agent's memory actually works.
+It's the part people forget to call memory. Procedural memory holds the instructions the agent follows, which for a language-model agent means the system prompt and the code around it.
+
+An agent that edits its own instructions after a correction is writing to procedural memory.
+
+That's the riskiest write, since a bad rule changes every later run. The paper calls it significantly riskier than writing to episodic or semantic memory.
+
+## How does each type fail?
+
+Each fails in its own recognisable way, which is the practical reason to keep them apart.
+
+- **Working memory** fails by loss. The agent forgets a constraint from early in a long session.
+- **Episodic memory** fails by contradiction. The agent says it finished something it never ran.
+- **Semantic memory** fails by confidence. The agent states an outdated fact as current.
+- **Procedural memory** fails by repetition. The agent makes one mistake on every run, because the mistake is a rule.
+
+A single store hides which of these you're looking at. The layered design in [AI memory management](/articles/ai-memory-management/) keeps them apart from the start.
+
+## FAQ
+
+**What are the types of agent memory?**
+
+Working memory, which is the context window, and three long-term types: episodic memory for past events, semantic memory for facts and procedural memory for the rules the agent follows.
+
+**Is semantic memory the same as semantic search?**
+
+No. Semantic memory is stored knowledge, and semantic search is a way of finding text by meaning, so a fact store can be searched by key and an event log by meaning.
+
+**Which memory type should an agent have first?**
+
+Start with working memory managed well, then add semantic memory for facts that must survive a session. Add episodic memory when the agent has to answer questions about what it did.

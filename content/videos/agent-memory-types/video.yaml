@@ -1,7 +1,7 @@
 # Narrated explainer for /articles/agent-memory-types/, imported by tools/import_video.py from
 # ninadpathak-video films/agent-memory-types (render of 2026-10-28T15:25:28+05:30).
 name: Agent memory types in 40 seconds
-description: 'Why an agent forgets what it just did when its logs look normal: working, episodic and semantic memory, routing facts and events to different stores, and how each failure shows itself.'
+description: "A 40-second narrated film made for an earlier version of the agent memory types page. It is not embedded on the page and is queued for a new render."
 upload_date: '2026-10-28T15:25:28+05:30'
 duration_seconds: 40
 width: 1920

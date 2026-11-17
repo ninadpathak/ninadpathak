@@ -48,6 +48,8 @@ That layer belongs to the serving engine, and the [LLM inference optimization gu
 
 This page splits explicit memory into five layers: an input buffer, working context, episodic memory, semantic memory and procedural memory.
 
+The last three names come from research on agent memory, and my page on the [types of agent memory](/articles/agent-memory-types/) says where each came from and how each is looked up.
+
 | Layer | Question it answers | Typical lifetime |
 | --- | --- | --- |
 | Input buffer | What just arrived? | One step |
