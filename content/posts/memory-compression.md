@@ -3,8 +3,8 @@ category: agent-memory
 primary_query: context compression
 siblings:
 - short-term-agent-memory
+- rag-vs-memory
 - memory-serialization
-- ai-memory-management
 bridges:
 - slug: llm-context-windows
   reason: Every loaded note is paid for in the context window of every session.
@@ -19,44 +19,50 @@ title: 'Contextual Compression for Agent Memory: What Stays and What Goes'
 updated: 2026-11-17
 ---
 
-Every repository has a `.gitignore`, and [Git's documentation](https://git-scm.com/docs/gitignore) gives its job in a sentence: it "specifies intentionally untracked files that Git should ignore." The usual entries are build output and installed dependencies, which a command can produce again.
+A `.gitignore` file is where a repository says what it won't keep. [Git's documentation](https://git-scm.com/docs/gitignore) gives the job in a sentence, that it "specifies intentionally untracked files that Git should ignore", and the usual entries are build output and installed dependencies, which a command can produce again.
 
-Context compression for agent memory makes that call about knowledge: what an agent carries into its next step or its next session, and what it leaves to be looked up again. It is the part of [AI agent memory](/articles/agent-memory/) that decides what gets written at all.
+Context compression asks the same thing of an agent's context: what gets carried forward, and what gets left to be looked up again. It happens in two places, inside a session when old turns are squeezed to fit the window, and between sessions when the agent decides what to write down.
 
-A build directory comes back exactly from one command. A lesson an agent learned by failing comes back only if it fails again, so that lesson is the thing worth the space.
+So I'll take both in turn. The rule I end up with for [AI agent memory](/articles/agent-memory/) is the `.gitignore` one, which is to keep what you can't regenerate.
 
-## What counts as context compression?
+## What is context compression?
 
-The name covers two different operations. Inside one session, compaction replaces old turns with a summary so the work can continue, and [short-term memory for agents](/articles/short-term-agent-memory/) covers that one.
+Context compression is any step that reduces what a model has to carry so the work can go on. The two kinds share a name and differ in almost everything else.
 
-Across sessions, compression is the choice of what to write to a memory store and what to prune from it later. Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, keeps the two apart and leaves compaction out of its definition of memory.
-
-That definition is "knowledge that Claude gains from experience", kept between sessions and "saved as context it can read later." The second kind of compression is the subject here, since it decides what an agent knows next week.
-
-## What should stay?
-
-Keep what the environment can't hand back. Anthropic's evidence is a comparison of two models playing Pokémon Red, each with a folder it could write notes to, taken at about 10,000 steps into the game.
-
-| Model | Memory written | Badges earned |
+| | Inside a session | Between sessions |
 | --- | --- | --- |
-| Claude Sonnet 3.7 | 413 files across 225 folders | 1 |
-| Claude Fable 5 | 9 files in 2 folders, plus one top-level file | 4 |
+| What is compressed | The conversation so far | What the agent learned |
+| How | Old turns are dropped or summarized | The agent chooses what to write to memory and what to prune |
+| Trigger | The context window filling up | The end of a task or session |
+| What goes wrong | The summary leaves out something a later turn needs | The store fills with notes that are redundant or wrong |
 
-The older model recorded each battle and each item. The post explains why that failed: facts such as the player's money or position "can be read off the screen every turn, so storing it is redundant."
+Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), written by Lance Martin and published on November 6, keeps the two apart. Its definition of memory is "knowledge that Claude gains from experience", kept between sessions, and it leaves compaction out.
 
-The newer model wrote down the opposite kind of thing, and the post gives the reason: "memory files about strategy, plans, and tested rules exist only if Claude works them out, and they disappear unless Claude writes them down."
+## How does compression work inside a session?
 
-That is the `.gitignore` rule again. State the agent can re-read stays out of memory, and conclusions it had to earn go in.
+It replaces old turns with something shorter. The same post describes compaction as "summaries written by Claude that replace its older turns so it can continue working in a new context window".
 
-The comparison is thin as evidence, and the post says so by describing it as "one run each". It is also a vendor writing about its own models, so I take it as an illustration of the rule and no more.
+Why not keep everything? Because a full window fails outright, and a nearly full one gets worse answers, which my page on [LLM context windows](/articles/llm-context-windows/) goes into.
+
+But a summary is a lossy copy made by a model. Whatever it leaves out is gone for the rest of the session, and [short-term memory for agents](/articles/short-term-agent-memory/) runs an example where the thing left out is the instruction that mattered.
+
+That's the first place the `.gitignore` rule applies. A file the agent can open again doesn't need to survive in the summary, and a decision the user made in conversation does.
+
+## What should an agent keep between sessions?
+
+Keep what the environment can't hand back. Martin's evidence is a comparison of two models playing Pokémon Red, each with a folder to write notes in, and my page on [RAG vs memory](/articles/rag-vs-memory/) has the file counts.
+
+What interests me here is why the note-heavy model lost. The post's reason is that its "detailed record was continuously going out of date", so it "had to spend more time and resources combing through its memories rather than playing the game."
+
+And the better model? It wrote down what the game never showed it, since "memory files about strategy, plans, and tested rules exist only if Claude works them out, and they disappear unless Claude writes them down."
+
+So state the agent can read again stays out, and conclusions it had to earn go in. Now, this is one run per model, reported by the company that makes both, so I take it as an illustration and no more.
 
 ## Do fixed rules decide it well?
 
-Anthropic's post suggests they don't, for strong models.
+For strong models, the post suggests they don't. Its authors gave models one rule each about what to write, and with the rule set to record only failures, "both Opus 5 and Opus 4.7 lost much of the performance boost that memory gave them".
 
-Its authors tested giving models one rule each about what to write. With the rule set to record only failures, "both Opus 5 and Opus 4.7 lost much of the performance boost that memory gave them".
-
-Their summary of the lesson is "it helps to tell Claude what memory is for, but not how to use it." Older models went the other way in the same tests, and prompting Sonnet 4.6 to read its memory before answering "nearly doubled its benchmark score".
+Martin's summary of the lesson is "it helps to tell Claude what memory is for, but not how to use it." Older models went the other way, though: prompting Sonnet 4.6 to read its memory before answering, and then to test its theories, "nearly doubled its benchmark score".
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/memory-compression/compression-pass.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/memory-compression/compression-pass.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/memory-compression/compression-pass.svg" width="720" height="392" alt="Raw agent memory, every tool response and interaction kept in full, goes through a scoring pass that weighs recency, how often each item was accessed, and explicit importance. High scorers stay in memory; low scorers are dropped." loading="lazy" decoding="async"></picture></a>
@@ -65,27 +71,31 @@ Their summary of the lesson is "it helps to tell Claude what memory is for, but 
 
 A scoring pass is a fixed rule in code. It ranks stored items by recency, by how often they were read and by a flag set at write time, and it drops whatever ranks low.
 
-I think the result above is a reason to be wary of that design. A half-life can't know that a rule written two months ago is the one that prevents today's mistake, and the model that wrote the note could have said so.
+I think that result is a reason to be wary of the design. A half-life can't know that a rule written two months ago is the one that prevents today's mistake, and the model that wrote the note could have said so.
 
-Where a scorer is still needed, give it the one signal the writer had. A note marked as a tested rule should outlive a note marked as an observation, whatever their ages.
+So where a scorer is still needed, give it the one signal the writer had. A note marked as a tested rule should outlive a note marked as an observation, whatever their ages.
 
 ## When does compression backfire?
 
-When the compressed form is larger or less true than what it replaced. Anthropic's post has an example of each.
+When the compressed form is less true than what it replaced. The post has a case I haven't seen quoted elsewhere, from a test in which agents built a wiki out of a set of contracts.
 
-A model in one test built a wiki from a set of legal documents, and "the wiki grew larger than the documents themselves". The authors compare it to Borges's map the size of the empire and call it "an extremely detailed wiki that effectively abstracted nothing."
+Several agents wrote to one shared table of contract terms at once. When a brief was generated from the result, "Claude had included only 41 of the 57 facts (72%)", and the cause was that "agents had overwritten one another's work."
 
-The other failure is a wrong note. The post warns that with notes loaded into every session, "an incorrect note can be carried into every session", and a summary is trusted in the same way once the turns behind it are gone.
+The fix was structural. Giving each contract a single agent, which wrote its own page and quoted terms word for word, kept all 57.
 
-Both failures have the same defence, which is to keep the source. A summary that can be checked against the transcript can be corrected, a point [memory serialization](/articles/memory-serialization/) takes further.
+Here's what I take from that. Compression fails at the write as often as at the summary, and quoting the source exactly is the cheapest protection against both.
+
+The opposite failure is in the post too. On another task "the wiki grew larger than the documents themselves", which Martin calls "an extremely detailed wiki that effectively abstracted nothing."
+
+Either way the defence is to keep the source. A summary that can be checked against the transcript can be corrected, a point [memory serialization](/articles/memory-serialization/) takes further.
 
 ## How small should the loaded part be?
 
-Small enough to read every time, with pointers to the rest. Claude Code is the worked example in the post: "It loads only the first 200 lines or 25 KB of MEMORY.md."
+Small enough to read every time, with pointers to the rest. Claude Code is the post's worked example: "It loads only the first 200 lines or 25 KB of MEMORY.md."
 
-That top layer is an index, and the detail sits in files the agent opens when it needs them. The guide to [Claude Code memory](/articles/claude-code-memory/) describes the layout, and [AI memory management](/articles/ai-memory-management/) covers the layers in general.
+That top layer is an index, and the detail sits in files the agent opens when it needs them. The guide to [Claude Code memory](/articles/claude-code-memory/) describes the layout, and [AI memory management](/articles/ai-memory-management/) has the layers in general.
 
-The budget is real because every loaded line is paid for in the [context window](/articles/llm-context-windows/) of every session. A note has to earn its place there, and the rest can wait on disk.
+And the budget is real, because every loaded line is paid for in every session. A note has to earn its place there, and the rest can wait on disk.
 
 ## FAQ
 
