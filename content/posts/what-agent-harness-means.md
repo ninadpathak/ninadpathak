@@ -21,15 +21,19 @@ I went through the vendor pages that use the word, and I think the commenter was
 
 If you came for the definition and the parts, that's my explainer on the [agent harness](/articles/agent-harnesses/). What follows is about the wording.
 
-## The word names a layer, a program and a service
+## What Runta, Anthropic and LangChain each call a harness
 
-I'd separate the uses by what you do with the thing. You build the first, install the second and rent the last.
+Start with the benchmark the Hacker News thread was about. Runta's [FrontierHarness Eval](https://runta.com/blog/introducing-frontierharness-eval-v1-1/) ranks 22 harness configurations, and the names on its leaderboard are Codex CLI, OpenCode and Pi.
 
-- **A layer you build.** The sense my explainer uses: the code around a model that runs the loop and calls the tools.
-- **A program you install.** The [benchmark in that thread](https://runta.com/blog/introducing-frontierharness-eval-v1-1/) ranks 22 harness configurations, and the names on its leaderboard include Codex CLI and Pi.
-- **A service you rent.** Anthropic's [Agent SDK docs](https://code.claude.com/docs/en/agent-sdk/overview) describe Managed Agents as "A hosted agent harness that runs the agent loop".
+Codex CLI, OpenCode and Pi are coding agents that you install and launch from a terminal. So on Runta's leaderboard, a harness is a finished program with its own prompt and its own tools.
 
-None of these is wrong. They're the same idea at different distances from your own code, and a reader who learned the word from one of them will misread the other two.
+Anthropic uses the word for a product you never install. Its [Agent SDK overview](https://code.claude.com/docs/en/agent-sdk/overview) describes Managed Agents as "A hosted agent harness that runs the agent loop", which means the loop runs on Anthropic's servers and you configure it through the Claude API.
+
+LangChain uses the word for a Python package. Its [Deep Agents overview](https://docs.langchain.com/oss/python/deepagents/overview) calls Deep Agents the agent harness for multi-step work, and using it means writing `from deepagents import create_deep_agent` and passing in your own model and tools.
+
+My explainer uses the word a fourth way, for code you write yourself: the loop that calls the model, the list of tools and the file where a run saves its progress. That code has no product name and nobody ships it to you.
+
+Now put a developer who learned the word from Runta's leaderboard in front of LangChain's docs. They read that Deep Agents is a harness, look for a program to launch the way they launch Codex CLI, and find an import statement.
 
 ## I'd keep the equation
 

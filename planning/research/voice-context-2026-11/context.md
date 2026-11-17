@@ -2,6 +2,22 @@
 
 Working notes for the voice rewrite of ninadpathak.com. `sources.json` holds every external item with its URL, author, date, exact quotes and the posts it connects to. `verify_quotes.py` refetches each page and checks each quote.
 
+## The first rule: specific sentences, understood on first read (Ninad, 2026-11-18)
+
+This rule sits above every other rule in this file. Ninad's words, after reading "Agent docs don't agree on what a harness is":
+
+> I am loving the writing style but what's missing is specificity and conciseness. Right now, in trying to emulate the writing style that I asked you to emulate, you are writing extremely vague sentences. For example, in the latest article, "Agent Docs Don't Agree on What a Harness Is," the first section's tight heading is "The Word Names a Layer, a Program, and a Service." I'd separate the uses by what you do with the thing: you build the first, install the second, and rent the last. This entire part is so vague that I personally had to read it three times to understand what you are trying to say. I want you to be more specific. Go back and fix the articles that you just created, and add more specificity. We cannot have vague sentences where the reader is left wondering, "What the fuck did you even say?" or "What does this mean?" If the reader has to read the next sentence just to understand this sentence, you haven't done the job right. The next sentence should build upon the knowledge gained from this sentence and there should be zero sentences that do not add any value. If a sentence does not add value or is unable to build knowledge, you have to replace it with a better sentence. Of course, that does not mean you have to shorten the articles to just two lines because not everything can be explained in two lines. You need to explain things with examples, analogies, ideas, concepts, thoughts, even philosophies for that matter, references, screenshots from different comments, and so on. Writing an article requires connecting a lot of dots from across the internet to bring together what we have today.
+
+What it means when writing:
+
+1. Every sentence is understood on first read without the sentences around it. It names the actual thing and carries its example: which product, which doc, which command, what the reader would see.
+2. No heading or sentence is built from an abstract pair or triad such as "a layer, a program and a service". No "the first, the second, the last", no "the former, the latter", and no pronoun whose referent is a sentence back. No compressed or clever phrasing. Earlier reviews rewarded tight parallel phrasing, and that habit is to be unlearned.
+3. Each next sentence adds something the reader did not have: a fact, an example, a consequence or a named reference. A sentence that only gestures is cut or replaced.
+4. Length is not the target. Explain with concrete examples, analogies Ninad would recognise, named references, and screenshots of real comments or posts where the comment is the evidence. A screenshot is captured from its public page and stored like the xkcd figure, with credit, author, date and link, and alt text that carries the words. The site's terms are checked first and the finding recorded.
+5. The spoken register, opinion-led essays, plain titles and every fact rule stay.
+
+How a pass is run: read every sentence cold, one at a time, and list the ones that fail before rewriting. Keep facts, sources, code, titles, links and structure. Report the before and after of the five worst sentences per piece. Each pass gets an independent cold-read review.
+
 ## Why the old posts read like a B2B blog
 
 Diagnosis from 16 posts read on 2026-11-16 (semantic-caching, agent-error-handling, documentation-velocity, writing-for-ai-products, technical-writing-for-engineers, rag-vs-memory, technical-docs, time-to-first-token, ai-agent-failures, multi-agent-vs-single-agent, shorter-documentation, writing-changelogs, llm-inference-optimization, code-documentation, internal-vs-external-docs queries, claude-code-subagents pilot).
