@@ -15,7 +15,7 @@ stages:
     beats:
       - "I start by listening. I listen to calls and ask for sales call transcripts, then use Claude and other AI tools to summarize the topics buyers keep raising."
       - "Semrush then shows which of those topics people search for. I group the queries into clusters and begin with the narrow ones a new site can win."
-      - "Each page gets one primary query and one job. For [DelightChat](/work/delightchat/) the queries were support problems, such as missed WhatsApp messages, and never software categories."
+      - "Each page gets one primary query and one job. For [DelightChat](/work/delightchat/) the queries were support problems, such as missed WhatsApp messages."
     evidence: "How I run strategy with clients, and the [DelightChat](/work/delightchat/) and [LinuxForDevices](/work/linuxfordevices/) case studies."
   - id: brief
     label: Brief
@@ -51,12 +51,12 @@ stages:
     label: Checks
     title: "Checks: every claim traced to a source"
     figure: Claim check
-    alt: "Three claims in a draft each connect to a source. Four checks pass in turn, and a review reports 95 quotes re-fetched and 3 blockers sent back."
+    alt: "Three claims in a draft each connect to a source. Four checks pass in turn, and this site's review of 17 November 2026 reports 95 quotes re-fetched and 3 blockers sent back."
     beats:
-      - "Before anyone else reads it, each number and each quote gets traced to a page a reader can open. I won't publish code I can't run or a result I can't trace."
+      - "Before anyone else reads it, I trace each number and each quote in the draft to its source. I won't publish code I can't run or a result I can't trace."
       - "On this site scripts take the first pass: a rule checker for the prose and a claims audit for first-person claims and bare measurements. Quote verifiers then re-fetch each quoted page, and the build stops on a leftover TODO."
-      - "Then a reviewer with no hand in the draft checks it against the sources. The review of 17 November 2026 re-fetched 95 recorded quotes and still sent back three blockers."
-    evidence: "The checkers in this site's repository and its review of 17 November 2026. The [technical writing linter](/linter/) is the public one."
+      - "Then a reviewer with no hand in the draft checks it against the sources. On this site, the review of 17 November 2026 re-fetched 95 recorded quotes and still sent back three blockers."
+    evidence: "The checkers in this site's repository and its own review log of 17 November 2026, which isn't public. The [technical writing linter](/linter/) is the checker anyone can run."
   - id: review
     label: Review
     title: "Review: never more than two rounds"
@@ -77,7 +77,7 @@ stages:
     beats:
       - "If you want the page uploaded into your CMS, I do that, and otherwise I hand it over. On this site each new page also gets at least one link in from an existing page and at least two links out."
       - "Then I check what an answer engine gets. The [AI Overviews checker](/ai-overviews-checker/) runs nine structural checks, and the [AI crawler access checker](/ai-crawler-checker/) reads which AI crawlers robots.txt lets in."
-      - "Each article and services page here also ships as plain Markdown, listed in [llms.txt](/llms.txt). llms.txt is good to have, but there's no evidence that LLMs fetch it."
+      - "Each article and services page here also ships as plain Markdown at its own index.md. [llms.txt](/llms.txt) is good to have, but there's no evidence that LLMs fetch it."
     evidence: "The [AI-ready documentation audit](/services/ai-ready-documentation-audit/) and the four checkers under [tools](/tools/)."
   - id: measure
     label: Measure
@@ -85,9 +85,9 @@ stages:
     figure: Reading a change
     alt: "Search Console feeds a 28-day baseline. One change ships, 14 days pass with no verdict, and each number is labelled measured or estimate."
     beats:
-      - "Publishing isn't a result. A page counts when Google Search Console shows impressions and a position for it."
+      - "A page counts as a result when Google Search Console shows impressions and a position for it."
       - "I report from Search Console. On this site a script pulls it every day, with windows that end three days back because the data lags."
-      - "The loop allows one change to a page at a time. It freezes the 28 days before the change as the baseline and refuses a verdict for 14 days."
+      - "On this site the loop allows one change to a page at a time. It freezes the 28 days before the change as the baseline and refuses a verdict for 14 days."
     evidence: "This site's daily Search Console pull and its weekly loop, where each number is labelled as measured or as an estimate."
 start:
   - step: "A 30-minute call"
@@ -95,9 +95,9 @@ start:
   - step: "The brief, in 24 hours"
     line: "A written brief and a specific timeline, within a day of the call."
   - step: "A paid trial piece"
-    line: "One piece, start to finish. We continue only if you're happy with it."
+    line: "A single piece, start to finish. We continue only if you're happy with it."
   - step: "A working week"
-    line: "About 5 days from brief to draft and 2 for revision. Later pieces take 4 days end to end."
+    line: "About 5 days from brief to draft and 2 for revision. Once we're used to working together, that comes down to 4 days end to end."
 results:
   - client: LinuxForDevices
     url: /work/linuxfordevices/
@@ -117,7 +117,8 @@ results:
     after: "450,000"
     period: "2022"
     line: "Clean sizing data behind each page template took monthly visits from 7,000 to 450,000."
-results_note: "Monthly visits before and after. Source: Semrush, for LinuxForDevices from 2019 to 2022, DelightChat in 2021 and Kiwi Sizing in 2022. Documentation can't repair a weak product or create demand where none exists."
+results_note: "Monthly visits before and after, on one scale across the three charts, so a starting figure too small to draw at that scale shows as a hairline. Source: Semrush, for LinuxForDevices from 2019 to 2022, DelightChat in 2021 and Kiwi Sizing in 2022."
+results_limit: "Documentation can't repair a weak product or create demand where none exists."
 ---
 
 ## What I need from you to start
@@ -154,4 +155,4 @@ I use AI to prepare research, check a corpus and attack a draft. I check the pro
 
 **How do you measure whether a page worked?**
 
-By Google Search Console impressions and position for the page, read against the 28 days before the change. Publishing a page doesn't count as a result.
+On this site, by Google Search Console impressions and position for the page, read against the 28 days before the change. A page counts as a result once Search Console shows both.

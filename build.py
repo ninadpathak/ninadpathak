@@ -717,7 +717,7 @@ class SiteBuilder:
                 page["markdown"] = page["markdown"].replace(marker, listing)
         return pages
 
-    def load_process_page(self):
+    def load_process_page(self, path=None):
         """Load content/process.md, the page at /technical-writing-process/.
 
         The page is a sequence of scroll scenes, so its text lives in frontmatter as
@@ -727,7 +727,7 @@ class SiteBuilder:
         the template draws one figure per stage and a missing beat would leave a scene
         with a step that never plays.
         """
-        path = Path("content/process.md")
+        path = Path(path or "content/process.md")
         if not path.exists():
             return None
         post = frontmatter.load(path)
@@ -759,7 +759,10 @@ class SiteBuilder:
         count = lambda text: int(str(text).replace(",", ""))
         peak = max((count(row["after"]) for row in results), default=1)
         for row in results:
-            row["before_level"] = round(count(row["before"]) / peak * 100, 2)
+            # A starting figure under one pixel at this scale is drawn as a hairline
+            # (0.8 of 100 units, about 1.4px), and the page says so beside the charts.
+            before = count(row["before"]) / peak * 100
+            row["before_level"] = round(max(before, 0.8), 2) if before else 0
             row["after_level"] = round(count(row["after"]) / peak * 100, 2)
         # The page as one Markdown document: the stages as numbered sections, then the body.
         lines = []
@@ -773,7 +776,7 @@ class SiteBuilder:
         if post.get("results"):
             lines += ["## What the process has produced", ""]
             lines += [f"- [{row['client']}]({row['url']}): {row['line']}" for row in post["results"]]
-            lines += ["", post.get("results_note", ""), ""]
+            lines += ["", post.get("results_note", ""), "", post.get("results_limit", ""), ""]
         if post.get("start"):
             lines += ["## How an engagement starts", ""]
             lines += [f"{number}. {row['step']}: {row['line']}" for number, row in enumerate(post["start"], 1)]
@@ -1644,7 +1647,13 @@ class SiteBuilder:
             "",
         ]
         for page in service_pages:
-            lines += section(page["title"], page["url"], page["markdown"])
+            # The file is kept under 40,000 characters. A long sub-service page goes in
+            # as its lead and a link to its own Markdown copy, which holds it in full.
+            if not page.get("is_index") and len(page["markdown"]) > 4000:
+                lines += section(page["title"], page["url"],
+                                 f"{page.get('lead', '')}\n\nThis page in full: {base}{page['url']}index.md")
+            else:
+                lines += section(page["title"], page["url"], page["markdown"])
         if process_page and process_page["published"]:
             # The stages by name, with the full text one fetch away: the whole page
             # here would push this file past the size it is kept to.

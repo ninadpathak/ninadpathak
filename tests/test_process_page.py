@@ -8,6 +8,7 @@ script, no library).
 """
 import json
 import re
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -129,7 +130,10 @@ class ProcessPageTests(unittest.TestCase):
                 self.assertRegex(row["period"], r"20\d\d")
                 self.assertIn(f"Semrush, {row['period']}", self.html)
         self.assertNotIn("chart", self.source.metadata)
-        self.assertNotRegex(self.text.lower(), r"\d[\d,]* (weekly )?impressions")
+        # No figure from this site's own Search Console, in any phrasing: the only
+        # counts of impressions, clicks or positions allowed on the page are none.
+        self.assertNotRegex(self.text.lower(), r"\d[\d,.]*\s+(?:weekly |daily |monthly )?(?:impressions|clicks)")
+        self.assertNotRegex(self.text.lower(), r"(?:impressions|clicks|position)\s+(?:of|at|was|were|is)\s+\d")
 
     def test_internal_links_resolve_to_built_pages(self):
         built = {URL, "/", "/articles/", "/work/", "/services/", "/about/", "/tools/", "/linter/", "/llms.txt",
@@ -154,6 +158,54 @@ class ProcessPageTests(unittest.TestCase):
             with self.subTest(template=other):
                 self.assertNotIn("process.", (REPO / "templates" / other).read_text(encoding="utf-8").replace("process.html", ""))
 
+    def test_statements_about_this_sites_loop_say_so(self):
+        """The loop, the daily pull and the baseline are how this site is run. Each
+        sentence that names one says "on this site", and so does the FAQ answer that
+        ships alone in the FAQPage markup."""
+        measure = next(stage for stage in self.page["stages"] if stage["id"] == "measure")
+        for beat in measure["beats"][1:]:
+            with self.subTest(beat=beat[:40]):
+                self.assertIn("this site", beat.lower())
+        answer = next(faq["answer"] for faq in self.page["faqs"] if "measure" in faq["question"].lower())
+        self.assertTrue(answer.startswith("On this site"))
+
+    def test_the_checks_scene_labels_its_two_numbers_as_this_sites_review(self):
+        """95 and 3 come from this site's own review log, which a reader cannot open.
+        The beat, the figure and the description each say whose numbers they are, and
+        the scene does not promise an openable source for them."""
+        checks = next(stage for stage in self.page["stages"] if stage["id"] == "checks")
+        self.assertIn("On this site, the review of 17 November 2026", checks["beats"][2])
+        self.assertIn("this site's review of 17 November 2026", checks["alt"])
+        self.assertIn("This site, 17 Nov 2026", self.html)
+        self.assertNotIn("a reader can open", " ".join(checks["beats"]))
+        self.assertIn("isn't public", checks["evidence"])
+
+    def test_the_stepped_path_is_safe_before_its_script_runs(self):
+        """A browser without scroll timelines gets .pp-io before process.js arrives.
+        Until the script marks the figures only the first may show, and the head script
+        takes the classes off again if the script never reports in."""
+        css = (REPO / "static" / "css" / "process.css").read_text(encoding="utf-8")
+        self.assertIn(".pp-io [data-figure]:not([data-step], .pp-n1) { visibility: hidden; }", css)
+        script = self.html[self.html.index("<script data-cfasync"):]
+        script = script[:script.index("</script>")]
+        self.assertIn("data-pp-ready", script)
+        self.assertIn("classList.remove('pp-live','pp-io')", script)
+        self.assertIn("setAttribute('data-pp-ready'", (REPO / "static" / "js" / "process.js").read_text(encoding="utf-8"))
+
+    def test_each_figure_states_its_height_in_units(self):
+        css = (REPO / "static" / "css" / "process.css").read_text(encoding="utf-8")
+        for stage in self.page["stages"]:
+            with self.subTest(stage=stage["id"]):
+                self.assertRegex(css, rf"\.pf-{stage['id']}\b[^{{]*\{{ --pf-h: \d+; \}}")
+        self.assertIn("/ var(--pf-h))", css)
+
+    def test_it_prints_as_the_finished_page(self):
+        css = (REPO / "static" / "css" / "process.css").read_text(encoding="utf-8")
+        printed = css[css.index("@media print"):]
+        for rule in (".pp-live .pp-figure { position: static;", ".pp-live .pp-beat { min-height: 0; }", "animation: none !important"):
+            with self.subTest(rule=rule):
+                self.assertIn(rule, printed)
+
     def test_motion_is_opt_in_and_moves_transform_and_opacity_only(self):
         css = re.sub(r"/\*.*?\*/", "", (REPO / "static" / "css" / "process.css").read_text(encoding="utf-8"), flags=re.S)
         for name, body in re.findall(r"@keyframes ([\w-]+)\s*\{((?:[^{}]*\{[^{}]*\})*)", css):
@@ -171,6 +223,7 @@ class ProcessPageTests(unittest.TestCase):
                 self.assertTrue(all(".pp-live" in part or ".pp-n" in part for part in selector.split(",")), selector)
         script = self.html[self.html.index("<script data-cfasync"):]
         self.assertIn("prefers-reduced-motion: no-preference", script[:script.index("</script>")])
+        self.assertIn("min-height: 600px", script[:script.index("</script>")])
 
 
 class ProcessPageBuildTests(unittest.TestCase):
@@ -204,15 +257,13 @@ class ProcessPageBuildTests(unittest.TestCase):
         self.assertIn(f"/process/ {URL} 301", redirects)
 
     def test_a_stage_with_a_missing_beat_stops_the_build(self):
-        source = REPO / "content" / "process.md"
-        original = source.read_text(encoding="utf-8")
+        original = (REPO / "content" / "process.md").read_text(encoding="utf-8")
         beat = re.search(r'      - "We talk for 30 minutes[^\n]*\n', original).group(0)
-        try:
-            source.write_text(original.replace(beat, ""), encoding="utf-8")
+        with tempfile.TemporaryDirectory() as scratch:
+            copy = Path(scratch) / "process.md"
+            copy.write_text(original.replace(beat, ""), encoding="utf-8")
             with self.assertRaises(ValueError):
-                SiteBuilder().load_process_page()
-        finally:
-            source.write_text(original, encoding="utf-8")
+                SiteBuilder().load_process_page(copy)
 
 
 if __name__ == "__main__":

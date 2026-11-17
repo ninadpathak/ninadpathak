@@ -19,6 +19,7 @@
   --pp-stage-h: calc(100vh - var(--pp-top) - var(--space-12));
   --pp-dur: 520ms;
   --pp-icon: 56px;
+  --pp-icon-gap: var(--space-10);
 }
 
 /* ---------------------------------------------------------------------
@@ -50,7 +51,7 @@
   content: '';
   position: absolute;
   right: calc(var(--space-6) + (100% - var(--space-12)) / 16);
-  bottom: calc(100% + var(--space-10) + var(--pp-icon) / 2);
+  bottom: calc(100% + var(--pp-icon-gap) + var(--pp-icon) / 2);
   left: calc(var(--space-6) + (100% - var(--space-12)) / 16);
   height: 1px;
   background: var(--text-3);
@@ -88,7 +89,7 @@
 
 .pp-rail-icon {
   position: absolute;
-  bottom: calc(100% + var(--space-10));
+  bottom: calc(100% + var(--pp-icon-gap));
   left: calc(50% - var(--pp-icon) / 2);
   display: grid;
   place-items: center;
@@ -223,7 +224,17 @@
 .pf-no { font-size: var(--font-size-2xs); letter-spacing: var(--tracking-caps); color: var(--text-3); }
 
 /* The field is a size container: one unit, --u, is 1/468 of its width, so a figure
-   drawn on a 420 by 500 grid scales as one piece and keeps equal margins. */
+   drawn 420 units wide scales as one piece and keeps equal margins. Each figure also
+   states its own height in units (--pf-h: its parts, its two leads and a margin), so
+   on the pinned stage the unit shrinks until that figure fits and stays centred. */
+.pf-strategy { --pf-h: 340; }
+.pf-brief,
+.pf-research { --pf-h: 382; }
+.pf-draft { --pf-h: 376; }
+.pf-checks { --pf-h: 550; }
+.pf-review { --pf-h: 528; }
+.pf-publish { --pf-h: 340; }
+.pf-measure { --pf-h: 564; }
 .pf-field {
   position: relative;
   flex: 1;
@@ -477,7 +488,6 @@
 .pf-slot { border: var(--rule-strong); border-style: dashed; }
 .pf-chip { background: var(--pf-ink); border: var(--rule-strong); border-color: var(--pf-ink); }
 .pf-chip-b { background: var(--bg-1); }
-.pf-chip-c { background: var(--border-2); border-color: var(--border-2); }
 .pf-guide,
 .pf-day { width: calc(var(--u) * 12); height: calc(var(--u) * 12); background: var(--pf-ink); }
 .pf-day.is-open { background: var(--border-2); }
@@ -629,22 +639,21 @@
   pointer-events: none;
 }
 
-.d1 { --pd: 4vh; --pd-t: 70ms; }
-.d2 { --pd: 8vh; --pd-t: 140ms; }
-.d3 { --pd: 12vh; --pd-t: 210ms; }
-.d4 { --pd: 16vh; --pd-t: 280ms; }
-.d5 { --pd: 20vh; --pd-t: 350ms; }
+.d1 { --pd: calc(var(--pp-gap) * 1); --pd-t: 70ms; }
+.d2 { --pd: calc(var(--pp-gap) * 2); --pd-t: 140ms; }
+.d3 { --pd: calc(var(--pp-gap) * 3); --pd-t: 210ms; }
+.d4 { --pd: calc(var(--pp-gap) * 4); --pd-t: 280ms; }
+.d5 { --pd: calc(var(--pp-gap) * 5); --pd-t: 350ms; }
 
 @keyframes pp-in { from { opacity: 0; transform: var(--pa-from); } }
 @keyframes pp-move { from { transform: var(--pa-from); } }
 @keyframes pp-out { from { opacity: 1; } }
-@keyframes pp-rise { from { transform: scaleY(0); } }
 @keyframes pp-ping { from { opacity: 0.9; transform: scale(1); } to { opacity: 0; transform: scale(2.2); } }
 @keyframes pp-pan-in { from { transform: translateY(100cqh); } }
 @keyframes pp-pan-out { to { transform: translateY(-100cqh); } }
 @keyframes pp-fade-in { from { opacity: 0; } }
 @keyframes pp-fade-out { to { opacity: 0; } }
-@keyframes pp-dock { to { opacity: 0; transform: translateY(calc(var(--space-10) + var(--pp-icon) / 2 + var(--pp-rail-h) / 2)) scale(0.3); } }
+@keyframes pp-dock { to { opacity: 0; transform: translateY(calc(var(--pp-icon-gap) + var(--pp-icon) / 2 + var(--pp-rail-h) / 2)) scale(0.3); } }
 
 /* ---------------------------------------------------------------------
    Live layout: the figures pinned to one stage
@@ -654,9 +663,11 @@
   --pp-s2: 114vh;
   --pp-s3: 184vh;
   --pp-len: 24vh;
+  --pp-gap: 4vh;
   --pp-pan: 46vh;
+  --pp-beat: 70vh;
 }
-.pp-live .pp-beat { min-height: 70vh; }
+.pp-live .pp-beat { min-height: var(--pp-beat); }
 .pp-live .pp-scene { position: relative; border-bottom: var(--rule); }
 .pp-live .pp-figure {
   position: sticky;
@@ -672,7 +683,9 @@
 .pp-live .pp-frame { display: block; background: var(--bg); }
 .pp-live .pp-n1.pp-scene { margin-top: 46svh; }
 .pp-live .pf-field { container-type: size; }
-.pp-live .pf-stage { --u: clamp(0.5px, min(calc(100cqw / 468), calc(100cqh / 500)), 1.7px); }
+/* Labels stop shrinking at their size floors while the unit keeps shrinking, so a
+   small stage holds back --pf-slack of its height for them. */
+.pp-live .pf-stage { --u: clamp(0.4px, min(calc(100cqw / 468), calc((100cqh - var(--pf-slack, 0px)) / var(--pf-h))), 1.7px); }
 /* The pinned figures share the frame under them, so each drops its own. */
 .pp-live [data-figure] .pf { background: none; border-color: transparent; }
 .pp-live [data-figure] .pf-head,
@@ -713,7 +726,7 @@
   .pp-live [data-figure] .pf-foot {
     animation: pp-fade-in linear both, pp-fade-out linear forwards;
     animation-timeline: var(--tl), var(--tl-next);
-    animation-range: cover 24vh cover var(--pp-pan), cover 0vh cover 20vh;
+    animation-range: cover calc(var(--pp-pan) * 0.55) cover var(--pp-pan), cover 0vh cover calc(var(--pp-pan) * 0.4);
   }
   /* The first figure is on stage from the start. */
   .pp-live .pp-n1 .pf-stage { animation-name: none, pp-pan-out; }
@@ -729,7 +742,7 @@
   .pp-live .pp-n8 .pf-foot {
     animation: pp-fade-in linear both;
     animation-timeline: var(--tl);
-    animation-range: cover 24vh cover var(--pp-pan);
+    animation-range: cover calc(var(--pp-pan) * 0.55) cover var(--pp-pan);
   }
 
   .pp-live .pa,
@@ -742,12 +755,6 @@
   .pp-live .pa-move { animation-name: pp-move; }
   .pp-live .pa-out { animation-name: pp-out; }
   .pp-live .pa-ping { animation-name: pp-ping; }
-  .pp-live .pp-bars { view-timeline-name: --bars; }
-  .pp-live .pv {
-    animation: pp-rise linear both;
-    animation-timeline: --bars;
-    animation-range: entry 40% cover 50%;
-  }
 }
 
 /* Stepped: process.js sets is-before or is-after on the figures off stage, and
@@ -770,9 +777,14 @@
 .pp-io [data-step="1"] .s3,
 .pp-io [data-step="2"] .s3 { opacity: 0; transform: var(--pa-from); }
 .pp-io [data-step] .pa-move { opacity: 1; }
+/* Until process.js has marked the figures, only the first is on stage, finished. If
+   the script never arrives the head script takes the page back to its finished state. */
+.pp-io [data-figure]:not([data-step], .pp-n1) { visibility: hidden; }
 .pp-io [data-step="2"] .pa-out { opacity: 1; }
-.pp-io .pv { transition: transform 900ms var(--ease); }
-.pp-io .pv:not(.is-in) { transform: scaleY(0); }
+/* The result bars rise once, when process.js sees the chart on screen. They are never
+   tied to the scroll, so a bar is never left part-way beside its final number. */
+.pp-live .pv { transition: transform 900ms var(--ease); }
+.pp-live .pv:not(.is-in) { transform: scaleY(0); }
 
 /* ---------------------------------------------------------------------
    Results and the start of an engagement
@@ -799,8 +811,11 @@
 
 /* The three cards share one scale, so their bars read as one chart: each pair is
    monthly visits before and after, as a share of the tallest bar. */
-.pp-bars { display: block; width: 100%; height: 180px; margin: var(--space-5) 0 var(--space-3); border-bottom: var(--rule-strong); }
+.pp-bars { display: block; width: 100%; height: 180px; margin: var(--space-5) 0 var(--space-2); border-bottom: var(--rule-strong); }
 .pp-bar-before { fill: var(--text-3); }
+.pp-bar-labels { display: grid; grid-template-columns: repeat(2, 1fr); margin-bottom: var(--space-4); text-align: center; }
+.pp-bar-label { font-family: var(--mono); font-size: var(--font-size-sm); color: var(--text-1); }
+.pp-bar-label span { display: block; font-size: var(--font-size-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--text-3); }
 .pp-bar-after { fill: var(--accent); transform-box: fill-box; transform-origin: center bottom; }
 
 .pp-note { max-width: 70ch; margin-top: var(--space-6); font-size: var(--font-size-md); color: var(--text-3); }
@@ -837,17 +852,64 @@
 
 @media (max-width: 899px) {
   .pp-rail,
-  .pp { --pp-icon: 34px; }
+  .pp { --pp-icon: 34px; --pp-icon-gap: var(--space-6); }
   .pp-rail-icon .pf-icon { width: 18px; height: 18px; }
   .pp-rail-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .pp-result-grid { grid-template-columns: 1fr; }
   /* On a phone the stage covers the top of the window, so a beat is read lower down
      and its step plays a little earlier in the scroll. */
-  .pp-live .pp { --pp-s1: 34vh; --pp-s2: 104vh; --pp-s3: 174vh; }
+  .pp-live .pp {
+    --pp-s1: 20vh;
+    --pp-s2: 50vh;
+    --pp-s3: 80vh;
+    --pp-len: 12vh;
+    --pp-gap: 1.5vh;
+    --pp-pan: 22vh;
+    --pp-beat: 30svh;
+    --pf-slack: 44px;
+  }
+  /* A rail link or a deep link has to land its heading under the stage, not behind it. */
+  .pp-live .pp-scene { scroll-margin-top: calc(var(--pp-top) + 46svh); }
+  /* The opening screen on a phone has to reach the overview. */
+  .pp-intro { padding-top: var(--space-10); padding-bottom: calc(var(--space-8) + var(--space-12) + 34px); }
+
   .pp-live .pf-foot { display: none; }
   .pp-live .pf-head { height: 32px; }
 }
 
 @media (max-width: 600px) {
   .pp-start-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------------------------------------------------------------------
+   Print: the finished page, whatever the screen was doing
+   --------------------------------------------------------------------- */
+@media print {
+  .pp-rail { position: static; }
+  .pp-rail-icon,
+  .pp-rail-list::before,
+  .pp-live .pp-frame { display: none; }
+  .pp-intro { padding-bottom: var(--space-14); }
+  .pp-live .pp-beat { min-height: 0; }
+  .pp-live .pp-scene,
+  .pp-live .pp-n1.pp-scene { margin-top: 0; }
+  .pp-live .pp-figure { position: static; grid-row: auto; height: auto; padding: 0 0 var(--space-8); break-inside: avoid; }
+  .pp-live .pf-field { container-type: inline-size; }
+  .pp-live .pf-stage { --u: clamp(0.6px, calc(100cqw / 468), 1.2px); }
+  .pp-live [data-figure] .pf { background: var(--bg); border-color: var(--border-2); }
+  .pp-live [data-figure],
+  .pp-live [data-figure] .pf-stage,
+  .pp-live [data-figure] .pf-head,
+  .pp-live [data-figure] .pf-foot,
+  .pp-live .pa,
+  .pp-live .pv,
+  .pp-live .pp-rail-icon {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .pp-live .pa-out,
+  .pp-live .pf-ping { opacity: 0 !important; animation: none !important; }
 }

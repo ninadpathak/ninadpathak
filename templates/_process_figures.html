@@ -78,9 +78,11 @@
 <div class="pf-chips">{% for n in range(12) %}<i class="pf-slot"></i>{% endfor %}</div>
 {{ bus("thirds", "pa pa-y s2") }}
 <div class="pf-thirds">
-  {% for kind, name in [("a", "Broad"), ("b", "Narrow"), ("c", "Broad")] %}
+  {# Each chip's delay is its slot's distance from the axis in the row, so the twelve
+     enter in mirror order from the centre outward. #}
+  {% for kind, name, delays in [("a", "Broad", [5, 3, 0, 2]), ("b", "Narrow", [4, 4, 1, 1]), ("c", "Broad", [3, 5, 2, 0])] %}
   <div class="pf-panel{% if kind != 'b' %} is-later{% endif %}">
-    <span class="pf-four pf-four-{{ kind }}">{% for n in range(4) %}<i class="pf-mv pa pa-move s2"><i class="pf-chip pf-chip-{{ kind }} pa pa-pop s1 d{{ n + 1 }}"></i></i>{% endfor %}</span>
+    <span class="pf-four pf-four-{{ kind }}">{% for n in range(4) %}<i class="pf-mv pa pa-move s2"><i class="pf-chip pf-chip-{{ kind }} pa pa-pop s1 d{{ delays[n] }}"></i></i>{% endfor %}</span>
     <span class="pf-tag pa s2 d3">{{ name }}</span>
     {% if kind == "b" %}<i class="pf-hot pa pa-narrow s3"></i>{% endif %}
   </div>
@@ -128,7 +130,7 @@
     {% endfor %}
     <i class="pf-hot pa pa-fade s3 d2"></i>
   </div>
-  {{ arrow("is-hot is-rev pa pa-x s3 d1") }}
+  {{ arrow("is-hot is-rev pa pa-x s3 d2") }}
   {{ tile("person", "is-accent pa pa-pop s3") }}
   <span class="pf-cap pa s2 d1">AI</span>
   <span class="pf-cap pf-end pa s3 d1">Owner</span>
@@ -158,10 +160,11 @@
     {% for name in ["Quotes", "Build"] %}<div class="pf-gate"><span class="pf-box">{{ icon("check", "pa pa-pop s2 d" ~ (loop.index0 + 1)) }}</span><span class="pf-tag">{{ name }}</span></div>{% endfor %}
   </div>
 </div>
+{{ run("This site, 17 Nov 2026", "s3") }}
 <div class="pf-through">
-  <div class="pf-stat pa s3"><span class="pf-stat-num" data-count>95</span><span class="pf-tag">Quotes re-fetched</span></div>
-  <i class="pf-wire pa pa-y s3"></i>
-  <div class="pf-stat pa s3"><span class="pf-stat-num" data-count>3</span><span class="pf-tag">Blockers sent back</span></div>
+  <div class="pf-stat pa s3 d1"><span class="pf-stat-num" data-count>95</span><span class="pf-tag">Re-fetched</span></div>
+  <i class="pf-wire pa pa-y s3 d1"></i>
+  <div class="pf-stat pa s3 d1"><span class="pf-stat-num" data-count>3</span><span class="pf-tag">Blockers</span></div>
 </div>
 {{ lead_out("Checked") }}
 {% endmacro %}

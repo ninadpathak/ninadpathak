@@ -39,6 +39,8 @@
     });
   }, { rootMargin: '-45% 0px -55% 0px' }), scenes);
 
+  // Tell the head script this file ran, so it leaves the motion classes in place.
+  root.setAttribute('data-pp-ready', '');
   if (!root.classList.contains('pp-live')) return;
 
   // A number counts up once, and only if it was off screen when this file ran.
@@ -48,6 +50,7 @@
     var final = element.textContent;
     var match = /^([\d,]+)(.*)$/.exec(final);
     if (!match) return;
+    if (match[1] === '0') return;
     var target = parseInt(match[1].replace(/,/g, ''), 10);
     var grouped = match[1].indexOf(',') !== -1;
     var started = null;
@@ -64,7 +67,9 @@
   // 2 and 3. A scene is on stage once its top is above the line 85% down the window;
   // a beat counts once its top is above the line 75% down.
   var SCENE_LINE = 0.85;
-  var BEAT_LINE = 0.75;
+  // Under 900px the stage covers the top of the window, so a beat counts as soon as
+  // it enters the reading area below it.
+  var BEAT_LINE = window.matchMedia('(max-width: 899px)').matches ? 0.92 : 0.75;
   var first = true;
 
   function update() {
@@ -101,7 +106,7 @@
   watch(new IntersectionObserver(update, { rootMargin: '0px 0px -' + Math.round((1 - BEAT_LINE) * 100) + '% 0px' }),
     document.querySelectorAll('.pp-beat'));
 
-  // The results: count each headline figure and, without scroll timelines, grow its bar.
+  // The results: count each headline figure and raise its bar, once, on entry.
   var results = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;

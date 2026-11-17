@@ -12,13 +12,13 @@
 {% block canonical %}{{ process.url }}{% endblock %}
 {% block og_url %}{{ process.url }}{% endblock %}
 {% block og_image %}
-  <meta property="og:image"       content="{{ site.url }}/static/images/diagrams/services/og.png">
+  <meta property="og:image"       content="{{ site.url }}/static/images/diagrams/technical-writing-process/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt"   content="Freelance technical writer for AI and developer-tool companies">
+  <meta property="og:image:alt"   content="My technical writing process, from strategy to a measured result">
 {% endblock %}
 {% block tw_card %}summary_large_image{% endblock %}
-{% block tw_image %}{{ site.url }}/static/images/diagrams/services/og.png{% endblock %}
+{% block tw_image %}{{ site.url }}/static/images/diagrams/technical-writing-process/og.png{% endblock %}
 {% block alternates %}<link rel="alternate" type="text/markdown" title="{{ process.title | e }}" href="{{ process.url }}index.md">{% endblock %}
 
 {% block extra_css %}
@@ -26,8 +26,11 @@
 {# Motion is opted into here: .pp-live pins the figures to one stage, and .pp-io marks a
    browser without scroll-driven animations, where process.js plays the same scenes. The
    classes have to be on <html> before first paint, or the page would lay out twice, so
-   this one line opts out of Rocket Loader's deferral. #}
-<script data-cfasync="false">(function(){var d=document.documentElement,c=window.CSS,m=window.matchMedia;if(!('IntersectionObserver' in window)||!m||!m('(prefers-reduced-motion: no-preference) and (min-height: 700px)').matches)return;d.className+=' pp-live';if(!(c&&c.supports&&c.supports('animation-timeline: view()')&&c.supports('timeline-scope: --a')))d.className+=' pp-io';})();</script>
+   this one line opts out of Rocket Loader's deferral. process.js marks <html> with
+   data-pp-ready when it runs. If it has not within four seconds of load (blocked, failed
+   or lost), the classes come off again and the page is its finished, static self.
+   The 600px floor is Safari on a 390 by 844 iPhone with its toolbars showing (664px). #}
+<script data-cfasync="false">(function(){var d=document.documentElement,c=window.CSS,m=window.matchMedia;if(!('IntersectionObserver' in window)||!m||!m('(prefers-reduced-motion: no-preference) and (min-height: 600px)').matches)return;d.classList.add('pp-live');if(!(c&&c.supports&&c.supports('animation-timeline: view()')&&c.supports('timeline-scope: --a')))d.classList.add('pp-io');window.addEventListener('load',function(){setTimeout(function(){if(!d.hasAttribute('data-pp-ready'))d.classList.remove('pp-live','pp-io');},4000);});})();</script>
 {% endblock %}
 
 {% block schema %}
@@ -139,17 +142,19 @@
       <article class="pp-result">
         <h3 class="pp-result-client"><a href="{{ row.url }}">{{ row.client }}</a></h3>
         <div class="pp-result-num" data-count>{{ row.after }}</div>
-        <div class="pp-result-label">monthly visits, from {{ row.before }}</div>
+        <div class="pp-result-label">monthly visits</div>
         <svg class="pp-bars" viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Monthly visits before: {{ row.before }}. After: {{ row.after }}.">
-          <rect class="pp-bar-before" x="22" y="{{ 100 - row.before_level }}" width="20" height="{{ row.before_level }}"/>
-          <rect class="pp-bar-after pv" x="58" y="{{ 100 - row.after_level }}" width="20" height="{{ row.after_level }}"/>
+          <rect class="pp-bar-before" x="18" y="{{ 100 - row.before_level }}" width="14" height="{{ row.before_level }}"/>
+          <rect class="pp-bar-after pv" x="68" y="{{ 100 - row.after_level }}" width="14" height="{{ row.after_level }}"/>
         </svg>
+        <div class="pp-bar-labels"><span class="pp-bar-label"><span>Before</span>{{ row.before }}</span><span class="pp-bar-label"><span>After</span>{{ row.after }}</span></div>
         <div class="pp-result-period">Semrush, {{ row.period }}</div>
         <p class="pp-result-line">{{ row.line }}</p>
       </article>
       {% endfor %}
     </div>
     <p class="pp-note">{{ process.results_note }}</p>
+    <p class="pp-note">{{ process.results_limit }}</p>
   </div>
 </section>
 
