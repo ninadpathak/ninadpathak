@@ -129,7 +129,7 @@ Recall counts whether `d8` appears anywhere in the retrieved results, so it scor
 
 Position is what a reranker changes, so nDCG is the metric to watch once you [add a reranking stage](/articles/rag-reranking/).
 
-The precision column is the column people misread. A question with one relevant document can't score above 0.33 when k is 3, because the other two retrieved slots have to hold something.
+The precision column understates this retriever. A question with one relevant document can't score above 0.33 when k is 3, because the other two retrieved slots have to hold something.
 
 So the mean precision of 0.50 largely reflects that four of the six questions have a single relevant document.
 
@@ -145,7 +145,7 @@ You measure answer quality with a judge model that checks the answer against the
 
 [Faithfulness](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/) breaks the answer into claims and checks each against the context. The score is the number of supported claims divided by the total, and Ragas counts an answer as faithful "if all its claims can be supported by the retrieved context".
 
-[Response relevancy](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/answer_relevance/) starts from the answer and works back to the question. The judge model reads the answer and writes a few questions that the answer would fit, and the score is the average cosine similarity between those generated questions and the user's real question.
+For [response relevancy](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/answer_relevance/), the judge model reads the answer and writes a few questions that the answer would fit, and the score is the average cosine similarity between those generated questions and the user's real question.
 
 Response relevancy can't tell a correct answer from a wrong one. The docs say the metric works "without evaluating factual accuracy", so an answer that gives the wrong billing date still scores well as long as it's about billing dates, and I wouldn't report response relevancy without faithfulness beside it.
 
@@ -157,7 +157,7 @@ Fix retrieval recall first, because nothing downstream can use a passage that wa
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/rag-evaluation/eval-order.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-evaluation/eval-order.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/rag-evaluation/eval-order.svg" width="720" height="256" alt="Four RAG metrics in the order to fix them. Recall comes first, so the right passages are retrieved. Precision and ranking come second, so the context carries little noise. Faithfulness is third, so the answer sticks to the context, and response relevancy is last." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Each stage only means something once the one before it holds. Starting with response relevancy hides failures upstream.</figcaption>
+  <figcaption>A faithfulness score means little until recall is high, because the answer can't stick to a passage that was never retrieved. Starting with response relevancy hides those retrieval failures.</figcaption>
 </figure>
 
 The same order tells you how to read a bad score. Suppose faithfulness is low on a question where recall also failed: the model made claims the context didn't support because the supporting passage was never retrieved, and the bug to fix is in retrieval.
@@ -168,7 +168,7 @@ When recall and ranking are good and the answer still contradicts the passages, 
 
 Set a pass threshold from your own labelled examples and from what a wrong answer costs you. I don't think a universal cutoff such as "precision above 0.8" can exist, and the script's output shows why: 0.33 was the highest possible precision on four of its six questions.
 
-A threshold also depends on the test questions staying representative. The test questions are frozen on the day you write them and your users keep asking new ones, so I'd add fresh questions from production logs to the test set on a schedule.
+A threshold only holds while the test questions match what users ask. The test questions are frozen on the day you write them and your users keep asking new ones, so I'd add fresh questions from production logs to the test set on a schedule.
 
 Cleverdon's critics raised the same concern about his fixed test collection. Wikipedia's account of Cranfield says the experiments were "the topic of continual debate for years", and the debate was over whether the test setup measured the right thing.
 
@@ -184,7 +184,7 @@ No single faithfulness score counts as good for every application. A score of 1.
 
 **How is context precision different from precision@k?**
 
-Precision@k is the share of the top k results that are relevant. Ragas's context precision averages precision@k over the positions of the retrieved chunks, so it also rewards putting relevant chunks higher.
+Precision@k is the share of the top k results that are relevant. Ragas's context precision takes precision@k at each rank that holds a relevant chunk and averages those values, so a relevant chunk at the top rank scores higher than the same chunk two ranks lower.
 
 **Are BLEU and ROUGE useful for RAG?**
 

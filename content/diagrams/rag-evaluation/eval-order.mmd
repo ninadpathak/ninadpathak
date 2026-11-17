@@ -1,7 +1,7 @@
 %% @fig 01
 %% @kicker Evaluate in this order
 %% @alt Four RAG metrics in the order to fix them. Recall comes first, so the right passages are retrieved. Precision and ranking come second, so the context carries little noise. Faithfulness is third, so the answer sticks to the context, and response relevancy is last.
-%% @caption Each stage only means something once the one before it holds. Starting with response relevancy hides failures upstream.
+%% @caption A faithfulness score means little until recall is high, because the answer can't stick to a passage that was never retrieved. Starting with response relevancy hides those retrieval failures.
 %% @path recall>precision>faith>relevance
 %% @glyph recall | ranked rows=6
 %% @glyph precision | ranked rows=3 hi=0

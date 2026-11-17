@@ -8,14 +8,14 @@ bridges:
 - slug: agent-harnesses
   reason: The essay is about how vendors use the word that page defines.
 date: 2026-11-18
-description: An essay on vocabulary. Vendor docs use the word harness for a layer you build, a program you install and a service you rent, and I think a product's docs should define it on first use and say what's inside.
+description: An essay on vocabulary. Runta's benchmark calls Codex CLI a harness, Anthropic uses the word for its hosted Managed Agents and LangChain for its Deep Agents package. I think a product's docs should define the word on first use and list what's inside.
 slug: what-agent-harness-means
 status: published
 title: "Agent docs don't agree on what a harness is"
 work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation and define its terms on the page, after running the product myself. [Get in touch](/contact/)."
 ---
 
-On November 17, under a Hacker News post about a benchmark of agent harnesses, [a commenter named samueloph asked](https://news.ycombinator.com/item?id=50534879) whether the distinction between "harness" and "agent" still exists, since people use the two words interchangeably. A reply from ogmutlu said the two words mean the same thing, and a reply from layer8 gave a formula for telling them apart.
+On November 17, under a Hacker News post about a benchmark of agent harnesses, [a commenter named samueloph asked](https://news.ycombinator.com/item?id=50534879) whether the distinction between "harness" and "agent" still exists, since people use the two words interchangeably. A reply from ogmutlu asked whether the two words mean the same thing, and a reply from layer8 gave a formula for telling them apart.
 
 I opened the docs of the companies that use the word, and samueloph was right to ask. Runta, Anthropic and LangChain each call a different kind of thing a harness, and a reader moving from one company's page to the next gets no warning that the meaning has changed.
 
@@ -23,7 +23,7 @@ Pinning down a word like harness is a job for [technical documentation](/article
 
 ## What Runta, Anthropic and LangChain each call a harness
 
-Start with the benchmark the Hacker News thread was about. Runta's [FrontierHarness Eval](https://runta.com/blog/introducing-frontierharness-eval-v1-1/) ranks 22 harness configurations, and the names on its leaderboard are Codex CLI, OpenCode and Pi.
+The benchmark that thread was about, Runta's [FrontierHarness Eval](https://runta.com/blog/introducing-frontierharness-eval-v1-1/), ranks 22 harness configurations, and the names on its leaderboard include Codex CLI, OpenCode and Pi.
 
 Codex CLI, OpenCode and Pi are coding agents that you install and launch from a terminal. So on Runta's leaderboard, a harness is a finished program with its own prompt and its own tools.
 
@@ -37,7 +37,7 @@ Now put a developer who learned the word from Runta's leaderboard in front of La
 
 ## I'd keep the reply that says harness plus model equals agent
 
-Of the two replies to samueloph, I'd keep [the one from layer8](https://news.ycombinator.com/item?id=50534958): "harness + model = agent (plus sub-agents)". Under that formula, Codex CLI running GLM-5.3 is an agent, and Codex CLI with the model taken out is the harness.
+Of the two replies to samueloph, I'd keep [the one from layer8](https://news.ycombinator.com/item?id=50534958): "harness + model = agent (plus sub-agents)". Under that formula, Codex CLI running the GLM-5.3 model is an agent, and Codex CLI with the model taken out is the harness.
 
 The other reply, from ogmutlu, asked whether harness and agent mean the same thing. That matches how people use the words in a comment thread, and it can't work as a definition, because a definition has to tell the two words apart.
 
@@ -61,7 +61,7 @@ So a developer comparing Managed Agents with Deep Agents from those two descript
 
 DeerFlow stretches the word furthest. Its repository describes the whole application, which does research, writes code and includes a message gateway, as a "long-horizon SuperAgent harness".
 
-Put Codex CLI next to DeerFlow and the part they share is small: each runs a model in a loop and gives it tools. Memory, sandboxing and hosting differ between Codex CLI and DeerFlow, and the word harness is used for each of them.
+Put Codex CLI next to DeerFlow and the part they share is small: each runs a model in a loop and gives it tools. Memory, sandboxing and hosting differ between the two, and both Codex CLI and DeerFlow are called a harness.
 
 ## What I'd write in a product's docs
 
@@ -71,6 +71,6 @@ Under that sentence I'd put a short list of what the harness includes and what i
 
 Checking a term like harness is already part of an editor's job. The reviewer table on my [documentation review](/articles/documentation-review/) page gives the technical writer or editor four things to check, and terminology is one of the four.
 
-I wouldn't write separate pages for readers who learned the word from Runta and readers who learned it from Anthropic. My rule in [documentation structure](/articles/documentation-structure/) is to split audiences only when they need different steps, and both groups need the same page with harness defined at the top.
+I wouldn't write separate pages for readers who learned the word from Runta and readers who learned it from Anthropic. My rule in [documentation structure](/articles/documentation-structure/) is to split audiences only when their tasks differ, and both groups have the same task and need the same page with harness defined at the top.
 
 Until Runta, Anthropic and LangChain mean the same thing by harness, each product's docs have to say which parts are in its harness and who runs it.

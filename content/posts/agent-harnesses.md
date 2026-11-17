@@ -33,7 +33,7 @@ An agent harness is the runtime layer between your application and the model's A
 
 An agent makes many of those calls for one task. A research agent might make thirty to fifty model calls, and some piece of code has to carry each result into the next call, run the tools and stop the run when the task is done.
 
-That piece of code is the harness, and the split of work is simple: the model reasons, and the harness does everything else. Claude Code is an example you may already use, where the model chooses to run `git diff` and the harness is the part that runs it and hands back the output.
+That piece of code is the harness, and the split of work is simple: the model reasons, and the harness does everything else. Claude Code is an example you may already use: say the model chooses to run `git diff`, and the harness is the part that runs it and hands back the output.
 
 Vendors use the word for their own products as well. Anthropic's [Agent SDK docs](https://code.claude.com/docs/en/agent-sdk/overview) describe Managed Agents as a hosted agent harness, and LangChain calls its [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) package an agent harness.
 
@@ -41,11 +41,11 @@ A hosted service and a Python package are different things to call by one name, 
 
 ## What does an agent harness contain?
 
-I split a harness into five parts. Each part exists in every working agent, including the agents where nobody planned the parts and the code for them is spread across the application:
+I split a harness into five parts:
 
 - **Tool registry:** the list of tools, with a schema and a description for each one. Permissions belong in the registry too, such as which tool calls need a person's approval, and the [Model Context Protocol](/articles/model-context-protocol/) is one way to fill the registry from outside servers.
 - **Prompt assembler:** the code that builds the context window on every step from instructions, history, retrieved files and tool results.
-- **Execution loop:** the cycle that sends the context to the model and runs the tool the model picks, which the [four phases of an agent loop](/articles/agent-loop-anatomy/) breaks down. The loop is where a turn limit and a spending limit are enforced.
+- **Execution loop:** the cycle that sends the context to the model and runs the tool the model picks. My page on the [four phases of an agent loop](/articles/agent-loop-anatomy/) covers each phase, and the loop is where a turn limit and a spending limit are enforced.
 - **State manager:** the code that writes the run's progress to a file or a database, so the progress survives if the process dies.
 - **Observer:** a log line for every prompt, completion and tool call, tagged with a run ID.
 
@@ -62,21 +62,21 @@ The model matters more, and the harness still changes the bill. FrontierHarness 
 
 An 11-point spread in pass rate looks large, and the post warns against reading it that way. Each pass rate carries a 95% interval of about 10 points either way, and the post says a difference of a few points between two harnesses is a tie.
 
-Cost is where the harnesses separated. Codex CLI was the cheapest harness per task when it ran GLM-5.3 and the 16th cheapest of 22 when it ran Kimi's model, so a harness that is cheap with one model can be expensive with another.
+<!-- evidence-three: Kimi-K3 is a model name, not a count --> Cost is where the harnesses separated. Codex CLI was the cheapest harness per task when it ran GLM-5.3 and the 16th cheapest of 22 when it ran Kimi-K3, so a harness that is cheap with one model can be expensive with another.
 
 The post puts a number on how much of the cost each side controls. The model explains 92.8% of the variance in cost per task, which leaves 7.2% for everything else, the harness included.
 
 The figure in the post that I'd take to a budget meeting is about failed runs. The post reports that "64.5% of the list-price cost of the scored runs went to trials that did not pass", which means nearly two-thirds of the money was spent on runs that produced nothing usable.
 
-The benchmark has limits that its authors state. Runta ran it on Runta's own runtime, with open-weight models from one provider, and only one of its five per-model winners held up in nearly every resample of the tasks, while the best of the other four won 53% of the resamples.
+The benchmark has limits that its authors state: Runta ran it on Runta's own runtime, with open-weight models served by one provider, Baseten. The winners are also unsteady: Codex CLI with GLM-5.3 stayed first in 99.6% of the resamples, and the next steadiest winner, Oh My Pi with Muse, stayed first in 53%.
 
 So I wouldn't copy Runta's ranking into a purchasing decision. I'd copy the method: run two or more harnesses with the model you plan to use, on tasks from your own backlog, and compare cost per passing run.
 
 ## How does a harness recover from a failed step?
 
-A harness recovers by saving state after every step and starting the next attempt from the last save. Say a run dies at step eighteen of twenty-five because a page server returned a 503: without a saved checkpoint, the retry begins again at step one.
+A harness recovers by saving state after every step and starting the next attempt from the last save. Say a run dies at step eighteen of twenty-five because a web page the agent was fetching returned a 503: without a saved checkpoint, the retry begins again at step one.
 
-The script below shows both behaviors in one small harness. The plan is a fixed list of five steps that stands in for the model's decisions, and the `read_b` tool fails with a 503 the first time it's called:
+The script below runs the same five-step plan twice, once without checkpoints and once with them. The plan is a fixed list of five steps that stands in for the model's decisions, and the `read_b` tool fails with a 503 the first time it's called:
 
 ```python
 """A small agent harness: run a loop, checkpoint after every step, resume after a crash."""
@@ -158,7 +158,7 @@ Resuming from a checkpoint is only safe when running a step twice does no harm. 
 
 ## What should a harness do when the context fills up?
 
-A harness should apply a rule that you chose in advance for a full context window. A harness with no rule still has to do something when the window fills, and whatever it does then is a rule nobody chose.
+A harness should apply a rule that you chose in advance for a full context window. A harness with no rule sends the oversized prompt anyway, and the model's API rejects it: Anthropic's API, for one, [returns a 400 error](https://platform.claude.com/docs/en/build-with-claude/context-windows) with the message "prompt is too long".
 
 Here are four rules to choose from, starting with the one that takes the least code:
 
@@ -171,7 +171,7 @@ I'd write the chosen rule into the harness code and not leave the choice to the 
 
 ## What should you check before shipping an agent?
 
-Check each of the five parts of the harness before the agent reaches users. I'd want a yes to all four of these:
+Check the tools, the loop, the saved state and the logs before the agent reaches users. I'd want a yes to all four of these:
 
 - Every tool has a schema, a timeout and an error message the model can read.
 - The loop has a maximum number of turns, and somebody has run a test that hits the maximum.
@@ -202,7 +202,7 @@ Yes, in the sense this page uses. Anthropic's docs say the Agent SDK gives you "
 
 **Why is checkpointing the hard part?**
 
-Checkpointing is hard because the loop takes a few lines of code and recovery takes design. A checkpoint has to capture enough state to continue the run, and every tool has to be safe to call a second time.
+Checkpointing is hard because writing a state file isn't enough to resume safely. The file has to hold everything the next step needs, and every tool has to be safe to call a second time.
 
 **Does a better harness make the model smarter?**
 

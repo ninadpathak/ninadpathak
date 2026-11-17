@@ -23,13 +23,13 @@ updated: '2026-08-17'
 
 OpenAI's [model optimization guide](https://developers.openai.com/api/docs/guides/model-optimization) now carries a notice above its fine-tuning section: "OpenAI is winding down the fine-tuning platform." New users have been shut out of the self-serve platform since May, and eligible existing customers can create training jobs only until January 6, 2027.
 
-OpenAI's notice takes its hosted fine-tuning service out of the RAG vs fine-tuning decision for any team that isn't already a customer, so the decision is worth making again. RAG puts knowledge into the prompt at request time by retrieving it from an index, and fine-tuning puts knowledge into the model's weights by training the model on examples.
+For a team that isn't already a fine-tuning customer, the notice removes OpenAI's hosted service from the choice, so the RAG vs fine-tuning decision is worth making again. RAG puts knowledge into the prompt at request time by retrieving it from an index, and fine-tuning puts knowledge into the model's weights by training the model on examples.
 
 Developers already have a rule for deciding what gets built in and what gets looked up. [The Twelve-Factor App](https://12factor.net/config) says anything likely to vary between deploys, such as a database URL, is config and has to live outside the code.
 
 I think knowledge splits the same way. A fact that changes often, such as a price, belongs in the RAG index, and a behavior that stays the same, such as always answering in JSON, can be trained into the weights.
 
-My position on this page is that RAG is the default and fine-tuning needs a specific reason. The page is filed under [RAG](/articles/rag/) for that reason.
+I treat RAG as the default and want a specific reason before fine-tuning, which is why this page sits under [RAG](/articles/rag/).
 
 ## What is the difference between RAG and fine-tuning?
 
@@ -43,13 +43,13 @@ RAG changes what the model can see for one request, and fine-tuning changes how 
 | What it's good at changing | Facts | Format and behavior |
 | What you pay | Longer prompts on every request | A training run up front |
 
-The researchers who named RAG described the weaknesses of weights-only models in 2020, which are the citation and update rows of that table. Their [paper](https://arxiv.org/abs/2005.11401) says that for a model with knowledge only in its weights, "providing provenance for their decisions and updating their world knowledge remain open research problems".
+The 2020 [paper](https://arxiv.org/abs/2005.11401) that named RAG had already described the citation row and the update row of that table. It says that for a model with knowledge only in its weights, "providing provenance for their decisions and updating their world knowledge remain open research problems".
 
 ## When should you use RAG?
 
 Use RAG when the facts change or when an answer has to show where it came from. Say a product's price changed this morning: once the pricing page is re-indexed, the next request retrieves the new price, and the answer can link to the pricing page as its source.
 
-Research has also compared RAG and fine-tuning directly on factual knowledge. A 2023 study, [Fine-Tuning or Retrieval?](https://arxiv.org/abs/2312.05934), compared RAG and fine-tuning on knowledge-heavy tasks and found that RAG "consistently outperforms" unsupervised fine-tuning, for facts the model had seen in training and for new ones.
+A 2023 study, [Fine-Tuning or Retrieval?](https://arxiv.org/abs/2312.05934), compared RAG and fine-tuning on knowledge-heavy tasks and found that RAG "consistently outperforms" unsupervised fine-tuning, for facts the model had seen in training and for new ones.
 
 The same authors report that models struggle to learn a new fact from fine-tuning unless they see it in many variations. That finding is a warning for anyone who plans to fine-tune a model on product docs, where a fact may be stated only once.
 
@@ -61,7 +61,7 @@ Use fine-tuning when the model has the right facts and behaves the wrong way, fo
 
 OpenAI's guide also makes a cost argument for fine-tuning. A fine-tuned model needs shorter prompts with fewer examples, which cuts token cost at scale, while RAG makes every prompt longer by adding retrieved passages to it.
 
-Fine-tuning has also become cheaper to run since 2021. [LoRA](https://arxiv.org/abs/2106.09685), from 2021, trains small added matrices and leaves the original weights frozen, and its authors report 10,000 times fewer trainable parameters than full fine-tuning of GPT-3.
+Fine-tuning has also become cheaper to run. [LoRA](https://arxiv.org/abs/2106.09685), from 2021, trains small added matrices and leaves the original weights frozen, and its authors report 10,000 times fewer trainable parameters than full fine-tuning of GPT-3.
 
 What changed in 2026 is where you can fine-tune. OpenAI's [deprecations page](https://developers.openai.com/api/docs/deprecations) ends job creation on its self-serve platform on January 6, 2027, so I read fine-tuning as something you now plan around open-weight models, or around a provider whose docs still offer it on the day you check.
 
@@ -75,7 +75,7 @@ When a RAG pipeline already retrieves the right passage along with too many wron
 
 ## How do you decide between RAG and fine-tuning?
 
-Decide by asking two questions in order: do the facts change, and is the model's behavior the problem? The figure and the list below show which answer leads to RAG and which leads to fine-tuning.
+Decide by asking two questions in order: do the facts change, and is the model's behavior the problem? A yes to the first question means RAG, whatever the answer to the second.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.narrow.svg" width="288" height="520"><img class="np-has-narrow" src="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg" width="720" height="640" alt="A decision tree. If the knowledge changes frequently, use RAG. If it doesn't, ask whether the problem is behavioral, meaning the model's format or conduct is wrong: a behavioral problem means fine-tuning, and a factual problem means RAG." loading="lazy" decoding="async"></picture></a>

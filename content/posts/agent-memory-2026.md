@@ -13,7 +13,7 @@ bridges:
 - slug: rag-evaluation
   reason: A memory read path is a retrieval problem.
 date: 2026-04-19
-description: Agent memory frameworks in 2026 differ on who writes a memory and what shape
+description: Agent memory frameworks in 2026 differ on who writes a memory and what form
   it's stored in. How Letta, Mem0, Graphiti and Anthropic's memory tool answer those
   questions, read from their current docs.
 status: published
@@ -26,9 +26,9 @@ video: agent-memory-2026
 
 MemGPT, an early paper on agent memory, took its design from the operating system. [The paper](https://arxiv.org/abs/2310.08560), from October 2023, treats the context window the way an OS treats RAM: a small fast space with a larger, slower store behind it, and a manager that moves data between the two.
 
-The MemGPT project is called Letta now, and other teams have built their own answers since. Agent memory frameworks in 2026 are the libraries and services that store what an agent learns outside the context window and bring the relevant part back on a later turn.
+The MemGPT project is called Letta now, and Mem0, Zep and Anthropic have shipped their own memory systems since. Agent memory frameworks in 2026 are the libraries and services that store what an agent learns outside the context window and bring the relevant part back on a later turn.
 
-The MemGPT paper made the model itself the manager that moves data, and the frameworks no longer agree on that choice. I read the current docs for four of them, and I think the clearest way to compare [agent memory](/articles/agent-memory/) frameworks is with two questions: who decides that a fact is worth writing down, and in what form is the fact stored?
+The MemGPT paper made the model itself the manager that moves data, and the frameworks no longer agree on that choice. I read the current docs for Letta, Mem0, Graphiti and Anthropic's memory tool, and I think the clearest way to compare [agent memory](/articles/agent-memory/) frameworks is with two questions: who decides that a fact is worth writing down, and in what form is the fact stored?
 
 I managed the writing team at Mem0 earlier this year, so weigh what I say about Mem0 with that in mind.
 
@@ -47,7 +47,7 @@ Reading works the same way in every framework here that uses search. The memorie
 
 Because reading a memory is a retrieval problem, the tools built for retrieval apply to it. [Hybrid search](/articles/hybrid-search/) finds the candidate memories, and the metrics from [RAG evaluation](/articles/rag-evaluation/) score whether the right ones came back.
 
-Writing is where the four frameworks differ, and the rest of this page is about writing.
+Writing is where the four frameworks differ.
 
 ## How do the main agent memory frameworks differ?
 
@@ -98,17 +98,17 @@ The memory tool is the plainest of the four designs, and I mean that as praise. 
 
 Letta's MemFS is a close relative of the memory tool: both store Markdown files, and Letta adds git history and the dreaming subagents.
 
-The cost of plain files is retrieval. A directory has no ranking step, so whether Claude finds the right note next week depends on the file name it chose this week, and Letta's docs say MemFS likewise has no semantic or vector index by default.
+Plain files are harder to search. A directory has no ranking step, so whether Claude finds the right note next week depends on the file name it chose this week, and Letta's docs say MemFS likewise has no semantic or vector index by default.
 
 ## Can these frameworks be swapped over MCP?
 
-MCP lets you swap the connection and not the data. Mem0 and Graphiti each publish a server for the [Model Context Protocol](/articles/model-context-protocol/), so an MCP client such as Claude Code can add and search memories in either one without custom code, and Graphiti's docs label their server experimental.
+Over MCP you can switch which memory server an agent calls, but the stored memories don't move with the switch. Mem0 and Graphiti each publish a server for the [Model Context Protocol](/articles/model-context-protocol/), so an MCP client such as Claude Code can add and search memories in either one without custom code, and Graphiti's docs label their server experimental.
 
-The stored memories don't transfer between Mem0 and Graphiti. A sentence-sized fact in Mem0 and an edge between two entities in Graphiti's graph are different records, so moving from Mem0 to Graphiti still means exporting the facts and loading them again.
+A sentence-sized fact in Mem0 and an edge between two entities in Graphiti's graph are different records, so moving from Mem0 to Graphiti still means exporting the facts and loading them again.
 
 ## How should you evaluate an agent memory framework?
 
-Evaluate an agent memory framework by testing whether the agent does its job better with the memory than without it. Retrieval scores such as recall are the cheap first check, and a framework can pass that check and still leave the agent worse off.
+Evaluate an agent memory framework by testing whether the agent does its job better with the memory than without it. Retrieval scores such as recall are the cheap first check, and a framework can retrieve the right facts and still leave the agent answering wrongly, which is what LongMemEval measures.
 
 [LongMemEval](https://arxiv.org/abs/2410.10813), from October 2024, is the benchmark I'd read before building my own test. Its authors split memory into indexing, retrieval and reading, and they report "a 30% accuracy drop" for commercial assistants and long-context models when the needed information is spread across long interactions.
 
@@ -116,7 +116,7 @@ Reading is the stage where the model uses what was retrieved, and it's the stage
 
 So I'd build the test set around updates and contradictions. A customer who changed plans is a harder case than a customer who only stated a plan, and the changed plan is the case that produces a wrong invoice.
 
-A pair of neighbouring pages covers what this page leaves out. [AI memory management](/articles/ai-memory-management/) covers what stays in the context window, and [short-term memory for AI agents](/articles/short-term-agent-memory/) covers memory within one session.
+[AI memory management](/articles/ai-memory-management/) covers what stays in the context window, and [short-term memory for AI agents](/articles/short-term-agent-memory/) covers memory within one session.
 
 ## FAQ
 

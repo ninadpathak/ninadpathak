@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/rag-evaluation/eval-order.mmd",
-  "hash": "73b39c030c9d1d6c",
+  "hash": "c754b8d7cbeba0a1",
   "pele": "1.8.0",
   "width": 720,
   "height": 256,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "Four RAG metrics in the order to fix them. Recall comes first, so the right passages are retrieved. Precision and ranking come second, so the context carries little noise. Faithfulness is third, so the answer sticks to the context, and response relevancy is last.",
-  "caption": "Each stage only means something once the one before it holds. Starting with response relevancy hides failures upstream.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-evaluation/eval-order.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-evaluation/eval-order.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-evaluation/eval-order.svg\" width=\"720\" height=\"256\" alt=\"Four RAG metrics in the order to fix them. Recall comes first, so the right passages are retrieved. Precision and ranking come second, so the context carries little noise. Faithfulness is third, so the answer sticks to the context, and response relevancy is last.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Each stage only means something once the one before it holds. Starting with response relevancy hides failures upstream.</figcaption>\n</figure>"
+  "caption": "A faithfulness score means little until recall is high, because the answer can't stick to a passage that was never retrieved. Starting with response relevancy hides those retrieval failures.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/rag-evaluation/eval-order.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/rag-evaluation/eval-order.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/rag-evaluation/eval-order.svg\" width=\"720\" height=\"256\" alt=\"Four RAG metrics in the order to fix them. Recall comes first, so the right passages are retrieved. Precision and ranking come second, so the context carries little noise. Faithfulness is third, so the answer sticks to the context, and response relevancy is last.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>A faithfulness score means little until recall is high, because the answer can't stick to a passage that was never retrieved. Starting with response relevancy hides those retrieval failures.</figcaption>\n</figure>"
 }

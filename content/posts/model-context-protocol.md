@@ -35,9 +35,9 @@ MCP is a client-server protocol built on JSON-RPC 2.0. The [architecture page](h
 - **Client:** a component inside the host that holds the connection to one server. The host creates one client per server.
 - **Server:** a program that provides tools and data to clients. A server can run on your machine or on someone else's.
 
-The spec says MCP "takes some inspiration from the Language Server Protocol", and the two protocols solve the same shape of problem. An editor that speaks LSP can support Rust or Python by connecting to that language's server, and a host that speaks MCP can use GitHub or a Postgres database by connecting to that tool's server.
+The spec says MCP "takes some inspiration from the Language Server Protocol", which did the same thing for code editors. An editor that speaks LSP can support Rust or Python by connecting to that language's server, and a host that speaks MCP can use GitHub or a Postgres database by connecting to that tool's server.
 
-MCP covers the messages between client and server and nothing after them. The same architecture page says MCP "does not dictate how AI applications use LLMs or manage the provided context", so whether a host shows the model all 40 tools from a server or only 5 of them is the host's decision.
+MCP covers the messages between client and server and nothing after them. The same architecture page says MCP "does not dictate how AI applications use LLMs or manage the provided context", so whether a host shows the model all of a server's tools, say 40, or only 5 of them is the host's decision.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/model-context-protocol/mcp-architecture.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/model-context-protocol/mcp-architecture.narrow.svg" width="288" height="688"><img class="np-has-narrow" src="/static/images/diagrams/model-context-protocol/mcp-architecture.svg" width="720" height="264" alt="An MCP round trip drawn left to right. The host holds a client, the client sends a request to the server, and the server runs one of its tools and returns the result along the same path." loading="lazy" decoding="async"></picture></a>
@@ -54,7 +54,7 @@ An MCP server can offer tools, resources and prompts, and each has a list method
 | Resources | Data the application can read, such as a file or a database schema | `resources/list`, `resources/read` |
 | Prompts | Reusable prompt templates | `prompts/list`, `prompts/get` |
 
-Tools are the primitive that MCP tutorials spend nearly all their time on, and I think that's fair, because a tool is the only primitive that lets the model act. A tool carries a name, a description and an `inputSchema` written in JSON Schema, which is the same mechanism behind [structured outputs and function calling](/articles/llm-structured-outputs/).
+Tools are the primitive I'd learn first, because a tool is the only primitive that lets the model act. A tool carries a name, a description and an `inputSchema` written in JSON Schema, which is the same mechanism behind [structured outputs and function calling](/articles/llm-structured-outputs/).
 
 A client can offer one feature back to the server, called elicitation, which lets a server ask the user a question in the middle of a tool call, such as "delete all 14 files?". Roots, sampling and protocol logging are deprecated as of the 2026-07-28 revision, so a tutorial that leans on them is teaching features that still work and are on their way out.
 
@@ -142,18 +142,18 @@ Running `uv run python wire.py` on 2026-11-17 printed this:
 
 The first message `wire.py` sent was a `tools/call` request, and the server answered it with the word count of 4. The client didn't have to run a handshake first, because each request carries its protocol version and the client's capabilities in the `_meta` field.
 
-Sending `_meta` on every request costs bytes, and the output shows how many. Of the 255 bytes in the `tools/list` request, 181 are the `_meta` field.
+Sending `_meta` on every request costs bytes: it is 181 of the 255 bytes in the `tools/list` request.
 
 The fourth call, where I sent the argument as `txt` when the tool expects `text`, is the one I'd show someone writing their first MCP server. The wrong argument name comes back as an ordinary result with `isError` set to true and a message the model can read, and the [tools spec](https://modelcontextprotocol.io/specification/2026-07-28/server/tools) says such errors exist so that a model can correct its arguments and try again.
 
-The fifth call asks for the tool list again with the protocol version set to `2024-11-05`. The server refused with error `-32022` and named `2026-07-28` as the only version it supports, so a client that still speaks a 2024 version can't use a server built on SDK 2.3.0.
+The fifth call asks for the tool list again with the protocol version set to `2024-11-05`. The server refused with error `-32022` and named `2026-07-28` as the only version it supports, so a client that still speaks a 2024 version can't use this server.
 
 ## What changed in MCP in 2026?
 
 The 2026-07-28 revision made MCP stateless, which means a server no longer has to remember anything about a client between two requests. The changelog lists every change, and these four are the ones that make older explanations of MCP wrong:
 
 - The `initialize` handshake is gone. Every request now carries the protocol version and client capabilities in `_meta`.
-- Protocol-level sessions and the `Mcp-Session-Id` header are gone from the HTTP transport. A server that needs state across calls hands out its own handle and takes it back as a tool argument.
+- Protocol-level sessions and the `Mcp-Session-Id` header are gone from the HTTP transport. A server that needs state across calls returns its own identifier from one tool call, say a `cart_id`, and takes it back as an argument on the next.
 - Servers must implement `server/discover`, which reports versions and capabilities. Clients may call it or skip it.
 - Change notifications moved to a single opt-in stream called `subscriptions/listen`.
 
@@ -163,7 +163,7 @@ Statelessness also explains the `ttlMs` and `cacheScope` fields on the `tools/li
 
 ## Should an MCP server run locally or remotely?
 
-Run it locally over stdio when it touches files on one machine, and remotely over Streamable HTTP when many clients need the same server. The architecture page puts it this way: a local stdio server "typically" serves a single client, and a remote one serves many.
+Run it locally over stdio when it touches files on one machine, and remotely over Streamable HTTP when many clients need the same server. The architecture page says a local stdio server "typically" serves a single client and a remote server serves many.
 
 A `tools/call` request is the same JSON on both transports, and only the delivery differs. On stdio the host launches the server as a child process, and on Streamable HTTP the client sends each message as an HTTP POST, with OAuth as the recommended way to get a token.
 

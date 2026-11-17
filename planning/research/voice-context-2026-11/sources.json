@@ -4384,7 +4384,8 @@
         "Oh My Pi with Muse (53%), ZCode with DeepSeek (47%), Pi with GLM Flash (42%) and Alma with Kimi-K3 (25%)",
         "a gap of a few points is a tie",
         "each pass rate has a 95% interval of about ±10 points",
-        "Codex CLI went from 1st with GLM-5.3 to 16th with Kimi-K3"
+        "Codex CLI went from 1st with GLM-5.3 to 16th with Kimi-K3",
+        "Baseten served all five"
       ],
       "connects": [
         "agent-harnesses",
@@ -4581,6 +4582,19 @@
       ],
       "connects": [
         "what-agent-harness-means"
+      ]
+    },
+    {
+      "id": "anthropic-context-window-overflow",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
+      "author": "Anthropic",
+      "date": "2026-11-18",
+      "title": "Context windows",
+      "quotes": [
+        "If the input alone already exceeds the model's context window, the API returns a 400 invalid_request_error (\"prompt is too long\") on every model"
+      ],
+      "connects": [
+        "agent-harnesses"
       ]
     }
   ],
