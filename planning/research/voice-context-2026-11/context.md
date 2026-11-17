@@ -773,3 +773,34 @@ Rules the batch 9 review added:
 
 After the batch 9 review: agent-memory-2026 describes Letta from its current docs (MemFS, files loaded into the prompt each turn, dreaming subagents, the hosted MCP server) and says the block-and-archive design is the legacy SDK; the essay is retitled "Agent docs don't agree on what a harness is". ai-memory-management described Letta from the same legacy page and was corrected in the same push.
 
+## Batch 10 (2026-11-18, owner voice-rewrite-2)
+
+| Post | What it now rests on | Run or checked |
+| --- | --- | --- |
+| kv-cache-eviction, retitled "What the KV Cache Is and What Happens When It Fills Up" | Cloudflare's October 26 incident report, the H2O, StreamingLLM and SnapKV abstracts, Qwen2.5-7B-Instruct's config, vLLM's prefix caching docs | `kv_size.py` run, output on the page; both figures kept with reworded captions |
+| voice-agent-latency, retitled "Voice AI Latency and Where a Voice Agent's Time Goes" | Levinson and Torreira 2015 on turn-taking, OpenAI's Realtime VAD guide, LiveKit's turn detection docs | `voice_trace.py` run, output on the page; its stage times are stated as assumed |
+| context-windows-vs-memory, retitled "Context Window vs Memory, and What Each One Is For" | the November 7 Ask HN on agent context, Lost in the Middle, RULER | `replay_cost.py` run with tiktoken 0.14.0, output on the page; film kept |
+| claude-vs-gemini-cli, retitled "Claude Code vs Gemini CLI in Late 2026" | Google's May 19 post on Antigravity CLI, Killed by Google, both tools' docs on plan mode, checkpoints and sandboxing as read on 2026-11-18 | no code and no head-to-head run; film kept |
+| docs-seo, retitled "SEO for Documentation Sites, Checked in Order" | Google Search Central pages, re-read | `static/tools/docs-seo-audit.py` rerun against Cloudflare's Workers guide, output on the page; film kept |
+| documentation-best-practices, title kept | FastAPI's, Stripe's and GitHub's docs, re-read; Gauge's README | no code; film kept |
+| cloudflare-kv-cache-incident-report (new essay, technical-documentation) | Cloudflare's report and one Hacker News comment on its title | opinion-led, one short quote per section |
+
+Opening devices added to the ledger: Heartbleed, 2014, placed after the Cloudflare incident (kv-cache-eviction); radio's "over" and the 200 ms pause between speakers (voice-agent-latency); Miller's 1956 magical number seven, placed after the Ask HN thread (context-windows-vs-memory); Killed by Google (claude-vs-gemini-cli); View Source (docs-seo); RTFM (documentation-best-practices). The essay opens on its source.
+
+The order of parts differs across the six: a dated event first on kv-cache-eviction and context-windows-vs-memory, the known thing first on the other four, with the definition in the second paragraph each time.
+
+Films: context-windows-vs-memory, claude-vs-gemini-cli, docs-seo and documentation-best-practices keep their films, because each page still states every line the film narrates. kv-cache-eviction and voice-agent-latency have none.
+
+Depth of rewrite: docs-seo got a lighter pass than the rest, since its claims were already sourced to Google's docs and its script already ran. The work there was the opening, first-person leads, a fresh run and a FAQ.
+
+What the earlier pages had wrong, for the record: kv-cache-eviction carried a run of sections with no source, among them hardware, security and cost claims; voice-agent-latency asserted transport behavior with no source; claude-vs-gemini-cli compared a tool that Google had withdrawn from its consumer plans five months earlier without saying so.
+
+Facts that move: Gemini CLI's status (consumer plans ended June 18, 2026; enterprise licences and paid API keys continue), OpenAI's default `silence_duration_ms` of 500, and the 12-pass result of the audit script against Cloudflare's page. Recheck each when the page is next touched.
+
+A page the site now lacks: the comparison a new user wants is Claude Code against Antigravity CLI, and claude-vs-gemini-cli says so without making it.
+
+Position taken in the new essay, for Ninad to confirm: an incident report should put the count of affected customers before the explanation and state the belief that turned out wrong; Cloudflare's report does both and lists fixes by pull request; its title names a model for a bug in configuration and an engine, and the cause belongs in the title with the model in the first sentence.
+
+Pages touched only for an inbound link: time-to-first-token, coding-agent-memory, agents-on-call-runbooks, writing-release-notes.
+
+Batch 10 was also run through `check_vendor_links.py`, which found four redirected links on its pages (LiveKit, PubMed Central and two OpenAI Codex pages); each now points at the page it lands on.

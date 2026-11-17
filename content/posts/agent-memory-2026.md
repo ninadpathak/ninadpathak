@@ -112,7 +112,7 @@ Test whether the agent does its job better with the memory than without it. Retr
 
 [LongMemEval](https://arxiv.org/abs/2410.10813), from October 2024, is the benchmark I'd read before building my own test. Its authors split memory into indexing, retrieval and reading, and they report "a 30% accuracy drop" for commercial assistants and long-context models on information spread across long interactions.
 
-Reading is the stage people skip. The right facts in the wrong order can still produce a worse decision, for the reason the Lost in the Middle section of [context windows vs memory](/articles/context-windows-vs-memory/) gives: where a fact sits in the prompt changes whether the model uses it.
+Reading is the stage people skip. The right facts in the wrong order can still produce a worse decision, for the reason [context window vs memory](/articles/context-windows-vs-memory/) gives from the Lost in the Middle paper: where a fact sits in the prompt changes whether the model uses it.
 
 So I'd write the test set around updates and contradictions. A customer who changed plans is a harder case than a customer who stated one, and it's the case that sends a wrong invoice.
 

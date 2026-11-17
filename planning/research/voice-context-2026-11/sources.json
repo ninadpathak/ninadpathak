@@ -1868,12 +1868,16 @@
         "How do you manage your AI agents' context across clients and projects?",
         "I let agents read their own pre-compaction history often",
         "prep a handoff so we can resume from here in a fresh session",
-        "at the end ask the agent to summarize what it learned and write it down."
+        "at the end ask the agent to summarize what it learned and write it down.",
+        "re-explaining context and past decisions, client rules",
+        "Karpathys LLM wiki",
+        "which is an Obsidian vault"
       ],
       "connects": [
         "short-term-agent-memory",
         "coding-agent-memory",
-        "claude-code-memory"
+        "claude-code-memory",
+        "context-windows-vs-memory"
       ]
     },
     {
@@ -1962,7 +1966,7 @@
     },
     {
       "id": "livekit-agents-turns",
-      "url": "https://docs.livekit.io/agents/build/turns/",
+      "url": "https://docs.livekit.io/agents/logic/turns/",
       "author": "LiveKit",
       "date": "2026-11-17",
       "title": "Turn detection and interruptions",
@@ -2352,10 +2356,13 @@
       "date": "2026-11-17",
       "title": "Idempotent requests",
       "quotes": [
-        "Retries with the same key return the saved response, including 500 errors."
+        "Retries with the same key return the saved response, including 500 errors.",
+        "safely repeat the request without risk of creating a second object",
+        "The idempotency layer compares incoming parameters to those of the original request and errors if they're not the same"
       ],
       "connects": [
-        "agent-error-handling"
+        "agent-error-handling",
+        "documentation-best-practices"
       ]
     },
     {
@@ -2690,7 +2697,7 @@
     },
     {
       "id": "codex-agents-md-guide",
-      "url": "https://developers.openai.com/codex/guides/agents-md.md",
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/agents-md.md",
       "author": "OpenAI",
       "date": "2026-11-17",
       "title": "Custom instructions with AGENTS.md",
@@ -2914,7 +2921,7 @@
     },
     {
       "id": "codex-memories-docs",
-      "url": "https://developers.openai.com/codex/customization/memories.md",
+      "url": "https://learn.chatgpt.com/docs/customization/memories.md",
       "author": "OpenAI",
       "date": "2026-11-17",
       "title": "Memories",
@@ -3044,10 +3051,12 @@
       "title": "Lost in the Middle: How Language Models Use Long Contexts",
       "quotes": [
         "performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models.",
-        "Submitted on 6 Jul 2023"
+        "Submitted on 6 Jul 2023",
+        "significantly degrades when models must access relevant information in the middle of long contexts"
       ],
       "connects": [
-        "llm-context-windows"
+        "llm-context-windows",
+        "context-windows-vs-memory"
       ]
     },
     {
@@ -4714,6 +4723,355 @@
       "connects": [
         "claude-vs-gemini-cli"
       ]
+    },
+    {
+      "id": "cloudflare-kv-cache-exposure-2026-10",
+      "url": "https://blog.cloudflare.com/kv-cache-exposure-remediation/",
+      "author": "Cloudflare",
+      "date": "2026-10-26",
+      "title": "Cross-request KV cache exposure in the GLM-5.3 Workers AI model (HN 50252159)",
+      "quotes": [
+        "In total, 155 responses were affected, all to prompts longer than 681,280 tokens",
+        "We deployed GLM 5.3 with a 1,048,576-token context window, but the KV cache pool on our prefill GPUs only had room for 681,280 tokens",
+        "This bug belongs to a class of KV cache memory-safety bugs",
+        "attending over stale cache pages that still held data from earlier requests",
+        "A prompt that fits the context window now always fits the pool",
+        "We were aware of this mismatch before launch.",
+        "We expected the engine to return an error for any prompt it could not process, and our long-context tests returned successful responses",
+        "We found no evidence of deliberate exploitation",
+        "consistent in timing and volume with ordinary long-context use",
+        "All times UTC",
+        "Cross-request KV cache exposure in the GLM-5.3 Workers AI model"
+      ],
+      "connects": [
+        "kv-cache-eviction",
+        "cloudflare-kv-cache-incident-report"
+      ]
+    },
+    {
+      "id": "wikipedia-heartbleed",
+      "url": "https://en.wikipedia.org/wiki/Heartbleed",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "Heartbleed",
+      "quotes": [
+        "publicly disclosed in April 2014",
+        "The vulnerability was classified as a buffer over-read"
+      ],
+      "connects": [
+        "kv-cache-eviction"
+      ]
+    },
+    {
+      "id": "h2o-paper-2023",
+      "url": "https://arxiv.org/abs/2306.14048",
+      "author": "Zhang et al.",
+      "date": "2023-06-24",
+      "title": "H2O: Heavy-Hitter Oracle",
+      "quotes": [
+        "scaling linearly with the sequence length and batch size",
+        "a small portion of tokens contributes most of the value when computing attention scores",
+        "a KV cache eviction policy that dynamically retains a balance of recent and H$_2$ tokens"
+      ],
+      "connects": [
+        "kv-cache-eviction"
+      ]
+    },
+    {
+      "id": "streamingllm-paper-2023",
+      "url": "https://arxiv.org/abs/2309.17453",
+      "author": "Xiao et al.",
+      "date": "2023-09-29",
+      "title": "Efficient Streaming Language Models with Attention Sinks",
+      "quotes": [
+        "even if they are not semantically important",
+        "we show that it fails when the text length surpasses the cache size",
+        "stable and efficient language modeling with up to 4 million tokens and more"
+      ],
+      "connects": [
+        "kv-cache-eviction"
+      ]
+    },
+    {
+      "id": "snapkv-paper-2024",
+      "url": "https://arxiv.org/abs/2404.14469",
+      "author": "Li et al.",
+      "date": "2024-04-22",
+      "title": "SnapKV",
+      "quotes": [
+        "an 8.2x enhancement in memory efficiency compared to the baseline when processing inputs of 16K tokens",
+        "comparable performance to the baseline models across 16 long sequence datasets",
+        "an 'observation' window located at the end of the prompts"
+      ],
+      "connects": [
+        "kv-cache-eviction"
+      ]
+    },
+    {
+      "id": "qwen25-7b-config",
+      "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct/raw/main/config.json",
+      "author": "Qwen",
+      "date": "2026-11-18",
+      "title": "Qwen2.5-7B-Instruct config.json",
+      "quotes": [
+        "\"num_key_value_heads\": 4",
+        "\"num_hidden_layers\": 28",
+        "\"hidden_size\": 3584",
+        "\"torch_dtype\": \"bfloat16\""
+      ],
+      "connects": [
+        "kv-cache-eviction"
+      ]
+    },
+    {
+      "id": "vllm-automatic-prefix-caching",
+      "url": "https://docs.vllm.ai/en/latest/features/automatic_prefix_caching/",
+      "author": "vLLM",
+      "date": "2026-11-18",
+      "title": "Automatic Prefix Caching",
+      "quotes": [
+        "a new query can directly reuse the KV cache if it shares the same prefix with one of the existing queries"
+      ],
+      "connects": [
+        "kv-cache-eviction"
+      ]
+    },
+    {
+      "id": "wikipedia-procedure-word",
+      "url": "https://en.wikipedia.org/wiki/Procedure_word",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "Procedure word",
+      "quotes": [
+        "This is the end of my transmission to you and a response is necessary"
+      ],
+      "connects": [
+        "voice-agent-latency"
+      ]
+    },
+    {
+      "id": "levinson-torreira-2015",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4464110/",
+      "author": "Levinson and Torreira",
+      "date": "2015-06-12",
+      "title": "Timing in turn-taking and its implications for processing models of language",
+      "quotes": [
+        "the gaps between turns are short (of the order of 200 ms), but the latencies involved in language production are much longer (over 600 ms)",
+        "must predict (or 'project' as SSJ have it) the end of the current speaker's turn"
+      ],
+      "connects": [
+        "voice-agent-latency"
+      ]
+    },
+    {
+      "id": "openai-realtime-vad",
+      "url": "https://developers.openai.com/api/docs/guides/realtime-vad",
+      "author": "OpenAI",
+      "date": "2026-11-18",
+      "title": "Voice activity detection (VAD)",
+      "quotes": [
+        "\"silence_duration_ms\": 500",
+        "server_vad: Automatically chunks the audio based on periods of silence",
+        "This classifier scores the input audio based on the probability that the user is done speaking",
+        "user audio that trails off would result in a longer timeout than a definitive statement",
+        "input_audio_buffer.speech_stopped: The end of a speech turn",
+        "Server VAD is the default mode for speech-to-speech sessions"
+      ],
+      "connects": [
+        "voice-agent-latency"
+      ]
+    },
+    {
+      "id": "livekit-turn-detection",
+      "url": "https://docs.livekit.io/agents/logic/turns/",
+      "author": "LiveKit",
+      "date": "2026-11-18",
+      "title": "Turn detection and interruptions",
+      "quotes": [
+        "Predicts end of turn from both the meaning of speech and its acoustic properties",
+        "Recommended for most agents, and the default",
+        "VAD only When you need minimal latency"
+      ],
+      "connects": [
+        "voice-agent-latency"
+      ]
+    },
+    {
+      "id": "wikipedia-magical-number-seven",
+      "url": "https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "The Magical Number Seven, Plus or Minus Two",
+      "quotes": [
+        "published in 1956 in Psychological Review",
+        "the number of objects an average human can hold in short-term memory is 7 ± 2"
+      ],
+      "connects": [
+        "context-windows-vs-memory"
+      ]
+    },
+    {
+      "id": "ruler-paper-2024",
+      "url": "https://arxiv.org/abs/2404.06654",
+      "author": "Hsieh et al.",
+      "date": "2024-04-09",
+      "title": "RULER: What's the Real Context Size of Your Long-Context Language Models?",
+      "quotes": [
+        "We evaluate 17 long-context LMs with 13 representative tasks in RULER",
+        "While these models all claim context sizes of 32K tokens or greater, only half of them can maintain satisfactory performance at the length of 32K"
+      ],
+      "connects": [
+        "context-windows-vs-memory"
+      ]
+    },
+    {
+      "id": "google-seo-starter-guide",
+      "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "SEO Starter Guide",
+      "quotes": [
+        "Google primarily finds pages through links from other pages it already crawled"
+      ],
+      "connects": [
+        "docs-seo"
+      ]
+    },
+    {
+      "id": "google-links-crawlable",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "Make your links crawlable",
+      "quotes": [
+        "with an href attribute"
+      ],
+      "connects": [
+        "docs-seo"
+      ]
+    },
+    {
+      "id": "google-build-sitemap",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "Build and submit a sitemap",
+      "quotes": [
+        "Use fully-qualified, absolute URLs in your sitemaps",
+        "if it's consistently and verifiably"
+      ],
+      "connects": [
+        "docs-seo"
+      ]
+    },
+    {
+      "id": "google-consolidate-duplicate-urls",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "Consolidate duplicate URLs",
+      "quotes": [
+        "Redirects: A strong signal that the target of the redirect should become canonical",
+        "Sitemap inclusion: A weak signal"
+      ],
+      "connects": [
+        "docs-seo"
+      ]
+    },
+    {
+      "id": "google-title-link",
+      "url": "https://developers.google.com/search/docs/appearance/title-link",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "Influencing title links",
+      "quotes": [
+        "Write descriptive and concise text for your",
+        "Content in og:title meta tags"
+      ],
+      "connects": [
+        "docs-seo"
+      ]
+    },
+    {
+      "id": "google-block-indexing",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/block-indexing",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "Block Search indexing with noindex",
+      "quotes": [
+        "the crawler will never see the noindex rule, and the page can still appear in search results"
+      ],
+      "connects": [
+        "docs-seo"
+      ]
+    },
+    {
+      "id": "wikipedia-rtfm",
+      "url": "https://en.wikipedia.org/wiki/RTFM",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "RTFM",
+      "quotes": [
+        "typically used to reply to a basic question where the answer is easily found in the documentation"
+      ],
+      "connects": [
+        "documentation-best-practices"
+      ]
+    },
+    {
+      "id": "fastapi-handling-errors",
+      "url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+      "author": "FastAPI",
+      "date": "2026-11-18",
+      "title": "Handling Errors",
+      "quotes": [
+        "There are many situations in which you need to report an error to a client that is using your API",
+        "To return HTTP responses with errors to the client you use HTTPException"
+      ],
+      "connects": [
+        "documentation-best-practices"
+      ]
+    },
+    {
+      "id": "github-rest-rate-limits",
+      "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+      "author": "GitHub",
+      "date": "2026-11-18",
+      "title": "Rate limits for the REST API",
+      "quotes": [
+        "x-ratelimit-remaining The number of requests remaining in the current rate limit window",
+        "you should not retry your request until after the time, in UTC epoch seconds, specified by the x-ratelimit-reset header"
+      ],
+      "connects": [
+        "documentation-best-practices"
+      ]
+    },
+    {
+      "id": "gauge-cli-2026-11",
+      "url": "https://raw.githubusercontent.com/gauge-sh/gauge-cli/HEAD/README.md",
+      "author": "Gauge",
+      "date": "2026-11-04",
+      "title": "Gauge CLI README (Show HN 50371090)",
+      "quotes": [
+        "Gauge runs real agents against your product, captures where they get stuck"
+      ],
+      "connects": [
+        "documentation-best-practices"
+      ]
+    },
+    {
+      "id": "hn-cloudflare-kv-title-2026-10",
+      "url": "https://hn.algolia.com/api/v1/items/50253748",
+      "author": "jacquesm (Hacker News)",
+      "date": "2026-10-27",
+      "title": "Comment on the Cloudflare KV cache report (thread 50252159)",
+      "quotes": [
+        "instead of naming other (imo innocent) parties in the title",
+        "This doesn't really have anything to do with GLM-5.3"
+      ],
+      "connects": [
+        "cloudflare-kv-cache-incident-report"
+      ]
     }
   ],
   "unused_leads": [
@@ -4918,6 +5276,23 @@
       "harness",
       "agent",
       "the harness in these docs is the loop and the tool registry, and you host it"
+    ],
+    "voice-agent-latency": [
+      "over"
+    ],
+    "context-windows-vs-memory": [
+      "context"
+    ],
+    "docs-seo": [
+      "Overview"
+    ],
+    "documentation-best-practices": [
+      "read the manual",
+      "may throttle traffic"
+    ],
+    "cloudflare-kv-cache-incident-report": [
+      "our tests passed, so we assumed the error path worked",
+      "we fixed it"
     ]
   }
 }
