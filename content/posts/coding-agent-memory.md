@@ -15,181 +15,107 @@ bridges:
 - slug: agent-memory-2026
   reason: A coding agent's memory files follow the same write, store and read path.
 date: '2026-05-06'
-description: The memory persistence patterns that actually work for AI coding assistants,
-  and why most agents lose context between sessions.
+description: 'A coding agent forgets between sessions because the model keeps no state. What Claude Code, Codex, Gemini CLI and Cursor each load back in, from their docs.'
 slug: coding-agent-memory
 status: published
 work_note: 'Mem0 sells memory for agents, and I joined it in February 2026 to run its writers. That makes me an interested party on why coding agents forget, and [my portfolio](/portfolio/) shows the work.'
 title: 'Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in AI
   Coding Assistants'
+updated: 2026-11-17
 ---
 
-The first time I watched a coding agent forget a six-hour refactoring session, I assumed it was a bug. It was not.
+HTTP forgets you between requests, and the fix has been in every browser since the 1990s. [Wikipedia's history of the cookie](https://en.wikipedia.org/wiki/HTTP_cookie) dates the idea to June 1994 at Netscape, and describes what a cookie does: the browser sends it back "with every request, introducing states (memory of previous events) into otherwise stateless HTTP transactions."
 
-The forgetting was the designed behavior of a system that treats memory as optional.
+A coding agent forgets everything in a new session for the same reason a web server did. The model keeps nothing between sessions, and what looks like memory is a file that the tool reads back in at the start of each one.
 
-Working with Claude Code on a Django-to-FastAPI migration, I had watched the agent map out the entire model layer, document the migration order, and track which endpoints needed rewriting. Then I closed the terminal.
+The parallel breaks on who writes the note. A server sets its own cookie, and the file a coding agent reads is one that you write.
 
-When I opened a new session the next morning, the agent greeted me like a stranger. No memory of the migration.
+On the pages cited below, only Claude Code's describes the agent adding notes of its own.
 
-No record of what we had completed. Back to zero.
+## Why does a coding agent forget between sessions?
 
-Claude Code is not unusual here. Every coding agent I have tested works this way by default.
+Because the model has no memory of its own, and the session is the only place the conversation was held. Cursor's [documentation on rules](https://cursor.com/docs/rules) says it without decoration.
 
-Session context is ephemeral by design, and the persistence mechanisms exist but are easy to miss if you do not know what to look for.
+"Large language models don't retain memory between completions. Rules provide persistent, reusable context at the prompt level."
 
-## Why Coding Agents Forget by Default
+Anthropic's docs put the same fact as the first line of [their memory page](https://code.claude.com/docs/en/memory): "Each Claude Code session begins with a fresh context window." A decision made on Tuesday reaches Wednesday's session only if it was written to a file the tool loads.
 
-Forgetting comes from how these agents are architected. A coding agent running in a terminal operates in layers that each retain information differently.
+[Context windows vs memory](/articles/context-windows-vs-memory/) explains the general split. The rest of this page is about what each tool loads.
 
-The first layer is session context. Everything the agent knows about the current task lives in the context window of a running process.
+## What does each tool carry into a new session?
 
-Close that process and the context is gone. None of that is a bug.
+Each of the four reads instruction files from a personal location and from the project. The table is taken from each vendor's documentation as it read on November 17, 2026.
 
-Stale context from old sessions causes more problems than forgotten context does, so engineers building these systems made ephemeral memory the default. The broader point about [why context windows and memory are not the same thing](/articles/context-windows-vs-memory/) is worth internalizing before you try to fix persistence issues, because the failure modes are different and so are the solutions.
+| Tool | File you write | Personal location | Loading rule the docs state |
+| --- | --- | --- | --- |
+| Claude Code | `CLAUDE.md`, or an existing `AGENTS.md` | `~/.claude/CLAUDE.md` | Files above the working directory load at launch |
+| Codex | `AGENTS.md` | `~/.codex/AGENTS.md` | Read "once per run", up to 32 KiB combined by default |
+| Gemini CLI | `GEMINI.md` | `~/.gemini/GEMINI.md` | Concatenated and sent "to the model with every prompt" |
+| Cursor | Rules in `.cursor/rules`, or `AGENTS.md` | User rules, "Global to your Cursor environment" | Included "at the start of the model context" when applied |
 
-Project-level memory files form the second layer. Claude Code uses `CLAUDE.md` in your project root.
+Codex's [AGENTS.md guide](https://developers.openai.com/codex/guides/agents-md) is the only one of the four that gives a hard size cap. It stops adding files "once the combined size reaches the limit defined by `project_doc_max_bytes` (32 KiB by default)", so a long file near the root can crowd out a nearer one.
 
-Cursor uses similar project memory conventions. These files persist across sessions and survive restarts, though the agent does not update them automatically.
+Gemini CLI's [page on GEMINI.md](https://geminicli.com/docs/cli/gemini-md/) carries a banner saying that unpaid users were moved to another tool in June 2026. I've kept the row because the file convention is the point of comparison.
 
-Cross-session persistent memory is the third layer. Claude Code has a SQLite database at `~/.claude/memory.db` that stores what the agent learns across sessions.
+## Which of them takes notes for you?
 
-The database only exists once you run the agent with the `--memory` flag. Without that flag, nothing is created, and every session starts fresh.
+Claude Code does, and the other pages cited here describe only files that a person writes. Anthropic calls the feature auto memory and describes it as "notes Claude writes itself based on your corrections and preferences".
 
-An agent can have access to working context, project files, and persistent memory while its operator treats them as one system. The agent looks like it has memory because you have been working with it for days.
+Those notes stay on the machine that wrote them, and only the top of their index loads into a session. [How memory works in Claude Code](/articles/claude-code-memory/) covers the limits.
 
-Restart the terminal, though, and the session layer is gone. The project files still hold what you wrote manually.
+An agent that writes its own notes will also write wrong ones. Whichever tool you use, a note that is loaded every session is trusted every session, so the files need the review any shared document gets.
 
-The SQLite database, if it exists, holds what the agent chose to record. That uneven combination is what makes the experience feel inconsistent: one day the agent recalls a decision you never wrote down, the next day it forgets a constraint you mentioned an hour ago.
+## Can one file serve every tool?
+
+For instructions, yes. [AGENTS.md](https://agents.md/) describes itself as "A simple, open format for guiding coding agents, used by over 60k open-source projects", and asks you to "Think of AGENTS.md as a README for agents".
+
+Codex and Cursor read it by name, and Anthropic's memory page says Claude Code can read it "so a repository already set up for other coding agents works without adding a `CLAUDE.md`". The site says the format "is now stewarded by the Agentic AI Foundation under the Linux Foundation."
+
+So a team using several tools can keep one instruction file. What stays tool-specific is everything beyond instructions, such as Cursor's path-scoped rules and Claude Code's auto memory.
+
+## Is forgetting inside a session the same problem?
+
+No. A long session can lose its own early turns once the context window fills, because the harness has to drop or summarize something to make room.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/coding-agent-memory/sliding-window.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/coding-agent-memory/sliding-window.narrow.svg" width="288" height="200"><img class="np-has-narrow" src="/static/images/diagrams/coding-agent-memory/sliding-window.svg" width="720" height="232" alt="A row of conversation turns with the context window bracketed over the most recent ones. As each new turn is appended on the right, the oldest turns fall off the left edge and out of the model's view." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Each new turn joins on the right while the oldest fall off the left edge and out of the model's view.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/coding-agent-memory/sliding-window.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/coding-agent-memory/sliding-window.narrow.svg" width="288" height="200"><img class="np-has-narrow" src="/static/images/diagrams/coding-agent-memory/sliding-window.svg" width="720" height="232" alt="A row of conversation turns with the context window bracketed over the latest ones. As each new turn is appended on the right, the oldest turns fall off the left edge and out of the model's view." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Each new turn joins on the right in a harness that truncates, and the oldest fall out of the model's view.</figcaption>
 </figure>
 
-## How Memory Serialization Actually Works
+That loss happens with every instruction file loaded and working. [Short-term memory for agents](/articles/short-term-agent-memory/) covers it, including which instructions survive a compaction.
 
-The serialization layer is where persistence either happens or does not. I covered serialization patterns in depth in [my post on memory serialization between sessions](/articles/memory-serialization/), but the short version for coding agents follows.
+## What about the conversation itself?
 
-When you run Claude Code with `--memory`, the agent gains the ability to write entries to a SQLite database. These entries are retrievable in future sessions and are scoped by project.
+The transcript is on disk, and no tool reads it back by default. Ellie Huxtable made the point when announcing [Atuin Threads](https://blog.atuin.sh/threads-agent-sessions/) on October 27, a feature that syncs agent sessions between machines.
 
-Working in a repository called `api-gateway`, the agent stores findings tagged with that project. Switch to a different directory and those entries do not surface unless you specifically query for them.
+"Agent sessions store the lot of it. Every command, its output, my intent, and everything I tried along the way to the eventual solution."
 
-The scoping behaves like a per-project drawer rather than one shared shelf: a fact the agent learned about `api-gateway` does not bleed into your work on `billing-service` unless you go pull it across yourself.
+Her complaint is that the record goes unused: "while my shell history follows me everywhere, my agent sessions do not." The tool's answer is to make sessions searchable and resumable, including in a different agent from the one that started them.
 
-The schema has five columns: id, content, project, created_at, updated_at, and tags. The content field holds whatever the agent decided to remember.
+I think that is the right layer to add next, and it is a different thing from memory. A resumed session brings back everything, and a memory file holds the few lines that were worth keeping.
 
-The project field scopes retrieval. The tags field lets you filter.
+## How do you check what your agent remembers?
 
-```python
-import sqlite3
+Ask the tool to show what it loaded. Each one has a way.
 
-conn = sqlite3.connect('/home/ubuntu/.claude/memory.db')
-cur = conn.cursor()
+- Claude Code: `/memory` lists the instruction and memory files in the session.
+- Codex: the guide suggests `codex --ask-for-approval never "Summarize the current instructions."`
+- Gemini CLI: `/memory show` prints the combined context.
 
-# Check how many entries exist after a week of use
-cur.execute("SELECT COUNT(*) FROM memory_entries;")
-print(f"Total entries: {cur.fetchone()[0]}")
+If a rule you care about is absent from that output, the agent never had it. If it is present and ignored, the file is too long or the rule too vague, and [the CLAUDE.md guide](/articles/claude-md/) has the fixes.
 
-# Check entries for a specific project
-cur.execute("""
-    SELECT content, created_at 
-    FROM memory_entries 
-    WHERE project = 'api-gateway'
-    ORDER BY created_at DESC 
-    LIMIT 5;
-""")
-for row in cur.fetchall():
-    print(f"{row[1]}: {row[0][:100]}")
-```
+For work that spans sessions, write the handoff yourself before closing the terminal: what is done, what is next, and what was decided. [Memory serialization](/articles/memory-serialization/) covers the general form of that note.
 
-The entries do not accumulate automatically. The agent writes to this database when you explicitly ask it to remember something, or when it decides a finding is significant enough to record.
+## FAQ
 
-I have run sessions where the database gained 15 entries, all of them genuine findings like which service owned a shared schema. I have also run sessions where the count stayed at zero because I never asked the agent to track anything, even after an afternoon of real work.
+**Why does my coding agent forget everything when I start a new session?**
 
-The project file `CLAUDE.md` works differently. You write it.
+The model keeps no state between sessions. Only the instruction files the tool loads, and any notes the tool saves, carry over.
 
-The agent reads it on every session start, yet it does not update it unless you specifically ask. Read-only access by default is intentional. `CLAUDE.md` is your file, encoding your decisions, and the agent respects that ownership the way it would not silently rewrite a config file you committed.
+**Does AGENTS.md work in Claude Code?**
 
-## The Failure Modes to Check
+Yes. Anthropic's memory documentation says Claude Code can read an existing `AGENTS.md` as the project instructions.
 
-Context window exhaustion is the failure mode that bites most coding agents. During a large task, the agent accumulates file reads, tool results, and reasoning in the context window.
+**Is a resumed session the same as memory?**
 
-A large context window can still fill during a repository migration. Each opened file, tool result, patch, and test run consumes part of the same finite budget.
-
-The agent started dropping older file contents from context and making decisions based on incomplete information. It happened with no error, the same way a person three hours into a meeting answers confidently about a slide they no longer remember.
-
-Just quietly wrong code, like reintroducing an import I had already told it to delete.
-
-Checkpointing is the fix. For long tasks, I write periodic summaries to `CLAUDE.md` or the SQLite database, usually after every handful of files: which modules are done, which are still pending, and any decision that would be expensive to rediscover.
-
-The [short-term memory patterns for AI agents](/articles/short-term-agent-memory/) that I wrote about apply directly here. The context window is short-term memory.
-
-What you serialize to disk is long-term memory. The agent needs both, and you need to manage the boundary explicitly.
-
-Schema drift is a second failure mode. A stable SQLite schema does not mean the content written into it stays compatible with every reader.
-
-An entry written six months ago might use a format that the current agent interprets differently, like a note that says "use the new auth flow" when there have since been two newer ones. To handle that, I review and prune memory entries monthly.
-
-Entries older than 90 days get audited. When the content no longer reflects project reality, I delete it.
-
-Cross-session continuity breaks in a third way I did not anticipate. A coding agent can have good memory within a session and zero memory across sessions when the persistence layer is not connected properly.
-
-Diagnose it with a specific test: start a session, do meaningful work, close the terminal, open a new session, and ask the agent what it remembers. An answer of nothing means the persistence layer is not working.
-
-## The Practical Fixes That Actually Work
-
-Enable `--memory` on every session. Add an alias to your shell profile so it is not extra typing.
-
-```bash
-# In your .bashrc or .zshrc
-alias cc='claude --memory'
-```
-
-Verify the database is being written to. Run this between sessions.
-
-```bash
-sqlite3 ~/.claude/memory.db "SELECT COUNT(*) FROM memory_entries;"
-```
-
-A count of zero after a week of regular use means the agent is not writing anything. Either `--memory` is not active, or the agent is not deciding that anything is worth recording.
-
-When it is the second case, you need to prompt more explicitly. A line like "remember that the auth service uses JWT with RS256" triggers a database write where a passing mention of the same fact will not.
-
-The [practical guide to AI memory management for LLMs](/articles/ai-memory-management/) covers the eviction and retention decisions behind what gets written and what gets dropped, which helps explain why some entries appear and others do not.
-
-Reach for `CLAUDE.md` for what you know the agent needs on every session: architecture decisions, coding standards, team conventions, environment setup, the fact that tests run under `make test` and not `pytest` directly. These do not change often and the agent reads them automatically.
-
-Living in version control with your code makes it the most reliable memory mechanism you have.
-
-The SQLite database is for cross-session tracking. I use it for migration status, known issues, and findings that span multiple projects.
-
-A customer support agent might track user preferences here. A coding agent tracks technical debt and architectural findings.
-
-Store full conversation logs separately if you need them. The [layered memory model for AI systems](/articles/ai-memory-management/) makes the case for separating structured state from raw log data.
-
-The log is append-only and grows unbounded. The structured state is what the agent uses to make decisions.
-
-I keep a sliding window of recent log entries for reconstruction and serialize the structured state independently.
-
-## What This Means for Long-Running Codebase Work
-
-Across weeks or months on the same codebase, the memory architecture matters more than the model choice. A Sonnet 4 with good memory discipline outperforms an Opus 4 with none.
-
-A model that can access relevant context from six months ago, like the reason a particular table was denormalized, will make better decisions about a large refactoring than a model that starts fresh every session and proposes undoing that choice.
-
-The [episodic, semantic, and working memory map](/articles/agent-memory-types/) I wrote covers this in detail. Episodic memory is what happened in specific sessions.
-
-Semantic memory is what the agent knows about the codebase as a whole. Working memory is what is active right now.
-
-Coding agents are good at working memory, poor at episodic memory without explicit serialization, and inconsistent at semantic memory unless you maintain the project files.
-
-All of which means treating memory management as part of your workflow, not an optional feature. Before starting a large task, establish what the agent needs to know.
-
-During the task, serialize significant findings. After the task, verify that what you want remembered was actually written to a persistent layer.
-
-For the broader context, [state of AI agent memory in 2026](/articles/agent-memory-2026/) covers the full landscape of memory approaches across different agent systems. The patterns are similar even when the implementations differ.
-
-Agents that ship with real memory discipline are still the exception. Coding agents mostly give you the tools and expect you to know how to use them.
-
-Once you understand how the persistence layers work, the forgetting problem is solvable. It just requires treating memory as something you architect, not something that happens automatically.
+No. Resuming reloads one conversation, and memory is a small set of notes that every later session reads.
