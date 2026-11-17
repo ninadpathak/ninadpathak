@@ -31,7 +31,7 @@ sections:
   - heading: "Protocols"
     spokes:
       - post: model-context-protocol
-        note: "Explains how MCP connects a model to data sources and tools."
+        note: "Explains MCP as it works after the 2026 stateless revision, with the messages printed from a running server."
       - post: mcp-server-tutorial
         note: "Builds a docs search server in Python and tests it without a model."
   - heading: "A single agent or several"

@@ -3790,6 +3790,137 @@
       "connects": [
         "shared-vs-isolated-memory"
       ]
+    },
+    {
+      "id": "mcp-architecture-docs",
+      "url": "https://modelcontextprotocol.io/docs/learn/architecture",
+      "author": "Model Context Protocol",
+      "date": "2026-11-17",
+      "title": "Architecture overview",
+      "quotes": [
+        "does not dictate how AI applications use LLMs or manage the provided context",
+        "Local MCP servers that use the STDIO transport typically serve a single MCP client",
+        "MCP is a stateless protocol",
+        "are deprecated as of protocol version 2026-07-28",
+        "MCP recommends using OAuth to obtain authentication tokens",
+        "Calling server/discover is optional"
+      ],
+      "connects": [
+        "model-context-protocol"
+      ]
+    },
+    {
+      "id": "mcp-spec-2026-07-28",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28",
+      "author": "Model Context Protocol",
+      "date": "2026-07-28",
+      "title": "Specification 2026-07-28",
+      "quotes": [
+        "takes some inspiration from the Language Server Protocol",
+        "Tools represent arbitrary code execution and must be treated with appropriate caution",
+        "While MCP itself cannot enforce these security principles at the protocol level"
+      ],
+      "connects": [
+        "model-context-protocol"
+      ]
+    },
+    {
+      "id": "mcp-changelog-2026-07-28",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/changelog",
+      "author": "Model Context Protocol",
+      "date": "2026-07-28",
+      "title": "Key Changes",
+      "quotes": [
+        "Make MCP stateless: remove the",
+        "Remove protocol-level sessions and the Mcp-Session-Id header from the Streamable HTTP transport",
+        "servers MUST implement this RPC to advertise their supported protocol versions",
+        "a single long-lived POST-response stream for opted-in server-to-client change notifications",
+        "explicit, server-minted handles passed as ordinary tool arguments"
+      ],
+      "connects": [
+        "model-context-protocol"
+      ]
+    },
+    {
+      "id": "mcp-spec-tools",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools",
+      "author": "Model Context Protocol",
+      "date": "2026-07-28",
+      "title": "Tools",
+      "quotes": [
+        "self-correct and retry with adjusted parameters",
+        "They are reported in tool results with isError: true"
+      ],
+      "connects": [
+        "model-context-protocol"
+      ]
+    },
+    {
+      "id": "mcp-spec-stdio",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio",
+      "author": "Model Context Protocol",
+      "date": "2026-07-28",
+      "title": "stdio transport",
+      "quotes": [
+        "Messages are delimited by newlines, and MUST NOT contain embedded newlines"
+      ],
+      "connects": [
+        "model-context-protocol"
+      ]
+    },
+    {
+      "id": "mcp-versioning",
+      "url": "https://modelcontextprotocol.io/specification/versioning",
+      "author": "Model Context Protocol",
+      "date": "2026-11-17",
+      "title": "Versioning",
+      "quotes": [
+        "The current protocol version is 2026-07-28"
+      ],
+      "connects": [
+        "model-context-protocol"
+      ]
+    },
+    {
+      "id": "anthropic-mcp-announcement-2024",
+      "url": "https://www.anthropic.com/news/model-context-protocol",
+      "author": "Anthropic",
+      "date": "2024-11-25",
+      "title": "Introducing the Model Context Protocol",
+      "quotes": [
+        "Published Nov 25, 2024",
+        "we're open-sourcing the Model Context Protocol (MCP)"
+      ],
+      "connects": [
+        "model-context-protocol"
+      ]
+    },
+    {
+      "id": "wikipedia-odbc",
+      "url": "https://en.wikipedia.org/wiki/Open_Database_Connectivity",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Open Database Connectivity",
+      "quotes": [
+        "ODBC 1.0 was released in September 1992",
+        "ODBC accomplishes DBMS independence by using an ODBC driver as a translation layer between the applic"
+      ],
+      "connects": [
+        "model-context-protocol"
+      ]
+    },
+    {
+      "id": "hn-mcp-explained-2026-11",
+      "url": "https://hn.algolia.com/api/v1/items/50379528",
+      "author": "nater5000 (Hacker News)",
+      "date": "2026-11-05",
+      "title": "Comment on MCP Explained (thread 50379249)",
+      "quotes": [
+        "basically just a REST API with standardized endpoints for discovery aimed at agents"
+      ],
+      "connects": [
+        "model-context-protocol"
+      ]
     }
   ],
   "unused_leads": [
