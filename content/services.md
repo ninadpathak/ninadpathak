@@ -26,7 +26,7 @@ proof:
 
 I write for AI and developer-tool companies whose readers are engineers. That reader opens a terminal next to your page and tries the first command, so I run it first.
 
-The [portfolio](/portfolio/) links my published work for Firecrawl and Mem0. My page as a [freelance technical writer for AI companies](/services/freelance-technical-writer-for-ai-companies/) lists the work in that field by company.
+The [portfolio](/portfolio/) links my published work for Firecrawl and Centus. My page as a [freelance technical writer for AI companies](/services/freelance-technical-writer-for-ai-companies/) lists the work in that field by company.
 
 ## How to hire me
 
@@ -69,9 +69,9 @@ An agency fits when you need many topics covered in parallel. An independent wri
 
 This page lists no rate. Send the scope through the contact details in [how to hire me](#how-to-hire-me) for a quote.
 
-**Which companies have you written for?**
+**Which companies have you worked with?**
 
-I've written for Semrush, Adobe, TinyFish, Mastra, Manicule, OpenComputer, Firecrawl, Graphite, Mem0 and Centus. My [portfolio](/portfolio/) links selected published work.
+I've worked with Semrush, Adobe, TinyFish, Mastra, Manicule, OpenComputer, Firecrawl, Graphite, Mem0 and Centus. My [portfolio](/portfolio/) links selected published work.
 
 **Do you use AI to write?**
 
