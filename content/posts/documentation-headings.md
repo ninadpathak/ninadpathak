@@ -20,7 +20,7 @@ updated: 2026-11-17
 video: documentation-headings
 ---
 
-Stripe's [webhook guide](https://docs.stripe.com/webhooks) has nine second-level headings. Of those, six name an action, such as "Create a handler", and the rest name a subject, such as "Event delivery behaviours", which is the British spelling Stripe served to my region.
+Stripe's [webhook guide](https://docs.stripe.com/webhooks) has nine second-level headings. Of those, six name an action, such as "Create a handler", and the rest name a subject, such as "Event delivery behaviors", which is the British spelling Stripe served to my region.
 
 That split is the rule for documentation headings, taken from a page built on it. A heading should tell a scanning reader what the section contains.
 
@@ -109,12 +109,12 @@ curl -sL https://docs.stripe.com/webhooks.md | grep '^## '
 ## Optional: Create an event destination for Connect
 ## Optional: Create an event destination for Organisations
 ## Debug webhook integrations
-## Event delivery behaviours
+## Event delivery behaviors
 ## Best practices for using webhooks
 ## See also
 ```
 
-The outline reads as the job in order: set up, create, test, debug. The reference material sits under "Event delivery behaviours", and its own subheadings are noun phrases such as "Automatic retries" and "Event ordering".
+The outline reads as the job in order: set up, create, test, debug. The reference material sits under "Event delivery behaviors", and its own subheadings are noun phrases such as "Automatic retries" and "Event ordering".
 
 Compare that with labels such as `Setup`, `Testing`, and `Errors`. Those labels may be acceptable inside a tightly scoped interface, but they do not describe a task or subject by themselves.
 

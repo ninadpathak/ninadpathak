@@ -1512,7 +1512,7 @@
       "title": "Receive Stripe events in your webhook endpoint",
       "quotes": [
         "## Create a handler",
-        "## Event delivery behaviours",
+        "## Event delivery behaviors",
         "## Best practices for using webhooks",
         "### Automatic retries",
         "### Event ordering"
