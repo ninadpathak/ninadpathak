@@ -877,7 +877,8 @@
         "5 Fable 5.1 45.60% $14.24",
         "6 Muse Wonder 1.0 42.40% $3.76 7 Gemini 4 Argon 39.20% $4.66",
         "3 Sonnet 5.5 51.20% $10.09",
-        "pass@1, averaged over five independent runs per task"
+        "pass@1, averaged over five independent runs per task",
+        "Different models fail in different ways"
       ],
       "connects": [
         "coding-models-new-code-vs-change",
@@ -1298,7 +1299,8 @@
         "Released November 2026",
         "has a 1M tokens context window",
         "Time to first answer token 208.11s",
-        "# 1 / 81"
+        "# 1 / 81",
+        "Claude Fable 5.2 has a time to first answer token of 208.11s (max), 48.22s (xhigh), 23.65s (high), 9.20s (medium), and 7.22s (low)"
       ],
       "connects": [
         "best-llms-for-coding",
@@ -2159,7 +2161,10 @@
       "date_note": "Last updated November 18, 2025.",
       "title": "Time to First Byte (TTFB)",
       "quotes": [
-        "measures the time between starting navigating to a page and when the first byte of a response begins to arrive"
+        "measures the time between starting navigating to a page and when the first byte of a response begins to arrive",
+        "precedes every other meaningful loading performance metric",
+        "Because TTFB isn't a Core Web Vitals metric",
+        "Published: October 26, 2021"
       ],
       "connects": [
         "time-to-first-token"
@@ -2186,7 +2191,8 @@
       "date": "2026-11-17",
       "title": "Speculative execution",
       "quotes": [
-        "work is done before it is known whether it is actually needed"
+        "work is done before it is known whether it is actually needed",
+        "if extra resources are available"
       ],
       "connects": [
         "speculative-decoding"
@@ -2254,7 +2260,9 @@
       "date": "2026-11-17",
       "title": "Handle tool calls",
       "quotes": [
-        "is_error (optional): Set to true if the tool execution resulted in an error."
+        "is_error (optional): Set to true if the tool execution resulted in an error.",
+        "Write instructive error messages",
+        "include what went wrong and what Claude should try next"
       ],
       "connects": [
         "agent-error-handling"
@@ -2322,7 +2330,9 @@
       "quotes": [
         "Level 2 (hands/on, eyes/on)",
         "An ADAS requires a human driver to handle tasks that the ADAS does not support.",
-        "Level 4 robotaxi service"
+        "Level 4 robotaxi service",
+        "In January 2026, Mercedes removed the feature from its cars in favor of an upcoming Level 2 capability.",
+        "In 2014, the association for transport and other industries SAE International published a six-level classification system"
       ],
       "connects": [
         "ai-agent-taxonomy"
@@ -2436,7 +2446,9 @@
         "built isn't the same as working in production",
         "DORA's 2025 research found AI adoption is now linked to higher delivery throughput, but to lower delivery stability.",
         "about ⅔ of their time at the whiteboard and ⅓ on the harness",
-        "I'm Rachel Laycock, CTO at Thoughtworks."
+        "I'm Rachel Laycock, CTO at Thoughtworks.",
+        "they got 80% done",
+        "senior engineers, infrastructure consultants and product people"
       ],
       "connects": [
         "red-build-nobody-reads"
@@ -2453,6 +2465,34 @@
       ],
       "connects": [
         "red-build-nobody-reads"
+      ]
+    },
+    {
+      "id": "mcp-spec-2026-07-28-tools",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/server/tools",
+      "author": "Model Context Protocol",
+      "date": "2026-07-28",
+      "title": "Tools (MCP specification, revision 2026-07-28)",
+      "quotes": [
+        "actionable feedback that language models can use to self-correct and retry with adjusted parameters",
+        "Clients SHOULD provide tool execution errors to language models to enable self-correction."
+      ],
+      "connects": [
+        "agent-error-handling"
+      ]
+    },
+    {
+      "id": "mcp-spec-2026-07-28-schema",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/schema",
+      "author": "Model Context Protocol",
+      "date": "2026-07-28",
+      "title": "Schema reference (MCP specification, revision 2026-07-28)",
+      "quotes": [
+        "calling the tool repeatedly with the same arguments will have no additional effect on its environment.",
+        "Clients should never make tool use decisions based on ToolAnnotations received from untrusted servers."
+      ],
+      "connects": [
+        "agent-error-handling"
       ]
     }
   ],
@@ -2627,7 +2667,8 @@
     "time-to-first-token": [],
     "speculative-decoding": [],
     "agent-error-handling": [
-      "The charge may have gone through and has not been retried"
+      "The charge may have gone through and has not been retried",
+      "connection timed out"
     ],
     "ai-agent-failures": []
   }

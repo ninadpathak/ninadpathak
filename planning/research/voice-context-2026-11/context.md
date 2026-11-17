@@ -142,7 +142,8 @@ Every script was run in scratch on 2026-11-17 and its printed output pasted into
 
 - ai-memory-management (batch 2b): narration L4, an on-screen caption and the end card title.
 - best-llms-for-coding (batch 3): narration L2 to L5 name March models and SWE-bench Verified. The embed is off until it is redone.
-- speculative-decoding (batch 5): the narration claims ownership of a model ("my 70B", "So I use speculative decoding"), says a verification pass "costs about the same as making one token", and gives two to three times faster as a general result. The page gives 2X-3X for the paper's T5-XXL run only. Root asked for the embed to come off, but `tests/test_article_video.py` and `tests/test_lastmod.py` use this post and its film as their fixture, so the `video` field stays until the test owner moves the fixture. The description in `video.yaml` no longer repeats the claims.
+- speculative-decoding (batch 5): the narration claims ownership of a model ("my 70B", "So I use speculative decoding"), says a verification pass "costs about the same as making one token", and gives two to three times faster as a general result. The page gives 2X-3X for the paper's T5-XXL run only. The embed came off once hub-build's commit 3b177090 stopped the video and lastmod tests depending on this post; before that, removing the `video` field failed two tests in `tests/test_article_video.py`.
+- ai-agent-failures (batch 5): the first twelve seconds argue that agents fail because "the patterns for running them are still being invented" and call it "a distributed systems problem", the thesis the page dropped for Real-SWE's measured causes. The specifics after that still match the page. The embed is off until it is redone.
 - ai-agent-taxonomy (batch 5): L1 and L2 say cost and blast radius rise by roughly an order of magnitude per type, which no source backs and the page no longer says. The embed is off until it is redone.
 
 ### Notes for the next batch
@@ -246,6 +247,20 @@ Openings follow Ninad's direction of 2026-11-17: start from something developers
 ### Notes for the next batch
 
 - `sources.json` is edited in nearly every commit, so a rebase conflicts on each one. Keep source additions out of piece commits and land them in the record commit.
-- Batch 4's review lessons were applied before review: no reading of output by line position, no "The same X" pivots, descriptive link anchors, descriptions that claim only what the page ran.
+- Batch 4's review lessons were only partly applied before review. Reading output by line position and vague link anchors were gone, and the batch 5 review still found four sentences opening "The same X", eight "[X] covers Y" hand-offs and one closing disclaimer repeated on three pages. All were fixed after that review.
 - Two pieces in one batch must not open on the same book. The essay first opened on the SRE book, which ai-agent-failures already uses.
+
+### Batch 5 review fixes (2026-11-17)
+
+The independent review found 2 blockers, 16 should-fix items and 12 notes. What changed in response:
+
+- agent-error-handling: the page said neither protocol tells a client whether a call can be repeated. MCP's schema defines `idempotentHint` and warns clients not to act on annotations from untrusted servers, and Anthropic's tool-use page tells authors to write instructive error messages. The page now cites all three and argues from them: the protocol carries a hint, the hint is untrusted, so the harness owns the retry decision. The title lost "What Nobody Tells You". The script's classifier now treats an unrecognised error as ambiguous, with a fourth run that shows it.
+- time-to-first-token: rebuilt around web.dev's own demotion of TTFB and two pieces of arithmetic on borrowed numbers (the spread across effort settings, and TTFT as a share of total latency in NVIDIA's table). Modelplane quotes went from seven to two, and the guide is dated as its page dates itself, October 2026. The title's second half changed because the page argued against it.
+- llm-token-budgets: the script prints the saving with the cache lapsing at three rates, down to a 20% loss, and the page states AWS's interest in the post it quotes.
+- speculative-decoding: the opening gives the condition under which speculation pays, quoted from the entry it cites, in place of a contrast that the Spectre reference contradicted.
+- ai-agent-failures: the page says its counts come from a benchmark, prints the top-ranked model's different breakdown, and moves the figure to the section it illustrates.
+- ai-agent-taxonomy: the two definitions no longer "fall in the same place", since Anthropic's cuts across the ladder; the five types are named in the second paragraph.
+- red-build-nobody-reads: corrected to what Laycock reports (who took part, "80% done", "frequently red"), which changelog list held which entry, and that Willison's remedy is the collapsed block.
+- Openings: the review found one device in one shape across six pieces. The known thing now sits first, second or runs through the piece, no opening has a sentence announcing where a parallel breaks, and the three undated references carry dates.
+- Hub model: the branch was rebased onto the hub commit. All seven pieces link their hub in the first 200 words and declare siblings and bridges; the essay sits in the coding agents hub with a line in its pillar file.
 
