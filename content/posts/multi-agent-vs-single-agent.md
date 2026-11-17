@@ -12,113 +12,86 @@ bridges:
 - slug: llm-context-windows
   reason: Each turn of the agent loop spends tokens and latency.
 date: '2026-04-27'
-description: The decision between one agent and many is not about capability. It is
-  about failure modes, latency, and operational complexity.
+description: 'Multi-agent systems vs a single agent: what a second agent buys, what it costs in tokens, where handoffs break, and a test for when to split.'
 slug: multi-agent-vs-single-agent
 status: published
 work_note: 'For Firecrawl I wrote about agent harnesses and agent tools, the parts an agent needs whether there is one or five. Whether a job needs more than one is the question here, and [those pieces are in my portfolio](/portfolio/).'
 title: 'Multi-Agent vs Single-Agent Systems: The Real Trade-offs'
+updated: 2026-11-17
 ---
 
-The first time I split a single agent into two, I thought I was solving a parallelism problem. What I actually did was create two new failure modes I did not have before.
+Martin Fowler wrote [Monolith First](https://martinfowler.com/bliki/MonolithFirst.html) in June 2015, after watching teams adopt microservices. His observation was that "Almost all the successful microservice stories have started with a monolith that got too big and was broken up", and that systems built as microservices from scratch tended to end in trouble.
 
-Treated like an architecture purity question, the single-vs-multi-agent decision pulls engineers into absolutes. One agent is too monolithic, so many agents must be better.
+Multi-agent systems put the same question to agent builders. A multi-agent system is several model loops, each with its own context window and a narrower job, passing work between them, and a single-agent system is one loop that does everything.
 
-Or the opposite claim: multiple agents introduce too much coordination overhead, so one agent is always the right call. Both framings are wrong.
+The parallel breaks at the interface. Services exchange requests with fixed fields, and agents hand each other prose, so a misunderstanding between two agents has no schema to fail against.
 
-The real question is what kind of failure you can afford.
+## What does a second agent buy?
 
-## What you actually get with a single agent
+More context to think with, on work that splits cleanly. Anthropic's account of [its multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system), published on June 13, 2025, reports that a lead agent with subagents "outperformed single-agent Claude Opus 4 by 90.2% on our internal research eval."
 
-A single agent loop is synchronous by default. Perceive, think, act, remember.
+The post's own explanation is about capacity. A separate analysis of a browsing benchmark in the post found that "token usage by itself explains 80% of the variance", and a system of agents spends more tokens because each one has a window to itself.
 
-Repeat. When it works, it works cleanly.
-
-When it fails, you get one trace, one error, one place to look.
-
-A single-agent loop can still fail at its tool boundary rather than in the loop architecture. [Production AI agent error patterns](/articles/agent-error-handling/) explains those tool-call failures.
-
-An agent would call a search tool that returned an empty array, or a database query that timed out after thirty seconds, and it would either retry sensibly or sit there spinning. Whatever broke, it broke in one place I could point at.
-
-A single agent working a complex task accumulates its whole history inside the context window. That history includes tool results, intermediate thoughts, and files read earlier in the task.
-
-Past a certain point, paying to feed that history into every reasoning step costs more than the step is worth, and the agent starts forgetting how the task began by the time it reaches the end. None of that is a software bug.
-
-It is a physics problem rooted in the [layered memory model for AI systems](/articles/ai-memory-management/).
-
-Serialization is the other constraint. A single agent does its steps in order, so if a task means scrape ten pages, summarize each, then compare them, the agent grinds through all ten scrapes one at a time before it touches the comparison.
-
-Batching prompts buys some throughput, but the loop itself runs nothing in parallel.
-
-## Where multi-agent systems pay off
-
-Two reasons pushed me toward multi-agent architectures. Specialization came first.
-
-A coding agent that also has to drive a file browser, a shell, and a PR reviewer is holding twenty-odd tool schemas in its head at once, and it starts misfiring: calling the shell when it meant to read a file, passing a diff to the wrong tool. Splitting those into separate agents let each one carry a handful of tools it understood cold.
-
-That is the pattern I later recognized as the [supervisor agent pattern](/articles/agent-design-space/) in production. The supervisor becomes an [agentic router](/glossary/agentic-router/) when it chooses which specialist receives each request.
-
-Isolation was the second reason. A research agent that goes off the rails and starts hallucinating sources should not be able to corrupt the state of a code generation agent working the same ticket.
-
-Giving each its own memory, context, and failure boundary keeps one wreck from spreading. Think of it like watertight compartments in a ship's hull: flooding one does not sink the rest.
-
-Speed gains are real but conditional. When two agents work independent sub-problems at the same time, latency drops toward the longest single branch rather than the sum of all of them.
-
-Break a task into three parallel workstreams and you can see something close to a 3x cut in wall-clock time. That only holds if the work is genuinely parallelizable and the agents are not stalling on each other for shared state.
+The eval is internal and the models in it date from 2025. I read the number as showing direction, and the mechanism behind it still applies: a subagent can read twenty pages and hand back a paragraph, which keeps the lead agent's window clear.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.narrow.svg" width="288" height="656"><img class="np-has-narrow" src="/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.svg" width="720" height="488" alt="A single agent runs one loop with one trace. A multi-agent system puts a supervisor over three workers, each with its own memory and failure boundary, so they can run independent work in parallel, but every handoff between them is a message boundary where things can break in transit." loading="lazy" decoding="async"></picture></a>
   <figcaption>Parallel workers cut wall-clock time only when the work is independent, and every handoff adds a place to fail.</figcaption>
 </figure>
 
-## The failure modes nobody talks about
+## What does it cost?
 
-What the architecture debates skip over is where multi-agent systems actually break: in transit, between agents.
+Tokens first. The same post says "agents typically use about 4× more tokens than chat interactions, and multi-agent systems use about 15× more tokens than chats."
 
-A single agent fails inside a loop you control. A multi-agent system fails across message boundaries, and the failures are quieter for it.
+By that arithmetic a multi-agent run costs a little under four times a single-agent run of the same task. Anthropic's condition for paying it is that "the value of the task is high enough to pay for the increased performance."
 
-The supervisor sends a task to a sub-agent and gets back JSON shaped nothing like what it expected. A sub-agent finishes its work cleanly, then the memory update never lands in the shared store.
+Coordination is the second cost, and the post is plain about where the design doesn't fit: "some domains that require all agents to share the same context or involve many dependencies between agents are not a good fit for multi-agent systems today." It names coding as an example.
 
-The coordinator dispatches tasks to three workers and one of them drops off the network without raising a single error.
+## Where do multi-agent systems break?
 
-Building a pipeline on [event-driven agent architectures](/articles/agent-design-space/) taught me this the slow way. The event bus was rock solid in testing.
+At the handoff, where one agent acts on a guess about what another meant. Walden Yan of Cognition made the case in [Don't Build Multi-Agents](https://cognition.ai/blog/dont-build-multi-agents) on June 12, 2025, a day before Anthropic's post.
 
-Under production load, message delivery turned non-deterministic. Agents would finish their work and publish results that nobody consumed, because the consumer had restarted and re-subscribed under a fresh consumer group.
+His example is a task to clone Flappy Bird, split between a subagent building the background and one building the bird. The first returns a background in the style of a different game, the second a bird that doesn't match, and a final agent is left to combine what he calls "these two miscommunications."
 
-Every dashboard said the system was alive. No actual work was moving through it.
+The rule he draws from it is "Actions carry implicit decisions, and conflicting decisions carry bad results". Each subagent made choices nobody wrote down, and the choices didn't agree.
 
-Error propagation is the other trap. Inside a single agent, an error stays local to the loop.
+His other rule is about what to pass along: "Share context, and share full agent traces, not just individual messages". A brief of two lines can't carry the decisions that led to it.
 
-Across agents, one bad output cascades the moment a downstream agent trusts it without validation, which is exactly what I described under [production AI agent errors](/articles/agent-error-handling/). Hand a planner agent garbage findings from a research agent and it will build its entire plan on that rotten foundation, confidently.
+## Do the two posts disagree?
 
-## Memory becomes exponentially more complex
+Less than their titles suggest. Anthropic's system splits a research question into searches that don't depend on each other, and Cognition's failure is two agents building parts of one artifact.
 
-Single-agent memory is one problem. Multi-agent memory is several interconnected ones.
+I think the line between them is whether the agents read or write. Agents that gather information in parallel can't contradict each other's work, and agents that each change the same thing can.
 
-Shared memory drags consistency into the picture. When Agent A writes to the shared store and Agent B reads from it a second later, has B actually seen A's write yet, or is it reading a value from before the commit landed?
+That matches the labels in my guide to the [types of AI agents](/articles/ai-agent-taxonomy/). Parallel readers are a safe first use of a second agent, and parallel writers need the shared context Yan asks for.
 
-Event-driven message passing trades that for a different headache: each agent holds its own view of state, and keeping those views in sync becomes my job, by hand.
+Claude Code's design follows the same line. A [subagent](/articles/claude-code-subagents/) there works in its own context window and returns only a final report, which suits a search and suits a joint edit badly.
 
-One failure burned me badly enough that I still remember the shape of it. A planning agent read the shared store expecting the research agent's findings to be there.
+## When should you split a single agent?
 
-The research agent had finished, no error, clean exit. It had written those findings to its own isolated memory, never to the shared store.
+Start with one agent, as Fowler's teams started with one service, and split when you can name the seam. Kadharmoideen Fadurudeen's [guide to multi-agent patterns](https://kadhar.dev/blog/multi-agent-systems-from-scratch), published in June and discussed on Hacker News on November 5, gives a test for staying put: "You can't yet say what each agent would own."
 
-The planner read an empty slot, assumed nothing had been found, and planned around a hole.
+The questions to put to a design are these.
 
-So I ended up wiring explicit synchronization into the workflow: each agent confirmed its writes had propagated before the next agent was cleared to start. That bought correctness at the cost of latency, and it made the workflow more serial, which chipped away at the very reason I had split into multiple agents to begin with.
+- Can the subtasks run without seeing each other's results?
+- Does each subagent only gather information, or does it change something?
+- Is the task worth several times the token bill?
+- Can a person trace a wrong answer back to the agent that produced it?
 
-The [shared versus isolated memory guide](/articles/shared-vs-isolated-memory/) separates that coordination choice from the wider memory hierarchy. The tradeoff is which failure mode the system can contain and explain.
+A no to the first question means the work belongs in one loop. A no to the last means the system needs logging before it needs more agents, since [agents fail](/articles/ai-agent-failures/) in ways that are hard to reconstruct even with one.
 
-## When to make the call
+Memory is the last thing a split changes. Several agents either share a store or keep their own, and [shared vs isolated memory](/articles/shared-vs-isolated-memory/) covers that choice, with [agent design patterns](/articles/agent-design-space/) for the ways to wire them together.
 
-My heuristic is plain. For a task with one clear goal whose steps run linear or lightly branched, say "read this repo, find the bug, open a PR", a single agent with good [context window management](/articles/llm-context-windows/) gets there faster and springs fewer surprises.
+## FAQ
 
-When the work splits into genuinely independent streams, demands tool sets that share no schemas, or needs real concurrency to hit a latency target, I reach for multiple agents.
+**What is a multi-agent system?**
 
-The decision is operational, not architectural. The question I sit with is which failure I am choosing to live with.
+It is a system in which several AI agents, each with its own context and tools, pass work between them to complete a task.
 
-A single agent that fails completely tends to be easier to recover than a multi-agent system that fails partially and keeps running in a broken state, reporting success the whole time.
+**Are multi-agent systems better than a single agent?**
 
-I have shipped both. The multi-agent systems felt more impressive going in.
+For broad research that splits into independent searches, Anthropic reported a large gain in 2025. For tasks where the parts depend on each other, a single agent avoids the handoff errors.
 
-The single-agent systems were easier to debug when things went wrong.
+**Why do multi-agent systems cost more?**
+
+Each agent has its own context window to fill. Anthropic's 2025 figures put multi-agent systems at about 15 times the tokens of a chat, against about 4 times for a single agent.
