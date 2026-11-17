@@ -10,7 +10,7 @@ bridges:
 - slug: short-term-agent-memory
   reason: Forgetting inside one session is a separate failure, covered there.
 date: '2026-05-06'
-description: 'A coding agent forgets between sessions because the model keeps no state. What Claude Code, Codex, Gemini CLI and Cursor each load back in, from their docs.'
+description: 'Coding agent memory compared across Claude Code, Codex, Gemini CLI and Cursor: the files each loads into a new session, and which ones write their own notes.'
 slug: coding-agent-memory
 status: published
 work_note: 'Mem0 sells memory for agents, and I joined it in February 2026 to run its writers. That makes me an interested party on why coding agents forget, and [my portfolio](/portfolio/) shows the work.'
@@ -19,52 +19,60 @@ title: 'Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in
 updated: 2026-11-17
 ---
 
-A coding agent forgets everything in a new session because the model keeps nothing between sessions. What looks like memory is a file that the tool reads back in at the start of each one.
+A coding agent forgets everything when you start a new session because the model keeps nothing between sessions. Coding agent memory is whatever files the tool reads back in at the start of the next one, and the four tools compared here differ on who writes those files.
 
-HTTP had this problem first. [Wikipedia's history of the cookie](https://en.wikipedia.org/wiki/HTTP_cookie) dates the fix to June 1994 at Netscape, a small piece of data that the browser sends back "with every request, introducing states (memory of previous events) into otherwise stateless HTTP transactions."
+You already know the pattern from `.env` files. The [dotenv README](https://github.com/motdotla/dotenv) describes a module "that loads environment variables from a `.env` file", which is a file you write once and a program reads on every start.
 
-A server sets its own cookie, and the file a coding agent reads is one that you write. On the pages cited below, only Claude Code's describes the agent adding notes of its own, which is the main difference among the four [coding agents](/articles/coding-agents/) compared here.
+Instruction files work the same way, and all but one of these [coding agents](/articles/coding-agents/) now add something a `.env` file never had, which is notes the agent writes for itself. So I'll go through what each tool loads, which ones take notes, and how you can check what yours has in front of it.
 
 ## Why does a coding agent forget between sessions?
 
-Because the model has no memory of its own, and the session is the only place the conversation was held. Cursor's [documentation on rules](https://cursor.com/docs/rules) says it without decoration.
+Because the model has no memory of its own, and the session is the only place the conversation was held. Cursor's [documentation on rules](https://cursor.com/docs/rules) is blunt about it.
 
 "Large language models don't retain memory between completions. Rules provide persistent, reusable context at the prompt level."
 
-Anthropic's docs put the same fact as the first line of [their memory page](https://code.claude.com/docs/en/memory): "Each Claude Code session begins with a fresh context window." A decision made on Tuesday reaches Wednesday's session only if it was written to a file the tool loads.
+Anthropic's [memory page](https://code.claude.com/docs/en/memory) opens on the same fact: "Each Claude Code session begins with a fresh context window." So a decision you made on Tuesday reaches Wednesday's session only if it got written to a file the tool loads.
 
 ## What does each tool carry into a new session?
 
-Each of the four reads instruction files from a personal location and from the project. The table is taken from each vendor's documentation as it read on November 17, 2026.
+Each of the four reads instruction files you write, and all but Cursor can also write notes of their own. Every cell comes from the vendor's documentation as it read on November 17, 2026.
 
-| Tool | File you write | Personal location | Loading rule the docs state |
+| Tool | File you write | Notes the agent writes | Default |
 | --- | --- | --- | --- |
-| Claude Code | `CLAUDE.md`, or an existing `AGENTS.md` | `~/.claude/CLAUDE.md` | Files above the working directory load at launch |
-| Codex | `AGENTS.md` | `~/.codex/AGENTS.md` | Read "once per run", up to 32 KiB combined by default |
-| Gemini CLI | `GEMINI.md` | `~/.gemini/GEMINI.md` | Concatenated and sent "to the model with every prompt" |
-| Cursor | Rules in `.cursor/rules`, or `AGENTS.md` | User rules, "Global to your Cursor environment" | Included "at the start of the model context" when applied |
+| Claude Code | `CLAUDE.md`, falling back to `AGENTS.md` | Auto memory, a `MEMORY.md` index with topic files | On in local sessions |
+| Codex | `AGENTS.md` | Memories generated from earlier chats | Off |
+| Gemini CLI | `GEMINI.md` | A memory tool that edits its Markdown files, plus Auto Memory | Auto Memory off |
+| Cursor | Rules in `.cursor/rules`, or `AGENTS.md` | None documented | |
 
-Codex and Claude Code both state a hard size limit. Codex's [AGENTS.md guide](https://developers.openai.com/codex/guides/agents-md) stops adding files "once the combined size reaches the limit defined by `project_doc_max_bytes` (32 KiB by default)", so a long file near the root can crowd out a nearer one.
+Codex and Claude Code both state a size limit on the files you write. Codex's [AGENTS.md guide](https://developers.openai.com/codex/guides/agents-md) stops adding files "once the combined size reaches the limit defined by `project_doc_max_bytes` (32 KiB by default)", so a long file near the root can crowd out a nearer one.
 
-Claude Code's memory page sets its limit per file, for instruction files that load on demand: 40,000 characters in a session with a 200K context window. A file over the limit reaches the model only in part, with a note telling it to read the rest.
-
-Gemini CLI's [page on GEMINI.md](https://geminicli.com/docs/cli/gemini-md/) carries a banner saying that unpaid users were moved to another tool in June 2026. I've kept the row because the file convention is the point of comparison.
+Claude Code loads a launch file whole as long as it is 4 MiB or smaller, and puts a tighter limit on instruction files that load on demand, 40,000 characters in a session with a 200K context window. A file over that second limit reaches the model only in part, with a note telling it to read the rest.
 
 ## Which of them takes notes for you?
 
-Claude Code does, and the other pages cited here describe only files that a person writes. Anthropic calls the feature auto memory and describes it as "notes Claude writes itself based on your corrections and preferences".
+Claude Code, Codex and Gemini CLI all do, and they disagree about how much to trust the agent with it.
 
-Those notes stay on the machine that wrote them, and only the top of their index loads into a session. The limits are set out in the guide to [Claude Code's memory files](/articles/claude-code-memory/).
+Claude Code trusts the agent furthest, with auto memory on by default. Anthropic describes it as "notes Claude writes itself based on your corrections and preferences", and [my guide to Claude Code's memory files](/articles/claude-code-memory/) goes through how much of it loads.
 
-An agent that writes its own notes will also write wrong ones. Whichever tool you use, a note that is loaded every session is trusted every session, so the files need the review any shared document gets.
+Codex makes you opt in. Its [Memories page](https://developers.openai.com/codex/customization/memories) says "Local Codex memories are off by default", and once enabled, "Codex can turn useful context from eligible prior chats into local memory files."
+
+Gemini CLI splits the job in two. Its [memory tool](https://geminicli.com/docs/tools/memory) "persists durable facts, user preferences, and project details by editing Markdown memory files directly", and a separate feature called [Auto Memory](https://geminicli.com/docs/cli/auto-memory/) mines old sessions for more.
+
+That second feature is the cautious one. The page calls it "an experimental feature", says "Auto Memory is off by default", and holds every proposed note "in a project-local inbox until you approve or discard them."
+
+And Cursor? Its documentation describes rules, which people write, and has no page for agent-written memory.
+
+Here's why the differences matter. An agent that writes its own notes will also write wrong ones, and a note that loads every session gets trusted every session, so the review step Gemini builds in is one you'd want to do by hand in the other two.
 
 ## Can one file serve every tool?
 
-For instructions, yes. [AGENTS.md](https://agents.md/) describes itself as "A simple, open format for guiding coding agents, used by over 60k open-source projects", and asks you to "Think of AGENTS.md as a README for agents".
+For instructions, yes, with a condition for two of the tools. [AGENTS.md](https://agents.md/) describes itself as "A simple, open format for guiding coding agents, used by over 60k open-source projects", and the site says the format "is now stewarded by the Agentic AI Foundation under the Linux Foundation."
 
-Codex and Cursor read it by name, and Anthropic's memory page says Claude Code can read it "so a repository already set up for other coding agents works without adding a `CLAUDE.md`". The site says the format "is now stewarded by the Agentic AI Foundation under the Linux Foundation."
+Codex and Cursor read it by name. Claude Code reads it too, with a condition the docs spell out: "By default, Claude reads `AGENTS.md` only when you have no `CLAUDE.md` in your working directory or above it."
 
-So a team using several tools can keep one instruction file. What stays tool-specific is everything beyond instructions, such as Cursor's path-scoped rules and Claude Code's auto memory.
+So if your repository has both files, Claude Code uses `CLAUDE.md` and ignores the other unless you import it. Gemini CLI needs a setting, since `GEMINI.md` is its default name and the `context.fileName` property is where you add `AGENTS.md`.
+
+Which means one shared file works once each tool is pointed at it. [The CLAUDE.md guide](/articles/claude-md/) has the one-line import that makes Claude Code read the shared file.
 
 ## Is forgetting inside a session the same problem?
 
@@ -75,39 +83,45 @@ No. A long session can lose its own early turns once the context window fills, b
   <figcaption>Each new turn joins on the right in a harness that truncates, and the oldest fall out of the model's view.</figcaption>
 </figure>
 
-That loss happens with every instruction file loaded and working. [Short-term memory for agents](/articles/short-term-agent-memory/) covers it, including which instructions survive a compaction.
+That loss happens with every instruction file loaded and working. [Short-term memory for agents](/articles/short-term-agent-memory/) explains which instructions survive a compaction.
 
 ## What about the conversation itself?
 
-The transcript is on disk, and no tool reads it back by default. Ellie Huxtable made the point when announcing [Atuin Threads](https://blog.atuin.sh/threads-agent-sessions/) on October 27, a feature that syncs agent sessions between machines.
+The transcript is on disk in every one of these tools, and two of them have started reading it back. Codex builds its memories from prior chats, and Gemini's Auto Memory page says it "scans those transcripts for durable facts".
+
+A third approach leaves the transcript whole. Ellie Huxtable announced [Atuin Threads](https://blog.atuin.sh/threads-agent-sessions/) on October 27, a feature that syncs agent sessions between machines, with the complaint that "while my shell history follows me everywhere, my agent sessions do not."
+
+Her point is that the record is already complete.
 
 "Agent sessions store the lot of it. Every command, its output, my intent, and everything I tried along the way to the eventual solution."
 
-Her complaint is that the record goes unused: "while my shell history follows me everywhere, my agent sessions do not." The tool's answer is to make sessions searchable and resumable, including in a different agent from the one that started them.
-
-I think that is the right layer to add next, and it is a different thing from memory. A resumed session brings back everything, and a memory file holds the few lines that were worth keeping.
+So a tool now has a choice of what to do with an old conversation: distill it into notes without asking, propose notes for you to approve, or keep it searchable and resumable. I'd take the last two over the first, because both leave a person able to see what was kept.
 
 ## How do you check what your agent remembers?
 
-Ask the tool to show what it loaded. Each one has a way.
+Ask the tool to show what it loaded, and each one has a command for that.
 
-- Claude Code: `/memory` lists the instruction and memory files in the session.
+- Claude Code: `/context all` lists the loaded files under Memory files, and `/memory` opens them for editing.
 - Codex: the guide suggests `codex --ask-for-approval never "Summarize the current instructions."`
 - Gemini CLI: `/memory show` prints the combined context.
 
-If a rule you care about is absent from that output, the agent never had it. If it is present and ignored, the file is too long or the rule too vague, and [the CLAUDE.md guide](/articles/claude-md/) has the fixes.
+If a file you care about is missing from that output, the agent never had it. And for work that spans sessions, write the handoff yourself before you close the terminal: what's done, what's next, and what was decided.
 
-For work that spans sessions, write the handoff yourself before closing the terminal: what is done, what is next, and what was decided. [Memory serialization](/articles/memory-serialization/) covers the general form of that note.
+That note is a small piece of serialized state, and [memory serialization](/articles/memory-serialization/) describes the general form.
 
 ## FAQ
 
 **Why does my coding agent forget everything when I start a new session?**
 
-The model keeps no state between sessions. Only the instruction files the tool loads, and any notes the tool saves, carry over.
+The model keeps no state between sessions. Only the instruction files the tool loads, and any notes the tool has saved, carry over.
+
+**Which coding agents write their own memory?**
+
+Claude Code does by default. Codex does once you enable memories, and Gemini CLI has a memory tool plus an experimental Auto Memory feature that asks for approval.
 
 **Does AGENTS.md work in Claude Code?**
 
-Yes. Anthropic's memory documentation says Claude Code can read an existing `AGENTS.md` as the project instructions.
+Yes, when the repository has no `CLAUDE.md`. If both exist, Claude Code reads `CLAUDE.md`, which can import the other file.
 
 **Is a resumed session the same as memory?**
 
