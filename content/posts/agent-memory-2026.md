@@ -8,272 +8,126 @@ siblings:
 bridges:
 - slug: hybrid-search
   reason: A memory read path is a retrieval problem.
-- slug: developer-onboarding-docs
-  reason: Onboarding documentation shows the same fragmentation problem in a field developers already know.
 - slug: model-context-protocol
-  reason: Memory is one step in the agent loop, and the agents hub covers the loop around it.
+  reason: Mem0 and Graphiti both publish a server that exposes memory over the protocol.
 - slug: rag-evaluation
   reason: A memory read path is a retrieval problem.
 date: 2026-04-19
-description: Agent memory spans working state, episodic history, retrieval, and consistency
-  controls. The right architecture depends on the agent's task and risk.
+description: Agent memory frameworks in 2026 differ on who writes a memory and what shape
+  it's stored in. How Letta, Mem0, Graphiti and Anthropic's memory tool answer those
+  questions, read from their current docs.
 status: published
 work_note: "Building an AI product whose readers are engineers? I'm Ninad Pathak, a freelance technical writer, and I write tutorials and technical articles for companies like yours after running the product myself. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
-title: State of AI Agent Memory in 2026
+title: Agent Memory Frameworks in 2026
 updated: '2026-08-17'
 slug: agent-memory-2026
 video: agent-memory-2026
 ---
 
-An agent can act on stale or contradictory state without realizing that its memory is wrong. The architecture therefore needs provenance, update rules, and evaluation, not only storage.
+An early paper in this category borrowed its idea from the operating system. [MemGPT](https://arxiv.org/abs/2310.08560), from October 2023, treats the context window the way an OS treats RAM: a small fast space, with a larger slow one behind it and something deciding what moves between them.
 
-The ecosystem offers several approaches to those problems, with different trade-offs in control, portability, and operational cost.
+That project is called Letta now, and it has company. Agent memory frameworks in 2026 are the libraries and services that store what an agent learns outside the context window and bring the relevant part back on a later turn.
 
+They've stopped agreeing on what that "something" is. Having read the current docs for four of them, I think the useful way to sort [agent memory](/articles/agent-memory/) frameworks is by two questions: who decides that a fact is worth writing down, and what shape it's stored in.
+
+I managed the writing team at Mem0 earlier this year, so read my notes on that one knowing it.
+
+## What does an agent memory framework do?
+
+An agent memory framework writes facts from a conversation into a store and reads the relevant ones back into the prompt later. A RAG pipeline reads a corpus somebody else wrote, and a memory framework also has to decide what to write.
+
+Say a support agent learns on Monday that a customer is on the enterprise plan. It should still treat them as an enterprise customer on Tuesday without being told again, and it should stop the day they downgrade.
+
+The read side looks the same in every framework I checked. Memories sit in storage, a retrieval step finds candidates for the current turn, and a ranking step picks the few that go into the context window.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/agent-memory-2026/memory-stack.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-memory-2026/memory-stack.narrow.svg" width="288" height="648"><img class="np-has-narrow" src="/static/images/diagrams/agent-memory-2026/memory-stack.svg" width="720" height="256" alt="The agent memory stack from the bottom up: an embedding and storage layer such as pgvector, Pinecone, or Qdrant holds memories outside the context window; a retrieval layer combines dense vectors with BM25; a ranking layer reorders candidates; and the result reaches the agent's context window, the active working state." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Storage, retrieval, and ranking are separate layers; only what survives ranking reaches the context window.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/agent-memory-2026/memory-stack.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-memory-2026/memory-stack.narrow.svg" width="288" height="648"><img class="np-has-narrow" src="/static/images/diagrams/agent-memory-2026/memory-stack.svg" width="720" height="256" alt="The read path of an agent memory framework, left to right: a storage layer holds memories outside the context window, a retrieval layer finds candidates, a ranking layer orders them, and the few that are left reach the agent's context window." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Every framework here reads the same way: storage, then retrieval, then ranking. Only what survives ranking reaches the context window.</figcaption>
 </figure>
 
-## The memory stack separates active state from stored knowledge
+So the read path is a retrieval problem, and the tools for it carry over: [hybrid search](/articles/hybrid-search/) for finding candidates, and the retrieval metrics from [RAG evaluation](/articles/rag-evaluation/) for scoring them. The write path is where the frameworks part ways.
 
-### Agent memory is categorically different from RAG
+## How do the main agent memory frameworks differ?
 
-Retrieval-Augmented Generation solved document question answering. You have a corpus, you embed it, you retrieve the relevant chunks, you pass them to the model.
+They differ on who writes a memory and on the shape it's stored in. Here's how four of them answer, from their docs as of November 18, 2026:
 
-That problem is well-understood and reasonably solved.
+| Framework | Who decides what to write | What gets stored |
+|---|---|---|
+| [Letta](https://docs.letta.com/guides/agents/memory) | The agent, by calling memory tools | Text blocks pinned in the prompt, plus a searchable archive |
+| [Mem0](https://docs.mem0.ai/core-concepts/memory-types) | The service, which extracts facts from the messages you send | Short facts with metadata and embeddings |
+| [Graphiti](https://help.getzep.com/graphiti/getting-started/overview) | The framework, which extracts entities and relationships | A knowledge graph whose facts carry time |
+| [Anthropic's memory tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool) | The model, by asking for file operations | Files in a directory your application owns |
 
-Agent memory is a different animal. An agent needs persistent identity, ongoing task state, learned preferences, and episodic recall all at once.
+I'd pick between them on the first column before the second. An agent that writes its own memory spends turns on it and can be asked why it wrote something, and a service that extracts in the background costs the agent nothing and is harder to question.
 
-Rather than answering questions about documents, it maintains a model of the world it operates in, updates that model in real time, and acts on it. A support agent that learned yesterday a customer is on the enterprise plan should still bill them as enterprise tomorrow without being told again.
+## How does Letta manage memory?
 
-The classic cognitive architecture trio is how I think about it: working memory (what the agent is actively reasoning about), episodic memory (what happened in past interactions), and semantic memory (structured facts and learned knowledge). A production agent needs all three working together as a unified memory layer rather than as three bolted-on systems.
+Letta keeps a small set of memory blocks inside the prompt and lets the agent edit them. Its docs describe the blocks as strings that the agent changes through memory tools, and a block attached to an agent is pinned to the system prompt.
 
-Where the two diverge in practice is the failure mode. RAG fails silently when retrieval quality degrades, and you catch it in your evaluation metrics.
+Everything that doesn't fit lives outside. Letta stores all messages, so the old ones can still be fetched after they've been compacted out of the window, and a separate [archival memory](https://docs.letta.com/guides/agents/archival-memory) holds what the agent chooses to file.
 
-Agent memory can fail loudly when the system acts on stale or contradictory state.
+That's the MemGPT design carried forward, and I think its cost is still the one the paper signed up for. The model manages its own paging, so some of every long task goes to deciding what to keep.
 
-### The stack separates storage, retrieval, and ranking
+## How does Mem0 manage memory?
 
-Production agent-memory systems tend to share a conceptual stack even when their implementations differ.
+Mem0 takes the writing decision away from the agent. You send it the conversation turns, and by default it stores facts extracted from them, so "I prefer aisle seats" becomes a stored preference and the transcript is dropped.
 
-At the bottom is the embedding and storage layer, where your memories live when they are not in the context window. PostgreSQL with pgvector, Pinecone, Weaviate, Qdrant, or just flat files depending on your scale.
+Reads are a search call scoped by `user_id`, `agent_id` or `run_id`. The docs say plainly where its job ends: "Your app decides which returned memories to include in the prompt."
 
-Storage migrations become expensive when memory reads and writes depend directly on one provider's schema. A stable interface reduces that coupling.
+If you'd rather extract nothing, there's a switch. Passing `infer=False` stores the raw messages, and I'd know which mode a deployment runs in before debugging a missing memory.
 
-Retrieval sits above storage, and it is where the fragmentation crisis is worst as well as where most of the interesting engineering is happening. Naive semantic search is the floor, not the ceiling.
+## How does Graphiti handle facts that change?
 
-Hybrid search combining dense vectors with BM25 lexical matching is now table stakes for anything where recall quality matters.
+Graphiti stores memory as a graph in which a fact has a period when it was true. Zep, the company behind it, uses Graphiti in its hosted product, and the docs list a bi-temporal model and fact invalidation among its parts.
 
-I wrote about hybrid search for production RAG systems in my piece on [BM25 and vector search combinations](/articles/hybrid-search/), and the same principles apply directly to agent memory retrieval. The difference is that agent memory retrieval needs to be faster and more contextual, because it happens inline with reasoning, not as a pre-retrieval step.
+The reason is in its own docs, which say Microsoft's GraphRAG was "primarily designed for static documents". A customer's plan isn't a static document, and the enterprise example above needs a store that can say the old fact ended.
 
-Ranking and re-ranking come next, fed by the retrieval layer, and here MemGPT's architecture separates itself from simpler approaches. MemGPT uses a tiered memory architecture that explicitly manages what stays in the context window and what gets paged out.
+An agent can act on a stale fact without knowing it's stale, so it's the question I'd put to any framework on the list. [Memory versioning](/articles/memory-versioning/) covers what an honest answer looks like, with an append-only ledger you can run.
 
-The LLM itself decides what to recall, which sounds elegant until you realize it means your LLM is spending tokens deliberating over memory management instead of the actual task in front of it.
+## What is Anthropic's memory tool?
 
-Cross-encoder and late-interaction reranking can improve multi-constraint retrieval at additional compute cost. Measure recall and latency on a labeled memory corpus before adding either one.
+Anthropic's memory tool gives Claude a directory of files and leaves the storage to you. Claude asks to create, read or edit a file under `/memories`, and your application carries out each request against storage it controls.
 
-### Research systems differ in control, representation, and deployment
+It's the plainest design of the four, and I mean that as praise. A memory you can open in a text editor is a memory you can review, which is the same thing I liked about [DeerFlow's Markdown files](/articles/deerflow-memory/).
 
-Research on AI memory systems in 2026 is easier to compare through design decisions than project names. Those decisions remain useful when a framework changes its API or a hosted product changes ownership.
+What you give up is retrieval. A directory has no ranking step, so finding the right note depends on how the model named its files.
 
-The control plane decides who moves information between active context and stored memory. Model-managed systems let the agent choose what to recall or archive, while application-managed systems express those transitions in code.
+## Can these frameworks be swapped over MCP?
 
-A hybrid can let the model propose a change and require the host to validate it.
+Partly. Mem0 and Graphiti each publish a server for the [Model Context Protocol](/articles/model-context-protocol/), so an MCP client can add and search memories in either without custom code, and Graphiti's docs call their server experimental.
 
-The representation determines which questions the store can answer directly. A flat fact store favors simple inspection, tiers separate always-present state from recall and archive, temporal graphs preserve changing relationships, and mounted hierarchies narrow retrieval by location before ranking.
+The protocol moves the calls and leaves the contents alone. A fact extracted by Mem0 and an edge in Graphiti's graph aren't the same record, so changing provider still means migrating the data.
 
-The deployment boundary assigns operational responsibility. Self-hosting keeps memory data and migration decisions under the team's control, while also making indexing, access control, backups, and evaluation the team's work.
+## How should you evaluate an agent memory framework?
 
-These choices should be compared with the same memory operations and task-level evaluation. A system that retrieves a fact accurately may still fail if it cannot supersede that fact, explain its source, or keep one subject's memory outside another subject's context.
+Test whether the agent does its job better with the memory than without it. Retrieval scores come first because they're cheap, and they aren't the end of it.
 
-## Current systems make those choices concrete
+[LongMemEval](https://arxiv.org/abs/2410.10813) is the benchmark I'd read before building my own test. Its authors split memory into indexing, retrieval and reading, and they report "a 30% accuracy drop" for commercial assistants and long-context models on information spread across long interactions.
 
-### Letta treats context as managed working space
+Reading is the stage people skip. The right facts in the wrong order can still produce a worse decision, for the reason the Lost in the Middle section of [context windows vs memory](/articles/context-windows-vs-memory/) gives: where a fact sits in the prompt changes whether the model uses it.
 
-Letta positions itself as an operating system for agent memory, and the metaphor is more accurate than most. The system treats the LLM context window as RAM and external memory as disk storage, the same swap mechanism your laptop uses when physical RAM runs out and pages spill to the SSD.
+So I'd write the test set around updates and contradictions. A customer who changed plans is a harder case than a customer who stated one, and it's the case that sends a wrong invoice.
 
-The agent manages its own memory via explicit system prompts that define how and when to read from and write to external memory stores.
-
-A concept called virtual context anchors the architecture, a logical context window that spans both the actual context and the external memory store. The agent reads relevant memories, incorporates them into its reasoning, and writes updated memories back to the store.
-
-The operating-system metaphor makes the separation between active context and external memory easier to reason about.
-
-Letta's production deployment supports three memory types: core memory (persistent identity and preferences), archival memory (searchable long-term storage), and recall memory (recent conversation history). The splitting of core and archival memory is deliberate.
-
-Core memory is small, high-value, and queried on every turn. Archival memory is large, lower-value, and retrieved selectively.
-
-Letta's architecture still needs load tests with the target agent, concurrency, memory volume, and deployment region. Platform pricing also needs to be calculated from the current plan rather than an article-level estimate.
-
-### MemGPT lets the model manage paging
-
-MemGPT launched with a strong academic pedigree, and it shows in the design. The system is built around the idea that modern LLMs have a limited attention window, and agents need a memory hierarchy similar to how operating systems manage RAM and disk.
-
-Letting the LLM manage its own memory via a tiered page system is the key innovation. The system prompts the LLM to decide when to move memories between the fast context layer and the slower external storage.
-
-Self-management of this kind is intellectually elegant and maps cleanly onto how humans think about memory. Where it stops mapping cleanly is how production systems actually behave.
-
-Self-managed memory can move important state out of active context at the wrong time. Evaluate that behavior with task traces, update tests, and an audit requirement before using it for consequential workflows.
-
-Memory versioning is another design question. Verify whether the selected system preserves history, supports rollback, and records why a memory changed.
-
-### Mem0 hides memory operations behind a small interface
-
-Mem0 takes the opposite approach from MemGPT. The pitch is an infrastructure layer for developers who need agent memory working in production this quarter, with the novel memory model left as someone else's research problem.
-
-The API surface is intentionally simple. You add memories with a single call, you query them, and the system handles embedding, storage, retrieval, and ranking underneath.
-
-Complexity lives in the implementation rather than the interface. For teams that have no wish to become memory infrastructure experts, that is the right trade-off.
-
-Mem0 separates user, session, and agent memory, a hierarchy that maps onto many multi-agent architectures.
-
-User-level memory holds preferences and facts that persist across sessions. Session-level memory holds what happened in the current conversation.
-
-Agent-level memory holds the agent's operational state and learned procedures.
-
-Mem0 and a custom vector-store implementation trade integration work against platform cost and control. Compare them with the same memory operations, retrieval labels, and engineering assumptions instead of using a universal crossover point.
-
-## The architecture still has unresolved boundaries
-
-### Consolidation and cross-agent sharing remain research problems
-
-Two areas have significant research backing but are not yet production-ready for most teams.
-
-The first is episodic memory consolidation. The idea is that agents should periodically review recent memories, extract high-value facts, and fold them into semantic memory, much the way sleep is thought to move the day's experiences into long-term storage in the brain.
-
-The research papers are compelling and the implementations are fragile. Consolidation logic can corrupt existing memories if it misclassifies a recent false memory as a stable fact, and detecting false memories is itself an unsolved problem.
-
-An agent that once heard a user say "actually, cancel that" out of context can permanently bake the cancellation into its semantic store.
-
-The second is cross-agent memory sharing. When multiple agents work on related tasks, they should share relevant memories without overwhelming each other's context.
-
-Cross-agent memory sharing adds coordination work because the system must decide what to publish and which observation wins. Treat it as research for the target workflow until a task-level evaluation shows a benefit.
-
-Larger context windows may change where external memory earns its cost, but they do not remove the need to test recall, updates, and conflicting state.
-
-### Framework fragmentation traps memory behind abstractions
-
-Every agent framework has its own memory abstraction, and none of them talk to each other. That is the whole situation in one sentence.
-
-LangChain has LangChain Memory. CrewAI has its own memory layer.
-
-AutoGen has memory plugins. LlamaIndex has memory components.
-
-Microsoft has its Copilot memory infrastructure. Google has Agent Space memory.
-
-None of these are compatible. Build your agent memory on LangChain's abstractions, decide to migrate to CrewAI, and you are starting your memory layer from scratch.
-
-Fragmentation like this carries real costs. Switching costs lock teams into their initial framework choice.
-
-Evaluation becomes impossible across frameworks because each system measures memory quality differently. Research findings do not transfer, because a technique that works in MemGPT's tiered memory model may not apply to Mem0's flat storage.
-
-I wrote about a similar fragmentation problem in [developer onboarding documentation](/articles/developer-onboarding-docs/), and the pattern is the same. When a problem space is new and fast-moving, everyone builds their own solution.
-
-When the space matures, standards emerge. The memory space is not mature yet.
-
-Debugging gets harder too. When an agent makes a bad decision based on faulty memory, the error could be in retrieval, ranking, storage, consolidation, or the context assembly logic.
-
-A monolithic system may offer a shorter trace. Framework middleware adds more places where state can be transformed or lost.
-
-### MCP standardizes transport, not memory meaning
-
-The Model Context Protocol (MCP) was never meant as a memory protocol, yet it has become one of the most important pieces of infrastructure for agent memory. My detailed breakdown of [how MCP works architecturally](/articles/model-context-protocol/) is worth reading before you design any memory system on top of it.
-
-What makes it matter is the standardized interface it provides for tools and data sources. Memory systems can expose themselves as MCP servers, which means any MCP-compliant agent can connect to any MCP-compliant memory system without custom code.
-
-Cross-framework memory portability finally has a credible path.
-
-Memory-provider support for MCP changes quickly. Check current vendor documentation before relying on a server or adapter.
-
-Its limit is that MCP standardizes the interface, not the memory model. Two MCP-compliant memory servers can have completely incompatible schemas.
-
-An agent switching from Letta to Mem0 via MCP still has to handle schema migration. MCP is a universal power plug that fits every socket, and the appliance on the other end still expects a particular voltage.
-
-It solves the transport problem and leaves the semantic one open.
-
-Teams building agent systems today should treat MCP as a required interface even when only one memory system is in use internally. Being able to swap providers without rewriting your agent's memory integration is worth the modest added complexity.
-
-
-## Selection starts with evidence from the target workflow
-
-### Evaluation must reach downstream task behavior
-
-You cannot improve what you cannot measure, and agent memory evaluation is hard in a way that RAG evaluation is not.
-
-RAG evaluation has established benchmarks. Retrieval quality has recall and MRR.
-
-Answer quality has faithfulness and relevance. Off-the-shelf evaluation frameworks work well enough for most teams.
-
-I covered [RAG evaluation metrics in depth](/articles/rag-evaluation/) and those principles apply, though they only cover part of the agent memory problem.
-
-Agent memory evaluation has to measure something different: does the agent make better decisions because of its memory? Answering that means evaluating downstream outcomes rather than retrieval quality alone.
-
-A memory system can have perfect recall and still produce worse agent behavior if it surfaces the right facts in the wrong order, or if it updates memories in a way that introduces subtle contradictions. Recall the customer's allergy and their favorite dish but present them in the wrong priority and the agent still recommends the thing that lands someone in the hospital.
-
-A useful evaluation has three layers. The bottom measures retrieval quality, the middle tests consistency and overriding behavior, and the top measures task performance with and without memory.
-
-The task layer matters most and costs the most to build because it requires representative tasks and deterministic grading.
-
-### A provider-independent interface preserves options
-
-Start with the smallest architecture that can preserve required state and explain updates. Compare hosted and self-managed options on retrieval quality, auditability, portability, latency, and the engineering cost of operating them.
-
-Define a provider-independent memory interface before product code depends on one schema. Build custom storage only when a measured requirement rules out the available platforms.
-
-### Standards and evaluations matter more than rankings
-
-Transport standards can reduce integration work without standardizing memory schemas. Evaluation will matter more as agents take consequential actions, especially tests for updates, contradictions, and task outcomes.
-
-Treat acquisition predictions and vendor rankings as speculation. Architecture decisions should rest on current product documentation and a reproducible evaluation of the target workflow.
-
-The memory stack is one of the most important infrastructure decisions you will make for your agent system. The space is immature and the stakes are high.
-
-Pick boring technology for the storage layer, pick a platform that matches your team's size and urgency, and invest heavily in evaluation before you need it.
-
-
-
-The stack becomes easier to judge inside one workload. A support workflow forces the design to keep identity, session scope, and validity attached to every retrieved memory because a stale fact can change the answer.
-
-## Related articles
-
-This cluster of articles covers the full AI memory stack. [Context windows vs memory](/articles/context-windows-vs-memory/) explains the boundary and includes long-context evaluation with Lost in the Middle and RULER.
-
-For implementation patterns, see [AI memory management for LLMs](/articles/ai-memory-management/).
-
-For short-term memory specifically, see [short-term memory for AI agents](/articles/short-term-agent-memory/).
+For the layer under all of this, [AI memory management](/articles/ai-memory-management/) covers what stays in the window, and [short-term memory for AI agents](/articles/short-term-agent-memory/) covers the session itself.
 
 ## FAQ
 
 **What is the difference between agent memory and RAG?**
 
-RAG is a retrieval pattern for document question answering. You have documents, you retrieve relevant chunks, you pass them to the model.
+RAG retrieves from documents that already exist. Agent memory also writes, which means deciding what's worth keeping and what an older fact should give way to.
 
-Agent memory is broader: it includes persistent identity, learned preferences, episodic recall, and ongoing task state. An agent uses memory to maintain a model of the world it operates in, going well beyond answering questions about documents.
+**Is MemGPT still a thing?**
 
-**Is MemGPT production-ready?**
+Yes, under another name. The project's repository describes Letta as formerly known as MemGPT, and the paper's design of in-context blocks with outside storage is still how Letta works.
 
-MemGPT's architecture is useful to study, but production readiness depends on the current implementation and the workload. Review its documentation and test consistency, audit history, and latency before adopting it.
+**Which agent memory framework should I start with?**
 
-**How does MCP help with agent memory?**
+I'd start with the plainest one that fits, which for a single agent may be a directory of files. Move to extraction or a graph when you can name the question the plain version can't answer.
 
-MCP provides a standardized interface for connecting AI systems to tools and data sources. Memory systems can expose themselves as MCP servers, which means any MCP-compliant agent can connect to any MCP-compliant memory system.
+**Does a bigger context window replace a memory framework?**
 
-Schema incompatibility stays your problem to solve, and the transport layer fragmentation goes away.
+Not on LongMemEval's evidence. The paper reports the accuracy drop for long-context models as well as for commercial assistants.
 
-**What evaluation metrics matter for agent memory?**
+**Do agent memory frameworks support MCP?**
 
-Three layers. Retrieval quality (recall, MRR, latency).
-
-Memory consistency (correct overriding behavior, minimal contradictions). Downstream task performance (does the agent complete tasks better with good memory).
-
-Only the third layer actually matters, but it requires the most investment to measure.
-
-**Should I build custom or use a platform?**
-
-Compare a platform with a custom implementation when the requirements are known. Include integration work, operations, portability, retrieval quality, and audit controls in that comparison.
-
-**What is the biggest risk in the current memory landscape?**
-
-Vendor lock-in and fragmentation. Every framework has its own memory abstraction, and switching costs are high.
-
-Building MCP-compliant interfaces and abstracting your memory layer from day one is the best defense against getting stuck with a memory platform that does not scale with your needs.
+Some do. Mem0 and Graphiti publish MCP servers, and Letta's docs list MCP tools among the tools an agent can call.

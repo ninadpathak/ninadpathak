@@ -45,7 +45,7 @@ sections:
   - heading: "The field and its tools"
     spokes:
       - post: agent-memory-2026
-        note: "Surveys agent memory architectures in 2026 and ties the choice to the agent's task and risk."
+        note: "Compares Letta, Mem0, Graphiti and Anthropic's memory tool by who writes a memory and what shape it is stored in."
       - post: hyperagents-memory
         note: "Walks through how HyperAgents layers memory and keeps session continuity."
       - post: deerflow-memory

@@ -1,7 +1,7 @@
 %% @fig 01
 %% @kicker The agent memory stack
-%% @alt The agent memory stack from the bottom up: an embedding and storage layer such as pgvector, Pinecone, or Qdrant holds memories outside the context window; a retrieval layer combines dense vectors with BM25; a ranking layer reorders candidates; and the result reaches the agent's context window, the active working state.
-%% @caption Storage, retrieval, and ranking are separate layers; only what survives ranking reaches the context window.
+%% @alt The read path of an agent memory framework, left to right: a storage layer holds memories outside the context window, a retrieval layer finds candidates, a ranking layer orders them, and the few that are left reach the agent's context window.
+%% @caption Every framework here reads the same way: storage, then retrieval, then ranking. Only what survives ranking reaches the context window.
 %% @path store>retr>rank>ctx
 %% @glyph store | store
 %% @glyph retr | vectors
