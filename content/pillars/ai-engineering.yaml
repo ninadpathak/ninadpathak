@@ -25,7 +25,7 @@ sections:
       - post: llm-inference-optimization
         note: "Covers which optimizations are engine defaults in late 2026 and how to size the KV cache."
       - post: kv-cache-eviction
-        note: "Compares KV cache eviction strategies and the accuracy each one puts at risk."
+        note: "Explains the KV cache, sizes it from a model config, and compares what each eviction policy keeps when it fills."
       - post: mixture-of-experts
         note: "Explains how a mixture-of-experts model activates a fraction of its parameters per token, and what that costs in memory."
       - post: llm-token-budgets
