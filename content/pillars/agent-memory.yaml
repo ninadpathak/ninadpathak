@@ -39,7 +39,7 @@ sections:
   - heading: "Several agents, and voice"
     spokes:
       - post: shared-vs-isolated-memory
-        note: "Sets shared against isolated memory for multi-agent systems, with what two SDKs do by default and a lost-update run."
+        note: "Sets shared against isolated memory for multi-agent systems, with what OpenAI's Agents SDK and Claude Code do by default and a lost-update run."
       - post: voice-agent-memory
         note: "Covers memory across a real-time streaming pipeline, where a voice agent has constraints a text chatbot lacks."
   - heading: "The field and its tools"

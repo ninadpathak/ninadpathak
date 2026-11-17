@@ -11,7 +11,7 @@ bridges:
 - slug: agent-error-handling
   reason: A rejected write to a shared store is an error the orchestrator has to handle.
 date: '2026-05-11'
-description: 'Shared memory lets every agent in a multi-agent system read one store. Isolated memory passes artifacts between them. What two SDKs do by default, and a lost-update run.'
+description: 'Shared memory lets every agent in a multi-agent system read one store. Isolated memory passes artifacts between them. What OpenAI''s Agents SDK and Claude Code do by default, and a lost-update run.'
 slug: shared-vs-isolated-memory
 status: published
 work_note: "I'm Ninad Pathak, and I freelance as a technical writer for AI companies. I build the example and run it before I draft a tutorial, so your engineers review working code. [Here's how we'd work together](/services/freelance-technical-writer-for-ai-companies/)."
@@ -25,7 +25,7 @@ Go programmers have a line for this choice. Andrew Gerrand's 2010 post on the Go
 
 Agents aren't goroutines, and a model can't take a lock. But two agents writing to one store can lose each other's work in the way two threads can, and the run further down shows it.
 
-Which way to go is a decision inside [AI agent memory](/articles/agent-memory/), and it only comes up once a system has more than one agent.
+The choice only comes up once a system has more than one agent, and it's one of the later ones in [AI agent memory](/articles/agent-memory/).
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.narrow.svg" width="288" height="1120"><img class="np-has-narrow" src="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.svg" width="720" height="640" alt="Two pipelines of the same three agents. In isolated memory the extractor hands its output to the validator, which hands its output to the summary agent, and nothing else passes between them. In shared memory all three use one common store: the extractor writes to it and the validator and summary agent read from it, so the validator can act on a conclusion the extractor later revises, marked as a failure on the store." loading="lazy" decoding="async"></picture></a>
@@ -38,7 +38,7 @@ The difference is where coordination lives. With isolated memory it lives in the
 
 With shared memory it lives in the store. Any agent can look up what any other agent wrote, drafts included, so the order of writes starts to matter.
 
-So isolated memory gives you a record of exactly what each agent saw. Shared memory gives each agent more to work with, and makes that record harder to rebuild.
+So isolated memory gives you a record of exactly what each agent saw, which is what you need to explain or debug a decision afterwards. Shared memory gives each agent more to work with, and makes that record harder to rebuild.
 
 ## What do agent frameworks do by default?
 
@@ -138,6 +138,10 @@ It's a store that every agent can read and write, such as a database or a messag
 **Is shared or isolated memory better for multi-agent workflows?**
 
 Isolated memory is the safer default, because each agent's input is a known artifact you can replay. Shared memory is worth its cost when agents work at once and need each other's confirmed findings.
+
+**How does shared versus isolated memory affect explaining an agent's decision?**
+
+With isolated memory you can explain a decision from one artifact, the input that agent was handed. With shared memory you also need the state of the store at the moment the agent read it.
 
 **How do you stop agents overwriting each other in shared memory?**
 

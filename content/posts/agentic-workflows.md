@@ -21,7 +21,7 @@ title: 'Agentic Workflows From Prompt to Pull Request'
 updated: 2026-11-17
 ---
 
-An agentic workflow is a repeatable process in which an AI agent does the work between two points a person controls: the statement of what done means, and the approval of the result. The agent runs alone in the middle, and the process decides what it's allowed to get wrong.
+An agentic workflow is a multi-step process that an AI agent plans and carries out with tools, deciding each next step from the last result. For coding work, the version I'd run puts the agent between two points a person controls: the statement of what done means, and the approval of the result.
 
 On November 4 someone asked Hacker News [what everyone's agentic setup looks like](https://news.ycombinator.com/item?id=50366117), and several hundred people answered. The answers disagree on the model, the harness and whether to sandbox at all.
 
@@ -30,7 +30,7 @@ Where they agree is smaller and more useful. A top reply, from someone who had t
 So this page is about the part that survives a change of tools, as it applies to [coding agents](/articles/coding-agents/).
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agentic-workflows/workflow-pipeline.narrow.svg" width="288" height="776"><img class="np-has-narrow" src="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg" width="720" height="264" alt="Five stages left to right: frame the task, scope it down, let the agent work against an instrumented loop, review the diff, and land it. Framing and review are the human's stages, marked with a person; the work stage is the agent's own loop." loading="lazy" decoding="async"></picture></a>
+  <a class="np-figure-zoom" href="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agentic-workflows/workflow-pipeline.narrow.svg" width="288" height="776"><img class="np-has-narrow" src="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg" width="720" height="264" alt="Five stages left to right: frame the task, scope it down, let the agent run with its own checks, review the diff, and land it. Framing and review are the human's stages, marked with a person; the work stage is the agent's own loop." loading="lazy" decoding="async"></picture></a>
   <figcaption>A person owns framing and review, the agent owns the run, and scoping and landing join the two.</figcaption>
 </figure>
 
@@ -70,7 +70,7 @@ Small enough that you can read the whole diff in one sitting. An agent will chan
 
 When the task is larger than that, split it into changes that each stand alone, each with its own frame and its own review. The sequence gets you to the large change through steps you can check.
 
-Scoping is also where you decide how many agents the task needs, and the answer is nearly always one. [Multi-agent vs single-agent systems](/articles/multi-agent-vs-single-agent/) goes through what a second agent costs.
+Scoping is also where you decide how many agents the task needs, and the answer is nearly always one. The costs of a second agent are in [multi-agent vs single-agent systems](/articles/multi-agent-vs-single-agent/).
 
 ## What should an agent run leave behind?
 
@@ -84,7 +84,7 @@ And a side task doesn't have to fill the main context. A [Claude Code subagent](
 
 Because the summary is what the agent believes it did, and the diff is what it did. The two differ in exactly the cases you care about.
 
-I'd read for the changes nobody asked for: a config flag flipped, an error swallowed, an assertion deleted so a test goes green. Those are quiet, and they pass every automated check the agent ran.
+I'd read for the changes nobody asked for: a config flag flipped, an error swallowed, an assertion deleted so a test goes green. Nothing flags them, and they pass every automated check the agent ran.
 
 Anthropic's docs suggest one more reader, a review by a fresh subagent that never saw the conversation and so isn't swayed by the reasoning that produced the code. I think that's a good second pass and a poor substitute for yours.
 
@@ -100,9 +100,9 @@ Let the agent draft the commit message and the description from the diff, then e
 
 **What is an agentic workflow?**
 
-It's a repeatable process in which an AI agent does the work between a person's statement of what done means and a person's approval of the result.
+It's a multi-step process that an AI agent plans and carries out with tools. The version on this page puts a person's statement of what done means before it and a person's approval after it.
 
-**Do I need a powerful model for an agentic workflow?**
+**Do I need a stronger model for an agentic workflow?**
 
 A stronger model finishes more in one pass. The frame and the review catch mistakes from any model, so they matter whichever one you run.
 

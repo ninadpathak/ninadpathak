@@ -18,7 +18,7 @@ updated: 2026-11-17
 
 Semantic caching stores the answer an LLM gave to a question and returns it again when a new question means the same thing. It decides "the same thing" by comparing embeddings, so two questions can match without sharing a word.
 
-An HTTP cache has a simpler job. [RFC 9111](https://www.rfc-editor.org/rfc/rfc9111.html) builds the cache key from the request method and the target URI, and notes that many caches in common use key on the URI alone.
+An HTTP cache has a simpler job. [RFC 9111](https://www.rfc-editor.org/rfc/rfc9111.html), from June 2022, builds the cache key from the request method and the target URI, and notes that many caches in common use key on the URI alone.
 
 Questions typed by people have no URI. The same request arrives in a hundred phrasings, so a cache in front of a [RAG pipeline](/articles/rag/) has to judge closeness, and that judgment is where it goes right or wrong.
 
@@ -107,7 +107,7 @@ How do I cancel my last order?              How do I cancel my subscription?  0.
 When does my plan renew?                    What is your return policy?       0.644   miss   miss   miss
 ```
 
-Look at the middle two rows. "Can I send an item back?" is a fair paraphrase of the return policy question and scores 0.761, and "How do I cancel my last order?" is a different request from cancelling a subscription and scores 0.807.
+"Can I send an item back?" is a question the return policy entry answers, and it scores 0.761, and "How do I cancel my last order?" is a different request from cancelling a subscription and scores 0.807.
 
 So the wrong match outscored a right one. No threshold serves the first without also serving the second, and at 0.80 the cache hands a customer the wrong answer.
 

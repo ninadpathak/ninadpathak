@@ -713,7 +713,7 @@ Ninad on /services/: "on the services page it's not obvious these are other serv
 | agentic-workflows, retitled "Agentic Workflows From Prompt to Pull Request" | Anthropic's Claude Code best practices, the November 4 Ask HN thread on agent setups | quotes re-fetched; film unembedded |
 | semantic-caching, retitled "Semantic Caching for LLM and RAG Applications" | RFC 9111, the 2024 GPT Semantic Cache paper, Redis's tuning guide | `semantic_cache_demo.py` run with bge-small-en-v1.5, output on the page |
 | agent-memory-types, retitled "Types of AI Agent Memory" | the 2023 CoALA paper, LangGraph's memory docs | `memory_types_demo.py` run, output on the page; film unembedded |
-| shared-vs-isolated-memory | OpenAI's Agents SDK handoff and orchestration docs, Claude Code's subagent docs | `shared_memory_demo.py` run, output on the page |
+| shared-vs-isolated-memory | OpenAI's Agents SDK handoff and orchestration docs, Claude Code's subagent docs (one SDK and one product) | `shared_memory_demo.py` run, output on the page |
 | deerflow-memory | DeerFlow's memory guide and contributor notes, fetched from the repository | no code; figure redrawn; film unembedded |
 | chrome-modern-web-guidance-notes (new essay, technical-documentation) | the project README, one guide, the Show HN thread of November 10 | opinion-led, one quote |
 

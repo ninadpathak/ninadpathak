@@ -61,8 +61,8 @@ The same goes for the other signals. A changelog puts the entries that need acti
 
 None of that is new, and all of it is editing. Deciding what a busy reader must see first is the work a technical writer does on a page, applied here to a build light.
 
-Laycock's team reckoned they spent about two thirds of their time at the whiteboard and the rest on the harness. The harness is where these signals get designed, beside the [CLAUDE.md file](/articles/claude-md/) that tells the agent the rules.
-
 Where a person's review sits in the whole process is in my page on [agentic workflows](/articles/agentic-workflows/).
+
+Laycock's team reckoned they spent about two thirds of their time at the whiteboard and the rest on the harness. The harness is where these signals get designed, beside the [CLAUDE.md file](/articles/claude-md/) that tells the agent the rules.
 
 And the first number I'd settle there is how many times a day a person can be asked to stop.
