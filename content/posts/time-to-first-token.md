@@ -20,6 +20,8 @@ Web performance has been through this with Time to First Byte. web.dev's [TTFB g
 
 A first byte arrives before anything is painted. Reasoning models have put TTFT in that position, because their first token can be thinking that never reaches the screen.
 
+TTFT and tokens per second are the two numbers that [LLM inference](/articles/ai-engineering/) is tuned against, and the first of them is the subject here.
+
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/time-to-first-token/ttft-chain.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/time-to-first-token/ttft-chain.narrow.svg" width="288" height="704"><img class="np-has-narrow" src="/static/images/diagrams/time-to-first-token/ttft-chain.svg" width="720" height="288" alt="The latency chain to the first token: the request crosses the network, waits in the queue, and the model prefills the prompt; together those make up time to first token. After the first token, generation streams the rest at the model's throughput." loading="lazy" decoding="async"></picture></a>
   <figcaption>Time to first token covers the network trip, the queue and the pass that reads the prompt, and generation starts after it.</figcaption>

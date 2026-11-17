@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/ai-agent-failures/failure-modes.mmd",
-  "hash": "3e450871e39ec5f8",
+  "hash": "774f8b4eb463d4b8",
   "pele": "1.8.0",
   "width": 720,
   "height": 488,
@@ -18,7 +18,7 @@
       "mono": 11
     }
   },
-  "alt": "The agent loop drawn as a ring of perceive, think, act, and remember, with two failure points marked. At act, a tool call times out, the agent retries, and the action executes twice. At perceive, context pollution lets one agent's scratch work leak into another's prompt.",
-  "caption": "Timeouts, retries, partial failure, and drifting state: underneath, a distributed systems problem.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/ai-agent-failures/failure-modes.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/ai-agent-failures/failure-modes.narrow.svg\" width=\"288\" height=\"888\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/ai-agent-failures/failure-modes.svg\" width=\"720\" height=\"488\" alt=\"The agent loop drawn as a ring of perceive, think, act, and remember, with two failure points marked. At act, a tool call times out, the agent retries, and the action executes twice. At perceive, context pollution lets one agent's scratch work leak into another's prompt.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Timeouts, retries, partial failure, and drifting state: underneath, a distributed systems problem.</figcaption>\n</figure>"
+  "alt": "The agent loop drawn as a ring of perceive, think, act and remember, with two failure points marked. At act, a tool call times out, the agent retries, and the action executes twice. At perceive, context left over from earlier work reaches the model's prompt.",
+  "caption": "The ordinary class of agent failure: a timed-out call that is retried runs twice, and stale context reaches the next step.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/ai-agent-failures/failure-modes.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/ai-agent-failures/failure-modes.narrow.svg\" width=\"288\" height=\"888\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/ai-agent-failures/failure-modes.svg\" width=\"720\" height=\"488\" alt=\"The agent loop drawn as a ring of perceive, think, act and remember, with two failure points marked. At act, a tool call times out, the agent retries, and the action executes twice. At perceive, context left over from earlier work reaches the model's prompt.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The ordinary class of agent failure: a timed-out call that is retried runs twice, and stale context reaches the next step.</figcaption>\n</figure>"
 }

@@ -1,7 +1,7 @@
 %% @fig 01
 %% @kicker Where the loop breaks
-%% @alt The agent loop drawn as a ring of perceive, think, act, and remember, with two failure points marked. At act, a tool call times out, the agent retries, and the action executes twice. At perceive, context pollution lets one agent's scratch work leak into another's prompt.
-%% @caption Timeouts, retries, partial failure, and drifting state: underneath, a distributed systems problem.
+%% @alt The agent loop drawn as a ring of perceive, think, act and remember, with two failure points marked. At act, a tool call times out, the agent retries, and the action executes twice. At perceive, context left over from earlier work reaches the model's prompt.
+%% @caption The ordinary class of agent failure: a timed-out call that is retried runs twice, and stale context reaches the next step.
 %% @ring perceive>think>act>remember | 116 | 56
 %% @glyph perceive | eye corner=cross
 %% @glyph think | core

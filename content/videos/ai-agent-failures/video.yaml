@@ -1,7 +1,7 @@
 # Narrated explainer for /articles/ai-agent-failures/, imported by tools/import_video.py from
 # ninadpathak-video films/ai-agent-failures (render of 2026-10-28T17:27:06+05:30).
 name: Why AI agents fail in production in 40 seconds
-description: 'Why AI agents fail in production: a distributed systems problem underneath, retries that double-execute, reliability that multiplies down across agents, and the circuit breaker and observability to add first.'
+description: A 40-second narrated summary of an earlier version of the article on why AI agents fail. The film is not embedded until it is re-rendered.
 upload_date: '2026-10-28T17:27:06+05:30'
 duration_seconds: 40
 width: 1920

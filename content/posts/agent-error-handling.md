@@ -23,6 +23,8 @@ The failures themselves are old. The [fallacies of distributed computing](https:
 
 What an agent adds is the reader of the error. A model shown "connection timed out" after a payment call has to guess whether the customer was charged, and nobody can unit-test that guess.
 
+Within [AI agent architecture](/articles/ai-agents/), error handling is the code that takes such guesses away from the model.
+
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/agent-error-handling/error-taxonomy.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-error-handling/error-taxonomy.narrow.svg" width="288" height="704"><img class="np-has-narrow" src="/static/images/diagrams/agent-error-handling/error-taxonomy.svg" width="720" height="264" alt="Five failure modes of an agent that calls tools. Context exhaustion: tool results pile up until the context window is full and the next call is rejected. Schema drift: the model calls a tool with parameters from an older schema version. Partial failure: some parallel tool calls succeed and some fail. Ambiguous timeout: a request times out after the server may already have processed it, so a retry can execute it twice. Observability gaps: without structured logs of tool calls there is no record of what the agent tried." loading="lazy" decoding="async"></picture></a>
   <figcaption>Each mode has its own fix: a hard cap on tool history, versioned schemas, per-call tracking, idempotency keys and a log line for every tool call.</figcaption>
