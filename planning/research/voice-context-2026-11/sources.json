@@ -4779,13 +4779,18 @@
     ],
     "agentic-workflows": [
       "add caching to the API",
-      "all tests pass"
+      "all tests pass",
+      "fixed the failing test",
+      "use pnpm",
+      "Add caching"
     ],
     "semantic-caching": [
       "Can I send an item back?",
       "How do I cancel my last order?",
       "When does my plan renew?",
-      "the same thing"
+      "the same thing",
+      "What is your return policy?",
+      "Can I send an item back?"
     ],
     "agent-memory-types": [
       "The user deploys on Fridays",

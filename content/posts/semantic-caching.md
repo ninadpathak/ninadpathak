@@ -16,41 +16,41 @@ slug: semantic-caching
 updated: 2026-11-17
 ---
 
-Semantic caching stores the answer an LLM gave to a question and returns it again when a new question means the same thing. It decides "the same thing" by comparing embeddings, so two questions can match without sharing a word.
+Semantic caching stores the answer an LLM gave to a question and returns it again when a new question means the same thing. A semantic cache decides that two questions mean the same thing by comparing their embeddings, so "What is your return policy?" can match "Can I send an item back?" although the two share almost no words.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/semantic-caching/semantic-cache.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/semantic-caching/semantic-cache.narrow.svg" width="288" height="664"><img class="np-has-narrow" src="/static/images/diagrams/semantic-caching/semantic-cache.svg" width="720" height="384" alt="An incoming query is embedded and compared with cached queries by similarity. Above the threshold it is a hit and the cached response returns. Below it is a miss, and the full pipeline and model run." loading="lazy" decoding="async"></picture></a>
   <figcaption>A hit returns the stored answer and skips retrieval and generation. A miss runs the pipeline and stores the result for next time.</figcaption>
 </figure>
 
-An HTTP cache has a simpler job. [RFC 9111](https://www.rfc-editor.org/rfc/rfc9111.html), from June 2022, builds the cache key from the request method and the target URI, and notes that many caches in common use key on the URI alone.
+An HTTP cache has a simpler job, because it matches requests exactly. [RFC 9111](https://www.rfc-editor.org/rfc/rfc9111.html), from June 2022, builds the cache key from the request method and the target URI, and notes that many caches in common use key on the URI alone.
 
-Questions typed by people have no URI. The same request arrives in a hundred phrasings, so a cache in front of a [RAG pipeline](/articles/rag/) has to judge closeness, and that judgment is where it goes right or wrong.
+A question typed by a person has no URI to use as a key. People phrase the same request in many different ways, so a cache in front of a [RAG pipeline](/articles/rag/) has to judge how close two questions are, and a wrong judgment returns the wrong answer.
 
 ## What is semantic caching?
 
-It's a lookup that runs before retrieval and generation, keyed on meaning. The [glossary entry](/glossary/semantic-caching/) has the short definition, and the mechanism has four steps.
+Semantic caching is a lookup that runs before retrieval and generation and matches questions by meaning. The [glossary entry](/glossary/semantic-caching/) has the short definition, and the mechanism has four steps.
 
 1. Embed the incoming question with an embedding model.
 2. Search the stored questions for the nearest one.
 3. Compare the similarity score with a threshold.
 4. On a hit, return the stored answer, and on a miss, run the full pipeline and store the result.
 
-So a hit costs one embedding and one vector search. Everything after that in the pipeline is skipped.
+So a cache hit costs one embedding call and one vector search. A hit skips retrieval, reranking and the model call.
 
 ## How much can a semantic cache save?
 
-It depends on how much your traffic repeats, and the published figures come from favourable traffic. A paper from November 2024, [GPT Semantic Cache](https://arxiv.org/abs/2411.05276) by Sajal Regmi and Chetan Phakami Pun, reports that its cache "reduces API calls by up to 68.8% across various query categories".
+What a semantic cache saves depends on how often your users ask the same thing, and the published figures come from traffic that repeats a lot. A paper from November 2024, [GPT Semantic Cache](https://arxiv.org/abs/2411.05276) by Sajal Regmi and Chetan Phakami Pun, reports that its cache "reduces API calls by up to 68.8% across various query categories".
 
-The same abstract reports that over 97% of its hits were correct ones. Those are the authors' numbers on the query categories they chose, and I'd treat them as a ceiling for support-style questions.
+The same abstract reports that over 97% of its hits were correct ones. The 68.8% and 97% figures are the authors' own numbers on query categories the authors chose, and I'd treat them as an upper limit for a support-style FAQ.
 
-A conversation where every message depends on the last one repeats far less. So measure the repeat rate in your own logs before you build anything.
+A multi-turn conversation, where every message depends on the message before it, repeats far less often than an FAQ. So measure the repeat rate in your own logs before you build anything.
 
 ## How do you choose a similarity threshold?
 
-Start high and lower it while you watch for wrong hits. Redis's [guide to semantic cache tuning](https://redis.io/blog/10-techniques-for-semantic-cache-optimization/) suggests 0.88 cosine similarity as a starting point for an FAQ cache, then moving down gradually.
+Choose a threshold by starting high and lowering it while you check for hits that return the wrong answer. Redis's [guide to semantic cache tuning](https://redis.io/blog/10-techniques-for-semantic-cache-optimization/) suggests 0.88 cosine similarity as a starting point for an FAQ cache, then moving down gradually.
 
-The trouble is that one number has to separate two kinds of near neighbour. The script below scores a handful of new questions against a small cache with an open embedding model, at several thresholds.
+The difficulty is that one threshold has to separate questions that mean the same thing from questions that only look alike. The script below scores a handful of new questions against a small cache with an open embedding model, at several thresholds.
 
 ```python
 """Score new questions against a small cache of answered ones, at three thresholds."""
@@ -107,45 +107,45 @@ How do I cancel my last order?              How do I cancel my subscription?  0.
 When does my plan renew?                    What is your return policy?       0.644   miss   miss   miss
 ```
 
-"Can I send an item back?" is a question the return policy entry answers, and it scores 0.761, and "How do I cancel my last order?" is a different request from cancelling a subscription and scores 0.807.
+"Can I send an item back?" should hit the cached return policy answer, and it scores 0.761. "How do I cancel my last order?" should miss, because the cached entry is about cancelling a subscription, and it scores 0.807.
 
-So the wrong match outscored a right one. No threshold serves the first without also serving the second, and at 0.80 the cache hands a customer the wrong answer.
+So the question that should miss scored higher than the question that should hit. Any threshold low enough to serve the return question also serves the cancel-order question, and at a threshold of 0.80 the cache tells a customer how to cancel a subscription when they asked about an order.
 
-A handful of questions and one small model prove nothing about your traffic. But they show why a threshold needs testing against labelled pairs from your own domain, wrong neighbours included.
+A few test questions and one small embedding model prove nothing about your traffic. The output does show why a threshold needs testing against labelled pairs from your own domain, wrong neighbours included.
 
 ## What makes a cached answer wrong later?
 
-Anything the answer depended on that has since changed. An exact-match cache drops a key, and a semantic cache has no key to drop, only a region of similar questions.
+A cached answer becomes wrong when something it depended on changes, such as the source document. An exact-match cache can delete the one key for that document, and a semantic cache has no single key to delete, because many similar questions map to the same stored answer.
 
 The usual causes are a changed source document, a changed system prompt and a changed model. The fix I'd reach for first is to store a version with each entry, made of the document version and the prompt version, and to treat a mismatch as a miss.
 
-A time limit on entries covers what versions don't. And changing the embedding model means rebuilding the cache, since scores from one model can't be compared with vectors from another.
+A time limit on each entry covers the changes that version numbers miss, such as an edit to a document nobody versioned. And changing the embedding model means rebuilding the cache, since scores from one model can't be compared with vectors from another.
 
 ## When should you skip semantic caching?
 
-Skip it when two people asking the same words need different answers. "When does my plan renew?" is identical text for every customer, so a cache keyed on meaning alone will serve one customer's date to another.
+Skip semantic caching when two people who type the same words need different answers. "When does my plan renew?" is identical text for every customer, so a cache keyed on meaning alone will serve one customer's date to another.
 
-Skip it for agent steps as well. A prompt that carries tool results and history is close to unique on every turn, so the lookup adds latency and seldom hits.
+Skip semantic caching for the steps inside an agent loop as well. A prompt that carries tool results and history is close to unique on every turn, so the lookup adds latency and seldom hits.
 
-And skip it for anything live, such as a price or a queue length. A cached answer there is wrong as soon as the number moves.
+Skip it also for any answer that contains a live value, such as a price or a queue length. A cached price is wrong as soon as the real price changes.
 
 ## Where does a semantic cache sit in a RAG pipeline?
 
-It sits in front of everything. A hit skips the query embedding for retrieval, the search, the reranker and the model call, so it saves more than the model's bill.
+A semantic cache sits in front of every other stage of the pipeline. A hit skips the query embedding for retrieval, the search, the reranker and the model call, so a hit saves retrieval cost and latency as well as the model's bill.
 
-That makes it a different kind of work from improving retrieval. [Contextual retrieval](/articles/contextual-retrieval/) and [reranking](/articles/rag-reranking/) make a miss cheaper or better, and the cache decides how often a miss happens.
+Tuning a cache is therefore separate work from improving retrieval. [Contextual retrieval](/articles/contextual-retrieval/) and [reranking](/articles/rag-reranking/) make a miss cheaper or better, and the cache decides how often a miss happens.
 
-It's also a different thing from the prompt caching that model providers offer, which discounts a repeated prefix inside a request that still runs. The [token budgets guide](/articles/llm-token-budgets/) works out what that one saves.
+A semantic cache is also different from the prompt caching that model providers offer, which discounts a repeated prefix inside a request that still runs. The [token budgets guide](/articles/llm-token-budgets/) works out what that one saves.
 
 ## FAQ
 
 **What is semantic caching?**
 
-It's a cache for LLM answers keyed on the meaning of the question. A new question that is similar enough to a stored one gets the stored answer without the model being called.
+Semantic caching is a cache for LLM answers that matches on the meaning of the question. A new question that is similar enough to a stored one gets the stored answer without the model being called.
 
 **What similarity threshold should I start with?**
 
-Redis suggests 0.88 cosine similarity for an FAQ cache. Then test it against pairs of questions from your own domain, including pairs that look alike and need different answers.
+Redis suggests 0.88 cosine similarity for an FAQ cache. Then test that threshold against pairs of questions from your own domain, including pairs that look alike and need different answers.
 
 **How do I invalidate a semantic cache when the knowledge base changes?**
 
