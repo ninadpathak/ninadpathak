@@ -2,68 +2,131 @@
 category: technical-documentation
 primary_query: how to write a changelog
 date: 2026-03-30
-description: Write a changelog that helps developers assess an upgrade, find breaking
-  changes, and understand what each release means for their code.
+description: How to write a changelog developers can search. Put breaking changes, removals and deprecations first, with counts from a month of one real changelog.
 slug: writing-changelogs
 status: published
-work_note: 'I wrote this for the developer about to approve a dependency bump, and it ends in a worked example that turns pull requests into a release entry. For developer content written for your product, [write to me](/contact/).'
+work_note: 'I counted a month of one project''s changelog for this page, and it ends by regrouping one real release under headings that put required action first. For developer content written for your product, [write to me](/contact/).'
 takeaways:
-- Lead with upgrade impact, not an undifferentiated list of commits.
-- Group releases by version, date, and consistent change categories.
-- Describe the consequence of each change and link to migration details.
-- Keep an Unreleased section and update it as the product changes.
+- Put breaking changes, removals and deprecations above routine entries.
+- Write each entry so it makes sense when a search or a tool lifts it out of the file.
+- State the condition under which a user notices the change, then the action.
+- Keep an Unreleased section and add entries with the pull request.
 title: How to Write a Changelog That Developers Actually Read
-updated: 2026-07-30
+updated: 2026-11-17
 ---
 
-You are about to approve a dependency bump and someone asks, “Is this actually safe to ship?” The changelog says “improved pagination,” “updated authentication,” and “internal maintenance.”
+Claude Code published 20 releases between October 18 and November 16, and its [changelog](https://code.claude.com/docs/en/changelog) lists 1,807 entries for them, about sixty a day. An entry among them tells people who use fast mode on Opus 4.8 that their requests will start returning errors after November 30.
 
-Now the team is opening pull requests to find out whether a config key changed. The approach below makes the changelog answer the upgrade question before that conversation starts.
+A changelog that developers read has to make that entry findable by someone who will never read the other 1,806. Writing a changelog means recording each change so that a person can assess an upgrade from it, and at this release rate the person gets there by searching the file or by asking a tool that read it for them.
+
+## How much changelog can one person read?
+
+Far less than a fast-moving project now publishes. The thirty days to November 16 break down like this, with every entry counted under the label it sits beneath.
+
+```text
+window: 2026-10-18 to 2026-11-16
+releases: 20
+entries: 1807  (90.3 per release, 60.2 per day)
+entries that open with Deprecated or Removed: 11
+label             releases  entries
+N bug fixes             16     1149
+Changed                 16      293
+N improvements          15      223
+Added                   16      133
+(no label)               0        5
+Improved                 1        4
+```
+
+The largest group is the one a reader is invited to skip, a collapsed list with a counted label such as "233 bug fixes". The five entries with no label come from four small releases, and for two of those the whole release reads "Bug fixes and reliability improvements".
+
+`python3 changelog_stats.py` produced the table, and its window is fixed so the counts hold as the page grows.
+
+```python
+"""Count releases, entries and section labels in the Claude Code changelog over a 30-day window."""
+import datetime
+import re
+import urllib.request
+
+url = "https://code.claude.com/docs/en/changelog.md"
+request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+text = urllib.request.urlopen(request, timeout=60).read().decode("utf-8")
+
+end = datetime.date(2026, 11, 16)
+start = end - datetime.timedelta(days=29)
+release = re.compile(r"^\*\*(\d+\.\d+\.\d+)\*\*\s+(\w+ \d+, \d{4})\s*$", re.M)
+matches = list(release.finditer(text))
+
+releases = entries = flagged = 0
+headings = {}  # label -> [releases that use it, entries under it]
+for i, match in enumerate(matches):
+    day = datetime.datetime.strptime(match.group(2), "%B %d, %Y").date()
+    if not start <= day <= end:
+        continue
+    body = text[match.end(): matches[i + 1].start() if i + 1 < len(matches) else len(text)]
+    releases += 1
+    current = "(no label)"
+    for line in body.splitlines():
+        label = re.match(r"^\*\*([^*]+)\*\*$", line.strip())
+        if label:
+            current = re.sub(r"^\d+ ", "N ", label.group(1))
+            headings.setdefault(current, [0, 0])[0] += 1
+        if line.lstrip().startswith("* "):
+            entries += 1
+            headings.setdefault(current, [0, 0])[1] += 1
+            if re.match(r"\* (\\\[[^]]+\] )?(Deprecated|Removed) ", line.lstrip()):
+                flagged += 1
+
+print(f"window: {start} to {end}")
+print(f"releases: {releases}")
+print(f"entries: {entries}  ({entries / releases:.1f} per release, {entries / 30:.1f} per day)")
+print(f"entries that open with Deprecated or Removed: {flagged}")
+print("label             releases  entries")
+for name, (used, count) in sorted(headings.items(), key=lambda kv: -kv[1][1]):
+    print(f"{name:<17} {used:>8}  {count:>7}")
+```
+
+The project knows nobody reads all of it. The page describes itself as generated from the CHANGELOG.md file in the project's GitHub repository, and says "Longer releases are grouped by type of change, with long lists of improvements and bug fixes collapsed."
+
+Its Added and Changed labels match two of the six in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), though the page names no format, so the resemblance is my observation. Keep a Changelog 1.1.0, which its own changelog dates to February 15, 2019, opens its principles with "Changelogs are for humans, not machines."
+
+I think that is still right about who makes the upgrade decision and seven years out of date about who reads first. Fern's [State of Docs report](https://buildwithfern.com/post/state-of-docs) from November 10 says of the changelog that "Agents read it twice as much as people to understand what's changed on your platform."
+
+That figure comes from the docs sites Fern hosts, and [my essay on agents reading docs](/articles/agents-reading-docs/) looks at how it was counted. An entry a tool lifts out of the file arrives without its heading or its neighbours, so it has to make sense alone, and the fast mode entry does.
+
+> Deprecated fast mode for Opus 4.8 as of October 30, 2026; it will be removed on November 30, 2026. After removal, fast mode requests on Opus 4.8 return an error and do not fall back to standard Opus 4.8. Migrate to Opus 5.5 to keep the speedup
+
+It names the feature, gives both dates and states the failure a user will see. It sits in a list headed "Changed", though, and only eleven entries in the month open with the word Deprecated or Removed, none of them under a heading of their own.
 
 ## Start with the upgrade decision
 
-That means version, date, breaking changes, security impact, and required action all need to be easy to spot. A developer shouldn’t have to infer the risk from the eighth bullet.
+Put the version and date first, then every change that needs action, then the rest. Keep a Changelog states the minimum as "If you do nothing else, list deprecations, removals, and any breaking changes in your changelog."
 
-The beginning of a release entry should answer:
+A person reading a release wants to know whether upgrading will break anything they run, and what to do if it will. The entries below, all from the same month, show how much of that one line can carry.
 
-- What version shipped, and when?
-- Is the release compatible with the previous version?
-- Which users, APIs, or environments are affected?
-- Is action required before or after upgrading?
-- Where are the migration instructions?
+| Entry, quoted in full | Release | What a reader can decide |
+| --- | --- | --- |
+| "Bug fixes and reliability improvements" | 2.1.308, October 22 | Nothing, since it names no behaviour |
+| "Changed some `cp` and `mv` commands to ask first" | 2.1.326, November 16 | That a script may now stop for a prompt, without knowing which commands |
+| "Changed nested skill loading: `.claude/skills` folders in `--plugin-dir` plugins no longer load from a session started above them; start Claude Code in the plugin folder instead" | 2.1.325, November 13 | Whether their setup is the one affected, and the fix |
 
-“Updated authentication handler” answers none of those questions. “Expired access tokens are now rejected immediately, so remove any client-side grace-period logic before upgrading” tells the reader what changed and why it matters.
+The third entry follows a pattern worth copying. It gives the thing that changed and the condition under which a user would notice, and it ends with the action.
 
-### Write the consequence before the implementation
+The second may be vague on purpose, since a permission rule spelled out in full can tell an attacker what to avoid. Even then a link to the rule's documentation would let the affected reader find out.
 
-Internally, the change may be a refactor, a new cache, or a renamed class. From the user’s side, it might mean a faster response, a changed error, or nothing observable at all.
+Implementation detail belongs in an entry only when it helps someone diagnose or adapt. A refactor that users can't observe needs no entry at all.
 
-Lead with the consequence and include implementation detail only when it helps someone diagnose or adapt. The project log becomes a product record.
+## Which headings should a release use?
 
-### Make required action impossible to miss
+Use Keep a Changelog's six types of change, and put the ones that demand action first. The format lists releases newest first with the date beside each version, and it defines the types in a few words each.
 
-Use a consistent label for breaking changes and required migrations. A generic “Changed” heading is too quiet for work that can break an integration.
-
-> **Breaking:** `client.retryCount` has been replaced by `client.retry.maxAttempts`. Rename the field before upgrading or the client will use the default of three attempts.
-
-The label catches attention, while the second sentence gives a consequence and a next step. A link can carry the full migration procedure.
-
-## Use one repeatable release structure
-
-[Keep a Changelog](https://keepachangelog.com/en/1.1.0/) recommends a human-readable file with releases in reverse chronological order, ISO-formatted dates, and consistent categories. Its Unreleased section captures changes before release day.
-
-Its categories are simple because they map to the questions developers ask:
-
-| Category | What the reader learns |
-|---|---|
-| Added | Which new capability is available |
-| Changed | Which existing behavior now works differently |
-| Deprecated | What to stop using before it is removed |
-| Removed | What no longer exists |
-| Fixed | Which known behavior is corrected |
-| Security | Which security exposure or hardening matters |
-
-You don’t have to force an empty heading into every release. Keep the vocabulary consistent and use only the categories that have something meaningful in them.
+| Type | Keep a Changelog's definition |
+| --- | --- |
+| Added | "for new features." |
+| Changed | "for changes in existing functionality." |
+| Deprecated | "for soon-to-be removed features." |
+| Removed | "for now removed features." |
+| Fixed | "for any bug fixes." |
+| Security | "in case of vulnerabilities." |
 
 <div class="visual-wrapper">
   <div class="visual-title">The Keep a Changelog structure</div>
@@ -71,208 +134,140 @@ You don’t have to force an empty heading into every release. Keep the vocabula
     <img src="/static/images/visuals/keep-a-changelog.png" alt="Keep a Changelog website showing its guidance for human-readable and chronologically organized changelogs" loading="lazy">
   </div>
 </div>
-<p class="visual-caption">Versions, dates, and change types make the file predictable for someone assessing a release. The Git history can remain in Git.</p>
+<p class="visual-caption">Versions, dates and change types make the file predictable for someone assessing a release.</p>
+
+The format has no heading for a change that breaks an integration without removing anything, and "Changed" will hold it beside harmless adjustments. My addition is a Breaking heading at the top of the release, followed by Removed and Deprecated, with the routine types below.
+
+That ordering is where I part from the Claude Code page, which files deprecations and removals under "Changed". The entry below, from version 2.1.300 on October 14, is written well enough to stand under a Removed heading as it is.
+
+> Removed the `--sandbox` and `--no-sandbox` flags from `claude remote-control`, which had no effect; passing either now exits with an error. Set `sandbox.enabled` in settings to sandbox sessions
+
+A script that passed either flag started failing on that release, so the entry describes a breaking change. A reader scanning 88 entries would find it faster under its own heading.
+
+Leave out a heading that has nothing under it. The types are a fixed vocabulary, and a release uses the ones it needs.
 
 ### Keep an Unreleased section
 
-An Unreleased section is the working area for changes that users will eventually need to understand. Contributors can add an entry with the product change while reviewers still remember the impact.
+Keep a Changelog recommends it in one line: "Keep an Unreleased section at the top to track upcoming changes." Contributors add an entry there with the change, and at release time the section moves under a version and a date.
 
-At release time, move those entries under a version and date. The release process becomes an editorial pass through material that already has context.
+### Mark yanked releases
 
-### Mark yanked releases without erasing them
+A release that was withdrawn keeps its entry. Keep a Changelog says of such versions "Often these versions don't even appear in change logs.", argues that they should, and marks them in the heading.
 
-If a release is withdrawn, keep its entry and mark it as yanked. Explain why it should not be used and which version contains the fix or replacement.
+```markdown
+## [0.0.5] - 2014-12-13 [YANKED]
+```
 
-Deleting the entry creates a gap for anyone who already installed that version. A changelog is a record, including when the record is uncomfortable.
+Anyone who installed the version can then find out why it was pulled and which release replaces it.
 
-## Make the version number agree with the prose
+## Should the version number agree with the entry?
 
-[Semantic Versioning](https://semver.org/) communicates the compatibility promise through `MAJOR.MINOR.PATCH`. A major version contains incompatible API changes, a minor version adds backward-compatible functionality, and a patch contains backward-compatible fixes.
+Yes, wherever the project makes a versioning promise. [Semantic Versioning](https://semver.org/) defines each part of `MAJOR.MINOR.PATCH` by compatibility, and its summary gives the first as "MAJOR version when you make incompatible API changes".
 
-The changelog must make the same promise. A breaking configuration change described inside a patch release creates more confusion than precise prose can repair.
+Under that promise a removed flag in a patch release contradicts the number before anyone reads the notes. Keep a Changelog's principles include "Mention whether you follow Semantic Versioning.", and the reason is that a reader treats the number as a claim.
+
+Claude Code's changelog page never mentions Semantic Versioning, and all 20 releases in the month carry a 2.1 number, including the one that deprecated fast mode. The number in such a project tells a reader nothing about compatibility, so the entry text has to carry all of it.
 
 ### Treat deprecation as a sequence
 
-A deprecation entry needs four facts: what is deprecated, what replaces it, when removal is expected, and how to migrate. Repeat the warning in later releases as the removal date approaches.
+A deprecation entry should name the feature and its replacement, give the removal date, and link to the migration steps. The fast mode entry has all of that except the link.
 
-When the feature is removed, link back to the first deprecation entry. The sequence gives users evidence that the change was announced and time to act.
+Semantic Versioning asks for the same order in its FAQ: "Before you completely remove the functionality in a new major release there should be at least one minor release that contains the deprecation". Keep a Changelog describes the reader's side of it, an upgrade to the version that lists deprecations followed by an upgrade to "the version where the deprecations become removals."
 
-### Describe compatibility in plain language
+When the removal ships, its entry should link back to the deprecation. A reader who missed the first notice can then see when it was given.
 
-Spell out whether existing code continues to work, even when the version number already signals compatibility. Name any exception beside that statement.
+### State compatibility in plain words
 
-For example:
+Say whether existing setups keep working, and name the exception in the same entry. A Claude Code entry from November 12 does this in its second half.
 
-> This release is backward compatible for REST API users. The JavaScript SDK now requires Node.js 20 or later.
+> Removed the `subagentStatusLine` setting: subagent rows always use the default look, and settings files that still hold the key load as before
 
-Compare that with “runtime support modernized,” which leaves the compatibility question unanswered. Precision builds trust faster than polish.
-
-## Write entries around user impact
-
-Brief works when it remains specific. Behavior, affected user, and action give you enough structure without turning each entry into a mini article.
-
-### Rewrite vague entries
-
-| Weak entry | Useful entry |
-|---|---|
-| Improved retries | The client now retries `429` responses up to three times with exponential backoff; disable this with `retry.maxAttempts: 0`. |
-| Fixed login bug | Fixed OAuth login failures for accounts whose email address contains a plus sign. |
-| Updated pagination | List endpoints now return a cursor in `next_page`; integrations using numeric page offsets must migrate before v4. |
-| Security improvements | Requests with invalid webhook signatures now return `401` before the handler processes them. |
-
-The rewritten entries let readers decide whether the change applies to them. They also contain the option, endpoint, error code, or environment someone is likely to search for later.
-
-### Add links that finish the job
-
-The changelog points readers to the migration guide, updated reference page, security advisory, or issue when they need more detail. Keep the release entry focused on the decision at hand.
-
-Use descriptive link text so the destination is clear out of context. “Migrate from numeric pagination to cursors” is stronger than “learn more.”
+The clause after the comma answers the question an upgrading reader has, which is whether an old settings file will now fail.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/writing-changelogs/entry-anatomy.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/writing-changelogs/entry-anatomy.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/writing-changelogs/entry-anatomy.svg" width="720" height="256" alt="A useful changelog entry exposes four layers in order: the version and date, the category it is grouped under with breaking changes first, the impact on the affected user, and the migration path or link that finishes the job. A reader can stop at the first layer that answers their question." loading="lazy" decoding="async"></picture></a>
   <figcaption>A strong entry exposes version, date, category, impact, and migration path in layers. A reader can stop after the first useful answer or continue into the details.</figcaption>
 </figure>
 
-## Make the changelog part of the release workflow
+## How does a changelog stay current?
 
-If the changelog is assembled during a quarterly cleanup, half the context is already gone. Capture the impact as the code changes, when the tradeoffs are still fresh.
+Write each entry with the change that causes it, in the same pull request. The reviewer can then check the code and the entry's claim about it together.
 
-### Add an entry with the pull request
+Leave out commits with no visible effect. Keep a Changelog's case against pasting the log is "Using commit log diffs as changelogs is a bad idea: they're full of noise."
 
-Ask contributors to add an Unreleased entry when a change affects documented behavior. The reviewer can then compare the code, documentation, and changelog claim in the same context.
+### Let automation collect and a person decide
 
-Not every commit deserves an entry. Internal refactors, test changes, and dependency updates belong only when users see a consequence.
+GitHub's [automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) "include a list of merged pull requests, a list of contributors to the release, and a link to a full changelog." A `.github/release.yml` file can sort pull requests into categories by label and exclude others.
 
-### Automate collection, not judgment
-
-GitHub can create [automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) from merged pull requests and contributors. Labels and a `.github/release.yml` file can organize or exclude entries.
-
-Generated notes provide raw material. An editor still has to find migration work, combine duplicates, rewrite internal titles, and move risk to the top.
+That output is a list of titles. Someone still has to decide which of them a user must act on, merge the ones that describe one change, and move the risky ones to the top.
 
 ### Give the file an owner
 
-The release manager can own completeness, while technical writers or developer advocates own clarity and links. Product engineers should verify the technical claim for changes they implemented.
-
-Ownership should be visible in the release checklist. “Someone will update the changelog” is how the task moves to the final hour and turns into copied pull request titles.
+Name the person who checks the file before each release, and put that check in the release checklist. I'd have the engineer who made a change confirm the technical claim in its entry, since the entry is a statement about their code.
 
 ## Changelog checklist
 
-- The version and date are correct.
-- Releases appear newest first.
-- Breaking changes and required actions are visible before routine improvements.
-- Each entry describes observable impact.
-- Deprecated and removed features include alternatives.
-- Security entries are specific without exposing unsafe detail.
-- Migration, reference, and advisory links resolve.
-- The version number matches the compatibility claim.
-- The Unreleased section remains ready for the next change.
+- The version and date are correct, and releases appear newest first.
+- Breaking changes, removals and deprecations sit above routine entries.
+- Each entry describes behaviour a user can observe.
+- Deprecated and removed features name a replacement.
+- Links to migration and reference pages resolve.
+- The version number matches the compatibility claim, where the project makes one.
+- The Unreleased section is ready for the next change.
 
-Scan the rendered page using only headings, labels, and the first line of each bullet. If the upgrade risk is still unclear, the hierarchy needs another pass.
+A last check is to read only the headings and the first words of each bullet. If the upgrade risk isn't visible from those, reorder the release.
 
-## Worked example: turn pull requests into a release entry
+## Worked example: regroup one real release
 
-Suppose a release contains these merged pull requests:
-
-```text
-#842 Refactor cursor helper
-#847 Add max page size validation
-#851 Update Node matrix
-#856 Retry webhook delivery
-#861 Remove legacy page parameter
-#864 Fix email normalization
-```
-
-Copying those titles would be quick and almost useless. The list does not say that pagination is breaking, Node.js support changed, or webhook deliveries now behave differently.
-
-### Gather the missing facts
-
-Before writing, ask the owners for the behavior behind each change:
-
-| Pull request | User-facing fact |
-|---|---|
-| Cursor helper and legacy parameter | `page` is removed; list endpoints accept `cursor` only |
-| Page size validation | Requests above 100 items return `400`; the API no longer silently caps them. |
-| Node matrix | Node.js 18 support is removed; Node.js 20 is the minimum |
-| Webhook retry | Failed deliveries retry three times over 15 minutes |
-| Email normalization | Login now accepts uppercase characters in email addresses |
-
-The cursor helper and removed parameter form one breaking pagination change. The refactor disappears because users cannot observe it.
-
-### Write the scannable version
-
-The resulting entry could read:
+Version 2.1.323 of Claude Code, released on November 12, lists four entries under "Changed" that ask something of the reader. They are quoted exactly below, and the headings and their order are the only things I changed.
 
 ```markdown
-## [4.0.0] - 2026-07-30
+## [2.1.323] - 2026-11-12
 
 ### Breaking
 
-- List endpoints no longer accept the `page` parameter. Replace numeric
-  pagination with `cursor`; see the [pagination migration guide].
-- The JavaScript SDK now requires Node.js 20 or later. Upgrade the runtime
-  before installing version 4.
+- Changed organization settings and policy requests to no longer use a proxy
+  set only by `ALL_PROXY`; set `HTTPS_PROXY` if your network needs a proxy
+  for them
 
-### Changed
+### Removed
 
-- List requests with `limit` values above 100 now return `400
-  invalid_page_size`. Previous versions silently reduced the value to 100.
-- Failed webhook deliveries now retry three times over 15 minutes. Endpoints
-  may receive the same event more than once, so handlers must remain idempotent.
+- Removed the `subagentStatusLine` setting: subagent rows always use the
+  default look, and settings files that still hold the key load as before
+- Changed `MCP_SDK_GENERATION=v1` to run the v2 MCP client in a
+  compatibility mode (earlier handshake, relaxed OAuth sign-in checks),
+  because the v1 MCP client is removed
 
-### Fixed
+### Deprecated
 
-- Email login now treats the domain and local-part casing consistently, fixing
-  failures for addresses entered with uppercase characters.
+- Deprecated a plugin's `agent` setting: it still applies, and now warns at
+  startup, in `claude plugin list` and in `claude plugin validate`
 ```
 
-The breaking changes appear before routine behavior, and every bullet names a field, limit, runtime, error, or action. A developer can recognize their integration without opening the pull requests.
+The original release has 294 entries, and these four were spread through a "Changed" list beside message limits and permission prompts. Regrouped, a reader behind a corporate proxy sees the line that affects them in the first screen.
 
-### Link to the work that cannot fit
+The exercise also shows what a heading can't fix. The deprecation entry gives no removal date and no replacement, and a heading that says Deprecated makes that absence more obvious.
 
-The pagination bullet should link to a migration page containing before-and-after requests:
+A changelog keeps the full sequence of changes, while [release notes explain one release](/articles/writing-release-notes/) in enough depth for a developer to act on it.
 
-```http
-GET /v3/orders?page=3&limit=50
-```
-
-```http
-GET /v4/orders?cursor=eyJpZCI6IjEwMDAifQ==&limit=50
-```
-
-The migration page can explain cursor storage, ordering, and expiry. The changelog identifies the change and sends the affected reader there.
-
-### Check the release against its version
-
-Removing an input and a supported runtime warrants a major version under Semantic Versioning. Calling the release `3.8.2` would contradict the compatibility promise before anyone reads the notes.
-
-Either preserve compatibility or change the version. A note cannot turn a breaking patch into a safe patch.
-
-### Preserve the history after a correction
-
-Suppose the release later proves that webhook retries can happen over 20 minutes. Correct the entry and record the clarification in the next release so readers can see the change.
-
-Readers need the canonical page to become accurate, but teams also need an audit trail when the published behavior changed. A repository commit provides that trail, and the next changelog entry makes the correction visible to people who do not watch the file.
-
-A changelog records the durable sequence, while [release notes explain one release decision](/articles/writing-release-notes/) in enough depth for a developer to act. When several supported versions remain live, preserve the routes to their instructions.
-
-## Changelog FAQ
+## FAQ
 
 **What is the difference between a changelog and release notes?**
 
-A changelog is the durable, chronological record of product changes across versions. Release notes can provide a richer explanation for one release, including context, screenshots, migration guidance, and rollout information.
+A changelog is the chronological record of changes across every version. Release notes explain one release in more depth, with context and migration guidance.
 
 **Should every commit appear in a changelog?**
 
-No. Include changes that affect user-visible behavior, compatibility, security, supported environments, or documented workflows.
+No. Include changes that affect behaviour a user can see, compatibility, security or supported environments.
 
 **Where should a changelog live?**
 
-Keep a `CHANGELOG.md` file in the repository when developers consume the project from source or package registries. You can also render it on the documentation site, but both views should come from one canonical source.
+Keep a `CHANGELOG.md` file in the repository when developers consume the project from source or a package registry. A copy on the documentation site should be generated from that file, which is how the Claude Code page describes itself.
 
 **How detailed should a changelog entry be?**
 
-Give enough detail to identify who is affected, what changed, and whether action is required. Link to a dedicated guide when safe migration needs several steps or substantial code.
+Detailed enough to show who is affected, what changed and whether action is required. Link to a migration guide when the change needs several steps.
 
 **Can generated release notes replace a changelog?**
 
-They can collect merged work, but they cannot reliably explain user impact. Use automation to assemble candidates and human review to produce the actual record.
+They collect the merged pull requests. Deciding which of those a user has to act on is still an editing job.

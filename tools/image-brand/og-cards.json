@@ -16,6 +16,11 @@
     "doc*",
     "core"
   ],
+  "written-by-a-human": [
+    "reader",
+    "doc check*",
+    "tools"
+  ],
   "nobody-understands-the-code": [
     "core",
     "doc question*",

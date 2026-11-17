@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/voice-agent-memory/voice-pipeline.mmd",
-  "hash": "8fdb8931d9da16df",
+  "hash": "ca70c0653c07e9ab",
   "pele": "1.8.0",
   "width": 720,
   "height": 392,
@@ -18,7 +18,7 @@
       "mono": 9.5
     }
   },
-  "alt": "A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Working memory lives inside the pipeline stages and updates on every audio frame. Retrieved memory is fetched in parallel with generation, drawn as a dashed input to the model, so it arrives before the first token is spoken instead of blocking the turn.",
-  "caption": "The caller hears every pause, so retrieved memory runs alongside generation, never in front of it.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.svg\" width=\"720\" height=\"392\" alt=\"A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Working memory lives inside the pipeline stages and updates on every audio frame. Retrieved memory is fetched in parallel with generation, drawn as a dashed input to the model, so it arrives before the first token is spoken instead of blocking the turn.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The caller hears every pause, so retrieved memory runs alongside generation, never in front of it.</figcaption>\n</figure>"
+  "alt": "A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Stored memory is drawn as a dashed input to the model.",
+  "caption": "A voice pipeline. What the model generates and what the caller hears part ways at the last stage, text-to-speech.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.svg\" width=\"720\" height=\"392\" alt=\"A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Stored memory is drawn as a dashed input to the model.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>A voice pipeline. What the model generates and what the caller hears part ways at the last stage, text-to-speech.</figcaption>\n</figure>"
 }

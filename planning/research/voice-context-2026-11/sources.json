@@ -1139,10 +1139,21 @@
       "quotes": [
         "it keeps the active context small, because response quality degrades as a conversation grows",
         "The API, when input tokens reach the trigger you set",
-        "Use on-demand compaction wherever it is available."
+        "Use on-demand compaction wherever it is available.",
+        "Compaction replaces the older turns of a conversation with a summary that Claude writes on the server, so you need no summarization code of your own.",
+        "because response quality degrades as a conversation grows",
+        "are in beta",
+        "input tokens reach the trigger you set",
+        "so you need no summarization code of your own",
+        "Use on-demand compaction wherever it is available",
+        "A compaction loop that requests the summary and swaps it in",
+        "One parameter on your ordinary requests",
+        "Compaction that keeps recent turns",
+        "when the default summary drops something a later turn needs."
       ],
       "connects": [
-        "ai-memory-management"
+        "ai-memory-management",
+        "short-term-agent-memory"
       ],
       "date_note": "Date fetched; documentation page."
     },
@@ -1241,7 +1252,8 @@
       ],
       "connects": [
         "best-llms-for-coding",
-        "nobody-understands-the-code"
+        "nobody-understands-the-code",
+        "written-by-a-human"
       ]
     },
     {
@@ -1619,11 +1631,13 @@
         "Release notes for Ghostty 1.4.0, released on October 27, 2026.",
         "This requires user interaction (copy-paste) to trigger.",
         "This affects Ghostty 1.3.0 and 1.3.1.",
-        "They take a combined 16+ hours to write"
+        "They take a combined 16+ hours to write",
+        "These release notes are painstakingly and lovingly hand-crafted by human Ghostty maintainers, including the full changelog. They take a combined 16+ hours to write, so please enjoy."
       ],
       "connects": [
         "writing-release-notes",
-        "writing-changelogs"
+        "writing-changelogs",
+        "written-by-a-human"
       ]
     },
     {
@@ -1695,6 +1709,369 @@
       "connects": [
         "nobody-understands-the-code",
         "code-documentation"
+      ]
+    },
+    {
+      "id": "claude-code-changelog-2026-11",
+      "url": "https://code.claude.com/docs/en/changelog.md",
+      "author": "Anthropic",
+      "date": "2026-11-16",
+      "title": "Claude Code changelog",
+      "quotes": [
+        "CHANGELOG.md on GitHub",
+        "Longer releases are grouped by type of change, with long lists of improvements and bug fixes collapsed.",
+        "Deprecated fast mode for Opus 4.8 as of October 30, 2026; it will be removed on November 30, 2026. After removal, fast mode requests on Opus 4.8 return an error and do not fall back to standard Opus 4.8.",
+        "Migrate to Opus 5.5 to keep the speedup",
+        "summarizing away a message that Claude had not answered yet",
+        "sometimes replying to one of your messages instead of summarizing, or leaving Claude's last reply out of the summary",
+        "233 bug fixes",
+        "Bug fixes and reliability improvements",
+        "Changed some `cp` and `mv` commands to ask first",
+        "Changed nested skill loading: `.claude/skills` folders in `--plugin-dir` plugins no longer load from a session started above them; start Claude Code in the plugin folder instead",
+        "Removed the `--sandbox` and `--no-sandbox` flags from `claude remote-control`, which had no effect; passing either now exits with an error. Set `sandbox.enabled` in settings to sandbox sessions",
+        "Removed the `subagentStatusLine` setting: subagent rows always use the default look, and settings files that still hold the key load as before",
+        "Changed organization settings and policy requests to no longer use a proxy set only by `ALL_PROXY`; set `HTTPS_PROXY` if your network needs a proxy for them",
+        "because the v1 MCP client is removed",
+        "Deprecated a plugin's `agent` setting: it still applies, and now warns at startup, in `claude plugin list` and in `claude plugin validate`",
+        "Deprecated fast mode for Opus 4.8 as of October 30, 2026; it will be removed on November 30, 2026. After removal, fast mode requests on Opus 4.8 return an error and do not fall back to standard Opus 4.8. Migrate to Opus 5.5 to keep the speedup"
+      ],
+      "connects": [
+        "writing-changelogs",
+        "short-term-agent-memory"
+      ]
+    },
+    {
+      "id": "keep-a-changelog-1-1-0",
+      "url": "https://keepachangelog.com/en/1.1.0/",
+      "author": "Olivier Lacan",
+      "date": "2026-11-17",
+      "title": "Keep a Changelog 1.1.0",
+      "quotes": [
+        "Changelogs are for humans, not machines.",
+        "If you do nothing else, list deprecations, removals, and any breaking changes in your changelog.",
+        "for new features.",
+        "for changes in existing functionality.",
+        "for soon-to-be removed features.",
+        "for now removed features.",
+        "for any bug fixes.",
+        "in case of vulnerabilities.",
+        "Keep an Unreleased section at the top to track upcoming changes.",
+        "Often these versions don't even appear in change logs.",
+        "Mention whether you follow Semantic Versioning.",
+        "Using commit log diffs as changelogs is a bad idea: they're full of noise.",
+        "the version where the deprecations become removals.",
+        "[1.1.0] - 2019-02-15",
+        "[0.0.5] - 2014-12-13 [YANKED]"
+      ],
+      "connects": [
+        "writing-changelogs"
+      ]
+    },
+    {
+      "id": "hn-ask-agent-context-2026-11",
+      "url": "https://hn.algolia.com/api/v1/items/50403153",
+      "author": "Hacker News thread, several commenters",
+      "date": "2026-11-07",
+      "title": "Ask HN: How do you manage your AI agents' context across clients and projects?",
+      "discussion": "https://news.ycombinator.com/item?id=50403153",
+      "quotes": [
+        "How do you manage your AI agents' context across clients and projects?",
+        "I let agents read their own pre-compaction history often",
+        "prep a handoff so we can resume from here in a fresh session",
+        "at the end ask the agent to summarize what it learned and write it down."
+      ],
+      "connects": [
+        "short-term-agent-memory",
+        "coding-agent-memory",
+        "claude-code-memory"
+      ]
+    },
+    {
+      "id": "stroq-show-hn",
+      "url": "https://github.com/AGGIB/Stroq",
+      "author": "AGGIB",
+      "date": "2026-11-05",
+      "date_note": "Show HN submission date, item 50380704.",
+      "title": "Stroq",
+      "discussion": "https://news.ycombinator.com/item?id=50380704",
+      "quotes": [
+        "trace risky commands to the content that dictated them",
+        "Matching is text-level, so a command the model writes from scratch does not trace back to a source."
+      ],
+      "connects": [
+        "memory-versioning"
+      ]
+    },
+    {
+      "id": "fowler-event-sourcing-2005",
+      "url": "https://martinfowler.com/eaaDev/EventSourcing.html",
+      "author": "Martin Fowler",
+      "date": "2005-12-12",
+      "title": "Event Sourcing",
+      "quotes": [
+        "that all changes to application state are stored as a sequence of events",
+        "we can also use the event log to reconstruct past states",
+        "Martin Fowler 12 December 2005"
+      ],
+      "connects": [
+        "memory-versioning",
+        "memory-serialization"
+      ]
+    },
+    {
+      "id": "eu-ai-act-article-12",
+      "url": "https://artificialintelligenceact.eu/article/12/",
+      "author": "European Union",
+      "date": "2024",
+      "title": "EU AI Act, Article 12: Record-Keeping",
+      "quotes": [
+        "High-risk AI systems shall technically allow for the automatic recording of events (logs) over the lifetime of the system."
+      ],
+      "connects": [
+        "memory-versioning"
+      ]
+    },
+    {
+      "id": "langgraph-persistence-docs",
+      "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+      "author": "LangChain",
+      "date": "2026-11-17",
+      "title": "LangGraph persistence",
+      "quotes": [
+        "gives agents short-term memory through checkpointers and long-term memory through stores"
+      ],
+      "connects": [
+        "memory-versioning",
+        "memory-serialization",
+        "short-term-agent-memory"
+      ]
+    },
+    {
+      "id": "openai-realtime-conversations",
+      "url": "https://developers.openai.com/api/docs/guides/realtime-conversations",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Realtime conversations guide",
+      "quotes": [
+        "We call this truncating the model's last response, that is, removing the unplayed portion of the model's last response from the conversation.",
+        "the user says \"what was that last thing?\"",
+        "The server will automatically truncate unplayed audio when there's a user interruption.",
+        "Record how many milliseconds of that item's audio the user actually heard.",
+        "must stop playback and handle truncation",
+        "will cut the audio at a given place and remove the text transcript for the unplayed portion",
+        "doesn't provide a truncated transcript.",
+        "doesn't have enough information to precisely align transcript and audio"
+      ],
+      "connects": [
+        "voice-agent-memory",
+        "voice-agent-latency"
+      ]
+    },
+    {
+      "id": "livekit-agents-turns",
+      "url": "https://docs.livekit.io/agents/build/turns/",
+      "author": "LiveKit",
+      "date": "2026-11-17",
+      "title": "Turn detection and interruptions",
+      "quotes": [
+        "automatically truncates its conversation history to include only the portion of the speech that the user heard before interruption."
+      ],
+      "connects": [
+        "voice-agent-memory",
+        "voice-agent-latency"
+      ]
+    },
+    {
+      "id": "pipecat-context-management",
+      "url": "https://docs.pipecat.ai/guides/learn/context-management",
+      "author": "Pipecat",
+      "date": "2026-11-17",
+      "title": "Context management",
+      "quotes": [
+        "This ensures context matches what users actually hear.",
+        "represents what was actually spoken",
+        "Your context stays updated at the word level in case an interruption occurs"
+      ],
+      "connects": [
+        "voice-agent-memory"
+      ]
+    },
+    {
+      "id": "deepmind-alphaproof-code",
+      "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+      "author": "Pushmeet Kohli and Swarat Chaudhuri",
+      "date": "2026-11-10",
+      "title": "Introducing AlphaProof Code: a breakthrough in verifying complex software at depth",
+      "discussion": "https://news.ycombinator.com/item?id=50439193",
+      "quotes": [
+        "over six million lines of Lean",
+        "Every proof is checked by Lean to verify the agents' work.",
+        "human experts work with AI to decide what to prove, and a group of AI agents does it."
+      ],
+      "connects": [
+        "lambda-calculus-ai"
+      ]
+    },
+    {
+      "id": "hn-opus-nerfed-kasey-junk",
+      "url": "https://hn.algolia.com/api/v1/items/50420515",
+      "author": "kasey_junk",
+      "date": "2026-11-09",
+      "title": "Comment on Tell HN: A flood of reports of Opus 5.5 being nerfed",
+      "discussion": "https://news.ycombinator.com/item?id=50420515",
+      "quotes": [
+        "Do you run evals as a matter of course?",
+        "without any measurement it's a non-interesting assertion",
+        "That's not to say that the labs don't downgrade models at times",
+        "Everyone I know that does shows high levels of variance across them under the best case."
+      ],
+      "connects": [
+        "writing-for-ai-products"
+      ]
+    },
+    {
+      "id": "openai-prompt-engineering-guide",
+      "url": "https://developers.openai.com/api/docs/guides/prompt-engineering",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Prompt engineering guide",
+      "quotes": [
+        "Even different snapshots of models within the same family could produce different results.",
+        "Pinning your production applications to specific model snapshots",
+        "measure prompt behavior"
+      ],
+      "connects": [
+        "writing-for-ai-products"
+      ]
+    },
+    {
+      "id": "anthropic-model-deprecations",
+      "url": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+      "author": "Anthropic",
+      "date": "2026-11-17",
+      "title": "Model deprecations",
+      "quotes": [
+        "at least 60 days' notice before model retirement for publicly released models"
+      ],
+      "connects": [
+        "writing-for-ai-products",
+        "writing-changelogs"
+      ]
+    },
+    {
+      "id": "google-tech-writing-sample-code",
+      "url": "https://developers.google.com/tech-writing/two/sample-code",
+      "author": "Google",
+      "date": "2026-11-17",
+      "title": "Technical Writing Two: Creating sample code",
+      "quotes": [
+        "Build without errors. Perform the task it claims to perform.",
+        "Build without errors.",
+        "Perform the task it claims to perform."
+      ],
+      "connects": [
+        "writing-for-ai-products",
+        "writing-technical-tutorials"
+      ]
+    },
+    {
+      "id": "hn-trust-auntienomen",
+      "url": "https://hn.algolia.com/api/v1/items/50487366",
+      "author": "auntienomen",
+      "date": "2026-11-13",
+      "title": "Comment on AI is destroying the trust between writers and readers",
+      "discussion": "https://news.ycombinator.com/item?id=50487366",
+      "quotes": [
+        "generate prose faster than readers can read it",
+        "This is a fundamental break in the bargain between readers and writers: However long it takes someone to consume a piece of writing, it almost certainly took the author longer to write it.",
+        "you should spend more time writing something than you expect the audience to spend reading it."
+      ],
+      "connects": [
+        "written-by-a-human"
+      ]
+    },
+    {
+      "id": "hn-trust-juanre",
+      "url": "https://hn.algolia.com/api/v1/items/50487329",
+      "author": "juanre",
+      "date": "2026-11-13",
+      "title": "Comment on AI is destroying the trust between writers and readers",
+      "discussion": "https://news.ycombinator.com/item?id=50487329",
+      "quotes": [
+        "The one thing that we can prove with reasonable ease is that the time it took to write was compatible with the author being a human"
+      ],
+      "connects": [
+        "written-by-a-human"
+      ]
+    },
+    {
+      "id": "hn-trust-samintheshell",
+      "url": "https://hn.algolia.com/api/v1/items/50484325",
+      "author": "SamInTheShell",
+      "date": "2026-11-13",
+      "title": "Comment on AI is destroying the trust between writers and readers",
+      "discussion": "https://news.ycombinator.com/item?id=50484325",
+      "quotes": [
+        "I can't trust that my coworkers are actually testing the crap they're generating before wasting my time with runbooks that aren't even validated."
+      ],
+      "connects": [
+        "written-by-a-human"
+      ]
+    },
+    {
+      "id": "openai-voice-sip-guide",
+      "url": "https://developers.openai.com/api/docs/guides/voice-sip",
+      "author": "OpenAI",
+      "date": "2026-11-06",
+      "date_note": "Hacker News submission date, item 50399695; the page prints no date.",
+      "title": "Voice SIP guide",
+      "discussion": "https://news.ycombinator.com/item?id=50399695",
+      "quotes": [
+        "Outbound SIP calling is available to all organizations through the Live API"
+      ],
+      "connects": [
+        "voice-agent-memory",
+        "voice-agent-latency"
+      ]
+    },
+    {
+      "id": "site-about-page",
+      "url": "https://ninadpathak.com/about/",
+      "author": "Ninad Pathak",
+      "date": "2026-11-17",
+      "title": "About Ninad Pathak",
+      "quotes": [
+        "I use AI to prepare research, inspect a corpus, try variations, and attack a draft."
+      ],
+      "connects": [
+        "written-by-a-human"
+      ]
+    },
+    {
+      "id": "semver-2-0-0",
+      "url": "https://semver.org/",
+      "author": "Tom Preston-Werner",
+      "date": "2026-11-17",
+      "title": "Semantic Versioning 2.0.0",
+      "quotes": [
+        "MAJOR version when you make incompatible API changes",
+        "Before you completely remove the functionality in a new major release there should be at least one minor release that contains the deprecation"
+      ],
+      "connects": [
+        "writing-changelogs"
+      ]
+    },
+    {
+      "id": "github-generated-release-notes",
+      "url": "https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes",
+      "author": "GitHub",
+      "date": "2026-11-17",
+      "title": "Automatically generated release notes",
+      "quotes": [
+        "include a list of merged pull requests, a list of contributors to the release, and a link to a full changelog."
+      ],
+      "connects": [
+        "writing-changelogs"
       ]
     }
   ],
@@ -1850,6 +2227,20 @@
       "If a sentence cannot help someone decide, migrate, verify, or troubleshoot, it does not belong above the technical changes.",
       "Keep version 3 deployed in the previous production slot. If error rates rise before v4 cursors are stored, shift traffic back. After that point, disable pagination writes and contact support before downgrading."
     ],
-    "nobody-understands-the-code": []
+    "nobody-understands-the-code": [],
+    "writing-changelogs": [
+      "**Breaking:** `client.retryCount` has been replaced by `client.retry.maxAttempts`. Rename the field before upgrading or the client will fall back to its default retry limit.",
+      "This release is backward compatible for REST API users. The JavaScript SDK now requires Node.js 20 or later."
+    ],
+    "short-term-agent-memory": [],
+    "memory-versioning": [],
+    "voice-agent-memory": [],
+    "lambda-calculus-ai": [],
+    "writing-for-ai-products": [
+      "rate limits apply"
+    ],
+    "written-by-a-human": [
+      "written by a human"
+    ]
   }
 }

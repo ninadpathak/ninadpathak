@@ -9,224 +9,95 @@ bridges:
 - slug: agent-harnesses
   reason: The agent harness page is the worked example behind the claim made here.
 date: 2026-03-31
-description: AI product docs now need prompts, schemas, evals, and version boundaries.
-  I explain the rules I would use to judge a technical writer for an AI company.
+description: 'Technical writing for AI products documents a contract the model can change: what a model name pins, the output contract and how to judge a writer.'
 status: published
 work_note: 'I write for AI companies such as Firecrawl, where a product''s output changes from one run to the next. The rules below are the ones I judge that writing by, and [my portfolio](/portfolio/) has the work.'
 title: 'Technical Writing for AI Products: The New Rules'
 slug: writing-for-ai-products
+updated: 2026-11-17
 ---
 
-Technical writing for AI products has become a product design problem. A weak paragraph used to confuse a reader for five minutes and cost nothing else.
+A thread on Hacker News on November 8 gathered user reports that Claude Opus 5.5 had been "nerfed", and the reply that stayed with me asked a documentation question: ["Do you run evals as a matter of course?"](https://news.ycombinator.com/item?id=50420515)
 
-A weak prompt example or sloppy schema explanation now gets copied into production, fed to an agent, and multiplied across hundreds of calls before anyone notices the damage. I once watched a docs example that hardcoded an unconstrained `temperature` get pasted into three internal services, each one quietly returning malformed JSON about one call in twenty.
+The commenter's next sentence is the awkward one for anyone who does: "Everyone I know that does shows high levels of variance across them under the best case." The comment allows that labs sometimes downgrade a model, and ends that "without any measurement it's a non-interesting assertion".
 
-A lot of teams are still hiring technical writers for the previous generation of software. They ask for someone who can explain features clearly.
+Technical writing for AI products exists to make that argument answerable. A reader of ordinary API docs needs to know what a call returns, and a reader of AI product docs also needs to know what stays fixed behind a model name and how to check it.
 
-That still matters, though it is nowhere near enough for an AI product. I would not trust a writer on an LLM, agent, or AI API product unless they can document prompts, outputs, failure modes, evaluation criteria, and version drift with the same rigor they bring to an endpoint reference.
+## What does a model name promise in the docs?
 
-**Short answer:** Technical writing for AI products now needs to cover three things at once: human understanding, machine-readable structure, and behavioral reliability. Strong AI docs include tested examples, explicit output constraints, prompt and schema versioning, and clear failure boundaries.
+It promises only what the page says it does, so the page has to say. OpenAI's [prompt engineering guide](https://developers.openai.com/api/docs/guides/prompt-engineering) is direct about the risk: "Even different snapshots of models within the same family could produce different results."
 
-Teams evaluating writers should look for someone who can treat prompts, JSON schemas, and eval cases as part of the product surface, not as side material around it.
+It recommends "Pinning your production applications to specific model snapshots", and tests that "measure prompt behavior".
 
-## AI product docs now have three readers
+That gives the writer a rule for every page with a model identifier on it. State whether the identifier is a snapshot or a moving alias, and give the date the example was last run against it.
 
-Classic software documentation usually had one primary reader: the developer integrating the API. AI product documentation has at least three.
+Retirement dates belong in the docs too. Anthropic's [model deprecations page](https://platform.claude.com/docs/en/about-claude/model-deprecations) commits to "at least 60 days' notice before model retirement for publicly released models", and my post on [writing a changelog](/articles/writing-changelogs/) looks at one deprecation entry that carries its dates and its failure mode in two sentences.
 
-Reader one is still the human developer. The second reader is the model-facing workflow the developer assembles from your docs: prompt templates, function schemas, system instructions, output validators, and guardrails.
+## What is the output contract of an AI feature?
 
-Last comes the retrieval layer around modern tooling, meaning site search, support copilots, coding assistants, internal knowledge bases, and agent harnesses that quote your docs back to users.
+It is the schema the output follows, the cases where it won't, and what the caller has to check itself. OpenAI's [structured outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs) puts all of that in two sentences, which I hold up as the model for any AI reference page.
 
-Google's guidance for web content generated with AI says the bar is still "accuracy, quality, and relevance," and that metadata, structured data, titles, and descriptions need the same care as body copy ([Google Search Central](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)). That sounds obvious until you audit a typical AI startup docs set.
+"Structured Outputs constrains completed, non-refusal model output to your supplied JSON Schema. Your application still needs to handle refusals, incomplete responses, and API errors, and validate any business rules that the schema does not express."
 
-Plenty of teams still treat metadata as an SEO chore, prompt examples as blog fodder, and JSON schemas as something the SDK team can explain later.
-
-My take is blunt: if your AI product has a prompt surface, then your prompt surface is documentation. If your product emits structured JSON, then your schema is documentation.
-
-If your agent can fail in predictable ways, then those failure modes belong in documentation before they land in support tickets.
-
-That change in audience is why I care so much about information architecture. A model cannot infer the intended contract from marketing language, and a harried engineer will not guess it either.
-
-Google's API writing guidance requires a description for every method, parameter, return value, and exception, and it asks for a code sample of roughly 5 to 20 lines near the top of each API page ([Google developer documentation style guide](https://developers.google.com/style/api-reference-comments)). AI products need that discipline plus one extra layer: documented behavior under ambiguity, like what the model does when a required field is missing or when the user asks for something the schema cannot represent.
-
-## Prompts, schemas, and evals are part of the product surface
-
-Far too often, teams still separate "real docs" from "prompting guidance," and I think that split is a mistake. The prompt is where most of the actual behavior lives, so filing it under tips and tricks is like documenting a function's signature while leaving the body undocumented.
-
-<div class="visual-wrapper">
-  <div class="visual-title">OpenAI Prompt Engineering Guide</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/openai-prompt-engineering.png" alt="OpenAI Prompt Engineering Guide" loading="lazy">
-  </div>
-</div>
-
-<div class="visual-wrapper">
-  <div class="visual-title">Anthropic Prompt Engineering Guide</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/anthropic-prompt-engineering.png" alt="Anthropic Prompt Engineering Guide" loading="lazy">
-  </div>
-</div>
-
-OpenAI's prompt engineering guide explicitly recommends pinning production apps to model snapshots and building evals that measure prompt behavior as you iterate or upgrade model versions ([OpenAI prompt engineering guide](https://developers.openai.com/api/docs/guides/prompt-engineering)). Anthropic's prompting guide makes the same point from a different angle: be clear and direct, provide explicit output constraints, and use 3 to 5 examples for best results ([Anthropic prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)).
-
-Once the model vendors tell you to pin versions and measure prompt behavior, the writing problem stops being "how do I explain the feature?" and becomes "how do I document a behavioral contract that changes over time?"
-
-Many AI docs fall apart at exactly that point. They explain what the endpoint does and skip the instructions that make it work reliably.
-
-They give one happy-path example and never show the borderline cases, like an empty input, a 200-page document, or a question the model should decline. A page will say "returns structured JSON" without showing the schema or the refusal path.
-
-Worst of all, teams ship a prompt example that was never re-run against the current model snapshot, then claim the output is consistent.
-
-I covered the schema side of that problem in my post on [structured outputs](/articles/llm-structured-outputs/). OpenAI's structured outputs docs say the feature ensures the model adheres to your supplied JSON Schema and removes the need to retry malformed responses ([OpenAI structured outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs)).
-
-That changes what good documentation looks like. A writer working on an AI API now needs to explain:
-
-- which fields are guaranteed by schema
-- which fields are model-generated but unconstrained
-- how refusals appear
-- what changes when teams use tool calling instead of direct response formatting
-
-None of those are edge concerns. Each one determines whether the integration survives contact with production traffic, where a model sees inputs no writer ever pictured.
-
-Writing AI infrastructure content has made one pattern very clear to me: the best writers on these products think like interface designers. They do not stop at prose.
-
-They ask for the actual prompt template, the exact schema, the logged error objects, the benchmark setup, and the deprecation plan. That is also the kind of technical depth I bring when writing for AI companies.
-
-[My work page](/work/) has examples if that is relevant.
-
-## Sample code has to be runnable, not decorative
-
-Good AI documentation lives or dies on examples. Google states that good sample code should build without errors, perform the task it claims to perform, be production-ready where possible, and explain how to run it, including setup, dependencies, and expected results ([Google technical writing course on sample code](https://developers.google.com/tech-writing/two/sample-code)).
+A writer working from that standard documents which fields the schema guarantees and how a refusal arrives. My guide to [structured outputs](/articles/llm-structured-outputs/) goes through those cases for each vendor.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/writing-for-ai-products/example-pattern.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/writing-for-ai-products/example-pattern.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/writing-for-ai-products/example-pattern.svg" width="720" height="256" alt="The preferred pattern for an AI documentation example has four parts in order: a minimal working request, the exact output contract the response must follow, one failure or refusal case, and the production caveat that changes implementation choices." loading="lazy" decoding="async"></picture></a>
   <figcaption>Show the request, the contract, a refusal, and the caveat. Anything less demos well and deploys badly.</figcaption>
 </figure>
 
-Because developers actively mutate the sample, that standard matters more for AI products than for ordinary CRUD APIs. They paste it into a notebook, replace the model name, tweak a system instruction, and ship a variant into a prototype by lunch.
+The pattern in the figure is the smallest complete example for an AI endpoint. It has the request, the contract, one refusal and the caveat that changes how the caller builds.
 
-Snippet quality has a compounding effect in AI docs:
+## What makes a code sample trustworthy in AI docs?
 
-- A correct example teaches the integration pattern.
-- A complete example teaches the surrounding constraints.
-- A tested example teaches trust.
+It runs, its output is shown, and the page says which model produced that output.
 
-Weak examples create very specific failure modes. A missing system instruction changes output shape.
+Google's [technical writing course](https://developers.google.com/tech-writing/two/sample-code) lists what a correct sample must do, starting with "Build without errors." and "Perform the task it claims to perform."
 
-An omitted validator hides schema drift. A toy prompt with no delimiters teaches bad prompting habits.
+An AI sample needs one thing more, because the same code returns different text next quarter. Print the output the sample produced, with the model snapshot and the date, so a reader whose result differs can tell a changed model from a broken integration.
 
-A code sample that hardcodes a model alias without a snapshot masks version instability. A response example without a refusal case teaches developers to parse the happy path only.
+A docs page can also ship a small eval, a set of prompts with expected properties, which gives every user the measurement that commenter asked for. The variance in the same comment sets its size.
 
-Google's style guidance says the first sentence of an API description should carry unique, descriptive information and not repeat what the name already implies ([Google developer documentation style guide](https://developers.google.com/style/api-reference-comments)). I apply the same rule to examples.
+My arithmetic for a prompt set scored pass or fail at a true rate of 80% gives a standard error near nine points at 20 runs and 2.8 points at 200. A handful of prompts run once can't show a five-point drop, so the page should say how many runs its numbers rest on.
 
-A code block should not merely prove the endpoint exists. It should teach the non-obvious part.
+## Who reads AI product docs besides developers?
 
-If a developer could have guessed the sample from the method name alone, the sample is wasting space.
+Coding agents and retrieval systems read them, a paragraph at a time and without the surrounding page. A sentence such as "rate limits apply" sends a person to look up the number, and gives a coding assistant nothing to put in the client it is generating.
 
-My preferred pattern for AI docs is simple:
-
-1. Show the minimal working request.
-2. Show the exact output contract.
-3. Show one failure or refusal case.
-4. Show the production caveat that changes implementation choices.
-
-Anything less usually produces docs that demo well and deploy badly.
-
-## Versioning matters more in AI docs than teams admit
-
-Documenting endpoints, parameters, and deprecations was the whole job under traditional API versioning. AI products need all of that plus model-behavior versioning, because the same prompt can return a different answer after a model update that touched no parameter you control.
-
-OpenAI recommends pinning production applications to specific model snapshots so behavior remains consistent across releases ([OpenAI prompt engineering guide](https://developers.openai.com/api/docs/guides/prompt-engineering)). Anthropic's docs are equally explicit that prompt behavior depends on model generation, prompt structure, examples, and effort settings ([Anthropic prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)).
-
-SemVer gives software teams a shared language for contract changes ([Semantic Versioning 2.0.0](https://semver.org/)).
-
-Rarely do AI companies apply that thinking far enough. They version SDKs and neglect prompt packs, eval datasets, output schemas, and migration notes between model snapshots.
-
-Then they act surprised when support volume rises after a "minor" model update that quietly made the model chattier and broke a downstream parser expecting one-line answers.
-
-I wrote recently about [how to write a changelog developers actually read](/articles/writing-changelogs/). AI product teams need the same discipline, except the changelog has to explain behavioral changes with much more care.
-
-"Improved reasoning quality" is not a useful release note. "Responses are now more likely to include intermediate rationale unless `verbosity` is set to low" is useful.
-
-"Tool selection is more aggressive on multi-step prompts" is useful. "Strict schema enforcement now rejects unsupported keywords instead of ignoring them" is useful.
-
-Readers evaluating an AI writer should ask one uncomfortable question: can this person write migration notes for model behavior as well as feature release notes? Plenty of otherwise competent SaaS writers cannot.
-
-My page as a [freelance technical writer for AI companies](/services/freelance-technical-writer-for-ai-companies/) links the work I've published for Firecrawl and OpenComputer, along with the Centus guides.
-
-## Retrieval and agent use change what “clear docs” means
-
-Search-friendly documentation used to mean headings, metadata, and sane page structure. Those basics still matter, though modern AI products add another constraint: your docs will be read piecemeal by agents, retrieval systems, support copilots, and developer tools that grab a single paragraph with none of its surrounding context.
-
-OpenAI's prompting docs recommend structuring developer messages with sections such as identity, instructions, examples, and context, using Markdown and XML to mark logical boundaries ([OpenAI prompt engineering guide](https://developers.openai.com/api/docs/guides/prompt-engineering)). Anthropic recommends XML tags for complex prompts and reports that placing longform data first, with the query near the end, can improve quality by up to 30% in tests on complex multi-document inputs ([Anthropic prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)).
-
-That guidance is nominally about prompts, but I think it has a direct writing implication: document structure itself has become part of product performance.
-
-A few concrete rules follow from that:
-
-- Headings should answer real questions, not label vague topic buckets.
-- Example blocks should have enough context around them that retrieval systems can surface them meaningfully.
-- Parameter tables should state defaults, limits, and replacement paths explicitly.
-- Error sections should include the exact failure object or message shape where possible.
-
-My post on [agent harnesses](/articles/agent-harnesses/) makes a related point from the systems side: the runtime around an LLM becomes load-bearing once the model is taking multi-step actions. Documentation plays the same role for developers.
-
-A vague paragraph that a human can mentally patch over becomes a serious integration bug when an agent uses it as operating context. A human reading "rate limits apply" knows to go look up the actual number.
-
-A coding assistant pulling that same line into a generated client will happily fire requests with no backoff at all.
-
-That is the non-obvious shift I do not see enough articles mention. AI documentation is no longer just explanatory text around the product.
-
-It is often the retrieval corpus and behavioral instruction layer around the product.
+Writing for that reader means stating defaults and limits in the sentence where they matter, and showing the exact shape of an error. My [reading of Fern's agent traffic report](/articles/agents-reading-docs/) looks at how much of docs traffic is agents, and the [agent harnesses](/articles/agent-harnesses/) post covers the runtime that feeds those pages to a model.
 
 ## How I would evaluate a technical writer for an AI company
 
-If I were hiring for this work, I would not ask for a generic portfolio review first. I would ask for evidence in five specific areas:
+Ask for evidence in five areas before looking at a general portfolio.
 
-1. Can the writer document a prompt or system instruction set with the same precision they use for an API method?
-2. Can they explain a JSON schema, refusal case, and validation boundary without flattening the nuance?
-3. Can they produce examples that are complete enough to run and concrete enough to implement from?
-4. Can they write migration notes for changing model behavior and not hide behind soft language?
-5. Can they work directly with PMs, engineers, and applied AI teams to extract the actual contract instead of paraphrasing whatever made it into a Notion brief?
+1. A prompt or system instruction documented with the precision of an API method.
+2. A JSON schema explained with its refusal case and its validation boundary.
+3. An example complete enough to run, with its output and model version shown.
+4. A migration note for a model change that says what will behave differently.
+5. A record of getting the real contract from engineers, in place of a paraphrase of the launch brief.
 
-I would also look for one more thing that rarely shows up on job descriptions: taste in omission. Strong AI writing leaves out speculative claims, hand-wavy guarantees, and fake certainty.
+A further quality rarely appears in a job description, which is judgment about what to leave out. Strong AI writing omits guarantees the product can't keep and states uncertainty where the behavior is experimental.
 
-Weak AI writing fills space where experimental uncertainty should have been stated plainly.
-
-What AI teams need, in my experience, is not more words. They need better boundaries.
-
-A writer who can turn fuzzy behavior into a documented contract is worth far more than one who can spin a polished 1,500-word feature page out of a launch brief.
+My page as a [freelance technical writer for AI companies](/services/freelance-technical-writer-for-ai-companies/) links the work I've published for Firecrawl and OpenComputer. The [Centus case study](/work/centus/) covers the localization guides, and [my work page](/work/) has the rest.
 
 ## FAQ
 
 **How is technical writing for AI products different from ordinary API documentation?**
 
-AI docs still need reference accuracy, but they also need to document behavior. That includes prompts, examples, schemas, refusals, model-version caveats, and evaluation criteria.
-
-Ordinary API docs can often stop at syntax plus semantics. AI docs usually fail if they stop there.
+AI docs still need reference accuracy, and they also have to document behavior. That covers prompts, schemas, refusals, model versions and the evidence that an example was run.
 
 **Should a technical writer for an AI company know how to run evals?**
 
-Yes, at least at a practical level. I do not expect every writer to design evaluation infrastructure, but I do expect them to understand what is being measured, what changed between versions, and which examples are part of the tested contract.
-
-A writer who cannot read eval outputs will struggle to document model behavior honestly.
+Yes, at a practical level. A writer who can't read eval output can't say accurately what changed between two model versions.
 
 **Do AI product docs need more tutorials or more reference pages?**
 
-Both, but reference quality usually breaks first. Teams rush to publish glossy tutorials and skip the unglamorous details: parameter defaults, schema guarantees, refusal handling, and migration notes.
-
-I would fix reference and examples before adding another tutorial series.
+Fix reference first. Parameter defaults, schema guarantees and refusal handling are the details an integration depends on.
 
 **Should writers own prompt libraries and system prompts?**
 
-Shared ownership works best. Applied AI or engineering should own runtime behavior.
-
-Writers should own clarity, structure, consistency, and upgrade notes. That split fails when writers are blocked from seeing the actual prompts or when engineers treat prompt text as too informal to document.
-
-Prompt text is product logic in many AI systems.
+Shared ownership works best. Engineering owns runtime behavior, and writers own clarity and upgrade notes, which requires that writers can see the real prompts.
 
 **What is the fastest way to tell whether an AI writer is strong?**
 
-Ask them to rewrite one weak API page for an LLM feature. Give them the schema, a prompt template, three failure logs, and a model upgrade note.
-
-Strong writers get sharper. Weak writers get vaguer.
+Ask them to rewrite one weak API page for an LLM feature, and give them the schema, a prompt template and a model upgrade note. A strong writer's version gets more specific.
