@@ -5183,6 +5183,19 @@
       "connects": [
         "writing-technical-tutorials"
       ]
+    },
+    {
+      "id": "wikipedia-lorem-ipsum",
+      "url": "https://en.wikipedia.org/wiki/Lorem_ipsum",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "Lorem ipsum",
+      "quotes": [
+        "is a dummy or placeholder text commonly used in graphic design, publishing, and web development"
+      ],
+      "connects": [
+        "documentation-template"
+      ]
     }
   ],
   "unused_leads": [
@@ -5422,6 +5435,10 @@
     ],
     "writing-technical-tutorials": [
       "hello, world"
+    ],
+    "documentation-template": [
+      "Retry failed requests",
+      "Reader check: pick an action for each row of the table using only the filled pages, then find the sentence that supports it. If you need information from outside the pages to choose, write down what was missing."
     ]
   }
 }

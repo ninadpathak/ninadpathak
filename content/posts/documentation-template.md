@@ -6,35 +6,36 @@ siblings:
 - quickstart-guide
 - api-documentation
 date: 2026-08-01
-description: Download a technical documentation template, learn what each page must
-  prove, and turn its placeholders into trustworthy product docs.
+description: A technical documentation template you can download, with a blank MkDocs
+  starter and a filled example for a small export service. What each page has to show,
+  with the commands that test it.
 slug: documentation-template
 status: published
 work_note: "This post is a starting structure for product docs, for the team looking at an empty docs folder with a launch coming. If you'd rather have someone fill that structure with pages that were run against the product, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Work with me on them](/services/)."
 takeaways:
-- A documentation template should define page jobs and evidence requirements, not
-  only headings.
-- Start with one tested reader task, then add reference and troubleshooting pages
-  as the product creates those needs.
-- Validate navigation and local links before publishing a generated documentation
-  site.
-title: 'Technical Documentation Template: Build Product Docs With a Tested Structure'
+- Give each page in the template one reader job and the evidence that job needs.
+- Start with one tested reader task, then add reference and troubleshooting pages as
+  the product needs them.
+- Run the link validator and a strict build before you publish the site.
+title: A Technical Documentation Template With a Filled Example
 updated: 2026-09-10
 ---
 
-A documentation template can manufacture the appearance of order in seconds: a getting-started page, a reference section, a neat little slot for troubleshooting. Fill those headings before choosing a real product task and you have built an empty house faster.
+A page of [lorem ipsum](https://en.wikipedia.org/wiki/Lorem_ipsum) looks finished from across the room. A technical documentation template has the same problem: it gives you a getting-started page, a reference section and a troubleshooting page in seconds, and every one of them is still empty.
 
-I think a template earns its keep only when it forces the writer to expose product behavior. The downloads below pair a blank starter with a filled example for a hypothetical export service that stores request records in memory without generating files.
+So the technical documentation template on this page comes in two parts. You get a blank starter to copy, and a filled example for a small export service, so you can see what each heading looks like once a real command and a real response are under it.
 
-The quickstart proves a first result, reference nails down the contract, and troubleshooting tells the reader what to do when the response disappears.
+I think a template is only useful if it makes the writer show how the product behaves. Each page in this one has a job, and I've listed the evidence that job needs, as part of my pages on [technical documentation](/articles/technical-documentation/).
 
-## Copy the blank starter or inspect the filled template
+## What is in the technical documentation template?
+
+The template has five pages, and you can download it blank or read it filled in:
 
 - [Download the blank technical documentation template](/static/templates/technical-documentation-template.zip).
 - [Download the filled writing lab and runnable fixture](/static/examples/writing-lab.zip).
 - [Read the filled documentation index](/static/examples/writing-lab/docs/index.md).
 
-The blank starter contains a MkDocs site and its validator. The writing lab is a separate Markdown example with a local service; it does not replace the starter's publishing setup.
+The blank starter is a MkDocs site with a script that validates its links. The writing lab is a separate set of Markdown pages about a local export service, and it comes with that service so you can run every command in the docs.
 
 | Page job | Filled example | Evidence the page must supply |
 | --- | --- | --- |
@@ -44,13 +45,13 @@ The blank starter contains a MkDocs site and its validator. The writing lab is a
 | Look up a contract | `docs/reference.md` | Input rules and response meanings |
 | Recover from a symptom | `docs/troubleshooting.md` | A diagnostic check and a justified next action |
 
-If a page has no distinct reader job, kill the placeholder until a task requires it. An empty "Concepts" section is a promise nobody has done the work to keep.
+If a page in your copy has no reader job yet, delete it until a task needs it. An empty "Concepts" section tells readers that an explanation exists when nobody has written one.
 
-The [documentation types guide](/articles/documentation-types/) helps place explanation or tutorial material when it grows beyond this initial route.
+When you later need a tutorial or an explanation page, the [documentation types guide](/articles/documentation-types/) covers where each one goes.
 
-## Fill the starting path with a real command
+## How do you fill in the getting-started page?
 
-The filled quickstart tells the reader to extract the archive and run these commands from `writing-lab`. The recorded test runtime is Node.js 24.18.0; the fixture has no npm dependencies.
+Fill the getting-started page with commands you have run and the response the reader should see. The filled example tells the reader to extract the archive and run these three commands from the `writing-lab` folder:
 
 ```bash
 node --version
@@ -58,9 +59,9 @@ node check.mjs
 node service.mjs
 ```
 
-The check ends with `PASS`. The server then prints its loopback URL and remains running.
+The check prints `PASS` on its last line. The third command starts the export service, which prints a loopback URL and keeps running.
 
-Set `LAB_URL` to the printed value in another terminal:
+Open a second terminal, set `LAB_URL` to the URL the service printed, then send the two requests:
 
 ```bash
 export LAB_URL=http://127.0.0.1:49152
@@ -71,17 +72,15 @@ curl -i "$LAB_URL/exports" \
   --data '{"format":"csv"}'
 ```
 
-On a fresh server, the request returns HTTP 202 with `{"id":"exp_1","format":"csv","status":"accepted"}`. The page must define what "accepted" means: a record exists in this server's memory.
+On a freshly started service the export request returns HTTP 202 with `{"id":"exp_1","format":"csv","status":"accepted"}`. The page then has to say what "accepted" means, which for this fixture is that a record now exists in the service's memory.
 
-If the health request fails, compare the URL with the server terminal before continuing; use the recovery page for an export error. Keep this server running for the recovery experiment below.
+If the health request fails, compare your `LAB_URL` with the URL in the first terminal before going further. Leave the service running, because the troubleshooting section below uses it.
 
 For a quickstart page on its own, the [quick start guide template](/articles/quickstart-guide/) adds a version check for each tool and a table of the errors a first run produces.
 
-## Put exact rules in reference
+## What belongs on the reference page?
 
-A quickstart can choose `csv` for its first request. Reference must also say whether `json` is allowed and what happens to an unsupported value.
-
-That distinction keeps setup prose short without hiding the contract.
+The reference page holds the exact rules that the getting-started page skipped. The quickstart can use `csv` for its first request, and the reference page has to say that `json` is also allowed and that `xml` is refused.
 
 | Reference field | Filled value | Check |
 | --- | --- | --- |
@@ -91,17 +90,17 @@ That distinction keeps setup prose short without hiding the contract.
 | Retention | The lifetime of this server instance | A new instance starts with no stored records |
 | Output | An accepted record identifier | The fixture contains no file-generation worker |
 
-Run `node check.mjs` to verify the tested cases. An assertion failure means the corresponding contract statement needs investigation.
+Run `node check.mjs` to test every row of that table against the service. If an assertion fails, the row it tests is wrong and needs fixing before the page ships.
 
-The [API documentation guide](/articles/api-documentation/) writes out the full reference entry for this endpoint, with each response and a script that checks them against the service. When reference is generated from source, [code documentation](/articles/code-documentation/) decides what stays in comments and docstrings and what moves into a guide.
+The [API documentation guide](/articles/api-documentation/) writes out the full reference entry for this endpoint, with each response and a script that checks them against the service. When your reference is generated from source code, [code documentation](/articles/code-documentation/) covers what stays in comments and what moves into a guide.
 
-For a CLI or internal tool, fill the option's allowed values and state the observed failure before recommending the page layout. Limit the claim to the tested cases, then name the behavior change that should trigger page review.
+For a command-line tool, the same table works with one row per option: the allowed values, and the error the tool prints for a value outside them.
 
-## Give recovery its own decision table
+## How do you write the troubleshooting page?
 
-The blank starter already includes a troubleshooting page. The missing work is product-specific: supply enough information for the reader to act after an ambiguous outcome.
+Write the troubleshooting page as a table that tells the reader what to do for each state they might be in. The blank starter includes the page, and you supply the states and actions from your own product.
 
-The filled guide deliberately stores a request, then closes its connection without a response.
+The filled example makes one failure happen on purpose. The service stores the request below and then closes the connection without sending a response:
 
 ```bash
 curl -i "$LAB_URL/exports" \
@@ -111,9 +110,9 @@ curl -i "$LAB_URL/exports" \
   --data '{"format":"csv"}'
 ```
 
-Use a previously unused key. Expect curl's `Empty reply from server` and exit code 52.
+Use an idempotency key you haven't sent before. Curl prints `Empty reply from server` and exits with code 52.
 
-The controlled connection loss is not a timed network outage. If you receive HTTP 200, that key was already retained; use another unused key to reproduce the failure.
+If you get HTTP 200, the service already holds a record for that key, so pick a new key to see the failure.
 
 | Observed state | Next action | Reason |
 | --- | --- | --- |
@@ -121,19 +120,19 @@ The controlled connection loss is not a timed network outage. If you receive HTT
 | HTTP 409 | Compare the new format with the original request | The key identifies a different retained payload |
 | Process restarted after response loss | Stop the recovery experiment | The fixture cannot recover the previous record |
 
-"Retry failed requests" is the kind of instruction that looks tidy in a review and ruins someone's afternoon in production. The [filled request guide](/static/examples/writing-lab/docs/send-a-request.md) contains the retry command and the [troubleshooting page](/static/examples/writing-lab/docs/troubleshooting.md) owns the stop condition.
+"Retry failed requests" is an instruction that reads well in a review and causes duplicates in production. The [filled request guide](/static/examples/writing-lab/docs/send-a-request.md) has the exact retry command, and the [troubleshooting page](/static/examples/writing-lab/docs/troubleshooting.md) says when to stop retrying.
 
-The [recorded fixture checks](/static/examples/writing-lab/validation.txt) ran on Node.js 24.18.0 on 10 September 2026. No human reader trial has been completed.
+I ran the lost-response request and the retry on November 18, 2026 with Node.js 24.22.3. The retry with the same key and format returned HTTP 200, and the retry with the format changed to `json` returned HTTP 409, as the table says.
 
-> Reader check: select an action for each row using only the filled pages, then identify the supporting sentence. If a choice needs outside information, record that gap before claiming the template supports the task.
+The [recorded fixture checks](/static/examples/writing-lab/validation.txt) are from September 10, 2026 on Node.js 24.18.0. I haven't tested these pages with outside readers.
 
-After the recovery experiment, press Ctrl-C in the server terminal. Stopping this fixture erases its stored records.
+> Reader check: pick an action for each row of the table using only the filled pages, then find the sentence that supports it. If you need information from outside the pages to choose, write down what was missing.
 
-## Check structure and behavior separately
+When you're done, press Ctrl-C in the service's terminal. Stopping the service erases its stored records.
 
-The blank starter's validator checks navigation and local Markdown links. Its strict build checks the documentation site.
+## How do you check the template before publishing?
 
-Run its commands from the extracted starter, after installing its requirements in a fresh Python environment:
+Check the site's structure and the product's behavior separately, because a site can build cleanly while its commands are wrong. For structure, run the starter's validator and a strict MkDocs build from a fresh Python environment:
 
 ```bash
 python -m venv .venv
@@ -143,9 +142,9 @@ python scripts/validate_docs.py
 mkdocs build --strict
 ```
 
-If installation or validation fails, stop before publishing generated output. These checks do not send a request to your product.
+On my run, with MkDocs 1.6.1, the validator printed a `PASS` line for each of its checks across five pages, and the strict build finished without a warning. If the install or the validator fails for you, fix that before publishing the generated site.
 
-The filled fixture's `node check.mjs` covers behavior and closes its temporary servers, but does not test the blank starter's publishing workflow.
+Those five commands never send a request to your product. The behavior test in the filled example is `node check.mjs`, and it doesn't test the starter's publishing setup.
 
 | Change | Page to review | Evidence to repeat |
 | --- | --- | --- |
@@ -156,4 +155,22 @@ The filled fixture's `node check.mjs` covers behavior and closes its temporary s
 
 When one of those changes reaches users, release notes built on the [release notes template](/articles/release-notes-template/) tell them what to do about it. The [documentation review checklist](/articles/documentation-review/) adds the reader-facing checks.
 
-Assign an owner to each filled page and keep its triggering behavior beside the review check.
+I'd also give each filled page a named owner, and keep the product change that triggers its review next to that name.
+
+## FAQ
+
+**What should a technical documentation template include?**
+
+A technical documentation template should include an index, a getting-started page, a task page, a reference page and a troubleshooting page. Each page needs one reader job and a note of the evidence that job requires.
+
+**Is the template free to use?**
+
+Yes. Both downloads on this page are free, and the filled example has no npm dependencies.
+
+**Which tool does the template use?**
+
+The blank starter is a MkDocs site, pinned to MkDocs 1.6.1 in its `requirements.txt`. The pages are plain Markdown, so you can move them to another static site generator.
+
+**Can I use the template for an internal tool?**
+
+Yes. The page jobs are the same for an internal tool, and the reference table works for a command-line option as well as for an API field.
