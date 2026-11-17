@@ -147,7 +147,7 @@ Each of the four phases fails in its own way, and from the outside the failures 
 
 **Remember.** Appending every result works until the history outgrows the context window. Anthropic's SDK then compacts the history into a summary, and its docs warn that instructions from early in the conversation may not survive.
 
-Every turn also costs a model call, and each call sends a history that's longer than the one on the turn before. The [token budgets guide](/articles/llm-token-budgets/) runs that arithmetic.
+Every turn also costs a model call, and each call sends a history that's longer than the one on the turn before. The [token budgets guide](/articles/llm-token-budgets/) works out what that growing history costs in tokens.
 
 ## Which phase should you check first?
 

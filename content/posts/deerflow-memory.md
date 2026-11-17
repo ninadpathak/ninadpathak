@@ -93,9 +93,9 @@ I managed the writing team at Mem0 earlier this year, so weigh what I say about 
 
 DeerMem's default write path is the strictest I've read in an open-source agent project. Its design effort went into deciding which facts may be written and who may confirm them, and comparatively little went into retrieval, which is a full-text search.
 
-DeerMem also has a lot of settings. The guide documents flags for deduplication, eviction, relevance ranking and shutdown, and a team that adopts DeerMem has to understand each flag it changes.
+DeerMem also has a lot of settings: the guide documents flags for deduplication, eviction, relevance ranking and shutdown. A team that adopts DeerMem has to understand each flag it changes.
 
-Memory is one part of DeerFlow. DeerFlow calls itself an agent harness, and memory sits beside its sandboxes and sub-agents in the way [agent harnesses](/articles/agent-harnesses/) describes.
+Memory is one part of DeerFlow, which calls itself an agent harness, and it sits beside its sandboxes and sub-agents in the way [agent harnesses](/articles/agent-harnesses/) describes.
 
 ## FAQ
 

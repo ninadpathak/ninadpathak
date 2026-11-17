@@ -33,7 +33,7 @@ The navigation drawer guide also tells the agent what to assume when the user's 
 
 The README publishes a measurement of whether the guides work, and the fact that it publishes one impresses me more than the figure. The README carries a table of runs with and without the guides, and on November 8 Claude Code on Opus 5.5 went from 57% of checks passed to 88%, over 215 tasks.
 
-The Chrome team wrote the guides, the tasks and the graders, so I read the jump from 57% to 88% as a sign the guides help and not as a measured size of the help. A commenter in the thread ran the project's legacy scan on their own code and it found only two issues, and a maintainer replied that the scan covers about a fifth of the guides so far.
+The Chrome team wrote the guides, the tasks and the graders, so I read the result, 88% against 57%, as a sign the guides help and not as a measured size of the help. A commenter in the thread ran the project's legacy scan on their own code and it found only two issues, and a maintainer replied that the scan covers about a fifth of the guides so far.
 
 The legacy scan checks existing code and the eval table checks newly generated code, and I haven't run either one myself. Even so, I can't name many docs teams that publish a table of pass rates with and without their docs.
 

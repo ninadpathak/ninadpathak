@@ -112,4 +112,4 @@ Small enough that you can review the whole diff in one sitting. Split anything l
 
 **Should I use several agents for one feature?**
 
-Nearly always no. A second agent adds coordination, and one agent with a clear frame and a reviewed diff is the simpler setup to trust.
+Nearly always no, because a second agent adds coordination, and one agent with a clear frame and a reviewed diff is the simpler setup to trust.
