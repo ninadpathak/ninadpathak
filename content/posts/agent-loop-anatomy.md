@@ -7,158 +7,157 @@ siblings:
 - agent-error-handling
 bridges:
 - slug: llm-token-budgets
-  reason: Each turn of the agent loop spends tokens and latency.
+  reason: Every pass through the loop is another model call, and that page adds up what the calls cost.
 - slug: llm-structured-outputs
-  reason: Each turn of the agent loop spends tokens and latency.
+  reason: The act phase depends on tool arguments that match a schema.
 - slug: ai-memory-management
-  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
+  reason: The remember phase is where an agent's memory gets written.
 - slug: context-windows-vs-memory
-  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
+  reason: A loop that only appends runs into the context window, which is a different thing from memory.
 date: '2026-04-23'
-description: The agent loop is not one thing. It is four distinct phases that run
-  in sequence, and understanding each one is how you debug what breaks.
+description: 'An agent loop is the cycle of model call, tool call and result that an agent repeats until it stops. The four phases, a loop in 30 lines, and how two SDKs end one.'
 slug: agent-loop-anatomy
 status: published
 work_note: "Explainers like this one are what I write for AI companies as a freelance technical writer. I'm Ninad Pathak, and I run the product before I write about it. [Let's work on yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'The Anatomy of an Agent Loop: Perceive, Think, Act, Remember'
 video: agent-loop-anatomy
+updated: 2026-11-17
 ---
 
-When an agent starts misbehaving, the loop is the first useful boundary to inspect. The literature describes it as a single construct.
+An agent loop is the cycle an AI agent repeats until its task is done: the model reads the state so far, picks a tool call, the tool runs, and the result goes back into the state. A single pass is a turn, and an agent is whatever keeps taking turns without a person in between.
 
-The actual implementation has four separate phases, and a failure in any one of them looks like a failure in the whole thing. An agent that loops forever, an agent that ignores a tool error, an agent that forgets what it was doing halfway through a task: those are three different broken phases that all read as "the agent is dumb" until you take the loop apart.
+Programmers have typed into a loop like this since 1964, when the phrase read-eval-print cycle was first used for a Lisp on the PDP-1. A [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop) reads a line, evaluates it, prints the result and waits for you.
 
-Perceive, think, act, and remember are the four phases. [ReAct prompting](/glossary/react-prompting/) is one loop pattern that interleaves model decisions with actions and the observations they return.
+An agent loop has nobody to wait for. The model reads the printed result itself and writes the next line.
 
-What differs between agents is what each phase contains and how much work it does.
-
-## Why the loop has four phases and not one
-
-The instinct is to treat the agent as a single inference call that produces an action. That model breaks down the moment the agent needs to call a tool, wait for a result, and then decide what to do next.
-
-A single inference call cannot wait. It cannot read a search result and then choose its next query based on what came back.
-
-Because the agent needs a cycle it can repeat, the loop exists at all. Each cycle adds a little more to the task state, the way a person debugging a problem runs one command, reads the output, and forms the next command from it.
-
-The loop terminates when the task is complete or when a stop condition is hit.
-
-How different agent architectures handle this loop is something I covered in my post on [the taxonomy of AI agents](/articles/ai-agent-taxonomy/). Reflex agents skip the think phase almost entirely.
-
-Deliberative agents spend significant compute in think before acting. That structural difference matters more than most framework documentation suggests.
+That's the whole mechanism under [AI agent architecture](/articles/ai-agents/), and the four phases below are a way to find which part of it broke.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/agent-loop-anatomy/agent-loop.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-loop-anatomy/agent-loop.narrow.svg" width="288" height="1064"><img class="np-has-narrow" src="/static/images/diagrams/agent-loop-anatomy/agent-loop.svg" width="720" height="664" alt="The agent loop drawn as a circular track: perceive, think, act, and remember in sequence, returning to perceive until the task is complete or a stop condition ends the run. A task enters at perceive, the run exits from remember, and the context window at the centre fills with each pass until its newest tokens spill past the edge." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Each phase has its own failure modes: infinite loops start in act, context exhaustion and lost tool results start in remember.</figcaption>
+  <figcaption>One pass through the loop. A tool call repeated without progress is an act failure, and a history that outgrows the context window is a remember failure.</figcaption>
 </figure>
 
-## Perceive: what the agent sees before it decides
+## What is an agent loop?
 
-Reading its current context and forming an internal picture of the task state is what the agent does in perceive. The phase is not passive.
+It's a `while` loop around a model call. Both big vendor SDKs document theirs in a few lines, and the two descriptions agree.
 
-The agent actively selects what to attend to in the context window.
+Anthropic's [Agent SDK docs](https://platform.claude.com/docs/en/agent-sdk/agent-loop) say Claude "evaluates your prompt, calls tools to take action, receives the results, and repeats until the task is complete." OpenAI's [Agents SDK docs](https://openai.github.io/openai-agents-python/running_agents/) list the same steps for its runner: call the model, return if the output is final, and otherwise run the tool calls, append the results and go round again.
 
-Scanning the conversation history, any retrieved documents, tool results from the previous step, and the current task instruction is the concrete work of perceive. Out of all of that, the agent builds a working representation of the situation.
+Neither vendor uses the words perceive, think, act and remember. Those four names are a teaching split, and I keep them because each one points at a different place to look when a run goes wrong.
 
-Context contamination is the failure mode here. When the context window contains stale information from a previous step, the perceive phase can lock onto the wrong picture.
+| Phase | What happens | Where you see it |
+| --- | --- | --- |
+| Perceive | The model is sent the system prompt, the tool definitions and the history so far | The request your code sends |
+| Think | The model decides between answering and calling a tool | The response, as text or a tool call |
+| Act | Your code runs the tool the model asked for | The tool's own logs and side effects |
+| Remember | The result is appended to the history for the next turn | The message list after the turn |
 
-I have seen this happen when a file-read tool returns "permission denied," a later step retries and the retry scrolls the error out of view, and the agent then proceeds as though the file were already loaded. The agent perceives the error as resolved when it is not.
+## What does an agent loop look like in code?
 
-Structured logging in the [agent harness](/articles/agent-harnesses/) is what lets you detect this. Without a record of what the agent was attending to at each perceive step, you cannot diagnose why it made the wrong call.
+About thirty lines. The script below swaps the model for a list of canned decisions, so the loop is the only moving part and anyone can run it.
 
-## Think: reasoning over the perceived state
+```python
+"""A whole agent loop in one function, with a scripted stand-in for the model."""
 
-Think is where the agent reasons about what it has perceived and decides what to do next. No phase varies more between implementations.
 
-Some agents use chain-of-thought prompting and generate visible reasoning tokens. Others treat think as a latent computation inside the model weights.
+def scripted_model(script):
+    """Return a 'model' that replays canned decisions, one per call."""
+    turns = iter(script)
+    return lambda messages: next(turns)
 
-Whether it has enough information to act is the first thing the model evaluates here. The same phase decides which tool to call, if any, and with what arguments.
 
-Engineers new to agent design tend to be surprised that the think phase cannot be observed directly in most frameworks. You get the output of think, not the process.
+TOOLS = {
+    "run_tests": lambda arg: "2 failed: test_login, test_logout",
+    "read_file": lambda arg: f"contents of {arg}",
+    "edit_file": lambda arg: f"edited {arg}",
+}
 
-That opacity is harmless on the happy path. It becomes a serious debugging problem when the agent decides, on step three, that a directory exists and you only find out on step twenty-three when a write into it fails.
 
-Token budget management happens here too. The think phase consumes tokens.
+def run(model, task, max_turns):
+    messages = [("user", task)]                      # remember: the state starts as the task
+    for turn in range(1, max_turns + 1):
+        decision = model(messages)                   # perceive and think: one model call
+        if decision["tool"] is None:                 # no tool call means the loop is done
+            print(f"turn {turn}: final answer: {decision['text']}")
+            return "finished"
+        result = TOOLS[decision["tool"]](decision["arg"])   # act
+        messages.append(("tool", result))            # remember: the result joins the state
+        print(f"turn {turn}: {decision['tool']}({decision['arg']}) -> {result}")
+    return "stopped at the turn limit"
 
-A deliberative agent that reasons extensively before acting will spend more per step than a reflex agent that acts on pattern matching. I covered token budget strategies in [LLM token budgets and cost control](/articles/llm-token-budgets/).
 
-The think phase is usually where that budget gets eaten.
+fix = [
+    {"tool": "run_tests", "arg": ""},
+    {"tool": "read_file", "arg": "auth.py"},
+    {"tool": "edit_file", "arg": "auth.py"},
+    {"tool": None, "text": "Both tests pass now."},
+]
+print("run 1:", run(scripted_model(fix), "Fix the failing tests", max_turns=10))
 
-## Act: calling tools and producing outputs
+stuck = [{"tool": "edit_file", "arg": "auth.py"}] * 50
+print("run 2:", run(scripted_model(stuck), "Fix the failing tests", max_turns=3))
+```
 
-Act is the phase where the agent does something. That something might be calling a tool, returning a text response to the user, or updating internal state.
+`python3 loop_demo.py` prints both runs.
 
-Of the four phases, act is the only one that produces observable side effects.
+```text
+turn 1: run_tests() -> 2 failed: test_login, test_logout
+turn 2: read_file(auth.py) -> contents of auth.py
+turn 3: edit_file(auth.py) -> edited auth.py
+turn 4: final answer: Both tests pass now.
+run 1: finished
+turn 1: edit_file(auth.py) -> edited auth.py
+turn 2: edit_file(auth.py) -> edited auth.py
+turn 3: edit_file(auth.py) -> edited auth.py
+run 2: stopped at the turn limit
+```
 
-Interacting with the external world is what the loop does in act. A tool call passes arguments to an API and receives a result.
+The first run ends the way a healthy loop ends, with a turn that calls no tool. The second run is an agent editing one file forever, and the only thing that stops it is the number passed as `max_turns`.
 
-The agent receives that result and feeds it back into the loop as a perceived input for the next cycle.
+## How does an agent loop stop?
 
-Tool schema design determines whether the act phase succeeds or fails. A poorly designed schema produces malformed arguments that the tool rejects, like a date field the model fills with "next Tuesday" because nothing told it to send an ISO timestamp.
+It stops when the model answers without asking for a tool, or when your code says enough. The first is the model's judgment, so a production loop needs the second as well.
 
-A schema with clear types and validation catches that argument error before the tool is even called. [Tool schema design for reliability](/articles/llm-structured-outputs/) goes deep on what makes schemas actually work in production.
+Both SDKs give you that limit, and they report it differently. OpenAI's runner raises a `MaxTurnsExceeded` exception when a run passes `max_turns`.
 
-There is an implicit cost to the act phase too. Every tool call has latency.
+Anthropic's SDK returns a result whose subtype is `error_max_turns`, with no final answer in it, and it has a second limit in dollars called `max_budget_usd`. Its docs are plain about leaving both off: the loop then runs until Claude decides it's finished, which they call fine for a well-scoped task and a risk on an open-ended prompt.
 
-Some tool calls fail. The loop needs policies for both.
+So set a limit, and treat hitting it as a result your code handles. What to do next is a policy question, which [error handling for agents](/articles/agent-error-handling/) takes up.
 
-Timeout enforcement and retry logic belong in the harness, not scattered across tool implementations.
+## Where does each phase fail?
 
-## Remember: updating state for the next iteration
+Each phase has a failure of its own, and they get mistaken for one another. A model that reasons badly and a model that was shown the wrong history both produce a wrong tool call.
 
-Remember is the phase most agents get wrong. Here the agent updates its internal state to reflect what just happened, so the next loop iteration has accurate context.
+**Perceive.** The model can only use what's in the request. If an old error message is still in the history, or the file it needs was never read, the decision that follows will be wrong for a reason the model can't see.
 
-Appending the last tool result to the conversation history is the simplest version of remember. That works for short tasks.
+**Think.** You get the decision and not the reasoning behind it. That's harmless on the happy path, and it's why the logging in an [agent harness](/articles/agent-harnesses/) records the request beside the response.
 
-It breaks for long ones.
+**Act.** A tool call fails when its arguments don't match what the tool accepts, such as a date sent as "next Tuesday". A strict schema catches that before the tool runs, and [structured outputs](/articles/llm-structured-outputs/) covers how.
 
-A fixed-capacity context window is the root of the problem. Remembering everything means eventually forgetting something.
+**Remember.** Appending every result works until the history outgrows the context window. Anthropic's SDK then compacts the history into a summary, and its docs warn that instructions from early in the conversation may not survive.
 
-[AI memory management for LLMs](/articles/ai-memory-management/) covers the layered approach that actually solves this. Short-term working memory lives in the context window.
+And every turn costs a model call, on a history that's longer than the turn before. The [token budgets guide](/articles/llm-token-budgets/) runs that arithmetic.
 
-Long-term facts get written to external storage and retrieved when relevant.
+## Which phase should you check first?
 
-Conflating those two is how you build expensive systems that still lose track of what they were doing, as my [context windows vs memory](/articles/context-windows-vs-memory/) post argues. Remember is more than appending.
+Check perceive, then remember. A wrong decision is more often a wrong input than a wrong thought, in my reading of how these loops are built, and both of those phases are fully visible in the message list.
 
-The phase decides what to keep, what to compress, and what to evict, the way a person taking notes in a long meeting writes down decisions and drops the small talk.
+So print the request for the turn that went wrong. If the fact the model needed isn't in it, find the earlier turn that should have put it there.
 
-Checkpointing is the production version of remember. Writing state to durable storage after each successful act phase means the loop can recover from a crash without restarting from scratch, the same reason a long video render writes frames to disk as it goes instead of holding the whole job in memory.
+Past that, the question becomes what the agent should keep between turns and between sessions. The context window holds one run, and [context windows vs memory](/articles/context-windows-vs-memory/) explains why that isn't the same thing as memory.
 
-An agent that runs longer than a few minutes cannot skip this.
+Writing things down on purpose is its own design problem, covered in [AI memory management](/articles/ai-memory-management/). And how much of the loop an agent runs alone is what separates the [types of AI agents](/articles/ai-agent-taxonomy/).
 
-## Where it breaks down in practice
+## FAQ
 
-Described as four phases, the loop sounds clean. It stops being clean when you actually run it.
+**What is an agent loop?**
 
-Context window exhaustion happens in remember, not in perceive. When the agent cannot recall what it did ten steps ago, the problem was set in motion two dozen steps earlier, every one of them quietly padding the window with full tool outputs nobody trimmed.
+It's the cycle an AI agent repeats: a model call, a tool call if the model asks for one, and the result added to the history for the next call. The loop ends when the model answers without a tool call or a limit is reached.
 
-Teams that track context window usage in real time catch this before it produces incoherent outputs.
+**What is the difference between an agent loop and a ReAct loop?**
 
-Infinite loops happen in act. The agent calls a tool, gets a result that looks like it needs more work, calls the tool again with slightly different arguments, and repeats.
+[ReAct](/glossary/react-prompting/) is one pattern for the loop, in which the model writes its reasoning between actions. Every ReAct agent runs an agent loop, and an agent loop doesn't have to show its reasoning.
 
-Picture an agent told to make a test pass: it edits a file, the test still fails, it edits the same file again, and it never tries running the test from a fresh state. The stop condition never triggers because the agent keeps perceiving the task as incomplete.
+**How many turns should an agent loop be allowed?**
 
-Explicit iteration budgets, and tests that exercise them, are not optional.
-
-Tool result loss happens in remember. A tool call returns a result that the agent does not append to context.
-
-The next iteration proceeds as if the tool call never happened. The cause is usually a bug in how the harness handles tool results, not a model failure.
-
-Structured logging of every tool call and its result is the fix.
-
-The [production AI agent errors](/articles/agent-error-handling/) post has a fuller taxonomy of what goes wrong. The loop phases are the right frame for understanding those errors because each phase has its own failure modes.
-
-## The loop is a design tool
-
-Once you see the four phases, you can evaluate any agent framework by asking what each phase contains and who controls it. Some frameworks give you fine-grained control over think.
-
-Others abstract it away. Some give you hooks in remember.
-
-Others hide state management entirely.
-
-The frameworks that win in production are the ones where each phase is observable and controllable. You cannot debug what you cannot see.
-
-You cannot improve what you cannot measure. Breaking the agent loop into four phases gives you four places to look when something goes wrong.
-
-Start with perceive. Check what the agent actually sees at the start of each iteration.
-
-Then check what it remembered from the previous iteration. The bugs that read as reasoning failures usually turn out to be perception or memory problems instead.
+Enough for the longest task you expect, with a hard limit above that. Both OpenAI's and Anthropic's SDKs accept a turn limit, and Anthropic's also accepts a spending limit.
