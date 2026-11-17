@@ -40,6 +40,8 @@ sections:
         note: "Sets the October jump in coding models beside a benchmark where the best of them passed one staged-change checkpoint in six."
       - post: nobody-understands-the-code
         note: "Argues that an agent can explain what code does, while the reason it exists has to be written down by a person."
+      - post: red-build-nobody-reads
+        note: "Argues that a build light is a pager, and that agent-rate change wears it out unless a team rations what reaches a person."
 bridges:
   - hub: ai-agents
     text: "A coding agent is one agent loop with a harness around it, which the [AI agent architecture](/articles/ai-agents/) hub takes apart."
