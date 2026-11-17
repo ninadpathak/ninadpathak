@@ -5,47 +5,47 @@
   },
   "agent-design-space": {
     "lastmod": "2026-11-17",
-    "sources": "56e5d9dcadbb18ef9387ada2f360d213d32e49835491c192b35563de50c8adb7"
+    "sources": "0a48ca82177c73267a50d498993b56aefa5ea3b8f79d4fcd0934c8e492798c5c"
   },
   "agent-error-handling": {
     "lastmod": "2026-11-17",
-    "sources": "5d48433c6072efa13bd77005b081ae2fe4a24cc2dbda07696ea38fb70ca6a28f"
+    "sources": "49f2771a86484316c4d369d1ed1fc2556c0d915e374b81b52ffe60336bf56b2a"
   },
   "agent-harnesses": {
     "lastmod": "2026-11-17",
-    "sources": "5c4101e386858603d07030f590b656ffa9ca47a86dc133e9fd9bd456de0c23ea"
+    "sources": "de1491722a90ef270329798080da79b648ebfd869f1309bb13026a7cf83ee7bd"
   },
   "agent-loop-anatomy": {
     "lastmod": "2026-11-17",
-    "sources": "0a4a4c09a4b8047a6923fe61cf085f945fa8ea348109f34c7998a221f7e34b37"
+    "sources": "2e715f3d1d0df435fcc6447467b3d557b8f849d1c347553a3dd19ca994d36392"
   },
   "agent-memory-2026": {
     "lastmod": "2026-11-17",
-    "sources": "131b988fd58dd0e2fb1509a665ea79ee123ced9540e6923164dbf5eeb52a87b8"
+    "sources": "f2e26e7e0643f9406a31d80fc051d80d6d773a9a7596f315420479df8a7ae8f1"
   },
   "agent-memory-types": {
     "lastmod": "2026-11-17",
-    "sources": "11dd8492b3b5ade9dde19ff9d1c1a2b4b1addd30e0514b5485bc8f5dbc71627b"
+    "sources": "20aaed99e12829fb71f6c4dfeef55ed7ffff68772f655000ee49a9e69bbe5ac2"
   },
   "agent-vs-ai-assistant": {
     "lastmod": "2026-11-17",
-    "sources": "fb862f9512a0360b68747374dd43db19d1813e6b72745c8ab376c8afbc69f15f"
+    "sources": "5edb437cd0c65c2616f3f4e2d597e979c4bb8fe50723a1e3a68df9e88adec897"
   },
   "agentic-workflows": {
     "lastmod": "2026-11-17",
-    "sources": "07e3115f707aaeadef6daabd530d84c623d2447de117a81fa02f038fe4e72b87"
+    "sources": "cb110b4278cebabcd23f646cf8967c410e8e342895a0d9b9d613a54c3fa913bf"
   },
   "agents-reading-docs": {
     "lastmod": "2026-11-17",
-    "sources": "ba089514254a641393edae8466c58f14c20e3f9c6d63b8e93b13487a5add0a72"
+    "sources": "b1cb69126cd567cf55652554cd2e715d1a6200afaa913a92117d995416440d6f"
   },
   "ai-agent-failures": {
     "lastmod": "2026-11-17",
-    "sources": "b16461a5afe872deea517a8cdcc722c8d4264394618e4e22855f1ca42f5f8218"
+    "sources": "9b5b5239196c6016fb77f2cc38c0d1c34a6b69eafc7fd24aae89a1cdcbe1f495"
   },
   "ai-agent-taxonomy": {
     "lastmod": "2026-11-17",
-    "sources": "59ab93778821028c4fd89ec63249c472b2654e385b97587c5e371f6a593fb369"
+    "sources": "1827928a73967901b05793e4cd1af095a78934ddf486f1fe5bd0a04645ab5057"
   },
   "ai-crawlers": {
     "lastmod": "2026-11-17",
@@ -53,7 +53,7 @@
   },
   "ai-memory-management": {
     "lastmod": "2026-11-17",
-    "sources": "31300f20c109fe5ed484ea86f200b171730d5a8260840d1a547798e25bf19117"
+    "sources": "880db6ad0219d4482b58aa23a68b3f8e5e7fea049c71fa907e381553798f06ad"
   },
   "api-documentation": {
     "lastmod": "2026-11-17",
@@ -61,27 +61,27 @@
   },
   "best-llms-for-coding": {
     "lastmod": "2026-11-17",
-    "sources": "5166925b3d609e0c6b72968ce3d2b1db9d1a6454e5f73cfd64cd6e2d73a51d41"
+    "sources": "10eb681f92ede9b8ff422615e1fa320566e90d6b1e9172113196139c3629dc3f"
   },
   "browser-vector-search": {
     "lastmod": "2026-11-17",
-    "sources": "b538b6335f65b40d4dd3155e9b7ec44165af5942b2be5de14918723ba53d58ab"
+    "sources": "2a22e73311b51e047a87248094d872a3e71ec146ab1390b145997abcc632efb5"
   },
   "claude-code-memory": {
     "lastmod": "2026-11-17",
-    "sources": "e02d32a9bcbbb029c6baae96be3a9f313d949dc6efe48173568a657a27c8a068"
+    "sources": "0add798478d48f8cfe2d173ff2c931f4b7b6300e2b9cb994d537d2ce1e2da456"
   },
   "claude-code-subagents": {
     "lastmod": "2026-11-17",
-    "sources": "114d3b90b2102750192a3dfd0246b17642125c2988b82b47b5f01ccad0474f92"
+    "sources": "8d3216e6dceefcfebfeb587d147d4a5d374ac6b3f5f83dc391df8e67cf25133b"
   },
   "claude-md": {
     "lastmod": "2026-11-17",
-    "sources": "cd23051ecaa745ff9425a6bd9cb629b5b00f739ca04cd43b5dac7977e1821fb4"
+    "sources": "759f8a413b87166087f6aa8afd4ad9bd1d7ef76af4679015b6fc84b283c8c963"
   },
   "claude-vs-gemini-cli": {
     "lastmod": "2026-11-17",
-    "sources": "fe4e04a0d3ebd9730e671fd94928bbb2f8e69cbf1858f2a114fcea9aaf79c35a"
+    "sources": "deb8efd1f6aeb3560bec31767a27b10580e70b2cd42bb9ae6456ed2cd42fd101"
   },
   "code-documentation": {
     "lastmod": "2026-11-17",
@@ -89,23 +89,23 @@
   },
   "coding-agent-memory": {
     "lastmod": "2026-11-17",
-    "sources": "616442ba4d8f15405af81cd58e5a5a8a31af289b79cbc50e5fa6938ddd296ea6"
+    "sources": "94612ae90b66d0dd95c7e531451522e76758b10473e2a0ff3b63b3b87e1e66f8"
   },
   "coding-models-new-code-vs-change": {
     "lastmod": "2026-11-17",
-    "sources": "74362d6650e7eb2ad7c6217106aed4135f0d92baba7ec5762168b05696cbd8c8"
+    "sources": "690ab3a840771ce1987f7696d1648e2e51b2ca01593bee33eed6280c15a00cf1"
   },
   "context-windows-vs-memory": {
     "lastmod": "2026-11-17",
-    "sources": "32595bf5856de2c411fd99d7cc1e6d4054bdc4f5fed65da53f360ee1836eb5cb"
+    "sources": "0d3c707598f85365c22763306ed21f1488f85d4adfbf9edbf55d8873e2d7e83d"
   },
   "contextual-retrieval": {
     "lastmod": "2026-11-17",
-    "sources": "ba873789f551f6024b4db45824efd492ba2541b33a5cf6d33404c28678f15489"
+    "sources": "be24b7c41bae938150256829f8547cc662e385f67a276dbc3159a5e5bdf47bd9"
   },
   "deerflow-memory": {
     "lastmod": "2026-11-17",
-    "sources": "3bcd884532e725333f4bd74604e5193566e4fc2e29c14dc1cd9ad963842c4c2c"
+    "sources": "313158d871db7ec7e645b70a1290ba46f2a294eaeda21ac9b5cc29c94e106206"
   },
   "design-doc-template": {
     "lastmod": "2026-11-17",
@@ -161,15 +161,15 @@
   },
   "fine-tuning-vs-rag": {
     "lastmod": "2026-11-17",
-    "sources": "b857998f14bea0850f91a41165abee2af6002b415c540cc90ae8f7cff0ebdf3d"
+    "sources": "b3b9ab907abc2e8b97c7f5a33f4733070232a920cd881a91966dd3627d4d2a1e"
   },
   "hybrid-search": {
     "lastmod": "2026-11-17",
-    "sources": "74abeb8bcb677af52e3d8b1170b40ac2c69e6cbb4f9aa115355c5fb61c09c7f7"
+    "sources": "101ef8c82d6e8a2f98d0e58079aa8f2094f2d97c4eb1988a78195d33ae353627"
   },
   "hyperagents-memory": {
     "lastmod": "2026-11-17",
-    "sources": "12a5001082b78f4e69dc49a92f6737c678c9444b8016fc1ffef626dfbac6d159"
+    "sources": "94657dc50c54a8fe84f9fd2176a4c91773b840fc10f73bb62714c008ab96fd54"
   },
   "internal-vs-external-docs": {
     "lastmod": "2026-11-17",
@@ -181,7 +181,7 @@
   },
   "lambda-calculus-ai": {
     "lastmod": "2026-11-17",
-    "sources": "a74af8ba77921f8eb7609c74e0f40df08b49063977d04af6aeb4039816cd6936"
+    "sources": "0c15673b8b71f1eed10200371082cacbc63b76da71d7562056c9dae554a0f205"
   },
   "llm-context-windows": {
     "lastmod": "2026-11-17",
@@ -205,19 +205,19 @@
   },
   "mcp-server-tutorial": {
     "lastmod": "2026-11-17",
-    "sources": "0237189f0378baa31e3553e95b65149a2ffef0641d613d4e3ac270af41ece8f4"
+    "sources": "d6e4d41fe3cc30250ad82b54fef50f45a167da04c90580c451a7024f567a01ec"
   },
   "memory-compression": {
     "lastmod": "2026-11-17",
-    "sources": "b21af769b856009a81ab525c2ec20e99072c1ba3146055516e0c8b23d2831374"
+    "sources": "8d9ddc5e805509e1476492bea82e2d9547bb24978715a0f1afeec41e843c4ccf"
   },
   "memory-serialization": {
     "lastmod": "2026-11-17",
-    "sources": "779fcfda04e93624a9407cf2aaf7011d505151f0d8239cfad30abb8fe604deca"
+    "sources": "e66b057e68232523ae48e2d23db4899268a922ab671dc3cfee7c354524aee737"
   },
   "memory-versioning": {
     "lastmod": "2026-11-17",
-    "sources": "194a5e431468f9c1b55456ae72e5160b521973f117fb1cccd8e27f7401ba6af1"
+    "sources": "aa072585759aa67b4a7ff2c3153f7068c505583128fe008e088f84ebc2c65c0b"
   },
   "mixture-of-experts": {
     "lastmod": "2026-11-17",
@@ -225,15 +225,15 @@
   },
   "model-context-protocol": {
     "lastmod": "2026-11-17",
-    "sources": "04199382039c9e82ef4021c25d95deb17a95bba351976a3e814fa1a266887092"
+    "sources": "441f1b1a91fd894a5ab8b887313b642d732a5448a6f3c1135446e4ce2cd244e1"
   },
   "multi-agent-vs-single-agent": {
     "lastmod": "2026-11-17",
-    "sources": "7b4237666a6903f8da5b999ae336bec6e319c5182fd92a342f10d1f13623923a"
+    "sources": "6d899058b57e54e1d14b2a45af17181d2b7e71b6ba608fdb4adf6bfe78dd77c9"
   },
   "nobody-understands-the-code": {
     "lastmod": "2026-11-17",
-    "sources": "5ac69f8fff58b5a95f9a836d3da04d5a2f59f730e282c19a388a41b6d05bb796"
+    "sources": "b2b3df5ca375026b69eaed654e268ebb8cda1424d779068ff09956f1a26bc17f"
   },
   "quickstart-guide": {
     "lastmod": "2026-11-17",
@@ -241,15 +241,15 @@
   },
   "rag-evaluation": {
     "lastmod": "2026-11-17",
-    "sources": "384910ab6741548bb4535084d9cff2407f50c091b56fb587097876a0e8d9ba0e"
+    "sources": "422938291b954616b9128128a4dad2b2e15ffe563fb1933a17c8f2657365ed71"
   },
   "rag-reranking": {
     "lastmod": "2026-11-17",
-    "sources": "7ef5710af9ef18524e9c0c4d0a438da702976f95de0a48a241130f455bfeaa9c"
+    "sources": "db12127cca39d3a060e9bf946d5533be2f78ab8d548e7d1934ba5629151cf762"
   },
   "rag-vs-memory": {
     "lastmod": "2026-11-17",
-    "sources": "6a94317ec05c5cf888c8e96a3446eb802d9b627b48209be684bf29605caef4fd"
+    "sources": "83b3201340e9f86c0701931287dfc814e4331383d8724d09221bc8f31b8fb8bd"
   },
   "release-notes-template": {
     "lastmod": "2026-11-17",
@@ -261,15 +261,15 @@
   },
   "semantic-caching": {
     "lastmod": "2026-11-17",
-    "sources": "a152a48d3a8bba34a24de2a26b188072761fe57d19ad1b5d275c55bc993a5e72"
+    "sources": "0408ca988458e6eb7b0f2d33fe0bfd1220735e62476c4e6e60778e4115f102d6"
   },
   "shared-vs-isolated-memory": {
     "lastmod": "2026-11-17",
-    "sources": "3b86a5afd2a602c27a2f12a9815e71a05f50b7a919cafd838d2fde4a952ab45a"
+    "sources": "6aa1ffb863b9ea7848da3d52b8c9e1e312c2964da7a9d27d1a5ed83fc4f43d1c"
   },
   "short-term-agent-memory": {
     "lastmod": "2026-11-17",
-    "sources": "c5a7d633842d99ef0ac16fa308c811f0cbb0cd95e9b76da20385a7f38df06979"
+    "sources": "56aff7f782f77b0403c558ade4226405e3568120366fa13d56b52e9187bada13"
   },
   "shorter-documentation": {
     "lastmod": "2026-11-17",
@@ -297,7 +297,7 @@
   },
   "vector-embeddings": {
     "lastmod": "2026-11-17",
-    "sources": "b92902bfb28064f16fbcd42d3240e1f17e375d788429f88ce9710c6873ae4ced"
+    "sources": "9f357c56fc6a922d1f0c16b8da78c0293d1e6c99266e109ff1dfe61ba52f13ae"
   },
   "voice-agent-latency": {
     "lastmod": "2026-11-17",
@@ -305,7 +305,7 @@
   },
   "voice-agent-memory": {
     "lastmod": "2026-11-17",
-    "sources": "404faf01dd8091a29b46f01bcbe42bfb306359eccd91c297de66d0796923c385"
+    "sources": "656efe9dba6deac0919affbaabc8f601a0340850cafeec2ae4bf92eca0fa15df"
   },
   "writing-changelogs": {
     "lastmod": "2026-11-17",
