@@ -614,3 +614,25 @@ Positions taken, for Ninad to confirm where they are not his own words:
 - `written-by-a-human`: beyond his three points, the essay keeps one section marked as a further thought, that a last-tested date and a checkable line prove more to a technical reader than the label does. That view is reasoned, not his words, and the essay ends on his own closing point.
 - `nobody-understands-the-code`: beyond his two statements, the essay adds the split between what code does and why, taken from Naur, and the sentence that a team copying Anthropic's explainers without the people who remember the decisions should expect what Merz describes. Both are reasoned from the sources.
 - `agents-reading-docs`: his sentence is "llms.txt is good to have but there's no evidence that llms actually fetch that." Fern's report counts 448,667 fetches of llms.txt in September on the docs it hosts, with Claude Code the largest named source, so the sentence as worded is contradicted for coding agents on one vendor's API docs. The same report says ChatGPT, Gemini and Perplexity fetch only HTML, and Ahrefs found 97% of files unrequested across 137,210 domains. The essay says "good to have, and the evidence that models fetch it is still thin" in both places it states the view, and prints 32,812 named Claude Code requests beside the 448,667 total, with the rest counted as agent requests by route.
+
+## Batch 7 (2026-11-17, owner voice-rewrite-2)
+
+Written under every rule above, including the lighter quote rule for explainers: the page's own explanation carries each section and a quote stays only where the wording is the point.
+
+| Post | What it now rests on | Run or checked |
+| --- | --- | --- |
+| llm-context-windows | Lost in the Middle (2023), Chroma's context rot report (2025), Anthropic's context window docs | quotes re-fetched |
+| agent-vs-ai-assistant | Vals AI's refund experiment (October 15), a post on Claude Duet (October 29) | quotes re-fetched; table paraphrases the report |
+| agent-design-space, retitled "AI Agent Design Patterns" | Anthropic's Building effective agents (2024), Fadurudeen's multi-agent guide | figure redrawn as three groups; grid labelled as the author's |
+| technical-writing-for-engineers | Simplified Technical English, the STE80 Humanizer (November 9), Google's technical writing course | `ste_check.py` run, output on the page |
+| documentation-velocity, retitled "Documentation ROI and Engineering Velocity" | DORA's 2022 documentation table, DORA's metrics guide, Stripe's 2018 Developer Coefficient, Anthropic's code review post | every figure re-fetched; unverified 2.4x, 2.5x and 25% cut |
+| devtools-documentation, retitled "How Developers Judge Devtools Documentation Before They Buy" | State of Docs 2026 purchase section (GitBook), three vendor quickstarts fetched November 17 | `quickstart_probe.py` run, output on the page |
+| agents-on-call-runbooks (new essay, technical-documentation) | SigNoz's post of February 28 and its Hacker News thread of October 30, this site's runbook test | opinion-led, one quote |
+
+Opening devices added to the ledger: conventional memory and the 640K line (llm-context-windows); the Office Assistant, placed second (agent-vs-ai-assistant); the Gang of Four's Design Patterns (agent-design-space); Simplified Technical English (technical-writing-for-engineers); the bus factor (documentation-velocity); "Nobody got fired for buying an IBM" (devtools-documentation); Bainbridge's Ironies of Automation, credited to the post that uses it (agents-on-call-runbooks).
+
+Films that no longer match their page, added to the re-render list and left embedded pending root's word: agent-vs-ai-assistant (the narration opens on a ticket-routing anecdote the page no longer has), agent-design-space (the narration describes five patterns the page no longer lists), devtools-documentation (the first line states that startups lose deals over docs, and the page now says no source counts one).
+
+The three April screenshots of vendor quickstarts are no longer embedded on devtools-documentation. The files stay in `static/images/visuals/`.
+
+Position taken in the new essay, for Ninad to confirm: the deskilling risk is real and sharpest for juniors, the post's evidence is borrowed from medicine and aviation, and the cheap remedy it leaves out is making the agent write a short account of each incident it closes for a person to read.

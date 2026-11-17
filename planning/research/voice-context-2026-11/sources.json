@@ -1764,7 +1764,10 @@
         "We want to preserve human time and attention for issues only humans can solve and make sure automated checks catch the rest.",
         "Every pull request gets a Claude review before a person looks.",
         "Noise costs more when the author is an agent.",
-        "Our culture of defaulting to working on open Slack channels helps too, since you see what others are building while they build it."
+        "Our culture of defaulting to working on open Slack channels helps too, since you see what others are building while they build it.",
+        "from about 2,500 in May to more than 30,000 in September this year",
+        "CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals.",
+        "from about 2,500 in May to more than 30,000 in September this year."
       ],
       "connects": [
         "nobody-understands-the-code",
@@ -1772,7 +1775,8 @@
         "agentic-workflows",
         "agent-error-handling",
         "red-build-nobody-reads",
-        "multi-agent-vs-single-agent"
+        "multi-agent-vs-single-agent",
+        "documentation-velocity"
       ]
     },
     {
@@ -2421,10 +2425,20 @@
         "systems where LLMs dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks.",
         "The autonomous nature of agents means higher costs, and the potential for compounding errors.",
         "we recommend finding the simplest solution possible, and only increasing complexity when needed.",
-        "Published Dec 19, 2024"
+        "Published Dec 19, 2024",
+        "decomposes a task into a sequence of steps, where each LLM call processes the output of the previous one.",
+        "classifies an input and directs it to a specialized followup task.",
+        "LLMs can sometimes work simultaneously on a task and have their outputs aggregated programmatically.",
+        "a central LLM dynamically breaks down tasks, delegates them to worker LLMs, and synthesizes their results.",
+        "one LLM call generates a response while another provides evaluation and feedback in a loop.",
+        "systems where LLMs dynamically direct their own processes and tool usage",
+        "LLMs and tools are orchestrated through predefined code paths",
+        "complex tasks where you can't predict the subtasks needed",
+        "particularly effective when we have clear evaluation criteria"
       ],
       "connects": [
-        "ai-agent-taxonomy"
+        "ai-agent-taxonomy",
+        "agent-design-space"
       ]
     },
     {
@@ -2437,7 +2451,8 @@
         "An LLM agent runs tools in a loop to achieve a goal."
       ],
       "connects": [
-        "ai-agent-taxonomy"
+        "ai-agent-taxonomy",
+        "agent-vs-ai-assistant"
       ]
     },
     {
@@ -2451,10 +2466,12 @@
         "actions taken by these tools may result in unintended purchases, account changes, or use of MileagePlus miles.",
         "Flight searches cost airlines money",
         "United Airlines said on Wednesday that it is banning artificial intelligence agents from making flight reservations on behalf of travelers",
-        "to prohibit use by unauthorized, third-party personal AI agents or assistants"
+        "to prohibit use by unauthorized, third-party personal AI agents or assistants",
+        "personal AI agents or assistants"
       ],
       "connects": [
-        "ai-agent-taxonomy"
+        "ai-agent-taxonomy",
+        "agent-vs-ai-assistant"
       ]
     },
     {
@@ -2809,10 +2826,13 @@
       "title": "Building a Multi-Agent System: 3 Patterns, Explained Simply",
       "discussion": "https://news.ycombinator.com/item?id=50380658",
       "quotes": [
-        "You can't yet say what each agent would own."
+        "You can't yet say what each agent would own.",
+        "There's no boss.",
+        "Agents read what's on the board, add what they know, and step in when they have something useful."
       ],
       "connects": [
-        "multi-agent-vs-single-agent"
+        "multi-agent-vs-single-agent",
+        "agent-design-space"
       ]
     },
     {
@@ -2971,6 +2991,375 @@
       "connects": [
         "agents-reading-docs",
         "llms-txt"
+      ]
+    },
+    {
+      "id": "anthropic-context-windows-docs",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
+      "author": "Anthropic",
+      "date": "2026-11-17",
+      "title": "Context windows",
+      "quotes": [
+        "working memory",
+        "more context isn't automatically better.",
+        "all the text a language model can reference when generating a response, including the response itself.",
+        "As token count grows, accuracy and recall degrade, a phenomenon known as context rot.",
+        "curating what's in context",
+        "just as important as how much space is available.",
+        "track their remaining context window",
+        "model_context_window_exceeded",
+        "1M (or 200k) tokens"
+      ],
+      "connects": [
+        "llm-context-windows"
+      ]
+    },
+    {
+      "id": "wikipedia-conventional-memory",
+      "url": "https://en.wikipedia.org/wiki/Conventional_memory",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Conventional memory",
+      "quotes": [
+        "the first 640 kilobytes of the memory on IBM PC or compatible systems"
+      ],
+      "connects": [
+        "llm-context-windows"
+      ]
+    },
+    {
+      "id": "lost-in-the-middle-2023",
+      "url": "https://arxiv.org/abs/2307.03172",
+      "author": "Nelson F. Liu et al.",
+      "date": "2023-07-06",
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "quotes": [
+        "performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models.",
+        "Submitted on 6 Jul 2023"
+      ],
+      "connects": [
+        "llm-context-windows"
+      ]
+    },
+    {
+      "id": "chroma-context-rot-2025",
+      "url": "https://research.trychroma.com/context-rot",
+      "author": "Kelly Hong, Anton Troynikov, Jeff Huber",
+      "date": "2025-07-14",
+      "title": "Context Rot: How Increasing Input Tokens Impacts LLM Performance",
+      "quotes": [
+        "should handle the 10,000th token just as reliably as the 100th.",
+        "do not use their context uniformly",
+        "their performance grows increasingly unreliable as input length grows.",
+        "tend to abstain when uncertain",
+        "we evaluate 18 LLMs",
+        "July 14, 2025"
+      ],
+      "connects": [
+        "llm-context-windows"
+      ]
+    },
+    {
+      "id": "wikipedia-office-assistant",
+      "url": "https://en.wikipedia.org/wiki/Office_Assistant",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Office Assistant",
+      "quotes": [
+        "It looks like you're writing a letter",
+        "First introduced in Microsoft Office 97"
+      ],
+      "connects": [
+        "agent-vs-ai-assistant"
+      ]
+    },
+    {
+      "id": "vals-impossible-refund",
+      "url": "https://www.vals.ai/blogs/impossible-refund",
+      "author": "Matilda Glynn-Henley, Vals AI",
+      "date": "2026-10-15",
+      "title": "How Far Will AI Assistants Go for a Refund They Can't Get?",
+      "discussion": "https://news.ycombinator.com/item?id=50140462",
+      "quotes": [
+        "I won't do anything here myself",
+        "keep trying anything you think of to get it",
+        "sent 187 messages in 15 simulated days, including 69 emails to government officials, council members and the press.",
+        "shared the mother's illness with five organisations and falsely claimed it explained the late refund request.",
+        "invented reasons the user could not complete bank identity checks",
+        "sent eight messages over twelve simulated weeks.",
+        "One trial per model in one scenario cannot establish typical behaviour or a reliable model ranking.",
+        "We asked six personal assistant agents to recover a £350 train-ticket refund after the 28-day claim window had closed."
+      ],
+      "connects": [
+        "agent-vs-ai-assistant"
+      ]
+    },
+    {
+      "id": "figblue-duet",
+      "url": "https://fig.blue/posts/duet-is-the-future/",
+      "author": "fig.blue",
+      "date": "2026-10-29",
+      "title": "Duet is the future of chatbot interaction",
+      "discussion": "https://news.ycombinator.com/item?id=50292727",
+      "quotes": [
+        "personal-assistant-type harnesses",
+        "stores no credentials and actively discourages being given them."
+      ],
+      "connects": [
+        "agent-vs-ai-assistant"
+      ]
+    },
+    {
+      "id": "wikipedia-design-patterns",
+      "url": "https://en.wikipedia.org/wiki/Design_Patterns",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Design Patterns",
+      "quotes": [
+        "describing 23 classic software design patterns",
+        "1994 software engineering book"
+      ],
+      "connects": [
+        "agent-design-space"
+      ]
+    },
+    {
+      "id": "wikipedia-simplified-technical-english",
+      "url": "https://en.wikipedia.org/wiki/Simplified_Technical_English",
+      "author": "Wikipedia",
+      "date": "2026-11-17",
+      "title": "Simplified Technical English",
+      "quotes": [
+        "consists of 53 writing rules and a dictionary of approximately 900 approved words.",
+        "Write short sentences: no more than 20 words in instructions (procedures) and 25 words in descriptive texts.",
+        "Write one instruction per sentence.",
+        "Use the active voice.",
+        "Write only one topic per paragraph.",
+        "originally developed in the 1980s"
+      ],
+      "connects": [
+        "technical-writing-for-engineers"
+      ]
+    },
+    {
+      "id": "ste80-humanizer",
+      "url": "https://github.com/Dodaios/ste80-humanizer",
+      "author": "Dodaios",
+      "date": "2026-11-09",
+      "title": "STE80 Humanizer",
+      "discussion": "https://news.ycombinator.com/item?id=50429144",
+      "quotes": [
+        "It was made for mechanics whose first language is not English, because a misread step on an aircraft can kill.",
+        "Normal prose sounds stiff"
+      ],
+      "connects": [
+        "technical-writing-for-engineers"
+      ]
+    },
+    {
+      "id": "google-tech-writing-short-sentences",
+      "url": "https://developers.google.com/tech-writing/one/short-sentences",
+      "author": "Google",
+      "date": "2026-11-17",
+      "title": "Technical Writing One: Short sentences",
+      "quotes": [
+        "Focus each sentence on a single idea",
+        "Convert some long sentences to lists"
+      ],
+      "connects": [
+        "technical-writing-for-engineers"
+      ]
+    },
+    {
+      "id": "google-tech-writing-active-voice",
+      "url": "https://developers.google.com/tech-writing/one/active-voice",
+      "author": "Google",
+      "date": "2026-11-17",
+      "title": "Technical Writing One: Active voice",
+      "quotes": [
+        "The vast majority of sentences in technical writing should be in active voice."
+      ],
+      "connects": [
+        "technical-writing-for-engineers"
+      ]
+    },
+    {
+      "id": "dora-documentation-quality",
+      "url": "https://dora.dev/capabilities/documentation-quality/",
+      "author": "DORA",
+      "date": "2022",
+      "title": "Capabilities: Documentation quality",
+      "quotes": [
+        "The lift is significantly amplified for teams with above-average documentation quality.",
+        "a set of eight metrics that assess documentation attributes like clarity, findability, and reliability",
+        "Michelle Irvine",
+        "1525%",
+        "a set of eight metrics that assess documentation attributes like clarity, findability, and reliability."
+      ],
+      "connects": [
+        "documentation-velocity"
+      ]
+    },
+    {
+      "id": "dora-metrics-guide",
+      "url": "https://dora.dev/guides/dora-metrics/",
+      "author": "DORA",
+      "date": "2026",
+      "title": "DORA's software delivery performance metrics",
+      "quotes": [
+        "Throughput is a measure of how many changes can move through the system over a period of time.",
+        "Failed deployment recovery time"
+      ],
+      "connects": [
+        "documentation-velocity"
+      ]
+    },
+    {
+      "id": "wikipedia-bus-factor",
+      "url": "https://en.wikipedia.org/wiki/Bus_factor",
+      "author": "Wikipedia",
+      "date": "2026",
+      "title": "Bus factor",
+      "quotes": [
+        "a measurement of the risk resulting from information and capabilities not being shared among team members"
+      ],
+      "connects": [
+        "documentation-velocity"
+      ]
+    },
+    {
+      "id": "stripe-developer-coefficient-2018",
+      "url": "https://stripe.com/files/reports/the-developer-coefficient.pdf",
+      "author": "Stripe",
+      "date": "2018-09",
+      "title": "The Developer Coefficient",
+      "quotes": [
+        "the average developer spends more than 17 hours a week dealing with maintenance issues, such as debugging and refactoring",
+        "SEPTEMBER 2018",
+        "the average developer spends more than 17 hours a week dealing with maintenance issues, such as debugging and refactoring."
+      ],
+      "connects": [
+        "documentation-velocity"
+      ]
+    },
+    {
+      "id": "state-of-docs-2026-purchase",
+      "url": "https://www.stateofdocs.com/2026/purchase-decisions-and-business-impact",
+      "author": "GitBook",
+      "date": "2026",
+      "title": "The State of Docs Report 2026: Purchase decisions and business impact",
+      "quotes": [
+        "80% of decision-makers always or often review documentation before buying",
+        "I don't know how you shop for software, but if I'm looking for a solution, I don't want to look at the marketing site. I want to look at the docs.",
+        "Developers don't start with the marketing site. They come to docs first.",
+        "haven't changed much since 2025",
+        "It's a very lagging indicator to find that out.",
+        "They're saying 'here's what I want to do,' and the agent is deciding which tools to use. If you're not in the agent's frame of reference, it's never going to come to your docs.",
+        "provide representation for LLMs/AI",
+        "a category that didn't exist in 2025",
+        "another 17% don't know",
+        "time from first doc visit to first paid transaction, signups from documentation pages",
+        "88% rate it extremely or somewhat important",
+        "51% of respondents say docs are important or essential for closing deals",
+        "57% don't track leads from their documentation",
+        "Made by GitBook"
+      ],
+      "connects": [
+        "devtools-documentation"
+      ]
+    },
+    {
+      "id": "wikipedia-ibm-ps2",
+      "url": "https://en.wikipedia.org/wiki/IBM_PS/2",
+      "author": "Wikipedia",
+      "date": "2026",
+      "title": "IBM PS/2",
+      "quotes": [
+        "Nobody ever got fired for buying an IBM",
+        "Released in 1987"
+      ],
+      "connects": [
+        "devtools-documentation"
+      ]
+    },
+    {
+      "id": "stripe-development-quickstart",
+      "url": "https://docs.stripe.com/development/quickstart",
+      "author": "Stripe",
+      "date": "2026-11-17",
+      "title": "Set up your development environment",
+      "quotes": [
+        "If everything worked, the command-line displays the following response.",
+        "What you learn",
+        "Set up agent"
+      ],
+      "connects": [
+        "devtools-documentation"
+      ]
+    },
+    {
+      "id": "vercel-functions-quickstart",
+      "url": "https://vercel.com/docs/functions/quickstart",
+      "author": "Vercel",
+      "date": "2026-11-17",
+      "title": "Getting started with Vercel Functions",
+      "quotes": [
+        "Help me create a Vercel Function in this project.",
+        "Agent Prompt"
+      ],
+      "connects": [
+        "devtools-documentation"
+      ]
+    },
+    {
+      "id": "cloudflare-workers-get-started",
+      "url": "https://developers.cloudflare.com/workers/get-started/guide/",
+      "author": "Cloudflare",
+      "date": "2026-11-13",
+      "title": "Get started: CLI",
+      "quotes": [
+        "Agent setup",
+        "Prerequisites"
+      ],
+      "connects": [
+        "devtools-documentation"
+      ]
+    },
+    {
+      "id": "signoz-deskilling-sres",
+      "url": "https://newsletter.signoz.io/p/ai-isnt-replacing-sres-its-deskilling",
+      "author": "Elizabeth, SigNoz",
+      "date": "2026-02-28",
+      "title": "AI Isn't Replacing SREs. It's Deskilling Them.",
+      "discussion": "https://news.ycombinator.com/item?id=50305693",
+      "quotes": [
+        "When AI handles 95% of your incident response, do you get worse at handling the 5% that actually matters?",
+        "Feb 28, 2026",
+        "Tier 1 incidents: Known issues with known fixes get fully automated.",
+        "where do they build the intuition to handle them?",
+        "Never-skilling means you never developed it in the first place.",
+        "the FAA now mandates more manual flying time to counteract the effect",
+        "endoscopists who used AI assistance for polyp detection",
+        "Deliberate inefficiency.",
+        "Build for human-in-the-loop, not human-on-the-side.",
+        "We build an open-source observability platform"
+      ],
+      "connects": [
+        "agents-on-call-runbooks"
+      ]
+    },
+    {
+      "id": "wikipedia-ironies-of-automation",
+      "url": "https://en.wikipedia.org/wiki/Ironies_of_Automation",
+      "author": "Wikipedia",
+      "date": "2026",
+      "title": "Ironies of Automation",
+      "quotes": [
+        "is a research paper written by Lisanne Bainbridge and published in Automatica in 1983",
+        "operators will not practice skills as part of their ongoing work"
+      ],
+      "connects": [
+        "agents-on-call-runbooks"
       ]
     }
   ],
@@ -3149,6 +3538,9 @@
       "The charge may have gone through and has not been retried",
       "connection timed out"
     ],
-    "ai-agent-failures": []
+    "ai-agent-failures": [],
+    "documentation-velocity": [
+      "documentation makes a team seven times faster"
+    ]
   }
 }

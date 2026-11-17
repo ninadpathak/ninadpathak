@@ -41,7 +41,7 @@ The sentence is covered by four of the standard's rules, and Google's free cours
 
 | The standard's rule, per Wikipedia's summary | What Google's course teaches |
 | --- | --- |
-| Keep sentences short: 20 words at most in an instruction and 25 in a description | Give each sentence a single idea |
+| Keep sentences short: no more than 20 words in an instruction and 25 in a description | Give each sentence a single idea |
 | Put one instruction in a sentence | Turn a long sentence into a list |
 | Use the active voice | Write nearly every sentence in the active voice |
 | Keep a paragraph to one topic | |
