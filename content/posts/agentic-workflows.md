@@ -31,7 +31,7 @@ So this page covers the steps of a workflow that stay the same whichever model o
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agentic-workflows/workflow-pipeline.narrow.svg" width="288" height="776"><img class="np-has-narrow" src="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg" width="720" height="264" alt="Five stages left to right: frame the task, scope it down, let the agent run with its own checks, review the diff, and land it. Framing and review are the human's stages, marked with a person; the work stage is the agent's own loop." loading="lazy" decoding="async"></picture></a>
-  <figcaption>A person owns framing and review, the agent owns the run, and scoping and landing join the two.</figcaption>
+  <figcaption>A person frames the task and reviews the diff, the agent does the run, and the person and the agent share scoping and landing.</figcaption>
 </figure>
 
 ## What is an agentic workflow?

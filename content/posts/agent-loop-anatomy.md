@@ -13,7 +13,7 @@ bridges:
 - slug: context-windows-vs-memory
   reason: A loop that only appends runs into the context window, which is a different thing from memory.
 date: '2026-04-23'
-description: 'An agent loop is the cycle of model call, tool call and result that an agent repeats until it stops. Perceive, think, act and remember, a loop you can run, and how two SDKs end one.'
+description: 'An agent loop is the cycle of model call, tool call and result that an agent repeats until it stops. Perceive, think, act and remember, a loop you can run, and how Anthropic''s and OpenAI''s SDKs stop a loop.'
 slug: agent-loop-anatomy
 status: published
 work_note: "Explainers like this one are what I write for AI companies as a freelance technical writer. I'm Ninad Pathak, and I run the product before I write about it. [Let's work on yours](/services/freelance-technical-writer-for-ai-companies/)."

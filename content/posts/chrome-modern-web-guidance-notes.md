@@ -8,7 +8,7 @@ bridges:
 - slug: agents-reading-docs
   reason: Fern's logs show agents fetching an index and then single Markdown pages, which is the delivery this essay argues for.
 date: 2026-11-17
-description: Chrome shipped 200-odd guides written for coding agents. I think the editing is the part to copy, a plain index should be the way in, and the question of who writes an agent's defaults is fair.
+description: Chrome shipped more than 200 guides written for coding agents. I think its rule of cutting what the model already knows is worth copying, a plain Markdown index should come before the npm install, and it's fair to ask who decides what every agent writes by default.
 slug: chrome-modern-web-guidance-notes
 status: published
 title: "Notes on Chrome's Modern Web Guidance for coding agents"

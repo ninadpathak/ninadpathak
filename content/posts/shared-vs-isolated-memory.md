@@ -29,7 +29,7 @@ Agents aren't goroutines, and a model can't take a lock. But two agents writing 
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.narrow.svg" width="288" height="1120"><img class="np-has-narrow" src="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.svg" width="720" height="640" alt="Two pipelines of the same three agents. In isolated memory the extractor hands its output to the validator, which hands its output to the summary agent, and nothing else passes between them. In shared memory all three use one common store: the extractor writes to it and the validator and summary agent read from it, so the validator can act on a conclusion the extractor later revises, marked as a failure on the store." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Isolated memory passes artifacts along the line. Shared memory lets every agent read what any agent wrote, including drafts.</figcaption>
+  <figcaption>With isolated memory each agent passes a finished artifact to the next agent. With shared memory every agent can read what any agent wrote, including drafts.</figcaption>
 </figure>
 
 ## What is the difference between shared and isolated memory?
