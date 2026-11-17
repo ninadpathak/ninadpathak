@@ -33,7 +33,7 @@ MCP is a client-server protocol built on JSON-RPC 2.0. The [architecture page](h
 
 - **Host:** the AI application a person uses, such as Claude Code or Visual Studio Code.
 - **Client:** a component inside the host that holds the connection to one server. The host creates one client per server.
-- **Server:** a program that provides tools and data to clients. It can run on your machine or on someone else's.
+- **Server:** a program that provides tools and data to clients. A server can run on your machine or on someone else's.
 
 The spec says MCP "takes some inspiration from the Language Server Protocol", and the two protocols solve the same shape of problem. An editor that speaks LSP can support Rust or Python by connecting to that language's server, and a host that speaks MCP can use GitHub or a Postgres database by connecting to that tool's server.
 

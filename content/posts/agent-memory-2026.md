@@ -104,7 +104,7 @@ The cost of plain files is retrieval. A directory has no ranking step, so whethe
 
 MCP lets you swap the connection and not the data. Mem0 and Graphiti each publish a server for the [Model Context Protocol](/articles/model-context-protocol/), so an MCP client such as Claude Code can add and search memories in either one without custom code, and Graphiti's docs label their server experimental.
 
-The stored memories don't transfer between the two. A sentence-sized fact in Mem0 and an edge between two entities in Graphiti's graph are different records, so moving from Mem0 to Graphiti still means exporting the facts and loading them again.
+The stored memories don't transfer between Mem0 and Graphiti. A sentence-sized fact in Mem0 and an edge between two entities in Graphiti's graph are different records, so moving from Mem0 to Graphiti still means exporting the facts and loading them again.
 
 ## How should you evaluate an agent memory framework?
 

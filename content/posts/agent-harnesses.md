@@ -25,7 +25,7 @@ Software testing used the word harness first. A [test harness](https://en.wikipe
 
 Agent harnesses got their own benchmark this month. On November 17 [FrontierHarness Eval](https://runta.com/blog/introducing-frontierharness-eval-v1-1/) reached the Hacker News front page after running 18 harnesses in 22 configurations against 5 models, and the harness it picked as best value was a different one for each of the 5 models.
 
-That result is why the choice of harness is worth a page of its own. Below is what an agent harness contains and where it sits in [AI agent architecture](/articles/ai-agents/), with a short harness you can run.
+A different winner for each model is the reason the choice of harness is worth a page of its own. Below is what an agent harness contains and where it sits in [AI agent architecture](/articles/ai-agents/), with a short harness you can run.
 
 ## What is an agent harness?
 

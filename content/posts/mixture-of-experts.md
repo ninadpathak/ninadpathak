@@ -28,7 +28,7 @@ That split between compute and memory is the part of [AI engineering](/articles/
 
 A mixture of experts model is a neural network that holds many expert sub-networks per layer and runs only a few of them for each token. A dense model runs every parameter for every token.
 
-Model vendors publish both numbers, the total parameter count and the count used per token. Divide the second by the first and you get the share of the model that runs for each token, which is 5.5% for the largest model in this table:
+Model vendors publish both numbers, the total parameter count and the count used per token. Divide the per-token count by the total and you get the share of the model that runs for each token, which is 5.5% for the largest model in this table:
 
 | Model | Total parameters | Used per token | Source |
 |---|---|---|---|
@@ -38,7 +38,7 @@ Model vendors publish both numbers, the total parameter count and the count used
 
 Mistral's announcement states the claim plainly, saying Mixtral "processes input and generates output at the same speed and for the same cost as a 12.9B model".
 
-Mistral's sentence is a claim about speed and compute cost. It says nothing about memory, and the 33.8B parameters that a token doesn't use still have to be loaded for the model to run.
+Mistral's sentence is a claim about speed and compute cost. The sentence says nothing about memory, and the 33.8B parameters that a token doesn't use still have to be loaded for the model to run.
 
 ## How does MoE routing work?
 
@@ -123,7 +123,7 @@ Validation loss was 3.921 with the bias and 3.923 without it, so balancing the e
 
 ## What does MoE save, in DeepSeek's own numbers?
 
-DeepSeek-V2's paper compares the MoE model with the company's earlier dense 67B model. It reports 42.5% lower training cost, a KV cache 93.3% smaller and 5.76 times the maximum generation throughput.
+DeepSeek-V2's paper compares the MoE model with the company's earlier dense 67B model. The paper reports 42.5% lower training cost, a KV cache 93.3% smaller and 5.76 times the maximum generation throughput.
 
 I wouldn't credit all of those gains to mixture of experts. The same abstract assigns the KV cache saving to a change in the attention layers called Multi-head Latent Attention, so the throughput figure is the result of both changes together.
 
@@ -139,11 +139,11 @@ When you host the model yourself, you buy memory for the total parameter count, 
 
 **Is an MoE model with 37B active parameters the same as a 37B dense model?**
 
-The two models do roughly the same amount of compute per token. They differ in how much they can store, because the MoE model picks a different set of experts for each token out of its full 671B parameters.
+The two models do roughly the same amount of compute per token. The two models differ in how much they can store, because the MoE model picks a different set of experts for each token out of its full 671B parameters.
 
 **Can I run DeepSeek-V3 locally?**
 
-Only on a machine that can hold all 671B parameters. That's about 671 GB at 8 bits per weight before any cache, and a smaller footprint means quantizing further.
+Only on a machine that can hold all 671B parameters. Holding 671B parameters takes about 671 GB at 8 bits per weight before any cache, and a smaller footprint means quantizing further.
 
 **What is routing collapse?**
 

@@ -33,7 +33,7 @@ My position on this page is that RAG is the default and fine-tuning needs a spec
 
 ## What is the difference between RAG and fine-tuning?
 
-RAG changes what the model can see for one request, and fine-tuning changes how the model behaves on every request. The other differences between the two come from where each one keeps the knowledge:
+RAG changes what the model can see for one request, and fine-tuning changes how the model behaves on every request. The other differences between RAG and fine-tuning come from where each one keeps the knowledge:
 
 | | RAG | Fine-tuning |
 |---|---|---|
@@ -43,7 +43,7 @@ RAG changes what the model can see for one request, and fine-tuning changes how 
 | What it's good at changing | Facts | Format and behavior |
 | What you pay | Longer prompts on every request | A training run up front |
 
-The researchers who named RAG described both of those weaknesses of weights-only models in 2020. Their [paper](https://arxiv.org/abs/2005.11401) says that for a model with knowledge only in its weights, "providing provenance for their decisions and updating their world knowledge remain open research problems".
+The researchers who named RAG described the weaknesses of weights-only models in 2020, which are the citation and update rows of that table. Their [paper](https://arxiv.org/abs/2005.11401) says that for a model with knowledge only in its weights, "providing provenance for their decisions and updating their world knowledge remain open research problems".
 
 ## When should you use RAG?
 
@@ -67,7 +67,7 @@ What changed in 2026 is where you can fine-tune. OpenAI's [deprecations page](ht
 
 ## Can you use RAG and fine-tuning together?
 
-Yes, and a study that measured both together found that the two gains add up. A [2024 case study on agriculture data](https://arxiv.org/abs/2401.08406) reports an accuracy gain of over 6 percentage points from fine-tuning, and a further 5 points when RAG was added on top.
+Yes, and a study that measured RAG and fine-tuning together found that their gains add up. A [2024 case study on agriculture data](https://arxiv.org/abs/2401.08406) reports an accuracy gain of over 6 percentage points from fine-tuning, and a further 5 points when RAG was added on top.
 
 The study covers one domain, agriculture, and one set of models, so I wouldn't expect 6 points and 5 points on your data. The part I'd expect to hold elsewhere is that the gains added up, because fine-tuning and RAG were fixing different problems.
 

@@ -31,9 +31,9 @@ Anthropic uses the word for a product you never install. Its [Agent SDK overview
 
 LangChain uses the word for a Python package. Its [Deep Agents overview](https://docs.langchain.com/oss/python/deepagents/overview) calls Deep Agents the agent harness for multi-step work, and using it means writing `from deepagents import create_deep_agent` and passing in your own model and tools.
 
-My explainer uses the word a fourth way, for code you write yourself: the loop that calls the model, the list of tools and the file where a run saves its progress. That code has no product name and nobody ships it to you.
+My explainer uses the word a fourth way, for code you write yourself: the loop that calls the model, the list of tools and the file where a run saves its progress. The loop, the tool list and the progress file have no product name, and nobody ships them to you.
 
-Now put a developer who learned the word from Runta's leaderboard in front of LangChain's docs. They read that Deep Agents is a harness, look for a program to launch the way they launch Codex CLI, and find an import statement.
+Now put a developer who learned the word from Runta's leaderboard in front of LangChain's docs. That developer reads that Deep Agents is a harness, looks for a program to launch the way they launch Codex CLI, and finds an import statement.
 
 ## I'd keep the reply that says harness plus model equals agent
 
@@ -41,13 +41,13 @@ Of the two replies to samueloph, I'd keep [the one from layer8](https://news.yco
 
 The other reply, from ogmutlu, asked whether harness and agent mean the same thing. That matches how people use the words in a comment thread, and it can't work as a definition, because a definition has to tell the two words apart.
 
-Runta's benchmark already works the way layer8's formula says. It runs Codex CLI with the GLM-5.3 model, runs Codex CLI again with DeepSeek, and treats the part that stayed the same across both runs as the harness.
+Runta's benchmark already works the way layer8's formula says. The benchmark runs Codex CLI with the GLM-5.3 model, runs Codex CLI again with DeepSeek, and treats the part that stayed the same across both runs as the harness.
 
 The formula also gives a writer a check to run on a draft. Take a sentence such as "configure the harness to retry failed tool calls" and replace "harness" with "agent": if the sentence still reads as correct, it never said whether the retry setting belongs to the harness or to the whole agent.
 
 ## The formula doesn't say whether memory is part of the harness
 
-Layer8's formula says a harness is everything in the agent except the model. It doesn't say whether one product's harness includes memory, a sandbox or hosting, and the vendors' own descriptions give different answers:
+Layer8's formula says a harness is everything in the agent except the model. The formula doesn't say whether one product's harness includes memory, a sandbox or hosting, and the vendors' own descriptions give different answers:
 
 | Project | What the project is | What its description says the harness includes |
 |---|---|---|
@@ -61,7 +61,7 @@ So a developer comparing Managed Agents with Deep Agents from those two descript
 
 DeerFlow stretches the word furthest. Its repository describes the whole application, which does research, writes code and includes a message gateway, as a "long-horizon SuperAgent harness".
 
-Put Codex CLI next to DeerFlow and the part they share is small: each runs a model in a loop and gives it tools. Memory, sandboxing and hosting differ between the two, and the word harness is used for both.
+Put Codex CLI next to DeerFlow and the part they share is small: each runs a model in a loop and gives it tools. Memory, sandboxing and hosting differ between Codex CLI and DeerFlow, and the word harness is used for each of them.
 
 ## What I'd write in a product's docs
 
