@@ -1,265 +1,115 @@
 ---
 category: ai-engineering
 date: 2026-04-19
-description: Voice AI agents live or die by how they manage memory across a real-time
-  streaming pipeline. Text chatbots solve memory with RAG. Voice agents need something
-  different.
+description: 'Memory for voice AI agents has one rule text chatbots skip: store what the caller heard. How OpenAI, LiveKit and Pipecat handle it, with a run example.'
 status: published
 work_note: 'I wrote Firecrawl''s comparison of AI voice agent platforms and ran the writing team at Mem0. Voice and memory meet on this page, and [the Firecrawl comparison](/portfolio/) is in my portfolio.'
 title: 'Memory for Voice AI Agents: What Text Chatbots Cannot Do'
-updated: '2026-08-17'
 slug: voice-agent-memory
+updated: 2026-11-17
 ---
 
-Voice agents and text chatbots fail differently. A text chatbot that loses context produces a confusing paragraph the user can reread and shrug off.
+A voice agent can generate a full sentence and be cut off after the fifth word. What it stores as its side of the conversation decides whether the rest of the call makes sense, and the documentation for the voice stacks compared below agrees on what that should be: the words the caller heard.
 
-A voice agent that loses context produces dead air, then a response about a topic the caller abandoned two sentences ago, and the call quietly falls apart. The failure mode is catastrophic in a way text never is.
-
-
-A voice agent cannot pause to run a retrieval step in the middle of a turn the way a text chatbot does. The caller hears the pause.
-
+Memory for voice AI agents has the layers a text agent has, plus that one rule a text chatbot never needs. A reader sees every word the model wrote, and a caller hears only what was played before they spoke.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/voice-agent-memory/voice-pipeline.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/voice-agent-memory/voice-pipeline.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/voice-agent-memory/voice-pipeline.svg" width="720" height="392" alt="A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Working memory lives inside the pipeline stages and updates on every audio frame. Retrieved memory is fetched in parallel with generation, drawn as a dashed input to the model, so it arrives before the first token is spoken instead of blocking the turn." loading="lazy" decoding="async"></picture></a>
   <figcaption>The caller hears every pause, so retrieved memory runs alongside generation, never in front of it.</figcaption>
 </figure>
 
-##The Fundamental Difference: Memory Latency Budget
+## What can a text chatbot ignore that a voice agent can't?
 
-A text chatbot can hide retrieval and prompt-loading delay behind a visible wait. The same delay becomes silence in a voice conversation.
+A text chatbot can treat what the model generated as what the user received. A voice agent sees those two drift apart every time the caller interrupts, because generation runs ahead of playback.
 
-Nobody notices a two-second wait when they are reading. A voice agent gets no such grace.
+OpenAI's [Realtime conversations guide](https://developers.openai.com/api/docs/guides/realtime-conversations) names the fix. "We call this truncating the model's last response, that is, removing the unplayed portion of the model's last response from the conversation."
 
+The guide gives the reason in the caller's words: the model should know where it stopped in case "the user says "what was that last thing?"". An agent that remembers its whole sentence will answer that question with words the caller never heard.
 
-Voice agents end up splitting memory into two tiers based on latency tolerance. The first tier is working memory, held entirely in the pipeline process, updated on every audio frame.
+## How do voice frameworks record what the caller heard?
 
-The second tier is retrieved memory, fetched in parallel with LLM generation so it arrives before the first token is spoken. Blocking on retrieval is off the table.
+They track playback and cut the stored reply at the point of interruption. Who does the tracking depends on the transport.
 
-##Working Memory: What Lives In The Pipeline
+| Stack | What its documentation says |
+| --- | --- |
+| OpenAI Realtime API over WebRTC or SIP | "The server will automatically truncate unplayed audio when there's a user interruption." |
+| OpenAI Realtime API over WebSocket | The client must "Record how many milliseconds of that item's audio the user actually heard." |
+| [LiveKit Agents](https://docs.livekit.io/agents/build/turns/) | The agent "automatically truncates its conversation history to include only the portion of the speech that the user heard before interruption." |
+| [Pipecat](https://docs.pipecat.ai/guides/learn/context-management) | Context is built from the text the speech service reports as spoken: "This ensures context matches what users actually hear." |
 
-When a user speaks to a voice agent, their audio enters a pipeline that looks like this:
+The WebSocket row is the one that fails without anyone noticing. Nothing breaks if the client skips the truncation event, and the conversation history fills with sentences that were never played.
 
-```
-Microphone → VAD → STT → LLM → TTS → Speaker
-```
+## What does the difference look like in the history?
 
-Each stage maintains its own state. VAD tracks recent audio energy levels.
+A short simulation makes it concrete. It gives each word of one reply a playback time, interrupts at 1.7 seconds, and compares the two versions of the stored turn.
 
-STT maintains a rolling buffer of the current transcription segment. The LLM holds the conversation context in its context window.
+```python
+"""What a voice agent should remember after an interruption: the words the caller heard."""
 
-TTS carries a voice model that spans the generation window.
+# One generated reply, with the time each word finishes playing (milliseconds).
+reply = "I have you booked for Tuesday the fourteenth at three in the afternoon with Dr Rao"
+words = reply.split()
+ends_ms = [220 * (i + 1) for i in range(len(words))]
 
-Working memory here means mutable state held by the transcription and language-model stages before a turn is committed.
-
-The LLM context window holds whatever prompt you built for it, which includes the system prompt, extracted conversation facts, and recent exchange summaries.
-
-Of these, the STT buffer is the most volatile. It contains partial transcriptions that are continuously rewritten as the user speaks.
-
-A partial transcript can change several times before endpointing commits the final user turn.
-
-Up to that point the agent is holding incomplete text, which is why turn-taking logic carries so much weight: you cannot commit memory until VAD says the user has stopped.
-
-##Voice Activity Detection: The Gatekeeper Of Memory
-
-VAD is the first critical node in the voice memory system. Its job is to detect when a user has finished speaking so the agent knows it is safe to respond.
-
-Get this wrong and you either cut the user off mid-sentence or sit through an awkward silence while they wait for a reply.
-
-VAD systems expose frame and threshold settings that trade detection speed against false endpoints. Compare WebRTC VAD and neural alternatives on labeled audio from the deployment environment.
-
-When VAD fires the end-of-speech event, working memory crystallizes. The STT buffer freezes and produces the final transcript segment, and that segment is what gets added to the conversation state.
-
-Think of the VAD end event as the commit in a version-controlled buffer: everything before it was a working draft that could still change, everything after it is on the record. That single event is the moment of memory commit for the current turn.
-
-##Turn-taking: The Protocol That Prevents Collisions
-
-Human conversation has an implicit protocol for turn-taking. One person speaks, the other listens, and a pause sits between them before the roles reverse.
-
-Voice agents have to implement an explicit version of this protocol, and the protocol carries memory implications.
-
-Three states exist in a turn-taking system: user speaking, agent speaking, and transition. When the user is speaking, the agent must not produce audio.
-
-When the agent is speaking, VAD has to be configured to ignore the agent's own output so it does not cut itself off mid-word. During transition, the system has to detect when the user wants to take back the turn and handle that cleanly.
-
-Memory gets complicated in the transition state. A user who interrupts mid-generation usually has a specific intent: correcting a detail or redirecting the conversation.
-
-Say the agent is reading back "I have you booked for Tuesday the fourteenth at" and the caller cuts in with "no, Wednesday." The agent has to keep the already-generated half in memory so it can either discard it or fold the correction in.
-
-Losing that state produces the classic broken-voice-agent moment where the assistant cheerfully confirms Tuesday the fourteenth right after being told Wednesday.
-
-One interruption pattern keeps the partial generation in a buffer, marks it invalid, and passes that state into the next model turn so the response can acknowledge the correction.
+interrupted_at_ms = 1700  # the caller starts speaking: "no, Wednesday"
 
 
-##Interruption Handling: The Architecture
+def heard(words, ends_ms, cutoff_ms):
+    return " ".join(w for w, end in zip(words, ends_ms) if end <= cutoff_ms)
 
-Handling interruptions requires separating two concerns: audio cancellation and conversation state management. Audio cancellation means stopping the TTS output immediately so the user hears silence.
 
-Conversation state management means deciding what to do with the partial response that was being generated.
+generated = {"role": "assistant", "text": reply}
+truncated = {"role": "assistant", "text": heard(words, ends_ms, interrupted_at_ms), "interrupted": True}
 
-For audio cancellation, the standard approach is to send a flush signal to the TTS engine. WebRTC applications use a full silence RTP payload to drain the output buffer, followed by a DTX (discontinuous transmission) command that stops further packet generation.
+print("generated :", generated["text"])
+print("heard     :", truncated["text"])
+print("unplayed  :", reply[len(truncated["text"]):].strip())
 
-Use the TTS provider's documented stop or flush mechanism, then measure how quickly queued audio actually stops in the client.
-
-A useful design separates current-turn state, conversation history, and retrieved cross-session context.
-
-Layer one is the current turn buffer, held in the STT process. It contains the transcription of what the user has said in the current speaking turn, not yet committed to history.
-
-Layer two is the conversation history buffer, held in the LLM process. It holds a structured summary of previous turns rather than the raw transcript.
-
-Completed turns can be summarized into a bounded history while extracted entities are kept separately. Set both limits from recall tests, not a universal conversation length.
-
-When an interruption occurs, layer one gets replaced with the new user speech. Layers two and three are preserved.
-
-The system injects the invalidated partial response into the next prompt with a rerouting instruction. The LLM decides whether to address the interruption directly or confirm the redirect before continuing.
-
-##Streaming Pipeline Architecture
-
-A production voice agent runs a streaming pipeline rather than a request-response loop. The difference matters for memory, because streaming forces you to commit state incrementally even as the stream keeps flowing.
-
-A streaming pipeline can use these boundaries:
-
-```
-Audio chunk received → VAD check → Partial transcription updated
-                                         ↓
-                               STT finalization event (VAD end)
-                                         ↓
-                               Turn summary extracted → Conversation buffer updated
-                                         ↓
-                               Retrieved context fetched (parallel with LLM)
-                                         ↓
-                               LLM inference starts → Tokens stream to TTS
-                                         ↓
-                               Audio chunks played → User hears response
+for label, history in (("stores generated text", generated), ("stores heard text", truncated)):
+    knows_time = "three in the afternoon" in history["text"]
+    print(f"{label:<22} -> history claims the caller was told the time: {knows_time}")
 ```
 
-Transcription, generation, and synthesis can overlap, so state must be committed at explicit boundaries while other stages continue.
+Running `python3 heard_demo.py` printed this.
 
-State updates happen at specific pipeline boundaries. When VAD fires an end-of-speech event, the STT buffer commits its current content to the conversation buffer.
+```text
+generated : I have you booked for Tuesday the fourteenth at three in the afternoon with Dr Rao
+heard     : I have you booked for Tuesday the
+unplayed  : fourteenth at three in the afternoon with Dr Rao
+stores generated text  -> history claims the caller was told the time: True
+stores heard text      -> history claims the caller was told the time: False
+```
 
-When the LLM produces a turn-complete marker, the conversation buffer gets compressed and stored. Between those two boundaries, state stays mutable.
+The script models the bookkeeping only, with made-up word timings and no audio. The outcome is the point: the first history says the caller was told an appointment time, and the caller heard seven words that stop before the date.
 
-Those boundaries are where the memory challenge lives. Between VAD end-of-speech and LLM turn-complete, the system sits in a transitional state: the user has finished speaking but the agent has not finished responding.
+When the caller then says "no, Wednesday", a model reading the first history believes the time is settled and only the day is in dispute. A model reading the second knows it has to give the day and the time again.
 
-A user who interrupts during that window forces the system to revert to the pre-turn state without dropping prior context.
+## Can a voice agent remember context from earlier in the same call?
 
-A checkpoint-and-rollback pattern can preserve the pre-turn conversation buffer until the response completes.
+Yes. Everything said earlier in the call sits in the conversation history that is sent to the model on each turn, the same [short-term memory](/articles/short-term-agent-memory/) a text agent has.
 
+A long call brings the same limit a long chat does. The history has to be shortened at some point, and [context windows vs memory](/articles/context-windows-vs-memory/) covers what that costs.
 
-##Latency Constraints That Drive Every Decision
+The voice-specific risk is a wrong entry, more than a missing one. A turn recorded as spoken when it was cut off stays in the history for the rest of the call.
 
-Set the memory budget from measured end-to-end latency for the target interaction. Co-locate frequently read state when network and retrieval time consume too much of that budget, and keep external retrieval off the critical path when traces show it is the bottleneck.
+## What should a voice agent remember across calls?
 
-The workable pattern keeps the active context in memory on the inference server and updates it incrementally after each turn. Full retrieval from external storage happens only on agent startup and when context switches occur, for example when the user changes topics.
+Facts the caller would expect a person to remember, written after the call from the corrected history. That ordering matters, because a summary of a transcript that contains unplayed sentences will store things the caller was never told.
 
-Throughout a continuous conversation, the memory system operates entirely in-process.
+Retrieval of those facts has a constraint text doesn't share. A lookup in the middle of a turn is silence on the line, and [tracing voice agent latency](/articles/voice-agent-latency/) covers where that time goes.
 
-##Context Compression And Conversation Summarization
+The write side works as it does for any agent. [AI memory management for LLMs](/articles/ai-memory-management/) covers what to store and when to replace it, and the [state of agent memory](/articles/agent-memory-2026/) surveys the products that do it.
 
+## FAQ
 
-Past that, compression becomes mandatory.
+**Does the Realtime API handle interruptions for me?**
 
-One option is tiered summarization: keep recent turn summaries in a bounded buffer, then merge older summaries while preserving separately extracted entities.
+It depends on the connection. OpenAI's guide says the server truncates unplayed audio on WebRTC and SIP, and that with a WebSocket connection the client "must stop playback and handle truncation".
 
-Once the buffer fills, the oldest turns collapse into a single longer summary and drop out of the buffer.
+**What is the unplayed portion of a response?**
 
-The summarization runs inside the LLM pipeline itself. After a turn completes and before TTS synthesis starts, a lightweight extraction prompt runs against the current turn to pull out named entities, user preferences, and intent markers.
+It is the part of a generated reply that was produced and never reached the caller's speaker because they started talking. Voice stacks remove it from the conversation so the model's record matches the call.
 
-Those land in a separate entity table that survives compression, so a caller's stated dietary restriction does not vanish just because the turn it appeared in got summarized away. On retrieval, the entity table merges with the turn summaries to reconstruct conversation state.
+**Why does this matter for memory across sessions?**
 
-
-The summarization finishes during the seconds the user spends hearing the response, hidden inside the audio playback time.
-
-##Memory Across Sessions
-
-Intra-conversation memory turned out to be the manageable part. Inter-session memory is what actually tests the design.
-
-A user who books a haircut today, calls back next week, and has to re-explain everything will conclude the agent is dumb, even when the in-call experience was flawless. A voice agent that resets to empty state every session fails that expectation on contact.
-
-Cross-session memory reuses the same retrieval pattern as in-conversation context. After each turn, the system extracts key facts and writes them to a durable store.
-
-On session startup, the store gets queried for recent facts relevant to the user, and those facts get injected into the system prompt.
-
-A simple cross-session design can store timestamped facts under a user identifier and retrieve relevant facts when a new session starts.
-
-
-One real limitation: the approach only captures explicitly tagged facts. It misses conversation style, relationship nuance, and the implicit preferences a human would carry over, like the fact that a particular caller always wants the short version.
-
-When missing a remembered fact is more costly than retrieving an irrelevant one, tune the system toward recall and measure the resulting noise.
-
-##What Text Chatbots Get Wrong About Voice Memory
-
-The standard RAG architecture for text chatbots assumes you have time to retrieve and time to read. You send a message, the system searches a vector store, the retrieved documents drop into the prompt, and the LLM generates a response.
-
-Text retrieval often tolerates a visible wait that becomes awkward silence in voice, so retrieval should be overlapped or moved off the live turn when traces require it.
-
-Turn granularity is the second difference. Text chatbots operate at message granularity: a message arrives, the system retrieves context and generates a response, and the response is one block of text.
-
-Voice agents operate at token granularity, generating one token at a time, and any token can be interrupted before the full response is complete. Memory has to be designed for partial, interruptible generation rather than a single-shot reply.
-
-Audio context is the third difference. A text chatbot receives text.
-
-A voice agent receives audio, which carries prosodic signals text never captures: the caller's tone, the hesitation before a sentence, the small laugh before a correction. Those signals carry intent that needs to land in memory somehow.
-
-A voice agent storing only transcripts is throwing away half of what the caller actually communicated.
-
-##Related Articles
-
-This cluster of articles covers the full AI memory stack. For understanding how memory differs from context windows, see [context windows vs memory](/articles/context-windows-vs-memory/).
-
-For how HyperAgents handle memory across sessions, read [how memory works in HyperAgents](/articles/hyperagents-memory/). For implementation patterns, see [AI memory management for LLMs](/articles/ai-memory-management/).
-
-
-
-##Related Articles
-
-- [Context windows vs memory](/articles/context-windows-vs-memory/)
-- [AI memory management for LLMs](/articles/ai-memory-management/)
-- [Short-term memory for AI agents](/articles/short-term-agent-memory/)
-- [How memory works in HyperAgents](/articles/hyperagents-memory/)
-- [State of AI agent memory 2026](/articles/agent-memory-2026/)
-
-##Faq
-
-**How does VAD latency affect memory accuracy?**
-
-Shorter VAD frames can reduce detection delay but increase processing and false endpoints. Choose the window with labeled audio from the deployment environment.
-
-**What happens when the user interrupts mid-generation?**
-
-When VAD detects speech during agent generation, the system marks the current generation as invalidated, preserves the conversation buffer state, and waits for the user to complete their interruption. The invalidated generation is passed to the LLM on the next turn as context.
-
-The LLM is instructed to acknowledge the interruption without repeating the invalidated content.
-
-**How do you handle very long conversations?**
-
-Long conversations are handled through tiered summarization. Each turn is compressed to a fixed-size summary after completion.
-
-Summaries are stored in a rolling buffer. Entity extraction runs in parallel with TTS synthesis to avoid adding latency.
-
-On context retrieval, the system pulls recent summaries and merges them with the entity table to reconstruct conversation state.
-
-**What storage backend works for cross-session memory?**
-
-Choose a storage backend from measured read latency, durability, and deployment constraints. Do not copy a database threshold from a different workload.
-
-**How does the streaming pipeline handle state consistency?**
-
-The pipeline uses a checkpoint and rollback pattern. Before each LLM turn, the conversation buffer is checkpointed.
-
-If the turn completes, the checkpoint is discarded. If an interruption occurs, the checkpoint is restored and the turn restarts.
-
-Conversation state stays intact no matter how often the caller cuts in.
-
-**Can you use RAG for voice agent memory?**
-
-RAG can support voice-agent memory when retrieval fits the measured turn budget or runs outside the critical path. Keep active context close to inference when traces show external retrieval is the bottleneck.
-
-**How does TTS overlap with LLM generation in the pipeline?**
-
-TTS synthesis starts before LLM generation is complete. Tokens stream from the LLM as they are produced, and TTS synthesizes each token as it arrives.
-
-Streaming generation and synthesis can overlap, allowing audio playback to begin before the full model response is complete.
-
-For more on the latency pipeline that this memory system lives inside, see my guide to [tracing real-time voice agent latency](/articles/voice-agent-latency/). For the LLM context window management that determines how much memory you can hold, see [how Anthropic's contextual retrieval changes RAG architecture](/articles/contextual-retrieval/).
-
-For the broader agent infrastructure context, see [production AI agent errors: what actually fails](/articles/agent-error-handling/).
+Long-term memory is written from the conversation history. If the history contains sentences the caller never heard, the stored facts can include things nobody said aloud.

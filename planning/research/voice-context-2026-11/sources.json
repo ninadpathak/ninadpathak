@@ -1812,6 +1812,52 @@
         "memory-serialization",
         "short-term-agent-memory"
       ]
+    },
+    {
+      "id": "openai-realtime-conversations",
+      "url": "https://developers.openai.com/api/docs/guides/realtime-conversations",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Realtime conversations guide",
+      "quotes": [
+        "We call this truncating the model's last response, that is, removing the unplayed portion of the model's last response from the conversation.",
+        "the user says \"what was that last thing?\"",
+        "The server will automatically truncate unplayed audio when there's a user interruption.",
+        "Record how many milliseconds of that item's audio the user actually heard.",
+        "must stop playback and handle truncation"
+      ],
+      "connects": [
+        "voice-agent-memory",
+        "voice-agent-latency"
+      ]
+    },
+    {
+      "id": "livekit-agents-turns",
+      "url": "https://docs.livekit.io/agents/build/turns/",
+      "author": "LiveKit",
+      "date": "2026-11-17",
+      "title": "Turn detection and interruptions",
+      "quotes": [
+        "automatically truncates its conversation history to include only the portion of the speech that the user heard before interruption."
+      ],
+      "connects": [
+        "voice-agent-memory",
+        "voice-agent-latency"
+      ]
+    },
+    {
+      "id": "pipecat-context-management",
+      "url": "https://docs.pipecat.ai/guides/learn/context-management",
+      "author": "Pipecat",
+      "date": "2026-11-17",
+      "title": "Context management",
+      "quotes": [
+        "This ensures context matches what users actually hear.",
+        "represents what was actually spoken"
+      ],
+      "connects": [
+        "voice-agent-memory"
+      ]
     }
   ],
   "unused_leads": [
@@ -1972,6 +2018,7 @@
       "This release is backward compatible for REST API users. The JavaScript SDK now requires Node.js 20 or later."
     ],
     "short-term-agent-memory": [],
-    "memory-versioning": []
+    "memory-versioning": [],
+    "voice-agent-memory": []
   }
 }
