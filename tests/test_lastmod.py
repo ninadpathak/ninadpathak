@@ -284,17 +284,22 @@ class ResolveUpdatedTests(unittest.TestCase):
         os.chdir(ROOT)
         self.addCleanup(os.chdir, self.cwd)
         self.builder = SiteBuilder()
-        self.path = ROOT / "content" / "posts" / "speculative-decoding.md"
+        # A post written for this test, so no live article's frontmatter can break it.
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.path = pathlib.Path(tmp.name) / "lastmod-fixture.md"
+        self.path.write_text(
+            "---\ntitle: Lastmod fixture\nslug: lastmod-fixture\nstatus: published\n"
+            "date: 2026-03-07\nupdated: '2026-05-01'\n---\n\nOne paragraph of body text.\n", encoding="utf-8")
         import frontmatter
         self.meta = frontmatter.load(self.path).metadata
-        self.sources = lastmod.source_paths(pathlib.Path("content/posts/speculative-decoding.md"),
-                                            "speculative-decoding", self.meta.get("video"))
+        self.sources = lastmod.source_paths(self.path, "lastmod-fixture", self.meta.get("video"))
+        self.assertEqual(self.sources, [self.path])
 
     def resolve(self, entry):
-        self.builder.lastmod_manifest = {"speculative-decoding": entry} if entry else {}
+        self.builder.lastmod_manifest = {"lastmod-fixture": entry} if entry else {}
         self.builder.stale_lastmod = []
-        return self.builder.resolve_updated(pathlib.Path("content/posts/speculative-decoding.md"),
-                                            "speculative-decoding", self.meta)
+        return self.builder.resolve_updated(self.path, "lastmod-fixture", self.meta)
 
     def test_a_matching_entry_sets_the_date(self):
         entry = {"lastmod": "2026-10-27", "sources": lastmod.sources_hash(self.sources)}
@@ -305,7 +310,8 @@ class ResolveUpdatedTests(unittest.TestCase):
         entry = {"lastmod": "2026-10-27", "sources": "not-the-current-hash"}
         floor = lastmod_floor(self.meta)
         self.assertEqual(self.resolve(entry), floor)
-        self.assertEqual(self.builder.stale_lastmod, ["speculative-decoding"])
+        self.assertEqual(floor, dt.date(2026, 5, 1))
+        self.assertEqual(self.builder.stale_lastmod, ["lastmod-fixture"])
 
     def test_never_earlier_than_the_publish_date(self):
         entry = {"lastmod": "2020-01-01", "sources": lastmod.sources_hash(self.sources)}
@@ -344,18 +350,35 @@ class BuiltDatesAgreeTests(unittest.TestCase):
             if visible:
                 self.assertEqual(visible.group(1), modified.group(1), path)
 
-    def test_speculative_decoding_carries_its_video_date(self):
+    def test_a_post_with_a_video_is_dated_no_earlier_than_the_video(self):
+        """Any post with a film: its sitemap date is on or after the film's upload date.
+        No single live post is named, so an owner can drop a video field freely."""
+        import frontmatter
+        import yaml
         cwd = os.getcwd()
         os.chdir(ROOT)
         try:
             pages = lastmod.discover()
-            entry = lastmod.load_manifest().get("speculative-decoding")
-            current = entry and entry["sources"] == lastmod.sources_hash(pages["speculative-decoding"])
+            manifest = lastmod.load_manifest()
+            with_video, checked = 0, 0
+            for path in sorted((ROOT / "content" / "posts").glob("*.md")):
+                meta = frontmatter.load(path).metadata
+                if meta.get("status") != "published" or not meta.get("video"):
+                    continue
+                with_video += 1
+                slug = lastmod.post_slug(path.relative_to(ROOT), meta)
+                entry = manifest.get(slug)
+                if not entry or entry["sources"] != lastmod.sources_hash(pages[slug]):
+                    continue  # stale until the refresh workflow runs
+                video = yaml.safe_load((ROOT / "content" / "videos" / meta["video"] / "video.yaml").read_text())
+                uploaded = str(video["upload_date"])[:10]
+                self.assertGreaterEqual(self.lastmods[f"/articles/{slug}/"], uploaded, slug)
+                checked += 1
         finally:
             os.chdir(cwd)
-        if not current:
-            self.skipTest("its manifest entry is stale until the refresh workflow runs")
-        self.assertGreaterEqual(self.lastmods["/articles/speculative-decoding/"], "2026-10-27")
+        self.assertGreater(with_video, 0, "no published post has a video: this test has nothing to check")
+        if not checked:
+            self.skipTest("every video post's manifest entry is stale until the refresh workflow runs")
 
     def test_home_and_sections_are_the_newest_of_their_articles(self):
         articles = {p: d for p, d in self.lastmods.items()

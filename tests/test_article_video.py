@@ -196,39 +196,52 @@ class PublishedVideoTests(unittest.TestCase):
                 )
                 self.assertEqual(poster.returncode, 0, poster.stderr)
 
+    def video_post(self, builder):
+        """The first published post that carries a film. No single live post is named, so
+        an owner can remove a video field; with no film anywhere the tests fail."""
+        posts = sorted((p for p in builder.load_posts() if p["video"]), key=lambda p: p["slug"])
+        self.assertTrue(posts, "no published post has a video: the player template is untested")
+        return posts[0]
+
     def test_template_renders_player_track_transcript_and_nested_video_object(self):
         builder = SiteBuilder()
-        post = next(p for p in builder.load_posts() if p["slug"] == "speculative-decoding")
+        post = self.video_post(builder)
+        film = post["video"]
         html = builder.env.get_template("post.html").render(
             post=post, site=builder.config["site"], contact=builder.config["contact"],
             related=[], latest_posts=[], build_year=2026,
         )
-        self.assertRegex(html, r'<video controls preload="none" playsinline width="1920" height="1080" poster="/static/videos/speculative-decoding/poster.webp"')
+        self.assertTrue(film["poster_webp"].startswith(f"/static/videos/{film['slug']}/"))
+        self.assertTrue(film["poster_webp"].endswith(".webp"))
+        self.assertIn(f'<video controls preload="none" playsinline width="{film["width"]}" height="{film["height"]}" '
+                      f'poster="{film["poster_webp"]}"', html)
         # The film burns condensed captions into the picture, so the verbatim track is
         # offered in the player's captions menu but not switched on over them.
-        self.assertIn('<track kind="captions" src="/static/videos/speculative-decoding/captions.vtt" srclang="en" label="English">', html)
+        self.assertIn(f'<track kind="captions" src="{film["captions"]}" srclang="en" label="English">', html)
+        self.assertNotIn("<track kind=\"captions\" default", html)
         self.assertLess(html.index("<video"), html.index('class="post-content"'))
         self.assertIn("<summary>Transcript</summary>", html)
         self.assertIn("figures.css", html)
         # The player shows the WebP, the head preloads it at high priority, and the
         # VideoObject names the same WebP so search sees one thumbnail URL.
-        self.assertIn('poster="/static/videos/speculative-decoding/poster.webp"', html)
-        self.assertIn('<link rel="preload" as="image" href="/static/videos/speculative-decoding/poster.webp" type="image/webp" fetchpriority="high">', html)
+        self.assertIn(f'<link rel="preload" as="image" href="{film["poster_webp"]}" type="image/webp" fetchpriority="high">', html)
         self.assertLess(html.index('rel="preload" as="image"'), html.index("</head>"))
         articles = [json.loads(block) for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)]
         article = next(block for block in articles if block.get("@type") == "TechArticle")
         video = article["video"]
         self.assertEqual(video["@type"], "VideoObject")
-        self.assertEqual(video["duration"], "PT40S")
-        self.assertEqual(video["thumbnailUrl"], "https://ninadpathak.com/static/videos/speculative-decoding/poster.webp")
-        self.assertTrue(video["contentUrl"].endswith("/static/videos/speculative-decoding/speculative-decoding.mp4"))
+        self.assertRegex(video["duration"], r"^PT(\d+M)?\d+S$")
+        self.assertEqual(video["duration"], film["duration_iso"])
+        self.assertEqual(video["thumbnailUrl"], f"https://ninadpathak.com{film['poster_webp']}")
+        self.assertEqual(video["contentUrl"], f"https://ninadpathak.com{film['src']}")
+        self.assertTrue(video["contentUrl"].endswith(".mp4"))
         for field in ("name", "description", "thumbnailUrl", "uploadDate", "transcript"):
             self.assertTrue(video[field], field)
 
     # Codex fix (1): the transcript is escaped (failed on a776cbcd)
     def test_transcript_markup_is_escaped(self):
         builder = SiteBuilder()
-        post = next(p for p in builder.load_posts() if p["slug"] == "speculative-decoding")
+        post = self.video_post(builder)
         post = dict(post, video=dict(post["video"], transcript='Use the <video> element & "quote".'))
         html = builder.env.get_template("post.html").render(
             post=post, site=builder.config["site"], contact=builder.config["contact"],
