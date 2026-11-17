@@ -60,6 +60,8 @@ sections:
         note: "Responds to SigNoz's post on AI deskilling SREs by asking the on-call agent to write down what it did."
       - post: chrome-modern-web-guidance-notes
         note: "Reads Chrome's guides for coding agents as documentation, and argues that a plain index should be the way in."
+      - post: what-agent-harness-means
+        note: "Sorts the uses of the word harness across vendor docs and argues for defining it on the page."
   - heading: "Ship changes"
     spokes:
       - post: writing-release-notes

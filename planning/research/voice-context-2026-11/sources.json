@@ -4372,10 +4372,13 @@
         "The others cost up to 1.6 times as much and passed 50.6% to 60.2%",
         "ZCode (highest pass rate, 61.9%)",
         "62 terminal tasks",
-        "Each trial gets a new Runta runtime"
+        "Each trial gets a new Runta runtime",
+        "The model explains 92.8% of the variance of cost per task",
+        "Codex CLI with GLM-5.3, Pi with GLM-5.3 Flash"
       ],
       "connects": [
-        "agent-harnesses"
+        "agent-harnesses",
+        "what-agent-harness-means"
       ]
     },
     {
@@ -4399,10 +4402,12 @@
       "title": "Agent SDK overview",
       "quotes": [
         "A hosted agent harness that runs the agent loop",
-        "the same tools, agent loop, and context management that power Claude Code"
+        "the same tools, agent loop, and context management that power Claude Code",
+        "with sessions in an Anthropic-managed cloud sandbox or a self-hosted sandbox on your own infrastructure"
       ],
       "connects": [
-        "agent-harnesses"
+        "agent-harnesses",
+        "what-agent-harness-means"
       ]
     },
     {
@@ -4412,10 +4417,42 @@
       "date": "2026-11-18",
       "title": "Deep Agents overview",
       "quotes": [
-        "Deep Agents is the agent harness for complex, multi-step work"
+        "Deep Agents is the agent harness for complex, multi-step work",
+        "It adds planning, a virtual filesystem for context, subagent spawning, and long-term memory on top of LangChain and LangGraph",
+        "available as Managed Deep Agents or the Deep Agents SDK"
       ],
       "connects": [
-        "agent-harnesses"
+        "agent-harnesses",
+        "what-agent-harness-means"
+      ]
+    },
+    {
+      "id": "hn-harness-vs-agent-2026-11",
+      "url": "https://hn.algolia.com/api/v1/items/50534879",
+      "author": "samueloph, layer8, ogmutlu (Hacker News)",
+      "date": "2026-11-17",
+      "title": "Comment thread under 'What is the best harness for each model?' (50532191)",
+      "quotes": [
+        "doesn't exist anymore because too many people use them interchangeably",
+        "harness + model = agent",
+        "They mean the same thing?"
+      ],
+      "connects": [
+        "what-agent-harness-means"
+      ]
+    },
+    {
+      "id": "deerflow-github-repo",
+      "url": "https://github.com/bytedance/deer-flow",
+      "author": "ByteDance",
+      "date": "2026-11-18",
+      "title": "bytedance/deer-flow",
+      "quotes": [
+        "An open-source long-horizon SuperAgent harness that researches, codes, and creates",
+        "With the help of sandboxes, memories, tools, skill, subagents and message gateway"
+      ],
+      "connects": [
+        "what-agent-harness-means"
       ]
     }
   ],
@@ -4616,6 +4653,11 @@
     ],
     "rag-evaluation": [
       "When do I get billed?"
+    ],
+    "what-agent-harness-means": [
+      "harness",
+      "agent",
+      "the harness in these docs is the loop and the tool registry, and you host it"
     ]
   }
 }

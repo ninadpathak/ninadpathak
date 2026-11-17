@@ -104,6 +104,8 @@ Developer: I have an approved role and need to send an authenticated request.
 
 The audience split earns its place because the actions and evidence differ. If both sentences lead to the same task, one section is wearing an org-chart costume.
 
+Vocabulary can diverge with no role attached, as it has with [the word harness in agent docs](/articles/what-agent-harness-means/).
+
 ### Keep page types close to the task
 
 The [Diataxis framework](https://diataxis.fr/start-here/) distinguishes tutorials, how-to guides, reference, and explanation by reader need. That distinction does not require four giant buckets at the top of a site.

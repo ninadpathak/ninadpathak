@@ -57,6 +57,8 @@ It matters enough to measure, going by FrontierHarness Eval. The benchmark ran 2
 
 Cost moved more than pass rate, and it didn't follow the harness from model to model. Ranking the harnesses by cost on two halves of the runs gave a rank correlation of 0.71 with the same model and 0.26 across different models.
 
+The post is clear about the order of things, though. The model explains 92.8% of the variance in cost per task, and the harness comes second.
+
 The line I'd take to a budget meeting is another one. The post reports that "64.5% of the list-price cost of the scored runs went to trials that did not pass", which is money a harness spends before anyone learns the run failed.
 
 Runta published the benchmark and ran it on its own runtime, and the post lists its limits as open models and one provider. I'd treat the rankings as theirs and the lesson as general: test harnesses with your model on your own tasks.

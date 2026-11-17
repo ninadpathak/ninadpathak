@@ -256,6 +256,8 @@ One reviewer should not impersonate an engineer, editor, accessibility specialis
 
 Each reviewer should point to the evidence they checked. Do not treat one approval as proof of facts outside that reviewer's access.
 
+Terminology earns its place in the writer's row. The phrase agent harness currently [names different things](/articles/what-agent-harness-means/) depending on whose docs you read.
+
 ## Run the passes on a fictional authentication guide
 
 Orbit is a fictional API used to expose the review method. It is not client work, a product test, or evidence about a live service.
