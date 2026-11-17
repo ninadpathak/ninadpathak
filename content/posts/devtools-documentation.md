@@ -14,7 +14,7 @@ bridges:
   reason: Fern's logs show what agents fetch from docs, and an agent is now often the first evaluator.
 money_link: true
 date: 2026-04-06
-description: 'Devtools documentation is read before the purchase. What the 2026 State of Docs survey says buyers do, the pages they check, and the agent that now reads first.'
+description: 'Devtools documentation is read before the purchase. This page covers what the 2026 State of Docs survey says buyers do, the four pages they check, and the coding agent that now reads the docs before a person does.'
 status: published
 work_note: "This post is about what a buyer's engineer checks in your docs before a trial starts. If you'd rather someone else find those missing answers and write them before the next evaluation, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Let's talk about yours](/services/)."
 title: How Developers Judge Devtools Documentation Before They Buy
@@ -28,22 +28,22 @@ Corporate buyers of the 1980s had a saying for the safe choice, that nobody got 
 
 A devtools startup can't offer that kind of cover. What its buyer can check, without talking to anyone, is the docs.
 
-So this page is about what that buyer looks for, as the commercial end of [developer content](/articles/developer-experience/).
+So this page covers what that buyer looks for in the docs, which is where [developer content](/articles/developer-experience/) meets a sale.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/devtools-documentation/evaluation-friction.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/devtools-documentation/evaluation-friction.narrow.svg" width="288" height="776"><img class="np-has-narrow" src="/static/images/diagrams/devtools-documentation/evaluation-friction.svg" width="720" height="264" alt="A technical evaluator's path from the docs to a deal, passing the quickstart, the auth page and the limits page. Each of the three is marked as a point where the evaluation can stop." loading="lazy" decoding="async"></picture></a>
-  <figcaption>The pages an evaluator meets on the way to a decision. A failure at any of them can end the trial before sales hears an objection.</figcaption>
+  <figcaption>The quickstart, the auth page and the limits page are where an evaluation can stop, before sales hears an objection.</figcaption>
 </figure>
 
 ## What is devtools documentation for?
 
-It lets a developer who has never spoken to the company decide whether the tool will work for their case. CT Smith of Payabli says in the report that when they shop for software they skip the marketing site and go to the docs.
+Devtools documentation lets a developer who has never spoken to the company decide whether the tool will work for their case. CT Smith of Payabli says in the report that when they shop for software they skip the marketing site and go to the docs.
 
 And Usha Mandya of Docker sees it from the vendor's side: "Developers don't start with the marketing site. They come to docs first."
 
 ## What does the survey say about docs and buying?
 
-It says buyers read the docs, and vendors don't count what happens next.
+The survey says buyers read the docs before buying, and more than half of vendors don't track the leads that come from them.
 
 | What respondents said | Share |
 | --- | --- |
@@ -54,13 +54,13 @@ It says buyers read the docs, and vendors don't count what happens next.
 
 GitBook makes a documentation platform and runs this survey, and I write documentation for a living. Read the figures knowing both.
 
-The report adds that the first two figures sit about where they did in 2025, and it has no row for deals lost. Christopher Gales asks in the same section whether a customer would fail to renew over doc quality, and says "It's a very lagging indicator to find that out."
+The report adds that the 80% and 88% figures sit about where they did in 2025, and it has no row for deals lost. Christopher Gales asks in the same section whether a customer would fail to renew over doc quality, and says "It's a very lagging indicator to find that out."
 
-This page used to carry a title saying devtools startups lose deals over bad docs. I haven't found a published count of one, so the claim I'll stand behind is smaller: buyers check, and a page that fails the check gives them a reason to stop.
+This page used to carry a title saying devtools startups lose deals over bad docs. I haven't found a published count of lost deals, so the claim I'll stand behind is smaller: buyers check, and a page that fails the check gives them a reason to stop.
 
 ## Which pages does a buyer check?
 
-I name four, and the choice is my judgment, since the survey doesn't ask. Each one answers a question the buyer has before they give the trial any more time.
+I'd name four pages, and the choice is my judgment, since the survey doesn't ask which pages buyers open. Each one answers a question the buyer has before they give the trial any more time.
 
 | Page | The buyer's question |
 | --- | --- |
@@ -69,11 +69,11 @@ I name four, and the choice is my judgment, since the survey doesn't ask. Each o
 | Limits and pricing | What will this refuse to do, and what does it cost past the free tier? |
 | Changelog | What happens to my integration when the next version ships? |
 
-The [quick start guide template](/articles/quickstart-guide/) covers the first page, and my [changelog guide](/articles/writing-changelogs/) covers the last.
+The [quick start guide template](/articles/quickstart-guide/) covers the quickstart, and my [changelog guide](/articles/writing-changelogs/) covers the changelog.
 
 ## What does a quickstart tell a first-time reader?
 
-Stripe's page alone matched a success signal, and Stripe's alone has no prerequisites heading. The script below fetches the quickstarts of Stripe, Vercel and Cloudflare and searches each for four things a first-time reader needs.
+A quickstart should tell a first-time reader what they need, what a successful run looks like and where to go next. The script below fetches the quickstarts of Stripe, Vercel and Cloudflare and searches each for those things, plus an entry point for a coding agent.
 
 ```python
 """Fetch three vendor quickstarts and report what each page tells a first-time reader."""
@@ -127,23 +127,23 @@ Cloudflare yes             no              yes             yes
 
 The checks are plain string searches, so a "no" means the page doesn't use those words and may still do the job another way. Stripe's page has no prerequisites heading and opens on a list titled "What you learn", which names the SDK version it installs.
 
-It's also the only page where the search found a success signal, in the sentence "If everything worked, the command-line displays the following response." That sentence is the one I'd add to any quickstart first.
+Stripe's is also the only page where the search found a success signal, in the sentence "If everything worked, the command-line displays the following response." That sentence is the one I'd add to any quickstart first.
 
 ## Who reads the docs first now?
 
-Often an agent, and each of these quickstarts has made room for one. Stripe's page offers "Set up agent" and Cloudflare's links "Agent setup", and Vercel's prints a ready-made prompt to hand to a coding agent.
+A coding agent often reads the docs first now, and each of the quickstarts above has an entry point for one. Stripe's page offers "Set up agent" and Cloudflare's links "Agent setup", and Vercel's prints a ready-made prompt to hand to a coding agent.
 
 Dachary Carey of MongoDB explains in the report why that matters. Developers now tell an agent what they want to build and the agent picks the tools, so a product the agent doesn't know about doesn't get its docs read at all.
 
-The report counts it too: 32% of respondents say their docs now serve to represent the product to LLMs, a category the survey didn't have in 2025. What agents request once they arrive is in my notes on [Fern's agent traffic report](/articles/agents-reading-docs/).
+The report puts a number on that shift: 32% of respondents say their docs now serve to represent the product to LLMs, a category the survey didn't have in 2025. What agents request once they arrive is in my notes on [Fern's agent traffic report](/articles/agents-reading-docs/).
 
 ## Can you measure what docs do for sales?
 
-Yes, and few teams do. The report says 57% of respondents don't track leads from documentation, and a further 17% don't know.
+You can, and few teams do. The report says 57% of respondents don't track leads from documentation, and a further 17% don't know.
 
 Larry Ullman was Stripe's first technical writer, and the report lists what his team tracked there, starting with the time from a first docs visit to a first paid transaction.
 
-So start with one of those. Inside an engineering team the same question has different evidence, which my page on [documentation ROI](/articles/documentation-velocity/) covers.
+So start with one of the measures his team tracked. Inside an engineering team the same question has different evidence, which my page on [documentation ROI](/articles/documentation-velocity/) covers.
 
 ## What should a small team fix first?
 
@@ -157,16 +157,16 @@ And if nobody on the team has the time, this is the work I do. My [technical wri
 
 **What is devtools documentation?**
 
-It is the documentation a developer-tool company publishes for the engineers who evaluate and use its product, from the quickstart and API reference to the changelog.
+Devtools documentation is what a developer-tool company publishes for the engineers who evaluate and use its product, from the quickstart and API reference to the changelog.
 
 **Do bad docs lose deals?**
 
-I haven't found a published count. The 2026 State of Docs survey found 51% of respondents calling docs important or essential for closing deals.
+I haven't found a published count of deals lost to bad docs. The 2026 State of Docs survey found 51% of respondents calling docs important or essential for closing deals.
 
 **Which docs page matters first for a devtools trial?**
 
-The quickstart, in my judgment, because it's the page that decides whether the trial starts.
+The quickstart matters first, in my judgment, because it's the page that decides whether the trial starts.
 
 **Does documentation for an AI product need anything extra?**
 
-Yes. The model's behaviour can change under the same name, which [writing for AI products](/articles/writing-for-ai-products/) covers.
+Yes. A model's behaviour can change while its name stays the same, which [writing for AI products](/articles/writing-for-ai-products/) covers.

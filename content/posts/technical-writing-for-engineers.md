@@ -13,7 +13,7 @@ bridges:
 - slug: shorter-documentation
   reason: A page built around one task is short, which that essay argues for.
 date: 2026-04-18
-description: 'Technical writing for engineers in four rules from aerospace''s Simplified Technical English, a script that checks two of them, and the habits no script can check.'
+description: "Technical writing for engineers in four rules from aerospace's Simplified Technical English, a script that checks two of them, and the habits no script can check, such as leading with the task."
 status: published
 work_note: "Handed the docs along with everything else? You can hand them on again. I'm Ninad Pathak, a freelance technical writer, and I'll run your product before I write about it. [Let's work together](/services/)."
 title: 'Technical Writing for Engineers'
@@ -23,15 +23,15 @@ updated: 2026-11-17
 
 Aircraft maintenance manuals are written in [Simplified Technical English](https://en.wikipedia.org/wiki/Simplified_Technical_English), a restricted English developed in the 1980s for the European airline industry. Its current edition has 53 writing rules and a dictionary of about 900 approved words.
 
-Technical writing for engineers needs a small share of that discipline, and the share is the part a program can check.
+Technical writing for engineers needs only a few of those rules, and the few it needs are ones a program can check.
 
-Andrej Karpathy suggested a softer version on October 2, which is to ask a model for text "80% of the way to ASD-STE100". A project built on that tip, the [STE80 Humanizer](https://github.com/Dodaios/ste80-humanizer), reached Hacker News on November 9.
+Andrej Karpathy suggested a softer version on October 2, which is to ask a model for text "80% of the way to ASD-STE100", the standard's formal name. A project built on that tip, the [STE80 Humanizer](https://github.com/Dodaios/ste80-humanizer), reached Hacker News on November 9.
 
-I think that proportion is right for [developer content](/articles/developer-experience/) as well, and this page is my version of it: four rules from the standard, a script that checks two of them, and the habits no script can check.
+I think that proportion is right for [developer content](/articles/developer-experience/) as well, and this page is my version of it: four rules from the standard, a script that checks two of them, and the habits no script can check, such as leading with the task.
 
 ## What is technical writing for engineers?
 
-It is writing that lets a reader carry out a task or make a decision without asking the author. An engineer already writes it in READMEs, pull request descriptions, design docs and runbooks, whether or not anyone calls it documentation.
+Technical writing for engineers is writing that lets a reader carry out a task or make a decision without asking the author. An engineer already writes it in READMEs, pull request descriptions, design docs and runbooks, whether or not anyone calls it documentation.
 
 The aerospace standard, in the STE80 README's words, "was made for mechanics whose first language is not English, because a misread step on an aircraft can kill."
 
@@ -39,7 +39,7 @@ A misread step in a deploy guide costs less. But your reader is mid-task and rea
 
 ## Which rules do the work?
 
-The sentence is covered by four of the standard's rules, and Google's free course for engineers teaches all four in other words.
+The sentence and the paragraph are covered by four of the standard's rules, and Google's free course for engineers teaches all four in other words.
 
 | The standard's rule, per Wikipedia's summary | What Google's course teaches |
 | --- | --- |
@@ -52,7 +52,7 @@ So an aerospace committee in the 1980s and a [Google course](https://developers.
 
 ## Can a script check them?
 
-A script of about fifty lines can check two of them. The one below counts words in each sentence and counts imperative verbs, then applies the 20 and 25 word limits and the one-instruction rule to a before and after that I wrote for the purpose.
+A script of about fifty lines can check two of the four: sentence length and one instruction per sentence. The script below counts the words and the imperative verbs in each sentence, then applies the 20-word and 25-word limits and the one-instruction rule to a before-and-after passage I wrote for the purpose.
 
 ```python
 """Check a passage against two Simplified Technical English rules.
@@ -126,36 +126,36 @@ after
 
 The verb list is short and the detection is crude, so treat the script as a demonstration that the rules are mechanical. A real setup would use a prose linter such as the STE80 project's own `ste_check.py`, and the [technical writing linter](/linter/) on this site checks a draft in the browser.
 
-And the rewrite is shorter too, 19 words against 41. Splitting the steps removed the scaffolding that held them in one sentence.
+And the rewrite is shorter too, 19 words against 41. Splitting the steps removed the connecting words, such as "you should make sure" and "that you are going to".
 
 ## Why stop at 80%?
 
-Because the last fifth of the standard controls vocabulary, and software has too many words of its own. The README describes full compliance as a state where "Normal prose sounds stiff", with common verbs restricted to one part of speech.
+I'd stop at 80% because the rest of the standard controls vocabulary, and software has too many words of its own. The README describes full compliance as a state where "Normal prose sounds stiff", with common verbs restricted to one part of speech.
 
-A dictionary of 900 words suits a fleet of aircraft maintained from one set of manuals. A codebase names new things every week, so the rule to carry over is the narrower one behind the dictionary: one name for one thing, used the same way every time.
+A dictionary of 900 words suits a fleet of aircraft maintained from one set of manuals. A codebase keeps naming new things, so the rule to carry over is the narrower one behind the dictionary: one name for one thing, used the same way every time.
 
 ## What can't a script check?
 
-Whether the page helps. Sentence rules make text readable, and a readable page can still answer a question nobody asked.
+A script can't check whether the page helps. Sentence rules make text readable, and a readable page can still answer a question nobody asked.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/technical-writing-for-engineers/docs-8020.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/technical-writing-for-engineers/docs-8020.narrow.svg" width="288" height="792"><img class="np-has-narrow" src="/static/images/diagrams/technical-writing-for-engineers/docs-8020.svg" width="720" height="464" alt="Practices that reach the reader are leading with the task, code that copies and runs, and a documentation update in every feature pull request. A style guide and a content calendar are drawn muted inside a cluster labelled ceremony and do not connect to the reader, because they matter only once the others are in place." loading="lazy" decoding="async"></picture></a>
   <figcaption>The practices that reach the reader are the task up front, code that runs and a docs change in the same pull request.</figcaption>
 </figure>
 
-These habits come ahead of any style rule.
+The habits below come ahead of any style rule.
 
 - **Lead with the task.** Open with what the reader is trying to do and the command that does it. The [guide to writing technical tutorials](/articles/writing-technical-tutorials/) builds a whole page that way.
 - **Ship code that runs.** Every sample should be copied from something that executed, with its output. The reasoning is in my [code documentation guide](/articles/code-documentation/).
 - **Change the docs in the same pull request.** A page updated with the code it describes is reviewed by the person who knows whether it is true.
 
-Length follows from the first habit. A page built around one task is short, and [the case for shorter documentation](/articles/shorter-documentation/) argues that the shortness is a feature.
+Length follows from leading with the task. A page built around one task is short, and [the case for shorter documentation](/articles/shorter-documentation/) argues for keeping it that way.
 
 ## Where does an engineer's writing get read?
 
-Further than the repository. The posts on [Stripe's engineering blog](/articles/stripe-technical-blog/) are engineer-written and are read as evidence of how the company builds.
+An engineer's writing gets read well beyond the repository. The posts on [Stripe's engineering blog](/articles/stripe-technical-blog/) are engineer-written and are read as evidence of how the company builds.
 
-Products built on models raise the bar again, since their behaviour has to be described precisely enough to test, the problem [writing for AI products](/articles/writing-for-ai-products/) takes up. For a company selling to developers, what a buyer checks in those docs is the subject of [devtools documentation](/articles/devtools-documentation/).
+Products built on models are harder to document, since their behaviour has to be described precisely enough to test, which is the problem [writing for AI products](/articles/writing-for-ai-products/) takes up. For a company selling to developers, what a buyer checks in those docs is the subject of [devtools documentation](/articles/devtools-documentation/).
 
 Some engineers end up doing this work full time, the move described in [from engineer to technical writer](/articles/engineer-to-writer/).
 
@@ -163,7 +163,7 @@ Some engineers end up doing this work full time, the move described in [from eng
 
 **Which technical writing rules matter first?**
 
-A few rules carry the value: short sentences, one instruction each, active voice and one topic per paragraph. The remaining rules in a full standard such as Simplified Technical English control vocabulary, which software teams can skip.
+Start with four: short sentences, one instruction per sentence, the active voice and one topic per paragraph. The remaining rules in a full standard such as Simplified Technical English control vocabulary, which software teams can skip.
 
 **How long should a sentence in documentation be?**
 
@@ -171,4 +171,4 @@ Simplified Technical English allows 20 words for an instruction and 25 for a des
 
 **Do engineers need a style guide?**
 
-A short one helps, once the habits above are in place. A linter that enforces a few rules does more than a long guide nobody opens.
+A short style guide helps, once the team leads with the task and ships code that runs. A linter that enforces a few rules does more than a long guide nobody opens.

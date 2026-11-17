@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/agent-vs-ai-assistant/who-drives-the-loop.mmd",
-  "hash": "fedcffd143d9e328",
+  "hash": "161517de77aec9cb",
   "pele": "1.8.0",
   "width": 720,
   "height": 544,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "Two systems side by side. In the assistant, the human sends each prompt and reads each response, so the loop lives in the human's workflow. In the agent, the human sets a goal once and the system runs its own loop until it returns a result.",
-  "caption": "An assistant answers each turn you drive. An agent drives its own loop, and you check the result.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.narrow.svg\" width=\"288\" height=\"1000\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.svg\" width=\"720\" height=\"544\" alt=\"Two systems side by side. In the assistant, the human sends each prompt and reads each response, so the loop lives in the human's workflow. In the agent, the human sets a goal once and the system runs its own loop until it returns a result.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>An assistant answers each turn you drive. An agent drives its own loop, and you check the result.</figcaption>\n</figure>"
+  "caption": "With an assistant, you send each request and read each reply. With an agent, you set a goal once and check the result at the end.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.narrow.svg\" width=\"288\" height=\"1000\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-vs-ai-assistant/who-drives-the-loop.svg\" width=\"720\" height=\"544\" alt=\"Two systems side by side. In the assistant, the human sends each prompt and reads each response, so the loop lives in the human's workflow. In the agent, the human sets a goal once and the system runs its own loop until it returns a result.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>With an assistant, you send each request and read each reply. With an agent, you set a goal once and check the result at the end.</figcaption>\n</figure>"
 }

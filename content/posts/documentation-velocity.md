@@ -20,17 +20,17 @@ updated: 2026-11-17
 
 Documentation ROI is hard to state as one number, and the best published evidence treats documentation as a multiplier on other engineering practices. DORA's 2022 data shows a team with above-average documentation quality getting a 750% lift in organizational performance from continuous integration, and a team below average getting 34%.
 
-A team's [bus factor](https://en.wikipedia.org/wiki/Bus_factor) counts people, and DORA's table counts performance. Neither is a return in money, and I think the case for investing in [developer content](/articles/developer-experience/) is stronger when it says so.
+A team's [bus factor](https://en.wikipedia.org/wiki/Bus_factor) is the number of people who could disappear before the project stalls, and DORA's table measures lifts in performance. Neither figure is a return in money, and I think the case for investing in [developer content](/articles/developer-experience/) is stronger when it says so.
 
 ## What is engineering velocity?
 
 Engineering velocity is how quickly a team moves a change from an idea to production, and DORA measures it as throughput. Its [metrics guide](https://dora.dev/guides/dora-metrics/) defines the term: "Throughput is a measure of how many changes can move through the system over a period of time."
 
-The guide measures it by change lead time, deployment frequency and failed deployment recovery time. A claim that documentation raises velocity has to show up in one of those.
+The guide measures it by change lead time, deployment frequency and failed deployment recovery time. A claim that documentation raises velocity has to show up in one of those measures.
 
 ## What does DORA's research say about documentation?
 
-It says documentation quality amplifies the payoff of every technical practice the 2022 study covered. DORA's [capability page on documentation quality](https://dora.dev/capabilities/documentation-quality/) prints the table, excerpted from an analysis by Michelle Irvine and Derek DeBellis.
+DORA's research says documentation quality amplifies the payoff of every technical practice its 2022 study covered. DORA's [capability page on documentation quality](https://dora.dev/capabilities/documentation-quality/) prints the table, excerpted from an analysis by Michelle Irvine and Derek DeBellis.
 
 | Technical capability | Lift with below-average documentation | Lift with above-average documentation |
 | --- | --- | --- |
@@ -42,7 +42,9 @@ It says documentation quality amplifies the payoff of every technical practice t
 | Trunk-based development | 36% | 1525% |
 | Version control | 27% | 278% |
 
-So the lift from every practice is far larger for teams with above-average documentation. DORA scored quality with eight metrics covering attributes such as clarity and findability.
+So the lift from every practice is far larger for teams with above-average documentation. Even the row with the smallest difference, Site Reliability Engineering, shows 343% against 79%.
+
+DORA scored documentation quality with eight metrics covering attributes such as clarity and findability.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/dora-multiplier.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/dora-multiplier.narrow.svg" width="288" height="416"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/dora-multiplier.svg" width="720" height="472" alt="The performance lift that continuous integration gives a team in DORA's 2022 data, by documentation quality: 34% for teams below average and 750% for teams above average. Each tile is 50 percentage points." loading="lazy" decoding="async"></picture></a>
@@ -51,19 +53,19 @@ So the lift from every practice is far larger for teams with above-average docum
 
 ## How far can that table be pushed?
 
-Less far than its largest number invites. The data is from 2022, and I read the table as a correlation between documentation quality and the payoff of other practices, whatever verbs the page uses.
+The table can't be pushed as far as its largest number, 1525%, invites. The data is from 2022, and I read the table as a correlation between documentation quality and the payoff of other practices, with no proof that documentation causes the lift.
 
-A team with strong documentation is plausibly strong at other things the table doesn't show. The table can't separate those.
+A team with strong documentation is plausibly strong at other things the table doesn't show, such as code review or testing, and the table can't separate their effect from documentation's.
 
-So what does it support? A narrower statement: a practice such as trunk-based development pays back far more where people can find out how it's meant to work, so documentation belongs in the plan for any practice a team is about to adopt.
+So what does the table support? It supports a narrower statement: a practice such as trunk-based development pays back far more where people can find out how it's meant to work, so documentation belongs in the plan for any practice a team is about to adopt.
 
-And it gives no support to a sentence like "documentation makes a team seven times faster". No row measures a team before and after it wrote anything.
+The table gives no support to a sentence like "documentation makes a team seven times faster", because no row measures a team before and after it wrote anything.
 
 ## Where does the time go without documentation?
 
-Into work that looks like something else. Stripe's [Developer Coefficient report](https://stripe.com/files/reports/the-developer-coefficient.pdf) from September 2018 found that "the average developer spends more than 17 hours a week dealing with maintenance issues, such as debugging and refactoring."
+The time goes into work that gets logged as something else, such as debugging. Stripe's [Developer Coefficient report](https://stripe.com/files/reports/the-developer-coefficient.pdf) from September 2018 found that "the average developer spends more than 17 hours a week dealing with maintenance issues, such as debugging and refactoring."
 
-The report doesn't say how much of that time is spent working out what code was meant to do, and I won't put a share on it. The places where missing documentation gets paid for can be named, though not measured from this report.
+The report doesn't say how much of that time is spent working out what code was meant to do, and I won't put a share on it. I can name the places where a team pays for missing documentation, and the report doesn't measure them.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/documentation-debt.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/documentation-debt.narrow.svg" width="288" height="448"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/documentation-debt.svg" width="720" height="504" alt="Missing documentation never breaks the build, but it taxes three places: every pull request where a reviewer has to ask what a function does, every onboarding where a new hire reverse-engineers the deploy process, and every incident where the one person who understands the failing job is asleep." loading="lazy" decoding="async"></picture></a>
@@ -77,7 +79,7 @@ A reviewer has to ask what a function is for. A new hire reconstructs the deploy
   <figcaption>A delivery pipeline in which one stage depends on a detail only one engineer knows.</figcaption>
 </figure>
 
-That last case is the bus factor showing up in a recovery time. A [runbook](/articles/runbook-template/) is the document that takes it out of one person's head.
+An incident that waits for one person is a bus factor of one, and it shows up as a longer recovery time. A [runbook](/articles/runbook-template/) puts what that person knows about the failing job on a page the on-call engineer can follow.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/context-switching.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/context-switching.narrow.svg" width="288" height="432"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/context-switching.svg" width="720" height="528" alt="An engineer working in the IDE needs an answer. Documentation kept in the same repository answers it a few keystrokes away, so the engineer stays in flow. A question sent to Slack or a stale wiki page pulls the engineer out of the IDE and drops the mental state they were holding." loading="lazy" decoding="async"></picture></a>
@@ -86,11 +88,11 @@ That last case is the bus factor showing up in a recovery time. A [runbook](/art
 
 ## What changes when agents write the code?
 
-The volume changes, and the reader does too. Anthropic's [account of its code review](https://claude.dev/blog/solving-code-review-at-anthropic/) from October 15 says the changes landing in its monorepo each day went from about 2,500 in May to more than 30,000 in September.
+The volume of changes goes up, and a model becomes the first reader of a team's conventions. Anthropic's [account of its code review](https://claude.dev/blog/solving-code-review-at-anthropic/) from October 15 says the changes landing in its monorepo each day went from about 2,500 in May to more than 30,000 in September.
 
-At that rate, the first reader of a team's conventions is a model. The post describes fixing repeated review findings at the source, in files such as the one where "CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals."
+The post describes fixing repeated review findings by editing the instruction files the model reads, such as the one where "CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals."
 
-I think of that as documentation with a visible return, since a line added to the file removes a class of review comment. My [CLAUDE.md guide](/articles/claude-md/) covers what belongs in it.
+I think of an instruction file as documentation with a visible return, since a line added to the file removes a class of review comment. My [CLAUDE.md guide](/articles/claude-md/) covers what belongs in it.
 
 ## How do you measure documentation ROI on your own team?
 
@@ -100,7 +102,9 @@ Pick one document, one metric and a period before and after. The measurements be
 - **Repeat questions.** How often the same question appears in the team's chat in a month, before and after its answer has a page.
 - **Recovery.** Time to recover from a recurring failure, with and without a runbook for it.
 
-The last of these is close to DORA's recovery factor and the other two sit beside its factors, and each keeps the claim checkable. For a company whose buyers are developers, the same reasoning applies outside the team, and [devtools documentation](/articles/devtools-documentation/) makes that case.
+Recovery time is close to DORA's failed deployment recovery time, and the onboarding and repeat-question measures aren't DORA metrics. Each one still gives a number a team can check.
+
+For a company whose buyers are developers, the same reasoning applies outside the team, and [devtools documentation](/articles/devtools-documentation/) makes that case.
 
 And the writing doesn't need a specialist to start. My [guide to writing for engineers](/articles/technical-writing-for-engineers/) covers the rules an engineer can apply to the first page.
 
@@ -110,12 +114,12 @@ Planning and running the articles behind a product is work I take on, described 
 
 **Can documentation ROI be calculated?**
 
-Not as a general figure. A team can measure one document against one metric, such as onboarding time, and the published research shows correlation at the level of whole organizations.
+Documentation ROI can't be calculated as one general figure. A team can measure one document against one metric, such as onboarding time, and the published research shows correlation at the level of whole organizations.
 
 **What is the strongest evidence that documentation improves engineering performance?**
 
-DORA's 2022 analysis, in which every technical capability studied produced a larger performance lift in teams with above-average documentation quality.
+The strongest evidence is DORA's 2022 analysis, in which every technical capability studied produced a larger performance lift in teams with above-average documentation quality.
 
 **Does AI-written code reduce the need for documentation?**
 
-It moves it. Instruction files and written conventions become input to the tools that write and review the code.
+No, it moves the need. Instruction files and written conventions become input to the tools that write and review the code.
