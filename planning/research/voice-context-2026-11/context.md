@@ -735,3 +735,32 @@ Rules the batch 8 review added:
 - "First" is claimed only when the source says first.
 - Five pages in one batch do not open on the same order of parts. Vary where the definition, the known thing, the figure and the topic sentence sit.
 - When a page's old design survives in a stray file, such as a film or a standalone visual, report it; deleting files is Ninad's decision.
+
+## Batch 9 (2026-11-18, owner voice-rewrite-2)
+
+| Post | What it now rests on | Run or checked |
+| --- | --- | --- |
+| model-context-protocol, retitled "What the Model Context Protocol (MCP) Is and How It Works" | the 2026-07-28 spec, its changelog, the architecture page, Anthropic's 2024 announcement, the November 5 Hacker News thread on MCP Explained | `mcpwire/server.py` and `wire.py` run with MCP Python SDK 2.3.0, output on the page |
+| mixture-of-experts, retitled "How Mixture of Experts (MoE) Models Work" | the Mixtral, DeepSeek-V2 and DeepSeek-V3 pages, Shazeer 2017, the November 14 Show HN reimplementation in JAX, the llama-modchip README | `moe_demo.py` run with NumPy 2.0.2, output on the page |
+| rag-evaluation, retitled "RAG Evaluation Metrics and What Each One Measures" | Ragas's paper and current metric pages, Wikipedia on the Cranfield experiments | `rag_eval_demo.py` run with fastembed 0.7.4 and bge-small-en-v1.5, output on the page |
+| agent-memory-2026, retitled "Agent Memory Frameworks in 2026" | docs for Letta, Mem0, Graphiti and Anthropic's memory tool as read on 2026-11-18, the MemGPT and LongMemEval papers | no code; film kept |
+| fine-tuning-vs-rag, retitled "RAG vs Fine-Tuning and When to Use Each" | OpenAI's model optimization guide, the 2020 RAG paper, Ovadia 2023, the 2024 agriculture case study, LoRA, The Twelve-Factor App | no code |
+| agent-harnesses, retitled "What an Agent Harness Is and What It Does" | FrontierHarness Eval v1.1 (November 17), Anthropic's Agent SDK overview, LangChain's Deep Agents and persistence docs | `harness_demo.py` run on Python 3.13, output on the page; film kept |
+| what-agent-harness-means (new essay, technical-documentation) | the November 17 Hacker News comment thread, the same vendor pages, DeerFlow's repository | opinion-led, one short quote per section |
+
+Opening devices added to the ledger: ODBC, 1992 (model-context-protocol); the 1991 Adaptive Mixtures of Local Experts paper, placed after the Show HN that opens the page (mixture-of-experts); the Cranfield experiments of the 1960s (rag-evaluation); MemGPT's borrowing of operating-system paging, 2023 (agent-memory-2026); The Twelve-Factor App's config rule, placed after OpenAI's notice (fine-tuning-vs-rag); the test harness (agent-harnesses). The essay opens on its source, a Hacker News comment.
+
+The order of parts differs across the six: definition first on model-context-protocol and agent-harnesses, a dated event first on mixture-of-experts and fine-tuning-vs-rag, the known thing first on rag-evaluation and agent-memory-2026.
+
+Films: agent-memory-2026 and agent-harnesses keep their films, because each rewritten page still states every line the film narrates. No film was unembedded in this batch.
+
+What the earlier pages had wrong, for the record: model-context-protocol described a connection handshake that the 2026-07-28 revision removed; mixture-of-experts credited DeepSeek-V2's KV cache saving to the experts when the paper assigns it to Multi-head Latent Attention, and carried price and hardware claims with no source; rag-evaluation showed a Ragas snippet that was never run and named a metric that is no longer in Ragas's list; fine-tuning-vs-rag answered a narrower question than its query.
+
+A fact that moves: OpenAI's guide said on 2026-11-18 that its fine-tuning platform is closed to new users and winding down. The fine-tuning-vs-rag page opens on that notice, so recheck the page when the guide changes.
+
+A source that could not be fetched: OpenAI's "harness engineering" post returned 403, so the essay and the explainer do not cite it.
+
+Position taken in the new essay, for Ninad to confirm: "harness + model = agent" is the definition to keep; the word says nothing about memory, sandboxing or hosting, so a product's docs should define it on first use and list what the harness includes and who runs it.
+
+Pages touched only for an inbound link: llm-inference-optimization, speculative-decoding, rag-reranking, contextual-retrieval, documentation-review, documentation-structure. The last two fail the prose and quote checks on main for reasons that predate this batch, and they are due in batch 11.
+
