@@ -46,15 +46,27 @@ os.chdir(ROOT)
 # ---------------------------------------------------------------------------
 
 def render_work_note(note) -> str:
-    """Render plain text and one internal link, separate from the article body."""
+    """Render plain text and one internal link, separate from the article body.
+
+    The link goes to /portfolio/, /contact/, /services/ or one /services/<slug>/ page.
+    A services link has to name a published page under content/, so a note cannot point
+    at a hiring page the build does not render.
+    """
     if note is None or note == "":
         return ""
     if not isinstance(note, str) or "\n" in note.strip():
         raise ValueError("work_note must be a single text paragraph")
-    match = re.fullmatch(r"([^\[\]]*)\[([^\[\]\n]+)\]\((/portfolio/|/contact/)\)([^\[\]]*)", note.strip())
+    match = re.fullmatch(
+        r"([^\[\]]*)\[([^\[\]\n]+)\]\((/portfolio/|/contact/|/services/(?:[a-z0-9][a-z0-9-]*/)?)\)([^\[\]]*)",
+        note.strip())
     if not match:
-        raise ValueError("work_note requires one link to /portfolio/ or /contact/")
+        raise ValueError("work_note requires one link to /portfolio/, /contact/, /services/ or a /services/<slug>/ page")
     before, label, url, after = match.groups()
+    if url.startswith("/services/"):
+        slug = url[len("/services/"):].strip("/")
+        source = Path("content/services") / f"{slug}.md" if slug else Path("content/services.md")
+        if not source.is_file() or frontmatter.load(source).get("status", "draft") != "published":
+            raise ValueError(f"work_note links {url}, which is not a published services page")
     return f'{escape(before)}<a href="{url}">{escape(label)}</a>{escape(after)}'
 
 

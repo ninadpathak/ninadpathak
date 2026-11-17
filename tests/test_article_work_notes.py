@@ -18,6 +18,27 @@ class WorkNoteRenderingTests(unittest.TestCase):
             'Write <a href="/portfolio/">the guide</a> with me.',
         )
 
+    def test_services_pages_are_allowed_destinations(self):
+        published = ["/services/"] + [f"/services/{path.stem}/" for path in sorted(Path("content/services").glob("*.md"))
+                                      if frontmatter.load(path).get("status") == "published"]
+        self.assertGreater(len(published), 1)
+        for url in published:
+            with self.subTest(url=url):
+                self.assertEqual(render_work_note(f"I take this on as [a service]({url})."),
+                                 f'I take this on as <a href="{url}">a service</a>.')
+
+    def test_a_services_link_must_name_a_published_page(self):
+        for value in (
+            "[hire me](/services/no-such-page/)",
+            "[hire me](/services/ai-ready-documentation-audit)",
+            "[hire me](/services/ai-ready-documentation-audit/extra/)",
+            "[hire me](/services/../contact/)",
+            "[hire me](/services/#pricing)",
+            "[one](/services/) [two](/contact/)",
+        ):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                render_work_note(value)
+
     def test_plain_text_and_link_label_are_escaped(self):
         rendered = render_work_note('<script>x</script> [A & <B>](/contact/) "quoted"')
         self.assertNotIn("<script>", rendered)
