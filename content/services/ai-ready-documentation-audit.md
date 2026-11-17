@@ -57,7 +57,7 @@ Each check is documented in an article on this site:
 - [AEO, GEO and SEO for developer docs](/articles/aeo-for-developer-docs/) lists six checks that decide whether docs can be found and quoted.
 - [Technical SEO for documentation sites](/articles/docs-seo/) covers crawling, rendering and indexing, which come before any AI check.
 
-The [AI search optimization for documentation](/articles/ai-search-optimization/) hub lists these articles beside the four checkers.
+The [AI search optimization for documentation](/articles/ai-search-optimization/) topic page lists these articles beside the four checkers.
 
 ## Fixing what the audit finds
 

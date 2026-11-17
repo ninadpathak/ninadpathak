@@ -17,7 +17,7 @@ proof:
 
 ## What you can hire me to write
 
-- **Developer documentation.** Quickstarts and reference pages, plus the troubleshooting page that tells a developer what to do when a request fails, which is where [devtools startups lose deals over bad docs](/articles/devtools-documentation/).
+- **Developer documentation.** Quickstarts and reference pages, plus the troubleshooting page that tells a developer what to do when a request fails, and the quickstart is the first of the [pages a buyer checks before a trial](/articles/devtools-documentation/).
 - **Tutorials and integration guides.** One reader goes from an empty project to a working result, like [setting up Firecrawl MCP in Cursor](https://www.firecrawl.dev/blog/firecrawl-mcp-in-cursor), or [localizing a Svelte app](https://centus.com/blog/svelte-localization) for Centus.
 - **Technical articles.** Comparisons and explainers for engineers who will check the claims, like [Playwright vs Puppeteer](https://www.firecrawl.dev/blog/playwright-vs-puppeteer) for Firecrawl.
 - **AI-ready documentation audits.** I check answer structure, AI crawler access and llms.txt with the checkers I built, described on the [AI-ready documentation audit](/services/ai-ready-documentation-audit/) page.
@@ -31,9 +31,9 @@ The [portfolio](/portfolio/) links my published work for Firecrawl and Centus. M
 
 ## What I publish on this site
 
-My own guides sit in two hubs. The [technical documentation](/articles/technical-documentation/) hub holds the templates, such as the [quick start guide template](/articles/quickstart-guide/) and the [release notes template](/articles/release-notes-template/).
+My own guides sit under two topics. The [technical documentation](/articles/technical-documentation/) topic holds the templates, such as the [quick start guide template](/articles/quickstart-guide/) and the [release notes template](/articles/release-notes-template/).
 
-The [developer content](/articles/developer-experience/) hub covers what to publish and who should write it.
+The [developer content](/articles/developer-experience/) topic covers what to publish and who should write it.
 
 ## How to hire me
 

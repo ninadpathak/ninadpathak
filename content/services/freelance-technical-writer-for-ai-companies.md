@@ -41,7 +41,7 @@ The [Mem0 case study](/work/mem0/) covers the workflow and the Search Console re
 
 ## What I write on this site
 
-I publish my own articles on these systems in five hubs:
+I publish my own articles on these systems under five topics:
 
 - [AI agent architecture](/articles/ai-agents/) covers the agent loop and the harness that runs it.
 - [AI agent memory](/articles/agent-memory/) covers what an application writes down and what it reads back.
