@@ -15,7 +15,7 @@ proof:
     label: "Monthly visits, LinuxForDevices"
 ---
 
-## What you can hire me to write
+## What I write
 
 - **Developer documentation.** Quickstarts and reference pages, plus the troubleshooting page that tells a developer what to do when a request fails, and the quickstart is the first of the [pages a buyer checks before a trial](/articles/devtools-documentation/).
 - **Tutorials and integration guides.** One reader goes from an empty project to a working result, like [setting up Firecrawl MCP in Cursor](https://www.firecrawl.dev/blog/firecrawl-mcp-in-cursor), or [localizing a Svelte app](https://centus.com/blog/svelte-localization) for Centus.
@@ -35,7 +35,7 @@ My own guides sit under two topics. The [technical documentation](/articles/tech
 
 The [developer content](/articles/developer-experience/) topic covers what to publish and who should write it.
 
-## How to hire me
+## How we'd work together
 
 Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the product, the reader and the pages you need, and ask for a quote. This page lists no rate, and you can also book a 30-minute call at [https://zcal.co/i/AGG1iJtv](https://zcal.co/i/AGG1iJtv).
 
@@ -74,7 +74,7 @@ An agency fits when you need many topics covered in parallel. An independent wri
 
 **What do your technical writing services cost?**
 
-This page lists no rate. Send the scope through the contact details in [how to hire me](#how-to-hire-me) for a quote.
+This page lists no rate. Send the scope through the contact details in [how we'd work together](#how-wed-work-together) for a quote.
 
 **Which companies have you worked with?**
 

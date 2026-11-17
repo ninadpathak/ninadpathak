@@ -10,7 +10,7 @@ description: Download a technical documentation template, learn what each page m
   prove, and turn its placeholders into trustworthy product docs.
 slug: documentation-template
 status: published
-work_note: "This post is a starting structure for product docs, for the team looking at an empty docs folder with a launch coming. If you'd rather have someone fill that structure with pages that were run against the product, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Hire me to write them](/services/)."
+work_note: "This post is a starting structure for product docs, for the team looking at an empty docs folder with a launch coming. If you'd rather have someone fill that structure with pages that were run against the product, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Work with me on them](/services/)."
 takeaways:
 - A documentation template should define page jobs and evidence requirements, not
   only headings.

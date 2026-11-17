@@ -6,7 +6,7 @@ description: DeepSeek V3 has 671B parameters but only activates 37B per token. H
   how mixture of experts works, why it cuts inference costs, and the catch nobody
   puts in the headline.
 status: published
-work_note: "Tutorials, explainers and comparisons for AI companies are my work as a freelance technical writer. I'm Ninad Pathak, and I build the example and run it before I draft, so your engineers review working code. [Hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Tutorials, explainers and comparisons for AI companies are my work as a freelance technical writer. I'm Ninad Pathak, and I build the example and run it before I draft, so your engineers review working code. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Mixture of Experts: How MoE Models Cut Computation but Need More Memory'
 slug: mixture-of-experts
 ---

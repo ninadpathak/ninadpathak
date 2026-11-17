@@ -14,7 +14,7 @@ date: '2026-05-05'
 description: 'Context compression for agent memory: what an agent should keep between sessions and what to leave out, with Anthropic''s November 2026 memory tests.'
 slug: memory-compression
 status: published
-work_note: "Your engineers shouldn't have to fix a tutorial's code in review. I'm Ninad Pathak, a freelance technical writer for AI companies, and I build and run every example before I draft. [Hire me to write yours](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Your engineers shouldn't have to fix a tutorial's code in review. I'm Ninad Pathak, a freelance technical writer for AI companies, and I build and run every example before I draft. [Work with me on yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Contextual Compression for Agent Memory: What Stays and What Goes'
 updated: 2026-11-17
 ---

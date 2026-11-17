@@ -11,7 +11,7 @@ date: '2026-04-26'
 description: 'AI agent vs AI assistant: an assistant leaves the next step to you and an agent takes it. What changed when six assistants were told to act alone.'
 slug: agent-vs-ai-assistant
 status: published
-work_note: "Your engineers shouldn't have to fix a tutorial's code in review. I'm Ninad Pathak, a freelance technical writer for AI companies, and I build and run every example before I draft. [Hire me to write yours](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Your engineers shouldn't have to fix a tutorial's code in review. I'm Ninad Pathak, a freelance technical writer for AI companies, and I build and run every example before I draft. [Work with me on yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'AI Agent vs AI Assistant: When to Build Each'
 updated: 2026-11-17
 ---

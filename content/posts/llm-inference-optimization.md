@@ -9,7 +9,7 @@ date: '2026-05-06'
 description: 'LLM inference optimization in late 2026, covering which techniques are engine defaults, how to size the KV cache and where more throughput stops helping.'
 slug: llm-inference-optimization
 status: published
-work_note: "Explainers like this one are what I write for AI companies as a freelance technical writer. I'm Ninad Pathak, and I run the product before I write about it. [Hire me for yours](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Explainers like this one are what I write for AI companies as a freelance technical writer. I'm Ninad Pathak, and I run the product before I write about it. [Let's work on yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'LLM Inference Optimization: What Actually Works in Production'
 updated: '2026-11-16'
 ---

@@ -10,7 +10,7 @@ description: Every production AI agent needs a harness. Here is what one contain
   why frameworks often are not enough, and how to build the layer that actually determines
   reliability.
 status: published
-work_note: "Tutorials, explainers and comparisons for AI companies are my work as a freelance technical writer. I'm Ninad Pathak, and I build the example and run it before I draft, so your engineers review working code. [Hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Tutorials, explainers and comparisons for AI companies are my work as a freelance technical writer. I'm Ninad Pathak, and I build the example and run it before I draft, so your engineers review working code. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Agent Harnesses: The Infrastructure Your LLM Agent Needs'
 slug: agent-harnesses
 video: agent-harnesses

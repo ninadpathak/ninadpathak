@@ -545,7 +545,7 @@ class DiscoveryFileTests(BuiltSite):
             posts_in_order = [f"/articles/{e['post']}/" for s in data["sections"] for e in s["spokes"] if "post" in e]
             tools_in_order = [f"/{e['tool']}/" for s in data["sections"] for e in s["spokes"] if "tool" in e]
             self.assertEqual(links, [f"/articles/{slug}/", *posts_in_order, *tools_in_order], slug)
-            self.assertIn("Hiring page for this topic:", sections[hub["title"]].splitlines()[2])
+            self.assertIn("Services page for this topic:", sections[hub["title"]].splitlines()[2])
 
     def test_llms_txt_lists_every_tool_and_url_once(self):
         text = (OUTPUT / "llms.txt").read_text(encoding="utf-8")

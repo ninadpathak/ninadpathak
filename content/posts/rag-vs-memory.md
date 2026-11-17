@@ -13,7 +13,7 @@ bridges:
 date: 2026-04-19
 description: RAG selects evidence for one request and memory governs state across requests. Why memory that only recalls is RAG over old chats, and how to run both.
 status: published
-work_note: "I write tutorials and technical articles for AI companies, and I run the product before I write a line. I'm Ninad Pathak, a freelance technical writer, and [you can hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "I write tutorials and technical articles for AI companies, and I run the product before I write a line. I'm Ninad Pathak, a freelance technical writer, and [we can work together](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'RAG vs Memory: What AI Developers Need to Know'
 updated: '2026-11-16'
 slug: rag-vs-memory

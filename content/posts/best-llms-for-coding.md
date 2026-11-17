@@ -15,7 +15,7 @@ bridges:
 date: 2026-03-12
 description: 'The best LLMs for coding on Real-SWE 1.1 (October 2026): the leaders, the cost per resolved task, open-weight options and a test for your own repo.'
 status: published
-work_note: "Tutorials, explainers and comparisons for AI companies are my work as a freelance technical writer. I'm Ninad Pathak, and I build the example and run it before I draft, so your engineers review working code. [Hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Tutorials, explainers and comparisons for AI companies are my work as a freelance technical writer. I'm Ninad Pathak, and I build the example and run it before I draft, so your engineers review working code. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'The Best LLMs for Coding in 2026: An Engineering Review'
 slug: best-llms-for-coding
 updated: 2026-11-17

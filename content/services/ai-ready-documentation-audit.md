@@ -65,7 +65,7 @@ The findings are writing work as often as configuration. My [technical writing s
 
 For agent and LLM products, see my work as a [freelance technical writer for AI companies](/services/freelance-technical-writer-for-ai-companies/).
 
-## How to hire me
+## How we'd work together
 
 Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the documentation URL and ask for a quote. You can also book a 30-minute call at [https://zcal.co/i/AGG1iJtv](https://zcal.co/i/AGG1iJtv).
 

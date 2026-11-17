@@ -13,7 +13,7 @@ bridges:
 date: 2026-04-04
 description: 'Why shorter technical documentation works better, why AI-written docs run long, how to cut a page without losing detail, and when length is earned.'
 status: published
-work_note: "I'm Ninad Pathak, and I freelance as a technical writer for developer-tool companies. Docs run long, more so now that models draft them, and cutting a page down without losing what's true is work you can [hire me for](/services/)."
+work_note: "I'm Ninad Pathak, and I freelance as a technical writer for developer-tool companies. Docs run long, more so now that models draft them, and cutting a page down without losing what's true is work we can [do together](/services/)."
 title: The Case for Shorter Technical Documentation
 updated: 2026-11-16
 slug: shorter-documentation

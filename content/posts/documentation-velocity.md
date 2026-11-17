@@ -12,7 +12,7 @@ bridges:
 date: 2026-04-11
 description: 'Documentation ROI and engineering velocity: what DORA''s 2022 table shows, how far it can be pushed, and how to measure one document on your own team.'
 status: published
-work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. This post is for the person who has to argue for documentation with numbers, and once you've won that argument I can write the pages. [Hire me](/services/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. This post is for the person who has to argue for documentation with numbers, and once you've won that argument I can write the pages. [Let's work together](/services/)."
 title: 'Documentation ROI and Engineering Velocity'
 slug: documentation-velocity
 updated: 2026-11-17

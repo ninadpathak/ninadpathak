@@ -15,7 +15,7 @@ bridges:
 date: 2026-04-18
 description: 'Technical writing for engineers in four rules from aerospace''s Simplified Technical English, a script that checks two of them, and the habits no script can check.'
 status: published
-work_note: "Handed the docs along with everything else? You can hand them on again. I'm Ninad Pathak, a freelance technical writer, and I'll run your product before I write about it. [Hire me](/services/)."
+work_note: "Handed the docs along with everything else? You can hand them on again. I'm Ninad Pathak, a freelance technical writer, and I'll run your product before I write about it. [Let's work together](/services/)."
 title: 'Technical Writing for Engineers'
 slug: technical-writing-for-engineers
 updated: 2026-11-17

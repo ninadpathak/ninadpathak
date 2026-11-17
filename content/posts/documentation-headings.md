@@ -9,7 +9,7 @@ description: Write documentation headings that tell a reader which task, decisio
   concept, or recovery path a section covers.
 slug: documentation-headings
 status: published
-work_note: "A developer scans the headings to find their step, and a heading that names a subject doesn't tell them where it is. I'm Ninad Pathak, a freelance technical writer, and restructuring pages around the reader's task is work I take on. [Hire me for yours](/services/)."
+work_note: "A developer scans the headings to find their step, and a heading that names a subject doesn't tell them where it is. I'm Ninad Pathak, a freelance technical writer, and restructuring pages around the reader's task is work I take on. [Work with me on yours](/services/)."
 takeaways:
 - Use a task heading when a section tells the reader how to reach a specific result.
 - Use a descriptive noun phrase when a section explains a concept or documents a reference

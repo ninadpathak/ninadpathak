@@ -10,7 +10,7 @@ description: Write a technical tutorial that takes one reader from a clear start
   point to a tested, useful result.
 slug: writing-technical-tutorials
 status: published
-work_note: "I build every tutorial before I write it up, so your engineers review working code. This post is my method for a tutorial a reader can finish. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Hire me to write your tutorials](/services/)."
+work_note: "I build every tutorial before I write it up, so your engineers review working code. This post is my method for a tutorial a reader can finish. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Work with me on your tutorials](/services/)."
 takeaways:
 - Choose one reader, one starting state, and one result they can verify.
 - Build the working path before writing the explanation around it.

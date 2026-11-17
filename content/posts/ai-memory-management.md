@@ -13,7 +13,7 @@ bridges:
 date: 2026-04-19
 description: 'AI memory management for LLMs: the memory layers, who should decide what gets written, eviction and scope with runnable examples, and the smallest system worth building.'
 status: published
-work_note: "I'm Ninad Pathak, a freelance technical writer for AI companies that build agents, agent memory and LLM infrastructure. I write their tutorials and technical articles, and I run each product before I write about it. [Hire me for yours](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer for AI companies that build agents, agent memory and LLM infrastructure. I write their tutorials and technical articles, and I run each product before I write about it. [Let's work on yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: "AI Memory Management for LLMs"
 slug: ai-memory-management
 video: ai-memory-management

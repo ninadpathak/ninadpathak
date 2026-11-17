@@ -18,7 +18,7 @@ proof:
 
 ## What I write for AI companies
 
-AI companies have hired me to write these kinds of page:
+I write these kinds of page for AI companies:
 
 - **Setup and integration tutorials.** A developer follows them to a working result, like [Firecrawl MCP in Cursor](https://www.firecrawl.dev/blog/firecrawl-mcp-in-cursor), or [a Greptile clone built with Claude](https://opencomputer.dev/blog/pr-review-agent) for OpenComputer.
 - **Concept explainers.** They define a term an engineer has half-met and show how it works, like [agent harnesses](https://www.firecrawl.dev/blog/what-is-an-agent-harness) and [agent skills](https://www.firecrawl.dev/blog/agent-skills) for Firecrawl.
@@ -54,7 +54,7 @@ The [MCP server tutorial](/articles/mcp-server-tutorial/) and the tested guide t
 
 Docs for these products can be checked with my [AI-ready documentation audit](/services/ai-ready-documentation-audit/).
 
-## How to hire me
+## How we'd work together
 
 Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the product, the reader and the pages you need. You can also book a 30-minute call at [https://zcal.co/i/AGG1iJtv](https://zcal.co/i/AGG1iJtv), and my [technical writing services](/services/) page covers the process and pricing.
 

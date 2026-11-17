@@ -17,7 +17,7 @@ takeaways:
 - Give every change an Undo line, and name the condition that means the runbook no longer applies.
 - Run the checker before the runbook goes on call, so a step with no expected output fails.
 title: 'Runbook Template and Example: Steps an On-Call Agent Can Follow'
-work_note: "A runbook step should say what you'll see when it works, so a person on call or an agent with shell access can follow it. Your product's docs need the same thing. I'm Ninad Pathak, a freelance technical writer, and I run each step before I write it down. [Hire me](/services/)."
+work_note: "A runbook step should say what you'll see when it works, so a person on call or an agent with shell access can follow it. Your product's docs need the same thing. I'm Ninad Pathak, a freelance technical writer, and I run each step before I write it down. [Let's work together](/services/)."
 ---
 
 A runbook's useful lines are the ones that say what you should see and what to do when you don't. Those lines carry the judgment, and a responder woken by a page or an AI agent with shell access can't supply that judgment from the rest of the page.

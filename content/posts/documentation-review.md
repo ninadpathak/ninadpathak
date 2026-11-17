@@ -10,7 +10,7 @@ description: 'Review documentation in four passes: product truth, reader route, 
   behavior, and release state, before polishing prose.'
 slug: documentation-review
 status: published
-work_note: "I run the product before I write a page, which is the review this post describes, done ahead of time. So your reviewers get commands that already worked. I'm Ninad Pathak, a freelance technical writer, and [you can hire me](/services/)."
+work_note: "I run the product before I write a page, which is the review this post describes, done ahead of time. So your reviewers get commands that already worked. I'm Ninad Pathak, a freelance technical writer, and [we can work together](/services/)."
 takeaways:
 - Verify product behavior before editing sentences.
 - Run the reader's success and failure paths from the documented starting state.

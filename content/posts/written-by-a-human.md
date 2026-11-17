@@ -12,7 +12,7 @@ description: Ghostty's release notes say people wrote them. I read that as an in
 slug: written-by-a-human
 status: published
 title: "Thoughts on Ghostty's hand-crafted release notes"
-work_note: "I'm Ninad Pathak, a freelance technical writer for developer-tool companies. Release notes are among the pages I write, and I run the product before I write about it. [Hire me to write yours](/services/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer for developer-tool companies. Release notes are among the pages I write, and I run the product before I write about it. [Work with me on yours](/services/)."
 ---
 
 Ghostty's [1.4.0 release notes](https://ghostty.org/docs/install/release-notes/1-4-0), published on October 27, stop after the contributor thanks to tell you who wrote them: "These release notes are painstakingly and lovingly hand-crafted by human Ghostty maintainers, including the full changelog." They add that the job took a combined 16-plus hours.

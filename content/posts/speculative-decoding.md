@@ -8,7 +8,7 @@ siblings:
 date: 2026-03-07
 description: 'Speculative decoding has a fast predictor draft tokens and the large model verify them in one pass. How it works, what it gains and when it stops helping.'
 status: published
-work_note: "Your engineers shouldn't have to fix a tutorial's code in review. I'm Ninad Pathak, a freelance technical writer for AI companies, and I build and run every example before I draft. [Hire me to write yours](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Your engineers shouldn't have to fix a tutorial's code in review. I'm Ninad Pathak, a freelance technical writer for AI companies, and I build and run every example before I draft. [Work with me on yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Speculative Decoding: Speeding Up LLM Inference'
 slug: speculative-decoding
 updated: 2026-11-17

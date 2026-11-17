@@ -14,7 +14,7 @@ description: SigNoz argues that AI is deskilling SREs. I think the risk is real 
 slug: agents-on-call-runbooks
 status: published
 title: "I read SigNoz's post on AI deskilling SREs and thought about runbooks"
-work_note: "I'm Ninad Pathak, a freelance technical writer for developer-tool companies. Runbooks and incident write-ups only help if someone ran the steps, and I run every step before I write it down. [Hire me for your docs](/services/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer for developer-tool companies. Runbooks and incident write-ups only help if someone ran the steps, and I run every step before I write it down. [Work with me on your docs](/services/)."
 ---
 
 Elizabeth at SigNoz asked a question in [a newsletter post](https://newsletter.signoz.io/p/ai-isnt-replacing-sres-its-deskilling) that reached the front page of Hacker News on October 30: "When AI handles 95% of your incident response, do you get worse at handling the 5% that actually matters?" The post is dated February 28, and the question has aged well.

@@ -12,7 +12,7 @@ description: A team that let agents write every line found its build frequently 
 slug: red-build-nobody-reads
 status: published
 title: "Applying Google's pager rule to a build that is always red"
-work_note: "I write tutorials and technical articles for AI companies, and I run the product before I write a line. I'm Ninad Pathak, a freelance technical writer, and [you can hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "I write tutorials and technical articles for AI companies, and I run the product before I write a line. I'm Ninad Pathak, a freelance technical writer, and [we can work together](/services/freelance-technical-writer-for-ai-companies/)."
 ---
 
 On October 29 Rachel Laycock, the CTO of Thoughtworks, published [Why are good developers so wary of agentic development?](https://martinfowler.com/rachels-ramblings/good-devs-wary.html), and the middle of it reports an experiment. A group of senior engineers, infrastructure consultants and product people built an airline application for a week with agents writing every line, and by her account they finished about four fifths of it.

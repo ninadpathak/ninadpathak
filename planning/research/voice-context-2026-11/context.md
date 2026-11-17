@@ -664,3 +664,12 @@ Ninad asked for the portfolio to carry his newer published pieces. Each piece ad
 - Held back: Mastra's A2A protocol post, which the page credits to Sam Bhagwat and Ninad says he wrote. The card and its label wait on branch `mastra-card` until he confirms the public wording, since it discloses a ghostwriting arrangement.
 - A piece that shows another person's name is never added on a guess. Candidates go to Ninad in a list.
 - No public byline was found on Semrush, Adobe or Manicule.
+
+## Standing rule: never "hire me" (2026-11-17)
+
+Ninad, on the line under each article: "Hire me is childish. It's desperate. Something more casual confident would be \"Work together\" or \"Work with me\" or \"Contact me\" or something like that."
+
+- Nothing a visitor reads says "hire me", "hire Ninad", "you can hire me" or "how to hire me". That covers notes, headings, link labels, titles, meta descriptions, structured data and llms.txt.
+- Use "Work with me", "Let's work together", "Contact me", "Get in touch" or "How we'd work together".
+- Every note still says he is a freelance technical writer and carries one of those invitations. `tests/test_article_work_notes.py` rejects any form of "hire" in a note.
+- Left alone: internal names such as `hire_note` and the `hire-line` class, sentences about hiring writers at Mem0, and "a new hire" where a post means a new employee.

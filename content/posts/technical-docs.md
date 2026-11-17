@@ -9,7 +9,7 @@ date: 2026-08-05
 description: 'Technical documentation explained: the document types it includes and the reader task each one owns, in a table you can check a docs set against.'
 slug: technical-docs
 status: published
-work_note: "A product needs more documents than a README, and each one owes a different reader a different task. I'm Ninad Pathak, a freelance technical writer, and working out that list and then writing the pages is what companies hire me for. [Here's how I work](/services/)."
+work_note: "A product needs more documents than a README, and each one owes a different reader a different task. I'm Ninad Pathak, a freelance technical writer, and working out that list and then writing the pages is the work companies bring to me. [Let's talk about your docs](/services/)."
 takeaways:
 - Technical documentation gives each reader task one useful home.
 - Start with orientation, one verified success path, and the reference that path needs.

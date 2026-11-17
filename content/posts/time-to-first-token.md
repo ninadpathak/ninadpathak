@@ -8,7 +8,7 @@ siblings:
 date: 2026-03-08
 description: 'Time to first token (TTFT) explained: what it measures, why reasoning models need time to first answer token, and how TTFT behaves under load.'
 status: published
-work_note: "I'm Ninad Pathak. AI companies hire me as a freelance technical writer for setup tutorials, concept explainers and comparisons, and I run each product before I write about it. [See the work and get in touch](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "I'm Ninad Pathak. I work with AI companies as a freelance technical writer on setup tutorials, concept explainers and comparisons, and I run each product before I write about it. [See the work and get in touch](/services/freelance-technical-writer-for-ai-companies/)."
 title: "What Time to First Token (TTFT) Measures"
 slug: time-to-first-token
 updated: 2026-11-17

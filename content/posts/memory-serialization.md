@@ -12,7 +12,7 @@ date: '2026-04-30'
 description: 'Memory serialization is how an agent persists state across sessions. Three ways to do it, a run of a versioned state record, and why to keep the log.'
 slug: memory-serialization
 status: published
-work_note: "Explainers like this one are what I write for AI companies as a freelance technical writer. I'm Ninad Pathak, and I run the product before I write about it. [Hire me for yours](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Explainers like this one are what I write for AI companies as a freelance technical writer. I'm Ninad Pathak, and I run the product before I write about it. [Let's work on yours](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Memory Serialization: How Agents Persist State Across Sessions'
 updated: 2026-11-17
 ---

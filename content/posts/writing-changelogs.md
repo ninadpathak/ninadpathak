@@ -11,7 +11,7 @@ date: 2026-03-30
 description: How to write a changelog developers can search. Put breaking changes, removals and deprecations first, with counts from a month of one real changelog.
 slug: writing-changelogs
 status: published
-work_note: "This post is about keeping a changelog readable when more pull requests ship than any person can read. If you'd rather someone else handle the changelog while you work on the product, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Here's how to hire me](/services/)."
+work_note: "This post is about keeping a changelog readable when more pull requests ship than any person can read. If you'd rather someone else handle the changelog while you work on the product, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Here's how we'd work together](/services/)."
 takeaways:
 - Put breaking changes, removals and deprecations above routine entries.
 - Write each entry so it makes sense when a search or a tool lifts it out of the file.

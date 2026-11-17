@@ -30,11 +30,11 @@ class WorkNoteRenderingTests(unittest.TestCase):
 
     def test_a_services_link_must_name_a_published_page(self):
         for value in (
-            "[hire me](/services/no-such-page/)",
-            "[hire me](/services/ai-ready-documentation-audit)",
-            "[hire me](/services/ai-ready-documentation-audit/extra/)",
-            "[hire me](/services/../contact/)",
-            "[hire me](/services/#pricing)",
+            "[work with me](/services/no-such-page/)",
+            "[work with me](/services/ai-ready-documentation-audit)",
+            "[work with me](/services/ai-ready-documentation-audit/extra/)",
+            "[work with me](/services/../contact/)",
+            "[work with me](/services/#pricing)",
             "[one](/services/) [two](/contact/)",
         ):
             with self.subTest(value=value), self.assertRaises(ValueError):
@@ -119,7 +119,13 @@ def note_outside_link(note: str) -> str:
 # when it says "freelance", carries a hiring phrase, links a services page or the contact
 # page, names no company or person outside ALLOWED_NAMES, and gives no figure.
 SELLING = re.compile(r"(?i)\b(?:sell|sells|selling|sold|seller|sellers|sale|sales)\b")
-HIRING = re.compile(r"(?i)\bhire\b|\bwork with me\b|\bget in touch\b|\b(?:tell|ask|talk to) me\b")
+# The invitation to get in touch. Ninad's rule: a note never says "hire me"; it says
+# "work with me", "let's work together", "contact me" or "get in touch".
+HIRING = re.compile(
+    r"(?i)\bwork with me\b|\bwork(?: on \w+)? together\b|\blet['’]s (?:work|talk)\b|\bcontact me\b"
+    r"|\bget in touch\b|\b(?:tell|ask|talk to) me\b|\bwork with AI companies\b|\bdo together\b"
+)
+HIRE_ME = re.compile(r"(?i)\bhir(?:e|es|ed|ing)\b")
 NOTE_TARGET = re.compile(r"\]\((?:/contact/|/services/(?:[a-z0-9-]+/)?)\)")
 # Work no services page offers. A first-person verb followed in the same sentence by one
 # of these subjects is an offer the site cannot back.
@@ -148,8 +154,10 @@ def offer_problems(note: str) -> list:
         problems.append("a form of sell")
     if "freelance" not in text.lower():
         problems.append("does not say freelance")
+    if HIRE_ME.search(text):
+        problems.append("says hire")
     if not HIRING.search(text):
-        problems.append("no hiring phrase")
+        problems.append("no invitation to get in touch")
     if not NOTE_TARGET.search(note):
         problems.append("link is not a services page or the contact page")
     if UNBACKED_OFFER.search(text):
@@ -178,7 +186,7 @@ class WorkNoteVoiceRuleTests(unittest.TestCase):
             "I wrote this template so the author of a design doc argues with the proposal before review. [My portfolio](/portfolio/) has more.",
             "I wrote this page for the writer who has to review an engineer's draft. [My portfolio](/portfolio/) has more.",
             "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [See how I work](/services/).",
-            "Handed the docs along with everything else? I am Ninad Pathak, a freelance technical writer, and [you can hire me](/services/).",
+            "Handed the docs along with everything else? I am Ninad Pathak, a freelance technical writer, and [we can work together](/services/).",
         ):
             with self.subTest(value=value):
                 self.assertEqual(voice_problems(value), [])
@@ -194,9 +202,9 @@ class WorkNoteVoiceRuleTests(unittest.TestCase):
             "I'm Ninad Pathak, and I'm Ninad Pathak again in [the same note](/services/).",
             "I work with Ninad Pathak, who writes documentation. [Get in touch](/contact/).",
             "The author of this site documents developer products, as [my page](/services/) shows.",
-            "A freelance technical writer for AI companies wrote this post, in my view. [Hire me](/services/).",
-            "This site's writer has documented fifty products, and my inbox is open. [Hire me](/services/).",
-            "I'm Ninad Pathak's biggest fan, and I say so often. [Hire me](/services/).",
+            "A freelance technical writer for AI companies wrote this post, in my view. [Work with me](/services/).",
+            "This site's writer has documented fifty products, and my inbox is open. [Work with me](/services/).",
+            "I'm Ninad Pathak's biggest fan, and I say so often. [Work with me](/services/).",
         ):
             with self.subTest(value=value):
                 self.assertIn("third-person bio wording", voice_problems(value))
@@ -213,7 +221,7 @@ class WorkNoteVoiceRuleTests(unittest.TestCase):
 
 
 class WorkNoteOfferRuleTests(unittest.TestCase):
-    GOOD = "I'm Ninad Pathak, a freelance technical writer, and I run the product before I write about it. [Hire me](/services/)."
+    GOOD = "I'm Ninad Pathak, a freelance technical writer, and I run the product before I write about it. [Work with me](/services/)."
 
     def test_a_backed_offer_passes(self):
         self.assertEqual(offer_problems(self.GOOD), [])
@@ -221,16 +229,18 @@ class WorkNoteOfferRuleTests(unittest.TestCase):
 
     def test_unbacked_or_unhirable_notes_fail(self):
         cases = {
-            "I'm Ninad Pathak, a freelance technical writer, and I run accessibility audits and SEO campaigns. [Hire me](/services/).": "offers work no services page backs",
-            "I'm Ninad Pathak, a freelance technical writer. I write runbooks for your team. [Hire me](/services/).": "offers work no services page backs",
-            "I'm Ninad Pathak, a freelance writer with documentation for Stripe and Google behind me. [Hire me](/services/).": "names outside the allowed list: Stripe, Google",
-            "I'm Ninad Pathak, a freelance writer for twenty years. [Hire me](/services/).": "a figure or a count of years",
-            "I'm Ninad Pathak, a freelance writer, and I sold documentation packages. [Hire me](/services/).": "a form of sell",
-            "I'm Ninad Pathak, a freelance writer and a seller of documentation. [Hire me](/services/).": "a form of sell",
-            "I'm Ninad Pathak, a freelance writer, and my sales pitch is short. [Hire me](/services/).": "a form of sell",
-            "I'm Ninad Pathak, a freelance writer. [Hire me](/portfolio/).": "link is not a services page or the contact page",
+            "I'm Ninad Pathak, a freelance technical writer, and I run accessibility audits and SEO campaigns. [Work with me](/services/).": "offers work no services page backs",
+            "I'm Ninad Pathak, a freelance technical writer. I write runbooks for your team. [Work with me](/services/).": "offers work no services page backs",
+            "I'm Ninad Pathak, a freelance writer with documentation for Stripe and Google behind me. [Work with me](/services/).": "names outside the allowed list: Stripe, Google",
+            "I'm Ninad Pathak, a freelance writer for twenty years. [Work with me](/services/).": "a figure or a count of years",
+            "I'm Ninad Pathak, a freelance writer, and I sold documentation packages. [Work with me](/services/).": "a form of sell",
+            "I'm Ninad Pathak, a freelance writer and a seller of documentation. [Work with me](/services/).": "a form of sell",
+            "I'm Ninad Pathak, a freelance writer, and my sales pitch is short. [Work with me](/services/).": "a form of sell",
+            "I'm Ninad Pathak, a freelance writer. [Work with me](/portfolio/).": "link is not a services page or the contact page",
             "I'm Ninad Pathak, and I write for AI companies. [See what I do](/services/).": "does not say freelance",
-            "I'm Ninad Pathak, a freelance technical writer. [See what I do](/services/).": "no hiring phrase",
+            "I'm Ninad Pathak, a freelance technical writer. [See what I do](/services/).": "no invitation to get in touch",
+            "I'm Ninad Pathak, a freelance technical writer. Work with me, or [hire me](/services/).": "says hire",
+            "I'm Ninad Pathak, a freelance technical writer, and companies hire me for docs. [Get in touch](/contact/).": "says hire",
         }
         for value, expected in cases.items():
             with self.subTest(value=value):

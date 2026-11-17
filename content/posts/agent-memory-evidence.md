@@ -9,7 +9,7 @@ description: A proposal for a shared agent memory format lists five questions a 
 slug: agent-memory-evidence
 status: published
 title: "I went looking for the citation field in a proposed agent memory format"
-work_note: "Tutorials, explainers and comparisons for AI companies are my work as a freelance technical writer. I'm Ninad Pathak, and I build the example and run it before I draft, so your engineers review working code. [Hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Tutorials, explainers and comparisons for AI companies are my work as a freelance technical writer. I'm Ninad Pathak, and I build the example and run it before I draft, so your engineers review working code. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
 ---
 
 <div class="visual-wrapper">

@@ -15,7 +15,7 @@ bridges:
 date: 2026-03-31
 description: 'Technical writing for AI products documents a contract the model can change: what a model name pins, the output contract and how to judge a writer.'
 status: published
-work_note: "A model update can leave every example in your docs showing output the product no longer gives. I'm Ninad Pathak, a freelance technical writer for AI companies, and rerunning and rewriting those examples is work I take on. [Hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "A model update can leave every example in your docs showing output the product no longer gives. I'm Ninad Pathak, a freelance technical writer for AI companies, and rerunning and rewriting those examples is work I take on. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Technical Writing for AI Products: The New Rules'
 slug: writing-for-ai-products
 updated: 2026-11-17

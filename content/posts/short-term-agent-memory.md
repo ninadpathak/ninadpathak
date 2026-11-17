@@ -11,7 +11,7 @@ bridges:
 date: 2026-04-19
 description: 'Short-term memory for AI agents is the context window during one run. What compaction keeps and loses, with a tested example of a dropped instruction.'
 status: published
-work_note: "I'm Ninad Pathak. AI companies hire me as a freelance technical writer for setup tutorials, concept explainers and comparisons, and I run each product before I write about it. [See the work and get in touch](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "I'm Ninad Pathak. I work with AI companies as a freelance technical writer on setup tutorials, concept explainers and comparisons, and I run each product before I write about it. [See the work and get in touch](/services/freelance-technical-writer-for-ai-companies/)."
 title: 'Short-Term Memory for AI Agents: A Practical Guide'
 slug: short-term-agent-memory
 updated: 2026-11-17

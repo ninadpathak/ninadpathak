@@ -8,7 +8,7 @@ date: 2026-04-12
 description: A workflow comparison of Claude Code and Gemini CLI for repository refactoring,
   verification, and human review.
 status: published
-work_note: "I'm Ninad Pathak, and I freelance as a technical writer for AI companies. I build the example and run it before I draft a tutorial, so your engineers review working code. [Here's how to hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "I'm Ninad Pathak, and I freelance as a technical writer for AI companies. I build the example and run it before I draft a tutorial, so your engineers review working code. [Here's how we'd work together](/services/freelance-technical-writer-for-ai-companies/)."
 title: Claude Code vs. Gemini CLI for Repository Refactoring
 updated: '2026-08-17'
 slug: claude-vs-gemini-cli

@@ -986,7 +986,7 @@ class SiteBuilder:
         """The contact route as one plain sentence, for the text files agents read.
         templates/_hire_line.html is the same sentence with links."""
         contact = self.config["contact"]
-        return (f"Hire me: email {contact['email']}, or book a 30-minute call at "
+        return (f"Work with me: email {contact['email']}, or book a 30-minute call at "
                 f"{contact['booking_url']}")
 
     def absolute_links(self, markdown_text: str) -> str:
@@ -1438,7 +1438,7 @@ class SiteBuilder:
             hub_line = f"- [{category['title']}]({base}{category['url']}): {category['description']}"
             money_title = money_titles.get(category.get("money_page"))
             if money_title:
-                hub_line += f" Hiring page for this topic: {money_title}."
+                hub_line += f" Services page for this topic: {money_title}."
             lines.append(hub_line)
             for post in category.get("ordered_posts", category["posts"]):
                 desc = (post.get("description") or "").strip().replace("\n", " ")
@@ -1495,7 +1495,7 @@ class SiteBuilder:
         if service_pages:
             lines.append("## Optional")
             lines.append("")
-            lines.append(f"- [Hiring pages in full]({base}/llms-full.txt): The services and about pages in full, with case study summaries, as one Markdown file.")
+            lines.append(f"- [Services pages in full]({base}/llms-full.txt): The services and about pages in full, with case study summaries, as one Markdown file.")
             lines.append("")
 
         (self.output / "llms.txt").write_text("\n".join(lines), encoding="utf-8")

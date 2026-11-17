@@ -189,7 +189,7 @@ class BuiltSiteTests(unittest.TestCase):
             title = re.search(r"<title>(.*?)</title>", html, re.S).group(1)
             description = re.search(r'<meta name="description" content="([^"]*)"', html).group(1)
             with self.subTest(route=route):
-                self.assertRegex(title, r"Freelance Technical Writer|Hire Ninad Pathak")
+                self.assertRegex(title, r"Freelance Technical Writer|Work with Ninad Pathak")
                 self.assertIn("AI and developer-tool companies", description)
                 self.assertIn(f'{BASE}/static/images/diagrams/services/og.png', html)
                 self.assertNotIn('property="og:image"       content="' + BASE + '/static/favicon.png"', html)
@@ -329,7 +329,7 @@ class BuiltSiteTests(unittest.TestCase):
 
     def test_services_page_states_the_contact_route_once_per_place(self):
         main = self.page("services").split("<main", 1)[1].split("</main>", 1)[0]
-        # The hire line under the H1, the "How to hire me" section and the CTA band.
+        # The hire line under the H1, the "How we'd work together" section and the CTA band.
         self.assertEqual(main.count(f'>{CONTACT["email"]}</a>'), 3)
         for route in SERVICE_ROUTES[1:]:
             child = self.page(route).split("<main", 1)[1].split("</main>", 1)[0]

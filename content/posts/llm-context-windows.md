@@ -12,7 +12,7 @@ bridges:
 date: 2026-03-14
 description: 'An LLM context window is what a model can read at once. Why the middle gets ignored, what context rot is, what length costs, and how to fill a large window.'
 status: published
-work_note: "Building an AI product whose readers are engineers? I'm Ninad Pathak, a freelance technical writer, and I write tutorials and technical articles for companies like yours after running the product myself. [Hire me](/services/freelance-technical-writer-for-ai-companies/)."
+work_note: "Building an AI product whose readers are engineers? I'm Ninad Pathak, a freelance technical writer, and I write tutorials and technical articles for companies like yours after running the product myself. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
 title: "LLM Context Windows Explained"
 slug: llm-context-windows
 updated: 2026-11-17
