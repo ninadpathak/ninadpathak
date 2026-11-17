@@ -5,8 +5,9 @@ siblings:
 - documentation-structure
 - documentation-review
 date: 2026-08-02
-description: Use a tested review card to make documentation tasks, failure states,
-  limits, and ownership clear before readers need support.
+description: Technical documentation best practices come down to one test. Can a reader
+  finish a task, see that it worked, and recover from the likeliest failure? Checked
+  against FastAPI, Stripe and GitHub docs, with a review card.
 slug: documentation-best-practices
 status: published
 work_note: "This post tests the usual documentation advice against real developer docs, for the team that has read the advice and still isn't sure its pages work. If you'd rather have someone run your product and rewrite the pages that fail, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Work with me on it](/services/)."
@@ -19,21 +20,34 @@ updated: 2026-08-02
 video: documentation-best-practices
 ---
 
-A documentation page can be accurate and still fail the moment a reader leaves the happy path. The useful test is smaller: can someone complete one task, recognize the result, and recover from the failure most likely to interrupt it?
+RTFM is the oldest reply in developer support. It stands for "read the manual", with a ruder word in the middle, and [Wikipedia's entry](https://en.wikipedia.org/wiki/RTFM) describes it as the answer given when a question is already covered in the documentation.
 
-The review uses [FastAPI’s error-handling guide](https://fastapi.tiangolo.com/tutorial/handling-errors/), [Stripe’s idempotency reference](https://docs.stripe.com/api/idempotent_requests), and [GitHub’s REST API rate-limit guide](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api). A live source check returned `200` for all three pages and confirmed the terms this review discusses: `HTTPException`, `Idempotency-Key`, and `x-ratelimit-remaining`.
+The insult assumes the manual works. A page can be accurate in every sentence and still fail the moment a reader leaves the happy path, and nobody learns that by proofreading it.
 
-[Download the documentation task review card](/static/templates/documentation-review-card.md) and use it on a single important page before you expand a docs section. It turns a vague request for “better docs” into evidence a writer, engineer, and maintainer can inspect together.
+So my version of technical documentation best practices is one test: can someone finish a task, see that it worked, and recover from the failure likeliest to interrupt them? I've checked it below against real [technical documentation](/articles/technical-documentation/): FastAPI's and Stripe's docs and GitHub's rate-limit guide, all read again on November 18.
 
-## Technical documentation best practices that help readers finish a task
+There's a [review card](/static/templates/documentation-review-card.md) to go with it. It's one page, and you fill it in against a single important page of your own docs.
 
-### Start with a task and a success state
+## What are the best practices for technical documentation?
 
-Readers do not arrive to learn an internal content model. They arrive with a job: return a useful error, retry a request safely, or understand why a request stopped working.
+I'd put four ahead of everything else, and each one answers a question a stuck reader is asking:
 
-FastAPI’s guide starts with an error response before it introduces `HTTPException`. Its useful choice is the connection between condition, HTTP status, and response body, which lets the reader identify the state they created.
+| Practice | The reader's question |
+| --- | --- |
+| Start with a task and a visible result | Did it work? |
+| Put recovery beside the action that can fail | It didn't work, so what now? |
+| Make limits something a client can inspect | How close am I to being cut off? |
+| Give every question one page that owns it | Which of these pages is right? |
 
-A documentation page should make one finish line visible:
+Style guides cover tone and terminology, and those matter. These four come first for me because a reader who can't finish the task never gets far enough to notice the tone.
+
+## How do you start a page with a task?
+
+Name the job the reader came with and show what done looks like. People don't arrive to learn your content model, and they do arrive needing to return an error or retry a request safely.
+
+[FastAPI's error-handling guide](https://fastapi.tiangolo.com/tutorial/handling-errors/) is my example. It opens with the errors a client has to be told about, reaches `HTTPException` after that, and then shows the response the client receives.
+
+What done looks like depends on the kind of page:
 
 | Page type | Reader task | What proves completion |
 | --- | --- | --- |
@@ -42,57 +56,68 @@ A documentation page should make one finish line visible:
 | Reference | Resolve a stable question | A field, default, constraint, or type |
 | Troubleshooting | Recover from a known failure | Symptom, diagnostic, cause, and recovery |
 
-A reference page can stay compact instead of carrying a full end-to-end scenario. It still needs to identify the question it owns and the boundary that changes the answer.
+## Where should recovery guidance go?
 
-### Put recovery next to the action that can fail
+Put it beside the action that can fail. The costly version of this mistake is distance: a reader sees a request in one guide, hits a timeout, and has to search a separate FAQ to learn whether retrying will charge the customer twice.
 
-The most expensive documentation gap is often distance. A reader sees a happy-path request in one guide, hits a timeout, and has to search a separate FAQ to learn whether retrying will duplicate work.
+[Stripe's idempotency reference](https://docs.stripe.com/api/idempotent_requests) makes the retry part of the request's contract. It tells you that with an idempotency key you can "safely repeat the request without risk of creating a second object", and it says what happens when a retry arrives with different parameters.
 
-Stripe’s idempotency reference makes retry behavior part of the request contract. The relevant reader decision is not simply “add a header.”
-
-The decision is whether the same operation can be retried safely, what identifies that operation, and when changed parameters break the assumption.
-
-Use the same structure for any action with a meaningful failure mode:
+That's the structure I'd copy for any step with a real failure mode:
 
 1. Show the expected success state.
-2. Name the response, error, or condition that signals failure.
-3. Explain the repair, retry, or backoff decision.
+2. Name the response or error that signals failure.
+3. Explain the repair, the retry or the backoff.
 4. State the condition that makes that repair unsafe.
 
-A common objection is that this makes a quickstart longer. That is true for a simple, reversible task with an obvious error.
+Yes, it makes a quickstart longer. For a simple, reversible step that's a fair objection, and for anything involving permissions, retries or quotas, leaving recovery elsewhere just moves the decision onto the reader.
 
-Once permissions, retries, asynchronous work, or quotas can change the outcome, leaving recovery elsewhere is not brevity. It is an undocumented implementation decision.
+## How should documentation describe a limit?
 
-### Make limits observable before they become incidents
+Give the reader a signal they can check before they hit it. A sentence saying an API "may throttle traffic" doesn't help anyone decide whether to queue work or slow down.
 
-A warning that an API “may throttle traffic” cannot help a client decide whether to queue work, slow down, or investigate configuration. The page needs a signal the client can inspect.
+[GitHub's rate-limit guide](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api) lists the response headers that carry the state, including `x-ratelimit-remaining`. It also says what to do at zero, which is to wait until the time in `x-ratelimit-reset`.
 
-GitHub’s rate-limit documentation distinguishes rate-limit behavior and exposes headers such as `x-ratelimit-remaining`. That gives a developer an observable state to log or automate instead of a generic support symptom.
-
-For each limit, answer these questions in the same place:
+For each limit, I'd answer these in one place:
 
 - What resource is limited?
-- Which header, field, dashboard value, or response shows remaining capacity?
-- What state marks exhaustion?
-- What should the client do next?
-- When should the client stop retrying or escalate?
+- Which header, field or dashboard value shows what's left?
+- What marks exhaustion?
+- What should the client do next, and when should it stop retrying?
 
-Use the review card’s limit table to make this operational. If the writer cannot fill the signal and recovery columns, the documentation has not yet given the reader enough control.
+The review card has a table for this. If you can't fill in the signal and recovery columns, the page hasn't given the reader enough control yet.
 
-### Give every reader question one owner
+## Who should own each question?
 
-Documentation drifts when tutorials, reference pages, release notes, and support articles all explain the same behavior differently. More navigation does not fix that conflict.
+A single page should, and the others should link to it. Docs drift when a tutorial, a reference page and a support article each explain the same behavior in slightly different words.
 
-Assign one page to own the task, then link outward for prerequisites, stable parameter detail, and deeper recovery. The [documentation organization guide](/articles/documentation-structure/) explains how to split those page roles, while the [documentation review checklist](/articles/documentation-review/) covers the release checks that follow.
+Pick the owner, then link outward for prerequisites and parameter detail. [Documentation structure](/articles/documentation-structure/) covers how to split those roles, and [documentation review](/articles/documentation-review/) covers the checks before release.
 
-The owner should also know what invalidates the page: a changed permission, renamed control, new response shape, revised quota, or support issue that reveals an absent recovery path. A review date alone cannot keep documentation current.
+The owner also needs to know what makes the page stale. A changed permission or a new response shape should send it back for review, and a calendar reminder won't catch either.
 
-## Use the review card before you publish
+## How do you test documentation against these practices?
 
-The card is deliberately small. It asks for a reader, starting state, task, success state, risky action, failure signal, recovery boundary, limit signal, and page owner.
+Run the task. The card has a row for each thing covered above, from the reader and the task down to the limit signal and the owner, and every blank cell is a change to make.
 
-Run it on the highest-risk page first, not every page at once. A payment request, authentication guide, migration path, or quota-sensitive endpoint is a better starting point than a low-stakes glossary entry.
+I'd start with the riskiest page you have. A payment request or an authentication guide will teach you more than a glossary entry.
 
-The point is not to make documentation longer. It is to stop forcing a reader to infer the state that determines whether the next action is safe.
+You can also hand the task to a machine now. A tool called [Gauge](https://github.com/gauge-sh/gauge-cli), posted to Hacker News on November 4, "runs real agents against your product, captures where they get stuck", which is the same test with a different reader.
 
-[Download the review card](/static/templates/documentation-review-card.md), fill it against one rendered page, and turn the unanswered cells into the next documentation change.
+Either way the aim isn't longer documentation. It's a page that doesn't leave the reader guessing whether the next step is safe, and you can [download the review card](/static/templates/documentation-review-card.md) to find out where yours does.
+
+## FAQ
+
+**What makes technical documentation good?**
+
+A reader can finish the task it describes and tell that it worked. Accuracy is required for that and doesn't guarantee it.
+
+**Should a quickstart include error handling?**
+
+For the failure a reader is likeliest to hit, yes. A quickstart that shows only the happy path sends the first stuck reader to support.
+
+**How often should documentation be reviewed?**
+
+When the product changes under it. A renamed field or a revised quota is a better trigger than a date.
+
+**What is a documentation review card?**
+
+It's a one-page form that records a page's reader and task, along with its success state and its owner. Filling it in shows which of those the page doesn't state.
