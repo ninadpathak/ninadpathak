@@ -10,8 +10,6 @@ bridges:
   reason: Every pass through the loop is another model call, and that page adds up what the calls cost.
 - slug: llm-structured-outputs
   reason: The act phase depends on tool arguments that match a schema.
-- slug: ai-memory-management
-  reason: The remember phase is where an agent's memory gets written.
 - slug: context-windows-vs-memory
   reason: A loop that only appends runs into the context window, which is a different thing from memory.
 date: '2026-04-23'
@@ -146,7 +144,7 @@ So print the request for the turn that went wrong. If the fact the model needed 
 
 Past that, the question becomes what the agent should keep between turns and between sessions. The context window holds one run, and [context windows vs memory](/articles/context-windows-vs-memory/) explains why that isn't the same thing as memory.
 
-Writing things down on purpose is its own design problem, covered in [AI memory management](/articles/ai-memory-management/). And how much of the loop an agent runs alone is what separates the [types of AI agents](/articles/ai-agent-taxonomy/).
+How much of the loop an agent runs alone is what separates the [types of AI agents](/articles/ai-agent-taxonomy/).
 
 ## FAQ
 

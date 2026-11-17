@@ -63,4 +63,6 @@ None of that is new, and all of it is editing. Deciding what a busy reader must 
 
 Laycock's team reckoned they spent about two thirds of their time at the whiteboard and the rest on the harness. The harness is where these signals get designed, beside the [CLAUDE.md file](/articles/claude-md/) that tells the agent the rules.
 
+Where a person's review sits in the whole process is in my page on [agentic workflows](/articles/agentic-workflows/).
+
 And the first number I'd settle there is how many times a day a person can be asked to stop.

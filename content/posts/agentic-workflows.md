@@ -1,169 +1,115 @@
 ---
 category: coding-agents
 primary_query: agentic workflows
+siblings:
+- claude-md
+- claude-code-subagents
+- red-build-nobody-reads
 bridges:
 - slug: agent-loop-anatomy
-  reason: A coding agent is one agent loop with a harness around it.
-- slug: multi-agent-vs-single-agent
-  reason: A coding agent is one agent loop with a harness around it.
+  reason: The run stage of the workflow is one agent loop, and that page takes the loop apart.
 - slug: agent-harnesses
-  reason: A coding agent is one agent loop with a harness around it.
-- slug: ai-agent-failures
-  reason: A coding agent is one agent loop with a harness around it.
-- slug: agent-design-space
-  reason: A coding agent is one agent loop with a harness around it.
+  reason: The limits and the trace for a run live in the harness.
+- slug: multi-agent-vs-single-agent
+  reason: Scoping a task includes deciding whether it needs more than one agent.
 date: 2026-06-14
-description: 'An agentic workflow puts an AI agent inside a fixed process. I frame and scope the task before the agent runs, and I review its diff before the change lands.'
+description: 'An agentic workflow puts an AI agent inside a fixed process. Five stages from prompt to pull request, and the five questions Anthropic asks before a run goes unattended.'
 slug: agentic-workflows
 status: published
 work_note: "Your engineers shouldn't have to fix a tutorial's code in review. I'm Ninad Pathak, a freelance technical writer for AI companies, and I build and run every example before I draft. [Work with me on yours](/services/freelance-technical-writer-for-ai-companies/)."
-title: 'Agentic Workflows: A Five-Stage Playbook From Prompt to PR'
-video: agentic-workflows
+title: 'Agentic Workflows From Prompt to Pull Request'
+updated: 2026-11-17
 ---
 
-I do not turn an agent loose on a task and hope. I run a sequence, the same one every time, that turns a vague intent into a pull request I am willing to put my name on.
+An agentic workflow is a repeatable process in which an AI agent does the work between two points a person controls: the statement of what done means, and the approval of the result. The agent runs alone in the middle, and the process decides what it's allowed to get wrong.
 
-The agent does the heavy lifting. I step in at the moments a mistake would actually cost something, like when the change touches a payment path, or the agent is about to edit a database migration that runs against production.
+On November 4 someone asked Hacker News [what everyone's agentic setup looks like](https://news.ycombinator.com/item?id=50366117), and several hundred people answered. The answers disagree on the model, the harness and whether to sandbox at all.
 
-Almost all of the value in agentic work comes from the structure around the agent rather than the model. A strong model inside a sloppy process produces confident garbage, and a modest model inside a tight process ships real work.
+Where they agree is smaller and more useful. A top reply, from someone who had thrown out their custom skills, put it this way: "the biggest trick is just to tell it what complete looks like."
 
-## The playbook in one sentence
-
-Frame the task, scope it down, let the agent work against an instrumented loop, review the diff like I do not trust it, then land it. Five stages, two of them mine and one of them the agent's, with scoping and landing as the seams between.
-
-The art is knowing which stage owns which decision.
-
-I think about the whole thing as [flow engineering](/glossary/flow-engineering/) with a human at two of its phases. The agent runs its own perceive-think-act-remember cycle inside stage three, which I broke down in [the anatomy of an agent loop](/articles/agent-loop-anatomy/).
-
-My job is the outer loop around it, and that outer loop has barely changed across three generations of models.
+So this page is about the part that survives a change of tools, as it applies to [coding agents](/articles/coding-agents/).
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agentic-workflows/workflow-pipeline.narrow.svg" width="288" height="776"><img class="np-has-narrow" src="/static/images/diagrams/agentic-workflows/workflow-pipeline.svg" width="720" height="264" alt="Five stages left to right: frame the task, scope it down, let the agent work against an instrumented loop, review the diff, and land it. Framing and review are the human's stages, marked with a person; the work stage is the agent's own loop." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Two stages are mine, one is the agent's, and scoping and landing are the seams between them.</figcaption>
+  <figcaption>A person owns framing and review, the agent owns the run, and scoping and landing join the two.</figcaption>
 </figure>
 
-## Stage 1: Frame the task before the agent sees it
+## What is an agentic workflow?
 
-Nothing about the first stage involves the agent. Framing is where I write down what done looks like, in plain terms, before a single token gets generated.
+It's the process around an agent run, as distinct from the run. The agent's own cycle of model call and tool call is [the agent loop](/articles/agent-loop-anatomy/), and a workflow is what you put before and after that loop.
 
-A good frame answers three questions. What is the change.
+For a coding task the workflow starts at a prompt and ends at a merged pull request. I split it into five stages, and a person owns the first and the fourth.
 
-How will I know it worked. What must not break.
+## What are the five stages?
 
-Ten minutes spent here saves an hour of watching an agent solve the wrong problem with great enthusiasm.
+Frame, scope, run, review and land. Anthropic's [best practices for Claude Code](https://code.claude.com/docs/en/best-practices) list five questions to ask before a run goes unattended, and the stages line up with them closely enough that I've set the two side by side.
 
-A one-line request leaves the agent to infer constraints that should have been stated. "Add caching to the API" can mean an in-memory layer, a Redis tier, HTTP cache headers, or memoized database reads, and the agent picks one, commits to it, and builds a whole structure around the wrong assumption.
+| Stage | Who | What it settles | Anthropic's question |
+| --- | --- | --- | --- |
+| Frame | You | What done means | Does it know what done looks like? |
+| Scope | You | Which files and how large a change | What's it allowed to touch? |
+| Run | The agent | The work, with its own checks | Can it check its own work, and what stops it? |
+| Review | You | Whether the diff does what the frame asked | Who signs off? |
+| Land | The agent drafts, you approve | The commit and the pull request | Where does the result go? |
 
-That wrong assumption compounds with every file it touches, because each later edit is consistent with the early mistake.
+The same page ends its list with a sentence I'd pin above any agent setup: "The parts that stay with you are starting it, deciding what "done" means this time, and approving the merge at the end."
 
-The frame goes into a short brief the agent reads first: goal, acceptance check, hard constraints, and the files I expect to be involved. A brief is not the prompt.
+## How do you frame a task for an agent?
 
-It is the contract, and I hold the agent to it during review.
+Write down what done looks like before the agent sees anything. A frame answers what the change is, how you'll know it worked and what must not break.
 
-## Stage 2: Scope the change to something reviewable
+Say the request is "add caching to the API". That could mean an in-memory layer or HTTP cache headers, and an agent given only that line will pick one and build on it.
 
-The second stage is mine too. Scoping is where I cut the task down to a change I can actually review in one sitting.
+So the frame goes in a short brief: the goal, an acceptance check, the hard constraints and the files you expect to change. Anthropic's version of the acceptance check is a goal condition or a failing test the agent has to turn green.
 
-An agent will happily rewrite forty files in one pass. A forty-file diff is unreviewable, which means it is untrustable, which means it ships bugs.
+Rules that hold for every task don't belong in the brief. They go in the instruction file the agent loads at the start of each session, which my [CLAUDE.md guide](/articles/claude-md/) covers.
 
-I scope the work so the diff stays in the range I can read carefully, usually a few hundred lines across five or six files at most.
+## How big should one agent task be?
 
-When a task is genuinely large, I split it into a sequence of scoped changes that each stand on their own. Each one gets its own frame, its own agent run, its own review.
+Small enough that you can read the whole diff in one sitting. An agent will change forty files if you let it, and a diff nobody can read is a diff nobody reviewed.
 
-The sequence builds toward the big change through steps I can verify one at a time. A migration across a codebase becomes twelve small reviewable diffs through the same plan-before-execution separation formalized by [Plan-and-Solve](/glossary/plan-and-solve-framework/).
+When the task is larger than that, split it into changes that each stand alone, each with its own frame and its own review. The sequence gets you to the large change through steps you can check.
 
-Scoping is also where I decide whether the task needs one agent or several. The honest answer is almost always one.
+Scoping is also where you decide how many agents the task needs, and the answer is nearly always one. [Multi-agent vs single-agent systems](/articles/multi-agent-vs-single-agent/) goes through what a second agent costs.
 
-I covered the real trade-offs in [multi-agent versus single-agent systems](/articles/multi-agent-vs-single-agent/), and the short version is that coordination cost is real and most tasks do not need it.
+## What should an agent run leave behind?
 
-## Stage 3: Let the agent work against an instrumented loop
+A record you can read afterwards, and evidence for anything it claims. Anthropic's advice is to ask for the command the agent ran and its output, because a bare "all tests pass" tells you very little.
 
-After reading the frame and the relevant files, the agent starts its loop. What matters is that I can see what it is doing.
+The limits belong in the same place as the record. A turn limit and a spending limit stop a run that isn't getting anywhere, and the [agent harness](/articles/agent-harnesses/) is the layer that enforces both.
 
-A run I cannot observe is a run I cannot trust. Structured logging of every tool call and its result, the file it opened and the test it ran and what came back, is what lets me catch a wrong turn at step three instead of discovering it at step thirty.
+And a side task doesn't have to fill the main context. A [Claude Code subagent](/articles/claude-code-subagents/) does its searching in its own window and hands back the answer.
 
-The instrumentation lives in the harness, not in the prompt. The harness enforces the iteration budget, the timeouts, and the retries, and it records the trace for me to read later.
+## Why review the diff and not the summary?
 
-I wrote about what belongs in that layer in [agent harnesses](/articles/agent-harnesses/). A coding agent without a harness is a demo.
+Because the summary is what the agent believes it did, and the diff is what it did. The two differ in exactly the cases you care about.
 
-A coding agent with one is a tool I can rely on.
+I'd read for the changes nobody asked for: a config flag flipped, an error swallowed, an assertion deleted so a test goes green. Those are quiet, and they pass every automated check the agent ran.
 
-A [Claude Code subagent](/articles/claude-code-subagents/) keeps a sub-task's tool calls in its own context window, and Claude Code saves its transcript for the same read-back.
+Anthropic's docs suggest one more reader, a review by a fresh subagent that never saw the conversation and so isn't swayed by the reasoning that produced the code. I think that's a good second pass and a poor substitute for yours.
 
-I do not babysit every step. I let the agent run to a natural checkpoint, a passing test or a completed sub-change, and then I look.
+Now, all of this assumes someone still has attention to spend on review. What happens when agents produce more signals than a team can read is the subject of [my essay on a build that is always red](/articles/red-build-nobody-reads/).
 
-The point of the instrumentation is that I can read back the whole trace when something is off, rather than staring at the agent live and hoping to catch the moment it goes wrong.
+## How do you land the change?
 
-## Stage 4: Review like you do not trust it
+Reuse the frame. The acceptance check you wrote in stage one becomes the pull request description, so the reviewer checks the change against a stated bar.
 
-The fourth stage is the one people skip, and skipping it is why agentic work gets a bad name. Review is where I read the diff as if a stranger wrote it under deadline pressure.
-
-Reading the agent's summary of what it did is the trap I refuse. I read the diff instead.
-
-The summary is the agent telling me what it believes it did. The diff is what it actually did.
-
-The two diverge more often than the confident tone suggests.
-
-My review checks the same things every time. Does the change match the acceptance check from stage one.
-
-Did it touch files outside the scope from stage two. Are there silent changes, a config flag flipped, an error swallowed, a test weakened so it passes.
-
-Agents are very good at making tests green, and not always by making the code correct.
-
-The errors that survive to this stage tend to be the quiet ones. A dependency added that did not need to be.
-
-An edge case handled by deleting the assertion that caught it. A retry wrapped around a call that should have failed loudly.
-
-Reviewing an agent's diff is closer to auditing an expense report than reading a story: the line that hides the problem is never the one drawing attention to itself, so I scan for the entries that should not be there at all. I keep a running list from [why AI agents keep failing in production](/articles/ai-agent-failures/), and most of those failures are visible in the diff once I read it line by line.
-
-## Stage 5: Land it
-
-When the first four stages were done well, the last one is the cheapest. Landing is commit, push, and open the PR, with the frame from stage one becoming the PR description.
-
-Reusing the frame here is deliberate. The acceptance check I wrote before the agent started becomes the thing a reviewer verifies, and the constraints become the things they know to watch.
-
-A PR that explains what done looks like gets reviewed fast, because the reviewer is checking against a stated bar rather than guessing at intent.
-
-I let the agent draft the commit message and the PR body from the diff, then I edit. The draft is usually eighty percent right and saves the part of the job I find tedious.
-
-The edit is where I make sure the description matches what the diff actually does, not what the agent hoped it did.
-
-## Where the playbook saves me
-
-Far from overhead, the playbook is the thing that makes the agent worth using at all.
-
-The two stages I own, framing and review, are where my judgment lives. The stage the agent owns, the actual work, is where its speed lives.
-
-Scoping and landing are the seams that connect them. Skip framing and the agent solves the wrong problem.
-
-Skip review and the wrong solution ships. Keep all five and the agent becomes the fastest reliable contributor I work with.
-
-The shape of what people build keeps shifting, and my page on [the agent design space](/articles/agent-design-space/) lists the named patterns, but the outer loop has stayed the same since the first week I trusted an agent with real work. Get the structure right and the model becomes a detail you swap out.
+Let the agent draft the commit message and the description from the diff, then edit them against what the diff does. A person approves the merge, as with anything else you can't take back.
 
 ## FAQ
 
 **What is an agentic workflow?**
 
-An agentic workflow is a repeatable process where an AI agent does part of the work inside a structure you control. The agent runs its own loop on the task, and you step in where a mistake would cost something real, like a change to a billing flow or anything that runs against production, usually by framing the work up front and reading the diff before it merges.
+It's a repeatable process in which an AI agent does the work between a person's statement of what done means and a person's approval of the result.
 
-**Do I need a powerful model to run this playbook?**
+**Do I need a powerful model for an agentic workflow?**
 
-No. The playbook is built so a modest model still produces reliable output, because the structure catches its mistakes.
-
-A stronger model finishes more in one pass, and the framing and review stages still matter more than the model choice.
+A stronger model finishes more in one pass. The frame and the review catch mistakes from any model, so they matter whichever one you run.
 
 **How big should a single agent task be?**
 
-Small enough that you can review the entire diff in one sitting, usually a few hundred lines across a handful of files. When the task is larger, split it into a sequence of scoped changes that each stand on their own and review each one.
+Small enough that you can review the whole diff in one sitting. Split anything larger into changes that each stand alone.
 
-**Why review the diff instead of the agent's summary?**
+**Should I use several agents for one feature?**
 
-The summary is what the agent believes it did. The diff is what it actually did.
-
-Agents are good at making tests pass and writing confident summaries, and the quiet mistakes, a swallowed error or a weakened test, only show up when you read the diff.
-
-**Should I use multiple agents for a single feature?**
-
-Usually not. Coordination between agents adds latency and new failure modes, and most features ship faster with one well-instrumented agent.
-
-Reach for multiple agents only when the work splits into clearly separate roles that each need their own context and tools.
+Nearly always no. A second agent adds coordination, and one agent with a clear frame and a reviewed diff is the simpler setup to trust.

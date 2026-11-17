@@ -1,7 +1,7 @@
 # Narrated explainer for /articles/agentic-workflows/, imported by tools/import_video.py from
 # ninadpathak-video films/agentic-workflows (render of 2026-10-28T16:33:11+05:30).
 name: Agentic workflows in 40 seconds
-description: Why an agent given a one-line task builds on a guess, and how an agentic workflow frames the task, scopes the diff to something reviewable, and reads the diff instead of the agent's summary.
+description: "A 40-second narrated film made for an earlier version of the agentic workflows page. It is not embedded on the page and is queued for a new render."
 upload_date: '2026-10-28T16:33:11+05:30'
 duration_seconds: 40
 width: 1920
