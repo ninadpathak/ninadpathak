@@ -6,410 +6,150 @@ siblings:
 - ai-memory-management
 - short-term-agent-memory
 date: 2026-04-19
-description: A deep dive into how HyperAgents retain context across interactions,
-  layer memory architectures, and handle session continuity in production.
+description: 'HyperAgents memory was written by the agent itself: a key-value JSON store printed in the paper. This page runs it and shows what it keeps and omits.'
 status: published
-work_note: 'I ran Mem0''s team of 13 writers, so I come to another project''s memory design with a vendor''s bias. This page describes how HyperAgents handles memory, and [my Mem0 work is in my portfolio](/portfolio/).'
+work_note: 'I ran Mem0''s team of 13 writers, so I read another project''s memory design with a vendor''s bias. This page runs the memory tool that Meta''s hyperagent wrote for itself, and [my Mem0 work is in my portfolio](/portfolio/).'
 title: How Memory Works in HyperAgents
 slug: hyperagents-memory
+updated: 2026-11-17
 ---
 
+Nobody on the research team designed the memory system in HyperAgents. The [paper](https://arxiv.org/abs/2603.19461), first posted on March 19 and revised on November 1, reports that the agent wrote one for itself: "Without explicit instruction to do so, the agent creates mechanisms for storing and retrieving insights across sessions."
+
+Memory in HyperAgents is therefore whatever a given run invented, and the paper prints one example in [its appendix](https://arxiv.org/html/2603.19461v1). The example is a short Python class that keeps notes in a JSON file, and this page runs it and looks at what the agent chose to build and what it left out.
+
+## What is a hyperagent?
+
+A hyperagent is a program made of two agents that can both be edited. The abstract defines the pair as "a task agent (which solves the target task) and a meta agent (which modifies itself and the task agent)".
+
+The meta agent's own procedure is open to change as well, so the system can improve how it improves. The authors, with Jenny Zhang as first author and the work done at Meta, build it on the Darwin Gödel Machine and call the result DGM-H.
+
+Memory comes into the paper as one of the things the meta agent gave itself. The abstract lists "persistent memory, performance tracking" among the improvements the system made to its own process.
+
+## What memory did the agent build?
+
+It built a key-value store with a timestamp on each entry. The class below is the one printed in Appendix E.3.7, with a loader added, since the paper doesn't print that method.
+
+```python
+"""The MemoryTool printed in Appendix E.3.7 of the Hyperagents paper, run on a temp file.
+
+The class body is the paper's. _load_memory is not printed there, so the
+version below is mine, as are the three calls at the bottom.
+"""
+import json
+import os
+import tempfile
+from datetime import datetime
+from typing import List, Optional
+
+
+class MemoryTool:
+    """Tool for persistent memory storage across agent interactions."""
+
+    def __init__(self, memory_file: str = './memory.json'):
+        self.memory_file = memory_file
+        self.memory = self._load_memory()
+
+    def _load_memory(self) -> dict:  # not shown in the paper
+        if os.path.exists(self.memory_file):
+            with open(self.memory_file) as f:
+                return json.load(f)
+        return {}
+
+    def store(self, key: str, value: any) -> None:
+        """Store information with timestamp for temporal tracking."""
+        self.memory[key] = {
+            "value": value,
+            "timestamp": datetime.now().isoformat()
+        }
+        self._save()
+
+    def retrieve(self, key: str) -> Optional[any]:
+        """Retrieve stored information by key."""
+        return self.memory.get(key, {}).get("value")
+
+    def list_keys(self) -> List[str]:
+        """List all stored memory keys."""
+        return list(self.memory.keys())
+
+    def _save(self):
+        """Persist memory to disk."""
+        with open(self.memory_file, 'w') as f:
+            json.dump(self.memory, f, indent=2)
+
+
+path = os.path.join(tempfile.mkdtemp(), "memory.json")
+
+first = MemoryTool(path)
+first.store("best_generation", "Gen55: 63% accuracy, too harsh")
+first.store("best_generation", "Gen64: 61% accuracy, best balance")
+first.store("gen66_results", "52% accuracy, worse than gen64")
+
+second = MemoryTool(path)  # a new process would start here
+print("keys after reload:   ", second.list_keys())
+print("best_generation:     ", second.retrieve("best_generation"))
+print("unknown key:         ", second.retrieve("gen55_results"))
+print("entries on disk:     ", len(json.load(open(path))))
+```
+
+The three `store` calls and the reload at the bottom are mine. `python3 hyper_memory.py` gives this.
+
+```text
+keys after reload:    ['best_generation', 'gen66_results']
+best_generation:      Gen64: 61% accuracy, best balance
+unknown key:          None
+entries on disk:      2
+```
+
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/hyperagents-memory/memory-layers.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/hyperagents-memory/memory-layers.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/hyperagents-memory/memory-layers.svg" width="720" height="256" alt="The HyperAgent loop reads its working context on every model call. When a session ends, the working context is summarized into episodic memory in a durable store, and the agent queries a long-term knowledge base for facts, procedures, and preferences it doesn't need in every prompt. Each layer down trades speed for capacity." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Like registers, RAM, and disk: the agent reaches for a slower layer only when the faster one can't hold the answer.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/hyperagents-memory/memory-layers.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/hyperagents-memory/memory-layers.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/hyperagents-memory/memory-layers.svg" width="720" height="256" alt="A meta agent calls a MemoryTool that it wrote for itself. The tool saves each insight under a key in a memory.json file, and the next generation of the agent loads that file before it changes anything." loading="lazy" decoding="async"></picture></a>
+  <figcaption>The hyperagent's memory is one JSON file, written through a tool the agent added to its own code.</figcaption>
 </figure>
 
-##What Is a Hyperagent And Why Does Memory Matter
+The reload works, which is all persistence means here: a second instance reads the file and finds the notes. The paper's description of the real file is "structured storage of performance insights", and the entries it prints are paragraphs of analysis filed under keys such as `best_performers_analysis`.
 
-A HyperAgent is not a single language model call. It is a composed system of models, tools, and a reasoning loop that can run for minutes or hours across many steps.
+## What does the agent write down?
 
-Build something that lives inside a long-running process and you quickly hit a wall: the model forgets. Context windows fill up.
+It writes conclusions and leaves the raw numbers to the logs. The authors make the distinction themselves: "Instead of merely logging numerical scores, the hyperagent stores synthesized insights, causal hypotheses, and forward-looking plans".
 
-Sessions collapse. Lacking a memory architecture, every turn starts from scratch and every user experience degrades.
+A printed entry records that a later generation scored worse and names the cause, in the agent's words: "gen65 changes over-corrected." Another sets a plan for the next attempt.
 
-I watched one of my early agents spend three turns re-reading the same config file because it had already pushed the earlier read out of its context window.
+That is the choice I find instructive. Left to design its own memory, the agent stored what it had concluded and what it meant to do next, which is what [short-term agent memory](/articles/short-term-agent-memory/) loses first when a context window is compacted.
 
-Giving the agent somewhere to store what it knows, what it has done, and what it still needs to do is what memory in HyperAgents actually buys you.
+## What did the agent leave out?
 
-##The Three-layer Memory Architecture
+Everything a memory system grows later. The run above shows the first omission: the second note under `best_generation` replaced the first, and the file holds no trace that Gen55 was once the answer.
 
-HyperAgents do not use a single memory store. They use three distinct layers, each with a different access pattern and purpose.
+An overwrite with no history is the design that [memory versioning](/articles/memory-versioning/) argues against, since nobody can ask later what the agent believed at an earlier point. The timestamp records when the surviving value was written and nothing about the one it replaced.
 
-Knowing what each layer does is the difference between an agent that feels smart and one that actually is. Picture the layers the way an operating system stacks storage: CPU registers for what you need this instant, RAM for the active session, disk for everything you might recall later.
+The class also has no way to search. `retrieve` needs the exact key, and `list_keys` returns every key, so recall depends on the agent choosing names it will recognise later.
 
-Each tier trades speed for capacity, and you reach for the slow one only when the fast one cannot hold the answer.
+Nothing is forgotten on purpose either, and the whole file is rewritten on every `store`. Neither matters at the scale of the runs the paper reports, and both would in a system that ran for months.
 
-###Layer 1: Working Context (In-Memory)
+## Does the memory make the agent better?
 
-Living in RAM during a session, the working context holds the current conversation history, the agent's current goal, and a sliding window of recent tool results. Every model call reads from this layer directly, so whatever sits here is what the agent can reason over right now.
+The paper credits it with part of the gain and doesn't isolate it. Its transfer experiment moves a trained hyperagent to a new domain, and the authors write that "the transfer hyperagents have features such as performance tracking and persistent memory", which they call a qualitative attribution.
 
-```python
-class WorkingContext:
-    def __init__(self, max_turns: int = 50):
-        self.messages: list[dict] = []
-        self.goal: str = ""
-        self.tool_results: deque = deque(maxlen=20)
-        self.max_turns = max_turns
+The measured result is about the meta agent as a whole. Moving only the meta agent to the new domain scored 0.620 on the paper's improvement measure against 0.630 for moving both agents, and moving only the task agent scored 0.100.
 
-    def add_turn(self, role: str, content: str):
-        self.messages.append({"role": role, "content": content})
-        if len(self.messages) > self.max_turns:
-            self.messages.pop(0)
-```
+So the evidence says the self-improvement machinery transfers, and that memory is one visible part of that machinery. A claim that the memory file alone caused the gain would go past what the paper shows.
 
-How far back the agent can "see" is set by the `max_turns` parameter. Setting it to 50 gives you roughly 100K tokens of context history assuming average turns at 1K tokens each.
+## What should a builder take from it?
 
-On a model with a 128K context window, you have room to spare. Running against a 4K window, you need to be more aggressive, dropping `max_turns` to something like 6 and leaning harder on the lower layers.
+Start with less than the frameworks offer. An agent that could have written anything wrote a class of about thirty lines and a JSON file, and that was enough for its notes to shape the next generation.
 
-###Layer 2: Episodic Memory (Durable Store)
+The omissions are the list of what to add when the simple version stops being enough: history, search and forgetting. [AI memory management](/articles/ai-memory-management/) covers those layers, and [how Claude Code handles memory](/articles/claude-code-memory/) shows a shipped product making similar choices with plain files.
 
-Working context evaporates when the session ends. Episodic memory persists across sessions by writing structured summaries to disk or a database.
+## FAQ
 
-Each episode captures what happened, what was decided, and what outstanding threads remain, the way a good standup note records "shipped the auth refactor, decided to defer rate limiting, still need to fix the flaky test" rather than replaying every keystroke.
+**Does HyperAgents ship with a memory system?**
 
-```python
-class EpisodicMemory:
-    def __init__(self, store_path: str):
-        self.store = SQLiteStore(store_path)
-        self.session_id: str = ""
+Not as a designed feature. The paper reports that the agent created persistent memory for itself during its runs, and prints one such tool in an appendix.
 
-    def start_session(self, session_id: str):
-        self.session_id = session_id
-        self.store.execute(
-            "INSERT INTO sessions (id, started_at) VALUES (?, ?)",
-            (session_id, datetime.utcnow().isoformat())
-        )
+**Where does a hyperagent store its memory?**
 
-    def save_episode(self, episode: dict):
-        self.store.execute(
-            """INSERT INTO episodes
-               (session_id, turn, summary, decisions, open_threads, created_at)
-               VALUES (?, ?, ?, ?, ?, ?)""",
-            (
-                self.session_id,
-                episode["turn"],
-                episode["summary"],
-                json.dumps(episode["decisions"]),
-                json.dumps(episode["open_threads"]),
-                datetime.utcnow().isoformat()
-            )
-        )
-```
+In the printed example, in a `memory.json` file next to the agent's code. Each key holds a value and the time it was written.
 
-An episode gets written every N turns (I default to 10) or when the user goes quiet for more than 30 seconds. A separate call to the LLM generates the summary, condensing the last N turns into a 2-3 sentence synopsis.
+**Is HyperAgents the same as the Darwin Gödel Machine?**
 
-Storing the synopsis instead of the transcript keeps episodic storage small while retaining the shape of what happened.
-
-###Layer 3: Knowledge Base (Long-Term Store)
-
-Knowledge base is where you put things the agent should know but does not need in every prompt: factual knowledge, learned procedures, and accumulated user preferences such as "this user always wants TypeScript, never JavaScript" or "deploy targets are us-east-1 by default". The agent queries this layer only when relevant, not on every turn.
-
-```python
-class KnowledgeBase:
-    def __init__(self, kb_path: str):
-        self.kb = ChromaDBClient(kb_path)
-
-    def store_fact(self, key: str, value: str, metadata: dict):
-        self.kb.upsert(
-            collection="facts",
-            id=key,
-            text=value,
-            metadata=metadata
-        )
-
-    def query(self, query: str, top_k: int = 5) -> list[str]:
-        results = self.kb.query(
-            collection="facts",
-            query_texts=[query],
-            n_results=top_k
-        )
-        return [doc["text"] for doc in results["documents"][0]]
-```
-
-The retrieval step happens at the start of a new session when you load the user's history. You pull their last 10 episode summaries, rank them by recency, and inject the top 3 into the working context as a "here is where we left off" block.
-
-##Session Continuity In Practice
-
-Session continuity is where most agent frameworks fall apart. A user kicks off a multi-step data migration at 6pm, closes the laptop, and comes back the next morning expecting the agent to pick up exactly where it left off.
-
-Absent explicit architecture, the agent has no idea what happened before and cheerfully starts the migration over from row one.
-
-The continuity flow I use:
-
-1. On session resume, load the last episodic summary for this user.
-2. Inject it as a system message with a special prefix `[RESUMED_SESSION]`.
-3. Pull any open threads from the last episode and add them to the agent's goal state.
-4. Confirm back to the user with "Resuming from where we left off: [summary]".
-
-```python
-def resume_session(user_id: str) -> WorkingContext:
-    last_episodes = db.query(
-        "SELECT * FROM episodes WHERE user_id = ? ORDER BY created_at DESC LIMIT 3",
-        (user_id,)
-    )
-
-    context = WorkingContext()
-    context.add_turn("system",
-        f"[RESUMED_SESSION] Last active: {last_episodes[0]['summary']}")
-    context.goal = last_episodes[0].get("open_threads", [])
-
-    return context
-```
-
-Handling the "I left off mid-task" problem this way keeps the resume clean. The agent sees the summary, knows what was unfinished, and can reorient immediately.
-
-No hallucination about what happened, no wasted turns re-discovering the context.
-
-##Tool Memory And Intermediate Results
-
-When a HyperAgent calls a tool, the result of that call is transient unless you capture it. Say the agent runs a code execution tool and gets back a 500-line stack trace plus test output.
-
-That blob needs to live somewhere the moment the agent might want to quote a specific line of it later.
-
-I use a tool result buffer that stores the last N tool calls with their outputs. As the context window gets tight, I compress older tool results into summaries rather than dropping them entirely.
-
-```python
-class ToolResultBuffer:
-    def __init__(self, max_entries: int = 15):
-        self.entries: deque = deque(maxlen=max_entries)
-
-    def store(self, tool_name: str, input_params: dict, output: str, compressed: bool = False):
-        self.entries.append({
-            "tool": tool_name,
-            "input": input_params,
-            "output": output if not compressed else compress(output),
-            "compressed": compressed
-        })
-
-    def compress_oldest(self, compression_model="gpt-4o-mini"):
-        oldest = self.entries[0]
-        summary = call_llm(
-            f"Compress this tool output to 3 sentences: {oldest['output']}"
-        )
-        oldest["output"] = summary
-        oldest["compressed"] = True
-```
-
-A smaller model can handle gist extraction when its output is checked against the fields the memory record requires. The compressed entry should preserve what happened and its outcome without retaining the raw output.
-
-##Context Window Management
-
-Context windows are finite. A HyperAgent running 200 turns against a 128K context window will eventually fill up, especially with verbose tool outputs mixed in.
-
-Managing long sessions actively beats trying to avoid them, because the useful work is in the long sessions.
-
-I use a tiered truncation strategy. At 70% context usage, the agent gets a warning and I trigger mid-level compression of older tool results.
-
-```python
-def check_context_pressure(context: WorkingContext, model: str):
-    usage = count_tokens(context.messages + context.tool_results)
-    max_ctx = {"gpt-4o": 128000, "gpt-4o-mini": 128000,
-               "claude-3-5-sonnet": 200000}.get(model, 128000)
-
-    pressure = usage / max_ctx
-
-    if pressure > 0.95:
-        persist_and_reset(context)
-    elif pressure > 0.85:
-        summarize_oldest_turns(context, keep=10)
-    elif pressure > 0.70:
-        compress_tool_results(context, oldest_first=True)
-```
-
-Waiting until the context is full to act is the mistake I made first, and it bit me when a single large tool result blew past the limit mid-turn and the call failed outright. The 70/85/95 thresholds give the system room to breathe and prevent forced truncation mid-turn.
-
-##Embedding And Retrieval For Context Injection
-
-When a session resumes or when an agent needs to know something from three sessions ago, you cannot just dump all history into the prompt. You need to retrieve the relevant pieces.
-
-Embedding-based retrieval works well here. Each episodic summary gets embedded at save time and stored in a vector index.
-
-To find relevant history, you embed the current conversation state and do a nearest-neighbor search against the summary index, the same move a librarian makes when you describe a book you half-remember and they walk you to the right shelf instead of reciting the whole catalog.
-
-```python
-def retrieve_relevant_history(current_context: str, user_id: str, top_k: int = 5) -> list[dict]:
-    query_embedding = embed(current_context)
-
-    results = db.query(
-        """SELECT e.* FROM episodes e
-           JOIN sessions s ON e.session_id = s.id
-           WHERE s.user_id = ?
-           ORDER BY cosine_distance(e.embedding, ?) ASC
-           LIMIT ?""",
-        (user_id, query_embedding, top_k)
-    )
-    return results
-```
-
-The embedding model matters. `text-embedding-3-small` from OpenAI gives good results at low cost. `bge-m3` from BAAI is a solid open-source alternative if you need to stay on-premises. Embed at save time, not at query time.
-
-Paying the embedding cost once on write beats recomputing it on every read, and the extra storage is cheap by comparison.
-
-##Multi-agent Memory Sharing
-
-When you have multiple HyperAgents working together on a problem, memory becomes a coordination problem. A research agent finishes gathering sources and a writer agent needs to know what it found.
-
-A third agent rejoining a project needs the shared context from a previous joint session.
-
-I use a shared episodic store with a concept called "shared context episodes". Working together, agents write to a shared session with their own episode streams.
-
-Other agents read from that shared store by querying across agent IDs, the way a team channel lets anyone scroll back through what colleagues posted without sitting in every meeting themselves.
-
-```python
-class SharedMemoryStore:
-    def __init__(self, db_path: str):
-        self.db = sqlite3.connect(db_path)
-
-    def write_shared_episode(self, agent_id: str, session_id: str, episode: dict):
-        self.db.execute(
-            """INSERT INTO shared_episodes
-               (agent_id, session_id, turn, summary, embedding, created_at)
-               VALUES (?, ?, ?, ?, ?, ?)""",
-            (
-                agent_id,
-                session_id,
-                episode["turn"],
-                episode["summary"],
-                embed(episode["summary"]),
-                datetime.utcnow().isoformat()
-            )
-        )
-
-    def read_shared_history(self, session_id: str, requesting_agent: str) -> list[dict]:
-        rows = self.db.execute(
-            """SELECT * FROM shared_episodes
-               WHERE session_id = ?
-               ORDER BY created_at ASC""",
-            (session_id,)
-        ).fetchall()
-        return [{"agent": r[0], "turn": r[2], "summary": r[3]} for r in rows]
-```
-
-The pattern lets agents contribute to a collective memory without stepping on each other's context. The embedding column exists specifically for cross-agent relevance queries, so the writer agent can pull "everything the researcher logged about pricing" rather than reading all of it.
-
-##Production Considerations
-
-If you want to understand how this compares to other memory systems, see my post on [context windows vs memory](/articles/context-windows-vs-memory/). For a deeper look at the layers, check out [AI memory management for LLMs](/articles/ai-memory-management/).
-
-Memory architecture that looks clean in a notebook breaks in production if you do not account for latency, storage growth, and failure modes.
-
-**Write latency** is the first trap. Writing to SQLite on every turn adds 5-10ms per operation.
-
-At 500 turns per session, that is 2.5-5 seconds of overhead spread across the session. For a smooth user experience, you want to batch writes or do them asynchronously.
-
-I use a background thread that flushes the episodic buffer every 30 seconds or every 10 turns, whichever comes first.
-
-**Storage growth** is the second trap. Episodic summaries are small but they compound.
-
-With 100 users doing 10 sessions per day, you write 1000 episodes daily. At 500 bytes per summary, that is 500KB per day, or 180MB per year.
-
-Negligible. But if you store full tool result logs instead of summaries, that number jumps by two orders of magnitude.
-
-Be deliberate about what you store and for how long.
-
-**Failure recovery** is the third trap. Should the agent crash mid-session, what survives?
-
-Working context is gone. Episodic memory on disk survives.
-
-Knowledge base survives. The failure mode you want to avoid is a crash mid-write that leaves the episodic store half-flushed and corrupt, taking the only durable record down with it.
-
-Use append-only writes and validate integrity on startup.
-
-```python
-def startup_health_check(store: EpisodicMemory):
-    try:
-        latest = store.store.query("SELECT id FROM episodes ORDER BY id DESC LIMIT 1")
-        store.store.execute("SELECT COUNT(*) FROM episodes")
-    except sqlite3.DatabaseError as e:
-        logging.critical(f"Episodes store corrupted: {e}. Re-initializing.")
-        store.store.execute("VACUUM")
-```
-
-VACUUM rebuilds the SQLite file and fixes most corruption scenarios. It is not guaranteed, but it handles the common case where a crash left the WAL in an inconsistent state.
-
-##Comparing Hyperagent Memory To Standard RAG
-
-Standard RAG (Retrieval-Augmented Generation) relies on a vector store and a fixed corpus. You index documents, the user asks a question, you retrieve relevant chunks, and the model answers.
-
-That pattern serves static knowledge bases well. Agentic workflows break it.
-
-HyperAgent memory differs in three fundamental ways. First, it is bidirectional.
-
-The agent writes to memory as it works, then reads its own notes back later. Second, it is temporal.
-
-Memories are tagged with when they happened and what happened before and after. Third, it is goal-directed.
-
-Memory tracks what the agent is trying to accomplish and what remains, alongside what it knows.
-
-A standard RAG pipeline would not know that the agent is three steps into a six-step deployment. A HyperAgent memory system knows the full trajectory and can reconstruct it.
-
-
-
-##Related Articles
-
-- [Context windows vs memory](/articles/context-windows-vs-memory/)
-- [AI memory management for LLMs](/articles/ai-memory-management/)
-- [Short-term memory for AI agents](/articles/short-term-agent-memory/)
-- [State of AI agent memory 2026](/articles/agent-memory-2026/)
-
-##Faq
-
-**How does HyperAgent memory differ from conversation history in a chat model?**
-
-Conversation history is raw. It contains every message in sequence.
-
-HyperAgent memory is structured and tiered. Raw history lives in working context.
-
-Structured summaries and decisions live in episodic memory. Facts and procedures live in the knowledge base.
-
-Tiering it this way lets the agent reach the right information at the right time without drowning in noise.
-
-**Can memory be shared across different agent instances?**
-
-Yes. Shared episodic stores let multiple agent instances read and write to a common memory space, which helps multi-agent workflows where agents need to coordinate or build on each other's work.
-
-**What happens if the episodic store grows too large?**
-
-You can implement a retention policy that rolls off old episodes. I keep the last 30 sessions per user in full and compress anything older than 90 days into a single yearly summary.
-
-Rolling off this way keeps storage bounded while retaining enough history to handle the "where did we leave off" question.
-
-**How do you handle memory when switching between different LLMs?**
-
-The memory layer is model-agnostic. Working context is a list of messages in OpenAI SDK format by default, but you can translate to Anthropic format or any other provider's schema at the adapter layer.
-
-The episodic and knowledge layers are pure data and do not care which model is consuming them.
-
-**Is memory written synchronously or asynchronously?**
-
-Writes to the working context are synchronous (immediate). Writes to episodic memory are asynchronous via a background flush thread, which keeps memory writes from blocking the agent's main loop.
-
-The trade-off is that a crash can lose up to 30 seconds of recent episodes, which is acceptable for most production use cases.
-
-**How do you handle sensitive data in memory?**
-
-Episodic summaries should be generated with a system prompt that redacts sensitive fields (passwords, tokens, PII) before storage. The summary generation call runs through a sanitizer that replaces patterns like `[A-Za-z0-9+/]{32,}` with `[REDACTED]`.
-
-Actual tool outputs with sensitive data should be stored in memory only as compression summaries, never raw.
-
-**What context pressure thresholds do you recommend?**
-
-For models with 128K context, I use 70/85/95 as described above. For models with smaller windows (32K or below), you want tighter thresholds.
-
-Set your compression trigger at 60% and your forced persist at 80%. The goal is to always have headroom so a large tool result does not push you over the limit mid-turn.
-
-**Can the agent access memory mid-turn or only at turn boundaries?**
-
-Access is available at any point. The agent can query the knowledge base between tool calls or during planning phases.
-
-The working context is always available since it lives in the same process. Episodic retrieval typically happens at session start or when the agent explicitly calls a "recall" tool that queries the episodic store.
-
-**How does the agent know which memory layer to use?**
-
-Through the system prompt. The agent is instructed that recent turns and tool results live in working context, that session history is in episodic memory, and that factual knowledge is in the knowledge base.
-
-The instruction carries this, not the code. Agents learn to query memory appropriately after a few sessions in practice.
-
-The memory architecture in HyperAgents is the reason it works reliably across long sessions. Without it, you have a powerful but forgetful system.
-
-With it, you have something that can hold context, learn from experience, and pick up work where it left off. That is the difference between a demo and a product.
+It extends it. The paper's system, DGM-H, adds a meta agent whose own improvement procedure can be edited.
