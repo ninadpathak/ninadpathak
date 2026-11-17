@@ -62,6 +62,8 @@ sections:
         note: "Reads Chrome's guides for coding agents as documentation, and argues that a plain index should be the way in."
       - post: what-agent-harness-means
         note: "An essay on vocabulary: how vendor docs use the word harness, and why a product should define it on the page."
+      - post: cloudflare-kv-cache-incident-report
+        note: "Reads Cloudflare's report on a KV cache leak as writing: the count first, the wrong belief stated, and a title I would change."
   - heading: "Ship changes"
     spokes:
       - post: writing-release-notes

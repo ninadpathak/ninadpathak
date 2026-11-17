@@ -51,6 +51,8 @@ My addition is a third, and it's cheaper than either. Every incident an agent cl
 
 Why would that help? Because a write-up is how an incident teaches the people who weren't in it, which is the whole reason teams write postmortems.
 
+Cloudflare's October report on a KV cache leak is a good model of the long form, and I've written up [what I'd copy from it](/articles/cloudflare-kv-cache-incident-report/).
+
 Reading is weaker practice than doing, and I won't pretend otherwise. But it costs minutes, and it means the routine incidents still pass in front of someone.
 
 There's a second reason I care about the account. My [runbook template](/articles/runbook-template/) reports a test with a coding agent as the responder on one Postgres incident, where a prose runbook led it to cancel five legitimate report queries in all but one of four runs.
