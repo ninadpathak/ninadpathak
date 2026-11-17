@@ -13,6 +13,7 @@
   --bg-2:      #efefed;
   --border:    #e0e0dc;
   --border-2:  #c8c8c4;
+  --line:      #7d7d79;
   --text-1:    #0e0e0e;
   --text-2:    #3a3a3a;
   --text-3:    #6b6b6b;
@@ -138,6 +139,7 @@
   --bg-2:      #1a1a1a;
   --border:    #1e1e1e;
   --border-2:  #2c2c2c;
+  --line:      #6f6f6f;
   --text-1:    #f0f0f0;
   --text-2:    #c2c2c2;
   --text-3:    #8a8a8a;
@@ -1422,7 +1424,8 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
   border-bottom: var(--rule);
   text-decoration: none;
 }
-.blog-row:hover .blog-row-title { color: var(--accent); }
+.blog-row:hover .blog-row-title,
+.topic-card:hover .blog-row-title { color: var(--accent); }
 
 .blog-row-date { font-family: var(--mono); font-size: var(--font-size-md); color: var(--text-3); padding-top: var(--space-hairline); }
 
@@ -1438,6 +1441,44 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
 
 .blog-row-meta { display: flex; align-items: center; gap: var(--space-4); }
 .read-time { font-family: var(--mono); font-size: var(--font-size-sm); color: var(--text-3); }
+
+/* Topics grid on /articles/: one box per hub. Eight boxes sit 4 x 2, then 2 x 4, then
+   one column with the glyph beside the text, so no row ends on a single box. The box
+   shares .related-card's frame and the list rows' type classes. */
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+.topic-card .read-time { margin-top: auto; }
+
+/* The glyphs are tools/image-brand/lib/glyphs.js drawings at 1:1, and these rules are
+   theme/brand.css's .gl-* rules on the site tokens. Only the classes the eight topic
+   glyphs use are here; tests/test_hubs.py fails when a glyph needs one that is missing. */
+.topic-glyph { flex: none; margin-bottom: var(--space-4); }
+.topic-glyph .gl-fill     { fill: var(--bg-1); stroke: var(--line); stroke-width: 1.25; stroke-linejoin: round; }
+.topic-glyph .gl-fill2    { fill: var(--bg-2); stroke: var(--line); stroke-width: 1.25; stroke-linejoin: round; }
+.topic-glyph .gl-line     { fill: none; stroke: var(--line); stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
+.topic-glyph .gl-ink      { fill: none; stroke: var(--text-2); stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
+.topic-glyph .gl-accent-line { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.topic-glyph .gl-thick    { stroke-width: 1.75; }
+.topic-glyph .gl-solid    { fill: var(--line); }
+.topic-glyph .gl-bar      { fill: var(--border-2); }
+.topic-glyph .gl-accent   { fill: var(--accent); }
+.topic-glyph .gl-hair     { fill: none; stroke: var(--border-2); stroke-width: 0.75; }
+.topic-glyph .gl-cell     { fill: var(--bg-1); stroke: var(--border-2); stroke-width: 1; }
+.topic-glyph .np-hatch    { stroke: var(--border-2); stroke-width: 1; }
+.topic-glyph .gl-hatch    { stroke: none; }
+.topic-glyph .gl-badge    { fill: var(--bg-1); stroke: var(--line); stroke-width: 1; }
+.topic-glyph .gl-badge-accent { stroke: var(--accent); }
 
 .empty-state {
   padding: var(--space-16) 0;
@@ -1631,12 +1672,14 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
 .post-related h3 { margin-bottom: var(--space-6); }
 .related-grid    { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
 
-.related-card {
+.related-card,
+.topic-card {
   padding: var(--space-5);
   border: var(--rule);
   transition: background var(--t);
 }
-.related-card:hover { background: var(--bg-1); }
+.related-card:hover,
+.topic-card:hover { background: var(--bg-1); }
 .related-card-date  { font-family: var(--mono); font-size: var(--font-size-sm); color: var(--text-3); margin-bottom: var(--space-2); }
 .related-card-title { font-size: var(--font-size-xl); font-weight: var(--weight-medium); color: var(--text-1); }
 
@@ -1977,6 +2020,7 @@ a.p-item:hover { background: var(--bg-1); }
   .portfolio-grid  { grid-template-columns: repeat(2, 1fr); }
   .testimonials-grid { grid-template-columns: 1fr; }
   .related-grid    { grid-template-columns: repeat(2, 1fr); }
+  .topic-grid      { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 768px) {
@@ -2039,6 +2083,10 @@ a.p-item:hover { background: var(--bg-1); }
   .footer-brand   { grid-column: auto; }
   .footer-links   { gap: var(--space-3-5); }
   .page-content   { padding: var(--space-8) 0 var(--space-12); }
+
+  .topic-grid  { grid-template-columns: 1fr; }
+  .topic-card  { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--space-4); }
+  .topic-glyph { grid-row: 1 / span 3; margin-bottom: 0; }
 
   .post-content table { display: block; overflow-x: auto; max-width: 100%; }
 }

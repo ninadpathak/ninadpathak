@@ -222,14 +222,101 @@ class HubPageTests(BuiltSite):
             self.assertNotIn(" style=", main_of(html))
             self.assertEqual(len(re.findall(r"<h1\b", html)), 1)
 
-    def test_articles_index_lists_the_hubs(self):
-        html = page("/articles/")
+
+
+class TopicGridTests(BuiltSite):
+    """/articles/ opens with one box per hub, called Topics on the page, then the list."""
+
+    GLYPHS = json.loads((ROOT / "content" / "topic-glyphs.json").read_text(encoding="utf-8"))
+
+    def cards(self):
+        grid = re.search(r'<ul class="topic-grid">(.*?)</ul>', main_of(page("/articles/")), re.S).group(1)
+        return re.findall(r"<li>\s*(<a\b.*?</a>)\s*</li>", grid, re.S)
+
+    def test_the_grid_has_one_box_per_hub_in_config_order(self):
+        cards = self.cards()
+        self.assertEqual([re.search(r'href="([^"]+)"', card).group(1) for card in cards],
+                         [f"/articles/{slug}/" for slug in HUBS])
+        for card, (slug, hub) in zip(cards, HUBS.items()):
+            self.assertEqual(len(re.findall(r"<a\b", card)), 1, f"{slug}: the box is one link")
+            self.assertIn(f'<h3 class="blog-row-title">{hub["label"]}</h3>', card)
+            self.assertIn(f'<p class="blog-row-desc">{hub["card"]}</p>', card)
+            count = sum(1 for post in self.posts.values() if post["category"] == slug)
+            self.assertIn(f'<span class="read-time">{count} articles</span>', card)
+            self.assertIn(self.GLYPHS[slug], card, f"{slug}: glyph missing")
+
+    def test_each_hub_is_linked_once_and_the_page_says_topics(self):
+        main = main_of(page("/articles/"))
         for slug in HUBS:
-            self.assertIn(f'href="/articles/{slug}/"', main_of(html))
+            self.assertEqual(main.count(f'href="/articles/{slug}/"'), 1, slug)
+        self.assertEqual(re.findall(r'<h2 class="label">([^<]+)</h2>', main), ["Topics", "All articles, newest first"])
+        self.assertNotRegex(re.sub(r"<[^>]+>", " ", main), r"\b[Hh]ubs?\b")
+        self.assertNotIn(" style=", main)
+
+    def test_item_list_matches_the_grid_and_only_page_one_has_it(self):
+        html = page("/articles/")
         item_list = next(b for b in schema(html) if b.get("@type") == "ItemList")
-        self.assertEqual([item["url"] for item in item_list["itemListElement"]],
-                         [f"{BASE}/articles/{slug}/" for slug in HUBS])
-        self.assertNotIn('"ItemList"', page("/articles/page/2/"))
+        self.assertEqual(item_list["name"], "Article topics")
+        self.assertEqual([(item["position"], item["url"], item["name"]) for item in item_list["itemListElement"]],
+                         [(i, f"{BASE}/articles/{slug}/", hub["title"]) for i, (slug, hub) in enumerate(HUBS.items(), 1)])
+        second = page("/articles/page/2/")
+        self.assertNotIn('"ItemList"', second)
+        self.assertNotIn("topic-grid", second)
+
+    def test_the_article_list_still_links_every_post_once_across_its_pages(self):
+        per_page = CONFIG["content"]["posts_per_page"]
+        total = -(-len(self.posts) // per_page)
+        linked = []
+        for number in range(1, total + 1):
+            url = "/articles/" if number == 1 else f"/articles/page/{number}/"
+            html = page(url)
+            self.assertIn(f'<link rel="canonical" href="{BASE}{url}">', html)
+            rows = re.findall(r'<a href="/articles/([^/"]+)/" class="blog-row">(.*?)</a>', main_of(html), re.S)
+            self.assertEqual(len(rows), per_page if number < total else len(self.posts) - per_page * (total - 1))
+            for slug, row in rows:
+                self.assertIn(f'<span class="tag">{HUBS[self.posts[slug]["category"]]["label"]}</span>', row, slug)
+            linked += [slug for slug, _ in rows]
+            self.assertIn(f"Page {number} of {total}", html)
+        self.assertEqual(sorted(linked), sorted(self.posts))
+        self.assertFalse((OUTPUT / "articles" / "page" / str(total + 1)).exists())
+
+    def test_each_topic_has_its_own_decorative_glyph_at_a_fixed_size(self):
+        self.assertEqual(list(self.GLYPHS), list(HUBS))
+        names = [hub["glyph"].split()[0] for hub in HUBS.values()]
+        self.assertEqual(len(set(names)), len(names), "two topics share a glyph")
+        self.assertEqual(len(set(self.GLYPHS.values())), len(HUBS))
+        library = (ROOT / "tools" / "image-brand" / "lib" / "glyphs.js").read_text(encoding="utf-8")
+        guideline = (ROOT / "tools" / "image-brand" / "GUIDELINE.md").read_text(encoding="utf-8")
+        for name in names:
+            self.assertIn(f"G.{name} = ", library)
+            self.assertIn(f"| `{name}` |", guideline, f"{name} is not in the guideline's glyph table")
+        for slug, svg in self.GLYPHS.items():
+            # Fixed width and height reserve the box, so the glyph cannot shift the layout.
+            self.assertTrue(svg.startswith('<svg class="topic-glyph" viewBox="-28 -24 56 48" width="56" height="48" '
+                                           'aria-hidden="true" focusable="false">'), slug)
+            for banned in ("<script", "<style", " style=", "<text", "<image", "href="):
+                self.assertNotIn(banned, svg, slug)
+
+    def test_the_stylesheet_colours_every_class_a_topic_glyph_uses(self):
+        css = (ROOT / "static" / "css" / "main.css").read_text(encoding="utf-8")
+        used = {name for svg in self.GLYPHS.values() for attr in re.findall(r'class="([^"]+)"', svg)
+                for name in attr.split()} - {"topic-glyph"}
+        styled = set(re.findall(r"\.topic-glyph \.([\w-]+)", css))
+        self.assertEqual(used, styled, "a glyph class without a rule draws black; a rule without a glyph is dead CSS")
+
+    def test_the_committed_glyphs_match_the_library(self):
+        result = subprocess.run(["node", str(ROOT / "tools" / "image-brand" / "topics.mjs"), "--check"],
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_card_lines_are_one_plain_sentence_that_keeps_the_primary_query(self):
+        for slug, hub in HUBS.items():
+            line = hub["card"]
+            self.assertEqual(len(re.findall(r"[.!?](?:\s|$)", line)), 1, f"{slug}: {line}")
+            self.assertTrue(line.endswith("."), line)
+            self.assertNotIn("\u2014", line)
+            self.assertLessEqual(len(line), 120, f"{slug}: the line has to fit a box")
+            self.assertIn(hub["primary_query"], f"{hub['label']} {line}".lower(), slug)
 
 
 class SpokePageTests(BuiltSite):

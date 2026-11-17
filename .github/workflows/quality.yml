@@ -33,6 +33,7 @@ jobs:
         run: python -m pip install -r requirements.txt
 
       # Article figures and share cards are committed output of tools/image-brand.
+      # topics.mjs draws the Topics grid glyphs on /articles/ from the same library.
       # The check re-renders every source in Chromium and fails on stale output, an
       # off-token stroke, radius or text size, a contrast pair below AA, or a figure
       # over its word budget. The site build itself stays pure Python.
@@ -62,6 +63,7 @@ jobs:
           npx playwright-core install --with-deps --only-shell chromium
           node og.mjs --check
           node render.mjs --check
+          node topics.mjs --check
           node fallbacks.mjs --check
 
       - name: Compile Python sources

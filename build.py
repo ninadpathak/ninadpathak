@@ -563,6 +563,10 @@ class SiteBuilder:
     def load_categories(self, posts: list[dict]) -> list[dict]:
         """Resolve one editorial category per post without changing article URLs."""
         configured = self.config["content"].get("categories", [])
+        # One inline <svg> per hub, drawn from the article glyph library by
+        # tools/image-brand/topics.mjs. build() stops on a hub that lacks one.
+        glyph_path = Path("content/topic-glyphs.json")
+        glyphs = json.loads(glyph_path.read_text(encoding="utf-8")) if glyph_path.is_file() else {}
         categories = []
         by_slug = {}
         for raw in configured:
@@ -572,6 +576,8 @@ class SiteBuilder:
                 "label": raw.get("label", raw["title"]),
                 "seo_title": raw.get("seo_title", ""),
                 "description": raw["description"],
+                "card": raw.get("card", ""),
+                "glyph_svg": glyphs.get(raw["slug"], ""),
                 "primary_query": raw.get("primary_query", ""),
                 "money_page": raw.get("money_page", ""),
                 "hire_note": raw.get("hire_note", ""),
@@ -1470,7 +1476,7 @@ class SiteBuilder:
 
         lines.append("## Pages")
         lines.append("")
-        lines.append(f"- [Articles]({base}/articles/): Every article, newest first, with the eight hub pages.")
+        lines.append(f"- [Articles]({base}/articles/): Every article, newest first, with the eight topic pages.")
         lines.append(f"- [Projects]({base}/projects/): Working tools and software.")
         lines.append("")
 
@@ -1689,6 +1695,13 @@ class SiteBuilder:
         glossary_terms = self.load_glossary()
         categories = self.load_categories(posts)
         self.load_hubs(categories, posts)
+        # A hub without its one-line card or its glyph would render an empty box in the
+        # Topics grid on /articles/, so the build stops instead.
+        for category in categories:
+            if category["posts"] and not (category["card"] and category["glyph_svg"]):
+                raise ValueError(
+                    f"hub {category['slug']!r} needs `card` and `glyph` in config.toml and an entry in "
+                    "content/topic-glyphs.json: run `node tools/image-brand/topics.mjs`")
         self.assign_related(posts)
         self.link_glossary_owners(glossary_terms, posts)
         service_pages = self.load_service_pages()

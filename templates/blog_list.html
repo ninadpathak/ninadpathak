@@ -11,7 +11,7 @@
 {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "Article hubs",
+  "name": "Article topics",
   "url": "{{ site.url }}/articles/",
   "itemListElement": [
 {% for category in categories if category.posts and not category.incubating %}
@@ -44,23 +44,31 @@
 </section>
 
 {% if current_page_num == 1 and categories %}
+{# One box per hub. Readers see "Topics"; "hub" is the word in code and config. Each box
+   is a single link, and its glyph is inline SVG from content/topic-glyphs.json, drawn by
+   tools/image-brand/topics.mjs and coloured by the .gl-* rules in main.css. #}
 <section class="blog-list-section">
   <div class="container">
-    <h2 class="label">Hubs</h2>
-    {% for category in categories if category.posts and not category.incubating %}
-    <a href="{{ category.url }}" class="blog-row">
-      <div class="blog-row-title">{{ category.title }}</div>
-      <div class="blog-row-desc">{{ category.description }}</div>
-      <div class="blog-row-meta"><span class="read-time">{{ category.posts | length }} articles</span></div>
-    </a>
-    {% endfor %}
+    <h2 class="label">Topics</h2>
+    <ul class="topic-grid">
+      {% for category in categories if category.posts and not category.incubating %}
+      <li>
+        <a href="{{ category.url }}" class="topic-card">
+          {{ category.glyph_svg }}
+          <h3 class="blog-row-title">{{ category.label }}</h3>
+          <p class="blog-row-desc">{{ category.card }}</p>
+          <span class="read-time">{{ category.posts | length }} articles</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
   </div>
 </section>
 {% endif %}
 
 <section class="blog-list-section">
   <div class="container">
-    {% if current_page_num == 1 and categories %}<h2 class="label">All articles</h2>{% endif %}
+    {% if current_page_num == 1 and categories %}<h2 class="label">All articles, newest first</h2>{% endif %}
     {% if posts %}
       {% for post in posts %}
       <a href="/articles/{{ post.slug }}/" class="blog-row">
@@ -70,6 +78,7 @@
         {% endif %}
         <div class="blog-row-meta">
           <span class="read-time">{{ post.reading_time }} min read</span>
+          {% if post.category %}<span class="tag">{{ post.category.label }}</span>{% endif %}
         </div>
       </a>
       {% endfor %}
