@@ -58,7 +58,7 @@ For Centus, building each example first produced more than 50 localization guide
 ## Work you can check
 
 - [Centus](/work/centus/): 50+ developer guides with zero rounds of engineering revision.
-- [Mem0](/work/mem0/): I managed 13 writers and handled hiring and technical reviews.
+- [Mem0](/work/mem0/): I wrote 11 guides, such as the ones on [AI agent memory](https://web.archive.org/web/20260209224933/https://mem0.ai/blog/what-is-ai-agent-memory) and [agentic RAG](https://web.archive.org/web/20260311051406/https://mem0.ai/blog/what-is-agentic-rag) (archived copies), and managed 13 writers.
 - [LinuxForDevices](/work/linuxfordevices/): monthly visits went from 487 to 203,400 in 15 months.
 - [DelightChat](/work/delightchat/): a content program built from zero to 50,000 monthly organic visits in 12 months.
 

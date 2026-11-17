@@ -102,7 +102,7 @@ So how do you catch a stale note? For auto memory the docs give each file a `mod
 
 The commands split the same way. `/context all` shows which files a session loaded and `/memory` opens them for editing, and for the instruction files `/doctor prompt-audit` has Claude look for "references to files or commands that don't exist, and files that contradict each other."
 
-My time managing the writers at Mem0, which sells a memory layer for agents, gives me a stake in this, so weigh what follows accordingly. For one developer on one machine, I think the two file types are enough.
+I managed the writers at Mem0, which sells a memory layer for agents, and I wrote its [setup guide for adding memory to Claude Code](https://web.archive.org/web/20260307002643/https://mem0.ai/blog/claude-code-memory), so weigh what follows accordingly. For one developer on one machine, I think the two file types are enough.
 
 The limits appear with a team, since auto memory doesn't travel, and with other tools, which [coding agent memory](/articles/coding-agent-memory/) compares.
 
