@@ -16,7 +16,7 @@ slug: llm-token-budgets
 updated: 2026-11-17
 ---
 
-AWS's billing alarm is the cost control developers already know, and its [documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html) is exact about when it fires. The alarm "triggers only when the current billing exceeds the threshold" and "doesn't use projections based on your usage so far in the month."
+AWS's billing alarm fires after the money is spent, and its [documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html) is exact about when it fires. The alarm "triggers only when the current billing exceeds the threshold" and "doesn't use projections based on your usage so far in the month."
 
 An LLM token budget is a limit on what one request or one period is allowed to spend, set before the spending happens. It can refuse a request where the alarm can only report money already gone, because [tokens can be counted](https://platform.claude.com/docs/en/build-with-claude/token-counting) before anything is sent.
 

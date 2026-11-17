@@ -19,7 +19,7 @@ updated: 2026-11-17
 
 Nobody on the research team designed the memory system in HyperAgents. The [paper](https://arxiv.org/abs/2603.19461), first posted on March 19 and revised on November 1, reports that the agent wrote one for itself: "Without explicit instruction to do so, the agent creates mechanisms for storing and retrieving insights across sessions."
 
-A program that rewrites itself is an old idea with a famous name attached. Jürgen Schmidhuber proposed the [Gödel machine](https://en.wikipedia.org/wiki/G%C3%B6del_machine) in 2003, which Wikipedia describes as a program that "rewrites its own code when it can prove the new code provides a better strategy", and the system in this paper descends from it by way of the Darwin Gödel Machine.
+Jürgen Schmidhuber proposed the [Gödel machine](https://en.wikipedia.org/wiki/G%C3%B6del_machine) in 2003, which Wikipedia describes as a program that "rewrites its own code when it can prove the new code provides a better strategy". The system in this paper descends from it by way of the Darwin Gödel Machine.
 
 So what does a self-rewriting agent build when it wants to remember something? The paper prints one answer in [its appendix](https://arxiv.org/html/2603.19461v1), a short Python class that keeps notes in a JSON file, and in this article I'll run it and look at what the agent chose to build as its own [AI agent memory](/articles/agent-memory/), and what it left out.
 

@@ -11,7 +11,7 @@ date: 2026-04-16
 description: 'Error handling in production AI agents: classify tool errors in code, make ambiguous failures safe with idempotency keys, and tell the model what happened.'
 status: published
 work_note: 'I''ve written guides to agent tools and agent APIs for Firecrawl. This page covers what an agent should do after a tool call fails, and [those guides are in my portfolio](/portfolio/).'
-title: 'Error Handling in Production AI Agents: Who Decides After a Tool Fails'
+title: "Error Handling in Production AI Agents"
 slug: agent-error-handling
 video: agent-error-handling
 updated: 2026-11-17
@@ -19,7 +19,7 @@ updated: 2026-11-17
 
 Error handling in production AI agents turns on one question: after a tool call fails, who decides what happens next. Ordinary software answers with code that someone wrote and tested, and an agent sends the error text back to a model.
 
-The failures themselves are old. The [fallacies of distributed computing](https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing), a list L Peter Deutsch assembled at Sun Microsystems in 1994, begins with "The network is reliable", and an agent that calls tools over a network meets every item on it.
+The [fallacies of distributed computing](https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing), a list L Peter Deutsch assembled at Sun Microsystems in 1994, begins with "The network is reliable", and an agent that calls tools over a network meets every item on it.
 
 What an agent adds is the reader of the error. A model shown "connection timed out" after a payment call has to guess whether the customer was charged, and nobody can unit-test that guess.
 

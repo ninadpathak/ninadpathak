@@ -3076,7 +3076,8 @@
       "for fine tuned models"
     ],
     "coding-models-new-code-vs-change": [
-      "best coding model"
+      "best coding model",
+      "Why SWE-bench Verified is the only metric that matters"
     ],
     "best-llms-for-coding": [],
     "vector-embeddings": [

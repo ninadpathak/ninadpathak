@@ -136,7 +136,7 @@ Perfect breadth is not something I expect from a small team. I do expect the ess
 
 Release communication matters to founders. Vague update pages make buyers wonder how painful upgrades will become after adoption.
 
-I covered that problem from the user side in [How to Write a Changelog That Developers Actually Read](/articles/writing-changelogs/) and from the release side in [Writing release notes that developers trust](/articles/writing-release-notes/). Buyers read those surfaces as evidence that the product will age gracefully.
+I covered that problem from the user side in [my guide to writing a changelog](/articles/writing-changelogs/) and from the release side in [Writing release notes that developers trust](/articles/writing-release-notes/). Buyers read those surfaces as evidence that the product will age gracefully.
 
 ## The hidden deal killer is post-sale fear
 

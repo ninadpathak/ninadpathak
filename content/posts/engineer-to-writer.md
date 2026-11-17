@@ -119,7 +119,7 @@ Search queries drift, product defaults change, and screenshots rot the instant a
 
 I also hunt for chances to link older posts into newer ones, knitting the site into a network instead of a pile of isolated blog posts.
 
-[How to Write a Changelog That Developers Actually Read](/articles/writing-changelogs/) is one example from this site. That post gives me a stable reference point to link from every later piece about developer communication.
+The guide on [how to write a changelog](/articles/writing-changelogs/) is one example from this site. That post gives me a stable reference point to link from every later piece about developer communication.
 
 Maintenance is not a chore tacked on at the end. Maintenance is how the technical assets you already built hold their value.
 

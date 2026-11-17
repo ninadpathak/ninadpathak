@@ -23,7 +23,7 @@ updated: 2026-11-17
 
 AI agents fail in two ways, and only one of them looks like a bug. The ordinary kind is a timeout that was retried or state that went missing, and the other kind has no faulty line in it: the model acted on something it never checked.
 
-Operations teams already have a method for the first. Google's SRE book, published in 2016, [defines the postmortem](https://sre.google/sre-book/postmortem-culture/) as "a written record of an incident, its impact, the actions taken to mitigate or resolve it, the root cause(s), and the follow-up actions to prevent the incident from recurring", and the method assumes a root cause sits in code or configuration.
+Google's SRE book, published in 2016, [defines the postmortem](https://sre.google/sre-book/postmortem-culture/) as "a written record of an incident, its impact, the actions taken to mitigate or resolve it, the root cause(s), and the follow-up actions to prevent the incident from recurring", and the method assumes a root cause sits in code or configuration.
 
 The second kind has nothing for that method to find. It is also the larger share in the one public breakdown of failed runs, which makes it the main subject for anyone working on [AI agent architecture](/articles/ai-agents/).
 

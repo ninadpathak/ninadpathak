@@ -10,10 +10,10 @@ bridges:
 - slug: llm-token-budgets
   reason: Context limits and token cost decide how a coding agent is configured.
 date: 2026-11-17
-description: Simon Willison says coding models hit an inflection point in October. The same month, the best of them passed one staged-change checkpoint in six. Both are true.
+description: My March ranking of coding models rested on one benchmark score. An October run with 32 strict passes out of 196 is why I rebuilt the page, and what it does now.
 slug: coding-models-new-code-vs-change
 status: published
-title: 'Coding Models Got Better at New Code. Changing Code Is Still at 16%'
+title: "Why I rebuilt my best-LLMs-for-coding page"
 work_note: 'I write about coding agents for developer-tool companies, and this essay is my reading of two October results that seem to disagree. [My portfolio](/portfolio/) has the client work.'
 ---
 
@@ -25,7 +25,7 @@ That run is Dex Horthy's [October SlopCodeBench update](https://github.com/human
 
 A model that can make a game fun on request and a model that fails six staged changes out of seven are the same model. The two results stop contradicting each other once you look at what each one asks for.
 
-The distance between those two results is the question for anyone choosing [coding agents](/articles/coding-agents/).
+The distance between those two results is the question for anyone choosing [coding agents](/articles/coding-agents/). It is also why I rebuilt my [best LLMs for coding](/articles/best-llms-for-coding/) page this month.
 
 ## What the two results measure
 
@@ -59,7 +59,9 @@ Nearly all of them score the patch and ignore what the patch costs the next pers
 
 Excess code is the same complaint I wrote about in the [code documentation guide](/articles/code-documentation/), where a model told to add no comments added them in a third of tasks. It is also what a regression failure is made of, since every extra branch is something the next change can break.
 
-My own [best LLMs for coding](/articles/best-llms-for-coding/) page, written in March around a single benchmark score, needs rebuilding for that reason. A ranking by solve rate answers which model writes new code best, and Willison's games already answer that well enough.
+The March version of my best-LLMs page had a section headed "Why SWE-bench Verified is the only metric that matters" and ranked models on that one score. A run in which the best result is 32 strict passes out of 196 made that ranking impossible to defend.
+
+A ranking by solve rate answers which model writes new code best, and Willison's games already answer that well enough. So the rebuilt page dates its answer, reports the cost of a run beside the resolution rate on a newer benchmark, and ends on a test for your own repository.
 
 The question worth a test of your own is the other one. Take a change you made last month, give a model the repository as it stood before, and count a pass only if your whole suite stays green afterwards.
 

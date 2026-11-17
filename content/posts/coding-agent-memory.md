@@ -21,9 +21,11 @@ updated: 2026-11-17
 
 A coding agent forgets everything when you start a new session because the model keeps nothing between sessions. Coding agent memory is whatever files the tool reads back in at the start of the next one, and the four tools compared here differ on who writes those files.
 
-You already know the pattern from `.env` files. The [dotenv README](https://github.com/motdotla/dotenv) describes a module "that loads environment variables from a `.env` file", which is a file you write once and a program reads on every start.
+A `.env` file is one you write once and a program reads on every start. The [dotenv README](https://github.com/motdotla/dotenv) describes a module "that loads environment variables from a `.env` file".
 
-Instruction files work the same way, and all but one of these [coding agents](/articles/coding-agents/) now add something a `.env` file never had, which is notes the agent writes for itself. So I'll go through what each tool loads, which ones take notes, and how you can check what yours has in front of it.
+A coding agent's instruction file is written by you and read by the tool at the start of each session. All but one of these [coding agents](/articles/coding-agents/) now add something a `.env` file never had, which is notes the agent writes for itself.
+
+So I'll go through what each tool loads, which ones take notes, and how you can check what yours has in front of it.
 
 ## Why does a coding agent forget between sessions?
 

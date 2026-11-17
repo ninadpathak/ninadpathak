@@ -19,7 +19,7 @@ updated: 2026-11-17
 
 Zork let players save their position to disk, and BYTE magazine explained in 1981 what the feature was for, in a line [Wikipedia's article on saved games](https://en.wikipedia.org/wiki/Saved_game) preserves: "it was intended to let players play over many weeks". A game too long for one sitting needed a way to write down where the player stood.
 
-Memory serialization is that feature for an agent. Persisting agent state across sessions means writing what the agent knows and what it was doing to storage, in a form that a later process can load and continue from.
+Memory serialization is how an agent does it. Persisting agent state across sessions means writing what the agent knows and what it was doing to storage, in a form that a later process can load and continue from.
 
 So I'll go through the usual ways to save an agent's state, run one of them, and then get to the catch a game never had, which is that the save itself can be wrong. That catch is the part of [agent memory](/articles/agent-memory/) worth your attention.
 

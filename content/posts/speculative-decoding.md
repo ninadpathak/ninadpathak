@@ -16,7 +16,7 @@ updated: 2026-11-17
 
 Speculative decoding has a cheap predictor draft the next few tokens of a model's output, and the large model check all of them in one pass. Every accepted draft is a token the large model didn't have to generate one at a time.
 
-The name and the bet come from processors. [Wikipedia's entry](https://en.wikipedia.org/wiki/Speculative_execution) on speculative execution says "work is done before it is known whether it is actually needed", and the idea reached a wider audience in 2018, when the Spectre attack [took its name](https://spectreattack.com/) from "the root cause, speculative execution".
+[Wikipedia's entry](https://en.wikipedia.org/wiki/Speculative_execution) on speculative execution in processors says "work is done before it is known whether it is actually needed", and the idea reached a wider audience in 2018, when the Spectre attack [took its name](https://spectreattack.com/) from "the root cause, speculative execution".
 
 That entry also gives the condition under which the bet pays, which is "if extra resources are available". A processor usually has them, and a GPU server under load doesn't, so among [LLM inference](/articles/ai-engineering/) techniques this one helps some workloads and slows others.
 

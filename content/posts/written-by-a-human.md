@@ -11,7 +11,7 @@ date: 2026-11-17
 description: Release notes and blog posts now carry a line saying a human wrote them. A technical reader can check a different label, the date the page was last run.
 slug: written-by-a-human
 status: published
-title: 'Written by a Human Proves Little. Last Tested Proves More'
+title: "Thoughts on Ghostty's hand-crafted release notes"
 work_note: 'I write technical content for a living, so I have an interest in what makes a page worth trusting now that text is free to produce. This essay is my answer, and [my portfolio](/portfolio/) has the work.'
 ---
 
@@ -62,3 +62,5 @@ My [about page](/about/) says how I work: "I use AI to prepare research, inspect
 A reader can rerun those. I prefer being checked to being believed.
 
 The comment I started from ends with a rule its author's team follows: "you should spend more time writing something than you expect the audience to spend reading it." For a docs team the rule needs one change, which is to spend that time running what the page tells the reader to run and to leave the proof where they can see it.
+
+Ghostty's notes already do that in their advisory lines, and those lines are what I'd copy from them before the label.

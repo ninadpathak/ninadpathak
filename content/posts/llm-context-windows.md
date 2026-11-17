@@ -10,7 +10,7 @@ description: Context windows are expanding to millions of tokens. Here is why th
   how to build production systems that use these massive windows effectively.
 status: published
 work_note: 'I wrote Firecrawl''s guide to the context layer for AI agents. This page covers the limit underneath it, the context window, and [the guide is in my portfolio](/portfolio/).'
-title: 'LLM Context Windows Explained: Why More Is Not Always Better'
+title: "LLM Context Windows Explained"
 slug: llm-context-windows
 ---
 

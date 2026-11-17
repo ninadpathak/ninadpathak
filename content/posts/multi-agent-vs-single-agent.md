@@ -21,7 +21,7 @@ updated: 2026-11-17
 
 A multi-agent system is several model loops, each with its own context window and a narrower job, passing work between them. A single-agent system is one loop that does everything, and one loop is still the place to start.
 
-If that advice sounds familiar, it should. Martin Fowler wrote [Monolith First](https://martinfowler.com/bliki/MonolithFirst.html) in June 2015 after watching teams adopt microservices, and what he'd noticed was that "Almost all the successful microservice stories have started with a monolith that got too big and was broken up".
+Martin Fowler wrote [Monolith First](https://martinfowler.com/bliki/MonolithFirst.html) in June 2015 after watching teams adopt microservices, and what he'd noticed was that "Almost all the successful microservice stories have started with a monolith that got too big and was broken up".
 
 So I'll take the question in that order for [AI agent architecture](/articles/ai-agents/): what a second agent buys, what it costs, and what the person who told everyone not to build these now says works.
 

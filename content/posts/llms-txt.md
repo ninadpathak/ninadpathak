@@ -50,7 +50,7 @@ Server logs answer whether anything fetches the file. An [Ahrefs study published
 
 Ahrefs notes that its customers skew technical and SEO-aware, and it didn't check whether the files followed the proposal.
 
-Fern's figures for the docs it hosts point the other way, and [agents reading docs](/articles/agents-reading-docs/) sets the two studies side by side.
+Fern's figures for the API docs it hosts point the other way: the file is fetched there, by coding agents, as an index. I added this paragraph after reading that report, and [agents reading docs](/articles/agents-reading-docs/) sets the two studies side by side.
 
 ## Four real files, checked against the proposal
 

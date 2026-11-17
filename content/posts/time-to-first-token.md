@@ -9,16 +9,16 @@ date: 2026-03-08
 description: 'Time to first token (TTFT) explained: what it measures, why reasoning models need time to first answer token, and how TTFT behaves under load.'
 status: published
 work_note: 'I''m a technical writer, and what I offer on time to first token is an explanation of what the number measures and where the wait comes from. For the developer content I''ve published, see [my portfolio](/portfolio/).'
-title: 'Time to First Token (TTFT): What It Measures and What It Misses'
+title: "What Time to First Token (TTFT) Measures"
 slug: time-to-first-token
 updated: 2026-11-17
 ---
 
 Time to first token (TTFT) is the time from sending a request to a language model to receiving the first token back. It is the number people quote for how fast an application feels, and it holds up as long as the first token is something the user can see.
 
-Web performance has been through this with Time to First Byte. web.dev's [TTFB guide](https://web.dev/articles/ttfb), first published in October 2021, says the metric "precedes every other meaningful loading performance metric", and then tells readers how much weight to give it: "Because TTFB isn't a Core Web Vitals metric", a site doesn't have to hit the good threshold if the metrics that follow are healthy.
+web.dev's [TTFB guide](https://web.dev/articles/ttfb), first published in October 2021, says Time to First Byte "precedes every other meaningful loading performance metric", and then tells readers how much weight to give it: "Because TTFB isn't a Core Web Vitals metric", a site doesn't have to hit the good threshold if the metrics that follow are healthy.
 
-A first byte arrives before anything is painted. Reasoning models have put TTFT in that position, because their first token can be thinking that never reaches the screen.
+A first byte arrives before anything is painted. A reasoning model's first token can be thinking that never reaches the screen.
 
 TTFT and tokens per second are the two numbers that [LLM inference](/articles/ai-engineering/) is tuned against, and the first of them is the subject here.
 

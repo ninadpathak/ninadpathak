@@ -14,7 +14,7 @@ date: 2026-04-19
 description: 'AI memory management for LLMs: the memory layers, who should decide what gets written, eviction and scope with runnable examples, and the smallest system worth building.'
 status: published
 work_note: 'I ran a team of 13 writers at Mem0, which sells memory infrastructure. This page is independent of that work, and every code block on it was run with its output shown. [My portfolio](/portfolio/) has the Mem0 case study.'
-title: 'AI Memory Management for LLMs: What Works'
+title: "AI Memory Management for LLMs"
 slug: ai-memory-management
 video: ai-memory-management
 updated: 2026-11-17

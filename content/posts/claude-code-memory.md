@@ -21,7 +21,9 @@ slug: claude-code-memory
 
 Claude Code memory is a set of files read into each new session. There are two kinds, `CLAUDE.md` files that you write and auto memory that Claude writes for itself, and unless you resume the old conversation, nothing else carries over.
 
-Anthropic's [memory documentation](https://code.claude.com/docs/en/memory) opens with the reason: "Each Claude Code session begins with a fresh context window." It is the condition of Leonard Shelby in Christopher Nolan's 2000 film Memento, who in [Wikipedia's summary](https://en.wikipedia.org/wiki/Memento_(film)) gets by on "an elaborate system of photos, notes, and tattoos".
+Anthropic's [memory documentation](https://code.claude.com/docs/en/memory) opens with the reason: "Each Claude Code session begins with a fresh context window." 
+
+Leonard Shelby, in Christopher Nolan's 2000 film Memento, can't form new memories, and in [Wikipedia's summary](https://en.wikipedia.org/wiki/Memento_(film)) he gets by on "an elaborate system of photos, notes, and tattoos".
 
 So what goes wrong for Leonard? He trusts whatever his notes say, and by the film's end he is, in that summary's words, "willing to lie to himself to be happy".
 

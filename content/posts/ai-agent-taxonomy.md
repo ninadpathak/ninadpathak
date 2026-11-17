@@ -23,7 +23,7 @@ updated: 2026-11-17
 
 Tesla sells a feature called Full Self-Driving, and [Wikipedia's article on self-driving cars](https://en.wikipedia.org/wiki/Self-driving_car), as it read on November 17, files it as a "Level 2 (hands/on, eyes/on)" system. Waymo's robotaxis sit two levels higher, because the SAE levels, published in 2014, rank a system by how much of the driving a human still has to do and say nothing about how clever the software is.
 
-Types of AI agents are worth ranking by that measure too, by how much an agent decides and does before a person looks. The first two are reactive and tool-using agents, and above them come loop agents and multi-agent systems, with persistent-goal agents at the top.
+Types of AI agents can be ranked by how much an agent decides and does before a person looks. The first two are reactive and tool-using agents, and above them come loop agents and multi-agent systems, with persistent-goal agents at the top.
 
 A car's level changes rarely, though the article records Mercedes withdrawing its Level 3 feature in January 2026. An agent's type is a configuration, so one model can answer a single question in one deployment and work unattended for a week in another.
 

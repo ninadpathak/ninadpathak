@@ -11,7 +11,7 @@ date: 2026-11-17
 description: A team that let agents write every line found its build frequently red. Google's pager rule from the SRE book says how often a person can be asked to stop.
 slug: red-build-nobody-reads
 status: published
-title: 'A Red Build Is a Pager, and Agents Are Wearing It Out'
+title: "Applying Google's pager rule to a build that is always red"
 work_note: 'I write documentation, which is the trade of deciding what a busy reader has to see. This essay applies that to build lights and changelogs, and [my portfolio](/portfolio/) has the client work.'
 ---
 
@@ -39,7 +39,7 @@ Google's Site Reliability Engineering book, published in 2016, has a rule about 
 
 "Every time the pager goes off, I should be able to react with a sense of urgency. I can only react with a sense of urgency a few times a day before I become fatigued."
 
-The rule treats an engineer's attention as a budget that the alerting system spends. A red build is a page sent to a whole team, and it draws on the same budget.
+The rule treats an engineer's attention as a budget that the alerting system spends. A red build asks every engineer on a team to stop and look, so each one spends from it.
 
 Continuous integration depends on a failure being rare enough that somebody stops, and the pager rule says how rare that is: a few times a day.
 

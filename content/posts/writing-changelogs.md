@@ -17,7 +17,7 @@ takeaways:
 - Write each entry so it makes sense when a search or a tool lifts it out of the file.
 - State the condition under which a user notices the change, then the action.
 - Keep an Unreleased section and add entries with the pull request.
-title: How to Write a Changelog That Developers Actually Read
+title: "How to Write a Changelog"
 updated: 2026-11-17
 ---
 

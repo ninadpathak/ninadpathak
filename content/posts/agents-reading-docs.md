@@ -13,7 +13,7 @@ date: 2026-11-16
 description: Fern says agents are now over half of the requests to the docs it hosts. A close read of the numbers, what they change for docs teams, and what they leave out.
 slug: agents-reading-docs
 status: published
-title: 'A Request Is Not a Reader: What Fern''s Agent Traffic Data Shows'
+title: "What Fern's agent traffic report made me change in my llms.txt article"
 work_note: 'I help teams with AI-ready documentation audits, so a report on what agents fetch from docs sites bears on my own work. [Write to me](/contact/) about an audit of your docs.'
 ---
 
@@ -71,6 +71,6 @@ Ahrefs and Fern can both be right, since Ahrefs sampled 137,210 domains across i
 
 The usage pattern is the useful part: "an agent reads llms.txt once, then fetches the Markdown for the pages it needs." An index earns its place under that pattern, and a single file holding the whole site doesn't, which is why Fern says it stopped generating llms-full.txt.
 
-What my article should now say is narrower than either study. On an API docs site the file gets fetched, by coding agents, as an index.
+What my article should say is narrower than either study: on an API docs site the file gets fetched, by coding agents, as an index. So I've changed it, and the llms.txt guide now sets Fern's figures beside the Ahrefs study where it used to cite Ahrefs alone.
 
 No traffic log shows whether the integration an agent wrote after reading a page worked. Until someone publishes that, request share measures fetching, and the writing decision is the one it always was: finish the reference and the changelog first, and keep the guides for the person who chooses.
