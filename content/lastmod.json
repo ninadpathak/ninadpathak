@@ -5,7 +5,7 @@
   },
   "agent-design-space": {
     "lastmod": "2026-11-17",
-    "sources": "55e0dc387d03d9841b3c7a6e189b7dbba07c9629aa8d9fab2134a0c4226b30c3"
+    "sources": "dfd4c7c484f1df15081030a1804d11358313bf065c554861f11ca9510de38899"
   },
   "agent-error-handling": {
     "lastmod": "2026-11-17",
@@ -29,15 +29,19 @@
   },
   "agent-memory-types": {
     "lastmod": "2026-11-17",
-    "sources": "c1643d1d2121a4e5a971d2a3442cbfe1ca1cdb0aa8419b9a02110481d253fc53"
+    "sources": "8b0d79504b0532e9b3c87265ae980108812b2de665e7927e51f8b436fd2b2204"
   },
   "agent-vs-ai-assistant": {
     "lastmod": "2026-11-17",
-    "sources": "3dd4497d71f2049a449d6a136d05fd1c9cbe78f3751814bdb19fe7da5e1d67e1"
+    "sources": "44df9fd4eb284b0c7415db1a6ad0e673b0bbed4c1625b0386b973ed90ddaf6eb"
   },
   "agentic-workflows": {
     "lastmod": "2026-11-17",
-    "sources": "470b1cd09bd86f9fd1ec7195cd156b06ef02e0a3951579e20a4a82a75c67ae6c"
+    "sources": "39495b86d0802602ec801cd1d87015f5137e001fbe08b97eed58cde00adb3d80"
+  },
+  "agents-on-call-runbooks": {
+    "lastmod": "2026-11-17",
+    "sources": "8e154838a142b5efd7dc5d1bb2286cc296bc155491eaef86df00835fe56ae7e5"
   },
   "agents-reading-docs": {
     "lastmod": "2026-11-17",
@@ -49,7 +53,7 @@
   },
   "ai-agent-taxonomy": {
     "lastmod": "2026-11-17",
-    "sources": "d6f03f10f95430cca36733df30dbfe82041653eebb9bc3b1d0fc8fc051928843"
+    "sources": "da6449736901c3306625185b97367088151d8c85859cba940f4d48461de320ed"
   },
   "ai-crawlers": {
     "lastmod": "2026-11-17",
@@ -121,7 +125,7 @@
   },
   "devtools-documentation": {
     "lastmod": "2026-11-17",
-    "sources": "69fb2850c16b10f2da3d0bbe7b55ef48d6ec691bed83ea0a6c9e90343eb63c78"
+    "sources": "69b4393aa3e9aa8deb3d4f994a6115018b7cf7a029685d67663712175e043ae5"
   },
   "docs-accessibility": {
     "lastmod": "2026-11-17",
@@ -157,7 +161,7 @@
   },
   "documentation-velocity": {
     "lastmod": "2026-11-17",
-    "sources": "d47379e84c0312ac299091459eb8377fff347cf60c7fa612757ba80ac14990e6"
+    "sources": "af2cf8945518f429621ea1ed1dab593923e7230ef1b162d53b4c73df716cecdf"
   },
   "engineer-to-writer": {
     "lastmod": "2026-11-17",
@@ -177,7 +181,7 @@
   },
   "internal-vs-external-docs": {
     "lastmod": "2026-11-17",
-    "sources": "bf6c3f4bbcf0e44fff1ade90ba48143e2f4131223c43f35f1026b8cf800b2fff"
+    "sources": "7a9dc8ff27931cf5b9dbe721a48352ce3dd14c18854f649f972dc66f72419682"
   },
   "kv-cache-eviction": {
     "lastmod": "2026-11-17",
@@ -189,7 +193,7 @@
   },
   "llm-context-windows": {
     "lastmod": "2026-11-17",
-    "sources": "4be55400d7db26432b421d2eeeeb5f0973fcee192868ffe6471039da10ec6f59"
+    "sources": "a04e79deba076e2623be3f11c5a5dc01d69314d51119dda171f1cbc2142e3d52"
   },
   "llm-inference-optimization": {
     "lastmod": "2026-11-17",
@@ -265,7 +269,7 @@
   },
   "runbook-template": {
     "lastmod": "2026-11-17",
-    "sources": "7346f81fae7f28cd017b580195313baa07548dacbc812bd439a033f003f3a658"
+    "sources": "86fada89ffed6d70962020096d050335b1fe0a83f71ac486c3b5b86c6244ec3b"
   },
   "semantic-caching": {
     "lastmod": "2026-11-17",
@@ -297,7 +301,7 @@
   },
   "technical-writing-for-engineers": {
     "lastmod": "2026-11-17",
-    "sources": "38e5920c5de12c4667c3bb26d2a6a985df5cbc17832a144175ae2135fd458170"
+    "sources": "951b5468cf04a99b4fcead42d466e317115643f46ea60e1d9c37f3e177aed85c"
   },
   "time-to-first-token": {
     "lastmod": "2026-11-17",
@@ -321,7 +325,7 @@
   },
   "writing-for-ai-products": {
     "lastmod": "2026-11-17",
-    "sources": "eef0b39f5f0b90ef0b0395c74cf685a4dd54d3563ec2ec84adc392670fbaa9b6"
+    "sources": "9f3e449e9244405a3c9c856d8152af6a39d307d29fe484da1270d268ae3355ba"
   },
   "writing-release-notes": {
     "lastmod": "2026-11-17",
