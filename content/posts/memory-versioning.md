@@ -1,142 +1,151 @@
 ---
 category: ai-engineering
 date: '2026-05-05'
-description: If your agent overwrites its memory, you cannot pass a compliance audit.
-  How to build append-only memory versioning and trace agent reasoning.
+description: 'How to make agent memory auditable: append-only versions, a source for every write and a hash chain, with a runnable SQLite ledger and its output.'
 slug: memory-versioning
 status: published
 work_note: 'I ran the writers at a memory vendor, Mem0, and here I take the question an auditor would ask of any such product: what did the agent know when it decided? The case study is [in my portfolio](/portfolio/).'
 title: Memory Versioning and Audit Trails for Regulated AI Agents
+updated: 2026-11-17
 ---
 
-An AI agent that hallucinates in a consumer app is annoying. The same hallucination inside a financial compliance review or a healthcare diagnostic pipeline becomes a liability event.
+Stroq, a tool shown on Hacker News on November 5, scans a coding agent's sessions and promises to ["trace risky commands to the content that dictated them"](https://github.com/AGGIB/Stroq). An auditor asks the same thing of an agent's memory: for any past decision, what did the agent know, and what put each fact there.
 
-Someone signs off on the agent's output, and that signature is now attached to a wrong answer nobody can explain.
+Memory versioning is how a store answers that. It keeps every version of a fact with the time it held and the source that produced it, and it never overwrites one.
 
-Nearly every tutorial on agent memory tells you to connect an LLM to a vector database, run a similarity search, and overwrite the user profile when new information arrives. An `UPDATE` statement against an agent's memory store in a regulated environment means you have already failed the audit.
+## How do you make agent memory auditable?
 
-Proving exactly what the agent knew at the exact millisecond it made a decision is the whole game for regulated agents. Overwrite a memory and you destroy the context that drove every historical decision.
+Agent memory is auditable when it has an append-only history, a source for every write and a way to detect edits. With those in place you can reconstruct what the agent knew at any moment and show where each fact came from.
 
-You can no longer debug the agent, and you can no longer defend its actions to an auditor who asks why it did what it did six weeks ago.
+The parts map to questions an auditor asks.
 
-Building a diagnostic agent for a compliance workflow taught me this the painful way. The agent failed a test case, so I opened the database to see what context it had retrieved.
+| Question | What the store needs |
+| --- | --- |
+| What did the agent know on that date? | Every version kept, with the times it was valid |
+| Why did it believe that? | A source recorded with each write |
+| Has the record been changed since? | A hash that chains each row to the one before |
 
-A later turn had already modified that memory. I couldn't reconstruct the prompt the agent actually saw, which meant I couldn't tell whether the bug was in the model, the retrieval, or my own code.
+## Why does overwriting memory break an audit?
 
-A standard vector store was never going to work. We needed an append-only audit trail.
+An overwrite destroys the state that explains earlier decisions. Suppose an advisory agent stores `risk tolerance: low` for a user, recommends bonds, and two weeks later replaces the value with `high` after a new conversation.
 
-**Short answer:** Do not use `UPDATE` or `DELETE` for agent memory. Implement an append-only architecture where every state change writes a new immutable row.
+A reviewer who asks why the agent recommended bonds finds a store that says the user's tolerance is high. The recommendation now looks like an error, and nothing in the database can show otherwise.
 
-Store the memory embedding alongside a cryptographic hash of the reasoning trace that triggered the change. Treat your agent's memory like an event-sourced ledger, not a CRUD table.
+Software has had the remedy for a long time. Martin Fowler's [Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html), dated December 12, 2005, describes it as ensuring "that all changes to application state are stored as a sequence of events", so that "we can also use the event log to reconstruct past states".
 
-## The problem with mutable memory
+## What does an append-only memory ledger look like?
 
-The standard approach to agent memory keeps a single "working profile." A user says "my risk tolerance is low," and the agent writes `risk_tolerance: low`.
+It is a table in which each change adds a row, the previous row is closed with an end time, and each row carries a hash of its content and of the row before. The version below runs on Python's standard library.
 
-The user comes back a month later, says "actually, I want to put some money into crypto," and the agent overwrites the record with `risk_tolerance: high`.
+```python
+"""An append-only memory ledger in SQLite: as-of queries and a tamper check."""
+import hashlib
+import sqlite3
 
-The audit trail is gone the moment that overwrite lands. Say a regulator asks why the agent recommended municipal bonds on Tuesday and a Bitcoin ETF on Thursday.
+db = sqlite3.connect(":memory:")
+db.execute("""create table memory (
+    id integer primary key, entity text, fact text, source text,
+    valid_from text, valid_to text, prev_hash text, hash text)""")
 
-Your database shows only the current state, so you have nothing to point at. There is no time-travel, only the present.
 
-Traditional software solved this years ago with [Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) or temporal databases, where you never overwrite a record, you append the next one. Agents add a wrinkle the bank-ledger version never had: the state isn't a tidy boolean flag, it is often a 1,536-dimension embedding or a dense semantic summary that no human will diff by eye.
+def digest(prev_hash, entity, fact, source, valid_from):
+    return hashlib.sha256("|".join([prev_hash, entity, fact, source, valid_from]).encode()).hexdigest()
 
-## The Append-Only Architecture
 
-Every memory operation becomes an `INSERT` under an append-only architecture. Nothing ever gets edited in place, the way a paper ledger only lets you write the next line, never erase a prior one.
+def write(entity, fact, source, at):
+    """Close the current row for this entity, then append the new one."""
+    db.execute("update memory set valid_to = ? where entity = ? and valid_to is null", (at, entity))
+    last = db.execute("select hash from memory order by id desc limit 1").fetchone()
+    prev_hash = last[0] if last else ""
+    db.execute("insert into memory (entity, fact, source, valid_from, prev_hash, hash) values (?,?,?,?,?,?)",
+               (entity, fact, source, at, prev_hash, digest(prev_hash, entity, fact, source, at)))
 
-Rather than a table of facts, you keep a table of events. Every row needs:
-1. `entity_id`: Who or what this memory is about.
-2. `memory_content`: The actual text or structured data.
-3. `embedding`: The vector representation of the content.
-4. `timestamp`: When this became true.
-5. `valid_to`: When this was superseded (null if current).
-6. `trace_id`: The specific reasoning chain or tool call that produced this memory.
 
-When the agent needs to "forget" or "update" a memory, it inserts a new row and stamps `valid_to` on the old one. Point-in-time recovery falls out of that for free.
+def as_of(entity, at):
+    return db.execute("""select fact, source from memory where entity = ? and valid_from <= ?
+                         and (valid_to is null or valid_to > ?)""", (entity, at, at)).fetchone()
 
-You can ask the database "what were the active memories for this user at `T=1`" by filtering `WHERE timestamp <= T1 AND (valid_to IS NULL OR valid_to > T1)`, and get back exactly the context the agent saw at that instant.
 
-If you are using a framework like [LangGraph](https://github.com/langchain-ai/langchain), you can use its built-in thread-level checkpointing to maintain some of this state. But thread checkpoints do not persist long-term semantic knowledge across separate sessions.
+def verify():
+    prev_hash = ""
+    for row in db.execute("select id, entity, fact, source, valid_from, prev_hash, hash from memory order by id"):
+        if row[5] != prev_hash or row[6] != digest(prev_hash, *row[1:5]):
+            return f"chain broken at row {row[0]}"
+        prev_hash = row[6]
+    return "chain intact"
 
-For that, you need a dedicated memory ledger.
+
+write("user-17:risk", "risk tolerance is low", "turn 4: 'I can't afford to lose this money'", "2026-11-03T10:00")
+write("user-17:risk", "risk tolerance is high", "turn 31: 'put some of it into crypto'", "2026-11-12T16:30")
+
+print("as of Nov 10:", as_of("user-17:risk", "2026-11-10T09:00"))
+print("as of Nov 14:", as_of("user-17:risk", "2026-11-14T09:00"))
+print("rows kept:", db.execute("select count(*) from memory").fetchone()[0])
+print(verify())
+
+db.execute("update memory set fact = 'risk tolerance is high' where id = 1")
+print("after editing row 1 in place:", verify())
+```
+
+Running `python3 memory_ledger.py` printed this.
+
+```text
+as of Nov 10: ('risk tolerance is low', "turn 4: 'I can't afford to lose this money'")
+as of Nov 14: ('risk tolerance is high', "turn 31: 'put some of it into crypto'")
+rows kept: 2
+chain intact
+after editing row 1 in place: chain broken at row 1
+```
+
+The first two lines are the audit answer: on November 10 the agent believed the user's tolerance was low, and the stored source says why. The last line shows the chain catching an edit made directly in the database.
+
+A single mutation is left in the design. Closing a row sets its `valid_to`, which is outside the hash, so the content of a row can't change unnoticed and its end time can.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/memory-versioning/append-vs-overwrite.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/memory-versioning/append-vs-overwrite.narrow.svg" width="288" height="1000"><img class="np-has-narrow" src="/static/images/diagrams/memory-versioning/append-vs-overwrite.svg" width="720" height="544" alt="Two ways to change a memory. The append-only ledger inserts a new row and stamps the old one as superseded, so v1, v2, and v3 all remain and any point in time can be recovered. A destructive update overwrites the row: v2 replaces v1, and the prior state is gone." loading="lazy" decoding="async"></picture></a>
   <figcaption>Inserting a new row and stamping valid_to on the old one gives point-in-time recovery for free.</figcaption>
 </figure>
 
-## Linking memory to reasoning
+## How do you link a memory to the reasoning behind it?
 
-Knowing *what* the agent remembered is only half the battle. You also need *why* it remembered it.
+Record the source at write time, as a required field, because it can't be recovered afterwards. The `source` column in the ledger above holds the turn and the words that justified the fact.
 
-Link every memory write to a reasoning trace. When the agent records "user prefers cautious investments," that row must carry a `trace_id` pointing to the exact prompt, user input, and LLM output that justified the extraction.
+Where the model writes memory through a tool, make the tool's source parameter required, so a write without one is rejected by the schema. A fact with no source is one nobody can tell apart from an inference the model made out of a passing remark.
 
-Otherwise you end up staring at a fact with no provenance, unable to say whether the user actually requested caution or the model inferred it from one offhand sentence about not liking surprises.
+Stroq advertises that property for commands, and it matters more for memory, since a stored fact is reused. A wrong command runs once, and a wrong memory is loaded as true in every later session until someone traces it.
 
-[Mem0](https://github.com/mem0ai/mem0), an open-source memory layer, handles this by treating memory extraction as a distinct, loggable event. Their architecture separates the storage of the memory from the extraction process, making it easier to attach metadata to the operation.
+## What does a regulator ask for?
 
-With [Anthropic's tool use features](https://docs.anthropic.com/en/docs/tool-use), you can enforce this at the schema level by making your `update_memory` tool require a `justification` parameter. The agent physically cannot write to the database without stating its reasoning in the tool call payload, the same way a strict expense system refuses a reimbursement that arrives without a receipt attached.
+The clearest written requirement I know of is in the EU AI Act, adopted in 2024. [Article 12](https://artificialintelligenceact.eu/article/12/) says "High-risk AI systems shall technically allow for the automatic recording of events (logs) over the lifetime of the system."
 
-```json
-{
-  "name": "write_memory",
-  "description": "Store a new fact in long-term memory. You must justify this extraction.",
-  "input_schema": {
-    "type": "object",
-    "properties": {
-      "fact": {"type": "string"},
-      "justification": {"type": "string", "description": "The exact quote or reasoning that validates this fact"}
-    },
-    "required": ["fact", "justification"]
-  }
-}
-```
+The article is about high-risk systems and about event logs, and it doesn't mention agent memory. My reading is that a memory write is an event that changes what the system will do next, so a team under that rule should want it in the record.
 
-## The cost of immutability
+## How do you audit a vector database?
 
-None of this comes free.
+Keep the ledger as the record and treat the vector index as a copy that can be rebuilt from it. A vector index has no notion of which version of a fact is current, so that knowledge has to come from the table.
 
-Storage cost and retrieval complexity are the two bills you pay. Your vector database balloons because every historical variant of a fact stays on disk forever.
+A pair of rules follows from that, and both are design choices on my part. Only rows with no `valid_to` are embedded for retrieval, so a superseded fact can't outrank the current one, and the index is rebuilt from the ledger when the two disagree.
 
-A user who revises their address three times now has four rows where a mutable store would have one.
+Frameworks separate the same two concerns. LangGraph's [persistence documentation](https://docs.langchain.com/oss/python/langgraph/persistence) says its layer "gives agents short-term memory through checkpointers and long-term memory through stores", and the versioning described here applies to the second kind.
 
-The retrieval step is where it bites harder. Run a naive vector search against an append-only store and you can pull back a superseded version of a memory purely because its embedding happens to sit closer to the query than the current one.
+Version history is useful only if state survives a restart in a readable form, which the guide to [serializing agent memory between sessions](/articles/memory-serialization/) covers.
 
-The agent then acts on the user's old address, confidently.
+## What does versioning cost?
 
-Reaching for a vector database that supports pre-filtering is the fix. Filter the search to vectors where `valid_to IS NULL` before similarity ranking runs, so deprecated rows never enter the candidate set.
+It costs storage and a filter on every read. A fact occupies one row for every version it has had, and every query has to say whether it wants the current row or the row for a past date.
 
-We use [SQLite-vec](https://github.com/asg017/sqlite-vec) for local testing precisely because it combines relational metadata filters with vector similarity in one query.
-
-## Shadowing vs. Versioning
-
-When pre-filtering vectors is too slow or your infrastructure does not support it, **Relational Shadowing** is the fallback.
-
-The pattern keeps a standard, mutable vector database for fast retrieval, and every mutation to that store also writes a synchronous, immutable log row to a relational database like PostgreSQL. The fast path and the audit path run side by side.
-
-Semantic search lives in the vector DB, the audit record lives in Postgres. Need to reconstruct the past?
-
-Pull the event log from Postgres and replay it to rebuild the exact state. That replay-from-the-log idea is what I covered when discussing [state persistence across sessions](/articles/memory-serialization/).
-
-The agent stays fast, and the compliance team still gets its paper trail.
-
-Version history is useful only if state survives a restart in a readable form. The guide to [serializing agent memory between sessions](/articles/memory-serialization/) covers that persistence layer before versioning begins.
+Both costs are small beside the cost of the question it answers. A team that can't say what its agent knew last month can't debug it either, which makes the ledger worth having with or without a regulator.
 
 ## FAQ
 
-**How long should we keep historical memory versions?** Treat them like application logs. For standard debugging, 30 to 90 days is usually sufficient.
+**Doesn't keeping every version risk confusing the agent?**
 
-For regulated environments (finance, healthcare), you must tie the retention policy to your standard data compliance rules, which can mean 7 years. You must also implement hard-delete workflows for GDPR/CCPA compliance, which breaks the immutability rule by legal necessity.
+Only if old versions reach the prompt. Retrieval should read current rows, and the history is for people and for audits.
 
-**Doesn't keeping every version increase hallucination risk?** Only if your retrieval pipeline is sloppy. If you fail to filter out deprecated memories (`valid_to IS NOT NULL`), the agent will pull contradictory facts into its context window and hallucinate trying to reconcile them.
+**Can I use git for this?**
 
-Strict metadata filtering is mandatory.
+For a single agent that keeps its memory as files, yes, since commits give versions and sources in the commit message. A database ledger fits better when many users or agents write at once.
 
-**Can we just use git for this?** There is an emerging pattern called Git-ContextController where agent state is literally committed to a git repository as text files. It works beautifully for local, single-tenant agents because you get diffs, branches, and time-travel for free.
+**Is the hash chain necessary?**
 
-It scales poorly for high-throughput, multi-tenant cloud agents because of locking and concurrency issues.
-
-**What about cryptographic signing?** For non-repudiation, where you have to prove to a third party that nobody tampered with the logs, you can cryptographically sign each memory row. You hash the payload, the timestamp, and the hash of the previous row, which chains every entry to the one before it so editing any single row breaks every hash downstream.
-
-The structure is overkill for nearly every application, and warranted when your agent is executing autonomous financial trades that a counterparty might later dispute.
+It is necessary when someone outside the team has to trust the record. Inside a team, the append-only rule and database permissions cover the common case, and the chain adds proof that nobody edited a row.

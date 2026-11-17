@@ -1753,6 +1753,65 @@
         "coding-agent-memory",
         "claude-code-memory"
       ]
+    },
+    {
+      "id": "stroq-show-hn",
+      "url": "https://github.com/AGGIB/Stroq",
+      "author": "AGGIB",
+      "date": "2026-11-05",
+      "date_note": "Show HN submission date, item 50380704.",
+      "title": "Stroq",
+      "discussion": "https://news.ycombinator.com/item?id=50380704",
+      "quotes": [
+        "trace risky commands to the content that dictated them"
+      ],
+      "connects": [
+        "memory-versioning"
+      ]
+    },
+    {
+      "id": "fowler-event-sourcing-2005",
+      "url": "https://martinfowler.com/eaaDev/EventSourcing.html",
+      "author": "Martin Fowler",
+      "date": "2005-12-12",
+      "title": "Event Sourcing",
+      "quotes": [
+        "that all changes to application state are stored as a sequence of events",
+        "we can also use the event log to reconstruct past states",
+        "Martin Fowler 12 December 2005"
+      ],
+      "connects": [
+        "memory-versioning",
+        "memory-serialization"
+      ]
+    },
+    {
+      "id": "eu-ai-act-article-12",
+      "url": "https://artificialintelligenceact.eu/article/12/",
+      "author": "European Union",
+      "date": "2024",
+      "title": "EU AI Act, Article 12: Record-Keeping",
+      "quotes": [
+        "High-risk AI systems shall technically allow for the automatic recording of events (logs) over the lifetime of the system."
+      ],
+      "connects": [
+        "memory-versioning"
+      ]
+    },
+    {
+      "id": "langgraph-persistence-docs",
+      "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+      "author": "LangChain",
+      "date": "2026-11-17",
+      "title": "LangGraph persistence",
+      "quotes": [
+        "gives agents short-term memory through checkpointers and long-term memory through stores"
+      ],
+      "connects": [
+        "memory-versioning",
+        "memory-serialization",
+        "short-term-agent-memory"
+      ]
     }
   ],
   "unused_leads": [
@@ -1912,6 +1971,7 @@
       "**Breaking:** `client.retryCount` has been replaced by `client.retry.maxAttempts`. Rename the field before upgrading or the client will fall back to its default retry limit.",
       "This release is backward compatible for REST API users. The JavaScript SDK now requires Node.js 20 or later."
     ],
-    "short-term-agent-memory": []
+    "short-term-agent-memory": [],
+    "memory-versioning": []
   }
 }
