@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/deerflow-memory/stage-handoff.mmd",
-  "hash": "6496841804741305",
+  "hash": "0f23240842c685b6",
   "pele": "1.8.0",
   "width": 720,
   "height": 256,
@@ -18,7 +18,7 @@
       "mono": 11
     }
   },
-  "alt": "A conversation passes through fact extraction and then a write gate. Facts that pass are saved as one Markdown file each, and a later conversation has the relevant ones injected into its prompt.",
-  "caption": "DeerMem extracts facts after a quiet period, checks each against a write gate, stores one Markdown file per fact and injects the relevant ones into later prompts.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/deerflow-memory/stage-handoff.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/deerflow-memory/stage-handoff.narrow.svg\" width=\"288\" height=\"728\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/deerflow-memory/stage-handoff.svg\" width=\"720\" height=\"256\" alt=\"A conversation passes through fact extraction and then a write gate. Facts that pass are saved as one Markdown file each, and a later conversation has the relevant ones injected into its prompt.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>DeerMem extracts facts after a quiet period, checks each against a write gate, stores one Markdown file per fact and injects the relevant ones into later prompts.</figcaption>\n</figure>"
+  "alt": "A conversation passes through fact extraction and then a write gate. Facts that pass are saved as one Markdown file each, and a later conversation has the highest-confidence ones injected into its prompt until a token budget is full.",
+  "caption": "DeerMem's default mode extracts facts after a quiet period, checks each against a write gate, stores one Markdown file per fact and injects the highest-confidence ones into later prompts.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/deerflow-memory/stage-handoff.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/deerflow-memory/stage-handoff.narrow.svg\" width=\"288\" height=\"728\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/deerflow-memory/stage-handoff.svg\" width=\"720\" height=\"256\" alt=\"A conversation passes through fact extraction and then a write gate. Facts that pass are saved as one Markdown file each, and a later conversation has the highest-confidence ones injected into its prompt until a token budget is full.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>DeerMem's default mode extracts facts after a quiet period, checks each against a write gate, stores one Markdown file per fact and injects the highest-confidence ones into later prompts.</figcaption>\n</figure>"
 }
