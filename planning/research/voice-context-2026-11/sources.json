@@ -3570,7 +3570,7 @@
     },
     {
       "id": "langgraph-memory-concepts",
-      "url": "https://docs.langchain.com/oss/python/langgraph/memory",
+      "url": "https://docs.langchain.com/oss/python/concepts/memory",
       "author": "LangChain",
       "date": "2026-11-17",
       "title": "Memory overview",
@@ -5340,19 +5340,29 @@
     ],
     "agentic-workflows": [
       "add caching to the API",
-      "all tests pass"
+      "all tests pass",
+      "fixed the failing test",
+      "use pnpm",
+      "Add caching"
     ],
     "semantic-caching": [
       "Can I send an item back?",
       "How do I cancel my last order?",
       "When does my plan renew?",
-      "the same thing"
+      "the same thing",
+      "What is your return policy?",
+      "Can I send an item back?",
+      "How do I reset my password?",
+      "I forgot my password, how can I change it?"
     ],
     "agent-memory-types": [
       "The user deploys on Fridays",
       "The deploy on Friday failed on a migration timeout",
       "migrations on this database need a longer timeout",
-      "somewhere else"
+      "somewhere else",
+      "what did I deploy on Friday?",
+      "what timeout do migrations need?",
+      "memory"
     ],
     "rag-evaluation": [
       "When do I get billed?",

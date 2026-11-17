@@ -18,11 +18,11 @@ updated: 2026-11-17
 
 The types of agent memory are working memory, which is what the model can see right now, and three kinds of long-term memory: episodic for what happened, semantic for what is true, and procedural for how to act. The split comes from a 2023 paper, [Cognitive Architectures for Language Agents](https://arxiv.org/abs/2309.02427), which borrowed it from older work on human and machine cognition.
 
-The two middle names are older still. Endel Tulving coined [episodic memory](https://en.wikipedia.org/wiki/Episodic_memory) in 1972 to separate remembering an event from knowing a fact.
+The names episodic and semantic are older than the paper. Endel Tulving coined [episodic memory](https://en.wikipedia.org/wiki/Episodic_memory) in 1972 to separate remembering an event from knowing a fact.
 
-An agent needs the same separation for a practical reason. An event and a fact get looked up in different ways, and a store built for one answers badly for the other.
+An agent needs Tulving's separation for a practical reason: "what did I deploy on Friday?" is answered by looking up a time, and "what timeout do migrations need?" is answered by looking up a meaning. A store indexed only by meaning answers the Friday question badly.
 
-So the type you're storing comes before the store you pick, in any design for [AI agent memory](/articles/agent-memory/).
+So in any design for [AI agent memory](/articles/agent-memory/), I'd decide which type of memory I'm storing before I pick a database for it.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/agent-memory-types/memory-types.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-memory-types/memory-types.narrow.svg" width="288" height="624"><img class="np-has-narrow" src="/static/images/diagrams/agent-memory-types/memory-types.svg" width="720" height="288" alt="Working, episodic, semantic and procedural memory side by side. Working memory is the context window, and it lasts until the session ends or the window is compacted. Episodic memory is the record of what happened across sessions, kept in time order. Semantic memory holds what is true, such as a fact about the user. Procedural memory holds the rules the agent acts by, such as its system prompt." loading="lazy" decoding="async"></picture></a>
@@ -31,7 +31,7 @@ So the type you're storing comes before the store you pick, in any design for [A
 
 ## What are the types of agent memory?
 
-There are four: working memory, which is short-term, and the long-term types episodic, semantic and procedural. The paper defines them for agents built on language models, and LangGraph's [memory documentation](https://docs.langchain.com/oss/python/langgraph/memory) gives each long-term type a plain example.
+There are four: working memory, which is short-term, and the long-term types episodic, semantic and procedural. The 2023 paper defines all four for agents built on language models, and LangChain's [memory documentation](https://docs.langchain.com/oss/python/concepts/memory) gives each long-term type a plain example.
 
 | Type | What it holds | An agent example |
 | --- | --- | --- |
@@ -40,27 +40,27 @@ There are four: working memory, which is short-term, and the long-term types epi
 | Semantic | Facts about the world and the user | "The user deploys on Fridays" |
 | Procedural | The rules the agent acts by | The system prompt and the agent's own code |
 
-Product names don't always follow the table. A feature called memory in one tool may store only facts, and in another only a history of sessions.
+Product features named "memory" don't always map onto one row of that table. A memory feature in one tool may store only facts about the user, and in another tool it may store only a history of past sessions.
 
 ## What is working memory in an agent?
 
-It's the context window. Everything the model can use on this turn is there, and nothing else is.
+Working memory in an agent is the context window, which holds everything the model can use on the current turn.
 
-So working memory is fast, complete and temporary. When the session ends or the window is compacted, whatever wasn't written somewhere else is gone, which is the limit my page on [context windows](/articles/llm-context-windows/) covers.
+Working memory is temporary. When the session ends or the window is compacted, whatever wasn't written somewhere else is gone, which is the limit my page on [context windows](/articles/llm-context-windows/) covers.
 
-Long-term memory is the "somewhere else". The long-term types differ in what gets written and in how it's read back.
+Long-term memory is any store outside the context window that the agent writes to, so the text survives the session. Episodic, semantic and procedural memory differ in what gets written and in how it's read back.
 
 ## What is the difference between episodic and semantic memory?
 
 Episodic memory records events and semantic memory records facts. "The deploy on Friday failed on a migration timeout" is an episode, and "migrations on this database need a longer timeout" is the fact someone drew from it.
 
-The paper puts the two writes side by side, and LangGraph's docs repeat it: experiences go to episodic memory, and facts go to semantic memory. An agent that reflects on its episodes can turn them into facts.
+The 2023 paper and LangChain's memory docs give the same rule: experiences go to episodic memory, and facts go to semantic memory. An agent that reviews its episodes can turn them into facts, the way the Friday failure became a rule about timeouts.
 
-The name hides a trap. LangGraph's docs point out that semantic memory is a term from psychology for stored knowledge, and semantic search is a retrieval method, so a vector index doesn't make a store semantic memory.
+The name semantic memory gets confused with semantic search. LangChain's docs point out that semantic memory is a term from psychology for stored knowledge, and semantic search is a retrieval method, so a vector index doesn't make a store semantic memory.
 
 ## Why does the memory type decide the lookup?
 
-Because a question about events is usually a question about time, and similarity search doesn't know what time it is. The script below asks one question of a five-line event log I wrote for the purpose, by meaning in several wordings and then by time.
+The memory type decides the lookup because a question about events is usually a question about time, and similarity search has no notion of time. <!-- evidence-three: the script's docstring and output show three wordings --> The script below asks what changed in the last hour of a five-line event log I wrote for the purpose, first by similarity search in three wordings and then with a filter on the timestamp.
 
 ```python
 """Ask one question of the same event log by meaning, in three wordings, then by time."""
@@ -142,40 +142,40 @@ by time, last 60 minutes (an episodic lookup):
      20 min ago  Renamed the billing worker queue to invoices
 ```
 
-Read the scores before the order. The five events, from 20 minutes to 41 days old, score within 0.05 of each other on every wording, so the ranking among them is close to noise.
+Look at the similarity scores before you look at the ranking. The five events, from 20 minutes to 41 days old, score within 0.05 of each other on every wording, so the ranking among the five is decided by differences too small to mean anything.
 
-And the order changes with one word of the question. "Change" puts a 12-day-old edit first, "modify" puts a 50-minute-old one first by 0.001, and "do" puts the newest first.
+The ranking also changes when one word of the question changes. "Change" puts a 12-day-old edit first, "modify" puts a 50-minute-old one first by 0.001, and "do" puts the newest first.
 
-So similarity carries no signal about time here. The time lookup returns the two events from the last hour on every wording, because it never reads the words.
+So in this run a similarity score says nothing about when an event happened. The lookup by timestamp returns the two events from the last hour for every wording, because a timestamp filter doesn't read the wording at all.
 
-I wrote the log, and it's five lines against one small model, so it shows a mechanism and no rate. But the mechanism is general: episodes want an index on time or session, and facts want an index on meaning.
+I wrote the five-line log myself and tested one small embedding model, so the run shows how the failure happens and not how often it happens. The design rule it supports is that episodes need an index on time or session, and facts need an index on meaning.
 
-[RAG vs memory](/articles/rag-vs-memory/) goes further into how the two differ.
+[RAG vs memory](/articles/rag-vs-memory/) goes further into how retrieving documents differs from recalling events.
 
 ## Where does procedural memory fit?
 
-It's the part people forget to call memory. Procedural memory holds the instructions the agent follows, which for a language-model agent means the system prompt and the code around it.
+Procedural memory is the type that often isn't labelled as memory at all. It holds the instructions the agent follows, which for a language-model agent means the system prompt and the code around it.
 
 An agent that edits its own instructions after a correction is writing to procedural memory.
 
-That's the riskiest write, since a bad rule changes every later run. The paper calls it significantly riskier than writing to episodic or semantic memory.
+Editing instructions is the riskiest kind of memory write, since one bad rule changes every later run. The paper calls it significantly riskier than writing to episodic or semantic memory.
 
 ## How does each type fail?
 
-Each type fails in a way you can recognise, and a single store hides which one you're looking at.
+Each memory type fails in its own recognisable way, and putting all four types in a single store makes the four failures look the same.
 
-- **Working memory** fails by loss. The agent forgets a constraint from early in a long session.
-- **Episodic memory** fails by contradiction. The agent says it finished something it never ran.
-- **Semantic memory** fails by confidence. The agent states an outdated fact as current.
-- **Procedural memory** fails by repetition. The agent makes one mistake on every run, because the mistake is a rule.
+- **Working memory** loses things: the agent forgets a constraint from early in a long session.
+- **Episodic memory** contradicts the record: the agent says it finished something it never ran.
+- **Semantic memory** goes out of date: the agent states an old fact as current.
+- **Procedural memory** repeats a mistake on every run, because the mistake is a rule.
 
-The layered design in [AI memory management](/articles/ai-memory-management/) keeps them apart from the start.
+The layered design in [AI memory management](/articles/ai-memory-management/) gives each memory type its own store from the start.
 
 ## FAQ
 
 **What are the types of agent memory?**
 
-Working memory, which is the context window, and three long-term types: episodic memory for past events, semantic memory for facts and procedural memory for the rules the agent follows.
+The types are working memory, which is the context window, and the long-term types: episodic memory for past events, semantic memory for facts and procedural memory for the rules the agent follows.
 
 **Is semantic memory the same as semantic search?**
 
@@ -183,4 +183,4 @@ No. Semantic memory is stored knowledge, and semantic search is a way of finding
 
 **Which memory type should an agent have first?**
 
-Start with working memory managed well, then add semantic memory for facts that must survive a session. Add episodic memory when the agent has to answer questions about what it did.
+Start by keeping the context window to what the current task needs, then add semantic memory for facts that must survive a session. Add episodic memory when the agent has to answer questions about what it did.
