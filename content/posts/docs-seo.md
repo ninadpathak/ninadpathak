@@ -170,7 +170,9 @@ Description: Validate Orbit webhook signatures and reject replayed requests.
 Opening:     Use the signing secret and timestamp header to verify each payload.
 ```
 
-I also read the headings with the sidebar hidden, to see whether the procedure still makes sense. “Create an API key” and “Recover from an expired key” pass that test. “Setup” and “Errors” fail it, because they only make sense to someone who can see which product section they're in.
+I also read the headings with the sidebar hidden, to see whether the procedure still makes sense.
+
+“Create an API key” and “Recover from an expired key” pass that test. “Setup” and “Errors” fail it, because they only make sense to someone who can see which product section they're in.
 
 A task page is finished when it has all six of these:
 
