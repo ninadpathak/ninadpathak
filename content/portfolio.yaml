@@ -2,6 +2,8 @@
 # Wayback Machine capture that still shows it and original_url keeps the publisher's address.
 # An entry with original_url and no url has no usable capture, so its card renders without a link
 # and reads "no longer online". A card with both reads "archived copy".
+# byline names the person a piece was published under when that is someone else. The card says
+# so beside the client, and the page's structured data makes no author claim for that entry.
 entries:
   # TinyFish
   - title: "Best Cloud Browsers for AI Agents in 2026: 6 Compared"
@@ -43,6 +45,13 @@ entries:
     client: "TinyFish"
     category: "AI Systems"
     url: "https://www.tinyfish.ai/blog/agentic-search-tools"
+
+  # Mastra
+  - title: "What is the Agent2Agent (A2A) protocol? How AI agents delegate work"
+    client: "Mastra"
+    category: "AI Systems"
+    url: "https://mastra.ai/blog/what-is-agent-to-agent-protocol"
+    byline: "Sam Bhagwat"
 
   # DevTools / Code Review
   - title: "Code Review Best Practices for Engineering Teams"
