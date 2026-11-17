@@ -1,18 +1,18 @@
 %% @fig 01
-%% @kicker Memory between DeerFlow stages
-%% @alt A DeerFlow workflow runs as a sequence of stages: plan, research, and report. Each stage works in its own fresh working memory, the prompt at execution time, then writes its outputs to the session state file. The file grows stage by stage, and the next stage reads it into its working memory, so stopping and resuming a run only needs that one file.
-%% @caption Working memory resets between stages; the session file carries state forward, so a failed run resumes from its last stage.
+%% @kicker The path of a DeerFlow memory
+%% @alt A conversation passes through fact extraction and then a write gate. Facts that pass are saved as one Markdown file each, and a later conversation has the relevant ones injected into its prompt.
+%% @caption DeerMem extracts facts after a quiet period, checks each against a write gate, stores one Markdown file per fact and injects the relevant ones into later prompts.
 %% @path s1>f1>s2>f2>s3
 %% @glyph s1 | tokens
-%% @glyph f1 | ledger rows=1
-%% @glyph s2 | tokens
-%% @glyph f2 | ledger rows=2
+%% @glyph f1 | core
+%% @glyph s2 | stop
+%% @glyph f2 | doc
 %% @glyph s3 | tokens
 %% @spacing 20,20
 flowchart LR
-  s1["Plan"]
-  f1["State"]
-  s2["Research"]
-  f2["State"]:::focal
-  s3["Report"]
+  s1["Chat"]
+  f1["Extract"]
+  s2["Gate"]
+  f2["Facts"]:::focal
+  s3["Prompt"]
   s1 --> f1 --> s2 --> f2 --> s3

@@ -1,7 +1,7 @@
 # Narrated explainer for /articles/deerflow-memory/, imported by tools/import_video.py from
 # ninadpathak-video films/deerflow-memory (render of 2026-10-29T02:47:58+05:30).
 name: DeerFlow memory in 40 seconds
-description: 'How DeerFlow keeps a workflow resumable: working memory resets between stages, a plain JSON session file carries each stage''s outputs forward, and a pluggable store like pgvector holds findings across runs.'
+description: "A 40-second narrated film made for an earlier version of the DeerFlow memory page. It is not embedded on the page and is queued for a new render."
 upload_date: '2026-10-29T02:47:58+05:30'
 duration_seconds: 40
 width: 1920

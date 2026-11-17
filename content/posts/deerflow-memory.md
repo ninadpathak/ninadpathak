@@ -1,318 +1,104 @@
 ---
 category: agent-memory
 primary_query: deerflow memory
+siblings:
+- agent-memory-types
+- agent-memory-evidence
+- memory-compression
 bridges:
-- slug: agent-error-handling
-  reason: Memory is one step in the agent loop, and the agents hub covers the loop around it.
 - slug: agent-harnesses
-  reason: Memory is one step in the agent loop, and the agents hub covers the loop around it.
-- slug: contextual-retrieval
-  reason: A memory read path is a retrieval problem.
+  reason: DeerFlow describes itself as an agent harness, and memory is one part of what a harness supplies.
 date: 2026-04-19
-description: 'A deep dive into the memory architecture of DeerFlow: layered context
-  passing, session state files, sub-agent isolation, and how it compares to Letta,
-  AutoGen, and CrewAI.'
+description: 'DeerFlow memory is DeerMem by default: one Markdown file per fact, written after a gate and injected into later prompts. Read from the repository on November 17, 2026.'
 status: published
 work_note: "I write tutorials and technical articles for AI companies, and I run the product before I write a line. I'm Ninad Pathak, a freelance technical writer, and [we can work together](/services/freelance-technical-writer-for-ai-companies/)."
 title: How Memory Works in DeerFlow
 slug: deerflow-memory
-video: deerflow-memory
+updated: 2026-11-17
 ---
 
-Structured context passing is what I call the way DeerFlow organizes memory. Rather than relying on a central vector store or a global knowledge graph, DeerFlow passes memory between agents through explicit JSON state files and Markdown context documents.
+DeerFlow's memory is a local store called DeerMem that keeps each remembered fact as its own Markdown file. It writes those facts on its own after a conversation goes quiet, and puts the relevant ones into the prompt of later conversations.
 
-Each agent in a workflow receives exactly what it needs at the moment it needs it, nothing more.
+Around 1995, Daniel Bernstein's [Maildir](https://en.wikipedia.org/wiki/Maildir) format gave every email message its own file, so that no program had to lock a shared mailbox to deliver one.
 
-What you get is an architecture you can audit and debug. A single state file can make a failed run easier to trace than interleaved logs from several agents.
-
-Anyone who has watched an opaque agent system lose track of what happened three steps ago will recognize the relief.
+DeerFlow stores facts that way too, and its rules about what may be written are stricter than any I've read in an open agent project. Everything below is from the [DeerFlow repository](https://github.com/bytedance/deer-flow) as it stood on November 17, 2026, and it's one worked case of [AI agent memory](/articles/agent-memory/).
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/deerflow-memory/stage-handoff.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/deerflow-memory/stage-handoff.narrow.svg" width="288" height="728"><img class="np-has-narrow" src="/static/images/diagrams/deerflow-memory/stage-handoff.svg" width="720" height="256" alt="A DeerFlow workflow runs as a sequence of stages: plan, research, and report. Each stage works in its own fresh working memory, the prompt at execution time, then writes its outputs to the session state file. The file grows stage by stage, and the next stage reads it into its working memory, so stopping and resuming a run only needs that one file." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Working memory resets between stages; the session file carries state forward, so a failed run resumes from its last stage.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/deerflow-memory/stage-handoff.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/deerflow-memory/stage-handoff.narrow.svg" width="288" height="728"><img class="np-has-narrow" src="/static/images/diagrams/deerflow-memory/stage-handoff.svg" width="720" height="256" alt="A conversation passes through fact extraction and then a write gate. Facts that pass are saved as one Markdown file each, and a later conversation has the relevant ones injected into its prompt." loading="lazy" decoding="async"></picture></a>
+  <figcaption>DeerMem extracts facts after a quiet period, checks each against a write gate, stores one Markdown file per fact and injects the relevant ones into later prompts.</figcaption>
 </figure>
 
-##The Layered Architecture Of DeerFlow Memory
+## How does DeerFlow store memory?
 
-Three distinct layers organize memory in DeerFlow, and they map cleanly to how humans actually think. Working memory lives in the prompt at execution time.
+As plain files on your disk. The [memory guide](https://github.com/bytedance/deer-flow/blob/main/docs/guide/memory.md) describes one `memory.json` per user, holding two summaries, and one Markdown file per fact under `agents/{agent_name}/facts/`.
 
-Session memory lives in structured files that persist across turns. Long-term memory lives in a configurable store you plug in.
+The contributor notes for the memory code put the rule in a sentence: "Facts are one Markdown file each." The JSON file never holds facts or an index of them.
 
-Working memory in DeerFlow is the current context window. It contains the system prompt, the task description, the conversation history, and any retrieved documents.
+Search does use an index, a SQLite full-text one, and the notes treat it as derived data that can be rebuilt from the Markdown files at any time. So the files are the memory, and you can read or edit them by hand.
 
-Between major workflow stages, that layer resets. What matters here is that DeerFlow does not treat working memory as a dump of everything known.
+My page on the [types of agent memory](/articles/agent-memory-types/) would call this semantic memory with a short summary on top. DeerMem keeps facts, and it doesn't keep a log of episodes.
 
-It treats it as a curated snapshot of what matters right now, the way a surgeon lays out only the instruments for the current step rather than wheeling in the entire supply room.
+## What does DeerFlow write to memory, and when?
 
-Session memory captures the accumulated state of a research or task workflow. When a DeerFlow workflow runs across multiple stages, each stage writes its outputs to a session file.
+It writes facts extracted from what the user said and from the assistant's final replies. A turn in which the assistant asked for a tool is left out, and the [contributor notes](https://github.com/bytedance/deer-flow/blob/main/backend/packages/harness/deerflow/agents/memory/AGENTS.md) give the reason as a rule: "Tool-call intent is not memory."
 
-The next stage reads that file and folds its contents into working memory. You can stop a workflow mid-execution and resume it later by reading that one file, which is exactly what saved me the afternoon a benchmark run died at stage eleven of fourteen and I picked it back up without rerunning the first ten.
+Extraction waits for a pause. The guide gives a quiet period of 30 seconds by default, with a cap of 300 seconds from the first pending update.
 
-```python
-# DeerFlow session state structure (simplified)
-session_state = {
-    "workflow_id": "research-2026-04-19-001",
-    "current_stage": "web_research",
-    "completed_stages": ["task_decomposition", "initial_planning"],
-    "stage_outputs": {
-        "task_decomposition": {
-            "subtasks": ["gather_prerequisites", "run_benchmark", "compile_results"],
-            "next_stage": "web_research"
-        },
-        "initial_planning": {
-            "goals": ["measure_latency_p50", "compare_qps_limits"],
-            "constraints": ["budget < $50", "max 2 hour runtime"]
-        }
-    },
-    "memory_snapshots": [
-        {"stage": "task_decomposition", "summary": "Decomposed into 3 subtasks"},
-        {"stage": "initial_planning", "summary": "Set latency and budget constraints"}
-    ]
-}
-```
+Then comes the part I'd copy. Every proposed fact is classified by scope, durability and authority, and a deterministic write gate decides whether it's stored.
 
-Long-term memory in DeerFlow is where the design earns its keep. You plug in your own store.
+Durable, descriptive facts about the user get in. Temporary task state and one-off permissions stay in the conversation's own state, and duplicates are skipped when the update is applied.
 
-The framework ships with adapters for vector databases, PostgreSQL with pgvector, and plain file-based retrieval. The long-term store holds facts and findings that survive beyond the current session, say the benchmark results from last week that this week's run wants to compare against.
+## How does DeerFlow decide what to forget?
 
-When a new session starts, DeerFlow retrieves relevant long-term context and injects it into working memory at the beginning of the workflow.
+It forgets by confidence, unless you choose otherwise. When a scope reaches its maximum number of facts, the default policy evicts in order of confidence alone.
 
-Splitting memory into three layers means you never pay the token cost of loading your entire knowledge base for every single agent invocation. You only load what the current stage needs.
+An optional policy called `hybrid-v1` weighs three signals: confidence at 65%, how recently the user confirmed the fact at 25%, and how often searches returned it at 10%. Corrections can be given reserved slots so they're evicted last.
 
-##Session Continuity Via State Files
+A rule in the notes matters more than the weights. They say "Confirmation needs human evidence", which means a fact doesn't become more trusted because the model mentioned it again.
 
-DeerFlow's structured file passing for session continuity rests on the same principle behind [checkpointing in production AI agents](/articles/agent-error-handling/). DeerFlow enforces it at the workflow level rather than the tool call level.
+That's the distinction my essay on [evidence in agent memory](/articles/agent-memory-evidence/) argues for, and DeerFlow is the first project I've read that enforces it in code.
 
-Should the workflow crash, restart, or get handed off to a different process, it reads the state file and resumes from exactly where it left off.
+## How does memory get back into the prompt?
 
-The state file tracks three things: which stages completed, what each stage produced, and what the next stage should be. Deliberate simplicity is the point.
+Through search and injection. The default search ranks facts by a full-text score combined with time decay and confidence, and the selected facts are injected into the prompt as a block.
 
-Complex systems fail in complex ways. A plain JSON file that a human can read and edit holds up far better than a binary state store that needs special tooling to inspect, the same reason most of us would rather debug a config file than a memory dump.
+Injection can be switched off for the whole system or for one agent. When it's off for an agent, the guide says the previously injected block is removed from that agent's state before the next model call.
 
-```yaml
-# deerflow_session.yaml — session configuration
-session:
-  id: "research-2026-04-19-latency-benchmark"
-  storage_backend: "postgresql"
-  vector_store:
-    provider: "pgvector"
-    connection: "postgresql://user:pass@localhost:5432/deerflow"
-    collection: "session_memories"
-  checkpoint_interval: 2  # checkpoint every 2 stages
+Compaction gets its own handling. DeerMem takes a snapshot of the messages a compaction is about to remove, and queues it for extraction separately, so a long session doesn't lose facts to its own summary.
 
-memory:
-  working_memory:
-    max_tokens: 128000
-    eviction_policy: "oldest_first"
+What a summary can drop is the subject of [memory compression](/articles/memory-compression/).
 
-  session_memory:
-    persist: true
-    path: "/var/lib/deerflow/sessions/{session_id}.json"
+## What other memory backends does DeerFlow support?
 
-  long_term_memory:
-    retrieval_top_k: 10
-    rerank: true
-    rerank_model: "cross-encoder/ms-marco-MiniLM-L-12-v2"
-```
+DeerFlow has optional backends for mem0, OpenViking and Honcho, as of this reading. DeerMem stays the default, and the others send memory to a separate service.
 
-The checkpoint interval tells DeerFlow how often to write a durable state snapshot. Setting it to 2 means every two completed stages produce a checkpoint.
+| Backend | Where memory lives | What the guide says about it |
+| --- | --- | --- |
+| DeerMem | Local files | The default |
+| mem0 | The hosted mem0 platform or a compatible self-hosted server | Opt-in |
+| OpenViking | OpenViking sessions | Opt-in, one user in the first integration |
+| Honcho | A Honcho server, hosted or self-hosted | Opt-in, with no fact editing from DeerFlow's settings page |
 
-A twenty-stage workflow then gives you ten recovery points, so a failure at stage seventeen restarts from the last checkpoint at stage sixteen rather than from scratch.
+I managed the writing team at Mem0 earlier this year, so weigh that row knowing it. I'd start with the default for a different reason, which is that you can open its files.
 
-To test this, I killed a DeerFlow process mid-workflow with a hard SIGKILL and restarted it. The session file held the full state.
+## What do I make of DeerFlow's memory?
 
-The workflow resumed exactly where it left off, with no lost work and no corrupted state.
+It's the strictest write path I've read in an open agent project. The interesting decisions are all about what may be written and by whom, and almost none are about retrieval.
 
-##Sub-agent Isolation In Multi-stage Workflows
+It's also heavily configured. The guide runs long, with flags for deduplication, eviction, relevance ranking and shutdown, and a team adopting it takes on that surface.
 
-DeerFlow workflows compose multiple specialized agents. A research workflow might use a planner agent, a web search agent, a code execution agent, and a synthesis agent.
+And it's one piece of a larger system. DeerFlow calls itself an agent harness, and memory sits beside its sandboxes and sub-agents in the way [agent harnesses](/articles/agent-harnesses/) describes.
 
-Each agent operates in its own context window and writes its outputs to the shared session file when it completes.
+## FAQ
 
-Sub-agent isolation here means two things. First, each agent sees only the context it was explicitly handed.
+**How does memory work in DeerFlow?**
 
-A code execution agent never sees the raw web search results. It sees a curated summary written by the web search agent, the same way a contractor works from the architect's drawings rather than the architect's entire pile of notes and site photos.
+DeerFlow extracts facts from conversations after a quiet period, checks each against a write gate, stores accepted facts as Markdown files and injects relevant ones into later prompts. The default backend is called DeerMem.
 
-Second, each agent runs to completion before the next agent starts, so no two agents ever write to the session file at the same moment.
+**Where does DeerFlow store its memory?**
 
-Running agents in strict sequence eliminates a class of race conditions that plague more loosely coupled multi-agent systems. The cost is latency.
+On local disk by default, as one `memory.json` of summaries per user and one Markdown file per fact. Optional backends store memory in mem0, OpenViking or Honcho.
 
-Four agents that each take thirty seconds add up to a workflow of at least two minutes. For research tasks where depth matters more than speed, I happily take that trade.
+**Can you edit DeerFlow's memory by hand?**
 
-```python
-# DeerFlow multi-agent execution loop (simplified)
-def run_deerflow_workflow(workflow_config: dict, session_store: SessionStore):
-    workflow_id = workflow_config["id"]
-    stages = workflow_config["stages"]  # ordered list of stage configs
-
-    for stage in stages:
-        agent = load_agent(stage["agent_type"])
-        previous_outputs = session_store.read_latest(workflow_id)
-
-        # Inject previous stage outputs into working memory
-        context = build_context(
-            system_prompt=stage["system_prompt"],
-            task=workflow_config["task"],
-            prior_outputs=previous_outputs,
-            long_term_context=retrieve_from_memory(workflow_id)
-        )
-
-        # Agent runs to completion
-        result = agent.run(context)
-
-        # Write outputs to session store
-        session_store.append(workflow_id, stage["name"], result)
-        session_store.checkpoint(workflow_id)
-
-    final_output = session_store.get_final_outputs(workflow_id)
-    return final_output
-```
-
-Keeping agents isolated also lets you swap them in and out without touching the surrounding infrastructure. Replacing the web search agent with a different provider, say moving from a general search API to a domain-specific one, means changing the agent configuration and nothing else.
-
-The session store interface stays the same.
-
-##How Context Gets Passed Between Agents
-
-Context passing in DeerFlow runs through a structured summary protocol. The output of each stage is never raw tool calls or raw LLM completions.
-
-It arrives as a formatted summary document the next agent can use as input.
-
-Passing raw conversation logs between agents and expecting each one to figure out what matters is the mistake I see most multi-agent frameworks make. DeerFlow enforces a contract instead: each stage writes a summary in a known schema, and the next stage reads that schema.
-
-```python
-# Stage output schema (enforced by DeerFlow)
-stage_output = {
-    "stage_name": "web_research",
-    "summary": "String — what was found and why it matters",
-    "key_findings": [
-        {"fact": "string", "source": "url or document ID"},
-        {"fact": "string", "source": "url or document ID"}
-    ],
-    "confidence": "high | medium | low",
-    "next_stage_recommendations": ["suggested focus areas for synthesis"],
-    "raw_data_refs": ["pointers to stored raw outputs"]
-}
-```
-
-The confidence field earns its place. When a stage marks its confidence as low, downstream stages know to treat the findings as provisional, and the synthesis agent can spend more time cross-checking a shaky claim, like a single-source statistic, before it lands in the final output.
-
-The same pattern shows up in my [agent harness](/articles/agent-harnesses/) post, where explicit state transitions stop the model from improvising recovery.
-
-Raw data refs point to stored artifacts. When the web research agent crawls twelve pages, those pages get stored and referenced by ID.
-
-The synthesis agent can pull the actual text whenever it needs to verify a finding against the source.
-
-##Memory Retrieval At Workflow Initialization
-
-When a DeerFlow workflow starts, it refuses to start with a blank slate. It queries the long-term memory store for relevant content from previous sessions, which is where the vector store or pgvector adapter does its work.
-
-The retrieval query comes from the workflow task description and any session initialization parameters. DeerFlow embeds the task description, runs similarity search against the memory store, and returns the top-k results.
-
-Those results get injected into working memory before the first agent runs.
-
-```python
-def initialize_workflow(workflow_id: str, task: str, config: dict):
-    # Retrieve relevant long-term context
-    query_embedding = embed(task, model="text-embedding-3-large")
-    relevant_memories = vector_store.query(
-        vector=query_embedding,
-        top_k=config.get("memory_retrieval_top_k", 10),
-        filters={"session_tag": config.get("topic_tag", "general")}
-    )
-
-    # Build initial context
-    context = {
-        "task": task,
-        "retrieved_memories": relevant_memories,
-        "session_id": workflow_id,
-        "config": config
-    }
-
-    # Write initial session state
-    session_store.init(workflow_id, context)
-    return context
-```
-
-The filters on the query let you scope retrieval to specific topic areas. Running a workflow about latency benchmarking, you have no use for memories about code style debates resurfacing in the planner's context.
-
-Tag-based filtering keeps retrieval focused.
-
-##Production Considerations
-
-Running DeerFlow in production surfaces three concerns the documentation underplays.
-
-**Token budget management.** A twenty-stage workflow piles up serious context when each stage writes verbose summaries, and I have watched a research run quietly drift toward the model's context ceiling by stage fifteen because nobody capped the summaries. Set hard limits on working memory size and enforce truncation or summarization at stage boundaries.
-
-The YAML config above lets you set `max_tokens` on the working memory layer. Leaving that at the default and assuming it will scale is how runs start silently dropping early context.
-
-**State file durability.** DeerFlow writes session state to disk. Should the disk fill up or the write permissions get revoked, the workflow fails silently on the next restart.
-
-Reach for a durability-checked storage backend (postgresql works well) rather than the filesystem adapter for anything mission-critical.
-
-**Memory store query latency.** Long-term memory retrieval adds latency at workflow initialization. A cold vector store with no cached embeddings can take two to three seconds per retrieval query.
-
-For workflows that run hundreds of times per day, those seconds compound into real wall-clock time. Warm your vector store cache, or accept that initialization takes a few seconds and budget for it.
-
-##Comparison To Other Frameworks
-
-Letta treats memory as an operating system, paging context in and out of the LLM window like RAM. DeerFlow takes the inverted approach: keep context small and explicit, pass it between stages as structured documents, and lean on the long-term store for anything that needs to survive across sessions.
-
-Letta wins when you have a single agent that needs to hold an identity over thousands of interactions, like a personal assistant that remembers your preferences across months. DeerFlow wins when you have a workflow that decomposes into specialized stages and you need to audit what each stage found.
-
-AutoGen exposes a more flexible, less opinionated message-passing model where multiple agents run concurrently and exchange messages freely. Such flexibility pays off for complex collaboration patterns.
-
-Debugging gets harder for the same reason, since messages can arrive in non-deterministic order and state scatters across many agents rather than concentrating in one session file.
-
-CrewAI uses role-based agents with shared goals and a manager agent that assigns tasks. Its memory model sits implicit inside the manager's task assignment logic.
-
-DeerFlow's explicit session files run more verbose, yet they are far easier to inspect when something goes wrong, because the state is sitting right there in a file you can open.
-
-The table below summarizes the differences.
-
-| Concern | DeerFlow | Letta | AutoGen | CrewAI |
-|---|---|---|---|---|
-| Memory model | Structured file passing | OS-style paging | Message passing | Manager task assignment |
-| Session continuity | Deterministic file-based | Virtual memory protocol | Message history | Task context |
-| Sub-agent isolation | Sequential, stage-gated | Per-agent memory spaces | Concurrent message exchange | Role-based task isolation |
-| Auditability | High (human-readable JSON) | Medium | Low | Medium |
-| Long-term memory | Pluggable adapter | Built-in | Do-it-yourself | Do-it-yourself |
-| Best for | Structured research workflows | Long-horizon single agents | Complex multi-agent collaboration | Role-based task automation |
-
-DeerFlow is not the right tool for every agent problem. Building a chatbot that needs to remember a user's preferences over months, reach for Letta.
-
-Building a research pipeline that needs to be auditable and resumable, reach for DeerFlow.
-
-##Faq
-
-**How does DeerFlow handle memory in short sessions versus long sessions?**
-
-Short sessions (a few stages, under an hour) rely primarily on working memory and session memory. Long-term memory retrieval is lightweight or skipped.
-
-Long sessions trigger full memory initialization on startup and checkpoint more aggressively. The threshold is configurable via the session config.
-
-**Can I use DeerFlow without a vector database?**
-
-Yes. DeerFlow ships with a filesystem-based memory adapter that stores summaries as Markdown files and retrieves via keyword matching.
-
-It is slower for large knowledge bases but requires zero infrastructure. Switch to pgvector or a managed vector store when you need scale.
-
-**What happens if a stage produces output that the next stage cannot parse?**
-
-DeerFlow enforces schema validation on stage outputs. If a stage produces malformed output, the workflow halts and writes an error to the session file with the stage name, the validation error, and the raw output.
-
-You can fix the output manually and restart from the failed stage.
-
-**How does DeerFlow compare to Model Context Protocol for memory standardization?**
-
-DeerFlow predates MCP but aligns with its philosophy. MCP standardizes how agents talk to memory servers over a network protocol.
-
-DeerFlow standardizes how stages in a workflow pass context through structured files. Both approaches solve the fragmentation problem, just at different layers.
-
-You can use DeerFlow with an MCP-compatible memory server if your infrastructure already speaks MCP.
-
-**Is DeerFlow suitable for real-time conversational agents?**
-
-DeerFlow is built for task-oriented workflows, not free-form conversation. The stage-gated execution model means it is optimized for research, analysis, and code generation tasks where depth matters more than response latency.
-
-For real-time conversation, use a framework designed for that, like VAPI or a simple RAG pipeline. If you want to understand the long-term memory tradeoffs better, read my [breakdown of context retrieval](/articles/contextual-retrieval/).
+Yes. The fact files are Markdown and the search index is rebuilt from them, and the application also has a memory page in its settings.
