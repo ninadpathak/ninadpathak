@@ -10,77 +10,77 @@ bridges:
 - slug: code-documentation
   reason: The comment worth writing is the one that gives a reason the code cannot show.
 date: 2026-11-17
-description: A Reddit post said nobody understands the code after a year of agents. The Claude Code team says nobody needs the whole picture. Naur's 1985 paper shows what both miss.
+description: A Reddit post said nobody understands the code after a year of agents. I think the need to hold code in your head will shrink, and a record of how things shipped is what to keep writing.
 slug: nobody-understands-the-code
 status: published
 title: "What I'd still write by hand in a codebase agents can explain"
 work_note: "Building an AI product whose readers are engineers? I'm Ninad Pathak, a freelance technical writer, and I write tutorials and technical articles for companies like yours after running the product myself. [Hire me](/services/freelance-technical-writer-for-ai-companies/)."
 ---
 
-On November 9 a Reddit post titled "A year after the 100% AI mandate nobody understands our code" [reached Hacker News](https://news.ycombinator.com/item?id=50433079), and the first thing commenters settled was that the post itself looked machine-written. "Pangram said the op post is 100% AI generated", one wrote, and another told readers not to "fall for the bait".
+On November 9 a Reddit post titled "A year after the 100% AI mandate nobody understands our code" [reached Hacker News](https://news.ycombinator.com/item?id=50433079). The first thing commenters settled was that the post itself looked machine-written, so I wouldn't lean on it.
 
-The complaint outlived its source, and a day later the same site was discussing [AI usage generates a fragile codebase](https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/), a post by Evan X. Merz dated November 7.
+The complaint is real, though.
 
-It is the standing objection to [coding agents](/articles/coding-agents/) at work.
+A day later the same site was discussing [AI usage generates a fragile codebase](https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/), which Evan X. Merz published on November 7 and says he wrote himself, and it makes the standing objection to [coding agents](/articles/coding-agents/) at work.
 
-Merz notes that "every word of this article was written by a human", and he makes the charge from inside a large company: "The longer a company relies on AI agents to generate the code, the fewer developers are going to understand the codebase."
+So here's where I stand. People need to know what their codebase does, at the very least, and I also think that need is going to shrink.
 
-I think Merz is describing something real, and that an answer published the month before his post is right about half of it.
+What won't shrink is the value of a record of what happened and how things were shipped. That record is the part I'd still write by hand.
 
-## The answer from a team that ships this way
+## Where I agree with Merz
 
-That answer is in a post the Claude Code team [published on October 15](https://claude.dev/blog/solving-code-review-at-anthropic/), written by Addy Osmani and two colleagues, about reviewing code at the volume agents produce it.
+Merz writes from inside a large company, and his charge is simple: "The longer a company relies on AI agents to generate the code, the fewer developers are going to understand the codebase."
 
-It says code review has always had a second job, spreading understanding of the codebase, and then asks Merz's question for him. With machines doing the reading, "how does anyone learn the code?"
+I think he's describing something real. If code is written by someone with zero understanding of what's happening underneath it, nobody can point at the function or file behind a problem, because that context doesn't exist in any developer's head.
 
-The reply opens "We don't have a formal process for this."
+And I'd put the cost more broadly than a bad incident. Knowing what the code does is what lets you work on it effectively, and a team without that knowledge is slower at everything it touches.
 
-"Nobody on the team keeps a complete mental model of Claude Code in their head, and we don't think anyone needs to. When someone wants to understand a part of the codebase, they ask Claude to write an explainer for exactly that slice."
+Now, Merz says incidents rise and recovery slows in agent-written codebases, and he gives no counts for either. So I agree with the worry and I can't call it proven.
 
-The post brings results with it. Between June and September, it says, "merged pull requests to Claude Code's codebase more than doubled while the share that had to be reverted fell by more than 40 percent."
+## Where I don't oppose Anthropic
 
-Merz brings none. His post says incidents rise and recovery slows in codebases written by agents, and it gives no counts for either, so on evidence the exchange is lopsided in Anthropic's favour.
+The other side has numbers. The Claude Code team [wrote on October 15](https://claude.dev/blog/solving-code-review-at-anthropic/) about reviewing code at the volume agents produce it, and they report that merged pull requests more than doubled between June and September while the share that had to be reverted fell by over 40 percent.
 
-Both sides are arguing about documentation, whether or not they use the word. An explainer is a document, written at the moment someone needs it.
+They also answer Merz's question before he asked it. Nobody on that team keeps a complete mental model of the codebase, they say, "and we don't think anyone needs to", because anyone who wants to understand a slice of it asks Claude to write an explainer for that slice.
 
-## What an explainer is made from
+I don't flatly disagree. If I extrapolate a few years, we probably won't need people to remember what the code does, and a team that ships this way with fewer reverts is evidence for that.
 
-An explainer is made from the code. That is its strength, because it "reflects the code as it is today", which is more than a hand-written architecture page can promise a month after someone wrote it.
+But look at what they replaced the memory with. An explainer is a document, written at the moment someone needs it, so the argument between these two posts is about documentation whether or not either uses the word.
 
-It is also the limit, and the limit was described in 1985.
+## What an explainer can't tell you
 
-Peter Naur's paper [Programming as Theory Building](https://gwern.net/doc/cs/algorithm/1985-naur.pdf) argues that a program is the visible part of a theory its programmers hold, with "any documentation being an auxiliary, secondary product". The programmer who has the theory, Naur writes, "can explain why each part of the program is what it is".
+An explainer is made from the code, and that's its strength. It describes the code as it is today, which a hand-written architecture page can't promise a month after someone wrote it.
 
-The what and the why come from different places. What a module does can be read off the module, by a person or by a model.
+It's also the limit, and Peter Naur described the limit in 1985. His paper [Programming as Theory Building](https://gwern.net/doc/cs/algorithm/1985-naur.pdf) treats a program as the visible part of a theory its programmers hold, and the person who holds that theory "can explain why each part of the program is what it is".
 
-Why it does it that way depends on things that were never in the repository, such as the option that was tried and dropped, or the outage that accounts for an odd timeout. A model asked for the why will supply one, and it will be a plausible reading of the code with nothing to mark the places where it guessed.
+So the what and the why come from different places. What a module does can be read off the module, by a person or by a model.
 
-Naur was stricter than I am being. He held that "reestablishing the theory of a program merely from the documentation, is strictly impossible", and that "The death of a program happens when the programmer team possessing its theory is dissolved."
+Why it does it that way depends on things that were never in the repository, such as the option that was tried and dropped, or the outage behind an odd timeout. Ask a model for the why and you'll get a plausible reading of the code, with nothing to mark where it guessed.
 
-A dead program, in his account, keeps running. What stops is the ability to answer a request for a change well, which is close to what Merz reports from the inside.
+Naur went further than I would. He thought a program's theory can't be rebuilt from documentation at all, and that a program dies when the team holding its theory breaks up, even while it keeps running.
 
 ## Why it works for them
 
-The Anthropic post describes more than explainers, and the rest is where the theory lives. The team works in open Slack channels, and when a change heads the wrong way, "Usually someone in the channel asks why, points at an earlier decision, or suggests a simpler route".
+I think Anthropic's method works for a reason the post mentions almost in passing. The team talks in open Slack channels, and when a change heads the wrong way, someone asks why or points at an earlier decision.
 
-Somebody remembers the earlier decision. The people who hold the theory are present, and a norm the post calls "You land it, you own it" keeps each change attached to a person.
+Somebody remembers the earlier decision. The people who know how things were shipped are still in the room, and a norm the post calls "You land it, you own it" keeps every change attached to a person.
 
-So the explainer covers the what, and the why is carried by people who were there. A team that copies the explainer and lacks the rest should expect the result Merz describes.
+So the explainer covers the what, and the history is carried by people who were there. A team that copies the explainer and lacks those people should expect the result Merz describes.
+
+[A reply to Merz](https://news.ycombinator.com/item?id=50446216) argued that understanding moves up a level, the way few programmers understand the kernel they run on. I don't buy that as it stands, because the kernel has an owner and a written contract, and a service agents generated last year has neither unless someone supplied them.
 
 Change at that volume also wears on the signals a team relies on, and [my essay on red builds](/articles/red-build-nobody-reads/) takes up what happens to a build light. Whether the models change existing code as well as they write new code is a separate question, in [new code versus change](/articles/coding-models-new-code-vs-change/).
 
-[A reply to Merz](https://news.ycombinator.com/item?id=50446216) argued that understanding "does not decrease, it just moves up a level or two", the way few programmers understand the kernel they run on. I think the comparison holds only where the level below has an owner and a written contract, and a service that agents generated last year has neither unless someone supplied them.
+## The part I'd still write by hand
 
-## The part worth writing by hand
+All of this leaves a smaller documentation job than the one teams used to skip. A page that says what the code does can be regenerated whenever someone needs it, and the fresh copy will beat anything kept by hand.
 
-This leaves a smaller documentation job than the one teams used to skip, and a more exact one. A page that says what the code does can be regenerated whenever it is needed, and the regenerated copy will be fresher than anything kept by hand.
+What happened and how it shipped can't be regenerated, so that's the part to write, at the time it happens. Record what was chosen and what was rejected, with the outside fact that forced the choice.
 
-The decisions can't be regenerated, so they are the part to write, at the time they are made. Record what was chosen and what was rejected, with the outside fact that forced the choice.
+A [design doc](/articles/design-doc-template/) keeps exactly that when it has non-goals and a rejected alternative. So does the comment I argued for in the [code documentation guide](/articles/code-documentation/), the one that gives a reason the code can't show.
 
-That is what a [design doc](/articles/design-doc-template/) keeps when it has non-goals and a rejected alternative. It is also the comment I argued for in the [code documentation guide](/articles/code-documentation/), the one that gives a reason the code can't show.
+Naur would say even this falls short of the theory, and he may be right. But it lets a successor put a question to a page, where otherwise they could only put it to the code.
 
-Naur would say even this falls short of the theory, and I agree with him. It is still the difference between a successor who can put a question to a page and one who can only put it to the code.
+So here's a test for any team. Pick a module that agents have changed many times this year, and ask why it's built the way it is and what was decided against.
 
-A test follows for any team. Pick a module that agents have changed many times this year, and ask why it is built the way it is and what was decided against.
-
-If a document answers, the theory has a second home. If only one person can answer, write it down before they leave the team, and if nobody can, the Reddit post was about you, whoever wrote it.
+If a document answers, the history has a second home. If only one person can answer, write it down before they leave the team.
