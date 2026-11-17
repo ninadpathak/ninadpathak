@@ -1,18 +1,14 @@
 %% @fig 01
-%% @kicker Agent patterns by run frequency and risk
-%% @alt The five production agent patterns in order of how often they run and how wide their blast radius is: retrieval-augmented single-loop agents run once per request with the smallest blast radius, then multi-turn conversational agents, workflow orchestration agents, supervisor-delegation agents that split work across several agents, and persistent-goal agents that run continuously and carry state across days with the widest blast radius and the hardest audit.
-%% @caption The later a pattern comes in the sequence, the longer it runs and the more its state has to survive a restart.
-%% @glyph rag | vectors
-%% @glyph conv | tokens
-%% @glyph flow | tools
-%% @glyph sup | loop
-%% @glyph goal | loop corner=flag
-%% @dim rag | goal | Longer runs, wider risk
-%% @spacing 20,22
+%% @kicker Six patterns in three groups
+%% @alt Agent design patterns grouped by who directs the steps. Prompt chaining, routing and parallelization run on paths fixed in code. In orchestrator-workers and evaluator-optimizer a model decides part of the path. In the autonomous agent the model directs every step.
+%% @caption Anthropic's six patterns in my grouping, from paths fixed in code on the left to a model directing every step on the right.
+%% @glyph code | tools
+%% @glyph mixed | loop
+%% @glyph agent | loop corner=flag
+%% @dim code | agent | More decided by the model
+%% @spacing 24,22
 flowchart LR
-  rag["RAG loop"]
-  conv["Chat"]
-  flow["Workflow"]
-  sup["Supervisor"]:::stack
-  goal["Persistent goal"]:::focal
-  rag --> conv --> flow --> sup --> goal
+  code["Path fixed in code"]
+  mixed["Model picks part"]:::stack
+  agent["Model directs all"]:::focal
+  code --> mixed --> agent

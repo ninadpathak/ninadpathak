@@ -19,7 +19,7 @@ sections:
       - post: agent-vs-ai-assistant
         note: "Draws the line at who chooses the next step, then compares the cost and control of building each."
       - post: agent-design-space
-        note: "Maps the patterns that agent designs cluster into."
+        note: "Sets Anthropic's six agent design patterns beside a second list and gives a grid for placing any pattern."
   - heading: "The loop and the harness"
     spokes:
       - post: agent-loop-anatomy

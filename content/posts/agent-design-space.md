@@ -2,129 +2,90 @@
 category: ai-agents
 primary_query: ai agent design patterns
 siblings:
-- agent-loop-anatomy
-- agent-error-handling
+- ai-agent-taxonomy
 - multi-agent-vs-single-agent
-bridges:
-- slug: agent-memory-2026
-  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
-- slug: hybrid-search
-  reason: Retrieval is how an agent reads facts the model was never trained on.
-- slug: short-term-agent-memory
-  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
-- slug: llm-structured-outputs
-  reason: Each turn of the agent loop spends tokens and latency.
-- slug: rag-evaluation
-  reason: Retrieval is how an agent reads facts the model was never trained on.
+- agent-loop-anatomy
 date: 2026-04-26
-description: After surveying production agents across industries, the design space
-  clusters into patterns. Here is what I found.
+description: 'AI agent design patterns from chaining to the autonomous agent, set beside a second list that adds the blackboard, and a grid for placing any pattern.'
 slug: agent-design-space
 status: published
 work_note: "I'm Ninad Pathak, a freelance technical writer. If your AI product's tutorials have fallen behind the product, I write them, and I run the product first. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
-title: 'The Agent Design Space: A Map of What Engineers Are Actually Building'
+title: 'AI Agent Design Patterns: A Map of the Agent Design Space'
 video: agent-design-space
+updated: 2026-11-17
 ---
 
-Three weeks of reading production architecture posts, scraping GitHub for agent implementations, and talking to engineers who run agents at scale taught me one thing the taxonomy diagrams miss: I wanted to know what engineers are actually building, not what the boxes say they should build.
+AI agent design patterns are the named ways to arrange model calls, tools and control flow into a working system. The list people cite comes from Anthropic's [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) of December 19, 2024, which describes five workflows and the autonomous agent.
 
-The real design space of [agentic engineering](/glossary/agentic-engineering/) is messier than the taxonomies suggest. Production agents do not map cleanly into types.
+Software has done this naming once before. Design Patterns, the 1994 book whose authors are known as the Gang of Four, is summed up in [its Wikipedia entry](https://en.wikipedia.org/wiki/Design_Patterns) as "describing 23 classic software design patterns", and what lasted from it, in my reading, was the shared vocabulary.
 
-They cluster around the constraints that decide everything else: how often the agent runs, what it can break when it gets something wrong, and how much a human can audit after the fact.
-
-## The patterns that show up in production
-
-**Retrieval-augmented single-loop agents** are the most common. A user sends a request, the agent retrieves relevant context, reasons about it, calls a tool or two, and returns an answer.
-
-Plenty of RAG applications look exactly like this once someone wraps them in an agent harness. Because the loop runs once, the failure modes stay limited to bad retrieval and bad tool selection.
-
-Teams reach for this shape when the task is bounded and a wrong answer costs little, say a docs-search assistant that surfaces the wrong paragraph and the user just re-asks.
-
-For a map of memory approaches, read [state of AI agent memory in 2026](/articles/agent-memory-2026/); for retrieval mechanics, read [hybrid search with BM25 and vectors](/articles/hybrid-search/). Neither article establishes that retrieval is where a particular agent will fail.
-
-What bites you is retrieval failing silently, the vector search returning three plausible-but-wrong chunks, and the agent confidently building an answer on top of them.
-
-**Multi-turn conversational agents** are the second major cluster. Holding state across a single conversation session is what sets them apart.
-
-They are retrieval-augmented underneath, plus a memory layer that tracks the conversation history and lets the agent reference earlier turns. Customer support bots and coding assistants dominate this category, and the [short-term-memory-for-ai-agents](/articles/short-term-agent-memory/) post covers the mechanisms used in practice.
-
-Context pollution is the failure I see most in this cluster. Every turn appends to the conversation context, and without active compression or windowing, the agent ends up reasoning over a bloated context stuffed with stale earlier turns.
-
-I have watched it happen in production: a customer support agent kept citing a refund the user had already received, because the resolved ticket from three turns back was still sitting in its context window, and it answered the next question as if nothing had been settled.
-
-**Workflow orchestration agents** execute a defined sequence of steps, where each step might itself be an agent or a plain old program. With the workflow laid out upfront, the agent handles routing, error recovery, and conditional branching.
-
-Production is where the [plan-and-execute pattern](/articles/agent-loop-anatomy/) shows up most often in this shape: document processing pipelines, code review automation, and data transformation jobs.
-
-Error handling here looks nothing like the single-loop case. A workflow agent that dies on step four of seven has to either checkpoint state or restart from a known good position, otherwise it re-runs steps one through three and you get duplicate side effects, like a payment fired twice.
-
-I wrote about [circuit breakers](/articles/agent-error-handling/) as a pattern for stopping cascade failures in these systems. A circuit breaker barely earns its keep in a simple single-loop agent, yet it becomes load-bearing once you have a chain of steps that can drag each other down.
-
-**Supervisor-delegation agents** split a task across several specialized agents, with a supervisor running the orchestration. The supervisor decides which sub-agent owns which part of the work, aggregates results, and resolves conflicts when two agents return contradictory answers.
-
-This is the most architecturally complex pattern in the design space.
-
-The [supervisor-agent pattern](/articles/multi-agent-vs-single-agent/) post goes into where this works and where it breaks. One failure deserves naming outright: supervisors rack up hidden coordination costs that teams routinely underestimate.
-
-Every sub-agent call adds latency and one more thing that can break, the way adding people to a meeting adds nothing to the output but multiplies the time spent getting everyone aligned. Parallelize those sub-agent calls and you hit the same challenges I covered in [parallel versus sequential tool calls](/articles/agent-loop-anatomy/).
-
-The speedups are real, and so is the new class of failures you just signed up for.
-
-**Persistent-goal agents** run continuously, carry state across days or weeks, and chip away at goals that need many steps spread over many sessions. Of all the patterns, these look least like software and most like automated employees.
-
-Bug triage agents that watch an issue tracker, research synthesis agents that build up a report over a week, and monitoring agents all live here.
-
-Durability is everything for this pattern, which is why the [agent-loop-anatomy](/articles/agent-loop-anatomy/) matters most. Every component of that loop has to survive a restart.
-
-Drop state when the process recycles overnight and the perceive-think-act cycle wakes up with no idea what it was working toward. Serve stale data from the memory layer and the agent reasons forward from premises that stopped being true days ago, like an employee who comes back from vacation and acts on a plan that was cancelled while they were out.
+The agent lists are thirty years younger and don't yet agree with each other. Choosing among them is the wiring decision in [AI agent architecture](/articles/ai-agents/), and it comes after deciding how much the agent does alone.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/agent-design-space/design-space-map.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-design-space/design-space-map.narrow.svg" width="288" height="744"><img class="np-has-narrow" src="/static/images/diagrams/agent-design-space/design-space-map.svg" width="720" height="288" alt="The five production agent patterns in order of how often they run and how wide their blast radius is: retrieval-augmented single-loop agents run once per request with the smallest blast radius, then multi-turn conversational agents, workflow orchestration agents, supervisor-delegation agents that split work across several agents, and persistent-goal agents that run continuously and carry state across days with the widest blast radius and the hardest audit." loading="lazy" decoding="async"></picture></a>
-  <figcaption>The later a pattern comes in the sequence, the longer it runs and the more its state has to survive a restart.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/agent-design-space/design-space-map.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-design-space/design-space-map.narrow.svg" width="288" height="472"><img class="np-has-narrow" src="/static/images/diagrams/agent-design-space/design-space-map.svg" width="720" height="288" alt="Agent design patterns grouped by who directs the steps. Prompt chaining, routing and parallelization run on paths fixed in code. In orchestrator-workers and evaluator-optimizer a model decides part of the path. In the autonomous agent the model directs every step." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Anthropic's six patterns in my grouping, from paths fixed in code on the left to a model directing every step on the right.</figcaption>
 </figure>
 
-## What the production data shows
+## What are the AI agent design patterns?
 
-Across these patterns, three things stand out.
+Anthropic's post names six, and the table gives each in the post's own words.
 
-**Most agents are simpler than the taxonomy suggests.** Useful as the five-type taxonomy I published last week is for classification, production agents rarely sit cleanly in one type. They are blends with a dominant pattern.
+| Pattern | Anthropic's description |
+| --- | --- |
+| Prompt chaining | "decomposes a task into a sequence of steps, where each LLM call processes the output of the previous one." |
+| Routing | "classifies an input and directs it to a specialized followup task." |
+| Parallelization | "LLMs can sometimes work simultaneously on a task and have their outputs aggregated programmatically." |
+| Orchestrator-workers | "a central LLM dynamically breaks down tasks, delegates them to worker LLMs, and synthesizes their results." |
+| Evaluator-optimizer | "one LLM call generates a response while another provides evaluation and feedback in a loop." |
+| Autonomous agent | "systems where LLMs dynamically direct their own processes and tool usage" |
 
-A common design is a retrieval-augmented single-loop agent with multi-turn conversational memory bolted on. This Type 2-3 hybrid has no clean home in most taxonomies.
+The post files the first five under workflows, where "LLMs and tools are orchestrated through predefined code paths", and keeps the word agent for the last. It carries a note that the tooling it describes has changed since 2024, and the pattern names have outlived the tooling.
 
-**The tool layer decides reliability more than the model does.** Teams with fragile agents almost always had a tool schema problem, not a model problem. The [tool schema design](/articles/llm-structured-outputs/) post covers this in depth, and the short version is that agents fall over when the tool interface is underspecified, when one tool returns errors as a 500 and another returns them as a cheerful 200 with an error string in the body, and when the agent has no defined way to retry a failed call.
+## Do other lists agree?
 
-**Observability is the biggest blind spot.** Right behind tool schema problems, the second most common production failure was teams having no way to see what their agent was doing mid-execution. A minimum viable observability layer earns its place fast here.
+Partly. Kadharmoideen Fadurudeen's [guide to multi-agent patterns](https://kadhar.dev/blog/multi-agent-systems-from-scratch), published in June and discussed on Hacker News on November 5, has three: pipeline, orchestrator and blackboard.
 
-Basic logging is not enough. A production agent also needs structured decision traces, replayable paths, and cost attribution for individual actions.
+The first two map onto prompt chaining and orchestrator-workers. The third has no row in Anthropic's table, and the guide sums it up as "There's no boss."
 
-## Where agents are not being built
+A blackboard design means "Agents read what's on the board, add what they know, and step in when they have something useful." Nothing in Anthropic's six shares state that way, since each of them passes work along a path.
 
-Clear blind spots showed up in the survey too, areas where the demand exists but production-grade implementations stay rare.
+So the lists differ in length and in what they count. I find two questions sort every pattern on both of them.
 
-**Cross-agent state synchronization** is the piece nobody has nailed. When several agents need to share state in real time, teams reach for shared databases or message queues, yet no established pattern exists for doing it without bolting the agents tightly together.
+| | Steps share only what is passed along | Steps share a common store |
+| --- | --- | --- |
+| Code decides the next step | Chaining, routing, parallelization | A pipeline writing to shared state |
+| A model decides the next step | Orchestrator-workers, evaluator-optimizer, autonomous agent | Blackboard |
 
-The post on [message passing between agents](/articles/multi-agent-vs-single-agent/) covers what does exist, and most of it still demands a pile of custom plumbing.
+The grid is mine and neither source draws it. Its use is that a new pattern name can be placed by asking who decides the next step and what the steps share.
 
-**Agent regression testing** barely exists. Agents get tested the way teams test ordinary software: unit tests for functions, integration tests for APIs.
+## How do you choose a pattern?
 
-An agent that sails through every unit test can still blow up in production the moment it meets an input shape it never saw in CI, such as a user pasting a long PDF into a chat that the test suite only ever fed one-line questions. The [RAG evaluation metrics guide](/articles/rag-evaluation/) explains retrieval and answer checks, but those checks do not cover every production input shape.
+Start from the top-left cell and move only when the task forces it. A path fixed in code can be tested step by step, and every move toward the model trades that for flexibility.
 
-**Structured output reliability** from agents is still unsolved. Agents that must emit structured JSON or hit specific action schemas fail at higher rates than agents that just produce freeform text.
+Anthropic's own guidance on when to move is specific. Orchestrator-workers is for "complex tasks where you can't predict the subtasks needed", and evaluator-optimizer is "particularly effective when we have clear evaluation criteria".
 
-The cause is rarely raw model capability and almost always prompt and schema design, which I dug into in [structured-outputs-llms-json-mode-function-calling](/articles/llm-structured-outputs/).
+That second condition is stricter than it sounds. The clearest criteria are ones a program can check, which is why my [lambda calculus exercise](/articles/lambda-calculus-ai/) grades answers with a script.
 
-## The design space is not a menu
+A pattern is a separate choice from a type. My guide to the [types of AI agents](/articles/ai-agent-taxonomy/) ranks systems by how much they decide alone, and [AI agent vs AI assistant](/articles/agent-vs-ai-assistant/) covers the line below which no loop is needed at all.
 
-After all this surveying, the point I keep coming back to is that the design space is not a menu where you pick the most impressive pattern. These patterns exist because the constraints that produce them are real.
+## Where do the patterns break?
 
-A reactive information agent is not a watered-down persistent-goal agent. It is the correct architecture for a bounded task where failure is cheap and nothing needs to persist between runs.
+At the joins. A chain fails when one step's output isn't what the next expects, and an orchestrator fails when a worker misreads its brief, the handoff problem described in [multi-agent vs single-agent systems](/articles/multi-agent-vs-single-agent/).
 
-Picking a simpler pattern is not the mistake. Picking a simpler pattern and then stretching it past its intended scope is, like turning a single-loop docs assistant into something you expect to track a multi-day migration on its own.
+A loop adds its own failure, which is not knowing when to stop. The [anatomy of an agent loop](/articles/agent-loop-anatomy/) goes through one pass, and [error handling for agents](/articles/agent-error-handling/) covers what the code around the loop has to decide.
 
-Sketching a new agent system, I start with the [three questions in the taxonomy post](/articles/ai-agent-taxonomy/). Does it need to act or just generate?
+Shared state fails differently again. A pair of agents writing to one board can overwrite each other, and the board needs the rules any shared store needs.
 
-Does it need to persist state? Does the task complexity genuinely call for multiple agents?
+## FAQ
 
-Those three questions narrow the design space faster than any framework diagram.
+**What are the main AI agent design patterns?**
 
-The [agent-harnesses](/articles/agent-harnesses/) post covers the runtime layer that sits beneath whatever pattern you choose. Whatever architecture you land on, the harness is where reliability gets built or lost.
+Anthropic's 2024 list has prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer and the autonomous agent. Other lists add a shared-state pattern called the blackboard.
+
+**What is the difference between a workflow and an agent pattern?**
+
+A workflow has code fix the path between model calls. An agent pattern leaves the next step to the model.
+
+**Which agent design pattern should I start with?**
+
+The one that fixes as much as possible in code and still does the job, which is often a chain or a router.

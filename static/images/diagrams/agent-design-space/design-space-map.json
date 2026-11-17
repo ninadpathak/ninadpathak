@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/agent-design-space/design-space-map.mmd",
-  "hash": "3e7df5b223668cb2",
+  "hash": "0c9b515f0b7deda5",
   "pele": "1.8.0",
   "width": 720,
   "height": 288,
@@ -12,13 +12,13 @@
   "narrow": {
     "rel": "/static/images/diagrams/agent-design-space/design-space-map.narrow",
     "width": 288,
-    "height": 744,
+    "height": 472,
     "minText": {
       "sans": 13,
       "mono": 9.5
     }
   },
-  "alt": "The five production agent patterns in order of how often they run and how wide their blast radius is: retrieval-augmented single-loop agents run once per request with the smallest blast radius, then multi-turn conversational agents, workflow orchestration agents, supervisor-delegation agents that split work across several agents, and persistent-goal agents that run continuously and carry state across days with the widest blast radius and the hardest audit.",
-  "caption": "The later a pattern comes in the sequence, the longer it runs and the more its state has to survive a restart.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-design-space/design-space-map.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-design-space/design-space-map.narrow.svg\" width=\"288\" height=\"744\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-design-space/design-space-map.svg\" width=\"720\" height=\"288\" alt=\"The five production agent patterns in order of how often they run and how wide their blast radius is: retrieval-augmented single-loop agents run once per request with the smallest blast radius, then multi-turn conversational agents, workflow orchestration agents, supervisor-delegation agents that split work across several agents, and persistent-goal agents that run continuously and carry state across days with the widest blast radius and the hardest audit.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The later a pattern comes in the sequence, the longer it runs and the more its state has to survive a restart.</figcaption>\n</figure>"
+  "alt": "Agent design patterns grouped by who directs the steps. Prompt chaining, routing and parallelization run on paths fixed in code. In orchestrator-workers and evaluator-optimizer a model decides part of the path. In the autonomous agent the model directs every step.",
+  "caption": "Anthropic's six patterns in my grouping, from paths fixed in code on the left to a model directing every step on the right.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-design-space/design-space-map.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-design-space/design-space-map.narrow.svg\" width=\"288\" height=\"472\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-design-space/design-space-map.svg\" width=\"720\" height=\"288\" alt=\"Agent design patterns grouped by who directs the steps. Prompt chaining, routing and parallelization run on paths fixed in code. In orchestrator-workers and evaluator-optimizer a model decides part of the path. In the autonomous agent the model directs every step.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Anthropic's six patterns in my grouping, from paths fixed in code on the left to a model directing every step on the right.</figcaption>\n</figure>"
 }
