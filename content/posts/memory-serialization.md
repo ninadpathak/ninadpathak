@@ -2,9 +2,12 @@
 category: agent-memory
 primary_query: agent state persistence
 siblings:
-- ai-memory-management
-- rag-vs-memory
+- memory-compression
 - memory-versioning
+- context-windows-vs-memory
+bridges:
+- slug: coding-agent-memory
+  reason: Four coding tools each keep state in files of their own, which shows the portability problem.
 date: '2026-04-30'
 description: 'Memory serialization is how an agent persists state across sessions. Three ways to do it, a run of a versioned state record, and why to keep the log.'
 slug: memory-serialization
@@ -16,9 +19,9 @@ updated: 2026-11-17
 
 Zork let players save their position to disk, and BYTE magazine explained in 1981 what the feature was for, in a line [Wikipedia's article on saved games](https://en.wikipedia.org/wiki/Saved_game) preserves: "it was intended to let players play over many weeks". A game too long for one sitting needed a way to write down where the player stood.
 
-Memory serialization is the same feature for an agent. Persisting agent state across sessions means writing what the agent knows and what it was doing to storage, in a form that a later process can load and continue from.
+Memory serialization gives an agent that feature. Persisting agent state across sessions means writing what the agent knows and what it was doing to storage, in a form that a later process can load and continue from.
 
-The parallel breaks on who writes the save. A game engine dumps its own exact state, and an agent's saved state is the model's account of where things stand, which can be wrong when it is written and wrong again by the time it is read.
+A game engine dumps its own exact state. An agent's saved state is the model's account of where things stand, which can be wrong when it is written and wrong again by the time it is read, and that weakness shapes this corner of [AI agent memory](/articles/agent-memory/).
 
 ## What are the ways to persist agent state?
 

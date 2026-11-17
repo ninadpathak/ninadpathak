@@ -2,9 +2,12 @@
 category: agent-memory
 primary_query: hyperagents memory
 siblings:
-- context-windows-vs-memory
-- ai-memory-management
 - short-term-agent-memory
+- memory-versioning
+- ai-memory-management
+bridges:
+- slug: claude-code-memory
+  reason: Claude Code is a shipped product that also keeps memory in plain files.
 date: 2026-04-19
 description: 'HyperAgents memory was written by the agent itself: a key-value JSON store printed in the paper. This page runs it and shows what it keeps and omits.'
 status: published
@@ -17,6 +20,8 @@ updated: 2026-11-17
 Nobody on the research team designed the memory system in HyperAgents. The [paper](https://arxiv.org/abs/2603.19461), first posted on March 19 and revised on November 1, reports that the agent wrote one for itself: "Without explicit instruction to do so, the agent creates mechanisms for storing and retrieving insights across sessions."
 
 Memory in HyperAgents is therefore whatever a given run invented, and the paper prints one example in [its appendix](https://arxiv.org/html/2603.19461v1). The example is a short Python class that keeps notes in a JSON file, and this page runs it and looks at what the agent chose to build and what it left out.
+
+That makes it an unusual case in [AI agent memory](/articles/agent-memory/), since every design choice in it was the agent's own.
 
 ## What is a hyperagent?
 

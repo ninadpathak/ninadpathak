@@ -34,6 +34,8 @@ sections:
         note: "Explains why an agent forgets on restart and the serialization patterns that carry state across sessions."
       - post: memory-versioning
         note: "Builds append-only memory versioning so an agent's reasoning can be traced in an audit."
+      - post: agent-memory-evidence
+        note: "Argues that a memory record should carry how the agent knew, ahead of any shared format."
   - heading: "Several agents, and voice"
     spokes:
       - post: shared-vs-isolated-memory

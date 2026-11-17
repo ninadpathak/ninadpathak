@@ -2,15 +2,14 @@
 category: ai-agents
 primary_query: multi agent systems
 siblings:
-- agent-error-handling
+- ai-agent-taxonomy
+- ai-agent-failures
 - agent-design-space
 bridges:
-- slug: ai-memory-management
-  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
+- slug: claude-code-subagents
+  reason: Claude Code's subagents return only a final report, the read-only split this page recommends.
 - slug: shared-vs-isolated-memory
-  reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
-- slug: llm-context-windows
-  reason: Each turn of the agent loop spends tokens and latency.
+  reason: Several agents either share a store or keep their own, which that page decides.
 date: '2026-04-27'
 description: 'Multi-agent systems vs a single agent: what a second agent buys, what it costs in tokens, where handoffs break, and a test for when to split.'
 slug: multi-agent-vs-single-agent
@@ -22,9 +21,9 @@ updated: 2026-11-17
 
 Martin Fowler wrote [Monolith First](https://martinfowler.com/bliki/MonolithFirst.html) in June 2015, after watching teams adopt microservices. His observation was that "Almost all the successful microservice stories have started with a monolith that got too big and was broken up", and that systems built as microservices from scratch tended to end in trouble.
 
-Multi-agent systems put the same question to agent builders. A multi-agent system is several model loops, each with its own context window and a narrower job, passing work between them, and a single-agent system is one loop that does everything.
+Multi-agent systems raise Fowler's question for agent builders. A multi-agent system is several model loops, each with its own context window and a narrower job, passing work between them, and a single-agent system is one loop that does everything.
 
-The parallel breaks at the interface. Services exchange requests with fixed fields, and agents hand each other prose, so a misunderstanding between two agents has no schema to fail against.
+Services exchange requests with fixed fields. Agents hand each other prose, so a misunderstanding between two agents has no schema to fail against, and that is the weak point in any [AI agent architecture](/articles/ai-agents/) with more than one agent in it.
 
 ## What does a second agent buy?
 

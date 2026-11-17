@@ -1,15 +1,15 @@
 ---
 category: coding-agents
 primary_query: claude code memory
+siblings:
+- claude-md
+- coding-agent-memory
+- claude-code-subagents
 bridges:
-- slug: agent-harnesses
-  reason: A coding agent is one agent loop with a harness around it.
-- slug: llm-context-windows
-  reason: Context limits and token cost decide how a coding agent is configured.
-- slug: multi-agent-vs-single-agent
-  reason: A coding agent is one agent loop with a harness around it.
-- slug: agent-error-handling
-  reason: A coding agent is one agent loop with a harness around it.
+- slug: short-term-agent-memory
+  reason: Instructions given only in conversation are lost at compaction, which that page works through.
+- slug: ai-memory-management
+  reason: Claude Code's two file types are one case of the layering that page describes.
 date: 2026-04-19
 description: 'Claude Code memory is two sets of files read into each new session: CLAUDE.md files you write and auto memory Claude writes. Where they live and what loads.'
 status: published
@@ -20,11 +20,11 @@ slug: claude-code-memory
 video: claude-code-memory
 ---
 
-Leonard Shelby, the lead of Christopher Nolan's Memento, can't form new long-term memories, and [Wikipedia's summary of the film](https://en.wikipedia.org/wiki/Memento_(film)) says he gets by on "an elaborate system of photos, notes, and tattoos". Claude Code is built the same way, and Anthropic's [memory documentation](https://code.claude.com/docs/en/memory) opens with the condition: "Each Claude Code session begins with a fresh context window."
+Claude Code memory is a set of files read into each new session. There are two kinds, `CLAUDE.md` files that you write and auto memory that Claude writes for itself, and nothing else from the last session carries over.
 
-Claude Code memory is the set of files that get read into that fresh window. There are two kinds, `CLAUDE.md` files that you write and auto memory that Claude writes for itself, and everything else from the last session is gone.
+Anthropic's [memory documentation](https://code.claude.com/docs/en/memory) opens with the reason: "Each Claude Code session begins with a fresh context window." It is the condition of Leonard Shelby in Christopher Nolan's 2000 film Memento, who in [Wikipedia's summary](https://en.wikipedia.org/wiki/Memento_(film)) gets by on "an elaborate system of photos, notes, and tattoos".
 
-The parallel breaks where the film gets its plot. Leonard can't inspect his own system from outside, and you can open every one of these files, since the docs describe auto memory as "plain markdown you can edit or delete at any time."
+Leonard can't inspect his notes from outside, and you can open every one of these files, which the docs describe as "plain markdown you can edit or delete at any time." Keeping them true is the standing chore for anyone whose [coding agents](/articles/coding-agents/) remember things.
 
 ## What does Claude Code remember between sessions?
 

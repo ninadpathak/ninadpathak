@@ -1,19 +1,14 @@
 ---
 category: coding-agents
 primary_query: coding agent memory
+siblings:
+- claude-code-memory
+- claude-md
 bridges:
-- slug: context-windows-vs-memory
-  reason: A coding agent's memory files follow the same write, store and read path.
 - slug: memory-serialization
-  reason: A coding agent's memory files follow the same write, store and read path.
+  reason: A handoff note written before closing a session is a small case of serialized state.
 - slug: short-term-agent-memory
-  reason: A coding agent's memory files follow the same write, store and read path.
-- slug: ai-memory-management
-  reason: A coding agent's memory files follow the same write, store and read path.
-- slug: agent-memory-types
-  reason: A coding agent's memory files follow the same write, store and read path.
-- slug: agent-memory-2026
-  reason: A coding agent's memory files follow the same write, store and read path.
+  reason: Forgetting inside one session is a separate failure, covered there.
 date: '2026-05-06'
 description: 'A coding agent forgets between sessions because the model keeps no state. What Claude Code, Codex, Gemini CLI and Cursor each load back in, from their docs.'
 slug: coding-agent-memory
@@ -24,13 +19,11 @@ title: 'Why Your Coding Agent Keeps Forgetting Everything: Memory Persistence in
 updated: 2026-11-17
 ---
 
-HTTP forgets you between requests, and the fix has been in every browser since the 1990s. [Wikipedia's history of the cookie](https://en.wikipedia.org/wiki/HTTP_cookie) dates the idea to June 1994 at Netscape, and describes what a cookie does: the browser sends it back "with every request, introducing states (memory of previous events) into otherwise stateless HTTP transactions."
+A coding agent forgets everything in a new session because the model keeps nothing between sessions. What looks like memory is a file that the tool reads back in at the start of each one.
 
-A coding agent forgets everything in a new session for the same reason a web server did. The model keeps nothing between sessions, and what looks like memory is a file that the tool reads back in at the start of each one.
+HTTP had this problem first. [Wikipedia's history of the cookie](https://en.wikipedia.org/wiki/HTTP_cookie) dates the fix to June 1994 at Netscape, a small piece of data that the browser sends back "with every request, introducing states (memory of previous events) into otherwise stateless HTTP transactions."
 
-The parallel breaks on who writes the note. A server sets its own cookie, and the file a coding agent reads is one that you write.
-
-On the pages cited below, only Claude Code's describes the agent adding notes of its own.
+A server sets its own cookie, and the file a coding agent reads is one that you write. On the pages cited below, only Claude Code's describes the agent adding notes of its own, which is the main difference among the four [coding agents](/articles/coding-agents/) compared here.
 
 ## Why does a coding agent forget between sessions?
 
@@ -39,8 +32,6 @@ Because the model has no memory of its own, and the session is the only place th
 "Large language models don't retain memory between completions. Rules provide persistent, reusable context at the prompt level."
 
 Anthropic's docs put the same fact as the first line of [their memory page](https://code.claude.com/docs/en/memory): "Each Claude Code session begins with a fresh context window." A decision made on Tuesday reaches Wednesday's session only if it was written to a file the tool loads.
-
-[Context windows vs memory](/articles/context-windows-vs-memory/) explains the general split. The rest of this page is about what each tool loads.
 
 ## What does each tool carry into a new session?
 
@@ -61,7 +52,7 @@ Gemini CLI's [page on GEMINI.md](https://geminicli.com/docs/cli/gemini-md/) carr
 
 Claude Code does, and the other pages cited here describe only files that a person writes. Anthropic calls the feature auto memory and describes it as "notes Claude writes itself based on your corrections and preferences".
 
-Those notes stay on the machine that wrote them, and only the top of their index loads into a session. [How memory works in Claude Code](/articles/claude-code-memory/) covers the limits.
+Those notes stay on the machine that wrote them, and only the top of their index loads into a session. The limits are set out in the guide to [Claude Code's memory files](/articles/claude-code-memory/).
 
 An agent that writes its own notes will also write wrong ones. Whichever tool you use, a note that is loaded every session is trusted every session, so the files need the review any shared document gets.
 

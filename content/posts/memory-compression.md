@@ -2,12 +2,14 @@
 category: agent-memory
 primary_query: context compression
 siblings:
-- agent-memory-types
-- ai-memory-management
+- short-term-agent-memory
 - memory-serialization
+- ai-memory-management
 bridges:
 - slug: llm-context-windows
-  reason: The context window limit is the reason an agent needs memory.
+  reason: Every loaded note is paid for in the context window of every session.
+- slug: claude-code-memory
+  reason: Claude Code's 200-line index is the worked example of a small loaded layer.
 date: '2026-05-05'
 description: 'Context compression for agent memory: what an agent should keep between sessions and what to leave out, with Anthropic''s November 2026 memory tests.'
 slug: memory-compression
@@ -19,9 +21,9 @@ updated: 2026-11-17
 
 Every repository has a `.gitignore`, and [Git's documentation](https://git-scm.com/docs/gitignore) gives its job in a sentence: it "specifies intentionally untracked files that Git should ignore." The usual entries are build output and installed dependencies, which a command can produce again.
 
-Context compression for agent memory is the same decision made about knowledge. It decides what an agent carries into its next step or its next session, and what it leaves behind to be looked up again when needed.
+Context compression for agent memory makes that call about knowledge: what an agent carries into its next step or its next session, and what it leaves to be looked up again. It is the part of [AI agent memory](/articles/agent-memory/) that decides what gets written at all.
 
-The parallel breaks on what can be rebuilt. A build directory comes back exactly from one command, and a lesson an agent learned by failing comes back only if it fails again, so that lesson is the thing worth the space.
+A build directory comes back exactly from one command. A lesson an agent learned by failing comes back only if it fails again, so that lesson is the thing worth the space.
 
 ## What counts as context compression?
 
@@ -50,7 +52,7 @@ The comparison is thin as evidence, and the post says so by describing it as "on
 
 ## Do fixed rules decide it well?
 
-The same post suggests they don't, for strong models.
+Anthropic's post suggests they don't, for strong models.
 
 Its authors tested giving models one rule each about what to write. With the rule set to record only failures, "both Opus 5 and Opus 4.7 lost much of the performance boost that memory gave them".
 
@@ -81,7 +83,7 @@ Both failures have the same defence, which is to keep the source. A summary that
 
 Small enough to read every time, with pointers to the rest. Claude Code is the worked example in the post: "It loads only the first 200 lines or 25 KB of MEMORY.md."
 
-That top layer is an index, and the detail sits in files the agent opens when it needs them. [How memory works in Claude Code](/articles/claude-code-memory/) describes the layout, and [AI memory management](/articles/ai-memory-management/) covers the layers in general.
+That top layer is an index, and the detail sits in files the agent opens when it needs them. The guide to [Claude Code memory](/articles/claude-code-memory/) describes the layout, and [AI memory management](/articles/ai-memory-management/) covers the layers in general.
 
 The budget is real because every loaded line is paid for in the [context window](/articles/llm-context-windows/) of every session. A note has to earn its place there, and the rest can wait on disk.
 

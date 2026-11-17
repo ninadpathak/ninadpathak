@@ -1,5 +1,9 @@
 ---
-category: ai-engineering
+category: agent-memory
+primary_query: none
+siblings:
+- memory-serialization
+- memory-versioning
 date: 2026-11-17
 description: A proposal for a shared agent memory format lists five questions a record must answer. This essay argues for a sixth, how the agent knew, and puts it first.
 slug: agent-memory-evidence
@@ -13,6 +17,8 @@ Wikipedia gives any reader a way to challenge a sentence. Its page on [the citat
 An agent's memory file is a page of uncited claims with one reader, and that reader believes all of them. Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, says a wrong note "can be read, and trusted, by Claude in a later session."
 
 On November 7 Mads Thines argued that [agent memory needs its OpenTelemetry moment](https://www.lorekit.io/blog/open-agent-memory-format). I think his proposal is right about the format and puts the field that matters at the bottom of the list.
+
+That field is evidence, and it is the thing [AI agent memory](/articles/agent-memory/) is shortest of.
 
 ## What the proposal asks for
 
@@ -28,7 +34,7 @@ None of the five questions asks how the writer knew. A record can say where it a
 
 The evidence that this field does the work comes from the Anthropic post. On a benchmark where models built their own notes over many sessions, the first model to close the loop was one whose entries "included a rule (and also how it knew the rule was true)".
 
-The same post quotes a note written by a model playing Pokémon, a rule for what to do after several failed throws: "VARY the timing (insert extra 'wait' presses between menu steps) - the catch landed right after doing this."
+Anthropic also quotes a note written by a model playing Pokémon, a rule for what to do after several failed throws: "VARY the timing (insert extra 'wait' presses between menu steps) - the catch landed right after doing this."
 
 The last clause of that note is a citation. A later session reading it knows the rule came from one success, and can weigh it as that.
 
