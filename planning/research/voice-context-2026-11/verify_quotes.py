@@ -8,7 +8,7 @@ Comparison ignores HTML tags, runs of whitespace and curly versus straight quote
 and nothing else. Inline tags such as <code> are removed without adding a space. A fetch failure or a missing quote exits non-zero, so a PASS means
 every quote was found in a page fetched during this run.
 """
-import html, json, pathlib, re, subprocess, sys, urllib.request
+import gzip, html, json, pathlib, re, subprocess, sys, urllib.request
 
 HERE = pathlib.Path(__file__).parent
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -31,7 +31,11 @@ def norm(s):
 
 
 def fetch(url):
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,*/*"})
+    # Some servers send compressed bytes whether or not they were asked for. Asking for gzip
+    # and decompressing it keeps the body readable; any other encoding still fails the
+    # quote check, because the text will not be found.
+    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,*/*",
+                                               "Accept-Encoding": "gzip"})
     for attempt in range(3):
         try:
             data = urllib.request.urlopen(req, timeout=60).read()
@@ -40,6 +44,8 @@ def fetch(url):
             last = error
     else:
         raise last
+    if data[:2] == b"\x1f\x8b":
+        data = gzip.decompress(data)
     if data[:5] == b"%PDF-":
         # A PDF is converted with pdftotext. If the tool is missing this raises, and the
         # source is reported as a fetch failure rather than passed unread.

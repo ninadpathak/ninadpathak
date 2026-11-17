@@ -1858,6 +1858,22 @@
       "connects": [
         "voice-agent-memory"
       ]
+    },
+    {
+      "id": "deepmind-alphaproof-code",
+      "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+      "author": "Pushmeet Kohli and Swarat Chaudhuri",
+      "date": "2026-11-10",
+      "title": "Introducing AlphaProof Code: a breakthrough in verifying complex software at depth",
+      "discussion": "https://news.ycombinator.com/item?id=50439193",
+      "quotes": [
+        "over six million lines of Lean",
+        "Every proof is checked by Lean to verify the agents' work.",
+        "human experts work with AI to decide what to prove, and a group of AI agents does it."
+      ],
+      "connects": [
+        "lambda-calculus-ai"
+      ]
     }
   ],
   "unused_leads": [
@@ -2019,6 +2035,7 @@
     ],
     "short-term-agent-memory": [],
     "memory-versioning": [],
-    "voice-agent-memory": []
+    "voice-agent-memory": [],
+    "lambda-calculus-ai": []
   }
 }
