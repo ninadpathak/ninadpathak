@@ -19,7 +19,7 @@ sections:
       - post: speculative-decoding
         note: "Explains how a smaller draft model predicts tokens for a larger one to speed up generation."
       - post: voice-agent-latency
-        note: "Traces latency in a voice agent stage by stage, from endpointing through speech synthesis."
+        note: "Adds up a voice agent turn stage by stage and argues that endpointing is where to spend effort first."
   - heading: "Throughput and cost"
     spokes:
       - post: llm-inference-optimization

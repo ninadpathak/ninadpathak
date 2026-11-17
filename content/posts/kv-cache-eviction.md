@@ -103,6 +103,8 @@ Not in the sense these papers mean, as far as the docs I checked go. What vLLM d
 
 That's the same cache working in your favour. A long system prompt is computed once and its keys and values serve every request that starts with it, which is how prefix caching shortens [time to first token](/articles/time-to-first-token/).
 
+A voice agent is where [that saving is heard](/articles/voice-agent-latency/), because the caller is waiting in silence for the first word.
+
 So the decisions you'll make in practice are about size and sharing. How many tokens the pool holds, and which requests may read which pages, are settings on the page about [LLM inference optimization](/articles/llm-inference-optimization/) too.
 
 ## Why is the KV cache a security boundary?
