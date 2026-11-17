@@ -20,47 +20,43 @@ work_note: "Tutorials, explainers and comparisons for AI companies are my work a
 </div>
 <p class="visual-caption"><a href="https://xkcd.com/285/">xkcd 285</a>, Randall Munroe, CC BY-NC 2.5.</p>
 
-An agent's memory file is a page of uncited claims with one reader. Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, says what that reader does with a wrong one: it "can be read, and trusted, by Claude in a later session."
+An agent's memory file is a page of uncited claims with one reader. Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, admits what that reader does with a wrong one: a later session reads it and trusts it.
 
 So when Mads Thines argued on November 7 that [agent memory needs its OpenTelemetry moment](https://www.lorekit.io/blog/open-agent-memory-format), I read it looking for the citation field. He has it, and he leaves it optional, which is the one thing in his proposal for [AI agent memory](/articles/agent-memory/) I'd change.
 
-## What the proposal asks for
+## What I make of the proposal
 
-Thines counts the places his coding tools keep what they remember and finds that "none of them can read the others". His remedy is the one observability reached in 2019, an agreed data model that vendors stop competing on.
+I like the problem he starts from. Thines counts the places his coding tools keep what they remember and finds that none of them can read the others, and his remedy is the one observability reached in 2019, an agreed data model that vendors stop competing on.
 
-His reduction of that model is five questions every format answers: "where a memory is true, what its identity is (does a second write update it or duplicate it?), what it says, when it stops being true, and which version is current."
+He boils that model down to five questions every format answers: where a memory is true, what its identity is, what it says, when it stops being true, and which version is current. I think those are the right five for moving a memory between tools.
 
-The post is fair to its critics, and it prints the objection that traces and memories differ, since a trace is written once and a memory gets corrected.
+He's also fair to his critics. He prints the objection that traces and memories differ, since a trace is written once and a memory gets corrected.
 
-And Thines gets close to my point more than once. He wants a record to say who wrote it, "so a reader knows how much to trust what it reads", and he praises GitHub's Copilot Memory because it "pairs citations you can check against the code with forgetting by default".
+And he gets close to my point more than once. He wants a record to say who wrote it, and he praises GitHub's Copilot Memory for pairing citations with forgetting, but he leaves the idea as an open question: "Should a record point at the code it depends on?"
 
-But he ends with it as an open question: "Should a record point at the code it depends on?"
+## The question I'd add
 
-## The sixth question
+My answer is yes, and I'd make it required. None of his five questions asks how the writer knew, so a record can say where it applies and when it expires and still be wrong.
 
-None of the five questions asks how the writer knew. A record can say where it applies, who wrote it and when it expires, and still be wrong, and the fields that would let a reader find out are the optional ones.
+Is there evidence that such a field does the work? Only a hint, and it comes from the Anthropic post.
 
-Is there evidence that this field does the work? Only a hint, from the Anthropic post.
+On a benchmark where models built their own notes across sessions, the first model to close the loop wrote entries that carried a rule along with how it knew the rule was true. That describes what a stronger model wrote, and the post doesn't test the clause in isolation, so I won't claim it does.
 
-On a benchmark where models built their own notes across sessions, the first model to close the loop was one whose entries "included a rule (and also how it knew the rule was true)".
+But look at the note Anthropic quotes from a model playing Pokémon, a rule for what to do after several failed throws: "VARY the timing (insert extra 'wait' presses between menu steps) - the catch landed right after doing this."
 
-That describes what a stronger model wrote, and the post doesn't test the clause in isolation, so I won't claim it does.
+To me the last clause of that note is a citation. A later session reading it knows the rule came from one success, and can weigh it as that.
 
-Anthropic also quotes a note written by a model playing Pokémon, a rule for what to do after several failed throws: "VARY the timing (insert extra 'wait' presses between menu steps) - the catch landed right after doing this."
+The post's failure case runs the other way. A model recorded a landmark on the wrong side of a mountain and kept acting on it, and in a separate run a pass that checked the note against the session log caught the error.
 
-The last clause of that note is a citation. A later session reading it knows the rule came from one success, and can weigh it as that.
+## Why I'd settle trust before format
 
-The post's failure case is a wrong note that got trusted. A model recorded a landmark on the wrong side of a mountain and kept acting on it, and in a separate run, a pass that checked the note against the session log caught the error.
+I don't think a shared format is the urgent part, and the commenters on [the Hacker News thread](https://news.ycombinator.com/item?id=50411467) made that case better than I could. A commenter argued that a spec matters less here because the reader is an agent, which can already read files in any shape.
 
-## Why format comes second
+Another had given up on memory as a feature: "it remembers the wrong things, and then turns them into an inane focus for each task." I read that as a complaint about trust, and a shared envelope would deliver the same wrong things to more tools.
 
-The commenters on [the Hacker News thread](https://news.ycombinator.com/item?id=50411467) made the case against a format better than I could. A commenter wrote that the need for a spec "is greatly reduced in the case of Agent memory because by definition it is read by agents", which can already read files in any shape.
+Thines half agrees. He treats a pointer to the code as the best guard against stale memory, and his draft record has room for a pull request number among its optional attributes.
 
-Another had given up on the feature: "it remembers the wrong things, and then turns them into an inane focus for each task." That is a complaint about trust, and a shared envelope would deliver the same wrong things to more tools.
-
-Thines half agrees, as I said. He calls a pointer to the code "the best protection against stale memory", and his draft record has room for a pull request number among its optional attributes.
-
-A shipped product already goes further. His own table lists Copilot Memory's unit as "A fact with code citations", and its forgetting rule as "Deleted after 28 days unused".
+And a shipped product already goes further. His own table describes Copilot Memory as storing facts with code citations and deleting them after 28 days unused.
 
 So optional is the part I'd change. A record with no source should be readable as a guess, the way an untagged sentence on Wikipedia is readable as unchallenged, and a model should be told the difference.
 
