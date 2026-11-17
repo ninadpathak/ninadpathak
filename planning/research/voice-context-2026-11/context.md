@@ -16,6 +16,8 @@ What it means when writing:
 4. Length is not the target. Explain with concrete examples, analogies Ninad would recognise, named references, and screenshots of real comments or posts where the comment is the evidence. A screenshot is captured from its public page and stored like the xkcd figure, with credit, author, date and link, and alt text that carries the words. The site's terms are checked first and the finding recorded.
 5. The spoken register, opinion-led essays, plain titles and every fact rule stay.
 
+Screenshots of Hacker News: Y Combinator's terms (ycombinator.com/legal, read 2026-11-18) say a visitor agrees not to "modify, copy, frame, scrape" the site or its content and not to reproduce any portion of the site for commercial purposes. So no Hacker News page is captured as an image. A Hacker News comment is quoted in text with its author, date and link, which is what the pages already do. xkcd stays the one screenshot-style figure, under its CC BY-NC licence.
+
 How a pass is run: read every sentence cold, one at a time, and list the ones that fail before rewriting. Keep facts, sources, code, titles, links and structure. Report the before and after of the five worst sentences per piece. Each pass gets an independent cold-read review.
 
 ## Why the old posts read like a B2B blog

@@ -15,11 +15,11 @@ title: "Agent docs don't agree on what a harness is"
 work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation and define its terms on the page, after running the product myself. [Get in touch](/contact/)."
 ---
 
-On November 17, under a Hacker News post about a benchmark of agent harnesses, [a commenter asked](https://news.ycombinator.com/item?id=50534879) whether the distinction between "harness" and "agent" still exists, since people use the two interchangeably. The two replies that came back disagreed.
+On November 17, under a Hacker News post about a benchmark of agent harnesses, [a commenter named samueloph asked](https://news.ycombinator.com/item?id=50534879) whether the distinction between "harness" and "agent" still exists, since people use the two words interchangeably. A reply from ogmutlu said the two words mean the same thing, and a reply from layer8 gave a formula for telling them apart.
 
-I went through the vendor pages that use the word, and I think the commenter was right to ask. The word is doing different jobs in different docs, and catching that is what [technical documentation](/articles/technical-documentation/) is for.
+I opened the docs of the companies that use the word, and samueloph was right to ask. Runta, Anthropic and LangChain each call a different kind of thing a harness, and a reader moving from one company's page to the next gets no warning that the meaning has changed.
 
-If you came for the definition and the parts, that's my explainer on the [agent harness](/articles/agent-harnesses/). What follows is about the wording.
+Pinning down a word like harness is a job for [technical documentation](/articles/technical-documentation/), and this essay is about how I'd do it. If you came for the definition of a harness and the parts inside one, my explainer on the [agent harness](/articles/agent-harnesses/) has both.
 
 ## What Runta, Anthropic and LangChain each call a harness
 
@@ -35,36 +35,42 @@ My explainer uses the word a fourth way, for code you write yourself: the loop t
 
 Now put a developer who learned the word from Runta's leaderboard in front of LangChain's docs. They read that Deep Agents is a harness, look for a program to launch the way they launch Codex CLI, and find an import statement.
 
-## I'd keep the equation
+## I'd keep the reply that says harness plus model equals agent
 
-Of the two replies, the one to keep [fits in a line](https://news.ycombinator.com/item?id=50534958): "harness + model = agent (plus sub-agents)". The other reply asked whether the words mean the same thing, which is a fair report of how people talk and no use as a definition.
+Of the two replies to samueloph, I'd keep [the one from layer8](https://news.ycombinator.com/item?id=50534958): "harness + model = agent (plus sub-agents)". Under that formula, Codex CLI running GLM-5.3 is an agent, and Codex CLI with the model taken out is the harness.
 
-The equation holds up against the benchmark too. Its method is to fix a model and swap the harness around it, across 5 models, so the leaderboard treats a harness as the agent minus the model.
+The other reply, from ogmutlu, asked whether harness and agent mean the same thing. That matches how people use the words in a comment thread, and it can't work as a definition, because a definition has to tell the two words apart.
 
-And it gives a writer a test. If a sentence in your docs still makes sense after you replace "harness" with "agent", the sentence hasn't said which one it means.
+Runta's benchmark already works the way layer8's formula says. It runs Codex CLI with the GLM-5.3 model, runs Codex CLI again with DeepSeek, and treats the part that stayed the same across both runs as the harness.
 
-## What's inside is the part the docs leave to you
+The formula also gives a writer a check to run on a draft. Take a sentence such as "configure the harness to retry failed tool calls" and replace "harness" with "agent": if the sentence still reads as correct, it never said whether the retry setting belongs to the harness or to the whole agent.
 
-The equation settles what a harness is, and I don't think it settles what's in one. Read what each project says it includes:
+## The formula doesn't say whether memory is part of the harness
 
-| Project | What it calls a harness | What it says that includes |
+Layer8's formula says a harness is everything in the agent except the model. It doesn't say whether one product's harness includes memory, a sandbox or hosting, and the vendors' own descriptions give different answers:
+
+| Project | What the project is | What its description says the harness includes |
 |---|---|---|
-| [Anthropic Managed Agents](https://code.claude.com/docs/en/agent-sdk/overview) | A hosted service, with a self-hosted sandbox as an option | The agent loop, with sessions in a sandbox |
-| [LangChain Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) | A library, also offered managed | Planning, a virtual filesystem, subagents and long-term memory |
-| [DeerFlow](https://github.com/bytedance/deer-flow) | An open-source application | Sandboxes, memories, tools, skills, subagents and a message gateway |
+| Anthropic Managed Agents | A service Anthropic hosts, with a self-hosted sandbox as an option | The agent loop, with sessions in a sandbox |
+| LangChain Deep Agents | A Python package, also offered as a managed service | Planning, a virtual filesystem, subagents and long-term memory |
+| [DeerFlow](https://github.com/bytedance/deer-flow) | An open-source application from ByteDance | Sandboxes, memories, tools, skills, subagents and a message gateway |
 
-Memory is in two of those lists and missing from Anthropic's one-line description, though Managed Agents has a [memory stores page](https://platform.claude.com/docs/en/managed-agents/memory) of its own. A description that leaves out something the product documents is the problem in miniature.
+LangChain lists long-term memory as part of Deep Agents, and DeerFlow lists memories among its parts. Anthropic's one-line description of Managed Agents mentions only the agent loop and a sandbox, although the same docs have a [memory stores page](https://platform.claude.com/docs/en/managed-agents/memory) for Managed Agents.
 
-DeerFlow's repository calls the project a "long-horizon SuperAgent harness", which stretches the word to cover a whole application.
+So a developer comparing Managed Agents with Deep Agents from those two descriptions would conclude that only Deep Agents has memory. That conclusion is wrong, and the one-line description is what produced it.
 
-So the word tells a reader there's a loop and some tools, and it says nothing about memory or sandboxing or who hosts it. A pair of products that both call themselves a harness can share very little.
+DeerFlow stretches the word furthest. Its repository describes the whole application, which does research, writes code and includes a message gateway, as a "long-horizon SuperAgent harness".
 
-## What I'd put on the page
+Put Codex CLI next to DeerFlow and the part they share is small: each runs a model in a loop and gives it tools. Memory, sandboxing and hosting differ between the two, and the word harness is used for both.
 
-Define the word the first time it appears, in one sentence, and then list what's inside. A sentence like "the harness in these docs is the loop and the tool registry, and you host it" takes one line.
+## What I'd write in a product's docs
 
-Terminology already sits on the editor's side of a [documentation review](/articles/documentation-review/), next to structure and links. For an agent product this word belongs on that list, because it's the one a reader is likeliest to bring a different meaning to.
+If I were writing the docs for one of these products, I'd define harness in one sentence the first time the word appears. For Managed Agents that sentence could be "the harness is the agent loop and the sandbox it runs in, and Anthropic hosts both".
 
-Some readers will arrive with the benchmark's sense and some with Anthropic's. My rule in [documentation structure](/articles/documentation-structure/) is to split audiences only when their routes differ, and here they don't, so one page with the word defined serves both.
+Under that sentence I'd put a short list of what the harness includes and what it leaves to the developer. Memory and hosting would each get a line in that list, whether the answer is yes or no.
 
-Until the word settles, the definition has to travel with the page: what's in your harness, and who runs it.
+Checking a term like harness is already part of an editor's job. The reviewer table on my [documentation review](/articles/documentation-review/) page gives the technical writer or editor four things to check, and terminology is one of the four.
+
+I wouldn't write separate pages for readers who learned the word from Runta and readers who learned it from Anthropic. My rule in [documentation structure](/articles/documentation-structure/) is to split audiences only when they need different steps, and both groups need the same page with harness defined at the top.
+
+Until Runta, Anthropic and LangChain mean the same thing by harness, each product's docs have to say which parts are in its harness and who runs it.

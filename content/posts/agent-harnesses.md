@@ -5,6 +5,9 @@ siblings:
 - agent-loop-anatomy
 - agent-error-handling
 - ai-agent-taxonomy
+bridges:
+- slug: what-agent-harness-means
+  reason: That essay covers how vendor docs use the word this page defines.
 date: 2026-03-10
 description: An agent harness is the code around the model that runs the loop, calls the
   tools, manages context and saves state. What it contains, why the choice of harness
