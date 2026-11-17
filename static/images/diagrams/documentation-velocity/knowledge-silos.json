@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/documentation-velocity/knowledge-silos.mmd",
-  "hash": "d7b53c6e4e1768d8",
+  "hash": "14599ad72c3b1cf4",
   "pele": "1.8.0",
   "width": 720,
   "height": 256,
@@ -18,7 +18,7 @@
       "mono": 9.5
     }
   },
-  "alt": "A delivery pipeline from code through build and deploy. One stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, no matter how quick the build and deploy are.",
-  "caption": "Throughput is capped by the slowest station. A ten-minute pipeline means nothing if understanding a dependency first takes hours of asking around.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/documentation-velocity/knowledge-silos.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/documentation-velocity/knowledge-silos.narrow.svg\" width=\"288\" height=\"736\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/documentation-velocity/knowledge-silos.svg\" width=\"720\" height=\"256\" alt=\"A delivery pipeline from code through build and deploy. One stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, no matter how quick the build and deploy are.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Throughput is capped by the slowest station. A ten-minute pipeline means nothing if understanding a dependency first takes hours of asking around.</figcaption>\n</figure>"
+  "alt": "A delivery pipeline from code through build and deploy. A single stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, however quick the build and deploy are.",
+  "caption": "Throughput is capped by the slowest station, and a fast pipeline still waits on the one person who understands a dependency.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/documentation-velocity/knowledge-silos.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/documentation-velocity/knowledge-silos.narrow.svg\" width=\"288\" height=\"736\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/documentation-velocity/knowledge-silos.svg\" width=\"720\" height=\"256\" alt=\"A delivery pipeline from code through build and deploy. A single stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, however quick the build and deploy are.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Throughput is capped by the slowest station, and a fast pipeline still waits on the one person who understands a dependency.</figcaption>\n</figure>"
 }

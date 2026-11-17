@@ -1,204 +1,123 @@
 ---
 category: developer-experience
 primary_query: documentation roi
+siblings:
+- devtools-documentation
+- technical-writing-for-engineers
 bridges:
-- slug: shorter-documentation
-  reason: Documentation is the content developers trust first.
-- slug: developer-onboarding-docs
-  reason: Documentation is the content developers trust first.
+- slug: runbook-template
+  reason: A runbook is the document that turns a one-person recovery into a team one.
+- slug: claude-md
+  reason: An instruction file is documentation whose return shows up as fewer review findings.
 date: 2026-04-11
-description: I analyze the structural correlation between documentation quality and
-  engineering throughput, using DORA metrics and Accelerate research to quantify the
-  ROI of technical writing.
+description: 'Documentation ROI and engineering velocity: what DORA''s 2022 table shows, how far it can be pushed, and how to measure one document on your own team.'
 status: published
 work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. This post is for the person who has to argue for documentation with numbers, and once you've won that argument I can write the pages. [Hire me](/services/)."
-title: Quantifying the Engineering Velocity Impact of Technical Documentation
+title: 'Documentation ROI: What the Evidence Says About Docs and Engineering Velocity'
 slug: documentation-velocity
+updated: 2026-11-17
 ---
 
-Of every investment I have watched move engineering velocity, technical documentation is the one most teams underrate. Writing tends to get filed under secondary administrative work, and yet [DORA research (Accelerate)](https://dora.dev/publications/) confirms that high-quality documentation makes a team 2.4x more likely to achieve elite software delivery performance.
+Documentation ROI is hard to state as one number, and the best published evidence treats documentation as a multiplier on other engineering practices. DORA's 2022 data shows a team with above-average documentation quality getting a 750% lift in organizational performance from continuous integration, and a team below average getting 34%.
 
-The effect compounds rather than adding up linearly. Technical practices like Continuous Integration provide a 34% performance lift with poor documentation, and that same lift surges to 750% when supported by high-quality technical writing.
+Engineers have long had a name for the cost of unwritten knowledge. Wikipedia defines [the bus factor](https://en.wikipedia.org/wiki/Bus_factor) as "a measurement of the risk resulting from information and capabilities not being shared among team members", and every team knows roughly what its own number is.
 
-I have stopped thinking of documentation as a clarity exercise. It behaves like a systemic optimization for engineering throughput, the kind of thing that quietly raises the ceiling on everything else a team does.
+The bus factor counts people and DORA's table counts performance. Neither is a return in money, and I think the case for investing in [developer content](/articles/developer-experience/) is stronger when it says so.
+
+## What is engineering velocity?
+
+Engineering velocity is how quickly a team moves a change from an idea to production, and DORA measures it as throughput. Its [metrics guide](https://dora.dev/guides/dora-metrics/) defines the term: "Throughput is a measure of how many changes can move through the system over a period of time."
+
+The guide measures it by change lead time, deployment frequency and failed deployment recovery time. A claim that documentation raises velocity has to show up in one of those.
+
+## What does DORA's research say about documentation?
+
+It says documentation quality amplifies the payoff of every technical practice the 2022 study covered. DORA's [capability page on documentation quality](https://dora.dev/capabilities/documentation-quality/) prints the table, excerpted from an analysis by Michelle Irvine and Derek DeBellis.
+
+| Technical capability | Lift with below-average documentation | Lift with above-average documentation |
+| --- | --- | --- |
+| Continuous delivery | 63% | 656% |
+| Continuous integration | 34% | 750% |
+| Loosely coupled teams | 46% | 313% |
+| Site Reliability Engineering | 79% | 343% |
+| Supply chain security | 37% | 451% |
+| Trunk-based development | 36% | 1525% |
+| Version control | 27% | 278% |
+
+The page's summary is "The lift is significantly amplified for teams with above-average documentation quality." Quality was scored with "a set of eight metrics that assess documentation attributes like clarity, findability, and reliability."
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/dora-multiplier.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/dora-multiplier.narrow.svg" width="288" height="416"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/dora-multiplier.svg" width="720" height="472" alt="The performance lift that continuous integration gives a team, by documentation quality: 34% with poor documentation and 750% with high-quality documentation. Each tile is 50 percentage points." loading="lazy" decoding="async"></picture></a>
-  <figcaption>DORA research: the same practice lifts performance 34% with poor documentation and 750% with high-quality documentation. Each tile is 50 points.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/dora-multiplier.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/dora-multiplier.narrow.svg" width="288" height="416"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/dora-multiplier.svg" width="720" height="472" alt="The performance lift that continuous integration gives a team in DORA's 2022 data, by documentation quality: 34% for teams below average and 750% for teams above average. Each tile is 50 percentage points." loading="lazy" decoding="async"></picture></a>
+  <figcaption>DORA's 2022 data for continuous integration: a 34% lift in organizational performance with below-average documentation quality and 750% with above-average. Each tile is 50 points.</figcaption>
 </figure>
 
-**Short answer:** Documentation acts as a force multiplier for every other technical capability in an engineering organization. Good docs shrink "Lead Time for Changes" by cutting the time engineers spend in discovery, and they shrink "Time to Restore Service" by moving tribal knowledge out of people's heads into something searchable and reliable.
+## How far can that table be pushed?
 
-During an incident, the difference shows up plainly: a team with a runbook for the failing service restores it in minutes, and a team without one spends the first hour just reconstructing how the thing is supposed to work. Organizations that invest in documentation maturity see a 19% increase in developer productivity and a 70% boost in overall engineering throughput.
+Less far than its largest number invites. The data is a survey from 2022, the scores are self-reported, and the table shows a correlation between documentation quality and the payoff of other practices.
 
-## The structural drag of documentation debt
+A team with strong documentation is plausibly strong at other things the survey didn't ask about. The table can't separate those, and DORA doesn't claim it does.
 
-Engineering teams frequently prioritize code-level technical debt over documentation debt because the former triggers immediate build failures. Documentation debt never breaks the build, which is exactly what makes it dangerous.
+What it supports is a narrower statement, and a more useful one for a budget discussion. A practice such as trunk-based development pays back far more where people can find out how it is meant to work, so documentation belongs in the plan for any practice a team is about to adopt.
 
-It accrues quietly as a tax on every Pull Request where a reviewer has to ask what a function actually does, every onboarding cycle where a new hire reverse-engineers the deploy process, and every production incident where the one person who understands the cron job is asleep.
+It gives no support to a sentence like "documentation makes a team seven times faster". No row measures a team before and after it wrote anything.
+
+## Where does the time go without documentation?
+
+Into work that looks like something else. Stripe's [Developer Coefficient report](https://stripe.com/files/reports/the-developer-coefficient.pdf) from September 2018 found that "the average developer spends more than 17 hours a week dealing with maintenance issues, such as debugging and refactoring."
+
+The report doesn't say how much of that time is spent working out what code was meant to do, and I won't put a share on it. The places where missing documentation gets paid for can be named, though not measured from this report.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/documentation-debt.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/documentation-debt.narrow.svg" width="288" height="448"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/documentation-debt.svg" width="720" height="504" alt="Missing documentation never breaks the build, but it taxes three places: every pull request where a reviewer has to ask what a function does, every onboarding where a new hire reverse-engineers the deploy process, and every incident where the one person who understands the failing job is asleep." loading="lazy" decoding="async"></picture></a>
-  <figcaption>A Stripe survey found developers spend about 17 hours a week on technical debt and maintenance, with poor docs a primary friction point.</figcaption>
+  <figcaption>Missing documentation never breaks the build, and its cost is paid in reviews, onboarding and incidents.</figcaption>
 </figure>
 
-A [Stripe survey](https://stripe.com/files/reports/the-developer-coefficient.pdf) found that developers spend an average of 17 hours per week on technical debt and maintenance, with poor documentation cited as a primary friction point. Once the answers live only in someone's memory or a Slack thread that scrolled away last Tuesday, the cost of discovery scales with the size of the team.
-
-A team of 100 engineers working in an undocumented system is rarely 10x more productive than a team of 10. They are often less productive, because the overhead of keeping everyone's mental model in sync eats the surplus capacity the extra headcount was supposed to buy.
-
-[McKinsey research](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/tech-debt-reclaiming-tech-equity-through-software-excellence) on "Tech Equity" confirms that companies with significant documentation shortfalls take 18% longer to release new features. Nobody is typing 18% slower.
-
-That delay is discovery latency: the hours an engineer burns figuring out that the payment service silently retries on a 500, or that the migration has to run before the feature flag flips, none of which was written down anywhere.
-
-<div class="visual-wrapper">
-  <div class="visual-title">Research: tech debt and engineering excellence (McKinsey)</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/enterprise-doc-marketing.png" alt="Tech Debt Research" loading="lazy">
-  </div>
-</div>
-
-## DORA metrics as a documentation benchmark
-
-The [DevOps Research and Assessment (DORA)](https://dora.dev/) team has spent nearly a decade identifying the capabilities that drive software delivery and operational (SDO) performance. Their findings consistently place documentation at the center of the performance web.
-
-<div class="visual-wrapper">
-  <div class="visual-title">DORA metrics: the industry standard for velocity</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/dora-metrics-verified.png" alt="DORA Metrics" loading="lazy">
-  </div>
-</div>
-
-Elite performers use documentation to amplify other capabilities. The performance lift from trunk-based development, for instance, climbs from 36% to over 1500% when supported by high-quality docs.
-
-Trunk-based development lives or dies on rapid context sharing and high-frequency commits, and both stall the moment an engineer in one time zone has to wait for the only person who understands a module to wake up in another.
-
-| Metric | Impact of High-Quality Documentation |
-|---|---|
-| Software Delivery Performance | 2.4x more likely to be an elite performer |
-| Security Integration | 3.8x higher success rate |
-| Cloud Adoption | 2.5x more effectively utilized |
-| Organizational Performance | 25% higher relative to low-doc peers |
-
-## Knowledge silos and the linear decay of throughput
-
-A knowledge silo is an undocumented architectural detail that lives only in one engineer's head, the kind of thing you discover exists the first time you need it and that person is on vacation. Silos are the primary bottleneck in the modern engineering pipeline.
+A reviewer has to ask what a function is for. A new hire reconstructs the deploy process from old pull requests, and an incident waits for the one person who understands the failing job.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/knowledge-silos.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/knowledge-silos.narrow.svg" width="288" height="736"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/knowledge-silos.svg" width="720" height="256" alt="A delivery pipeline from code through build and deploy. One stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, no matter how quick the build and deploy are." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Throughput is capped by the slowest station. A ten-minute pipeline means nothing if understanding a dependency first takes hours of asking around.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/knowledge-silos.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/knowledge-silos.narrow.svg" width="288" height="736"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/knowledge-silos.svg" width="720" height="256" alt="A delivery pipeline from code through build and deploy. A single stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, however quick the build and deploy are." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Throughput is capped by the slowest station, and a fast pipeline still waits on the one person who understands a dependency.</figcaption>
 </figure>
 
-Throughput capacity is limited by the slowest component of the system, the same way an assembly line moves only as fast as its slowest station no matter how quick the others are. A deployment pipeline that takes 10 minutes means nothing if understanding the Auth Service dependencies first takes four hours of Slack interrogation.
-
-Your real velocity is capped by the missing documentation, not the fast part you are proud of. Initiatives built around intentional knowledge sharing, such as [Architecture Decision Records (ADRs)](https://github.com/joelparkerhenderson/architecture-decision-record), have been shown to boost engineering throughput by nearly 70%.
-
-[GitHub's State of the Octoverse](https://octoverse.github.com/) reports consistently show that high-quality documentation can increase developer productivity by 50%. That gain comes from decentralizing the truth.
-
-Once the documentation is the source of truth, the "Bus Factor" of any individual component matters less than the reliability of the written spec, because the spec does not take a new job.
-
-<div class="visual-wrapper">
-  <div class="visual-title">GitHub Octoverse: productivity and documentation</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/github-octoverse-productivity.png" alt="GitHub Octoverse" loading="lazy">
-  </div>
-</div>
-
-## Quantifying the context switching tax
-
-Context switching is the most expensive operation in engineering. Every time an engineer leaves their IDE to hunt for an answer in Slack, Jira, or a wiki page that 404s, they pay a cognitive restart cost: the held stack of variable names, the half-built mental model of the bug, the thread they were three steps into all get dropped, and rebuilding that state after the detour can take far longer than the search itself.
+That last case is the bus factor showing up in a recovery time. A [runbook](/articles/runbook-template/) is the document that takes it out of one person's head.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/context-switching.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/context-switching.narrow.svg" width="288" height="432"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/context-switching.svg" width="720" height="528" alt="An engineer working in the IDE needs an answer. Documentation kept in the same repository answers it a few keystrokes away, so the engineer stays in flow. A question sent to Slack or a stale wiki page pulls the engineer out of the IDE and drops the mental state they were holding." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Docs that live next to the code put answers at the point of need. Every detour to Slack or a wiki costs a cognitive restart.</figcaption>
+  <figcaption>Docs that live next to the code put answers at the point of need, and a detour to chat or a wiki breaks the engineer's attention.</figcaption>
 </figure>
 
-High-quality documentation minimizes this tax by putting answers at the point of need. "Documentation as Code", where docs live in the same repository as the source, earns its keep for that reason.
+## What changes when agents write the code?
 
-Keeping the docs a few keystrokes from the code shortens the path between question and answer enough that the engineer never fully leaves flow state. According to Stack Overflow data, 48% of developers experience weekly productivity issues specifically due to knowledge silos and the resulting context switches.
+The volume changes, and the reader does too. Anthropic's [account of its code review](https://claude.dev/blog/solving-code-review-at-anthropic/) from October 15 says changes landing in its monorepo went "from about 2,500 in May to more than 30,000 in September this year."
 
-## The documentation-as-capability framework
+At that rate the first reader of a team's conventions is a model. The post describes fixing repeated review findings at the source, in files such as the one where "CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals."
 
-Google Cloud's Architecture Framework identifies documentation not as a support asset, but as a core operational capability.
+That is documentation with a measurable return, since a line added to the file removes a class of review comment. My [CLAUDE.md guide](/articles/claude-md/) covers what belongs in it.
 
-<div class="visual-wrapper">
-  <div class="visual-title">Documentation as an operational capability (Google Cloud)</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/google-docs-capability.png" alt="Google Cloud Docs Capability" loading="lazy">
-  </div>
-</div>
+Throughput is only half of DORA's picture, and the other half has gone the wrong way. Rachel Laycock of Thoughtworks summarised the newer research on October 29: "DORA's 2025 research found AI adoption is now linked to higher delivery throughput, but to lower delivery stability."
 
-To achieve velocity gains, DORA research identifies eight key attributes of high-quality documentation that must be met:
+## How do you measure documentation ROI on your own team?
 
-1.  **Clarity**: Easy to understand for the intended audience.
-2.  **Findability**: Answers are discoverable in under 60 seconds, which is one reason [shorter technical documentation usually works better](/articles/shorter-documentation/).
-3.  **Reliability**: The information is technically accurate.
-4.  **Updateability**: The friction to revise a doc is lower than the friction to ignore it.
-5.  **Relevance**: Content is directly applicable to current workflows.
-6.  **Completeness**: The entire public surface area is covered.
-7.  **Organization**: Following structured frameworks like Diátaxis.
-8.  **Accessibility**: Available to all stakeholders without permission silos.
+Pick one document, one metric and a period before and after. The measurements below are suggestions and I have no results of my own to report for them.
 
-## Economic outcomes of documentation maturity
+- **Onboarding.** Days from a new engineer's start to their first merged change, before and after a setup guide is written.
+- **Repeat questions.** How often the same question appears in the team's chat in a month, before and after its answer has a page.
+- **Recovery.** Time to recover from a recurring failure, with and without a runbook for it.
 
-Finance teams tend to question the ROI of technical writing because it reads like a soft cost on a budget line. The outcomes, though, are quantifiable.
+Each of these ties a page to one of DORA's factors, which keeps the claim checkable. For a company whose buyers are developers, the same reasoning applies outside the team, and [devtools documentation](/articles/devtools-documentation/) makes that case.
 
-### Support ticket deflection
-
-High-quality documentation is a defensive asset. A good "how do I rotate the API key" page answered once in the docs is a question your senior engineers never field again in a support channel, which frees them for the architectural work only they can do.
-
-That trade moves spend from Opex (maintenance) toward Capex (new feature value).
-
-### Onboarding velocity
-
-The "Time to First Commit" for a new hire is a leading indicator of organizational health. Teams with elite documentation cut that time by 40-60%, which is why [developer onboarding docs that actually work](/articles/developer-onboarding-docs/) pay back so quickly.
-
-Picture two new hires: one clones the repo, follows a working setup guide, and ships a small fix on day three, and the other spends that week pinging strangers to learn which environment variables the local server needs. Making the first scenario the default, in a competitive hiring market, is a real economic advantage.
-
-<div class="visual-wrapper">
-  <div class="visual-title">Architecture Decision Records (ADR) as truth</div>
-  <div class="visual-container">
-    <img src="/static/images/visuals/adr-template-verified.png" alt="ADR Template" loading="lazy">
-  </div>
-</div>
-
-ADRs are a high-signal example of practitioner writing that outranks the standard wiki dump. They capture the "why" behind a decision, which stops a future engineer from "fixing" the deliberately blocking call in the payment flow that was made synchronous on purpose, then spending a week debugging the race condition their cleanup reintroduced.
-
-## Engineering documentation as infrastructure
-
-Information architecture has become the primary competitive moat for developer-first companies in 2026, and [Stripe's technical blog shows how that advantage compounds](/articles/stripe-technical-blog/). Practitioners reward the teams that put writing on the product roadmap instead of leaving it for a quarter that never arrives.
-
-When a doc lets a developer wire up your SDK in ten minutes instead of an afternoon, that page stops being content and starts being infrastructure. Deep practitioner writing earns a permanent spot in the trusted toolkit the way a reliable library does.
-
-Useful content stays relevant for one reason: it does something for the reader the moment they land on it.
+The writing itself doesn't need a specialist to start. [Technical writing for engineers](/articles/technical-writing-for-engineers/) covers the rules an engineer can apply to the first page.
 
 ## FAQ
 
-**How do we measure "documentation quality" objectively?** Use the DORA attributes as a scorecard. Survey your engineers on "Time to Find Answer" and "Reliability of Source."
+**Can documentation ROI be calculated?**
 
-Correlate these scores with your DORA velocity metrics (Lead Time and Change Failure Rate).
+Not as a general figure. A team can measure one document against one metric, such as onboarding time, and the published research shows correlation at the level of whole organizations.
 
-**Is "Documentation as Code" required for these gains?** It is the most reliable way to keep documentation current. Treating docs like code, with PR reviews, linting, and automated testing, drops the "Updateability" friction that lets traditional wikis rot into a graveyard of half-true pages.
+**What is the strongest evidence that documentation improves engineering performance?**
 
-**Should engineers write all the documentation?** No. Technical writers bring the structural expertise and editorial discipline, and engineers still have to own the "Primary Source" truth.
+DORA's 2022 analysis, in which every technical capability studied produced a larger performance lift in teams with above-average documentation quality.
 
-The most effective teams I have seen run a hybrid model where engineers draft the technical core and writers shape it for clarity, findability, and the Diátaxis framework.
+**Does AI-written code reduce the need for documentation?**
 
-**What is the "Bus Factor" impact of documentation?** Documentation raises the Bus Factor by decentralizing tribal knowledge. Picture the one person who knows how the payment gateway actually works walking out with no docs behind them: your Bus Factor is 1, and a single resignation can stall a revenue-critical system.
-
-High-quality docs move that knowledge from a person to the organization, where it cannot give two weeks' notice.
-
-**Does AI-generated documentation help velocity?** Only when a human practitioner verifies it. AI handles boilerplate well, and the nonsense detector of technical readers fires fast on hallucinated details like a flag that never existed or a parameter the API does not accept.
-
-Readers extend trust on the basis of accuracy, never volume.
-
-<!--
-primary keyword: engineering velocity
-sources used:
-- Forsgren, N., Humble, J., & Kim, G. (2018). Accelerate: The Science of Lean Software and DevOps.
-- DORA State of DevOps Report (2021, 2023).
-- Stripe (2018). The Developer Coefficient.
-- McKinsey (2023). Tech Debt: Reclaiming tech equity.
-- GitHub (2023). State of the Octoverse.
-research gap identified: I have specifically linked the 750% performance lift statistic from DORA 2021 to the concept of "Documentation as Capability," a structural link often missed in shallow ROI discussions.
-self-identified risks or weak spots: The 3000-word target requires deep elaboration on each DORA attribute; I have used the economic outcome sections to drive this volume while maintaining practitioner focus.
--->
+It moves it. Instruction files and written conventions become input to the tools that write and review the code.
