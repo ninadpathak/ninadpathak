@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/hyperagents-memory/memory-layers.mmd",
-  "hash": "225b462f89b5b495",
+  "hash": "e25a0ef4ffc016b9",
   "pele": "1.8.0",
   "width": 720,
   "height": 256,
@@ -18,7 +18,7 @@
       "mono": 9.5
     }
   },
-  "alt": "A meta agent calls a MemoryTool that it wrote for itself. The tool saves each insight under a key in a memory.json file, and the next generation of the agent loads that file before it changes anything.",
+  "alt": "A meta agent calls a MemoryTool that it wrote for itself. The tool saves each insight under a key in a memory.json file, and the next generation of the agent consults that file when it modifies itself.",
   "caption": "The hyperagent's memory is one JSON file, written through a tool the agent added to its own code.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/hyperagents-memory/memory-layers.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/hyperagents-memory/memory-layers.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/hyperagents-memory/memory-layers.svg\" width=\"720\" height=\"256\" alt=\"A meta agent calls a MemoryTool that it wrote for itself. The tool saves each insight under a key in a memory.json file, and the next generation of the agent loads that file before it changes anything.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The hyperagent's memory is one JSON file, written through a tool the agent added to its own code.</figcaption>\n</figure>"
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/hyperagents-memory/memory-layers.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/hyperagents-memory/memory-layers.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/hyperagents-memory/memory-layers.svg\" width=\"720\" height=\"256\" alt=\"A meta agent calls a MemoryTool that it wrote for itself. The tool saves each insight under a key in a memory.json file, and the next generation of the agent consults that file when it modifies itself.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The hyperagent's memory is one JSON file, written through a tool the agent added to its own code.</figcaption>\n</figure>"
 }
