@@ -5,6 +5,9 @@ siblings:
 - agent-loop-anatomy
 - agent-error-handling
 - ai-agent-taxonomy
+bridges:
+- slug: what-agent-harness-means
+  reason: That essay covers how vendor docs use the word this page defines.
 date: 2026-03-10
 description: An agent harness is the code around the model that runs the loop, calls the
   tools, manages context and saves state. What it contains, why the choice of harness
@@ -16,34 +19,34 @@ slug: agent-harnesses
 video: agent-harnesses
 ---
 
-An agent harness is the code around a language model that turns it into an agent. It runs the loop, calls the tools the model asks for, decides what goes into the context window, and saves state so a run can survive a failure.
+An agent harness is the code around a language model that turns the model into an agent. The harness runs the loop, calls the tools the model asks for, decides what goes into the context window, and saves state so a run can survive a failure.
 
-The word is the one testing uses. A [test harness](https://en.wikipedia.org/wiki/Test_harness) is the set of stubs and drivers you put around a component so it can be run and checked, and an agent harness does that job for a model, which can't run anything by itself.
+Software testing used the word harness first. A [test harness](https://en.wikipedia.org/wiki/Test_harness) is the set of stubs and drivers you put around a component so the component can be run and checked, and an agent harness plays the same part for a model, which can't call a tool or read a file by itself.
 
-It's also the word of the week. On November 17 a benchmark called [FrontierHarness Eval](https://runta.com/blog/introducing-frontierharness-eval-v1-1/) reached the Hacker News front page after running 18 harnesses in 22 configurations against 5 models, and its best-value pick came out different for each model.
+Agent harnesses got their own benchmark this month. On November 17 [FrontierHarness Eval](https://runta.com/blog/introducing-frontierharness-eval-v1-1/) reached the Hacker News front page after running 18 harnesses in 22 configurations against 5 models, and the harness it picked as best value was a different one for each of the 5 models.
 
-So the layer around the model now has its own leaderboard. Below is what an agent harness contains and where it sits in [AI agent architecture](/articles/ai-agents/), with a small one you can run.
+A different winner for each model is the reason the choice of harness is worth a page of its own. Below is what an agent harness contains and where it sits in [AI agent architecture](/articles/ai-agents/), with a short harness you can run.
 
 ## What is an agent harness?
 
-An agent harness is the runtime layer between your application and the model's API. You need one because an API call is stateless: a prompt goes in, a completion comes out, and nothing is remembered.
+An agent harness is the runtime layer between your application and the model's API. You need one because an API call is stateless: a prompt goes in, a completion comes out, and the API remembers nothing about the exchange.
 
-An agent isn't one call. A research agent might make thirty to fifty model calls in one task, and something has to carry the results from each call into the next, run the tools and stop the run when it's done.
+An agent makes many of those calls for one task. A research agent might make thirty to fifty model calls, and some piece of code has to carry each result into the next call, run the tools and stop the run when the task is done.
 
-That something is the harness, and vendors now use the word for their own products. Anthropic's [Agent SDK docs](https://code.claude.com/docs/en/agent-sdk/overview) describe Managed Agents as a hosted agent harness, and LangChain calls [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) an agent harness too.
+That piece of code is the harness, and the split of work is simple: the model reasons, and the harness does everything else. Claude Code is an example you may already use: say the model chooses to run `git diff`, and the harness is the part that runs it and hands back the output.
 
-Those uses don't all mean the same thing, and I've taken that up separately in an essay on [how agent docs use the word](/articles/what-agent-harness-means/).
+Vendors use the word for their own products as well. Anthropic's [Agent SDK docs](https://code.claude.com/docs/en/agent-sdk/overview) describe Managed Agents as a hosted agent harness, and LangChain calls its [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) package an agent harness.
 
-The division of labor is the thing to hold on to. The model reasons, and the harness does everything else.
+A hosted service and a Python package are different things to call by one name, and my essay on [how agent docs use the word harness](/articles/what-agent-harness-means/) goes through the differences.
 
 ## What does an agent harness contain?
 
-I split a harness into five parts, and you'll find each of them in any agent that works, whether somebody designed it or it grew:
+I split a harness into five parts:
 
-- **Tool registry:** the list of tools with a schema and a description for each. Permissions live here too, including which calls need a person's approval, and the [Model Context Protocol](/articles/model-context-protocol/) is one way to fill it.
+- **Tool registry:** the list of tools, with a schema and a description for each one. Permissions belong in the registry too, such as which tool calls need a person's approval, and the [Model Context Protocol](/articles/model-context-protocol/) is one way to fill the registry from outside servers.
 - **Prompt assembler:** the code that builds the context window on every step from instructions, history, retrieved files and tool results.
-- **Execution loop:** the cycle that sends the context to the model and runs the tool it picks, which the [four phases of an agent loop](/articles/agent-loop-anatomy/) breaks down. Turn limits and spending limits are enforced here.
-- **State manager:** where the run's progress is written, so it exists somewhere other than the context window.
+- **Execution loop:** the cycle that sends the context to the model and runs the tool the model picks. My page on the [four phases of an agent loop](/articles/agent-loop-anatomy/) covers each phase, and the loop is where a turn limit and a spending limit are enforced.
+- **State manager:** the code that writes the run's progress to a file or a database, so the progress survives if the process dies.
 - **Observer:** a log line for every prompt, completion and tool call, tagged with a run ID.
 
 <figure class="np-figure">
@@ -51,29 +54,29 @@ I split a harness into five parts, and you'll find each of them in any agent tha
   <figcaption>The model reasons. The harness handles everything else, including the checkpoint that lets an interrupted run resume.</figcaption>
 </figure>
 
-If you don't build these, you still have them. The loop ends up in one file and the retry logic in another, and I'd call that a harness nobody designed.
+A team that never builds these five parts on purpose still ends up with all five. The loop gets written in one file and the retry logic in another, and the result is a harness that nobody designed and nobody can test as one unit.
 
 ## Does the harness matter as much as the model?
 
-It matters enough to measure, going by FrontierHarness Eval. The benchmark ran 22 harness configurations with 5 open-weight models on 62 terminal tasks, and over all models the pass rates ran from 50.6% to 61.9%.
+The model matters more, and the harness still changes the bill. FrontierHarness Eval ran 22 harness configurations with 5 open-weight models on 62 terminal tasks, and across all 5 models the pass rates of the harnesses ran from 50.6% to 61.9%.
 
-Read those pass rates loosely. The post puts a 95% interval of about 10 points either way on each one, and says a difference of a few points is a tie.
+An 11-point spread in pass rate looks large, and the post warns against reading it that way. Each pass rate carries a 95% interval of about 10 points either way, and the post says a difference of a few points between two harnesses is a tie.
 
-Cost moved more than pass rate, and it didn't follow the harness from model to model. Ranking the harnesses by cost on two halves of the runs gave a rank correlation of 0.71 with the same model and 0.26 across different models.
+<!-- evidence-three: Kimi-K3 is a model name, not a count --> Cost is where the harnesses separated. Codex CLI was the cheapest harness per task when it ran GLM-5.3 and the 16th cheapest of 22 when it ran Kimi-K3, so a harness that is cheap with one model can be expensive with another.
 
-The post is clear about the order of things, though. The model explains 92.8% of the variance in cost per task, and the harness comes second.
+The post puts a number on how much of the cost each side controls. The model explains 92.8% of the variance in cost per task, which leaves 7.2% for everything else, the harness included.
 
-The line I'd take to a budget meeting is another one. The post reports that "64.5% of the list-price cost of the scored runs went to trials that did not pass", which is money a harness spends before anyone learns the run failed.
+The figure in the post that I'd take to a budget meeting is about failed runs. The post reports that "64.5% of the list-price cost of the scored runs went to trials that did not pass", which means nearly two-thirds of the money was spent on runs that produced nothing usable.
 
-Runta published the benchmark and ran it on its own runtime, and the post lists its limits as open models and one provider. Its per-model winners are soft too: only one of the five held up in nearly every resample of the tasks, and the best of the other four won 53% of the resamples.
+The benchmark has limits that its authors state: Runta ran it on Runta's own runtime, with open-weight models served by one provider, Baseten. The winners are also unsteady: Codex CLI with GLM-5.3 stayed first in 99.6% of the resamples, and the next steadiest winner, Oh My Pi with Muse, stayed first in 53%.
 
-I'd treat the rankings as theirs and the lesson as general: test harnesses with your model on your own tasks.
+So I wouldn't copy Runta's ranking into a purchasing decision. I'd copy the method: run two or more harnesses with the model you plan to use, on tasks from your own backlog, and compare cost per passing run.
 
 ## How does a harness recover from a failed step?
 
-It saves state after every step and starts the next attempt from the last save. Say a run dies at step eighteen of twenty-five because a page server returned a 503: without a checkpoint, the retry begins at step one.
+A harness recovers by saving state after every step and starting the next attempt from the last save. Say a run dies at step eighteen of twenty-five because a web page the agent was fetching returned a 503: without a saved checkpoint, the retry begins again at step one.
 
-Here's that difference in a harness small enough to read. The plan is a fixed list standing in for the model's decisions, and one tool fails the first time it's called:
+The script below runs the same five-step plan twice, once without checkpoints and once with them. The plan is a fixed list of five steps that stands in for the model's decisions, and the `read_b` tool fails with a 503 the first time it's called:
 
 ```python
 """A small agent harness: run a loop, checkpoint after every step, resume after a crash."""
@@ -147,58 +150,60 @@ with checkpoints
   tool calls made in total: 6
 ```
 
-The run without checkpoints made 8 tool calls and the run with them made 6. The two calls it saved are `search` and `read_a`, which had already succeeded and didn't need doing again.
+The run without checkpoints made 8 tool calls, and the run with checkpoints made 6. The 2 calls that checkpointing saved are `search` and `read_a`, which had already succeeded before the crash and didn't need to run again.
 
-A saving of two calls is nothing, and step eighteen of a long run isn't. LangGraph's [persistence docs](https://docs.langchain.com/oss/python/langgraph/persistence) put the same ability in a framework, saying persistence lets an agent "resume after an interruption, recover from a failure".
+Saving 2 calls out of 8 doesn't matter much, and saving seventeen steps of a twenty-five-step run does. Frameworks ship this ability so you don't have to write it: LangGraph's [persistence docs](https://docs.langchain.com/oss/python/langgraph/persistence) say persistence lets an agent "resume after an interruption, recover from a failure".
 
-Resuming only works if a repeated step is harmless. A tool that sends an invoice has to recognize the second attempt, which is the idempotency-key pattern in [agent error handling](/articles/agent-error-handling/).
+Resuming from a checkpoint is only safe when running a step twice does no harm. A tool that emails an invoice has to detect that it already sent that invoice, which is the idempotency-key pattern covered in [agent error handling](/articles/agent-error-handling/).
 
 ## What should a harness do when the context fills up?
 
-It should apply a rule you chose, because doing nothing is also a rule and a bad one. The options I know of, from least work to the largest amount of it:
+A harness should apply a rule that you chose in advance for a full context window. A harness with no rule sends the oversized prompt anyway, and the model's API rejects it: Anthropic's API, for one, [returns a 400 error](https://platform.claude.com/docs/en/build-with-claude/context-windows) with the message "prompt is too long".
+
+Here are four rules to choose from, starting with the one that takes the least code:
 
 - **Truncate:** drop the oldest messages.
 - **Summarize:** replace old turns with a summary before dropping them.
 - **Retrieve:** keep the full history outside the window and fetch what the current step needs.
 - **Split the task:** give each subtask its own context and pass results between them.
 
-Whichever you pick, I'd keep the decision in the harness and out of the model's hands. A rule in code behaves the same on every run, and you can test it.
+I'd write the chosen rule into the harness code and not leave the choice to the model at run time. A rule in code, such as "summarize every turn older than the last ten", behaves the same on every run, and you can write a test for it.
 
 ## What should you check before shipping an agent?
 
-Check the harness, part by part. I'd want a yes to each of these:
+Check the tools, the loop, the saved state and the logs before the agent reaches users. I'd want a yes to all four of these:
 
-- Every tool has a schema, a timeout and an error the model can read.
-- The loop has a maximum number of turns, and the limit has been tested.
-- State is saved after each successful step, and a resume from that save has been tried.
+- Every tool has a schema, a timeout and an error message the model can read.
+- The loop has a maximum number of turns, and somebody has run a test that hits the maximum.
+- State is saved after each successful step, and somebody has killed a run and resumed it from that save.
 - Every log line carries the run ID.
 
-That last one sounds small. Without a run ID, debugging one bad run means reading the interleaved logs of every run that happened beside it.
+The run ID is the check I'd look at first. Say forty runs write to one log file and a single run misbehaves: a run ID lets you filter the log down to that run's lines, and without the ID you're reading all forty runs interleaved.
 
 ## When do you not need an agent harness?
 
-You don't need one when your application controls the flow. A single model call, or a fixed sequence like summarize-then-translate, is a pipeline, and wrapping it in a harness adds parts with nothing to do.
+You don't need a harness when your application code decides every step. A single model call is one example, and a fixed two-step sequence that summarizes a document and then translates the summary is another, because in both cases the model never chooses what happens next.
 
-You need one once the model decides which tool to call next. The [taxonomy of AI agents](/articles/ai-agent-taxonomy/) ranks agent types by how much each one decides, and the further up that ranking you build, the more the harness has to do.
+You need a harness once the model decides which tool to call next. The [taxonomy of AI agents](/articles/ai-agent-taxonomy/) ranks agent types by how much each type decides for itself, and an agent that plans its own steps needs every part of the harness listed above.
 
 ## FAQ
 
 **What is a harness in an LLM system?**
 
-A harness is the program around the model that runs it in a loop with tools. The model produces text, and the harness executes tool calls and feeds the results back.
+A harness is the program around the model that runs the model in a loop with tools. The model produces text, and the harness executes the tool calls in that text and feeds the results back to the model.
 
 **Is an agent harness the same as an agent framework?**
 
-Not quite, though people use the words loosely. A framework is a library you build with, and a harness is the running layer you end up with, whether you built it from a framework or by hand.
+No, although people often use one word for the other. A framework such as LangGraph is a library you build with, and a harness is the running code you end up with, whether you built it with a framework or by hand.
 
 **Is Claude Code an agent harness?**
 
-In the sense used here, yes. Anthropic's docs say the Agent SDK gives you "the same tools, agent loop, and context management that power Claude Code".
+Yes, in the sense this page uses. Anthropic's docs say the Agent SDK gives you "the same tools, agent loop, and context management that power Claude Code".
 
 **Why is checkpointing the hard part?**
 
-Because the loop is a few lines and recovery isn't. A checkpoint has to capture enough state to continue, and every tool has to be safe to call again.
+Checkpointing is hard because writing a state file isn't enough to resume safely. The file has to hold everything the next step needs, and every tool has to be safe to call a second time.
 
 **Does a better harness make the model smarter?**
 
-No. It makes failures cheaper and more visible, and FrontierHarness Eval suggests it changes what a passing run costs.
+No. A better harness makes a failed run cost less and leaves a log you can read, and FrontierHarness Eval shows the choice of harness changing what a passing run costs.

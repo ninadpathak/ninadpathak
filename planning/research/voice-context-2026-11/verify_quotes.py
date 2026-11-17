@@ -37,7 +37,9 @@ def fetch(url):
     # and decompressing it keeps the body readable; any other encoding still fails the
     # quote check, because the text will not be found.
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,*/*",
-                                               "Accept-Encoding": "gzip"})
+                                               "Accept-Encoding": "gzip",
+                                               # Stripe serves British or American spelling by region.
+                                               "Accept-Language": "en-US"})
     for attempt in range(3):
         try:
             data = urllib.request.urlopen(req, timeout=60).read()

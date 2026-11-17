@@ -96,10 +96,10 @@ Choose a level for the structure it declares. CSS can change how a heading looks
 
 Read the headings without the body copy. The review asks a narrower question than an editorial review: does the outline show the tasks and recovery paths that the page promises to cover?
 
-Where a site publishes its pages as Markdown, one command pulls the second-level outline.
+Where a site publishes its pages as Markdown, one command pulls the second-level outline. The language header is there because Stripe serves "behaviours" or "behaviors" depending on where the request comes from.
 
 ```sh
-curl -sL https://docs.stripe.com/webhooks.md | grep '^## '
+curl -sL -H 'Accept-Language: en-US' https://docs.stripe.com/webhooks.md | grep '^## '
 ```
 
 ```text

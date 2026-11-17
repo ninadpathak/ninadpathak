@@ -4392,7 +4392,9 @@
         "Codex CLI stayed first with GLM-5.3 in 99.6% of the draws",
         "Oh My Pi with Muse (53%), ZCode with DeepSeek (47%), Pi with GLM Flash (42%) and Alma with Kimi-K3 (25%)",
         "a gap of a few points is a tie",
-        "each pass rate has a 95% interval of about ±10 points"
+        "each pass rate has a 95% interval of about ±10 points",
+        "Codex CLI went from 1st with GLM-5.3 to 16th with Kimi-K3",
+        "Baseten served all five"
       ],
       "connects": [
         "agent-harnesses",
@@ -5142,6 +5144,19 @@
       "connects": [
         "docs-seo"
       ]
+    },
+    {
+      "id": "anthropic-context-window-overflow",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
+      "author": "Anthropic",
+      "date": "2026-11-18",
+      "title": "Context windows",
+      "quotes": [
+        "If the input alone already exceeds the model's context window, the API returns a 400 invalid_request_error (\"prompt is too long\") on every model"
+      ],
+      "connects": [
+        "agent-harnesses"
+      ]
     }
   ],
   "unused_leads": [
@@ -5340,12 +5355,15 @@
       "somewhere else"
     ],
     "rag-evaluation": [
-      "When do I get billed?"
+      "When do I get billed?",
+      "precision above 0.8"
     ],
     "what-agent-harness-means": [
       "harness",
       "agent",
-      "the harness in these docs is the loop and the tool registry, and you host it"
+      "the harness in these docs is the loop and the tool registry, and you host it",
+      "configure the harness to retry failed tool calls",
+      "the harness is the agent loop and the sandbox it runs in, and Anthropic hosts both"
     ],
     "voice-agent-latency": [
       "over"
@@ -5365,6 +5383,16 @@
       "our tests passed, so we assumed the error path worked",
       "we fixed it",
       "Cross-request data exposure from an undersized KV cache pool on Workers AI"
+    ],
+    "agent-harnesses": [
+      "summarize every turn older than the last ten"
+    ],
+    "model-context-protocol": [
+      "delete all 14 files?"
+    ],
+    "agent-memory-2026": [
+      "what happens to the old fact?",
+      "which plan was this customer on in March?"
     ]
   }
 }
