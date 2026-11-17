@@ -18,7 +18,7 @@ proof:
 
 - **Developer documentation.** Quickstarts and reference pages, plus the troubleshooting page that tells a developer what to do when a request fails, which is where [devtools startups lose deals over bad docs](/articles/devtools-documentation/).
 - **Tutorials and integration guides.** One reader goes from an empty project to a working result, like [setting up Firecrawl MCP in Cursor](https://www.firecrawl.dev/blog/firecrawl-mcp-in-cursor) or [self-hosting Mem0 with Docker](https://mem0.ai/library/integrations/self-host-mem0-docker).
-- **Technical articles.** Comparisons and explainers for engineers who will check the claims, like [where a Claude Agent SDK agent runs](https://opencomputer.dev/guides/claude-agent-sdk-sandbox) for OpenComputer.
+- **Technical articles.** Comparisons and explainers for engineers who will check the claims, like [where a Claude Agent SDK agent runs](https://web.archive.org/web/20260829214211/https://opencomputer.dev/guides/claude-agent-sdk-sandbox/) for OpenComputer.
 - **AI-ready documentation audits.** I check answer structure, AI crawler access and llms.txt with the checkers I built, described on the [AI-ready documentation audit](/services/ai-ready-documentation-audit/) page.
 - **Content programs.** The keyword map and review process behind a library of articles, and managing the writers when one person is not enough.
 

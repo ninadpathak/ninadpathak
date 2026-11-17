@@ -1755,7 +1755,7 @@ pre code { background: none; padding: 0; color: var(--text-1); font-size: var(--
   display: block;
   transition: background var(--t);
 }
-.p-item:hover { background: var(--bg-1); }
+a.p-item:hover { background: var(--bg-1); }
 .p-item-client { font-family: var(--mono); font-size: var(--font-size-xs); color: var(--text-3); text-transform: uppercase; letter-spacing: var(--tracking-caps-lg); margin-bottom: var(--space-3); }
 .p-item-title  { font-size: var(--font-size-xl); font-weight: var(--weight-medium); color: var(--text-1); line-height: var(--leading-snug); margin-bottom: var(--space-3); }
 .p-item-cat    { font-family: var(--mono); font-size: var(--font-size-xs); font-weight: var(--weight-medium); color: var(--accent); text-transform: uppercase; letter-spacing: var(--tracking-caps); }

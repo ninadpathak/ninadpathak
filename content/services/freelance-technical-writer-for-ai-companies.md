@@ -21,16 +21,16 @@ AI companies have hired me to write these kinds of page:
 
 - **Setup and integration tutorials.** A developer follows them to a working result, like [Firecrawl MCP in Cursor](https://www.firecrawl.dev/blog/firecrawl-mcp-in-cursor) or [persistent memory for Claude Code with Mem0](https://mem0.ai/blog/claude-code-memory).
 - **Concept explainers.** They define a term an engineer has half-met and show how it works, like [agent harnesses](https://www.firecrawl.dev/blog/what-is-an-agent-harness) for Firecrawl or [agentic RAG](https://mem0.ai/blog/what-is-agentic-rag) for Mem0.
-- **Comparisons.** They help an engineer choose between tools, like [where a Claude Agent SDK agent runs](https://opencomputer.dev/guides/claude-agent-sdk-sandbox) for OpenComputer.
+- **Comparisons.** They help an engineer choose between tools, like [where a Claude Agent SDK agent runs](https://web.archive.org/web/20260829214211/https://opencomputer.dev/guides/claude-agent-sdk-sandbox/) for OpenComputer.
 
 ## Published work by company
 
 Each link goes to the article on the company's own site:
 
 - **Firecrawl, web data for AI agents.** [Agent tools](https://www.firecrawl.dev/blog/agent-tools), [context layer for AI agents](https://www.firecrawl.dev/blog/context-layer-for-ai-agents), [agentic search](https://www.firecrawl.dev/blog/agentic-search) and [AI agent sandboxes](https://www.firecrawl.dev/blog/ai-agent-sandbox).
-- **Mem0, agent memory.** [AI agent memory](https://mem0.ai/blog/what-is-ai-agent-memory), [long-term memory for agents](https://mem0.ai/blog/long-term-memory-ai-agents), [vector embeddings](https://mem0.ai/blog/vector-embeddings) and [self-hosting Mem0 with Docker](https://mem0.ai/library/integrations/self-host-mem0-docker).
-- **OpenComputer, agent sandboxes.** [E2B alternatives](https://opencomputer.dev/guides/e2b-alternatives), [Python sandboxes ranked](https://opencomputer.dev/guides/python-sandbox) and [a Greptile clone with Claude](https://opencomputer.dev/blog/pr-review-agent).
-- **LambdaTest, AI testing.** [AI agent testing](https://www.testmu.ai/learning-hub/ai-agent-testing) and [AI testing agents in QA](https://www.testmu.ai/blog/ai-testing-agents-accelerate-qa).
+- **Mem0, agent memory.** [AI agent memory](https://mem0.ai/blog/what-is-ai-agent-memory), [long-term memory for agents](https://mem0.ai/blog/long-term-memory-ai-agents), [vector embeddings](https://web.archive.org/web/20260411081914/https://mem0.ai/blog/vector-embeddings) and [self-hosting Mem0 with Docker](https://mem0.ai/library/integrations/self-host-mem0-docker).
+- **OpenComputer, agent sandboxes.** E2B alternatives, Python sandboxes ranked and [a Greptile clone with Claude](https://opencomputer.dev/blog/pr-review-agent).
+- **LambdaTest, AI testing.** [AI agent testing](https://www.testmu.ai/learning-hub/ai-agent-testing) and AI testing agents in QA.
 
 The [portfolio](/portfolio/) lists the rest, filtered by AI Systems.
 

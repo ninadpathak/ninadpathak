@@ -1231,7 +1231,7 @@ class SiteBuilder:
               for page in service_pages],
             f"- [About]({base}/about/): Who I am, what I write, and who I write it for.",
             f"- [Work]({base}/work/): Case studies with the result each piece of work produced.",
-            f"- [Portfolio]({base}/portfolio/): Published articles and documentation, linked at the publisher.",
+            f"- [Portfolio]({base}/portfolio/): Published articles and documentation, linked at the publisher or an archived copy.",
             f"- [Contact]({base}/contact/): Email {self.config['contact']['email']} or book a 30-minute call.",
             "",
         ]

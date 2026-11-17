@@ -1,24 +1,31 @@
+# url is where the card links. When the publisher took a piece down, url is the latest
+# Wayback Machine capture that still shows it and original_url keeps the publisher's address.
+# An entry with original_url and no url has no usable capture, so its card renders without a link.
 entries:
   # DevTools / Code Review
   - title: "Code Review Best Practices for Engineering Teams"
     client: "Graphite"
     category: "DevTools"
-    url: "https://graphite.dev/blog/code-review-best-practices"
+    url: "https://web.archive.org/web/20260813143601/https://graphite.com/blog/code-review-best-practices"
+    original_url: "https://graphite.dev/blog/code-review-best-practices"
 
   - title: "Phabricator Code Review: Complete Guide"
     client: "Graphite"
     category: "DevTools"
-    url: "https://graphite.dev/blog/phabricator-code-review"
+    url: "https://web.archive.org/web/20260819080025/https://graphite.com/blog/phabricator-code-review"
+    original_url: "https://graphite.dev/blog/phabricator-code-review"
 
   - title: "Phabricator Alternatives for Modern Teams"
     client: "Graphite"
     category: "DevTools"
-    url: "https://graphite.dev/blog/phabricator-alternatives"
+    url: "https://web.archive.org/web/20260819080049/https://graphite.com/blog/phabricator-alternatives"
+    original_url: "https://graphite.dev/blog/phabricator-alternatives"
 
   - title: "Pull Request Best Practices for Teams"
     client: "Graphite"
     category: "DevTools"
-    url: "https://graphite.dev/blog/pull-request-guidelines"
+    url: "https://web.archive.org/web/20260813152232/https://graphite.com/blog/pull-request-guidelines"
+    original_url: "https://graphite.dev/blog/pull-request-guidelines"
 
   # AI / Testing
   - title: "AI Agent Testing: A Complete Guide"
@@ -71,7 +78,8 @@ entries:
   - title: "What is Natural Language Processing (NLP)?"
     client: "Mem0"
     category: "AI Systems"
-    url: "https://mem0.ai/blog/what-is-natural-language-processing"
+    url: "https://web.archive.org/web/20260216121127/https://mem0.ai/blog/what-is-natural-language-processing"
+    original_url: "https://mem0.ai/blog/what-is-natural-language-processing"
 
   - title: "What is AI Agent Memory?"
     client: "Mem0"
@@ -96,7 +104,8 @@ entries:
   - title: "What Are Vector Embeddings? A Complete Guide"
     client: "Mem0"
     category: "AI Systems"
-    url: "https://mem0.ai/blog/vector-embeddings"
+    url: "https://web.archive.org/web/20260411081914/https://mem0.ai/blog/vector-embeddings"
+    original_url: "https://mem0.ai/blog/vector-embeddings"
 
   - title: "Reducing Hallucinations in LLMs with Grounded Memory"
     client: "Mem0"
@@ -231,17 +240,19 @@ entries:
   - title: "How to use stacked PRs to unblock your entire team"
     client: "Graphite"
     category: "DevTools"
-    url: "https://graphite.com/blog/stacked-prs"
+    url: "https://web.archive.org/web/20260808004903/https://graphite.com/blog/stacked-prs"
+    original_url: "https://graphite.com/blog/stacked-prs"
 
   - title: "What's the best GitHub pull request merge strategy?"
     client: "Graphite"
     category: "DevTools"
-    url: "https://graphite.com/blog/pull-request-merge-strategy"
+    url: "https://web.archive.org/web/20260725153900/https://graphite.com/blog/pull-request-merge-strategy"
+    original_url: "https://graphite.com/blog/pull-request-merge-strategy"
 
   - title: "How AI Testing Agents Accelerate QA"
     client: "LambdaTest"
     category: "AI Systems"
-    url: "https://www.testmu.ai/blog/ai-testing-agents-accelerate-qa"
+    original_url: "https://www.testmu.ai/blog/ai-testing-agents-accelerate-qa"
 
   - title: "AI Testing vs Traditional Testing: What's The Difference?"
     client: "LambdaTest"
@@ -333,24 +344,25 @@ entries:
   - title: "Claude Agent SDK: Where Does the Agent Actually Run?"
     client: "OpenComputer"
     category: "AI Systems"
-    url: "https://opencomputer.dev/guides/claude-agent-sdk-sandbox"
+    url: "https://web.archive.org/web/20260829214211/https://opencomputer.dev/guides/claude-agent-sdk-sandbox/"
+    original_url: "https://opencomputer.dev/guides/claude-agent-sdk-sandbox"
 
   - title: "GitHub Codespaces vs Gitpod for Autonomous AI Agents"
     client: "OpenComputer"
     category: "Developer Infrastructure"
-    url: "https://opencomputer.dev/guides/codespaces-gitpod-agents"
+    original_url: "https://opencomputer.dev/guides/codespaces-gitpod-agents"
 
   - title: "E2B Alternatives for AI Agent Sandboxes (2026)"
     client: "OpenComputer"
     category: "Developer Infrastructure"
-    url: "https://opencomputer.dev/guides/e2b-alternatives"
+    original_url: "https://opencomputer.dev/guides/e2b-alternatives"
 
   - title: "Podman vs Docker for Running Untrusted Code"
     client: "OpenComputer"
     category: "Developer Infrastructure"
-    url: "https://opencomputer.dev/guides/podman-vs-docker-untrusted-code"
+    original_url: "https://opencomputer.dev/guides/podman-vs-docker-untrusted-code"
 
   - title: "Python Sandbox: Every Approach, Honestly Ranked"
     client: "OpenComputer"
     category: "Developer Infrastructure"
-    url: "https://opencomputer.dev/guides/python-sandbox"
+    original_url: "https://opencomputer.dev/guides/python-sandbox"
