@@ -1139,10 +1139,16 @@
       "quotes": [
         "it keeps the active context small, because response quality degrades as a conversation grows",
         "The API, when input tokens reach the trigger you set",
-        "Use on-demand compaction wherever it is available."
+        "Use on-demand compaction wherever it is available.",
+        "Compaction replaces the older turns of a conversation with a summary that Claude writes on the server, so you need no summarization code of your own.",
+        "because response quality degrades as a conversation grows",
+        "are in beta",
+        "input tokens reach the trigger you set",
+        "so you need no summarization code of your own"
       ],
       "connects": [
-        "ai-memory-management"
+        "ai-memory-management",
+        "short-term-agent-memory"
       ],
       "date_note": "Date fetched; documentation page."
     },
@@ -1707,10 +1713,13 @@
         "CHANGELOG.md on GitHub",
         "Longer releases are grouped by type of change, with long lists of improvements and bug fixes collapsed.",
         "Deprecated fast mode for Opus 4.8 as of October 30, 2026; it will be removed on November 30, 2026. After removal, fast mode requests on Opus 4.8 return an error and do not fall back to standard Opus 4.8.",
-        "Migrate to Opus 5.5 to keep the speedup"
+        "Migrate to Opus 5.5 to keep the speedup",
+        "summarizing away a message that Claude had not answered yet",
+        "sometimes replying to one of your messages instead of summarizing, or leaving Claude's last reply out of the summary"
       ],
       "connects": [
-        "writing-changelogs"
+        "writing-changelogs",
+        "short-term-agent-memory"
       ]
     },
     {
@@ -1724,6 +1733,25 @@
       ],
       "connects": [
         "writing-changelogs"
+      ]
+    },
+    {
+      "id": "hn-ask-agent-context-2026-11",
+      "url": "https://hn.algolia.com/api/v1/items/50403153",
+      "author": "Hacker News thread, several commenters",
+      "date": "2026-11-07",
+      "title": "Ask HN: How do you manage your AI agents' context across clients and projects?",
+      "discussion": "https://news.ycombinator.com/item?id=50403153",
+      "quotes": [
+        "How do you manage your AI agents' context across clients and projects?",
+        "I let agents read their own pre-compaction history often",
+        "prep a handoff so we can resume from here in a fresh session",
+        "at the end ask the agent to summarize what it learned and write it down."
+      ],
+      "connects": [
+        "short-term-agent-memory",
+        "coding-agent-memory",
+        "claude-code-memory"
       ]
     }
   ],
@@ -1883,6 +1911,7 @@
     "writing-changelogs": [
       "**Breaking:** `client.retryCount` has been replaced by `client.retry.maxAttempts`. Rename the field before upgrading or the client will fall back to its default retry limit.",
       "This release is backward compatible for REST API users. The JavaScript SDK now requires Node.js 20 or later."
-    ]
+    ],
+    "short-term-agent-memory": []
   }
 }
