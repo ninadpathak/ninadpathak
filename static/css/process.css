@@ -699,8 +699,7 @@
   .pp-n5 { --tl: --s5; --tl-next: --s6; }
   .pp-n6 { --tl: --s6; --tl-next: --s7; }
   .pp-n7 { --tl: --s7; --tl-next: --s8; }
-  /* No scene declares --s9, so the last figure's exit never runs. */
-  .pp-n8 { --tl: --s8; --tl-next: --s9; }
+  .pp-n8 { --tl: --s8; }
   .pp-live .pp-scene { view-timeline-name: var(--tl); }
 
   /* A figure pans up into the stage as its scene arrives and on out as the next one
@@ -720,6 +719,18 @@
   .pp-live .pp-n1 .pf-stage { animation-name: none, pp-pan-out; }
   .pp-live .pp-n1 .pf-head,
   .pp-live .pp-n1 .pf-foot { animation-name: none, pp-fade-out; }
+  /* The last figure has no scene after it, so it only arrives. */
+  .pp-live .pp-n8 .pf-stage {
+    animation: pp-pan-in linear both;
+    animation-timeline: var(--tl);
+    animation-range: cover 0vh cover var(--pp-pan);
+  }
+  .pp-live .pp-n8 .pf-head,
+  .pp-live .pp-n8 .pf-foot {
+    animation: pp-fade-in linear both;
+    animation-timeline: var(--tl);
+    animation-range: cover 24vh cover var(--pp-pan);
+  }
 
   .pp-live .pa,
   .pp-live .pa-out,

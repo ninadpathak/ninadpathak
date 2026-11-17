@@ -116,7 +116,7 @@ class ProcessPageTests(unittest.TestCase):
     def test_it_states_only_the_confirmed_timings_and_counts(self):
         """Ninad's answers of 2026-11-17: brief within 24 hours, about 5 days to a draft,
         2 days for revision, 4 days later on, two review rounds at most, a paid trial."""
-        for phrase in ("Within 24 hours", "about 5 days from brief to draft", "two rounds of review at most",
+        for phrase in ("Within 24 hours", "about 5 days from brief to draft", "never goes past two rounds",
                        "paid trial piece", "4 days end to end", "demo account and API keys"):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, self.text)

@@ -59,11 +59,11 @@ stages:
     evidence: "The checkers in this site's repository and its review of 17 November 2026. The [technical writing linter](/linter/) is the public one."
   - id: review
     label: Review
-    title: "Review: two rounds at most"
+    title: "Review: never more than two rounds"
     figure: Engineer review
     alt: "A draft passes an engineer's review and goes live. Fifty tiles stand for the Centus guides, and thirteen dots for the writers at Mem0."
     beats:
-      - "Your engineers review the draft for accuracy, and they get working code to review. There are two rounds of review at most, and a third is never required."
+      - "Your engineers review the draft for accuracy, and they get working code to review. Review never goes past two rounds."
       - "For [Centus](/work/centus/) that meant 50+ localization guides across 10+ frameworks, approved without a round of engineering revisions."
       - "When one writer isn't enough, the review scales to a team. At [Mem0](/work/mem0/) I wrote 11 guides and ran a team of 13 writers, with the hiring and the technical reviews."
     quote: "Our devs called it awesome and just sent it ahead for publishing."
@@ -90,13 +90,13 @@ stages:
       - "The loop allows one change to a page at a time. It freezes the 28 days before the change as the baseline and refuses a verdict for 14 days."
     evidence: "This site's daily Search Console pull and its weekly loop, where each number is labelled as measured or as an estimate."
 start:
-  - step: "30-minute call"
+  - step: "A 30-minute call"
     line: "We settle the reader, the decision and the access I need."
-  - step: "Brief in 24 hours"
+  - step: "The brief, in 24 hours"
     line: "A written brief and a specific timeline, within a day of the call."
-  - step: "Paid trial piece"
+  - step: "A paid trial piece"
     line: "One piece, start to finish. We continue only if you're happy with it."
-  - step: "One working week"
+  - step: "A working week"
     line: "About 5 days from brief to draft and 2 for revision. Later pieces take 4 days end to end."
 results:
   - client: LinuxForDevices
@@ -142,7 +142,7 @@ It takes about 5 days from brief to draft and 2 days for revision, so one workin
 
 **How many review rounds are there?**
 
-There are two rounds of review at most. A third round is never required.
+Review never goes past two rounds. A third round is never required.
 
 **How does an engagement start?**
 

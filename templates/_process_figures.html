@@ -12,7 +12,7 @@
 
    Motion classes: `pa` marks a part that animates; pa-pop, pa-x, pa-y, pa-land and the
    rest pick how it enters; s1, s2, s3 tie it to the beat that brings it in; d1 to d5
-   stagger it. With no script and no scroll timeline every part is simply there. #}
+   stagger it. With no script and no scroll timeline every part is there. #}
 
 {% set ICONS = {
   "doc": ["M5 3h9l5 5v13H5z", "M14 3v5h5", "M8.5 12.5h7", "M8.5 16.5h7"],
@@ -170,7 +170,7 @@
 {% macro review() %}
 {{ lead_in() }}
 {{ tile("person", "pa pa-pop s1") }}
-{{ run('2 rounds at most', "s1 d2") }}
+{{ run('2 rounds, no more', "s1 d2") }}
 <div class="pf-panel pf-wider pa s2">
   <span class="pf-guides">{% for n in range(50) %}<i class="pf-guide pa pa-pop s2 d{{ n // 10 + 1 }}"></i>{% endfor %}</span>
   <span class="pf-thirds">
