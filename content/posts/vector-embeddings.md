@@ -1,7 +1,7 @@
 ---
 category: ai-engineering
 date: 2026-03-15
-description: 'Vector embeddings explained with a model run on five texts: what an embedding is, why similarity scores mislead, how many dimensions to keep and what binary embeddings cost.'
+description: 'Vector embeddings explained with a model run on six short texts: what an embedding is, why similarity scores mislead, and what binary embeddings cost.'
 status: published
 work_note: 'At Mem0 I hired writers capable of understanding vector embeddings, and I handled the technical reviews. This guide to embeddings is my own, written for this site, and [the Mem0 case study](/portfolio/) is in my portfolio.'
 title: 'Vector Embeddings: A Guide to the Geometry of Meaning in AI'
@@ -13,7 +13,7 @@ Someone typed "soviet" into [a semantic search over about 6.3 million museum art
 
 [The thread](https://news.ycombinator.com/item?id=50194522), from October 22, teaches the geometry better than the king-and-queen diagram does, because each complaint in it is a property of the space. A commenter reported that the site "Completely failed if you search by Artist name", and another searched "holofernes" and got paintings "not-of-but-aesthetically-similar-to Judith beheading Holofernes".
 
-A third user praised the results for Art Deco, and the same geometry accounts for that too.
+A third user praised the results for Art Deco, and the same geometry accounts for that too. The figure shows the textbook version of it, with the two senses of "bank" landing in different neighbourhoods.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/vector-embeddings/meaning-space.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/vector-embeddings/meaning-space.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/vector-embeddings/meaning-space.svg" width="720" height="392" alt="Two texts that both use the word bank go through the same embedding model. Text about bank fees lands among financial concepts, and text about a river bank lands among geographic ones, so a strong model keeps the two senses apart in vector space." loading="lazy" decoding="async"></picture></a>
@@ -28,7 +28,7 @@ The word covers four kinds of output, and they fail in different ways.
 
 | Type | What is stored | Good at | Weak at |
 | --- | --- | --- | --- |
-| Dense | One vector per text, a few hundred to a few thousand floats | Paraphrase and topic | Telling near-identical names and codes apart |
+| Dense | One vector per text, a few hundred to a few thousand floats | Paraphrase and topic | Separating near-identical names and codes by a safe margin |
 | Sparse | One weight per vocabulary term, nearly all zero | Exact terms | Wording the document doesn't share |
 | Multi-vector | One vector per token | Phrase-level matching | Storage |
 | Binary | One bit per dimension of a dense vector | Memory and speed | Fine ranking |
@@ -77,7 +77,7 @@ for text, row in zip(queries, qb):
 print("\nbytes per vector: float32", d.shape[1] * 4, "| binary", d.shape[1] // 8)
 ```
 
-The script needs `pip install fastembed numpy`, and `python3 embed_demo.py` printed this.
+The script needs `pip install fastembed numpy`, and fastembed loads a quantized ONNX build of the model, so the scores are that build's. Here is what `python3 embed_demo.py` returned.
 
 ```text
 dimensions: 384 | vector length: 1.0
@@ -95,13 +95,13 @@ same search on sign bits (matching bits out of 384 )
 bytes per vector: float32 1536 | binary 48
 ```
 
-The first query shares no keyword with the overdraft sentence and still scores 0.73 against it, which is the behaviour people mean by semantic search. The second row shows the weakness: the query is the exact code in the ORA-00942 document, and the ORA-00932 document, a different Oracle error, scores 0.70 against the right answer's 0.75.
+The question about a negative balance shares one word with the overdraft sentence, "charged", and still scores 0.73 against it, which is the behaviour people mean by semantic search. The second query is where a dense model is weak: the query is the exact code in the ORA-00942 document, and the ORA-00932 document, a different Oracle error, scores 0.70 against the right answer's 0.75.
 
-A dense model sees two strings that look alike and places them together, which is the wrong instinct for identifiers. The same row ranks the unrelated error above the sentence that describes the fault in plain words.
+The model did rank the right code first, by a margin too thin to set a threshold on. The same row ranks the unrelated error above the sentence that describes the fault in plain words.
 
 The run also offers one reading of the artist-name complaint. A name can only pull a document toward a query if the name was part of what got embedded, and one comment in the thread asks the question that decides it: "whether the embeddings come off the images or the catalog text", which the site's About page doesn't answer.
 
-Query and document are embedded separately here, which is what makes the model a [bi-encoder](/glossary/bi-encoder/). The documents can be embedded once and stored, and only the query is embedded at search time.
+Query and document are embedded separately here, which is what makes the model a [bi-encoder](/glossary/bi-encoder/). The documents can be embedded once and stored, and only the query is embedded at search time, the arrangement the figure draws for a document split into chunks.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/vector-embeddings/chunk-embed.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/vector-embeddings/chunk-embed.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/vector-embeddings/chunk-embed.svg" width="720" height="400" alt="A document is split into chunks, and the embedding model turns each chunk into a vector, which is stored in a vector database with its original text and metadata. A user query is embedded by the same model and searched against the database for its nearest neighbors." loading="lazy" decoding="async"></picture></a>
@@ -141,7 +141,7 @@ for dim in (3, 384, 1536):
           f"largest of {sims.size:,} pairs {sims.max():.3f}")
 ```
 
-Running `python3 shell_demo.py` printed this.
+Its output, from `python3 shell_demo.py`:
 
 ```text
     3 dims: mean +0.000  std 0.577  largest of 1,999,000 pairs 1.000
@@ -151,7 +151,7 @@ Running `python3 shell_demo.py` printed this.
 
 Among two million pairs of random 384-dimension directions, the closest reached 0.266. The model scored a question about bank charges against an Oracle error at 0.51, so its vectors occupy a narrow part of the space and every score has to be read against that crowding.
 
-An earlier version of this page said a score of 0.7 in 1,536 dimensions "might be noise". Chance alone topped out at 0.126 in two million pairs at that size, and the noise that matters is the model's own floor, which you find by scoring pairs you know are unrelated.
+Dimension count is sometimes blamed for meaningless high scores, and the random run rules that out, since chance topped out at 0.126 in two million pairs at 1,536 dimensions. The noise that matters is the model's own floor, which you find by scoring pairs you know are unrelated.
 
 That floor is also the best explanation I have for the cylinder seal. Nearest-neighbour search always returns something, and when nothing in the index is close to a query the top result is whichever item the floor happens to favour.
 
@@ -189,7 +189,7 @@ The bge-small model in my run has 384 dimensions, and its model card describes n
 
 A binary vector embedding keeps one bit per dimension, the sign of each float, and compares vectors by counting matching bits. Each vector in the run above shrank from 1,536 bytes to 48, a 32-fold saving.
 
-The same run shows the price. The first two queries kept their best match, and "holofernes" lost it by a single bit, 233 against 232, to a sentence about a missing database table.
+Binary search has a price, and the run paid it once. The first two queries kept their best match, and "holofernes" lost it by a single bit, 233 against 232, to a sentence about a missing database table.
 
 That result is why binary search is used as a first pass. Retrieve a generous candidate set on bits, then rescore those candidates with the full vectors, the same two-stage shape as [reranking](/articles/rag-reranking/).
 
@@ -208,7 +208,7 @@ Compare one hosted default, one model with flexible dimensions and one you can r
 | Cohere embed-v5.0-pro | 256 to 2048 | "support for over 100 languages", binary and int8 output |
 | BAAI/bge-small-en-v1.5 | 384 | MIT license, the model run above |
 
-A public leaderboard score won't settle the choice. My six-document run is no benchmark either, and what it shows is the method: embed queries and documents with each candidate, then read the scores of the wrong documents as carefully as the right ones.
+A public leaderboard score won't settle the choice, and my six-document run is no benchmark either. Its use is as a method: embed queries and documents with each candidate, then read the scores of the wrong documents as carefully as the right ones.
 
 ## Is there a universal geometry of embeddings?
 
