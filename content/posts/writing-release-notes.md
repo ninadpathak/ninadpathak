@@ -5,7 +5,7 @@ description: Write release notes that let developers assess upgrade risk, unders
   product impact, and migrate without surprises.
 slug: writing-release-notes
 status: published
-work_note: 'I wrote this around one scene: someone wants to upgrade the SDK before the weekend, and the notes have to say whether that is safe. For help with the writing around a release, [get in touch](/contact/).'
+work_note: 'I counted how far into a few real release notes a reader gets before learning who is affected, and this page starts from those counts. For help with the writing around a release, [get in touch](/contact/).'
 takeaways:
 - Put compatibility, affected users, and required action on the first screen.
 - Separate product impact from launch language and implementation detail.
@@ -21,7 +21,7 @@ Writing release notes that developers trust comes down to that distance. Someone
 
 ## How soon do real release notes say who is affected?
 
-The notes I looked at ranged from 32 words to 427, counted from the release line to the first sentence that names affected users. The script below fetches each page and counts.
+The notes I looked at ranged from 32 words to 427, counted from the release line to the first sentence that names affected users.
 
 ```python
 """Count the words a reader passes before a release note says who must act."""
@@ -48,7 +48,7 @@ for name, url, start, warning in notes:
     print(f"{name:<24} {words:>4} words before the first sentence about who is affected")
 ```
 
-Running `python3 first_warning.py` printed the counts.
+Saved as `first_warning.py`, it reports the distance for each note.
 
 ```text
 GitLab 19.5.1 (Oct 21)     32 words before the first sentence about who is affected
@@ -119,7 +119,7 @@ Scope reduces unnecessary alarm. If a change affects only self-hosted deployment
 
 Negative scope is especially useful when a product has several SDKs, API versions, regions, or deployment models. It prevents every customer from interpreting a broad warning as their own emergency.
 
-## Write impact, not implementation
+## Write what changed for the user
 
 Pull request titles make sense from the team’s side of the work. Release notes have to turn them around and show what changed for the person using the product.
 
@@ -147,7 +147,7 @@ Within that section, use the same order for every item:
 - Verification step
 - Rollback or support path
 
-Consistency lets a reader scan long notes. Future writers are less likely to dilute a structure with an obvious place for each fact.
+Consistency lets a reader scan long notes.
 
 ### Be precise about security
 
@@ -170,13 +170,13 @@ For an API change, a focused request or response diff is usually better than a f
 + { "next_cursor": "eyJpZCI6IjEwMDAifQ==" }
 ```
 
-For an interface change, crop the screenshot to the changed region and call out the control or state the reader needs to notice. The caption should explain the consequence, not repeat the image title.
+For an interface change, crop the screenshot to the changed region and call out the control or state the reader needs to notice. The caption should explain the consequence.
 
 ### Skip visuals for routine inventory
 
 A decorative dashboard screenshot does not explain a dependency update. It adds page weight and another asset that can become stale.
 
-Ask whether the visual helps someone migrate or verify behavior. If it does neither, let the prose carry the point.
+Ask whether the visual helps someone migrate or verify behavior, and leave it out if it does neither.
 
 ## Let the version and prose make the same promise
 
@@ -196,13 +196,13 @@ The notes have to agree with the version. A breaking runtime change inside a pat
 
 State the first version that deprecates the behavior, the expected removal version, and a calendar date when possible. “Deprecated soon” leaves the migration schedule open-ended.
 
-If the schedule changes, update the canonical release page and link later notes back to it. Developers need one source they can trust while planning work.
+If the schedule changes, update the canonical release page and link later notes back to it.
 
 ### Include rollback limits
 
 If a database migration, state change, or new file format prevents a clean downgrade, say so before the upgrade steps. A rollback instruction that no longer works is worse than no instruction because it creates false confidence.
 
-State what can be reversed, how long the previous version remains supported, and which data needs a backup. These details often matter more than the feature description.
+State what can be reversed and which data needs a backup, with the date support for the previous version ends.
 
 ## Automate collection, keep judgment human
 
@@ -231,9 +231,9 @@ Individual engineers can verify their sections, but one person should edit the c
 
 Edit from highest risk to lowest risk: breaking changes, security and support changes, fixes, new capability, and minor improvements.
 
-## A release-note structure that works
+## What order should release notes follow?
 
-The exact labels can change, but the reading order should remain predictable:
+Release notes should run from the decision to the detail. The labels can change, and the order below should stay the same from one release to the next.
 
 1. **Release summary:** version, date, compatibility, scope, and action.
 2. **Breaking changes:** migration, verification, deadline, and rollback.
@@ -261,8 +261,6 @@ The [release notes template](/articles/release-notes-template/) turns this order
 - Do migration, advisory, rollback, and reference links work?
 - Can someone find the same release again by version?
 
-Trust comes from repeating this disclosure standard every time. A single vague release can make the next careful one harder to believe.
-
 ## Worked example: write the notes for a breaking SDK release
 
 Take the same hypothetical `4.0.0` release used in the [changelog example](/articles/writing-changelogs/). The changelog records pagination, runtime, webhook retry, validation, and login changes in compact form.
@@ -284,7 +282,7 @@ Action: Upgrade to Node.js 20 and migrate list endpoints to cursors
 Rollback: Safe until the first v4 cursor is stored; see rollback limits
 ```
 
-“Medium” is only useful because the following fields explain it. A standalone effort badge would replace one vague label with another.
+“Medium” is only useful because the following fields explain it.
 
 ### Explain the migration in dependency order
 
@@ -297,7 +295,7 @@ Runtime comes before package installation, and package installation comes before
 5. Deploy to a test environment and compare pagination results.
 6. Roll out gradually while monitoring `400` and `401` responses.
 
-The dependency order gives the reader one safe path across several product changes. Team ownership has no place in that sequence.
+The dependency order gives the reader one safe path across several product changes.
 
 ### Show the change where prose is weak
 
@@ -316,15 +314,13 @@ Then explain the behavior prose cannot show:
 - Changing filters invalidates the previous cursor.
 - The SDK returns `nextCursor: null` on the final page.
 
-The code proves the surface change, while the bullets define the operational constraints. Neither is complete alone.
-
 ### State the rollback boundary
 
 Suppose version 4 cursors cannot be passed to version 3. The notes should say that rolling back the SDK is safe only before the application persists or exposes a v4 cursor.
 
 A practical rollback block might say:
 
-> Keep version 3 deployed in the previous production slot. If error rates rise before v4 cursors are stored, shift traffic back; after that point, disable pagination writes and contact support before downgrading.
+> Keep version 3 deployed in the previous production slot. If error rates rise before v4 cursors are stored, shift traffic back. After that point, disable pagination writes and contact support before downgrading.
 
 An explicit rollback boundary may prompt the engineering team to add a compatibility layer. Finding that risk before release leaves time to reduce it.
 
@@ -353,11 +349,7 @@ The release note should leave the reader with checks they can run:
 - Duplicate webhook delivery does not create duplicate work.
 - Monitoring shows no unexplained increase in `400`, `401`, or `429` responses.
 
-Verification turns the notes into an upgrade tool. Without it, the page explains the change but leaves success undefined.
-
-A release note can explain the change without deciding where older instructions remain available. Keep their URLs and support policy explicit.
-
-## Release notes FAQ
+## FAQ
 
 **Who writes release notes?**
 
