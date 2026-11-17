@@ -1,7 +1,7 @@
 {
   "aeo-for-developer-docs": {
     "lastmod": "2026-11-17",
-    "sources": "42fad509bd77a980e897e7757ac9d81b3c9eb6725e6e37b9a15a301f205ebe10"
+    "sources": "ec519792929e8cc5206c299187b1154af1518a1e9df8133ce3f3be5f2622211e"
   },
   "agent-design-space": {
     "lastmod": "2026-11-17",
@@ -37,7 +37,7 @@
   },
   "agents-reading-docs": {
     "lastmod": "2026-11-17",
-    "sources": "8035ee434ec3e3622a92ac9e7bdb65bc007bbac6e1c1ce51b7dd03ef05c1112a"
+    "sources": "b64f3ef140561188795d38143177faa78b65dcc9bf405af0aa080e183d857304"
   },
   "ai-agent-failures": {
     "lastmod": "2026-11-17",
@@ -49,7 +49,7 @@
   },
   "ai-crawlers": {
     "lastmod": "2026-11-17",
-    "sources": "c87e018f8f60ae8518e34e8011c476891921275229cb358e19f9eec2d635a6d4"
+    "sources": "22ccfb2b2e3a8a6e3649cecd4c65a7eda472dea63145219bcebdc7646bc755ca"
   },
   "ai-memory-management": {
     "lastmod": "2026-11-17",
@@ -201,7 +201,7 @@
   },
   "llms-txt": {
     "lastmod": "2026-11-17",
-    "sources": "f88e69af480e5219f4350088d68ef1e6c4cf2601946e50beb471f4711e43c995"
+    "sources": "29b4836740ba23587fa1eba44c41c61f822756a6c58bb41f8ea5b4c38679b7d6"
   },
   "mcp-server-tutorial": {
     "lastmod": "2026-11-17",
@@ -329,6 +329,6 @@
   },
   "written-by-a-human": {
     "lastmod": "2026-11-17",
-    "sources": "c21833ab85ce8504d81a11283e658854bb68bce449463dbca87659189101e795"
+    "sources": "b7040e872e3964f9703393d96c3bdf8edafca84e887f0691b80d2198211d4dfc"
   }
 }
