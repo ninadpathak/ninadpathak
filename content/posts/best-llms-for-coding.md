@@ -100,7 +100,7 @@ My reading is that the two benchmarks ask different things, since Real-SWE grade
 
 Evan X. Merz described the second situation from inside a large company in [a post dated November 7](https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/): "AI tends to solve the problems that can fit within its context window very well, but it's totally oblivious to the long term issues that can't be understood in that relatively small frame."
 
-A leaderboard of single tasks can't show that cost, and a composition-level check like the one in my [lambda calculus exercise](/articles/lambda-calculus-ai/) is a small way to look for it.
+A leaderboard of single tasks can't show that cost. I take up Merz's point about understanding in [a separate essay](/articles/nobody-understands-the-code/), and a composition-level check like the one in my [lambda calculus exercise](/articles/lambda-calculus-ai/) is a small way to look for it.
 
 ## What is the best open source LLM for coding?
 

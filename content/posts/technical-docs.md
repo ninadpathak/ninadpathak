@@ -56,7 +56,7 @@ Each document type has one job and hands the reader to another type when the job
 - **An explanation** gives a model for a design choice, and it should make the next task simpler without asking the reader to learn every concept first.
 - **A how-to guide** changes one behavior from a known starting state.
 - **Reference** owns the public API surface.
-- **Troubleshooting** starts from a symptom the reader can recognize and ends in a safe recovery or an escalation.
+- **Troubleshooting** starts from a symptom the reader can recognize and ends in a safe recovery or an escalation, and its internal counterpart is the [runbook](/articles/runbook-template/).
 - **Release notes** explain changed behavior and the action it requires, and link to the migration page for the full instructions.
 
 Reference is where exactness is the whole job. Google's [API reference guidance](https://developers.google.com/style/api-reference-comments) says "API documentation must include descriptions for every class, constant, method, and parameter", because an implementation depends on exact behavior and a narrative approximation won't do.

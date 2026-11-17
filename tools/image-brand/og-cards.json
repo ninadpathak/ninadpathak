@@ -16,6 +16,11 @@
     "doc*",
     "core"
   ],
+  "nobody-understands-the-code": [
+    "core",
+    "doc question*",
+    "reader"
+  ],
   "coding-models-new-code-vs-change": [
     "core",
     "loop*",

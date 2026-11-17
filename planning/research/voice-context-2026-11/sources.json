@@ -1234,10 +1234,14 @@
       "title": "AI usage generates a fragile codebase",
       "discussion": "https://news.ycombinator.com/item?id=50438318",
       "quotes": [
-        "AI tends to solve the problems that can fit within its context window very well, but it's totally oblivious to the long term issues that can't be understood in that relatively small frame."
+        "AI tends to solve the problems that can fit within its context window very well, but it's totally oblivious to the long term issues that can't be understood in that relatively small frame.",
+        "every word of this article was written by a human",
+        "The longer a company relies on AI agents to generate the code, the fewer developers are going to understand the codebase.",
+        "2026-11-07, Evan X. Merz"
       ],
       "connects": [
-        "best-llms-for-coding"
+        "best-llms-for-coding",
+        "nobody-understands-the-code"
       ]
     },
     {
@@ -1621,6 +1625,77 @@
         "writing-release-notes",
         "writing-changelogs"
       ]
+    },
+    {
+      "id": "hn-100-percent-ai-mandate-thread",
+      "url": "https://hn.algolia.com/api/v1/items/50433079",
+      "author": "Hacker News thread, several commenters",
+      "date": "2026-11-09",
+      "title": "A year after the 100% AI mandate nobody understands our code",
+      "discussion": "https://news.ycombinator.com/item?id=50433079",
+      "quotes": [
+        "A year after the 100% AI mandate nobody understands our code",
+        "Pangram said the op post is 100% AI generated",
+        "fall for the bait"
+      ],
+      "connects": [
+        "nobody-understands-the-code"
+      ]
+    },
+    {
+      "id": "hn-merz-iagooar",
+      "url": "https://hn.algolia.com/api/v1/items/50446216",
+      "author": "iagooar",
+      "date": "2026-11-10",
+      "title": "Hacker News comment on AI usage generates a fragile codebase",
+      "discussion": "https://news.ycombinator.com/item?id=50446216",
+      "quotes": [
+        "does not decrease, it just moves up a level or two"
+      ],
+      "connects": [
+        "nobody-understands-the-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-code-review",
+      "url": "https://claude.dev/blog/solving-code-review-at-anthropic/",
+      "author": "Addy Osmani, Morgan Westlee Lunt, and Qing Wang",
+      "date": "2026-10-15",
+      "title": "How the Claude Code team does code review",
+      "quotes": [
+        "If machines do most of the reading, how does anyone learn the code?",
+        "We don't have a formal process for this.",
+        "Nobody on the team keeps a complete mental model of Claude Code in their head, and we don't think anyone needs to. When someone wants to understand a part of the codebase, they ask Claude to write an explainer for exactly that slice.",
+        "merged pull requests to Claude Code's codebase more than doubled while the share that had to be reverted fell by more than 40 percent.",
+        "reflects the code as it is today",
+        "Usually someone in the channel asks why, points at an earlier decision, or suggests a simpler route",
+        "You land it, you own it",
+        "PUBLISHED Oct 15, 2026",
+        "Code review's second job has always been to spread codebase understanding."
+      ],
+      "connects": [
+        "nobody-understands-the-code",
+        "documentation-review",
+        "agentic-workflows"
+      ]
+    },
+    {
+      "id": "naur-theory-building-1985",
+      "url": "https://gwern.net/doc/cs/algorithm/1985-naur.pdf",
+      "author": "Peter Naur",
+      "date": "1985",
+      "title": "Programming as Theory Building (reprinted in Alistair Cockburn, Agile Software Development)",
+      "quotes": [
+        "any documentation being an auxiliary, secondary product",
+        "can explain why each part of the program is what it is",
+        "reestablishing the theory of a program merely from the documentation, is strictly impossible",
+        "The death of a program happens when the programmer team possessing its theory is dissolved.",
+        "A dead program may continue to be used for execution in a computer and to produce useful results."
+      ],
+      "connects": [
+        "nobody-understands-the-code",
+        "code-documentation"
+      ]
     }
   ],
   "unused_leads": [
@@ -1773,6 +1848,7 @@
       "Medium",
       "If a sentence cannot help someone decide, migrate, verify, or troubleshoot, it does not belong above the technical changes.",
       "Keep version 3 deployed in the previous production slot. If error rates rise before v4 cursors are stored, shift traffic back; after that point, disable pagination writes and contact support before downgrading."
-    ]
+    ],
+    "nobody-understands-the-code": []
   }
 }
