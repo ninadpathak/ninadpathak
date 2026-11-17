@@ -1,71 +1,118 @@
 ---
 category: ai-engineering
 date: 2026-03-15
-description: Everything in AI starts with a vector. Here is how embedding models turn
-  human language into high-dimensional geometry, why dimensionality reduction matters,
-  and how to choose between OpenAI, Cohere, and self-hosted models.
+description: 'Vector embeddings explained with a model run on five texts: what an embedding is, why similarity scores mislead, how many dimensions to keep and what binary embeddings cost.'
 status: published
 work_note: 'At Mem0 I hired writers capable of understanding vector embeddings, and I handled the technical reviews. This guide to embeddings is my own, written for this site, and [the Mem0 case study](/portfolio/) is in my portfolio.'
 title: 'Vector Embeddings: A Guide to the Geometry of Meaning in AI'
-updated: '2026-08-17'
+updated: 2026-11-17
 slug: vector-embeddings
 ---
 
-Every interaction with a modern language model begins with a conversion. You provide text, and the system translates that text into a list of numbers.
+On October 22 someone posted [a semantic search over about 6.3 million museum artworks](https://lastmuseum.com/) to Hacker News, and an early reply came from a user whose search for "soviet" had "matched cylinder seal 3500bc". Vector embeddings are the numbers behind a search like that: a model turns each text or image into a point in a space with hundreds or thousands of dimensions, and the search returns whatever points sit nearest the query.
 
-These numbers represent the semantic essence of your input in a coordinate system so vast that human intuition for space completely fails.
+[The thread](https://news.ycombinator.com/item?id=50194522) teaches the geometry better than the king-and-queen diagram does, because each complaint in it is a property of the space. A commenter reported that the site "Completely failed if you search by Artist name", and another searched "holofernes" and got paintings "not-of-but-aesthetically-similar-to Judith beheading Holofernes".
 
-We call these lists of numbers embeddings. They are the foundational infrastructure for retrieval-augmented generation (RAG), semantic search, and recommendation engines.
-
-The choice of embedding model determines the ceiling of your system's accuracy.
-
-Weak models cluster unrelated concepts together. A strong model preserves the subtle distinctions between "bank" as a financial institution and "bank" as the side of a river.
-
-That precision is what lets a support bot answer a question about overdraft fees without surfacing a paragraph about fishing trips.
-
+A third user praised the results for Art Deco, and the same geometry accounts for that too.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/vector-embeddings/meaning-space.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/vector-embeddings/meaning-space.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/vector-embeddings/meaning-space.svg" width="720" height="392" alt="Two texts that both use the word bank go through the same embedding model. Text about bank fees lands among financial concepts, and text about a river bank lands among geographic ones, so a strong model keeps the two senses apart in vector space." loading="lazy" decoding="async"></picture></a>
   <figcaption>A strong model keeps "bank" the institution and "bank" the riverside in different neighbourhoods.</figcaption>
 </figure>
 
+## What are vector embeddings?
 
+A vector embedding is a fixed-length list of numbers that a model assigns to a piece of content so that distance between two lists tracks similarity of meaning. Any list of numbers is a vector, and an embedding is a vector produced by a model trained to make those distances useful.
 
-## How text becomes geometry
+The word covers four kinds of output, and they fail in different ways.
 
-Encoding text into a vector is a process of projection. You take a discrete string of characters and map it onto a point in a high-dimensional space.
+| Type | What is stored | Good at | Weak at |
+| --- | --- | --- | --- |
+| Dense | One vector per text, a few hundred to a few thousand floats | Paraphrase and topic | Telling near-identical names and codes apart |
+| Sparse | One weight per vocabulary term, nearly all zero | Exact terms | Wording the document doesn't share |
+| Multi-vector | One vector per token | Phrase-level matching | Storage |
+| Binary | One bit per dimension of a dense vector | Memory and speed | Fine ranking |
 
-OpenAI's [`text-embedding-3-small`](https://developers.openai.com/api/docs/models/text-embedding-3-small) model uses 1,536 dimensions by default.
+Multi-vector retrieval comes from [the ColBERT paper](https://arxiv.org/abs/2004.12832) of April 2020, which calls the idea "a late interaction architecture that independently encodes the query and the document". The rest of this page is about dense embeddings and the binary form derived from them, and [hybrid search](/articles/hybrid-search/) covers pairing dense with sparse.
 
-Each dimension represents a learned feature of language that the model discovered during training. One dimension might track the sentiment of the text.
+## How are vector embeddings created?
 
-Another might track the presence of technical jargon.
+An embedding model reads the whole text, produces one vector per token, and pools those into a single vector of fixed length. To show what comes out, I embedded six short documents and a handful of queries with [BAAI/bge-small-en-v1.5](https://huggingface.co/BAAI/bge-small-en-v1.5), a small MIT-licensed model that runs on a laptop CPU.
 
-A third might track the relationship to a specific geographic region. None of these dimensions get labeled for us.
+```python
+"""Embed six short texts with a small open model and compare float and binary search."""
+import numpy as np
+from fastembed import TextEmbedding
 
-The model learns those features from patterns in its training data.
+docs = [
+    "Overdraft fees are charged when a withdrawal takes your bank account below zero.",
+    "The river bank eroded after the spring flood and took the footpath with it.",
+    "Error ORA-00942: table or view does not exist.",
+    "Error ORA-00932: inconsistent datatypes.",
+    "The query failed because the table it referenced was missing.",
+    "Judith Beheading Holofernes, oil on canvas, Artemisia Gentileschi.",
+]
+queries = [
+    "why was I charged for a negative balance?",
+    "ORA-00942",
+    "holofernes",
+]
 
-Words that share meaning end up physically close to each other in this space. "King" and "Queen" reside in a similar neighborhood.
+model = TextEmbedding("BAAI/bge-small-en-v1.5")
+d = np.array(list(model.embed(docs)))
+q = np.array(list(model.embed(queries)))
+print("dimensions:", d.shape[1], "| vector length:", round(float(np.linalg.norm(d[0])), 3))
 
-"Apple" and "iPhone" cluster together.
+print("\ncosine similarity, rows are queries, columns are documents 1 to 6")
+sims = q @ d.T
+for text, row in zip(queries, sims):
+    print(" ".join(f"{v:5.2f}" for v in row), " best:", int(row.argmax()) + 1, "|", text)
 
-Push a little further out and "Apple" and "Banana" form a separate but nearby cluster representing fruit. The relationship between these points is what we measure when we perform a search.
+print("\nsame search on sign bits (matching bits out of", d.shape[1], ")")
+db, qb = d > 0, q > 0
+for text, row in zip(queries, qb):
+    match = (db == row).sum(axis=1)
+    print(" ".join(f"{v:5d}" for v in match), " best:", int(match.argmax()) + 1, "|", text)
 
-Get the geometry right and the rest of the pipeline has something solid to stand on.
+print("\nbytes per vector: float32", d.shape[1] * 4, "| binary", d.shape[1] // 8)
+```
 
+The script needs `pip install fastembed numpy`, and `python3 embed_demo.py` printed this.
 
+```text
+dimensions: 384 | vector length: 1.0
 
-## Measuring semantic proximity with vector similarity
+cosine similarity, rows are queries, columns are documents 1 to 6
+ 0.73  0.45  0.51  0.53  0.57  0.37  best: 1 | why was I charged for a negative balance?
+ 0.48  0.37  0.75  0.70  0.57  0.46  best: 3 | ORA-00942
+ 0.43  0.39  0.46  0.45  0.50  0.62  best: 6 | holofernes
 
-Searching through millions of vectors requires a consistent way to measure the "closeness" of two points. L2 norm is the most intuitive metric.
+same search on sign bits (matching bits out of 384 )
+  265   217   229   230   247   194  best: 1 | why was I charged for a negative balance?
+  214   204   280   259   228   211  best: 3 | ORA-00942
+  211   215   213   220   233   232  best: 5 | holofernes
 
-It measures the spatial interval between two coordinates.
+bytes per vector: float32 1536 | binary 48
+```
 
-Many embedding models are normalized to have a length of one, which places every vector on the surface of a multi-dimensional unit sphere. Normalization ensures that the magnitude of the vector does not bias the search results.
+The first query shares no keyword with the overdraft sentence and still scores 0.73 against it, which is the behaviour people mean by semantic search. The second row shows the weakness: the query is the exact code in the ORA-00942 document, and the ORA-00932 document, a different Oracle error, scores 0.70 against the right answer's 0.75.
 
-Cosine similarity becomes the preferred metric in this constrained geometry. It measures the cosine of the angle between two vectors.
+A dense model sees two strings that look alike and places them together, which is the wrong instinct for identifiers. The same row ranks the unrelated error above the sentence that describes the fault in plain words.
 
-When two vectors point in exactly the same direction, the angle is zero and the similarity is one.
+The run also offers one reading of the artist-name complaint. A name can only pull a document toward a query if the name was part of what got embedded, and one comment in the thread asks the question that decides it: "whether the embeddings come off the images or the catalog text", which the site's About page doesn't answer.
+
+Query and document are embedded separately here, which is what makes the model a [bi-encoder](/glossary/bi-encoder/). The documents can be embedded once and stored, and only the query is embedded at search time.
+
+<figure class="np-figure">
+  <a class="np-figure-zoom" href="/static/images/diagrams/vector-embeddings/chunk-embed.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/vector-embeddings/chunk-embed.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/vector-embeddings/chunk-embed.svg" width="720" height="400" alt="A document is split into chunks, and the embedding model turns each chunk into a vector, which is stored in a vector database with its original text and metadata. A user query is embedded by the same model and searched against the database for its nearest neighbors." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Chunks and queries go through the same model, so they land in the same space.</figcaption>
+</figure>
+
+## How is similarity measured between two embeddings?
+
+Similarity is the cosine of the angle between the two vectors, which runs from 1 for the same direction to -1 for opposite ones. When vectors have length 1, as the 384-dimension vectors above do, the cosine is the dot product.
+
+OpenAI's [embeddings guide](https://developers.openai.com/api/docs/guides/embeddings) says the same of its models: "OpenAI embeddings are normalized to length 1", so "Cosine similarity and Euclidean distance will result in the identical rankings".
 
 <div class="visual-wrapper">
   <div class="visual-title">Vector Distance and Cosine Similarity</div>
@@ -75,63 +122,56 @@ When two vectors point in exactly the same direction, the angle is zero and the 
   </div>
 </div>
 
-When they point in opposite directions, the similarity is negative one. High cosine scores become misleading when a team treats them as universal rather than calibrating them on its own corpus.
+## Why can't you read a similarity score on its own?
 
-High-dimensional spaces push points toward the edges of the space.
+A similarity score means nothing until you know the scores unrelated texts get from the same model, and that floor is high. The run above scored the bank-charge question as low as 0.37 and as high as 0.57 against the five wrong documents, so a rule such as "keep anything over 0.5" would have kept both Oracle errors as answers to it.
 
-The interval to your nearest neighbor and the interval to an average neighbor start to look almost identical. That crowding makes thresholds brutally sensitive.
+The floor is far above what the dimension count predicts. Random directions in a high-dimensional space are almost exactly perpendicular, which a few lines of numpy confirm.
 
-For example, two nearby similarity scores may correspond to different relevance judgments. Calibrate the cutoff with labeled queries instead of copying a universal score.
+```python
+"""Cosine similarity between random directions in 3, 384 and 1,536 dimensions."""
+import numpy as np
 
+rng = np.random.default_rng(0)
+for dim in (3, 384, 1536):
+    x = rng.standard_normal((2000, dim))
+    x /= np.linalg.norm(x, axis=1, keepdims=True)
+    sims = (x @ x.T)[np.triu_indices(2000, k=1)]
+    print(f"{dim:>5} dims: mean {sims.mean():+.3f}  std {sims.std():.3f}  "
+          f"largest of {sims.size:,} pairs {sims.max():.3f}")
+```
 
+Running `python3 shell_demo.py` printed this.
 
-## Architecture choices for embedding generation
+```text
+    3 dims: mean +0.000  std 0.577  largest of 1,999,000 pairs 1.000
+  384 dims: mean -0.000  std 0.051  largest of 1,999,000 pairs 0.266
+ 1536 dims: mean +0.000  std 0.026  largest of 1,999,000 pairs 0.126
+```
 
-The transition from text to vector happens inside the transformer architecture. Traditional LLMs like GPT-4 are decoders.
+Among two million pairs of random 384-dimension directions, the closest reached 0.266. The model scored a question about bank charges against an Oracle error at 0.51, so its vectors occupy a narrow part of the space and every score has to be read against that crowding.
 
-They predict the next token in a sequence.
+An earlier version of this page said a score of 0.7 in 1,536 dimensions "might be noise". Chance alone topped out at 0.126 in two million pairs at that size, and the noise that matters is the model's own floor, which you find by scoring pairs you know are unrelated.
 
-Embedding models are often encoders like BERT or RoBERTa. They process the entire input at once to generate a single summary representation.
+That floor is also the best explanation I have for the cylinder seal. Nearest-neighbour search always returns something, and when nothing in the index is close to a query the top result is whichever item the floor happens to favour.
 
-Reading the whole passage before committing to one vector is what captures the full meaning of a document, the way you would skim an entire paragraph before deciding what it is about.
+## Why do queries and documents sit in different parts of the space?
 
-Newer models have moved away from this rigid distinction. Many modern embedding models use a decoder-only architecture but are fine-tuned specifically for the embedding task.
+A question and the passage that answers it are different kinds of text, so their embeddings form two populations. Apple's machine learning group built a retrieval method on that observation and [wrote it up on November 5, 2026](https://machinelearning.apple.com/research/faster-retrieval).
 
-They take the final hidden state of the last token or use mean pooling across all hidden states to produce the final vector.
+The post says that in RAG, queries "arise from short user-generated questions" and the stored keys "represent long, informative, and curated pieces of text, making keys and queries substantially different."
 
-Split long documents where topic or section boundaries change rather than forcing one vector to represent several ideas.
+Their KeyNet is a small network trained on sample queries for one fixed database, and it moves each query toward where its answer is likely to be before a standard index searches. On about 2.6 million Natural Questions passages, "reaching 99% recall takes up to ~8× less time with the largest model (0.23 ms vs 1.8 ms for the raw query)".
 
-Squeeze a full product manual into one point and the details that distinguish two SKUs get averaged into mush.
+The cost is in the setup. The network is trained "once, offline, for a fixed database of keys", and the post claims tolerance only of "mild distribution shift in the query patterns".
 
-Considerable research now focuses on "late interaction" models like ColBERT. These models preserve more granular information by keeping multiple vectors per document instead of just one.
+Embedding vendors handle the same asymmetry with a flag. Cohere's [embeddings documentation](https://docs.cohere.com/docs/embeddings) says "the search query should be embedded by setting input_type="search_query"", and stored passages take `search_document`.
 
-The payoff shows up on complex queries, where retrieval accuracy climbs well above single-vector approaches.
+## How many dimensions should an embedding have?
 
-## Balancing dimensionality and information density
+Start with the model's default and shorten only after measuring retrieval on your own queries. OpenAI's guide gives the defaults: "the length of the embedding vector is 1536 for text-embedding-3-small or 3072 for text-embedding-3-large."
 
-There is a constant tension between the size of a vector and its expressive power. Larger vectors store more nuance but increase the cost of storage and the latency of searches.
-
-A 3072-dimension vector takes up twice the space of a 1536-dimension vector.
-
-Higher-dimensional output also increases similarity-computation and storage cost.
-
-They use compression-aware training to pack information efficiently into each dimension.
-
-Packing the signal tighter lets their models outperform larger competitors while burning fewer resources. Dimensionality reduction is the process of taking these high-dimensional vectors and projecting them down to smaller spaces.
-
-We reach for it to visualize clusters on a 2D scatter plot, or to speed up the first pass of a search.
-
-Techniques like Principal Component Analysis (PCA) or t-SNE help us see the clusters that the model creates. These projections always come with a cost in accuracy.
-
-You must carefully validate the performance impact when using reduced vectors in production.
-
-
-
-## Building flexible vectors with Matryoshka embeddings
-
-The most significant innovation in embedding geometry recently is [Matryoshka Representation Learning (MRL)](/glossary/matryoshka-representation-learning/). These models are trained so that the most important information is stored in the first few dimensions.
-
-The vector acts like a Russian nesting doll.
+Shortening works on models trained for it. The method is [Matryoshka Representation Learning](/glossary/matryoshka-representation-learning/), from [a paper submitted in May 2022](https://arxiv.org/abs/2205.13147) that "encodes information at different granularities and allows a single embedding to adapt to the computational constraints of downstream tasks."
 
 <div class="visual-wrapper">
     <div class="visual-title">Matryoshka: keep the head of the vector</div>
@@ -141,223 +181,37 @@ The vector acts like a Russian nesting doll.
     </div>
 </div>
 
-OpenAI's embeddings API accepts a `dimensions` parameter for shortening `text-embedding-3` outputs. Measure retrieval quality at each candidate size on your own corpus.
+OpenAI exposes it as a `dimensions` parameter and reports that "a text-embedding-3-large embedding can be shortened to a size of 256 while still outperforming an unshortened text-embedding-ada-002 embedding with a size of 1536." Cohere's embed-v5.0-pro accepts output sizes of 256 up to 2048.
 
-OpenAI's latest models support this natively through the `dimensions` parameter.
+The bge-small model in my run has 384 dimensions, and its model card describes no such training. Cutting its vectors to the first 128 values would discard information the model never arranged to keep at the front.
 
+## What is a binary vector embedding?
 
-The mathematical elegance of MRL comes from a multi-scale loss function that penalizes errors at every truncation point simultaneously.
+A binary vector embedding keeps one bit per dimension, the sign of each float, and compares vectors by counting matching bits. Each vector in the run above shrank from 1,536 bytes to 48, a 32-fold saving.
 
+The same run shows the price. The first two queries kept their best match, and "holofernes" lost it by a single bit, 233 against 232, to a sentence about a missing database table.
 
-Storage layers can exploit the same property.
+That result is why binary search is used as a first pass. Retrieve a generous candidate set on bits, then rescore those candidates with the full vectors, the same two-stage shape as [reranking](/articles/rag-reranking/).
 
-Full vectors live on high-latency disk. Only the truncated Matryoshka heads stay in low-latency RAM for the initial [bi-encoder retrieval](/glossary/bi-encoder/) candidate selection.
+Cohere's API returns compressed forms directly, and its documentation lists `float`, `int8`, `uint8`, `binary` and `ubinary` as embedding types. The same page warns that "because Cohere packages bits as bytes under the hood, the actual length of the vector changes", so 1,024 bits arrive as 128 bytes.
 
-That layered split is the current gold standard for large-scale retrieval.
+The int8 form is scalar quantization, one byte per dimension, a 4-fold saving. [Product quantization](/glossary/product-quantization/) goes a different way and replaces groups of dimensions with codebook entries.
 
+## Which vector embedding models should you compare?
 
+Compare one hosted default, one model with flexible dimensions and one you can run yourself, on queries with known answers from your own data. The figures below are the vendors' own, read on November 17, 2026.
 
-## Spatial collapse in high dimensions
+| Model | Dimensions | Notes from the vendor's page |
+| --- | --- | --- |
+| OpenAI text-embedding-3-small | 1536, can be shortened | 62.3% on MTEB in OpenAI's table |
+| OpenAI text-embedding-3-large | 3072, can be shortened | 64.6% on MTEB in OpenAI's table |
+| Cohere embed-v5.0-pro | 256 to 2048 | "support for over 100 languages", binary and int8 output |
+| BAAI/bge-small-en-v1.5 | 384 | MIT license, the model run above |
 
-Navigating a 1536-dimension space is not like navigating a 3D room. Our brains are built to understand volume.
+A public leaderboard score won't settle the choice. My six-document run is no benchmark either, and what it shows is the method: embed queries and documents with each candidate, then read the scores of the wrong documents as carefully as the right ones.
 
-High-dimensional geometry behaves according to different rules.
+## Is there a universal geometry of embeddings?
 
-The most counter-intuitive rule is the volume concentration phenomenon. Almost all the volume of a high-dimensional sphere is concentrated in a thin shell near its surface.
+There is evidence that different models arrange meaning in similar shapes. [A paper from May 2025](https://arxiv.org/abs/2505.12540) by Rishi Jha and colleagues describes "the first method for translating text embeddings from one vector space to another without any paired data, encoders, or predefined sets of matches."
 
-Points do not fill the middle of the space.
-
-Crowding can make semantically distinct vectors land on similarly high cosine scores.
-
-Everything has been pushed into the same thin outer layer of the geometry, so the scores compress. Understanding the collapse is vital for setting search thresholds.
-
-A similarity score of 0.7 in 3D space might indicate a strong relationship.
-
-That same score in 1536D might be noise. You need to calibrate your retrieval system based on the specific distribution of your model's output space.
-
-Accurate calibration prevents false positives in your search results.
-
-
-
-## Comparing OpenAI, Cohere, and Voyage AI
-
-Choosing a provider involves balancing accuracy, latency, and cost. OpenAI remains the default choice for many teams due to their aggressive pricing and decent performance.
-
-Their `text-embedding-3-small` model is cheap and reliable for general-purpose semantic search.
-
-Cohere offers a more specialized experience. Their `v3` models are trained specifically for enterprise retrieval tasks.
-
-They handle noisy data well and hold their accuracy on domain-specific jargon.
-
-For high-cost retrieval errors, compare providers on a labeled slice of the actual contracts or filings rather than relying on a general leaderboard.
-
-Their models often show a meaningful improvement in recall over OpenAI.
-
-That edge comes from larger base architectures and more careful training-data curation. Smaller providers tend to ship architectural ideas months before the giants adopt them.
-
-Evaluating two or three providers against your own data distribution is the only way to know which one fits.
-
-
-
-## Reducing memory with binary and scalar quantization
-
-Storing millions of high-dimensional vectors as 32-bit floats is prohibitively expensive. A single 1536-dimension vector at float32 precision takes up 6KB.
-
-One million vectors would require 6GB of memory.
-
-Scalar quantization reduces each component from 32 bits to 8 bits, cutting raw vector storage by 75%. Measure recall loss on the target corpus.
-
-The model maps the range of floating-point values onto a 256-level integer scale, much like saving a photo at lower color depth while the picture stays recognizable. [Product quantization](/glossary/product-quantization/) takes a different route by replacing vector subspaces with identifiers from learned centroid codebooks.
-
-Binary quantization (BQ) goes further.
-
-Each dimension drops to a single bit, 0 or 1, storing only whether the original value was positive or negative. That collapse cuts memory usage by 32x.
-
-Search speeds jump because similarity calculations become simple XOR operations at the hardware level. Cohere's latest models are built to support binary quantization with minimal accuracy trade-offs.
-
-Modern vector databases now implement "over-sampling and re-scoring" to mitigate the small accuracy loss from BQ.
-
-A binary index can retrieve a wider candidate set, which a second pass reranks with full-precision vectors.
-
-
-
-## The standard semantic search pipeline
-
-Building a search system with these models follows a predictable pipeline. You start by chunking your documents.
-
-Each chunk is passed to the embedding model to generate a vector.
-
-<figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/vector-embeddings/chunk-embed.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/vector-embeddings/chunk-embed.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/vector-embeddings/chunk-embed.svg" width="720" height="400" alt="A document is split into chunks, and the embedding model turns each chunk into a vector, which is stored in a vector database with its original text and metadata. A user query is embedded by the same model and searched against the database for its nearest neighbors." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Chunks and queries go through the same model, so they land in the same space.</figcaption>
-</figure>
-
-These vectors are stored in a vector database alongside the original text and metadata. A user query arrives and is embedded using the same model.
-
-The vector database performs a nearest-neighbor search to find the chunks with the highest similarity.
-
-These chunks are then passed to an LLM as context for the final answer, and many production systems pair dense vectors with [BM25 sparse retrieval in a hybrid search setup](/articles/hybrid-search/) to catch exact keyword matches that pure semantic search misses. The embedding model acts as the librarian.
-
-The LLM acts as the researcher.
-
-Failures in this workflow usually happen at the librarian stage. Semantic search is only as good as the geometry of the underlying space.
-
-Retrieval breaks down the moment the embedding model fails to connect a query like "why is my invoice late" to a document titled "payment processing delays."
-
-
-
-## API latency vs self-hosted model performance
-
-Embedding large datasets is an asynchronous batch process. Querying them is a synchronous user interaction.
-
-Latency matters.
-
-Provider and self-hosted latency varies with region, batching, model, and hardware. Measure end-to-end query latency in the deployment environment.
-
-The cost is the operational overhead of managing GPU clusters.
-
-Large-scale systems often split the difference. A provider's API handles the one-time embedding of the whole corpus.
-
-A heavily optimized self-hosted model then serves real-time user queries.
-
-A split like that only works if both models project into a compatible space. Re-embedding a small set of results at query time is the most common way to keep them aligned.
-
-Consistency across your vector space is required for reliable retrieval.
-
-
-
-## Accuracy stability in long-context models
-
-Input limits vary by model and provider. Check the current model documentation before setting a chunking policy.
-
-A bigger window sounds like a clean way to embed long documents without chunking at all.
-
-
-Packing several topics into one vector dilutes the signal for any single passage.
-
-The model struggles to maintain the importance of specific facts buried in the middle of a long text. The "Lost in the Middle" phenomenon applies to embedding encoders just as much as to decoder LLMs. Recursive chunking with overlap remains the most reliable strategy for production RAG.
-
-Small, focused chunks preserve semantic density. You can then use cross-encoders for [reranking your top-k results](/articles/rag-reranking/).
-
-You can also implement a parent-document retrieval strategy to give the LLM broader context.
-
-The long context window on an embedding model is best used for processing large cohesive units like code files. It should not replace a robust chunking strategy.
-
-Granularity is your best defense against information loss.
-
-## Searching across languages with vector alignment
-
-Language-agnostic embeddings allow you to search in one language and retrieve results in another. A query in English can match a document in French if both project into the same neighborhood of the vector space.
-
-The alignment is achieved by training models on parallel corpora.
-
-The same sentence in English, French, and Japanese is nudged toward the same vector during training. Mapping such different syntaxes onto one shared space is one of the more striking outcomes of modern representation learning.
-
-We can now build search over a knowledge base that ignores which language each document was written in.
-
-No brittle translation layer sits between your query and a French document anymore. Engineering teams routinely underestimate how much work it takes to keep these cross-lingual spaces aligned as models update.
-
-What you get when it works is a single semantic surface spanning every language in the corpus.
-
-
-A shared geometry like that is what makes global RAG possible.
-
-Cohere documents multilingual support for its multilingual embedding models. Validate the languages in the target corpus because coverage is not the same as equal retrieval quality.
-
-The system retrieves the most relevant information regardless of the source language. A translation layer or a multilingual LLM handles the final response.
-
-Open-source models like the multilingual-E5 series also perform well.
-
-They run smaller and self-host more easily, which matters when data residency rules keep a corpus pinned to one region. The geometry of a multilingual space is a genuine achievement in representation learning.
-
-It shows that meaning lives in a mathematical layer sitting underneath any particular human syntax.
-
-## Token-level matching with ColBERT and late interaction
-
-Compressing an entire document into one vector is a lossy operation. The late interaction paradigm popularized by ColBERT offers a more granular alternative.
-
-Instead of one vector per document, ColBERT stores a vector for every token in the document.
-
-At query time, the system compares every token in the query against every token in the candidate documents. That token-by-token comparison preserves the subtle interactions between words that single-vector models flatten away.
-
-For a query like "error handling in async retry logic," where the phrasing carries the meaning, the accuracy jump is dramatic.
-
-Specific relationships between words matter as much as the words themselves. Storage cost is the main thing standing in ColBERT's way.
-
-Late-interaction models store multiple token-level vectors per document, which improves matching granularity at a substantial storage cost.
-
-Newer variants like ColBERTv2 lean on aggressive compression and quantization to make the footprint manageable. Many vector databases now ship native support for ColBERT indices.
-
-The trend points toward this more granular retrieval strategy for high-precision use cases.
-
-## Selecting the right embedding infrastructure
-
-Choosing a model starts with your data's complexity. General-purpose search on clean English text is a solved problem.
-
-OpenAI is your starting point.
-
-Move to Cohere or Voyage when you deal with messy or domain-specific data. They provide top-tier retrieval recall for high-stakes applications.
-
-Hardware constraints drive the choice to self-host.
-
-Open-source models are attractive when the team already operates suitable inference hardware and can measure latency itself.
-
-What you pay instead is the operational cost of maintenance, including failures after a CUDA driver update.
-
-Providers hand you a managed service that scales on its own, freeing you to work on application logic rather than GPU driver versions. Cost-sensitive applications should look hard at Matryoshka models and binary quantization.
-
-Reducing raw vector storage by 32x changes the economics of search at scale, although index overhead and metadata remain.
-
-That speed boost is often worth more than a few percentage points of theoretical accuracy.
-
-The geometry of meaning is the most important map in your AI architecture. So much of your retrieval engineering time goes into navigating this space and building paths between users and the information they need.
-
-Teams that succeed treat their vector space as a first-class engineering concern, not a configuration value they set once and forget.
-
-Vector databases allow you to migrate and re-embed data as models improve. The field moves fast.
-
-The field changes quickly, so build for re-embedding and provider replacement.
-
-Build for flexibility and monitor your retrieval quality. Never stop exploring the high-dimensional neighbors of your data.
-
-The geometry of language is still revealing its secrets.
+The practical consequence is about security. The authors write that "An adversary with access only to embedding vectors can extract sensitive information about the underlying documents", so a vector store deserves the same access controls as the text it was built from.

@@ -1265,6 +1265,135 @@
       "connects": [
         "best-llms-for-coding"
       ]
+    },
+    {
+      "id": "lastmuseum-site",
+      "url": "https://lastmuseum.com/",
+      "author": "The Last Museum",
+      "date": "2026-11-17",
+      "title": "The Last Museum",
+      "quotes": [
+        "Search across 6,308,174 artworks"
+      ],
+      "connects": [
+        "vector-embeddings"
+      ]
+    },
+    {
+      "id": "hn-lastmuseum-dominotw",
+      "url": "https://hn.algolia.com/api/v1/items/50194522",
+      "author": "Hacker News thread, several commenters",
+      "date": "2026-10-22",
+      "title": "Semantic search across major museums",
+      "discussion": "https://news.ycombinator.com/item?id=50194522",
+      "quotes": [
+        "matched cylinder seal 3500bc",
+        "Completely failed if you search by Artist name",
+        "not-of-but-aesthetically-similar-to Judith beheading Holofernes",
+        "whether the embeddings come off the images or the catalog text",
+        "search is _terrific_"
+      ],
+      "connects": [
+        "vector-embeddings"
+      ]
+    },
+    {
+      "id": "colbert-paper-2020",
+      "url": "https://arxiv.org/abs/2004.12832",
+      "author": "Omar Khattab, Matei Zaharia",
+      "date": "2020-04-27",
+      "title": "ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT",
+      "quotes": [
+        "a late interaction architecture that independently encodes the query and the document"
+      ],
+      "connects": [
+        "vector-embeddings"
+      ]
+    },
+    {
+      "id": "openai-embeddings-guide",
+      "url": "https://developers.openai.com/api/docs/guides/embeddings",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Vector embeddings guide",
+      "quotes": [
+        "OpenAI embeddings are normalized to length 1",
+        "Cosine similarity and Euclidean distance will result in the identical rankings",
+        "the length of the embedding vector is 1536 for text-embedding-3-small or 3072 for text-embedding-3-large.",
+        "a text-embedding-3-large embedding can be shortened to a size of 256 while still outperforming an unshortened text-embedding-ada-002 embedding with a size of 1536.",
+        "text-embedding-3-small 62,500 62.3% 8192 text-embedding-3-large 9,615 64.6% 8192"
+      ],
+      "connects": [
+        "vector-embeddings"
+      ]
+    },
+    {
+      "id": "apple-faster-retrieval",
+      "url": "https://machinelearning.apple.com/research/faster-retrieval",
+      "author": "Apple Machine Learning Research",
+      "date": "2026-11-05",
+      "title": "Faster Retrieval for Better, More Efficient RAG",
+      "discussion": "https://news.ycombinator.com/item?id=50455633",
+      "quotes": [
+        "In the crucial RAG case, queries arise from short user-generated questions, whereas keys represent long, informative, and curated pieces of text, making keys and queries substantially different.",
+        "reaching 99% recall takes up to ~8× less time with the largest model (0.23 ms vs 1.8 ms for the raw query)",
+        "once, offline, for a fixed database of keys",
+        "reasonably robust to mild distribution shift in the query patterns",
+        "roughly 2.6M unique passages in our setup",
+        "published November 5, 2026",
+        "arise from short user-generated questions",
+        "represent long, informative, and curated pieces of text, making keys and queries substantially different.",
+        "mild distribution shift in the query patterns"
+      ],
+      "connects": [
+        "vector-embeddings",
+        "rag-reranking"
+      ]
+    },
+    {
+      "id": "cohere-embeddings-docs",
+      "url": "https://docs.cohere.com/docs/embeddings",
+      "author": "Cohere",
+      "date": "2026-11-17",
+      "title": "Introduction to Embeddings at Cohere",
+      "quotes": [
+        "the search query should be embedded by setting input_type=\"search_query\"",
+        "because Cohere packages bits as bytes under the hood, the actual length of the vector changes",
+        "support for over 100 languages",
+        "float int8 uint8 binary ubinary",
+        "[256,512,768,1024,1536,2048]",
+        "it will become 1024/8 => 128 bytes"
+      ],
+      "connects": [
+        "vector-embeddings"
+      ]
+    },
+    {
+      "id": "matryoshka-paper-2022",
+      "url": "https://arxiv.org/abs/2205.13147",
+      "author": "Aditya Kusupati et al.",
+      "date": "2022-05-26",
+      "title": "Matryoshka Representation Learning",
+      "quotes": [
+        "encodes information at different granularities and allows a single embedding to adapt to the computational constraints of downstream tasks."
+      ],
+      "connects": [
+        "vector-embeddings"
+      ]
+    },
+    {
+      "id": "universal-geometry-paper-2025",
+      "url": "https://arxiv.org/abs/2505.12540",
+      "author": "Rishi Jha and 3 others",
+      "date": "2025-05-18",
+      "title": "Harnessing the Universal Geometry of Embeddings",
+      "quotes": [
+        "the first method for translating text embeddings from one vector space to another without any paired data, encoders, or predefined sets of matches.",
+        "An adversary with access only to embedding vectors can extract sensitive information about the underlying documents"
+      ],
+      "connects": [
+        "vector-embeddings"
+      ]
     }
   ],
   "unused_leads": [
@@ -1399,6 +1528,10 @@
     "coding-models-new-code-vs-change": [
       "best coding model"
     ],
-    "best-llms-for-coding": []
+    "best-llms-for-coding": [],
+    "vector-embeddings": [
+      "keep anything over 0.5",
+      "might be noise"
+    ]
   }
 }
