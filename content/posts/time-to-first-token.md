@@ -51,6 +51,8 @@ Its second metric, time to first answer token, "includes the time spent reasonin
 
 Those are Artificial Analysis's measurements on Anthropic's API, and this page adds none of its own. The spread is what I take from them: one model, and a wait that differs by a factor of about 29 depending on a parameter the caller sets.
 
+The site re-measures, so the numbers move. Later the same day its page showed 211.56 seconds for the top setting.
+
 So the wait before an answer is a product decision before it is a serving problem. A team that picks the highest setting has chosen a wait of minutes, and no change to the queue will bring it back.
 
 ## How does TTFT behave under load?
