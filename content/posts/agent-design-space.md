@@ -30,14 +30,14 @@ The agent lists are thirty years younger and don't yet agree with each other. Ch
 
 Anthropic's post names six.
 
-| Pattern | Anthropic's description |
+| Pattern | What it does |
 | --- | --- |
-| Prompt chaining | "decomposes a task into a sequence of steps, where each LLM call processes the output of the previous one." |
-| Routing | "classifies an input and directs it to a specialized followup task." |
-| Parallelization | "LLMs can sometimes work simultaneously on a task and have their outputs aggregated programmatically." |
-| Orchestrator-workers | "a central LLM dynamically breaks down tasks, delegates them to worker LLMs, and synthesizes their results." |
-| Evaluator-optimizer | "one LLM call generates a response while another provides evaluation and feedback in a loop." |
-| Autonomous agent | "systems where LLMs dynamically direct their own processes and tool usage" |
+| Prompt chaining | Splits a task into steps, and each model call works on the output of the one before. |
+| Routing | Classifies the input and sends it to a prompt built for that kind. |
+| Parallelization | Runs several model calls at once and combines their outputs in code. |
+| Orchestrator-workers | Has one model break the task down, hand the parts to worker models and merge what comes back. |
+| Evaluator-optimizer | Has one model write an answer and another critique it, in a loop. |
+| Autonomous agent | Lets the model direct its own process and choose its own tools. |
 
 The post files the first five under workflows, where "LLMs and tools are orchestrated through predefined code paths", and keeps the word agent for the last. It carries a note that the tooling it describes has changed since 2024, and the pattern names have outlived the tooling.
 
@@ -47,7 +47,7 @@ Partly. Kadharmoideen Fadurudeen's [guide to multi-agent patterns](https://kadha
 
 The first two map onto prompt chaining and orchestrator-workers. The third has no row in Anthropic's table, and the guide sums it up as "There's no boss."
 
-A blackboard design means "Agents read what's on the board, add what they know, and step in when they have something useful." Nothing in Anthropic's six shares state that way, since each of them passes work along a path.
+In a blackboard design the agents share a board: each reads what's there, adds what it knows and steps in when it has something to offer. Nothing in Anthropic's six shares state that way, since each of them passes work along a path.
 
 So the lists differ in length and in what they count. I find two questions sort every pattern on both of them.
 
@@ -62,7 +62,7 @@ The grid is mine and neither source draws it. Its use is that a new pattern name
 
 Start from the top-left cell and move only when the task forces it. A path fixed in code can be tested step by step, and every move toward the model trades that for flexibility.
 
-So when do you move? Anthropic's post says orchestrator-workers is for "complex tasks where you can't predict the subtasks needed", and evaluator-optimizer is "particularly effective when we have clear evaluation criteria".
+So when do you move? Anthropic's post says to reach for orchestrator-workers when you can't predict the subtasks in advance, and for evaluator-optimizer when you have "clear evaluation criteria".
 
 Now, that second condition is stricter than it sounds. The clearest criteria are ones a program can check, which is why my [lambda calculus exercise](/articles/lambda-calculus-ai/) grades answers with a script.
 

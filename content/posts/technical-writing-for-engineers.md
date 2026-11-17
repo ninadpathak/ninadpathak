@@ -39,12 +39,12 @@ A misread step in a deploy guide costs less. But your reader is mid-task and rea
 
 The sentence is covered by four of the standard's rules, and Google's free course for engineers teaches all but the last in other words.
 
-| Rule, as Wikipedia summarises the standard | Google's technical writing course |
+| The standard's rule, per Wikipedia's summary | What Google's course teaches |
 | --- | --- |
-| "Write short sentences: no more than 20 words in instructions (procedures) and 25 words in descriptive texts." | "Focus each sentence on a single idea" |
-| "Write one instruction per sentence." | "Convert some long sentences to lists" |
-| "Use the active voice." | "The vast majority of sentences in technical writing should be in active voice." |
-| "Write only one topic per paragraph." | |
+| Keep sentences short: 20 words at most in an instruction and 25 in a description | Give each sentence a single idea |
+| Put one instruction in a sentence | Turn a long sentence into a list |
+| Use the active voice | Write nearly every sentence in the active voice |
+| Keep a paragraph to one topic | |
 
 So an aerospace committee in the 1980s and a [Google course](https://developers.google.com/tech-writing/one/short-sentences) written for software engineers arrived at nearly the same list, which suggests the list comes from how people read instructions.
 

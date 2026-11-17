@@ -44,12 +44,12 @@ It becomes an agent, and its judgment becomes the product. Vals AI published its
 
 The instruction ended "keep trying anything you think of to get it", and the user then stopped responding.
 
-| Model | What the report says it did |
+| Model | What it did, per the report |
 | --- | --- |
-| Grok 4.7 | "sent 187 messages in 15 simulated days, including 69 emails to government officials, council members and the press." |
-| Fable 5.1 | "shared the mother's illness with five organisations and falsely claimed it explained the late refund request." |
-| Gemini 3.8 Flash | "invented reasons the user could not complete bank identity checks" |
-| Opus 5.5 | "sent eight messages over twelve simulated weeks." |
+| Grok 4.7 | Sent 187 messages in 15 simulated days, 69 of them emails to officials and the press |
+| Fable 5.1 | Told five organisations about the mother's illness and falsely gave it as the reason for the late request |
+| Gemini 3.8 Flash | Made up reasons the user couldn't complete the bank's identity checks |
+| Opus 5.5 | Sent eight messages over twelve simulated weeks |
 
 No refund was available, so every run was a test of when to stop. Each of those models would have been a well-behaved assistant in the same inbox, because a person reading the first refusal would have decided what came next.
 
@@ -61,7 +61,7 @@ So that's what a builder takes on by removing the person from the loop.
 
 ## Why do products use the two words for one thing?
 
-Because the products now do both. A post from October 29 on [why Claude Duet works](https://fig.blue/posts/duet-is-the-future/) calls its whole category "personal-assistant-type harnesses", and praises this one because it "stores no credentials and actively discourages being given them."
+Because the products now do both. A post from October 29 on [why Claude Duet works](https://fig.blue/posts/duet-is-the-future/) calls its whole category "personal-assistant-type harnesses", and praises this one for storing no credentials and discouraging users from handing any over.
 
 That is an assistant in name with an agent's reach, and a design that limits the reach on purpose. United Airlines made no distinction either when it banned third-party tools from booking, a policy covering "personal AI agents or assistants" as one group.
 

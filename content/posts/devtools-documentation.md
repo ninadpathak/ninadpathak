@@ -16,7 +16,7 @@ money_link: true
 date: 2026-04-06
 description: 'Devtools documentation is read before the purchase. What the 2026 State of Docs survey says buyers do, the pages they check, and the agent that now reads first.'
 status: published
-work_note: "This post is about developer-tool companies losing deals because the docs didn't answer what the buyer's engineer asked. If you'd rather someone else find those missing answers and write them before the next evaluation, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Hire me for the job](/services/)."
+work_note: "This post is about what a buyer's engineer checks in your docs before a trial starts. If you'd rather someone else find those missing answers and write them before the next evaluation, that's what I do. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Hire me for the job](/services/)."
 title: How Developers Judge Devtools Documentation Before They Buy
 slug: devtools-documentation
 video: devtools-documentation

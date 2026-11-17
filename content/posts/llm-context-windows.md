@@ -28,7 +28,7 @@ That sentence is the reason window size is a cost and quality decision in [LLM i
 
 ## What counts toward the context window?
 
-Everything the model can refer to while it generates, including what it generates. Anthropic's page defines the window as "all the text a language model can reference when generating a response, including the response itself."
+Everything the model can refer to while it generates, and that includes the response it's writing. So the reply spends the same budget as the prompt.
 
 A conversation fills it turn by turn, since each request resends the turns before it. When a request would run past the limit on recent Claude models, generation stops with the reason `model_context_window_exceeded`, and older models reject the request up front.
 
@@ -36,7 +36,7 @@ A conversation fills it turn by turn, since each request resends the turns befor
 
 Because models recall the two ends of their input better than the middle. The finding has a name from the paper that reported it, [Lost in the Middle](https://arxiv.org/abs/2307.03172), submitted on July 6, 2023.
 
-Its authors found that "performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models."
+Its authors found that models did best when the relevant fact sat at the beginning or the end of the input, and noticeably worse when it sat in the middle. That held "even for explicitly long-context models."
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/llm-context-windows/lost-in-the-middle.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/llm-context-windows/lost-in-the-middle.narrow.svg" width="288" height="528"><img class="np-has-narrow" src="/static/images/diagrams/llm-context-windows/lost-in-the-middle.svg" width="720" height="544" alt="A long prompt split into its start, middle, and end. The model reliably recalls facts placed at the start, which frames the task, and at the end, which is the runway to the next token. Facts buried in the middle compete for whatever attention is left and often get skipped." loading="lazy" decoding="async"></picture></a>
@@ -49,11 +49,11 @@ The models in that paper date from 2023, and I don't assume the curve is as deep
 
 Context rot is the loss of accuracy as the input grows, wherever the important part sits. Chroma's [technical report](https://research.trychroma.com/context-rot) of July 14, 2025 tested 18 models and gave the effect its name.
 
-The report starts from the assumption it then removes, that a model "should handle the 10,000th token just as reliably as the 100th." Its result is that models "do not use their context uniformly", and that "their performance grows increasingly unreliable as input length grows."
+The report starts from an assumption and then removes it: that a model handles its 10,000th token as reliably as its 100th. What it found is that models don't use their context evenly, and that they get less reliable as the input gets longer.
 
 Now, Chroma sells a retrieval database, so it has a reason to find that stuffing the window fails. But Anthropic sells the tokens, and its own docs now say the same: "As token count grows, accuracy and recall degrade, a phenomenon known as context rot."
 
-And the failure differs by model. On questions with distracting passages, the report found Claude models "tend to abstain when uncertain", and GPT models more often answered wrongly with confidence.
+And the failure differs by model. On questions with distracting passages, the report found Claude models tending to abstain when unsure, and GPT models more often answering wrongly with confidence.
 
 ## What does a long context cost?
 
@@ -71,14 +71,14 @@ Inside a long session the third option is to shrink what is already there. Compa
 
 ## How should you fill a large window?
 
-Treat the size as a ceiling and fill it by choice. Anthropic's page puts the principle in a clause, that "curating what's in context" is "just as important as how much space is available."
+Treat the size as a ceiling and fill it by choice. Anthropic's own page says that choosing what goes into the context matters as much as how much room there is.
 
 - Send what the task needs, and leave out documents included in case they help.
 - Place instructions and key facts at the start or the end.
 - Count tokens before sending, so a request is refused by your code and not by the API.
 - Measure answers at the lengths you will run, since a prompt that works at 2,000 tokens tells you little about 200,000.
 
-Newer models help with the bookkeeping. Anthropic says several current ones "track their remaining context window" through a conversation, which lets a long task plan against the space left.
+Newer models help with the bookkeeping. Anthropic says several current ones keep track of how much window is left through a conversation, which lets a long task plan against that space.
 
 ## FAQ
 

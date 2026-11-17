@@ -44,7 +44,7 @@ It says documentation quality amplifies the payoff of every technical practice t
 | Trunk-based development | 36% | 1525% |
 | Version control | 27% | 278% |
 
-DORA's summary is "The lift is significantly amplified for teams with above-average documentation quality." Quality was scored with "a set of eight metrics that assess documentation attributes like clarity, findability, and reliability."
+So the lift from every practice is far larger for teams with above-average documentation. DORA scored quality with eight metrics covering attributes such as clarity and findability.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/dora-multiplier.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/dora-multiplier.narrow.svg" width="288" height="416"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/dora-multiplier.svg" width="720" height="472" alt="The performance lift that continuous integration gives a team in DORA's 2022 data, by documentation quality: 34% for teams below average and 750% for teams above average. Each tile is 50 percentage points." loading="lazy" decoding="async"></picture></a>
@@ -88,7 +88,7 @@ That last case is the bus factor showing up in a recovery time. A [runbook](/art
 
 ## What changes when agents write the code?
 
-The volume changes, and the reader does too. Anthropic's [account of its code review](https://claude.dev/blog/solving-code-review-at-anthropic/) from October 15 says changes landing in its monorepo went "from about 2,500 in May to more than 30,000 in September this year."
+The volume changes, and the reader does too. Anthropic's [account of its code review](https://claude.dev/blog/solving-code-review-at-anthropic/) from October 15 says the changes landing in its monorepo went from about 2,500 in May to more than 30,000 in September.
 
 At that rate, the first reader of a team's conventions is a model. The post describes fixing repeated review findings at the source, in files such as the one where "CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals."
 
