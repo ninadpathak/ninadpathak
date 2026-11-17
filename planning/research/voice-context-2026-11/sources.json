@@ -5388,7 +5388,62 @@
         "Label regions to allow users to distinguish and access them"
       ],
       "connects": [
-        "documentation-review"
+        "documentation-review",
+        "documentation-structure"
+      ]
+    },
+    {
+      "id": "wikipedia-conways-law",
+      "url": "https://en.wikipedia.org/wiki/Conway%27s_law",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "Conway's law",
+      "quotes": [
+        "copies of the communication structures of these organizations",
+        "who introduced the idea in 1967"
+      ],
+      "connects": [
+        "documentation-structure"
+      ]
+    },
+    {
+      "id": "diataxis-start-here",
+      "url": "https://diataxis.fr/start-here/",
+      "author": "Daniele Procida",
+      "date": "2026-11-18",
+      "title": "Start here - Diátaxis in five minutes",
+      "quotes": [
+        "there are fundamentally four identifiable kinds of documentation"
+      ],
+      "connects": [
+        "documentation-structure"
+      ]
+    },
+    {
+      "id": "gitlab-docs-folder-structure",
+      "url": "https://docs.gitlab.com/development/documentation/site_architecture/folder_structure/",
+      "author": "GitLab",
+      "date": "2026-11-18",
+      "title": "Folder structure for documentation",
+      "quotes": [
+        "Instructions for installing GitLab",
+        "Instructions for updating GitLab"
+      ],
+      "connects": [
+        "documentation-structure"
+      ]
+    },
+    {
+      "id": "aws-lambda-developer-guide-welcome",
+      "url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html",
+      "author": "AWS",
+      "date": "2026-11-18",
+      "title": "What is AWS Lambda?",
+      "quotes": [
+        "AWS Lambda is a serverless compute service"
+      ],
+      "connects": [
+        "documentation-structure"
       ]
     }
   ],
@@ -5666,6 +5721,20 @@
       "high quality",
       "Generate an API key in Settings, add it to your request, and run the example. The API returns your account.",
       "\"mode\": \"test\""
+    ],
+    "documentation-structure": [
+      "Platform Services",
+      "keep",
+      "delete",
+      "Deploy",
+      "Concepts",
+      "Get started with the JavaScript SDK",
+      "Learn more",
+      "Resources",
+      "Start",
+      "Operate",
+      "Change",
+      "You have an account but no credentials. Find the shortest supported route to a successful test API response."
     ]
   }
 }
