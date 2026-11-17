@@ -6,100 +6,72 @@ siblings:
 - speculative-decoding
 - llm-inference-optimization
 date: 2026-03-08
-description: Users do not care about total throughput. They care about how fast the
-  first word appears. Here is the engineering guide to measuring and optimizing Time
-  to First Token (TTFT) in production.
+description: 'Time to first token (TTFT) explained: what it measures, why reasoning models need time to first answer token, and how TTFT behaves under load.'
 status: published
 work_note: 'I''m a technical writer, and what I offer on time to first token is an explanation of what the number measures and where the wait comes from. For the developer content I''ve published, see [my portfolio](/portfolio/).'
 title: 'Time to First Token (TTFT): The Metric That Determines AI Snappiness'
 slug: time-to-first-token
+updated: 2026-11-17
 ---
 
-Every interactive AI app I have shipped lives or dies by perceived latency. A model might churn out 100 tokens per second, and none of that speed matters when the user stares at a blank box for five seconds before the stream starts.
+Web developers have measured the wait for a response with one number for years. Time to First Byte, in [web.dev's definition](https://web.dev/articles/ttfb), "measures the time between starting navigating to a page and when the first byte of a response begins to arrive", and a slow one means the server is the problem.
 
-Time to First Token (TTFT) is the metric I reach for when I want to know whether an application feels alive or feels broken, and I have watched the same chat UI go from delightful to abandoned on the strength of that one number alone.
-
-What trips up most teams I work with is treating TTFT as a single dial they can turn. It is really the sum of a pipeline: the network hop from the user to your server and on to the inference host, time spent waiting in a queue behind other requests, and the model prefilling your prompt.
-
-Each one adds milliseconds, and any one of them can quietly dominate the others depending on the day. Chasing a slow chat endpoint for a full day, I assumed the model was the problem, when the culprit was requests piling up in a queue during the lunchtime traffic spike while the GPU sat near idle the rest of the afternoon.
-
-Because the fix for each piece is completely different, breaking the number into those three parts is the first thing I do before I optimize anything. Network latency I attack with edge routing and keeping the inference host close to the user, say moving an endpoint from a single us-east region into a CDN that terminates closer to where the request originates.
-
-Queue time I attack with capacity and smarter scheduling. Caching and model choice are what I reach for against prefill.
-
-Spending a week shrinking the model when 80% of your TTFT is actually queue wait, the way one team I helped did before they measured anything, is the kind of wasted effort that good instrumentation prevents.
-
-
-
-## What TTFT actually measures
-
-When I talk about TTFT I mean the interval between a user sending a request and the first generated token landing back in their browser. That is a separate thing from tokens per second, which only describes how fast text flows once the stream has already opened.
-
-A model can post a gorgeous tokens-per-second figure and still feel sluggish to type at, because the user judges responsiveness almost entirely by that first word.
-
-Prefilling contributes to TTFT because the model processes the input before it emits the first token. The [KV-cache article](/articles/kv-cache-eviction/) explains the state built during that phase, not a universal latency result.
-
-Because the cost scales with prompt length, a request carrying a 200-token question returns far faster than the same request after I have stuffed 40k tokens of retrieved documents in front of it. A support assistant I worked on went from snappy to painful purely because someone padded the system prompt with a second page of tone-of-voice instructions, doubling its size overnight and adding a beat of dead air before every reply.
+Time to first token (TTFT) is the same measurement for a language model: the time from sending a request to receiving the first token back. The parallel breaks in one place, because a web server's first byte is the start of the page and a reasoning model's first token can be thinking the user never sees.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/time-to-first-token/ttft-chain.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/time-to-first-token/ttft-chain.narrow.svg" width="288" height="704"><img class="np-has-narrow" src="/static/images/diagrams/time-to-first-token/ttft-chain.svg" width="720" height="288" alt="The latency chain to the first token: the request crosses the network, waits in the queue, and the model prefills the prompt; together those make up time to first token. After the first token, generation streams the rest at the model's throughput." loading="lazy" decoding="async"></picture></a>
   <figcaption>Prefill cost scales with prompt length: a 200-token question returns far faster than the same request with 40k tokens of retrieved documents in front of it.</figcaption>
 </figure>
 
-## TTFT is not the same as throughput
+## What does time to first token measure?
 
-For batch jobs I happily optimize for throughput. Parsing ten thousand support tickets overnight to extract sentiment, nobody is watching the screen, so I want the GPU saturated and the total tokens-per-hour as high as I can push it.
+TTFT measures everything that happens before the model starts to answer: the network trip, the wait in the queue and the pass that reads the prompt. Modelplane's [inference field guide](https://docs.modelplane.ai/guides/inference-guide) from November 10 defines it in six words, "Queueing plus prefill", and describes it as "how long the user waits before anything appears".
 
-Interactive chat is the opposite job: a single human is waiting, and low TTFT is the only thing they feel. The two goals pull against each other, and I have to pick which one a given endpoint serves.
+Prefill is the part the prompt controls. The guide says prefill "Reads the whole input in parallel, including the system prompt and tool definitions as well as the conversation history", so a longer prompt means a later first token.
 
-Batching is where the tension lives. Cramming more requests into one batch lets the GPU do more arithmetic per memory load, which is great for throughput, and it means your request now waits for the whole batch to assemble and run before its first token comes back.
+## Why is TTFT misleading for reasoning models?
 
-Think of it like a shuttle bus that only leaves once every seat is full: efficient per passenger, miserable if you are the one who boarded first and the bus refuses to move. Smaller batches or dedicated compute let interactive requests start instead of waiting for a pooled batch.
+A reasoning model starts emitting tokens long before it starts answering, and the usual TTFT counts the first of them. Artificial Analysis now publishes two numbers for that reason, and its [methodology page](https://artificialanalysis.ai/methodology) says of time to first token that "For reasoning models which return reasoning tokens, this will be the first reasoning token."
 
-Continuous batching softens this on modern inference servers, where new requests can slot into a running batch instead of waiting for a fresh one to form. That helps a lot, and I still have to set the maximum batch size deliberately, because letting it grow without bound trades away the very TTFT I am trying to protect.
+Its second metric, time to first answer token, "includes the time spent reasoning", which lets it compare the wait for an answer across models that reason and models that don't.
 
-My rule of thumb on interactive endpoints is to size the batch for the worst-case TTFT I am willing to ship, say 600ms at p95, then add hardware rather than batch size when I need more total capacity.
+The difference is large at the top of the leaderboard. On November 17 the site's page for [Claude Fable 5.2](https://artificialanalysis.ai/models/claude-fable-5-2) ranked the model first of 81 on its intelligence index and listed "Time to first answer token 208.11s".
 
-## Model size is the first real lever
+A title like this page's, calling TTFT the metric that decides whether an application feels fast, is true for models that answer straight away. For a reasoning model the number to watch is the one Modelplane's guide names: "Measure the first token the user sees."
 
-Before any tuning, model size sets the floor on TTFT. A 7B parameter model will beat a 400B model to the first token on identical hardware every time, because the smaller one has fewer weights to pull through memory while it prefills your prompt.
+## How does TTFT behave under load?
 
-Picture prefill as reading a book aloud before you can answer a question about it: the thicker the model, the longer that silent read takes regardless of how clever the rest of your pipeline is. No amount of clever batching changes that baseline, which is why I treat model choice as the first knob I reach for, not the last.
+It can stay flat while the service gets much slower, which makes it a poor overload alarm. NVIDIA's [two-station GLM-5.3 tutorial](https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/) from November 13 reports both numbers at four concurrency levels.
 
-Reaching for a smaller distilled model is the highest-impact move when the quality bar leaves room for it. A two-model handoff can let a fast model acknowledge the request while a larger model handles the reasoning, but the transition must not present generated filler as a substantive answer.
+| Concurrent requests | Mean TTFT, ms | Mean request latency, s |
+| --- | --- | --- |
+| 1 | 479.75 | 49.84 |
+| 8 | 433.79 | 114.17 |
+| 16 | 482.90 | 136.46 |
+| 32 | 899.36 | 453.54 |
 
-The user gets a word on screen almost instantly, and the depth still arrives, so nobody feels the larger model's slower start.
+Between one request and sixteen the first token arrives in under half a second every time, and the full response goes from 50 seconds to 136. NVIDIA adds a note under the table that "TTFT measures time to the first token, which may be reasoning".
 
-## A practical order for optimization
+## Is TTFT the same as throughput?
 
-When a team hands me a slow endpoint and asks me to make it feel fast, I work down the same hierarchy every time, cheapest wins first.
+No. TTFT is set by queueing and prefill, and throughput is set by decoding, and the two have different limits.
 
-**Model Selection.** My first question is always whether a smaller model clears the quality bar, because swapping a 70B for a well-chosen 8B can halve TTFT before I touch the infrastructure. It is the cheapest experiment I can run and the one teams skip most often.
+Modelplane's guide puts prefill on the compute side and decode on memory bandwidth, and draws the consequence: "Because the phases have opposite bottlenecks, a technique that speeds one often does little for the other. That is why benchmarks report TTFT and tokens per second separately."
 
-**Prompt Caching.** Static context like a long system prompt or a fixed set of few-shot examples gets paid for on every single request unless I cache it. Wiring up prompt caching to eliminate the prefill tax for static context has dropped TTFT by around 80% on the repeated-prefix portion of requests I have measured, since the model reuses the KV cache for the part of the prompt that never changes.
+[Speculative decoding](/articles/speculative-decoding/) is an example of the second kind, since it raises tokens per second and leaves the first token where it was. The [KV-cache article](/articles/kv-cache-eviction/) covers the memory that decoding reads.
 
-**Speculative Decoding.** Pulling in [a draft model to speed up LLM inference for free](/articles/speculative-decoding/) lets a small model guess several tokens ahead while the big model verifies them in one pass. The snappiness comes from generating multiple tokens per step rather than one at a time, and the output stays identical to what the big model would have produced alone.
+## What lowers time to first token?
 
-**Quantization.** Dropping the precision of the weights speeds up the memory loads that prefill is bottlenecked on. Moving from FP16 to INT8 or FP8 has given me a real TTFT improvement with accuracy loss small enough that my eval suite barely flinched.
+A shorter prompt, a cached prompt prefix and a shorter queue all lower it. Each maps to one part of the definition.
 
-The reason it helps is mechanical: prefill spends most of its time hauling weights out of GPU memory, and halving the bytes per weight halves that traffic, so the first token arrives sooner even though the model is doing the same logical work.
+- **Shorter prompt.** Prefill reads the whole input, so retrieved documents and tool definitions that aren't needed cost time before the first token.
+- **Prefix caching.** The guide describes it as a way to "Reuse the work already done on repeated prompt openings", and says it is on by default in vLLM and SGLang.
+- **Less queueing.** A request that waits behind others adds that wait to its TTFT, which is the jump at 32 concurrent requests in NVIDIA's table.
 
-TTFT is one output of a wider serving system. The [LLM inference optimization guide](/articles/llm-inference-optimization/) covers the batching and memory decisions that can move it without confusing first-token delay with total throughput.
+The wider set of serving choices is in the [LLM inference optimization guide](/articles/llm-inference-optimization/).
 
-## How to measure without fooling yourself
+## How should you measure TTFT?
 
-Averages are where I have fooled myself the most. A mean TTFT of 400ms looks healthy right up until I notice the tail, where one user in twenty is waiting two seconds and quietly churning.
+Measure it at the client, to the first token the user can see, and report percentiles. A server-side number leaves out the network, and a mean hides what Modelplane's guide warns about: "Users feel the tail, not the average".
 
-Latency lives in that tail, so I measure p95 and p99 and treat those as the real number, since they describe the experience of my unluckiest users rather than a comfortable fiction.
-
-One dashboard mistake I see constantly is plotting TTFT as a flat line with no sense of input size. A p95 of 500ms is excellent for a 1k token prompt and physically impossible for a 100k token prompt without caching, so a single threshold tells me nothing.
-
-I normalize the metric by prompt length and look at TTFT per thousand input tokens, which finally makes a slow week distinguishable from a week where prompts simply got longer.
-
-The other measurement habit I insist on is timing the real path, not a synthetic one. A benchmark that fires requests from a machine sitting next to the GPU will report a TTFT your actual users never see, because it skips the network hop and the queue contention that real traffic creates.
-
-I instrument the client side, capturing the moment the user's request leaves the browser and the moment the first token paints, and I sample it under genuine load rather than at three in the morning when the cluster is idle. The number that matters is the one a logged-in user produces during your busiest hour.
-
-Perception is the whole game here. I have shipped features that win the moment the first token appears before the user has finished forming their thought, and lost ones that were technically fast yet felt dead because that first word lagged.
-
-Watch TTFT closely and the applications you build start to feel less like a request-response form and more like something that was already listening.
+Record time to first answer token beside it for any model that reasons. I report no measurements of my own on this page, and its numbers come from the sources linked above.
