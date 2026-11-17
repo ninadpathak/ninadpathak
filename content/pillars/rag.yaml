@@ -29,7 +29,7 @@ sections:
   - heading: "Cost"
     spokes:
       - post: semantic-caching
-        note: "Explains how a cache keyed on meaning returns stored responses for similar queries, and where it fails."
+        note: "Explains a cache keyed on meaning, and tests a threshold on a real embedding model where a wrong match outscores a right one."
   - heading: "Evaluation"
     spokes:
       - post: rag-evaluation

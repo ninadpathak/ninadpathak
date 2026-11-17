@@ -3398,6 +3398,343 @@
       "connects": [
         "llm-context-windows"
       ]
+    },
+    {
+      "id": "claude-agent-sdk-agent-loop",
+      "url": "https://platform.claude.com/docs/en/agent-sdk/agent-loop",
+      "author": "Anthropic",
+      "date": "2026-11-17",
+      "title": "How the agent loop works",
+      "quotes": [
+        "evaluates your prompt, calls tools to take action, receives the results, and repeats until the task is complete.",
+        "Without limits, the loop runs until Claude finishes on its own, which is fine for well-scoped tasks but can run long on open-ended prompts",
+        "Hit the maxTurns limit before finishing",
+        "specific instructions from early in the conversation may not be preserved",
+        "max_budget_usd"
+      ],
+      "connects": [
+        "agent-loop-anatomy"
+      ]
+    },
+    {
+      "id": "openai-agents-sdk-running-agents",
+      "url": "https://openai.github.io/openai-agents-python/running_agents/",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Running agents",
+      "quotes": [
+        "If the LLM produces tool calls, we run those tool calls, append the results, and re-run the loop.",
+        "If we exceed the max_turns passed, we raise a MaxTurnsExceeded exception.",
+        "If the runner classifies the LLM's output as final output, the loop ends and we return the result."
+      ],
+      "connects": [
+        "agent-loop-anatomy"
+      ]
+    },
+    {
+      "id": "wikipedia-repl",
+      "url": "https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop",
+      "author": "Wikipedia",
+      "date": "2026",
+      "title": "Read-eval-print loop",
+      "quotes": [
+        "The expression READ-EVAL-PRINT cycle is used by L. Peter Deutsch and Edmund Berkeley for a 1964 implementation of Lisp on the PDP-1."
+      ],
+      "connects": [
+        "agent-loop-anatomy"
+      ]
+    },
+    {
+      "id": "claude-code-best-practices",
+      "url": "https://code.claude.com/docs/en/best-practices",
+      "author": "Anthropic",
+      "date": "2026-11-17",
+      "title": "Best practices for Claude Code",
+      "quotes": [
+        "Does it know what done looks like?",
+        "Can it check its own work?",
+        "What's it allowed to touch?",
+        "What stops it?",
+        "Where does the result go, and who signs off?",
+        "The parts that stay with you are starting it, deciding what \"done\" means this time, and approving the merge at the end.",
+        "\"All tests pass\" on its own tells you very little",
+        "It isn't swayed by the reasoning that produced the code.",
+        "A goal condition, a spec file, or a failing test it has to turn green."
+      ],
+      "connects": [
+        "agentic-workflows"
+      ]
+    },
+    {
+      "id": "hn-agentic-setup-2026-11",
+      "url": "https://news.ycombinator.com/item?id=50366117",
+      "author": "Hacker News",
+      "date": "2026-11-04",
+      "title": "Ask HN: What's your current AI agentic setup?",
+      "quotes": [
+        "the biggest trick is just to tell it what complete looks like",
+        "the biggest trick is just to tell it what complete looks like."
+      ],
+      "connects": [
+        "agentic-workflows"
+      ]
+    },
+    {
+      "id": "rfc9111-http-caching",
+      "url": "https://www.rfc-editor.org/rfc/rfc9111.html",
+      "author": "IETF",
+      "date": "2022-06",
+      "title": "RFC 9111: HTTP Caching",
+      "quotes": [
+        "The \"cache key\" is the information a cache uses to choose a response and is composed from, at a minimum, the request method and target URI used to retrieve the stored response",
+        "many HTTP caches in common use today only cache GET responses and therefore only use the URI as the cache key."
+      ],
+      "connects": [
+        "semantic-caching"
+      ]
+    },
+    {
+      "id": "gpt-semantic-cache-2024",
+      "url": "https://arxiv.org/abs/2411.05276",
+      "author": "Sajal Regmi, Chetan Phakami Pun",
+      "date": "2024-11-08",
+      "title": "GPT Semantic Cache: Reducing LLM Costs and Latency via Semantic Embedding Caching",
+      "quotes": [
+        "reduces API calls by up to 68.8% across various query categories",
+        "positive hit rates exceeding 97%",
+        "Submitted on 8 Nov 2024"
+      ],
+      "connects": [
+        "semantic-caching"
+      ]
+    },
+    {
+      "id": "redis-semantic-cache-techniques",
+      "url": "https://redis.io/blog/10-techniques-for-semantic-cache-optimization/",
+      "author": "Redis",
+      "date": "2026",
+      "title": "10 techniques for semantic cache optimization",
+      "quotes": [
+        "For a semantic FAQ cache, start with a cosine similarity threshold of 0.88.",
+        "we recommend starting with a high threshold and lowering it gradually"
+      ],
+      "connects": [
+        "semantic-caching"
+      ]
+    },
+    {
+      "id": "coala-paper-2023",
+      "url": "https://arxiv.org/html/2309.02427",
+      "author": "Sumers, Yao, Narasimhan, Griffiths",
+      "date": "2023-09-05",
+      "title": "Cognitive Architectures for Language Agents",
+      "quotes": [
+        "Working memory maintains active and readily available information as symbolic variables for the current decision cycle",
+        "Episodic memory stores experience from earlier decision cycles.",
+        "it is significantly riskier than writing to episodic or semantic memory, as it can easily introduce bugs or allow an agent to subvert its designers' intentions.",
+        "uses an LLM to reflect on failed episodes and stores the results",
+        "All agents contain some procedural memory (agent code and LLM weights)"
+      ],
+      "connects": [
+        "agent-memory-types"
+      ]
+    },
+    {
+      "id": "wikipedia-episodic-memory",
+      "url": "https://en.wikipedia.org/wiki/Episodic_memory",
+      "author": "Wikipedia",
+      "date": "2026",
+      "title": "Episodic memory",
+      "quotes": [
+        "The term \"episodic memory\" was coined by Endel Tulving in 1972"
+      ],
+      "connects": [
+        "agent-memory-types"
+      ]
+    },
+    {
+      "id": "langgraph-memory-concepts",
+      "url": "https://docs.langchain.com/oss/python/langgraph/memory",
+      "author": "LangChain",
+      "date": "2026-11-17",
+      "title": "Memory overview",
+      "quotes": [
+        "facts can be written to semantic memory, whereas experiences can be written to episodic memory",
+        "Semantic memory is different from \"semantic search,\"",
+        "Semantic Facts Things I learned in school Facts about a user Episodic Experiences Things I did Past agent actions Procedural Instructions Instincts or motor skills Agent system prompt"
+      ],
+      "connects": [
+        "agent-memory-types"
+      ]
+    },
+    {
+      "id": "go-blog-share-memory-2010",
+      "url": "https://go.dev/blog/codelab-share",
+      "author": "Andrew Gerrand",
+      "date": "2010-07-13",
+      "title": "Share Memory By Communicating",
+      "quotes": [
+        "Do not communicate by sharing memory; instead, share memory by communicating.",
+        "Andrew Gerrand 13 July 2010"
+      ],
+      "connects": [
+        "shared-vs-isolated-memory"
+      ]
+    },
+    {
+      "id": "openai-agents-sdk-handoffs",
+      "url": "https://openai.github.io/openai-agents-python/handoffs/",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Handoffs",
+      "quotes": [
+        "gets to see the entire previous conversation history",
+        "If you want to change this, you can set an input_filter."
+      ],
+      "connects": [
+        "shared-vs-isolated-memory"
+      ]
+    },
+    {
+      "id": "openai-agents-sdk-multi-agent",
+      "url": "https://openai.github.io/openai-agents-python/multi_agent/",
+      "author": "OpenAI",
+      "date": "2026-11-17",
+      "title": "Agent orchestration",
+      "quotes": [
+        "A manager agent keeps control of the conversation and calls specialist agents through Agent.as_tool().",
+        "Use agents as tools when a specialist should help with a bounded subtask but should not take over the user-facing conversation."
+      ],
+      "connects": [
+        "shared-vs-isolated-memory"
+      ]
+    },
+    {
+      "id": "claude-code-subagents-docs",
+      "url": "https://code.claude.com/docs/en/sub-agents",
+      "author": "Anthropic",
+      "date": "2026-11-17",
+      "title": "Subagents",
+      "quotes": [
+        "Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions.",
+        "the subagent does that work in its own context and returns only the summary."
+      ],
+      "connects": [
+        "shared-vs-isolated-memory"
+      ]
+    },
+    {
+      "id": "deerflow-memory-guide",
+      "url": "https://raw.githubusercontent.com/bytedance/deer-flow/main/docs/guide/memory.md",
+      "author": "ByteDance",
+      "date": "2026-11-17",
+      "title": "DeerFlow: Long-Term Memory",
+      "quotes": [
+        "Most agents forget everything the moment a conversation ends. DeerFlow remembers.",
+        "`memory.backend_config.debounce_seconds` sets the quiet period (default 30 seconds)",
+        "(default 300 seconds)",
+        "classifies every proposed fact by scope, durability, and authority before a deterministic write gate accepts it",
+        "Temporary task state and one-time action permissions stay in conversation state.",
+        "combines bounded confidence (65%), explicit-confirmation freshness (25%), and query-driven access heat (10%)",
+        "FTS5 search selects the highest combined BM25, time-decay, and confidence scores",
+        "DeerMem remains the default local backend.",
+        "every fact is a canonical Markdown file below `agents/{agent_name}/facts/`",
+        "Fact CRUD and Settings-page fact editing are not available for this backend."
+      ],
+      "connects": [
+        "deerflow-memory"
+      ]
+    },
+    {
+      "id": "deerflow-memory-agents-md",
+      "url": "https://raw.githubusercontent.com/bytedance/deer-flow/main/backend/packages/harness/deerflow/agents/memory/AGENTS.md",
+      "author": "ByteDance",
+      "date": "2026-11-17",
+      "title": "DeerFlow memory contributor notes",
+      "quotes": [
+        "Facts are one Markdown file each.",
+        "Tool-call intent is not memory.",
+        "Confirmation needs human evidence.",
+        "The retrieval index is derived data.",
+        "It never holds facts or a fact index.",
+        "Snapshots taken before compaction do not"
+      ],
+      "connects": [
+        "deerflow-memory"
+      ]
+    },
+    {
+      "id": "wikipedia-maildir",
+      "url": "https://en.wikipedia.org/wiki/Maildir",
+      "author": "Wikipedia",
+      "date": "2026",
+      "title": "Maildir",
+      "quotes": [
+        "Maildir was designed by Daniel J. Bernstein circa 1995, with a major goal of eliminating the need for program code to handle file locking and unlocking through use of the local filesystem."
+      ],
+      "connects": [
+        "deerflow-memory"
+      ]
+    },
+    {
+      "id": "chrome-modern-web-guidance-readme",
+      "url": "https://raw.githubusercontent.com/GoogleChrome/modern-web-guidance/main/README.md",
+      "author": "Google Chrome team",
+      "date": "2026-11-17",
+      "title": "Modern Web Guidance README",
+      "quotes": [
+        "prune lowest-common-denominator content that models already know",
+        "Stewarded by the Google Chrome, Microsoft Edge, Mozilla Firefox, and MDN teams, alongside the web development community.",
+        "| Nov 8 | claude_code (opus-5-5) | 215 / 1801 | 57% → 88% (**+31pp**) |",
+        "CLI tool search queries generated by the agent",
+        "browser compatibility data directly into your coding agents"
+      ],
+      "connects": [
+        "chrome-modern-web-guidance-notes"
+      ]
+    },
+    {
+      "id": "chrome-modern-web-guidance-drawer-guide",
+      "url": "https://raw.githubusercontent.com/GoogleChrome/modern-web-guidance/main/skills/modern-web-guidance/guides/ui-components/navigation-drawer.md",
+      "author": "Google Chrome team",
+      "date": "2026-11-17",
+      "title": "Navigation Drawer guide",
+      "quotes": [
+        "If the request does not say, assume it is only ever a drawer.",
+        "This approach is preferred over JavaScript-driven `transform` animations"
+      ],
+      "connects": [
+        "chrome-modern-web-guidance-notes"
+      ]
+    },
+    {
+      "id": "hn-modern-web-guidance",
+      "url": "https://news.ycombinator.com/item?id=50443812",
+      "author": "Hacker News",
+      "date": "2026-11-10",
+      "title": "Show HN: Get your coding agent off ~2019 JavaScript, onto modern web primitives",
+      "quotes": [
+        "200+ guides (~1.7MB) of curated, hand-crafted implementation best-practices from web experts",
+        "in collaboration with Firefox, MDN, and Edge",
+        "running my code through the legacy scan only found two issues",
+        "Chrome already has too much power in the browser standards world."
+      ],
+      "connects": [
+        "chrome-modern-web-guidance-notes"
+      ]
+    },
+    {
+      "id": "hn-simonw-mwg-distribution",
+      "url": "https://news.ycombinator.com/item?id=50444594",
+      "author": "Simon Willison",
+      "date": "2026-11-10",
+      "title": "Comment on Modern Web Guidance",
+      "quotes": [
+        "That index page should link to plain markdown versions of all of the documents, and should be designed for search with grep to find the right answers."
+      ],
+      "connects": [
+        "chrome-modern-web-guidance-notes"
+      ]
     }
   ],
   "unused_leads": [
@@ -3578,6 +3915,22 @@
     "ai-agent-failures": [],
     "documentation-velocity": [
       "documentation makes a team seven times faster"
+    ],
+    "agentic-workflows": [
+      "add caching to the API",
+      "all tests pass"
+    ],
+    "semantic-caching": [
+      "Can I send an item back?",
+      "How do I cancel my last order?",
+      "When does my plan renew?",
+      "the same thing"
+    ],
+    "agent-memory-types": [
+      "The user deploys on Fridays",
+      "The deploy on Friday failed on a migration timeout",
+      "migrations on this database need a longer timeout",
+      "somewhere else"
     ]
   }
 }

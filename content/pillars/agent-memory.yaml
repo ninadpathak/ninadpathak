@@ -17,7 +17,7 @@ sections:
       - post: ai-memory-management
         note: "Covers the memory layers and who decides what gets written, with runnable examples of eviction and scope."
       - post: agent-memory-types
-        note: "Maps the three memory types an agent uses to what each one stores."
+        note: "Names the four memory types, says where the names come from, and shows why the type decides the lookup."
       - post: context-windows-vs-memory
         note: "Treats the context window as a per-request budget and memory as state retrieved into a later request."
       - post: rag-vs-memory
@@ -39,7 +39,7 @@ sections:
   - heading: "Several agents, and voice"
     spokes:
       - post: shared-vs-isolated-memory
-        note: "Chooses between shared and isolated memory for multi-agent systems by coordination and debugging cost."
+        note: "Sets shared against isolated memory for multi-agent systems, with what two SDKs do by default and a lost-update run."
       - post: voice-agent-memory
         note: "Covers memory across a real-time streaming pipeline, where a voice agent has constraints a text chatbot lacks."
   - heading: "The field and its tools"
@@ -49,7 +49,7 @@ sections:
       - post: hyperagents-memory
         note: "Walks through how HyperAgents layers memory and keeps session continuity."
       - post: deerflow-memory
-        note: "Walks through DeerFlow's memory, from session state files to sub-agent isolation."
+        note: "Walks through DeerFlow's memory as its repository documents it: one Markdown file per fact, a write gate and optional backends."
 bridges:
   - hub: rag
     text: "A memory read path is a retrieval problem, and the [RAG pipeline](/articles/rag/) topic covers the search stack it runs on."

@@ -23,7 +23,7 @@ sections:
   - heading: "The loop and the harness"
     spokes:
       - post: agent-loop-anatomy
-        note: "Breaks the loop into four phases, which helps locate the phase where a run went wrong."
+        note: "Breaks the loop into four phases, runs one in 30 lines, and shows how two SDKs stop it."
       - post: agent-harnesses
         note: "Lists what a harness contains and explains why a framework alone may not supply it."
       - post: lambda-calculus-ai

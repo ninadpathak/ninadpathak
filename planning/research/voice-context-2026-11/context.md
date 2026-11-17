@@ -704,3 +704,25 @@ Ninad on /services/: "on the services page it's not obvious these are other serv
 - Each service page ends on the same six boxes, so the pages link to one another in one fixed form. The two topic pages, the three case studies and five articles link the fitting service page.
 - The programs page uses one term everywhere, "technical content program", which does not contain the developer-content topic's query.
 - No search volume or difficulty is recorded for the five service queries: the Ahrefs plan returned "Insufficient plan", and Search Console shows no impressions for any of them. Each was chosen from a results page dominated by service providers.
+
+## Batch 8 (2026-11-17, owner voice-rewrite-2)
+
+| Post | What it now rests on | Run or checked |
+| --- | --- | --- |
+| agent-loop-anatomy | Anthropic's Agent SDK and OpenAI's Agents SDK agent-loop docs | `loop_demo.py` run, output on the page |
+| agentic-workflows, retitled "Agentic Workflows From Prompt to Pull Request" | Anthropic's Claude Code best practices, the November 4 Ask HN thread on agent setups | quotes re-fetched; film unembedded |
+| semantic-caching, retitled "Semantic Caching for LLM and RAG Applications" | RFC 9111, the 2024 GPT Semantic Cache paper, Redis's tuning guide | `semantic_cache_demo.py` run with bge-small-en-v1.5, output on the page |
+| agent-memory-types, retitled "Types of AI Agent Memory" | the 2023 CoALA paper, LangGraph's memory docs | `memory_types_demo.py` run, output on the page; film unembedded |
+| shared-vs-isolated-memory | OpenAI's Agents SDK handoff and orchestration docs, Claude Code's subagent docs | `shared_memory_demo.py` run, output on the page |
+| deerflow-memory | DeerFlow's memory guide and contributor notes, fetched from the repository | no code; figure redrawn; film unembedded |
+| chrome-modern-web-guidance-notes (new essay, technical-documentation) | the project README, one guide, the Show HN thread of November 10 | opinion-led, one quote |
+
+Opening devices added to the ledger: the REPL and the 1964 read-eval-print cycle (agent-loop-anatomy); the HTTP cache key in RFC 9111 (semantic-caching); Tulving's 1972 episodic and semantic memory (agent-memory-types); the Go proverb about sharing memory, 2010 (shared-vs-isolated-memory); Maildir, 1995 (deerflow-memory). agentic-workflows opens on the Ask HN thread and the essay on its source.
+
+Films unembedded in this batch and added to the re-render list: agentic-workflows (narrates personal habits the page no longer claims), agent-memory-types (narrates an invented incident), deerflow-memory (narrates a design the project does not have). The agent-loop-anatomy film still matches its page and stays.
+
+What the earlier pages had wrong, for the record: deerflow-memory described session state files and pluggable vector stores, and the repository documents one Markdown file per fact with a write gate; semantic-caching carried hit-rate ranges and a production deployment with no source.
+
+An essay source that could not be fetched: Apiiro's November post on Claude Code permission files returned 403 and renders by script, so no essay was written on it.
+
+Position taken in the new essay, for Ninad to confirm: the editing standard of Chrome's guides (cut what the model already knows, say what to assume when the request is silent) is the part to copy; documentation should be readable with nothing installed, so a plain Markdown index beats a skill and an npm command; and whoever writes the page an agent reads sets a default for every codebase it touches.

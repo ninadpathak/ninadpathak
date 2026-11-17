@@ -21,7 +21,7 @@ sections:
       - post: claude-code-subagents
         note: "Shows what a Claude Code subagent starts with and when to pick one over a skill or a hook, with a tested example."
       - post: agentic-workflows
-        note: "A five-stage playbook that scopes the task before the agent runs and reviews its diff before the change lands."
+        note: "Five stages from prompt to pull request, set beside the five questions Anthropic asks before a run goes unattended."
   - heading: "Memory"
     spokes:
       - post: claude-code-memory

@@ -60,6 +60,6 @@ It needs little. A note says what was observed, where, and when: the command and
 
 I hold a documentation page to that standard, and the reason is the same. A reader who can check a claim doesn't have to trust the writer, and for an agent the writer is an earlier session that can't be asked.
 
-An open project already enforces part of this in code, and [how memory works in DeerFlow](/articles/deerflow-memory/) covers its rule that a fact gains trust only from a person.
+An open project already enforces part of this in code, and my page on [DeerFlow's memory](/articles/deerflow-memory/) covers its rule that a fact gains trust only from a person.
 
 My page on [memory serialization](/articles/memory-serialization/) keeps the log beside the record for this reason, and [memory versioning](/articles/memory-versioning/) covers what to keep when a note is corrected. A shared format would be worth having once the notes inside it can be checked.
