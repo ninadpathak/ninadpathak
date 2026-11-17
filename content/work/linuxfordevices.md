@@ -62,6 +62,8 @@ Developers began citing the tutorials in forums, GitHub discussions, and Stack O
 - 8,900+ new Twitter followers
 - brand recognition from 3% to 34%
 
+Running a program like this one is work I take on, described on my [technical content programs](/services/technical-content-programs/) page.
+
 ## This is what technical content looks like when the system is right
 
 The gain did not come from publishing more often. It came from giving the site a structure, giving the articles technical credibility, and making sure the best work reached the communities that cared about it.

@@ -18,7 +18,9 @@ proof:
 
 ## What each service covers
 
-Each box above opens a page for one kind of work, with what I write, how I do it and published pieces you can check. The [AI-ready documentation audit](/services/ai-ready-documentation-audit/) is the one that reviews pages you already have.
+Each service has a page of its own, with what I write, how I do it and published pieces you can check. The [AI-ready documentation audit](/services/ai-ready-documentation-audit/) is the one that reviews pages you already have.
+
+<!-- service-list -->
 
 ## Who I write for
 

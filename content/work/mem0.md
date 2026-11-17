@@ -34,6 +34,8 @@ Scale fails when it depends on manual follow-ups. My role involved setting up cu
 
 Management of the content operation included handling editors, invoicing, and resource allocation. Peer-to-peer engineering tones in the content ensured that we reached technical audiences that generic writers cannot replicate. Scaling your technical content program requires a combination of technical vetting, workflow automation, and leadership.
 
+Running a program like this one is work I take on, described on my [technical content programs](/services/technical-content-programs/) page.
+
 ## What I wrote there
 
 I wrote 11 of the blog's guides. Mem0 later changed the author shown on them or took them down, so each link goes to an archived copy that shows my byline.

@@ -700,3 +700,7 @@ Ninad on /services/: "on the services page it's not obvious these are other serv
 - "Don't show my Search Console numbers because they are extremely tiny." No chart or figure from this site's own Search Console appears anywhere.
 - The LinuxForDevices, DelightChat and Kiwi Sizing traffic figures are Semrush's: LinuxForDevices 2019 to 2022, DelightChat 2021, Kiwi Sizing 2022. A page that prints one names the source and the years.
 - No price, no turnaround beyond the above, no "hire me", no "I sell".
+- After the services review: a service page promises only what Ninad confirmed. Cut as unsourced: a list of where the product surprised him, handing over the tutorial's project files, running migration steps, and running the products a client is compared with. Changelog handling stays, since it is his own sentence.
+- Each service page ends on the same six boxes, so the pages link to one another in one fixed form. The two topic pages, the three case studies and five articles link the fitting service page.
+- The programs page uses one term everywhere, "technical content program", which does not contain the developer-content topic's query.
+- No search volume or difficulty is recorded for the five service queries: the Ahrefs plan returned "Insufficient plan", and Search Console shows no impressions for any of them. Each was chosen from a results page dominated by service providers.

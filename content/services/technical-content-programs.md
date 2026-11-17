@@ -1,11 +1,11 @@
 ---
-title: "Developer Content Programs"
+title: "Technical Content Programs"
 nav_title: "Technical content programs"
-seo_title: "Developer Content Program for Technical Products | Ninad Pathak"
-description: "A developer content program for AI and developer-tool companies: the topic plan, the review process and the writers behind a library of technical articles."
-lead: "A developer content program is the plan, the review process and the people behind a library of technical articles. I'm Ninad Pathak, a freelance technical writer, and I build and run these programs when one writer is not enough."
+seo_title: "Technical Content Programs for Developer Products | Ninad Pathak"
+description: "A technical content program for AI and developer-tool companies: the topic plan, the review process and the writers behind a library of articles."
+lead: "A technical content program is the plan, the review process and the people behind a library of technical articles. I'm Ninad Pathak, a freelance technical writer, and I build and run these programs when one writer is not enough."
 service_type: "Technical content programs"
-primary_query: developer content program
+primary_query: technical content program
 kind: service
 glyph: calendar
 card: "The topic plan, review process and writers behind a library of technical articles."
@@ -28,7 +28,7 @@ proof:
 
 ## How I plan the topics
 
-I start with your customers. I listen to calls, ask for sales call transcripts, and use Claude and other AI tools to summarise the topics people keep raising.
+I start with your customers. Your calls and sales call transcripts tell me what buyers keep asking, and I use Claude and other AI tools to pull those topics together.
 
 Then I check search demand in Semrush and put the two lists together. After pages are live, I track them in Google Search Console and adjust the plan.
 
@@ -62,7 +62,7 @@ The [developer content](/articles/developer-experience/) topic covers what to pu
 
 ## FAQ
 
-**What is a developer content program?**
+**What is a technical content program?**
 
 It's the topic plan, the review process and the writers behind a company's technical articles, run as one system so every piece is checked against the product.
 

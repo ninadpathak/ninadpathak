@@ -357,6 +357,8 @@ The release note should leave the reader with checks they can run:
 - Duplicate webhook delivery does not create duplicate work.
 - Monitoring shows no unexplained increase in `400`, `401`, or `429` responses.
 
+Writing each release's notes for a team is work I take on, described under [release notes and changelogs](/services/changelogs-and-release-notes/).
+
 ## FAQ
 
 **Who writes release notes?**

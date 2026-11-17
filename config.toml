@@ -94,7 +94,7 @@ seo_title = "Technical Documentation: Templates and Review | Ninad Pathak"
 description = "Technical documentation treated as a product surface, with a template for each page type and a review process that starts from the product."
 primary_query = "technical documentation"
 money_page = "/services/"
-hire_note = "My <a href=\"/services/\">technical writing services</a> cover this documentation for developer products."
+hire_note = "My <a href=\"/services/\">technical writing services</a> cover this documentation for developer products, as <a href=\"/services/developer-documentation/\">developer documentation</a>, <a href=\"/services/technical-tutorials/\">tutorials</a> and <a href=\"/services/changelogs-and-release-notes/\">release notes</a>."
 tag_matches = ["documentation", "technical-writing", "api-documentation", "docs-as-code", "documentation-workflow", "information-architecture", "accessibility"]
 
 [[content.categories]]
@@ -120,7 +120,7 @@ seo_title = "Developer Content and DevRel | Ninad Pathak"
 description = "Developer content and DevRel for readers who check each claim, covering what to publish and who should write it."
 primary_query = "developer content"
 money_page = "/services/"
-hire_note = "My <a href=\"/services/\">technical writing services</a> cover technical articles and content programs for developer products."
+hire_note = "My <a href=\"/services/\">technical writing services</a> cover <a href=\"/services/technical-articles/\">technical articles</a> and <a href=\"/services/technical-content-programs/\">technical content programs</a> for developer products."
 tag_matches = ["developer-experience", "devtools", "developer-tools", "developer-marketing", "developer-productivity", "content-strategy", "engineering-culture", "career"]
 
 [[content.categories]]
@@ -239,8 +239,9 @@ knows_about = [
 # node's makesOffer, llms.txt, llms-full.txt and the hiring templates.
 #
 # Only facts already published on this site go here: the client list is the one on
-# /about/, and each proof line restates a case study under content/work/. No price,
-# turnaround or availability appears, because none is published.
+# /about/, and each proof line restates a case study under content/work/. No price or
+# availability appears, because none is published. The only turnaround is the one Ninad
+# stated, and it lives on the services pages.
 [hire]
 audience = "AI and developer-tool companies"
 statement = "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it."

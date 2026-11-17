@@ -72,6 +72,8 @@ Those articles ranked because they answered the exact problem. They also convert
 - content that kept bringing in traffic after the initial buildout
 - organic search turned into a reliable acquisition channel
 
+Running a program like this one is work I take on, described on my [technical content programs](/services/technical-content-programs/) page.
+
 ## This is the kind of buildout early-stage SaaS teams usually need
 
 When a company starts content from zero, the temptation is to publish fast and hope volume creates momentum. I usually do the opposite. I set the structure first, pick the clusters that can move first, and make sure every article earns its place.

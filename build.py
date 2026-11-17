@@ -702,6 +702,19 @@ class SiteBuilder:
             if not page.get("card") or not page["glyph_svg"]:
                 raise ValueError(f"{page['url']}: front matter needs a card line and a glyph from lib/topic-icons.mjs")
         pages.sort(key=lambda page: (not page["is_index"], page.get("order", 99), page["url"]))
+        # The boxes on /services/ come from the template, so the Markdown alternate and
+        # llms-full.txt would lose the list of services. The index body marks where the
+        # list goes, and the text copies get it written out with links.
+        marker = "<!-- service-list -->"
+        base = self.config["site"]["url"]
+        listing = "\n".join(
+            f"- [{page.get('box_title') or page.get('nav_title') or page['title']}]({base}{page['url']}): {page['card']}"
+            for page in pages if not page["is_index"] and page["published"])
+        for page in pages:
+            if page["is_index"]:
+                if listing and marker not in page["markdown"]:
+                    raise ValueError("content/services.md needs the <!-- service-list --> marker")
+                page["markdown"] = page["markdown"].replace(marker, listing)
         return pages
 
     def load_legal_pages(self) -> list[dict]:

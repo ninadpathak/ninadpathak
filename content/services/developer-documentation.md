@@ -2,20 +2,20 @@
 title: "Developer Documentation Writing Services"
 nav_title: "Developer documentation"
 seo_title: "Developer Documentation Writing Services | Ninad Pathak"
-description: "Developer documentation writing services for AI and developer-tool companies: quickstarts, reference pages and troubleshooting pages, written after I run the product."
+description: "Developer documentation writing services for AI and developer-tool companies: quickstarts, reference and troubleshooting pages, written after I run the product."
 lead: "My developer documentation writing services cover the pages a developer needs to get a first result: the quickstart, the reference and the troubleshooting page. I'm Ninad Pathak, a freelance technical writer, and I run your product before I write about it."
 service_type: "Developer documentation"
 primary_query: developer documentation writing services
 kind: service
 glyph: book
-card: "Quickstarts, reference pages and troubleshooting pages, written after I run the product."
+card: "Quickstarts, reference and troubleshooting pages, written after I run the product."
 order: 1
 status: published
 proof:
   - value: "50+"
-    label: "Developer guides I wrote for Centus"
+    label: "Developer guides I wrote for the Centus blog"
   - value: "0"
-    label: "Revision rounds Centus engineers asked for"
+    label: "Revision rounds Centus engineers asked for on them"
   - value: "2"
     label: "Review rounds at most on any page"
 ---
@@ -34,17 +34,17 @@ Each step says what the reader should see when it works. That line is what lets 
 
 ## What you get
 
-You get pages your engineers can review for accuracy without rewriting them, in your docs format. You also get a list of the places where the product surprised me.
+You get pages your engineers can review for accuracy without rewriting them, in your docs format.
 
 ## Work you can check
 
-The documentation I can show you in public is on this site, where each page ships with its test:
+I have no client documentation set I can link in public. The documentation I can show you is on this site, where each page ships with its test:
 
 - The [quick start guide template](/articles/quickstart-guide/), with a filled example run against the GitHub REST API.
 - The guide to [API documentation](/articles/api-documentation/), with a reference entry that a script checks against a running service.
 - The [runbook template](/articles/runbook-template/), tested with a coding agent as the responder.
 
-For [Centus](/work/centus/) I wrote more than 50 developer guides, and its engineers approved them without a round of revisions.
+For [Centus](/work/centus/) I wrote more than 50 developer guides for its blog, and its engineers approved them without a round of revisions.
 
 ## How we'd work together
 

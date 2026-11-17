@@ -93,6 +93,8 @@ Run these checks on a finished quickstart, in a new directory and a fresh termin
 
 A quickstart ends at one working result. A [technical tutorial](/articles/writing-technical-tutorials/) teaches a concept through a longer build, and [developer onboarding docs](/articles/developer-onboarding-docs/) get a new team member to a merged change in your own codebase.
 
+Writing a page like this for a product is work I take on, described under [developer documentation](/services/developer-documentation/).
+
 ## FAQ
 
 ### What should a quick start guide include?

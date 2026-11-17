@@ -2082,7 +2082,8 @@ a.p-item:hover { background: var(--bg-1); }
 /* Two topic boxes side by side leave about 166px of text at 481px, so one column starts here. */
 @media (max-width: 600px) {
   .topic-grid  { grid-template-columns: 1fr; }
-  .topic-card  { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--space-4); }
+  .topic-card  { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: var(--space-4); }
+  .topic-card .read-time { align-self: end; }
   .topic-glyph { grid-row: 1 / span 3; margin-bottom: 0; }
 }
 

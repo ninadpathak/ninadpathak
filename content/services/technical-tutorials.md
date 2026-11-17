@@ -15,7 +15,7 @@ proof:
   - value: "25"
     label: "Localization guides under my name on the Centus blog"
   - value: "5"
-    label: "Days from an agreed brief to a draft"
+    label: "Days, about, from an agreed brief to a draft"
   - value: "2"
     label: "Review rounds at most on any tutorial"
 ---
@@ -34,7 +34,7 @@ Every step shows its expected output. If the reader's screen doesn't match, they
 
 ## What you get
 
-You get a tutorial with code that ran, in your format, plus the project itself so your engineers can run it too. You also get the notes on where setup was harder than the docs suggested.
+You get a tutorial with code that ran, in your format, so your engineers review working code.
 
 ## Work you can check
 
@@ -67,7 +67,7 @@ My guide on [how to write a technical tutorial](/articles/writing-technical-tuto
 
 **What do technical tutorial writing services include?**
 
-A step-by-step guide built on a project I made and ran first, with the code, the expected output of each step and the project files.
+A step-by-step guide built on a project I made and ran first, with the code and the expected output of each step.
 
 **How long does one tutorial take?**
 
@@ -75,4 +75,4 @@ A draft takes about 5 days from an agreed brief and revisions take 2, so you can
 
 **Do you write the code as well?**
 
-Yes. I build the example project before drafting, and you get the project along with the tutorial.
+Yes. I build the example project before drafting, so the code in the tutorial has run.

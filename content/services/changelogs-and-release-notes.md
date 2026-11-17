@@ -15,7 +15,7 @@ proof:
   - value: "24h"
     label: "From our first call to a written brief"
   - value: "5"
-    label: "Days from an agreed brief to a draft"
+    label: "Days, about, from an agreed brief to a draft"
   - value: "2"
     label: "Review rounds at most on any release"
 ---
@@ -30,7 +30,7 @@ proof:
 
 I read the changes and ask what each one does to a developer who upgrades. The answer to that question goes at the top of the note.
 
-With access to the release, I run the migration steps before they reach your users.
+I run the release before I write about it, as I do with any product.
 
 ## What you get
 
@@ -38,7 +38,7 @@ You get release notes in your format for each release, and a changelog that stay
 
 ## Work you can check
 
-My published work on release communication is on this site:
+I have no client release notes I can link in public. My published work on release communication is on this site:
 
 - [How to write a changelog](/articles/writing-changelogs/), with counts from a month of one real changelog.
 - [Writing release notes that developers trust](/articles/writing-release-notes/), built on real notes that buried a critical fix.

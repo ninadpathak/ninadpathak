@@ -105,6 +105,8 @@ Copy the habits that connect the writing to the product.
 
 That combination is the writing work I do for technical companies, and [my work page](/work/) is built around it. AI products add their own requirements, because outputs vary between runs, and the guide to [technical writing for AI products](/articles/writing-for-ai-products/) covers them.
 
+Writing articles of this kind for a company is work I take on, described under [technical articles](/services/technical-articles/).
+
 ## FAQ
 
 **Why call a technical blog a moat instead of a marketing channel?**

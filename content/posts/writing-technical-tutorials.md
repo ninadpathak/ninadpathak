@@ -146,3 +146,5 @@ I keep the review focused on what the next instruction needs: run the archive fr
 The [recorded checks](/static/examples/writing-lab/validation.txt) passed on Node.js 24.18.0 on 10 September 2026. No human usability study was conducted.
 
 The [documentation review checklist](/articles/documentation-review/) provides the wider release review; [developer onboarding documentation](/articles/developer-onboarding-docs/) applies the same prerequisite discipline to a contributor's first task.
+
+Writing tutorials this way for a product is work I take on, described under [technical tutorials](/services/technical-tutorials/).

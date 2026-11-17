@@ -103,7 +103,7 @@
       <li>
         <a href="{{ page.url }}" class="topic-card">
           {{ page.glyph_svg }}
-          <h3 class="blog-row-title">{{ page.nav_title }}</h3>
+          <h3 class="blog-row-title">{{ page.box_title or page.nav_title }}</h3>
           <p class="blog-row-desc">{{ page.card }}</p>
           <span class="read-time">See this service →</span>
         </a>
@@ -116,7 +116,7 @@
       <li>
         <a href="{{ page.url }}" class="topic-card">
           {{ page.glyph_svg }}
-          <h3 class="blog-row-title">{{ page.nav_title }}</h3>
+          <h3 class="blog-row-title">{{ page.box_title or page.nav_title }}</h3>
           <p class="blog-row-desc">{{ page.card }}</p>
           <span class="read-time">See this page →</span>
         </a>
@@ -155,6 +155,28 @@
     </div>
   </div>
 </section>
+
+{% if not service.is_index %}
+{# Every service page ends on the same six boxes as /services/, so the pages link to one
+   another in one fixed form. The page being read is marked as the current one. #}
+<section class="blog-list-section">
+  <div class="container">
+    <h2 class="label">All services</h2>
+    <ul class="topic-grid topic-grid-3">
+      {% for page in service_pages if page.kind == "service" %}
+      <li>
+        <a href="{{ page.url }}" class="topic-card"{% if page.url == service.url %} aria-current="page"{% endif %}>
+          {{ page.glyph_svg }}
+          <h3 class="blog-row-title">{{ page.box_title or page.nav_title }}</h3>
+          <p class="blog-row-desc">{{ page.card }}</p>
+          <span class="read-time">{% if page.url == service.url %}You are here{% else %}See this service →{% endif %}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
 
 <section class="cta-band">
   <div class="container">

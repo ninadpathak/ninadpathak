@@ -65,19 +65,22 @@ class ServiceLoaderTests(unittest.TestCase):
 
     def test_index_and_child_pages_get_their_routes(self):
         pages = self._load({
-            "services.md": "---\ntitle: S\nstatus: published\n---\n\n## FAQ\n\n### Q?\n\nA.\n",
+            "services.md": "---\ntitle: S\nstatus: published\n---\n\n<!-- service-list -->\n\n## FAQ\n\n### Q?\n\nA.\n",
             "services/audit.md": "---\ntitle: A\nkind: service\nglyph: checks\ncard: A check.\nstatus: published\n---\n\nBody.\n",
             "service-glyphs.json": '{"checks": "<svg></svg>"}',
         })
         self.assertEqual([page["url"] for page in pages], ["/services/", "/services/audit/"])
         self.assertTrue(pages[0]["is_index"])
+        # The text copies of the index get the list the HTML page shows as boxes.
+        self.assertIn("- [A](https://ninadpathak.com/services/audit/): A check.", pages[0]["markdown"])
+        self.assertNotIn("service-list", pages[0]["markdown"])
         self.assertEqual(pages[0]["faqs"], [{"question": "Q?", "answer": "A."}])
 
     def test_a_child_page_needs_its_box_fields(self):
         """Every page under /services/ is shown as a box on the index, so it must say
         whether it is a service or an audience and carry the box's line and icon."""
         glyphs = {"service-glyphs.json": '{"checks": "<svg></svg>"}'}
-        index = {"services.md": "---\ntitle: S\nstatus: published\n---\n\nBody.\n"}
+        index = {"services.md": "---\ntitle: S\nstatus: published\n---\n\n<!-- service-list -->\n\nBody.\n"}
         for front in ("title: A\nstatus: published",
                       "title: A\nkind: service\nglyph: checks\nstatus: published",
                       "title: A\nkind: service\ncard: A check.\nglyph: missing\nstatus: published",

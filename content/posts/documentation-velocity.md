@@ -104,6 +104,8 @@ The last of these is close to DORA's recovery factor and the other two sit besid
 
 And the writing doesn't need a specialist to start. My [guide to writing for engineers](/articles/technical-writing-for-engineers/) covers the rules an engineer can apply to the first page.
 
+Planning and running the articles behind a product is work I take on, described under [technical content programs](/services/technical-content-programs/).
+
 ## FAQ
 
 **Can documentation ROI be calculated?**

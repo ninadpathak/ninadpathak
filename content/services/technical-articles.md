@@ -34,7 +34,7 @@ Then I check the search demand in Semrush. A topic goes on the list when your bu
 
 ## How I write it
 
-I run the products an article is about, yours and the ones it's compared with. A claim I can't check gets a source and a date, or it comes out.
+I run your product before I write about it. A claim I can't check gets a source and a date, or it comes out.
 
 ## Work you can check
 
