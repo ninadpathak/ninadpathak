@@ -12,12 +12,57 @@ takeaways:
 - Use visuals only when they clarify changed behavior or a migration.
 - Automate the release inventory, then edit it for risk and consequence.
 title: Writing Release Notes That Developers Trust
-updated: 2026-07-30
+updated: 2026-11-17
 ---
 
-It is late in the release cycle and someone wants to upgrade the SDK before the weekend. The team needs to know whether the API changed, whether CI needs a new runtime, and whether rollback is still possible.
+OpenSSH 10.6p2, released on November 5, contains what [its own release notes](https://www.openssh.org/releasenotes.html) call "a critical security workaround", and a reader is 427 words into those notes before learning it. GitLab's [critical patch release](https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-5-1-released/) of October 21 says who has to upgrade within 32 words.
 
-The feature list does not answer those questions, so people open diffs and pull requests. The method below puts the upgrade decision on the first screen of the release notes.
+Writing release notes that developers trust comes down to that distance. Someone opening the notes is deciding whether to upgrade and what it will cost, so the page has to answer that decision before it describes the release.
+
+## How soon do real release notes say who is affected?
+
+The notes I looked at ranged from 32 words to 427, counted from the release line to the first sentence that names affected users. The script below fetches each page and counts.
+
+```python
+"""Count the words a reader passes before a release note says who must act."""
+import html
+import re
+import urllib.request
+
+notes = [
+    ("GitLab 19.5.1 (Oct 21)", "https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-5-1-released/",
+     "On October 21, 2026, we released", "we strongly recommend that all self-managed"),
+    ("Ghostty 1.4.0 (Oct 27)", "https://ghostty.org/docs/install/release-notes/1-4-0",
+     "Release notes for Ghostty 1.4.0", "Paste protection didn't treat"),
+    ("OpenSSH 10.6p2 (Nov 5)", "https://www.openssh.org/releasenotes.html",
+     "Portable OpenSSH 10.6p2 was released", "This release contains a critical security workaround"),
+]
+
+for name, url, start, warning in notes:
+    request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    page = urllib.request.urlopen(request, timeout=60).read().decode("utf-8", "replace")
+    page = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", page)
+    text = html.unescape(re.sub(r"<[^>]+>", " ", page)).replace("’", "'")
+    begin = text.index(start)
+    words = len(text[begin:text.index(warning, begin)].split())
+    print(f"{name:<24} {words:>4} words before the first sentence about who is affected")
+```
+
+Running `python3 first_warning.py` printed the counts.
+
+```text
+GitLab 19.5.1 (Oct 21)     32 words before the first sentence about who is affected
+Ghostty 1.4.0 (Oct 27)    144 words before the first sentence about who is affected
+OpenSSH 10.6p2 (Nov 5)    427 words before the first sentence about who is affected
+```
+
+GitLab's opening is the model. Its second sentence says "we strongly recommend that all self-managed GitLab installations be upgraded to one of these versions immediately", and the third tells everyone else to stand down: "GitLab.com is already running the patched version."
+
+[Ghostty 1.4.0](https://ghostty.org/docs/install/release-notes/1-4-0), released on October 27, spends its first 144 words on a summary and thanks, then lists security advisories ahead of any feature. Each advisory states what an attack needs, in sentences such as "This requires user interaction (copy-paste) to trigger." and "This affects Ghostty 1.3.0 and 1.3.1."
+
+The OpenSSH sentence is precise once you reach it, naming "Linux systems that use the musl libc and PAM disabled". It sits below a donations paragraph and a deprecation notice, in the order the project's notes always use.
+
+That order matters more as releases speed up. Since the 10.5 release in August the notes have opened with a paragraph on security reports found with AI tools, which says the team will be "making more frequent releases to get bugfixes into users' hands", and a project that ships more often asks its users to make the upgrade decision more often.
 
 ## Release notes and changelogs do different jobs
 
@@ -59,7 +104,7 @@ Lead with:
 A compact summary can look like this:
 
 ```text
-Version:        4.0.0 — 30 July 2026
+Version:        4.0.0, 30 July 2026
 Compatibility:  Breaking changes in authentication and pagination
 Affected:       REST API and JavaScript SDK users
 Action:         Migrate before 30 September 2026
@@ -70,7 +115,7 @@ The block sets the reading order. Migration details still follow, but nobody has
 
 ### Say who is not affected
 
-Scope reduces unnecessary alarm. If a change affects only self-hosted deployments, say that cloud customers do not need to act.
+Scope reduces unnecessary alarm. If a change affects only self-hosted deployments, say that cloud customers do not need to act, as GitLab's patch release does in its opening lines.
 
 Negative scope is especially useful when a product has several SDKs, API versions, regions, or deployment models. It prevents every customer from interpreting a broad warning as their own emergency.
 
@@ -87,7 +132,7 @@ Pull request titles make sense from the team’s side of the work. Release notes
 | Upgraded database driver | No application change is required, but self-hosted deployments now require PostgreSQL 15 or later. |
 | Fixed CSV bug | CSV exports now preserve leading zeroes in string columns such as postal codes. |
 
-The right-hand column lets a developer recognize their system and choose an action. Concrete terms such as the error code, field, and runtime also make the entry easier to find later.
+The right-hand column lets a developer recognize their system and choose an action. Concrete terms such as the error code and the field name also let a search find the entry later.
 
 ### Separate breaking changes from new capability
 
@@ -102,11 +147,13 @@ Within that section, use the same order for every item:
 - Verification step
 - Rollback or support path
 
-Consistency makes long notes easier to scan. Future writers are less likely to dilute a structure with an obvious place for each fact.
+Consistency lets a reader scan long notes. Future writers are less likely to dilute a structure with an obvious place for each fact.
 
 ### Be precise about security
 
-Say which versions are affected, what users should do, and where the advisory lives. Avoid vague phrases such as “security improvements,” because they tell a reader neither the urgency nor the scope.
+Say which versions are affected and what users should do, and link the advisory.
+
+The Ghostty notes above do it in one line per advisory, and GitLab's add a warning a version number can't carry: "upgrading GitLab is not sufficient: you must also upgrade Ruby" for installations that bring their own runtime. Avoid vague phrases such as “security improvements,” because they tell a reader neither the urgency nor the scope.
 
 Coordinate security wording with the security owner and link to the canonical advisory for updates. Leave out exploit detail that creates additional risk.
 
@@ -127,7 +174,7 @@ For an interface change, crop the screenshot to the changed region and call out 
 
 ### Skip visuals for routine inventory
 
-A decorative dashboard screenshot does not make a dependency update easier to understand. It adds page weight and another asset that can become stale.
+A decorative dashboard screenshot does not explain a dependency update. It adds page weight and another asset that can become stale.
 
 Ask whether the visual helps someone migrate or verify behavior. If it does neither, let the prose carry the point.
 
@@ -161,7 +208,9 @@ State what can be reversed, how long the previous version remains supported, and
 
 Release tooling can already collect pull requests, contributors, labels, and links. GitHub's [automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) can even use `.github/release.yml` to define categories and exclusions.
 
-Automation saves collection time, but the inventory remains a draft. It cannot reliably combine three pull requests into one user-facing change or spot migration work behind an innocent title.
+Automation saves collection time, but the inventory remains a draft. It cannot reliably combine several pull requests into one user-facing change or spot migration work behind an innocent title.
+
+Ghostty's maintainers went the other way and say so in the notes: "They take a combined 16+ hours to write". That is the cost of the judgment, and a generated inventory doesn't remove it.
 
 ### Build the notes during development
 
@@ -212,7 +261,7 @@ The [release notes template](/articles/release-notes-template/) turns this order
 - Do migration, advisory, rollback, and reference links work?
 - Can someone find the same release again by version?
 
-Trust comes from repeating this disclosure standard every time. One vague release can make the next careful one harder to believe.
+Trust comes from repeating this disclosure standard every time. A single vague release can make the next careful one harder to believe.
 
 ## Worked example: write the notes for a breaking SDK release
 
@@ -225,7 +274,7 @@ Release notes turn that record into an upgrade plan. They need more context than
 The first screen could read:
 
 ```text
-SDK 4.0.0 — 30 July 2026
+SDK 4.0.0, 30 July 2026
 
 Upgrade effort: Medium
 Compatibility: Breaking changes to pagination and Node.js support
@@ -309,6 +358,10 @@ Verification turns the notes into an upgrade tool. Without it, the page explains
 A release note can explain the change without deciding where older instructions remain available. Keep their URLs and support policy explicit.
 
 ## Release notes FAQ
+
+**Who writes release notes?**
+
+Someone who knows what the release changes for its users, with engineers checking the sections they own. Ghostty's 1.4.0 notes were written by its maintainers, who put the cost at more than 16 hours.
 
 **How long should release notes be?**
 

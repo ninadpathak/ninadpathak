@@ -1570,6 +1570,57 @@
       "connects": [
         "technical-docs"
       ]
+    },
+    {
+      "id": "openssh-10-6p2-release-notes",
+      "url": "https://www.openssh.org/releasenotes.html",
+      "author": "OpenSSH",
+      "date": "2026-11-05",
+      "title": "OpenSSH 10.6p2 release notes",
+      "discussion": "https://news.ycombinator.com/item?id=50377976",
+      "quotes": [
+        "a critical security workaround",
+        "Portable OpenSSH 10.6p2 was released on 2026-11-05.",
+        "Linux systems that use the musl libc and PAM disabled",
+        "making more frequent releases to get bugfixes into users' hands"
+      ],
+      "connects": [
+        "writing-release-notes",
+        "writing-changelogs"
+      ]
+    },
+    {
+      "id": "gitlab-critical-patch-19-5-1",
+      "url": "https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-5-1-released/",
+      "author": "GitLab",
+      "date": "2026-10-21",
+      "title": "GitLab Critical Patch Release: 19.5.1",
+      "quotes": [
+        "we strongly recommend that all self-managed GitLab installations be upgraded to one of these versions immediately",
+        "GitLab.com is already running the patched version.",
+        "upgrading GitLab is not sufficient: you must also upgrade Ruby"
+      ],
+      "connects": [
+        "writing-release-notes"
+      ]
+    },
+    {
+      "id": "ghostty-1-4-0-release-notes",
+      "url": "https://ghostty.org/docs/install/release-notes/1-4-0",
+      "author": "Ghostty maintainers",
+      "date": "2026-10-27",
+      "title": "Ghostty 1.4.0 release notes",
+      "discussion": "https://news.ycombinator.com/item?id=50261998",
+      "quotes": [
+        "Release notes for Ghostty 1.4.0, released on October 27, 2026.",
+        "This requires user interaction (copy-paste) to trigger.",
+        "This affects Ghostty 1.3.0 and 1.3.1.",
+        "They take a combined 16+ hours to write"
+      ],
+      "connects": [
+        "writing-release-notes",
+        "writing-changelogs"
+      ]
     }
   ],
   "unused_leads": [
@@ -1713,6 +1764,15 @@
     "documentation-headings": [
       "information about this topic"
     ],
-    "technical-docs": []
+    "technical-docs": [],
+    "writing-release-notes": [
+      "Our fastest release yet",
+      "Batch exports now finish up to 30 minutes after creation and send a webhook when the file is ready",
+      "security improvements,",
+      "Deprecated soon",
+      "Medium",
+      "If a sentence cannot help someone decide, migrate, verify, or troubleshoot, it does not belong above the technical changes.",
+      "Keep version 3 deployed in the previous production slot. If error rates rise before v4 cursors are stored, shift traffic back; after that point, disable pagination writes and contact support before downgrading."
+    ]
   }
 }
