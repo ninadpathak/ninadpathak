@@ -142,6 +142,8 @@ Every script was run in scratch on 2026-11-17 and its printed output pasted into
 
 - ai-memory-management (batch 2b): narration L4, an on-screen caption and the end card title.
 - best-llms-for-coding (batch 3): narration L2 to L5 name March models and SWE-bench Verified. The embed is off until it is redone.
+- speculative-decoding (batch 5): the narration claims ownership of a model ("my 70B", "So I use speculative decoding"), says a verification pass "costs about the same as making one token", and gives two to three times faster as a general result. The page gives 2X-3X for the paper's T5-XXL run only. Root asked for the embed to come off, but `tests/test_article_video.py` and `tests/test_lastmod.py` use this post and its film as their fixture, so the `video` field stays until the test owner moves the fixture. The description in `video.yaml` no longer repeats the claims.
+- ai-agent-taxonomy (batch 5): L1 and L2 say cost and blast radius rise by roughly an order of magnitude per type, which no source backs and the page no longer says. The embed is off until it is redone.
 
 ### Notes for the next batch
 

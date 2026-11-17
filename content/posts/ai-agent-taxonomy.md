@@ -20,7 +20,6 @@ slug: ai-agent-taxonomy
 status: published
 work_note: 'I group agents on this page by how much they decide alone, because that decides which tools and memory a task needs. For the agent guides I''ve written for Firecrawl, see [my portfolio](/portfolio/).'
 title: 'Types of AI Agents: Five Types by Autonomy and Scope'
-video: ai-agent-taxonomy
 updated: 2026-11-17
 ---
 
