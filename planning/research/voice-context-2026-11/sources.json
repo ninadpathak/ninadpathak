@@ -1163,8 +1163,7 @@
         "Memory blocks can be attached and detached from agents"
       ],
       "connects": [
-        "ai-memory-management",
-        "agent-memory-2026"
+        "ai-memory-management"
       ],
       "date_note": "Date fetched; documentation page."
     },
@@ -1178,8 +1177,7 @@
         "Archival memory is a semantically searchable database where agents can store facts, knowledge, and information for long-term retrieval."
       ],
       "connects": [
-        "ai-memory-management",
-        "agent-memory-2026"
+        "ai-memory-management"
       ],
       "date_note": "Date fetched; documentation page."
     },
@@ -3800,7 +3798,7 @@
     },
     {
       "id": "mcp-architecture-docs",
-      "url": "https://modelcontextprotocol.io/docs/learn/architecture",
+      "url": "https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture",
       "author": "Model Context Protocol",
       "date": "2026-11-17",
       "title": "Architecture overview",
@@ -4040,7 +4038,8 @@
       "date": "2026-11-08",
       "title": "llama-modchip README (HN 50411961)",
       "quotes": [
-        "57.99 GiB (284B)"
+        "57.99 GiB (284B)",
+        "58.6–59.1 GiB"
       ],
       "connects": [
         "mixture-of-experts"
@@ -4171,15 +4170,19 @@
     },
     {
       "id": "mem0-docs-memory-types",
-      "url": "https://docs.mem0.ai/core-concepts/memory-types",
+      "url": "https://docs.mem0.ai/core-concepts/how-it-works",
       "author": "Mem0",
       "date": "2026-11-18",
-      "title": "Memory types",
+      "title": "How Mem0 works",
       "quotes": [
         "Your app decides which returned memories to include in the prompt.",
         "By default, Mem0 stores extracted memories, not a verbatim transcript",
         "Scope memory by user_id, agent_id, run_id, and metadata",
-        "I prefer aisle seats"
+        "I prefer aisle seats",
+        "The automatic extraction path is additive",
+        "Mem0 can store the new fact without silently rewriting the old one",
+        "Use explicit update or delete operations when your application needs to correct or remove a memory",
+        "stores them for entity matching at search time"
       ],
       "connects": [
         "agent-memory-2026"
@@ -4374,7 +4377,12 @@
         "62 terminal tasks",
         "Each trial gets a new Runta runtime",
         "The model explains 92.8% of the variance of cost per task",
-        "Codex CLI with GLM-5.3, Pi with GLM-5.3 Flash"
+        "Codex CLI with GLM-5.3, Pi with GLM-5.3 Flash",
+        "18 harnesses. The four DeepSeek Harness profiles have different tool sets, and OpenCode ran at two versions. Each counts separately: 22 configurations.",
+        "Codex CLI stayed first with GLM-5.3 in 99.6% of the draws",
+        "Oh My Pi with Muse (53%), ZCode with DeepSeek (47%), Pi with GLM Flash (42%) and Alma with Kimi-K3 (25%)",
+        "a gap of a few points is a tie",
+        "each pass rate has a 95% interval of about ±10 points"
       ],
       "connects": [
         "agent-harnesses",
@@ -4396,7 +4404,7 @@
     },
     {
       "id": "claude-agent-sdk-overview",
-      "url": "https://platform.claude.com/docs/en/agent-sdk/overview",
+      "url": "https://code.claude.com/docs/en/agent-sdk/overview",
       "author": "Anthropic",
       "date": "2026-11-18",
       "title": "Agent SDK overview",
@@ -4435,7 +4443,8 @@
       "quotes": [
         "doesn't exist anymore because too many people use them interchangeably",
         "harness + model = agent",
-        "They mean the same thing?"
+        "They mean the same thing?",
+        "harness + model = agent (plus sub-agents)"
       ],
       "connects": [
         "what-agent-harness-means"
@@ -4450,6 +4459,119 @@
       "quotes": [
         "An open-source long-horizon SuperAgent harness that researches, codes, and creates",
         "With the help of sandboxes, memories, tools, skill, subagents and message gateway"
+      ],
+      "connects": [
+        "what-agent-harness-means"
+      ]
+    },
+    {
+      "id": "letta-memfs-docs",
+      "url": "https://docs.letta.com/concepts/memfs/index.md",
+      "author": "Letta",
+      "date": "2026-11-18",
+      "title": "MemFS",
+      "quotes": [
+        "The memory itself is part of the agent’s state, held in a git repository that belongs to the agent",
+        "Files at the memory root are loaded into the agent’s system prompt on every turn",
+        "Older agents use a `system/` directory instead",
+        "MemFS does not include a semantic or vector index by default",
+        "Edits are local until committed and pushed",
+        "All Letta agents use MemFS"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "letta-memory-dreaming-docs",
+      "url": "https://docs.letta.com/configuration/memory/index.md",
+      "author": "Letta",
+      "date": "2026-11-18",
+      "title": "Memory & dreaming",
+      "quotes": [
+        "Dreaming uses background subagents to review recent conversations, consolidate useful lessons, and update memory without interrupting your active work",
+        "a git-backed memory filesystem that they can inspect and edit"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "letta-agent-sdk-memory-docs",
+      "url": "https://docs.letta.com/agent-sdk/memory/index.md",
+      "author": "Letta",
+      "date": "2026-11-18",
+      "title": "Memory (Agent SDK)",
+      "quotes": [
+        "Files under `system/` are in the system prompt every turn",
+        "the agent sees the file tree and reads what it needs"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "letta-hosted-mcp-docs",
+      "url": "https://docs.letta.com/platform/hosted-mcp/index.md",
+      "author": "Letta",
+      "date": "2026-11-18",
+      "title": "Hosted Letta MCP server",
+      "quotes": [
+        "to create stateful Letta agents, delegate work to them, and read their replies"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "letta-legacy-stateful-agents",
+      "url": "https://docs.letta.com/v1-sdk/concepts/stateful-agents/index.md",
+      "author": "Letta",
+      "date": "2026-11-18",
+      "title": "Stateful agents (legacy SDK)",
+      "quotes": [
+        "status: legacy"
+      ],
+      "connects": [
+        "agent-memory-2026"
+      ]
+    },
+    {
+      "id": "openai-deprecations-2026-11",
+      "url": "https://developers.openai.com/api/docs/deprecations",
+      "author": "OpenAI",
+      "date": "2026-11-18",
+      "title": "Deprecations",
+      "quotes": [
+        "Active existing customers will no longer be able to create new fine-tuning jobs on this date",
+        "Creating fine-tuning jobs or training is not available to organizations that have not previously run fine-tuning",
+        "Self-serve fine-tuning job creation"
+      ],
+      "connects": [
+        "fine-tuning-vs-rag"
+      ]
+    },
+    {
+      "id": "openai-supervised-fine-tuning",
+      "url": "https://developers.openai.com/api/docs/guides/supervised-fine-tuning",
+      "author": "OpenAI",
+      "date": "2026-11-18",
+      "title": "Supervised fine-tuning",
+      "quotes": [
+        "Eligible existing customers can create training jobs until January 6, 2027, unless the base model shuts down earlier"
+      ],
+      "connects": [
+        "fine-tuning-vs-rag"
+      ]
+    },
+    {
+      "id": "anthropic-managed-agents-memory",
+      "url": "https://platform.claude.com/docs/en/managed-agents/memory",
+      "author": "Anthropic",
+      "date": "2026-11-18",
+      "title": "Memory stores",
+      "quotes": [
+        "Memory stores"
       ],
       "connects": [
         "what-agent-harness-means"

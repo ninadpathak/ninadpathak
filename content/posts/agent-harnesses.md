@@ -18,11 +18,11 @@ video: agent-harnesses
 
 An agent harness is the code around a language model that turns it into an agent. It runs the loop, calls the tools the model asks for, decides what goes into the context window, and saves state so a run can survive a failure.
 
-The word comes from testing. A [test harness](https://en.wikipedia.org/wiki/Test_harness) is the set of stubs and drivers you put around a component so it can be run and checked, and an agent harness does that job for a model, which can't run anything by itself.
+The word is the one testing uses. A [test harness](https://en.wikipedia.org/wiki/Test_harness) is the set of stubs and drivers you put around a component so it can be run and checked, and an agent harness does that job for a model, which can't run anything by itself.
 
-It's also the word of the week. On November 17 a benchmark called [FrontierHarness Eval](https://runta.com/blog/introducing-frontierharness-eval-v1-1/) reached the Hacker News front page after running 22 harnesses against 5 models, and it found that the best-value harness was a different one for each model.
+It's also the word of the week. On November 17 a benchmark called [FrontierHarness Eval](https://runta.com/blog/introducing-frontierharness-eval-v1-1/) reached the Hacker News front page after running 18 harnesses in 22 configurations against 5 models, and its best-value pick came out different for each model.
 
-So the layer I used to describe as plumbing now has its own leaderboard. Below is what an agent harness contains and where it sits in [AI agent architecture](/articles/ai-agents/), with a small one you can run.
+So the layer around the model now has its own leaderboard. Below is what an agent harness contains and where it sits in [AI agent architecture](/articles/ai-agents/), with a small one you can run.
 
 ## What is an agent harness?
 
@@ -30,7 +30,9 @@ An agent harness is the runtime layer between your application and the model's A
 
 An agent isn't one call. A research agent might make thirty to fifty model calls in one task, and something has to carry the results from each call into the next, run the tools and stop the run when it's done.
 
-That something is the harness, and vendors now use the word for their own products. Anthropic's [Agent SDK docs](https://platform.claude.com/docs/en/agent-sdk/overview) describe Managed Agents as a hosted agent harness, and LangChain calls [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) an agent harness too.
+That something is the harness, and vendors now use the word for their own products. Anthropic's [Agent SDK docs](https://code.claude.com/docs/en/agent-sdk/overview) describe Managed Agents as a hosted agent harness, and LangChain calls [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) an agent harness too.
+
+Those uses don't all mean the same thing, and I've taken that up separately in an essay on [how agent docs use the word](/articles/what-agent-harness-means/).
 
 The division of labor is the thing to hold on to. The model reasons, and the harness does everything else.
 
@@ -53,7 +55,9 @@ If you don't build these, you still have them. The loop ends up in one file and 
 
 ## Does the harness matter as much as the model?
 
-It matters enough to measure, going by FrontierHarness Eval. The benchmark ran 22 harnesses with 5 open-weight models on 62 terminal tasks, and over all models the pass rates ran from 50.6% to 61.9%.
+It matters enough to measure, going by FrontierHarness Eval. The benchmark ran 22 harness configurations with 5 open-weight models on 62 terminal tasks, and over all models the pass rates ran from 50.6% to 61.9%.
+
+Read those pass rates loosely. The post puts a 95% interval of about 10 points either way on each one, and says a difference of a few points is a tie.
 
 Cost moved more than pass rate, and it didn't follow the harness from model to model. Ranking the harnesses by cost on two halves of the runs gave a rank correlation of 0.71 with the same model and 0.26 across different models.
 
@@ -61,7 +65,9 @@ The post is clear about the order of things, though. The model explains 92.8% of
 
 The line I'd take to a budget meeting is another one. The post reports that "64.5% of the list-price cost of the scored runs went to trials that did not pass", which is money a harness spends before anyone learns the run failed.
 
-Runta published the benchmark and ran it on its own runtime, and the post lists its limits as open models and one provider. I'd treat the rankings as theirs and the lesson as general: test harnesses with your model on your own tasks.
+Runta published the benchmark and ran it on its own runtime, and the post lists its limits as open models and one provider. Its per-model winners are soft too: only one of the five held up in nearly every resample of the tasks, and the others won between 25% and 53% of the time.
+
+I'd treat the rankings as theirs and the lesson as general: test harnesses with your model on your own tasks.
 
 ## How does a harness recover from a failed step?
 
@@ -143,7 +149,7 @@ with checkpoints
 
 The run without checkpoints made 8 tool calls and the run with them made 6. The two calls it saved are `search` and `read_a`, which had already succeeded and didn't need doing again.
 
-A saving of two calls is nothing, and step eighteen of a long run isn't. LangGraph's [persistence docs](https://docs.langchain.com/oss/python/langgraph/persistence) put the same ability in a framework, saying a checkpointer lets an agent "resume after an interruption, recover from a failure".
+A saving of two calls is nothing, and step eighteen of a long run isn't. LangGraph's [persistence docs](https://docs.langchain.com/oss/python/langgraph/persistence) put the same ability in a framework, saying persistence lets an agent "resume after an interruption, recover from a failure".
 
 Resuming only works if a repeated step is harmless. A tool that sends an invoice has to recognize the second attempt, which is the idempotency-key pattern in [agent error handling](/articles/agent-error-handling/).
 
@@ -173,7 +179,7 @@ That last one sounds small. Without a run ID, debugging one bad run means readin
 
 You don't need one when your application controls the flow. A single model call, or a fixed sequence like summarize-then-translate, is a pipeline, and wrapping it in a harness adds parts with nothing to do.
 
-You need one once the model decides which tool to call next. That's the property the [taxonomy of AI agents](/articles/ai-agent-taxonomy/) uses to separate an agent from an assistant.
+You need one once the model decides which tool to call next. The [taxonomy of AI agents](/articles/ai-agent-taxonomy/) ranks agent types by how much each one decides, and the further up that ranking you build, the more the harness has to do.
 
 ## FAQ
 

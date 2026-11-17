@@ -38,11 +38,11 @@ An agent memory framework writes facts from a conversation into a store and read
 
 Say a support agent learns on Monday that a customer is on the enterprise plan. It should still treat them as an enterprise customer on Tuesday without being told again, and it should stop the day they downgrade.
 
-The read side looks the same in every framework I checked. Memories sit in storage, a retrieval step finds candidates for the current turn, and a ranking step picks the few that go into the context window.
+The read side looks the same in the frameworks that search. Memories sit in storage, a retrieval step finds candidates for the current turn, and a ranking step picks the few that go into the context window.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/agent-memory-2026/memory-stack.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-memory-2026/memory-stack.narrow.svg" width="288" height="648"><img class="np-has-narrow" src="/static/images/diagrams/agent-memory-2026/memory-stack.svg" width="720" height="256" alt="The read path of an agent memory framework, left to right: a storage layer holds memories outside the context window, a retrieval layer finds candidates, a ranking layer orders them, and the few that are left reach the agent's context window." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Every framework here reads the same way: storage, then retrieval, then ranking. Only what survives ranking reaches the context window.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/agent-memory-2026/memory-stack.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/agent-memory-2026/memory-stack.narrow.svg" width="288" height="648"><img class="np-has-narrow" src="/static/images/diagrams/agent-memory-2026/memory-stack.svg" width="720" height="256" alt="The read path of an agent memory framework that searches, left to right: a storage layer holds memories outside the context window, a retrieval layer finds candidates, a ranking layer orders them, and the few that are left reach the agent's context window." loading="lazy" decoding="async"></picture></a>
+  <figcaption>A framework that searches reads this way: storage, then retrieval, then ranking. Only what survives ranking reaches the context window.</figcaption>
 </figure>
 
 So the read path is a retrieval problem, and the tools for it carry over: [hybrid search](/articles/hybrid-search/) for finding candidates, and the retrieval metrics from [RAG evaluation](/articles/rag-evaluation/) for scoring them. The write path is where the frameworks part ways.
@@ -53,24 +53,26 @@ They differ on who writes a memory and on the shape it's stored in. Here's how f
 
 | Framework | Who decides what to write | What gets stored |
 |---|---|---|
-| [Letta](https://docs.letta.com/guides/agents/memory) | The agent, by calling memory tools | Text blocks pinned in the prompt, plus a searchable archive |
-| [Mem0](https://docs.mem0.ai/core-concepts/memory-types) | The service, which extracts facts from the messages you send | Short facts with metadata and embeddings |
+| [Letta](https://docs.letta.com/concepts/memfs/) | The agent, by editing files, and background subagents that consolidate | Markdown files in a git repository the agent owns |
+| [Mem0](https://docs.mem0.ai/core-concepts/how-it-works) | The service, which extracts facts from the messages you send | Short facts with metadata and embeddings, plus the entities they mention |
 | [Graphiti](https://help.getzep.com/graphiti/getting-started/overview) | The framework, which extracts entities and relationships | A knowledge graph whose facts carry time |
 | [Anthropic's memory tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool) | The model, by asking for file operations | Files in a directory your application owns |
 
-I'd pick between them on the first column before the second. An agent that writes its own memory spends turns on it and can be asked why it wrote something, and a service that extracts in the background costs the agent nothing and is harder to question.
+I'd pick between them on the first column before the second. An agent that writes its own memory can be asked why it wrote something, and a service that extracts in the background is harder to question.
 
 ## How does Letta manage memory?
 
-Letta keeps a small set of memory blocks inside the prompt and lets the agent edit them. Its docs describe the blocks as strings that the agent changes through memory tools, and a block attached to an agent is pinned to the system prompt.
+Letta gives each agent a git repository of Markdown files and calls it MemFS. The agent reads and edits those files with ordinary file tools, and an edit becomes memory once it's committed and pushed.
 
-Everything that doesn't fit lives outside. Letta stores all messages, so the old ones can still be fetched after they've been compacted out of the window, and a separate [archival memory](https://docs.letta.com/guides/agents/archival-memory) holds what the agent chooses to file.
+Where a file sits decides whether the model sees it. Files at the root of the repository, or under `system/` on older agents, are loaded into the system prompt on every turn, and everything else stays out of context as a file tree the agent reads when it needs to.
 
-That's the MemGPT design carried forward, and I think its cost is still the one the paper signed up for. The model manages its own paging, so some of every long task goes to deciding what to keep.
+The second writer is the newer idea. Letta's [memory docs](https://docs.letta.com/configuration/memory/) describe dreaming, in which "background subagents" review recent conversations and update memory while the main agent keeps working.
+
+So Letta now answers my first question both ways, and that's a change from where it started. The design of in-prompt blocks with a searchable archive, which is the MemGPT paper's, is still documented, and the pages for it are marked as the legacy SDK.
 
 ## How does Mem0 manage memory?
 
-Mem0 takes the writing decision away from the agent. You send it the conversation turns, and by default it stores facts extracted from them, so "I prefer aisle seats" becomes a stored preference and the transcript is dropped.
+Mem0 takes the writing decision away from the agent. You send it the conversation turns, and by default it stores facts extracted from them along with the people and places they mention, so "I prefer aisle seats" becomes a stored preference and the transcript is dropped.
 
 Reads are a search call scoped by `user_id`, `agent_id` or `run_id`. The docs say plainly where its job ends: "Your app decides which returned memories to include in the prompt."
 
@@ -84,13 +86,19 @@ The reason is in its own docs, which say Microsoft's GraphRAG was "primarily des
 
 An agent can act on a stale fact without knowing it's stale, so it's the question I'd put to any framework on the list. [Memory versioning](/articles/memory-versioning/) covers what an honest answer looks like, with an append-only ledger you can run.
 
+Mem0's own answer is weaker than Graphiti's, and its docs say so. Automatic extraction is additive: when a user says they moved from Austin to Seattle, Mem0 "can store the new fact without silently rewriting the old one", and correcting the old one takes an explicit update or delete.
+
 ## What is Anthropic's memory tool?
 
 Anthropic's memory tool gives Claude a directory of files and leaves the storage to you. Claude asks to create, read or edit a file under `/memories`, and your application carries out each request against storage it controls.
 
 It's the plainest design of the four, and I mean that as praise. A memory you can open in a text editor is a memory you can review, which is the same thing I liked about [DeerFlow's Markdown files](/articles/deerflow-memory/).
 
+Letta's files are close kin, with git and a second writer added.
+
 What you give up is retrieval. A directory has no ranking step, so finding the right note depends on how the model named its files.
+
+Letta's docs say the same of MemFS, which has no semantic or vector index by default.
 
 ## Can these frameworks be swapped over MCP?
 
@@ -102,7 +110,7 @@ The protocol moves the calls and leaves the contents alone. A fact extracted by 
 
 Test whether the agent does its job better with the memory than without it. Retrieval scores come first because they're cheap, and they aren't the end of it.
 
-[LongMemEval](https://arxiv.org/abs/2410.10813) is the benchmark I'd read before building my own test. Its authors split memory into indexing, retrieval and reading, and they report "a 30% accuracy drop" for commercial assistants and long-context models on information spread across long interactions.
+[LongMemEval](https://arxiv.org/abs/2410.10813), from October 2024, is the benchmark I'd read before building my own test. Its authors split memory into indexing, retrieval and reading, and they report "a 30% accuracy drop" for commercial assistants and long-context models on information spread across long interactions.
 
 Reading is the stage people skip. The right facts in the wrong order can still produce a worse decision, for the reason the Lost in the Middle section of [context windows vs memory](/articles/context-windows-vs-memory/) gives: where a fact sits in the prompt changes whether the model uses it.
 
@@ -118,7 +126,7 @@ RAG retrieves from documents that already exist. Agent memory also writes, which
 
 **Is MemGPT still a thing?**
 
-Yes, under another name. The project's repository describes Letta as formerly known as MemGPT, and the paper's design of in-context blocks with outside storage is still how Letta works.
+Yes, under another name. The project's repository describes Letta as formerly known as MemGPT, and Letta's current docs have moved from the paper's memory blocks to a git-backed filesystem of Markdown files.
 
 **Which agent memory framework should I start with?**
 
@@ -126,8 +134,8 @@ I'd start with the plainest one that fits, which for a single agent may be a dir
 
 **Does a bigger context window replace a memory framework?**
 
-Not on LongMemEval's evidence. The paper reports the accuracy drop for long-context models as well as for commercial assistants.
+Not on LongMemEval's evidence, with a caveat about its age. The paper reports the accuracy drop for long-context models as well as for commercial assistants, and the models it tested are from 2024.
 
 **Do agent memory frameworks support MCP?**
 
-Some do. Mem0 and Graphiti publish MCP servers, and Letta's docs list MCP tools among the tools an agent can call.
+Some do. Mem0 and Graphiti publish MCP servers for their memory, and Letta has a hosted MCP server through which another agent can create and message Letta agents.

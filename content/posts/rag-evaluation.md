@@ -150,8 +150,8 @@ Ragas has retrieval-side metrics of its own too. Its [context recall](https://do
 Fix retrieval recall first, because nothing downstream can use a passage that was never retrieved. After that I'd go in the order of the pipeline: precision and ranking, then faithfulness, then relevancy.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/rag-evaluation/eval-order.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-evaluation/eval-order.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/rag-evaluation/eval-order.svg" width="720" height="256" alt="Four RAG metrics in the order to fix them: context recall first, so the right chunks are retrieved; context precision second, so the context carries signal rather than noise; faithfulness third, so the answer sticks to the context; answer relevancy last, because it measures the whole system working together." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Each stage only means something once the one before it holds. Starting with answer relevancy hides upstream failures.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/rag-evaluation/eval-order.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-evaluation/eval-order.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/rag-evaluation/eval-order.svg" width="720" height="256" alt="Four RAG metrics in the order to fix them. Recall comes first, so the right passages are retrieved. Precision and ranking come second, so the context carries little noise. Faithfulness is third, so the answer sticks to the context, and response relevancy is last." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Each stage only means something once the one before it holds. Starting with response relevancy hides failures upstream.</figcaption>
 </figure>
 
 The order matters for reading the scores as well as for fixing them. A low faithfulness score on a question where recall failed is a retrieval bug that happens to show up in the answer.

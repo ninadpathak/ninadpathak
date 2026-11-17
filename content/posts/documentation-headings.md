@@ -20,7 +20,7 @@ updated: 2026-11-17
 video: documentation-headings
 ---
 
-Stripe's [webhook guide](https://docs.stripe.com/webhooks) has nine second-level headings. Of those, six name an action, such as "Create a handler", and the rest name a subject, such as "Event delivery behaviors", which is the British spelling Stripe served to my region.
+Stripe's [webhook guide](https://docs.stripe.com/webhooks) has nine second-level headings. Of those, six name an action, such as "Create a handler", and the rest name a subject, such as "Event delivery behaviors".
 
 That split is the rule for documentation headings, taken from a page built on it. A heading should tell a scanning reader what the section contains.
 
@@ -107,7 +107,7 @@ curl -sL https://docs.stripe.com/webhooks.md | grep '^## '
 ## Create a handler
 ## Test your handler
 ## Optional: Create an event destination for Connect
-## Optional: Create an event destination for Organisations
+## Optional: Create an event destination for Organizations
 ## Debug webhook integrations
 ## Event delivery behaviors
 ## Best practices for using webhooks

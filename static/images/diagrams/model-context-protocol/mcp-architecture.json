@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/model-context-protocol/mcp-architecture.mmd",
-  "hash": "47ae05ef7e90d28e",
+  "hash": "ca0bb06aa9ff0a2d",
   "pele": "1.8.0",
   "width": 720,
   "height": 264,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "An MCP round trip drawn left to right. The host holds a client, the client sends a request to the server, and the server runs one of its tools and returns the result along the same path.",
-  "caption": "The host creates one client per server. Each request carries its own protocol version, so the server keeps no memory of the client between calls.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/model-context-protocol/mcp-architecture.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/model-context-protocol/mcp-architecture.narrow.svg\" width=\"288\" height=\"688\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/model-context-protocol/mcp-architecture.svg\" width=\"720\" height=\"264\" alt=\"An MCP round trip drawn left to right. The host holds a client, the client sends a request to the server, and the server runs one of its tools and returns the result along the same path.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The host creates one client per server. Each request carries its own protocol version, so the server keeps no memory of the client between calls.</figcaption>\n</figure>"
+  "caption": "The host creates one client per server. Each request carries its own protocol version, so the protocol keeps no session between calls.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/model-context-protocol/mcp-architecture.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/model-context-protocol/mcp-architecture.narrow.svg\" width=\"288\" height=\"688\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/model-context-protocol/mcp-architecture.svg\" width=\"720\" height=\"264\" alt=\"An MCP round trip drawn left to right. The host holds a client, the client sends a request to the server, and the server runs one of its tools and returns the result along the same path.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The host creates one client per server. Each request carries its own protocol version, so the protocol keeps no session between calls.</figcaption>\n</figure>"
 }

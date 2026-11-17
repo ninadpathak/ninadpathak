@@ -58,7 +58,7 @@ The last three names come from research on agent memory, and my page on the [typ
 | Semantic memory | What is known to be true? | Until a newer fact replaces it |
 | Procedural memory | How should the agent act here? | Until the rule changes |
 
-The [short-term memory guide](/articles/short-term-agent-memory/) covers the first two layers, and [agent memory in 2026](/articles/agent-memory-2026/) surveys products across all five.
+The [short-term memory guide](/articles/short-term-agent-memory/) covers the first two layers, and [agent memory in 2026](/articles/agent-memory-2026/) compares four frameworks by who writes a memory and how it's stored.
 
 ### Inclusion, retrieval, and lifecycle need separate policies
 

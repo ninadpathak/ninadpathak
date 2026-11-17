@@ -27,7 +27,7 @@ What's less familiar is that the protocol changed shape this year. The [2026-07-
 
 ## What is the Model Context Protocol?
 
-MCP is a client-server protocol built on JSON-RPC 2.0. The [architecture page](https://modelcontextprotocol.io/docs/learn/architecture) names the parties:
+MCP is a client-server protocol built on JSON-RPC 2.0. The [architecture page](https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture) names the parties:
 
 - **Host:** the AI application a person uses, such as Claude Code or Visual Studio Code.
 - **Client:** a component inside the host that holds the connection to one server. The host creates one client per server.
@@ -39,7 +39,7 @@ The protocol stops at the exchange. The same architecture page says MCP "does no
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/model-context-protocol/mcp-architecture.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/model-context-protocol/mcp-architecture.narrow.svg" width="288" height="688"><img class="np-has-narrow" src="/static/images/diagrams/model-context-protocol/mcp-architecture.svg" width="720" height="264" alt="An MCP round trip drawn left to right. The host holds a client, the client sends a request to the server, and the server runs one of its tools and returns the result along the same path." loading="lazy" decoding="async"></picture></a>
-  <figcaption>The host creates one client per server. Each request carries its own protocol version, so the server keeps no memory of the client between calls.</figcaption>
+  <figcaption>The host creates one client per server. Each request carries its own protocol version, so the protocol keeps no session between calls.</figcaption>
 </figure>
 
 ## What can an MCP server offer?
@@ -54,7 +54,7 @@ An MCP server can offer tools, resources and prompts, and each has a list method
 
 Tools get nearly all the attention, and I think that's fair. A tool carries a name, a description and an `inputSchema` written in JSON Schema, which is the same mechanism behind [structured outputs and function calling](/articles/llm-structured-outputs/).
 
-Clients have one feature of their own left, called elicitation, which lets a server ask the user a question in the middle of a call. Roots, sampling and protocol logging are deprecated as of the 2026-07-28 revision, so a tutorial that leans on them is teaching the old protocol.
+Clients have one feature of their own left, called elicitation, which lets a server ask the user a question in the middle of a call. Roots, sampling and protocol logging are deprecated as of the 2026-07-28 revision, so a tutorial that leans on them is teaching features that still work and are on their way out.
 
 ## How does an MCP call work?
 

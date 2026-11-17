@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/agent-memory-2026/memory-stack.mmd",
-  "hash": "3e6651bac31f0c9b",
+  "hash": "5c909d21b2e6dc8f",
   "pele": "1.8.0",
   "width": 720,
   "height": 256,
@@ -18,7 +18,7 @@
       "mono": 9.5
     }
   },
-  "alt": "The read path of an agent memory framework, left to right: a storage layer holds memories outside the context window, a retrieval layer finds candidates, a ranking layer orders them, and the few that are left reach the agent's context window.",
-  "caption": "Every framework here reads the same way: storage, then retrieval, then ranking. Only what survives ranking reaches the context window.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-memory-2026/memory-stack.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-memory-2026/memory-stack.narrow.svg\" width=\"288\" height=\"648\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-memory-2026/memory-stack.svg\" width=\"720\" height=\"256\" alt=\"The read path of an agent memory framework, left to right: a storage layer holds memories outside the context window, a retrieval layer finds candidates, a ranking layer orders them, and the few that are left reach the agent's context window.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Every framework here reads the same way: storage, then retrieval, then ranking. Only what survives ranking reaches the context window.</figcaption>\n</figure>"
+  "alt": "The read path of an agent memory framework that searches, left to right: a storage layer holds memories outside the context window, a retrieval layer finds candidates, a ranking layer orders them, and the few that are left reach the agent's context window.",
+  "caption": "A framework that searches reads this way: storage, then retrieval, then ranking. Only what survives ranking reaches the context window.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/agent-memory-2026/memory-stack.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/agent-memory-2026/memory-stack.narrow.svg\" width=\"288\" height=\"648\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/agent-memory-2026/memory-stack.svg\" width=\"720\" height=\"256\" alt=\"The read path of an agent memory framework that searches, left to right: a storage layer holds memories outside the context window, a retrieval layer finds candidates, a ranking layer orders them, and the few that are left reach the agent's context window.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>A framework that searches reads this way: storage, then retrieval, then ranking. Only what survives ranking reaches the context window.</figcaption>\n</figure>"
 }

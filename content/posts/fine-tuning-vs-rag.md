@@ -21,7 +21,7 @@ title: 'RAG vs Fine-Tuning and When to Use Each'
 updated: '2026-08-17'
 ---
 
-OpenAI's [model optimization guide](https://developers.openai.com/api/docs/guides/model-optimization) now carries a notice above its fine-tuning section: "OpenAI is winding down the fine-tuning platform." New users can't get in, and existing ones can keep creating training jobs for some months yet.
+OpenAI's [model optimization guide](https://developers.openai.com/api/docs/guides/model-optimization) now carries a notice above its fine-tuning section: "OpenAI is winding down the fine-tuning platform." New users have been shut out of the self-serve platform since May, and eligible existing customers can create training jobs only until January 6, 2027.
 
 So the RAG vs fine-tuning question has a different shape than it had a year ago. RAG puts knowledge into the prompt at request time by retrieving it from an index, and fine-tuning puts it into the model's weights by training on examples.
 
@@ -59,9 +59,9 @@ Use fine-tuning when the model's behavior is wrong and the facts are fine. OpenA
 
 The guide adds a cost argument I think gets overlooked. A fine-tuned model needs shorter prompts with fewer examples, which cuts token cost at scale, and that's the opposite of what RAG does to a prompt.
 
-Training has become cheaper as well. [LoRA](https://arxiv.org/abs/2106.09685) trains small added matrices and leaves the original weights frozen, and its authors report 10,000 times fewer trainable parameters than full fine-tuning of GPT-3.
+Training has become cheaper as well. [LoRA](https://arxiv.org/abs/2106.09685), from 2021, trains small added matrices and leaves the original weights frozen, and its authors report 10,000 times fewer trainable parameters than full fine-tuning of GPT-3.
 
-What's changed is where you can do it. With OpenAI closing its platform to new users, I read fine-tuning as something you now plan around open-weight models, or around a provider whose docs still offer it on the day you check.
+What's changed is where you can do it. OpenAI's [deprecations page](https://developers.openai.com/api/docs/deprecations) ends job creation on its self-serve platform on January 6, 2027, so I read fine-tuning as something you now plan around open-weight models, or around a provider whose docs still offer it on the day you check.
 
 ## Can you use RAG and fine-tuning together?
 
@@ -76,7 +76,7 @@ When a RAG pipeline is already retrieving more than it needs, I'd tune the retri
 Ask whether the facts change, and then whether the problem is behavior. Those two questions settle nearly every case I can think of.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.narrow.svg" width="288" height="520"><img class="np-has-narrow" src="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg" width="720" height="640" alt="A decision tree. If the knowledge changes frequently, use RAG. If it doesn't, ask whether the problem is behavioral, meaning how the model reasons: a behavioral problem means fine-tuning, and a factual problem means RAG." loading="lazy" decoding="async"></picture></a>
+  <a class="np-figure-zoom" href="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.narrow.svg" width="288" height="520"><img class="np-has-narrow" src="/static/images/diagrams/fine-tuning-vs-rag/memory-finetuning-decision.svg" width="720" height="640" alt="A decision tree. If the knowledge changes frequently, use RAG. If it doesn't, ask whether the problem is behavioral, meaning the model's format or conduct is wrong: a behavioral problem means fine-tuning, and a factual problem means RAG." loading="lazy" decoding="async"></picture></a>
   <figcaption>Facts that change go to RAG. Fine-tuning is for behavior that has to hold on every request.</figcaption>
 </figure>
 
@@ -98,7 +98,7 @@ Poorly, on the evidence above. The 2023 comparison found that models struggle to
 
 **Can I still fine-tune OpenAI models?**
 
-Not as a new user, according to OpenAI's guide. Existing users can create training jobs for now, and fine-tuned models stay available until their base models are deprecated.
+Not as a new user, according to OpenAI's guide. Eligible existing customers can create training jobs until January 6, 2027, and fine-tuned models stay available for inference until their base models are deprecated.
 
 **Does RAG change the model?**
 

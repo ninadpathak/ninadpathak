@@ -101,9 +101,9 @@ Every expert has to be loaded because the router picks per token, and nobody kno
 
 So the memory bill is plain multiplication on the total. DeepSeek's 671B parameters come to about 1.34 TB for the weights alone at 16 bits each, and about 671 GB at 8 bits.
 
-People do run these models on small machines, though, and it's worth seeing how. On November 8 a project called [llama-modchip](https://github.com/synchopate/llama-modchip) reached the Hacker News front page with a README reporting a 284B DeepSeek model in 57.99 GiB of RAM.
+People do run these models on small machines, though, and it's worth seeing how. On November 8 a project called [llama-modchip](https://github.com/synchopate/llama-modchip) reached the Hacker News front page with a README reporting a 284B DeepSeek model in a 57.99 GiB file, and resident memory a little above that.
 
-Divide it out and that's about 1.75 bits per parameter. The memory came down by storing each weight in fewer bits, and the [first thing the thread asked](https://news.ycombinator.com/item?id=50412500) was at which quantization, and what the output looks like.
+Divide it out, which is my arithmetic and not the README's, and that's about 1.75 bits per parameter. Going by the file size, the memory came down by storing each weight in fewer bits, and the [first thing the thread asked](https://news.ycombinator.com/item?id=50412500) was at which quantization, and what the output looks like.
 
 My page on [LLM inference optimization](/articles/llm-inference-optimization/) has the same trap in figures from an NVIDIA tutorial, a 753B model whose whole checkpoint sits in GPU memory while 40B run per token.
 

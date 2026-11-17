@@ -132,7 +132,7 @@ A waiter who says "let me check on that" buys the kitchen time without the table
 
 ## The context window memory tax
 
-The [AI memory architecture review](/articles/agent-memory-2026/) compares structured memory designs with raw context. Read it as an architecture survey, not as benchmark evidence for a voice pipeline.
+The [comparison of agent memory frameworks](/articles/agent-memory-2026/) sorts four of them by who writes a memory. Read it as a comparison of designs, not as benchmark evidence for a voice pipeline.
 
 Long conversation history increases prompt-processing work and can slow the first token. Summaries and selective recall can bound that cost, but both need tests for lost constraints.
 

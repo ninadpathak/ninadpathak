@@ -61,7 +61,7 @@ sections:
       - post: chrome-modern-web-guidance-notes
         note: "Reads Chrome's guides for coding agents as documentation, and argues that a plain index should be the way in."
       - post: what-agent-harness-means
-        note: "Sorts the uses of the word harness across vendor docs and argues for defining it on the page."
+        note: "An essay on vocabulary: how vendor docs use the word harness, and why a product should define it on the page."
   - heading: "Ship changes"
     spokes:
       - post: writing-release-notes

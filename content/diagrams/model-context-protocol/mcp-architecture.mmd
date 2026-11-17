@@ -1,7 +1,7 @@
 %% @fig 01
 %% @kicker Request flow: host to client to server and back
 %% @alt An MCP round trip drawn left to right. The host holds a client, the client sends a request to the server, and the server runs one of its tools and returns the result along the same path.
-%% @caption The host creates one client per server. Each request carries its own protocol version, so the server keeps no memory of the client between calls.
+%% @caption The host creates one client per server. Each request carries its own protocol version, so the protocol keeps no session between calls.
 %% @path host>client>server>tools
 %% @glyph host | window
 %% @glyph client | plug

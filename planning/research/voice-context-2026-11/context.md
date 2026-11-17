@@ -762,5 +762,14 @@ A source that could not be fetched: OpenAI's "harness engineering" post returned
 
 Position taken in the new essay, for Ninad to confirm: "harness + model = agent" is the definition to keep; the word says nothing about memory, sandboxing or hosting, so a product's docs should define it on first use and list what the harness includes and who runs it.
 
-Pages touched only for an inbound link: llm-inference-optimization, speculative-decoding, rag-reranking, contextual-retrieval, documentation-review, documentation-structure. The last two fail the prose and quote checks on main for reasons that predate this batch, and they are due in batch 11.
+Pages touched only for an inbound link: llm-inference-optimization, speculative-decoding, rag-reranking, contextual-retrieval, documentation-review, documentation-structure. documentation-headings was touched to follow Stripe's headings as served. The last two fail the prose and quote checks on main for reasons that predate this batch, and they are due in batch 11.
+
+Rules the batch 9 review added:
+
+- Before a batch leaves, run `check_vendor_links.py` on every changed post. It follows each external link and fails on a redirect to another page or on a page that marks itself legacy or deprecated. A vendor's documentation index is read before describing how its product works, and the page linked is the page that was read.
+- A benchmark's limits are carried over from wherever the post states them, including its confidence intervals and resampling results, and a count is given in the post's own units.
+- An explainer and an essay on one subject say which is which in their titles, descriptions and first paragraphs, and each links the other early.
+- When a quoted page changes, the fix is rerun from a fresh fetch and pasted whole, so the page prints what the command returns.
+
+After the batch 9 review: agent-memory-2026 describes Letta from its current docs (MemFS, files loaded into the prompt each turn, dreaming subagents, the hosted MCP server) and says the block-and-archive design is the legacy SDK; the essay is retitled "Agent docs don't agree on what a harness is". ai-memory-management on main still describes Letta from the legacy page and needs the same correction when its batch comes.
 

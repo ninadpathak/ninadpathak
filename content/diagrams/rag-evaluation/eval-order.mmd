@@ -1,7 +1,7 @@
 %% @fig 01
 %% @kicker Evaluate in this order
-%% @alt Four RAG metrics in the order to fix them: context recall first, so the right chunks are retrieved; context precision second, so the context carries signal rather than noise; faithfulness third, so the answer sticks to the context; answer relevancy last, because it measures the whole system working together.
-%% @caption Each stage only means something once the one before it holds. Starting with answer relevancy hides upstream failures.
+%% @alt Four RAG metrics in the order to fix them. Recall comes first, so the right passages are retrieved. Precision and ranking come second, so the context carries little noise. Faithfulness is third, so the answer sticks to the context, and response relevancy is last.
+%% @caption Each stage only means something once the one before it holds. Starting with response relevancy hides failures upstream.
 %% @path recall>precision>faith>relevance
 %% @glyph recall | ranked rows=6
 %% @glyph precision | ranked rows=3 hi=0
