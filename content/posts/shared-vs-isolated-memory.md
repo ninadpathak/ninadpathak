@@ -11,7 +11,7 @@ bridges:
 - slug: agent-error-handling
   reason: A rejected write to a shared store is an error the orchestrator has to handle.
 date: '2026-05-11'
-description: 'Shared memory lets every agent in a multi-agent system read one store. Isolated memory passes artifacts between them. What OpenAI''s Agents SDK and Claude Code do by default, and a lost-update run.'
+description: "Shared memory lets every agent in a multi-agent system read one store, and isolated memory has each agent pass its finished output to the next. This page covers what OpenAI's Agents SDK and Claude Code do by default, and a script in which one agent's correction is overwritten."
 slug: shared-vs-isolated-memory
 status: published
 work_note: "I'm Ninad Pathak, and I freelance as a technical writer for AI companies. I build the example and run it before I draft a tutorial, so your engineers review working code. [Here's how we'd work together](/services/freelance-technical-writer-for-ai-companies/)."
@@ -19,42 +19,42 @@ title: Shared Memory vs Isolated Memory in Multi-Agent Workflows
 updated: 2026-11-17
 ---
 
-Shared memory in a multi-agent system means every agent reads and writes one common store. Isolated memory means each agent keeps its own context and passes a finished artifact to the next, and that's the safer default.
+Shared memory in a multi-agent system means every agent reads and writes one common store. Isolated memory means each agent keeps its own context and passes its finished output, say a JSON record of the fields it extracted, to the next agent, and isolated memory is the safer default.
 
-The choice only comes up once a system has more than one agent, and it's one of the later ones in [AI agent memory](/articles/agent-memory/).
+The choice between shared and isolated memory only comes up once a system has more than one agent, so it's a later decision in the design of [AI agent memory](/articles/agent-memory/).
 
-Go programmers have a line for this choice. Andrew Gerrand's 2010 post on the Go blog is titled with its second half, [Share Memory By Communicating](https://go.dev/blog/codelab-share), and the first half is "Do not communicate by sharing memory".
+Go programmers have a proverb for this choice. Andrew Gerrand's 2010 post on the Go blog is titled with the second half of the proverb, [Share Memory By Communicating](https://go.dev/blog/codelab-share), and the first half is "Do not communicate by sharing memory".
 
-Agents aren't goroutines, and a model can't take a lock. But two agents writing to one store can lose each other's work in the way two threads can, and the run further down shows it.
+Agents aren't goroutines, and a model can't take a lock. But two agents writing to one store can overwrite each other's work the way two threads can, and the script further down shows one agent's correction being lost.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.narrow.svg" width="288" height="1120"><img class="np-has-narrow" src="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.svg" width="720" height="640" alt="Two pipelines of the same three agents. In isolated memory the extractor hands its output to the validator, which hands its output to the summary agent, and nothing else passes between them. In shared memory all three use one common store: the extractor writes to it and the validator and summary agent read from it, so the validator can act on a conclusion the extractor later revises, marked as a failure on the store." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Isolated memory passes artifacts along the line. Shared memory lets every agent read what any agent wrote, including drafts.</figcaption>
+  <figcaption>With isolated memory each agent passes a finished artifact to the next agent. With shared memory every agent can read what any agent wrote, including drafts.</figcaption>
 </figure>
 
 ## What is the difference between shared and isolated memory?
 
-The difference is where coordination lives. With isolated memory it lives in the pipeline: an orchestrator hands each agent an input, and the agent's output is the only thing the next one sees.
+The difference is which component coordinates the agents. With isolated memory the pipeline coordinates them: an orchestrator hands each agent an input, and the agent's output is the only thing the next one sees.
 
-With shared memory it lives in the store. Any agent can look up what any other agent wrote, drafts included, so the order of writes starts to matter.
+With shared memory the agents coordinate through the store. Any agent can look up what any other agent wrote, drafts included, so the order of writes starts to matter.
 
-So isolated memory gives you a record of exactly what each agent saw, which is what you need to explain or debug a decision afterwards. Shared memory gives each agent more to work with, and makes that record harder to rebuild.
+Isolated memory gives you a record of exactly what each agent was shown, which is what you need to debug a wrong decision afterwards. Shared memory gives each agent more information to work with, and to rebuild the same record you'd need a snapshot of the store at the moment each agent read it.
 
 ## What do agent frameworks do by default?
 
-They offer both, under other names. OpenAI's Agents SDK has two ways to bring in a second agent, and they differ on exactly this point.
+Agent frameworks offer both shared and isolated memory, under other names. OpenAI's Agents SDK has two ways to bring in a second agent: a handoff, which shares memory, and an agent used as a tool, which isolates it.
 
-A handoff shares. The [handoffs documentation](https://openai.github.io/openai-agents-python/handoffs/) says the new agent "gets to see the entire previous conversation history", unless you pass an input filter to trim it.
+The [handoffs documentation](https://openai.github.io/openai-agents-python/handoffs/) says the new agent "gets to see the entire previous conversation history", unless you pass an input filter to trim it.
 
-An agent used as a tool is isolated by default. The manager agent keeps the conversation and calls the specialist for a bounded subtask, so the specialist sees only what it's handed unless you pass both the same session.
+An agent used as a tool is isolated by default. The manager agent keeps the conversation and calls the specialist for a bounded subtask, so the specialist sees only what it's handed unless you give the manager and the specialist the same session object.
 
-Claude Code's subagents are the isolated kind as well. Each runs in its own context window and returns a summary to the main conversation.
+Claude Code's subagents use isolated memory as well. Each subagent runs in its own context window and returns a summary to the main conversation.
 
 ## What goes wrong with shared memory?
 
-A pair of agents read the same value, both write, and one write disappears. Databases call it a lost update, and a shared agent store has no defence against it unless you build one.
+Shared memory goes wrong when a pair of agents read the same value, both write a new one, and the first write disappears. Databases call that a lost update, and a shared agent store has no defence against it unless you build one.
 
-The script below has an extractor and a validator read one note, then write to it in turn. It runs once with no check and once with a version check on each write.
+The script below has an extractor and a validator read one note, then write to it in turn. The script runs the two agents once with no check and once with a version check on each write.
 
 ```python
 """Two agents update one shared note. Run it with and without a version check."""
@@ -97,27 +97,27 @@ version check on : final note = 'amount: 1250 (corrected by extractor)'; validat
 
 With no check, the validator stamped "validated" on the amount it had read, and the extractor's correction to 1250 was gone. With the check, the stale write was refused and the correction survived.
 
-A refused write is the better failure, since something now knows there was a conflict. What the orchestrator does about it is a question for [error handling](/articles/agent-error-handling/).
+A refused write is the better of the two failures, because the orchestrator now knows a conflict happened. What the orchestrator should do about the conflict is a question for [error handling](/articles/agent-error-handling/).
 
-The other shared-memory failure is a stale read. An agent acts on a draft another agent later revises, and nothing in its output says which version it used.
+The other failure of shared memory is a stale read. An agent acts on a draft that another agent later revises, and nothing in the first agent's output records which version of the draft it used.
 
 ## What goes wrong with isolated memory?
 
-Information gets left behind. If the extractor notices a caveat and the artifact has no field for it, the summary agent two steps later never hears of it.
+Isolated memory goes wrong when information is left behind between agents. If the extractor notices a caveat and the artifact has no field for it, the summary agent two steps later never hears of it.
 
-The fix is a contract for the artifact, with a place for caveats and a version number. [Memory serialization](/articles/memory-serialization/) covers how to write state down so another process can read it back.
+The fix is a schema for the artifact, with a field for caveats and a version number. [Memory serialization](/articles/memory-serialization/) covers how to write state down so another process can read it back.
 
-A retry causes the other failure. If the extractor reruns and corrects a field after the validator has finished, the validator's verdict describes an artifact that no longer exists.
+A retry causes the second failure of isolated memory. If the extractor reruns and corrects a field after the validator has finished, the validator's verdict describes an artifact that no longer exists.
 
 ## When should agents share memory?
 
-Share when agents work at the same time on parts of one problem and a finding from one should stop another. A research task split across several agents is the usual case, since one agent's dead end saves the others the trip.
+Agents should share memory when they work at the same time on parts of one problem and a finding from one agent should stop another. A research task split across several agents is the usual case, since one agent's dead end saves the others the trip.
 
-Even then I'd share less than everything. Keep each agent's working notes private, and let agents read a common store of confirmed facts that only the orchestrator writes to.
+Even for parallel research I'd share less than everything. Keep each agent's working notes private, and let agents read a common store of confirmed facts that only the orchestrator writes to.
 
-That gives every write one author and one order. It also keeps other agents' drafts out of each context window, which matters for the reasons in [context windows vs memory](/articles/context-windows-vs-memory/).
+With a single writer, every write to the common store comes from the orchestrator and lands in one sequence, so no write can overwrite another. A single writer also keeps other agents' drafts out of each context window, which matters for the reasons in [context windows vs memory](/articles/context-windows-vs-memory/).
 
-And check first that the task needs several agents at all. [Multi-agent vs single-agent systems](/articles/multi-agent-vs-single-agent/) goes through what the extra agents cost.
+Before choosing either design, check that the task needs several agents at all. [Multi-agent vs single-agent systems](/articles/multi-agent-vs-single-agent/) goes through what the extra agents cost.
 
 ## How do you decide?
 
@@ -125,15 +125,15 @@ Ask three questions in order.
 
 1. Do the agents run one after another? If so, pass artifacts and keep memory isolated.
 2. Do they run at once and need each other's findings? If so, add a shared store for confirmed facts, with one writer.
-3. Does any agent need another's drafts? If it does, they're probably one agent, and the split is costing you.
+3. Does any agent need another's drafts? If it does, the two are probably doing one agent's job, and splitting them only adds handoffs.
 
-Whatever you choose sits inside the larger design of what the system remembers, which [AI memory management](/articles/ai-memory-management/) lays out in layers.
+Either choice is one part of the larger design of what the system remembers, which [AI memory management](/articles/ai-memory-management/) lays out in layers.
 
 ## FAQ
 
 **What is shared memory in a multi-agent system?**
 
-It's a store that every agent can read and write, such as a database or a message log. Agents coordinate through what's in the store.
+Shared memory is a store that every agent can read and write, such as a database or a message log. Agents coordinate through what's in the store.
 
 **Is shared or isolated memory better for multi-agent workflows?**
 

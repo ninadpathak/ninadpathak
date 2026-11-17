@@ -1,7 +1,7 @@
 %% @fig 01
 %% @kicker Isolated and shared memory
 %% @alt Two pipelines of the same three agents. In isolated memory the extractor hands its output to the validator, which hands its output to the summary agent, and nothing else passes between them. In shared memory all three use one common store: the extractor writes to it and the validator and summary agent read from it, so the validator can act on a conclusion the extractor later revises, marked as a failure on the store.
-%% @caption Isolated memory passes artifacts along the line. Shared memory lets every agent read what any agent wrote, including drafts.
+%% @caption With isolated memory each agent passes a finished artifact to the next agent. With shared memory every agent can read what any agent wrote, including drafts.
 %% @path e1>v1>s1
 %% @glyph e1 | loop
 %% @glyph v1 | loop
