@@ -726,3 +726,12 @@ What the earlier pages had wrong, for the record: deerflow-memory described sess
 An essay source that could not be fetched: Apiiro's November post on Claude Code permission files returned 403 and renders by script, so no essay was written on it.
 
 Position taken in the new essay, for Ninad to confirm: the editing standard of Chrome's guides (cut what the model already knows, say what to assume when the request is silent) is the part to copy; documentation should be readable with nothing installed, so a plain Markdown index beats a skill and an npm command; and whoever writes the page an agent reads sets a default for every codebase it touches.
+
+Rules the batch 8 review added:
+
+- A demo's finding is what all of its output shows. Print every score, state the margins, and name no cause the numbers contradict.
+- A page about a product's mechanism says which path is the default and which is behind a setting, and links the commit it was read at.
+- An essay that argues with a project states what the project already does and what its maintainers have agreed to, before the disagreement.
+- "First" is claimed only when the source says first.
+- Five pages in one batch do not open on the same order of parts. Vary where the definition, the known thing, the figure and the topic sentence sit.
+- When a page's old design survives in a stray file, such as a film or a standalone visual, report it; deleting files is Ninad's decision.

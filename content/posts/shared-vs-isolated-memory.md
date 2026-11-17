@@ -21,11 +21,11 @@ updated: 2026-11-17
 
 Shared memory in a multi-agent system means every agent reads and writes one common store. Isolated memory means each agent keeps its own context and passes a finished artifact to the next, and that's the safer default.
 
+The choice only comes up once a system has more than one agent, and it's one of the later ones in [AI agent memory](/articles/agent-memory/).
+
 Go programmers have a line for this choice. Andrew Gerrand's 2010 post on the Go blog is titled with its second half, [Share Memory By Communicating](https://go.dev/blog/codelab-share), and the first half is "Do not communicate by sharing memory".
 
 Agents aren't goroutines, and a model can't take a lock. But two agents writing to one store can lose each other's work in the way two threads can, and the run further down shows it.
-
-The choice only comes up once a system has more than one agent, and it's one of the later ones in [AI agent memory](/articles/agent-memory/).
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.narrow.svg" width="288" height="1120"><img class="np-has-narrow" src="/static/images/diagrams/shared-vs-isolated-memory/memory-architectures.svg" width="720" height="640" alt="Two pipelines of the same three agents. In isolated memory the extractor hands its output to the validator, which hands its output to the summary agent, and nothing else passes between them. In shared memory all three use one common store: the extractor writes to it and the validator and summary agent read from it, so the validator can act on a conclusion the extractor later revises, marked as a failure on the store." loading="lazy" decoding="async"></picture></a>
@@ -46,7 +46,7 @@ They offer both, under other names. OpenAI's Agents SDK has two ways to bring in
 
 A handoff shares. The [handoffs documentation](https://openai.github.io/openai-agents-python/handoffs/) says the new agent "gets to see the entire previous conversation history", unless you pass an input filter to trim it.
 
-An agent used as a tool is isolated. The manager agent keeps the conversation and calls the specialist for a bounded subtask, so the specialist sees only what it's handed.
+An agent used as a tool is isolated by default. The manager agent keeps the conversation and calls the specialist for a bounded subtask, so the specialist sees only what it's handed unless you pass both the same session.
 
 Claude Code's subagents are the isolated kind as well. Each runs in its own context window and returns a summary to the main conversation.
 

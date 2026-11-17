@@ -52,7 +52,7 @@ Frame, scope, run, review and land. Anthropic's [best practices for Claude Code]
 | Review | You | Whether the diff does what the frame asked | Who signs off? |
 | Land | The agent drafts, you approve | The commit and the pull request | Where does the result go? |
 
-The same page ends its list with a sentence I'd pin above any agent setup: "The parts that stay with you are starting it, deciding what "done" means this time, and approving the merge at the end."
+The same page ends its list by naming what stays with you: starting the run, deciding what done means this time, and approving the merge at the end. I'd pin that above any agent setup.
 
 ## How do you frame a task for an agent?
 
@@ -88,7 +88,7 @@ I'd read for the changes nobody asked for: a config flag flipped, an error swall
 
 Anthropic's docs suggest one more reader, a review by a fresh subagent that never saw the conversation and so isn't swayed by the reasoning that produced the code. I think that's a good second pass and a poor substitute for yours.
 
-Now, all of this assumes someone still has attention to spend on review. What happens when agents produce more signals than a team can read is the subject of [my essay on a build that is always red](/articles/red-build-nobody-reads/).
+All of this assumes someone still has attention to spend on review. [My essay on a build that is always red](/articles/red-build-nobody-reads/) looks at what happens when agents produce more signals than a team can read.
 
 ## How do you land the change?
 
