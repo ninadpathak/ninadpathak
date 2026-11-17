@@ -25,7 +25,7 @@
   },
   "agent-memory-evidence": {
     "lastmod": "2026-11-17",
-    "sources": "c1c751fa88495873d319dfcac9c6df1e33da5f546279a300591bd3dad855d9aa"
+    "sources": "0e56df0223c4edf1ba949763c85f1eae938af6879a5dcad8470e141a78470e1a"
   },
   "agent-memory-types": {
     "lastmod": "2026-11-17",
@@ -41,7 +41,7 @@
   },
   "agents-reading-docs": {
     "lastmod": "2026-11-17",
-    "sources": "1a7ac72879a58ad9c79084f738a2c15f959e768c8b7b8f50d0236ab87685a312"
+    "sources": "621d0ed398d1a59347a332465e63d6fd39fd9a9b908d01d0c01fbe69832b48d7"
   },
   "ai-agent-failures": {
     "lastmod": "2026-11-17",
@@ -97,7 +97,7 @@
   },
   "coding-models-new-code-vs-change": {
     "lastmod": "2026-11-17",
-    "sources": "610323e92284d3fb77b7325be042457ee5af956bcf8657c663586a0846d9d44f"
+    "sources": "b3533102e1503132be0c43460b5fbc2a64a8f508409b7ed665cfbcf241269743"
   },
   "context-windows-vs-memory": {
     "lastmod": "2026-11-17",
@@ -237,7 +237,7 @@
   },
   "nobody-understands-the-code": {
     "lastmod": "2026-11-17",
-    "sources": "e9c98d7ea9689ed96acf93795d2b7aaeea880a812efe6e29b565078aa5d38e25"
+    "sources": "53c9bf4ff075501843dfef878601608822445015a130ef4a33866c64cf0a9a09"
   },
   "quickstart-guide": {
     "lastmod": "2026-11-17",
@@ -257,7 +257,7 @@
   },
   "red-build-nobody-reads": {
     "lastmod": "2026-11-17",
-    "sources": "e90dc5f857582a101a09114d8953dad7e9f738cfdf5b46680f9989546785f75a"
+    "sources": "4a46dec09bdc5595bdfb742771cc4e400845100998b6ded4f520e1e72597d8cb"
   },
   "release-notes-template": {
     "lastmod": "2026-11-17",
@@ -333,6 +333,6 @@
   },
   "written-by-a-human": {
     "lastmod": "2026-11-17",
-    "sources": "165c98792ac3c751830ddaac29a376c50e79952b889c34e9ed5fca57fb64d24e"
+    "sources": "6ca9ab6d1e71a12abe9abd83cfd138fc4ebb54b3ffb810f2bf62d4cf83a02dd6"
   }
 }
