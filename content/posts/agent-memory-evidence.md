@@ -8,13 +8,19 @@ date: 2026-11-17
 description: A proposal for a shared agent memory format lists five questions a record must answer. This essay argues for a sixth, how the agent knew, as a required field.
 slug: agent-memory-evidence
 status: published
-title: 'A Memory Is a Claim, So Store How the Agent Knew'
+title: "I went looking for the citation field in a proposed agent memory format"
 work_note: 'I ran Mem0''s team of 13 writers, and I write documentation where a claim needs a source a reader can check. This essay asks the same of an agent''s notes, and [my portfolio](/portfolio/) has the work.'
 ---
 
-A man in a crowd holds up a sign at a politician's speech in [xkcd 285](https://xkcd.com/285/), from 2007, and the sign reads "[CITATION NEEDED]". The joke works because everyone knows the tag from Wikipedia, whose [page on it](https://en.wikipedia.org/wiki/Wikipedia:Citation_needed) says it exists as "a means for anyone to question an uncited claim."
+<div class="visual-wrapper">
+  <div class="visual-title">xkcd 285, Wikipedian Protester</div>
+  <div class="visual-container">
+    <img src="/static/images/visuals/xkcd-285-wikipedian-protester.png" alt="xkcd comic 285. A politician speaks at a podium to a crowd, and a man in the crowd holds up a sign that reads: [CITATION NEEDED]." width="500" height="271">
+  </div>
+</div>
+<p class="visual-caption"><a href="https://xkcd.com/285/">xkcd 285</a>, Randall Munroe, CC BY-NC 2.5.</p>
 
-Now picture an agent's memory file. It's a page of uncited claims with one reader, and Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, says what that reader does with a wrong one: it "can be read, and trusted, by Claude in a later session."
+An agent's memory file is a page of uncited claims with one reader. Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, says what that reader does with a wrong one: it "can be read, and trusted, by Claude in a later session."
 
 So when Mads Thines argued on November 7 that [agent memory needs its OpenTelemetry moment](https://www.lorekit.io/blog/open-agent-memory-format), I read it looking for the citation field. He has it, and he leaves it optional, which is the one thing in his proposal for [AI agent memory](/articles/agent-memory/) I'd change.
 
