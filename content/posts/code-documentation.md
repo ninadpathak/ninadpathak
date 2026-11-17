@@ -23,6 +23,8 @@ Claude Fable 5.1 was told not to add code comments and added a comment or docstr
 
 Code documentation is the written material that explains source code, and it has three homes: comments for local reasoning, docstrings and generated reference for contracts, and guides for decisions that cross several parts of a system. The benchmark is an argument about the first home, and the post weakens its own no-comments rule when it says of the comments GPT-6 Astra added that "all 6 comments seem legitimate to me".
 
+It is the layer of [technical documentation](/articles/technical-documentation/) that sits closest to the code.
+
 I believe the measurement and would throw out the rule. Models fill that first home with narration, which human teams have always done too, and the fix is the same for both.
 
 ## What is code documentation?

@@ -1,6 +1,9 @@
 ---
 category: technical-documentation
 primary_query: how to write a changelog
+siblings:
+- writing-release-notes
+- release-notes-template
 bridges:
 - slug: agents-reading-docs
   reason: A docs page now has agent readers.
@@ -21,6 +24,8 @@ updated: 2026-11-17
 Claude Code published 20 releases between October 18 and November 16, and its [changelog](https://code.claude.com/docs/en/changelog) lists 1,807 entries for them, about sixty a day. An entry among them tells people who use fast mode on Opus 4.8 that their requests will start returning errors after November 30.
 
 A changelog that developers read has to make that entry findable by someone who will never read the other 1,806. Writing a changelog means recording each change so that a person can assess an upgrade from it, and at this release rate the person gets there by searching the file or by asking a tool that read it for them.
+
+A changelog is the page of [technical documentation](/articles/technical-documentation/) that only grows.
 
 ## How much changelog can one person read?
 
@@ -251,7 +256,7 @@ The original release has 294 entries, and these four were spread through a "Chan
 
 The exercise also shows what a heading can't fix. The deprecation entry gives no removal date and no replacement, and a heading that says Deprecated makes that absence more obvious.
 
-A changelog keeps the full sequence of changes, while [release notes explain one release](/articles/writing-release-notes/) in enough depth for a developer to act on it.
+A changelog keeps the full sequence of changes, and [release notes explain one release](/articles/writing-release-notes/) in enough depth for a developer to act on it. The [release notes template](/articles/release-notes-template/) has the outline for that page.
 
 ## FAQ
 

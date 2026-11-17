@@ -24,6 +24,8 @@ Stripe's [webhook guide](https://docs.stripe.com/webhooks) has nine second-level
 
 That split is the rule for documentation headings, taken from a page built on it. A heading should tell a scanning reader what the section contains.
 
+Headings are how a reader moves through any page of [technical documentation](/articles/technical-documentation/), so the rule covers every type.
+
 - For a procedure, name the result or task.
 - For a concept, name the concept.
 - For a failure, name the condition and the recovery path.
@@ -122,6 +124,6 @@ Start with the headings that carry the heaviest navigation work, which are the f
 
 Leave the rest in the form that fits them. A section that explains token scopes should say so, and a section that documents a request field should name that field.
 
-For a full tutorial structure, see [How to Write a Technical Tutorial That Actually Teaches](/articles/writing-technical-tutorials/). Before publishing, use the [documentation review checklist](/articles/documentation-review/) to check the rendered outline, links, and navigation.
+For a full tutorial structure, see the guide to [writing technical tutorials](/articles/writing-technical-tutorials/). Before publishing, use the [documentation review checklist](/articles/documentation-review/) to check the rendered outline, links, and navigation.
 
 The standard to hold a page to is that a reader can tell why a section exists before reading it. Stripe's outline passes with verbs where the reader acts and nouns where the reader looks something up.

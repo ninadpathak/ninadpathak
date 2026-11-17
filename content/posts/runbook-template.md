@@ -22,6 +22,8 @@ work_note: 'I tested this template with a coding agent as the on-call responder 
 
 A runbook's useful lines are the ones that say what you should see and what to do when you don't. Those lines carry the judgment, and a responder woken by a page or an AI agent with shell access can't supply that judgment from the rest of the page.
 
+That leaves a runbook less room for a vague line than any other page of [technical documentation](/articles/technical-documentation/).
+
 Tested with Claude Code on Sonnet 5.5 as the on-call agent, a five-step prose runbook for a Postgres server out of connection slots led the agent to cancel five legitimate report queries in all but one of four runs. Each report's query text contained `pg_sleep(3600)`, so it looked like a runaway, and the agent left the 12 leaked transactions that caused the outage.
 
 The same incident written in this template got only the leak cleared, in four runs of four. With realistic report queries, both runbooks got the leak cleared, and only the template's runs also set the timeout that stops the next leak.

@@ -21,6 +21,8 @@ The [OpenAPI Specification](https://spec.openapis.org/oas/latest.html) describes
 
 I treat API documentation as a set of pages with one job each. For the worked example I use `POST /exports` from the local writing-lab service, with a checker for its documented request cases.
 
+Reference is the corner of [technical documentation](/articles/technical-documentation/) that a tool can generate, and the pages around it still have to be written.
+
 ## What API documentation includes
 
 API documentation is the set of pages that takes a developer from choosing your API to sending requests and recovering when one fails. Each page owns one reader moment:
@@ -120,6 +122,8 @@ A FAIL exits with status 1, so the check can run in CI next to the service's own
 The quickstart owns first success, so it links to this entry once the reader has a request to inspect. The reference owns exact behavior, the error guide owns recovery across endpoints, and a status change like `202` to `201` belongs in the [changelog](/articles/writing-changelogs/) as well as the reference.
 
 A generated reference keeps up with endpoints as they change. I write the recovery guidance explicitly, whether it lives in the OpenAPI response description or on the page, and I check the generated reference against the service.
+
+The comments and docstrings that a reference is generated from have their own guide, on [code documentation](/articles/code-documentation/).
 
 ## FAQ
 

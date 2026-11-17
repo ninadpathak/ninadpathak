@@ -20,6 +20,8 @@ updated: 2026-11-17
 
 Technical documentation is the written material that explains how a product works and how to use it, from a first install to the exact behavior of each API field. I give each [type of documentation](/articles/documentation-types/) one reader task, and the list of types is the same one it was before assistants started reading docs on people's behalf.
 
+The other pages in the [technical documentation](/articles/technical-documentation/) hub take each document type in turn.
+
 That reader is new. Matt Cockayne [reported on November 11](https://phpboyscout.uk/answer-first-then-everything-else/) that pages on his projects' docs sites sitting at search positions four to ten "were clicked 0.31% of the time", while assistants kept fetching them for a person who "quite possibly never sees the page at all".
 
 A later section runs his check on seven real pages to see what that reader changes inside each document.
@@ -116,4 +118,4 @@ Use a [technical documentation template](/articles/documentation-template/) when
 
 Use the [documentation review checklist](/articles/documentation-review/) before publication. If duplicate or stale answers are the problem, start by [organizing documentation that has drifted](/articles/documentation-structure/) instead of adding another page.
 
-Every other [technical documentation](/articles/technical-documentation/) guide on this site is listed on one page.
+Keep each of those pages short, for the reasons in [the case for shorter documentation](/articles/shorter-documentation/).

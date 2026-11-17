@@ -23,6 +23,8 @@ updated: 2026-11-17
 
 Internal documentation helps your team operate the system, and external documentation helps customers, partners and public developers use the supported product. When a subject has both readers, publish a public task page, keep a separate private operating record, and classify the subject as **internal**, **external** or **split**.
 
+Where that line falls is one of the first decisions in any set of [technical documentation](/articles/technical-documentation/).
+
 That line used to follow access, and a file that surfaced this autumn shows why access no longer settles it. The XScreenSaver source release ships an [AGENTS.md](https://github.com/Zygo/xscreensaver/blob/master/AGENTS.md), mirrored to GitHub on September 4, that opens "You are in a project that does not want AI contributions of any kind."
 
 A contribution policy is about as internal as documentation gets, and this one sits in a public tarball addressed to a reader who is neither a team member nor a customer. Coding agents are that third reader, and the section on agent instructions below is where I think the old table needs a new row.

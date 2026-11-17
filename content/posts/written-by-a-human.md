@@ -23,6 +23,8 @@ Evan X. Merz put a similar line in the introduction of [a post](https://evanxmer
 
 I think the label is aimed at a real problem and proves the wrong thing.
 
+My interest is in what the label means for [technical documentation](/articles/technical-documentation/).
+
 ## The bargain the label tries to restore
 
 The best account of the problem I've read is a comment by auntienomen in [a Hacker News thread](https://news.ycombinator.com/item?id=50481870) from November 13 about trust between writers and readers. It says that models let people "generate prose faster than readers can read it", and it calls the result "a fundamental break in the bargain between readers and writers: However long it takes someone to consume a piece of writing, it almost certainly took the author longer to write it."

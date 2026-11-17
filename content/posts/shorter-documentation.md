@@ -1,6 +1,10 @@
 ---
 category: technical-documentation
 primary_query: documentation length
+siblings:
+- writing-changelogs
+- documentation-headings
+- written-by-a-human
 bridges:
 - slug: agent-harnesses
   reason: The agent harness page is the worked example of the structure described here.
@@ -19,7 +23,11 @@ Simon Willison wrote on November 9 about [hiding agent-written pull request desc
 
 Shorter documentation works better because a reader arrives with one task, and every sentence that doesn't serve it is something they have to read past and you have to keep true. Willison's fix applies that to pull requests by keeping the full text one click away and choosing an opening that is "the shortest text a human can read that will help get them up to speed."
 
+The argument covers every kind of [technical documentation](/articles/technical-documentation/), from a README to a reference page.
+
 That was the argument before 2026 too. What changed this year is what a long page says about its author.
+
+Length used to stand in for effort, and [my essay on written-by-a-human labels](/articles/written-by-a-human/) follows what replaces it.
 
 ## Why is shorter technical documentation better?
 
@@ -67,13 +75,13 @@ The opening block carries the heaviest load. A line such as "This page explains"
 
 Willison's details tag is a good patch for a pull request and a poor fit for docs. A collapsed section still has to be kept true, and a toggle gives it no URL and no title of its own.
 
-Splitting by page does the same job with those problems solved. Sections with their own headings are the halfway step, and [agent harnesses](/articles/agent-harnesses/) is built that way, as one page whose seven sections can each be linked.
+Splitting by page does the same job with those problems solved. Sections with their own headings are the halfway step, named by the rule in [documentation headings](/articles/documentation-headings/), and [agent harnesses](/articles/agent-harnesses/) is built that way, as one page whose seven sections can each be linked.
 
 ## Does shorter documentation matter when agents read it?
 
 Yes, because an agent pays for every token it fetches, and the Markdown it asks for has no toggles. [Fern's State of Docs report](https://buildwithfern.com/post/state-of-docs), from November 10, says "Agents now make up more than half of the requests to the docs we host" and that they ask for the Markdown version of a page.
 
-I argue with that headline in [a separate essay](/articles/agents-reading-docs/), and the Markdown finding holds either way.
+I argue with that headline in [my essay on agents reading docs](/articles/agents-reading-docs/), and the Markdown finding holds either way.
 
 A collapsed section is plain text in Markdown, so progressive disclosure by toggle doesn't exist for that reader. Disclosure by page still does: Fern describes the pattern as "an agent reads llms.txt once, then fetches the Markdown for the pages it needs."
 

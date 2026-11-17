@@ -21,6 +21,8 @@ After its download links, the [Kubernetes v1.31.0 changelog](https://github.com/
 
 Both projects order the page around the upgrade decision. My template follows the same order, and it ships with a filled example and a small checker that fails a release note missing its rollback line.
 
+It belongs with the other templates in the [technical documentation](/articles/technical-documentation/) hub.
+
 ## What a release notes template contains
 
 A release notes template is a fixed outline for one release that puts the upgrade decision before the details. It has seven sections, in this order:
@@ -71,7 +73,7 @@ I made Verify required so readers can test the migration, and the checker reject
 
 ## Fill it in for a breaking SDK release
 
-The filled example uses the hypothetical SDK 4.0.0 release from the [changelog guide](/articles/writing-changelogs/), which moves list endpoints from page numbers to cursors and drops Node.js 18. Its summary reads:
+The filled example uses a hypothetical SDK 4.0.0 release, which moves list endpoints from page numbers to cursors and drops Node.js 18. Its summary reads:
 
 ```markdown
 Version: 4.0.0

@@ -21,6 +21,8 @@ GitHub's [REST API quickstart](https://docs.github.com/en/rest/quickstart) offer
 
 I put requirements before the first command and the expected output beside the command that produces it. A reader can then tell within one step whether they are on track, and you can check the page the same way before it ships.
 
+Among the kinds of [technical documentation](/articles/technical-documentation/), the quickstart is the page built for a first session.
+
 ## What a quick start guide is
 
 A quick start guide takes one reader from nothing to one working result by the shortest supported path. For a developer product that result is a first successful request, build or deploy, and each section of the template serves that one result:

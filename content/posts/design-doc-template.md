@@ -21,6 +21,8 @@ Under "Rationale and alternatives", the [Rust RFC template](https://github.com/r
 
 Both make the author argue with their own proposal before a reviewer has to. My template keeps those sections, and its checker fails a doc with no "Do nothing" entry or an alternative with no reason for rejecting it.
 
+A design doc is the one page of [technical documentation](/articles/technical-documentation/) written before the thing it describes exists.
+
 ## What a design doc template contains
 
 A design doc template is a fixed outline for proposing a technical change before it is built, so reviewers can compare the proposal with the options it beat. It has a short header and eight sections:

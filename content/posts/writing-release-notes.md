@@ -23,6 +23,8 @@ OpenSSH 10.6p2, released on November 5, contains what [its own release notes](ht
 
 Writing release notes that developers trust comes down to that distance. Someone opening the notes is deciding whether to upgrade and what it will cost, so the page has to answer that decision before it describes the release.
 
+Release notes are [technical documentation](/articles/technical-documentation/) read with an upgrade waiting.
+
 ## How soon do real release notes say who is affected?
 
 The notes I looked at ranged from 32 words to 427, counted from the release line to the first sentence that names affected users.

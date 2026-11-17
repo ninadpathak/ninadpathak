@@ -28,6 +28,8 @@ updated: 2026-11-17
 
 Technical documentation is the set of documents that help someone use a product, understand a system, operate it safely, or change it without losing context. The types below differ by the reader's task, and this year they also started to differ by who reads them and by whether a model can write them.
 
+It is the map for the rest of the [technical documentation](/articles/technical-documentation/) hub, which has a page for each type.
+
 | Type | The reader's question | Group |
 | --- | --- | --- |
 | Getting-started guide or quickstart | How do I get a first result? | User-facing |
@@ -45,7 +47,7 @@ Technical documentation is the set of documents that help someone use a product,
 
 ## Who technical documentation is for
 
-The classification I use separates [technical documentation](/articles/technical-documentation/) by the person who needs it. ClickHelp makes a similar distinction between process documents and user documents, while Squarespace Engineering frames documentation around reader behavior, patience, experience, and goal.
+The classification I use separates technical documentation by the person who needs it, and [what technical documentation should include](/articles/technical-docs/) lists what each of them has to find. ClickHelp makes a similar distinction between process documents and user documents, while Squarespace Engineering frames documentation around reader behavior, patience, experience, and goal.
 
 That gives you the groups in the table above. User-facing documents help customers or developers adopt a product.
 
@@ -87,7 +89,7 @@ Stripe’s [API reference](https://docs.stripe.com/api) shows the central contra
 
 Reference can include examples, but the examples should clarify the contract rather than turn the page into a learning path.
 
-Reference is now the type agents read hardest. Fern's report puts agent reading of API reference at 31%, against 18% for people, and [a separate essay](/articles/agents-reading-docs/) looks at how far its figures go.
+Reference is now the type agents read hardest. Fern's report puts agent reading of API reference at 31%, against 18% for people, and [my reading of that agent traffic report](/articles/agents-reading-docs/) looks at how far its figures go.
 
 ### Type 5: Troubleshooting guides
 
