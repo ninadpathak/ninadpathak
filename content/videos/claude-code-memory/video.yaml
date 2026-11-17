@@ -1,7 +1,7 @@
 # Narrated explainer for /articles/claude-code-memory/, imported by tools/import_video.py from
 # ninadpathak-video films/claude-code-memory (render of 2026-10-28T22:19:43+05:30).
 name: Claude Code memory in 40 seconds
-description: 'Where Claude Code memory lives between sessions: CLAUDE.md, read only at startup, and auto memory indexed by MEMORY.md, plus why a stale note is worse than none and how /memory shows what is loaded.'
+description: 'A 40-second narrated explainer of where Claude Code keeps memory between sessions, in CLAUDE.md files and auto memory.'
 upload_date: '2026-10-28T22:19:43+05:30'
 duration_seconds: 40
 width: 1920
