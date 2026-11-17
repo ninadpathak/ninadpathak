@@ -61,6 +61,6 @@ Teams that want developers to come back and read. That's where I think the label
 
 Ghostty is that kind of project. Its release notes read to me like the story of a release, and the line about sixteen hours is part of why.
 
-The same word turned up in November on documentation written for agents, which I take up in my [notes on Chrome's guidance for coding agents](/articles/chrome-modern-web-guidance-notes/).
+The word hand-crafted turned up again in November, on documentation written for agents, which I take up in my [notes on Chrome's guidance for coding agents](/articles/chrome-modern-web-guidance-notes/).
 
 If your changelog is a place developers return to for the writing, say that people wrote it, and mean it. If it's a list an agent will parse on its way to an upgrade, spend the hours on lines that are tested and exact.

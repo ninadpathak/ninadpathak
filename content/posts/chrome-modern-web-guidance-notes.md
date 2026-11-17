@@ -8,16 +8,16 @@ bridges:
 - slug: agents-reading-docs
   reason: Fern's logs show agents fetching an index and then single Markdown pages, which is the delivery this essay argues for.
 date: 2026-11-17
-description: Chrome shipped 200-odd guides written for coding agents. I think the editing is the part to copy, the packaging is wrong, and the question of who writes an agent's defaults is fair.
+description: Chrome shipped 200-odd guides written for coding agents. I think the editing is the part to copy, a plain index should be the way in, and the question of who writes an agent's defaults is fair.
 slug: chrome-modern-web-guidance-notes
 status: published
 title: "Notes on Chrome's Modern Web Guidance for coding agents"
-work_note: "Docs for coding agents are still docs, and someone has to run the product before writing them. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Hire me to write yours](/services/)."
+work_note: "Docs for coding agents are still docs, and someone has to run the product before writing them. I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. [Work with me on yours](/services/)."
 ---
 
-On November 10 a member of the Chrome team posted [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) to [Hacker News](https://news.ycombinator.com/item?id=50443812): more than 200 guides, written with the Firefox, Edge and MDN teams, that tell a coding agent to use what browsers now do natively. The reader they're written for is a model.
+On November 10 a member of the Chrome team posted [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) to [Hacker News](https://news.ycombinator.com/item?id=50443812): more than 200 guides, shipped in collaboration with Firefox, Edge and MDN, that tell a coding agent to use what browsers now do natively. The reader they're written for is a model.
 
-I read the project as [technical documentation](/articles/technical-documentation/) with a new kind of reader, and I think it's the best-edited example of that I've come across. I also think it ships in the wrong container.
+I read the project as [technical documentation](/articles/technical-documentation/) with a new kind of reader, and I think it's the best-edited example of that I've come across. I also think it puts the wrong door at the front.
 
 ## The editing is the part to copy
 
@@ -33,17 +33,21 @@ It also tells the agent what to assume when the request is silent. That's a line
 
 I'm more impressed that there's a number at all than by the number. The README carries a table of runs with and without the guides, and on November 8 Claude Code on Opus 5.5 went from 57% of checks passed to 88%, over 215 tasks.
 
-That's the vendor grading its own documentation with its own graders, so I read it as a direction and not a result. A commenter in the thread ran the project's legacy scan on their own code and reported it found two issues.
+That's the vendor grading its own documentation with its own graders, so I read it as a direction and not a result. A commenter in the thread ran the project's legacy scan on their own code and it found only two issues, and a maintainer replied that the scan covers about a fifth of the guides so far.
 
-I haven't run it myself, so I can't add a third data point. But I can't name many docs teams that publish any measure of whether a page changes what its reader does next.
+The scan and the eval table measure different things, and I haven't run either myself. But I can't name many docs teams that publish any measure of whether a page changes what its reader does next.
 
-## The container is where I disagree
+## The front door is where I disagree
 
-The guides arrive as an agent skill and an npm command, and I think that's the wrong way round. Documentation should be readable with nothing installed.
+The guides are offered first as an agent skill and an npm command, and I think that's the wrong way round. Documentation should be readable with nothing installed.
 
-Simon Willison [made the case in the thread](https://news.ycombinator.com/item?id=50444594) better than I would. He asked for a plain Markdown index on a public URL, written to be searched with grep, so that any agent that can make an HTTP request can find the right guide.
+These can be, to be fair. The launch post links readable versions on Chrome's developer site, and the README links every guide's Markdown file.
 
-I'd go further for a reason he didn't give. The README says the command-line tool reports the search queries an agent generates back to Google, and a file on a web server asks for nothing but a fetch.
+Simon Willison [asked in the thread](https://news.ycombinator.com/item?id=50444594) for the step beyond that: a plain Markdown index on a public URL, written to be searched with grep, so any agent that can make an HTTP request finds the right guide. The maintainers agreed, and one replied "We'll make this happen."
+
+So my disagreement is with the default, and it's smaller than it was on launch day. I'd document the index as the way in and the install as the upgrade.
+
+The install also asks for something a fetch doesn't. The README says the command-line tool sends Google anonymous usage data, including the search queries an agent generates, and gives an environment variable that turns it off.
 
 An index plus single pages is also what agents already ask docs sites for, going by the logs in [my notes on Fern's agent traffic report](/articles/agents-reading-docs/).
 
@@ -51,7 +55,7 @@ An index plus single pages is also what agents already ask docs sites for, going
 
 An objection in the thread stayed with me, which is that Chrome already has a great deal of say over the web, and now it would be steering what everyone's agent writes. I think the worry is fair, and I don't think it's special to Chrome.
 
-The project's answer is that four browser and documentation teams steward it and that its guides lean on shared compatibility data. That helps.
+The project's answer is that four browser and documentation teams steward it and that its guides lean on shared compatibility data. That helps, though a Chrome engineer said in the same thread that Mozilla had joined only in the last few weeks.
 
 But whoever writes the page an agent reads is setting a default for every codebase that agent touches. Documentation always did that, slowly, one developer at a time, and now it happens at the speed of a tool call.
 
