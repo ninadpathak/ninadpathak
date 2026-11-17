@@ -5,103 +5,91 @@ siblings:
 - kv-cache-eviction
 - time-to-first-token
 date: 2026-03-07
-description: LLM inference is memory-bound, not compute-bound. Speculative decoding
-  uses this fact to speed up generation by 2-3x using a smaller draft model to predict
-  tokens for a larger one.
+description: 'Speculative decoding has a fast predictor draft tokens and the large model verify them in one pass. How it works, what it gains and when it stops helping.'
 status: published
 work_note: 'I wrote this for my own site as an explainer of how a small draft model speeds up a large one. My client work covers agents and developer tools, and [my portfolio](/portfolio/) shows it.'
 title: 'Speculative Decoding: Speeding Up LLM Inference'
 slug: speculative-decoding
 video: speculative-decoding
+updated: 2026-11-17
 ---
 
-Inference speed is the biggest hurdle I keep running into with interactive LLM applications. Watching a 70B model dribble out text one token at a time, while a user stares at a blinking cursor, feels slow in a way that no amount of clever UI hides.
+Processors have guessed ahead for decades. [Wikipedia's entry](https://en.wikipedia.org/wiki/Speculative_execution) on speculative execution says "work is done before it is known whether it is actually needed", and the Spectre attack later made the phrase famous by [taking its name](https://spectreattack.com/) from "the root cause, speculative execution".
 
-The first instinct I had, and the one I see most teams reach for, was to throw more GPUs at the problem. That instinct ignores the physics of how these models actually run, and it costs a fortune for a speedup that never quite arrives.
+Speculative decoding applies the same bet to LLM inference. A cheap predictor drafts the next few tokens, the large model checks all of them in one pass, and every accepted draft is a token the large model didn't have to generate one at a time.
 
-Large models are "memory-bound." During single-token generation, moving model weights from high-bandwidth memory can constrain throughput.
-
-[KV-cache eviction](/articles/kv-cache-eviction/) addresses a related memory constraint but does not provide measured gains.
-
-The arithmetic of turning those weights into one token finishes almost instantly, then the cores sit idle waiting for the next batch of weights. Picture a chef with a tiny cutting board who has to walk to a pantry across the building for each ingredient.
-
-The chopping takes seconds. The walking takes minutes.
-
-[Speculative decoding](/glossary/speculative-decoding/) is how I put that idle compute to work without adding a single GPU.
-
-The numbers make the imbalance concrete. A model serving a single request often pushes the GPU's compute units to a few percent utilization even as memory bandwidth pegs near its ceiling, the inverse of what you see during training.
-
-Training runs in big batches that keep every core busy, so the chip looks healthy on a dashboard. Single-stream inference starves those same cores.
-
-Adding a second GPU does nothing for one user's request, because the request was never waiting on math in the first place. It was waiting on the bus.
-
-## The draft-verify loop in practice
-
-Two models do the work. A small "draft" model guesses the next few tokens in rapid succession, and a large "target" model verifies all of those guesses in a single parallel step.
-
-The draft model is fast and frequently wrong, something like a 1B model running ahead. The target model is slow and authoritative, the 70B you actually want answering.
+The parallel breaks in the outcome of a wrong guess. A processor that mispredicts throws the work away out of sight, and a model that rejects a draft has spent compute you can measure, which is why the method helps some workloads and slows others.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/speculative-decoding/draft-verify.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/speculative-decoding/draft-verify.narrow.svg" width="288" height="736"><img class="np-has-narrow" src="/static/images/diagrams/speculative-decoding/draft-verify.svg" width="720" height="392" alt="A small draft model guesses the next few tokens in quick succession, and the large target model verifies all of the guesses in one parallel step. Tokens the target agrees with are kept; the first one it rejects, and everything after it, is discarded." loading="lazy" decoding="async"></picture></a>
-  <figcaption>The draft model is fast and often wrong, like a 1B running ahead; the target is the 70B you actually want answering.</figcaption>
+  <figcaption>The draft model is fast and often wrong, and the target model has the final say on every token.</figcaption>
 </figure>
 
-The system works because checking is cheaper than generating. Verifying four or five proposed tokens costs the target model almost the same wall-clock time as producing one, since it loads its weights once and runs the candidates through together.
+## How does speculative decoding work?
 
-When the draft model's guesses are correct, I have generated several tokens in the time budget of a single forward pass. When a guess is wrong, I throw away that token and everything after it, then resume from the last correct position.
+It runs a draft-and-verify loop: a fast predictor proposes several tokens, and the target model scores those positions together and keeps the proposals up to the first one it rejects. The target then supplies its own token at that position, so each loop yields at least one token.
 
-A useful way to think about it: the draft model writes a rough sentence in pencil, and the target model reads the whole sentence at once, accepting words until it hits one it would not have written, then taking over from there. Nothing wrong ever slips through, because the target model has the final say on every token.
+The method comes from [a paper submitted on November 30, 2022](https://arxiv.org/abs/2211.17192) by Yaniv Leviathan and colleagues, which borrows the hardware term in its abstract. It describes "an algorithm to sample from autoregressive models faster without any changes to the outputs, by computing several tokens in parallel."
 
-That last point matters more than the speed. I worried the first time I enabled this that the small model would quietly degrade output quality, the way a cheaper autocomplete might.
+The last clause is the reason the trick is safe to turn on. The paper's sampling rule accepts and corrects drafts "without changing the distribution", so the text is what the large model would have produced alone.
 
-It cannot. The acceptance check guarantees the result is mathematically identical to what the target model would have produced on its own.
+## How much faster does it make inference?
 
-The draft model only ever proposes. It never decides.
+It depends on how often drafts are accepted. The paper reports "a 2X-3X acceleration" for one model, T5-XXL, and gives a formula for the expected number of tokens per verification step.
 
-A walk through one round makes the savings tangible. Say the draft model proposes five tokens, then the target model runs all five candidates plus its own next prediction through a single forward pass.
+```python
+"""Expected tokens per verification step in speculative decoding (Leviathan et al., Equation 1)."""
 
-If the target agrees with the first three drafted tokens and disagrees on the fourth, I keep those three, take the target's own corrected token for the fourth position, and discard the fifth. That round produced four real tokens for the price of one slow forward pass and one cheap draft pass.
 
-The worst case, where the target rejects the very first drafted token, still produces one token, the same as ordinary decoding, so the floor on performance is plain old generation rather than a regression.
+def expected_tokens(alpha, gamma):
+    """alpha: chance a drafted token is accepted. gamma: tokens drafted per step."""
+    return (1 - alpha ** (gamma + 1)) / (1 - alpha)
 
-## Why this is "free" speedup
 
-You are already paying for the memory bandwidth to drag the large model's weights across the bus on every step. A 1B draft model adds maybe a percent or two to that bill, because its weights are a fraction of the size and load in a sliver of the time.
+print("acceptance   2 drafted   4 drafted   8 drafted")
+for alpha in (0.5, 0.7, 0.8, 0.9):
+    row = "   ".join(f"{expected_tokens(alpha, gamma):9.2f}" for gamma in (2, 4, 8))
+    print(f"{alpha:>10.1f}   {row}")
+```
 
-The verification rides on GPU compute cycles that were sitting idle anyway, the same cores that finished their real work and went quiet waiting for memory. So the speedup comes out of slack the hardware was already wasting, which is why I describe it as close to free.
+Running `python3 spec_tokens.py` gives the table.
 
-How much you get back depends on the "acceptance rate," the share of drafted tokens the target model keeps. The rate climbs when the text is predictable.
+```text
+acceptance   2 drafted   4 drafted   8 drafted
+       0.5        1.75        1.94        2.00
+       0.7        2.19        2.77        3.20
+       0.8        2.44        3.36        4.33
+       0.9        2.71        4.10        6.13
+```
 
-Boilerplate code, structured JSON, and the verbose scaffolding around an answer ("Sure, here is the function you asked for...") get drafted almost perfectly, and I have watched those sections fly. The rate drops on genuinely creative or high-entropy passages where even a good small model cannot anticipate the large one.
+At an acceptance rate of 0.5 the loop never averages more than two tokens a step however many are drafted. At 0.9 with four drafted it averages about four, so the quality of the guesses matters far more than their number.
 
-A strong pairing lands a 2x to 3x speedup across a typical mix of requests. Even a modest acceptance rate trims the latency a user feels, and that improvement shows up directly in [time to first token, the metric that determines AI snappiness](/articles/time-to-first-token/).
+Those are tokens per step, and a step costs more than a plain decoding step because the predictor has to run too. The paper explains why the trade can still pay: inference "is often not bottlenecked on arithmetic operations, but rather on memory bandwidth and communication".
 
-Choosing the draft model is where I have spent the most tuning effort. Too small, and its guesses get rejected so often that the extra verification passes erase the gains, leaving me slower than plain decoding.
+## Do you need a separate draft model?
 
-Too large, and the draft step itself becomes the bottleneck, since now I am loading meaningful weights twice per round. The sweet spot I keep returning to is a model from the same family as the target, around a tenth to a twentieth of its size, because shared training data makes the small model think like the big one and pushes the acceptance rate up.
+No. The draft can come from a second, smaller model or from a prediction head built into the large one.
 
-Speculative length is the second knob, and it interacts with acceptance rate in a way that bit me early. Drafting more tokens per round sounds like a pure win, since a long correct guess collapses many steps into one.
+NVIDIA's [GLM-5.3 tutorial](https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/) from November 13 uses the second kind, turned on in vLLM with one setting, `{"method":"mtp","num_speculative_tokens":4}`. It explains that "the model's MTP layer drafts four tokens per step, and vLLM verifies them with the full model before accepting them, so each step can produce several tokens."
 
-The cost hides in the rejections. A draft of eight tokens that gets rejected at position two wasted the work of drafting six tokens that never shipped, and on a workload heavy with creative text that waste piles up fast.
+The same paragraph carries the caveat every deployment shares: "The gain depends on how often drafts are accepted, which varies with the prompt."
 
-For chat traffic full of code and structured output, a longer draft pays off. For open-ended generation, a shorter draft of two or three tokens keeps the rejection penalty small.
+## When does speculative decoding stop helping?
 
-I tune this per deployment rather than trusting a default.
+It stops helping when the server is busy or the drafts are bad.
 
-Batching changes the calculus too, which surprised me. The whole technique leans on idle compute, so as I pack more concurrent requests onto one GPU, those formerly idle cores get busy serving other users and the free lunch shrinks.
+Modelplane's [inference field guide](https://docs.modelplane.ai/guides/inference-guide) from November 10 lists its cost as "Wasted compute when guesses are rejected. Its value shrinks as load rises and spare compute runs out."
 
-Speculative decoding shines brightest on latency-sensitive, low-concurrency serving, the interactive chat session where one user waits on one stream. A high-throughput batch job that already saturates the GPU sees a smaller benefit, sometimes none, because there was no slack left to borrow.
+That makes it a tool for the case the guide names, "Individual responses stream too slowly, even at low load". On a server already batching many requests there is little spare compute to spend on guesses.
 
-## Implementation options
+The guide also says what to monitor.
 
-Standard speculative decoding needs a separate draft model, which means operators must serve and version two compatible checkpoints. Newer techniques avoid that overhead by folding the drafting step into the large model.
+"Watch speculative decoding acceptance. Acceptance depends on temperature, subject matter and the draft model."
 
-Medusa bolts a handful of extra prediction heads onto the target so it proposes several future tokens itself, and Lookahead decoding generates and verifies candidate n-grams from the model's own recent output. Both approaches kill the need to babysit two separate networks, at the cost of either fine-tuning the heads or accepting a lower acceptance rate than a well-matched draft model gives me.
+A falling acceptance rate is hard to spot from the outside, because requests still succeed and only get slower. The related metric is tokens per second for each stream, and [time to first token](/articles/time-to-first-token/) doesn't move, since the first token still waits on the same queue and prefill.
 
-Self-drafting suits one situation especially well. When I cannot find a good small sibling for my target model, or the deployment has no room for a second checkpoint in memory, Medusa-style heads let me get a respectable speedup from the one model I already loaded.
+## Where does it sit among other optimizations?
 
-For a model with a strong small relative on hand, a dedicated draft model still tends to win on raw acceptance rate.
+It is a decode-side technique, next to quantization and KV cache settings. [KV-cache eviction](/articles/kv-cache-eviction/) covers the memory that decoding reads, and the glossary entry on [speculative decoding](/glossary/speculative-decoding/) has the short definition.
 
-Production inference engines have made all of this far easier than it was. vLLM and TensorRT-LLM both support speculative decoding natively now, so turning it on is closer to setting a config flag than wiring up a research prototype. It has quietly become a default optimization rather than an exotic one.
-
-Anyone hosting their own models and feeling the latency squeeze should enable it before reaching for a bigger GPU budget, measure the acceptance rate on real traffic, and tune the draft model from there. The speedup was sitting in the hardware the whole time, waiting for the weights to show up.
+I have not benchmarked the method for this page. The arithmetic above is the paper's formula run as written, and the serving behaviour is as NVIDIA and Modelplane describe it.
