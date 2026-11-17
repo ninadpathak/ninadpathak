@@ -2,7 +2,63 @@
 # Wayback Machine capture that still shows it and original_url keeps the publisher's address.
 # An entry with original_url and no url has no usable capture, so its card renders without a link
 # and reads "no longer online". A card with both reads "archived copy".
+# byline names the person a piece was published under when that is someone else. The card says
+# so beside the client, and the page's structured data makes no author claim for that entry.
 entries:
+  # TinyFish
+  - title: "Best Cloud Browsers for AI Agents in 2026: 6 Compared"
+    client: "TinyFish"
+    category: "AI Systems"
+    url: "https://www.tinyfish.ai/blog/best-cloud-browsers-for-ai-agents"
+
+  - title: "Cloud Browser Examples: 8 Business Workflows for AI Agents"
+    client: "TinyFish"
+    category: "AI Systems"
+    url: "https://www.tinyfish.ai/blog/cloud-browser-examples"
+
+  - title: "Computer-Use Agents vs Web Agents: Key Differences"
+    client: "TinyFish"
+    category: "AI Systems"
+    url: "https://www.tinyfish.ai/blog/computer-use-agents-vs-web-agents"
+
+  - title: "Best Computer-Use Agents in 2026: Desktop & Browser Tests"
+    client: "TinyFish"
+    category: "AI Systems"
+    url: "https://www.tinyfish.ai/blog/best-computer-use-agents"
+
+  - title: "What Is a Cloud Browser? For Developers and AI Agents"
+    client: "TinyFish"
+    category: "AI Systems"
+    url: "https://www.tinyfish.ai/blog/what-is-a-cloud-browser"
+
+  - title: "Claude Code Context Window: Usage, Costs, and Tips"
+    client: "TinyFish"
+    category: "AI Systems"
+    url: "https://www.tinyfish.ai/blog/claude-code-context-window"
+
+  - title: "Prompt Compression vs. Caching: Costs and Tradeoffs"
+    client: "TinyFish"
+    category: "AI Systems"
+    url: "https://www.tinyfish.ai/blog/prompt-compression-and-caching"
+
+  - title: "9 Agentic Search Tools Ranked by Cost per Benchmark Point"
+    client: "TinyFish"
+    category: "AI Systems"
+    url: "https://www.tinyfish.ai/blog/agentic-search-tools"
+
+  # Firecrawl, newest
+  - title: "AI for Content Marketing: Tools and Workflows"
+    client: "Firecrawl"
+    category: "Growth & Marketing"
+    url: "https://www.firecrawl.dev/blog/ai-for-content-marketing"
+
+  # Mastra
+  - title: "What is the Agent2Agent (A2A) protocol? How AI agents delegate work"
+    client: "Mastra"
+    category: "AI Systems"
+    url: "https://mastra.ai/blog/what-is-agent-to-agent-protocol"
+    byline: "Sam Bhagwat"
+
   # DevTools / Code Review
   - title: "Code Review Best Practices for Engineering Teams"
     client: "Graphite"
@@ -392,3 +448,151 @@ entries:
     client: "OpenComputer"
     category: "Developer Infrastructure"
     original_url: "https://opencomputer.dev/guides/python-sandbox"
+
+  # Centus, further guides from the author page
+  - title: "Angular i18n and Localization: The Ultimate Guide"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/angular-localization"
+
+  - title: "Angular i18n with ngx-translate: I Made It Simple"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/angular-ngx-translate"
+
+  - title: "Django i18n and Localization: Complete Guide"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/django-i18n"
+
+  - title: "Laravel Localization: A Practical Guide for Developers"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/laravel-localization"
+
+  - title: "NextJS Internationalization (i18n) Made Easy"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/next-js-internationalization"
+
+  - title: "NodeJS i18n and Localization Tutorial"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/node-js-i18n-localization"
+
+  - title: "Nuxt i18n and Localization: A Practical Guide"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/nuxt-js-i18n"
+
+  - title: "PHP Localization: In-Depth Guide"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/php-localization"
+
+  - title: "PO Translation Guide"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/po-files-translation"
+
+  - title: "Python Gettext Tutorial for App Translation"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/python-gettext-translation"
+
+  - title: "Python i18n Internationalization and Localization Tutorial"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/python-localization"
+
+  - title: "Rails Internationalization (i18n) with i18n Gems"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/rails-i18n"
+
+  - title: "React Native Localization and Internationalization"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/react-localization"
+
+  - title: "Software Localization: The Ultimate Guide"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/software-localization"
+
+  - title: "Spring Boot Internationalization (i18n) and Localization"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/spring-boot-i18n"
+
+  - title: "JSON Translation and Localization Made Simple"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/translate-json-file"
+
+  - title: "How to Translate XML Files in 4 Simple Ways"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/translate-xml"
+
+  - title: "Vue i18n: App Localization Guide"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/vue-i18n"
+
+  - title: "XLIFF Translation Guide for Developers"
+    client: "Centus"
+    category: "Localization"
+    url: "https://centus.com/blog/xliff-translation"
+
+  # Factors.ai, further articles
+  - title: "Predictive Lead Scoring: How AI Helps Optimize Sales and Marketing"
+    client: "Factors.ai"
+    category: "Growth & Marketing"
+    url: "https://www.factors.ai/blog/predictive-lead-scoring"
+
+  - title: "Best Revenue Forecasting Models: 7 Methods + How to Choose in 2026"
+    client: "Factors.ai"
+    category: "Growth & Marketing"
+    url: "https://www.factors.ai/blog/revenue-forecasting-models"
+
+  - title: "The Ultimate Guide to Marketing Analytics for SaaS Companies"
+    client: "Factors.ai"
+    category: "Growth & Marketing"
+    url: "https://www.factors.ai/blog/saas-marketing-analytics-guide"
+
+  - title: "SaaS Marketing Reporting Done Right: 5 Tips for Extracting Actionable Insights from Your Reports"
+    client: "Factors.ai"
+    category: "Growth & Marketing"
+    url: "https://www.factors.ai/blog/saas-marketing-reporting"
+
+  - title: "SEO Benchmarking: Metrics, Competitors & Reporting That Drive Growth"
+    client: "Factors.ai"
+    category: "Growth & Marketing"
+    url: "https://www.factors.ai/blog/seo-benchmarking-guide"
+
+  - title: "10 Warmly.ai Alternatives and Competitors In 2026: Features, Pricing, Pros and Cons Compared"
+    client: "Factors.ai"
+    category: "Growth & Marketing"
+    url: "https://www.factors.ai/blog/top-warmly-ai-alternatives"
+
+  # LambdaTest (now TestMu AI), further articles
+  - title: "Software Testing Certifications: Which Are Worth It in 2026"
+    client: "LambdaTest"
+    category: "DevTools"
+    url: "https://www.testmuai.com/blog/best-software-testing-certifications/"
+
+  - title: "TestMu AI Named Strong Performer in Forrester Wave™ Autonomous Testing Q4 2025"
+    client: "LambdaTest"
+    category: "AI Systems"
+    url: "https://www.testmuai.com/blog/testmu-forrester-wave-autonomous-testing-2025/"
+
+  - title: "TestMu AI Named a Challenger in Gartner® First Magic Quadrant™ for AI-Augmented Software Testing"
+    client: "LambdaTest"
+    category: "AI Systems"
+    url: "https://www.testmuai.com/blog/testmu-gartner-magic-quadrant-2025/"
+
+  - title: "AI UI Testing Techniques & Tools for Intelligent Automation"
+    client: "LambdaTest"
+    category: "AI Systems"
+    url: "https://www.testmuai.com/learning-hub/ai-ui-testing/"

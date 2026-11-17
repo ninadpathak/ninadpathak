@@ -655,3 +655,12 @@ Archive.org shows "Author: Ninad Pathak" on 11 Mem0 blog posts dated January 26 
 - "What Are Vector Embeddings?" has no capture with his byline, so its portfolio card carries no link. "Self-Hosting Mem0: A Complete Docker Deployment Guide" shows Bex Tuychiev in every capture and was removed from the portfolio.
 - A post that discloses his Mem0 role may say he wrote Mem0's guide on that subject, with the capture linked, only where it helps the reader weigh the page. Work notes stay pitches.
 - The team facts are unchanged: joined February 2026, ran a team of 13 writers, handled hiring, vetting and technical reviews.
+
+## Portfolio additions (2026-11-17, branch mem0-restore)
+
+Ninad asked for the portfolio to carry his newer published pieces. Each piece added was fetched and shows his byline, except one he confirmed himself.
+
+- Added with his byline on the page: 8 TinyFish posts (his author page at tinyfish.ai/blog/author/ninad-pathak), 19 more Centus guides (his author pages), 6 Factors.ai articles, 4 TestMu AI articles filed under LambdaTest, and one more Firecrawl post.
+- Added on his word: Mastra's "What is the Agent2Agent (A2A) protocol? How AI agents delegate work", which the page credits to Sam Bhagwat. A portfolio entry may carry a `byline` field naming the person a piece was published under. The card then reads "Mastra · published under Sam Bhagwat's byline", and the page's structured data makes no author claim for that entry.
+- A piece that shows another person's name is never added on a guess. Candidates go to Ninad in a list.
+- No public byline was found on Semrush, Adobe or Manicule.
