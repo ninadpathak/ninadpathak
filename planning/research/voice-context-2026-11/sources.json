@@ -4796,7 +4796,10 @@
       "The user deploys on Fridays",
       "The deploy on Friday failed on a migration timeout",
       "migrations on this database need a longer timeout",
-      "somewhere else"
+      "somewhere else",
+      "what did I deploy on Friday?",
+      "what timeout do migrations need?",
+      "memory"
     ],
     "rag-evaluation": [
       "When do I get billed?",
