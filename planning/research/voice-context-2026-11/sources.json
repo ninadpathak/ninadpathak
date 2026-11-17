@@ -4780,7 +4780,8 @@
       "somewhere else"
     ],
     "rag-evaluation": [
-      "When do I get billed?"
+      "When do I get billed?",
+      "precision above 0.8"
     ],
     "what-agent-harness-means": [
       "harness",

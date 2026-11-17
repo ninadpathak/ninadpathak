@@ -16,11 +16,11 @@ updated: '2026-08-17'
 slug: rag-evaluation
 ---
 
-The method behind RAG evaluation was worked out on index cards. Cyril Cleverdon ran the [Cranfield experiments](https://en.wikipedia.org/wiki/Cranfield_experiments) at a college of aeronautics in England in the 1960s, comparing indexing systems by putting questions to a fixed collection of abstracts and checking whether relevant ones came back.
+The method used to evaluate a RAG system today was worked out in the 1960s with index cards and no computer. Cyril Cleverdon ran the [Cranfield experiments](https://en.wikipedia.org/wiki/Cranfield_experiments) at a college of aeronautics in England, comparing indexing systems by putting questions to a fixed collection of abstracts and checking whether relevant ones came back.
 
-Neither phase of that work used a computer, and the setup hasn't changed much since. You still need a fixed set of questions and a human judgment of which documents answer each one.
+A retrieval test in 2026 has the same two ingredients as Cleverdon's. You need a fixed set of questions, and you need a person's judgment of which documents answer each question.
 
-RAG evaluation is the practice of scoring a retrieval-augmented generation pipeline in two parts: whether retrieval returned the right passages, and whether the generated answer sticks to them. The second part is the new one, and [Ragas](https://arxiv.org/abs/2309.15217) arrived in September 2023 with metrics for it that don't need a human-written reference answer.
+RAG evaluation is the practice of scoring a retrieval-augmented generation pipeline in two parts: whether retrieval returned the right passages, and whether the generated answer says only what those passages support. Cleverdon had no generated answer to score, and [Ragas](https://arxiv.org/abs/2309.15217) arrived in September 2023 with metrics for the answer that don't need a human-written reference answer.
 
 Below are the RAG evaluation metrics for both halves of a [RAG](/articles/rag/) pipeline, with a retrieval scorer and the output it printed on a small labelled set.
 
@@ -37,7 +37,7 @@ The main RAG evaluation metrics split into retrieval metrics, which compare a ra
 | Faithfulness | Answer | Is each claim in the answer supported by the retrieved context? | A judge model |
 | Response relevancy | Answer | Does the answer address the question that was asked? | A judge model and embeddings |
 
-The names on the answer side move around. Ragas's [list of RAG metrics](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/) reads this way today, and a tutorial written against an older release may use other names:
+Ragas has renamed its metrics between releases, so check the current names before copying an import from a tutorial. The metric this page calls response relevancy has also been called answer relevancy, and Ragas's [list of RAG metrics](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/) reads this way today:
 
 - Context Precision
 - Context Recall
@@ -123,27 +123,33 @@ When do I get billed?          d2 d8 d3     1.00      0.33         0.50  0.63
 mean                                        1.00      0.50         0.92  0.94
 ```
 
-The recall column reads 1.00 on every row, so by that metric this retriever is finished. It isn't, and the last row shows why: for "When do I get billed?" the refund instructions ranked first and the right document came second.
+The recall column reads 1.00 on every row, which would suggest the retriever has nothing left to fix. The last row shows a real error that recall missed: for "When do I get billed?" the retriever ranked the refund instructions (`d2`) first and the invoice schedule (`d8`) second.
 
-Only the rank-aware columns caught that. Reciprocal rank fell to 0.50 and nDCG to 0.63 on that question, which is the case for reading nDCG once you [add a reranking stage](/articles/rag-reranking/) and order is the thing you're tuning.
+Recall counts whether `d8` appears anywhere in the retrieved results, so it scored that row as perfect. Reciprocal rank and nDCG both look at position, and they fell to 0.50 and 0.63 on the billing question.
 
-The precision column is the one that misleads. A question with one relevant document can't score above 0.33 when k is 3, so the mean of 0.50 here says more about how many answers each question has than about the retriever.
+Position is what a reranker changes, so nDCG is the metric to watch once you [add a reranking stage](/articles/rag-reranking/).
 
-That's also why I'd read the rows before the mean. The mean nDCG of 0.94 looks healthy, and the row under it is a billing question answered with refund steps.
+The precision column is the column people misread. A question with one relevant document can't score above 0.33 when k is 3, because the other two retrieved slots have to hold something.
 
-If recall itself is low, the fix is upstream of everything on this page, in chunking or in the [embedding model](/articles/vector-embeddings/). [Contextual retrieval](/articles/contextual-retrieval/) is one such fix, and Anthropic reported its results as a drop in exactly this kind of top-k retrieval failure.
+So the mean precision of 0.50 largely reflects that four of the six questions have a single relevant document.
+
+I'd read the per-question rows before I read the mean. The mean nDCG of 0.94 looks healthy, and it hides one question out of six where a customer asking about billing dates would be shown refund steps first.
+
+If recall itself is low, no ranking change will help, because the right passage never reached the candidate list. The fix is in how documents are chunked or in the [embedding model](/articles/vector-embeddings/).
+
+[Contextual retrieval](/articles/contextual-retrieval/) is one fix of that kind, and Anthropic reported its results as a drop in how often the right passage was missing from the top 20.
 
 ## How do you measure answer quality?
 
-You measure answer quality with a judge model that checks the answer against the retrieved context and against the question. Ragas defines the two metrics that carry this, and both are scored between 0 and 1.
+You measure answer quality with a judge model that checks the answer against the retrieved context and against the question. Ragas defines a metric for each of those checks, faithfulness and response relevancy, and both are scored between 0 and 1.
 
 [Faithfulness](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/) breaks the answer into claims and checks each against the context. The score is the number of supported claims divided by the total, and Ragas counts an answer as faithful "if all its claims can be supported by the retrieved context".
 
-[Response relevancy](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/answer_relevance/) works backwards. The judge writes a few questions that the answer would fit, and the score is the average cosine similarity between those and the user's question.
+[Response relevancy](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/answer_relevance/) starts from the answer and works back to the question. The judge model reads the answer and writes a few questions that the answer would fit, and the score is the average cosine similarity between those generated questions and the user's real question.
 
-Read that method again and you'll see what it can't catch. The docs say the metric works "without evaluating factual accuracy", so a wrong answer that stays on topic scores well, and I wouldn't report it without faithfulness beside it.
+Response relevancy can't tell a correct answer from a wrong one. The docs say the metric works "without evaluating factual accuracy", so an answer that gives the wrong billing date still scores well as long as it's about billing dates, and I wouldn't report response relevancy without faithfulness beside it.
 
-Ragas has retrieval-side metrics of its own too. Its [context recall](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_recall/) splits a reference answer into claims and checks whether the retrieved context supports each, which means it needs a reference where faithfulness doesn't.
+Ragas also has metrics for the retrieval step. Its [context recall](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_recall/) splits a reference answer into claims and checks whether the retrieved context supports each, which means context recall needs a reference answer and faithfulness doesn't.
 
 ## Which metric should you fix first?
 
@@ -154,17 +160,17 @@ Fix retrieval recall first, because nothing downstream can use a passage that wa
   <figcaption>Each stage only means something once the one before it holds. Starting with response relevancy hides failures upstream.</figcaption>
 </figure>
 
-The order matters for reading the scores as well as for fixing them. A low faithfulness score on a question where recall failed is a retrieval bug that happens to show up in the answer.
+The same order tells you how to read a bad score. Suppose faithfulness is low on a question where recall also failed: the model made claims the context didn't support because the supporting passage was never retrieved, and the bug to fix is in retrieval.
 
-When retrieval is fine and the answer still strays, the model's behavior is the problem, and that's the case [RAG vs fine-tuning](/articles/fine-tuning-vs-rag/) weighs.
+When recall and ranking are good and the answer still contradicts the passages, the model's behavior is the problem. Changing a model's behavior is the subject of [RAG vs fine-tuning](/articles/fine-tuning-vs-rag/).
 
 ## How do you set a pass threshold?
 
-Set it from your own labelled examples and from what a wrong answer costs you. I don't think a universal cutoff exists, and the precision column above is the reason: 0.33 was a perfect score on four of those six questions.
+Set a pass threshold from your own labelled examples and from what a wrong answer costs you. I don't think a universal cutoff such as "precision above 0.8" can exist, and the script's output shows why: 0.33 was the highest possible precision on four of its six questions.
 
-A threshold is also only as good as the test set under it. The questions are frozen on the day you write them and your users keep asking new ones, so I'd treat adding fresh production questions to the set as part of the evaluation work.
+A threshold also depends on the test questions staying representative. The test questions are frozen on the day you write them and your users keep asking new ones, so I'd add fresh questions from production logs to the test set on a schedule.
 
-That worry is as old as the method. Wikipedia's account of Cranfield says the experiments were "the topic of continual debate for years", and the debate was over whether the test setup measured the right thing.
+Cleverdon's critics raised the same concern about his fixed test collection. Wikipedia's account of Cranfield says the experiments were "the topic of continual debate for years", and the debate was over whether the test setup measured the right thing.
 
 ## FAQ
 
@@ -174,7 +180,7 @@ For retrieval metrics you need labelled relevant passages. Faithfulness and resp
 
 **What is a good faithfulness score?**
 
-No single number applies everywhere. A score of 1.0 means every claim in the answer was supported by the retrieved context, and how far below that you can accept depends on what a wrong claim costs.
+No single faithfulness score counts as good for every application. A score of 1.0 means every claim in the answer was supported by the retrieved context, and how far below that you can accept depends on what a wrong claim costs.
 
 **How is context precision different from precision@k?**
 
@@ -182,7 +188,7 @@ Precision@k is the share of the top k results that are relevant. Ragas's context
 
 **Are BLEU and ROUGE useful for RAG?**
 
-They score word overlap with a reference answer, so a correct answer in different words scores low. I'd use them only where the wording itself is what you're checking.
+BLEU and ROUGE score how many words an answer shares with a reference answer, so a correct answer phrased differently scores low. I'd use them only where the exact wording is what you're checking, as in translation.
 
 **Can I evaluate retrieval without calling an LLM?**
 
