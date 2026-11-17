@@ -5073,6 +5073,20 @@
       "connects": [
         "cloudflare-kv-cache-incident-report"
       ]
+    },
+    {
+      "id": "google-dev-docs-style-guide",
+      "url": "https://developers.google.com/style",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "Google developer documentation style guide",
+      "quotes": [
+        "Voice and tone",
+        "Word list"
+      ],
+      "connects": [
+        "documentation-best-practices"
+      ]
     }
   ],
   "unused_leads": [
@@ -5289,7 +5303,8 @@
     ],
     "documentation-best-practices": [
       "read the manual",
-      "may throttle traffic"
+      "may throttle traffic",
+      "how do I rotate an API key?"
     ],
     "cloudflare-kv-cache-incident-report": [
       "our tests passed, so we assumed the error path worked",
