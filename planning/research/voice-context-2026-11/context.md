@@ -673,3 +673,18 @@ Ninad, on the line under each article: "Hire me is childish. It's desperate. Som
 - Use "Work with me", "Let's work together", "Contact me", "Get in touch" or "How we'd work together".
 - Every note still says he is a freelance technical writer and carries one of those invitations. `tests/test_article_work_notes.py` rejects any form of "hire" in a note.
 - Left alone: internal names such as `hire_note` and the `hire-line` class, sentences about hiring writers at Mem0, and "a new hire" where a post means a new employee.
+
+## Booking link (2026-11-17)
+
+Ninad: "the zcal link is: https://zcal.co/ninadpathak/meet ... the one you're using is the embed link, not something you need to use for everything else please". `config.toml` now has `booking_url` for every place a person or an agent reads or clicks, and `booking_embed_url` for the inline widget inside the booking modal and nowhere else.
+
+## Standing design rule: symmetry (2026-11-17)
+
+Ninad: "remember I have OCD so the designs need to be logical but symmetrical as much as possible. Unless there's no other choice, keep things symmetrical (Arrows starting and ending in the center, etc) things like that."
+
+- Arrows and connectors start and end at the centre of the edge they touch.
+- Grids fill evenly, with equal columns and gaps and no stranded item on a last row.
+- Elements share edges and baselines, icons sit centred in equal boxes, and paired things are the same size.
+- Diagrams sit on a symmetric axis where the logic allows, with equal spacing between nodes of equal rank.
+- Logic comes first. Break symmetry only where the content forces it, and list each case with its reason in the handoff.
+- Measure alignment and centring in coordinates and put the measurements in the evidence.

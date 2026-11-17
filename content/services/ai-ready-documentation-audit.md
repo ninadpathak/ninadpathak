@@ -67,7 +67,7 @@ For agent and LLM products, see my work as a [freelance technical writer for AI 
 
 ## How we'd work together
 
-Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the documentation URL and ask for a quote. You can also book a 30-minute call at [https://zcal.co/i/AGG1iJtv](https://zcal.co/i/AGG1iJtv).
+Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the documentation URL and ask for a quote. You can also book a 30-minute call at [https://zcal.co/ninadpathak/meet](https://zcal.co/ninadpathak/meet).
 
 ## FAQ
 

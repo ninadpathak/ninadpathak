@@ -56,7 +56,7 @@ Docs for these products can be checked with my [AI-ready documentation audit](/s
 
 ## How we'd work together
 
-Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the product, the reader and the pages you need. You can also book a 30-minute call at [https://zcal.co/i/AGG1iJtv](https://zcal.co/i/AGG1iJtv), and my [technical writing services](/services/) page covers the process and pricing.
+Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the product, the reader and the pages you need. You can also book a 30-minute call at [https://zcal.co/ninadpathak/meet](https://zcal.co/ninadpathak/meet), and my [technical writing services](/services/) page covers the process and pricing.
 
 ## FAQ
 

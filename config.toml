@@ -189,7 +189,10 @@ hire_note = "I work as a <a href=\"/services/freelance-technical-writer-for-ai-c
 tag_matches = ["llm", "llm-architecture", "inference", "kv-cache", "context-window", "context-windows", "transformers", "fine-tuning", "voice-ai", "infrastructure"]
 
 [contact]
-booking_url = "https://zcal.co/i/AGG1iJtv"
+# booking_url is the address people and agents read and click. booking_embed_url is the
+# address zcal's inline widget needs inside the booking modal, and is used nowhere else.
+booking_url = "https://zcal.co/ninadpathak/meet"
+booking_embed_url = "https://zcal.co/i/AGG1iJtv"
 linkedin = "https://linkedin.com/in/ninadwrites"
 twitter = "https://x.com/ninadwrites"
 email = "hello@ninadpathak.com"
