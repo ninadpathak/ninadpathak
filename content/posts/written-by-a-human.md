@@ -26,7 +26,7 @@ Ghostty's sixteen hours restate that cost for a world where the page no longer i
 
 ## Why an assertion can't carry it
 
-The label is text, and text is the thing that became free. The Reddit complaint I wrote about in [another essay](/articles/nobody-understands-the-code/) had the voice of a tired engineer, and commenters reported that a detector scored it as fully machine-written.
+The label is text, and text is the thing that became free. The Reddit complaint at the centre of [my essay on code nobody understands](/articles/nobody-understands-the-code/) read to me like a tired engineer, and a commenter reported that a detector scored it as fully machine-written.
 
 A reader can't check "written by a human". A commenter in the same thread described a tool built to try, on the grounds that "The one thing that we can prove with reasonable ease is that the time it took to write was compatible with the author being a human".
 
@@ -40,7 +40,7 @@ The objection in that sentence is to a runbook nobody ran. A runbook typed by ha
 
 So the cost a technical reader wants evidence of is the checking. Somebody ran the command, on a stated version, and it printed a stated result.
 
-That evidence can sit on the page, and it differs from the label in the way that matters: the reader can run the command too. Ghostty's notes carry it alongside their label, in advisory lines such as "This affects Ghostty 1.3.0 and 1.3.1.", which anyone holding either version can test.
+That evidence can sit on the page, and it differs from the label in the way that matters: the reader can run the command too. Ghostty's notes carry it alongside their label, in advisory lines such as "This affects Ghostty 1.3.0 and 1.3.1.", which a reader can check their installed version against.
 
 ## A label the reader can check
 
@@ -48,7 +48,7 @@ The [runbook template](/articles/runbook-template/) on this site has a header fi
 
 I think that field is the one worth copying onto other kinds of page. It says the page was tested on a date, against a version, with the output shown.
 
-My site makes no claim to be written without AI, and my [about page](/about/) says I use it to prepare research and to attack a draft. What I try to put on a page is the other kind of proof, a script with the output it printed or a count with the page it was taken from.
+My [about page](/about/) says how I work: "I use AI to prepare research, inspect a corpus, try variations, and attack a draft." What I try to put on a page is the other kind of proof, a script with the output it printed or a count with the page it was taken from.
 
 A reader can rerun those. I prefer being checked to being believed.
 
