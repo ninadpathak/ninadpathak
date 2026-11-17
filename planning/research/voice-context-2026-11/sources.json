@@ -3925,7 +3925,8 @@
       ],
       "connects": [
         "model-context-protocol"
-      ]
+      ],
+      "note": "Other comments in thread 50379249 paraphrased on the page: shaolinspirit (50379672) 'good cli's are usually better'; mattlondon (50382702) 'a dead end compared to CLIs and normal APIs'."
     },
     {
       "id": "deepseek-v3-jax-2026-11",
@@ -4789,6 +4790,9 @@
     ],
     "agent-harnesses": [
       "summarize every turn older than the last ten"
+    ],
+    "model-context-protocol": [
+      "delete all 14 files?"
     ]
   }
 }
