@@ -11,114 +11,85 @@ bridges:
 - slug: agent-memory-2026
   reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
 date: '2026-04-22'
-description: I have spent two years watching agents fail in production. Here is what
-  I keep seeing and what the field is starting to do about it.
+description: 'Why AI agents fail in production: a measured breakdown of failed runs, why they resist postmortems, how chains of agents compound errors, and what helps.'
 slug: ai-agent-failures
 status: published
 work_note: 'I wrote Firecrawl''s guide to agent sandboxes, which exist because agents fail in ways worth containing. The failures themselves are collected here, and [the guide is in my portfolio](/portfolio/).'
 title: Why AI Agents Fail in Production
 video: ai-agent-failures
+updated: 2026-11-17
 ---
 
-Across two years of debugging production AI agents, I keep landing on the same handful of failures. Different companies, different frameworks, same root causes.
+Operations teams have a settled way of learning from a failure. Google's SRE book [defines the postmortem](https://sre.google/sre-book/postmortem-culture/) as "a written record of an incident, its impact, the actions taken to mitigate or resolve it, the root cause(s), and the follow-up actions to prevent the incident from recurring", and the method assumes a root cause can be found in the code or the configuration.
 
-The field is starting to converge on solutions, and most teams are still catching up.
+AI agents fail in production in ways that fit only part of that form. An agent has ordinary causes too, such as a timeout that was retried, and it has a second kind where nothing in the code is wrong and the model acted on something it never checked.
 
-These failures cluster into four categories. I wrote about the specific error patterns in my post on [production AI agent errors](/articles/agent-error-handling/) if you want the taxonomy.
-
-The piece you are reading now is about why the failures happen in the first place and what actually helps.
-
-## Agents fail because the loop is not where you think it is
-
-Most engineers assume the agent loop runs in their code. It does not.
-
-The loop runs inside the model's forward pass. Your code orchestrates around it, and the actual decisions happen inside a black box you cannot step through with a debugger.
-
-Two consequences follow from that. The model can drift mid-loop.
-
-I once watched a code-refactor agent start out renaming a function, get three files deep, then quietly reframe its own job as "clean up the imports" because a long file of tool output had pushed the original instruction out of its working attention. The second consequence is that you cannot set a hard budget on loop iterations the way a `while` counter caps a normal loop.
-
-The model decides when it is done, and it can be wrong about that.
-
-Reflex agents and deliberative ones fail differently, a split the [taxonomy of AI agents I wrote](/articles/ai-agent-taxonomy/) covers in structural detail. A reflex agent that misfires usually does one wrong thing and stops.
-
-A deliberative one builds a wrong plan and then executes ten coherent steps toward the wrong outcome. You need to know which category you are building before you can predict how it will break.
-
-## Context window exhaustion is the silent killer
-
-Agents accumulate state in the context window. The longer a session runs, the more tokens get spent on history, tool results, and intermediate reasoning, until the window fills up.
-
-Think of it like a whiteboard the agent never erases: every tool call and every reply gets jammed onto the same surface, and once the board is full, older notes get wiped to make room whether or not they still matter.
-
-A customer support agent I watched handled the first 40 turns of a conversation cleanly. Around there the context began compressing, the model lost access to the opening of the chat, and the agent started giving answers that contradicted what it had promised the customer 30 turns earlier.
-
-It was not lying. It literally could no longer see its own earlier replies.
-
-[Short-term memory for AI agents](/articles/short-term-agent-memory/) covers the mechanics of how this happens. Bigger context windows look like the obvious answer and they are the wrong one, because doubling the window roughly doubles the per-call inference bill on every turn, which gets brutal once you run thousands of concurrent sessions.
-
-What works is explicit memory management with eviction policies, the kind of thing most frameworks implement badly or skip entirely.
-
-## Multi-agent systems amplify every failure mode
-
-Splitting a task across multiple agents does not hand you one agent's reliability. You get the product of all their reliabilities, the same way a chain of five hand-offs is only as sound as every link surviving.
-
-Five agents each running at 90% reliability multiply out to 59% overall. That is not a production system.
-
-Teams scale to multi-agent architectures because they want parallelism or role specialization, and then they forget to budget for the coordination overhead. When the tradeoffs actually pencil out is exactly what [Multi-agent versus single-agent tradeoffs](/articles/multi-agent-vs-single-agent/) works through.
-
-Three failure modes dominate the multi-agent systems I see. Context pollution, where one agent's scratch work leaks into another's prompt and muddies its reasoning.
-
-Cascading errors, where a planner agent hands a researcher agent a subtly wrong task and the researcher dutifully executes it. And silent agreement on wrong answers, where two agents talk past each other and settle on a confident, incorrect conclusion that neither would have reached alone.
-
-## Tool use introduces failures your tests never catch
-
-Agents call tools, tools fail, and the failure modes are mundane right up until they hit production. A timeout is the classic one.
-
-The tool call hangs, the agent retries, the retry succeeds, and because the agent never checks whether the first call already landed, it double-executes. A refund gets issued twice.
-
-A Slack message goes out twice. A database row gets incremented twice.
-
-None of this shows up in a happy-path test, because in tests the tool never times out.
-
-Prompt injection sits in a nastier class of tool failure. An adversarial input riding in through the agent's context can hijack a tool call, the way a forged note slipped into an assistant's inbox could get them to wire money if they trusted every instruction they read.
-
-I have watched this happen for real on an agent that summarized inbound support tickets, where one ticket body contained instructions aimed squarely at the model rather than the human.
-
-The [Model Context Protocol](/articles/model-context-protocol/) was designed partly to fence off this class of failure, though protocol compliance still varies a lot across implementations.
+That second kind is where the measured failures sit, so it is where this page spends its length.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/ai-agent-failures/failure-modes.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/ai-agent-failures/failure-modes.narrow.svg" width="288" height="888"><img class="np-has-narrow" src="/static/images/diagrams/ai-agent-failures/failure-modes.svg" width="720" height="488" alt="The agent loop drawn as a ring of perceive, think, act, and remember, with two failure points marked. At act, a tool call times out, the agent retries, and the action executes twice. At perceive, context pollution lets one agent's scratch work leak into another's prompt." loading="lazy" decoding="async"></picture></a>
   <figcaption>Timeouts, retries, partial failure, and drifting state: underneath, a distributed systems problem.</figcaption>
 </figure>
 
-## What the field is doing about it
+## Why do AI agents fail in production?
 
-Solutions are emerging, just unevenly distributed across the teams that need them.
+They fail by proceeding on a guess more often than for any other reason. Real-SWE 1.1, a benchmark Specific Labs [published in October](https://withspecific.com/blog/real-swe), ran 18 coding models on tasks from private company codebases and sorted every failed run by cause.
 
-Circuit breakers for agents are starting to show up. Borrowed straight from the resilience pattern that trips a service offline when downstream calls keep failing, [agent circuit breakers](/articles/agent-error-handling/) halt the loop once the error rate crosses a threshold, so a stuck retry loop cannot keep firing actions for an hour.
+| Cause of a failed run, all 18 models | Share |
+| --- | --- |
+| Unverified assumption | 33.1% |
+| Missed requirement | 28.7% |
+| Misunderstood task | 16.4% |
+| Integration error | 14.7% |
+| Wrong logic | 4.4% |
+| Regression | 2.0% |
+| Wrong file | 0.8% |
 
-Few production teams have these yet, and the pattern is simple enough to write yourself in an afternoon.
+Wrong logic, the failure a traditional bug hunt looks for, is under one run in twenty. The top row is defined as a run that "Builds on a guess about the system instead of checking it in the workspace", and with the next two it accounts for 78% of the failures.
 
-Observability keeps improving. The agent observability stack I reviewed covers the tools that surface what the agent is actually doing inside the loop, every prompt, every tool result, every retry.
+The benchmark covers coding agents on 25 tasks, so the shares won't transfer to a support bot unchanged. The ordering is still the useful part: the model could usually have done the work, and it didn't find out what the work was.
 
-Run an agent without that and you are debugging a crash with no stack trace.
+## Why does a failed agent run resist a postmortem?
 
-Context management is finally getting serious attention. Teams are walking away from naive accumulation toward structured memory hierarchies with explicit eviction, deciding on purpose what stays in the window and what gets summarized or dropped.
+A postmortem looks for a cause that will produce the failure again, and an agent may not fail the same way twice. Real-SWE reports each score as "pass@1, averaged over five independent runs per task", because one run of the same model on the same task doesn't settle whether it can do it.
 
-Where those patterns are converging is the subject of [the state of AI agent memory in 2026](/articles/agent-memory-2026/).
+The record is thinner too. A stack trace names a line, and an agent's wrong assumption leaves no line behind unless every tool call and result was logged.
 
-## What you should do today
+Michael Lynch's [catalogue of coding-agent annoyances](https://mtlynch.io/why-are-coding-agents-so-dumb/) from October 9 has a failure with no error in it at all. After starting a long task overnight, Lynch found that the agent "stopped two minutes after I left to ask me what it should name a git branch and then sat all night waiting for my answer."
 
-Running agents in production without having read my post on [production AI agent errors](/articles/agent-error-handling/)? Start there.
+## How do multiple agents change the odds?
 
-A concrete error taxonomy beats general advice every time.
+They multiply them. A chain succeeds only when every step does, so per-step reliability compounds downward with length.
 
-Add circuit breakers before you scale the agent count. Add observability before you add the next agent.
+```python
+"""Chance that a chain of steps all succeed, for a few per-step success rates."""
+for rate in (0.90, 0.95, 0.99):
+    cells = "  ".join(f"{steps:>2} steps {rate ** steps:5.1%}" for steps in (5, 10, 20))
+    print(f"per-step {rate:.0%}:  {cells}")
+```
 
-Those two investments have headed off more production incidents, in my experience, than any amount of prompt tuning.
+```text
+per-step 90%:   5 steps 59.0%  10 steps 34.9%  20 steps 12.2%
+per-step 95%:   5 steps 77.4%  10 steps 59.9%  20 steps 35.8%
+per-step 99%:   5 steps 95.1%  10 steps 90.4%  20 steps 81.8%
+```
 
-Agents are not failing because the technology is immature. They fail because the operational patterns around them are still being invented.
+A chain of five steps at 90% each succeeds 59% of the time. The arithmetic assumes the steps fail independently, which flatters a real system, since one agent's wrong output becomes the next agent's input.
 
-What I see in production, again and again, is teams applying LLM-era intuition to what is, underneath, a distributed systems problem: timeouts, retries, partial failure, state that drifts out from under you. The fixes already exist.
+That is the case for keeping a design small until a measurement justifies more. [Multi-agent versus single-agent tradeoffs](/articles/multi-agent-vs-single-agent/) covers when the split pays, and the [types of AI agents](/articles/ai-agent-taxonomy/) page sets out what each step up in autonomy adds.
 
-Knowing which ones apply to your situation is the work that remains.
+## Which failures are ordinary engineering?
+
+Timeouts, retries and lost state are, and they have known fixes. A tool call that times out and is retried can run twice, which is how a refund gets issued twice.
+
+The fixes are the distributed-systems ones: idempotency keys and a cap on retries, with a circuit breaker that halts the loop after repeated errors. The [error handling guide](/articles/agent-error-handling/) works through them with a run example.
+
+Lost state is the same class of problem in a different place. A long session pushes early instructions out of the context window, which [short-term memory for AI agents](/articles/short-term-agent-memory/) covers, and the [state of agent memory](/articles/agent-memory-2026/) surveys the tools for keeping it.
+
+## What reduces the guessing?
+
+Give the agent a way to check and a reason to use it. The measured failures are about verification, so the countermeasures are the things that make checking cheap: tests the agent can run, tool results that say what happened, and instructions that name the checks.
+
+Protocols help with the plumbing. The [Model Context Protocol](/articles/model-context-protocol/) gives tools a standard way to report an error, and that still leaves the decision about what to do next.
+
+I have no production incident data of my own to add to the table above. Its value is that someone counted, and the count points away from the model's reasoning and toward what the model was allowed to assume.
