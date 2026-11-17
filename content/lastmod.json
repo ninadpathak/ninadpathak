@@ -9,7 +9,7 @@
   },
   "agent-error-handling": {
     "lastmod": "2026-11-17",
-    "sources": "49f2771a86484316c4d369d1ed1fc2556c0d915e374b81b52ffe60336bf56b2a"
+    "sources": "8e586a18244cf63cac744f81d8f7bdbdf68ef8dd33157fa7863f534d95f18f4c"
   },
   "agent-harnesses": {
     "lastmod": "2026-11-17",
@@ -41,11 +41,11 @@
   },
   "ai-agent-failures": {
     "lastmod": "2026-11-17",
-    "sources": "9b5b5239196c6016fb77f2cc38c0d1c34a6b69eafc7fd24aae89a1cdcbe1f495"
+    "sources": "fc1ea610db7f6b8ea5575e4872c2db0b3d8bb101c1faaf08a4fcd87773a77e89"
   },
   "ai-agent-taxonomy": {
     "lastmod": "2026-11-17",
-    "sources": "1827928a73967901b05793e4cd1af095a78934ddf486f1fe5bd0a04645ab5057"
+    "sources": "80b6240c66ff0bcc897892c4d508f6073a0135d15e03f414ffd36295ca79c9df"
   },
   "ai-crawlers": {
     "lastmod": "2026-11-17",
@@ -93,7 +93,7 @@
   },
   "coding-models-new-code-vs-change": {
     "lastmod": "2026-11-17",
-    "sources": "690ab3a840771ce1987f7696d1648e2e51b2ca01593bee33eed6280c15a00cf1"
+    "sources": "a7884096dd217085e95d19381280e6edf1f69df94e1b7914ae094e2bf4951489"
   },
   "context-windows-vs-memory": {
     "lastmod": "2026-11-17",
@@ -197,7 +197,7 @@
   },
   "llm-token-budgets": {
     "lastmod": "2026-11-17",
-    "sources": "6d325fb35f70ca7b255fcd49047a7a11753d2fc8be4836c008bb14a041e7a752"
+    "sources": "ef6dcfbd4bef399ef56d73d219f0f82712b4fec526d7b357f2e06a14f9f8a065"
   },
   "llms-txt": {
     "lastmod": "2026-11-17",
@@ -233,7 +233,7 @@
   },
   "nobody-understands-the-code": {
     "lastmod": "2026-11-17",
-    "sources": "b2b3df5ca375026b69eaed654e268ebb8cda1424d779068ff09956f1a26bc17f"
+    "sources": "94c3d0d330e89f76795fa50618812d8a4dd31f941e6ea7bea5cc5d928cdf837a"
   },
   "quickstart-guide": {
     "lastmod": "2026-11-17",
@@ -250,6 +250,10 @@
   "rag-vs-memory": {
     "lastmod": "2026-11-17",
     "sources": "83b3201340e9f86c0701931287dfc814e4331383d8724d09221bc8f31b8fb8bd"
+  },
+  "red-build-nobody-reads": {
+    "lastmod": "2026-11-17",
+    "sources": "3fdf94473095a526bac1475cbb505c5b938acd65c7f1c54619cc34712ce718a5"
   },
   "release-notes-template": {
     "lastmod": "2026-11-17",
@@ -277,7 +281,7 @@
   },
   "speculative-decoding": {
     "lastmod": "2026-11-17",
-    "sources": "1d1d90c43df0cee0ad1629cfe88cd2dd7ac63076f8ff15e4643af6cf3c1e0ff4"
+    "sources": "9eb0bb37daec75afbe0379c75fe08122af792bde4f62c04d642f1fea61f35d02"
   },
   "stripe-technical-blog": {
     "lastmod": "2026-11-17",
@@ -293,7 +297,7 @@
   },
   "time-to-first-token": {
     "lastmod": "2026-11-17",
-    "sources": "c8f275c89ff24ee69ce48dea17595b68d2319baf3b21309b5dd2e4af6ce49e3b"
+    "sources": "d5f6114b8fe50cab77b004d7b56d2cc670e1b504f46b7f6fdae4ed43fd019a47"
   },
   "vector-embeddings": {
     "lastmod": "2026-11-17",
