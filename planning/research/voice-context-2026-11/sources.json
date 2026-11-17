@@ -1344,7 +1344,6 @@
       "quotes": [
         "Released November 2026",
         "has a 1M tokens context window",
-        "# 1 / 81",
         "has a time to first answer token of"
       ],
       "connects": [
@@ -1352,6 +1351,7 @@
         "time-to-first-token"
       ],
       "snapshot_2026_11_17": [
+        "Intelligence # 1 / 81 (the count read 87 models later on 2026-11-17)",
         "Time to first answer token 208.11s",
         "Claude Fable 5.2 has a time to first answer token of 208.11s (max), 48.22s (xhigh), 23.65s (high), 9.20s (medium), and 7.22s (low)"
       ],
