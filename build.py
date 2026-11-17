@@ -1646,7 +1646,12 @@ class SiteBuilder:
         for page in service_pages:
             lines += section(page["title"], page["url"], page["markdown"])
         if process_page and process_page["published"]:
-            lines += section(process_page["title"], process_page["url"], process_page["markdown"])
+            # The stages by name, with the full text one fetch away: the whole page
+            # here would push this file past the size it is kept to.
+            stages = "\n".join(f"{int(stage['number'])}. {stage['title']}" for stage in process_page["stages"])
+            lines += section(process_page["title"], process_page["url"],
+                             f"{process_page['lead']}\n\n{stages}\n\n"
+                             f"Every stage in full: {base}{process_page['url']}index.md")
         lines += section(about.get("title", "About"), "/about/", about.content)
         # Case studies go in as their one-line summaries with a link, which keeps the
         # file short. The summaries still quote headline figures, and build_work_pages

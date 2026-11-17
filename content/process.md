@@ -26,7 +26,7 @@ stages:
       - "We talk for 30 minutes about the reader and the decision the page has to support."
       - "I require a demo account and API keys, plus any account that already holds data. I also ask what evidence and engineering review exist."
       - "Within 24 hours of that call you get a written brief and a specific timeline. Once the brief is agreed, we start with a paid trial piece."
-    evidence: "Steps one and two of [how a piece gets made](/services/#how-a-piece-gets-made), and how I onboard a client."
+    evidence: "Steps 1 to 4 of [how we'd work together](/services/#how-wed-work-together) on the services page."
   - id: research
     label: Research
     title: "Research: I run the product before I write"
@@ -36,7 +36,7 @@ stages:
       - "I build or test a working example locally before there's a draft."
       - "Then I go past the happy path and note the edge cases that show up after it."
       - "On the [Centus](/work/centus/) guides, when the docs said one thing and the framework did another, I kept what worked in the code. For [LinuxForDevices](/work/linuxfordevices/) a command that hadn't been run wasn't ready to publish."
-    evidence: "Step three of [how a piece gets made](/services/#how-a-piece-gets-made), and the [Centus](/work/centus/) and [LinuxForDevices](/work/linuxfordevices/) case studies."
+    evidence: "Step 3 of [how we'd work together](/services/#how-wed-work-together), and the [Centus](/work/centus/) and [LinuxForDevices](/work/linuxfordevices/) case studies."
   - id: draft
     label: Draft
     title: "Draft: in the order a developer follows"
@@ -46,7 +46,7 @@ stages:
       - "I write the draft in the order a developer follows it, built around the example I already ran. It takes about 5 days from brief to draft."
       - "AI helps me prepare research and attack a draft. I won't ask a model to manufacture product understanding or personal judgment."
       - "The draft arrives as a Google Doc or a Markdown pull request, or in whatever your team already uses. It says what I'd do, and it has an owner who knows why each claim is there."
-    evidence: "Step four of [how a piece gets made](/services/#how-a-piece-gets-made), and [what I believe](/about/#what-i-believe) on the about page."
+    evidence: "Steps 5 and 7 of [how we'd work together](/services/#how-wed-work-together), and [what I believe](/about/#what-i-believe) on the about page."
   - id: checks
     label: Checks
     title: "Checks: every claim traced to a source"
@@ -68,7 +68,7 @@ stages:
       - "When one writer isn't enough, the review scales to a team. At [Mem0](/work/mem0/) I wrote 11 guides and ran a team of 13 writers, with the hiring and the technical reviews."
     quote: "Our devs called it awesome and just sent it ahead for publishing."
     quote_by: "Roman Hresko, Head of Content at Centus"
-    evidence: "Step five of [how a piece gets made](/services/#how-a-piece-gets-made), and the [Centus](/work/centus/) and [Mem0](/work/mem0/) case studies."
+    evidence: "Step 6 of [how we'd work together](/services/#how-wed-work-together), and the [Centus](/work/centus/) and [Mem0](/work/mem0/) case studies."
   - id: publish
     label: Publish
     title: "Publish: findable by search engines and by agents"

@@ -141,8 +141,8 @@ class ProcessPageTests(unittest.TestCase):
         for link in sorted(links - chrome):
             with self.subTest(link=link):
                 self.assertIn(link.split("index.md")[0], built)
-        self.assertIn('href="/services/#how-a-piece-gets-made"', self.html)
-        self.assertIn('id="how-a-piece-gets-made"', self.builder.load_service_pages()[0]["content"])
+        self.assertIn('href="/services/#how-wed-work-together"', self.html)
+        self.assertIn('id="how-wed-work-together"', self.builder.load_service_pages()[0]["content"])
 
     def test_the_page_loads_its_own_stylesheet_and_script_and_no_library(self):
         self.assertEqual(self.html.count('href="/static/css/process.css'), 1)
