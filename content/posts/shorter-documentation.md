@@ -75,7 +75,9 @@ The opening block carries the heaviest load. A line such as "This page explains"
 
 Willison's details tag is a good patch for a pull request and a poor fit for docs. A collapsed section still has to be kept true, and a toggle gives it no URL and no title of its own.
 
-Splitting by page does the same job with those problems solved. Sections with their own headings are the halfway step, named by the rule in [documentation headings](/articles/documentation-headings/), and [agent harnesses](/articles/agent-harnesses/) is built that way, as one page whose seven sections can each be linked.
+Splitting by page does the same job with those problems solved. Sections with their own headings are the halfway step, and [documentation headings](/articles/documentation-headings/) has the rule for naming them.
+
+The [agent harnesses](/articles/agent-harnesses/) page is built that way, as one page whose seven sections can each be linked.
 
 ## Does shorter documentation matter when agents read it?
 

@@ -6,7 +6,7 @@ siblings:
 - ai-memory-management
 bridges:
 - slug: voice-agent-latency
-  reason: The context window limit is the reason an agent needs memory.
+  reason: A memory lookup in the middle of a turn is silence on the line, which the latency page measures.
 date: 2026-04-19
 description: 'Memory for voice AI agents has one rule text chatbots skip: store what the caller heard. How OpenAI, LiveKit and Pipecat differ, with a simulated example.'
 status: published

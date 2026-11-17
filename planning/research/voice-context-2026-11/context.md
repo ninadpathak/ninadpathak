@@ -277,3 +277,9 @@ A links-only batch on the 38 posts the worklist marks "done or newer", which is 
 
 `audit_clusters --strict` reports 0 errors and no warning on any of the 38 or on the batch 5 pieces. The 111 warnings left are on posts the voice rewrite has not reached.
 
+### Retrofit review fixes (2026-11-17)
+
+The review found 2 blockers, 8 should-fix items and 6 notes. Two added sentences were false about their target (the MCP tutorial builds a two-tool server; the hub has no page for every documentation type) and are corrected. Ten hub sentences sat between a paragraph and the one that refers back to it and moved to the end of the introduction. Seven that described the site's navigation now make a claim about the subject. Two links to lambda-calculus-ai claimed it tests a habit it does not; one is gone and the other says only that a script grades the answers, so that post has one inbound link from its hub and keeps the warning. Bridge reasons on eleven links now describe the link.
+
+Rule for later batches: the hub link goes where the paragraph flow allows it, and never between a paragraph and the one that refers back to it.
+

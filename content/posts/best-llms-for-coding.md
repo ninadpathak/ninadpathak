@@ -9,9 +9,9 @@ bridges:
 - slug: agent-harnesses
   reason: A coding agent is one agent loop with a harness around it.
 - slug: lambda-calculus-ai
-  reason: A coding agent is one agent loop with a harness around it.
+  reason: The lambda calculus exercise is a composition-level check that a leaderboard of single tasks lacks.
 - slug: mixture-of-experts
-  reason: Context limits and token cost decide how a coding agent is configured.
+  reason: One of the models compared is a dense design chosen over a mixture of experts.
 date: 2026-03-12
 description: 'The best LLMs for coding on Real-SWE 1.1 (October 2026): the leaders, the cost per resolved task, open-weight options and a test for your own repo.'
 status: published
@@ -23,14 +23,14 @@ updated: 2026-11-17
 
 The March version of this page named a best LLM for coding in each of five kinds of work, and none of the models it picked is among the 18 in the benchmark I now trust for this question. A list like that lasted eight months, so this version dates its answer and spends its length on reading the evidence, which ages slower.
 
-The model is one of several choices a team makes about [coding agents](/articles/coding-agents/).
-
 As of November 17, 2026, the best LLMs for coding work that resembles a job are Claude Opus 5.5 and GPT 6 Astra, which tie near 57% on [Real-SWE 1.1](https://withspecific.com/blog/real-swe), a benchmark Specific Labs published in October. GPT 6.1 Sol resolves 47% of the same tasks for under a dollar a run, and the strongest open-weight entries sit near 39%.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/best-llms-for-coding/coding-personas.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/best-llms-for-coding/coding-personas.narrow.svg" width="288" height="648"><img class="np-has-narrow" src="/static/images/diagrams/best-llms-for-coding/coding-personas.svg" width="720" height="328" alt="Five kinds of coding work, each paired with the model family the March 2026 version of this article picked for it: autonomous work with Claude Opus, repository-scale reasoning with Gemini Pro, cost-sensitive use with DeepSeek, planning with GPT Codex and autocomplete with Cursor." loading="lazy" decoding="async"></picture></a>
   <figcaption>The pairings this page made in March 2026. Choosing by the kind of work still holds, and the table below replaces the picks.</figcaption>
 </figure>
+
+The model is one of several choices a team makes about [coding agents](/articles/coding-agents/).
 
 ## Which LLM is best for coding right now?
 

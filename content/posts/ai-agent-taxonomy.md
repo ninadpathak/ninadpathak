@@ -9,7 +9,7 @@ bridges:
 - slug: context-windows-vs-memory
   reason: The stateful label on an agent type depends on what counts as kept state, which that page defines.
 - slug: llm-structured-outputs
-  reason: Each turn of the agent loop spends tokens and latency.
+  reason: Structured outputs keep the arguments of a tool call to a schema.
 - slug: ai-memory-management
   reason: Remembering is a step in the agent loop, and the memory hub covers it in full.
 date: 2026-04-21
@@ -92,7 +92,7 @@ A prompt goes in and a reply comes out, with nothing kept between calls. The onl
 
 The model picks a tool and fills in its arguments, the tool runs, and the model writes its reply from the result. The tool definitions decide what the model can choose from, and [structured outputs](/articles/llm-structured-outputs/) are how the arguments are kept to a schema.
 
-A shared format for those definitions is what the [Model Context Protocol](/articles/model-context-protocol/) provides, and the [MCP server tutorial](/articles/mcp-server-tutorial/) builds one tool on it.
+A shared format for those definitions is what the [Model Context Protocol](/articles/model-context-protocol/) provides, and the [MCP server tutorial](/articles/mcp-server-tutorial/) builds a two-tool server on it.
 
 ### Type 3: loop
 

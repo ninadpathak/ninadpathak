@@ -6,9 +6,9 @@ siblings:
 - llms-txt
 bridges:
 - slug: api-documentation
-  reason: Crawling and page structure come before any AI search check.
+  reason: A reference entry written to be read without its neighbours is the model for a page an agent fetches.
 - slug: release-notes-template
-  reason: Crawling and page structure come before any AI search check.
+  reason: A release note that leads with the required action is the model for a page an agent fetches.
 date: 2026-11-16
 description: Fern says agents are now over half of the requests to the docs it hosts. A close read of the numbers, what they change for docs teams, and what they leave out.
 slug: agents-reading-docs

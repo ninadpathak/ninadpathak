@@ -23,9 +23,9 @@ video: llms-txt
 
 Cloudflare's root llms.txt lists its products, and each entry links to that product's own llms.txt with the full index of its pages. Stripe's file opens with prose instructions for coding agents before its first list of links.
 
-The file is the newest part of [AI search optimization](/articles/ai-search-optimization/) for documentation.
-
 Both are valid Markdown, and both answer to the same short proposal. They read nothing alike, and the validator on this site finds no errors in one and 21 in the other, though neither result says whether anything fetches the file.
+
+Whether to publish one is a small decision within [AI search optimization](/articles/ai-search-optimization/) for documentation.
 
 ## What llms.txt is
 

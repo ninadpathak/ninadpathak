@@ -18,12 +18,12 @@ At sixteen concurrent requests, two NVIDIA DGX Stations serving GLM-5.3 through 
 
 LLM inference optimization is the work of serving more tokens per GPU at a latency users will accept, and that run shows where the work now sits. The run had prefix caching and an FP8 KV cache switched on, the batching and paging this page used to tell you to enable were already running, and doubling the load still made the whole system slower.
 
-This page is the overview for the [LLM inference](/articles/ai-engineering/) hub.
-
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/llm-inference-optimization/inference-stack.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/llm-inference-optimization/inference-stack.narrow.svg" width="288" height="1040"><img class="np-has-narrow" src="/static/images/diagrams/llm-inference-optimization/inference-stack.svg" width="720" height="856" alt="The inference stack as layered slabs, top to bottom: serving engines (vLLM, TensorRT-LLM, SGLang); continuous batching, drawn as request lanes where a finished request frees its slot for a new one; Flash Attention, drawn as a score matrix streamed tile by tile into on-chip memory; quantization, drawn as one weight at 16, 8, and 4 bits; the paged KV cache, drawn as three sequences mapped onto scattered memory blocks; and the GPU with its memory stacks. Numbered squares mark four of the layers, top to bottom: batching, the attention kernel, FP8 quantization and the paged KV cache." loading="lazy" decoding="async"></picture></a>
   <figcaption>The serving stack, from engine to GPU. Batching and the paged KV cache come switched on in vLLM and SGLang, and precision is the layer left to choose.</figcaption>
 </figure>
+
+Every other [LLM inference](/articles/ai-engineering/) technique is judged by what it does to tokens served per GPU.
 
 ## Which LLM inference optimization techniques are on by default?
 

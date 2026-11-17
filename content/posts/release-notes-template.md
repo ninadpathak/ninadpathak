@@ -21,7 +21,7 @@ After its download links, the [Kubernetes v1.31.0 changelog](https://github.com/
 
 Both projects order the page around the upgrade decision. My template follows the same order, and it ships with a filled example and a small checker that fails a release note missing its rollback line.
 
-It belongs with the other templates in the [technical documentation](/articles/technical-documentation/) hub.
+Of all [technical documentation](/articles/technical-documentation/), release notes are read closest to a decision.
 
 ## What a release notes template contains
 

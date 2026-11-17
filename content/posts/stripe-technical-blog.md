@@ -23,7 +23,7 @@ The five newest posts on Stripe's engineering blog are all about agents. Between
 
 That run explains the blog better than the word moat does. Stripe's engineering blog became an advantage because it follows whoever is integrating Stripe at the moment and explains the hard part to them in public, and this autumn that reader is a developer working through a coding agent.
 
-It is the example I come back to for [developer content](/articles/developer-experience/) that keeps its readers.
+For [developer content](/articles/developer-experience/), this blog is the example I come back to.
 
 ## Where the Stripe engineering blog lives and what it publishes
 

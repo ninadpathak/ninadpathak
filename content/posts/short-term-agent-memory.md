@@ -19,7 +19,7 @@ updated: 2026-11-17
 
 Short-term memory for an AI agent is whatever sits in the context window during the current run, and on Anthropic's API, for one, the step that manages it can now run on the server. A hand-written sliding window with a scoring function for each message, which this page used to teach, is the wrong place to start there.
 
-It is the first layer of [AI agent memory](/articles/agent-memory/), and the only one the model reads directly.
+The model reads this part of [AI agent memory](/articles/agent-memory/) directly, and everything else has to be loaded into it.
 
 The risk moved with it. Claude Code 2.1.323, released on November 12, [fixed a bug](https://code.claude.com/docs/en/changelog) in which running `/compact` a second time could end up "summarizing away a message that Claude had not answered yet".
 

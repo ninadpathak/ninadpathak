@@ -84,7 +84,7 @@ Ask for evidence in five areas before looking at a general portfolio.
 
 A further quality rarely appears in a job description, which is judgment about what to leave out. Strong AI writing omits guarantees the product can't keep and states uncertainty where the behavior is experimental.
 
-The habits carry over from older developer products. [Stripe's engineering blog](/articles/stripe-technical-blog/) is my reference for explaining the hard part to the person integrating, and [documentation for developer tools](/articles/devtools-documentation/) lists the pages every such product needs.
+The habits carry over from older developer products. [Stripe's engineering blog](/articles/stripe-technical-blog/) is my reference for explaining the hard part to the person integrating, and [documentation for developer tools](/articles/devtools-documentation/) names the pages to fix first on a startup's docs site.
 
 Engineers writing these pages themselves can start from [technical writing for engineers](/articles/technical-writing-for-engineers/).
 

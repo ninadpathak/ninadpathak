@@ -33,7 +33,7 @@ I joined Mem0 in February 2026 and ran a team of 13 writers there, and Mem0 sell
 
 RAG answers "what do the sources say about this question", and memory answers "what is still true about this user or task". Both put text in front of the model, and both can sit on the same vector index.
 
-The second question is the subject of the [AI agent memory](/articles/agent-memory/) hub.
+[AI agent memory](/articles/agent-memory/) is the work of keeping that second answer current.
 
 | | RAG | Memory |
 | --- | --- | --- |

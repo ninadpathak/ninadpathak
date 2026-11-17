@@ -28,7 +28,7 @@ updated: 2026-11-17
 
 Technical documentation is the set of documents that help someone use a product, understand a system, operate it safely, or change it without losing context. The types below differ by the reader's task, and this year they also started to differ by who reads them and by whether a model can write them.
 
-It is the map for the rest of the [technical documentation](/articles/technical-documentation/) hub, which has a page for each type.
+[Technical documentation](/articles/technical-documentation/) sorted this way gives each page one reader and one job.
 
 | Type | The reader's question | Group |
 | --- | --- | --- |

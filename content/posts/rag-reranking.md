@@ -21,7 +21,7 @@ To find out what a reranker changes, I ranked four small sets of candidate passa
 
 Reranking in RAG is a second scoring pass: a retriever returns its top-k candidates, a reranking model reads the query together with each candidate, and the reordered best few go to the language model. The run supports adding that step on one condition, that its scores are checked against marked answers before anyone sets a threshold on them.
 
-That makes it the second stage of a [RAG pipeline](/articles/rag/), after retrieval.
+That makes it the stage after retrieval in a [RAG pipeline](/articles/rag/).
 
 ## What is reranking in RAG?
 

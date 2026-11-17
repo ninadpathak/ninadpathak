@@ -6,7 +6,7 @@ siblings:
 - red-build-nobody-reads
 bridges:
 - slug: code-documentation
-  reason: The files that configure a coding agent are documentation.
+  reason: That guide covers the benchmark in which a model told to omit comments added them anyway.
 - slug: llm-token-budgets
   reason: Context limits and token cost decide how a coding agent is configured.
 date: 2026-11-17
@@ -21,11 +21,11 @@ work_note: 'I write about coding agents for developer-tool companies, and this e
 
 I believe it, because the games are linked and playable. The same month produced a benchmark run in which the same model passed 28 of 196 checkpoints.
 
-The distance between those two results is the question for anyone choosing [coding agents](/articles/coding-agents/).
-
 That run is Dex Horthy's [October SlopCodeBench update](https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/benchmarking-new-models-on-slop-code-bench.md), published on October 15. Its best result across every frontier model and effort setting belonged to OpenAI's Astra at the highest effort: 32 of 196, a strict pass rate of 16.33%.
 
 A model that can make a game fun on request and a model that fails six staged changes out of seven are the same model. The two results stop contradicting each other once you look at what each one asks for.
+
+The distance between those two results is the question for anyone choosing [coding agents](/articles/coding-agents/).
 
 ## What the two results measure
 

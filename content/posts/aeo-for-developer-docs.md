@@ -23,9 +23,9 @@ video: aeo-for-developer-docs
 
 Google's [guide to generative AI search](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide) says that optimizing for it "is optimizing for the search experience, and thus still SEO." The [GEO paper](https://arxiv.org/abs/2311.09735), accepted to KDD 2024, reported that rewriting content could raise its visibility in generative engine responses by up to 40% on its own benchmark.
 
-The hub on [AI search optimization](/articles/ai-search-optimization/) for documentation collects the checks this page refers to.
-
 Both are about getting a page into an answer, and for developer documentation they lead to the same work. I treat AEO and GEO as names for the editing SEO already asks of docs, plus two checks: crawler access by agent, and passages that still make sense when quoted alone.
+
+Both checks belong to [AI search optimization](/articles/ai-search-optimization/) for documentation, which begins with whether a page can be fetched at all.
 
 ## What AEO, GEO and SEO mean
 

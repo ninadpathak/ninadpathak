@@ -123,7 +123,7 @@ The quickstart owns first success, so it links to this entry once the reader has
 
 A generated reference keeps up with endpoints as they change. I write the recovery guidance explicitly, whether it lives in the OpenAPI response description or on the page, and I check the generated reference against the service.
 
-The comments and docstrings that a reference is generated from have their own guide, on [code documentation](/articles/code-documentation/).
+Comments and docstrings in the service's own code are a separate job, described in [code documentation](/articles/code-documentation/).
 
 ## FAQ
 

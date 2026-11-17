@@ -22,9 +22,9 @@ video: mcp-server-tutorial
 
 A tool's return value is part of its interface to the model, and its format decides what the model can do with the result. Tested with Claude Code 2.1.308 on Haiku 5.5, a `read_doc` tool that returned plain text led to the right line citation in one run of four, and the same tool returning numbered lines led to it in four of four.
 
-Tool design is the layer of [AI agent architecture](/articles/ai-agents/) that the builder controls completely.
-
 The docs-search server below makes that change, plus two decisions about refusals: it resolves every path before checking it against the one folder it may read, and it refuses with an error the model can read. Every command ran from a clean directory on 2026-10-22, with MCP Python SDK 2.3.0 and MCP Inspector 2.12.0, and the `server.py` and `test_server.py` shown here are the files that ran.
+
+Tool design is the layer of [AI agent architecture](/articles/ai-agents/) that the builder controls completely.
 
 ## How to set up an MCP server project in Python
 

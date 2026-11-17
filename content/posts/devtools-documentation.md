@@ -212,7 +212,7 @@ DevRel can amplify and humanize the product later. Weak docs make every later ch
 
 They document the happy path and assume support can cover the rest. Buyers are evaluating the unhappy path too.
 
-If docs do not explain constraints, migration, and failure handling, the product feels risky. For a product built on a model, the constraints include behaviour that shifts between snapshots, the subject of [writing for AI products](/articles/writing-for-ai-products/).
+If docs do not explain constraints, migration, and failure handling, the product feels risky. For a product built on a model, the constraints include behavior that shifts between snapshots, the subject of [writing for AI products](/articles/writing-for-ai-products/).
 
 **How should teams measure whether docs influence revenue?**
 

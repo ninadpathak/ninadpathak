@@ -3,10 +3,10 @@ category: ai-engineering
 primary_query: structured outputs
 siblings:
 - llm-inference-optimization
-- time-to-first-token
+- speculative-decoding
 bridges:
 - slug: agent-loop-anatomy
-  reason: An agent loop multiplies every inference cost.
+  reason: A tool call is the action payload inside an agent loop, whose control flow that page describes.
 date: 2026-03-27
 description: 'JSON mode, structured outputs and function calling promise different things. What each guarantees, what is left to your code, and what changes on self-hosted models.'
 status: published
@@ -19,8 +19,6 @@ updated: 2026-11-17
 
 Structured outputs constrain a model's completed output to a JSON Schema you supply, JSON mode only promises that the output parses as JSON, and function calling lets the model decide whether to call a tool and with what arguments. OpenAI's [Structured Outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs) describes the first as "the evolution of JSON mode" and says "We recommend always using Structured Outputs instead of JSON mode when possible."
 
-Constrained decoding is the part of [LLM inference](/articles/ai-engineering/) that an application developer touches directly.
-
 The guarantee is narrower than the name suggests, and the same guide spells out the limits in two sentences.
 
 "Structured Outputs constrains completed, non-refusal model output to your supplied JSON Schema. Your application still needs to handle refusals, incomplete responses, and API errors, and validate any business rules that the schema does not express."
@@ -29,6 +27,8 @@ The guarantee is narrower than the name suggests, and the same guide spells out 
   <a class="np-figure-zoom" href="/static/images/diagrams/llm-structured-outputs/output-mechanisms.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/llm-structured-outputs/output-mechanisms.narrow.svg" width="288" height="488"><img class="np-has-narrow" src="/static/images/diagrams/llm-structured-outputs/output-mechanisms.svg" width="720" height="528" alt="The same extraction prompt sent through three mechanisms. JSON mode guarantees only syntactically valid JSON, so a field can come back with the wrong type. Function calling lets the model decide whether to call a tool at all. Structured outputs constrain decoding to the schema, so every completed response matches it." loading="lazy" decoding="async"></picture></a>
   <figcaption>JSON mode guarantees valid JSON and nothing about your schema. Structured outputs enforce the schema on every completed response.</figcaption>
 </figure>
+
+Structured outputs are the part of [LLM inference](/articles/ai-engineering/) that an application developer sets directly, through a schema.
 
 ## JSON mode vs structured outputs vs function calling
 
@@ -50,7 +50,7 @@ A refusal comes back outside the schema. The Responses API returns it as a conte
 
 A response cut off by a length limit is incomplete whatever the mode. The guide's Responses examples check `response.status` and `incomplete_details` before reading the result, and its Chat Completions examples check the finish reason.
 
-Latency has one documented cost today, which lands on [time to first token](/articles/time-to-first-token/), and the guide states it differently in its two tabs. The Responses API tab says without qualification that "the first request you make with any schema will have additional latency as our API processes the schema, but subsequent requests with the same schema will not have additional latency."
+Latency has one documented cost today, and the guide states it differently in its two tabs. The Responses API tab says without qualification that "the first request you make with any schema will have additional latency as our API processes the schema, but subsequent requests with the same schema will not have additional latency."
 
 The Chat Completions tab opens the same note with "for fine tuned models" and adds "Other models do not have this limitation." Until the two agree, assume a first-request cost for any new schema.
 
@@ -84,7 +84,7 @@ I think the worry is right about a different failure than the one Ubicloud fixed
 
 [Outlines](https://github.com/dottxt-ai/outlines) is the library route for local models, and its README claims "Guaranteed valid structure" across backends including vLLM. [Instructor](https://python.useinstructor.com/) covers the other half, validation and automatic retries, for rules a schema can't express, such as a date that must fall after another date.
 
-The serving side of this, including how constrained and speculative decoding interact, is in the [LLM inference optimization guide](/articles/llm-inference-optimization/).
+The serving side of this, including how constrained and [speculative decoding](/articles/speculative-decoding/) interact, is in the [LLM inference optimization guide](/articles/llm-inference-optimization/).
 
 ## FAQ
 

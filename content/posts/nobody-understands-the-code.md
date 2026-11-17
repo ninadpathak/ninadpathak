@@ -6,9 +6,9 @@ siblings:
 - coding-models-new-code-vs-change
 bridges:
 - slug: design-doc-template
-  reason: The files that configure a coding agent are documentation.
+  reason: A design doc with non-goals and a rejected alternative is where the reasons behind code get recorded.
 - slug: code-documentation
-  reason: The files that configure a coding agent are documentation.
+  reason: The comment worth writing is the one that gives a reason the code cannot show.
 date: 2026-11-17
 description: A Reddit post said nobody understands the code after a year of agents. The Claude Code team says nobody needs the whole picture. Naur's 1985 paper shows what both miss.
 slug: nobody-understands-the-code
