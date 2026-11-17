@@ -1,0 +1,841 @@
+/* =====================================================================
+   PROCESS PAGE (/technical-writing-process/)
+   Loaded on that page only. Tokens come from main.css.
+
+   The page has three states.
+   1. Finished. Each stage is a text scene with its complete figure beside it. This is
+      the page with no script, under reduced motion, and in a window too short to hold
+      a figure and its text.
+   2. Scrubbed (.pp-live, with scroll-driven animations). The eight figures are pinned
+      to one place and each part follows the scroll. The script only adds the class.
+   3. Stepped (.pp-live.pp-io). Without scroll timelines process.js marks the scene and
+      beat on screen, and the same parts play as transitions.
+   States 2 and 3 move transform and opacity only.
+   ===================================================================== */
+.pp-rail,
+.pp {
+  --pp-rail-h: 44px;
+  --pp-top: calc(var(--nav-h) + var(--pp-rail-h));
+  --pp-stage-h: calc(100vh - var(--pp-top) - var(--space-12));
+  --pp-dur: 520ms;
+  --pp-icon: 56px;
+}
+
+/* ---------------------------------------------------------------------
+   Rail: the eight stages as links, stuck under the nav. Each link carries
+   its stage's icon above the bar, which is the overview on the opening screen.
+   --------------------------------------------------------------------- */
+.pp-intro { padding-bottom: calc(var(--space-14) + var(--space-16) + 56px); }
+
+.pp-rail {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 20;
+  height: var(--pp-rail-h);
+  background: var(--bg);
+  border-bottom: var(--rule);
+}
+
+.pp-rail-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  max-width: var(--max-w);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+/* One line through the centres of the eight icons. */
+.pp-rail-list::before {
+  content: '';
+  position: absolute;
+  right: calc(var(--space-6) + (100% - var(--space-12)) / 16);
+  bottom: calc(100% + var(--space-10) + var(--pp-icon) / 2);
+  left: calc(var(--space-6) + (100% - var(--space-12)) / 16);
+  height: 1px;
+  background: var(--text-3);
+}
+
+.pp-rail-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 100%;
+  font-family: var(--mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-3);
+  transition: color var(--t);
+}
+.pp-rail-link::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity var(--t);
+}
+.pp-rail-link:hover,
+.pp-rail-link[aria-current] { color: var(--text-1); }
+.pp-rail-link[aria-current]::after { opacity: 1; }
+.pp-rail-link[aria-current] .pp-rail-no { color: var(--accent); }
+
+.pp-rail-icon {
+  position: absolute;
+  bottom: calc(100% + var(--space-10));
+  left: calc(50% - var(--pp-icon) / 2);
+  display: grid;
+  place-items: center;
+  width: var(--pp-icon);
+  height: var(--pp-icon);
+  background: var(--bg-1);
+  border: var(--rule-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+}
+.pp-rail-icon .pf-icon { width: 24px; height: 24px; }
+
+/* ---------------------------------------------------------------------
+   Scenes and figures, finished state: one stage a row
+   --------------------------------------------------------------------- */
+.pp {
+  display: grid;
+  grid-template-rows: repeat(8, auto);
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.pp-scene { min-width: 0; padding: var(--space-14) 0 var(--space-8); scroll-margin-top: var(--pp-top); }
+.pp-figure { min-width: 0; padding: 0 0 var(--space-14); border-bottom: var(--rule); }
+.pp-frame { display: none; }
+
+.pp-scene-head { margin-bottom: var(--space-8); }
+.pp-scene-head .label { margin-bottom: var(--space-4); }
+.pp-scene-head h2,
+.pp-results h2,
+.pp-start h2 { font-size: clamp(1.5rem, 3vw, 2.125rem); }
+
+.pp-beats { display: grid; gap: var(--space-6); }
+
+.pp-beat {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: start;
+  gap: var(--space-4);
+}
+.pp-scene-head,
+.pp-beat,
+.pp-evidence,
+.pp-quote { max-width: 34rem; }
+
+.pp-beat-no {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-top: var(--space-hairline);
+  border: var(--rule-strong);
+  border-radius: var(--radius-sm);
+  font-family: var(--mono);
+  font-size: var(--font-size-sm);
+  line-height: var(--leading-none);
+  color: var(--text-3);
+}
+
+.pp-beat a,
+.pp-evidence a,
+.pp-result-client a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pp-quote {
+  margin-top: var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  border-left: var(--rule-accent);
+  background: var(--bg-1);
+}
+.pp-quote p { color: var(--text-1); }
+.pp-quote footer { margin-top: var(--space-2); font-size: var(--font-size-md); color: var(--text-3); }
+
+.pp-evidence {
+  margin-top: var(--space-6);
+  font-size: var(--font-size-md);
+  line-height: var(--leading-relaxed);
+  color: var(--text-3);
+}
+.pp-evidence-label,
+.pp-result-client,
+.pp-result-period,
+.pp-start-no {
+  font-family: var(--mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+.pp-evidence-label { margin-right: var(--space-1-5); color: var(--text-2); }
+
+/* ---------------------------------------------------------------------
+   Plate: head band, dotted field with crop marks, foot
+   --------------------------------------------------------------------- */
+.pf {
+  --pf-ink: var(--text-3);
+  --pf-r1: 1px;
+  --pf-r2: 2px;
+  display: flex;
+  flex-direction: column;
+  max-width: 34rem;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--bg);
+  border: var(--rule-strong);
+  border-radius: var(--radius-sm);
+}
+
+.pf-head,
+.pf-foot {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-4);
+}
+.pf-head { height: 40px; border-bottom: var(--rule); font-family: var(--mono); text-transform: uppercase; }
+.pf-foot { height: 26px; border-top: var(--rule); }
+
+.pf-kicker {
+  font-size: var(--font-size-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-caps-xl);
+  color: var(--accent);
+}
+.pf-kicker::before { content: '// '; opacity: 0.5; font-weight: var(--weight-regular); }
+.pf-no { font-size: var(--font-size-2xs); letter-spacing: var(--tracking-caps); color: var(--text-3); }
+
+/* The field is a size container: one unit, --u, is 1/468 of its width, so a figure
+   drawn on a 420 by 500 grid scales as one piece and keeps equal margins. */
+.pf-field {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: clip;
+  container-type: inline-size;
+}
+/* The 16px dot grid of the article plates, as a mask so its colour is a token. */
+.pf-field::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--border-2);
+  opacity: 0.55;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ccircle cx='8' cy='8' r='1'/%3E%3C/svg%3E") center / 16px 16px;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ccircle cx='8' cy='8' r='1'/%3E%3C/svg%3E") center / 16px 16px;
+}
+
+.pf-crop { position: absolute; width: 8px; height: 8px; }
+.pf-crop-tl { top: 10px; left: 10px; border-top: var(--rule-strong); border-left: var(--rule-strong); }
+.pf-crop-tr { top: 10px; right: 10px; border-top: var(--rule-strong); border-right: var(--rule-strong); }
+.pf-crop-bl { bottom: 10px; left: 10px; border-bottom: var(--rule-strong); border-left: var(--rule-strong); }
+.pf-crop-br { right: 10px; bottom: 10px; border-right: var(--rule-strong); border-bottom: var(--rule-strong); }
+
+/* The scale bar counts the stage: stage 3 fills three of its eight cells. */
+.pf-scale { display: flex; }
+.pf-scale-cell { display: block; width: 14px; height: 5px; border: var(--rule-strong); }
+.pf-scale-cell + .pf-scale-cell { border-left: 0; }
+.pf-scale-cell.is-on { background: var(--pf-ink); border-color: var(--pf-ink); }
+
+.pf-reg {
+  position: relative;
+  display: block;
+  width: 12px;
+  height: 12px;
+  border: var(--rule-strong);
+  border-radius: var(--radius-round);
+}
+.pf-reg::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: var(--accent);
+  border-radius: var(--radius-round);
+}
+
+/* ---------------------------------------------------------------------
+   Figure parts. Every size is a multiple of --u.
+   --------------------------------------------------------------------- */
+.pf-stage {
+  --u: clamp(0.6px, calc(100cqw / 468), 1.2px);
+  --pf-tile: calc(var(--u) * 64);
+  --pf-cell: calc(var(--u) * 18);
+  --pf-gap: calc(var(--u) * 8);
+  --pf-cap: max(12px, calc(var(--u) * 13));
+  --pf-small: max(8.5px, calc(var(--u) * 10));
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(var(--u) * 420);
+  height: 100%;
+  margin: 0 auto;
+}
+
+.pf-icon {
+  display: block;
+  width: calc(var(--u) * 26);
+  height: calc(var(--u) * 26);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pf-icon.is-check { color: var(--status-success); }
+.pf-icon.is-cross { color: var(--status-error); }
+
+.pf-tile,
+.pf-panel,
+.pf-page,
+.pf-box,
+.pf-pill,
+.pf-file {
+  background: var(--bg-1);
+  border: var(--rule-strong);
+}
+.pf-tile,
+.pf-panel,
+.pf-page { border-radius: var(--radius-sm); }
+
+.pf-tile {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: var(--pf-tile);
+  height: var(--pf-tile);
+  color: var(--text-2);
+}
+.pf-tile.is-small { --pf-tile: calc(var(--u) * 48); }
+.pf-tile.is-accent { background: var(--accent-lo); border-color: var(--accent); color: var(--accent); }
+.is-later { border-style: dashed; }
+.pf-tile.is-later,
+.pf-panel.is-later { background: var(--bg); }
+
+.pf-cap,
+.pf-tag { text-align: center; white-space: nowrap; }
+.pf-cap {
+  font-size: var(--pf-cap);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-heading-sm);
+  color: var(--text-1);
+}
+.pf-tag,
+.pf-pill,
+.pf-file {
+  font-family: var(--mono);
+  font-size: var(--pf-small);
+  line-height: var(--leading-snug);
+}
+.pf-tag {
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-caps-lg);
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.pf-stage > .pf-tag { margin-bottom: var(--pf-gap); }
+
+/* Connectors. A wire runs down the axis, an arrow runs across, a bus fans one stem
+   out. Each touches the edge it leaves and the edge it reaches. */
+.pf-wire,
+.pf-bus > i { display: block; flex: none; background: var(--pf-ink); }
+.pf-arrow-line { display: block; background: currentColor; }
+.pf-wire { position: relative; width: 1px; height: calc(var(--u) * 20); }
+.pf-wire.is-hot { width: 2px; background: var(--accent); }
+/* A run is a wire with a label on it. The label sits beside the line in the markup,
+   so drawing the line never stretches the text. */
+.pf-run { position: relative; display: flex; flex: none; justify-content: center; height: calc(var(--u) * 44); }
+.pf-run > .pf-wire { height: 100%; }
+/* A lead takes whatever height is left, equally at the top and the bottom, so the
+   figure stays centred and its wire reaches the edge of the field. */
+.pf-lead { flex: 1 1 0; height: auto; min-height: calc(var(--u) * 48); }
+
+.pf-pill,
+.pf-file {
+  padding: calc(var(--u) * 3) calc(var(--u) * 8);
+  border-radius: var(--pf-r2);
+  color: var(--text-1);
+  white-space: nowrap;
+}
+.pf-run > .pf-pill {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 5);
+  translate: -50% -50%;
+}
+.pf-pill .pf-icon { width: calc(var(--u) * 12); height: calc(var(--u) * 12); stroke-width: 2; }
+
+.pf-arrow { display: flex; align-items: center; min-width: 0; color: var(--pf-ink); }
+.pf-arrow-line { flex: 1; height: 1px; }
+.pf-arrow-head {
+  display: block;
+  flex: none;
+  width: 6px;
+  height: 10px;
+  margin-left: -6px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pf-arrow.is-rev { flex-direction: row-reverse; }
+.pf-arrow.is-rev .pf-arrow-head { margin: 0 -6px 0 0; scale: -1 1; }
+.pf-arrow.is-hot { color: var(--accent); }
+.pf-arrow.is-hot .pf-arrow-line { height: 2px; }
+.pf-arrow.is-dashed .pf-arrow-line { height: 0; background: none; border-top: var(--rule-strong); border-top-style: dashed; }
+
+.pf-bus { position: relative; display: block; flex: none; width: 100%; height: calc(var(--u) * 24); }
+.pf-bus > i { position: absolute; width: 1px; height: 50%; }
+.pf-bus-thirds { --pf-inset: calc(100% / 6); }
+.pf-bus-edge { --pf-inset: calc(var(--pf-tile) / 2); width: calc(var(--u) * 340); }
+.pf-bus-stem { top: 0; left: calc(50% - 0.5px); }
+.pf-bus > .pf-bus-bar { top: calc(50% - 0.5px); right: var(--pf-inset); left: var(--pf-inset); width: auto; height: 1px; }
+.pf-bus-drop { top: 50%; }
+.pf-bus-drop.is-first { left: calc(var(--pf-inset) - 0.5px); }
+.pf-bus-drop.is-mid { left: calc(50% - 0.5px); }
+.pf-bus-drop.is-last { right: calc(var(--pf-inset) - 0.5px); }
+/* Turned over: three drops come down and one stem leaves. */
+.pf-bus.is-up .pf-bus-stem { top: 50%; }
+.pf-bus.is-up .pf-bus-drop { top: 0; }
+
+/* An accent outline laid over a part, so "this one" arrives without a colour change. */
+.pf-hot {
+  position: absolute;
+  inset: -1px;
+  border: var(--rule-accent-thin);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Equal columns. Their centres are where the buses land. */
+.pf-thirds,
+.pf-side { display: grid; flex: none; justify-items: center; width: 100%; }
+.pf-thirds { grid-template-columns: repeat(3, 1fr); }
+.pf-side { grid-template-columns: repeat(2, 1fr); }
+.pf-thirds > .pf-panel { width: calc(var(--u) * 120); }
+
+/* A row the axis wire passes through, with one thing on each side of it. */
+.pf-through {
+  display: grid;
+  flex: none;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+}
+.pf-through > .pf-wire { align-self: stretch; height: auto; min-height: calc(var(--u) * 20); }
+.pf-through > .pf-side,
+.pf-through > .pf-stat,
+.pf-through > .pf-file { margin: var(--pf-gap) 0; }
+
+/* Small squares: topics, guides, days. */
+.pf-chips,
+.pf-four,
+.pf-guides,
+.pf-days,
+.pf-nine { display: grid; flex: none; justify-content: center; }
+.pf-chips,
+.pf-four { gap: var(--pf-gap); }
+.pf-chips { grid-template-columns: repeat(12, var(--pf-cell)); }
+.pf-four { grid-template-columns: repeat(2, var(--pf-cell)); }
+.pf-guides,
+.pf-days { gap: calc(var(--u) * 4); }
+.pf-guides { grid-template-columns: repeat(10, calc(var(--u) * 12)); }
+.pf-days { grid-template-columns: repeat(7, calc(var(--u) * 12)); }
+.pf-nine { grid-template-columns: repeat(9, calc(var(--u) * 18)); gap: calc(var(--u) * 6); }
+
+.pf-slot,
+.pf-chip,
+.pf-mv,
+.pf-guide,
+.pf-day { display: block; border-radius: var(--pf-r1); }
+.pf-slot,
+.pf-chip,
+.pf-mv { width: var(--pf-cell); height: var(--pf-cell); }
+.pf-slot { border: var(--rule-strong); border-style: dashed; }
+.pf-chip { background: var(--pf-ink); border: var(--rule-strong); border-color: var(--pf-ink); }
+.pf-chip-b { background: var(--bg-1); }
+.pf-chip-c { background: var(--border-2); border-color: var(--border-2); }
+.pf-guide,
+.pf-day { width: calc(var(--u) * 12); height: calc(var(--u) * 12); background: var(--pf-ink); }
+.pf-day.is-open { background: var(--border-2); }
+
+.pf-dot { display: block; width: calc(var(--u) * 10); height: calc(var(--u) * 10); border-radius: var(--radius-round); background: var(--pf-ink); }
+.pf-team { display: flex; justify-content: center; gap: calc(var(--u) * 7); }
+
+.pf-panel {
+  position: relative;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--pf-gap);
+  padding: calc(var(--u) * 12);
+}
+.pf-wide { width: calc(var(--u) * 260); }
+
+/* A row of tiles with arrows between them. Captions sit in a second row so every
+   tile centre stays on one line. */
+.pf-trio,
+.pf-flow { display: grid; flex: none; align-items: center; row-gap: var(--pf-gap); }
+.pf-trio { grid-template-columns: var(--pf-tile) 1fr calc(var(--u) * 170) 1fr var(--pf-tile); width: 100%; }
+.pf-flow { grid-template-columns: var(--pf-tile) 1fr var(--pf-tile) 1fr var(--pf-tile); width: calc(var(--u) * 340); }
+.pf-trio > .pf-cap,
+.pf-flow > .pf-tag { justify-self: center; }
+.pf-mid { grid-column: 3; }
+.pf-end { grid-column-end: -1; }
+.pf-flow > .pf-wire { grid-row: 1 / span 2; justify-self: center; align-self: stretch; height: auto; }
+/* The caption row would hold the trio's page off the axis wire, so the captions hang
+   below the row instead. */
+.pf-trio { position: relative; }
+.pf-trio > .pf-cap { position: absolute; top: calc(50% + var(--pf-tile) / 2 + var(--pf-gap)); left: 0; width: var(--pf-tile); }
+.pf-trio > .pf-cap.pf-end { right: 0; left: auto; }
+
+.pf-page {
+  position: relative;
+  display: grid;
+  flex: none;
+  grid-auto-rows: calc(var(--u) * 28);
+  gap: var(--pf-gap);
+  min-width: 0;
+  padding: calc(var(--u) * 14);
+}
+.pf-page-draft { grid-auto-rows: calc(var(--u) * 38); }
+.pf-claims { grid-auto-rows: calc(var(--u) * 20); width: calc(var(--u) * 220); }
+.pf-claim { display: flex; align-items: center; gap: var(--pf-gap); }
+.pf-term { background: var(--bg-2); }
+
+.pf-form-row,
+.pf-term-row,
+.pf-step-row { display: flex; align-items: center; gap: var(--pf-gap); min-width: 0; }
+
+.pf-box { display: grid; flex: none; place-items: center; width: calc(var(--u) * 18); height: calc(var(--u) * 18); border-radius: var(--pf-r2); }
+.pf-box .pf-icon { width: calc(var(--u) * 13); height: calc(var(--u) * 13); stroke-width: 2.5; color: var(--status-success); }
+.pf-term-row .pf-icon { flex: none; width: calc(var(--u) * 16); height: calc(var(--u) * 16); stroke-width: 2; }
+/* The failing run and its fix share one spot. */
+.pf-flip { display: grid; flex: none; }
+.pf-flip > .pf-icon { grid-area: 1 / 1; }
+
+.pf-row-name { flex: none; width: calc(var(--u) * 74); font-size: var(--pf-cap); font-weight: var(--weight-medium); color: var(--text-1); white-space: nowrap; }
+.pf-prompt { font-family: var(--mono); font-size: var(--pf-cap); line-height: var(--leading-none); color: var(--text-3); }
+
+.pf-line { display: block; height: 2px; border-radius: var(--pf-r1); background: var(--border-2); }
+.pf-line-fill,
+.pf-line-cmd { flex: 1; }
+.pf-line-cmd,
+.pf-line-claim { height: 3px; background: var(--pf-ink); }
+.pf-line-claim { flex: 1; box-shadow: 0 5px 0 -1px var(--accent); }
+.pf-line-code-2 { width: 60%; }
+
+.pf-num {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: calc(var(--u) * 18);
+  height: calc(var(--u) * 18);
+  border-radius: var(--pf-r2);
+  background: var(--accent);
+  font-family: var(--mono);
+  font-size: var(--pf-small);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-none);
+  color: var(--on-accent);
+}
+.pf-code { display: grid; flex: 1; gap: calc(var(--u) * 5); padding: calc(var(--u) * 8); border-radius: var(--pf-r2); background: var(--bg-2); }
+
+.pf-gate,
+.pf-stat { display: flex; flex-direction: column; align-items: center; gap: calc(var(--u) * 5); width: 100%; }
+.pf-stat-num,
+.pp-result-num {
+  font-family: var(--mono);
+  font-weight: var(--weight-medium);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--leading-none);
+  color: var(--accent);
+}
+.pf-stat-num { font-size: max(15px, calc(var(--u) * 22)); }
+
+/* ---------------------------------------------------------------------
+   Motion. `pa` marks a part; the modifier picks how it enters; s2 and s3
+   move it to a later beat; d1 to d5 stagger it.
+   --------------------------------------------------------------------- */
+.pa,
+.pa-out,
+.pa-ping { --pa-at: var(--pp-s1); }
+.s2 { --pa-at: var(--pp-s2); }
+.s3 { --pa-at: var(--pp-s3); }
+
+.pa { --pa-from: translateY(calc(var(--u) * 12)); }
+.pa-pop { --pa-from: scale(0.4); }
+.pa-l { --pa-from: translateX(calc(var(--u) * -14)); }
+.pa-r { --pa-from: translateX(calc(var(--u) * 14)); }
+.pa-fade { --pa-from: none; }
+.pa-x { --pa-from: scaleX(0); transform-origin: left center; }
+.pa-x.is-rev { transform-origin: right center; }
+.pa-y { --pa-from: scaleY(0); transform-origin: center top; }
+/* What a stage produced drops onto the axis. */
+.pa-land { --pa-from: translateY(calc(var(--u) * -44)) scale(1.35); }
+/* The pick starts as wide as all three clusters and closes on the middle one. */
+.pa-narrow { --pa-from: scaleX(3.4); }
+/* A topic leaves its slot in the row and settles in its cluster. The offsets are the
+   slot's place in the row less the chip's place in the cluster, in units. */
+.pa-move { --pa-from: translate(calc(var(--u) * var(--dx)), calc(var(--u) * var(--dy) - 1px)); }
+.pf-mv:nth-child(-n+2) { --dy: -54; }
+.pf-mv:nth-child(n+3) { --dy: -80; }
+.pf-four-a > :nth-child(1) { --dx: 10; }
+.pf-four-a > :nth-child(2) { --dx: 36; }
+.pf-four-a > :nth-child(3) { --dx: 140; }
+.pf-four-a > :nth-child(4) { --dx: 192; }
+.pf-four-b > :nth-child(1) { --dx: -104; }
+.pf-four-b > :nth-child(2) { --dx: 104; }
+.pf-four-b > :nth-child(3) { --dx: -26; }
+.pf-four-b > :nth-child(4) { --dx: 26; }
+.pf-four-c > :nth-child(1) { --dx: -36; }
+.pf-four-c > :nth-child(2) { --dx: -10; }
+.pf-four-c > :nth-child(3) { --dx: -192; }
+.pf-four-c > :nth-child(4) { --dx: -140; }
+/* A part that leaves: the failing run, once the fix passes. */
+.pa-out { opacity: 0; }
+/* A ring that spreads from the page as it goes live. It is only ever seen in motion. */
+.pf-ping {
+  position: absolute;
+  inset: -1px;
+  border: var(--rule-accent-thin);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.d1 { --pd: 4vh; --pd-t: 70ms; }
+.d2 { --pd: 8vh; --pd-t: 140ms; }
+.d3 { --pd: 12vh; --pd-t: 210ms; }
+.d4 { --pd: 16vh; --pd-t: 280ms; }
+.d5 { --pd: 20vh; --pd-t: 350ms; }
+
+@keyframes pp-in { from { opacity: 0; transform: var(--pa-from); } }
+@keyframes pp-move { from { transform: var(--pa-from); } }
+@keyframes pp-out { from { opacity: 1; } }
+@keyframes pp-rise { from { transform: scaleY(0); } }
+@keyframes pp-ping { from { opacity: 0.9; transform: scale(1); } to { opacity: 0; transform: scale(2.2); } }
+@keyframes pp-pan-in { from { transform: translateY(100cqh); } }
+@keyframes pp-pan-out { to { transform: translateY(-100cqh); } }
+@keyframes pp-fade-in { from { opacity: 0; } }
+@keyframes pp-fade-out { to { opacity: 0; } }
+@keyframes pp-dock { to { opacity: 0; transform: translateY(calc(var(--space-10) + var(--pp-icon) / 2 + var(--pp-rail-h) / 2)) scale(0.3); } }
+
+/* ---------------------------------------------------------------------
+   Live layout: the figures pinned to one stage
+   --------------------------------------------------------------------- */
+.pp-live .pp {
+  --pp-s1: 44vh;
+  --pp-s2: 114vh;
+  --pp-s3: 184vh;
+  --pp-len: 24vh;
+  --pp-pan: 46vh;
+}
+.pp-live .pp-beat { min-height: 70vh; }
+.pp-live .pp-scene { position: relative; border-bottom: var(--rule); }
+.pp-live .pp-figure {
+  position: sticky;
+  top: var(--pp-top);
+  z-index: 2;
+  grid-row: 1 / -1;
+  grid-column: 1;
+  align-self: start;
+  height: 46svh;
+  padding: var(--space-2) 0;
+  border-bottom: 0;
+}
+.pp-live .pp-frame { display: block; background: var(--bg); }
+.pp-live .pp-n1.pp-scene { margin-top: 46svh; }
+.pp-live .pf-field { container-type: size; }
+.pp-live .pf-stage { --u: clamp(0.5px, min(calc(100cqw / 468), calc(100cqh / 500)), 1.7px); }
+/* The pinned figures share the frame under them, so each drops its own. */
+.pp-live [data-figure] .pf { background: none; border-color: transparent; }
+.pp-live [data-figure] .pf-head,
+.pp-live [data-figure] .pf-foot { border-color: transparent; }
+.pp-live [data-figure] .pf-field::before,
+.pp-live [data-figure] .pf-crop { display: none; }
+
+@supports (animation-timeline: view()) and (timeline-scope: --a) {
+  .pp-live { timeline-scope: --hero; }
+  .pp-live .pp-intro { view-timeline: --hero block; view-timeline-inset: var(--nav-h) 0px; }
+  .pp-live .pp-rail-icon,
+  .pp-live .pp-rail-list::before {
+    animation: pp-dock linear both;
+    animation-timeline: --hero;
+    animation-range: exit 45% exit 100%;
+  }
+  .pp-live .pp-rail-list::before { animation-name: pp-fade-out; }
+
+  .pp-live .pp { timeline-scope: --s1, --s2, --s3, --s4, --s5, --s6, --s7, --s8; }
+  .pp-n1 { --tl: --s1; --tl-next: --s2; }
+  .pp-n2 { --tl: --s2; --tl-next: --s3; }
+  .pp-n3 { --tl: --s3; --tl-next: --s4; }
+  .pp-n4 { --tl: --s4; --tl-next: --s5; }
+  .pp-n5 { --tl: --s5; --tl-next: --s6; }
+  .pp-n6 { --tl: --s6; --tl-next: --s7; }
+  .pp-n7 { --tl: --s7; --tl-next: --s8; }
+  /* No scene declares --s9, so the last figure's exit never runs. */
+  .pp-n8 { --tl: --s8; --tl-next: --s9; }
+  .pp-live .pp-scene { view-timeline-name: var(--tl); }
+
+  /* A figure pans up into the stage as its scene arrives and on out as the next one
+     does, so the wire leaving one figure runs straight into the next. */
+  .pp-live [data-figure] .pf-stage {
+    animation: pp-pan-in linear both, pp-pan-out linear forwards;
+    animation-timeline: var(--tl), var(--tl-next);
+    animation-range: cover 0vh cover var(--pp-pan), cover 0vh cover var(--pp-pan);
+  }
+  .pp-live [data-figure] .pf-head,
+  .pp-live [data-figure] .pf-foot {
+    animation: pp-fade-in linear both, pp-fade-out linear forwards;
+    animation-timeline: var(--tl), var(--tl-next);
+    animation-range: cover 24vh cover var(--pp-pan), cover 0vh cover 20vh;
+  }
+  /* The first figure is on stage from the start. */
+  .pp-live .pp-n1 .pf-stage { animation-name: none, pp-pan-out; }
+  .pp-live .pp-n1 .pf-head,
+  .pp-live .pp-n1 .pf-foot { animation-name: none, pp-fade-out; }
+
+  .pp-live .pa,
+  .pp-live .pa-out,
+  .pp-live .pa-ping {
+    animation: pp-in linear both;
+    animation-timeline: var(--tl);
+    animation-range: cover calc(var(--pa-at) + var(--pd, 0vh)) cover calc(var(--pa-at) + var(--pp-len) + var(--pd, 0vh));
+  }
+  .pp-live .pa-move { animation-name: pp-move; }
+  .pp-live .pa-out { animation-name: pp-out; }
+  .pp-live .pa-ping { animation-name: pp-ping; }
+  .pp-live .pp-bars { view-timeline-name: --bars; }
+  .pp-live .pv {
+    animation: pp-rise linear both;
+    animation-timeline: --bars;
+    animation-range: entry 40% cover 50%;
+  }
+}
+
+/* Stepped: process.js sets is-before or is-after on the figures off stage, and
+   data-step on each figure. */
+.pp-io [data-figure] .pf-stage { transition: transform 700ms var(--ease); }
+.pp-io [data-figure] .pf-head,
+.pp-io [data-figure] .pf-foot { transition: opacity var(--pp-dur) var(--ease); }
+.pp-io .is-before .pf-stage { transform: translateY(100cqh); }
+.pp-io .is-after .pf-stage { transform: translateY(-100cqh); }
+.pp-io .is-before .pf-head,
+.pp-io .is-before .pf-foot,
+.pp-io .is-after .pf-head,
+.pp-io .is-after .pf-foot { opacity: 0; }
+.pp-io .pa,
+.pp-io .pa-out {
+  transition: opacity var(--pp-dur) var(--ease) var(--pd-t, 0ms), transform var(--pp-dur) var(--ease) var(--pd-t, 0ms);
+}
+.pp-io [data-step="0"] .pa,
+.pp-io [data-step="1"] .s2,
+.pp-io [data-step="1"] .s3,
+.pp-io [data-step="2"] .s3 { opacity: 0; transform: var(--pa-from); }
+.pp-io [data-step] .pa-move { opacity: 1; }
+.pp-io [data-step="2"] .pa-out { opacity: 1; }
+.pp-io .pv { transition: transform 900ms var(--ease); }
+.pp-io .pv:not(.is-in) { transform: scaleY(0); }
+
+/* ---------------------------------------------------------------------
+   Results and the start of an engagement
+   --------------------------------------------------------------------- */
+.pp-results,
+.pp-start { padding: var(--space-20) 0; border-bottom: var(--rule); }
+.pp-results h2,
+.pp-start h2 { margin: var(--space-4) 0 var(--space-10); }
+
+/* One-pixel gaps over the border colour draw the inner rules at any column count. */
+.pp-result-grid,
+.pp-start-grid { display: grid; gap: 1px; background: var(--border); border: var(--rule); }
+.pp-result-grid { grid-template-columns: repeat(3, 1fr); }
+.pp-start-grid { grid-template-columns: repeat(4, 1fr); margin-bottom: var(--space-12); }
+.pp-result,
+.pp-start-step { padding: var(--space-8); background: var(--bg-1); }
+
+.pp-result-client,
+.pp-result-period { color: var(--text-3); }
+.pp-result-num { margin: var(--space-4) 0 var(--space-2); font-size: clamp(2rem, 4vw, 3rem); }
+.pp-result-label { font-size: var(--font-size-md); color: var(--text-2); }
+.pp-result-line,
+.pp-start-step p { margin-top: var(--space-3); font-size: var(--font-size-xl); line-height: var(--leading-relaxed); }
+
+/* The three cards share one scale, so their bars read as one chart: each pair is
+   monthly visits before and after, as a share of the tallest bar. */
+.pp-bars { display: block; width: 100%; height: 180px; margin: var(--space-5) 0 var(--space-3); border-bottom: var(--rule-strong); }
+.pp-bar-before { fill: var(--text-3); }
+.pp-bar-after { fill: var(--accent); transform-box: fill-box; transform-origin: center bottom; }
+
+.pp-note { max-width: 70ch; margin-top: var(--space-6); font-size: var(--font-size-md); color: var(--text-3); }
+
+.pp-start-no { color: var(--accent); }
+.pp-start-step h3 { margin-top: var(--space-3); font-size: var(--font-size-2xl); }
+.pp-body { max-width: var(--prose-w); }
+
+/* ---------------------------------------------------------------------
+   Widths
+   --------------------------------------------------------------------- */
+@media (min-width: 900px) {
+  /* Both columns sit inside the site's column, so the text starts on the edge the
+     nav and the rail start on, and the stage ends on the edge they end on. */
+  .pp { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: var(--space-12); }
+  .pp-scene { padding: var(--space-20) 0; border-bottom: var(--rule); }
+  .pp-figure { padding: var(--space-20) 0; }
+  .pf { max-width: none; }
+
+  .pp-live .pp-scene { grid-column: 1; }
+  .pp-live .pp-figure {
+    top: calc(var(--pp-top) + var(--space-6));
+    grid-column: 2;
+    height: var(--pp-stage-h);
+    padding: 0;
+  }
+  .pp-live .pp-frame { background: none; }
+  .pp-live .pp-n1.pp-scene { margin-top: 0; }
+}
+
+@media (max-width: 1024px) {
+  .pp-start-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 899px) {
+  .pp-rail,
+  .pp { --pp-icon: 34px; }
+  .pp-rail-icon .pf-icon { width: 18px; height: 18px; }
+  .pp-rail-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .pp-result-grid { grid-template-columns: 1fr; }
+  /* On a phone the stage covers the top of the window, so a beat is read lower down
+     and its step plays a little earlier in the scroll. */
+  .pp-live .pp { --pp-s1: 34vh; --pp-s2: 104vh; --pp-s3: 174vh; }
+  .pp-live .pf-foot { display: none; }
+  .pp-live .pf-head { height: 32px; }
+}
+
+@media (max-width: 600px) {
+  .pp-start-grid { grid-template-columns: 1fr; }
+}

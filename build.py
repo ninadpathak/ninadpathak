@@ -717,6 +717,78 @@ class SiteBuilder:
                 page["markdown"] = page["markdown"].replace(marker, listing)
         return pages
 
+    def load_process_page(self):
+        """Load content/process.md, the page at /technical-writing-process/.
+
+        The page is a sequence of scroll scenes, so its text lives in frontmatter as
+        stages, each with three beats, and the closing sections live in the body. It is a
+        hiring page and is held to the same rules as the services pages: no [TODO marker,
+        no paragraph or beat over two sentences. Every stage needs the same parts, because
+        the template draws one figure per stage and a missing beat would leave a scene
+        with a step that never plays.
+        """
+        path = Path("content/process.md")
+        if not path.exists():
+            return None
+        post = frontmatter.load(path)
+        published = post.get("status", "draft") == "published"
+        if not published and not self.include_drafts:
+            print(f"  i {path} is a draft: not built (use --drafts to review it)")
+            return None
+        if "[TODO" in post.content + str(post.metadata):
+            raise ValueError(f"{path} still contains a [TODO marker")
+        stages = post.get("stages") or []
+        texts = [post.content]
+        for stage in stages:
+            missing = [key for key in ("id", "label", "title", "figure", "alt", "beats", "evidence") if not stage.get(key)]
+            if missing or len(stage.get("beats", [])) != 3:
+                raise ValueError(f"{path}: stage {stage.get('id')!r} needs {missing or 'exactly three beats'}")
+            texts += stage["beats"]
+        for text in texts:
+            issues = paragraph_sentence_violations(text)
+            if issues:
+                details = "\n".join(f"    {count} sentences: {snippet}" for _, count, snippet in issues)
+                raise ValueError(f"{path} violates the two-sentence paragraph rule:\n{details}")
+        for number, stage in enumerate(stages, 1):
+            stage["number"] = f"{number:02d}"
+            stage["beats_html"] = [self.inline_md(beat) for beat in stage["beats"]]
+            stage["evidence_html"] = self.inline_md(stage["evidence"])
+        # Bar heights for the results chart, as a percentage of the largest figure, so
+        # the three cards share one scale and the template needs no arithmetic.
+        results = post.get("results") or []
+        count = lambda text: int(str(text).replace(",", ""))
+        peak = max((count(row["after"]) for row in results), default=1)
+        for row in results:
+            row["before_level"] = round(count(row["before"]) / peak * 100, 2)
+            row["after_level"] = round(count(row["after"]) / peak * 100, 2)
+        # The page as one Markdown document: the stages as numbered sections, then the body.
+        lines = []
+        for stage in stages:
+            lines += [f"## {int(stage['number'])}. {stage['title']}", ""]
+            for beat in stage["beats"]:
+                lines += [beat, ""]
+            if stage.get("quote"):
+                lines += [f"> \"{stage['quote']}\"", ">", f"> {stage['quote_by']}", ""]
+            lines += [f"Evidence: {stage['evidence']}", ""]
+        if post.get("results"):
+            lines += ["## What the process has produced", ""]
+            lines += [f"- [{row['client']}]({row['url']}): {row['line']}" for row in post["results"]]
+            lines += ["", post.get("results_note", ""), ""]
+        if post.get("start"):
+            lines += ["## How an engagement starts", ""]
+            lines += [f"{number}. {row['step']}: {row['line']}" for number, row in enumerate(post["start"], 1)]
+            lines += [""]
+        markdown = "\n".join(lines) + "\n" + post.content
+        self.md.reset()
+        return {
+            **post.metadata,
+            "content": render_content_html(self.md.convert(post.content)),
+            "markdown": markdown,
+            "faqs": extract_faqs(post.content),
+            "published": published,
+            "url": "/technical-writing-process/",
+        }
+
     def load_legal_pages(self) -> list[dict]:
         pages = []
         legal_dir = Path("content/legal")
@@ -1229,6 +1301,20 @@ class SiteBuilder:
                 self.markdown_alternate(service["title"], service.get("lead", ""), service["url"], service["markdown"]),
             )
 
+    def build_process(self, process_page):
+        if not process_page:
+            return
+        self.render(
+            "process.html", "technical-writing-process/index.html",
+            page="process",
+            process=process_page,
+        )
+        self.write_text(
+            "technical-writing-process/index.md",
+            self.markdown_alternate(process_page["title"], process_page["lead"], process_page["url"],
+                                    process_page["markdown"]),
+        )
+
     def build_404(self):
         self.render(
             "404.html", "404.html",
@@ -1307,7 +1393,7 @@ class SiteBuilder:
                 term=term,
             )
 
-    def build_sitemap(self, posts, work_cases, glossary_terms, categories=None, service_pages=None):
+    def build_sitemap(self, posts, work_cases, glossary_terms, categories=None, service_pages=None, process_page=None):
         base = self.config["site"]["url"].rstrip("/")
         categories = categories or []
         # A listing page changes when anything it lists changes, so its lastmod is
@@ -1330,6 +1416,7 @@ class SiteBuilder:
             ("/contact/", "0.5", "yearly", None),
             # Drafts render noindex under --drafts and stay out of the sitemap.
             *[(page["url"], "0.9", "monthly", None) for page in service_pages or [] if page["published"]],
+            *([(process_page["url"], "0.9", "monthly", None)] if process_page and process_page["published"] else []),
             ("/tools/", "0.9", "monthly", None),
             ("/linter/", "0.9", "monthly", None),
             ("/llms-txt-generator/", "0.9", "monthly", None),
@@ -1407,7 +1494,7 @@ class SiteBuilder:
         feed_path = self.output / "feed.xml"
         tree.write(feed_path, xml_declaration=True, encoding="utf-8")
 
-    def build_llms_txt(self, posts, glossary_terms, work_cases, categories=None, service_pages=None):
+    def build_llms_txt(self, posts, glossary_terms, work_cases, categories=None, service_pages=None, process_page=None):
         """Emit /llms.txt — a clean, link-first map of the site for AI crawlers
         and answer engines. Follows the llms.txt convention (H1, summary
         blockquote, then sectioned bullet links)."""
@@ -1444,6 +1531,8 @@ class SiteBuilder:
             "",
             *[f"- [{page.get('nav_title') or page['title']}]({base}{page['url']}): {page['description']}"
               for page in service_pages],
+            *([f"- [{process_page['nav_title']}]({base}{process_page['url']}): {process_page['description']}"]
+              if process_page and process_page["published"] else []),
             f"- [About]({base}/about/): Who I am, what I write, and who I write it for.",
             f"- [Work]({base}/work/): Case studies with the result each piece of work produced.",
             f"- [Portfolio]({base}/portfolio/): Published articles and documentation, linked at the publisher or an archived copy.",
@@ -1528,7 +1617,7 @@ class SiteBuilder:
 
         (self.output / "llms.txt").write_text("\n".join(lines), encoding="utf-8")
 
-    def build_llms_full_txt(self, service_pages, work_cases):
+    def build_llms_full_txt(self, service_pages, work_cases, process_page=None):
         """Emit /llms-full.txt: the pages that answer a hiring question as one Markdown
         file. Articles are left out on purpose. Each has its own index.md, and
         putting 78 of them here would bury the offer the file exists to carry."""
@@ -1556,6 +1645,8 @@ class SiteBuilder:
         ]
         for page in service_pages:
             lines += section(page["title"], page["url"], page["markdown"])
+        if process_page and process_page["published"]:
+            lines += section(process_page["title"], process_page["url"], process_page["markdown"])
         lines += section(about.get("title", "About"), "/about/", about.content)
         # Case studies go in as their one-line summaries with a link, which keeps the
         # file short. The summaries still quote headline figures, and build_work_pages
@@ -1745,6 +1836,7 @@ class SiteBuilder:
         self.assign_related(posts)
         self.link_glossary_owners(glossary_terms, posts)
         service_pages = self.load_service_pages()
+        process_page = self.load_process_page()
         self.categories = categories
 
         self.build_homepage(posts, work_cases, categories)
@@ -1758,6 +1850,7 @@ class SiteBuilder:
         self.build_about()
         self.build_contact()
         self.build_services(service_pages)
+        self.build_process(process_page)
         self.build_404()
         self.build_linter()
         self.build_tools_index()
@@ -1768,10 +1861,12 @@ class SiteBuilder:
         self.build_legal_pages(legal_pages)
         self.build_glossary(glossary_terms)
 
-        self.build_sitemap(posts, work_cases, glossary_terms, categories=categories, service_pages=service_pages)
+        self.build_sitemap(posts, work_cases, glossary_terms, categories=categories, service_pages=service_pages,
+                           process_page=process_page)
         self.build_rss(posts)
-        self.build_llms_txt(posts, glossary_terms, work_cases, categories=categories, service_pages=service_pages)
-        self.build_llms_full_txt(service_pages, work_cases)
+        self.build_llms_txt(posts, glossary_terms, work_cases, categories=categories, service_pages=service_pages,
+                            process_page=process_page)
+        self.build_llms_full_txt(service_pages, work_cases, process_page)
         self.build_redirects(posts)
         self.build_pygments_css()
         self.build_visual_embed_css()

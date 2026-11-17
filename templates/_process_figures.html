@@ -1,0 +1,269 @@
+{# Figures for /technical-writing-process/, one per stage, drawn in HTML so every moving
+   part is its own box and every label is real text.
+
+   Vocabulary, from tools/image-brand/GUIDELINE.md: a plate with a head band, a dotted
+   field with crop marks and a foot; tiles holding one line icon; connectors that leave and
+   arrive at the centre of an edge. Icons follow lib/topic-icons.mjs (24 grid, one stroke
+   weight, no fill) but are centred on 12,12, because here each sits in the middle of a box.
+
+   Every figure hangs on one vertical axis. A lead wire enters at the top centre, the stage
+   does its work, and what it produced leaves at the bottom centre, so the eight figures
+   read as one line from buyer topics to a verdict.
+
+   Motion classes: `pa` marks a part that animates; pa-pop, pa-x, pa-y, pa-land and the
+   rest pick how it enters; s1, s2, s3 tie it to the beat that brings it in; d1 to d5
+   stagger it. With no script and no scroll timeline every part is simply there. #}
+
+{% set ICONS = {
+  "doc": ["M5 3h9l5 5v13H5z", "M14 3v5h5", "M8.5 12.5h7", "M8.5 16.5h7"],
+  "search": ["M17 10.5a6.5 6.5 0 1 1-13 0a6.5 6.5 0 0 1 13 0z", "M15.25 15.25L20 20"],
+  "terminal": ["M3 4.5h18v15H3z", "M7 9l3 3-3 3", "M12.5 15h4.5"],
+  "chip": ["M7 7h10v10H7z", "M10 3v4", "M14 3v4", "M10 17v4", "M14 17v4", "M3 10h4", "M3 14h4", "M17 10h4", "M17 14h4", "M10.5 10.5h3v3h-3z"],
+  "globe": ["M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0z", "M3 12h18", "M12 3c3.5 3 3.5 15 0 18", "M12 3c-3.5 3-3.5 15 0 18"],
+  "person": ["M15.5 7.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0z", "M5 20c0-4.5 3-7 7-7s7 2.5 7 7"],
+  "check": ["M5 12.25l4.5 4.5L19 7.25"],
+  "cross": ["M6.5 6.5l11 11", "M17.5 6.5l-11 11"],
+  "flag": ["M7.5 21V3", "M7.5 4h9l-2.5 3.5L16.5 11h-9"],
+  "list": ["M5 3h14v18H5z", "M8.5 8h7", "M8.5 12h7", "M8.5 16h7"],
+  "pen": ["M4.5 19.5l1.25-4.75L16.5 4l3.5 3.5L9.25 18.25z", "M14 6.5l3.5 3.5"],
+  "bars": ["M6 20v-7", "M12 20V4", "M18 20v-11", "M3 20h18"],
+} %}
+
+{# The icon each stage carries in the overview above the rail. #}
+{% set STAGE_ICONS = {"strategy": "search", "brief": "list", "research": "terminal", "draft": "pen",
+                      "checks": "check", "review": "person", "publish": "globe", "measure": "bars"} %}
+
+{% macro icon(name, cls="") -%}
+<svg class="pf-icon{% if cls %} {{ cls }}{% endif %}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">{% for d in ICONS[name] %}<path d="{{ d }}"/>{% endfor %}</svg>
+{%- endmacro %}
+
+{% macro stage_icon(stage_id) -%}{{ icon(STAGE_ICONS[stage_id]) }}{%- endmacro %}
+
+{% macro tile(name, cls="") -%}
+<span class="pf-tile{% if cls %} {{ cls }}{% endif %}">{{ icon(name) }}</span>
+{%- endmacro %}
+
+{# A connector running left to right, ending in an arrowhead. `is-rev` points it left. #}
+{% macro arrow(cls="") -%}
+<span class="pf-arrow{% if cls %} {{ cls }}{% endif %}"><i class="pf-arrow-line"></i><svg class="pf-arrow-head" viewBox="0 0 6 10" aria-hidden="true" focusable="false"><path d="M1 1l4 4-4 4"/></svg></span>
+{%- endmacro %}
+
+{# One stem down from the centre, a bar, and a drop over each target. #}
+{% macro bus(kind, cls="") -%}
+<span class="pf-bus pf-bus-{{ kind }}{% if cls %} {{ cls }}{% endif %}"><i class="pf-bus-stem"></i><i class="pf-bus-bar"></i><i class="pf-bus-drop is-first"></i><i class="pf-bus-drop is-mid"></i><i class="pf-bus-drop is-last"></i></span>
+{%- endmacro %}
+
+{# The wire that carries the last stage's work in from the top edge. #}
+{% macro lead_in(pill="") -%}
+<span class="pf-run pf-lead"><i class="pf-wire"></i>{% if pill %}<span class="pf-pill">{{ pill }}</span>{% endif %}</span>
+{%- endmacro %}
+
+{# A wire with a label on it. The label is a sibling of the line, so drawing the line
+   never stretches the text. #}
+{% macro run(label, cls, lead=false) -%}
+<span class="pf-run{% if lead %} pf-lead{% endif %}"><i class="pf-wire pa pa-y {{ cls }}"></i><span class="pf-pill pa pa-fade {{ cls }}">{{ label }}</span></span>
+{%- endmacro %}
+
+{# What the stage produced: a tile that lands, then the wire that carries it out. #}
+{% macro lead_out(label, name="doc") -%}
+<i class="pf-wire is-hot pa pa-y s3 d2"></i>
+{{ tile(name, "is-accent pa pa-land s3 d3") }}
+{{ run(label, "s3 d5", true) }}
+{%- endmacro %}
+
+
+{% macro strategy() %}
+<span class="pf-lead"></span>
+<span class="pf-tag pa s1">Buyer topics</span>
+<div class="pf-chips">{% for n in range(12) %}<i class="pf-slot"></i>{% endfor %}</div>
+{{ bus("thirds", "pa pa-y s2") }}
+<div class="pf-thirds">
+  {% for kind, name in [("a", "Broad"), ("b", "Narrow"), ("c", "Broad")] %}
+  <div class="pf-panel{% if kind != 'b' %} is-later{% endif %}">
+    <span class="pf-four pf-four-{{ kind }}">{% for n in range(4) %}<i class="pf-mv pa pa-move s2"><i class="pf-chip pf-chip-{{ kind }} pa pa-pop s1 d{{ n + 1 }}"></i></i>{% endfor %}</span>
+    <span class="pf-tag pa s2 d3">{{ name }}</span>
+    {% if kind == "b" %}<i class="pf-hot pa pa-narrow s3"></i>{% endif %}
+  </div>
+  {% endfor %}
+</div>
+{{ lead_out("1 query") }}
+{% endmacro %}
+
+
+{% macro brief() %}
+{{ lead_in() }}
+<div class="pf-page pf-wide">
+  {% for name, step in [("Reader", "s1"), ("Decision", "s1 d2"), ("Access", "s2"), ("Evidence", "s2 d2")] %}
+  <div class="pf-form-row"><span class="pf-box">{{ icon("check", "pa pa-pop " ~ step) }}</span><span class="pf-row-name">{{ name }}</span><i class="pf-line pf-line-fill pa pa-x {{ step }}"></i></div>
+  {% endfor %}
+</div>
+{{ run('<span data-count>24</span> hours', "s3") }}
+{{ tile("list", "is-accent pa pa-land s3 d3") }}
+{{ run("Brief", "s3 d5", true) }}
+{% endmacro %}
+
+
+{% macro research() %}
+{{ lead_in() }}
+<div class="pf-page pf-term pf-wide">
+  <div class="pf-term-row pa pa-l s1"><span class="pf-prompt">$</span><i class="pf-line pf-line-cmd"></i>{{ icon("check", "is-check") }}</div>
+  <div class="pf-term-row pa pa-l s1 d2"><span class="pf-prompt">$</span><i class="pf-line pf-line-cmd"></i>{{ icon("check", "is-check") }}</div>
+  <div class="pf-term-row pa pa-l s2"><span class="pf-prompt">$</span><i class="pf-line pf-line-cmd"></i><span class="pf-flip">{{ icon("cross", "is-cross pa-out s3") }}{{ icon("check", "is-check pa pa-pop s3 d2") }}</span></div>
+  <div class="pf-term-row pa pa-l s3 d3"><span class="pf-prompt">$</span><i class="pf-line pf-line-cmd"></i>{{ icon("check", "is-check") }}</div>
+</div>
+{{ run(icon("flag") ~ "Edge cases", "s2 d2") }}
+{{ tile("terminal", "is-accent pa pa-land s3 d3") }}
+{{ run("Example", "s3 d5", true) }}
+{% endmacro %}
+
+
+{% macro draft() %}
+{{ lead_in() }}
+<div class="pf-trio">
+  {{ tile("chip", "is-later pa pa-pop s2") }}
+  {{ arrow("is-dashed pa pa-x s2 d2") }}
+  <div class="pf-page pf-page-draft">
+    {% for n in range(3) %}
+    <div class="pf-step-row"><span class="pf-num pa pa-pop s1 d{{ n * 2 }}">{{ n + 1 }}</span><span class="pf-code pa pa-x s1 d{{ n * 2 + 1 }}"><i class="pf-line pf-line-code"></i><i class="pf-line pf-line-code-2"></i></span></div>
+    {% endfor %}
+    <i class="pf-hot pa pa-fade s3 d2"></i>
+  </div>
+  {{ arrow("is-hot is-rev pa pa-x s3 d1") }}
+  {{ tile("person", "is-accent pa pa-pop s3") }}
+  <span class="pf-cap pa s2 d1">AI</span>
+  <span class="pf-cap pf-end pa s3 d1">Owner</span>
+</div>
+{{ run('<span data-count>5</span> days', "s1 d5") }}
+{{ tile("doc", "is-accent pa pa-land s3 d3") }}
+{{ run("Draft", "s3 d5", true) }}
+{% endmacro %}
+
+
+{% macro checks() %}
+{{ lead_in() }}
+<div class="pf-page pf-claims">
+  {% for n in range(3) %}<div class="pf-claim"><i class="pf-line pf-line-claim pa pa-x s1 d{{ n }}"></i><span class="pf-box">{{ icon("check", "pa pa-pop s1 d5") }}</span></div>{% endfor %}
+</div>
+{{ bus("thirds", "pa pa-y s1 d3") }}
+<div class="pf-thirds">
+  {% for source in ["doc", "terminal", "globe"] %}{{ tile(source, "is-small pa pa-pop s1 d4") }}{% endfor %}
+</div>
+{{ bus("thirds", "is-up pa pa-y s2") }}
+<div class="pf-through">
+  <div class="pf-side pa pa-fade s2">
+    {% for name in ["Prose", "Claims"] %}<div class="pf-gate"><span class="pf-box">{{ icon("check", "pa pa-pop s2 d" ~ (2 - loop.index0)) }}</span><span class="pf-tag">{{ name }}</span></div>{% endfor %}
+  </div>
+  <i class="pf-wire pa pa-y s2 d1"></i>
+  <div class="pf-side pa pa-fade s2">
+    {% for name in ["Quotes", "Build"] %}<div class="pf-gate"><span class="pf-box">{{ icon("check", "pa pa-pop s2 d" ~ (loop.index0 + 1)) }}</span><span class="pf-tag">{{ name }}</span></div>{% endfor %}
+  </div>
+</div>
+<div class="pf-through">
+  <div class="pf-stat pa s3"><span class="pf-stat-num" data-count>95</span><span class="pf-tag">Quotes re-fetched</span></div>
+  <i class="pf-wire pa pa-y s3"></i>
+  <div class="pf-stat pa s3"><span class="pf-stat-num" data-count>3</span><span class="pf-tag">Blockers sent back</span></div>
+</div>
+{{ lead_out("Checked") }}
+{% endmacro %}
+
+
+{% macro review() %}
+{{ lead_in() }}
+{{ tile("person", "pa pa-pop s1") }}
+{{ run('2 rounds at most', "s1 d2") }}
+<div class="pf-panel pf-wide pa s2">
+  <span class="pf-guides">{% for n in range(50) %}<i class="pf-guide pa pa-pop s2 d{{ n // 10 + 1 }}"></i>{% endfor %}</span>
+  <span class="pf-thirds">
+    <span class="pf-stat"><span class="pf-stat-num" data-count>50+</span><span class="pf-tag">Guides</span></span>
+    <span class="pf-stat"><span class="pf-stat-num" data-count>0</span><span class="pf-tag">Revisions</span></span>
+    <span class="pf-stat"><span class="pf-stat-num" data-count>10+</span><span class="pf-tag">Frameworks</span></span>
+  </span>
+</div>
+<i class="pf-wire pa pa-y s3"></i>
+<div class="pf-panel pf-wide pa s3 d1">
+  <span class="pf-team">{% for n in range(13) %}{% set edge = [loop.index0, 12 - loop.index0] | min %}<i class="pf-dot pa pa-pop s3 d{{ [6 - edge, 5] | min }}"></i>{% endfor %}</span>
+  <span class="pf-tag">13 writers at Mem0</span>
+</div>
+{{ lead_out("Approved") }}
+{% endmacro %}
+
+
+{% macro publish() %}
+{{ lead_in("1 link in") }}
+<div class="pf-flow">
+  {{ tile("search", "pa pa-l s2 d1") }}
+  {{ arrow("pa pa-x s2 d2") }}
+  <span class="pf-tile is-accent pa pa-land s1">{{ icon("globe") }}<i class="pf-ping pa-ping s1 d3"></i><i class="pf-ping pa-ping s1 d5"></i></span>
+  {{ arrow("is-rev pa pa-x s2 d2") }}
+  {{ tile("terminal", "pa pa-r s2 d1") }}
+</div>
+{{ bus("edge", "pa pa-y s1 d2") }}
+<div class="pf-flow">
+  {{ tile("doc", "pa pa-pop s1 d3") }}
+  <i class="pf-wire pf-mid pa pa-y s1 d3"></i>
+  {{ tile("doc", "pf-end pa pa-pop s1 d3") }}
+  <span class="pf-tag pa s1 d4">Link out</span>
+  <span class="pf-tag pf-end pa s1 d4">Link out</span>
+</div>
+<div class="pf-nine pa pa-fade s2">
+  {% for n in range(9) %}{% set edge = [loop.index0, 8 - loop.index0] | min %}<span class="pf-box">{{ icon("check", "pa pa-pop s2 d" ~ (5 - edge)) }}</span>{% endfor %}
+</div>
+<div class="pf-through">
+  <span class="pf-file pa pa-r s3">index.md</span>
+  <i class="pf-wire pa pa-y s3"></i>
+  <span class="pf-file pa pa-l s3">llms.txt</span>
+</div>
+{{ run("Live", "s3 d2", true) }}
+{% endmacro %}
+
+
+{% macro measure() %}
+{{ lead_in() }}
+{{ tile("search", "pa pa-pop s1") }}
+<i class="pf-wire pa pa-y s2"></i>
+<div class="pf-panel pa s2 d1">
+  <span class="pf-days">{% for n in range(28) %}<i class="pf-day pa pa-pop s2 d{{ n // 7 + 1 }}"></i>{% endfor %}</span>
+  <span class="pf-tag">28 days, baseline</span>
+</div>
+<i class="pf-wire is-hot pa pa-y s3"></i>
+{{ tile("doc", "is-accent pa pa-land s3 d1") }}
+<i class="pf-wire pa pa-y s3 d2"></i>
+<div class="pf-panel is-later pa s3 d2">
+  <span class="pf-days">{% for n in range(14) %}<i class="pf-day is-open pa pa-pop s3 d{{ n // 7 + 3 }}"></i>{% endfor %}</span>
+  <span class="pf-tag">14 days, no verdict</span>
+</div>
+<i class="pf-wire pa pa-y s3 d4"></i>
+{{ tile("check", "pa pa-land s3 d5") }}
+<span class="pf-lead"></span>
+{% endmacro %}
+
+
+{# The plate chrome: head band, dotted field with crop marks, foot. `stage` may be none,
+   which draws the empty frame the pinned figures share. #}
+{% macro plate(stage) %}
+<figure class="pf{% if stage %} pf-{{ stage.id }}{% endif %}"{% if stage %} role="img" aria-label="{{ stage.alt }}"{% else %} aria-hidden="true"{% endif %}>
+  <div class="pf-head">{% if stage %}<span class="pf-kicker">{{ stage.figure }}</span><span class="pf-no">Fig. {{ stage.number }}</span>{% endif %}</div>
+  <div class="pf-field">
+    <i class="pf-crop pf-crop-tl"></i><i class="pf-crop pf-crop-tr"></i><i class="pf-crop pf-crop-bl"></i><i class="pf-crop pf-crop-br"></i>
+    {% if stage %}
+    <div class="pf-stage">
+      {% if stage.id == "strategy" %}{{ strategy() }}
+      {% elif stage.id == "brief" %}{{ brief() }}
+      {% elif stage.id == "research" %}{{ research() }}
+      {% elif stage.id == "draft" %}{{ draft() }}
+      {% elif stage.id == "checks" %}{{ checks() }}
+      {% elif stage.id == "review" %}{{ review() }}
+      {% elif stage.id == "publish" %}{{ publish() }}
+      {% elif stage.id == "measure" %}{{ measure() }}
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+  <div class="pf-foot">
+    {% if stage %}
+    <span class="pf-scale">{% for n in range(8) %}<i class="pf-scale-cell{% if n < (stage.number | int) %} is-on{% endif %}"></i>{% endfor %}</span>
+    <span class="pf-reg"></span>
+    {% endif %}
+  </div>
+</figure>
+{% endmacro %}

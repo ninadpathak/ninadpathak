@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% import "_process_figures.html" as figures %}
+
+{% set page_title = process.seo_title %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block description %}{{ process.description }}{% endblock %}
+{% block robots %}{% if process.published %}{{ super() }}{% else %}noindex, follow{% endif %}{% endblock %}
+{% block og_title %}{{ page_title }}{% endblock %}
+{% block og_description %}{{ process.description }}{% endblock %}
+{% block tw_title %}{{ page_title }}{% endblock %}
+{% block tw_desc %}{{ process.description }}{% endblock %}
+{% block canonical %}{{ process.url }}{% endblock %}
+{% block og_url %}{{ process.url }}{% endblock %}
+{% block og_image %}
+  <meta property="og:image"       content="{{ site.url }}/static/images/diagrams/services/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"   content="Freelance technical writer for AI and developer-tool companies">
+{% endblock %}
+{% block tw_card %}summary_large_image{% endblock %}
+{% block tw_image %}{{ site.url }}/static/images/diagrams/services/og.png{% endblock %}
+{% block alternates %}<link rel="alternate" type="text/markdown" title="{{ process.title | e }}" href="{{ process.url }}index.md">{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/process.css?v=process-1">
+{# Motion is opted into here: .pp-live pins the figures to one stage, and .pp-io marks a
+   browser without scroll-driven animations, where process.js plays the same scenes. The
+   classes have to be on <html> before first paint, or the page would lay out twice, so
+   this one line opts out of Rocket Loader's deferral. #}
+<script data-cfasync="false">(function(){var d=document.documentElement,c=window.CSS,m=window.matchMedia;if(!('IntersectionObserver' in window)||!m||!m('(prefers-reduced-motion: no-preference) and (min-height: 700px)').matches)return;d.className+=' pp-live';if(!(c&&c.supports&&c.supports('animation-timeline: view()')&&c.supports('timeline-scope: --a')))d.className+=' pp-io';})();</script>
+{% endblock %}
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "{{ site.url }}{{ process.url }}#page",
+  "url": "{{ site.url }}{{ process.url }}",
+  "name": {{ process.title | tojson }},
+  "description": {{ process.description | tojson }},
+  "author": {{ person_ref | tojson }},
+  "about": { "@type": "Service", "@id": "{{ site.url }}/services/#service" },
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "Stages of the technical writing process",
+    "numberOfItems": {{ process.stages | length }},
+    "itemListOrder": "https://schema.org/ItemListOrderAscending",
+    "itemListElement": [
+      {% for stage in process.stages %}
+      {
+        "@type": "ListItem",
+        "position": {{ loop.index }},
+        "name": {{ stage.title | tojson }},
+        "url": "{{ site.url }}{{ process.url }}#{{ stage.id }}"
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+}
+</script>
+{% if process.faqs %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+{% for faq in process.faqs %}
+    {
+      "@type": "Question",
+      "name": {{ faq.question | tojson }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ faq.answer | tojson }}
+      }
+    }{% if not loop.last %},{% endif %}
+{% endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<section class="page-intro pp-intro">
+  <div class="container">
+    <div class="label">Process</div>
+    <h1>{{ process.title }}</h1>
+    <p class="lead">{{ process.lead }}</p>
+    {% include "_hire_line.html" %}
+  </div>
+</section>
+
+{# The rail is a plain list of links to the stages, stuck under the nav. Each link also
+   carries its stage's icon, which hangs above the rail as the overview on the opening
+   screen and docks into the rail as the reader scrolls. The script marks the stage on
+   screen. #}
+<nav class="pp-rail" aria-label="Process stages">
+  <ol class="pp-rail-list" role="list">
+    {% for stage in process.stages %}
+    <li class="pp-rail-item"><a class="pp-rail-link" href="#{{ stage.id }}"><span class="pp-rail-icon">{{ figures.stage_icon(stage.id) }}</span><span class="pp-rail-no">{{ stage.number }}</span><span class="pp-rail-name">{{ stage.label }}</span></a></li>
+    {% endfor %}
+  </ol>
+</nav>
+
+{# Each stage is a text scene followed by its figure. With motion on, process.css pins
+   every figure to one place, so the eight read as one stage that builds as the text
+   scrolls past; the first child is the empty plate they share. Without motion each
+   figure sits beside its own scene. #}
+<div class="pp" id="process">
+  <div class="pp-figure pp-frame">{{ figures.plate(none) }}</div>
+  {% for stage in process.stages %}
+  <section class="pp-scene pp-n{{ loop.index }}" id="{{ stage.id }}" aria-labelledby="{{ stage.id }}-title">
+    <header class="pp-scene-head">
+      <div class="label">Stage {{ stage.number }}</div>
+      <h2 id="{{ stage.id }}-title">{{ stage.title }}</h2>
+    </header>
+    <ol class="pp-beats" role="list">
+      {% for beat in stage.beats_html %}
+      <li class="pp-beat"><span class="pp-beat-no" aria-hidden="true">{{ loop.index }}</span><p>{{ beat }}</p></li>
+      {% endfor %}
+    </ol>
+    {% if stage.quote %}
+    <blockquote class="pp-quote"><p>"{{ stage.quote }}"</p><footer>{{ stage.quote_by }}</footer></blockquote>
+    {% endif %}
+    <p class="pp-evidence"><span class="pp-evidence-label">Evidence</span> {{ stage.evidence_html }}</p>
+  </section>
+  <div class="pp-figure pp-n{{ loop.index }}" data-figure="{{ stage.id }}">{{ figures.plate(stage) }}</div>
+  {% endfor %}
+</div>
+
+<section class="pp-results" id="results" aria-labelledby="results-title">
+  <div class="container">
+    <div class="label">Results</div>
+    <h2 id="results-title">What the process has produced</h2>
+    <div class="pp-result-grid">
+      {% for row in process.results %}
+      <article class="pp-result">
+        <h3 class="pp-result-client"><a href="{{ row.url }}">{{ row.client }}</a></h3>
+        <div class="pp-result-num" data-count>{{ row.after }}</div>
+        <div class="pp-result-label">monthly visits, from {{ row.before }}</div>
+        <svg class="pp-bars" viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Monthly visits before: {{ row.before }}. After: {{ row.after }}.">
+          <rect class="pp-bar-before" x="22" y="{{ 100 - row.before_level }}" width="20" height="{{ row.before_level }}"/>
+          <rect class="pp-bar-after pv" x="58" y="{{ 100 - row.after_level }}" width="20" height="{{ row.after_level }}"/>
+        </svg>
+        <div class="pp-result-period">Semrush, {{ row.period }}</div>
+        <p class="pp-result-line">{{ row.line }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    <p class="pp-note">{{ process.results_note }}</p>
+  </div>
+</section>
+
+<section class="pp-start" id="start" aria-labelledby="start-title">
+  <div class="container">
+    <div class="label">Start</div>
+    <h2 id="start-title">How an engagement starts</h2>
+    <ol class="pp-start-grid" role="list">
+      {% for row in process.start %}
+      <li class="pp-start-step"><span class="pp-start-no">{{ "%02d" | format(loop.index) }}</span><h3>{{ row.step }}</h3><p>{{ row.line }}</p></li>
+      {% endfor %}
+    </ol>
+    <div class="post-content pp-body">
+      {{ process.content }}
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Tell me what needs writing.</h2>
+        <p>Bring the product and the reader you have in mind, or send me a draft developers get stuck on.</p>
+        {% include "_hire_line.html" %}
+      </div>
+      <div class="cta-actions">
+        <a href="{{ contact.booking_url }}" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a 30-min Call →</a>
+        <a href="/work/" class="btn btn-outline">See My Work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/static/js/process.js?v=process-1"></script>
+
+{% endblock %}
