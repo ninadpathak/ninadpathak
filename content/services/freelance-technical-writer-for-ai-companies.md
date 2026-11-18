@@ -35,6 +35,7 @@ Each link goes to the article on the company's own site, or to an archived copy 
 
 - **Firecrawl, web data for AI agents.** [Agent tools](https://www.firecrawl.dev/blog/agent-tools), [context layer for AI agents](https://www.firecrawl.dev/blog/context-layer-for-ai-agents), [agentic search](https://www.firecrawl.dev/blog/agentic-search) and [AI agent sandboxes](https://www.firecrawl.dev/blog/ai-agent-sandbox).
 - **Mem0, memory for AI agents.** [AI agent memory](https://web.archive.org/web/20260209224933/https://mem0.ai/blog/what-is-ai-agent-memory), [agentic RAG](https://web.archive.org/web/20260311051406/https://mem0.ai/blog/what-is-agentic-rag) and [a Claude Code memory setup guide](https://web.archive.org/web/20260307002643/https://mem0.ai/blog/claude-code-memory). These three are archived copies from February and March 2026, which show my byline.
+- **TinyFish, cloud browsers for AI agents.** [What a cloud browser is](https://www.tinyfish.ai/blog/what-is-a-cloud-browser) and [computer-use agents against web agents](https://www.tinyfish.ai/blog/computer-use-agents-vs-web-agents).
 - **LambdaTest, AI testing.** [AI testing against traditional testing](https://www.testmuai.com/blog/traditional-testing-vs-ai-testing/).
 
 The [portfolio](/portfolio/) lists the rest, filtered by AI Systems.
@@ -67,7 +68,7 @@ Email [hello@ninadpathak.com](mailto:hello@ninadpathak.com) with the product, th
 
 **Which AI companies have you written for?**
 
-I've published tutorials and technical articles for Firecrawl on agent tooling, and a build tutorial for OpenComputer on agent sandboxes. LambdaTest published my article on AI testing against traditional testing, and for Mem0 I wrote guides on agent memory and agentic RAG and managed its team of writers.
+I've published tutorials and technical articles for Firecrawl on agent tooling and for TinyFish on cloud browsers, and a build tutorial for OpenComputer on agent sandboxes. LambdaTest published my article on AI testing against traditional testing, and for Mem0 I wrote guides on agent memory and agentic RAG and managed its team of writers.
 
 **Do you test the product before writing?**
 
