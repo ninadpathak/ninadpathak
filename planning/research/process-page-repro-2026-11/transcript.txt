@@ -1,0 +1,15 @@
+$ node plurals.mjs en
+ok    count 1: items_one -> "1 item"
+ok    count 3: items_other -> "3 items"
+ok    count 11: items_other -> "11 items"
+exit 0
+$ node plurals.mjs ar
+ok    count 1: items_one
+wrong count 3: wants items_few, got items_other
+wrong count 11: wants items_many, got items_other
+exit 1
+$ node plurals.mjs ar locales-fixed
+ok    count 1: items_one
+ok    count 3: items_few
+ok    count 11: items_many
+exit 0

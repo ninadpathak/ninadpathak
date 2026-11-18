@@ -40,7 +40,7 @@ REQUIREMENTS = {
     "visuals.css": re.compile(r'class="[^"]*\bvisual-(?:wrapper|container|title|caption)\b'),
     "linter.css": re.compile(r'class="[^"]*\btool-(?:panel|section|actions|status|hint)\b'),
     "code-blocks.css": re.compile(r'class="[^"]*\bcode-block\b'),
-    "process.css": re.compile(r'class="[^"]*\b(?:pp-(?:scene|figure|rail)|pf-(?:stage|tile|wire))\b'),
+    "process.css": re.compile(r'class="[^"]*\bpp-(?:scene|stage|rail)\b'),
 }
 
 

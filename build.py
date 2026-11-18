@@ -720,12 +720,13 @@ class SiteBuilder:
     def load_process_page(self, path=None):
         """Load content/process.md, the page at /technical-writing-process/.
 
-        The page is a sequence of scroll scenes, so its text lives in frontmatter as
-        stages, each with three beats, and the closing sections live in the body. It is a
-        hiring page and is held to the same rules as the services pages: no [TODO marker,
-        no paragraph or beat over two sentences. Every stage needs the same parts, because
-        the template draws one figure per stage and a missing beat would leave a scene
-        with a step that never plays.
+        The page follows one docs page the way a code change ships. Each stage is a
+        scene: a headline, an object (an issue thread, a terminal, a diff) whose labels
+        are listed under `object`, and three captions under `beats`. It is a hiring page
+        and is held to the same rules as the services pages: no [TODO marker, and no
+        caption or paragraph over two sentences. Every stage needs the same parts,
+        because the template gives each caption its own moment and a missing one would
+        leave a scene with a step that never plays.
         """
         path = Path(path or "content/process.md")
         if not path.exists():
@@ -740,7 +741,7 @@ class SiteBuilder:
         stages = post.get("stages") or []
         texts = [post.content]
         for stage in stages:
-            missing = [key for key in ("id", "label", "title", "figure", "alt", "beats", "evidence") if not stage.get(key)]
+            missing = [key for key in ("id", "label", "title", "alt", "object", "beats") if not stage.get(key)]
             if missing or len(stage.get("beats", [])) != 3:
                 raise ValueError(f"{path}: stage {stage.get('id')!r} needs {missing or 'exactly three beats'}")
             texts += stage["beats"]
@@ -752,7 +753,6 @@ class SiteBuilder:
         for number, stage in enumerate(stages, 1):
             stage["number"] = f"{number:02d}"
             stage["beats_html"] = [self.inline_md(beat) for beat in stage["beats"]]
-            stage["evidence_html"] = self.inline_md(stage["evidence"])
         # Bar heights for the results chart, as a percentage of the largest figure, so
         # the three cards share one scale and the template needs no arithmetic.
         results = post.get("results") or []
@@ -764,26 +764,30 @@ class SiteBuilder:
             before = count(row["before"]) / peak * 100
             row["before_level"] = round(max(before, 0.8), 2) if before else 0
             row["after_level"] = round(count(row["after"]) / peak * 100, 2)
-        # The page as one Markdown document: the stages as numbered sections, then the body.
+        # The page as one Markdown document: each stage's captions, then what is written
+        # on its object, then the results and the closing sections.
         lines = []
         for stage in stages:
             lines += [f"## {int(stage['number'])}. {stage['title']}", ""]
             for beat in stage["beats"]:
                 lines += [beat, ""]
+            lines += ["```text", *stage["object"], "```", ""]
             if stage.get("quote"):
                 lines += [f"> \"{stage['quote']}\"", ">", f"> {stage['quote_by']}", ""]
-            lines += [f"Evidence: {stage['evidence']}", ""]
-        if post.get("results"):
-            lines += ["## What the process has produced", ""]
-            lines += [f"- [{row['client']}]({row['url']}): {row['line']}" for row in post["results"]]
-            lines += ["", post.get("results_note", ""), "", post.get("results_limit", ""), ""]
+        if stages and post.get("example_label"):
+            lines += [f"The issue in stage 1 is an {post['example_label']}: {post['example_url']}", ""]
+        if results:
+            lines += ["## In production", ""]
+            lines += [f"- [{row['client']}]({row['url']}): {row['before']} to {row['after']} monthly visits. Semrush, {row['period']}."
+                      for row in results]
+            lines += ["", post.get("results_note", ""), "", post.get("results_limit", ""), "", post.get("results_team", ""), ""]
         if post.get("start"):
-            lines += ["## How an engagement starts", ""]
+            lines += ["## Working together", ""]
             lines += [f"{number}. {row['step']}: {row['line']}" for number, row in enumerate(post["start"], 1)]
-            lines += [""]
+            lines += ["", post.get("start_note", ""), ""]
         markdown = "\n".join(lines) + "\n" + post.content
         self.md.reset()
-        return {
+        page = {
             **post.metadata,
             "content": render_content_html(self.md.convert(post.content)),
             "markdown": markdown,
@@ -791,6 +795,9 @@ class SiteBuilder:
             "published": published,
             "url": "/technical-writing-process/",
         }
+        if post.get("results_team"):
+            page["results_team_html"] = self.inline_md(post["results_team"])
+        return page
 
     def load_legal_pages(self) -> list[dict]:
         pages = []
@@ -1314,7 +1321,7 @@ class SiteBuilder:
         )
         self.write_text(
             "technical-writing-process/index.md",
-            self.markdown_alternate(process_page["title"], process_page["lead"], process_page["url"],
+            self.markdown_alternate(process_page["title"], f"{process_page['tagline']} {process_page['lead']}", process_page["url"],
                                     process_page["markdown"]),
         )
 
@@ -1659,7 +1666,7 @@ class SiteBuilder:
             # here would push this file past the size it is kept to.
             stages = "\n".join(f"{int(stage['number'])}. {stage['title']}" for stage in process_page["stages"])
             lines += section(process_page["title"], process_page["url"],
-                             f"{process_page['lead']}\n\n{stages}\n\n"
+                             f"{process_page['tagline']} {process_page['lead']}\n\n{stages}\n\n"
                              f"Every stage in full: {base}{process_page['url']}index.md")
         lines += section(about.get("title", "About"), "/about/", about.content)
         # Case studies go in as their one-line summaries with a link, which keeps the

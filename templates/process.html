@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% import "_process_figures.html" as figures %}
 
 {% set page_title = process.seo_title %}
 {% block title %}{{ page_title }}{% endblock %}
@@ -22,15 +21,14 @@
 {% block alternates %}<link rel="alternate" type="text/markdown" title="{{ process.title | e }}" href="{{ process.url }}index.md">{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="/static/css/process.css?v=process-1">
-{# Motion is opted into here: .pp-live pins the figures to one stage, and .pp-io marks a
-   browser without scroll-driven animations, where process.js plays the same scenes. The
-   classes have to be on <html> before first paint, or the page would lay out twice, so
-   this one line opts out of Rocket Loader's deferral. process.js marks <html> with
-   data-pp-ready when it runs. If it has not within four seconds of load (blocked, failed
-   or lost), the classes come off again and the page is its finished, static self.
-   The 600px floor is Safari on a 390 by 844 iPhone with its toolbars showing (664px). #}
-<script data-cfasync="false">(function(){var d=document.documentElement,c=window.CSS,m=window.matchMedia;if(!('IntersectionObserver' in window)||!m||!m('(prefers-reduced-motion: no-preference) and (min-height: 600px)').matches)return;d.classList.add('pp-live');if(!(c&&c.supports&&c.supports('animation-timeline: view()')&&c.supports('timeline-scope: --a')))d.classList.add('pp-io');window.addEventListener('load',function(){setTimeout(function(){if(!d.hasAttribute('data-pp-ready'))d.classList.remove('pp-live','pp-io');},4000);});})();</script>
+<link rel="stylesheet" href="/static/css/process.css?v=process-2">
+{# Motion is opted into here, before first paint, so the page lays out once: .pp-js gives
+   the two built scenes their pinned stage. It is added only when motion is welcome and
+   the window can hold a stage. process.js marks <html> with data-pp-ready when it has
+   set the scenes up. If that has not happened four seconds after load (a script blocked,
+   failed or lost), the class comes off and the page is its plain, complete self. This
+   line opts out of Rocket Loader's deferral; the libraries below do not need to. #}
+<script data-cfasync="false">(function(){var d=document.documentElement,m=window.matchMedia;if(!m||!m('(prefers-reduced-motion: no-preference) and (min-height: 560px)').matches)return;d.classList.add('pp-js');window.addEventListener('load',function(){setTimeout(function(){if(!d.hasAttribute('data-pp-ready'))d.classList.remove('pp-js');},4000);});})();</script>
 {% endblock %}
 
 {% block schema %}
@@ -84,89 +82,138 @@
 {% endif %}
 {% endblock %}
 
+{# What sits under every object: the stage's three captions, one at a time on the stage. #}
+{% macro captions(stage) %}
+<ol class="pp-caps" role="list">
+  {% for beat in stage.beats_html %}<li class="pp-cap"><p>{{ beat }}</p></li>{% endfor %}
+</ol>
+{% endmacro %}
+
+{% macro heading(stage) %}
+<div class="pp-kick">{{ stage.number }} · {{ stage.label }}</div>
+<h2 class="pp-head" id="{{ stage.id }}-title">{{ stage.title }}</h2>
+{% endmacro %}
+
 {% block content %}
 
-<section class="page-intro pp-intro">
-  <div class="container">
-    <div class="label">Process</div>
-    <h1>{{ process.title }}</h1>
-    <p class="lead">{{ process.lead }}</p>
-    {% include "_hire_line.html" %}
+<div class="pp" id="process">
+{% for stage in process.stages %}
+
+{% if stage.id == "issue" %}
+{# The opening and the first stage share one stage: the title gives way to the issue. #}
+<section class="pp-scene pp-built pp-open" id="issue" data-scene="issue" aria-labelledby="issue-title">
+  <div class="pp-stage">
+    <header class="pp-hero">
+      <div class="label">Process</div>
+      <h1>{{ process.title }}</h1>
+      <p class="pp-tagline">{{ process.tagline }}</p>
+      <p class="pp-lead">{{ process.lead }}</p>
+    </header>
+    <div class="pp-col">
+      {{ heading(stage) }}
+      <figure class="pp-obj pi" aria-label="{{ stage.alt }}">
+        <div class="pp-bar pi-bar"><span class="pp-dock"></span></div>
+        <div class="pi-body">
+          <p class="pi-title">{{ stage.object[0] | e }}</p>
+          <p class="pi-labels"><span class="pi-label">{{ stage.object[1] | e }}</span><span class="pi-label">{{ stage.object[2] | e }}</span><a class="pi-example" href="{{ process.example_url }}" rel="noopener">{{ process.example_label }}</a></p>
+          <ul class="pi-thread" role="list">
+            {% for n in range(3) %}<li class="pi-comment"><i class="pi-avatar"></i><span class="pi-text"><i></i><i></i></span><span class="pi-dup">{{ stage.object[3] | e }}</span></li>{% endfor %}
+          </ul>
+          <p class="pi-meta"><span class="pi-source">{{ stage.object[4] | e }}</span><span class="pi-demand" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.25 15.25L20 20"/></svg>{% for n in range(5) %}<i class="pi-bar-{{ n + 1 }}"></i>{% endfor %}</span></p>
+          <p class="pi-linked"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 3h9l5 5v13H5z"/><path d="M14 3v5h5"/></svg>{{ stage.object[5] | e }}</p>
+        </div>
+      </figure>
+      {{ captions(stage) }}
+    </div>
   </div>
 </section>
 
-{# The rail is a plain list of links to the stages, stuck under the nav. Each link also
-   carries its stage's icon, which hangs above the rail as the overview on the opening
-   screen and docks into the rail as the reader scrolls. The script marks the stage on
-   screen. #}
+{% elif stage.id == "repro" %}
+<section class="pp-scene pp-built" id="repro" data-scene="repro" aria-labelledby="repro-title">
+  <div class="pp-stage">
+    <div class="pp-col">
+      {{ heading(stage) }}
+      <figure class="pp-obj pt" aria-label="{{ stage.alt }}">
+        <div class="pp-bar pt-bar"><span class="pp-dock"></span><span class="pt-title">{{ stage.object[0] | e }}</span></div>
+        <div class="pt-body">
+          <p class="pt-line pt-cmd" data-beat="1"><span class="pt-type">{{ stage.object[1] | e }}</span></p>
+          <p class="pt-line pt-cmd" data-beat="1"><span class="pt-type">{{ stage.object[2] | e }}</span></p>
+          <p class="pt-line pt-out is-ok" data-beat="1"><span>{{ stage.object[3] | e }}</span><span class="pt-exit">{{ stage.object[4] | e }}</span></p>
+          <p class="pt-line pt-cmd" data-beat="2"><span class="pt-type">{{ stage.object[5] | e }}</span></p>
+          <p class="pt-line pt-out is-bad" data-beat="2"><span>{{ stage.object[6] | e }}</span><span class="pt-exit">{{ stage.object[7] | e }}</span></p>
+          <p class="pt-line pt-cmd" data-beat="3"><span class="pt-type">{{ stage.object[8] | e }}</span></p>
+          <p class="pt-line pt-out is-ok" data-beat="3"><span>{{ stage.object[9] | e }}</span><span class="pt-exit">{{ stage.object[4] | e }}</span></p>
+        </div>
+      </figure>
+      {{ captions(stage) }}
+    </div>
+  </div>
+</section>
+
+{% else %}
+{# Not built yet: the stage's words and what is written on its object, plainly. #}
+<section class="pp-scene" id="{{ stage.id }}" aria-labelledby="{{ stage.id }}-title">
+  <div class="pp-stage">
+    <div class="pp-col">
+      {{ heading(stage) }}
+      <figure class="pp-obj po" aria-label="{{ stage.alt }}">
+        <pre class="po-lines">{% for line in stage.object %}{{ line | e }}
+{% endfor %}</pre>
+        {% if stage.quote %}<blockquote class="po-quote"><p>"{{ stage.quote }}"</p><footer>{{ stage.quote_by }}</footer></blockquote>{% endif %}
+      </figure>
+      {{ captions(stage) }}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endfor %}
+</div>
+
+{# The eight stages as links. On the pinned stage they sit at the bottom centre. #}
 <nav class="pp-rail" aria-label="Process stages">
   <ol class="pp-rail-list" role="list">
     {% for stage in process.stages %}
-    <li class="pp-rail-item"><a class="pp-rail-link" href="#{{ stage.id }}"><span class="pp-rail-icon">{{ figures.stage_icon(stage.id) }}</span><span class="pp-rail-no">{{ stage.number }}</span><span class="pp-rail-name">{{ stage.label }}</span></a></li>
+    <li><a class="pp-rail-link" href="#{{ stage.id }}"><span class="pp-rail-no">{{ stage.number }}</span><span class="pp-rail-name">{{ stage.label }}</span></a></li>
     {% endfor %}
   </ol>
 </nav>
 
-{# Each stage is a text scene followed by its figure. With motion on, process.css pins
-   every figure to one place, so the eight read as one stage that builds as the text
-   scrolls past; the first child is the empty plate they share. Without motion each
-   figure sits beside its own scene. #}
-<div class="pp" id="process">
-  <div class="pp-figure pp-frame">{{ figures.plate(none) }}</div>
-  {% for stage in process.stages %}
-  <section class="pp-scene pp-n{{ loop.index }}" id="{{ stage.id }}" aria-labelledby="{{ stage.id }}-title">
-    <header class="pp-scene-head">
-      <div class="label">Stage {{ stage.number }}</div>
-      <h2 id="{{ stage.id }}-title">{{ stage.title }}</h2>
-    </header>
-    <ol class="pp-beats" role="list">
-      {% for beat in stage.beats_html %}
-      <li class="pp-beat"><span class="pp-beat-no" aria-hidden="true">{{ loop.index }}</span><p>{{ beat }}</p></li>
-      {% endfor %}
-    </ol>
-    {% if stage.quote %}
-    <blockquote class="pp-quote"><p>"{{ stage.quote }}"</p><footer>{{ stage.quote_by }}</footer></blockquote>
-    {% endif %}
-    <p class="pp-evidence"><span class="pp-evidence-label">Evidence</span> {{ stage.evidence_html }}</p>
-  </section>
-  <div class="pp-figure pp-n{{ loop.index }}" data-figure="{{ stage.id }}">{{ figures.plate(stage) }}</div>
-  {% endfor %}
-</div>
-
 <section class="pp-results" id="results" aria-labelledby="results-title">
   <div class="container">
     <div class="label">Results</div>
-    <h2 id="results-title">What the process has produced</h2>
+    <h2 id="results-title">In production</h2>
     <div class="pp-result-grid">
       {% for row in process.results %}
       <article class="pp-result">
         <h3 class="pp-result-client"><a href="{{ row.url }}">{{ row.client }}</a></h3>
-        <div class="pp-result-num" data-count>{{ row.after }}</div>
+        <div class="pp-result-num">{{ row.after }}</div>
         <div class="pp-result-label">monthly visits</div>
         <svg class="pp-bars" viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Monthly visits before: {{ row.before }}. After: {{ row.after }}.">
           <rect class="pp-bar-before" x="18" y="{{ 100 - row.before_level }}" width="14" height="{{ row.before_level }}"/>
-          <rect class="pp-bar-after pv" x="68" y="{{ 100 - row.after_level }}" width="14" height="{{ row.after_level }}"/>
+          <rect class="pp-bar-after" x="68" y="{{ 100 - row.after_level }}" width="14" height="{{ row.after_level }}"/>
         </svg>
         <div class="pp-bar-labels"><span class="pp-bar-label"><span>Before</span>{{ row.before }}</span><span class="pp-bar-label"><span>After</span>{{ row.after }}</span></div>
         <div class="pp-result-period">Semrush, {{ row.period }}</div>
-        <p class="pp-result-line">{{ row.line }}</p>
       </article>
       {% endfor %}
     </div>
     <p class="pp-note">{{ process.results_note }}</p>
     <p class="pp-note">{{ process.results_limit }}</p>
+    <p class="pp-note">{{ process.results_team_html }}</p>
   </div>
 </section>
 
 <section class="pp-start" id="start" aria-labelledby="start-title">
   <div class="container">
     <div class="label">Start</div>
-    <h2 id="start-title">How an engagement starts</h2>
+    <h2 id="start-title">Working together</h2>
     <ol class="pp-start-grid" role="list">
       {% for row in process.start %}
-      <li class="pp-start-step"><span class="pp-start-no">{{ "%02d" | format(loop.index) }}</span><h3>{{ row.step }}</h3><p>{{ row.line }}</p></li>
+      <li class="pp-start-step"><code class="pp-start-no">{{ row.step }}</code><p>{{ row.line }}</p></li>
       {% endfor %}
     </ol>
+    <p class="pp-note">{{ process.start_note }}</p>
+    {% include "_hire_line.html" %}
     <div class="post-content pp-body">
       {{ process.content }}
     </div>
@@ -179,16 +226,18 @@
       <div>
         <h2>Tell me what needs writing.</h2>
         <p>Bring the product and the reader you have in mind, or send me a draft developers get stuck on.</p>
-        {% include "_hire_line.html" %}
       </div>
       <div class="cta-actions">
-        <a href="{{ contact.booking_url }}" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a 30-min Call →</a>
+        <a href="{{ contact.booking_url }}" class="btn btn-primary booking-modal-trigger" rel="noopener">Book a 30-minute call →</a>
         <a href="/work/" class="btn btn-outline">See My Work</a>
       </div>
     </div>
   </div>
 </section>
 
-<script src="/static/js/process.js?v=process-1"></script>
+<script src="/static/js/vendor/gsap.min.js"></script>
+<script src="/static/js/vendor/ScrollTrigger.min.js"></script>
+<script src="/static/js/vendor/SplitText.min.js"></script>
+<script src="/static/js/process.js?v=process-2"></script>
 
 {% endblock %}
