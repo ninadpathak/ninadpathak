@@ -35,7 +35,7 @@ Shorter documentation is better because it spends the reader's attention on the 
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/shorter-documentation/cognitive-load.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/shorter-documentation/cognitive-load.narrow.svg" width="288" height="440"><img class="np-has-narrow" src="/static/images/diagrams/shorter-documentation/cognitive-load.svg" width="720" height="432" alt="Three kinds of cognitive load share a reader's limited working memory. Intrinsic load is the difficulty of the task itself. Extraneous load is effort wasted on poor documentation design, marked as the load to remove. Germane load is the productive effort of building a mental model of the system, drawn as the path that should get the freed capacity." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Good docs zero out extraneous load so the reader's bandwidth goes to the task and the mental model.</figcaption>
+  <figcaption>Good docs remove the effort of decoding the page, so the reader's attention goes to the task and to understanding the system.</figcaption>
 </figure>
 
 The idea is older than the web. John Carroll's [The Nurnberg Funnel](https://openlibrary.org/works/OL4792482W), published by MIT Press in 1990, carries the subtitle "Designing Minimalist Instruction for Practical Computer Skill".
@@ -62,20 +62,20 @@ A human writer handed a style guide hits the same limit. A style rule can shorte
 
 Give each page one job, answer it on the first screen, and move everything else to a page with its own job. The detail survives because it moves, and the reader who needs it follows a link.
 
-A page that feels long gets four questions.
+I'd ask four questions of a page that feels long.
 
 1. What does the reader need to do or decide after reading it?
 2. Does every paragraph support that outcome?
 3. Should this detail live on a troubleshooting or reference page?
 4. Does this sentence exist because I was afraid to cut it?
 
-The fourth question matters more than the others, because fear is what writes the paragraph about a legacy flag nobody has set in years. My post on [changelogs](/articles/writing-changelogs/) applies the same cut to release entries, where not every commit deserves a line.
+The question about fear matters more than the others, because fear is what writes the paragraph about a legacy flag nobody has set in years. My post on [changelogs](/articles/writing-changelogs/) applies the same cut to release entries, where not every commit deserves a line.
 
-The opening block carries the heaviest load. A line such as "This page explains" spends that room telling readers they are on a page.
+The first screen matters more than any other part of the page. A line such as "This page explains" spends that room telling readers they are on a page.
 
 Willison's details tag is a good patch for a pull request and a poor fit for docs. A collapsed section still has to be kept true, and a toggle gives it no URL and no title of its own.
 
-Splitting by page does the same job with those problems solved. Sections with their own headings are the halfway step, and [documentation headings](/articles/documentation-headings/) has the rule for naming them.
+Splitting the content into separate pages hides the detail the same way, and each page gets a URL and a title. Sections with their own headings are the halfway step, and [documentation headings](/articles/documentation-headings/) has the rule for naming them.
 
 The [agent harnesses](/articles/agent-harnesses/) page is built that way, as one page whose seven sections can each be linked.
 
@@ -87,7 +87,7 @@ I argue with that headline in [my essay on agents reading docs](/articles/agents
 
 A collapsed section is plain text in Markdown, so progressive disclosure by toggle doesn't exist for that reader. Disclosure by page still does: Fern describes the pattern as "an agent reads llms.txt once, then fetches the Markdown for the pages it needs."
 
-Small pages with one job are therefore the unit an agent can select, and a page that mixes five intents makes it buy four it didn't want.
+Small pages with one job are therefore the unit an agent can select, and a page that mixes five intents makes the agent fetch four it didn't need.
 
 Chrome's guides for coding agents are edited to that standard, and my [notes on Modern Web Guidance](/articles/chrome-modern-web-guidance-notes/) look at what they cut.
 
@@ -97,7 +97,7 @@ Documentation can be long when nobody reads it from the top, and reference is th
 
 DocSpring shows the same thing at a larger size. Nathan Broadbent [wrote on November 13](https://docspring.com/blog/posts/ponytail-vs-agents-md/) that "We have 42 AGENTS.md files, about 65,000 words in all: a root file with the rules every change follows, and a nested file next to each part of the code that has its own pitfalls (migrations, background jobs, the public API, CI)."
 
-At 65,000 words that is a book, and its structure means no reader, human or agent, meets more than the root file and the one beside the code being changed. Specifications, architecture references and incident runbooks earn their length the same way, by giving every section an address.
+At 65,000 words that is a book, and its structure means no reader, human or agent, meets more than the root file and the one beside the code being changed. Specifications, architecture references and incident runbooks earn their length the same way, by giving every section its own heading or file that a reader can go straight to.
 
 A migration guide is the exception that gets read in order, and there each section should map to a decision, such as whether to run the backfill before or after flipping the feature flag. The length this page argues against is the kind that comes from never editing.
 
@@ -109,11 +109,11 @@ There is no universal word count. The target is the smallest amount of informati
 
 **Do shorter docs risk leaving out important edge cases?**
 
-Only if you delete them without a plan. Edge cases move to dedicated troubleshooting or reference pages, which keeps the primary path clean and still answers the reader who hits one.
+Only if you delete the edge cases when you could move them. Edge cases move to dedicated troubleshooting or reference pages, which keeps the primary path clean and still answers the reader who hits one.
 
 **Should I split one long page into many tiny pages?**
 
-Only when each small page has a clear, independent job. Excessive fragmentation is as bad as excessive length, and the goal is fewer mixed-purpose pages.
+Only when each small page has a clear, independent job. A site of tiny pages that each need several others to make sense is as hard to use as one long page, and the goal is fewer pages that mix purposes.
 
 **What kind of documentation should always stay long?**
 
