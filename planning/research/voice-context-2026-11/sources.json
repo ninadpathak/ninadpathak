@@ -4891,7 +4891,10 @@
       ],
       "connects": [
         "voice-agent-latency"
-      ]
+      ],
+      "refuses_automated_fetch": true,
+      "last_confirmed": "2026-11-18",
+      "fetch_note": "PubMed Central serves a challenge page to scripted requests on some runs, so a full verify_quotes.py run can report this source's quotes as MISSING. Both quotes were confirmed on 2026-11-18 by running verify_quotes.py on this source alone. Rerun it alone before treating a MISSING line as a change to the paper."
     },
     {
       "id": "openai-realtime-vad",
