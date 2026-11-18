@@ -16,14 +16,16 @@ updated: '2026-11-16'
 
 At sixteen concurrent requests, two NVIDIA DGX Stations serving GLM-5.3 through vLLM produced 607.8 tokens per second, and at thirty-two they produced 385.0. Those figures come from [a tutorial NVIDIA published on November 13](https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/), and the table they sit in is the best short lesson in inference optimization I've read this year.
 
-LLM inference optimization is the work of serving more tokens per GPU at a latency users will accept. NVIDIA's run had prefix caching and an FP8 KV cache switched on, the batching and paging this page used to tell you to enable were already running, and doubling the load still made the whole system slower.
+LLM inference optimization is the work of serving more tokens per GPU at a latency users will accept. NVIDIA's run had prefix caching and an FP8 KV cache switched on, and vLLM's continuous batching and paged KV cache were already running.
+
+Doubling the load from sixteen requests to thirty-two still cut total throughput by more than a third.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/llm-inference-optimization/inference-stack.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/llm-inference-optimization/inference-stack.narrow.svg" width="288" height="1040"><img class="np-has-narrow" src="/static/images/diagrams/llm-inference-optimization/inference-stack.svg" width="720" height="856" alt="The inference stack as layered slabs, top to bottom: serving engines (vLLM, TensorRT-LLM, SGLang); continuous batching, drawn as request lanes where a finished request frees its slot for a new one; Flash Attention, drawn as a score matrix streamed tile by tile into on-chip memory; quantization, drawn as one weight at 16, 8, and 4 bits; the paged KV cache, drawn as three sequences mapped onto scattered memory blocks; and the GPU with its memory stacks. Numbered squares mark four of the layers, top to bottom: batching, the attention kernel, FP8 quantization and the paged KV cache." loading="lazy" decoding="async"></picture></a>
-  <figcaption>The serving stack, from engine to GPU. Batching and the paged KV cache come switched on in vLLM and SGLang, and precision is the layer left to choose.</figcaption>
+  <figcaption>The serving stack, from engine to GPU. Batching and the paged KV cache come switched on in vLLM and SGLang, and the precision of the weights, FP8 or BF16, is the choice left to you.</figcaption>
 </figure>
 
-Every other [LLM inference](/articles/ai-engineering/) technique is judged by what it does to tokens served per GPU.
+I judge every [LLM inference](/articles/ai-engineering/) technique on this page by what it does to tokens served per GPU at that latency.
 
 ## Which LLM inference optimization techniques are on by default?
 
@@ -35,11 +37,11 @@ Continuous batching, the paged KV cache and prefix caching are on by default in 
 | Paged KV cache | [PagedAttention](/glossary/pagedattention/) hands out cache in small blocks, the way an operating system pages RAM | Size the cache |
 | Prefix caching | Reuses the work done on a repeated prompt opening | Watch the hit rate |
 
-The guide is long, and one of its maintainers [said on Hacker News](https://news.ycombinator.com/item?id=50453146) "We certainly used agents to help us put a draft together", so I use it as a reference for defaults and for one set of measurements. Upbound's engineers ran coding agents against a self-hosted model, and the guide reports that "About two-thirds of prompt tokens hit the prefix cache, because agents resend their transcript on every turn."
+The guide is long, and one of its maintainers [said on Hacker News](https://news.ycombinator.com/item?id=50453146) "We certainly used agents to help us put a draft together", so I use it as a reference for defaults and for one set of measurements. Engineers at Upbound, whose Project Champagne posts the guide cites, ran coding agents against a self-hosted model, and the guide reports that "About two-thirds of prompt tokens hit the prefix cache, because agents resend their transcript on every turn."
 
-A hit rate of two thirds is why the prefix cache belongs on a dashboard once your clients are agents.
+When two thirds of prompt tokens come from the prefix cache, a fall in the hit rate, say after someone reorders the system prompt, shows up as slower first tokens. So put the hit rate on a dashboard once your clients are agents.
 
-Upbound's team "found that vLLM and scheduling worked. The time went to TLS, identity, timeouts, storage, IAM and observability."
+The defaults held up for Upbound as well: its team "found that vLLM and scheduling worked. The time went to TLS, identity, timeouts, storage, IAM and observability."
 
 ## How much memory does the KV cache need?
 
@@ -55,7 +57,7 @@ The [KV cache eviction article](/articles/kv-cache-eviction/) covers which cache
 
 Use the lowest precision your GPU runs natively and your own evals accept, which on current NVIDIA hardware means FP8 first. FP8 has native tensor-core support on NVIDIA's [Hopper](https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/) and [Ada Lovelace](https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf) architectures, and Ampere cards like the A100 have none.
 
-On the newer cards the matrix multiplies run in FP8, so you get compute throughput as well as roughly half the weight storage of BF16. Weight-only 4-bit formats such as AWQ and GPTQ are a different trade: they free memory for the KV cache and speed up decode, and they don't speed up prefill.
+On Hopper and Ada cards the matrix multiplies themselves run in FP8, so the model computes faster and its weights take roughly half the memory they take in BF16. Weight-only 4-bit formats such as AWQ and GPTQ are a different trade: they free memory for the KV cache and speed up decode, and they don't speed up prefill.
 
 Posts about quantization, including the earlier version of this one, like to quote a percentage of quality lost per step down. I've removed those numbers because the loss depends on the model and the task, and the only figure worth trusting comes from your own eval set.
 
@@ -70,7 +72,7 @@ More throughput stops helping at the concurrency where requests no longer meet y
 | 16 | 607.8 | 136.46 | 482.90 |
 | 32 | 385.0 | 453.54 | 899.36 |
 
-Total throughput in NVIDIA's table rises through sixteen requests, and each user pays for it, with per-user speed falling "from 115.3 tok/s at C1 to 13.0 tok/s at C32." Past sixteen requests total throughput falls as well, so nobody gains.
+Total throughput in NVIDIA's table rises through sixteen requests, and each user pays for it, with per-user speed falling, in NVIDIA's shorthand for one and thirty-two concurrent requests, "from 115.3 tok/s at C1 to 13.0 tok/s at C32." Past sixteen requests total throughput falls as well, so nobody gains.
 
 NVIDIA's launch script ships with `--max-num-seqs 16`, and its reproduction notes say the server had to be relaunched with the cap raised to 32 to produce the last row. So the shipped configuration already stops at the peak.
 
@@ -82,13 +84,15 @@ The engine and its flags change output quality, and tool calls show it first. Ub
 
 Constrained decoding, which masks any token that would break the tool schema, took their score on the K2VV ToolCall benchmark to 100%. vLLM ships the feature behind a `--tool-strict-level` flag and leaves it off by default, because some models misbehave when forced.
 
-On [Hacker News](https://news.ycombinator.com/item?id=50245479), Aurornis objected that the title oversells the work, since "really they just needed to configure it correctly." That objection makes the case for treating configuration as optimization, because one serving flag moved tool-call accuracy by eight points.
+On [Hacker News](https://news.ycombinator.com/item?id=50245479), Aurornis objected that the title oversells the work, since "really they just needed to configure it correctly." Ubicloud's jesdo replied that the fix needed code changes at the time, and that the latest vLLM handles the same problem with the `--tool-strict-level` flag.
+
+Either way, eight points of tool-call accuracy now sit behind one serving flag, which is my case for treating configuration as optimization.
 
 The same post describes "a bug in the interplay between constrained decoding and speculative decoding" that rejected valid speculative tokens and failed requests. Speed features and correctness features share one decode loop, so rerun your [structured output](/articles/llm-structured-outputs/) checks after every engine upgrade.
 
 ## What order should you apply inference optimizations in?
 
-Start with what the engine already does and end with anything that needs a draft model.
+Start with what the engine already does, and end with speculative decoding, where a cheap draft guesses several tokens and the full model checks them.
 
 1. **Check the defaults.** Confirm continuous batching, the paged KV cache and prefix caching are active in the engine version you pinned.
 2. **Fit the weights with room for cache.** Pick FP8 where the hardware runs it natively, and budget the KV cache with the formula above.
@@ -96,10 +100,10 @@ Start with what the engine already does and end with anything that needs a draft
 4. **Verify output quality.** Run tool-call and schema checks against the served model, with constrained decoding on where the model supports it.
 5. **Add speculative decoding last.** It helps when single responses stream too slowly even at low load.
 
-[Speculative decoding](/articles/speculative-decoding/) comes last because its failure doesn't show on the usual panels: "If acceptance collapses, every pass still pays for the guesses and the model slows while other panels look normal." It also differs from [test-time compute](/glossary/test-time-compute/), which spends extra inference work to improve an answer and makes no attempt to produce the same output in fewer steps.
+[Speculative decoding](/articles/speculative-decoding/) comes last because a failure is hard to see on a dashboard. The Modelplane guide says: "If acceptance collapses, every pass still pays for the guesses and the model slows while other panels look normal."
 
 ## Does hardware change the order?
 
 Hardware changes the order only when memory is short. On a consumer GPU a large model and a long context won't fit together, so quantization moves from step two to the first decision you make.
 
-A model that outgrows one GPU has to be split, and NVIDIA's two-Station setup does it with tensor parallelism over RDMA. Plan the split before deployment, because tensor parallelism is set when the server launches.
+A model that outgrows one GPU has to be split, and NVIDIA's two-Station setup does it with tensor parallelism over RDMA, a network link fast enough to split one model across two machines. Plan the split before deployment, because tensor parallelism is set when the server launches.

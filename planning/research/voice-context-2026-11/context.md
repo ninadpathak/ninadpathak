@@ -893,7 +893,7 @@ Pass C applied Ninad's first rule (every sentence clear alone on first read, the
 | 6 | batch 4 (six pieces) | 90b1bfda |
 | 7 | batch 3 (six pieces), with the lower half of writing-release-notes rewritten in full | 88d14645 |
 | 8 | batches 2b and 2a (seven pieces), with a second pass on internal-vs-external-docs and documentation-types | 9737b945 |
-| 9 | batch 1 (four pieces) | in review when this was written |
+| 9 | batch 1 (four pieces) | the commit that carries this line |
 
 Rules the pass C reviews added, to hold in every later piece:
 
@@ -910,4 +910,6 @@ Rules the pass C reviews added, to hold in every later piece:
 Tooling changed during the pass, all in `verify_quotes.py`: a failing source is fetched a second time after a pause, each fetch has a 180-second deadline, and a source marked `refuses_automated_fetch` with a `last_confirmed` date inside 30 days is reported as unverified with the failure reason and does not fail the run. PubMed Central still serves a challenge page on some full runs, and its source passes when fetched alone.
 
 Left for Ninad from pass C: the first-person questions listed with batch 11, the essay positions that are Claude's drafts (the Docker explainer, the harness essay, the incident-report essay), the films on the re-render list, and whether the drawn checker figure on docs-accessibility should stay.
+
+After the set 9 review: the Mem0 disclosure on rag-vs-memory uses the confirmed wording with no join month ("I wrote 11 guides for Mem0 and ran its team of 13 writers in early 2026"). The only other place that gives a join month is `content/work/mem0.md`, a work page outside the posts and topic pages. The quote-chain section of shorter-documentation was rebuilt around his claim with one quote, the Carroll paragraph was cut because the book was never fetched, and code-documentation shows the current five-line docstring and pydoc output.
 

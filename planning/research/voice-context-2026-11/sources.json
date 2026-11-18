@@ -5679,7 +5679,8 @@
       "what is still true about this user or task",
       "What were the deployment steps for this service?",
       "What failed last time?",
-      "RAG vs memory"
+      "RAG vs memory",
+      "this team deploys to Kubernetes 1.31"
     ],
     "llm-inference-optimization": [],
     "code-documentation": [

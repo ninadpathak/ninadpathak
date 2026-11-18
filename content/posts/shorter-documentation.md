@@ -11,7 +11,7 @@ bridges:
 - slug: agents-reading-docs
   reason: A docs page now has agent readers.
 date: 2026-04-04
-description: 'Why shorter technical documentation works better, why AI-written docs run long, how to cut a page without losing detail, and when length is earned.'
+description: 'A reader arrives with one task, so shorter documentation serves them better. Give each page one job and move the rest to a page of its own.'
 status: published
 work_note: "I'm Ninad Pathak, and I freelance as a technical writer for developer-tool companies. Docs run long, more so now that models draft them, and cutting a page down without losing what's true is work we can [do together](/services/)."
 title: The Case for Shorter Technical Documentation
@@ -25,9 +25,7 @@ Shorter documentation works better because a reader arrives with one task, and e
 
 The argument covers every kind of [technical documentation](/articles/technical-documentation/), from a README to a reference page.
 
-That was the argument before 2026 too. What changed this year is what a long page says about its author.
-
-Length used to stand in for effort, and [my essay on written-by-a-human labels](/articles/written-by-a-human/) follows what replaces it.
+That was the argument before 2026 too. Agents then made length free to produce, so a long page stopped showing that someone worked on it, and [my essay on written-by-a-human labels](/articles/written-by-a-human/) follows what readers trust in its place.
 
 ## Why is shorter technical documentation better?
 
@@ -38,25 +36,17 @@ Shorter documentation is better because it spends the reader's attention on the 
   <figcaption>Good docs remove the effort of decoding the page, so the reader's attention goes to the task and to understanding the system.</figcaption>
 </figure>
 
-The idea is older than the web. John Carroll's [The Nurnberg Funnel](https://openlibrary.org/works/OL4792482W), published by MIT Press in 1990, carries the subtitle "Designing Minimalist Instruction for Practical Computer Skill".
-
 Maintenance is the second cost, and writers undercount it. A button gets renamed and a parameter gets deprecated, so a page with one job has one promise to re-check, and a page with five has five.
 
 ## Why is AI-written documentation so long?
 
-AI-written documentation runs long because a model can produce every true sentence about a subject and has no way to know which one this reader came for. Rishabh Mishra put the reader's side of it bluntly on November 10: "It is too big for no reason."
+AI-written documentation runs long because a model can produce every true sentence about a subject and has no way to know which one this reader came for. Rishabh Mishra's [short note](https://rsbh.dev/notes/technical-writing-in-the-ai-era) from November 10 puts that cause in one line: "It doesn't know about the reader."
 
-The same [short note](https://rsbh.dev/notes/technical-writing-in-the-ai-era) names the cause better than the longer essays I've read: "AI writes in a zig-zag flow. It doesn't know about the reader."
+Until recently a long page was at least evidence of work, because someone had to type it. Agents took that cost to zero, so length now tells the reader nothing about care.
 
-Until recently a long page was at least evidence of work, because someone had to type it. Agents took that cost to zero, so length now tells the reader nothing about care, and Willison's phrase for the result is exact: "It's not necessarily slop, but it reads like slop!"
+Developers are already trying to fix the length inside the tools. A plugin called [i-have-adhd](https://github.com/ayghri/i-have-adhd) reached 542 points on Hacker News on September 8, and its first rule tells the coding assistant to lead with the next action.
 
-Developers are already trying to fix this in the tools. A plugin called [i-have-adhd](https://github.com/ayghri/i-have-adhd) reached 542 points on Hacker News on September 8, and its README describes it as "A skill for your coding assistant that stops it from burying the answer."
-
-Its rules read like a documentation style guide written for a machine, and the same list would serve a human writer. The first is "Lead with the next action." and the last bans preamble, recaps and closers.
-
-The thread under it was less hopeful than the README. A user there, sleazebreeze, reported that the skill holds for a few turns before the verbosity returns, and concluded "I don't think we can skill our way out of this one."
-
-A human writer handed a style guide hits the same limit. A style rule can shorten sentences, and it can't decide what a page is for, which is where the length comes from.
+The thread under it was less hopeful than the README, where a user, sleazebreeze, reported that the skill holds for a few turns before the verbosity returns. I'd expect the same of a human writer handed a style guide, because a style rule can shorten sentences and can't decide what a page is for, which is where the length comes from.
 
 ## How do you shorten documentation without losing detail?
 
@@ -71,7 +61,7 @@ I'd ask four questions of a page that feels long.
 
 The question about fear matters more than the others, because fear is what writes the paragraph about a legacy flag nobody has set in years. My post on [changelogs](/articles/writing-changelogs/) applies the same cut to release entries, where not every commit deserves a line.
 
-The first screen matters more than any other part of the page. A line such as "This page explains" spends that room telling readers they are on a page.
+The first screen is the one part every visitor reads, and a line such as "This page explains" spends it telling them they are on a page.
 
 Willison's details tag is a good patch for a pull request and a poor fit for docs. A collapsed section still has to be kept true, and a toggle gives it no URL and no title of its own.
 
@@ -85,7 +75,7 @@ Yes, because an agent pays for every token it fetches, and the Markdown it asks 
 
 I argue with that headline in [my essay on agents reading docs](/articles/agents-reading-docs/), and the Markdown finding holds either way.
 
-A collapsed section is plain text in Markdown, so progressive disclosure by toggle doesn't exist for that reader. Disclosure by page still does: Fern describes the pattern as "an agent reads llms.txt once, then fetches the Markdown for the pages it needs."
+A collapsed section arrives as plain text in Markdown, so an agent gets the hidden part whether it wanted it or not. Separate pages still let it choose, and Fern describes the pattern as "an agent reads llms.txt once, then fetches the Markdown for the pages it needs."
 
 Small pages with one job are therefore the unit an agent can select, and a page that mixes five intents makes the agent fetch four it didn't need.
 
@@ -109,7 +99,7 @@ There is no universal word count. The target is the smallest amount of informati
 
 **Do shorter docs risk leaving out important edge cases?**
 
-Only if you delete the edge cases when you could move them. Edge cases move to dedicated troubleshooting or reference pages, which keeps the primary path clean and still answers the reader who hits one.
+Only if you delete the edge cases when you could move them to a troubleshooting or reference page.
 
 **Should I split one long page into many tiny pages?**
 
@@ -117,8 +107,8 @@ Only when each small page has a clear, independent job. A site of tiny pages tha
 
 **What kind of documentation should always stay long?**
 
-Specifications and formal standards. They are the source of truth for an implementation and have to be exhaustive to prevent ambiguity.
+Reference pages, specifications and standards, which readers enter at one section and don't read from the top.
 
 **How can I tell if my page is too long?**
 
-Check the first screen and count the intents. If the first screen doesn't answer the reader's immediate question, or the page serves several different reader tasks, it is too long for its purpose.
+Read the first screen: if it doesn't answer the reader's immediate question, or the page serves several reader tasks, it is too long for its purpose.
