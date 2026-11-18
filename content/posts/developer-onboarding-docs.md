@@ -10,40 +10,36 @@ slug: developer-onboarding-docs
 status: published
 work_note: "Are the developers you're onboarding your customers? Then their version of this page is your quickstart, and I write those. I'm Ninad Pathak, a freelance technical writer for developer-tool companies, and I run the product before I write about it. [Tell me about yours](/contact/)."
 takeaways:
-- Make a safe first merged change the finish line instead of assigning a reading list.
-- Give the reader one supported setup path with proof after each stage.
-- Put help and recovery beside the command that can fail.
-- Review the route when the product or development workflow changes.
-title: 'Developer Onboarding Documentation: End It in a Merged Change'
+- End the onboarding guide at a safe first merged change, not at a reading list.
+- Give the new engineer one supported setup path, with a check after each stage.
+- Put the fix for a failing command next to that command.
+- Review the guide whenever the setup or the delivery workflow changes.
+title: Developer Onboarding Documentation That Ends in a Merged Change
 updated: 2026-09-11
 video: developer-onboarding-docs
 ---
 
-Developer onboarding documentation takes a new engineer from a clean machine to a safe first merged change, with one supported setup path and a check after each step. I end it at the merge, because a reading list gives the reader no finish line to reach.
+Jeff Atwood published a badge in 2007 for software that had passed the [Works on My Machine certification program](https://blog.codinghorror.com/the-works-on-my-machine-certification-program/). A new engineer's first week is when a team finds out how much of its setup has only that certificate.
 
-Picture a hypothetical day two: a new engineer is asking which Node version to use, whether Docker is required, and where the test credentials live. The answers exist.
+Developer onboarding documentation takes a new engineer from a clean machine to a safe first merged change, with one supported setup path and a check after each step. I'd end the guide at the merge, because a reading list gives the reader no finish line to reach.
 
-One sits in the README, another survived in Slack, and the setup script quietly assumes the third.
+Say a new engineer on day two asks which Node version to use, whether Docker is required and where the test credentials live. Suppose the first answer is in the README, the second is in a Slack thread and the third is an assumption inside the setup script.
 
-A teammate can walk them through it, so the machine eventually runs. That rescue feels helpful while the onboarding guide keeps lying.
+A teammate can walk the new engineer through all of it, and the machine will run by the afternoon. The onboarding guide is still wrong after that rescue, because it claims the setup is documented when part of the setup lives in one person's head.
 
-It says the route is documented when the route still lives in somebody's head.
+My rule for this kind of [technical documentation](/articles/technical-documentation/) is that the guide alone has to carry someone from a clean machine through setup, review and a verified change in a test environment.
 
-My rule is blunt: if the guide cannot carry someone from a clean machine through setup, review, and proof in a test environment, it is company background with a checklist attached.
+## Where should developer onboarding documentation end?
 
-## Design the route backward from the first merge
+Developer onboarding documentation should end at the new engineer's first merged change.
 
-"Learn the codebase" has no visible finish line. Replace it with a contained result: run the product, change one user-facing behavior, pass the required checks, open a pull request, and verify the merged result.
+"Learn the codebase" has no finish line. "Run the product, change one behavior, pass the checks, open a pull request and verify the merged result" names five things a reviewer can check.
 
-The default approach front-loads architecture because the team wants the new engineer to understand the system before touching it. The intention is fair.
+A team may put architecture first because it wants the new engineer to understand the system before touching it. I'd reverse the order, because a diagram of the request flow makes more sense after the reader has sent one request through it.
 
-The sequence is backwards. A request flow makes more sense after the reader has sent one request through it.
+### State the result before the setup begins
 
-### Declare the result before the setup begins
-
-Put a completion contract near the top of the page. A reviewer should be able to test each line without interpreting "familiar" or "comfortable."
-
-The illustrative contract below names no real product or team:
+Put a completion checklist near the top of the page, written so that a reviewer can test each line. The checklist below is an illustration and names no real product:
 
 ```text
 Onboarding route complete when:
@@ -54,15 +50,13 @@ Onboarding route complete when:
 [ ] The change appears in the test environment.
 ```
 
-Replace any line that asks the reader to "understand the architecture" or "explore the repository" with observable proof.
+Replace any line that says "understand the architecture" or "explore the repository" with something the reader can show, such as a passing test. The architecture pages become links that a step points to when the step needs them.
 
-Move that background into links the task can call for.
+### Put a check after each stage
 
-### Put proof after each stage
+A command that exits without an error has only shown that it exited. The database can still be unhealthy, and the API can still be pointed at the wrong environment.
 
-A command exiting without an error only proves that the command exited. The database may still be unhealthy, the API may be pointed at the wrong environment, and the frontend may be serving a cached build.
-
-The next block uses placeholder localhost ports and illustrative service commands:
+The block below uses placeholder ports and illustrative commands:
 
 ```text
 Database ready:  docker compose ps --format json
@@ -71,27 +65,21 @@ Tests ready:     npm test
 Frontend ready:  open http://localhost:3000
 ```
 
-Write the expected signal beside each check. If `curl` returns a non-`200` response, stop the route and send the reader to the recovery block for the API.
+Write the expected output next to each check. If the `curl` command returns anything other than `200`, the reader stops and goes to the recovery steps for the API, so that step six isn't where they discover that step two never worked.
 
-Do not let step six become the place they discover that step two never worked.
+## How many setup paths should the guide offer?
 
-## Give the reader one supported setup path
+The guide should offer one setup path, the path the team tests. Setup pages collect alternatives over time: a bootstrap script that one person uses, a Docker setup that another prefers, and an old wiki page that still shows up in internal search.
 
-Setup pages collect commands like kitchen drawers collect dead batteries. A bootstrap script works for one person, Docker works for another, and an old wiki page still ranks in internal search.
+Calling that pile "flexible" hands the choice to the new engineer, who is the person with the least information to choose with. Pick one path and mark it as supported, if Windows needs different commands, give them their own heading, and move the old commands off the page.
 
-Calling the pile "flexible" transfers maintenance decisions to the person with the least context.
+### Name versions and access before a command needs them
 
-Choose one supported route and mark it as the route the team tests. Put a required platform alternative under its own heading.
+"Install Node" isn't an instruction. Name the file that holds the version, the command that checks it and the first step that depends on it.
 
-Move historical commands out of the main path.
+[Corepack's README](https://github.com/nodejs/corepack/blob/main/README.md) describes one way to pin a package manager: you set the `packageManager` field in `package.json`, and `corepack enable` puts the matching Yarn and pnpm binaries on your path.
 
-### Expose versions and access before they block a command
-
-"Install Node" is not an instruction. Name the version source, the verification command, and the first step that needs it.
-
-[Corepack's maintained README](https://github.com/nodejs/corepack/blob/main/README.md) says the `packageManager` field records a supported manager and version. It documents `corepack enable [name]` for command shims and `corepack install` for the manager configured in the current project.
-
-The dependency record below is illustrative. `pnpm@10.17.1`, the vault role, service file, and recovery commands are placeholders rather than facts about a repository.
+The table below is an illustration. The version `pnpm@10.17.1`, the vault role and the recovery commands are placeholders and not facts about any repository.
 
 | Dependency | Source of truth | Check | Failure branch |
 | --- | --- | --- | --- |
@@ -100,11 +88,9 @@ The dependency record below is illustrative. `pnpm@10.17.1`, the vault role, ser
 | Test secrets | Test-vault role | `vault token lookup` | Request the role before cloning private fixtures |
 | Local services | `compose.yaml` | `docker compose config --quiet` | Fix missing variables before starting containers |
 
-Replace "ask the team" with a product or repository artifact before publishing the setup path.
+Before you publish the setup path, replace every "ask the team" with a file or a command the reader can check alone.
 
-Microsoft's [onboarding guide template](https://microsoft.github.io/code-with-engineering-playbook/developer-experience/onboarding-guide-template/) separates setup from contacts, team agreements, and project building blocks. It also says the guide can link to project material that already exists.
-
-That is a useful boundary: the route should connect the right pages, not swallow the handbook.
+Microsoft's [onboarding guide template](https://microsoft.github.io/code-with-engineering-playbook/developer-experience/onboarding-guide-template/) keeps setup separate from contacts, team agreements and project building blocks. It also says the guide can be "an index to project specific content if it already exists elsewhere", which is the right limit: the guide links to the handbook and doesn't copy it.
 
 <div class="visual-wrapper">
   <div class="visual-title">Microsoft's onboarding guide template</div>
@@ -112,13 +98,13 @@ That is a useful boundary: the route should connect the right pages, not swallow
     <img src="/static/images/visuals/microsoft-onboarding-template.png" alt="Microsoft Engineering Fundamentals onboarding template with separate areas for goals, contacts, team agreements, setup, project building blocks, and resources" loading="lazy">
   </div>
 </div>
-<p class="visual-caption">Setup has a distinct job. Contacts and project context remain available without blocking the first run.</p>
+<p class="visual-caption">Microsoft's template gives setup its own section, apart from contacts, team agreements and project building blocks.</p>
 
-### Attach recovery to the fragile step
+### Put the fix beside the step that fails
 
-"Ask in Slack if you get stuck" is an escape hatch for the document, not help for the engineer. Put the symptom, diagnostic, supported fix, and escalation owner beside the command that can fail.
+"Ask in Slack if you get stuck" helps the author more than the reader. Next to each command that can fail, put the symptom, the command that diagnoses it, the supported fix and the person or channel to escalate to.
 
-The following `checkout-db` service, port, environment variable, and `#dev-help` channel are fictional placeholders:
+The service name, port, environment variable and channel below are invented for the example:
 
 ```text
 Symptom: checkout-db is unhealthy
@@ -129,13 +115,13 @@ Verify:  docker compose ps checkout-db
 Escalate: Post the command and full output in #dev-help
 ```
 
-Replace "restart everything" with the state to clear, the supported fix, and a verification command. Name a real escalation destination before the guide ships.
+Replace "restart everything" with the specific thing to stop or reset, the fix, and a command that proves the fix worked. Put a real channel or owner in the escalation line before the guide ships.
 
-## Use the first change to teach how the team ships
+## What should a new engineer's first change be?
 
-The starter task is not free labor dressed as onboarding. Its job is to expose the team's real development loop while keeping the cost of a mistake small.
+The first change should be real, small and reversible, because its job is to take the new engineer through the team's actual branch, test, review and deploy steps.
 
-GitLab's public [onboarding handbook](https://handbook.gitlab.com/handbook/people-group/general-onboarding/) turns onboarding into issue tasks with ownership, a due date, and role-specific branches. That system is much larger than a first engineering change, but the useful idea survives at smaller scale: onboarding work is assigned work with a visible state.
+GitLab's public [onboarding handbook](https://handbook.gitlab.com/handbook/people-group/general-onboarding/) runs onboarding as tasks in a GitLab issue, and each onboarding issue has a due date of 30 days. GitLab's process covers a whole company, and the part I'd copy for a first engineering change is that each onboarding task sits in an issue with a due date, so anyone can see what is done.
 
 <div class="visual-wrapper">
   <div class="visual-title">GitLab's public onboarding handbook</div>
@@ -143,47 +129,39 @@ GitLab's public [onboarding handbook](https://handbook.gitlab.com/handbook/peopl
     <img src="/static/images/visuals/gitlab-onboarding-handbook.png" alt="GitLab handbook describing onboarding issue tasks, ownership, and role-specific work" loading="lazy">
   </div>
 </div>
-<p class="visual-caption">The task has an owner and a completion state. It is not a folder of optional reading.</p>
+<p class="visual-caption">GitLab's handbook runs onboarding as tasks in an issue with a 30-day due date.</p>
 
 ### Choose a change that is real and reversible
 
-A suitable first issue travels through the normal branch, test, review, and deployment path without putting production data or credentials at risk.
+A good first issue goes through the normal branch, test, review and deploy steps without touching production data or credentials. I'd accept an issue as a first change only if all five of these hold:
 
-Use this acceptance test:
-
-- The change affects behavior a reader can observe.
+- The change affects behavior the engineer can see, such as a response.
 - A failing test can describe the starting state.
-- The change stays inside one owned component.
+- The change stays inside one component with a named owner.
 - The test environment can prove the result.
 - Reverting the merge restores the earlier behavior.
 
-If the issue needs access to production data, touches several services, or has no reliable test, it fails as an onboarding task even if the code diff is short.
+An issue that needs production data, spans several services or has no reliable test fails as an onboarding task, even if the code change is ten lines.
 
-### Delay architecture until the task gives it a hook
+### Introduce the architecture after the first request
 
-Give the reader the path of the request they exercised. The component chain below is illustrative, not an architecture claim:
+Show the reader the path of the request they just sent. The chain below is an illustration and not a claim about any system:
 
 ```text
 Browser -> API gateway -> authentication -> checkout service -> database
 ```
 
-Link each component to its repository, local run command, and owner. Stop there.
+Link each component in the chain to its repository, its local run command and its owner. The full platform diagram can wait until the engineer has a request, a log line and a code path to place on it.
 
-The complete platform diagram can wait until the engineer has a request, a log line, and a code path to pin it to.
+## How do you keep onboarding documentation current?
 
-## Keep the route attached to product changes
+Change the guide in the same merge request as the setup change that makes it wrong. An onboarding guide goes stale when setup changes are reviewed in one place and the guide is edited in another.
 
-An onboarding guide rots when setup changes travel through one workflow and the guide lives in another. The page still looks polished while each release moves it one command further from the product.
+GitLab's [documentation workflow](https://docs.gitlab.com/development/documentation/workflow/) says its technical writing team "strongly encourages including documentation in the same merge request as the code that it relates to". Microsoft's [repository guidance](https://microsoft.github.io/code-with-engineering-playbook/documentation/guidance/project-and-repositories/) likewise lists onboarding and setup among the documentation that belongs to a repository.
 
-GitLab's [documentation workflow](https://docs.gitlab.com/development/documentation/workflow/) strongly encourages documentation in the code merge request or in a separate merge request raised at the same time. Microsoft's [repository guidance](https://microsoft.github.io/code-with-engineering-playbook/documentation/guidance/project-and-repositories/) places setup, build, test, deployment, and working agreements with the project.
+### Assign an owner where the change happens
 
-Both sources support the same practical move: review the route where maintainers can compare it with the change.
-
-### Assign ownership at the point of change
-
-Record the owner and update trigger for each stage. The roles in this table are illustrative.
-
-Use the actual teams that control each fact:
+Record an owner and a review trigger for each stage of the route. The teams in this table are illustrative, so use the teams that control each fact in your company:
 
 | Stage | Owner | Review trigger |
 | --- | --- | --- |
@@ -193,15 +171,13 @@ Use the actual teams that control each fact:
 | Pull request | Repository maintainer | CI or review-policy change |
 | Test deployment | Release owner | Environment or release-process change |
 
-One person can own the complete route, but a generic "docs owner" cannot verify facts controlled by other teams. Name the fact owner beside each stage.
+A single person can own the whole guide. A generic "docs owner" still can't verify a vault policy or a CI rule that another team controls, so name the team that owns each fact next to its stage.
 
-### Rerun the route from a clean state
+### Rerun the route from a clean machine
 
-A clean container catches missing packages. It cannot request a real permission, interpret an unclear issue, or notice that two pages disagree about the supported workflow.
+A clean container catches a missing package. It can't request a real permission or notice that two pages disagree about the supported workflow, so I'd automate the setup commands and have a person review the decisions around them.
 
-Use automation for deterministic setup and a human route review for the decisions around it.
-
-The next block uses the reserved `example.com` domain, a fictional `checkout-api` repository, placeholder localhost port `8080`, and illustrative commands. Do not copy it as a live setup path:
+The block below uses the reserved `example.com` domain, a fictional `checkout-api` repository and a placeholder port. Don't copy it as a working setup:
 
 ```bash
 git clone https://example.com/checkout-api.git
@@ -212,15 +188,13 @@ npm test
 curl --fail http://localhost:8080/health
 ```
 
-If the real run depends on a global package, cached credential, or private instruction absent from the page, repair the route before changing the success message.
+If your real run needs a globally installed package, a cached credential or an instruction that isn't on the page, fix the page before you call the route passing.
 
-## Test the method on a fictional checkout API
+## What does a complete onboarding route look like?
 
-The following Orbit checkout service is a worked example, not a client story or a measured result. Its purpose is to make the review decisions concrete.
+The route below is for Orbit, a checkout API I made up for this page. It isn't a client project and it carries no measured result.
 
-The weak issue says: "Read the architecture overview, clone the repositories, set up the services, and choose a starter ticket." Each instruction sounds reasonable.
-
-Together they dump repository choice, setup state, task safety, and proof onto the new engineer.
+A weak onboarding issue for Orbit would say: "Read the architecture overview, clone the repositories, set up the services, and choose a starter ticket." Each of those four instructions leaves a decision to the new engineer, such as which repository to clone first and which ticket is safe.
 
 ### Replace the reading list with a route
 
@@ -235,29 +209,47 @@ Together they dump repository choice, setup state, task safety, and proof onto t
 | Review | Open a pull request with the onboarding label | CI passes and the component owner reviews it |
 | Deploy | Merge and call the test API | The validation error appears in the test environment |
 
-This route teaches the product through the team's normal machinery. Replace any "looks right" evidence with output a reviewer can inspect.
+The route teaches Orbit through the same steps the team uses to ship. Every cell in the evidence column is something a reviewer can look at, such as a response or a test result.
 
-### Audit decisions instead of page views
+### Record where readers needed a rescue
 
-After someone uses the route, record the stage where they needed an undocumented choice or a rescue. Do not publish a made-up benchmark for "time to productivity."
+After someone follows the route, write down each stage where they needed a choice the page didn't make or help from a teammate.
 
 | Observed failure | Documentation decision |
 | --- | --- |
-| The vault role is requested after setup blocks | Move access before the repository step |
+| Setup stalls because the vault role wasn't requested first | Move access before the repository step |
 | The health check passes against the wrong build | Return the commit SHA in the response |
-| Starter issues cross component boundaries | Add ownership and rollback criteria |
+| Starter issues cross component boundaries | Accept a starter issue only if it stays in one owned component and its merge can be reverted |
 | Review waits with no assignee | Name the reviewer in the onboarding issue |
 
-Each observation should point to a repair in the route. Page views cannot tell you which undocumented decision stopped the reader.
+Each failure in the left column leads to one change in the route. Page views can't show you that the vault role was requested too late, and a note from the person who ran the route can.
 
 ## Developer onboarding docs checklist
 
 - The route ends in one safe merged change through the normal delivery workflow.
-- One supported setup path exposes prerequisites before commands.
-- Each fragile stage has proof, recovery, and an escalation destination.
-- Fact owners and product-change triggers are visible.
-- A clean-state run reproduces the documented path.
+- A single supported setup path lists its prerequisites before its commands.
+- Each stage that can fail has a check, a fix and an escalation contact.
+- Each stage names the team that owns its facts and the change that triggers a review.
+- A run from a clean machine reproduces the documented path.
 
-Onboarding is one route inside a wider documentation package. The guide to [what technical documentation should include](/articles/technical-docs/) shows which questions belong outside it.
+The guide to [what technical documentation should include](/articles/technical-docs/) covers the pages a product needs besides onboarding. A product's quickstart needs the same single setup path, and writing quickstarts is work I take on, described under [developer documentation](/services/developer-documentation/).
 
-Before the route ships, the [documentation review checklist](/articles/documentation-review/) should attack the commands, assumptions, and rendered page.
+Before the route ships, run it through the [documentation review checklist](/articles/documentation-review/), which tests the commands and the rendered page.
+
+## FAQ
+
+**What should developer onboarding documentation include?**
+
+It should include the access a new engineer needs, one supported setup path with a check after each stage, a first change to make, and the fix for each step that can fail. It should end when that first change is merged and verified.
+
+**How long should developer onboarding take?**
+
+This page doesn't give a number, because I haven't measured one. Record how long each stage takes the next new engineer and where they needed help, and shorten the stage that took longest.
+
+**Should the onboarding guide explain the architecture?**
+
+It should link to the architecture, after the reader has sent a first request through the system. A new engineer places a diagram better once they have a request and a log line to match against it.
+
+**Who should own developer onboarding documentation?**
+
+Each stage should be owned by the team that controls its facts. The platform team owns access, for example, and the service's maintainers own local setup.

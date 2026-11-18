@@ -1528,10 +1528,13 @@
       "title": "Headings and titles",
       "quotes": [
         "Write section headings based on the type of content that's in the section.",
-        "For a task-based heading, start with a bare infinitive"
+        "For a task-based heading, start with a bare infinitive",
+        "avoid skipping heading levels or using empty headings",
+        "Structure content with descriptive headings"
       ],
       "connects": [
-        "documentation-headings"
+        "documentation-headings",
+        "documentation-review"
       ]
     },
     {
@@ -5157,6 +5160,440 @@
       "connects": [
         "agent-harnesses"
       ]
+    },
+    {
+      "id": "wikipedia-hello-world",
+      "url": "https://en.wikipedia.org/wiki/%22Hello,_World!%22_program",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "\"Hello, World!\" program",
+      "quotes": [
+        "was inherited from a 1974 Bell Laboratories internal memorandum by Brian Kernighan, Programming in C: A Tutorial"
+      ],
+      "connects": [
+        "writing-technical-tutorials"
+      ]
+    },
+    {
+      "id": "node-crypto-timingsafeequal",
+      "url": "https://nodejs.org/api/crypto.html",
+      "author": "Node.js",
+      "date": "2026-11-18",
+      "title": "Crypto",
+      "quotes": [
+        "An error is thrown if a and b have different byte lengths"
+      ],
+      "connects": [
+        "writing-technical-tutorials"
+      ]
+    },
+    {
+      "id": "wikipedia-lorem-ipsum",
+      "url": "https://en.wikipedia.org/wiki/Lorem_ipsum",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "Lorem ipsum",
+      "quotes": [
+        "is a dummy or placeholder text commonly used in graphic design, publishing, and web development"
+      ],
+      "connects": [
+        "documentation-template"
+      ]
+    },
+    {
+      "id": "wikipedia-lynx-browser",
+      "url": "https://en.wikipedia.org/wiki/Lynx_(web_browser)",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "Lynx (web browser)",
+      "quotes": [
+        "it is the oldest web browser still being maintained",
+        "having started in 1992",
+        "images are displayed as orange alt text"
+      ],
+      "connects": [
+        "docs-accessibility"
+      ]
+    },
+    {
+      "id": "google-style-accessibility",
+      "url": "https://developers.google.com/style/accessibility",
+      "author": "Google",
+      "date": "2026-11-18",
+      "title": "Write accessible documentation",
+      "quotes": [
+        "Don't skip levels of the heading hierarchy",
+        "Links should make sense when read out of context",
+        "To change the visual formatting of a heading, use CSS rather than using a heading level that doesn't fit the hierarchy",
+        "If the image is purely decorative, use empty alt text",
+        "Don't use images of text, code samples, or terminal output"
+      ],
+      "connects": [
+        "docs-accessibility"
+      ]
+    },
+    {
+      "id": "msu-basic-accessibility-checklist",
+      "url": "https://webaccess.msu.edu/tutorials/basics/checklist",
+      "author": "Michigan State University",
+      "date": "2026-11-18",
+      "title": "Basic Accessibility Checklist",
+      "quotes": [
+        "Format and use simple tables with column and row headers",
+        "Text is searchable, selectable, and recognized by assistive technologies"
+      ],
+      "connects": [
+        "docs-accessibility"
+      ]
+    },
+    {
+      "id": "openedx-accessibility-checklist",
+      "url": "https://docs.openedx.org/en/latest/educators/references/accessibility/accessibility_best_practices_checklist.html",
+      "author": "Open edX",
+      "date": "2026-11-18",
+      "title": "Accessibility best practices checklist",
+      "quotes": [
+        "include the information contained in the image as accessible text adjacent to the image",
+        "an empty alt attribute is also acceptable"
+      ],
+      "connects": [
+        "docs-accessibility"
+      ]
+    },
+    {
+      "id": "codinghorror-works-on-my-machine-2007",
+      "url": "https://blog.codinghorror.com/the-works-on-my-machine-certification-program/",
+      "author": "Jeff Atwood",
+      "date": "2007-03-15",
+      "title": "The \"Works on My Machine\" Certification Program",
+      "quotes": [
+        "Jeff Atwood 15 Mar 2007"
+      ],
+      "connects": [
+        "developer-onboarding-docs"
+      ]
+    },
+    {
+      "id": "corepack-readme",
+      "url": "https://raw.githubusercontent.com/nodejs/corepack/main/README.md",
+      "author": "Node.js",
+      "date": "2026-11-18",
+      "title": "Corepack README",
+      "quotes": [
+        "Set your package's manager with the `packageManager` field in `package.json`",
+        "Run `corepack enable` to install the required Yarn and pnpm binaries on your path"
+      ],
+      "connects": [
+        "developer-onboarding-docs"
+      ]
+    },
+    {
+      "id": "microsoft-onboarding-guide-template",
+      "url": "https://microsoft.github.io/code-with-engineering-playbook/developer-experience/onboarding-guide-template/",
+      "author": "Microsoft",
+      "date": "2026-11-18",
+      "title": "Onboarding Guide Template",
+      "quotes": [
+        "an index to project specific content if it already exists elsewhere"
+      ],
+      "connects": [
+        "developer-onboarding-docs"
+      ]
+    },
+    {
+      "id": "gitlab-general-onboarding",
+      "url": "https://handbook.gitlab.com/handbook/people-group/general-onboarding/",
+      "author": "GitLab",
+      "date": "2026-11-18",
+      "title": "GitLab Onboarding",
+      "quotes": [
+        "all onboarding tasks are completed in a GitLab issue",
+        "a due date of 30 days"
+      ],
+      "connects": [
+        "developer-onboarding-docs"
+      ]
+    },
+    {
+      "id": "gitlab-docs-workflow",
+      "url": "https://docs.gitlab.com/development/documentation/workflow/",
+      "author": "GitLab",
+      "date": "2026-11-18",
+      "title": "Documentation workflow",
+      "quotes": [
+        "strongly encourages including documentation in the same merge request as the code that it relates to"
+      ],
+      "connects": [
+        "developer-onboarding-docs",
+        "documentation-review"
+      ]
+    },
+    {
+      "id": "microsoft-playbook-repo-docs",
+      "url": "https://microsoft.github.io/code-with-engineering-playbook/documentation/guidance/project-and-repositories/",
+      "author": "Microsoft",
+      "date": "2026-11-18",
+      "title": "Projects and repositories",
+      "quotes": [
+        "Documentation Specific to a Repository"
+      ],
+      "connects": [
+        "developer-onboarding-docs"
+      ]
+    },
+    {
+      "id": "wikipedia-law-of-triviality",
+      "url": "https://en.wikipedia.org/wiki/Law_of_triviality",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "Law of triviality",
+      "quotes": [
+        "it was popularized in the Berkeley Software Distribution community by the Danish software developer Poul-Henning Kamp in 1999",
+        "such as what materials to use for the staff bicycle shed"
+      ],
+      "connects": [
+        "documentation-review"
+      ]
+    },
+    {
+      "id": "gitlab-docs-review-apps",
+      "url": "https://docs.gitlab.com/development/documentation/review_apps/",
+      "author": "GitLab",
+      "date": "2026-11-18",
+      "title": "Documentation review apps",
+      "quotes": [
+        "The review app lets you preview how your changes appear on the GitLab Docs site before merging"
+      ],
+      "connects": [
+        "documentation-review"
+      ]
+    },
+    {
+      "id": "w3c-page-structure-tutorial",
+      "url": "https://www.w3.org/WAI/tutorials/page-structure/",
+      "author": "W3C",
+      "date": "2026-11-18",
+      "title": "Page Structure Tutorial",
+      "quotes": [
+        "Label regions to allow users to distinguish and access them"
+      ],
+      "connects": [
+        "documentation-review",
+        "documentation-structure"
+      ]
+    },
+    {
+      "id": "wikipedia-conways-law",
+      "url": "https://en.wikipedia.org/wiki/Conway%27s_law",
+      "author": "Wikipedia",
+      "date": "2026-11-18",
+      "title": "Conway's law",
+      "quotes": [
+        "copies of the communication structures of these organizations",
+        "who introduced the idea in 1967"
+      ],
+      "connects": [
+        "documentation-structure"
+      ]
+    },
+    {
+      "id": "diataxis-start-here",
+      "url": "https://diataxis.fr/start-here/",
+      "author": "Daniele Procida",
+      "date": "2026-11-18",
+      "title": "Start here - Diátaxis in five minutes",
+      "quotes": [
+        "there are fundamentally four identifiable kinds of documentation"
+      ],
+      "connects": [
+        "documentation-structure"
+      ]
+    },
+    {
+      "id": "gitlab-docs-folder-structure",
+      "url": "https://docs.gitlab.com/development/documentation/site_architecture/folder_structure/",
+      "author": "GitLab",
+      "date": "2026-11-18",
+      "title": "Folder structure for documentation",
+      "quotes": [
+        "Instructions for installing GitLab",
+        "Instructions for updating GitLab"
+      ],
+      "connects": [
+        "documentation-structure"
+      ]
+    },
+    {
+      "id": "aws-lambda-developer-guide-welcome",
+      "url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html",
+      "author": "AWS",
+      "date": "2026-11-18",
+      "title": "What is AWS Lambda?",
+      "quotes": [
+        "AWS Lambda is a serverless compute service"
+      ],
+      "connects": [
+        "documentation-structure"
+      ]
+    },
+    {
+      "id": "simonwillison-til",
+      "url": "https://til.simonwillison.net/",
+      "author": "Simon Willison",
+      "date": "2026-11-18",
+      "title": "Simon Willison: TIL",
+      "quotes": [
+        "Things I've learned"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "codeandcake-docker-is-weird",
+      "url": "https://codeandcake.dev/posts/2026-10-22-docker-is-weird",
+      "author": "Code and Cake",
+      "date": "2026-10-22",
+      "title": "Docker is weird",
+      "quotes": [
+        "Images are just folders",
+        "a whole bunch of networking magic I don’t understand",
+        "Docker requires root!",
+        "I’ve only just started my own container runtime"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "docker-engine-19-03-release-notes",
+      "url": "https://docs.docker.com/engine/release-notes/19.03/",
+      "author": "Docker",
+      "date": "2019-07-22",
+      "title": "Docker Engine 19.03 release notes",
+      "quotes": [
+        "Running dockerd as a non-root user (Rootless mode) is now allowed."
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "docker-engine-20-10-release-notes",
+      "url": "https://docs.docker.com/engine/release-notes/20.10/",
+      "author": "Docker",
+      "date": "2020-12-08",
+      "title": "Docker Engine 20.10 release notes",
+      "quotes": [
+        "rootless: graduate from experimental"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "docker-rootless-mode-docs",
+      "url": "https://docs.docker.com/engine/security/rootless/",
+      "author": "Docker",
+      "date": "2026-11-18",
+      "title": "Rootless mode",
+      "quotes": [
+        "Rootless mode lets you run the Docker daemon and containers as a non-root user"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "hn-50202681-docker-is-weird",
+      "url": "https://news.ycombinator.com/item?id=50202681",
+      "author": "Hacker News",
+      "date": "2026-10-22",
+      "title": "Docker is weird",
+      "quotes": [],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "hn-50203265-j16sdiz",
+      "url": "https://news.ycombinator.com/item?id=50203265",
+      "author": "j16sdiz",
+      "date": "2026-10-23",
+      "title": "Comment on Docker is weird",
+      "quotes": [
+        "what's weird about it?"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "hn-50203658-0xbadcafebee",
+      "url": "https://news.ycombinator.com/item?id=50203658",
+      "author": "0xbadcafebee",
+      "date": "2026-10-23",
+      "title": "Comment on Docker is weird",
+      "quotes": [
+        "Docker hasn't required root for 7 years"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "hn-50203573-kazinator",
+      "url": "https://news.ycombinator.com/item?id=50203573",
+      "author": "kazinator",
+      "date": "2026-10-23",
+      "title": "Comment on Docker is weird",
+      "quotes": [
+        "you can run gdb outside of that docker and point it to a process in the docker"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "hn-50202931-shykes",
+      "url": "https://news.ycombinator.com/item?id=50202931",
+      "author": "Solomon Hykes",
+      "date": "2026-10-23",
+      "title": "Comment on Docker is weird",
+      "quotes": [
+        "I'm the creator of Docker and came across this post"
+      ],
+      "connects": [
+        "docker-is-weird-explainer"
+      ]
+    },
+    {
+      "id": "phk-bikeshed-email",
+      "url": "https://phk.freebsd.dk/sagas/bikeshed/",
+      "author": "Poul-Henning Kamp",
+      "date": "1999-10-02",
+      "title": "The Bikeshed email",
+      "quotes": [
+        "In 1999 I had become sort of a de facto spiritual leader of the FreeBSD project",
+        "C. Northcote Parkinson wrote a book in the early 1960'ies"
+      ],
+      "connects": [
+        "documentation-review"
+      ]
+    },
+    {
+      "id": "conway-committees-paper",
+      "url": "https://www.melconway.com/Home/Committees_Paper.html",
+      "author": "Melvin E. Conway",
+      "date": "1968-04-01",
+      "title": "How Do Committees Invent?",
+      "quotes": [
+        "are constrained to produce designs which are copies of the communication structures of these organizations",
+        "Reprinted by permission of Datamation magazine, where it appeared April, 1968"
+      ],
+      "connects": [
+        "documentation-structure"
+      ]
     }
   ],
   "unused_leads": [
@@ -5407,6 +5844,61 @@
     "technical-writing-for-engineers": [
       "you should make sure",
       "that you are going to"
+    ],
+    "writing-technical-tutorials": [
+      "hello, world"
+    ],
+    "documentation-template": [
+      "Retry failed requests",
+      "Reader check: pick an action for each row of the table using only the filled pages, then find the sentence that supports it. If you need information from outside the pages to choose, write down what was missing."
+    ],
+    "docs-accessibility": [
+      "click here",
+      "read the documentation review checklist",
+      "here"
+    ],
+    "developer-onboarding-docs": [
+      "Learn the codebase",
+      "run the product, change one behavior, pass the checks, open a pull request and verify the merged result",
+      "understand the architecture",
+      "explore the repository",
+      "Install Node",
+      "ask the team",
+      "Ask in Slack if you get stuck",
+      "restart everything",
+      "docs owner",
+      "time to productivity",
+      "flexible",
+      "Read the architecture overview, clone the repositories, set up the services, and choose a starter ticket.",
+      "Run the product, change one behavior, pass the checks, open a pull request and verify the merged result"
+    ],
+    "documentation-review": [
+      "Try again",
+      "Restart the service",
+      "create a key",
+      "understand authentication",
+      "Keep paragraphs short",
+      "Review annually",
+      "the docs team",
+      "LGTM",
+      "high quality",
+      "Generate an API key in Settings, add it to your request, and run the example. The API returns your account.",
+      "\"mode\": \"test\"",
+      "Split a paragraph that holds both a setup step and its exception"
+    ],
+    "documentation-structure": [
+      "Platform Services",
+      "keep",
+      "delete",
+      "Deploy",
+      "Concepts",
+      "Get started with the JavaScript SDK",
+      "Learn more",
+      "Resources",
+      "Start",
+      "Operate",
+      "Change",
+      "You have an account but no credentials. Find the shortest supported route to a successful test API response."
     ]
   }
 }

@@ -5,40 +5,35 @@ siblings:
 - docs-seo
 - docs-accessibility
 date: 2026-07-30
-description: Reorganize a documentation site around reader routes, canonical answers,
-  tested labels, and direct redirects instead of mirroring the org chart.
+description: "A documentation structure built around what readers do. Inventory the pages, map routes through setup, use, failure and change, pick one canonical page per answer, and test the labels before migrating."
 slug: documentation-structure
 status: published
 work_note: "I'm Ninad Pathak, a freelance technical writer for developer-tool companies. Docs that mirror the org chart make a reader guess which team owns a feature before they can find its page, and I rewrite them around what the reader came to do. [Work with me on yours](/services/)."
 takeaways:
-- Inventory page jobs and evidence before drawing a new navigation tree.
-- Organize around reader routes through setup, use, failure, and change.
-- Choose one canonical answer for each question before moving URLs.
-- Test labels and landing pages before rebuilding the documentation platform.
-title: Organize Documentation Around Reader Routes, Not Your Org Chart
+- Inventory what each page is for and what proves it true before you draw a new navigation tree.
+- Organize the navigation around setup, routine use, failure and change.
+- Pick one canonical page for each answer before you move a URL.
+- Test the labels with reviewers on a plain-text tree before you rebuild the platform.
+title: A Documentation Structure Built Around What Readers Do
 updated: 2026-09-11
 video: documentation-structure
 ---
 
-A documentation site begins with a product and a handful of pages. Then the product gets teams.
+Melvin Conway wrote in [a 1968 paper](https://www.melconway.com/Home/Committees_Paper.html) that organizations produce designs which are "copies of the communication structures of these organizations", and programmers have called that [Conway's law](https://en.wikipedia.org/wiki/Conway%27s_law) since. A docs sidebar with one section per engineering team is Conway's law applied to documentation.
 
-Teams get navigation labels. Releases add pages faster than old answers leave, until the sidebar reads like a seating chart for a company the reader does not work for.
+A documentation structure works when it follows what the reader is doing: setting the product up, using it, fixing a failure or upgrading. I call the pages a reader passes through for one of those jobs a route, and I'd organize [technical documentation](/articles/technical-documentation/) around routes and keep team ownership out of the menu.
 
-The familiar response is a redesign: buy a platform, draw a cleaner tree, and drag the pages into it. That moves the furniture while duplicate answers keep arguing in the cupboards.
+My test for any navigation label is that it narrows the reader's next decision. A label that only shows which team owns the pages, say "Platform Services", belongs in repository metadata such as a CODEOWNERS file.
 
-Organize documentation around the routes readers take through the product, not the org chart that produced it. My test is simple: each navigation choice should narrow the reader's next decision.
+## What should you do before you redraw the navigation?
 
-If a label exposes ownership but not action, it belongs in repository metadata, not the menu.
+Inventory the pages before you debate labels. For each page, record what it helps a reader do, what evidence shows it's still true, and what should happen to its URL.
 
-## Inventory the mess before drawing the menu
+A new tree drawn without that inventory keeps the pages people argue for and breaks inbound links nobody looked up.
 
-Freeze the current state before debating labels. The inventory should show what a page claims to do, which product state supports it, and what should happen to its URL.
+### Record what each page is for
 
-A new tree drawn without that record protects the loudest pages and loses the quiet links nobody thought to inspect.
-
-### Record page jobs and evidence
-
-Start with fields that separate location from purpose. The following URLs and API page names are illustrative, not live migration targets:
+Use fields that separate where a page lives from what it does. The URLs and page names in this example are invented:
 
 | Field | Example |
 | --- | --- |
@@ -53,32 +48,30 @@ Start with fields that separate location from purpose. The following URLs and AP
 | Overlap | `/getting-started/api-key/` |
 | Proposed action | Consolidate and redirect |
 
-If "keep" means somebody likes the page or "delete" means the traffic was never checked, the inventory has not separated evidence from preference.
+A "keep" decision needs a reason other than someone liking the page. A "delete" decision needs a look at the page's traffic and inbound links first.
 
-Use repository searches to catch duplicate language and inbound links.
-
-These patterns and directories illustrate the search. Replace them with the repository's real terms and paths:
+Search the repository for duplicate wording and for links to the page. The patterns and directories below are an illustration, so replace them with your repository's terms and paths:
 
 ```bash
 rg -n -i 'api authentication|create.*api key|authorization: bearer' content/
 rg -n '/developers/api-auth/' content/ templates/ static/
 ```
 
-If two pages answer the same task, flag the collision before moving either URL. If they share a subject but one teaches a procedure and the other records exact fields, keep both and state the boundary.
+If two pages answer the same task, flag the collision before you move either URL. If two pages share a subject but one teaches a procedure while the other lists exact fields, keep both and say on each page where the other takes over.
 
-### Refuse the equal-card inventory
+### Why isn't a list of URLs and titles enough?
 
-A spreadsheet with URLs and titles is not an audit. It makes a current reference page and an abandoned announcement look equally alive.
+A spreadsheet of URLs and titles makes a current reference page and an abandoned launch announcement look the same. Add a column for the source that proves the page is true, say the current API schema, then a column for the canonical decision and a column for the migration action.
 
-Add a source for product truth, a canonical decision, and a migration action. Do not move a page before deciding whether its answer is still true.
+Decide whether a page's answer is still true before you move the page.
 
-## Build routes through the product lifecycle
+## How do you organize documentation around what readers do?
 
-Readers arrive with work already in motion. They are evaluating, setting up, building, operating, recovering, or changing.
+Organize it by the state the reader is in when they arrive. A reader is evaluating the product, setting it up, building on it, running it in production, recovering from a failure or upgrading.
 
-Those states create stronger routes than department names.
+Those states outlast department names, which change when the company reorganizes.
 
-Map representative tasks before naming sections:
+Write down representative tasks before you name any section:
 
 - Decide whether the product supports a required use case.
 - Create credentials and send a first request.
@@ -87,54 +80,46 @@ Map representative tasks before naming sections:
 - Prepare a production deployment.
 - Upgrade without breaking supported behavior.
 
-Give setup, routine use, failure, and change visible destinations. A glorious quickstart followed by a search box is not a product route.
+Give setup, routine use, failure and change each a visible destination in the navigation. A site with a polished quickstart and nothing after it but a search box has covered setup and left out use, failure and change.
 
-### Separate audiences only when their routes differ
+### When should an audience get its own section?
 
-An administrator and an application developer may both need authentication documentation. Give them separate routes when permissions, terminology, or actions diverge.
+Give an audience its own section when its permissions, terms or actions differ from another audience's. An administrator and an application developer may both need authentication docs, and that alone doesn't justify an Administrators section.
 
-Do not create an Administrators section merely because the product has an administrator role.
-
-Test the split with two illustrative starting-state sentences. The roles and API-key task are hypothetical:
+Test the split by writing one sentence per audience that says where they start. The roles and the API-key task below are invented:
 
 ```text
 Administrator: I need to define which roles may create API keys.
 Developer: I have an approved role and need to send an authenticated request.
 ```
 
-The audience split earns its place because the actions and evidence differ. If both sentences lead to the same task, one section is wearing an org-chart costume.
+Those two sentences lead to different actions, so the split is justified. If both led to the same task, the second section would exist only because the product has a second role.
 
-Vocabulary can diverge with no role attached, as it has with [the word harness in agent docs](/articles/what-agent-harness-means/).
+### Where do tutorials, how-to guides, reference and explanation go?
 
-### Keep page types close to the task
+The [Diataxis framework](https://diataxis.fr/start-here/) names four kinds of documentation, each answering a different reader need: tutorials, how-to guides, reference and explanation. I wouldn't turn those four kinds into the four top-level sections of a site.
 
-The [Diataxis framework](https://diataxis.fr/start-here/) distinguishes tutorials, how-to guides, reference, and explanation by reader need. That distinction does not require four giant buckets at the top of a site.
+Put the explanation of a deployment choice beside the deployment procedure when the reader needs it to pick an option. Keep the API reference as its own section, because developers open it directly to look up a field.
 
-Put a deployment explanation beside the deployment procedure when the decision depends on it. Keep API reference recognizable because a developer may browse it directly.
+If a reader has to leave "Deploy" for a general "Concepts" section to understand a choice the Deploy page just asked them to make, move that explanation next to the procedure.
 
-The route wins over taxonomic purity.
+## What job does each navigation layer do?
 
-If a reader must leave "Deploy" for a generic "Concepts" section to understand the choice the deployment page presented immediately before, move that explanation beside the procedure.
+A docs page has a global bar, a sidebar and a page outline, and each answers a different question. The global bar picks a kind of content, the sidebar shows where the page sits in one product area, and the page outline lists the sections of the current page.
 
-## Give each navigation layer one job
+Remove a sidebar link that repeats a global-bar destination.
 
-Global navigation, section navigation, and the page outline answer different questions. Repeating the same links at each layer does not improve findability.
+### The global bar picks a kind of content
 
-It makes the page feel trapped inside repeated copies of the same menu.
+Top-level labels should still be true after the next release. Labels such as API reference and Release notes keep their meaning while the features under them change.
 
-Give each layer one decision, then remove links that merely echo the layer above it.
+A feature name that could disappear in the next release is too narrow for the global bar.
 
-### Let global navigation choose a content route
+### The sidebar shows the route through one product area
 
-The top level should survive feature releases. Labels such as Guides, API reference, SDKs, Release notes, and Support can remain meaningful while product capabilities change underneath them.
+The sidebar should answer what belongs to this product area and what comes next. A sequence such as Start, Build, Operate, Troubleshoot and Upgrade does that.
 
-A feature name that may disappear in the next release is too narrow for the global bar. Use labels that still describe the content after a team rename or feature consolidation.
-
-### Let section navigation expose the local route
-
-The sidebar should answer what belongs to this product area and what comes next. A useful sequence might be Start, Build, Operate, Troubleshoot, and Upgrade.
-
-The [AWS Lambda developer guide](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) visibly separates AWS-level navigation, the Lambda guide tree, breadcrumbs, and the current page outline. That public structure is evidence of distinct navigation jobs, not proof that its labels belong on another product.
+The [AWS Lambda developer guide](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) shows the layers side by side: an AWS-wide header, the Lambda guide's own tree, breadcrumbs and an outline of the current page. I'm citing the page for how it separates those jobs, and its labels fit Lambda and wouldn't transfer to another product.
 
 <div class="visual-wrapper">
   <div class="visual-title">Navigation layers in the AWS Lambda documentation</div>
@@ -142,70 +127,64 @@ The [AWS Lambda developer guide](https://docs.aws.amazon.com/lambda/latest/dg/we
     <img src="/static/images/visuals/aws-docs-density.png" alt="AWS Lambda documentation with global navigation, a guide sidebar, breadcrumbs, and a current-page outline" loading="lazy">
   </div>
 </div>
-<p class="visual-caption">The header chooses a destination. The sidebar locates the page inside Lambda, and the page outline exposes only the current document.</p>
+<p class="visual-caption">The AWS header leads to other services, the sidebar shows where the page sits in the Lambda guide, and the outline on the right lists this page's sections.</p>
 
-Remove a local link when it opens the full product library or repeats a global destination without narrowing the reader's choice.
+Remove a sidebar link when it leads out of the product area, such as a link to every AWS service.
 
-### Let headings expose the page argument
+### The page outline lists the current page
 
-An on-page table of contents can help someone scan a long document. It cannot rescue a page that combines five independent tasks.
+An on-page table of contents helps someone scan a long page, and it can't fix a page that covers five unrelated tasks. If the outline of one page reads like a small site map, split the page.
 
-[W3C's page-structure guidance](https://www.w3.org/WAI/tutorials/page-structure/) covers headings, regions, labels, and content structure. Use one descriptive H1 and ordered heading levels.
+[W3C's page-structure tutorial](https://www.w3.org/WAI/tutorials/page-structure/) covers headings, page regions and labels for those regions. Use one descriptive H1 and keep the heading levels in order.
 
-If the page outline reads like a miniature site map, split the page instead of making the table of contents taller.
+## What should a documentation landing page do?
 
-## Make landing pages choose, not stall
+A landing page should tell the reader what the section helps them do, where a new reader starts, and which branch fits a returning reader. A grid of twelve cards with the same weight leaves that whole choice to the reader.
 
-A landing page should answer what the section helps someone do, where a new reader starts, and which branch fits a returning reader. A wall of twelve equal cards answers none of those questions.
+### State the condition for each branch
 
-It hands the decision back with nicer borders.
+A short decision table states the conditions. The API docs sections below are invented:
 
-### Make each branch state its condition
-
-Use a short decision table. These API routes are illustrative rather than navigation for a live product:
-
-| Reader state | Start here | Proof of fit |
+| Reader state | Start here | What the reader should find there |
 | --- | --- | --- |
 | Evaluating the API | API overview | Supported use cases and limits are visible |
 | Sending a first request | Quickstart | A test response is the finish line |
 | Adding one capability | How-to guides | The reader already has a working integration |
 | Looking up a field | API reference | Exact types and constraints are present |
-| Recovering from failure | Troubleshooting | Symptoms lead to diagnostics and recovery |
+| Recovering from failure | Troubleshooting | Each error message leads to a check and a fix |
 
-If the cards differ only by topic name, rewrite them around the reader's starting state and destination.
+If the cards differ only by topic name, rewrite each one around where the reader starts and where they end up.
 
-### Make the first link carry a real decision
+### Write link text that works alone
 
-"Get started with the JavaScript SDK" remains useful outside its paragraph. "Learn more" does not.
+"Get started with the JavaScript SDK" still makes sense when read outside its paragraph, and "Learn more" doesn't. Read each link's text with the surrounding prose covered, and rewrite any link whose destination you can't guess.
 
-Read the link text without surrounding prose. If the destination becomes ambiguous, rewrite the link.
+If the first screen offers four starting points with the same weight, name the reader each one serves and merge any two that serve the same reader.
 
-If the first screen offers four equally weighted starting points, decide which reader state each one serves or remove the false choice.
+## How do you stop two pages from answering the same question?
 
-## Choose canonical answers before moving URLs
+Pick one canonical page for each answer before you move any URL. A page can be linked from several routes and still live at one address.
 
-A page may appear in several routes while keeping one canonical home. Copying its instructions into each section creates [competing search results](/articles/docs-seo/) and guarantees that one copy will rot.
+Copying the same instructions into each section gives a search engine [two pages competing for one query](/articles/docs-seo/), and the copy nobody remembers to update goes stale.
 
-GitLab's [documentation folder guidance](https://docs.gitlab.com/development/documentation/site_architecture/folder_structure/) assigns distinct paths to user, administration, API, development, installation, update, and tutorial documentation. The exact folders belong to GitLab.
+GitLab's [documentation folder guidance](https://docs.gitlab.com/development/documentation/site_architecture/folder_structure/) gives each top-level folder a stated boundary: `doc/install/` holds "Instructions for installing GitLab" and `doc/update/` holds "Instructions for updating GitLab". The folder names are GitLab's own, and the part I'd copy is that every path says what belongs in it.
 
-The observable principle is that a path has a stated content boundary.
+### Split a guide and a reference that share a subject
 
-### Separate shared subject from duplicate intent
-
-An authentication guide and authentication reference may share nouns without duplicating a job. The following ownership split is illustrative:
+An authentication guide and an authentication reference share a subject without doing the same job. The split below is an example:
 
 | Page | Owns | Does not own |
 | --- | --- | --- |
 | Authentication guide | Create, store, use, rotate, and recover a key | Complete field and error schema |
 | Authentication reference | Schemes, header format, scopes, status codes, and errors | The end-to-end setup path |
 
-If both pages contain the same setup procedure with different update dates, choose one procedure owner and make the other page link at the decision boundary.
+If both pages carry the same setup procedure with different update dates, pick one page to own the procedure and have the other link to it.
 
-### Move a URL only when the page moved
+### When should a URL change?
 
-Navigation wording can improve without changing a path. Preserve the URL unless it misstates the product or the canonical content genuinely moved.
+Change a URL only when it misstates the product or the canonical content has moved. A navigation label can be reworded without touching the path.
 
-When a path must move, record a direct destination and reason. The following paths are fictional migration examples:
+When a path has to move, record where it goes and why. The paths below are invented:
 
 | Old URL | New URL | Reason | Action |
 | --- | --- | --- | --- |
@@ -213,32 +192,32 @@ When a path must move, record a direct destination and reason. The following pat
 | `/getting-started/api-key/` | `/docs/start/create-api-key/` | Duplicate setup path | Permanent redirect |
 | `/resources/errors/` | `/docs/api-reference/errors/` | Reference moved | Permanent redirect |
 
-Do not send removed pages to the documentation homepage. A generic home does not preserve the old intent.
+Don't redirect a removed page to the documentation homepage, because the homepage doesn't answer the question the old page answered. Return a `404` when no equivalent page exists.
 
-Return a clear `404` when no equivalent answer exists.
+## How do you test a documentation structure before migrating?
 
-## Test labels before rebuilding the platform
+Test the labels on a spreadsheet, a plain-text tree or a clickable prototype before any page moves. A new documentation platform isn't needed to find out that a label like "Resources" tells a reader nothing.
 
-A spreadsheet, plain-text tree, or clickable prototype can expose a bad route before a migration makes it expensive. You do not need a new documentation platform to learn that "Resources" means nothing.
+The test works only if a reviewer can pick a destination and explain the pick with no help from whoever designed the tree.
 
-The prototype must let a reviewer choose a destination and explain the choice without help from the person who designed the tree.
+A label can also fail because vendors use one word for different things, as they do with [the word harness in agent docs](/articles/what-agent-harness-means/).
 
-### Run findability prompts
+### Give reviewers tasks without naming the section
 
-Give a reviewer tasks without naming the target section. The following errors, versions, and requests are illustrative prompts:
+The errors, versions and requests below are example prompts:
 
 - Your webhook signature check returns `401`. Where do you look?
 - You need to confirm whether Node.js 24 is supported.
 - You have credentials and want to send a first Python request.
 - You are preparing an upgrade from version 2 to version 3.
 
-Ask them to choose a destination and explain the label. When two labels appear equally plausible, or search is the only route to an ordinary task, rename or restructure the route.
+Ask the reviewer to choose a destination and say why the label fit. When two labels look equally right, rename one of them, and when search is the only way to reach an ordinary task, add that task to the navigation.
 
 ### Give each page one parent
 
-Export the proposed URLs and assign one primary parent. Then ask the reverse question: does each landing page identify its immediate children and the decision between them?
+Export the proposed URLs and assign each one a single parent. Then check the reverse: each landing page should list its immediate children and say how to choose between them.
 
-The paths below are an illustrative tree:
+The paths below are an example tree:
 
 ```text
 /docs/start/                         parent: /docs/
@@ -247,17 +226,19 @@ The paths below are an illustrative tree:
 /docs/api-reference/authentication/  parent: /docs/api-reference/
 ```
 
-Repair an orphan, a page with two primary parents, or a landing page that contains no route to its declared children before migrating content.
+Before you migrate content, fix any page with no parent, any page with two parents, and any landing page that doesn't link to its children.
 
-## Reorganize a fictional API documentation site
+## What does the reorganization look like on one site?
 
-Orbit is a fictional product used to make the decisions visible. Its page count, support behavior, and navigation are not client history or market evidence.
+The example below reorganizes the docs for Orbit, an API I invented for this page. Orbit's navigation and pages aren't a client's, and nothing in the example is evidence about a real product.
 
-Assume its current navigation says Getting Started, Guides, Features, Developers, Resources, API, Help, and Learn. The same authentication procedure appears under Getting Started, Developers, and API, while errors and upgrades have no predictable home.
+Say Orbit's navigation reads Getting Started, Guides, Features, Developers, Resources, API, Help and Learn. The same authentication steps appear under Getting Started, Developers and API, while errors and upgrades have no predictable home.
 
-### Draft routes before sections
+Menus like that follow the org chart, because each section exists for the team that publishes there.
 
-The inventory exposes five reader routes:
+### Draft the routes before the sections
+
+Suppose the inventory turns up five reader routes:
 
 1. Evaluate the API and choose an integration method.
 2. Create credentials and send the first request.
@@ -265,7 +246,7 @@ The inventory exposes five reader routes:
 4. Operate the integration through errors, limits, and monitoring.
 5. Upgrade API versions and SDKs.
 
-Those routes produce this first tree for fictional Orbit:
+Those routes produce this first tree:
 
 ```text
 Documentation
@@ -293,44 +274,64 @@ Documentation
     `-- Release notes
 ```
 
-"Start" remains small. "Operate" and "Change" stop the site from treating a first response as the end of the product.
+"Start" holds only the pages a new reader needs before the first response. "Operate" and "Change" give the reader somewhere to go after the first successful response.
 
-### Resolve authentication without duplicating it
+### Give authentication one canonical home
 
-The guide owns obtaining, storing, using, rotating, and recovering a key. The reference owns schemes, headers, scopes, status codes, and the error schema.
+The guide owns everything a reader does with a key, from creating it to rotating it. The reference owns the header format, the scopes, the status codes and the error schema.
 
-The two old setup pages satisfy the same task, so their useful material moves into **Create an API key** and both old URLs redirect there. The fictional migration decision does not recommend moving a live URL without traffic and link evidence.
+The two old setup pages answer the same task, so their useful material moves into **Create an API key** and both old URLs redirect there. On a real site I'd check traffic and inbound links before moving either URL.
 
 ### Test one landing page before migrating the tree
 
-Build the Start page with real prototype links and give reviewers this prompt:
+Build the Start page with working prototype links and give reviewers this prompt:
 
 > You have an account but no credentials. Find the shortest supported route to a successful test API response.
 
-If reviewers open API reference before **Create an API key**, change the label or placement. If they finish setup but cannot prove the request worked, repair the task page.
+If reviewers open the API reference before **Create an API key**, change the label or its position. If they finish setup and can't tell whether the request worked, add a visible success check to the task page.
 
-Do not blame the reviewer for exposing a weak route.
+A reviewer who takes the wrong route has found a problem with the label, so the label is what changes.
 
-### Audit route failures after launch
+### Check the routes again after launch
 
-Use observed behavior without turning one signal into fake certainty:
+Each observation below suggests a defect without proving one, so each row ends in a next check:
 
 | Observation | Possible defect | Next check |
 | --- | --- | --- |
-| Search repeats a visible navigation label | Label may be hidden or misplaced | Run the same findability prompt |
+| Readers search for a term that is already a navigation label | Label may be hidden or misplaced | Run the same findability prompt |
 | Old URLs remain common entrances | Redirect or inbound links may be stale | Inspect referrers and redirect hops |
 | Readers move between two setup pages | Canonical task may be unclear | Compare the two page jobs |
-| Support links bypass landing pages | Landing route may not reach the answer | Ask why the direct link was needed |
+| Support replies link straight to deep pages | Landing route may not reach the answer | Ask why the direct link was needed |
 
-A lower bounce rate alone does not prove the structure works. My standard is stricter: the evidence should identify a reader decision and a route repair.
+A lower bounce rate doesn't show that the structure works. The evidence I'd accept names a decision the reader had to make and the label or page that was changed to help with it.
 
-The [documentation accessibility checklist](/articles/docs-accessibility/) can catch structural barriers before the migration ships.
+The [documentation accessibility checklist](/articles/docs-accessibility/) covers the heading and region checks to run before the migration ships.
 
-## Documentation organization checklist
+## Documentation structure checklist
 
-- Inventory page jobs, evidence, overlap, canonical decisions, and migration actions.
-- Build routes through setup, routine use, failure, and change.
-- Give global, section, and page navigation distinct jobs.
-- Test landing-page labels before migration.
-- Preserve one canonical URL and use direct, evidence-backed redirects.
-- Turn post-launch observations into named route checks.
+- Inventory each page's job, its evidence, its overlaps and what happens to its URL.
+- Build routes through setup, routine use, failure and change.
+- Give the global bar, the sidebar and the page outline one job each.
+- Test landing-page labels with reviewers before migrating.
+- Keep one canonical URL per answer and redirect each old URL straight to its new page.
+- After launch, follow each odd search or support pattern with one check, such as rerunning the task prompt.
+
+Writing the quickstart, reference and troubleshooting pages that fill a structure like this one is work I take on, described under [developer documentation](/services/developer-documentation/).
+
+## FAQ
+
+**What is documentation structure?**
+
+Documentation structure is how a docs site groups and links its pages: the navigation labels, the landing pages, the URL paths and the order a reader meets them in.
+
+**Should documentation follow the Diataxis framework?**
+
+Diataxis is useful for deciding what kind of page you're writing. I wouldn't use its four kinds as the top-level sections, because readers arrive with a task, and an explanation belongs beside the procedure it supports when the reader needs it to choose.
+
+**Do I need a new documentation platform to restructure docs?**
+
+No. A spreadsheet inventory and a plain-text tree are enough to test labels with reviewers, and the platform decision can wait until the tree has passed those tests.
+
+**How many levels of navigation should a docs site have?**
+
+I'd use a global bar, a sidebar for one product area and an outline of the current page. If the sidebar needs another level below that, I'd first check whether one page is covering several tasks.

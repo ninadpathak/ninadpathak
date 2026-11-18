@@ -128,16 +128,20 @@
     "sources": "5c5737569756ec663b1329953be25ffd843da26506406e98a15dcca8c80e31f8"
   },
   "developer-onboarding-docs": {
-    "lastmod": "2026-11-17",
-    "sources": "9dbb2e5e6f4faf918a3f21790e9eadcd90490b11edab344f7da6951383f5c7b1"
+    "lastmod": "2026-11-18",
+    "sources": "f13962f1e912c1c01c26a75d907f877a5b6e5a163ba9009b9d0487bbb44a4972"
   },
   "devtools-documentation": {
     "lastmod": "2026-11-17",
     "sources": "581b9cea85918019fd46584b78e685824d8c384547dc6ea6ab858a9fb52cff80"
   },
+  "docker-is-weird-explainer": {
+    "lastmod": "2026-11-18",
+    "sources": "76914cef41b64c28c9d277d796173587ccd8da764870bc1e20318eea5c02dfae"
+  },
   "docs-accessibility": {
-    "lastmod": "2026-11-17",
-    "sources": "e8c397fd111eabc80a067b80295e3e7b76216b2f7bed6059f9da9f3692720c83"
+    "lastmod": "2026-11-18",
+    "sources": "a8451807a2713e95361e6d3a3b0b9689fcf6545a84f22ad704793f5c602f097a"
   },
   "docs-seo": {
     "lastmod": "2026-11-18",
@@ -153,15 +157,15 @@
   },
   "documentation-review": {
     "lastmod": "2026-11-18",
-    "sources": "e94705fc8b5f1b7ad2bfb9b1060147f41c6d6618df72e921d375b9952d041ce0"
+    "sources": "d19cb2aeee92c75974bb503d8624e30f1c951608b4233bb2773096e235004b25"
   },
   "documentation-structure": {
     "lastmod": "2026-11-18",
-    "sources": "d3937cc28f7db590e2aacc32bea50d91be83a57ff068f2ca9f4cf4a0a46606c7"
+    "sources": "53e0e315f24c4249e369e4a9defe62d3557c6ef8aed057b638a0b6af2e0b66c0"
   },
   "documentation-template": {
-    "lastmod": "2026-11-17",
-    "sources": "56ff243dc2f6414fd1889a6a0901a3d7f6c6c67e1f66c0e13def58a9b3fef30a"
+    "lastmod": "2026-11-18",
+    "sources": "795ec78f39732ad52cf34eea2a33887538974926cc424ff5638b14a8397ec8f6"
   },
   "documentation-types": {
     "lastmod": "2026-11-17",
@@ -344,8 +348,8 @@
     "sources": "60360c3ff093610ed39b56a8f36a32ced8f199b40f168d9118a68b86e4bfad69"
   },
   "writing-technical-tutorials": {
-    "lastmod": "2026-11-17",
-    "sources": "d3af86bd3f9e88239c9b1272a96588dc8b0512102442dc019afec0d20968dd05"
+    "lastmod": "2026-11-18",
+    "sources": "a6e710d4d8a3ae1b0747e51e407da69aeefd0b841a1b4a9eb66b9c78bdb9674c"
   },
   "written-by-a-human": {
     "lastmod": "2026-11-17",
