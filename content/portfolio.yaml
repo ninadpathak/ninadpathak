@@ -2,8 +2,8 @@
 # Wayback Machine capture that still shows it and original_url keeps the publisher's address.
 # An entry with original_url and no url has no usable capture, so its card renders without a link
 # and reads "no longer online". A card with both reads "archived copy".
-# byline names the person a piece was published under when that is someone else. The card says
-# so beside the client, and the page's structured data makes no author claim for that entry.
+# byline names the person a piece was published under when that is someone else. The card shows
+# the client as usual, and the page's structured data makes no author claim for that entry.
 entries:
   # TinyFish
   - title: "Best Cloud Browsers for AI Agents in 2026: 6 Compared"

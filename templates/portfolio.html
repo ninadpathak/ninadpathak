@@ -70,7 +70,7 @@
       {% set tag = "a" if item.url else "div" %}
       <{{ tag }} class="p-item"{% if item.url %} href="{{ item.url }}" target="_blank" rel="noopener"{% endif %}
          data-cat="{{ item.category | lower | replace(' ', '-') }}">
-        <div class="p-item-client">{{ item.client }}{% if not item.url %} · no longer online{% elif item.original_url %} · archived copy{% endif %}{% if item.byline %} · published under {{ item.byline }}'s byline{% endif %}</div>
+        <div class="p-item-client">{{ item.client }}{% if not item.url %} · no longer online{% elif item.original_url %} · archived copy{% endif %}</div>
         <div class="p-item-title">{{ item.title }}</div>
         <div class="p-item-cat">{{ item.category }}</div>
       </{{ tag }}>
