@@ -33,7 +33,7 @@ Measured at the client, TTFT is the network trip, the wait in the server's queue
 
 Definitions differ on whether the network trip counts. Modelplane's [inference field guide](https://docs.modelplane.ai/guides/inference-guide), which gives its figures as of October 2026, defines TTFT from the server's side as "Queueing plus prefill", with no network term.
 
-The web metric includes the network too, since web.dev lists redirects, DNS lookup and connection setup among the phases TTFB adds up. A TTFT number is only comparable with another one measured from the same place.
+TTFB, the web metric, counts the network: web.dev lists redirects, DNS lookup and connection setup among its phases. A TTFT number is only comparable with another one measured from the same place.
 
 ## Why is TTFT misleading for reasoning models?
 
@@ -49,11 +49,11 @@ Its second metric, time to first answer token, "includes the time spent reasonin
 | Extra high | 48.22 |
 | Max | 208.11 |
 
-Those are Artificial Analysis's measurements on Anthropic's API, and this page adds none of its own. What I take from them is the spread: the same model makes a caller wait about 29 times longer at Max than at Low, and the caller sets that parameter.
+Those are Artificial Analysis's measurements on Anthropic's API, and this page adds none of its own. The same model makes a caller wait about 29 times longer at Max than at Low, and the caller picks the setting.
 
 The site re-measures, so the numbers move. Later the same day its page showed 211.56 seconds for the top setting.
 
-So the wait before an answer is a product decision before it is a serving problem. A team that picks the highest setting has chosen a wait of minutes, and no change to the queue will shorten it.
+So the team that picks the effort setting decides this wait, and the serving stack can't undo the choice. A team that picks Max has chosen a wait of about 208 seconds, and no change to the queue will shorten it.
 
 ## How does TTFT behave under load?
 
@@ -74,11 +74,11 @@ NVIDIA adds a note under the table that "TTFT measures time to the first token, 
 
 No. TTFT is set by queueing and prefill, and throughput is set by decoding, the phase that produces tokens one after another.
 
-The two respond to different fixes. [Speculative decoding](/articles/speculative-decoding/) raises tokens per second and leaves the first token where it was, and the cache that decoding reads from is the subject of the [KV-cache article](/articles/kv-cache-eviction/).
+The two respond to different fixes. [Speculative decoding](/articles/speculative-decoding/) raises tokens per second and doesn't change TTFT, and the cache that decoding reads from is the subject of the [KV-cache article](/articles/kv-cache-eviction/).
 
 ## What lowers time to first token?
 
-A shorter prompt, a cached prompt prefix and a shorter queue all lower it. Each maps to one phase.
+A shorter prompt, a cached prompt prefix and a shorter queue all lower it.
 
 - **Shorter prompt.** Prefill reads the whole input, so retrieved documents and tool definitions that aren't needed cost time before the first token.
 - **Prefix caching.** A prompt opening that repeats across requests can be read once and reused, and Modelplane's guide says the feature is on by default in vLLM and SGLang.
@@ -86,10 +86,12 @@ A shorter prompt, a cached prompt prefix and a shorter queue all lower it. Each 
 
 The wider set of serving choices is in the [LLM inference optimization guide](/articles/llm-inference-optimization/).
 
-For a voice agent on a phone call, TTFT is one stage of several, and [voice AI latency](/articles/voice-agent-latency/) adds up the stages around it.
+For a voice agent on a phone call, TTFT is one of four stages in a turn, and [voice AI latency](/articles/voice-agent-latency/) adds up the others: endpointing, transcription and speech synthesis.
 
 ## How should you measure TTFT?
 
 Measure it at the client and report percentiles, since a mean hides the slow requests that users remember. For any model that reasons, record time to first answer token beside it.
 
-Modelplane's guide has the rule in one line: "Measure the first token the user sees." The web's version of that rule is why TTFB sits outside the Core Web Vitals, and I expect TTFT to end up in the same supporting role.
+Modelplane's guide has the rule in one line: "Measure the first token the user sees."
+
+The web already treats TTFB that way: web.dev keeps it outside the Core Web Vitals, as a number that matters through the metrics after it. I expect TTFT to end up in the same supporting role.

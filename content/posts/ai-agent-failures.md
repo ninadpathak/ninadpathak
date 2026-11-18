@@ -25,7 +25,7 @@ AI agents fail in two ways, and only one of them looks like a bug. The ordinary 
 
 Google's SRE book, published in 2016, [defines the postmortem](https://sre.google/sre-book/postmortem-culture/) as "a written record of an incident, its impact, the actions taken to mitigate or resolve it, the root cause(s), and the follow-up actions to prevent the incident from recurring", and the method assumes a root cause sits in code or configuration.
 
-A model acting on an unchecked guess leaves nothing for a postmortem to find. Guessing is also the larger share in the one public breakdown of failed runs, which makes it the main subject for anyone working on [AI agent architecture](/articles/ai-agents/).
+A model acting on an unchecked guess leaves nothing for a postmortem to find. Guessing is also the largest single cause in the one public breakdown of failed runs, Real-SWE 1.1, which makes it the main subject for anyone working on [AI agent architecture](/articles/ai-agents/).
 
 ## Why do AI agents fail?
 
@@ -53,7 +53,7 @@ The benchmark covers coding agents on 25 tasks, so the shares won't transfer to 
 | Opus 5.5, ranked first | 22.2% | 11.1% | 38.9% |
 | GPT 6 Astra, ranked second | 58.2% | 0% | 16.4% |
 
-Opus 5.5, the top-ranked model, fails differently from the field, by misreading the task more often than by guessing. What the rows share is that the leading causes are about finding out what the work is, with wrong logic far behind.
+Opus 5.5, the top-ranked model, fails differently from the field, by misreading the task more often than by guessing. Every row has its leading causes in finding out what the work is, and wrong logic is far behind.
 
 ## Why does a failed agent run resist a postmortem?
 
@@ -82,9 +82,9 @@ per-step 95%:   5 steps 77.4%  10 steps 59.9%  20 steps 35.8%
 per-step 99%:   5 steps 95.1%  10 steps 90.4%  20 steps 81.8%
 ```
 
-A chain of five steps at 90% each succeeds 59% of the time. The arithmetic assumes the steps fail independently, which flatters a real system, since one agent's wrong output becomes the next agent's input.
+A chain of five steps at 90% each succeeds 59% of the time. The arithmetic assumes the steps fail independently, and a real chain does worse, since one agent's wrong output becomes the next agent's input.
 
-That arithmetic is the case for keeping a design small until a measurement justifies more. [Multi-agent versus single-agent tradeoffs](/articles/multi-agent-vs-single-agent/) covers when the split pays, and the [types of AI agents](/articles/ai-agent-taxonomy/) page sets out what each step up in autonomy adds.
+That arithmetic is the case for staying with one agent until a measurement shows a second one helps. [Multi-agent versus single-agent tradeoffs](/articles/multi-agent-vs-single-agent/) covers when the split pays, and the [types of AI agents](/articles/ai-agent-taxonomy/) page sets out what each step up in autonomy adds.
 
 ## Which failures are ordinary engineering?
 
@@ -97,7 +97,7 @@ Timeouts, retries and lost state are ordinary engineering, and they have known f
 
 The fixes are the distributed-systems ones: idempotency keys and a cap on retries, with a circuit breaker that halts the loop after repeated errors. The [error handling guide](/articles/agent-error-handling/) works through them with a run example.
 
-Lost state is ordinary engineering too. A long session pushes early instructions out of the context window, the failure [short-term memory for AI agents](/articles/short-term-agent-memory/) starts from, and the [state of agent memory](/articles/agent-memory-2026/) surveys the tools for keeping it.
+A long session pushes early instructions out of the context window. My page on [short-term memory for AI agents](/articles/short-term-agent-memory/) starts from that failure, and the [state of agent memory](/articles/agent-memory-2026/) surveys the tools that keep state across sessions.
 
 ## What reduces the guessing?
 
@@ -105,8 +105,8 @@ Give the agent a way to check and a reason to use it. The measured failures are 
 
 The cheapest checks are ones a program can grade, as in the [lambda calculus exercise](/articles/lambda-calculus-ai/), where a short script confirms each answer.
 
-A check only helps while a failing one still makes somebody stop. My essay on [a build that is red too often](/articles/red-build-nobody-reads/) is about what a red build is worth once it's red too often to make anyone stop.
+A check only helps as long as a failing one still makes somebody stop, which is the subject of my essay on [a build that is red too often](/articles/red-build-nobody-reads/).
 
-The [Model Context Protocol](/articles/model-context-protocol/) gives tools a standard way to report an error, and that still leaves the decision about what to do next.
+The [Model Context Protocol](/articles/model-context-protocol/) gives tools a standard way to report an error, an `isError` flag on the result, and the code around the model still has to decide what happens next.
 
-The table earlier on this page is someone else's count, and I have none from production to set beside it. What it shows is a problem located less in the model's reasoning than in what the model was allowed to assume.
+Real-SWE's table is someone else's count, and I have none from production to set beside it. That table puts 78% of failed runs down to what the model assumed, missed or misread about the task, and 4.4% down to wrong logic.

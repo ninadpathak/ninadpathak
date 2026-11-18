@@ -18,16 +18,16 @@ Speculative decoding has a cheap predictor draft the next few tokens of a model'
 
 [Wikipedia's entry](https://en.wikipedia.org/wiki/Speculative_execution) on speculative execution in processors says "work is done before it is known whether it is actually needed", and the idea reached a wider audience in 2018, when the Spectre attack [took its name](https://spectreattack.com/) from "the root cause, speculative execution".
 
-That entry also gives the condition under which the bet pays, which is "if extra resources are available". A processor usually has them, and a GPU server under load doesn't, so among [LLM inference](/articles/ai-engineering/) techniques this one helps a lightly loaded server and can slow a busy one.
+That entry also gives the condition under which speculating pays, which is "if extra resources are available". A processor usually has them, and a GPU server under load doesn't, so among [LLM inference](/articles/ai-engineering/) techniques this one helps a lightly loaded server and can slow a busy one.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/speculative-decoding/draft-verify.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/speculative-decoding/draft-verify.narrow.svg" width="288" height="736"><img class="np-has-narrow" src="/static/images/diagrams/speculative-decoding/draft-verify.svg" width="720" height="392" alt="A small draft model guesses the next few tokens in quick succession, and the large target model verifies all of the guesses in one parallel step. Tokens the target agrees with are kept; the first one it rejects, and everything after it, is discarded." loading="lazy" decoding="async"></picture></a>
-  <figcaption>The draft model is fast and often wrong, and the target model has the final say on every token.</figcaption>
+  <figcaption>The draft model is fast and often wrong, and the large model has the final say on every token.</figcaption>
 </figure>
 
 ## How does speculative decoding work?
 
-Speculative decoding runs a draft-and-verify loop: a fast predictor proposes several tokens, and the target model scores those positions together and keeps the proposals up to the first one it rejects. The target then supplies its own token at that position, so each loop yields at least one token.
+Speculative decoding runs a draft-and-verify loop: a fast predictor proposes several tokens, and the large model, called the target, scores those positions together and keeps the proposals up to the first one it rejects. The target then supplies its own token at that position, so each loop yields at least one token.
 
 The method comes from [a paper submitted on November 30, 2022](https://arxiv.org/abs/2211.17192) by Yaniv Leviathan and colleagues, which borrows the hardware term in its abstract. It describes "an algorithm to sample from autoregressive models faster without any changes to the outputs, by computing several tokens in parallel."
 
@@ -66,15 +66,17 @@ At an acceptance rate of 0.5 the loop never averages more than two tokens a step
 
 The table is the paper's formula evaluated as written, with no model run behind it.
 
-Those are tokens per step, and a step costs more than a plain decoding step because the predictor has to run too. The paper explains why the trade can still pay: inference "is often not bottlenecked on arithmetic operations, but rather on memory bandwidth and communication".
+Those are tokens per step, and a step costs more than a plain decoding step because the predictor has to run too.
+
+The paper explains why the trade can still pay: inference "is often not bottlenecked on arithmetic operations, but rather on memory bandwidth and communication". I read that as spare arithmetic capacity, which lets the large model score several drafted positions in one pass for little more than the cost of producing one token.
 
 A [mixture of experts](/articles/mixture-of-experts/) model cuts the cost of each token a different way, by running only some of its parameters for each token.
 
 ## Do you need a separate draft model?
 
-No. The draft can come from a second, smaller model or from a prediction head built into the large one.
+No. The draft can come from a second, smaller model or from extra layers inside the large model that are trained to guess several tokens ahead.
 
-NVIDIA's [GLM-5.3 tutorial](https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/) from November 13 uses a built-in prediction head, turned on in vLLM with one setting, `{"method":"mtp","num_speculative_tokens":4}`. It explains that "the model's MTP layer drafts four tokens per step, and vLLM verifies them with the full model before accepting them, so each step can produce several tokens."
+NVIDIA's [GLM-5.3 tutorial](https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/) from November 13 uses the built-in kind, which it calls multi-token prediction (MTP), turned on in vLLM with one setting, `{"method":"mtp","num_speculative_tokens":4}`. It explains that "the model's MTP layer drafts four tokens per step, and vLLM verifies them with the full model before accepting them, so each step can produce several tokens."
 
 The tutorial adds a caveat that applies to every deployment: "The gain depends on how often drafts are accepted, which varies with the prompt."
 
@@ -88,10 +90,14 @@ That makes it a tool for the case the guide names, "Individual responses stream 
 
 The guide also says what to monitor: "Watch speculative decoding acceptance. Acceptance depends on temperature, subject matter and the draft model."
 
-A falling acceptance rate is hard to spot from the outside, because requests still succeed and only get slower. The related metric is tokens per second for each stream, and [time to first token](/articles/time-to-first-token/) doesn't move, since the first token still waits on the same queue and prefill.
+A falling acceptance rate is hard to spot from the outside, because requests still succeed and only get slower.
+
+The number that drops is tokens per second on each stream. [Time to first token](/articles/time-to-first-token/) doesn't move, since the first token still waits on the same queue and prefill.
 
 ## Where does it sit among other optimizations?
 
-Speculative decoding is a decode-side technique, next to quantization and KV cache settings, and constrained decoding for [structured outputs](/articles/llm-structured-outputs/) acts at the same step. The memory those settings manage is the subject of [KV-cache eviction](/articles/kv-cache-eviction/), and the glossary entry on [speculative decoding](/glossary/speculative-decoding/) has the short definition.
+Speculative decoding speeds up decoding, the phase that produces tokens one after another. Quantization and KV cache settings act on the same phase, and so does constrained decoding for [structured outputs](/articles/llm-structured-outputs/).
+
+The memory a KV cache takes up is the subject of [KV-cache eviction](/articles/kv-cache-eviction/), and the glossary entry on [speculative decoding](/glossary/speculative-decoding/) has the short definition.
 
 The method changes speed and leaves the token count alone, since the large model has the final say on every token. What sets the bill is covered in [LLM token budgets](/articles/llm-token-budgets/).

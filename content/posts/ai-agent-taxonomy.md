@@ -29,7 +29,7 @@ A car's level changes rarely, though the article records Mercedes withdrawing it
 
 That makes the type a decision in [AI agent architecture](/articles/ai-agents/), made per deployment, and the table sets out what each one decides alone.
 
-| Type | What it decides alone | Labelled example | Failure it adds |
+| Type | What it decides alone | Example | Failure it adds |
 | --- | --- | --- | --- |
 | 1. Reactive | The words of one reply | A docs question box that answers from the text pasted into its prompt | A wrong answer |
 | 2. Tool-using | Which tool to call, and with what arguments, inside one request | A weather question answered with a lookup | A wrong call |
@@ -62,19 +62,21 @@ Anthropic's [Building effective agents](https://www.anthropic.com/research/build
 
 Simon Willison [settled on a definition](https://simonwillison.net/2025/Sep/18/agents/) on September 18, 2025: "An LLM agent runs tools in a loop to achieve a goal." Under his wording types 1 and 2 are no agents at all, and the word begins at the loop.
 
-Willison's line falls between my tool-using type and the loop. Anthropic's cuts across the ladder, since it asks who directs the steps: the post files an orchestrator with workers under workflows, so a multi-agent system can sit on either side of it.
+Anthropic's line cuts across the ladder, since it asks who directs the steps: the post files an orchestrator with workers under workflows, so a multi-agent system can sit on either side of it.
 
-I agree with both that handing the loop to the model is the largest step. I keep the two rungs below it because the word agent is used well below that line, and United Airlines' ban covers "personal AI agents or assistants" as one group.
+I agree with both that handing the loop to the model is the largest step.
+
+I keep the two rungs below it because the word agent is used well below that line. When United Airlines banned AI booking tools on November 11, its statement covered "personal AI agents or assistants" as one group.
 
 I also think one line is too few for a build decision. Neither definition has a rung for several agents sharing a task or for an agent that keeps a goal across sessions, and each of those adds a failure the single loop doesn't have.
 
 ## Reading and acting are separate risks
 
-On November 11 United Airlines said it was banning AI agents from booking flights for travellers, as [CBS News reported](https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/). The airline's statement names what it objects to: "actions taken by these tools may result in unintended purchases, account changes, or use of MileagePlus miles."
+[CBS News reported](https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/) the ban, and the airline's statement names what it objects to: "actions taken by these tools may result in unintended purchases, account changes, or use of MileagePlus miles."
 
 Every item in that statement is a write, an action that changes something. An agent that compares fares and an agent that buys the ticket can be the same type on the ladder, and only the buying agent can spend the customer's money.
 
-The CBS report also complicates a clean split between reading and acting. It quotes an aviation analyst saying "Flight searches cost airlines money", so a read-only agent still costs the system it reads from, and the [Hacker News thread](https://news.ycombinator.com/item?id=50458900) on the ban ran to more than 700 comments.
+The CBS report also complicates a clean split between reading and acting. It quotes Henry Harteveldt, an aviation analyst at Atmosphere Research Group, saying "Flight searches cost airlines money", so a read-only agent still costs the system it reads from.
 
 So each type carries a second label, read-only or acting.
 
@@ -102,7 +104,7 @@ The [anatomy of an agent loop](/articles/agent-loop-anatomy/) walks through one 
 
 ### Type 4: multi-agent
 
-Several agents share one task, passing messages or working from shared state. Coordination becomes a cost of its own, and the comparison of [multi-agent and single-agent systems](/articles/multi-agent-vs-single-agent/) is about when that cost pays for itself.
+Several agents share one task, passing messages or working from shared state. The messages between agents cost tokens and time, and a fault can start in any of the agents, so the comparison of [multi-agent and single-agent systems](/articles/multi-agent-vs-single-agent/) is about when that cost pays for itself.
 
 ### Type 5: persistent-goal
 
@@ -116,9 +118,9 @@ Choose the lowest type that does the job. Anthropic's post gives the same advice
 2. Can the number of steps be fixed in advance? If it can't, the task needs a loop.
 3. Does the work outlast one session? If it does, the agent needs stored state and belongs at type 5.
 
-Type 4 has no question of its own, because a second agent is a way to carry out a task and never a requirement of one. Add it when a single loop has been tried and measured.
+Type 4 has no question of its own, because a second agent is a way to carry out a task and never a requirement of one. Add a second agent only after a single loop has been tried and a measurement shows where it falls short.
 
-The ladder sorts agents by how much they decide alone. How to connect the model calls for a chosen type is the subject of my guide to [design patterns for AI agents](/articles/agent-design-space/).
+How to connect the model calls for a chosen type is the subject of my guide to [design patterns for AI agents](/articles/agent-design-space/).
 
 Where an agent ends and an assistant begins is argued in [AI agent vs AI assistant](/articles/agent-vs-ai-assistant/), and the code around the model is described in [agent harnesses](/articles/agent-harnesses/).
 
