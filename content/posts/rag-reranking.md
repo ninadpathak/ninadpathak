@@ -192,7 +192,7 @@ A repeated question doesn't have to pay that cost twice, and [semantic caching](
 
 Those figures are from one Apple M2 laptop, and a GPU or a hosted API will give different ones. What held across my runs is the order: the larger model took several times as long as the small one.
 
-The larger model was between four and eight times slower across my runs and was also the only one that separated the error codes. Latency rises in step with the candidate count, so halving the candidates halves the wait with either model, and I'd tune that number before switching models.
+The larger model was between four and nine times slower across my runs and was also the only one that separated the error codes. Latency rises in step with the candidate count, so halving the candidates halves the wait with either model, and I'd tune that number before switching models.
 
 ## Which reranking models should you try first?
 
