@@ -25,7 +25,7 @@ AI agents fail in two ways, and only one of them looks like a bug. The ordinary 
 
 Google's SRE book, published in 2016, [defines the postmortem](https://sre.google/sre-book/postmortem-culture/) as "a written record of an incident, its impact, the actions taken to mitigate or resolve it, the root cause(s), and the follow-up actions to prevent the incident from recurring", and the method assumes a root cause sits in code or configuration.
 
-The second kind has nothing for that method to find. It is also the larger share in the one public breakdown of failed runs, which makes it the main subject for anyone working on [AI agent architecture](/articles/ai-agents/).
+A model acting on an unchecked guess leaves nothing for a postmortem to find. Guessing is also the largest single cause in the one public breakdown of failed runs, Real-SWE 1.1, which makes it the main subject for anyone working on [AI agent architecture](/articles/ai-agents/).
 
 ## Why do AI agents fail?
 
@@ -53,7 +53,7 @@ The benchmark covers coding agents on 25 tasks, so the shares won't transfer to 
 | Opus 5.5, ranked first | 22.2% | 11.1% | 38.9% |
 | GPT 6 Astra, ranked second | 58.2% | 0% | 16.4% |
 
-The top-ranked model fails differently from the field, by misreading the task more often than by guessing. What the rows share is that the leading causes are about finding out what the work is, with wrong logic far behind.
+Opus 5.5, the top-ranked model, fails differently from the field, by misreading the task more often than by guessing. Every row has its leading causes in finding out what the work is, and wrong logic is far behind.
 
 ## Why does a failed agent run resist a postmortem?
 
@@ -61,13 +61,13 @@ A postmortem looks for a cause that will produce the failure again, and an agent
 
 Real-SWE reports each score as "pass@1, averaged over five independent runs per task". The report gives no reason for the five, and mine is that one run of a model on a task doesn't settle whether it can do it.
 
-The record is thinner too. A stack trace names a line, and an agent's wrong assumption leaves no line behind unless every tool call and result was logged.
+An agent run also leaves a thinner record than a crash does. A stack trace names a line, and an agent's wrong assumption leaves no line behind unless every tool call and result was logged.
 
 Michael Lynch's [catalogue of coding-agent annoyances](https://mtlynch.io/why-are-coding-agents-so-dumb/) from October 9 has a failure with no error in it at all. After starting a long task overnight, Lynch found that the agent "stopped two minutes after I left to ask me what it should name a git branch and then sat all night waiting for my answer."
 
 ## How do multiple agents change the odds?
 
-They multiply them. A chain succeeds only when every step does, so per-step reliability compounds downward with length.
+Multiple agents multiply the chances of failure. A chain succeeds only when every step does, so the chance that the whole chain succeeds falls with every step added.
 
 ```python
 """Chance that a chain of steps all succeed, for a few per-step success rates."""
@@ -82,13 +82,13 @@ per-step 95%:   5 steps 77.4%  10 steps 59.9%  20 steps 35.8%
 per-step 99%:   5 steps 95.1%  10 steps 90.4%  20 steps 81.8%
 ```
 
-A chain of five steps at 90% each succeeds 59% of the time. The arithmetic assumes the steps fail independently, which flatters a real system, since one agent's wrong output becomes the next agent's input.
+A chain of five steps at 90% each succeeds 59% of the time. The arithmetic assumes the steps fail independently, and a real chain does worse, since one agent's wrong output becomes the next agent's input.
 
-That is the case for keeping a design small until a measurement justifies more. [Multi-agent versus single-agent tradeoffs](/articles/multi-agent-vs-single-agent/) covers when the split pays, and the [types of AI agents](/articles/ai-agent-taxonomy/) page sets out what each step up in autonomy adds.
+That arithmetic is the case for staying with one agent until a measurement shows a second one helps. [Multi-agent versus single-agent tradeoffs](/articles/multi-agent-vs-single-agent/) covers when the split pays, and the [types of AI agents](/articles/ai-agent-taxonomy/) page sets out what each step up in autonomy adds.
 
 ## Which failures are ordinary engineering?
 
-Timeouts, retries and lost state are, and they have known fixes. A tool call that times out and is retried can run twice, and if the call was, say, a refund, the customer is paid twice.
+Timeouts, retries and lost state are ordinary engineering, and they have known fixes. A tool call that times out and is retried can run twice, and if the call was, say, a refund, the customer is paid twice.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/ai-agent-failures/failure-modes.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/ai-agent-failures/failure-modes.narrow.svg" width="288" height="888"><img class="np-has-narrow" src="/static/images/diagrams/ai-agent-failures/failure-modes.svg" width="720" height="488" alt="The agent loop drawn as a ring of perceive, think, act and remember, with two failure points marked. At act, a tool call times out, the agent retries, and the action executes twice. At perceive, context left over from earlier work reaches the model's prompt." loading="lazy" decoding="async"></picture></a>
@@ -97,7 +97,7 @@ Timeouts, retries and lost state are, and they have known fixes. A tool call tha
 
 The fixes are the distributed-systems ones: idempotency keys and a cap on retries, with a circuit breaker that halts the loop after repeated errors. The [error handling guide](/articles/agent-error-handling/) works through them with a run example.
 
-Lost state belongs to that class too. A long session pushes early instructions out of the context window, the failure [short-term memory for AI agents](/articles/short-term-agent-memory/) starts from, and the [state of agent memory](/articles/agent-memory-2026/) surveys the tools for keeping it.
+A long session pushes early instructions out of the context window. My page on [short-term memory for AI agents](/articles/short-term-agent-memory/) starts from that failure, and the [state of agent memory](/articles/agent-memory-2026/) surveys the tools that keep state across sessions.
 
 ## What reduces the guessing?
 
@@ -105,8 +105,8 @@ Give the agent a way to check and a reason to use it. The measured failures are 
 
 The cheapest checks are ones a program can grade, as in the [lambda calculus exercise](/articles/lambda-calculus-ai/), where a short script confirms each answer.
 
-A check only helps while a failing one still makes somebody stop. My essay on [a build that is red too often](/articles/red-build-nobody-reads/) is about how agent-rate change wears that signal out.
+A check only helps as long as a failing one still makes somebody stop, which is the subject of my essay on [a build that is red too often](/articles/red-build-nobody-reads/).
 
-Protocols help with the plumbing. The [Model Context Protocol](/articles/model-context-protocol/) gives tools a standard way to report an error, and that still leaves the decision about what to do next.
+The [Model Context Protocol](/articles/model-context-protocol/) gives tools a standard way to report an error, an `isError` flag on the result, and the code around the model still has to decide what happens next.
 
-The table earlier on this page is someone else's count, and I have none from production to set beside it. What it shows is a problem located less in the model's reasoning than in what the model was allowed to assume.
+Real-SWE's table is someone else's count, and I have none from production to set beside it. That table puts 78% of failed runs down to what the model assumed, missed or misread about the task, and 4.4% down to wrong logic.

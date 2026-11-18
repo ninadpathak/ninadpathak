@@ -73,11 +73,11 @@ class ThemeContrastTests(unittest.TestCase):
 class InlineCodeTests(unittest.TestCase):
     def test_short_inline_code_is_marked_to_stay_whole(self):
         html = "<p>Put the name before <code>-e</code>.</p>"
-        self.assertEqual(soften_inline_code(html), '<p>Put the name before <code class="code-short">-e</code>.</p>')
+        self.assertEqual(soften_inline_code(html), '<p>Put the name before <code class="language-text code-short">-e</code>.</p>')
 
     def test_long_inline_code_breaks_only_between_words_and_after_delimiters(self):
         out = soften_inline_code("<p><code>claude mcp add --scope project docs-search</code></p>")
-        self.assertIn('<code class="code-long">', out)
+        self.assertIn('<code class="language-text code-long">', out)
         self.assertIn('<span class="code-seg">--scope</span>', out)
         self.assertIn('<span class="code-seg">docs-search</span>', out)
 
@@ -125,3 +125,69 @@ class BuiltCodeBlockTests(unittest.TestCase):
         for slug, html in self.pages():
             with self.subTest(slug=slug):
                 self.assertNotIn('class="code-copy"', html)
+
+
+class LanguageClassTests(unittest.TestCase):
+    """Every rendered <code> element declares a language, block or inline.
+
+    The accessibility checker this site publishes fails a page on any <code> whose class
+    does not start with `language-`. Until 2026-11-18 the renderer wrote a bare <code>
+    inside each highlighted block, so the site's own guides failed their own checker.
+    """
+
+    def render(self, markdown_text):
+        import markdown
+
+        from code_blocks import CodeBlockFormatter
+        return soften_inline_code(markdown.Markdown(
+            extensions=["extra", "codehilite"],
+            extension_configs={"codehilite": {"guess_lang": False, "pygments_formatter": CodeBlockFormatter}},
+        ).convert(markdown_text))
+
+    def test_a_fenced_block_carries_its_language(self):
+        self.assertIn('<code class="language-bash">', self.render("```bash\nacme keys create --name ci\n```"))
+
+    def test_a_fence_with_no_language_is_declared_as_text(self):
+        self.assertIn('<code class="language-text">', self.render("```\nplain output\n```"))
+
+    def test_inline_code_declares_text_first_in_its_class(self):
+        html = self.render("Run `acme` now.")
+        self.assertIn('<code class="language-text code-short">acme</code>', html)
+
+    def test_no_rendered_code_element_is_left_bare(self):
+        html = self.render("Use `-e`.\n\n```python\nprint(1)\n```\n\n```\nraw\n```")
+        classes = re.findall(r"<code([^>]*)>", html)
+        self.assertEqual(len(classes), 3)
+        for attrs in classes:
+            with self.subTest(attrs=attrs):
+                self.assertRegex(attrs, r'^ class="language-[\w+#.-]+')
+
+
+@unittest.skipUnless((OUTPUT / "articles").exists(), "run python build.py first")
+class PublishedCheckerTests(unittest.TestCase):
+    """The site's own guides pass the accessibility checker the site gives away."""
+
+    PAGES = ("docs-accessibility", "documentation-template", "documentation-review")
+
+    @classmethod
+    def setUpClass(cls):
+        import importlib.util
+        path = ROOT / "static/downloads/documentation-accessibility-checker/check_documentation_accessibility.py"
+        spec = importlib.util.spec_from_file_location("published_checker", path)
+        cls.checker = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls.checker)
+
+    def issues(self, page):
+        parser = self.checker.DocumentationAccessibilityParser()
+        parser.feed(page.read_text(encoding="utf-8"))
+        return parser.finish()
+
+    def test_the_three_guides_pass(self):
+        for slug in self.PAGES:
+            with self.subTest(page=slug):
+                self.assertEqual(self.issues(OUTPUT / "articles" / slug / "index.html"), [])
+
+    def test_no_article_fails_the_code_language_rule(self):
+        for page in sorted((OUTPUT / "articles").glob("*/index.html")):
+            with self.subTest(page=page.parent.name):
+                self.assertNotIn("code element has no declared language class", self.issues(page))

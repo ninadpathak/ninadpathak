@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/voice-agent-memory/voice-pipeline.mmd",
-  "hash": "840fd358cbc87f0b",
+  "hash": "4b8156fedd2c110e",
   "pele": "1.8.0",
   "width": 720,
   "height": 392,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Stored memory is drawn as a dashed input to the model.",
-  "caption": "A voice pipeline. What the model generates and what the caller hears part ways at the last stage, text-to-speech.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.svg\" width=\"720\" height=\"392\" alt=\"A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Stored memory is drawn as a dashed input to the model.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>A voice pipeline. What the model generates and what the caller hears part ways at the last stage, text-to-speech.</figcaption>\n</figure>"
+  "caption": "What the model generates and what the caller hears part ways at the last stage, text-to-speech.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.narrow.svg\" width=\"288\" height=\"720\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/voice-agent-memory/voice-pipeline.svg\" width=\"720\" height=\"392\" alt=\"A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Stored memory is drawn as a dashed input to the model.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>What the model generates and what the caller hears part ways at the last stage, text-to-speech.</figcaption>\n</figure>"
 }
