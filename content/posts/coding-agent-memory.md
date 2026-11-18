@@ -23,13 +23,13 @@ A coding agent forgets everything when you start a new session because the model
 
 A `.env` file is one you write once and a program reads on every start. The [dotenv README](https://github.com/motdotla/dotenv) describes a module "that loads environment variables from a `.env` file".
 
-A coding agent's instruction file is written by you and read by the tool at the start of each session. All but one of these [coding agents](/articles/coding-agents/) now add something a `.env` file never had, which is notes the agent writes for itself.
+A coding agent's instruction file is written by you and read by the tool at the start of each session. Every one of the four [coding agents](/articles/coding-agents/) compared here except Cursor now adds something a `.env` file never had, which is notes the agent writes for itself.
 
 So I'll go through what each tool loads, which ones take notes, and how you can check what yours has in front of it.
 
 ## Why does a coding agent forget between sessions?
 
-Because the model has no memory of its own, and the session is the only place the conversation was held. Cursor's [documentation on rules](https://cursor.com/docs/rules) is blunt about it.
+A coding agent forgets because the model has no memory of its own, and the session is the only place the conversation was held. Cursor's [documentation on rules](https://cursor.com/docs/rules) puts it this way.
 
 "Large language models don't retain memory between completions. Rules provide persistent, reusable context at the prompt level."
 
@@ -48,7 +48,7 @@ Each of the four reads instruction files you write, and all but Cursor can also 
 
 Codex and Claude Code both state a size limit on the files you write. Codex's [AGENTS.md guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md) stops adding files "once the combined size reaches the limit defined by `project_doc_max_bytes` (32 KiB by default)", so a long file near the root can crowd out a nearer one.
 
-Claude Code loads a launch file whole as long as it is 4 MiB or smaller, and puts a tighter limit on instruction files that load on demand, 40,000 characters in a session with a 200K context window. A file over that second limit reaches the model only in part, with a note telling it to read the rest.
+Claude Code loads a file read at launch whole as long as it is 4 MiB or smaller, and puts a tighter limit on instruction files that load on demand, 40,000 characters in a session with a 200K context window. An on-demand file over 40,000 characters reaches the model only in part, with a note telling it to read the rest.
 
 ## Which of them takes notes for you?
 
@@ -60,15 +60,15 @@ Codex makes you opt in. Its [Memories page](https://learn.chatgpt.com/docs/custo
 
 Gemini CLI splits the job in two. Its [memory tool](https://geminicli.com/docs/tools/memory) "persists durable facts, user preferences, and project details by editing Markdown memory files directly", and a separate feature called [Auto Memory](https://geminicli.com/docs/cli/auto-memory/) mines old sessions for more.
 
-That second feature is the cautious one. The page calls it "an experimental feature", says "Auto Memory is off by default", and holds every proposed note "in a project-local inbox until you approve or discard them."
+Auto Memory is the cautious one. Its page calls it "an experimental feature", says "Auto Memory is off by default", and holds every proposed note "in a project-local inbox until you approve or discard them."
 
 And Cursor? Its documentation describes rules, which people write, and has no page for agent-written memory.
 
-Here's why the differences matter. An agent that writes its own notes will also write wrong ones, and a note that loads every session gets trusted every session, so the review step Gemini builds in is one you'd want to do by hand in the other two.
+An agent that writes its own notes will also write wrong ones, and a note that loads every session gets trusted every session, so the review step Gemini builds in is one you'd want to do by hand in the other two.
 
 ## Can one file serve every tool?
 
-For instructions, yes, with a condition for two of the tools. [AGENTS.md](https://agents.md/) describes itself as "A simple, open format for guiding coding agents, used by over 60k open-source projects", and the site says the format "is now stewarded by the Agentic AI Foundation under the Linux Foundation."
+A single file can serve every tool for instructions, with a condition for Claude Code and Gemini CLI. [AGENTS.md](https://agents.md/) describes itself as "A simple, open format for guiding coding agents, used by over 60k open-source projects", and the site says the format "is now stewarded by the Agentic AI Foundation under the Linux Foundation."
 
 Codex and Cursor read it by name. Claude Code reads it too, with a condition the docs spell out: "By default, Claude reads `AGENTS.md` only when you have no `CLAUDE.md` in your working directory or above it."
 
@@ -76,7 +76,7 @@ So if your repository has both files, Claude Code uses `CLAUDE.md` and ignores t
 
 Those two tools differ on permissions and undo as well, which [Claude Code vs Gemini CLI](/articles/claude-vs-gemini-cli/) compares.
 
-Which means one shared file works once each tool is pointed at it. [The CLAUDE.md guide](/articles/claude-md/) has the one-line import that makes Claude Code read the shared file.
+So one shared file works once each tool is pointed at it. [The CLAUDE.md guide](/articles/claude-md/) has the one-line import that makes Claude Code read the shared file.
 
 ## Is forgetting inside a session the same problem?
 
@@ -87,7 +87,7 @@ No. A long session can lose its own early turns once the context window fills, b
   <figcaption>Each new turn joins on the right in a harness that truncates, and the oldest fall out of the model's view.</figcaption>
 </figure>
 
-That loss happens with every instruction file loaded and working. [Short-term memory for agents](/articles/short-term-agent-memory/) explains which instructions survive a compaction.
+That loss happens even when every instruction file has loaded correctly. [Short-term memory for agents](/articles/short-term-agent-memory/) explains which instructions survive a compaction.
 
 ## What about the conversation itself?
 

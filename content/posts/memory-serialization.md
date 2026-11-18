@@ -9,7 +9,7 @@ bridges:
 - slug: coding-agent-memory
   reason: Claude Code, Codex and Gemini CLI each write agent notes to a different place and format.
 date: '2026-04-30'
-description: 'Memory serialization is how an agent persists state across sessions. Three ways to do it, a run of a versioned state record, and why to keep the log.'
+description: 'Memory serialization is how an agent persists state across sessions. This page covers three ways to do it, runs a versioned state record, and explains why to keep the log behind it.'
 slug: memory-serialization
 status: published
 work_note: "Explainers like this one are what I write for AI companies as a freelance technical writer. I'm Ninad Pathak, and I run the product before I write about it. [Let's work on yours](/services/freelance-technical-writer-for-ai-companies/)."
@@ -19,7 +19,7 @@ updated: 2026-11-17
 
 Zork let players save their position to disk, and BYTE magazine explained in 1981 what the feature was for, in a line [Wikipedia's article on saved games](https://en.wikipedia.org/wiki/Saved_game) preserves: "it was intended to let players play over many weeks". A game too long for one sitting needed a way to write down where the player stood.
 
-Memory serialization is how an agent does it. Persisting agent state across sessions means writing what the agent knows and what it was doing to storage, in a form that a later process can load and continue from.
+Memory serialization is how an agent writes down where it stood. Persisting agent state across sessions means writing what the agent knows and what it was doing to storage, in a form that a later process can load and continue from.
 
 So I'll go through the usual ways to save an agent's state, run one of them, and then get to the catch a game never had, which is that the save itself can be wrong. That catch is the part of [agent memory](/articles/agent-memory/) worth your attention.
 
@@ -44,7 +44,7 @@ Structured state is the one that behaves like a save file. It's small and quick 
 
 ## What goes wrong after a restart?
 
-Old state meets new code, and old facts meet a changed world. The script below saves a record the way older code would have, then loads it with a loader that expects a newer shape.
+After a restart, a record written by older code is read by newer code, and facts saved days ago may no longer be true. The script below saves a record the way older code would have, then loads it with a loader that expects a newer shape.
 
 ```python
 """Save an agent's state, restart with newer code, and load it back.
@@ -124,7 +124,7 @@ newer file, older code: cannot read state version 3
 
 The version field is what let the loader add the missing `plan` key, and it is also what let older code refuse a file from the future. Without it, a missing key reads as a fact that was never established.
 
-And the `recheck` label is the other half. A fact confirmed nine days earlier is loaded and marked as unverified, so the agent can ask before acting on it.
+The `recheck` label handles old facts. A fact confirmed nine days earlier is loaded and marked as unverified, so the agent can ask before acting on it.
 
 Why bother with the date? Because a saved fact was true when it was written, and the loader has no other way to know how long ago that was.
 
@@ -159,19 +159,19 @@ History is a separate decision. A record that overwrites a fact loses what was b
 
 ## What can't serialization fix?
 
-It can't make a bad note good, and it can't share one. A record written by one tool is unreadable by the next, which is the complaint behind Mads Thines's proposal for [a shared format for agent memory](https://www.lorekit.io/blog/open-agent-memory-format).
+Serialization can't make a wrong note right. It also can't make one tool's record readable by another tool, which is the complaint behind Mads Thines's proposal for [a shared format for agent memory](https://www.lorekit.io/blog/open-agent-memory-format).
 
-You can see it in [coding agent memory](/articles/coding-agent-memory/), where Claude Code, Codex and Gemini CLI each write their own notes to a different place.
+You can see the incompatibility in [coding agent memory](/articles/coding-agent-memory/), where Claude Code, Codex and Gemini CLI each write their own notes to a different place.
 
-And it doesn't decide what the model sees. Loading state puts it in the context window, and [context windows vs memory](/articles/context-windows-vs-memory/) explains why a large record crowds out the work.
+Serialization also doesn't decide what the model sees. Loading state puts it in the context window, and [context windows vs memory](/articles/context-windows-vs-memory/) explains why a large record crowds out the work.
 
-Nor does it settle who may write. When several agents use one store, that becomes its own question, in [shared vs isolated memory](/articles/shared-vs-isolated-memory/).
+Serialization doesn't settle who may write either. When several agents use one store, write access is its own question, covered in [shared vs isolated memory](/articles/shared-vs-isolated-memory/).
 
 ## FAQ
 
 **What is memory serialization in an AI agent?**
 
-It is writing the agent's state to storage in a form a later session can load. The state is a small structured record, a message log, or both.
+Memory serialization is writing the agent's state to storage in a form a later session can load. The state is a small structured record, a message log, or both.
 
 **Why does an agent forget after a restart?**
 
@@ -179,4 +179,4 @@ The conversation lived in the memory of one process. Unless something wrote it t
 
 **Should an agent store the full transcript or a summary?**
 
-Both, where it can. The summary is what gets loaded, and the transcript is what the summary can be checked against.
+Store both where you can. The summary is what gets loaded, and the transcript is what the summary can be checked against.

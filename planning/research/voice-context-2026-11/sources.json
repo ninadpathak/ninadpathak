@@ -2804,7 +2804,7 @@
     },
     {
       "id": "anthropic-multi-agent-research-system",
-      "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+      "url": "https://www.anthropic.com/research/multi-agent-research-system",
       "author": "Anthropic",
       "date": "2025-06-13",
       "title": "How we built our multi-agent research system",
@@ -2823,7 +2823,7 @@
     },
     {
       "id": "cognition-dont-build-multi-agents",
-      "url": "https://cognition.ai/blog/dont-build-multi-agents",
+      "url": "https://cognition.com/blog/dont-build-multi-agents",
       "author": "Walden Yan",
       "date": "2025-06-12",
       "title": "Don't Build Multi-Agents",
@@ -2895,7 +2895,7 @@
     },
     {
       "id": "cognition-multi-agents-working",
-      "url": "https://cognition.ai/blog/multi-agents-working",
+      "url": "https://cognition.com/blog/multi-agents-working",
       "author": "Walden Yan",
       "date": "2026-04-22",
       "title": "Multi-Agents: What's Actually Working",

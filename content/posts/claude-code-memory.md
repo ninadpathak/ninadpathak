@@ -11,7 +11,7 @@ bridges:
 - slug: ai-memory-management
   reason: Claude Code's two file types are one case of the layering that page describes.
 date: 2026-04-19
-description: 'Claude Code memory is two sets of files read into each new session: CLAUDE.md files you write and auto memory Claude writes. Where they live and what loads.'
+description: 'Claude Code memory is two sets of files read into each new session: CLAUDE.md files you write and auto memory Claude writes. This page covers where the files live and how much of each loads.'
 status: published
 work_note: "I'm Ninad Pathak, a freelance technical writer. If your AI product's tutorials have fallen behind the product, I write them, and I run the product first. [Work with me](/services/freelance-technical-writer-for-ai-companies/)."
 title: How Memory Works in Claude Code
@@ -27,11 +27,11 @@ Leonard Shelby, in Christopher Nolan's 2000 film Memento, can't form new memorie
 
 So what goes wrong for Leonard? He trusts whatever his notes say, and by the film's end he is, in that summary's words, "willing to lie to himself to be happy".
 
-Keeping the notes true is the standing chore for anyone whose [coding agents](/articles/coding-agents/) remember things, and it's where this page ends up.
+Keeping the notes true is the ongoing job for anyone whose [coding agents](/articles/coding-agents/) remember things, and the last section of this page covers it.
 
 ## What does Claude Code remember between sessions?
 
-It remembers what is in two sets of files, and the docs compare them row by row.
+Claude Code remembers what is in two sets of files, `CLAUDE.md` files and auto memory, and the docs compare them row by row.
 
 | | CLAUDE.md files | Auto memory |
 | --- | --- | --- |
@@ -42,9 +42,9 @@ It remembers what is in two sets of files, and the docs compare them row by row.
 
 Notice that the conversation is in neither column. So a decision you reached in yesterday's session exists today only if you put it in `CLAUDE.md` or Claude chose to save it.
 
-And that choice is Claude's, which makes it selective. The docs say "Claude doesn't save something every session", and that it skips what it can work out from the code.
+Whether to save something to auto memory is Claude's choice, so auto memory is selective. The docs say "Claude doesn't save something every session", and that it skips what it can work out from the code.
 
-A third input, text passed with a launch flag, lasts only for the session it starts.
+A third input, text passed at launch with the `--append-system-prompt` flag, lasts only for the session it starts.
 
 ## Where do the files live?
 
@@ -70,25 +70,25 @@ Now, that location has a consequence: "Auto memory is machine-local." What Claud
 
 ## How much of it gets loaded?
 
-For auto memory, only the top of the index. "The first 200 lines of `MEMORY.md`, or the first 25KB, whichever comes first, are loaded at the start of every conversation", and the topic files are read when Claude decides it needs them.
+For auto memory, only the top of the index gets loaded. "The first 200 lines of `MEMORY.md`, or the first 25KB, whichever comes first, are loaded at the start of every conversation", and the topic files are read when Claude decides it needs them.
 
 Instruction files that load at launch come in whole, "as long as the file is 4 MiB or smaller", and files that load on demand are cut off at 40,000 characters in a 200K session. But the number to aim for is far lower, since the docs ask you to "target under 200 lines per CLAUDE.md file."
 
-Why so short? Their reason is that "Longer files consume more context and reduce adherence."
+Why so short? The docs' reason is that "Longer files consume more context and reduce adherence."
 
-What earns a line in that budget is the subject of my [CLAUDE.md guide](/articles/claude-md/).
+Which instructions are worth one of those 200 lines is the subject of my [CLAUDE.md guide](/articles/claude-md/).
 
 ## Is memory a rule or a suggestion?
 
-It is a suggestion. The docs say of both file types that "Claude treats them as context, not enforced configuration", and I'd read that sentence before any other on the page.
+Memory is a suggestion. The docs say of both file types that "Claude treats them as context, not enforced configuration", and I'd read that sentence before any other on the docs page.
 
-Here's why. "CLAUDE.md content is delivered as a user message after the system prompt, not as part of the system prompt itself", so an instruction there competes with everything else in the window, and the docs warn that when two instructions conflict "Claude may pick one arbitrarily."
+The reason is how the file is delivered. "CLAUDE.md content is delivered as a user message after the system prompt, not as part of the system prompt itself", so an instruction there competes with everything else in the window, and the docs warn that when two instructions conflict "Claude may pick one arbitrarily."
 
 For something that must never happen, the docs point away from memory and toward a hook that blocks the action before it runs. A memory file is the right place for how the team works and the wrong place for a guarantee.
 
 ## What survives a long session?
 
-The project file does. When a session fills its window and is compacted, "Project-root CLAUDE.md survives compaction: after `/compact`, Claude re-reads it from disk and re-injects it into the session."
+The project-root `CLAUDE.md` does. When a session fills its window and is compacted, "Project-root CLAUDE.md survives compaction: after `/compact`, Claude re-reads it from disk and re-injects it into the session."
 
 An instruction given only in conversation has no such protection, which is the failure [short-term memory for agents](/articles/short-term-agent-memory/) works through. The reload itself has had bugs, and the [changelog](https://code.claude.com/docs/en/changelog) entry for version 2.1.311 on October 26 reads "Fixed Claude seeing stale MEMORY.md and CLAUDE.md content right after automatic compaction when those files were edited earlier in the session".
 
@@ -100,19 +100,19 @@ A model reading `MEMORY.md` is in the same position. A line saying the project u
 
 So how do you catch a stale note? For auto memory the docs give each file a `modified` date and say "The timestamp shows how current the fact is, both to you and to Claude when it reads the memory back."
 
-The commands split the same way. `/context all` shows which files a session loaded and `/memory` opens them for editing, and for the instruction files `/doctor prompt-audit` has Claude look for "references to files or commands that don't exist, and files that contradict each other."
+Claude Code has commands for checking both kinds of file. `/context all` shows which files a session loaded and `/memory` opens them for editing, and for the instruction files `/doctor prompt-audit` has Claude look for "references to files or commands that don't exist, and files that contradict each other."
 
 I managed the writers at Mem0, which sells a memory layer for agents, and I wrote its [setup guide for adding memory to Claude Code](https://web.archive.org/web/20260307002643/https://mem0.ai/blog/claude-code-memory), so weigh what follows accordingly. For one developer on one machine, I think the two file types are enough.
 
-The limits appear with a team, since auto memory doesn't travel, and with other tools, which [coding agent memory](/articles/coding-agent-memory/) compares.
+The two file types fall short for a team, since auto memory stays on one machine, and for anyone who also uses other coding tools, which [coding agent memory](/articles/coding-agent-memory/) compares.
 
-A [subagent](/articles/claude-code-subagents/) starts with its own fresh window and can be given a separate memory directory. How the wider set of options is layered is the subject of [AI memory management](/articles/ai-memory-management/).
+A [subagent](/articles/claude-code-subagents/) starts with its own fresh window and can be given a separate memory directory. How these files sit beside other kinds of agent memory is the subject of [AI memory management](/articles/ai-memory-management/).
 
 ## FAQ
 
 **Does Claude Code remember previous conversations?**
 
-Not unless you resume one. A new session starts with a fresh context window, and only `CLAUDE.md` files and auto memory carry over.
+No, unless you resume one. A new session starts with a fresh context window, and only `CLAUDE.md` files and auto memory carry over.
 
 **Where does Claude Code store memory?**
 

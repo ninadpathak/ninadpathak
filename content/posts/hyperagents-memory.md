@@ -23,7 +23,7 @@ Jürgen Schmidhuber proposed the [Gödel machine](https://en.wikipedia.org/wiki/
 
 So what does a self-rewriting agent build when it wants to remember something? The paper prints one answer in [its appendix](https://arxiv.org/html/2603.19461v1), a short Python class that keeps notes in a JSON file, and in this article I'll run it and look at what the agent chose to build as its own [AI agent memory](/articles/agent-memory/), and what it left out.
 
-That link goes to the March version, the only one arXiv renders as a web page, and the section reads the same in the November PDF.
+The appendix link goes to the March version, the only one arXiv renders as a web page, and the section reads the same in the November PDF.
 
 ## What is a hyperagent?
 
@@ -35,7 +35,7 @@ Memory comes into the paper as one of the things the meta agent gave itself. The
 
 ## What memory did the agent build?
 
-It built a key-value store with a timestamp on each entry. The class below is the one printed in Appendix E.3.7, with a loader added, since the paper doesn't print that method.
+The agent built a key-value store with a timestamp on each entry. The class below is the one printed in Appendix E.3.7, with a loader added, since the paper doesn't print that method.
 
 ```python
 """The MemoryTool printed in Appendix E.3.7 of the Hyperagents paper, run on a temp file.
@@ -117,29 +117,29 @@ The reload works, which is all persistence means here: a second instance reads t
 
 ## What does the agent write down?
 
-It writes conclusions and leaves the raw numbers to the logs. The authors make the distinction themselves: "Instead of merely logging numerical scores, the hyperagent stores synthesized insights, causal hypotheses, and forward-looking plans".
+The agent writes conclusions and leaves the raw numbers to the logs. The authors make the distinction themselves: "Instead of merely logging numerical scores, the hyperagent stores synthesized insights, causal hypotheses, and forward-looking plans".
 
 A printed entry records that a later generation scored worse and names the cause, in the agent's words: "gen65 changes over-corrected." Another sets a plan for the next attempt.
 
 Why does that matter? Because raw scores can be read again from the logs, and a conclusion exists only if somebody writes it down.
 
-A summary can drop it just as a missing note can, the failure [short-term agent memory](/articles/short-term-agent-memory/) describes for compaction.
+A summary can drop a conclusion just as a missing note can, which is the failure [short-term agent memory](/articles/short-term-agent-memory/) describes for compaction.
 
 ## What did the agent leave out?
 
-Everything a memory system grows later, starting with history. My run stores two notes under `best_generation`, and the second replaces the first with no trace that Gen55 was once the answer.
+The agent left out history, search and forgetting, which memory systems add later. My run stores two notes under `best_generation`, and the second replaces the first with no trace that Gen55 was once the answer.
 
-Now, the agent's own file avoids that, and it's worth seeing how. Each event in the printed entries gets a key of its own, such as `gen66_results`, so the naming does the work the class doesn't.
+The agent's own file avoids that overwrite through its key names. Each event in the printed entries gets a key of its own, such as `gen66_results`, so the naming does the work the class doesn't.
 
 But a convention can be broken by one careless call, and an overwrite with no history is the design that [memory versioning](/articles/memory-versioning/) argues against, since nobody can ask later what the agent believed at an earlier point. The timestamp records when the surviving value was written and nothing about the one it replaced.
 
 The class also has no way to search. `retrieve` needs the exact key, and `list_keys` returns every key, so recall depends on the agent choosing names it will recognise later.
 
-Nothing is forgotten on purpose either, and the whole file is rewritten on every `store`. Neither matters at the scale of the runs the paper reports, and both would in a system that ran for months.
+The class never deletes a note either, and the whole file is rewritten on every `store`. Neither matters at the scale of the runs the paper reports, and both would in a system that ran for months.
 
 ## Does the memory make the agent better?
 
-The paper credits it with part of the gain and doesn't isolate it. Its transfer experiment moves a trained hyperagent to a new domain, and the authors write that "the transfer hyperagents have features such as performance tracking and persistent memory", which they call a qualitative attribution.
+The paper credits memory with part of the gain and doesn't isolate its effect. Its transfer experiment moves a trained hyperagent to a new domain, and the authors write that "the transfer hyperagents have features such as performance tracking and persistent memory", which they call a qualitative attribution.
 
 The measured result is about the meta agent as a whole.
 
@@ -149,9 +149,9 @@ So the evidence says the self-improvement machinery transfers, and that memory i
 
 ## What should a builder take from it?
 
-Start with less than the frameworks offer. An agent that could have written anything wrote a class of 22 lines and a JSON file, and that was enough for its notes to shape the next generation.
+Start with less than a memory framework offers. An agent that could have written anything wrote a class of 22 lines and a JSON file, and that was enough for its notes to shape the next generation.
 
-The omissions are the list of what to add when the simple version stops being enough: history, search and forgetting. Those layers are laid out in [AI memory management](/articles/ai-memory-management/), and [Claude Code's memory](/articles/claude-code-memory/) is a shipped product that also keeps its notes in plain files.
+History, search and forgetting are what to add when the simple version stops being enough. Those layers are laid out in [AI memory management](/articles/ai-memory-management/), and [Claude Code's memory](/articles/claude-code-memory/) is a shipped product that also keeps its notes in plain files.
 
 ## FAQ
 
@@ -161,8 +161,8 @@ No. The public repository holds the starting agents with two tools, for shell co
 
 **Where does a hyperagent store its memory?**
 
-In the printed example, in a `memory.json` file in the working directory. Each key holds a value and the time it was written.
+The printed example stores it in a `memory.json` file in the working directory. Each key holds a value and the time it was written.
 
 **Is HyperAgents the same as the Darwin Gödel Machine?**
 
-It extends it. The paper's system, DGM-H, adds a meta agent whose own improvement procedure can be edited.
+No. The paper's system, DGM-H, extends the Darwin Gödel Machine with a meta agent whose own improvement procedure can be edited.
