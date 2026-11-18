@@ -23,7 +23,7 @@ updated: 2026-11-17
 
 Tesla sells a feature called Full Self-Driving, and [Wikipedia's article on self-driving cars](https://en.wikipedia.org/wiki/Self-driving_car), as it read on November 17, files it as a "Level 2 (hands/on, eyes/on)" system. Waymo's robotaxis sit two levels higher, because the SAE levels, published in 2014, rank a system by how much of the driving a human still has to do and say nothing about how clever the software is.
 
-Types of AI agents can be ranked by how much an agent decides and does before a person looks. The first two are reactive and tool-using agents, and above them come loop agents and multi-agent systems, with persistent-goal agents at the top.
+Types of AI agents can be ranked by how much an agent decides and does before a person looks. The lowest two types are reactive and tool-using agents, and above them come loop agents and multi-agent systems, with persistent-goal agents at the top.
 
 A car's level changes rarely, though the article records Mercedes withdrawing its Level 3 feature in January 2026. An agent's type is a configuration, so one model can answer a single question in one deployment and work unattended for a week in another.
 
@@ -64,7 +64,7 @@ Simon Willison [settled on a definition](https://simonwillison.net/2025/Sep/18/a
 
 Willison's line falls between my tool-using type and the loop. Anthropic's cuts across the ladder, since it asks who directs the steps: the post files an orchestrator with workers under workflows, so a multi-agent system can sit on either side of it.
 
-I agree with both that handing the loop to the model is the largest step. I keep the two rungs below it because the word is used well below that line, and United Airlines' ban covers "personal AI agents or assistants" as one group.
+I agree with both that handing the loop to the model is the largest step. I keep the two rungs below it because the word agent is used well below that line, and United Airlines' ban covers "personal AI agents or assistants" as one group.
 
 I also think one line is too few for a build decision. Neither definition has a rung for several agents sharing a task or for an agent that keeps a goal across sessions, and each of those adds a failure the single loop doesn't have.
 
@@ -72,9 +72,9 @@ I also think one line is too few for a build decision. Neither definition has a 
 
 On November 11 United Airlines said it was banning AI agents from booking flights for travellers, as [CBS News reported](https://www.cbsnews.com/news/united-airlines-bans-ai-agents-booking-flights/). The airline's statement names what it objects to: "actions taken by these tools may result in unintended purchases, account changes, or use of MileagePlus miles."
 
-Everything in that sentence is a write. An agent that compares fares and an agent that buys the ticket can be the same type on the ladder, and only the second can spend the customer's money.
+Every item in that statement is a write, an action that changes something. An agent that compares fares and an agent that buys the ticket can be the same type on the ladder, and only the buying agent can spend the customer's money.
 
-The report also cuts against a clean split. It quotes an aviation analyst saying "Flight searches cost airlines money", so a read-only agent still costs the system it reads from, and the [Hacker News thread](https://news.ycombinator.com/item?id=50458900) on the ban ran to more than 700 comments.
+The CBS report also complicates a clean split between reading and acting. It quotes an aviation analyst saying "Flight searches cost airlines money", so a read-only agent still costs the system it reads from, and the [Hacker News thread](https://news.ycombinator.com/item?id=50458900) on the ban ran to more than 700 comments.
 
 So each type carries a second label, read-only or acting.
 
@@ -118,7 +118,7 @@ Choose the lowest type that does the job. Anthropic's post gives the same advice
 
 Type 4 has no question of its own, because a second agent is a way to carry out a task and never a requirement of one. Add it when a single loop has been tried and measured.
 
-The ladder sorts agents by how much they decide alone. How to wire a chosen type is the subject of my guide to [design patterns for AI agents](/articles/agent-design-space/).
+The ladder sorts agents by how much they decide alone. How to connect the model calls for a chosen type is the subject of my guide to [design patterns for AI agents](/articles/agent-design-space/).
 
 Where an agent ends and an assistant begins is argued in [AI agent vs AI assistant](/articles/agent-vs-ai-assistant/), and the code around the model is described in [agent harnesses](/articles/agent-harnesses/).
 

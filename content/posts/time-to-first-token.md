@@ -20,7 +20,7 @@ web.dev's [TTFB guide](https://web.dev/articles/ttfb), first published in Octobe
 
 A first byte arrives before anything is painted. A reasoning model's first token can be thinking that never reaches the screen.
 
-TTFT and tokens per second are the two numbers that [LLM inference](/articles/ai-engineering/) is tuned against, and the first of them is the subject here.
+TTFT and tokens per second are the two numbers that [LLM inference](/articles/ai-engineering/) is tuned against, and this page covers TTFT.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/time-to-first-token/ttft-chain.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/time-to-first-token/ttft-chain.narrow.svg" width="288" height="704"><img class="np-has-narrow" src="/static/images/diagrams/time-to-first-token/ttft-chain.svg" width="720" height="288" alt="The latency chain to the first token: the request crosses the network, waits in the queue, and the model prefills the prompt; together those make up time to first token. After the first token, generation streams the rest at the model's throughput." loading="lazy" decoding="async"></picture></a>
@@ -29,11 +29,11 @@ TTFT and tokens per second are the two numbers that [LLM inference](/articles/ai
 
 ## What does time to first token measure?
 
-Measured at the client, TTFT is the network trip, the wait in the server's queue and the pass in which the model reads the prompt. That last phase is called prefill, and it grows with the length of the input.
+Measured at the client, TTFT is the network trip, the wait in the server's queue and the pass in which the model reads the prompt. The prompt-reading pass is called prefill, and it grows with the length of the input.
 
-Definitions differ on the network. Modelplane's [inference field guide](https://docs.modelplane.ai/guides/inference-guide), which gives its figures as of October 2026, defines TTFT from the server's side as "Queueing plus prefill", with no network term.
+Definitions differ on whether the network trip counts. Modelplane's [inference field guide](https://docs.modelplane.ai/guides/inference-guide), which gives its figures as of October 2026, defines TTFT from the server's side as "Queueing plus prefill", with no network term.
 
-The web metric has the same split, since web.dev lists redirects, DNS lookup and connection setup among the phases TTFB adds up. A TTFT number is only comparable with another one measured from the same place.
+The web metric includes the network too, since web.dev lists redirects, DNS lookup and connection setup among the phases TTFB adds up. A TTFT number is only comparable with another one measured from the same place.
 
 ## Why is TTFT misleading for reasoning models?
 
@@ -49,15 +49,15 @@ Its second metric, time to first answer token, "includes the time spent reasonin
 | Extra high | 48.22 |
 | Max | 208.11 |
 
-Those are Artificial Analysis's measurements on Anthropic's API, and this page adds none of its own. The spread is what I take from them: one model, and a wait that differs by a factor of about 29 depending on a parameter the caller sets.
+Those are Artificial Analysis's measurements on Anthropic's API, and this page adds none of its own. What I take from them is the spread: the same model makes a caller wait about 29 times longer at Max than at Low, and the caller sets that parameter.
 
 The site re-measures, so the numbers move. Later the same day its page showed 211.56 seconds for the top setting.
 
-So the wait before an answer is a product decision before it is a serving problem. A team that picks the highest setting has chosen a wait of minutes, and no change to the queue will bring it back.
+So the wait before an answer is a product decision before it is a serving problem. A team that picks the highest setting has chosen a wait of minutes, and no change to the queue will shorten it.
 
 ## How does TTFT behave under load?
 
-It can stay flat while the service gets much slower. NVIDIA's [two-station GLM-5.3 tutorial](https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/) from November 13 reports TTFT and full request latency at four concurrency levels, and the last column is my division of one by the other.
+TTFT can stay flat while full responses get much slower. NVIDIA's [two-station GLM-5.3 tutorial](https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/) from November 13 reports TTFT and full request latency at four concurrency levels, and the last column is my division of one by the other.
 
 | Concurrent requests | Mean TTFT, ms | Mean request latency, s | TTFT as a share of the wait |
 | --- | --- | --- | --- |
@@ -86,7 +86,7 @@ A shorter prompt, a cached prompt prefix and a shorter queue all lower it. Each 
 
 The wider set of serving choices is in the [LLM inference optimization guide](/articles/llm-inference-optimization/).
 
-On a phone call TTFT is one stage of several, and [voice AI latency](/articles/voice-agent-latency/) adds up the ones around it.
+For a voice agent on a phone call, TTFT is one stage of several, and [voice AI latency](/articles/voice-agent-latency/) adds up the stages around it.
 
 ## How should you measure TTFT?
 
