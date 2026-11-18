@@ -17,9 +17,9 @@ slug: llm-structured-outputs
 updated: 2026-11-17
 ---
 
-Structured outputs constrain a model's completed output to a JSON Schema you supply, JSON mode only promises that the output parses as JSON, and function calling lets the model decide whether to call a tool and with what arguments. OpenAI's [Structured Outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs) describes the first as "the evolution of JSON mode" and says "We recommend always using Structured Outputs instead of JSON mode when possible."
+Structured outputs constrain a model's completed output to a JSON Schema you supply, JSON mode only promises that the output parses as JSON, and function calling lets the model decide whether to call a tool and with what arguments. OpenAI's [Structured Outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs) describes Structured Outputs as "the evolution of JSON mode" and says "We recommend always using Structured Outputs instead of JSON mode when possible."
 
-The guarantee is narrower than the name suggests, and the same guide spells out the limits in two sentences.
+The guarantee covers only a response the model completes and doesn't refuse, and the same guide says so.
 
 "Structured Outputs constrains completed, non-refusal model output to your supplied JSON Schema. Your application still needs to handle refusals, incomplete responses, and API errors, and validate any business rules that the schema does not express."
 
@@ -36,15 +36,15 @@ The mechanisms differ in what they promise and in what they leave for your code.
 
 | Mechanism | Promises | Leaves to you |
 | --- | --- | --- |
-| JSON mode | Output that parses as JSON | Field names, types, missing fields, and everything in the next row |
+| JSON mode | Output that parses as JSON | Field names, types, missing fields, and everything structured outputs leave to you |
 | Structured outputs | Completed, non-refusal output that follows your schema | Refusals, incomplete responses, API errors, business rules |
 | Function calling | A decision about whether to call a tool, plus arguments | Running the tool, parsing the arguments, deciding what happens next |
 
-OpenAI keeps JSON mode for older models, noting that "Older models like gpt-4-turbo and earlier may use JSON mode instead." On anything newer, the choice is between a schema for the response and a schema for a tool's arguments.
+OpenAI keeps JSON mode for older models, noting that "Older models like gpt-4-turbo and earlier may use JSON mode instead." On anything newer, the choice is between structured outputs, which put a schema on the response, and function calling, which puts one on a tool's arguments.
 
 ## What do structured outputs guarantee?
 
-They guarantee that a response the model finishes, and does not refuse, matches the schema. OpenAI's Responses API takes the schema in `text.format`, and Chat Completions takes it in `response_format` with `type: "json_schema"` and `strict: true`.
+Structured outputs guarantee that a response the model finishes, and does not refuse, matches the schema. OpenAI's Responses API takes the schema in `text.format`, and Chat Completions takes it in `response_format` with `type: "json_schema"` and `strict: true`.
 
 A refusal comes back outside the schema. The Responses API returns it as a content item whose `type` is `"refusal"`, and for Chat Completions the guide's examples check `choice.message.refusal`, so code that validates only the parsed object will treat a refusal as an empty record.
 
@@ -54,7 +54,7 @@ Latency has one documented cost today, and the guide states it differently in it
 
 The Chat Completions tab opens the same note with "for fine tuned models" and adds "Other models do not have this limitation." Until the two agree, assume a first-request cost for any new schema.
 
-The limit no provider can remove is the schema itself. Constrained decoding enforces the schema you wrote, so a `string` where you needed an `enum`, or a billing address captured where you wanted shipping, passes every check.
+No provider can check that you wrote the right schema. Constrained decoding enforces the schema you wrote, so a `string` where you needed an `enum`, or a billing address captured where you wanted shipping, passes every check.
 
 ## What is function calling for?
 
@@ -62,11 +62,11 @@ Function calling is for letting the model decide whether a tool is needed, which
 
 OpenAI's [function calling guide](https://developers.openai.com/api/docs/guides/function-calling) lists a `strict` field on each function definition, "Whether to enforce strict mode for the function call", which applies schema enforcement to the arguments. The arguments still arrive as text: each call carries a name "and JSON-encoded arguments", so your code parses them unless an SDK helper does.
 
-The tool call is the action payload and nothing more. The [agent-loop anatomy](/articles/agent-loop-anatomy/) article covers the control flow that decides when an agent acts or retries.
+A tool call only names the action and its arguments. The [agent-loop anatomy](/articles/agent-loop-anatomy/) article covers the control flow that decides when an agent acts or retries.
 
 ## How do Anthropic and Google handle structured outputs?
 
-Both offer schema-constrained output, with different parameter names. Anthropic's [structured outputs documentation](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) says they "guarantee schema-compliant responses through constrained decoding" and records the move out of beta: "The output_format parameter has moved to output_config.format, and beta headers are no longer required."
+Anthropic and Google both offer schema-constrained output, with different parameter names. Anthropic's [structured outputs documentation](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) says they "guarantee schema-compliant responses through constrained decoding" and records the move out of beta: "The output_format parameter has moved to output_config.format, and beta headers are no longer required."
 
 Google's [Gemini API update](https://developers.googleblog.com/new-gemini-api-updates-for-gemini-3/) of November 25, 2025 added a combination with its hosted tools: "You can now combine Gemini hosted tools, specifically Grounding with Google Search and URL context with structured outputs."
 
@@ -80,11 +80,11 @@ Constrained decoding in vLLM took their benchmark score to 100%, and their post 
 
 A commenter on the Hacker News thread, hansvm, [raised the point](https://news.ycombinator.com/item?id=50245187) every strict mode has to answer: "Schema-constrained decoding changes the distribution the LLM will output." The same comment wonders how a back-up-and-retry method would compare, and describes that method as also reaching full tool-call accuracy.
 
-I think the worry is right about a different failure than the one Ubicloud fixed. A grammar guarantees the shape and can still push a model into a worse answer inside that shape, so the check after turning strict mode on is answer quality.
+I think hansvm's worry is right, and it is about answer quality, which Ubicloud's benchmark doesn't score. A grammar guarantees the shape and can still push a model into a worse answer inside that shape, so the check after turning strict mode on is answer quality.
 
-[Outlines](https://github.com/dottxt-ai/outlines) is the library route for local models, and its README claims "Guaranteed valid structure" across backends including vLLM. [Instructor](https://python.useinstructor.com/) covers the other half, validation and automatic retries, for rules a schema can't express, such as a date that must fall after another date.
+[Outlines](https://github.com/dottxt-ai/outlines) is the library route for local models, and its README claims "Guaranteed valid structure" across backends including vLLM. [Instructor](https://python.useinstructor.com/) covers validation and automatic retries for rules a schema can't express, such as a date that must fall after another date.
 
-The serving side of this, including how constrained and [speculative decoding](/articles/speculative-decoding/) interact, is in the [LLM inference optimization guide](/articles/llm-inference-optimization/).
+The serving side of constrained decoding, including how constrained and [speculative decoding](/articles/speculative-decoding/) interact, is in the [LLM inference optimization guide](/articles/llm-inference-optimization/).
 
 ## FAQ
 
@@ -92,7 +92,7 @@ The serving side of this, including how constrained and [speculative decoding](/
 
 **Can I use function calling and structured outputs together?** Yes. OpenAI's function definitions take a `strict` field that enforces the schema on tool-call arguments, so the model still chooses whether to call the tool and the arguments it sends follow your schema.
 
-**When should I use JSON mode at all in 2026?** When the model doesn't support structured outputs. OpenAI's guide recommends structured outputs "when possible" and reserves JSON mode for older models.
+**When should I use JSON mode at all in 2026?** Use JSON mode only when the model doesn't support structured outputs. OpenAI's guide recommends structured outputs "when possible" and reserves JSON mode for older models.
 
 **What happens when the model refuses inside structured outputs?** The refusal comes back outside the schema. OpenAI's Responses API returns it as a content item of type `refusal`, and Chat Completions as `message.refusal`, so check for it before reading the parsed object.
 

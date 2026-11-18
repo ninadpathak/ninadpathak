@@ -19,9 +19,9 @@ video: contextual-retrieval
 
 Anthropic took a chunk like `"The company's revenue grew by 3% over the previous quarter."`, asked Claude to explain that chunk using the full document, and prepended the explanation before indexing it. That step is Contextual Retrieval, often searched for as contextual RAG, and in [the writeup Anthropic published on September 19, 2024](https://www.anthropic.com/research/contextual-retrieval) it cut top-20 retrieval failure by **49%** once contextual embeddings were paired with contextual BM25.
 
-The mechanism changes the chunk before any query runs, where nearly all RAG tuning happens at query time. I still think that is the right end of the pipeline to push on, and coding agents have since changed my mind about which corpora it is for.
+Contextual Retrieval changes the chunk at indexing time, before any query runs, and nearly all other RAG tuning happens at query time. I still think indexing is the right place to work, and coding agents have since changed my mind about which corpora Contextual Retrieval suits.
 
-It works on the indexing stage of the [RAG pipeline](/articles/rag/).
+Contextual Retrieval works on the indexing stage of the [RAG pipeline](/articles/rag/).
 
 ## What is Contextual Retrieval?
 
@@ -33,7 +33,7 @@ The same thing happens to a setup step that loses the product it configures, and
 
 Both retrievers gain from the note. Embeddings get document-level framing, BM25 gets vocabulary the raw chunk never contained, and Anthropic names the two halves Contextual Embeddings and Contextual BM25.
 
-That is why I read it as better input for [hybrid search](/articles/hybrid-search/) and never as a replacement for it. It is also the cleanest example I know of [context engineering](/glossary/context-engineering/) done at index time.
+That is why I read Contextual Retrieval as better input for [hybrid search](/articles/hybrid-search/) and never as a replacement for it. It is also the cleanest example I know of [context engineering](/glossary/context-engineering/) done at index time.
 
 ## What Anthropic's benchmark shows
 
@@ -48,7 +48,7 @@ Anthropic's result is a stack of separate reductions in retrieval failure, measu
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/contextual-retrieval/retrieval-failure.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/contextual-retrieval/retrieval-failure.narrow.svg" width="288" height="432"><img class="np-has-narrow" src="/static/images/diagrams/contextual-retrieval/retrieval-failure.svg" width="720" height="472" alt="Reduction in top-20 retrieval failure, measured as 1 minus recall at 20, in Anthropic's contextual retrieval tests: 35% from contextual embeddings alone, 49% once contextual BM25 joins, and 67% once reranking joins too. Each tile is 5 percentage points." loading="lazy" decoding="async"></picture></a>
-  <figcaption>From Anthropic's contextual retrieval writeup. Each layer still helps on top of the one before it; each tile is 5 points.</figcaption>
+  <figcaption>From Anthropic's contextual retrieval writeup. Contextual BM25 and reranking each cut failure further, and each tile is 5 points.</figcaption>
 </figure>
 
 The breakdown is worth more than the headline because it shows each layer still helping on top of the last. Anthropic did not claim that one chunking trick made the rest of the stack irrelevant, and the full per-domain numbers are in [Appendix II](https://assets.claude.com/5722e7658c9302d8b97a3238de1bb8e6afdf04b9.pdf).
@@ -59,11 +59,11 @@ The corpora are Anthropic's, and the averages use the embedding configuration th
 
 Without [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), contextualizing every chunk resends the same full document once per chunk. Anthropic points to caching as the fix, describing it as "reducing latency by > 2x and costs by up to 90%".
 
-The expense lands at ingestion, and query-time retrieval barely changes unless you add reranking. Every chunk still gets longer, which raises embedding cost, BM25 index size and storage, so the bill is worth paying where a retrieval miss hurts, such as a support bot citing the wrong refund policy.
+The expense lands at ingestion, and query-time retrieval barely changes unless you add reranking. Every chunk still gets longer, which raises embedding cost and index size the way any extra text in a [context window](/articles/llm-context-windows/) raises cost, so the bill is worth paying where a retrieval miss hurts, such as a support bot citing the wrong refund policy.
 
 Query-time cost has its own lever, a cache keyed on the meaning of the question, which my page on [semantic caching](/articles/semantic-caching/) tests.
 
-Static prefixes should be reused, which is the same rule that governs [context windows](/articles/llm-context-windows/) at generation time.
+Caching works because every chunk's request starts with the same full document, so the document is loaded into the cache once.
 
 ## What changed since 2024: code left, prose stayed
 
@@ -71,11 +71,11 @@ The earlier version of this article called code the cleanest use case, on the re
 
 Kapa's Matteo Bortoletto and Janis Fluri [wrote on October 26, 2026](https://www.kapa.ai/blog/retrieval-bottleneck) that "Models have become good enough at using grep that the semantic search path no longer helps coding agents in a meaningful way." Their explanation is that in code "identifiers are distinctive and spelled the same way everywhere", so a capable model can refine an exact pattern until it lands on the file.
 
-I was wrong about code, or at least right only until coding agents learned to grep. The argument got stronger for the corpora the same post says grep can't handle, where documentation, tickets and forum threads describe one concept in several vocabularies.
+I was wrong about code, or at least right only until coding agents learned to grep. The case for Contextual Retrieval got stronger for the corpora the same post says grep can't handle, where documentation, tickets and forum threads describe one concept in several vocabularies.
 
-That post also changes the order of checks before adopting the technique. Contextual Retrieval improves finding, and Kapa reports that finding is now half the problem: "Today, about half of the failed test cases are caused by search."
+Kapa's post also gives a check to run before adopting the technique, which is to find out whether your failures happen in search. Contextual Retrieval improves search, and Kapa reports that search is now half the problem: "Today, about half of the failed test cases are caused by search."
 
-The other half fail after search, when the right chunk was retrieved and then cut. The last row of Anthropic's own table said as much in 2024, since reranking cut the remaining failures by about a third, and my [reranking guide](/articles/rag-reranking/) covers that stage.
+The other half fail after search, when the right chunk was retrieved and then cut. The reranking row of Anthropic's own table said as much in 2024, since reranking cut the remaining failures by about a third, and my [reranking guide](/articles/rag-reranking/) covers that stage.
 
 ## When to skip Contextual Retrieval
 
@@ -94,7 +94,7 @@ Keep the raw chunk, generate the contextualized one at ingestion, and index the 
 1. Keep the raw chunk and its metadata.
 2. Generate contextualized chunks at ingestion time, with prompt caching on.
 3. Index the contextualized text into embeddings and BM25.
-4. Retrieve a wider candidate pool.
+4. Retrieve a wider candidate pool, as Anthropic's test did with the top 150 chunks.
 5. Add reranking when your evals show the loss is in selection.
 
-Test generation with the raw chunk, the contextualized chunk, and the note as a header over the raw body. The best retrieval artifact is not always the best generation artifact, because the note is a model's paraphrase and the answer should quote the source.
+Test generation with the raw chunk, the contextualized chunk, and the note as a header over the raw body. The text that retrieves best isn't always the text to generate from, because the note is a model's paraphrase and the answer should quote the source.

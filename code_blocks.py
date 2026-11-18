@@ -20,6 +20,7 @@ tests/test_code_blocks.py checks every Pygments token type, not just the ones in
 from __future__ import annotations
 
 import html
+import io
 import re
 
 from pygments.formatters import HtmlFormatter
@@ -127,7 +128,12 @@ class CodeBlockFormatter(HtmlFormatter):
             f'<div class="code-block code-block--{mode}" data-lang="{label}">'
             f'<div class="code-block-head"><span class="code-block-lang">{label}</span></div>'
         )
-        super().format_unencoded(tokensource, outfile)
+        # Pygments writes a bare <code>. The language goes on it as a class, which is
+        # how a screen reader's user, a highlighter or a checker learns what the block
+        # holds; a fence with no language is declared as plain text.
+        body = io.StringIO()
+        super().format_unencoded(tokensource, body)
+        outfile.write(body.getvalue().replace("<code>", f'<code class="language-{label}">', 1))
         outfile.write("</div>")
 
 
@@ -136,6 +142,9 @@ class CodeBlockFormatter(HtmlFormatter):
 # only between words or after a / . _ = ? & : , delimiter; a run of more than LONG_RUN
 # characters with no delimiter may break anywhere rather than push the column sideways.
 # Code the build doesn't mark (templates, tool pages) wraps like ordinary text.
+# Inline code declares itself as plain text, first in its class list: the accessibility
+# checker this site publishes reads the start of every <code> element's class.
+INLINE_LANGUAGE = "language-text"
 SHORT_INLINE = 24
 LONG_RUN = 28
 _PRE = re.compile(r"(<pre\b.*?</pre>)", re.S)
@@ -146,7 +155,7 @@ _PIECES = re.compile(r"[^/._=?&:,]*[/._=?&:,]+|[^/._=?&:,]+")
 def _soften(match: re.Match) -> str:
     raw = html.unescape(match.group(1))
     if len(raw) <= SHORT_INLINE:
-        return f'<code class="code-short">{match.group(1)}</code>'
+        return f'<code class="{INLINE_LANGUAGE} code-short">{match.group(1)}</code>'
     words = []
     for word in raw.split(" "):
         pieces = _PIECES.findall(word) if len(word) > 20 else [word]
@@ -156,7 +165,7 @@ def _soften(match: re.Match) -> str:
             for piece in pieces if piece
         ]
         words.append("<wbr>".join(segs))
-    return f'<code class="code-long">{" ".join(words)}</code>'
+    return f'<code class="{INLINE_LANGUAGE} code-long">{" ".join(words)}</code>'
 
 
 def soften_inline_code(content: str) -> str:
