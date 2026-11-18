@@ -125,10 +125,11 @@ def main():
                 and source.get("last_confirmed")):
             age = (datetime.date.today() - datetime.date.fromisoformat(source["last_confirmed"])).days
             if age <= MAX_UNVERIFIED_DAYS:
-                print(f"UNVERIFIED {source['id']}: host refused the fetch, last confirmed {source['last_confirmed']}")
+                reason = problems[0].split(": ", 1)[1]
+                print(f"UNVERIFIED {source['id']}: fetch failed ({reason}), last confirmed {source['last_confirmed']}")
                 unverified += 1
                 continue
-            problems = [f"STALE {source['id']}: host refused the fetch and the last confirmation, "
+            problems = [f"STALE {source['id']}: the fetch failed and the last confirmation, "
                         f"{source['last_confirmed']}, is {age} days old"]
         checked += len(source["quotes"])
         for line in problems:

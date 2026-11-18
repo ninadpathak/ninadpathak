@@ -21,7 +21,7 @@ Ask a model to reduce `(λx.λy.x) y` and there is one right answer, a function 
 
 Much larger work rests on answers a program can check. DeepMind's [AlphaProof Code announcement](https://deepmind.google/blog/introducing-alphaproof-code/) of November 10 describes agents that wrote "over six million lines of Lean" to verify Signal's protocol code, and rests the result on one sentence: "Every proof is checked by Lean to verify the agents' work."
 
-An explanation can be fluent and wrong, and a normal form is right or it isn't.
+An explanation can be fluent and wrong, and a fully reduced expression, called a normal form, is right or it isn't.
 
 A check that a script can grade is worth having in [AI agent architecture](/articles/ai-agents/), where so much else has to be judged by reading.
 
@@ -35,9 +35,9 @@ The skill is narrow, and it is one that agent work depends on. An [agent loop](/
 
 ## How do you check an answer mechanically?
 
-Run the expression through a reducer and compare normal forms.
+Run the expression through a reducer and compare the normal form it returns with the model's answer.
 
-The reducer here parses lambda terms and reduces the leftmost outermost application first. It renames variables to avoid capture and stops after 50 steps.
+The reducer here parses lambda terms and reduces the leftmost outermost application first. It renames a parameter when the argument contains a variable of the same name, which is called avoiding capture, and it stops after 50 steps.
 
 ```python
 """Normal-order beta reduction for untyped lambda calculus, with a step limit."""
@@ -174,11 +174,13 @@ Here is what `python3 reduce.py` returns for six expressions.
 (λx.x x) (λx.x x)            -> no normal form within 50 steps
 ```
 
-The direct application, the chained one and the last expression, which never finishes, are the tiers the figure below draws. The two expressions that return a renamed variable are the cases that catch careless substitution.
+`(λx.x) y` is a direct application, `((λf.λx.f x) (λy.y)) z` is a chained one, and `(λx.x x) (λx.x x)` never finishes. Those are the tiers in the figure below.
+
+The two expressions that return a renamed variable are the cases that catch careless substitution.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/lambda-calculus-ai/reduction-tiers.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/lambda-calculus-ai/reduction-tiers.narrow.svg" width="288" height="432"><img class="np-has-narrow" src="/static/images/diagrams/lambda-calculus-ai/reduction-tiers.svg" width="720" height="528" alt="Beta reduction at three levels of difficulty. A direct application reaches its normal form in one substitution. A chained application takes more than one step, keeping its bindings, before it reaches a normal form. The Omega combinator reduces to itself forever, so the correct answer is to detect that it has no normal form rather than invent a terminating one." loading="lazy" decoding="async"></picture></a>
-  <figcaption>The third tier separates a system that notices Ω never finishes from one that writes a tidy answer for it.</figcaption>
+  <figcaption>The third tier separates a system that notices (λx.x x) (λx.x x), known as Ω, never finishes from one that writes a tidy answer for it.</figcaption>
 </figure>
 
 ## Which problems separate careful substitution from pattern matching?
@@ -207,6 +209,8 @@ Generate expressions, ask each model for the normal form, and score with the red
 - Include expressions with no normal form and accept only an answer that says so. The reducer's 50-step limit is a cutoff, so raise it for long reductions that do finish.
 - Publish the expressions and the raw outputs with the scores, so a reader can rerun the check.
 
-Record the kind of error as well as the count. A capture error and a wrong claim of termination point at different weaknesses, and the [error handling guide](/articles/agent-error-handling/) covers what a wrong claim of termination looks like in a running agent.
+Record the kind of error as well as the count. A capture error and a wrong claim of termination point at different weaknesses.
+
+The [error handling guide](/articles/agent-error-handling/) covers what the termination error looks like in a running agent.
 
 Binding matters wherever a system carries values across steps, which includes the [memory systems](/articles/agent-memory-2026/) agents use between sessions. A reduction test is a cheap first filter before more expensive evaluations.

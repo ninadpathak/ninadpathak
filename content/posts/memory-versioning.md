@@ -37,7 +37,7 @@ A reviewer who asks why the agent recommended bonds finds a store that says the 
 
 With two agents writing to that store, an overwrite can also happen by accident, which [shared vs isolated memory](/articles/shared-vs-isolated-memory/) shows in a short run.
 
-Software has had the remedy for a long time. Martin Fowler's [Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html), dated December 12, 2005, describes it as ensuring "that all changes to application state are stored as a sequence of events", so that "we can also use the event log to reconstruct past states".
+Software has had the remedy, event sourcing, since at least 2005. Martin Fowler's [Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) article, dated December 12, 2005, describes it as ensuring "that all changes to application state are stored as a sequence of events", so that "we can also use the event log to reconstruct past states".
 
 ## What does an append-only memory ledger look like?
 
@@ -138,13 +138,13 @@ The two `as of` results are the audit answer. On November 10 the agent believed 
 
 ## What does the hash chain catch, and what does it miss?
 
-The chain alone catches a careless edit and misses a careful one. The run above detects a row changed in place, then reports "chain intact" for that edit once the editor has recomputed every hash down the table.
+The chain alone catches an edit to one row and misses an edit followed by recomputing every hash after it. The run above detects a row changed in place, then reports "chain intact" for that edit once the editor has recomputed every hash down the table.
 
 The chain lives in the same database as the data, so anyone who can edit a row can rewrite the chain. What makes it evidence is the anchor, a copy of the newest hash kept in a second system, in a signed export or with the auditor.
 
 The results labelled `same, checked to anchor` and `newest row deleted` use the anchor. With the anchor held outside, the rewritten chain no longer matches, and deleting the newest row is caught the same way.
 
-An earlier version of this script closed each row by writing an end time into it, and that field sat outside the hash. Moving it would have erased the November 10 answer with the chain intact, which is why this version stores no end time and derives it from the next row.
+An earlier version of this script closed each row by writing an end time into it, and that field sat outside the hash. Editing that end time would have changed what the ledger answers for November 10 and the chain would still have verified, which is why this version stores no end time and derives it from the next row.
 
 ## How do you link a memory to the reasoning behind it?
 
@@ -170,7 +170,7 @@ Keep the ledger as the record and treat the vector index as a copy that can be r
 
 That choice comes with two rules. Only the newest row for each subject is embedded for retrieval, so a superseded fact can't outrank the current one, and the index is rebuilt from the ledger when the two disagree.
 
-Frameworks separate short-lived and durable state along a similar line. LangGraph's [persistence documentation](https://docs.langchain.com/oss/python/langgraph/persistence) says its layer "gives agents short-term memory through checkpointers and long-term memory through stores", and the versioning described here applies to stores, the long-term kind.
+LangGraph's [persistence documentation](https://docs.langchain.com/oss/python/langgraph/persistence) says its layer "gives agents short-term memory through checkpointers and long-term memory through stores". The versioning described here applies to stores, the long-term kind.
 
 Version history is useful only if state survives a restart in a readable form, the subject of the guide to [serializing agent memory between sessions](/articles/memory-serialization/). Deciding what deserves a row at all is covered in [AI memory management for LLMs](/articles/ai-memory-management/).
 

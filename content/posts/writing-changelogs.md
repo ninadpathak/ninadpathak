@@ -29,7 +29,7 @@ A changelog is the page of [technical documentation](/articles/technical-documen
 
 ## How much changelog can one person read?
 
-A single reader can get through far less than a fast-moving project now publishes. The thirty days to November 16 break down like this, with every entry counted under the label it sits beneath.
+Nobody reads sixty entries a day, which is what Claude Code published in the thirty days to November 16. The entries break down like this, each counted under the label it sits beneath.
 
 ```text
 window: 2026-10-18 to 2026-11-16
@@ -47,7 +47,7 @@ Improved                 1        4
 
 The largest group is the one a reader is invited to skip, a collapsed list with a counted label such as "233 bug fixes". The five entries with no label come from four small releases, and for two of those the whole release reads "Bug fixes and reliability improvements".
 
-`python3 changelog_stats.py` produced the table, and its window is fixed so the counts hold as the page grows.
+`python3 changelog_stats.py` produced the table, and its dates are fixed, so the counts hold as the changelog grows.
 
 ```python
 """Count releases, entries and section labels in the Claude Code changelog over a 30-day window."""
@@ -93,9 +93,9 @@ for name, (used, count) in sorted(headings.items(), key=lambda kv: -kv[1][1]):
     print(f"{name:<17} {used:>8}  {count:>7}")
 ```
 
-The project knows nobody reads all of it. The page describes itself as generated from the CHANGELOG.md file in the project's GitHub repository, and says "Longer releases are grouped by type of change, with long lists of improvements and bug fixes collapsed."
+The Claude Code team knows nobody reads the whole changelog. The changelog page describes itself as generated from the CHANGELOG.md file in the project's GitHub repository, and says "Longer releases are grouped by type of change, with long lists of improvements and bug fixes collapsed."
 
-Its Added and Changed labels match two of the six in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), though the page names no format, so the resemblance is my observation. Keep a Changelog 1.1.0, which its own changelog dates to February 15, 2019, opens its principles with "Changelogs are for humans, not machines."
+Its Added and Changed labels match two of the six section names in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), a published convention for changelog files, though the page names no format, so the resemblance is my observation. Keep a Changelog 1.1.0, which its own changelog dates to February 15, 2019, opens its principles with "Changelogs are for humans, not machines."
 
 I think that is still right about who makes the upgrade decision and seven years out of date about who reads first. Fern's [State of Docs report](https://buildwithfern.com/post/state-of-docs) from November 10 says of the changelog that "Agents read it twice as much as people to understand what's changed on your platform."
 
@@ -109,7 +109,7 @@ The entry names the feature, gives both dates and states the failure a user will
 
 Put the version and date first, then every change that needs action, then the rest. Keep a Changelog states the minimum as "If you do nothing else, list deprecations, removals, and any breaking changes in your changelog."
 
-A person reading a release wants to know whether upgrading will break anything they run, and what to do if it will. The entries below, all from the same month, show how much of that one line can carry.
+A person reading a release wants to know whether upgrading will break anything they run, and what to do if it will. The entries in the table below, all from those thirty days, show how much of that answer a single line can carry.
 
 | Entry, quoted in full | Release | What a reader can decide |
 | --- | --- | --- |
@@ -150,13 +150,13 @@ That ordering is where I part from the Claude Code page, which files deprecation
 
 > Removed the `--sandbox` and `--no-sandbox` flags from `claude remote-control`, which had no effect; passing either now exits with an error. Set `sandbox.enabled` in settings to sandbox sessions
 
-A script that passed either flag started failing on that release, so the entry describes a breaking change. A reader scanning 88 entries would find it faster under its own heading.
+A script that passed either flag started failing on that release, so the entry describes a breaking change. A reader scanning the 88 entries in that release would find it faster under its own heading.
 
 Leave out a heading that has nothing under it. The types are a fixed vocabulary, and a release uses the ones it needs.
 
 ### Keep an Unreleased section
 
-Keep a Changelog recommends it in one line: "Keep an Unreleased section at the top to track upcoming changes." Contributors add an entry there with the change, and at release time the section moves under a version and a date.
+Keep a Changelog's advice is one line: "Keep an Unreleased section at the top to track upcoming changes." Contributors add an entry there with the change, and at release time the section moves under a version and a date.
 
 ### Mark yanked releases
 
@@ -170,7 +170,7 @@ Anyone who installed the version can then find out why it was pulled and which r
 
 ## Should the version number agree with the entry?
 
-Yes, wherever the project makes a versioning promise. [Semantic Versioning](https://semver.org/) defines each part of `MAJOR.MINOR.PATCH` by compatibility, and its summary gives the first as "MAJOR version when you make incompatible API changes".
+Yes, wherever the project makes a versioning promise. [Semantic Versioning](https://semver.org/) defines each part of `MAJOR.MINOR.PATCH` by compatibility, and its summary says to increment the "MAJOR version when you make incompatible API changes".
 
 Under that promise a removed flag in a patch release contradicts the number before anyone reads the notes. Keep a Changelog's principles include "Mention whether you follow Semantic Versioning.", and the reason is that a reader treats the number as a claim.
 
@@ -180,7 +180,7 @@ Claude Code's changelog page never mentions Semantic Versioning, and all 20 rele
 
 A deprecation entry should name the feature and its replacement, give the removal date, and link to the migration steps. The fast mode entry has all of that except the link.
 
-Semantic Versioning asks for the same order in its FAQ: "Before you completely remove the functionality in a new major release there should be at least one minor release that contains the deprecation". Keep a Changelog describes the reader's side of it, an upgrade to the version that lists deprecations followed by an upgrade to "the version where the deprecations become removals."
+Semantic Versioning asks for deprecation before removal in its FAQ: "Before you completely remove the functionality in a new major release there should be at least one minor release that contains the deprecation". Keep a Changelog describes the reader's side of it, an upgrade to the version that lists deprecations followed by an upgrade to "the version where the deprecations become removals."
 
 When the removal ships, its entry should link back to the deprecation. A reader who missed the first notice can then see when it was given.
 
@@ -227,7 +227,7 @@ A last check is to read only the headings and the first words of each bullet. If
 
 ## Worked example: regroup one real release
 
-Version 2.1.323 of Claude Code, released on November 12, lists four entries under "Changed" that ask something of the reader. They are quoted exactly below, and the headings and their order are the only things I changed.
+Version 2.1.323 of Claude Code, released on November 12, lists four entries under "Changed" that break, remove or deprecate something. They are quoted exactly below, and the headings and their order are the only things I changed.
 
 ```markdown
 ## [2.1.323] - 2026-11-12
@@ -254,7 +254,7 @@ Version 2.1.323 of Claude Code, released on November 12, lists four entries unde
 
 The original release has 294 entries, and these four were spread through a "Changed" list beside message limits and permission prompts. Regrouped, a reader behind a corporate proxy sees the line that affects them in the first screen.
 
-The exercise also shows what a heading can't fix. The deprecation entry gives no removal date and no replacement, and a heading that says Deprecated makes that absence more obvious.
+Regrouping doesn't repair a thin entry. The deprecation entry gives no removal date and no replacement, and under a Deprecated heading the missing date is more obvious.
 
 A changelog keeps the full sequence of changes, and [release notes explain one release](/articles/writing-release-notes/) in enough depth for a developer to act on it. The [release notes template](/articles/release-notes-template/) has the outline for that page.
 

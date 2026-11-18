@@ -17,11 +17,13 @@ slug: short-term-agent-memory
 updated: 2026-11-17
 ---
 
-Short-term memory for an AI agent is whatever sits in the context window during the current run, and on Anthropic's API, for one, the step that manages it can now run on the server. A hand-written sliding window with a scoring function for each message, which this page used to teach, is the wrong place to start on an API that does compaction for you.
+Short-term memory for an AI agent is whatever sits in the context window during the current run. When the window fills, older turns get replaced with a summary, a step called compaction, and on Anthropic's API that step can now run on the server.
 
-The model reads this part of [AI agent memory](/articles/agent-memory/) directly, and everything else has to be loaded into it.
+A hand-written sliding window with a scoring function for each message, which this page used to teach, is the wrong place to start on an API that does compaction for you.
 
-With compaction done by the tool, the risk is now a bad summary. Claude Code 2.1.323, released on November 12, [fixed a bug](https://code.claude.com/docs/en/changelog) in which running `/compact` a second time could end up "summarizing away a message that Claude had not answered yet".
+Short-term memory is the only part of [AI agent memory](/articles/agent-memory/) the model reads directly, and anything stored elsewhere has to be loaded into the context window first.
+
+Once a product writes the summary for you, the risk is a bad summary. Claude Code 2.1.323, released on November 12, [fixed a bug](https://code.claude.com/docs/en/changelog) in which running `/compact` a second time could end up "summarizing away a message that Claude had not answered yet".
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/short-term-agent-memory/context-fill.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/short-term-agent-memory/context-fill.narrow.svg" width="288" height="632"><img class="np-has-narrow" src="/static/images/diagrams/short-term-agent-memory/context-fill.svg" width="720" height="424" alt="A fixed-size context window is filled by four inputs: the system prompt, the conversation history, retrieved documents, and the agent's scratchpad. Whatever capacity is left is the headroom for the model's next response and tool calls. When it overflows, naive truncation cuts the oldest messages first." loading="lazy" decoding="async"></picture></a>
@@ -97,9 +99,11 @@ The plain window keeps the newest fourteen messages, the oldest of them turn 27,
 
 Compaction keeps a model-written summary of the older turns and loses whatever the summary leaves out. Anthropic's [compaction documentation](https://platform.claude.com/docs/en/build-with-claude/compaction) says "Compaction replaces the older turns of a conversation with a summary that Claude writes on the server, so you need no summarization code of your own."
 
-The documentation gives a second reason to use compaction, saying it keeps the active context small "because response quality degrades as a conversation grows". Both of its modes "are in beta".
+The documentation gives a second reason to use compaction, saying it keeps the active context small "because response quality degrades as a conversation grows".
 
-The page's own advice is "Use on-demand compaction wherever it is available", a mode it describes as "A compaction loop that requests the summary and swaps it in". The other mode fires when "input tokens reach the trigger you set" and is the one that takes "One parameter on your ordinary requests".
+Compaction has two modes, on demand and at a token threshold, and the page says both "are in beta". Its own advice is "Use on-demand compaction wherever it is available".
+
+On demand, your code runs "A compaction loop that requests the summary and swaps it in". At a token threshold, compaction fires when "input tokens reach the trigger you set" and takes "One parameter on your ordinary requests".
 
 Either way the summarizer is no longer code you write. I think that is the right default, and Claude Code's changelog is a useful record of how the step fails.
 
@@ -109,7 +113,7 @@ Both bugs lost recent material, the part a summary is supposed to protect. A sum
 
 ## How do you keep an instruction from being lost?
 
-Put it where compaction doesn't reach, and keep the raw history so a summary can be checked. Standing instructions belong in the system prompt or an instruction file, which is reloaded whole on every request.
+Put the instruction where compaction doesn't reach, and keep the raw history so a summary can be checked. Standing instructions belong in the system prompt or an instruction file, which is reloaded whole on every request.
 
 The compaction page lists two options for everything else in the conversation. "Compaction that keeps recent turns" leaves the last few turns word for word, and a custom summarization prompt is for the case "when the default summary drops something a later turn needs."
 
@@ -117,9 +121,9 @@ For facts that come up mid-conversation, the habits worth copying come from repl
 
 Another commenter ends each session by asking the agent to "prep a handoff so we can resume from here in a fresh session". A handoff note is short-term memory written down on purpose, by the model before the full context is gone.
 
-A third practice in the thread is less comfortable: "at the end ask the agent to summarize what it learned and write it down." Anything written that way has crossed into long-term memory, and a note that was wrong when it was written will be loaded as fact next time.
+A third practice in the thread carries more risk: "at the end ask the agent to summarize what it learned and write it down." Anything written that way has crossed into long-term memory, and a note that was wrong when it was written will be loaded as fact next time.
 
-The commenter's answer is to keep decisions as records with a state such as approved or rejected, and both this commenter and the previous one link tools of their own.
+The commenter who writes those notes also keeps decisions as records with a state such as approved or rejected. That commenter and the one who asks for a handoff each link a tool they built.
 
 ## How does short-term memory relate to long-term memory?
 

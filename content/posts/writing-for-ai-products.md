@@ -23,11 +23,11 @@ updated: 2026-11-17
 
 A thread on Hacker News on November 8 gathered user reports that Claude Opus 5.5 had been "nerfed", and the reply that stayed with me asked a documentation question: ["Do you run evals as a matter of course?"](https://news.ycombinator.com/item?id=50420515)
 
-The commenter's next sentence is the awkward one for anyone who does: "Everyone I know that does shows high levels of variance across them under the best case." The comment allows that labs sometimes downgrade a model, and ends that "without any measurement it's a non-interesting assertion".
+The commenter's next sentence says evals don't settle it either: "Everyone I know that does shows high levels of variance across them under the best case." The comment allows that labs sometimes downgrade a model, and ends that "without any measurement it's a non-interesting assertion".
 
 Documenting that variance is the hard part of [developer content](/articles/developer-experience/) for an AI product.
 
-Technical writing for AI products exists to make an argument like the one in that thread answerable. A reader of ordinary API docs needs to know what a call returns, and a reader of AI product docs also needs to know what stays fixed behind a model name and how to check it.
+Technical writing for AI products exists so that a claim that a model got worse can be checked. A reader of ordinary API docs needs to know what a call returns, and a reader of AI product docs also needs to know what stays fixed behind a model name and how to check it.
 
 ## What does a model name promise in the docs?
 
@@ -52,7 +52,7 @@ A writer working from that standard documents which fields the schema guarantees
   <figcaption>Show the request, the contract, a refusal, and the caveat. An example without the refusal and the caveat works in a demo and fails in production.</figcaption>
 </figure>
 
-The pattern in the figure is the smallest complete example for an AI endpoint. It has the request, the contract, one refusal and the caveat that changes how the caller builds.
+The pattern in the figure is the smallest complete example for an AI endpoint. The caveat is whatever changes the caller's code in production, say that output varies between runs, so every response needs validating.
 
 ## What makes a code sample trustworthy in AI docs?
 
@@ -62,7 +62,7 @@ Google's [technical writing course](https://developers.google.com/tech-writing/t
 
 An AI sample needs one thing more, because the same code returns different text next quarter. Print the output the sample produced, with the model snapshot and the date, so a reader whose result differs can tell a changed model from a broken integration.
 
-A docs page can also ship a small eval, a set of prompts with expected properties, which gives every user the measurement that commenter asked for. The variance that commenter described decides how many runs the eval needs.
+A docs page can also ship a small eval, a set of prompts with expected properties, which gives every user the measurement the Hacker News commenter asked for. The variance in that comment decides how many runs the eval needs.
 
 My arithmetic for a prompt set scored pass or fail at a true rate of 80% gives a standard error near nine points at 20 runs and 2.8 points at 200. A handful of prompts run once can't show a five-point drop, so the page should say how many runs its numbers rest on.
 
@@ -82,7 +82,7 @@ Ask for evidence in five areas before looking at a general portfolio.
 4. A migration note for a model change that says what will behave differently.
 5. A record of getting the real contract from engineers, in place of a paraphrase of the launch brief.
 
-A further quality rarely appears in a job description, which is judgment about what to leave out. Strong AI writing omits guarantees the product can't keep and states uncertainty where the behavior is experimental.
+Judgment about what to leave out rarely appears in a job description. Strong AI writing omits guarantees the product can't keep and states uncertainty where the behavior is experimental.
 
 The habits carry over from older developer products. [Stripe's engineering blog](/articles/stripe-technical-blog/) is my reference for explaining the hard part to the person integrating, and [documentation for developer tools](/articles/devtools-documentation/) names the pages to fix first on a startup's docs site.
 

@@ -16,15 +16,17 @@ slug: voice-agent-memory
 updated: 2026-11-17
 ---
 
-Phone agents got a shorter path to production this month. OpenAI's [SIP guide](https://developers.openai.com/api/docs/guides/voice-sip) now says "Outbound SIP calling is available to all organizations through the Live API", a change that reached Hacker News on November 6, and every agent placed on a call inherits a problem text chatbots never had.
+OpenAI's Live API now lets any organization place outbound phone calls from a voice agent. Its [SIP guide](https://developers.openai.com/api/docs/guides/voice-sip) says "Outbound SIP calling is available to all organizations through the Live API", a change that reached Hacker News on November 6.
 
-A caller can interrupt, and a voice agent can have generated a full sentence when it is cut off after the seventh word. Memory for voice AI agents has the layers a text agent has, plus one rule: the record of the agent's side has to match what was played, because a reader sees every word the model wrote and a caller hears only part.
+Every agent placed on a call inherits a problem text chatbots never had.
+
+A caller can interrupt, and a voice agent can have generated a full sentence when it is cut off after the seventh word. Memory for voice AI agents has the two layers a text agent has, the conversation history within a call and the facts stored between calls, plus one rule: the record of the agent's side has to match what was played, because a reader sees every word the model wrote and a caller hears only part.
 
 Everything else follows the general design of [AI agent memory](/articles/agent-memory/).
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/voice-agent-memory/voice-pipeline.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/voice-agent-memory/voice-pipeline.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/voice-agent-memory/voice-pipeline.svg" width="720" height="392" alt="A caller's speech goes through speech-to-text, then the language model, then text-to-speech back to the caller. Stored memory is drawn as a dashed input to the model." loading="lazy" decoding="async"></picture></a>
-  <figcaption>A voice pipeline. What the model generates and what the caller hears part ways at the last stage, text-to-speech.</figcaption>
+  <figcaption>What the model generates and what the caller hears part ways at the last stage, text-to-speech.</figcaption>
 </figure>
 
 ## What can a text chatbot ignore that a voice agent can't?
@@ -37,7 +39,7 @@ The guide gives the reason in the caller's words: the model should know where it
 
 ## How do voice frameworks record what the caller heard?
 
-Voice frameworks differ, and the difference decides what ends up in memory. The stacks I read fall into two groups: one keeps only the played audio, and the other keeps the text of the part the caller heard.
+The stacks whose docs I read fall into two groups. OpenAI's Realtime API keeps only the played audio, and LiveKit Agents and Pipecat keep the text of the part the caller heard.
 
 | Stack | What is kept after an interruption |
 | --- | --- |
@@ -100,11 +102,11 @@ The voice-specific risk is a wrong entry more than a missing one. A turn recorde
 
 ## What should a voice agent remember across calls?
 
-A voice agent should remember facts the caller would expect a person to remember, written after the call from a history that matches what was played. On LiveKit or Pipecat that history is the framework's own.
+A voice agent should remember facts the caller would expect a person to remember, written after the call from a history that matches what was played. LiveKit and Pipecat already keep that history for you.
 
-On the Realtime API it isn't available as text, so the choice is between transcribing the played audio and accepting that long-term notes are built from a transcript with holes. I'd transcribe the played audio for anything a caller will be held to, such as a booking.
+On the Realtime API the played part isn't available as text, so the choice is between transcribing the played audio and accepting that long-term notes are built from a transcript with holes. I'd transcribe the played audio for anything a caller will be held to, such as a booking.
 
-Retrieval has a constraint text doesn't share, since a lookup in the middle of a turn is silence on the line. [Tracing voice agent latency](/articles/voice-agent-latency/) follows where that time goes, and [AI memory management for LLMs](/articles/ai-memory-management/) covers what to store.
+Retrieval in a voice call has a time limit a text chat doesn't, since a lookup in the middle of a turn is silence on the line. [Tracing voice agent latency](/articles/voice-agent-latency/) follows where that time goes, and [AI memory management for LLMs](/articles/ai-memory-management/) covers what to store.
 
 ## FAQ
 
