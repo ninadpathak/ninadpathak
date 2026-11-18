@@ -21,7 +21,7 @@ Error handling in production AI agents turns on one question: after a tool call 
 
 The [fallacies of distributed computing](https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing), a list L Peter Deutsch assembled at Sun Microsystems in 1994, begins with "The network is reliable", and an agent that calls tools over a network meets every item on it.
 
-What an agent adds is the reader of the error. A model shown "connection timed out" after a payment call has to guess whether the customer was charged, and nobody can unit-test that guess.
+What an agent adds is that a model reads the error. A model shown "connection timed out" after a payment call has to guess whether the customer was charged, and nobody can unit-test that guess.
 
 Within [AI agent architecture](/articles/ai-agents/), error handling is the code that takes such guesses away from the model.
 
@@ -32,21 +32,21 @@ Within [AI agent architecture](/articles/ai-agents/), error handling is the code
 
 ## What do the protocols tell the model after a failure?
 
-More than a bare error flag, and less than a retry decision. Anthropic's [tool use documentation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls) gives a tool result one field for it, "is_error (optional): Set to true if the tool execution resulted in an error.", and then advice on the text that goes with the flag.
+Anthropic's tool-use API and the Model Context Protocol both tell the model more than a bare error flag and less than a retry decision. Anthropic's [tool use documentation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls) gives a tool result one field for marking a failure, "is_error (optional): Set to true if the tool execution resulted in an error.", and then advice on the text that goes with the flag.
 
 "Write instructive error messages", the page says, and "include what went wrong and what Claude should try next". The current [Model Context Protocol specification](https://modelcontextprotocol.io/specification/2026-07-28/server/tools), the revision of July 28, 2026, takes the same line, describing tool execution errors as "actionable feedback that language models can use to self-correct and retry with adjusted parameters".
 
 That advice fits an error the model caused. A date in the wrong format is fixed by sending a better one, and the model is the right party to do it.
 
-It fits badly when the fault is on the far side of the call. A timeout after a charge has no better parameters to try, and the right move may be to do nothing.
+It fits badly when the fault is in the tool or the network. A timeout after a charge has no better parameters to try, and the right move may be to do nothing.
 
 ## Does the protocol say whether a call is safe to repeat?
 
-It can, as a hint. The MCP [schema](https://modelcontextprotocol.io/specification/2026-07-28/schema) lets a tool carry an annotation named `idempotentHint`, which when true means "calling the tool repeatedly with the same arguments will have no additional effect on its environment."
+MCP can say so, as a hint. The MCP [schema](https://modelcontextprotocol.io/specification/2026-07-28/schema) lets a tool carry an annotation named `idempotentHint`, which when true means "calling the tool repeatedly with the same arguments will have no additional effect on its environment."
 
-The schema then limits what a client may do with it. "Clients should never make tool use decisions based on ToolAnnotations received from untrusted servers."
+The schema then limits what a client may do with the hint. "Clients should never make tool use decisions based on ToolAnnotations received from untrusted servers."
 
-So the protocol carries the knowledge when the tool's author supplies it, and tells the client to distrust it unless it trusts the author. The decision to retry stays with the harness, which is the only party that knows which servers it trusts.
+So MCP passes along the tool author's claim that a call is safe to repeat, and tells the client to ignore that claim unless the client trusts the server. The decision to retry stays with the harness, the code that runs the model and calls its tools, because only the harness knows which servers it trusts.
 
 ## How should an agent classify errors?
 
@@ -62,9 +62,9 @@ The ambiguous kind is the dangerous one, and it has to be the default. A classif
 
 ## What does an idempotency key change?
 
-It makes an ambiguous failure safe to retry, because the server recognises the repeat and returns the first result. Stripe's [API reference](https://docs.stripe.com/api/idempotent_requests) describes the behaviour for its v1 API: "Retries with the same key return the saved response, including 500 errors."
+An idempotency key makes an ambiguous failure safe to retry, because the server recognises the repeat and returns the first result. Stripe's [API reference](https://docs.stripe.com/api/idempotent_requests) describes the behaviour for its v1 API: "Retries with the same key return the saved response, including 500 errors."
 
-The simulation below calls a payment API that charges the customer and then fails on the first call. It tries a timeout under each retry policy, then an error the classifier has never seen.
+The simulation below calls a payment API that charges the customer and then fails on the first call. It tries a timeout under each retry policy (retry blindly, classify with no key, classify with a key), then an error the classifier has never seen.
 
 ```python
 """A charge tool that fails after it has charged, called four ways."""
@@ -155,7 +155,9 @@ The ambiguous timeout is one of five in the figure above. The list is my own gro
 
 ## What should the model be told after a failure?
 
-Tell it what happened and what it is allowed to do next, in a result the harness wrote. That is Anthropic's instruction about error messages applied by the harness: "The charge may have gone through and has not been retried" is a statement the model can act on, and a stack trace is an invitation to guess.
+Tell the model what happened and what it is allowed to do next, in a result the harness wrote. That is Anthropic's instruction about error messages, written by the harness.
+
+A result that says, for example, "The charge may have gone through and has not been retried" gives the model something to act on, and a stack trace invites a guess.
 
 Guessing is the largest single cause in the one breakdown of failed agent runs I know of. [Real-SWE 1.1](https://withspecific.com/blog/real-swe), an October benchmark of coding agents, classified its failed runs and found the biggest group to be the unverified assumption, a run that "Builds on a guess about the system instead of checking it in the workspace."
 

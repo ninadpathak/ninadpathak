@@ -15,7 +15,7 @@ updated: 2026-11-17
 
 An auditor asks two things about any decision an agent made: what the agent knew at that moment, and what put each fact there. Memory versioning is how a store answers, by keeping every version of a fact with the time it held and the source that produced it, and never overwriting one.
 
-Among the parts of [AI agent memory](/articles/agent-memory/), it is the one built for people outside the team.
+Memory versioning is the part of [AI agent memory](/articles/agent-memory/) built for people outside the team, such as auditors.
 
 Tools for coding agents are starting to ask a similar question about commands. Stroq, shown on Hacker News on November 5, scans an agent's sessions and promises to ["trace risky commands to the content that dictated them"](https://github.com/AGGIB/Stroq), and I use it here only as an analogy, since it guards against prompt injection and stores no memory.
 
@@ -37,11 +37,11 @@ A reviewer who asks why the agent recommended bonds finds a store that says the 
 
 With two agents writing to that store, an overwrite can also happen by accident, which [shared vs isolated memory](/articles/shared-vs-isolated-memory/) shows in a short run.
 
-Software has had the remedy for a long time. Martin Fowler's [Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html), dated December 12, 2005, describes it as ensuring "that all changes to application state are stored as a sequence of events", so that "we can also use the event log to reconstruct past states".
+Software has had the remedy, event sourcing, since at least 2005. Martin Fowler's [Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) article, dated December 12, 2005, describes it as ensuring "that all changes to application state are stored as a sequence of events", so that "we can also use the event log to reconstruct past states".
 
 ## What does an append-only memory ledger look like?
 
-It is a table in which each change adds a row and no row is updated. A version ends where the next one for the same subject begins, and each row carries a hash of its content and of the row before.
+An append-only memory ledger is a table in which each change adds a row and no row is updated. A version ends where the next one for the same subject begins, and each row carries a hash of its content and of the row before.
 
 ```python
 """An append-only memory ledger in SQLite: as-of queries, a hash chain, and what the chain misses."""
@@ -129,7 +129,7 @@ same, checked to anchor: chain is consistent, but its newest hash does not match
 newest row deleted:      chain is consistent, but its newest hash does not match the anchor
 ```
 
-The first two results are the audit answer. On November 10 the agent believed the user's tolerance was low, and the stored source says why.
+The two `as of` results are the audit answer. On November 10 the agent believed the user's tolerance was low, and the stored source says why.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/memory-versioning/append-vs-overwrite.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/memory-versioning/append-vs-overwrite.narrow.svg" width="288" height="1000"><img class="np-has-narrow" src="/static/images/diagrams/memory-versioning/append-vs-overwrite.svg" width="720" height="544" alt="A memory changed in either of two ways. The append-only ledger inserts a new row and leaves the old ones in place, so v1, v2, and v3 all remain and any point in time can be recovered. A destructive update overwrites the row: v2 replaces v1, and the prior state is gone." loading="lazy" decoding="async"></picture></a>
@@ -138,13 +138,13 @@ The first two results are the audit answer. On November 10 the agent believed th
 
 ## What does the hash chain catch, and what does it miss?
 
-The chain alone catches a careless edit and misses a careful one. The run above detects a row changed in place, then reports "chain intact" for that edit once the editor has recomputed every hash down the table.
+The chain alone catches an edit to one row and misses an edit followed by recomputing every hash after it. The run above detects a row changed in place, then reports "chain intact" for that edit once the editor has recomputed every hash down the table.
 
 The chain lives in the same database as the data, so anyone who can edit a row can rewrite the chain. What makes it evidence is the anchor, a copy of the newest hash kept in a second system, in a signed export or with the auditor.
 
-The last two results use it. With the anchor held outside, the rewritten chain no longer matches, and deleting the newest row is caught the same way.
+The results labelled `same, checked to anchor` and `newest row deleted` use the anchor. With the anchor held outside, the rewritten chain no longer matches, and deleting the newest row is caught the same way.
 
-An earlier version of this script closed each row by writing an end time into it, and that field sat outside the hash. Moving it would have erased the November 10 answer with the chain intact, which is why this version stores no end time and derives it from the next row.
+An earlier version of this script closed each row by writing an end time into it, and that field sat outside the hash. Editing that end time would have changed what the ledger answers for November 10 and the chain would still have verified, which is why this version stores no end time and derives it from the next row.
 
 ## How do you link a memory to the reasoning behind it?
 
@@ -168,15 +168,15 @@ The article is about high-risk systems and about event logs, and it doesn't ment
 
 Keep the ledger as the record and treat the vector index as a copy that can be rebuilt from it. That is a design choice on my part, made because an index built for similarity search stores vectors and has no field for which version of a fact is current.
 
-A pair of rules follows. Only the newest row for each subject is embedded for retrieval, so a superseded fact can't outrank the current one, and the index is rebuilt from the ledger when the two disagree.
+That choice comes with two rules. Only the newest row for each subject is embedded for retrieval, so a superseded fact can't outrank the current one, and the index is rebuilt from the ledger when the two disagree.
 
-Frameworks separate short-lived and durable state along a similar line. LangGraph's [persistence documentation](https://docs.langchain.com/oss/python/langgraph/persistence) says its layer "gives agents short-term memory through checkpointers and long-term memory through stores", and the versioning described here applies to the second kind.
+LangGraph's [persistence documentation](https://docs.langchain.com/oss/python/langgraph/persistence) says its layer "gives agents short-term memory through checkpointers and long-term memory through stores". The versioning described here applies to stores, the long-term kind.
 
 Version history is useful only if state survives a restart in a readable form, the subject of the guide to [serializing agent memory between sessions](/articles/memory-serialization/). Deciding what deserves a row at all is covered in [AI memory management for LLMs](/articles/ai-memory-management/).
 
 ## What does versioning cost?
 
-It costs storage and a filter on every read. A fact occupies one row for every version it has had, and every query has to say whether it wants the current row or the row for a past date.
+Versioning costs storage and a filter on every read. A fact occupies one row for every version it has had, and every query has to say whether it wants the current row or the row for a past date.
 
 The anchor adds an operational cost of its own, since some second system has to receive the newest hash after each write or each batch. That is the price of a record someone outside the team can trust.
 
@@ -192,4 +192,4 @@ For a single agent that keeps its memory as files, yes, since commits give versi
 
 **Is the hash chain proof that nobody edited a row?**
 
-No, and the run above shows why. It is proof only together with a copy of the newest hash that the editor could not have changed.
+No, and the run above shows why. The chain is proof only together with a copy of the newest hash that the editor could not have changed.

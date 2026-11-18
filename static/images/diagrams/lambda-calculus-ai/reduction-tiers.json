@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/lambda-calculus-ai/reduction-tiers.mmd",
-  "hash": "fff892c81e0e2e63",
+  "hash": "fa90a4c6749c1e3d",
   "pele": "1.8.0",
   "width": 720,
   "height": 528,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "Beta reduction at three levels of difficulty. A direct application reaches its normal form in one substitution. A chained application takes more than one step, keeping its bindings, before it reaches a normal form. The Omega combinator reduces to itself forever, so the correct answer is to detect that it has no normal form rather than invent a terminating one.",
-  "caption": "The third tier separates a system that notices Ω never finishes from one that writes a tidy answer for it.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/lambda-calculus-ai/reduction-tiers.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/lambda-calculus-ai/reduction-tiers.narrow.svg\" width=\"288\" height=\"432\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/lambda-calculus-ai/reduction-tiers.svg\" width=\"720\" height=\"528\" alt=\"Beta reduction at three levels of difficulty. A direct application reaches its normal form in one substitution. A chained application takes more than one step, keeping its bindings, before it reaches a normal form. The Omega combinator reduces to itself forever, so the correct answer is to detect that it has no normal form rather than invent a terminating one.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The third tier separates a system that notices Ω never finishes from one that writes a tidy answer for it.</figcaption>\n</figure>"
+  "caption": "The third tier separates a system that notices (λx.x x) (λx.x x), known as Ω, never finishes from one that writes a tidy answer for it.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/lambda-calculus-ai/reduction-tiers.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/lambda-calculus-ai/reduction-tiers.narrow.svg\" width=\"288\" height=\"432\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/lambda-calculus-ai/reduction-tiers.svg\" width=\"720\" height=\"528\" alt=\"Beta reduction at three levels of difficulty. A direct application reaches its normal form in one substitution. A chained application takes more than one step, keeping its bindings, before it reaches a normal form. The Omega combinator reduces to itself forever, so the correct answer is to detect that it has no normal form rather than invent a terminating one.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The third tier separates a system that notices (λx.x x) (λx.x x), known as Ω, never finishes from one that writes a tidy answer for it.</figcaption>\n</figure>"
 }

@@ -8,7 +8,7 @@ Comparison ignores HTML tags, runs of whitespace and curly versus straight quote
 and nothing else. Inline tags such as <code> are removed without adding a space. A fetch failure or a missing quote exits non-zero, so a PASS means
 every quote was found in a page fetched during this run.
 """
-import datetime, gzip, html, json, pathlib, re, subprocess, sys, time, urllib.request
+import datetime, gzip, html, json, pathlib, re, subprocess, sys, threading, time, urllib.request
 
 HERE = pathlib.Path(__file__).parent
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -16,6 +16,7 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 
 
 RETRY_PAUSE_SECONDS = 20
+FETCH_DEADLINE_SECONDS = 180
 MAX_UNVERIFIED_DAYS = 30
 
 
@@ -65,10 +66,34 @@ def fetch(url):
     return data.decode("utf-8", "replace")
 
 
+def fetch_with_deadline(url):
+    """Fetch in a worker thread and give up after FETCH_DEADLINE_SECONDS.
+
+    The socket timeout covers each read, so a host that sends a few bytes at a time can
+    hold a fetch open for an hour. The deadline turns that into an ordinary fetch failure.
+    """
+    result = {}
+
+    def work():
+        try:
+            result["page"] = fetch(url)
+        except Exception as error:  # reported by the caller
+            result["error"] = error
+
+    worker = threading.Thread(target=work, daemon=True)
+    worker.start()
+    worker.join(FETCH_DEADLINE_SECONDS)
+    if worker.is_alive():
+        raise TimeoutError(f"no complete response within {FETCH_DEADLINE_SECONDS} seconds")
+    if "error" in result:
+        raise result["error"]
+    return result["page"]
+
+
 def check_source(source):
     """Return the problem lines for one source: a fetch failure or each missing quote."""
     try:
-        page = norm(fetch(source["url"]))
+        page = norm(fetch_with_deadline(source["url"]))
     except Exception as error:
         return [f"FETCH FAIL {source['id']}: {error}"]
     return [f"MISSING {source['id']}: {quote}" for quote in source["quotes"]
@@ -100,10 +125,11 @@ def main():
                 and source.get("last_confirmed")):
             age = (datetime.date.today() - datetime.date.fromisoformat(source["last_confirmed"])).days
             if age <= MAX_UNVERIFIED_DAYS:
-                print(f"UNVERIFIED {source['id']}: host refused the fetch, last confirmed {source['last_confirmed']}")
+                reason = problems[0].split(": ", 1)[1]
+                print(f"UNVERIFIED {source['id']}: fetch failed ({reason}), last confirmed {source['last_confirmed']}")
                 unverified += 1
                 continue
-            problems = [f"STALE {source['id']}: host refused the fetch and the last confirmation, "
+            problems = [f"STALE {source['id']}: the fetch failed and the last confirmation, "
                         f"{source['last_confirmed']}, is {age} days old"]
         checked += len(source["quotes"])
         for line in problems:
