@@ -13,21 +13,22 @@ work_note: "This post is about deciding what goes in the public docs and what st
 takeaways:
 - Choose internal or external documentation by the reader's task, not by the file's
   technical depth.
-- Split incidents, architecture, authentication, and releases when public guidance
-  and private operating context have different audiences.
-- Give every page an owner and an update trigger so public product guidance and private
-  operating knowledge stay aligned.
+- Split a subject such as authentication into a public task page and a private runbook
+  when customers and operators both need it.
+- Give every page an owner and a change that triggers its review.
 title: 'Internal vs. External Documentation: What Belongs Where'
 updated: 2026-11-17
 ---
 
-Internal documentation helps your team operate the system, and external documentation helps customers, partners and public developers use the supported product. When a subject has both readers, publish a public task page, keep a separate private operating record, and classify the subject as **internal**, **external** or **split**.
+Internal documentation helps your team operate the system, and external documentation helps customers, partners and public developers use the supported product. When a subject has both readers, write two pages: a public one for the customer's task and a private one for the team that runs the system.
+
+The rest of the page sorts every subject into **internal**, **external** or **split**. Authentication is the split I'll use as the example, with a public page for the OAuth flow and its error codes and a private key-rotation runbook behind it.
 
 Where the line between internal and external falls is one of the first decisions in any set of [technical documentation](/articles/technical-documentation/).
 
 That line used to follow access, and a file that surfaced this autumn shows why access no longer settles it. The XScreenSaver source release ships an [AGENTS.md](https://github.com/Zygo/xscreensaver/blob/master/AGENTS.md), mirrored to GitHub on September 4, that opens "You are in a project that does not want AI contributions of any kind."
 
-A contribution policy is about as internal as documentation gets, and this one sits in a public tarball addressed to a reader who is neither a team member nor a customer. Coding agents are that third reader, and the section on agent instructions below is where I think the old table needs a new row.
+A contribution policy is about as internal as documentation gets, and this one sits in a public tarball addressed to a reader who is neither a team member nor a customer. Coding agents are that third reader, and the section on agent instructions below covers where their files belong.
 
 ## Internal vs. external documentation: choose by reader task
 
@@ -35,14 +36,23 @@ Google's [technical writing guidance on audience](https://developers.google.com/
 
 Ask four questions:
 
-1. Does someone outside the organization need this information to evaluate, use, integrate with, administer, or recover the product?
-2. Does the subject contain credentials, private topology, unpublished plans, exploit detail, personnel information, or candid incident analysis?
+1. Does someone outside the organization need this to use the product, at any point from evaluating it to recovering from a failure?
+2. Does the subject contain anything that must stay private, such as credentials or a candid incident analysis?
 3. Does an internal operator need implementation context that an external reader does not?
 4. Who owns the source of truth, and which product or process change makes it stale?
 
+For question two, private material means:
+
+- Credentials
+- The private network layout
+- Unpublished plans
+- Exploit detail
+- Personnel information
+- Candid incident analysis
+
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/internal-vs-external-docs/documentation-placement.narrow.svg" width="288" height="792"><img class="np-has-narrow" src="/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg" width="720" height="672" alt="Documentation placement decision tree. If no outside reader needs the information, keep it internal when an operator needs it; otherwise review whether the page has a task. If an outside reader needs it, split it into a public task page and a private record when private context remains; otherwise publish it externally." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Each path ends in internal, review, split, or external documentation. A split is two documents, a public task page and a private record, and never a redacted internal page.</figcaption>
+  <figcaption>Each path ends in one of four results: internal, external, split, or review, which means nobody has a task for the page yet. A split is two documents, a public task page and a private record, and never a redacted internal page.</figcaption>
 </figure>
 
 ## Internal vs. external documentation comparison
@@ -50,44 +60,49 @@ Ask four questions:
 | Signal | Internal documentation | External documentation | Split documentation |
 | --- | --- | --- | --- |
 | Primary reader | Employee, contractor, or approved operator | Customer, partner, public developer, or product administrator | Both groups |
-| Reader task | Build, deploy, operate, support, decide, or change the system | Evaluate, start, integrate, configure, use, migrate, or recover | Complete an external task while preserving private operating context |
-| Typical detail | Architecture decisions, private dependencies, internal commands, staffing, controls, and candid analysis | Supported behavior, prerequisites, procedures, examples, limits, errors, and recovery | Public contract on one side, implementation and sensitive context on the other |
+| Reader task | Deploy the billing service | Add a webhook endpoint | Rotate an API key: the customer follows the public steps, and the team follows the runbook |
+| Typical detail | Why the team chose a queue, which dashboards to watch | Request fields, error codes, rate limits | The OAuth flow in public, key handling in private |
 | Access | Identity and role based | Public or customer authenticated | Separate access and separate documents |
-| Update trigger | Process, topology, control, tooling, or ownership change | Product contract, interface, workflow, or release change | Either side changes |
+| Update trigger | The on-call rotation or the deploy process changes | An endpoint, a limit or an error code changes | Either side changes |
 
-IBM's [code documentation overview](https://www.ibm.com/think/topics/code-documentation) makes the same practical distinction. Coding standards and development-environment setup serve internal work, while public API reference, integration notes, configuration, and README files can serve external work.
+IBM's [code documentation overview](https://www.ibm.com/think/topics/code-documentation) draws the same line: coding standards serve the team, and a public API reference serves outside developers.
 
 ## What belongs in internal documentation
 
-Internal documentation is everything the team needs to build, operate and change the system that an outside reader has no task for. It can be candid, because its access boundary is the team.
+Internal documentation is everything the team needs to build, operate and change the system that an outside reader has no task for. It can be candid, because only the team reads it.
 
 ### Architecture decisions and system design
 
-Keep architecture decision records, private topology, capacity assumptions, data classifications, vendor constraints, and unreleased plans with the team that operates them. A public architecture page should explain only the integration model, trust boundary, data flow, or deployment responsibility that changes a customer's decision.
+Keep architecture decision records and anything that maps the private network, such as a topology diagram or capacity plan, with the team that operates the system. A public architecture page should explain only what changes a customer's decision, say where their data is stored and which parts they deploy themselves.
 
 ### Runbooks and internal recovery procedures
 
-Keep privileged commands, escalation paths, rollback criteria, dashboards, and candid failure analysis behind the appropriate access boundary. External troubleshooting should start from an observable symptom, give a safe recovery path, and state when to contact support.
+Keep the commands that need production access, the escalation contacts and the candid write-up of what failed behind the team's login. The public troubleshooting page starts from the symptom a customer sees, such as a `401` on every request, gives a fix that is safe to try, and says when to contact support.
 
 ### Employee onboarding and working agreements
 
-Local access, internal repositories, approval paths, team ownership, coding standards, and deployment responsibilities belong in contributor onboarding. Atlassian's [internal documentation guidance](https://www.atlassian.com/work-management/knowledge-sharing/documentation) treats this material as living team knowledge, which means it still needs ownership and review.
+How to get repository access, who approves a deploy and which team owns which service belong in contributor onboarding. Atlassian's [internal documentation guidance](https://www.atlassian.com/work-management/knowledge-sharing/documentation) treats this material as living team knowledge, which means it still needs ownership and review.
 
 ## What belongs in external documentation
 
-External documentation is everything an outside reader needs to evaluate, start, integrate, configure, migrate or recover a product: quickstarts, API and SDK reference, limits and errors, release notes, migration guides and troubleshooting. It stops at the supported contract, so the reader learns what the product promises without seeing the system that keeps the promise.
+External documentation is what an outside reader needs to use the product: a quickstart, the API reference, release notes and troubleshooting pages. It stops at the supported contract, so the reader learns what the product promises without seeing the system that keeps the promise.
 
 ### Product scope and getting started
 
-Publish prerequisites, the supported first action, expected result, and the next useful page when an outside reader needs them to start. A documented happy path should not require a support conversation to complete.
+Publish what the reader has to install, the first call to make, the response they should see and a link to the next page. A reader should be able to finish that first call without writing to support.
 
 ### Public interfaces and product contracts
 
-Publish API endpoints, SDK methods, command flags, configuration fields, error behavior, limits, compatibility promises, and supported authentication flows. The reader needs the request shape, authorization requirement, response, failure behavior, and relevant limits, not the service graph that fulfills the request.
+Publish everything a caller can depend on, such as an endpoint's fields and its error codes, along with limits and the authentication flows you support. The reader needs the request, the response and what happens on failure, and has no use for the list of internal services behind the endpoint.
 
 ### Releases, migrations, and customer recovery
 
-Publish release notes, migration guides, deprecation notices, and troubleshooting when product behavior changes or a supported task can fail. The page must answer whether the reader is affected, what to change, when to change it, and how to confirm recovery.
+Publish a release note when behavior changes and a migration guide when the reader has to act. The page must answer:
+
+- Whether the reader is affected
+- What to change
+- When to change it
+- How to confirm the change worked
 
 ## When to split internal and external documentation
 
@@ -95,14 +110,14 @@ A split is two documents: a public page built around a customer task, and a priv
 
 | Shared subject | Internal documentation | External documentation |
 | --- | --- | --- |
-| Production incident | Timeline, contributing conditions, response decisions, corrective work, and private evidence | Customer impact, affected period, restored state, customer action, and follow-up commitment |
-| System architecture | Decisions, private topology, controls, dependencies, and operational constraints | Supported deployment model, integration boundary, data flow, and customer responsibility |
-| Authentication | Key handling, abuse controls, rotation operations, and internal escalation | Authentication flow, scopes, supported credentials, errors, rotation task, and recovery |
-| Product release | Launch plan, rollout criteria, internal risks, and rollback decision | Shipped behavior, impact, required action, compatibility, and migration path |
+| Production incident | Timeline, what caused it, what the team is changing | Who was affected and when, what customers should do, what happens next |
+| System architecture | Why it was built this way, the private network layout, what it depends on | Where the product runs, where customer data goes, what the customer deploys |
+| Authentication | Where keys are stored, how they are rotated, who to page | The OAuth flow, the scopes, the error codes, how a customer rotates a key |
+| Product release | Rollout plan, known risks, who decides on a rollback | What changed, who is affected, what to do before upgrading |
 
 Link the private page to the public page it supports. Give each page its own owner and update trigger, because a supported authentication flow can change without changing the internal key-rotation runbook.
 
-The same split applies when an agent resolves the incident, and [my essay on agents on call](/articles/agents-on-call-runbooks/) argues that its account of what it did belongs on the internal side.
+The same split applies when an AI agent resolves a production incident, and [my essay on agents on call](/articles/agents-on-call-runbooks/) argues that the agent's account of what it did belongs on the internal side.
 
 ## Where do AGENTS.md and other agent instructions belong?
 
@@ -123,7 +138,7 @@ Kevin Liao's Operator, a documentation workspace for coding agents, applies the 
 
 ## Documentation placement audit template
 
-Start with an inventory. Record whether an external reader has a task, whether private context exists, whether an internal operator has a separate task, who owns the page, and what makes it stale.
+Start with an inventory: for every page, record the answers to the four questions above.
 
 <!-- receipt-backed-first-person -->
 
@@ -143,12 +158,12 @@ Inspect the generated [CSV report](/static/templates/documentation-placement-aud
 
 | Placement | Primary owner | Useful update triggers | Completion signal |
 | --- | --- | --- | --- |
-| Internal | Team closest to the system or process | Topology, workflow, control, tooling, incident, or ownership change | An operator can complete the internal job safely |
-| External | Product documentation, developer experience, or product team | Interface, behavior, prerequisite, limit, error, version, or support-pattern change | An outside reader can complete the promised task |
+| Internal | Team closest to the system or process | A deploy process change, an incident, or a new owner | An operator can complete the internal job safely |
+| External | Product documentation, developer experience, or product team | A changed endpoint, limit or error code, or a support question that keeps recurring | An outside reader can complete the promised task |
 | Split | A named owner for each page, and a link between the two | Any change that makes the public promise and private operation disagree | Both pages agree on supported behavior without sharing private context |
 
-GitLab's [documentation style guide](https://docs.gitlab.com/development/documentation/styleguide/) treats product documentation as a maintained source of truth for implementation, use, and troubleshooting. Apply the same maintenance discipline to private operational material.
+GitLab's [documentation style guide](https://docs.gitlab.com/development/documentation/styleguide/) treats product documentation as a maintained source of truth for implementation, use, and troubleshooting. Give a private runbook the same treatment: a named owner, and a review whenever the system it describes changes.
 
-Start with the external task. If the answer also requires private operating context, create paired documents instead of widening one page until it serves neither reader well.
+Start with the external task. If answering it also takes private detail, write the second page, as with the key-rotation runbook behind the public authentication guide.
 
-Use the [types of technical documentation](/articles/documentation-types/) to choose the artifact each reader needs. If duplicate pages and navigation drift already hide the canonical answer, [organize the documentation site](/articles/documentation-structure/) before adding more pages.
+Use the [types of technical documentation](/articles/documentation-types/) to choose the artifact each reader needs. If readers already can't tell which of two pages is current, [organize the documentation site](/articles/documentation-structure/) before adding more.

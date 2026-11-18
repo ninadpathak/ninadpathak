@@ -79,17 +79,17 @@ What the writing adds is lower perceived risk at the moment a developer is decid
   <figcaption>Each new question the archive can answer gives another search a way into Stripe's docs.</figcaption>
 </figure>
 
-The archive widens that effect, because each post is another search result that leads into Stripe's docs. Someone searching for webhook debugging and someone searching for sandbox strategy arrive by different posts and land beside the same docs.
+The archive brings that lower risk to more developers, because each post is another search result that leads into Stripe's docs. Someone searching for webhook debugging and someone searching for sandbox strategy arrive by different posts and land beside the same docs.
 
-The surrounding system matters as much as any post. [The docs close the loop during implementation](/articles/devtools-documentation/), the public changelog shows dated changes (my [changelog post](/articles/writing-changelogs/) covers why precise entries build trust), and Stripe's [API upgrade guidance](https://docs.stripe.com/upgrades) lets a team plan a version change before an incident forces one.
+[The docs close the loop during implementation](/articles/devtools-documentation/), the public changelog shows dated changes (my [changelog post](/articles/writing-changelogs/) covers why precise entries build trust), and Stripe's [API upgrade guidance](https://docs.stripe.com/upgrades) lets a team plan a version change before an incident forces one.
 
-Teams trust systems that make failure legible and recoverable, and [agent harnesses](/articles/agent-harnesses/) exist for the same reason. Stripe's posts spend their length on failure modes and migration costs, where a brochure would spend it on capability.
+Teams trust a system when they can see how it fails and how to recover, and [agent harnesses](/articles/agent-harnesses/) exist for the same reason. Stripe's posts spend their length on failure modes and migration costs, where a brochure would spend it on capability.
 
 ## What other companies get wrong when they copy it
 
 Other companies copy the format, a regular engineering post, without the engineers' knowledge behind it. A content team can hit its publishing schedule with tutorials that have drifted behind the API, and no amount of editing recovers details the process never collected from engineers.
 
-Separating writers from engineers costs the product team too, and the analysis of [documentation and engineering velocity](/articles/documentation-velocity/) covers what maintained knowledge changes inside engineering work. Long architecture posts with no docs system to link to leave an interested reader with nowhere to go.
+Separating writers from engineers costs the product team too, and my page on [documentation and engineering velocity](/articles/documentation-velocity/) covers what up-to-date docs change for the engineers themselves. Long architecture posts with no docs system to link to leave an interested reader with nowhere to go.
 
 The test for any technical blog is whether it makes the product simpler to trust and adopt. Traffic is a weak proxy for that.
 
@@ -117,17 +117,17 @@ A technical blog's effect accumulates, and a campaign's ends when the campaign d
 
 They could copy the format. Copying the effect is harder.
 
-Stripe's results come from the fit between domain complexity, product depth, docs infrastructure, and years of consistent publishing.
+The effect needs things a format doesn't supply: hard problems to write about, such as the PaymentIntents migration, engineers who write the posts, and docs for each post to link into.
 
 **What makes Stripe's technical writing unusually effective?**
 
-Posts tend to teach the underlying problem, show real implementation tradeoffs, and connect naturally into product docs and tools. Readers get education and a path to action in the same session.
+The posts teach the problem and admit the cost. Michelle Bu's post explains why payment methods differ, and says the new API took almost two years to launch.
 
 **Does the engineering blog matter if the docs are already strong?**
 
 Yes. Docs help during integration.
 
-Blog posts create trust and mental models before integration starts. They also expand search reach into adjacent topics where docs alone would not rank or persuade as well.
+A blog post reaches a developer earlier, say one searching for webhook debugging who hasn't chosen a payments vendor yet.
 
 **What is the biggest lesson for developer-first companies?**
 

@@ -2745,7 +2745,8 @@
       "quotes": [
         "A simple, open format for guiding coding agents, used by over 60k open-source projects",
         "Think of AGENTS.md as a README for agents",
-        "is now stewarded by the Agentic AI Foundation under the Linux Foundation."
+        "is now stewarded by the Agentic AI Foundation under the Linux Foundation.",
+        "the closest one takes precedence"
       ],
       "connects": [
         "coding-agent-memory"
@@ -5724,7 +5725,8 @@
       "f.k.a. MemGPT",
       "keeps the active context small, because response quality degrades as a conversation grows.",
       "when input tokens reach the trigger you set",
-      "Redis stores vectors and metadata in hashes or JSON objects"
+      "Redis stores vectors and metadata in hashes or JSON objects",
+      "deploy only to eu-west-1"
     ],
     "llm-structured-outputs": [
       "what's the weather in Paris?",
@@ -5917,6 +5919,11 @@
     ],
     "claude-code-memory": [
       "this project uses npm"
+    ],
+    "documentation-types": [
+      "rotate an API key",
+      "configure single sign-on",
+      "add a webhook endpoint"
     ]
   }
 }

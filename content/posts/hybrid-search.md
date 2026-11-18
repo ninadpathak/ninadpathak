@@ -21,7 +21,7 @@ Kapa's Finn Bauer [published the benchmark on October 2, 2026](https://www.kapa.
 
 ## How does hybrid search score on a 2026 benchmark?
 
-Plain hybrid search scores 0.41 on Kapa's Company Knowledge Bench, below every other retriever tested. Every other retriever either draws a deeper pool from the same search and selects from it, or replaces the search with a model that runs grep.
+Plain hybrid search scores 0.41 on Kapa's Company Knowledge Bench, below every other retriever tested. The next two rows fetch more candidates from the same search and rerank them, and the two grep agents replace the search with a model that runs grep.
 
 | Retriever | Score | Time per query, where the post states it |
 | --- | --- | --- |
@@ -33,17 +33,19 @@ Plain hybrid search scores 0.41 on Kapa's Company Knowledge Bench, below every o
 | Kapa Default, a tuned fixed pipeline | 0.61 | 3.3 seconds |
 | Kapa Deep, a tuned agentic retriever | 0.65 | about five seconds |
 
-Kapa sells retrieval and says so: "A note on bias: retrieval is core to our product, and all seven retrievers were built by us". The fixed-pipeline rows don't depend on its product, and the post's advice from them is "If you change one thing in a basic RAG pipeline, add a reranker."
+Kapa sells retrieval and says so: "A note on bias: retrieval is core to our product, and all seven retrievers were built by us". The plain hybrid row and the two rows after it are techniques any team can build, and the post's advice from them is "If you change one thing in a basic RAG pipeline, add a reranker."
 
-I read the 0.41 as the score for stopping too early. Hybrid search generates candidates, and the plain row returns its top 15 as they come.
+I read the 0.41 as the score for a pipeline that stops at fusion: the plain row returns its top 15 fused results with no reranker to reorder them.
 
-The reranked row pulls 100 from the same search and reranks them to 15, and the query-decomposition row pools 50 for each of up to three sub-queries, so both gain from a deeper pool and from a step that chooses.
+The reranked row pulls 100 from the same search and reranks them to 15, and the query-decomposition row pools 50 for each of up to three sub-queries, so both gain from more candidates and from a reranker that picks the 15 to return.
 
 ## Why fuse a keyword retriever with a vector retriever?
 
 The two retrievers miss different documents, so their union contains more of what a query needs than either list.
 
-Dense retrieval matches a question about memory leaks to a page on garbage collection that shares none of its words. Given an error code like `ORA-00942` it ranks the exact page first by a margin too thin to set a threshold on, 0.75 against 0.70 for a different Oracle code in [a run on the embeddings page](/articles/vector-embeddings/), and a keyword index matches the string outright.
+Dense retrieval matches a question about memory leaks to a page on garbage collection that shares none of its words. Given an error code like `ORA-00942`, it scores the right page only a little above a wrong one: 0.75 against 0.70 for a page about a different Oracle code, in [a run on the embeddings page](/articles/vector-embeddings/).
+
+A keyword index matches the string `ORA-00942` exactly.
 
 The published evidence for the gain is older than a year, so read it with its dates. Microsoft's [Azure AI Search comparison](https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/azure-ai-search-outperforming-vector-search-with-hybrid-retrieval-and-reranking/3929167) from September 18, 2023 used the Ada-002 embedding model.
 
@@ -125,23 +127,23 @@ Weaviate has moved to score-based fusion: its [hybrid search documentation](http
 
 Qdrant offers a score-based option called Distribution-Based Score Fusion, available from v1.11.0, which "keeps the raw scores from each query but normalizes their distributions before combining."
 
-My opinion is that routing queries to different alpha values by query type is complexity few systems need. Kapa's table puts the larger win after fusion, and a wrong route sends an identifier query to the retriever least able to tell it from its neighbours.
+My opinion is that routing queries to different alpha values by query type is complexity few systems need. Kapa's table puts the larger win after fusion, and a router that misreads a query sends an error code like `ORA-00942` to the dense retriever, which scores it almost the same as other Oracle codes.
 
 ## Do agents with grep make hybrid search unnecessary?
 
-For code, largely yes, and for mixed company knowledge, no. The Kapa post notes that "Cursor recently stopped searching your code via embeddings in favor of relying only on grep and indexed search.", and its own grep agent with a strong model ties the tuned pipeline at 0.61.
+For code, largely yes, and for mixed company knowledge, no. The Kapa post notes that "Cursor recently stopped searching your code via embeddings in favor of relying only on grep and indexed search.", and its grep agent on OpenAI's Sol model ties Kapa Default at 0.61.
 
 The tie costs 13 to 17 seconds a query against 3.3, and a second Kapa post, [by Matteo Bortoletto and Janis Fluri on October 26](https://www.kapa.ai/blog/retrieval-bottleneck), measures what the grep agent hands back: "for grep, only about one in twenty-five of the chunks it returns is needed". Grep finds things and leaves every selection decision to the model reading the results.
 
-Selection is also where fixed pipelines now lose. The October 26 post traced each needed chunk through a test pipeline and found "Of all the gold chunks search found, 34% were never shown to the agentic retriever."
+Selection is also where retrieval pipelines now lose. The October 26 post traced each needed chunk through a test pipeline and found "Of all the gold chunks search found, 34% were never shown to the agentic retriever."
 
-A third of the right material was retrieved and then dropped. The benchmark table points the same way, since its gains come from the steps that select, and the [reranking guide](/articles/rag-reranking/) covers that step.
+A third of the right material was retrieved and then dropped. Kapa's benchmark table points the same way, since reranking 100 candidates down to 15 is what lifts the score past 0.41, and the [reranking guide](/articles/rag-reranking/) covers that step.
 
 ## What does hybrid search cost?
 
 Hybrid search costs a second index, a second query per request and a fusion step. Elastic's 2023 post named the latency side of that, noting that query latency rose "as the two queries are performed sequentially in Elasticsearch" at the time.
 
-Engines differ on whether the two queries run in sequence or in parallel, so measure your own. The choice of dense model is its own decision, covered on the embeddings page linked above.
+Engines differ on whether the two queries run in sequence or in parallel, so measure your own. The choice of dense model is its own decision, covered on my vector embeddings page, linked from the section on fusing retrievers.
 
 ## FAQ
 

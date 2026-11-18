@@ -24,11 +24,13 @@ AI memory management for LLMs is the set of decisions about what an application 
 
 The clearest account of what happens without them came from Drew Breunig, who is writing a handbook on context engineering. Breunig's [talk transcript, posted on October 24, 2026](https://www.dbreunig.com/2026/10/24/the-state-of-context-engineering.html), asks the audience who keeps memory switched on in ChatGPT or Claude and answers "I turn it off.", because with work and family projects in one account "The model will take notes on both, mix up those contexts, and the confusion grows from there."
 
-Those decisions are the whole of [AI agent memory](/articles/agent-memory/), whatever store sits underneath.
+What to write, which scope it belongs to, when to load it and when to drop it are the decisions that make up [AI agent memory](/articles/agent-memory/), whichever database holds the facts.
 
 ## Memory hierarchy separates active context from persistent state
 
-Memory in an LLM system lives in two places: state the application stores and retrieves, and state the model holds while it processes one request. State the application stores is explicit memory, state the model holds is the attention state kept in the KV cache, and retrieval over a document corpus is a separate job that the [RAG vs memory](/articles/rag-vs-memory/) comparison covers.
+Memory in an LLM system lives in two places. The application stores and retrieves explicit memory, and the model holds implicit memory, the attention state in the KV cache, while it processes one request.
+
+Retrieval over a document corpus is a separate job that the [RAG vs memory](/articles/rag-vs-memory/) comparison covers.
 
 ### Explicit and implicit memory solve different constraints
 
@@ -42,7 +44,7 @@ Implicit memory is paid for in GPU memory, at 2 × layers × KV heads × head di
 
 At 16-bit precision that is 2 × 80 × 8 × 128 × 2 bytes, or 327,680 bytes per token, so a 128,000-token context holds about 42 GB of attention state for one sequence. Serving engines manage that with paging, and the [PagedAttention paper](https://arxiv.org/abs/2309.06180) of September 2023, which introduced vLLM, reports "near-zero waste in KV cache memory".
 
-The KV cache belongs to the serving engine, and the [LLM inference optimization guide](/articles/llm-inference-optimization/) covers sizing it. The application's lever is a smaller context, which is what the explicit layers are for.
+The KV cache belongs to the serving engine, and the [LLM inference optimization guide](/articles/llm-inference-optimization/) covers sizing it. The application's lever is a smaller context: keep facts outside the window and load only the ones a request needs.
 
 ### The five layers answer five memory questions
 
@@ -62,9 +64,9 @@ The [short-term memory guide](/articles/short-term-agent-memory/) covers the inp
 
 ### Inclusion, retrieval, and lifecycle need separate policies
 
-An inclusion policy decides whether an observation leaves the input buffer at all. A tool's progress message can expire with the step, and a user-approved deployment constraint deserves an attributed record.
+An inclusion policy decides whether an observation leaves the input buffer at all. A tool's progress message can expire with the step, and a deployment rule a user approved, say "deploy only to eu-west-1", deserves a record that says who approved it.
 
-A retrieval policy filters by subject, scope and time before it ranks by similarity. A lifecycle policy covers supersession, expiry, eviction and deletion, and it should keep a path back to the original record when a summary might support a consequential decision.
+A retrieval policy filters by subject, scope and time before it ranks by similarity. A lifecycle policy says when a newer fact replaces an older one, when a fact expires and when it is evicted or deleted, and it should keep a path back to the original record when a summary might support a consequential decision.
 
 ## Who should decide what gets written?
 
@@ -74,7 +76,7 @@ When the researchers imposed a fixed rule to record only failures, "both Opus 5 
 
 My reading is that hand-written write rules belong with smaller or older models and with stores no model curates. Anthropic's post doesn't test that directly: it shows a fixed rule hurting strong models and steering helping a weaker one read and test its notes.
 
-The earlier version of this page presented scoring every entry as the default, and for current frontier models the sources no longer support that.
+The earlier version of this page told you to score every entry by its relevance to the task before keeping it, and for current frontier models Anthropic's test no longer supports that.
 
 What stays with the application in every case is the part a model can't see from inside one session: which user and project a fact belongs to, what it replaces, and who can read it back.
 
@@ -84,7 +86,7 @@ Retention should protect what a person asked the system to keep, let recency sor
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/ai-memory-management/memory-operations.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/ai-memory-management/memory-operations.narrow.svg" width="288" height="744"><img class="np-has-narrow" src="/static/images/diagrams/ai-memory-management/memory-operations.svg" width="720" height="520" alt="A new turn arrives in a full context window, and the memory layer has three moves: prioritize what a person asked to keep so those records stay, compress older records into a smaller summary, or evict the lowest-value records from memory entirely." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Keeping what someone asked for, compressing older records and evicting the rest are separate policies, and each fails in its own way.</figcaption>
+  <figcaption>Keeping what someone asked for, compressing older records and evicting the rest are separate policies.</figcaption>
 </figure>
 
 The example below runs the same four-entry session twice through a buffer one slot too small. The deployment region is written first and marked as pinned, which is the "remember this" case, and the greeting is touched again before the last write.
@@ -156,11 +158,11 @@ Vector stores have their own version in [product quantization](/glossary/product
 
 ## Letta and MemGPT make memory tiers explicit
 
-Letta, the project its [repository](https://github.com/letta-ai/letta) says was formerly known as MemGPT, now draws the tiers as files. Its [MemFS documentation](https://docs.letta.com/concepts/memfs/) describes an agent's memory as a git repository of Markdown files, where the files at the root are loaded into the system prompt on every turn.
+Letta, the project its [repository](https://github.com/letta-ai/letta) says was formerly known as MemGPT, now keeps its two memory tiers as files. Its [MemFS documentation](https://docs.letta.com/concepts/memfs/) describes an agent's memory as a git repository of Markdown files, where the files at the root are loaded into the system prompt on every turn.
 
 Everything deeper is the second tier. Directories with their own index "stay out of context until they are needed", and the agent follows file names to read the right one.
 
-Writing has a second path as well. Letta's [memory docs](https://docs.letta.com/configuration/memory/) describe dreaming, in which background subagents review recent conversations and update the files while the main agent keeps working.
+Letta's [memory docs](https://docs.letta.com/configuration/memory/) describe a second way the files get written, called dreaming, in which background subagents review recent conversations and update the files while the main agent keeps working.
 
 The earlier design, with memory blocks pinned in the prompt and a searchable archival store behind them, is the one the MemGPT paper introduced. Letta still documents it, on pages marked as the legacy SDK.
 
