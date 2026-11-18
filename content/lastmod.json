@@ -68,8 +68,8 @@
     "sources": "8c6368ff3abc7dfac42d3d815a89e86042d2bc1f027ce22453ddedd18e0520f6"
   },
   "best-llms-for-coding": {
-    "lastmod": "2026-11-17",
-    "sources": "edf06d0a31ad68c9dfabd97b308e635f7431eb96b2a01739432c887881ec97ec"
+    "lastmod": "2026-11-18",
+    "sources": "1a74753fedafed0a17ac891fe115b2f7837c1d1d3bdf716834923457de253183"
   },
   "browser-vector-search": {
     "lastmod": "2026-11-17",
@@ -153,7 +153,7 @@
   },
   "documentation-headings": {
     "lastmod": "2026-11-18",
-    "sources": "ac3784d952550ef9d9b37deb1c1258d2c2849aa54d5e2ddafddd286438cba3f3"
+    "sources": "295a109e4cdd4fd79374dddc652bbbb7f191f27b8f89037491d8648ba244e1d4"
   },
   "documentation-review": {
     "lastmod": "2026-11-18",
@@ -265,7 +265,7 @@
   },
   "rag-reranking": {
     "lastmod": "2026-11-18",
-    "sources": "8851b9dab8f1dfe9e8aec76b17c34e1cd2680be9f9f0830462353bdbafdc4456"
+    "sources": "44b65e5a34f27c9b99fb07ca0f55899c4a0e744cafc8e8e0c1e000175bb82f9b"
   },
   "rag-vs-memory": {
     "lastmod": "2026-11-18",
@@ -309,7 +309,7 @@
   },
   "technical-docs": {
     "lastmod": "2026-11-18",
-    "sources": "572517d01432494abb3239bc536bb582452d2ba1cc9c85aa2ce4d2b4bee3b576"
+    "sources": "18663abf9c9dc4a5ebc617dd0e38b8db6f53c71f9314169b6407aaaf9e4750c3"
   },
   "technical-writing-for-engineers": {
     "lastmod": "2026-11-18",
@@ -320,8 +320,8 @@
     "sources": "020ba5149ecfe76bd7c1443f2d06709a5d04bbae5d2fd6ab33fbc20b832768f3"
   },
   "vector-embeddings": {
-    "lastmod": "2026-11-17",
-    "sources": "81b4e1021b387bf24f610b13eb330f869ff64b39fb23e6a28507d67e4ce683a1"
+    "lastmod": "2026-11-18",
+    "sources": "e2509c6e9d17035fcbf3ad43ab80dab052b5a1e77a165b6adc8ec2baf5344da7"
   },
   "voice-agent-latency": {
     "lastmod": "2026-11-18",
@@ -345,7 +345,7 @@
   },
   "writing-release-notes": {
     "lastmod": "2026-11-18",
-    "sources": "60360c3ff093610ed39b56a8f36a32ced8f199b40f168d9118a68b86e4bfad69"
+    "sources": "25b827a4a3faed794b383f432b78afd6cb0b01b0c8b6ff7726a022bed04af836"
   },
   "writing-technical-tutorials": {
     "lastmod": "2026-11-18",
