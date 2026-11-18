@@ -879,3 +879,35 @@ For Ninad to confirm from this batch: whether he reviews client docs in these fo
 
 documentation-types carried the sentence "I reviewed the ranking pages for this query, including ClickHelp, Tango, and Squarespace Engineering" under a `receipt-backed-first-person` marker. Neither ClickHelp nor Squarespace Engineering was linked on the page or recorded in `sources.json`, and pass C had already cut the two sentences that attributed positions to them. On root's decision the sentence and its marker were removed. Tango stays, since the page links its collection of document types.
 
+## Pass C: the specificity pass over every live piece (2026-11-18, owner voice-rewrite-2)
+
+Pass C applied Ninad's first rule (every sentence clear alone on first read, the actual thing named, no positional or back references) to every piece rewritten before the rule existed. Each set was read sentence by sentence, reported with five before-and-after pairs per piece, and reviewed cold by an independent reviewer before it deployed.
+
+| Set | Pieces | Deployed at |
+| --- | --- | --- |
+| 1 | batch 8 (seven pieces) | 3cad4d9e |
+| 2 | batch 7 (seven pieces) | f5b0a305 |
+| 3 | the six essays | 2d36b8ae |
+| 4 | batch 6 (six pieces) | 54e45f91 |
+| 5 | batch 5 (six pieces) | f31d7acd |
+| 6 | batch 4 (six pieces) | 90b1bfda |
+| 7 | batch 3 (six pieces), with the lower half of writing-release-notes rewritten in full | 88d14645 |
+| 8 | batches 2b and 2a (seven pieces), with a second pass on internal-vs-external-docs and documentation-types | 9737b945 |
+| 9 | batch 1 (four pieces) | in review when this was written |
+
+Rules the pass C reviews added, to hold in every later piece:
+
+- An added specific is checked against the page's own output and its source before it ships. Three review blockers were added sentences that said more than the table or run above them (the smallest "difference" that was the smallest ratio, a claim about failed builds no source made, a heading claim about "each").
+- A term is defined where it first appears: compaction, harness, normal form, target model and MTP were each used a section before their definition.
+- "The protocol", "the tool", "the post" and "that page" are replaced by the name when two candidates are in reach.
+- A sentence that only announces the next one is merged into it or cut.
+- A comma list of four or more category nouns is replaced by one example, or broken into a list whose items each say something.
+- Table cells, captions, descriptions, takeaways and FAQ answers are read to the same standard as paragraphs.
+- A paraphrase of a source keeps the source's scope: one commenter is "a reader", not "readers", and a count keeps its unit.
+- An unlinked source with no ledger entry is cut, along with any first-person claim that rests on it.
+- A light revision is not a pass. Two pages needed a second pass and one needed half its prose rewritten after the review found the older register.
+
+Tooling changed during the pass, all in `verify_quotes.py`: a failing source is fetched a second time after a pause, each fetch has a 180-second deadline, and a source marked `refuses_automated_fetch` with a `last_confirmed` date inside 30 days is reported as unverified with the failure reason and does not fail the run. PubMed Central still serves a challenge page on some full runs, and its source passes when fetched alone.
+
+Left for Ninad from pass C: the first-person questions listed with batch 11, the essay positions that are Claude's drafts (the Docker explainer, the harness essay, the incident-report essay), the films on the re-render list, and whether the drawn checker figure on docs-accessibility should stay.
+
