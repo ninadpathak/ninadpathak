@@ -976,7 +976,10 @@
       "connects": [
         "hybrid-search"
       ],
-      "date_note": "Older than a year and dated as such in the post."
+      "date_note": "Older than a year and dated as such in the post.",
+      "refuses_automated_fetch": true,
+      "last_confirmed": "2026-11-18",
+      "fetch_note": "Microsoft Tech Community answers scripted requests with HTTP 403. The quotes were last confirmed by verify_quotes.py on 2026-11-18, in the run that checked 1218 quotes with 0 problems."
     },
     {
       "id": "elastic-hybrid-retrieval-2023",
@@ -2432,7 +2435,7 @@
     },
     {
       "id": "anthropic-building-effective-agents",
-      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "url": "https://www.anthropic.com/research/building-effective-agents",
       "author": "Anthropic",
       "date": "2024-12-19",
       "title": "Building effective agents",
@@ -3065,7 +3068,7 @@
     },
     {
       "id": "chroma-context-rot-2025",
-      "url": "https://research.trychroma.com/context-rot",
+      "url": "https://www.trychroma.com/research/context-rot",
       "author": "Kelly Hong, Anton Troynikov, Jeff Huber",
       "date": "2025-07-14",
       "title": "Context Rot: How Increasing Input Tokens Impacts LLM Performance",
@@ -5840,6 +5843,10 @@
     "agent-memory-2026": [
       "what happens to the old fact?",
       "which plan was this customer on in March?"
+    ],
+    "technical-writing-for-engineers": [
+      "you should make sure",
+      "that you are going to"
     ],
     "writing-technical-tutorials": [
       "hello, world"

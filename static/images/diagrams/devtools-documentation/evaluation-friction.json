@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/devtools-documentation/evaluation-friction.mmd",
-  "hash": "900434c7df5af86a",
+  "hash": "771db93b7be98c15",
   "pele": "1.8.0",
   "width": 720,
   "height": 264,
@@ -19,6 +19,6 @@
     }
   },
   "alt": "A technical evaluator's path from the docs to a deal, passing the quickstart, the auth page and the limits page. Each of the three is marked as a point where the evaluation can stop.",
-  "caption": "The pages an evaluator meets on the way to a decision. A failure at any of them can end the trial before sales hears an objection.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/devtools-documentation/evaluation-friction.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/devtools-documentation/evaluation-friction.narrow.svg\" width=\"288\" height=\"776\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/devtools-documentation/evaluation-friction.svg\" width=\"720\" height=\"264\" alt=\"A technical evaluator's path from the docs to a deal, passing the quickstart, the auth page and the limits page. Each of the three is marked as a point where the evaluation can stop.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The pages an evaluator meets on the way to a decision. A failure at any of them can end the trial before sales hears an objection.</figcaption>\n</figure>"
+  "caption": "The quickstart, the auth page and the limits page are where an evaluation can stop, before sales hears an objection.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/devtools-documentation/evaluation-friction.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/devtools-documentation/evaluation-friction.narrow.svg\" width=\"288\" height=\"776\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/devtools-documentation/evaluation-friction.svg\" width=\"720\" height=\"264\" alt=\"A technical evaluator's path from the docs to a deal, passing the quickstart, the auth page and the limits page. Each of the three is marked as a point where the evaluation can stop.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>The quickstart, the auth page and the limits page are where an evaluation can stop, before sales hears an objection.</figcaption>\n</figure>"
 }
