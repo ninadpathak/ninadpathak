@@ -61,7 +61,7 @@
   },
   "ai-memory-management": {
     "lastmod": "2026-11-18",
-    "sources": "2bb1fbe275f58172fc642d2cd93029b0fcae4bfe99e8838afa39085683879f43"
+    "sources": "b3032f9ee1064f5035db276007941e309e2123146904fd917e9b208ce26d6416"
   },
   "api-documentation": {
     "lastmod": "2026-11-17",
@@ -117,7 +117,7 @@
   },
   "contextual-retrieval": {
     "lastmod": "2026-11-18",
-    "sources": "801be7f7886e6b8dc1feed6e339ead24c215659f3788bb93a7e29a75f3d2d5f2"
+    "sources": "4f3820c61c6a5fb78354f83fc950fcc9c9aace454c6b2aa99b5fea8813a6b986"
   },
   "deerflow-memory": {
     "lastmod": "2026-11-18",
@@ -168,8 +168,8 @@
     "sources": "795ec78f39732ad52cf34eea2a33887538974926cc424ff5638b14a8397ec8f6"
   },
   "documentation-types": {
-    "lastmod": "2026-11-17",
-    "sources": "b660060c7bbfcdf3dbdfa7a570f84768647d645d3ddac0d2e6b0b200937ce90a"
+    "lastmod": "2026-11-18",
+    "sources": "effc3b015226efa6a88f530744c17506696b70b847237ff834ada6f31cd609c0"
   },
   "documentation-velocity": {
     "lastmod": "2026-11-18",
@@ -184,16 +184,16 @@
     "sources": "a337f575c1f4294881c06cca37e2ee98a37f027c7d8aeee588a0db8411ee77b1"
   },
   "hybrid-search": {
-    "lastmod": "2026-11-17",
-    "sources": "2008c89cac40fb1c40b3eb5146a4866f7284e93905594c9430331a9237cd55e3"
+    "lastmod": "2026-11-18",
+    "sources": "d64177f5832da29769eb59776349213d0d2e56feed456a332198adca872717df"
   },
   "hyperagents-memory": {
     "lastmod": "2026-11-18",
     "sources": "b5a916e4ed18eb243ef07429cb1215593c6ef5d26b21e23b74ce551d7326f42a"
   },
   "internal-vs-external-docs": {
-    "lastmod": "2026-11-17",
-    "sources": "7a9dc8ff27931cf5b9dbe721a48352ce3dd14c18854f649f972dc66f72419682"
+    "lastmod": "2026-11-18",
+    "sources": "7ea9f64d833d0d6569b44d851d774aa57483f96e47168ab3c8f84038b0d05fbf"
   },
   "kv-cache-eviction": {
     "lastmod": "2026-11-18",
@@ -212,8 +212,8 @@
     "sources": "cad4c84da81f30bca0b05443c04918ca0cd26a6f50934810c07454fcad69c1a3"
   },
   "llm-structured-outputs": {
-    "lastmod": "2026-11-17",
-    "sources": "c03d8a8e07ad58a00409215b4ea71620bf8c81949be944ce888bc953c3ff78c5"
+    "lastmod": "2026-11-18",
+    "sources": "5912ddfa3969f476d48f20c82ab979acac254a4efb87473b80cdf5412c50a58f"
   },
   "llm-token-budgets": {
     "lastmod": "2026-11-18",
@@ -304,8 +304,8 @@
     "sources": "e6edebb57ee0d5d0a5dc8d65fb2341fed3d8b5dbe939f6a44527eaf04849d8d2"
   },
   "stripe-technical-blog": {
-    "lastmod": "2026-11-17",
-    "sources": "401037e7533133a1e49150a86f954eb9fb1b4546bc6a96033fe512d303f68177"
+    "lastmod": "2026-11-18",
+    "sources": "36b619245dfeef11c541667ad2941b53c7ed5e334d4e363291ef95f733415f91"
   },
   "technical-docs": {
     "lastmod": "2026-11-18",
