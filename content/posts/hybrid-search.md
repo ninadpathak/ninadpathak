@@ -15,13 +15,13 @@ updated: 2026-11-17
 
 Hybrid search runs a keyword retriever, usually BM25, and a dense vector retriever over the same corpus and fuses the two ranked lists into one. On the latest production benchmark I can find, that fused list is the lowest-scoring retriever in the table.
 
-Within a [RAG pipeline](/articles/rag/) it is the retrieval stage, ahead of reranking.
+Hybrid search is the retrieval stage of a [RAG pipeline](/articles/rag/), ahead of reranking.
 
 Kapa's Finn Bauer [published the benchmark on October 2, 2026](https://www.kapa.ai/blog/company-knowledge-bench). It scores seven retrievers on "1,000 eval cases annotated from real production data", and plain hybrid search comes last.
 
 ## How does hybrid search score on a 2026 benchmark?
 
-Plain hybrid search scores 0.41 on Kapa's Company Knowledge Bench, below every other retriever tested. The rows above it either draw a deeper pool from the same search and select from it, or replace the search with a model that greps.
+Plain hybrid search scores 0.41 on Kapa's Company Knowledge Bench, below every other retriever tested. Every other retriever either draws a deeper pool from the same search and selects from it, or replaces the search with a model that runs grep.
 
 | Retriever | Score | Time per query, where the post states it |
 | --- | --- | --- |
@@ -37,7 +37,7 @@ Kapa sells retrieval and says so: "A note on bias: retrieval is core to our prod
 
 I read the 0.41 as the score for stopping too early. Hybrid search generates candidates, and the plain row returns its top 15 as they come.
 
-The second row pulls 100 from the same search and reranks them to 15, and the third pools 50 for each of up to three sub-queries, so both gain from a deeper pool and from a step that chooses.
+The reranked row pulls 100 from the same search and reranks them to 15, and the query-decomposition row pools 50 for each of up to three sub-queries, so both gain from a deeper pool and from a step that chooses.
 
 ## Why fuse a keyword retriever with a vector retriever?
 
@@ -59,7 +59,7 @@ Elastic's [hybrid retrieval post](https://www.elastic.co/search-labs/blog/improv
 
 Both posts predate the models in Kapa's table, and the shape of the result has held: fusion beats either retriever alone, and on Azure's customer datasets the reranker added more than fusion had.
 
-The background for all of it is the [BEIR benchmark paper](https://arxiv.org/abs/2104.08663) from April 2021, which compared single retrievers and tested no fusion. Its abstract says dense and learned-sparse models "often underperform other approaches" outside their training domain, which is the case against relying on one family.
+The background for both posts is the [BEIR benchmark paper](https://arxiv.org/abs/2104.08663) from April 2021, which compared single retrievers and tested no fusion. Its abstract says dense and learned-sparse models "often underperform other approaches" outside their training domain, which is the case against relying on one family.
 
 ## How does reciprocal rank fusion work?
 
@@ -104,7 +104,7 @@ first in both lists       0.0328
 rank 100 in both lists    0.0125
 ```
 
-The two documents both retrievers returned finish well ahead of the one that topped a single list. A document at rank 100 in both lists scores 0.0125, below a document ranked first in only one, so agreement helps and deep agreement helps less.
+The two documents both retrievers returned finish well ahead of the one that topped a single list. A document at rank 100 in both lists scores 0.0125, below a document ranked first in only one, so agreement near the top of both lists counts for more than agreement far down them.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/hybrid-search/rrf-fusion.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/hybrid-search/rrf-fusion.narrow.svg" width="288" height="536"><img class="np-has-narrow" src="/static/images/diagrams/hybrid-search/rrf-fusion.svg" width="720" height="392" alt="A BM25 keyword list and a vector list each rank the same documents differently. Reciprocal rank fusion discards their scores and adds 1/(60 + rank) from each list, so the document both retrievers rank highly rises to the top of the fused list." loading="lazy" decoding="async"></picture></a>
@@ -119,7 +119,7 @@ A small constant rewards the top of each list much more sharply, so the same two
 
 Start with whatever your engine defaults to, and treat fusion tuning as a late step. RRF needs no labeled data, and score-based fusion keeps information RRF throws away, such as how far ahead the top result was.
 
-Weaviate has moved to the second kind: its [hybrid search documentation](https://docs.weaviate.io/weaviate/search/hybrid) says "Relative Score Fusion is the default fusion method starting in v1.24." The same page defines the `alpha` weight that balances the two retrievers.
+Weaviate has moved to score-based fusion: its [hybrid search documentation](https://docs.weaviate.io/weaviate/search/hybrid) says "Relative Score Fusion is the default fusion method starting in v1.24." The same page defines the `alpha` weight that balances the two retrievers.
 
 "An alpha of 1 is a pure vector search. An alpha of 0 is a pure keyword search."
 
@@ -133,9 +133,9 @@ For code, largely yes, and for mixed company knowledge, no. The Kapa post notes 
 
 The tie costs 13 to 17 seconds a query against 3.3, and a second Kapa post, [by Matteo Bortoletto and Janis Fluri on October 26](https://www.kapa.ai/blog/retrieval-bottleneck), measures what the grep agent hands back: "for grep, only about one in twenty-five of the chunks it returns is needed". Grep finds things and leaves every selection decision to the model reading the results.
 
-Selection is also where fixed pipelines now lose. That post traced each needed chunk through a test pipeline and found "Of all the gold chunks search found, 34% were never shown to the agentic retriever."
+Selection is also where fixed pipelines now lose. The October 26 post traced each needed chunk through a test pipeline and found "Of all the gold chunks search found, 34% were never shown to the agentic retriever."
 
-A third of the right material was retrieved and then dropped. That is the same conclusion as the first table, reached from the other direction, and the [reranking guide](/articles/rag-reranking/) covers the step where it happens.
+A third of the right material was retrieved and then dropped. The benchmark table points the same way, since its gains come from the steps that select, and the [reranking guide](/articles/rag-reranking/) covers that step.
 
 ## What does hybrid search cost?
 

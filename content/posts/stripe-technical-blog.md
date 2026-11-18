@@ -66,7 +66,7 @@ Stripe has explained its own hard parts in public for years, and the clearest ex
 
 It also says where the project went badly. Launching the new API "took almost two years", and the post names the hardest part: "The hardest part of realizing the PaymentIntent migration was not a technical challenge, but a perception challenge".
 
-A vendor that says where its own work got slow earns more belief for its happy-path examples. That is the mechanism under the word trust, and it only works when the people writing were inside the problem.
+A vendor that says where its own work got slow earns more belief for its happy-path examples. Admitting the slow parts is how the blog builds trust, and it only works when the writers did the work themselves.
 
 ## Is the Stripe engineering blog a moat?
 
@@ -75,11 +75,11 @@ The blog is the visible end of an advantage, and I think calling the blog itself
 What the writing adds is lower perceived risk at the moment a developer is deciding. Nobody says they chose a vendor for its blog, and the reasons they do give (solid documentation, a safe migration path, a company that understands edge cases) are all things the posts demonstrate.
 
 <figure class="np-figure">
-  <a class="np-figure-zoom" href="/static/images/diagrams/stripe-technical-blog/archive-doors.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/stripe-technical-blog/archive-doors.narrow.svg" width="288" height="456"><img class="np-has-narrow" src="/static/images/diagrams/stripe-technical-blog/archive-doors.svg" width="720" height="424" alt="Three readers search for different things, Stripe API upgrades, webhook debugging, and sandbox strategy, and each lands on a different post. All three posts belong to one archive that keeps growing, so each search is a separate way into the same Stripe ecosystem." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Each new question the archive can answer adds a side door into the same building.</figcaption>
+  <a class="np-figure-zoom" href="/static/images/diagrams/stripe-technical-blog/archive-doors.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/stripe-technical-blog/archive-doors.narrow.svg" width="288" height="456"><img class="np-has-narrow" src="/static/images/diagrams/stripe-technical-blog/archive-doors.svg" width="720" height="424" alt="Three readers search for different things, Stripe API upgrades, webhook debugging, and sandbox strategy, and each lands on a different post. All three posts belong to one archive that keeps growing, so each search is a separate way into Stripe's docs and products." loading="lazy" decoding="async"></picture></a>
+  <figcaption>Each new question the archive can answer gives another search a way into Stripe's docs.</figcaption>
 </figure>
 
-The archive widens that effect, because each post is another door into the same building. Someone searching for webhook debugging and someone searching for sandbox strategy arrive by different posts and land beside the same docs.
+The archive widens that effect, because each post is another search result that leads into Stripe's docs. Someone searching for webhook debugging and someone searching for sandbox strategy arrive by different posts and land beside the same docs.
 
 The surrounding system matters as much as any post. [The docs close the loop during implementation](/articles/devtools-documentation/), the public changelog shows dated changes (my [changelog post](/articles/writing-changelogs/) covers why precise entries build trust), and Stripe's [API upgrade guidance](https://docs.stripe.com/upgrades) lets a team plan a version change before an incident forces one.
 
@@ -87,9 +87,9 @@ Teams trust systems that make failure legible and recoverable, and [agent harnes
 
 ## What other companies get wrong when they copy it
 
-They copy the surface and skip the source. A content team can hit its publishing schedule with tutorials that have drifted behind the API, and no amount of editing recovers details the process never collected from engineers.
+Other companies copy the format, a regular engineering post, without the engineers' knowledge behind it. A content team can hit its publishing schedule with tutorials that have drifted behind the API, and no amount of editing recovers details the process never collected from engineers.
 
-The separation costs the product team too, and the analysis of [documentation and engineering velocity](/articles/documentation-velocity/) covers what maintained knowledge changes inside engineering work. Long architecture posts with no docs system to link to leave an interested reader with nowhere to go.
+Separating writers from engineers costs the product team too, and the analysis of [documentation and engineering velocity](/articles/documentation-velocity/) covers what maintained knowledge changes inside engineering work. Long architecture posts with no docs system to link to leave an interested reader with nowhere to go.
 
 The test for any technical blog is whether it makes the product simpler to trust and adopt. Traffic is a weak proxy for that.
 
@@ -111,7 +111,7 @@ Writing articles of this kind for a company is work I take on, described under [
 
 **Why call a technical blog a moat instead of a marketing channel?**
 
-Because its effect accumulates where a campaign's resets. Stripe's posts keep lowering trust and learning barriers for new developers for years after they are published, though the blog is evidence of Stripe's advantage more than its source.
+A technical blog's effect accumulates, and a campaign's ends when the campaign does. Stripe's posts keep lowering trust and learning barriers for new developers for years after they are published, though the blog is evidence of Stripe's advantage more than its source.
 
 **Could another payments company copy Stripe's approach?**
 

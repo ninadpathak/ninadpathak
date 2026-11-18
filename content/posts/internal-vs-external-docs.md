@@ -23,7 +23,7 @@ updated: 2026-11-17
 
 Internal documentation helps your team operate the system, and external documentation helps customers, partners and public developers use the supported product. When a subject has both readers, publish a public task page, keep a separate private operating record, and classify the subject as **internal**, **external** or **split**.
 
-Where that line falls is one of the first decisions in any set of [technical documentation](/articles/technical-documentation/).
+Where the line between internal and external falls is one of the first decisions in any set of [technical documentation](/articles/technical-documentation/).
 
 That line used to follow access, and a file that surfaced this autumn shows why access no longer settles it. The XScreenSaver source release ships an [AGENTS.md](https://github.com/Zygo/xscreensaver/blob/master/AGENTS.md), mirrored to GitHub on September 4, that opens "You are in a project that does not want AI contributions of any kind."
 
@@ -42,7 +42,7 @@ Ask four questions:
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/internal-vs-external-docs/documentation-placement.narrow.svg" width="288" height="792"><img class="np-has-narrow" src="/static/images/diagrams/internal-vs-external-docs/documentation-placement.svg" width="720" height="672" alt="Documentation placement decision tree. If no outside reader needs the information, keep it internal when an operator needs it; otherwise review whether the page has a task. If an outside reader needs it, split it into a public task page and a private record when private context remains; otherwise publish it externally." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Each path ends in internal, review, split, or external documentation. A split is two documents with one contract between them, not a redacted internal page.</figcaption>
+  <figcaption>Each path ends in internal, review, split, or external documentation. A split is two documents, a public task page and a private record, and never a redacted internal page.</figcaption>
 </figure>
 
 ## Internal vs. external documentation comparison
@@ -91,7 +91,7 @@ Publish release notes, migration guides, deprecation notices, and troubleshootin
 
 ## When to split internal and external documentation
 
-A split is not a redacted internal page. It is a public document with a customer task and a private document with the operating detail required to maintain that public promise.
+A split is two documents: a public page built around a customer task, and a private page with the operating detail needed to keep the public page's promise.
 
 | Shared subject | Internal documentation | External documentation |
 | --- | --- | --- |
@@ -100,7 +100,7 @@ A split is not a redacted internal page. It is a public document with a customer
 | Authentication | Key handling, abuse controls, rotation operations, and internal escalation | Authentication flow, scopes, supported credentials, errors, rotation task, and recovery |
 | Product release | Launch plan, rollout criteria, internal risks, and rollback decision | Shipped behavior, impact, required action, compatibility, and migration path |
 
-Link the private source to the public contract it maintains. Give each page its own owner and update trigger, because a supported authentication flow can change without changing the internal key-rotation runbook.
+Link the private page to the public page it supports. Give each page its own owner and update trigger, because a supported authentication flow can change without changing the internal key-rotation runbook.
 
 The same split applies when an agent resolves the incident, and [my essay on agents on call](/articles/agents-on-call-runbooks/) argues that its account of what it did belongs on the internal side.
 
@@ -113,7 +113,7 @@ A private monorepo never raises the question. Nathan Broadbent [described DocSpr
 A public repository publishes every line of the file. Question two from the list above (credentials, private topology, unpublished plans) applies to it exactly as it applies to a README, and it is the check an agent-written instruction file is least likely to have had.
 
 <!-- evidence-three: October 3, 2026 is the publication date printed on liao.gg/blog/agents-dont-need-memory -->
-Kevin Liao's Operator, a documentation workspace for coding agents, has the same idea one level in. [Liao's post of October 3](https://liao.gg/blog/agents-dont-need-memory) separates an agent's private working notes from what a team shares, through "an explicit .operator-shared/ shared partition that you can commit with the repository, so that specs, guides, and standards can be shared with every coworker, intern, or cloud AI agent."
+Kevin Liao's Operator, a documentation workspace for coding agents, applies the same split inside the agent's own files. [Liao's post of October 3](https://liao.gg/blog/agents-dont-need-memory) separates an agent's private working notes from what a team shares, through "an explicit .operator-shared/ shared partition that you can commit with the repository, so that specs, guides, and standards can be shared with every coworker, intern, or cloud AI agent."
 
 | Agent instruction content | Placement | Why |
 | --- | --- | --- |
@@ -145,7 +145,7 @@ Inspect the generated [CSV report](/static/templates/documentation-placement-aud
 | --- | --- | --- | --- |
 | Internal | Team closest to the system or process | Topology, workflow, control, tooling, incident, or ownership change | An operator can complete the internal job safely |
 | External | Product documentation, developer experience, or product team | Interface, behavior, prerequisite, limit, error, version, or support-pattern change | An outside reader can complete the promised task |
-| Split | Named owner for each side, with one contract between them | Any change that makes the public promise and private operation disagree | Both pages agree on supported behavior without sharing private context |
+| Split | A named owner for each page, and a link between the two | Any change that makes the public promise and private operation disagree | Both pages agree on supported behavior without sharing private context |
 
 GitLab's [documentation style guide](https://docs.gitlab.com/development/documentation/styleguide/) treats product documentation as a maintained source of truth for implementation, use, and troubleshooting. Apply the same maintenance discipline to private operational material.
 

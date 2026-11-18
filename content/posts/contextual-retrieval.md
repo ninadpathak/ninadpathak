@@ -21,7 +21,7 @@ Anthropic took a chunk like `"The company's revenue grew by 3% over the previous
 
 The mechanism changes the chunk before any query runs, where nearly all RAG tuning happens at query time. I still think that is the right end of the pipeline to push on, and coding agents have since changed my mind about which corpora it is for.
 
-It works on the indexing stage of the [RAG pipeline](/articles/rag/).
+Contextual Retrieval works on the indexing stage of the [RAG pipeline](/articles/rag/).
 
 ## What is Contextual Retrieval?
 
@@ -33,7 +33,7 @@ The same thing happens to a setup step that loses the product it configures, and
 
 Both retrievers gain from the note. Embeddings get document-level framing, BM25 gets vocabulary the raw chunk never contained, and Anthropic names the two halves Contextual Embeddings and Contextual BM25.
 
-That is why I read it as better input for [hybrid search](/articles/hybrid-search/) and never as a replacement for it. It is also the cleanest example I know of [context engineering](/glossary/context-engineering/) done at index time.
+That is why I read Contextual Retrieval as better input for [hybrid search](/articles/hybrid-search/) and never as a replacement for it. It is also the cleanest example I know of [context engineering](/glossary/context-engineering/) done at index time.
 
 ## What Anthropic's benchmark shows
 
@@ -48,7 +48,7 @@ Anthropic's result is a stack of separate reductions in retrieval failure, measu
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/contextual-retrieval/retrieval-failure.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/contextual-retrieval/retrieval-failure.narrow.svg" width="288" height="432"><img class="np-has-narrow" src="/static/images/diagrams/contextual-retrieval/retrieval-failure.svg" width="720" height="472" alt="Reduction in top-20 retrieval failure, measured as 1 minus recall at 20, in Anthropic's contextual retrieval tests: 35% from contextual embeddings alone, 49% once contextual BM25 joins, and 67% once reranking joins too. Each tile is 5 percentage points." loading="lazy" decoding="async"></picture></a>
-  <figcaption>From Anthropic's contextual retrieval writeup. Each layer still helps on top of the one before it; each tile is 5 points.</figcaption>
+  <figcaption>From Anthropic's contextual retrieval writeup. Each layer still helps on top of the one before it, and each tile is 5 points.</figcaption>
 </figure>
 
 The breakdown is worth more than the headline because it shows each layer still helping on top of the last. Anthropic did not claim that one chunking trick made the rest of the stack irrelevant, and the full per-domain numbers are in [Appendix II](https://assets.claude.com/5722e7658c9302d8b97a3238de1bb8e6afdf04b9.pdf).
@@ -63,7 +63,7 @@ The expense lands at ingestion, and query-time retrieval barely changes unless y
 
 Query-time cost has its own lever, a cache keyed on the meaning of the question, which my page on [semantic caching](/articles/semantic-caching/) tests.
 
-Static prefixes should be reused, which is the same rule that governs [context windows](/articles/llm-context-windows/) at generation time.
+Caching works because the document prefix is identical for every chunk, and the same reuse of an unchanging prefix applies to [context windows](/articles/llm-context-windows/) at generation time.
 
 ## What changed since 2024: code left, prose stayed
 
@@ -97,4 +97,4 @@ Keep the raw chunk, generate the contextualized one at ingestion, and index the 
 4. Retrieve a wider candidate pool.
 5. Add reranking when your evals show the loss is in selection.
 
-Test generation with the raw chunk, the contextualized chunk, and the note as a header over the raw body. The best retrieval artifact is not always the best generation artifact, because the note is a model's paraphrase and the answer should quote the source.
+Test generation with the raw chunk, the contextualized chunk, and the note as a header over the raw body. The text that retrieves best isn't always the text to generate from, because the note is a model's paraphrase and the answer should quote the source.

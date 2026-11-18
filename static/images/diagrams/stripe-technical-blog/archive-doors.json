@@ -1,6 +1,6 @@
 {
   "source": "content/diagrams/stripe-technical-blog/archive-doors.mmd",
-  "hash": "4bb714fecbdfdbf0",
+  "hash": "aea0a62e0ca75f6e",
   "pele": "1.8.0",
   "width": 720,
   "height": 424,
@@ -18,7 +18,7 @@
       "mono": 11
     }
   },
-  "alt": "Three readers search for different things, Stripe API upgrades, webhook debugging, and sandbox strategy, and each lands on a different post. All three posts belong to one archive that keeps growing, so each search is a separate way into the same Stripe ecosystem.",
-  "caption": "Each new question the archive can answer adds a side door into the same building.",
-  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/stripe-technical-blog/archive-doors.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/stripe-technical-blog/archive-doors.narrow.svg\" width=\"288\" height=\"456\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/stripe-technical-blog/archive-doors.svg\" width=\"720\" height=\"424\" alt=\"Three readers search for different things, Stripe API upgrades, webhook debugging, and sandbox strategy, and each lands on a different post. All three posts belong to one archive that keeps growing, so each search is a separate way into the same Stripe ecosystem.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Each new question the archive can answer adds a side door into the same building.</figcaption>\n</figure>"
+  "alt": "Three readers search for different things, Stripe API upgrades, webhook debugging, and sandbox strategy, and each lands on a different post. All three posts belong to one archive that keeps growing, so each search is a separate way into Stripe's docs and products.",
+  "caption": "Each new question the archive can answer gives another search a way into Stripe's docs.",
+  "embed": "<figure class=\"np-figure\">\n  <a class=\"np-figure-zoom\" href=\"/static/images/diagrams/stripe-technical-blog/archive-doors.svg\"><picture><source media=\"(max-width: 712px)\" srcset=\"/static/images/diagrams/stripe-technical-blog/archive-doors.narrow.svg\" width=\"288\" height=\"456\"><img class=\"np-has-narrow\" src=\"/static/images/diagrams/stripe-technical-blog/archive-doors.svg\" width=\"720\" height=\"424\" alt=\"Three readers search for different things, Stripe API upgrades, webhook debugging, and sandbox strategy, and each lands on a different post. All three posts belong to one archive that keeps growing, so each search is a separate way into Stripe's docs and products.\" loading=\"lazy\" decoding=\"async\"></picture></a>\n  <figcaption>Each new question the archive can answer gives another search a way into Stripe's docs.</figcaption>\n</figure>"
 }

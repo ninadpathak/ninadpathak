@@ -28,13 +28,13 @@ Those decisions are the whole of [AI agent memory](/articles/agent-memory/), wha
 
 ## Memory hierarchy separates active context from persistent state
 
-Memory in an LLM system lives in two places: state the application stores and retrieves, and state the model holds while it processes one request. The first is explicit memory, the second is the attention state kept in the KV cache, and retrieval over a document corpus is a separate job that the [RAG vs memory](/articles/rag-vs-memory/) comparison covers.
+Memory in an LLM system lives in two places: state the application stores and retrieves, and state the model holds while it processes one request. State the application stores is explicit memory, state the model holds is the attention state kept in the KV cache, and retrieval over a document corpus is a separate job that the [RAG vs memory](/articles/rag-vs-memory/) comparison covers.
 
 ### Explicit and implicit memory solve different constraints
 
 Explicit memory is whatever your application decides to keep between requests, such as session logs, extracted facts and notes a model wrote to a folder. Implicit memory is built inside a forward pass, and the only control you have over it is what you put in the context window.
 
-Anthropic's [The components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), from November 6, 2026, draws the same line from the other side. It defines agent memory as knowledge retained between sessions and excludes compaction, which it describes as "summaries written by Claude that replace its older turns so it can continue working in a new context window".
+Anthropic's [The components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), from November 6, 2026, draws the same line. It defines agent memory as knowledge retained between sessions and excludes compaction, which it describes as "summaries written by Claude that replace its older turns so it can continue working in a new context window".
 
 The [Claude Code memory](/articles/claude-code-memory/) article shows one product's version of the explicit side.
 
@@ -42,13 +42,13 @@ Implicit memory is paid for in GPU memory, at 2 × layers × KV heads × head di
 
 At 16-bit precision that is 2 × 80 × 8 × 128 × 2 bytes, or 327,680 bytes per token, so a 128,000-token context holds about 42 GB of attention state for one sequence. Serving engines manage that with paging, and the [PagedAttention paper](https://arxiv.org/abs/2309.06180) of September 2023, which introduced vLLM, reports "near-zero waste in KV cache memory".
 
-That layer belongs to the serving engine, and the [LLM inference optimization guide](/articles/llm-inference-optimization/) covers sizing it. The application's lever is a smaller context, which is what the explicit layers are for.
+The KV cache belongs to the serving engine, and the [LLM inference optimization guide](/articles/llm-inference-optimization/) covers sizing it. The application's lever is a smaller context, which is what the explicit layers are for.
 
 ### The five layers answer five memory questions
 
 This page splits explicit memory into five layers: an input buffer, working context, episodic memory, semantic memory and procedural memory.
 
-The last three names come from research on agent memory, and my page on the [types of agent memory](/articles/agent-memory-types/) says where each came from and how each is looked up.
+The names episodic, semantic and procedural come from research on agent memory, and my page on the [types of agent memory](/articles/agent-memory-types/) says where each came from and how each is looked up.
 
 | Layer | Question it answers | Typical lifetime |
 | --- | --- | --- |
@@ -58,7 +58,7 @@ The last three names come from research on agent memory, and my page on the [typ
 | Semantic memory | What is known to be true? | Until a newer fact replaces it |
 | Procedural memory | How should the agent act here? | Until the rule changes |
 
-The [short-term memory guide](/articles/short-term-agent-memory/) covers the first two layers, and [agent memory in 2026](/articles/agent-memory-2026/) compares four frameworks by who writes a memory and how it's stored.
+The [short-term memory guide](/articles/short-term-agent-memory/) covers the input buffer and working context, and [agent memory in 2026](/articles/agent-memory-2026/) compares four frameworks by who writes a memory and how it's stored.
 
 ### Inclusion, retrieval, and lifecycle need separate policies
 

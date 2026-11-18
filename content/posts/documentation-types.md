@@ -47,7 +47,7 @@ Technical documentation is the set of documents that help someone use a product,
 
 ## Who technical documentation is for
 
-The classification I use separates technical documentation by the person who needs it, and [what technical documentation should include](/articles/technical-docs/) lists what each of them has to find. ClickHelp makes a similar distinction between process documents and user documents, while Squarespace Engineering frames documentation around reader behavior, patience, experience, and goal.
+The classification I use separates technical documentation by the person who needs it, and [what technical documentation should include](/articles/technical-docs/) lists what each of them has to find.
 
 That gives you the groups in the table above. User-facing documents help customers or developers adopt a product.
 
@@ -55,25 +55,25 @@ Process documents help the people building and operating it. Agent instructions 
 
 ## User-facing documentation helps someone use the product
 
-These are the documents a customer, developer, administrator, or new user opens when they want to get started, complete a task, find a precise answer, or fix a failure.
+User-facing documents are the ones a customer, developer or administrator opens to get started, finish a task, look up an exact answer or fix a failure.
 
 ### Type 1: Getting-started guides and quickstarts
 
 A getting-started guide takes someone from no working setup to a first result. It should name prerequisites, show the smallest supported path, and make success visible.
 
-React’s [Learn section](https://react.dev/learn) moves from an introduction to concepts and hands-on learning without treating a new reader as if they already know the framework. A quickstart is not a full manual.
+React’s [Learn section](https://react.dev/learn) moves from an introduction to concepts and hands-on learning without treating a new reader as if they already know the framework.
 
-Its job is to establish confidence and give the reader a sensible next page.
+A quickstart's job is to get one result working and point the reader to the next page, and it leaves the full manual to other pages.
 
 ### Type 2: Tutorials
 
 A tutorial teaches a capability through a guided sequence. It can combine several tasks because the reader is learning a skill, not only changing one setting.
 
-Squarespace Engineering distinguishes tutorials from how-to guides on that point. A tutorial demonstrates a use case or concept, while a how-to guide completes one bounded task.
+A tutorial demonstrates a use case or concept, while a how-to guide completes one bounded task.
 
 Keep checkpoints in the path so the reader can see whether they are still on track.
 
-Tutorials, with how-to guides, are the types Andrew finds models worst at. The explanation given is that "The majority of the time I spend writing a tutorial, isn't spent writing", because the work is understanding the subject and the audience before any words exist.
+Tutorials, with how-to guides, are the types Andrew finds models worst at. Andrew's explanation is that "The majority of the time I spend writing a tutorial, isn't spent writing", because the work is understanding the subject and the audience before any words exist.
 
 ### Type 3: How-to guides
 
@@ -85,7 +85,7 @@ A strong guide states the starting condition, required access, procedure, succes
 
 Reference is where exact details live. API endpoints, request fields, SDK methods, configuration values, defaults, limits, return types, and error conditions belong here because readers need information they can scan and depend on.
 
-Stripe’s [API reference](https://docs.stripe.com/api) shows the central contract clearly. A reader can move from an object to its endpoints and fields without reading a tutorial first.
+Stripe’s [API reference](https://docs.stripe.com/api) is organized by object. A reader can move from an object to its endpoints and fields without reading a tutorial first.
 
 Reference can include examples, but the examples should clarify the contract rather than turn the page into a learning path.
 
@@ -117,7 +117,7 @@ Use the [internal vs. external documentation decision](/articles/internal-vs-ext
 
 Architecture documents describe the system’s components, boundaries, data flows, dependencies, and important decisions. A design document is often narrower, explaining a proposed change before implementation begins.
 
-These documents should answer questions that source code cannot answer quickly. They should make system boundaries and important decisions inspectable.
+Architecture and design documents should answer questions that source code cannot answer quickly.
 
 For example, explain why a queue was selected over a synchronous call, which service owns a data set, and what assumptions make a deployment safe. A diagram can help, but it does not replace those decisions and constraints.
 
@@ -135,7 +135,7 @@ Tango’s [collection of technical document types](https://www.tango.ai/blog/typ
 
 A repository can now have another reader that needs documentation: a coding agent. The convention settled further on September 18, 2026, when Claude Code 2.1.277 shipped with the [changelog line](https://code.claude.com/docs/en/changelog) "Added AGENTS.md support: in a project with no CLAUDE.md, Claude Code reads AGENTS.md instead".
 
-[AGENTS.md](https://agents.md/) is an open Markdown convention for repository instructions aimed at coding agents. Its purpose is not to replace a README.
+[AGENTS.md](https://agents.md/) is an open Markdown convention for repository instructions aimed at coding agents. It sits beside a README and doesn't replace it.
 
 A README still helps people understand a project, install it, contribute to it, and find the public interface. An AGENTS.md file can hold the build commands, test commands, code conventions, security concerns, deployment details, and local rules that an agent needs when changing the repository.
 
@@ -143,7 +143,7 @@ The addition is useful because human contributors and coding agents need overlap
 
 An agent may need the exact command sequence, test scope, nearest-file instruction rule, and prohibited changes before it edits code.
 
-Keep the boundary visible. Do not hide human onboarding inside an agent file, and do not expect a long README to provide the focused instruction an agent needs during an edit.
+Keep the two files separate. Do not hide human onboarding inside an agent file, and do not expect a long README to provide the focused instruction an agent needs during an edit.
 
 If both audiences work in the repository, maintain both documents and link between them where the information overlaps.
 
@@ -169,7 +169,7 @@ A changed build command should trigger README and agent-instruction review.
 
 <!-- receipt-backed-first-person -->
 
-I reviewed the ranking pages for this query, including ClickHelp, Tango, and Squarespace Engineering, alongside the AGENTS.md guidance. The useful conclusion is not that every team needs the same list.
+I reviewed the ranking pages for this query, including ClickHelp, Tango, and Squarespace Engineering, alongside the AGENTS.md guidance. My conclusion is that a team doesn't need every type on those lists.
 
 Documentation costs less to maintain when each type has a named audience, a distinct job, and a change that tells its owner when to revisit it.
 
