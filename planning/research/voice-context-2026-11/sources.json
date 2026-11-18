@@ -107,7 +107,8 @@
         "agents had overwritten one another's work.",
         "Written by Lance Martin",
         "57 of 57 facts survived",
-        "This process is often called dreaming"
+        "This process is often called dreaming",
+        "wrote down (incorrectly) that the PokéCenter was on the east side"
       ],
       "connects": [
         "rag-vs-memory",
@@ -2538,7 +2539,8 @@
         "about ⅔ of their time at the whiteboard and ⅓ on the harness",
         "I'm Rachel Laycock, CTO at Thoughtworks.",
         "they got 80% done",
-        "senior engineers, infrastructure consultants and product people"
+        "senior engineers, infrastructure consultants and product people",
+        "tests, contracts, architecture checks and a delivery pipeline"
       ],
       "connects": [
         "red-build-nobody-reads"

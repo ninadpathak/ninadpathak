@@ -24,8 +24,8 @@
     "sources": "22b4b9f199cda9b62d7ac85deffdebdc87bb322a4731f30b805c9f443a4fd930"
   },
   "agent-memory-evidence": {
-    "lastmod": "2026-11-17",
-    "sources": "dcd7f7aba79de6bf32c59769d1b8500debf7f608a476b7e042e25597fa18ff6e"
+    "lastmod": "2026-11-18",
+    "sources": "f4d73e3ab970ca3c2d945019addec750a62aefea8ad19a29a23a392ba53773ad"
   },
   "agent-memory-types": {
     "lastmod": "2026-11-18",
@@ -44,8 +44,8 @@
     "sources": "14a8d864df1eb58fab33517299949015f8c4d9e4e5d2f55cad46bafddb67b99d"
   },
   "agents-reading-docs": {
-    "lastmod": "2026-11-17",
-    "sources": "38b706d851f059969358cf250eb67382da257ea41edfffb400ea0d4314fd6dc4"
+    "lastmod": "2026-11-18",
+    "sources": "4685cbe726617c52e4bf51cd93995487ca91bfa129d2c29d6359c9ae33f9926c"
   },
   "ai-agent-failures": {
     "lastmod": "2026-11-17",
@@ -108,8 +108,8 @@
     "sources": "eb2c86e1e75f8812f59924b1bbc8f6b8f9cb599465cada20bb3caace5095b1b4"
   },
   "coding-models-new-code-vs-change": {
-    "lastmod": "2026-11-17",
-    "sources": "b3533102e1503132be0c43460b5fbc2a64a8f508409b7ed665cfbcf241269743"
+    "lastmod": "2026-11-18",
+    "sources": "50ef9e121744e84ec796cc13609440959e6d7fab90ba21a020e405d91f86bbef"
   },
   "context-windows-vs-memory": {
     "lastmod": "2026-11-18",
@@ -252,8 +252,8 @@
     "sources": "6a42cffc0736223246026bcace545cbfaccf57c591c1f5e1289e7a71bec80387"
   },
   "nobody-understands-the-code": {
-    "lastmod": "2026-11-17",
-    "sources": "8a741b620f2d58583583181e15602f0231f092fb04cd2ece623717ee5bf9c826"
+    "lastmod": "2026-11-18",
+    "sources": "66f13e83706ac9778a25c2b189f819c472110cf979a27fa4d89d3a22c54d6ac7"
   },
   "quickstart-guide": {
     "lastmod": "2026-11-17",
@@ -272,8 +272,8 @@
     "sources": "5f1eafcd77a44c45aa0b2416c3640854fb6e78cb7890634539fc0031e0561e65"
   },
   "red-build-nobody-reads": {
-    "lastmod": "2026-11-17",
-    "sources": "bec8fb74399b2a9e0fbc8ad396f349de9230fad3ae1a5e146a79da842d749c70"
+    "lastmod": "2026-11-18",
+    "sources": "9dccb9cd0e57e379a7c200e270432aaf875c64ab4cfafb718fdb26d4c6c950d2"
   },
   "release-notes-template": {
     "lastmod": "2026-11-17",
@@ -352,7 +352,7 @@
     "sources": "a6e710d4d8a3ae1b0747e51e407da69aeefd0b841a1b4a9eb66b9c78bdb9674c"
   },
   "written-by-a-human": {
-    "lastmod": "2026-11-17",
-    "sources": "154f6e6dddce94ffdc89fc347e8c84b7c5c34920188858066db2b14a460dd788"
+    "lastmod": "2026-11-18",
+    "sources": "68483e5679ccce5372d072c955d46a2dde99e0ab409483a22ce481eb8f547b14"
   }
 }
