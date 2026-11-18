@@ -22,7 +22,7 @@ Technical documentation is the written material that explains how a product work
 
 An assistant reading on a person's behalf is a new reader. Matt Cockayne [reported on November 11](https://phpboyscout.uk/answer-first-then-everything-else/) that pages on his projects' docs sites sitting at search positions four to ten "were clicked 0.31% of the time", while assistants kept fetching them for a person who "quite possibly never sees the page at all".
 
-A later section runs his check on seven real pages to see what that reader changes inside each document.
+A later section runs a check from Cockayne's post, a count of the words before a page's first code block or table, on seven real pages.
 
 [Technical documentation](/articles/technical-documentation/) of every type now has that second reader.
 
@@ -32,12 +32,12 @@ Technical documentation should include one document for each task a reader bring
 
 | Reader task | Document that owns it | What must be visible | What shows it is enough |
 | --- | --- | --- | --- |
-| Decide whether the product fits | Orientation or README | Scope, non-scope, supported use cases, and a starting link | The reader can name the first relevant path |
+| Decide whether the product fits | Orientation or README | Scope, non-scope, supported use cases, and a starting link | The reader can say which page to open next |
 | Complete a first integration | Quickstart or tutorial | Prerequisites, one supported path, expected output, and a failure link | The reader reaches a recognizable result |
 | Understand a system choice | Explanation | Terms, model, constraints, and links to task pages | The reader can explain the choice before implementing it |
-| Change an existing behavior | How-to guide | Starting state, procedure, success state, and recovery boundary | The reader can perform the change safely |
+| Change an existing behavior | How-to guide | Starting state, procedure, success state, and the step after which the change can't be undone | The reader can perform the change safely |
 | Look up an exact question | Reference | Names, types, defaults, constraints, and exceptions | The reader can find the answer without inference |
-| Diagnose a failure | Troubleshooting | Symptom, diagnostic check, cause, recovery, and escalation boundary | The reader can choose the next safe action |
+| Diagnose a failure | Troubleshooting | Symptom, diagnostic check, cause, recovery, and when to stop and contact support | The reader can choose the next safe action |
 | Respond to a product change | Release note or migration guide | Impact, required action, version or date, and a migration path | The reader can decide whether action is required |
 
 A single page that teaches a beginner and also documents every field does neither job well. Split the jobs so each page can answer its own question completely.
@@ -46,13 +46,13 @@ The [Diátaxis framework](https://diataxis.fr/) makes the same cut and says it "
 
 ## Build the smallest package that lets someone succeed
 
-A small team can launch with less than the full table. The first reader needs to understand the product and finish one supported task, and needs the stable details that task depends on.
+A small team can launch with less than the full table. The first reader needs to understand the product and finish one supported task, and needs the reference for whatever that task touches, such as the one endpoint the quickstart calls.
 
 For an API, that often means an orientation page, a quickstart, and reference for the endpoint or SDK the quickstart uses. Add troubleshooting when a failed setup has a diagnostic path worth writing down, then release material once product changes can affect an existing integration.
 
 For a CLI, orientation should explain the tool's job and its supported environments. The quickstart should produce one visible command result, and reference owns the commands and flags.
 
-An internal platform may need a different starting package, since access and ownership can matter before any public-style portal does. Use the [internal vs. external documentation decision](/articles/internal-vs-external-docs/) when the same subject needs a private operating record and a public task page.
+An internal platform may need to start elsewhere, with who grants access and which team owns the service, before it needs a polished portal. Use the [internal vs. external documentation decision](/articles/internal-vs-external-docs/) when the same subject needs a private operating record and a public task page.
 
 Google's [technical writing course](https://developers.google.com/tech-writing/one/documents) puts the first decision in two sentences: "A good document begins by defining its scope." and "A better document additionally defines its non-scope". That decision keeps a page from collecting unrelated jobs as it grows.
 
@@ -68,15 +68,15 @@ Each document type has one job and hands the reader to another type when the job
 - **Troubleshooting** starts from a symptom the reader can recognize and ends in a safe recovery or an escalation, and its internal counterpart is the [runbook](/articles/runbook-template/).
 - **Release notes** explain changed behavior and the action it requires, and link to the migration page for the full instructions.
 
-Reference is where exactness is the whole job. Google's [API reference guidance](https://developers.google.com/style/api-reference-comments) says "API documentation must include descriptions for every class, constant, method, and parameter", because an implementation depends on exact behavior and a narrative approximation won't do.
-
 A generic support link can't tell someone whether a retry is safe, and a troubleshooting page can.
+
+Reference is where exactness is the whole job. Google's [API reference guidance](https://developers.google.com/style/api-reference-comments) says "API documentation must include descriptions for every class, constant, method, and parameter", because an implementation depends on exact behavior and a narrative approximation won't do.
 
 ## What should the first screen of each document hold?
 
 A how-to guide should open with the command or call that does the job, and a reference page with the thing people came to look up. Tutorials and explanations keep their lead-in, because their reader chose to sit down and learn.
 
-That is Cockayne's rule, and the reason behind it is what assistants fetched on his sites: "it was the pages whose first screen was a quotable command". His wording for the two page types is exact enough to review against.
+That is Cockayne's rule, and the reason behind it is what assistants fetched on his sites: "it was the pages whose first screen was a quotable command".
 
 A how-to, in his words, "opens with whatever does the job, directly under the heading", and he caps that opening at ten lines. "A reference page opens with whatever a person came to look up, the table or the field list or the exit codes."
 
@@ -112,7 +112,7 @@ Give each document an owner and a product change that requires review. A review 
 
 GitLab's contributor guide opens by calling its documentation ["the single source of truth (SSoT) for information about how to configure, use, and troubleshoot GitLab."](https://docs.gitlab.com/development/documentation/) A page can only hold that status if someone updates it when product behavior makes its instructions unsafe or incomplete.
 
-A useful trigger connects the document to the change that can invalidate it. A schema change should prompt reference review, and a recurring failure should prompt troubleshooting work.
+A recurring failure should prompt troubleshooting work in the same way.
 
 Use a [technical documentation template](/articles/documentation-template/) when you are ready to turn these decisions into a repository. Then [test whether a page helps someone finish a task](/articles/documentation-best-practices/) before calling it complete.
 

@@ -34,7 +34,7 @@ A task-based heading belongs on a section that holds a task, and the rule stops 
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-headings/task-heading-anatomy.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-headings/task-heading-anatomy.narrow.svg" width="288" height="376"><img class="np-has-narrow" src="/static/images/diagrams/documentation-headings/task-heading-anatomy.svg" width="720" height="480" alt="An illustrative example rewrites the topic label Configuration as the task heading Configure the client with an API key. Brackets under the heading mark its three parts: the action Configure, the object the client, and the context with an API key, each drawn as a play head, a cube, and a key." loading="lazy" decoding="async"></picture></a>
-  <figcaption>A topic label names a subject. A task heading names the work: an action, an object, and the context that changes the next step.</figcaption>
+  <figcaption>A topic label names a subject. A task heading names the work: an action (Configure), an object (the client) and the detail that tells this task from a similar one (with an API key).</figcaption>
 </figure>
 
 ## Match the heading to the section's job
@@ -62,9 +62,9 @@ Use a task heading when the section tells the reader how to change a system or r
 
 For example, `Configure the client with an API key` tells the reader what they will do and what it applies to. `Configuration` tells them only that the topic is configuration.
 
-Add context when it changes the next action. A detail such as the environment or a prerequisite belongs in the heading only if omitting it would make the task ambiguous.
+Add a detail when two tasks would otherwise share a heading. Say the macOS and Windows installs differ: `Install the CLI on Windows` then needs its last two words.
 
-Diátaxis says ["How-to guides are goal-oriented."](https://diataxis.fr/how-to-guides/) That is a useful check for a heading: prefer the reader's goal over a list of product controls.
+Diátaxis says ["How-to guides are goal-oriented."](https://diataxis.fr/how-to-guides/) That is a useful check for a heading: prefer the reader's goal over the name of the setting.
 
 For example, `Delay retries after a rate-limit response` explains the intended behavior. `Set the retry_after field` can be correct, but it makes the reader inspect the section before learning why that setting matters.
 
@@ -72,7 +72,7 @@ For example, `Delay retries after a rate-limit response` explains the intended b
 
 No. A verb helps when the reader is meant to act, and a section that explains a concept or documents one item needs a descriptive noun phrase.
 
-The opposite advice is a staple of help-centre marketing. Dedox, which sells help-centre software, put it this way in a promotional post on November 1: ["How to change your plan" beats "Plan management" every time.](https://mastodon.social/@dedox/117540805753181893)
+Dedox, which sells help-centre software, gave the opposite advice in a promotional post on November 1: ["How to change your plan" beats "Plan management" every time.](https://mastodon.social/@dedox/117540805753181893)
 
 The example is right, because a help-centre article about changing a plan is a task.
 
@@ -116,7 +116,7 @@ curl -sL -H 'Accept-Language: en-US' https://docs.stripe.com/webhooks.md | grep 
 
 The outline reads as the job in order: set up, create, test, debug. The reference material sits under "Event delivery behaviors", and its own subheadings are noun phrases such as "Automatic retries" and "Event ordering".
 
-Compare that with labels such as `Setup`, `Testing`, and `Errors`. Those labels may be acceptable inside a tightly scoped interface, but they do not describe a task or subject by themselves.
+Compare that with labels such as `Setup`, `Testing`, and `Errors`. Those labels can work on a settings screen, where the page title supplies the subject, and on a docs page they describe neither a task nor a subject.
 
 ## Rewrite headings where the reader needs to choose a next step
 

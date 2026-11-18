@@ -5744,7 +5744,9 @@
       "might be noise",
       "charged"
     ],
-    "rag-reranking": [],
+    "rag-reranking": [
+      "after 30 days"
+    ],
     "documentation-headings": [
       "information about this topic"
     ],
@@ -5756,7 +5758,11 @@
       "Deprecated soon",
       "Medium",
       "If a sentence cannot help someone decide, migrate, verify, or troubleshoot, it does not belong above the technical changes.",
-      "Keep version 3 deployed in the previous production slot. If error rates rise before v4 cursors are stored, shift traffic back. After that point, disable pagination writes and contact support before downgrading."
+      "Keep version 3 deployed in the previous production slot. If error rates rise before v4 cursors are stored, shift traffic back. After that point, disable pagination writes and contact support before downgrading.",
+      "Refactored token validation",
+      "Export moved from the toolbar to the row menu",
+      "Deprecated in 3.8, removed in 4.0 on 30 September 2026",
+      "Upgraded database driver"
     ],
     "nobody-understands-the-code": [],
     "writing-changelogs": [

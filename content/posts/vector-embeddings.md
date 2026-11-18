@@ -17,9 +17,9 @@ Someone typed "soviet" into [a semantic search over about 6.3 million museum art
 
 Embeddings are the first stage of a [RAG pipeline](/articles/rag/), and every later stage inherits their mistakes.
 
-[The thread](https://news.ycombinator.com/item?id=50194522), from October 22, teaches the geometry better than the king-and-queen diagram does, because each complaint in it is a property of the space. A commenter reported that the site "Completely failed if you search by Artist name", and another searched "holofernes" and got paintings "not-of-but-aesthetically-similar-to Judith beheading Holofernes".
+[The thread](https://news.ycombinator.com/item?id=50194522), from October 22, teaches the geometry better than the king-and-queen diagram does, because each complaint in the thread comes from how nearest-point search behaves. A commenter reported that the site "Completely failed if you search by Artist name", and another searched "holofernes" and got paintings "not-of-but-aesthetically-similar-to Judith beheading Holofernes".
 
-A third user praised the results for Art Deco, and the same geometry accounts for that too. The figure shows the textbook version of it, with the two senses of "bank" landing in different neighbourhoods.
+The figure shows the textbook example, in which the two senses of "bank" land in different neighbourhoods.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/vector-embeddings/meaning-space.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/vector-embeddings/meaning-space.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/vector-embeddings/meaning-space.svg" width="720" height="392" alt="Two texts that both use the word bank go through the same embedding model. Text about bank fees lands among financial concepts, and text about a river bank lands among geographic ones, so a strong model keeps the two senses apart in vector space." loading="lazy" decoding="async"></picture></a>
@@ -35,7 +35,7 @@ The word covers four kinds of output, and they fail in different ways.
 | Type | What is stored | Good at | Weak at |
 | --- | --- | --- | --- |
 | Dense | One vector per text, a few hundred to a few thousand floats | Paraphrase and topic | Separating near-identical names and codes by a safe margin |
-| Sparse | One weight per vocabulary term, nearly all zero | Exact terms | Wording the document doesn't share |
+| Sparse | One weight per vocabulary term, nearly all zero | Exact terms | Queries worded differently from the document |
 | Multi-vector | One vector per token | Phrase-level matching | Storage |
 | Binary | One bit per dimension of a dense vector | Memory and speed | Fine ranking |
 
@@ -105,7 +105,9 @@ The question about a negative balance shares one word with the overdraft sentenc
 
 The model did rank the right code first, by a margin too thin to set a threshold on. The same row ranks the unrelated error above the sentence that describes the fault in plain words.
 
-The run also offers one reading of the artist-name complaint. A name can only pull a document toward a query if the name was part of what got embedded, and one comment in the thread asks the question that decides it: "whether the embeddings come off the images or the catalog text", which the site's About page doesn't answer.
+The run also suggests why artist names failed on the museum site. "holofernes" found the Gentileschi document because the name is in the text that was embedded.
+
+A name can only pull a document toward a query if the name was part of what got embedded, and one comment in the thread asks the question that decides it: "whether the embeddings come off the images or the catalog text", which the site's About page doesn't answer.
 
 Query and document are embedded separately here, which is what makes the model a [bi-encoder](/glossary/bi-encoder/). The documents can be embedded once and stored, and only the query is embedded at search time, the arrangement the figure draws for a document split into chunks.
 
@@ -130,9 +132,9 @@ OpenAI's [embeddings guide](https://developers.openai.com/api/docs/guides/embedd
 
 ## Why can't you read a similarity score on its own?
 
-A similarity score means nothing until you know the scores unrelated texts get from the same model, and that floor is high. The run above scored the bank-charge question as low as 0.37 and as high as 0.57 against the five wrong documents, so a rule such as "keep anything over 0.5" would have kept both Oracle errors as answers to it.
+A similarity score means nothing until you know the scores unrelated texts get from the same model, and that floor is high. The run above scored the bank-charge question as low as 0.37 and as high as 0.57 against the five wrong documents, so a rule such as "keep anything over 0.5" would have kept the missing-table sentence and both Oracle errors as answers to it.
 
-The floor is far above what the dimension count predicts. Random directions in a high-dimensional space are almost exactly perpendicular, which a few lines of numpy confirm.
+That floor is far above what chance gives. A pair of random directions in a high-dimensional space is almost exactly perpendicular, so the cosine is near zero, which a few lines of numpy confirm.
 
 ```python
 """Cosine similarity between random directions in 3, 384 and 1,536 dimensions."""
@@ -163,7 +165,7 @@ That floor is also the best explanation I have for the cylinder seal. Nearest-ne
 
 ## Why do queries and documents sit in different parts of the space?
 
-A question and the passage that answers it are different kinds of text, so their embeddings form two populations. Apple's machine learning group built a retrieval method on that observation and [wrote it up on November 5, 2026](https://machinelearning.apple.com/research/faster-retrieval).
+A question and the passage that answers it are different kinds of text, so their embeddings land in two separate regions. Apple's machine learning group built a retrieval method on that observation and [wrote it up on November 5, 2026](https://machinelearning.apple.com/research/faster-retrieval).
 
 The post says that in RAG, queries "arise from short user-generated questions" and the stored keys "represent long, informative, and curated pieces of text, making keys and queries substantially different."
 
@@ -189,7 +191,7 @@ Shortening works on models trained for it. The method is [Matryoshka Representat
 
 OpenAI exposes shortening as a `dimensions` parameter and reports that "a text-embedding-3-large embedding can be shortened to a size of 256 while still outperforming a full-length text-embedding-ada-002 embedding with a size of 1536." Cohere's embed-v5.0-pro accepts output sizes of 256 up to 2048.
 
-The bge-small model in my run has 384 dimensions, and its model card describes no such training. Cutting its vectors to the first 128 values would discard information the model never arranged to keep at the front.
+The bge-small model in my run has 384 dimensions, and its model card doesn't mention Matryoshka training. Cutting its vectors to the first 128 values would discard information the model never arranged to keep at the front.
 
 ## What is a binary vector embedding?
 
