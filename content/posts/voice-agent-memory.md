@@ -42,8 +42,8 @@ Voice frameworks differ, and the difference decides what ends up in memory. The 
 | Stack | What is kept after an interruption |
 | --- | --- |
 | OpenAI Realtime API | Played audio only. Truncation "will cut the audio at a given place and remove the text transcript for the unplayed portion", and the guide adds that this "doesn't provide a truncated transcript." |
-| [LiveKit Agents](https://docs.livekit.io/agents/build/turns/) | Text of the heard part. The agent "automatically truncates its conversation history to include only the portion of the speech that the user heard before interruption." |
-| [Pipecat](https://docs.pipecat.ai/guides/learn/context-management) | Text of the heard part, word by word. Its documentation says "Your context stays updated at the word level in case an interruption occurs". |
+| [LiveKit Agents](https://docs.livekit.io/agents/logic/turns/) | Text of the heard part. The agent "automatically truncates its conversation history to include only the portion of the speech that the user heard before interruption." |
+| [Pipecat](https://docs.pipecat.ai/pipecat/learn/context-management) | Text of the heard part, word by word. Its documentation says "Your context stays updated at the word level in case an interruption occurs". |
 
 On the Realtime API the transport also matters. Over WebRTC or SIP "The server will automatically truncate unplayed audio when there's a user interruption.", and over WebSocket the client must "Record how many milliseconds of that item's audio the user actually heard."
 
