@@ -110,4 +110,6 @@ Put each fact next to the change that would make it wrong.
 
 Guides are where a [quick start](/articles/quickstart-guide/) or a page from the [technical documentation template](/articles/documentation-template/) lives, and each should link into reference at the point where an exact name becomes necessary. A change that breaks a public contract also owes its callers an entry in the release notes, written from the [release notes template](/articles/release-notes-template/).
 
-Maintaining several forms sounds like duplicated work, and it becomes duplication only when each form repeats the same answer. A comment goes stale when its lines change, a docstring when the contract changes and a guide when the workflow changes. So each form lives beside the thing that changes it, and links to the next form where the reader needs more.
+Maintaining several forms sounds like duplicated work, and it becomes duplication only when each form repeats the same answer.
+
+A comment goes stale when its lines change, a docstring when the contract changes and a guide when the workflow changes. So each form lives beside the thing that changes it, and links to the next form where the reader needs more.

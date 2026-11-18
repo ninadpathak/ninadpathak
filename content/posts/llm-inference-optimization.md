@@ -16,7 +16,7 @@ updated: '2026-11-16'
 
 At sixteen concurrent requests, two NVIDIA DGX Stations serving GLM-5.3 through vLLM produced 607.8 tokens per second, and at thirty-two they produced 385.0. Those figures come from [a tutorial NVIDIA published on November 13](https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/), and the table they sit in is the best short lesson in inference optimization I've read this year.
 
-LLM inference optimization is the work of serving more tokens per GPU at a latency users will accept, and that run shows where the work now sits. The run had prefix caching and an FP8 KV cache switched on, the batching and paging this page used to tell you to enable were already running, and doubling the load still made the whole system slower.
+LLM inference optimization is the work of serving more tokens per GPU at a latency users will accept. NVIDIA's run had prefix caching and an FP8 KV cache switched on, the batching and paging this page used to tell you to enable were already running, and doubling the load still made the whole system slower.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/llm-inference-optimization/inference-stack.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/llm-inference-optimization/inference-stack.narrow.svg" width="288" height="1040"><img class="np-has-narrow" src="/static/images/diagrams/llm-inference-optimization/inference-stack.svg" width="720" height="856" alt="The inference stack as layered slabs, top to bottom: serving engines (vLLM, TensorRT-LLM, SGLang); continuous batching, drawn as request lanes where a finished request frees its slot for a new one; Flash Attention, drawn as a score matrix streamed tile by tile into on-chip memory; quantization, drawn as one weight at 16, 8, and 4 bits; the paged KV cache, drawn as three sequences mapped onto scattered memory blocks; and the GPU with its memory stacks. Numbered squares mark four of the layers, top to bottom: batching, the attention kernel, FP8 quantization and the paged KV cache." loading="lazy" decoding="async"></picture></a>
@@ -27,7 +27,7 @@ Every other [LLM inference](/articles/ai-engineering/) technique is judged by wh
 
 ## Which LLM inference optimization techniques are on by default?
 
-Continuous batching, the paged KV cache and prefix caching are on by default in vLLM and SGLang. Modelplane's [Open Field Guide to Inference Engineering](https://docs.modelplane.ai/guides/inference-guide), which reached Hacker News on November 10, covers the first pair in five words: "Check it, don't build it."
+Continuous batching, the paged KV cache and prefix caching are on by default in vLLM and SGLang. Modelplane's [Open Field Guide to Inference Engineering](https://docs.modelplane.ai/guides/inference-guide), which reached Hacker News on November 10, covers batching and paging in five words: "Check it, don't build it."
 
 | Technique | What it does | What is left for you |
 | --- | --- | --- |
@@ -37,9 +37,9 @@ Continuous batching, the paged KV cache and prefix caching are on by default in 
 
 The guide is long, and one of its maintainers [said on Hacker News](https://news.ycombinator.com/item?id=50453146) "We certainly used agents to help us put a draft together", so I use it as a reference for defaults and for one set of measurements. Upbound's engineers ran coding agents against a self-hosted model, and the guide reports that "About two-thirds of prompt tokens hit the prefix cache, because agents resend their transcript on every turn."
 
-That figure is why the prefix cache hit rate belongs on a dashboard once your clients are agents.
+A hit rate of two thirds is why the prefix cache belongs on a dashboard once your clients are agents.
 
-The same team "found that vLLM and scheduling worked. The time went to TLS, identity, timeouts, storage, IAM and observability."
+Upbound's team "found that vLLM and scheduling worked. The time went to TLS, identity, timeouts, storage, IAM and observability."
 
 ## How much memory does the KV cache need?
 
@@ -47,7 +47,7 @@ The KV cache needs 2 × layers × KV heads × head dimension × bytes per value 
 
 A single 128,000-token sequence therefore takes about 42 GB of cache, and sixteen of them take about 671 GB. Context length and concurrency draw on the same memory, so every token of context you allow is a token another user can't have.
 
-[Mixture-of-experts models](/articles/mixture-of-experts/) add a sizing trap. The GLM-5.3 build in NVIDIA's tutorial "has 753 billion parameters, with 40 billion activated per token", and the full 464 GB checkpoint still has to sit in GPU memory because any token can route to any expert.
+[Mixture-of-experts models](/articles/mixture-of-experts/) need memory for all of their weights, even though each token uses a fraction of them. The GLM-5.3 build in NVIDIA's tutorial "has 753 billion parameters, with 40 billion activated per token", and the full 464 GB checkpoint still has to sit in GPU memory because any token can route to any expert.
 
 The [KV cache eviction article](/articles/kv-cache-eviction/) covers which cached state goes when memory fills.
 
@@ -55,7 +55,7 @@ The [KV cache eviction article](/articles/kv-cache-eviction/) covers which cache
 
 Use the lowest precision your GPU runs natively and your own evals accept, which on current NVIDIA hardware means FP8 first. FP8 has native tensor-core support on NVIDIA's [Hopper](https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/) and [Ada Lovelace](https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf) architectures, and Ampere cards like the A100 have none.
 
-On the newer cards the matrix multiplies run in FP8, so you get compute throughput as well as roughly half the weight storage of BF16. Weight-only 4-bit formats such as AWQ and GPTQ are a different trade: they free memory for the KV cache and speed up decode, and they leave prefill where it was.
+On the newer cards the matrix multiplies run in FP8, so you get compute throughput as well as roughly half the weight storage of BF16. Weight-only 4-bit formats such as AWQ and GPTQ are a different trade: they free memory for the KV cache and speed up decode, and they don't speed up prefill.
 
 Posts about quantization, including the earlier version of this one, like to quote a percentage of quality lost per step down. I've removed those numbers because the loss depends on the model and the task, and the only figure worth trusting comes from your own eval set.
 
@@ -70,9 +70,9 @@ More throughput stops helping at the concurrency where requests no longer meet y
 | 16 | 607.8 | 136.46 | 482.90 |
 | 32 | 385.0 | 453.54 | 899.36 |
 
-Total throughput in NVIDIA's table rises through sixteen requests, and each user pays for it, with per-user speed falling "from 115.3 tok/s at C1 to 13.0 tok/s at C32." Past the peak nobody gains anything.
+Total throughput in NVIDIA's table rises through sixteen requests, and each user pays for it, with per-user speed falling "from 115.3 tok/s at C1 to 13.0 tok/s at C32." Past sixteen requests total throughput falls as well, so nobody gains.
 
-The detail that settles it is in the reproduction notes. The launch script ships with `--max-num-seqs 16`, and NVIDIA had to relaunch the server with the cap raised to 32 to produce the last row, so the shipped configuration already stops at the peak.
+NVIDIA's launch script ships with `--max-num-seqs 16`, and its reproduction notes say the server had to be relaunched with the cap raised to 32 to produce the last row. So the shipped configuration already stops at the peak.
 
 That makes the concurrency cap the first setting to tune, and it makes a throughput benchmark quoted without latency the overrated number in this field. The [time to first token guide](/articles/time-to-first-token/) covers the latency side.
 
@@ -102,4 +102,4 @@ Start with what the engine already does and end with anything that needs a draft
 
 Hardware changes the order only when memory is short. On a consumer GPU a large model and a long context won't fit together, so quantization moves from step two to the first decision you make.
 
-A model that outgrows one GPU has to be split, and NVIDIA's two-Station setup does it with tensor parallelism over RDMA. Plan that before deployment, because sharding is a launch configuration.
+A model that outgrows one GPU has to be split, and NVIDIA's two-Station setup does it with tensor parallelism over RDMA. Plan the split before deployment, because tensor parallelism is set when the server launches.
