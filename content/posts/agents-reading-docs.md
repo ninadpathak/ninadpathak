@@ -21,7 +21,7 @@ My llms.txt article from October leaned on one study for whether anything fetche
 
 I think the report is worth your time, and I don't buy its title. On llms.txt it moved me a little: the file is good to have, and the evidence that models fetch it is still thin.
 
-Both questions decide how much [AI search optimization](/articles/ai-search-optimization/) a docs team should take on.
+Whether agents are now the main readers of docs, and whether anything fetches llms.txt, decide how much [AI search optimization](/articles/ai-search-optimization/) a docs team should take on.
 
 ## What I don't buy
 
@@ -33,7 +33,7 @@ A person who reads one guide for ten minutes is one page load, and a coding agen
 
 Fern sells a docs platform, and it also publishes its method and its limits, which is why I trust the report enough to argue with it. A limit in that list cuts against my argument: agents that fetch HTML aren't counted at all, and the report says ChatGPT, Gemini and Perplexity do exactly that.
 
-Another limit supports it. About two thirds of September's agent requests carried a browser or generic user agent, so calling them agents rests on which route they asked for.
+Another limit supports my argument: about two thirds of September's agent requests carried a browser or generic user agent, so calling them agents rests on which route they asked for.
 
 Count only the requests that name an AI agent or crawler and the September share is 32.8%, up from 2.3% in January. I think that figure belonged in the title, because a rise of roughly fourteen times is striking without the larger count.
 
@@ -45,9 +45,9 @@ The finding I'd change my plans for is which pages agents read. Agents spend 31%
 
 That makes sense to me if you treat an agent request as a developer's question arriving through a tool. The developer has already chosen the product, and now wants to know what a parameter accepts and what changed last month.
 
-So Fern says to put the next round of work into the reference and the changelog, and I agree. The instruction I'd act on first is about error codes, a page writers skip: "Every error code says what causes it and how to fix it."
+So Fern says to put the next round of work into the reference and the changelog, and I agree. The instruction I'd act on first is about the error reference, a page writers skip: "Every error code says what causes it and how to fix it."
 
-Both pages have a worked model on this site. The [API documentation guide](/articles/api-documentation/) writes one reference entry in full, errors included, and the [release notes template](/articles/release-notes-template/) is a starting point for a changelog keyed to endpoint and date.
+The reference and the changelog each have a worked model on this site. The [API documentation guide](/articles/api-documentation/) writes one reference entry in full, errors included, and the [release notes template](/articles/release-notes-template/) is a starting point for a changelog keyed to endpoint and date.
 
 Fern doesn't tell everyone to stop writing guides, and its advice is conditional: if agents are the larger share of your traffic, put the reference and the changelog ahead of new guides.
 
@@ -59,7 +59,7 @@ So count your own traffic first, and write down what you threw out, as Fern did 
 
 ## llms.txt is good to have, on thin evidence
 
-My view of llms.txt is that it's good to have, and that the evidence that models fetch it is still thin. Fern's report is the closest anyone has come to showing that models fetch it, so here is what it does and doesn't show.
+My view of llms.txt is that it's good to have, and that the evidence that models fetch it is still thin. Fern's report is the closest anyone has come to that evidence, so here is what it does and doesn't show.
 
 Fern counted 448,667 fetches of llms.txt in September. Claude Code made 32,812 of them, the largest count among agents that name themselves and more than GPTBot, ClaudeBot and OAI-SearchBot combined.
 

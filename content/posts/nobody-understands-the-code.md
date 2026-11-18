@@ -21,7 +21,9 @@ On November 9 a Reddit post titled "A year after the 100% AI mandate nobody unde
 
 The complaint is real, though.
 
-A day later the same site was discussing [AI usage generates a fragile codebase](https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/), which Evan X. Merz published on November 7 and says he wrote himself, and it argues that code written by agents leaves a company with developers who don't understand their own codebase, the common objection to using [coding agents](/articles/coding-agents/) at work.
+A day later Hacker News was discussing [AI usage generates a fragile codebase](https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/), which Evan X. Merz published on November 7 and says he wrote himself.
+
+It argues that code written by agents leaves a company with developers who don't understand their own codebase, which is the common objection to using [coding agents](/articles/coding-agents/) at work.
 
 So here's where I stand. People need to know what their codebase does, at the very least, and I also think that need is going to shrink.
 
@@ -53,9 +55,9 @@ An explainer is made from the code, and that's its strength. It describes the co
 
 Being made from the code is also the explainer's limit, and Peter Naur described that limit in 1985. His paper [Programming as Theory Building](https://gwern.net/doc/cs/algorithm/1985-naur.pdf) treats a program as the visible part of a theory its programmers hold, and the person who holds that theory "can explain why each part of the program is what it is".
 
-So the what and the why come from different places. What a module does can be read off the module, by a person or by a model.
+So what a module does and why it does it that way come from different places. What a module does can be read off the module, by a person or by a model.
 
-Why it does it that way depends on things that were never in the repository, such as the option that was tried and dropped, or the outage behind an odd timeout. Ask a model for the why and you'll get a plausible reading of the code, with nothing to mark where it guessed.
+The why depends on things that were never in the repository, such as the option that was tried and dropped, or the outage behind an odd timeout. Ask a model for the why and you'll get a plausible reading of the code, with nothing to mark where it guessed.
 
 Naur went further than I would. He thought a program's theory can't be rebuilt from documentation at all, and that a program dies when the team holding its theory breaks up, even while it keeps running.
 
@@ -69,11 +71,11 @@ So the explainer covers the what, and the history is carried by people who were 
 
 [A reply to Merz](https://news.ycombinator.com/item?id=50446216) argued that understanding moves up a level, the way few programmers understand the kernel they run on. I don't buy that as it stands, because the kernel has an owner and a written contract, and a service agents generated last year has neither unless someone supplied them.
 
-Change at that volume also produces more failed builds than a team can read, which [my essay on red builds](/articles/red-build-nobody-reads/) takes up. Whether the models change existing code as well as they write new code is a separate question, in [new code versus change](/articles/coding-models-new-code-vs-change/).
+Change at that volume can also turn a build red so often that people stop looking, which is the worry [my essay on red builds](/articles/red-build-nobody-reads/) takes up. Whether the models change existing code as well as they write new code is a separate question, in [new code versus change](/articles/coding-models-new-code-vs-change/).
 
 ## The part I'd still write by hand
 
-All of this leaves a smaller documentation job than the one teams used to skip. A page that says what the code does can be regenerated whenever someone needs it, and the fresh copy will beat anything kept by hand.
+All of this leaves a smaller documentation job than writing down what the code does. A page that says what the code does can be regenerated whenever someone needs it, and the fresh copy will beat anything kept by hand.
 
 What happened and how it shipped can't be regenerated, so that's the part to write, at the time it happens. Record what was chosen and what was rejected, with the outside fact that forced the choice.
 
@@ -81,6 +83,6 @@ A [design doc](/articles/design-doc-template/) keeps exactly that when it has no
 
 Naur would say even this falls short of the theory, and he may be right. But it lets a successor put a question to a page, where otherwise they could only put it to the code.
 
-To test this on any team, pick a module that agents have changed many times this year, and ask why it's built the way it is and what was decided against.
+To test whether a team has that record, pick a module that agents have changed many times this year, and ask why it's built the way it is and what was decided against.
 
 If a document answers, the history no longer depends on one person's memory. If only one person can answer, write it down before they leave the team.

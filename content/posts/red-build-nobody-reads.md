@@ -35,7 +35,7 @@ So that's the budget, a few times a day. Continuous integration depends on a fai
 
 The comparison is loose in one respect. A pager wakes one named person, and a red build addresses a whole team, where each person can assume somebody else is looking.
 
-The build light isn't the only signal that agents now produce faster than people can read. The count in [my guide to writing changelogs](/articles/writing-changelogs/) found 1,807 entries in thirty days of the Claude Code changelog, and the project folds 1,372 of them into collapsed lists.
+A red build isn't the only message that now arrives faster than people can read it. The count in [my guide to writing changelogs](/articles/writing-changelogs/) found 1,807 entries in thirty days of the Claude Code changelog, and the project folds 1,372 of them, its bug fixes and improvements, into collapsed lists.
 
 That folding is rationing, and I think it's the right instinct. Simon Willison [made the same move on November 9](https://simonwillison.net/2026/Nov/9/details-summary/) for long generated pull request descriptions, which he tells authors to hide behind a collapsed block.
 
@@ -57,12 +57,12 @@ The on-call fix was to send fewer pages, and Ewaschuk's list has the test I'd ap
 
 So a build that people must stop for has to fail seldom. I'd keep a small set of checks that turn the build red and collect everything else in a report someone reads on a schedule.
 
-The same rationing applies to a changelog, which puts the entries that need action above the ones that don't. It applies to a pull request description too, which opens with the decision the reviewer is being asked to make.
+The same rationing applies to a changelog, where the entries that need action should sit above the ones that don't. It applies to a pull request description too, which should open with the decision the reviewer is being asked to make.
 
 None of that is new, and all of it is editing. Deciding what a busy reader must see first is the work a technical writer does on a page, applied here to a build light.
 
 Where a person's review sits in the whole process is in my page on [agentic workflows](/articles/agentic-workflows/).
 
-Laycock's team reckoned they spent about two thirds of their time at the whiteboard and the rest on the harness. The harness, the code and configuration around the agent, is where these signals get designed, beside the [CLAUDE.md file](/articles/claude-md/) that tells the agent the rules.
+Laycock's team reckoned they spent about two thirds of their time at the whiteboard and the rest on the harness. The harness, which in her account is the tests, contracts, architecture checks and delivery pipeline around the agents, is where these signals get designed, beside the [CLAUDE.md file](/articles/claude-md/) that tells the agent the rules.
 
 And the first number I'd settle there is how many times a day a person can be asked to stop.

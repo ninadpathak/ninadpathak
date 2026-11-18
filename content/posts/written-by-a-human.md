@@ -8,7 +8,7 @@ bridges:
 - slug: nobody-understands-the-code
   reason: That essay starts from a complaint a detector scored as machine-written, which is why nobody can check the label.
 date: 2026-11-17
-description: Ghostty's release notes say people wrote them. I read that as an invitation, I think it's fading as agents become the readers, and I think teams whose developers return to read the changelog should keep doing it.
+description: Ghostty's release notes say people wrote them. I read that line as an invitation, I think it's fading as agents become the readers of changelogs, and I think teams that want developers to come back and read should keep writing by hand.
 slug: written-by-a-human
 status: published
 title: "Thoughts on Ghostty's hand-crafted release notes"
@@ -19,7 +19,7 @@ Ghostty's [1.4.0 release notes](https://ghostty.org/docs/install/release-notes/1
 
 That line worked on me. It made me want to read the notes the way I read something a person wrote, slowly and to the end.
 
-I also think the hand-written label is a fading thing, and that it will last only where someone really cares. Both views shape how I think about [technical documentation](/articles/technical-documentation/).
+I also think the hand-written label is a fading thing, and that it will last only where someone really cares, which is how I think about [technical documentation](/articles/technical-documentation/) in general.
 
 ## An invitation to a human reader
 
@@ -33,9 +33,9 @@ I made the related point in [the case for shorter documentation](/articles/short
 
 ## Why I think the label is fading
 
-The invitation is addressed to people, and people are a shrinking share of who reads a changelog. Fern's [State of Docs report](https://buildwithfern.com/post/state-of-docs) from November 10 found agents reading the changelog about twice as often as people do, across the docs sites Fern hosts.
+The invitation is addressed to people, and people are a shrinking share of who reads a changelog. Fern's [State of Docs report](https://buildwithfern.com/post/state-of-docs) from November 10 found agents reading the changelog about twice as much as people do, across the docs sites Fern hosts.
 
-That's one vendor's logs, and beyond them I'm going on impression. But I expect that share to keep growing, and my [changelog guide](/articles/writing-changelogs/) goes through what an agent reader changes about each entry.
+That's one vendor's logs, and beyond them I'm going on impression. But I expect agents to keep growing as a share of changelog readers, and my [changelog guide](/articles/writing-changelogs/) goes through what an agent reader changes about each entry.
 
 An agent doesn't care who typed the notes. It wants to know which versions are affected and what to change, and sixteen hours of craft are invisible to it.
 
@@ -53,7 +53,7 @@ The evidence I want is that somebody ran the command, on a stated version, and i
 
 Ghostty's notes carry that kind of evidence too, in advisory lines such as "This affects Ghostty 1.3.0 and 1.3.1." You can check your installed version against a line like that, and so can an agent.
 
-That evidence is why the [runbook template](/articles/runbook-template/) on this site has a header field called Last tested, for the date someone last ran every step. I'd copy that field onto other kinds of page before I'd copy the label, and my [about page](/about/) says how AI figures in the writing on this site.
+Wanting that evidence is why the [runbook template](/articles/runbook-template/) on this site has a header field called Last tested, for the date someone last ran every step. I'd copy that field onto other kinds of page before I'd copy the label, and my [about page](/about/) says how AI figures in the writing on this site.
 
 ## Who should keep writing by hand
 

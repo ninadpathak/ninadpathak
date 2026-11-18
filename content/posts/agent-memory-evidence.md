@@ -34,15 +34,15 @@ He's fair to his critics, printing the objection that a trace is written once an
 
 My answer is yes, and I'd make it required. None of his five questions asks how the writer knew, so a record can say where it applies and when it expires and still be wrong.
 
-Is there evidence that such a field does the work? Only a hint, and it comes from the Anthropic post.
+Is there evidence that a required source makes notes more reliable? Only a hint, and it comes from the Anthropic post.
 
-On a benchmark where models built their own notes across sessions, Claude Opus 5 was the first of the models tested whose entries carried a rule along with how it knew the rule was true. That describes what a stronger model wrote, and the post doesn't test the clause in isolation, so I won't claim it does.
+On a benchmark where models built their own notes across sessions, Claude Opus 5 is the model Anthropic singles out, and it says the majority of Opus 5's entries carried a rule along with how the model knew the rule was true. That describes what a stronger model wrote, and the post doesn't test what the how-it-knew part adds by itself, so I won't claim it does.
 
 Then there's the note Anthropic quotes from a model playing Pokémon, a rule for what to do after several failed throws: "VARY the timing (insert extra 'wait' presses between menu steps) - the catch landed right after doing this."
 
 To me the last clause of that note is a citation. A later session reading it knows the rule came from one success, and can weigh it as that.
 
-The post's failure case is a note with no source. A model recorded a landmark on the wrong side of a mountain and kept acting on it, and in a separate run a pass that checked the note against the session log caught the error.
+The post's failure case is a wrong note. A model playing Pokémon Red recorded that the PokéCenter was on the east side of Mount Moon and kept acting on that note, and in a separate run a pass that checked the note against the session log caught the error.
 
 ## Why I'd settle trust before format
 
