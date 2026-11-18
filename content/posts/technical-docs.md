@@ -94,7 +94,7 @@ awk '/^# /{h=1; next} h && /^(```|\|)/{print n+0; exit} h{n+=NF}' page.md
 | Cohere, [Chat API](https://docs.cohere.com/docs/chat-api) | How-to | 77 |
 | Cohere, [Rerank overview](https://docs.cohere.com/docs/rerank-overview) | How-to | 108 |
 | Stripe, [subscription quickstart](https://docs.stripe.com/billing/quickstart) | Tutorial | 633 |
-| LiveKit, [Turns overview](https://docs.livekit.io/agents/build/turns/) | Explanation | 656 |
+| LiveKit, [Turns overview](https://docs.livekit.io/agents/logic/turns/) | Explanation | 656 |
 | This site, [quickstart guide template](/articles/quickstart-guide/) | How-to | 376 |
 | This site, runbook template | How-to | 499 |
 
