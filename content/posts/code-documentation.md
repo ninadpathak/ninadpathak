@@ -8,7 +8,7 @@ siblings:
 title: 'Code Documentation: Comments, Generated Reference, and External Guides'
 date: 2026-08-18
 updated: 2026-11-16
-description: 'Code documentation has three homes: comments, generated reference and guides. Real examples, where each fact belongs, and whether agents should write comments.'
+description: 'Code documentation has three homes: comments, generated reference and guides. This page shows real examples, says where each fact belongs, and answers whether coding agents should write comments.'
 takeaways:
 - Put local rationale beside the code that needs it to be read correctly.
 - Generate reference from stable contracts that source can expose.
@@ -21,9 +21,9 @@ video: code-documentation
 
 Claude Fable 5.1 was told not to add code comments and added a comment or docstring anyway in 33 of 100 tasks. The count comes from [Shut up and SWE-bench](https://bayes.net/shut-up-and-swe-bench/), a small benchmark Tom Adamczewski published on September 24 out of one frustration: "AIs have such poor judgement for when to write a code comment that I prefer to have them write none at all."
 
-Code documentation is the written material that explains source code, and it has three homes: comments for local reasoning, docstrings and generated reference for contracts, and guides for decisions that cross several parts of a system. The benchmark is an argument about the first home, and the post weakens its own no-comments rule when it says of the comments GPT-6 Astra added that "all 6 comments seem legitimate to me".
+Code documentation is the written material that explains source code, and it has three homes: comments for local reasoning, docstrings and generated reference for contracts, and guides for decisions that cross several parts of a system. The benchmark is an argument about comments, and the post weakens its own no-comments rule when it says of the comments GPT-6 Astra added that "all 6 comments seem legitimate to me".
 
-I believe the measurement and would throw out the rule. Models fill that first home with narration, which human teams have always done too, and the fix is the same for both.
+I believe the measurement and would throw out the rule. Models fill comments with narration of what they just changed, which human teams have always done too, and the fix is the same for both: a comment has to give a reason.
 
 Code documentation is the layer of [technical documentation](/articles/technical-documentation/) that sits closest to the code.
 
@@ -51,7 +51,7 @@ A useful comment states a reason the code can't show, and a useful docstring sta
 "has_visuals": ('class="visual-' in html) or ("<iframe" in html),
 ```
 
-Delete that comment and the next editor will tidy the condition back into the bug it fixed. The opposite kind is the one ryandrake [quoted on Hacker News](https://news.ycombinator.com/item?id=49613881) on September 8, "This code returns true if the user clicked on a button -- not on the list view.", with the verdict "I don't care what the code doesn't do."
+Delete that comment and the next editor will tidy the condition back into the bug it fixed. The useless kind is the one ryandrake [quoted on Hacker News](https://news.ycombinator.com/item?id=49613881) on September 8, "This code returns true if the user clicked on a button -- not on the list view.", with the verdict "I don't care what the code doesn't do."
 
 A docstring is the comment a caller reads, so it describes the unit from outside.
 
@@ -85,17 +85,17 @@ Machine-written comments are regular enough to detect, whatever the tell turns o
 
 A better instruction turned up in Nathan Broadbent's November 13 [review of the Ponytail plugin](https://docspring.com/blog/posts/ponytail-vs-agents-md/). Broadbent summarises one Ponytail rule as telling an agent to "leave a shortcut: comment naming any limit you accepted and when to revisit it.", which is a rationale comment with a required shape.
 
-DocSpring's repository, which Broadbent describes in the same post, applies the placement idea to whole directories. It has a root AGENTS.md and "a nested file next to each part of the code that has its own pitfalls (migrations, background jobs, the public API, CI)."
+DocSpring's repository, which Broadbent describes in the same post, puts instructions next to the code they govern, one directory at a time. It has a root AGENTS.md and "a nested file next to each part of the code that has its own pitfalls (migrations, background jobs, the public API, CI)."
 
 ## Why the code alone isn't enough documentation
 
 Code records what the program does and has no place to record what was rejected. The strongest version of the opposite view came from kaydub, in the [thread on Kevin Liao's documentation post](https://news.ycombinator.com/item?id=49955753) on October 4: "The code IS the documentation."
 
-The reason given was experience with the alternative: "I kept tons of markdown docs and decision docs. Now those things are just causing problems because they got stale."
+The commenter's reason was experience with separate documents: "I kept tons of markdown docs and decision docs. Now those things are just causing problems because they got stale."
 
-That evidence supports a narrower claim than the conclusion. Documents kept far from the code went stale, and that argues for moving each fact next to the change that can invalidate it.
+That experience shows that documents kept far from the code went stale. I read it as an argument for moving each fact next to the change that can invalidate it, and the code alone still can't hold the fact.
 
-Generated reference has the matching limit from the other side. It can list what a parameter accepts, and it can't say which call proves an integration works or what to do when a valid request fails in production.
+Generated reference has a limit of its own. It can list what a parameter accepts, and it can't say which call proves an integration works or what to do when a valid request fails in production.
 
 ## Where should each piece of code documentation go?
 
@@ -104,10 +104,10 @@ Put each fact next to the change that would make it wrong.
 | If the reader needs to know | Put it in | Because |
 | --- | --- | --- |
 | Why this branch, guard or ordering rule exists | A comment beside it | The explanation changes how those lines should be edited |
-| What a public unit accepts or returns | A docstring and generated reference | The contract needs exact, searchable facts that stay close to source |
-| How to finish work across several units, or recover from a failure | A written guide | The reader needs sequence, context and a decision no single symbol owns |
+| What a public unit accepts or returns | A docstring and generated reference | A caller searches for the exact name and types, and source is where they change |
+| How to finish work across several units, or recover from a failure | A written guide | The steps span several functions, and no single docstring can hold their order |
 | Which pitfalls apply to everything in a directory | A README or AGENTS.md in that directory | Agents and people both load it when they start work there |
 
 Guides are where a [quick start](/articles/quickstart-guide/) or a page from the [technical documentation template](/articles/documentation-template/) lives, and each should link into reference at the point where an exact name becomes necessary. A change that breaks a public contract also owes its callers an entry in the release notes, written from the [release notes template](/articles/release-notes-template/).
 
-Maintaining several forms sounds like duplicated work, and it becomes duplication only when each form repeats the same answer. A comment, a contract and a reader's route have different update triggers, so keep each beside its own trigger and let it hand the reader to the next one.
+Maintaining several forms sounds like duplicated work, and it becomes duplication only when each form repeats the same answer. A comment goes stale when its lines change, a docstring when the contract changes and a guide when the workflow changes. So each form lives beside the thing that changes it, and links to the next form where the reader needs more.
