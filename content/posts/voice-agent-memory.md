@@ -8,7 +8,7 @@ bridges:
 - slug: voice-agent-latency
   reason: A memory lookup in the middle of a turn is silence on the line, which the latency page measures.
 date: 2026-04-19
-description: 'Memory for voice AI agents has one rule text chatbots skip: store what the caller heard. How OpenAI, LiveKit and Pipecat differ, with a simulated example.'
+description: 'Memory for voice AI agents has one rule text chatbots skip: store what the caller heard. This page covers how OpenAI, LiveKit and Pipecat differ, with a simulated example.'
 status: published
 work_note: "I'm Ninad Pathak, a freelance technical writer for AI and developer-tool companies. I write developer documentation, tutorials and technical articles, and I run the product before I write about it. [See how I work](/services/freelance-technical-writer-for-ai-companies/) and tell me what you're shipping."
 title: 'Memory for Voice AI Agents: What Text Chatbots Cannot Do'
@@ -37,7 +37,7 @@ The guide gives the reason in the caller's words: the model should know where it
 
 ## How do voice frameworks record what the caller heard?
 
-They differ, and the difference decides what ends up in memory. The stacks I read fall into two groups.
+Voice frameworks differ, and the difference decides what ends up in memory. The stacks I read fall into two groups: one keeps only the played audio, and the other keeps the text of the part the caller heard.
 
 | Stack | What is kept after an interruption |
 | --- | --- |
@@ -90,7 +90,7 @@ stores heard text      -> history claims the caller was told the time: False
 
 A history that stores the generated text says the caller was told an appointment time. The caller heard seven words that stop before the date.
 
-When the caller then says "no, Wednesday", a model given the first history has no way to know the time was never spoken. Given the second, the missing half of the sentence is visible in the record.
+When the caller then says "no, Wednesday", a model given the generated text has no way to know the time was never spoken. Given the heard text, the missing half of the sentence is visible in the record.
 
 ## Can a voice agent remember context from earlier in the same call?
 
@@ -100,9 +100,9 @@ The voice-specific risk is a wrong entry more than a missing one. A turn recorde
 
 ## What should a voice agent remember across calls?
 
-Facts the caller would expect a person to remember, written after the call from a history that matches what was played. On LiveKit or Pipecat that history is the framework's own.
+A voice agent should remember facts the caller would expect a person to remember, written after the call from a history that matches what was played. On LiveKit or Pipecat that history is the framework's own.
 
-On the Realtime API it isn't available as text, so the choice is between transcribing the played audio and accepting that long-term notes are built from a transcript with holes. My choice is the first for anything a caller will be held to, such as a booking.
+On the Realtime API it isn't available as text, so the choice is between transcribing the played audio and accepting that long-term notes are built from a transcript with holes. I'd transcribe the played audio for anything a caller will be held to, such as a booking.
 
 Retrieval has a constraint text doesn't share, since a lookup in the middle of a turn is silence on the line. [Tracing voice agent latency](/articles/voice-agent-latency/) follows where that time goes, and [AI memory management for LLMs](/articles/ai-memory-management/) covers what to store.
 
@@ -110,11 +110,11 @@ Retrieval has a constraint text doesn't share, since a lookup in the middle of a
 
 **Does the Realtime API handle interruptions for me?**
 
-It handles the audio, depending on the connection. OpenAI's guide says the server truncates unplayed audio on WebRTC and SIP, and that with a WebSocket connection the client "must stop playback and handle truncation".
+The Realtime API handles the audio, depending on the connection. OpenAI's guide says the server truncates unplayed audio on WebRTC and SIP, and that with a WebSocket connection the client "must stop playback and handle truncation".
 
 **What is the unplayed portion of a response?**
 
-It is the part of a generated reply that was produced and never reached the caller's speaker because they started talking. Voice stacks remove it from the conversation so the model's record matches the call.
+The unplayed portion is the part of a generated reply that was produced and never reached the caller's speaker because they started talking. Voice stacks remove it from the conversation so the model's record matches the call.
 
 **Why does this matter for memory across sessions?**
 

@@ -27,13 +27,13 @@ The commenter's next sentence is the awkward one for anyone who does: "Everyone 
 
 Documenting that variance is the hard part of [developer content](/articles/developer-experience/) for an AI product.
 
-Technical writing for AI products exists to make that argument answerable. A reader of ordinary API docs needs to know what a call returns, and a reader of AI product docs also needs to know what stays fixed behind a model name and how to check it.
+Technical writing for AI products exists to make an argument like the one in that thread answerable. A reader of ordinary API docs needs to know what a call returns, and a reader of AI product docs also needs to know what stays fixed behind a model name and how to check it.
 
 ## What does a model name promise in the docs?
 
-It promises only what the page says it does, so the page has to say. OpenAI's [prompt engineering guide](https://developers.openai.com/api/docs/guides/prompt-engineering) is direct about the risk: "Even different snapshots of models within the same family could produce different results."
+A model name promises only what the docs page says it does, so the page has to say. OpenAI's [prompt engineering guide](https://developers.openai.com/api/docs/guides/prompt-engineering) is direct about the risk: "Even different snapshots of models within the same family could produce different results."
 
-It recommends "Pinning your production applications to specific model snapshots", and tests that "measure prompt behavior".
+The guide recommends "Pinning your production applications to specific model snapshots", and tests that "measure prompt behavior".
 
 That gives the writer a rule for every page with a model identifier on it. State whether the identifier is a snapshot or a moving alias, and give the date the example was last run against it.
 
@@ -41,7 +41,7 @@ Retirement dates belong in the docs too. Anthropic's [model deprecations page](h
 
 ## What is the output contract of an AI feature?
 
-It is the schema the output follows, the cases where it won't, and what the caller has to check itself. OpenAI's [structured outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs) puts all of that in two sentences, which I hold up as the model for any AI reference page.
+The output contract is the schema the output follows, the cases where it won't, and what the caller has to check itself. OpenAI's [structured outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs) puts all of that in two sentences, which I hold up as the model for any AI reference page.
 
 "Structured Outputs constrains completed, non-refusal model output to your supplied JSON Schema. Your application still needs to handle refusals, incomplete responses, and API errors, and validate any business rules that the schema does not express."
 
@@ -49,20 +49,20 @@ A writer working from that standard documents which fields the schema guarantees
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/writing-for-ai-products/example-pattern.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/writing-for-ai-products/example-pattern.narrow.svg" width="288" height="720"><img class="np-has-narrow" src="/static/images/diagrams/writing-for-ai-products/example-pattern.svg" width="720" height="256" alt="The preferred pattern for an AI documentation example has four parts in order: a minimal working request, the exact output contract the response must follow, one failure or refusal case, and the production caveat that changes implementation choices." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Show the request, the contract, a refusal, and the caveat. Anything less demos well and deploys badly.</figcaption>
+  <figcaption>Show the request, the contract, a refusal, and the caveat. An example without the refusal and the caveat works in a demo and fails in production.</figcaption>
 </figure>
 
 The pattern in the figure is the smallest complete example for an AI endpoint. It has the request, the contract, one refusal and the caveat that changes how the caller builds.
 
 ## What makes a code sample trustworthy in AI docs?
 
-It runs, its output is shown, and the page says which model produced that output.
+A trustworthy sample runs, shows its output, and says which model produced that output.
 
 Google's [technical writing course](https://developers.google.com/tech-writing/two/sample-code) lists what a correct sample must do, starting with "Build without errors." and "Perform the task it claims to perform."
 
 An AI sample needs one thing more, because the same code returns different text next quarter. Print the output the sample produced, with the model snapshot and the date, so a reader whose result differs can tell a changed model from a broken integration.
 
-A docs page can also ship a small eval, a set of prompts with expected properties, which gives every user the measurement that commenter asked for. The variance in the same comment sets its size.
+A docs page can also ship a small eval, a set of prompts with expected properties, which gives every user the measurement that commenter asked for. The variance that commenter described decides how many runs the eval needs.
 
 My arithmetic for a prompt set scored pass or fail at a true rate of 80% gives a standard error near nine points at 20 runs and 2.8 points at 200. A handful of prompts run once can't show a five-point drop, so the page should say how many runs its numbers rest on.
 

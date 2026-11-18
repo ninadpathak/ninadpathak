@@ -29,7 +29,7 @@ A changelog is the page of [technical documentation](/articles/technical-documen
 
 ## How much changelog can one person read?
 
-Far less than a fast-moving project now publishes. The thirty days to November 16 break down like this, with every entry counted under the label it sits beneath.
+A single reader can get through far less than a fast-moving project now publishes. The thirty days to November 16 break down like this, with every entry counted under the label it sits beneath.
 
 ```text
 window: 2026-10-18 to 2026-11-16
@@ -103,7 +103,7 @@ That figure comes from the docs sites Fern hosts, and [my essay on agents readin
 
 > Deprecated fast mode for Opus 4.8 as of October 30, 2026; it will be removed on November 30, 2026. After removal, fast mode requests on Opus 4.8 return an error and do not fall back to standard Opus 4.8. Migrate to Opus 5.5 to keep the speedup
 
-It names the feature, gives both dates and states the failure a user will see. It sits in a list headed "Changed", though, and only eleven entries in the month open with the word Deprecated or Removed, none of them under a heading of their own.
+The entry names the feature, gives both dates and states the failure a user will see. It sits in a list headed "Changed", though, and only eleven entries in the month open with the word Deprecated or Removed, none of them under a heading of their own.
 
 ## Start with the upgrade decision
 
@@ -117,9 +117,9 @@ A person reading a release wants to know whether upgrading will break anything t
 | "Changed some `cp` and `mv` commands to ask first" | 2.1.326, November 16 | That a script may now stop for a prompt, without knowing which commands |
 | "Changed nested skill loading: `.claude/skills` folders in `--plugin-dir` plugins no longer load from a session started above them; start Claude Code in the plugin folder instead" | 2.1.325, November 13 | Whether their setup is the one affected, and the fix |
 
-The third entry follows a pattern worth copying. It gives the thing that changed and the condition under which a user would notice, and it ends with the action.
+The nested skill loading entry follows a pattern worth copying. It gives the thing that changed and the condition under which a user would notice, and it ends with the action.
 
-The second may be vague on purpose, since a permission rule spelled out in full can tell an attacker what to avoid. Even then a link to the rule's documentation would let the affected reader find out.
+The `cp` and `mv` entry may be vague on purpose, since a permission rule spelled out in full can tell an attacker what to avoid. Even then a link to the rule's documentation would let the affected reader find out.
 
 Implementation detail belongs in an entry only when it helps someone diagnose or adapt. A refactor that users can't observe needs no entry at all.
 
@@ -278,4 +278,4 @@ Detailed enough to show who is affected, what changed and whether action is requ
 
 **Can generated release notes replace a changelog?**
 
-They collect the merged pull requests. Deciding which of those a user has to act on is still an editing job.
+No. Generated notes collect the merged pull requests, and deciding which of those a user has to act on is still an editing job.

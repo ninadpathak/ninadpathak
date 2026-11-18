@@ -19,7 +19,7 @@ updated: 2026-11-17
 
 Ask a model to reduce `(λx.λy.x) y` and there is one right answer, a function that ignores its input and returns the outer `y`. Lambda calculus works as an AI reasoning exercise because a short Python program can check that answer, which makes it a better test than asking a model to explain its reasoning.
 
-Much larger work rests on that property. DeepMind's [AlphaProof Code announcement](https://deepmind.google/blog/introducing-alphaproof-code/) of November 10 describes agents that wrote "over six million lines of Lean" to verify Signal's protocol code, and rests the result on one sentence: "Every proof is checked by Lean to verify the agents' work."
+Much larger work rests on answers a program can check. DeepMind's [AlphaProof Code announcement](https://deepmind.google/blog/introducing-alphaproof-code/) of November 10 describes agents that wrote "over six million lines of Lean" to verify Signal's protocol code, and rests the result on one sentence: "Every proof is checked by Lean to verify the agents' work."
 
 An explanation can be fluent and wrong, and a normal form is right or it isn't.
 
@@ -27,7 +27,7 @@ A check that a script can grade is worth having in [AI agent architecture](/arti
 
 ## What does lambda calculus test in a model?
 
-It tests whether the model can keep track of which variable is bound where while it substitutes one expression into another. The whole language is variables, functions written `λx.body`, and application, so there is no library knowledge to recall and little to pattern-match.
+Lambda calculus tests whether the model can keep track of which variable is bound where while it substitutes one expression into another. The whole language is variables, functions written `λx.body`, and application, so there is no library knowledge to recall and little to pattern-match.
 
 A reduction step replaces a function's parameter with its argument. `(λx.x) y` becomes `y`, and larger expressions repeat that step until none applies, which is called reaching normal form.
 
@@ -183,21 +183,21 @@ The direct application, the chained one and the last expression, which never fin
 
 ## Which problems separate careful substitution from pattern matching?
 
-The capture cases and the non-terminating one do, more than the simple tiers. The argument in `(λx.λy.x) y` is named `y` and so is the inner parameter, and a naive substitution gives `λy.y`, the identity function.
+The capture cases and the non-terminating expression separate them, more than the direct and chained applications do. The argument in `(λx.λy.x) y` is named `y` and so is the inner parameter, and a naive substitution gives `λy.y`, the identity function.
 
 The right answer is a function that ignores its input and returns the outer `y`, which the reducer writes as `λv1.y` after renaming.
 
-When the term already uses `v1`, as the next expression does, it picks `v2`. A model that answers `λy.y` has made the same mistake as code that shadows a variable.
+When the term already uses `v1`, as `(λx.λy.x v1) y` does, the reducer picks `v2`. A model that answers `λy.y` has made the same mistake as code that shadows a variable.
 
 `(λx.x x) (λx.x x)` reduces to itself forever. The correct response is that it has no normal form, and a tidy finite answer is a sign the model produced what an answer usually looks like.
 
 ## What can't this exercise tell you?
 
-It can't tell you how a model performs on anything except substitution and scope. Good results here say nothing about tool use or planning, and the [agent failure patterns](/articles/ai-agent-failures/) I cover elsewhere have other causes.
+The exercise can't tell you how a model performs on anything except substitution and scope. Good results here say nothing about tool use or planning, and the [agent failure patterns](/articles/ai-agent-failures/) I cover elsewhere have other causes.
 
 No model results are reported here. The reducer was run, as shown above, and no set of models has been put through the problems for this page, so treat it as a method with a working checker and no leaderboard.
 
-The AlphaProof post draws that boundary at its own scale. A proof checker confirms that code meets a specification, and the post has people deciding what to prove: "human experts work with AI to decide what to prove, and a group of AI agents does it."
+The AlphaProof post has the same limit at a much larger scale. A proof checker confirms that code meets a specification, and the post has people deciding what to prove: "human experts work with AI to decide what to prove, and a group of AI agents does it."
 
 ## How do you turn it into an evaluation?
 
@@ -207,6 +207,6 @@ Generate expressions, ask each model for the normal form, and score with the red
 - Include expressions with no normal form and accept only an answer that says so. The reducer's 50-step limit is a cutoff, so raise it for long reductions that do finish.
 - Publish the expressions and the raw outputs with the scores, so a reader can rerun the check.
 
-Record the kind of error as well as the count. A capture error and a wrong claim of termination point at different weaknesses, and the [error handling guide](/articles/agent-error-handling/) covers what the second looks like in a running agent.
+Record the kind of error as well as the count. A capture error and a wrong claim of termination point at different weaknesses, and the [error handling guide](/articles/agent-error-handling/) covers what a wrong claim of termination looks like in a running agent.
 
-Binding matters wherever a system carries values across steps, which includes the [memory systems](/articles/agent-memory-2026/) agents use between sessions. A reduction test is a cheap first filter before the expensive ones.
+Binding matters wherever a system carries values across steps, which includes the [memory systems](/articles/agent-memory-2026/) agents use between sessions. A reduction test is a cheap first filter before more expensive evaluations.
