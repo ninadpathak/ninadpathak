@@ -31,7 +31,7 @@ Fern counts an agent request on the server, as any fetch of a Markdown route or 
 
 A person who reads one guide for ten minutes is one page load, and a coding agent wiring up one endpoint can fetch the index and a string of pages on the way. So the share of requests measures traffic, and I wouldn't read it as a share of readers.
 
-Fern sells a docs platform, and it also publishes its method and its limits, which is why I trust the report enough to argue with it. One limit in that list cuts against my argument: agents that fetch HTML aren't counted at all, and the report says ChatGPT, Gemini and Perplexity do exactly that.
+Fern sells a docs platform, and it also publishes its method and its limits, which is why I trust the report enough to argue with it. A limit in that list cuts against my argument: agents that fetch HTML aren't counted at all, and the report says ChatGPT, Gemini and Perplexity do exactly that.
 
 Another limit supports it. About two thirds of September's agent requests carried a browser or generic user agent, so calling them agents rests on which route they asked for.
 
@@ -51,7 +51,7 @@ Both pages have a worked model on this site. The [API documentation guide](/arti
 
 Fern doesn't tell everyone to stop writing guides, and its advice is conditional: if agents are the larger share of your traffic, put the reference and the changelog ahead of new guides.
 
-That share varies widely. Among Fern's larger sites, agents were under a tenth of traffic on some and over nine tenths on others. Fern's explanation is that docs for APIs called from code sit at the high end, and docs for products people use through a UI sit at the low end.
+That share varies widely, since among Fern's larger sites agents were under a tenth of traffic on some and over nine tenths on others. Fern's explanation is that docs for APIs called from code sit at the high end, and docs for products people use through a UI sit at the low end.
 
 What I'd add is a limit on the logs themselves. A person reads guides and comparisons before choosing a product, and no count of Markdown fetches can show that reading, because it happens before an integration exists.
 
