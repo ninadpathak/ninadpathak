@@ -80,8 +80,8 @@
     "sources": "c17453d73f4a019f51d91924bd1290a5d426cd5b2a5448c859225c669e07c326"
   },
   "claude-code-memory": {
-    "lastmod": "2026-11-17",
-    "sources": "bcd545f1cada9b00d352b56dc45699bdc2dc1e23f5e27d20868c46c7f43f7b8a"
+    "lastmod": "2026-11-18",
+    "sources": "ffa484ed415e5ef72b8042bd9db2761763edd6848106e914220faa97d52a44e4"
   },
   "claude-code-subagents": {
     "lastmod": "2026-11-17",
@@ -105,7 +105,7 @@
   },
   "coding-agent-memory": {
     "lastmod": "2026-11-18",
-    "sources": "eb2c86e1e75f8812f59924b1bbc8f6b8f9cb599465cada20bb3caace5095b1b4"
+    "sources": "174066c560099914211ef1d2a36db3e1bfac920991eb192b309382da8305690f"
   },
   "coding-models-new-code-vs-change": {
     "lastmod": "2026-11-18",
@@ -188,8 +188,8 @@
     "sources": "2008c89cac40fb1c40b3eb5146a4866f7284e93905594c9430331a9237cd55e3"
   },
   "hyperagents-memory": {
-    "lastmod": "2026-11-17",
-    "sources": "bd47f2eed6146e7d50e238cbddc405109a1cf7a6baa8921eec0eafe6e5c5845d"
+    "lastmod": "2026-11-18",
+    "sources": "b5a916e4ed18eb243ef07429cb1215593c6ef5d26b21e23b74ce551d7326f42a"
   },
   "internal-vs-external-docs": {
     "lastmod": "2026-11-17",
@@ -228,12 +228,12 @@
     "sources": "a6707d53e6048d154b3b7981ddcc4972ce5f7c716ce832641febf62149258ba3"
   },
   "memory-compression": {
-    "lastmod": "2026-11-17",
-    "sources": "e30191253d1f4ef5285d53de7d24b623c630ddf5634ff6bcb8f5f730ac238367"
+    "lastmod": "2026-11-18",
+    "sources": "faed0324a9714f61ce62851e1ec5284d25c4706d65ef1c7a48c12454dfada93f"
   },
   "memory-serialization": {
-    "lastmod": "2026-11-17",
-    "sources": "b903ba5cc2f859361262a3637b620a054343425a7e63c729b0373e42c639f1b2"
+    "lastmod": "2026-11-18",
+    "sources": "03969ee05d45af92f5be93115d522f268c0c1b7c8362d7023211719c539c56d3"
   },
   "memory-versioning": {
     "lastmod": "2026-11-17",
@@ -248,8 +248,8 @@
     "sources": "c8be71f1063f9773fabef87d53d6dff3f8cb4e6d104d5b193830e6f4396065d6"
   },
   "multi-agent-vs-single-agent": {
-    "lastmod": "2026-11-17",
-    "sources": "6a42cffc0736223246026bcace545cbfaccf57c591c1f5e1289e7a71bec80387"
+    "lastmod": "2026-11-18",
+    "sources": "f7c7a48a77464834ab8d6094ea62280c0094f2d40c36439a33c4ad67bf322379"
   },
   "nobody-understands-the-code": {
     "lastmod": "2026-11-18",
