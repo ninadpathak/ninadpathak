@@ -65,7 +65,7 @@ The background for both posts is the [BEIR benchmark paper](https://arxiv.org/ab
 
 Reciprocal rank fusion (RRF) scores each document by summing `1 / (k + rank)` over every list it appears in, and ignores the retrievers' own scores. That sidesteps the problem that a BM25 score of 8.5 and a cosine similarity of 0.87 share no scale.
 
-The method and its constant come from [a SIGIR 2009 paper](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf) by Cormack, Clarke and Büttcher, which says "k = 60 was fixed during a pilot investigation". The whole algorithm fits in a few lines of Python.
+The method and its constant come from [a SIGIR 2009 paper](https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf) by Cormack, Clarke and Büttcher, which says "k = 60 was fixed during a pilot investigation". The whole algorithm fits in a few lines of Python.
 
 ```python
 def rrf(rankings, k=60):
@@ -111,7 +111,7 @@ The two documents both retrievers returned finish well ahead of the one that top
   <figcaption>Agreement between the two retrievers becomes the strongest signal, and the underlying scores are discarded.</figcaption>
 </figure>
 
-Engines disagree on the constant. Elasticsearch's [RRF retriever reference](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/retrievers/rrf-retriever) says of `rank_constant` that it "Defaults to 60.", and Qdrant's [hybrid queries documentation](https://qdrant.tech/documentation/concepts/hybrid-queries/) counts ranks from zero and says "k is a constant (set to 2 by default)".
+Engines disagree on the constant. Elasticsearch's [RRF retriever reference](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/retrievers/rrf-retriever) says of `rank_constant` that it "Defaults to 60.", and Qdrant's [hybrid queries documentation](https://qdrant.tech/documentation/search/hybrid-queries/) counts ranks from zero and says "k is a constant (set to 2 by default)".
 
 A small constant rewards the top of each list much more sharply, so the same two result lists can fuse into different orders on the two engines. Check the default before comparing results across them.
 
