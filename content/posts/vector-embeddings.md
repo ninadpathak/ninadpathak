@@ -15,7 +15,7 @@ slug: vector-embeddings
 
 Someone typed "soviet" into [a semantic search over about 6.3 million museum artworks](https://lastmuseum.com/) and reported on Hacker News that it "matched cylinder seal 3500bc". Vector embeddings are the numbers behind a search like that: a model turns each text or image into a point in a space with hundreds or thousands of dimensions, and the search returns whatever points sit nearest the query.
 
-They are the first stage of a [RAG pipeline](/articles/rag/), and every later stage inherits their mistakes.
+Embeddings are the first stage of a [RAG pipeline](/articles/rag/), and every later stage inherits their mistakes.
 
 [The thread](https://news.ycombinator.com/item?id=50194522), from October 22, teaches the geometry better than the king-and-queen diagram does, because each complaint in it is a property of the space. A commenter reported that the site "Completely failed if you search by Artist name", and another searched "holofernes" and got paintings "not-of-but-aesthetically-similar-to Judith beheading Holofernes".
 
@@ -101,7 +101,7 @@ same search on sign bits (matching bits out of 384 )
 bytes per vector: float32 1536 | binary 48
 ```
 
-The question about a negative balance shares one word with the overdraft sentence, "charged", and still scores 0.73 against it, which is the behaviour people mean by semantic search. The second query is where a dense model is weak: the query is the exact code in the ORA-00942 document, and the ORA-00932 document, a different Oracle error, scores 0.70 against the right answer's 0.75.
+The question about a negative balance shares one word with the overdraft sentence, "charged", and still scores 0.73 against it, which is the behaviour people mean by semantic search. The ORA-00942 query is where a dense model is weak: the query is the exact code in the ORA-00942 document, and the ORA-00932 document, a different Oracle error, scores 0.70 against the right answer's 0.75.
 
 The model did rank the right code first, by a margin too thin to set a threshold on. The same row ranks the unrelated error above the sentence that describes the fault in plain words.
 
@@ -187,7 +187,7 @@ Shortening works on models trained for it. The method is [Matryoshka Representat
     </div>
 </div>
 
-OpenAI exposes it as a `dimensions` parameter and reports that "a text-embedding-3-large embedding can be shortened to a size of 256 while still outperforming a full-length text-embedding-ada-002 embedding with a size of 1536." Cohere's embed-v5.0-pro accepts output sizes of 256 up to 2048.
+OpenAI exposes shortening as a `dimensions` parameter and reports that "a text-embedding-3-large embedding can be shortened to a size of 256 while still outperforming a full-length text-embedding-ada-002 embedding with a size of 1536." Cohere's embed-v5.0-pro accepts output sizes of 256 up to 2048.
 
 The bge-small model in my run has 384 dimensions, and its model card describes no such training. Cutting its vectors to the first 128 values would discard information the model never arranged to keep at the front.
 
@@ -195,7 +195,7 @@ The bge-small model in my run has 384 dimensions, and its model card describes n
 
 A binary vector embedding keeps one bit per dimension, the sign of each float, and compares vectors by counting matching bits. Each vector in the run above shrank from 1,536 bytes to 48, a 32-fold saving.
 
-Binary search has a price, and the run paid it once. The first two queries kept their best match, and "holofernes" lost it by a single bit, 233 against 232, to a sentence about a missing database table.
+Binary search has a price, and the run paid it once. The bank-charge and ORA-00942 queries kept their best match, and "holofernes" lost it by a single bit, 233 against 232, to a sentence about a missing database table.
 
 That result is why binary search is used as a first pass. Retrieve a generous candidate set on bits, then rescore those candidates with the full vectors, the same two-stage shape as [reranking](/articles/rag-reranking/).
 

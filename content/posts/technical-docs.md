@@ -20,7 +20,7 @@ updated: 2026-11-17
 
 Technical documentation is the written material that explains how a product works and how to use it, from a first install to the exact behavior of each API field. I give each [type of documentation](/articles/documentation-types/) one reader task, and the list of types is the same one it was before assistants started reading docs on people's behalf.
 
-That reader is new. Matt Cockayne [reported on November 11](https://phpboyscout.uk/answer-first-then-everything-else/) that pages on his projects' docs sites sitting at search positions four to ten "were clicked 0.31% of the time", while assistants kept fetching them for a person who "quite possibly never sees the page at all".
+An assistant reading on a person's behalf is a new reader. Matt Cockayne [reported on November 11](https://phpboyscout.uk/answer-first-then-everything-else/) that pages on his projects' docs sites sitting at search positions four to ten "were clicked 0.31% of the time", while assistants kept fetching them for a person who "quite possibly never sees the page at all".
 
 A later section runs his check on seven real pages to see what that reader changes inside each document.
 
@@ -104,7 +104,7 @@ The two vendor pages over 600 are a tutorial and an explanation, the kinds his r
 
 Both of my pages fail. Each count includes between thirty and forty words of description and byline that this site adds to its Markdown files, and the rest is explanation I put ahead of the template the reader came for.
 
-The check suits pages with one job, and it belongs in a review with the page type written next to it. A count gives an author and a reviewer something to disagree about that is smaller than taste.
+The check suits pages with one job, and it belongs in a review with the page type written next to it. A word count gives an author and a reviewer a number to argue over in place of taste.
 
 ## Assign an owner and an update trigger
 

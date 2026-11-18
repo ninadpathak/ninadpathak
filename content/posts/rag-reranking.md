@@ -21,7 +21,7 @@ To find out what a reranker changes, I ranked four small sets of candidate passa
 
 Reranking in RAG is a second scoring pass: a retriever returns its top-k candidates, a reranking model reads the query together with each candidate, and the reordered best few go to the language model. The run supports adding that step on one condition, that its scores are checked against marked answers before anyone sets a threshold on them.
 
-That makes it the stage after retrieval in a [RAG pipeline](/articles/rag/).
+Reranking is the stage after retrieval in a [RAG pipeline](/articles/rag/).
 
 ## What is reranking in RAG?
 
@@ -29,7 +29,7 @@ Reranking is the stage between retrieval and generation where a slower, more car
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/rag-reranking/bi-encoder.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-reranking/bi-encoder.narrow.svg" width="288" height="544"><img class="np-has-narrow" src="/static/images/diagrams/rag-reranking/bi-encoder.svg" width="720" height="600" alt="The query and the document each pass through the embedding model on their own, and each comes out as a single vector. The database compares the two vectors by distance, so the model never sees the query and the document together." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Each text is compressed alone. The similarity score compares two summaries that never met.</figcaption>
+  <figcaption>The model embeds the query and the document separately, so the score compares two vectors and never the two texts.</figcaption>
 </figure>
 
 That first-stage model is a bi-encoder, and its limit is in the figure: the query and the document are never read together. A sentence about error E-4047 scores 0.68 against a query for E-4048 in the run below, because closeness is all the vector records.
@@ -54,7 +54,7 @@ Cohere's [Rerank documentation](https://docs.cohere.com/docs/rerank-overview) de
 
 ## What does a reranker fix, and what does it leave?
 
-The rerankers in my run fixed the scores and left the order. I gave a small embedding model, a small cross-encoder and a larger one the same four candidates for each of four queries, with the answering document marked in advance.
+The rerankers in my run widened the distance between right and wrong scores and left the top-ranked passage unchanged. I gave a small embedding model, a small cross-encoder and a larger one the same four candidates for each of four queries, with the answering document marked in advance.
 
 ```python
 """Rank the same four candidates with a bi-encoder and two cross-encoders."""
@@ -160,7 +160,7 @@ On the key-rotation query the small reranker gave the right passage its lowest s
 
 ## Do rerankers handle exact identifiers better?
 
-The larger one did, by a wide margin, and the small one barely did. For the query about E-4048, bge-reranker-base scored the right document 1.79 and the two neighbouring codes below zero, while MiniLM scored both neighbours within 0.35 of the right one.
+The larger reranker, bge-reranker-base, did, by a wide margin, and the small MiniLM model barely did. For the query about E-4048, bge-reranker-base scored the right document 1.79 and the two neighbouring codes below zero, while MiniLM scored both neighbours within 0.35 of the right one.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/rag-reranking/keyword-exactness.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/rag-reranking/keyword-exactness.narrow.svg" width="288" height="688"><img class="np-has-narrow" src="/static/images/diagrams/rag-reranking/keyword-exactness.svg" width="720" height="376" alt="A query for error code E-4048 goes to vector search, which returns both E-4048 and the near-identical E-4049 as close matches. A cross-encoder then reads the query and each document together: it rejects the document about E-4049 and keeps the document about E-4048." loading="lazy" decoding="async"></picture></a>
@@ -181,7 +181,7 @@ My run can't speak to depth at all, since each query had four candidates. Its fa
 
 Reranking costs one model pass per candidate, so latency grows with both the candidate count and the size of the model. The run above scored 100 pairs in 232 ms with the small cross-encoder and 1,792 ms with the larger one, against 8 ms to embed the query.
 
-Its passages average 14 words, far shorter than a real chunk, so both figures are a floor.
+The run's passages average 14 words, far shorter than a real chunk, so both figures are a floor.
 
 A repeated question doesn't have to pay that cost twice, and [semantic caching](/articles/semantic-caching/) covers the cache that sits in front of retrieval.
 
@@ -222,7 +222,7 @@ I don't think so, and the reason is in how each is built. A larger embedding sti
 
 Passing all hundred candidates to the language model moves the selection problem into the prompt. The [context window guide](/articles/llm-context-windows/) covers what models do with long inputs, and the comparison of [fine-tuning and RAG](/articles/fine-tuning-vs-rag/) covers the cost side.
 
-Neither argument is measured on this page. The run adds one thing to it: reranker scores spread far enough to cut on once they have been checked against [marked answers](/articles/rag-evaluation/), and a long prompt offers no cut at all.
+Neither argument is measured on this page. The run adds one thing to them: reranker scores spread far enough to cut on once they have been checked against [marked answers](/articles/rag-evaluation/), and a long prompt offers no cut at all.
 
 ## How do you add a reranker to an existing pipeline?
 

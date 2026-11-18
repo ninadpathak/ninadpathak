@@ -22,9 +22,9 @@ video: documentation-headings
 
 Stripe's [webhook guide](https://docs.stripe.com/webhooks) has nine second-level headings. Of those, six name an action, such as "Create a handler", and the rest name a subject, such as "Event delivery behaviors".
 
-That split is the rule for documentation headings, taken from a page built on it. A heading should tell a scanning reader what the section contains.
+That split is the rule for documentation headings: an action heading where the reader acts, and a subject heading where the reader looks something up. A heading should tell a scanning reader what the section contains.
 
-Headings are how a reader moves through any page of [technical documentation](/articles/technical-documentation/), so the rule covers every type.
+Headings are how a reader moves through any page of [technical documentation](/articles/technical-documentation/), so the rule covers every type of page.
 
 - For a procedure, name the result or task.
 - For a concept, name the concept.
@@ -54,7 +54,7 @@ A reference section identifies a field, object, or API behavior. A recovery sect
 | Explanation | Authentication | Token scopes and integration access |
 | Reference | Options | Retry policy options for background jobs |
 
-The right-hand column shows how a heading can name the reader's task or the section's subject where the middle column names only a broad topic. Treat it as a set of examples, since the wording depends on the product.
+Each rewrite names the reader's task or the section's subject, where the generic label names only a broad topic. Treat the rewrites as examples, since the wording depends on the product.
 
 ## Write task headings for procedural sections
 
@@ -78,7 +78,7 @@ The example is right, because a help-centre article about changing a plan is a t
 
 The words "every time" are where I disagree. The same post grounds the tip in search, saying task titles "match what people actually type into search", and people also type the names of things.
 
-Claude Code's [hooks reference](https://code.claude.com/docs/en/hooks) shows the other case. Its sections are named for what a developer looks up, such as "Hook input and output" and "Matcher patterns", and each hook event is a heading that is only the event's name, `PreToolUse` among them.
+Claude Code's [hooks reference](https://code.claude.com/docs/en/hooks) shows the case for noun headings. Its sections are named for what a developer looks up, such as "Hook input and output" and "Matcher patterns", and each hook event is a heading that is only the event's name, `PreToolUse` among them.
 
 A developer arriving there has the name already and wants its fields. `Webhook signature headers` works for the same reason, and `Details` fails because it forces the reader to open the section to learn what the details are about.
 
@@ -90,7 +90,7 @@ A precise heading can still be placed at the wrong level. The World Wide Web Con
 
 Use one page title for the page's primary job. Use major section headings for the main tasks or concepts, then nest headings only for work that belongs within a parent section.
 
-Choose a level for the structure it declares. CSS can change how a heading looks, and its level still sets the document outline that navigation tools read.
+Choose a heading level by where the section sits in the outline. CSS can change how a heading looks, and its level still sets the document outline that navigation tools read.
 
 ## Review the outline before the prose
 

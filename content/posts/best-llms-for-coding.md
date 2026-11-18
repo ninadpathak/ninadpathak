@@ -21,7 +21,7 @@ slug: best-llms-for-coding
 updated: 2026-11-17
 ---
 
-The March version of this page named a best LLM for coding in each of five kinds of work, and none of the models it picked is among the 18 in the benchmark I now trust for this question. A list like that lasted eight months, so this version dates its answer and spends its length on reading the evidence, which ages slower.
+The March version of this page named a best LLM for coding in each of five kinds of work, and none of the models it picked is among the 18 in the benchmark I now trust for this question. A list like that lasted eight months, so this version gives its answer with a date and spends more of its length on how to read a benchmark, which stays true longer.
 
 As of November 17, 2026, the best LLMs for coding work that resembles a job are Claude Opus 5.5 and GPT 6 Astra, which tie near 57% on [Real-SWE 1.1](https://withspecific.com/blog/real-swe), a benchmark Specific Labs published in October. GPT 6.1 Sol resolves 47% of the same tasks for under a dollar a run, and the strongest open-weight entries sit near 39%.
 
@@ -54,7 +54,7 @@ I kept the ten highest-ranked rows and added GLM-5.3 from thirteenth place, sinc
 
 Each score rests on 125 runs, since "Resolution rate is equivalent to pass@1, averaged over five independent runs per task.", and "All runs use the highest effort possible for each model with its harness."
 
-It is also already old. Google [announced Gemini 4 Hydrogen on November 12](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/), after the table was published, and Artificial Analysis lists [Claude Fable 5.2](https://artificialanalysis.ai/models/claude-fable-5-2) as a November release, so neither model has a row.
+The table is also already old. Google [announced Gemini 4 Hydrogen on November 12](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/), after the table was published, and Artificial Analysis lists [Claude Fable 5.2](https://artificialanalysis.ai/models/claude-fable-5-2) as a November release, so neither model has a row.
 
 The price column says more than the rank column. Dividing each cost by its resolution rate gives the price of one resolved task, and I computed it with a few lines of Python.
 
@@ -100,7 +100,7 @@ The [agent harness](/articles/agent-harnesses/) decides which files the model se
 
 ## How do the top coding models fail?
 
-They fail differently, and the failure mode predicts the review work a model leaves you. Real-SWE classified every failed run, and the largest group is the unverified assumption, a run that "Builds on a guess about the system instead of checking it in the workspace."
+The top models fail differently, and the failure mode predicts the review work a model leaves you. Real-SWE classified every failed run, and the largest group is the unverified assumption, a run that "Builds on a guess about the system instead of checking it in the workspace."
 
 | Share of each model's failed runs | Unverified assumption | Missed requirement | Misunderstood task | Integration error |
 | --- | --- | --- | --- | --- |
@@ -116,7 +116,7 @@ A row in that analysis cuts against something I wrote this month. Regressions ar
 
 My reading is that the two benchmarks ask different things, since Real-SWE grades one change to code that people wrote. The SlopCodeBench agent "writes a program, gets new requirements, and changes the existing code", so that benchmark measures a model living with its own output.
 
-Evan X. Merz described the second situation from inside a large company in [a post dated November 7](https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/): "AI tends to solve the problems that can fit within its context window very well, but it's totally oblivious to the long term issues that can't be understood in that relatively small frame."
+Evan X. Merz described a model living with its own output from inside a large company in [a post dated November 7](https://evanxmerz.com/post/ai-usage-generates-a-fragile-codebase/): "AI tends to solve the problems that can fit within its context window very well, but it's totally oblivious to the long term issues that can't be understood in that relatively small frame."
 
 A leaderboard of single tasks can't show that cost. I take up Merz's point about understanding in [my essay on code nobody understands](/articles/nobody-understands-the-code/), and a composition-level check like the one in my [lambda calculus exercise](/articles/lambda-calculus-ai/) is a small way to look for it.
 
@@ -124,7 +124,7 @@ A leaderboard of single tasks can't show that cost. I take up Merz's point about
 
 On Real-SWE 1.1 the best open-weight entries are Kimi K3.1 Pro at 39.20% and DeepSeek V4.1 Flash at 38.40%, 17 to 18 points behind the leaders. DeepSeek publishes [its weights under an MIT license](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash), and the [Kimi K3.1 Pro weights](https://huggingface.co/moonshotai/Kimi-K3.1-Pro) carry Moonshot's own license, so "open weight" is the accurate term for both.
 
-Vendor numbers tell a closer story than that. <!-- evidence-three: the Kimi launch post prints no date; October 23 is when it was submitted to Hacker News (item 50212065) --> The [Kimi K3.1 Pro launch post](https://www.kimi.ai/blog/kimi-k3-1-pro), which appeared on October 23, says that on Terminal-Bench 4.0 "K3.1 Pro scores 65.7%, ahead of GPT-6 Astra (58.2%) and narrowly behind Claude Opus 5.5 (66.4%)."
+Vendor numbers put the open models closer than that. <!-- evidence-three: the Kimi launch post prints no date; October 23 is when it was submitted to Hacker News (item 50212065) --> The [Kimi K3.1 Pro launch post](https://www.kimi.ai/blog/kimi-k3-1-pro), which appeared on October 23, says that on Terminal-Bench 4.0 "K3.1 Pro scores 65.7%, ahead of GPT-6 Astra (58.2%) and narrowly behind Claude Opus 5.5 (66.4%)."
 
 Both numbers can be true, since they come from different benchmarks. Nathan Lambert, who tracks open models, wrote [on October 28](https://www.interconnects.ai/p/artificial-analysis-v5-and-the-benchmarkers) that "The best open models do benchmax a little." and that "the best OpenAI and Anthropic models have been a major step ahead in their flexibility and reliability."
 
@@ -156,12 +156,12 @@ The cost column argues against it, because GPT 6.1 Sol resolved 47.20% of Real-S
 
 **Can I run a coding LLM on my own hardware?**
 
-Only the small one, on ordinary hardware. Hugging Face lists Kimi K3.1 Pro at 2.8 trillion parameters and DeepSeek V4.1 Flash at 763 billion, which is data-centre scale, and Ripple-65B Preview at 65 billion, which its maker says can "run efficiently on local devices such as NVIDIA DGX Spark".
+Only Ripple-65B Preview, the smallest open-weight model here, fits ordinary hardware. Hugging Face lists Kimi K3.1 Pro at 2.8 trillion parameters and DeepSeek V4.1 Flash at 763 billion, which is data-centre scale, and Ripple-65B Preview at 65 billion, which its maker says can "run efficiently on local devices such as NVIDIA DGX Spark".
 
 **How important is context window size?**
 
-It no longer separates the models on this page. Kimi K3.1 Pro, Ripple-65B Preview and Claude Fable 5.2 each list a context window of one million tokens on the pages linked above, so the window is rarely the limit that decides between them.
+Context window size no longer separates the models on this page. Kimi K3.1 Pro, Ripple-65B Preview and Claude Fable 5.2 each list a context window of one million tokens on the pages linked above, so the window is rarely the limit that decides between them.
 
 **How often does the answer change?**
 
-Within weeks. Real-SWE 1.1 came out in October, and by mid-November two vendors had shipped models it doesn't cover.
+The answer changes within weeks. Real-SWE 1.1 came out in October, and by mid-November two vendors had shipped models it doesn't cover.

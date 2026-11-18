@@ -21,7 +21,7 @@ updated: 2026-11-17
 
 OpenSSH 10.6p2, released on November 5, contains what [its own release notes](https://www.openssh.org/releasenotes.html) call "a critical security workaround", and a reader is 427 words into those notes before learning it. GitLab's [critical patch release](https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-5-1-released/) of October 21 says who has to upgrade within 32 words.
 
-Writing release notes that developers trust comes down to that distance. Someone opening the notes is deciding whether to upgrade and what it will cost, so the page has to answer that decision before it describes the release.
+Writing release notes that developers trust comes down to how many words a reader passes before learning whether they're affected. Someone opening the notes is deciding whether to upgrade and what it will cost, so the page has to answer that decision before it describes the release.
 
 Release notes are [technical documentation](/articles/technical-documentation/) read with an upgrade waiting.
 
@@ -83,7 +83,7 @@ The two can share source material without becoming the same document.
 | Optimized for lookup | Optimized for an upgrade decision |
 | Usually maintained as a continuous file | Published as a versioned page or release |
 
-[GitHub's releases documentation](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) connects releases to Git tags, notes, and downloadable assets. That versioned artifact is the anchor a developer needs, while the prose explains what the artifact changes.
+[GitHub's releases documentation](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) connects releases to Git tags, notes, and downloadable assets. A developer needs that tagged version to install or pin, and the notes explain what the version changes.
 
 ### Keep launch copy out of the risk summary
 
@@ -95,7 +95,7 @@ A launch post can tell a story about the problem, market, and product direction.
 
 ## Put upgrade risk on the first screen
 
-The opening should feel more like a status panel. You shouldn’t have to inspect every feature section to discover a runtime requirement or removed option.
+The opening should read like a status panel. A reader shouldn’t have to inspect every feature section to discover a runtime requirement or a removed option.
 
 ### Name five things immediately
 
@@ -123,7 +123,7 @@ The block sets the reading order. Migration details still follow, but nobody has
 
 Scope reduces unnecessary alarm. If a change affects only self-hosted deployments, say that cloud customers do not need to act, as GitLab's patch release does in its opening lines.
 
-Negative scope is especially useful when a product has several SDKs, API versions, regions, or deployment models. It prevents every customer from interpreting a broad warning as their own emergency.
+Saying who is unaffected is especially useful when a product has several SDKs, API versions, regions, or deployment models. It prevents every customer from interpreting a broad warning as their own emergency.
 
 ## Write what changed for the user
 
@@ -138,7 +138,7 @@ Pull request titles make sense from the team’s side of the work. Release notes
 | Upgraded database driver | No application change is required, but self-hosted deployments now require PostgreSQL 15 or later. |
 | Fixed CSV bug | CSV exports now preserve leading zeroes in string columns such as postal codes. |
 
-The right-hand column lets a developer recognize their system and choose an action. Concrete terms such as the error code and the field name also let a search find the entry later.
+The release-note wording lets a developer recognize their system and choose an action. Concrete terms such as the error code and the field name also let a search find the entry later.
 
 ### Separate breaking changes from new capability
 
@@ -153,7 +153,7 @@ Within that section, use the same order for every item:
 - Verification step
 - Rollback or support path
 
-Consistency lets a reader scan long notes.
+The same order in every item lets a reader scan long notes.
 
 ### Be precise about security
 
@@ -167,11 +167,11 @@ Cloudflare's report on a cache leak in Workers AI shows that wording done with c
 
 ## Show the changed behavior
 
-Visuals help when they make a changed state or workflow quicker to understand. A focused before-and-after can do that, but a decorative dashboard screenshot usually can’t.
+Visuals help when they make a changed state or workflow quicker to understand. A focused before-and-after can do that, and a decorative dashboard screenshot can’t.
 
 ### Use before-and-after examples
 
-For an API change, a focused request or response diff is usually better than a full screenshot:
+For an API change, a focused request or response diff shows the change better than a full screenshot:
 
 ```diff
 - { "next_page": 3 }
@@ -218,9 +218,9 @@ Release tooling can already collect pull requests, contributors, labels, and lin
 
 Automation saves collection time, but the inventory remains a draft. It cannot reliably combine several pull requests into one user-facing change or spot migration work behind an innocent title.
 
-Ghostty's maintainers went the other way and say so in the notes: "They take a combined 16+ hours to write". That is the cost of the judgment, and a generated inventory doesn't remove it.
+Ghostty's maintainers went the other way and say so in the notes: "They take a combined 16+ hours to write". Those hours are the cost of the judgment, and a generated inventory doesn't remove it.
 
-My essay on [what a written-by-a-human label proves](/articles/written-by-a-human/) starts from a line like theirs.
+My essay on [what a written-by-a-human label proves](/articles/written-by-a-human/) starts from the label in those same notes.
 
 ### Build the notes during development
 
@@ -347,7 +347,7 @@ Tracking: SDK-917
 Fixed in: Planned for 4.0.1
 ```
 
-Give this its own Known issues section. Include a searchable symptom, workaround, tracking reference, and expected resolution.
+Include a searchable symptom, a workaround, a tracking reference and the version expected to fix it.
 
 ### Finish with verification
 
@@ -365,7 +365,7 @@ Writing each release's notes for a team is work I take on, described under [rele
 
 **Who writes release notes?**
 
-Someone who knows what the release changes for its users, with engineers checking the sections they own. Ghostty's 1.4.0 notes were written by its maintainers, who put the cost at more than 16 hours.
+Release notes should be written by someone who knows what the release changes for its users, with engineers checking the sections they own. Ghostty's 1.4.0 notes were written by its maintainers, who put the cost at more than 16 hours.
 
 **How long should release notes be?**
 
@@ -381,7 +381,7 @@ Publish them at a stable, versioned URL that developers can search and link to. 
 
 **What makes release notes trustworthy?**
 
-Consistent disclosure of impact, required action, deadlines, and known limitations. Developers trust notes when past releases helped them upgrade without surprises.
+Release notes earn trust through consistent disclosure of impact, required action, deadlines and known limitations. Developers trust notes when past releases helped them upgrade without surprises.
 
 **Can AI write release notes from commit history?**
 
