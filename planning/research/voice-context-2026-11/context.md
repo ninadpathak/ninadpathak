@@ -875,3 +875,7 @@ Rules the batch 11 review added:
 
 For Ninad to confirm from this batch: whether he reviews client docs in these four passes (then the present tense can return), the onboarding film's line "I end developer onboarding docs at a safe first merge", the documentation-structure work note's "I rewrite them around what the reader came to do", and whether the drawn checker figure on docs-accessibility should stay now that the text output sits above it.
 
+## Pass C set 8: a first-person review claim removed (2026-11-18)
+
+documentation-types carried the sentence "I reviewed the ranking pages for this query, including ClickHelp, Tango, and Squarespace Engineering" under a `receipt-backed-first-person` marker. Neither ClickHelp nor Squarespace Engineering was linked on the page or recorded in `sources.json`, and pass C had already cut the two sentences that attributed positions to them. On root's decision the sentence and its marker were removed. Tango stays, since the page links its collection of document types.
+

@@ -167,10 +167,6 @@ A revised deployment flow should trigger runbook review. A recurring support iss
 
 A changed build command should trigger README and agent-instruction review.
 
-<!-- receipt-backed-first-person -->
-
-I reviewed the ranking pages for this query, including ClickHelp, Tango, and Squarespace Engineering, alongside the AGENTS.md guidance. My conclusion is that a team doesn't need every type on those lists.
-
-Documentation costs less to maintain when each type has a named audience, a distinct job, and a change that tells its owner when to revisit it.
+A team doesn't need every type on this page. Documentation costs less to maintain when each type has a named audience, a distinct job, and a change that tells its owner when to revisit it.
 
 Use the [technical documentation template](/articles/documentation-template/) to turn that inventory into a working plan. Then use the [technical documentation best practices](/articles/documentation-best-practices/) to test whether each page helps someone complete the job it promises.
