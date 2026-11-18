@@ -21,7 +21,7 @@ Zork let players save their position to disk, and BYTE magazine explained in 198
 
 Memory serialization is how an agent writes down where it stood. Persisting agent state across sessions means writing what the agent knows and what it was doing to storage, in a form that a later process can load and continue from.
 
-So I'll go through the usual ways to save an agent's state, run one of them, and then get to the catch a game never had, which is that the save itself can be wrong. That catch is the part of [agent memory](/articles/agent-memory/) worth your attention.
+So I'll go through the usual ways to save an agent's state, run one of them, and then get to the catch in [agent memory](/articles/agent-memory/) that a game never had, which is that the save itself can be wrong.
 
 ## What are the ways to persist agent state?
 
@@ -122,7 +122,7 @@ open items: switch webhook handler, remove v1 client
 newer file, older code: cannot read state version 3
 ```
 
-The version field is what let the loader add the missing `plan` key, and it is also what let older code refuse a file from the future. Without it, a missing key reads as a fact that was never established.
+The version field is what let the loader add the missing `plan` key, and it is also what let older code refuse a file from the future. Without a version field, the loader can't tell a record written before the `plan` key existed from one where no plan was made.
 
 The `recheck` label handles old facts. A fact confirmed nine days earlier is loaded and marked as unverified, so the agent can ask before acting on it.
 
@@ -130,9 +130,9 @@ Why bother with the date? Because a saved fact was true when it was written, and
 
 ## Can a saved state be wrong from the start?
 
-Yes, and a save from a game shows it. Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, follows a model playing Pokémon Red that recorded the wrong side of a mountain for a landmark.
+Yes, and a save from a game shows it. Anthropic's post on [the components of agent memory](https://www.anthropic.com/research/components-of-agent-memory), published on November 6, follows a model playing Pokémon Red that wrote down, wrongly, that the PokéCenter it used as a landmark was on the east side of Mount Moon.
 
-The model then updated its notes with the words "Mt Moon DONE." The mountain was still ahead of it, and in the run that kept the bad note the model fell back to an earlier route repeatedly and never reached the next city.
+The model then updated its notes with the words "Mt Moon DONE." The mountain was still ahead of it, and in the run that kept the bad note the model <!-- evidence-three: the post says "dropped back onto that earlier route three times" --> dropped back onto an earlier route three times and never reached Cerulean City.
 
 So what fixed it? The post's author, Lance Martin, describes a pass in which the model rereads its notes against the session log, a process he says "is often called dreaming".
 
@@ -165,7 +165,7 @@ You can see the incompatibility in [coding agent memory](/articles/coding-agent-
 
 Serialization also doesn't decide what the model sees. Loading state puts it in the context window, and [context windows vs memory](/articles/context-windows-vs-memory/) explains why a large record crowds out the work.
 
-Serialization doesn't settle who may write either. When several agents use one store, write access is its own question, covered in [shared vs isolated memory](/articles/shared-vs-isolated-memory/).
+Who may write is a separate question too. When several agents use one store, [shared vs isolated memory](/articles/shared-vs-isolated-memory/) covers write access.
 
 ## FAQ
 

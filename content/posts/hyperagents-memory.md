@@ -21,9 +21,9 @@ Nobody on the research team designed the memory system in HyperAgents. The [pape
 
 Jürgen Schmidhuber proposed the [Gödel machine](https://en.wikipedia.org/wiki/G%C3%B6del_machine) in 2003, which Wikipedia describes as a program that "rewrites its own code when it can prove the new code provides a better strategy". The system in this paper descends from it by way of the Darwin Gödel Machine.
 
-So what does a self-rewriting agent build when it wants to remember something? The paper prints one answer in [its appendix](https://arxiv.org/html/2603.19461v1), a short Python class that keeps notes in a JSON file, and in this article I'll run it and look at what the agent chose to build as its own [AI agent memory](/articles/agent-memory/), and what it left out.
+So what does a self-rewriting agent build when it wants to remember something? The paper prints one answer in [its appendix](https://arxiv.org/html/2603.19461v1), a short Python class that keeps notes in a JSON file.
 
-The appendix link goes to the March version, the only one arXiv renders as a web page, and the section reads the same in the November PDF.
+I'll run that class and look at what the agent built as its own [AI agent memory](/articles/agent-memory/) and what it left out. The appendix link goes to the March version, the only one arXiv renders as a web page, and the section reads the same in the November PDF.
 
 ## What is a hyperagent?
 
@@ -119,17 +119,17 @@ The reload works, which is all persistence means here: a second instance reads t
 
 The agent writes conclusions and leaves the raw numbers to the logs. The authors make the distinction themselves: "Instead of merely logging numerical scores, the hyperagent stores synthesized insights, causal hypotheses, and forward-looking plans".
 
-A printed entry records that a later generation scored worse and names the cause, in the agent's words: "gen65 changes over-corrected." Another sets a plan for the next attempt.
+The entry under `gen66_results` records 52% accuracy against generation 64's 61% and names the cause, in the agent's words: "gen65 changes over-corrected." Another entry sets the plan for the next attempt, to "combine gen55's critical reasoning with gen64's balance".
 
 Why does that matter? Because raw scores can be read again from the logs, and a conclusion exists only if somebody writes it down.
 
-A summary can drop a conclusion just as a missing note can, which is the failure [short-term agent memory](/articles/short-term-agent-memory/) describes for compaction.
+Compaction can lose a conclusion the same way. If the summary of a long session leaves the conclusion out, it's gone, which [short-term agent memory](/articles/short-term-agent-memory/) works through.
 
 ## What did the agent leave out?
 
 The agent left out history, search and forgetting, which memory systems add later. My run stores two notes under `best_generation`, and the second replaces the first with no trace that Gen55 was once the answer.
 
-The agent's own file avoids that overwrite through its key names. Each event in the printed entries gets a key of its own, such as `gen66_results`, so the naming does the work the class doesn't.
+The agent's own file avoids that overwrite through its key names. Each event in the printed entries gets a key of its own, such as `gen66_results`, so no result replaces an earlier one, even though the class would let it.
 
 But a convention can be broken by one careless call, and an overwrite with no history is the design that [memory versioning](/articles/memory-versioning/) argues against, since nobody can ask later what the agent believed at an earlier point. The timestamp records when the surviving value was written and nothing about the one it replaced.
 
@@ -143,7 +143,7 @@ The paper credits memory with part of the gain and doesn't isolate its effect. I
 
 The measured result is about the meta agent as a whole.
 
-Moving only the meta agent to the new domain scored 0.620 on the paper's improvement measure against 0.630 for moving both agents. Moving only the task agent scored 0.100, with a confidence interval the paper gives as 0.0 to 0.560.
+Moving only the meta agent to the new domain scored 0.620 on imp@50, the paper's measure of improvement after 50 iterations, against 0.630 for moving both agents. Moving only the task agent scored 0.100, with a confidence interval the paper gives as 0.0 to 0.560.
 
 So the evidence says the self-improvement machinery transfers, and that memory is one visible part of that machinery. A claim that the memory file alone caused the gain would go past what the paper shows.
 

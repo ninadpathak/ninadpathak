@@ -27,7 +27,7 @@ Leonard Shelby, in Christopher Nolan's 2000 film Memento, can't form new memorie
 
 So what goes wrong for Leonard? He trusts whatever his notes say, and by the film's end he is, in that summary's words, "willing to lie to himself to be happy".
 
-Keeping the notes true is the ongoing job for anyone whose [coding agents](/articles/coding-agents/) remember things, and the last section of this page covers it.
+Keeping the notes true is the ongoing job for anyone whose [coding agents](/articles/coding-agents/) remember things, and the section on what goes wrong shows how to check them.
 
 ## What does Claude Code remember between sessions?
 
@@ -42,7 +42,7 @@ Claude Code remembers what is in two sets of files, `CLAUDE.md` files and auto m
 
 Notice that the conversation is in neither column. So a decision you reached in yesterday's session exists today only if you put it in `CLAUDE.md` or Claude chose to save it.
 
-Whether to save something to auto memory is Claude's choice, so auto memory is selective. The docs say "Claude doesn't save something every session", and that it skips what it can work out from the code.
+Claude decides what goes into auto memory, so some sessions add nothing. The docs say "Claude doesn't save something every session", and that it skips what it can work out from the code.
 
 A third input, text passed at launch with the `--append-system-prompt` flag, lasts only for the session it starts.
 
@@ -66,13 +66,13 @@ Auto memory sits outside the repository, in `~/.claude/projects/<project>/memory
   <figcaption>Instruction files above the working directory load at launch, and auto memory loads the first 200 lines of its index.</figcaption>
 </figure>
 
-Now, that location has a consequence: "Auto memory is machine-local." What Claude learned on your laptop is absent from a cloud session and from a colleague's checkout, so anything the team needs belongs in the project file.
+Now, files in your home directory stay on your machine, and the docs say so: "Auto memory is machine-local." What Claude learned on your laptop is absent from a cloud session and from a colleague's checkout, so anything the team needs belongs in the project file.
 
 ## How much of it gets loaded?
 
 For auto memory, only the top of the index gets loaded. "The first 200 lines of `MEMORY.md`, or the first 25KB, whichever comes first, are loaded at the start of every conversation", and the topic files are read when Claude decides it needs them.
 
-Instruction files that load at launch come in whole, "as long as the file is 4 MiB or smaller", and files that load on demand are cut off at 40,000 characters in a 200K session. But the number to aim for is far lower, since the docs ask you to "target under 200 lines per CLAUDE.md file."
+Instruction files that load at launch come in whole, "as long as the file is 4 MiB or smaller", and files that load on demand are cut off at 40,000 characters in a session with a 200K context window. But the number to aim for is far lower, since the docs ask you to "target under 200 lines per CLAUDE.md file."
 
 Why so short? The docs' reason is that "Longer files consume more context and reduce adherence."
 
@@ -82,9 +82,9 @@ Which instructions are worth one of those 200 lines is the subject of my [CLAUDE
 
 Memory is a suggestion. The docs say of both file types that "Claude treats them as context, not enforced configuration", and I'd read that sentence before any other on the docs page.
 
-The reason is how the file is delivered. "CLAUDE.md content is delivered as a user message after the system prompt, not as part of the system prompt itself", so an instruction there competes with everything else in the window, and the docs warn that when two instructions conflict "Claude may pick one arbitrarily."
+`CLAUDE.md` reaches the model as an ordinary message. The docs say "CLAUDE.md content is delivered as a user message after the system prompt, not as part of the system prompt itself", so an instruction there competes with everything else in the window, and they warn that when two instructions conflict "Claude may pick one arbitrarily."
 
-For something that must never happen, the docs point away from memory and toward a hook that blocks the action before it runs. A memory file is the right place for how the team works and the wrong place for a guarantee.
+For something that must never happen, the docs say to use a `PreToolUse` hook, which blocks the action before it runs. A memory file is the right place for how the team works and the wrong place for a guarantee.
 
 ## What survives a long session?
 
@@ -96,11 +96,11 @@ An instruction given only in conversation has no such protection, which is the f
 
 Stale notes go wrong, because a note is trusted. Nolan said of Memento's audiences, in an interview the Wikipedia article quotes, that they had spent the film looking at a captioned photograph and "they still prefer to trust that image" after the film had shown it to be unreliable.
 
-A model reading `MEMORY.md` is in the same position. A line saying the project uses one package manager will be followed after the project has moved to another.
+A model reading `MEMORY.md` is in the same position. Say a line reads "this project uses npm": Claude will keep running npm after the project has moved to pnpm.
 
 So how do you catch a stale note? For auto memory the docs give each file a `modified` date and say "The timestamp shows how current the fact is, both to you and to Claude when it reads the memory back."
 
-Claude Code has commands for checking both kinds of file. `/context all` shows which files a session loaded and `/memory` opens them for editing, and for the instruction files `/doctor prompt-audit` has Claude look for "references to files or commands that don't exist, and files that contradict each other."
+`/context all` shows which files a session loaded and `/memory` opens them for editing, and for the instruction files `/doctor prompt-audit` has Claude look for "references to files or commands that don't exist, and files that contradict each other."
 
 I managed the writers at Mem0, which sells a memory layer for agents, and I wrote its [setup guide for adding memory to Claude Code](https://web.archive.org/web/20260307002643/https://mem0.ai/blog/claude-code-memory), so weigh what follows accordingly. For one developer on one machine, I think the two file types are enough.
 

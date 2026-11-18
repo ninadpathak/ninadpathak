@@ -31,7 +31,7 @@ A second agent buys more context to think with, on work that splits cleanly. Ant
 
 Why would more agents do better? The post's own answer is capacity: a separate analysis in it found that "token usage by itself explains 80% of the variance", and a system of agents spends more tokens because each one has a window to itself.
 
-Now, the eval is internal and the models in it date from 2025, so I read the number as a direction. The mechanism still applies, though: a subagent can read twenty pages and hand back a paragraph, which keeps the lead agent's window clear.
+Now, the eval is internal and the models in it date from 2025, so I take from it that subagents help on research and wouldn't quote the 90.2% for today's models. The mechanism still applies, though: a subagent can read twenty pages and hand back a paragraph, which keeps the lead agent's window clear.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.narrow.svg" width="288" height="656"><img class="np-has-narrow" src="/static/images/diagrams/multi-agent-vs-single-agent/agent-topology.svg" width="720" height="488" alt="A single agent runs one loop with one trace. A multi-agent system puts a supervisor over three workers, each with its own memory and failure boundary, so they can run independent work in parallel, but every handoff between them is a message boundary where things can break in transit." loading="lazy" decoding="async"></picture></a>
@@ -48,11 +48,11 @@ Coordination is the second cost. The post says plainly where the design doesn't 
 
 ## Where do multi-agent systems break?
 
-Multi-agent systems break at the handoff, where one agent acts on a guess about what another meant. Walden Yan of Cognition made the case in [Don't Build Multi-Agents](https://cognition.com/blog/dont-build-multi-agents) on June 12, 2025, with a task to clone Flappy Bird split between two subagents.
+Multi-agent systems break at the handoff, where one agent acts on a guess about what another meant. Yan made the case in [Don't Build Multi-Agents](https://cognition.com/blog/dont-build-multi-agents) on June 12, 2025, with a task to clone Flappy Bird split between two subagents.
 
-The subagent given the background builds it in the style of a different game, and the subagent given the bird builds one that doesn't match, so a final agent is left combining what Yan calls "these two miscommunications." His first rule comes from that: "Share context, and share full agent traces, not just individual messages".
+The subagent given the background builds one that looks like Super Mario Bros., and the subagent given the bird builds one that moves nothing like the bird in Flappy Bird, so a final agent is left combining what Yan calls "these two miscommunications." His first rule comes from that: "Share context, and share full agent traces, not just individual messages".
 
-But shared context isn't enough, and his second example shows why. Give both subagents the full task and they can still pick visual styles that clash, which is his second rule: "Actions carry implicit decisions, and conflicting decisions carry bad results".
+But shared context isn't enough. Give both subagents the full task and they can still pick visual styles that clash, which is his second rule: "Actions carry implicit decisions, and conflicting decisions carry bad results".
 
 ## What does Yan say works now?
 
@@ -72,7 +72,7 @@ The line between agents that read and the one agent that writes is Yan's, and he
 
 ## What would I add to that?
 
-I'd add a confirmation and two cautions. The confirmation comes from a second vendor: Anthropic's [post on its own code review](https://claude.dev/blog/solving-code-review-at-anthropic/) from October 15 describes the clean-context reviewer in production, where "Every pull request gets a Claude review before a person looks."
+I'd add a confirmation and two cautions. The confirmation comes from a second vendor: Anthropic's [post on its own code review](https://claude.dev/blog/solving-code-review-at-anthropic/) from October 15 describes the clean-context reviewer in production: before a pull request is opened, "a subagent reviews the diff with fresh context".
 
 The first caution is that both sources sell what they describe. Cognition sells agents and Anthropic sells the tokens they run on, so both gain when a task uses several, and neither post prints a failed deployment.
 
@@ -82,7 +82,7 @@ A manager that only decides which specialist gets a request is the smallest mult
 
 ## When should you split a single agent?
 
-Start with one agent, as Fowler's teams started with one service, and split when you can name the seam. Kadharmoideen Fadurudeen's [guide to multi-agent patterns](https://kadhar.dev/blog/multi-agent-systems-from-scratch), published in June and discussed on Hacker News on November 5, gives a test for staying put: "You can't yet say what each agent would own."
+Start with one agent, as Fowler's teams started with one service, and split once you can say which part of the work a second agent would own. Kadharmoideen Fadurudeen's [guide to multi-agent patterns](https://kadhar.dev/blog/multi-agent-systems-from-scratch), published in June and discussed on Hacker News on November 5, gives a test for staying put: "You can't yet say what each agent would own."
 
 So before you add an agent, put four questions to the design.
 

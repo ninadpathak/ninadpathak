@@ -23,15 +23,13 @@ A coding agent forgets everything when you start a new session because the model
 
 A `.env` file is one you write once and a program reads on every start. The [dotenv README](https://github.com/motdotla/dotenv) describes a module "that loads environment variables from a `.env` file".
 
-A coding agent's instruction file is written by you and read by the tool at the start of each session. Every one of the four [coding agents](/articles/coding-agents/) compared here except Cursor now adds something a `.env` file never had, which is notes the agent writes for itself.
+A coding agent's instruction file is written by you and read by the tool at the start of each session. Claude Code, Codex and Gemini CLI now add something a `.env` file never had, which is notes the agent writes for itself.
 
-So I'll go through what each tool loads, which ones take notes, and how you can check what yours has in front of it.
+Cursor, the fourth of the [coding agents](/articles/coding-agents/) compared here, doesn't. So I'll go through what each tool loads, which ones take notes, and how you can check what yours has in front of it.
 
 ## Why does a coding agent forget between sessions?
 
-A coding agent forgets because the model has no memory of its own, and the session is the only place the conversation was held. Cursor's [documentation on rules](https://cursor.com/docs/rules) puts it this way.
-
-"Large language models don't retain memory between completions. Rules provide persistent, reusable context at the prompt level."
+A coding agent forgets because the model has no memory of its own, and the session is the only place the conversation was held. Cursor's [documentation on rules](https://cursor.com/docs/rules) says "Large language models don't retain memory between completions."
 
 Anthropic's [memory page](https://code.claude.com/docs/en/memory) opens on the same fact: "Each Claude Code session begins with a fresh context window." So a decision you made on Tuesday reaches Wednesday's session only if it got written to a file the tool loads.
 
@@ -46,9 +44,11 @@ Each of the four reads instruction files you write, and all but Cursor can also 
 | Gemini CLI | `GEMINI.md` | A memory tool that edits its Markdown files, plus Auto Memory | Auto Memory off |
 | Cursor | Rules in `.cursor/rules`, or `AGENTS.md` | None documented | |
 
-Codex and Claude Code both state a size limit on the files you write. Codex's [AGENTS.md guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md) stops adding files "once the combined size reaches the limit defined by `project_doc_max_bytes` (32 KiB by default)", so a long file near the root can crowd out a nearer one.
+Codex and Claude Code both state a size limit on the files you write. Codex's [AGENTS.md guide](https://learn.chatgpt.com/docs/agent-configuration/agents-md) stops adding files "once the combined size reaches the limit defined by `project_doc_max_bytes` (32 KiB by default)", so a long `AGENTS.md` at the repository root can use up the 32 KiB before Codex reaches the file in the directory you're working in.
 
-Claude Code loads a file read at launch whole as long as it is 4 MiB or smaller, and puts a tighter limit on instruction files that load on demand, 40,000 characters in a session with a 200K context window. An on-demand file over 40,000 characters reaches the model only in part, with a note telling it to read the rest.
+Claude Code loads the whole of an instruction file at launch as long as the file is 4 MiB or smaller. Files that load on demand, such as a `CLAUDE.md` in a subdirectory, have a tighter limit of 40,000 characters in a session with a 200K context window.
+
+An on-demand file over 40,000 characters reaches the model only in part, with a note telling it to read the rest.
 
 ## Which of them takes notes for you?
 
@@ -72,11 +72,11 @@ A single file can serve every tool for instructions, with a condition for Claude
 
 Codex and Cursor read it by name. Claude Code reads it too, with a condition the docs spell out: "By default, Claude reads `AGENTS.md` only when you have no `CLAUDE.md` in your working directory or above it."
 
-So if your repository has both files, Claude Code uses `CLAUDE.md` and ignores the other unless you import it. Gemini CLI needs a setting, since `GEMINI.md` is its default name and the `context.fileName` property is where you add `AGENTS.md`.
+So if your repository has both files, Claude Code uses `CLAUDE.md` and ignores the other unless you import it or change the Project instructions setting. Gemini CLI needs a setting, since `GEMINI.md` is its default name and the `context.fileName` property is where you add `AGENTS.md`.
 
 Those two tools differ on permissions and undo as well, which [Claude Code vs Gemini CLI](/articles/claude-vs-gemini-cli/) compares.
 
-So one shared file works once each tool is pointed at it. [The CLAUDE.md guide](/articles/claude-md/) has the one-line import that makes Claude Code read the shared file.
+So one shared `AGENTS.md` works once Claude Code and Gemini CLI are pointed at it. [The CLAUDE.md guide](/articles/claude-md/) has the one-line import that makes Claude Code read the shared file.
 
 ## Is forgetting inside a session the same problem?
 
@@ -95,11 +95,9 @@ The transcript is on disk in every one of these tools, and two of them have star
 
 A third approach leaves the transcript whole. Ellie Huxtable announced [Atuin Threads](https://blog.atuin.sh/threads-agent-sessions/) on October 27, a feature that syncs agent sessions between machines, with the complaint that "while my shell history follows me everywhere, my agent sessions do not."
 
-Her point is that the record is already complete.
+She adds that the record is already complete: "Agent sessions store the lot of it. Every command, its output, my intent, and everything I tried along the way to the eventual solution."
 
-"Agent sessions store the lot of it. Every command, its output, my intent, and everything I tried along the way to the eventual solution."
-
-So a tool now has a choice of what to do with an old conversation: distill it into notes without asking, propose notes for you to approve, or keep it searchable and resumable. I'd take the last two over the first, because both leave a person able to see what was kept.
+So a tool now has a choice of what to do with an old conversation: distill it into notes without asking, propose notes for you to approve, or keep it searchable and resumable. I'd take a tool that proposes notes, or one that keeps the transcript searchable, over one that distills without asking, because both leave a person able to see what was kept.
 
 ## How do you check what your agent remembers?
 

@@ -108,7 +108,8 @@
         "Written by Lance Martin",
         "57 of 57 facts survived",
         "This process is often called dreaming",
-        "wrote down (incorrectly) that the PokéCenter was on the east side"
+        "wrote down (incorrectly) that the PokéCenter was on the east side",
+        "Cerulean City"
       ],
       "connects": [
         "rag-vs-memory",
@@ -1777,7 +1778,8 @@
         "Our culture of defaulting to working on open Slack channels helps too, since you see what others are building while they build it.",
         "from about 2,500 in May to more than 30,000 in September this year",
         "CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals.",
-        "from about 2,500 in May to more than 30,000 in September this year."
+        "from about 2,500 in May to more than 30,000 in September this year.",
+        "a subagent reviews the diff with fresh context"
       ],
       "connects": [
         "nobody-understands-the-code",
@@ -2654,7 +2656,8 @@
         "gen65 changes over-corrected.",
         "the transfer hyperagents have features such as performance tracking and persistent memory",
         "Tool for persistent memory storage across agent interactions.",
-        "Work done at Meta"
+        "Work done at Meta",
+        "combine gen55’s critical reasoning with gen64’s balance"
       ],
       "connects": [
         "hyperagents-memory"
@@ -2833,7 +2836,8 @@
         "these two miscommunications.",
         "Actions carry implicit decisions, and conflicting decisions carry bad results",
         "Share context, and share full agent traces, not just individual messages",
-        "By Walden Yan 2025.06.12"
+        "By Walden Yan 2025.06.12",
+        "started building a background that looks like Super Mario Bros"
       ],
       "connects": [
         "multi-agent-vs-single-agent"
@@ -5904,6 +5908,9 @@
       "Operate",
       "Change",
       "You have an account but no credentials. Find the shortest supported route to a successful test API response."
+    ],
+    "claude-code-memory": [
+      "this project uses npm"
     ]
   }
 }

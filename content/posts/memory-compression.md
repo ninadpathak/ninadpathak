@@ -23,11 +23,11 @@ A `.gitignore` file is where a repository says what it won't keep. [Git's docume
 
 Context compression decides what an agent carries forward and what gets left to be looked up again. It happens in two places, inside a session when old turns are squeezed to fit the window, and between sessions when the agent decides what to write down.
 
-So I'll take both in turn. The rule I end up with for [memory in AI agents](/articles/agent-memory/) is the `.gitignore` one, which is to keep what you can't regenerate.
+The rule I end up with for both, and for [memory in AI agents](/articles/agent-memory/) generally, is the `.gitignore` one, which is to keep what you can't regenerate.
 
 ## What is context compression?
 
-Context compression is any step that reduces what a model has to carry so the work can go on. The two kinds share a name and differ in almost everything else.
+Context compression is any step that reduces what a model has to carry so the work can go on. Compression inside a session and compression between sessions share a name and differ in almost everything else.
 
 | | Inside a session | Between sessions |
 | --- | --- | --- |
@@ -52,7 +52,7 @@ That's the first place the `.gitignore` rule applies. A file the agent can open 
 
 Keep what the environment can't hand back, such as a conclusion the agent worked out. Martin's evidence is a comparison of two models playing Pokémon Red, each with a folder to write notes in, and my page on [RAG vs memory](/articles/rag-vs-memory/) has the file counts.
 
-What interests me here is why Sonnet 3.7, the model that wrote far more notes, did worse. The post's reason is that its "detailed record was continuously going out of date", so it "had to spend more time and resources combing through its memories rather than playing the game."
+What interests me here is why Sonnet 3.7, the model that wrote far more notes, earned one badge to Fable 5's four. The post's reason is that its "detailed record was continuously going out of date", so it "had to spend more time and resources combing through its memories rather than playing the game."
 
 And Fable 5, the model that did better? It wrote down what the game never showed it, since "memory files about strategy, plans, and tested rules exist only if Claude works them out, and they disappear unless Claude writes them down."
 
@@ -60,7 +60,7 @@ So state the agent can read again stays out, and conclusions it had to earn go i
 
 ## Do fixed rules decide it well?
 
-For strong models, the post suggests fixed rules don't decide it well. Its authors gave models one rule each about what to write, and with the rule set to record only failures, "both Opus 5 and Opus 4.7 lost much of the performance boost that memory gave them".
+For strong models, the post suggests a fixed rule about what to write does worse than the model's own judgment. Its authors tested one rule at a time, and with the rule set to record only failures, "both Opus 5 and Opus 4.7 lost much of the performance boost that memory gave them".
 
 Martin's summary of the lesson is "it helps to tell Claude what memory is for, but not how to use it." Older models went the other way, though: prompting Sonnet 4.6 to read its memory before answering, and then to test its theories, "nearly doubled its benchmark score".
 
@@ -73,7 +73,7 @@ A scoring pass is a fixed rule in code. It ranks stored items by recency, by how
 
 I think the fixed-rule result is a reason to be wary of a scoring pass. A recency score can't know that a rule written two months ago is the one that prevents today's mistake, and the model that wrote the note could have said so.
 
-So where a scorer is still needed, give it the one signal the writer had. A note marked as a tested rule should outlive a note marked as an observation, whatever their ages.
+So where a scorer is still needed, have the model label each note with its kind as it writes, and score on that label. A note marked as a tested rule should outlive a note marked as an observation, whatever their ages.
 
 ## When does compression backfire?
 
@@ -83,7 +83,7 @@ Several agents wrote to one shared table of contract terms at once. When a brief
 
 The fix was to give each contract a single agent, which wrote its own page and quoted terms word for word, and that kept all 57.
 
-I take from that case that compression fails at the write as often as at the summary, and quoting the source exactly is the cheapest protection against both.
+I take from that case that facts can be lost when notes are written, before any summary is made, and quoting the source word for word protects against both losses.
 
 The opposite failure is in the post too. On another task "the wiki grew larger than the documents themselves", which Martin calls "an extremely detailed wiki that effectively abstracted nothing."
 
