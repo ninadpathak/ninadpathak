@@ -23,7 +23,7 @@ updated: 2026-11-17
 
 Aircraft maintenance manuals are written in [Simplified Technical English](https://en.wikipedia.org/wiki/Simplified_Technical_English), a restricted English developed in the 1980s for the European airline industry. Its current edition has 53 writing rules and a dictionary of about 900 approved words.
 
-Technical writing for engineers needs only a few of those rules, and the few it needs are ones a program can check.
+Technical writing for engineers needs only a few of those rules, and a short program can check two of them.
 
 Andrej Karpathy suggested a softer version on October 2, which is to ask a model for text "80% of the way to ASD-STE100", the standard's formal name. A project built on that tip, the [STE80 Humanizer](https://github.com/Dodaios/ste80-humanizer), reached Hacker News on November 9.
 
@@ -39,7 +39,7 @@ A misread step in a deploy guide costs less. But your reader is mid-task and rea
 
 ## Which rules do the work?
 
-The sentence and the paragraph are covered by four of the standard's rules, and Google's free course for engineers teaches all four in other words.
+Google's free course for engineers teaches the same four rules for sentences and paragraphs that the standard has, in its own words.
 
 | The standard's rule, per Wikipedia's summary | What Google's course teaches |
 | --- | --- |
@@ -126,11 +126,11 @@ after
 
 The verb list is short and the detection is crude, so treat the script as a demonstration that the rules are mechanical. A real setup would use a prose linter such as the STE80 project's own `ste_check.py`, and the [technical writing linter](/linter/) on this site checks a draft in the browser.
 
-And the rewrite is shorter too, 19 words against 41. Splitting the steps removed the connecting words, such as "you should make sure" and "that you are going to".
+And the rewrite is shorter too, 19 words against 41. Writing the first sentence as a direct instruction removed phrases such as "you should make sure" and "that you are going to".
 
 ## Why stop at 80%?
 
-I'd stop at 80% because the rest of the standard controls vocabulary, and software has too many words of its own. The README describes full compliance as a state where "Normal prose sounds stiff", with common verbs restricted to one part of speech.
+I'd stop at 80% because the rest of the standard controls vocabulary, and software has too many words of its own. The README describes full compliance as a state where "Normal prose sounds stiff", with common words restricted to one part of speech.
 
 A dictionary of 900 words suits a fleet of aircraft maintained from one set of manuals. A codebase keeps naming new things, so the rule to carry over is the narrower one behind the dictionary: one name for one thing, used the same way every time.
 
@@ -149,13 +149,13 @@ The habits below come ahead of any style rule.
 - **Ship code that runs.** Every sample should be copied from something that executed, with its output. The reasoning is in my [code documentation guide](/articles/code-documentation/).
 - **Change the docs in the same pull request.** A page updated with the code it describes is reviewed by the person who knows whether it is true.
 
-Length follows from leading with the task. A page built around one task is short, and [the case for shorter documentation](/articles/shorter-documentation/) argues for keeping it that way.
+A page that leads with one task is short, and [the case for shorter documentation](/articles/shorter-documentation/) argues for keeping it that way.
 
 ## Where does an engineer's writing get read?
 
 An engineer's writing gets read well beyond the repository. The posts on [Stripe's engineering blog](/articles/stripe-technical-blog/) are engineer-written and are read as evidence of how the company builds.
 
-Products built on models are harder to document, since their behaviour has to be described precisely enough to test, which is the problem [writing for AI products](/articles/writing-for-ai-products/) takes up. For a company selling to developers, what a buyer checks in those docs is the subject of [devtools documentation](/articles/devtools-documentation/).
+Products built on models are harder to document, since their behaviour has to be described precisely enough to test, which is the problem [writing for AI products](/articles/writing-for-ai-products/) takes up. For a company selling to developers, [devtools documentation](/articles/devtools-documentation/) covers the pages a buyer checks before a trial.
 
 Some engineers end up doing this work full time, the move described in [from engineer to technical writer](/articles/engineer-to-writer/).
 

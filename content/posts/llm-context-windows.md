@@ -36,13 +36,13 @@ On Claude 4.5 models and newer, a request whose input plus `max_tokens` would pa
 
 ## Why does the middle of a long context get ignored?
 
-The middle gets ignored because models recall the beginning and the end of their input better than the middle. The effect is named after the paper that reported it, [Lost in the Middle](https://arxiv.org/abs/2307.03172), submitted on July 6, 2023.
+Models recall the beginning and the end of their input better than the middle. The effect is named after the paper that measured it, [Lost in the Middle](https://arxiv.org/abs/2307.03172), submitted on July 6, 2023.
 
 Its authors found that models did best when the relevant fact sat at the beginning or the end of the input, and noticeably worse when it sat in the middle. The drop in the middle appeared "even for explicitly long-context models."
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/llm-context-windows/lost-in-the-middle.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/llm-context-windows/lost-in-the-middle.narrow.svg" width="288" height="528"><img class="np-has-narrow" src="/static/images/diagrams/llm-context-windows/lost-in-the-middle.svg" width="720" height="544" alt="A long prompt split into its start, middle, and end. The model reliably recalls facts placed at the start, which frames the task, and at the end, which is the runway to the next token. Facts buried in the middle compete for whatever attention is left and often get skipped." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Recall follows a U shape across the context. Put the instruction and the data you care about at the two ends.</figcaption>
+  <figcaption>Models recall facts at the start and the end of a prompt better than facts in the middle. Put the instruction and the data you care about at the start or the end.</figcaption>
 </figure>
 
 The models in that paper date from 2023, and I don't assume current models lose as much in the middle. The paper's practical rule still costs nothing to follow: put the instruction and the facts that matter at the start or the end of the prompt.
@@ -51,7 +51,7 @@ The models in that paper date from 2023, and I don't assume current models lose 
 
 Context rot is the loss of accuracy as the input grows, wherever the important part sits. Chroma's [technical report](https://www.trychroma.com/research/context-rot) of July 14, 2025 tested 18 models and made the term common.
 
-The term context rot is a month older than Chroma's report. Simon Willison [credits a Hacker News comment](https://simonwillison.net/2025/Jun/18/context-rot/) with coining it in June 2025.
+The term context rot is a month older than Chroma's report, since Simon Willison [credits a Hacker News comment](https://simonwillison.net/2025/Jun/18/context-rot/) with coining it in June 2025.
 
 Chroma's report tests a common assumption, that a model handles its 10,000th token as reliably as its 100th. The report found that models don't use their context evenly, and that they get less reliable as the input gets longer.
 
@@ -71,7 +71,7 @@ Use the window for material that has to be read together, and retrieval for mate
 
 Retrieval puts a few passages in front of the model, which keeps the input short. It can also miss the right passage, and [contextual retrieval](/articles/contextual-retrieval/) is one way to reduce that failure at indexing time.
 
-Inside a long session there's a third option, which is to shrink the history that is already in the window. Compaction replaces old turns with a summary, and [short-term memory for agents](/articles/short-term-agent-memory/) covers what that can lose.
+Inside a long session there's a third option, which is to shrink the history that is already in the window. Compaction replaces old turns with a summary, and [short-term memory for agents](/articles/short-term-agent-memory/) covers what a summary can lose.
 
 ## How should you fill a large window?
 
@@ -82,7 +82,7 @@ Treat the window's size as an upper limit, and choose each thing you put into it
 - Count tokens before sending, so a request is refused by your code and not by the API.
 - Measure answers at the lengths you will run, since a prompt that works at 2,000 tokens tells you little about 200,000.
 
-Some models keep count of the window for you. Anthropic lists four, including Sonnet 5 and Haiku 4.5, that keep track of how much window is left through a conversation, and says its newer ones take an explicit task budget instead.
+Anthropic lists four Claude models, including Sonnet 5 and Haiku 4.5, that track how much of the window is left through a conversation. Newer models such as Sonnet 5.5 and Haiku 5.5 take an explicit task budget instead.
 
 ## FAQ
 
@@ -92,7 +92,7 @@ A context window is the text the model can read at once, measured in tokens, inc
 
 **Is a bigger context window always better?**
 
-No. A 2023 paper, a 2025 report and Anthropic's own documentation all say that accuracy falls as the input grows.
+No. The Lost in the Middle paper from 2023, Chroma's 2025 report and Anthropic's own documentation all say that accuracy falls as the input grows.
 
 **What happens when the context window is full?**
 

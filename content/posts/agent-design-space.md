@@ -46,9 +46,9 @@ Other lists agree in part. Kadharmoideen Fadurudeen's [guide to multi-agent patt
 
 Pipeline maps onto prompt chaining, and orchestrator maps onto orchestrator-workers. The blackboard has no row in Anthropic's table, and the guide sums it up as "There's no boss."
 
-In a blackboard design the agents share one store, the board, which could be a single JSON document: each agent reads the board, adds what it knows and acts when it has something to offer. None of Anthropic's six patterns shares state that way, since each passes work from one call to the next.
+In a blackboard design the agents share one store, the board, say a single JSON document: each agent reads the board, adds what it knows and acts when it has something to offer. None of Anthropic's six patterns shares state that way, since each passes work from one call to the next.
 
-So the two lists differ in length and in what they count. I sort every pattern on both lists with two questions: does code or a model decide the next step, and do the steps share a common store?
+So the two lists differ in length, and only Fadurudeen's has a pattern built on shared state. I sort every pattern on both lists with two questions: does code or a model decide the next step, and do the steps share a common store?
 
 | | Steps share only what is passed along | Steps share a common store |
 | --- | --- | --- |
@@ -63,7 +63,7 @@ Start with chaining, routing or parallelization, where code decides each step, a
 
 So when do you move? Anthropic's post says to reach for orchestrator-workers when you can't predict the subtasks in advance, and for evaluator-optimizer when you have "clear evaluation criteria".
 
-Clear evaluation criteria are harder to come by than the phrase suggests. The clearest criteria are ones a program can check, which is why my [lambda calculus exercise](/articles/lambda-calculus-ai/) grades answers with a script.
+The clearest evaluation criteria are ones a program can check, such as a test that passes or fails, which is why my [lambda calculus exercise](/articles/lambda-calculus-ai/) grades answers with a script.
 
 Choosing a pattern is separate from choosing a type of agent. My guide to the [types of AI agents](/articles/ai-agent-taxonomy/) ranks systems by how much they decide alone, and [AI agent vs AI assistant](/articles/agent-vs-ai-assistant/) covers the cases where a person picks each next step and no loop is needed.
 
@@ -71,9 +71,9 @@ Choosing a pattern is separate from choosing a type of agent. My guide to the [t
 
 The patterns break at the handoffs between calls. A chain fails when one step's output isn't what the next step expects, and an orchestrator fails when a worker misreads the task it was handed, the handoff problem described in [multi-agent vs single-agent systems](/articles/multi-agent-vs-single-agent/).
 
-A loop adds a failure of its own, which is never knowing when to stop. The [anatomy of an agent loop](/articles/agent-loop-anatomy/) goes through one pass, and [error handling for agents](/articles/agent-error-handling/) covers what the code around the loop has to decide.
+A loop adds a failure of its own, which is never knowing when to stop. The [anatomy of an agent loop](/articles/agent-loop-anatomy/) goes through one pass, and [error handling for agents](/articles/agent-error-handling/) covers how the code around the loop classifies a tool error and whether a failed call is safe to repeat.
 
-Shared state fails in its own way. A pair of agents writing to one board can overwrite each other, so the board needs what any shared store needs: a rule for who may write, and a version check on each write.
+Shared state fails when two agents write to one board and one overwrites the other. So the board needs what any shared store needs: a rule for who may write, and a version check on each write.
 
 ## FAQ
 
@@ -83,7 +83,7 @@ Anthropic's 2024 list has prompt chaining, routing, parallelization, orchestrato
 
 **What is the difference between a workflow and an agent pattern?**
 
-A workflow has code fix the path between model calls. An agent pattern leaves the next step to the model.
+A workflow's code fixes the path between model calls. An agent pattern lets the model choose the next step.
 
 **Which agent design pattern should I start with?**
 

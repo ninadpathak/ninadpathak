@@ -42,7 +42,7 @@ DORA's research says documentation quality amplifies the payoff of every technic
 | Trunk-based development | 36% | 1525% |
 | Version control | 27% | 278% |
 
-So the lift from every practice is far larger for teams with above-average documentation. Even the row with the smallest difference, Site Reliability Engineering, shows 343% against 79%.
+So the lift from every practice is far larger for teams with above-average documentation. Even the row with the smallest ratio, Site Reliability Engineering, shows 343% against 79%, more than four times the lift.
 
 DORA scored documentation quality with eight metrics covering attributes such as clarity and findability.
 
@@ -53,7 +53,7 @@ DORA scored documentation quality with eight metrics covering attributes such as
 
 ## How far can that table be pushed?
 
-The table can't be pushed as far as its largest number, 1525%, invites. The data is from 2022, and I read the table as a correlation between documentation quality and the payoff of other practices, with no proof that documentation causes the lift.
+The table doesn't show that documentation multiplies a team's performance by fifteen, which is how its largest number, 1525%, can be read. The data is from 2022, and I read the table as a correlation between documentation quality and the payoff of other practices, with no proof that documentation causes the lift.
 
 A team with strong documentation is plausibly strong at other things the table doesn't show, such as code review or testing, and the table can't separate their effect from documentation's.
 
@@ -65,7 +65,7 @@ The table gives no support to a sentence like "documentation makes a team seven 
 
 The time goes into work that gets logged as something else, such as debugging. Stripe's [Developer Coefficient report](https://stripe.com/files/reports/the-developer-coefficient.pdf) from September 2018 found that "the average developer spends more than 17 hours a week dealing with maintenance issues, such as debugging and refactoring."
 
-The report doesn't say how much of that time is spent working out what code was meant to do, and I won't put a share on it. I can name the places where a team pays for missing documentation, and the report doesn't measure them.
+The report doesn't say how much of that time is spent working out what code was meant to do, and I won't put a share on it. The report doesn't measure where a team pays for missing documentation, and I'd name code review, onboarding and incidents.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/documentation-debt.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/documentation-debt.narrow.svg" width="288" height="448"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/documentation-debt.svg" width="720" height="504" alt="Missing documentation never breaks the build, but it taxes three places: every pull request where a reviewer has to ask what a function does, every onboarding where a new hire reverse-engineers the deploy process, and every incident where the one person who understands the failing job is asleep." loading="lazy" decoding="async"></picture></a>
@@ -76,21 +76,23 @@ A reviewer has to ask what a function is for. A new hire reconstructs the deploy
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/knowledge-silos.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/knowledge-silos.narrow.svg" width="288" height="736"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/knowledge-silos.svg" width="720" height="256" alt="A delivery pipeline from code through build and deploy. A single stage depends on an architectural detail that lives only in one engineer's head, so every change waits on that person, and the whole pipeline moves only as fast as that silo, however quick the build and deploy are." loading="lazy" decoding="async"></picture></a>
-  <figcaption>A delivery pipeline in which one stage depends on a detail only one engineer knows.</figcaption>
+  <figcaption>When one stage of a delivery pipeline depends on a detail only one engineer knows, every change through that stage waits for that engineer.</figcaption>
 </figure>
 
 An incident that waits for one person is a bus factor of one, and it shows up as a longer recovery time. A [runbook](/articles/runbook-template/) puts what that person knows about the failing job on a page the on-call engineer can follow.
 
+Where the answer lives matters as well. A page in the repository can be opened without leaving the editor, and a question in chat waits for another person to reply.
+
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/documentation-velocity/context-switching.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/documentation-velocity/context-switching.narrow.svg" width="288" height="432"><img class="np-has-narrow" src="/static/images/diagrams/documentation-velocity/context-switching.svg" width="720" height="528" alt="An engineer working in the IDE needs an answer. Documentation kept in the same repository answers it a few keystrokes away, so the engineer stays in flow. A question sent to Slack or a stale wiki page pulls the engineer out of the IDE and drops the mental state they were holding." loading="lazy" decoding="async"></picture></a>
-  <figcaption>Two places an engineer can look for an answer: documentation beside the code, or a question in chat or a wiki.</figcaption>
+  <figcaption>Documentation in the repository answers a question without the engineer leaving the editor. A question in chat or on a stale wiki page interrupts the work.</figcaption>
 </figure>
 
 ## What changes when agents write the code?
 
 The volume of changes goes up, and a model becomes the first reader of a team's conventions. Anthropic's [account of its code review](https://claude.dev/blog/solving-code-review-at-anthropic/) from October 15 says the changes landing in its monorepo each day went from about 2,500 in May to more than 30,000 in September.
 
-The post describes fixing repeated review findings by editing the instruction files the model reads, such as the one where "CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals."
+The post describes fixing a repeated review finding once, in a skill, a lint rule or an instruction file. It describes one such file this way: "CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals."
 
 I think of an instruction file as documentation with a visible return, since a line added to the file removes a class of review comment. My [CLAUDE.md guide](/articles/claude-md/) covers what belongs in it.
 
@@ -104,7 +106,7 @@ Pick one document, one metric and a period before and after. The measurements be
 
 Recovery time is close to DORA's failed deployment recovery time, and the onboarding and repeat-question measures aren't DORA metrics. Each one still gives a number a team can check.
 
-For a company whose buyers are developers, the same reasoning applies outside the team, and [devtools documentation](/articles/devtools-documentation/) makes that case.
+For a company whose buyers are developers, missing documentation also costs sales, and [devtools documentation](/articles/devtools-documentation/) makes that case.
 
 And the writing doesn't need a specialist to start. My [guide to writing for engineers](/articles/technical-writing-for-engineers/) covers the rules an engineer can apply to the first page.
 
@@ -122,4 +124,4 @@ The strongest evidence is DORA's 2022 analysis, in which every technical capabil
 
 **Does AI-written code reduce the need for documentation?**
 
-No, it moves the need. Instruction files and written conventions become input to the tools that write and review the code.
+No. The documentation is still needed, and a model now reads it first: instruction files and written conventions become input to the tools that write and review the code.

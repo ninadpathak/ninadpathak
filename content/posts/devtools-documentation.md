@@ -26,9 +26,9 @@ Devtools documentation is the part of a developer tool that a buyer uses first, 
 
 Corporate buyers of the 1980s had a saying for the safe choice, that nobody got fired for [buying an IBM](https://en.wikipedia.org/wiki/IBM_PS/2).
 
-A devtools startup can't offer that kind of cover. What its buyer can check, without talking to anyone, is the docs.
+A devtools startup has no name that makes it the safe choice. What its buyer can check, without talking to anyone, is the docs.
 
-So this page covers what that buyer looks for in the docs, which is where [developer content](/articles/developer-experience/) meets a sale.
+So this page covers what that buyer looks for in the docs. It's the part of [developer content](/articles/developer-experience/) that a purchase depends on.
 
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/devtools-documentation/evaluation-friction.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/devtools-documentation/evaluation-friction.narrow.svg" width="288" height="776"><img class="np-has-narrow" src="/static/images/diagrams/devtools-documentation/evaluation-friction.svg" width="720" height="264" alt="A technical evaluator's path from the docs to a deal, passing the quickstart, the auth page and the limits page. Each of the three is marked as a point where the evaluation can stop." loading="lazy" decoding="async"></picture></a>
@@ -73,7 +73,7 @@ The [quick start guide template](/articles/quickstart-guide/) covers the quickst
 
 ## What does a quickstart tell a first-time reader?
 
-A quickstart should tell a first-time reader what they need, what a successful run looks like and where to go next. The script below fetches the quickstarts of Stripe, Vercel and Cloudflare and searches each for those things, plus an entry point for a coding agent.
+A quickstart should tell a first-time reader what they need, what a successful run looks like and where to go next. The script below fetches the quickstarts of Stripe, Vercel and Cloudflare and searches each for those things, plus a button or a prompt meant for a coding agent.
 
 ```python
 """Fetch three vendor quickstarts and report what each page tells a first-time reader."""
@@ -143,13 +143,13 @@ You can, and few teams do. The report says 57% of respondents don't track leads 
 
 Larry Ullman was Stripe's first technical writer, and the report lists what his team tracked there, starting with the time from a first docs visit to a first paid transaction.
 
-So start with one of the measures his team tracked. Inside an engineering team the same question has different evidence, which my page on [documentation ROI](/articles/documentation-velocity/) covers.
+So start with that one, the time from a first docs visit to a first paid transaction. For documentation written for a company's own engineers, the evidence is DORA's 2022 data, which my page on [documentation ROI](/articles/documentation-velocity/) covers.
 
 ## What should a small team fix first?
 
 Start with the quickstart and run every command in it on a clean machine. Then publish the limits, because a limit found during a load test costs more trust than one read on a page.
 
-The writing can come from the engineers who built the product, and my [writing guide for engineers](/articles/technical-writing-for-engineers/) covers the rules that matter. The [Stripe engineering blog](/articles/stripe-technical-blog/) shows the stage before all this, where a company's writing earns attention before anyone creates an API key.
+The writing can come from the engineers who built the product, and my [writing guide for engineers](/articles/technical-writing-for-engineers/) covers four rules for sentences and paragraphs. The [Stripe engineering blog](/articles/stripe-technical-blog/) works earlier than the docs do, since its posts reach developers before any of them creates an API key.
 
 And if nobody on the team has the time, this is the work I do. My [technical writing services](/services/) cover these pages, and I run the product before I write about it.
 

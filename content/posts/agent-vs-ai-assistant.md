@@ -20,7 +20,7 @@ An AI assistant leaves the next step to you, and an AI agent takes it. Both can 
 
 Microsoft's [Office Assistant](https://en.wikipedia.org/wiki/Office_Assistant) shipped with Office 97 and is remembered for one prompt, which began "It looks like you're writing a letter". The paperclip, nicknamed Clippy, never sent the letter.
 
-A research group told six modern assistants to act alone in October. The user in [Vals AI's experiment](https://www.vals.ai/blogs/impossible-refund) said "I won't do anything here myself", and the results show what changes when the model, with no person watching, decides each next step.
+Vals AI told six AI assistants to act alone in October. The user in [its experiment](https://www.vals.ai/blogs/impossible-refund) said "I won't do anything here myself", and the results show what changes when the model, with no person watching, decides each next step.
 
 Whether a person or the model picks the next step is the first design decision in [AI agent architecture](/articles/ai-agents/).
 
@@ -41,7 +41,7 @@ My guide to the [types of AI agents](/articles/ai-agent-taxonomy/) uses Simon Wi
 
 It becomes an agent, and what it does next depends on its own judgment of when to stop. Vals AI published its experiment on October 15: six personal assistants were asked to recover a train refund of 350 pounds after the claim window had closed, with outgoing messages answered by simulated organisations.
 
-The instruction included "keep trying anything you think of to get it", and the user then stopped responding.
+The instruction included "keep trying anything you think of to get it", and the user then stopped responding. The table lists four of the six models.
 
 | Model | What it did, per the report |
 | --- | --- |
@@ -54,13 +54,13 @@ No refund was available, so every run was a test of when to stop. I think each o
 
 The report warns against reading a ranking into this: "One trial per model in one scenario cannot establish typical behaviour or a reliable model ranking." It adds that the runs lasted different lengths of time, so the message totals aren't directly comparable.
 
-Vals runs a benchmarking business, and it built the scenario to have no legitimate way through. Even so, the same instruction produced 187 messages in 15 simulated days from one model and eight in twelve weeks from another.
+Vals runs a benchmarking business, and in its scenario the 28-day claim window had already closed. Even so, the same instruction produced 187 messages in 15 simulated days from one model and eight in twelve weeks from another.
 
 A builder who removes the person from the loop takes on that spread in behavior, and has to supply the stopping point the person used to provide.
 
 ## Why do products use the two words for one thing?
 
-Products use both words because one product now does both jobs. A post from October 29 on [why Claude Duet works](https://fig.blue/posts/duet-is-the-future/) puts Anthropic's Duet in a category it calls "personal-assistant-type harnesses", and praises Duet for storing no credentials and discouraging users from handing any over.
+Products use both words because one product now does both jobs. A post from October 29 on [why Claude Duet works](https://fig.blue/posts/duet-is-the-future/) puts Duet, Anthropic's personal-assistant chat product, in a category it calls "personal-assistant-type harnesses", and praises Duet for storing no credentials and discouraging users from handing any over.
 
 Duet is called an assistant and can act for the user through Claude's connectors, as an agent does, and its design limits what it can reach by holding no passwords.
 
@@ -78,7 +78,7 @@ Build an agent when the steps depend on results nobody can predict and the perso
 
 Each pass of the loop is another model call, which the [token budgets guide](/articles/llm-token-budgets/) adds up. Each pass is also another place to fail, which is why [error handling for agents](/articles/agent-error-handling/) has to be designed before the agent gets any tool that writes.
 
-The Vals runs suggest a rule for the instruction you give an agent. An instruction to try everything gives the model no stopping point, so write the limits into the task: how many attempts, which channels, and what must never be shared.
+The Vals runs suggest a rule: an instruction to try everything gives the model no stopping point, so write the limits into the task: how many attempts, which channels, and what must never be shared.
 
 ## FAQ
 
@@ -92,4 +92,4 @@ Yes. A product can answer questions as an assistant and carry out tasks unattend
 
 **Which is safer to deploy?**
 
-An assistant is safer to deploy, because a person sees every output before it has an effect. An agent needs limits on what it can do alone.
+An assistant is safer to deploy, because a person sees every output before it has an effect. An agent needs limits written into its task, such as how many attempts it may make and what it must never share.
