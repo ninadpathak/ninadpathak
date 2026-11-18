@@ -4,8 +4,8 @@
     "sources": "284f413aaefde61a1481494659196c886f7fb3d551cf5fcf14d5ca2219b6efb2"
   },
   "agent-design-space": {
-    "lastmod": "2026-11-17",
-    "sources": "dfd4c7c484f1df15081030a1804d11358313bf065c554861f11ca9510de38899"
+    "lastmod": "2026-11-18",
+    "sources": "f781ba5132ad9427ee199807a5ed736e71ac9b44d231ae9001ef6bffefed333c"
   },
   "agent-error-handling": {
     "lastmod": "2026-11-17",
@@ -32,8 +32,8 @@
     "sources": "c252cf35b71691722503d00748086e606f012a82f7230f8e10d382ab96335aa8"
   },
   "agent-vs-ai-assistant": {
-    "lastmod": "2026-11-17",
-    "sources": "b82a607067619e1b1e00d6cfb1a195c1d626616140731fc97c2e6270e6bc844a"
+    "lastmod": "2026-11-18",
+    "sources": "1d823f31e7ee7c39b89fbbd287bedb678fa07e7fea92788114008d70d772c0e5"
   },
   "agentic-workflows": {
     "lastmod": "2026-11-18",
@@ -41,7 +41,7 @@
   },
   "agents-on-call-runbooks": {
     "lastmod": "2026-11-18",
-    "sources": "e60e44d1c1afac398d7fa8f79e22438583492003af7bf590ddcf7e3590f83424"
+    "sources": "14a8d864df1eb58fab33517299949015f8c4d9e4e5d2f55cad46bafddb67b99d"
   },
   "agents-reading-docs": {
     "lastmod": "2026-11-17",
@@ -52,8 +52,8 @@
     "sources": "3a36ade3c6c2042e2768f474f909f74e63b6752a6a92c20bce0886e3b2efa2bc"
   },
   "ai-agent-taxonomy": {
-    "lastmod": "2026-11-17",
-    "sources": "97449d59d671126e79235a921ec20b5f9afcd2df552ab1ada3611fc373f1d0e0"
+    "lastmod": "2026-11-18",
+    "sources": "becc86584046cc055a6d69a7158fefa2c62e603f1f59b343bad5d6bec3fbe1ba"
   },
   "ai-crawlers": {
     "lastmod": "2026-11-17",
@@ -132,8 +132,8 @@
     "sources": "f13962f1e912c1c01c26a75d907f877a5b6e5a163ba9009b9d0487bbb44a4972"
   },
   "devtools-documentation": {
-    "lastmod": "2026-11-17",
-    "sources": "581b9cea85918019fd46584b78e685824d8c384547dc6ea6ab858a9fb52cff80"
+    "lastmod": "2026-11-18",
+    "sources": "21a4efe1e62b6519cce0abaa9b7915d66db73f44a58c53d4e4f0493d30d7942d"
   },
   "docker-is-weird-explainer": {
     "lastmod": "2026-11-18",
@@ -172,8 +172,8 @@
     "sources": "b660060c7bbfcdf3dbdfa7a570f84768647d645d3ddac0d2e6b0b200937ce90a"
   },
   "documentation-velocity": {
-    "lastmod": "2026-11-17",
-    "sources": "b0a88d9ee1dbd1df54633b7c2d7006c563272129c07e6d236f4e0d479954ce99"
+    "lastmod": "2026-11-18",
+    "sources": "58e62a51858b0adaed0c977fb601d59532b61f71957a57e6d5fccaf7f343fec1"
   },
   "engineer-to-writer": {
     "lastmod": "2026-11-17",
@@ -204,8 +204,8 @@
     "sources": "fdaa68dccecf0ded5ef63668621486d9332a5ede99a911da997ec35bd1fbc3c2"
   },
   "llm-context-windows": {
-    "lastmod": "2026-11-17",
-    "sources": "8500eeed42394694aa8fa7f132d4698ec7be0f039c354d4e998435639ce55642"
+    "lastmod": "2026-11-18",
+    "sources": "f9611541bad56e2db1cab77ac7793161e0cbae7fc05c087f46d82564e84eec5f"
   },
   "llm-inference-optimization": {
     "lastmod": "2026-11-18",
@@ -312,8 +312,8 @@
     "sources": "1c3ba708a326a962809b8a4226665c903ed53569f8819bd7e5362520858f3ebc"
   },
   "technical-writing-for-engineers": {
-    "lastmod": "2026-11-17",
-    "sources": "18061856376f568a12650002cf6cf9913f49e0d8173f6a1269a1e26ebe1707bd"
+    "lastmod": "2026-11-18",
+    "sources": "6bccab83623463d68014ae5dc9a5bab0b7757a0649d72a2e4e3db51f0e0ed909"
   },
   "time-to-first-token": {
     "lastmod": "2026-11-18",
