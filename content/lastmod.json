@@ -100,8 +100,8 @@
     "sources": "645712f0fb5e48ed4222bfb32d311e3a2aa12fad154f4ff45cf808553f2cab84"
   },
   "code-documentation": {
-    "lastmod": "2026-11-17",
-    "sources": "69d5f51174dcb0a2f1331d8892200664644667f0821cc381dd503de4e6f8589c"
+    "lastmod": "2026-11-18",
+    "sources": "61b971a69319f2df7ebce2c2daf2c15f7e3fd810fe0edcff0151e5b9eecb7ecf"
   },
   "coding-agent-memory": {
     "lastmod": "2026-11-18",
@@ -209,7 +209,7 @@
   },
   "llm-inference-optimization": {
     "lastmod": "2026-11-18",
-    "sources": "cad4c84da81f30bca0b05443c04918ca0cd26a6f50934810c07454fcad69c1a3"
+    "sources": "296de7595319e0b9aa7e9a730ebd603e21c88eef9dc6ad044e4a12c8c14d1a82"
   },
   "llm-structured-outputs": {
     "lastmod": "2026-11-18",
@@ -269,7 +269,7 @@
   },
   "rag-vs-memory": {
     "lastmod": "2026-11-18",
-    "sources": "5f1eafcd77a44c45aa0b2416c3640854fb6e78cb7890634539fc0031e0561e65"
+    "sources": "a1a4247b86caf40fe93ed4f5f8008bb43c35cc2935e8ffd29b6be29795ca270d"
   },
   "red-build-nobody-reads": {
     "lastmod": "2026-11-18",
@@ -296,8 +296,8 @@
     "sources": "6eb5ac11c706fc1ac3dbef3c43494f854fe5a4cb86eeff1d9bf987e2cb4832c6"
   },
   "shorter-documentation": {
-    "lastmod": "2026-11-17",
-    "sources": "b7b78890ad1c8badff665c760c62f9ae79d9ded149f9aabe70412940388a0222"
+    "lastmod": "2026-11-18",
+    "sources": "8e37e32b97eeb666e97fa87e142f5c34b48ab6498b910a06b3018d9a6272215d"
   },
   "speculative-decoding": {
     "lastmod": "2026-11-18",
