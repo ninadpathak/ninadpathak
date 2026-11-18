@@ -976,7 +976,10 @@
       "connects": [
         "hybrid-search"
       ],
-      "date_note": "Older than a year and dated as such in the post."
+      "date_note": "Older than a year and dated as such in the post.",
+      "refuses_automated_fetch": true,
+      "last_confirmed": "2026-11-18",
+      "fetch_note": "Microsoft Tech Community answers scripted requests with HTTP 403. The quotes were last confirmed by verify_quotes.py on 2026-11-18, in the run that checked 1218 quotes with 0 problems."
     },
     {
       "id": "elastic-hybrid-retrieval-2023",

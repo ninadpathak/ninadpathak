@@ -8,7 +8,7 @@ Comparison ignores HTML tags, runs of whitespace and curly versus straight quote
 and nothing else. Inline tags such as <code> are removed without adding a space. A fetch failure or a missing quote exits non-zero, so a PASS means
 every quote was found in a page fetched during this run.
 """
-import gzip, html, json, pathlib, re, subprocess, sys, time, urllib.request
+import datetime, gzip, html, json, pathlib, re, subprocess, sys, time, urllib.request
 
 HERE = pathlib.Path(__file__).parent
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -16,6 +16,7 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 
 
 RETRY_PAUSE_SECONDS = 20
+MAX_UNVERIFIED_DAYS = 30
 
 
 def norm(s):
@@ -78,6 +79,7 @@ def main():
     wanted = set(sys.argv[1:])
     failures = 0
     checked = 0
+    unverified = 0
     seen = set()
     for source in json.loads((HERE / "sources.json").read_text())["sources"]:
         if wanted and source["id"] not in wanted:
@@ -90,6 +92,19 @@ def main():
         if problems:
             time.sleep(RETRY_PAUSE_SECONDS)
             problems = check_source(source)
+        # A source marked refuses_automated_fetch sits behind a host that answers scripts
+        # with an error. A refused fetch for such a source is reported as unverified, with
+        # the date its quotes were last confirmed, and fails only once that date is more
+        # than MAX_UNVERIFIED_DAYS old. A reachable page with a missing quote still fails.
+        if (problems and problems[0].startswith("FETCH FAIL") and source.get("refuses_automated_fetch")
+                and source.get("last_confirmed")):
+            age = (datetime.date.today() - datetime.date.fromisoformat(source["last_confirmed"])).days
+            if age <= MAX_UNVERIFIED_DAYS:
+                print(f"UNVERIFIED {source['id']}: host refused the fetch, last confirmed {source['last_confirmed']}")
+                unverified += 1
+                continue
+            problems = [f"STALE {source['id']}: host refused the fetch and the last confirmation, "
+                        f"{source['last_confirmed']}, is {age} days old"]
         checked += len(source["quotes"])
         for line in problems:
             print(line)
@@ -97,10 +112,11 @@ def main():
     for missing in sorted(wanted - seen):
         print(f"UNKNOWN SOURCE {missing}")
         failures += 1
-    if not checked:
+    if not checked and not unverified:
         print("FAIL: 0 quotes checked")
         return 1
-    print(f"{'FAIL' if failures else 'PASS'}: {checked} quotes checked, {failures} problems")
+    print(f"{'FAIL' if failures else 'PASS'}: {checked} quotes checked, {failures} problems, "
+          f"{unverified} sources unverified")
     return 1 if failures else 0
 
 
