@@ -8,8 +8,8 @@
     "sources": "f781ba5132ad9427ee199807a5ed736e71ac9b44d231ae9001ef6bffefed333c"
   },
   "agent-error-handling": {
-    "lastmod": "2026-11-17",
-    "sources": "bebe332c8686fa0154b81729d2739c63e76045fd1037297a5eaeec309dce5c60"
+    "lastmod": "2026-11-18",
+    "sources": "c1c984d2e79479abfe679db54852159d407507d8bbde50b33634fc81280cd835"
   },
   "agent-harnesses": {
     "lastmod": "2026-11-18",
@@ -48,12 +48,12 @@
     "sources": "4685cbe726617c52e4bf51cd93995487ca91bfa129d2c29d6359c9ae33f9926c"
   },
   "ai-agent-failures": {
-    "lastmod": "2026-11-17",
-    "sources": "3a36ade3c6c2042e2768f474f909f74e63b6752a6a92c20bce0886e3b2efa2bc"
+    "lastmod": "2026-11-18",
+    "sources": "3949b6c9dab10deefc09b470f7359b523917c36171f69c7131963c276ed54b4e"
   },
   "ai-agent-taxonomy": {
     "lastmod": "2026-11-18",
-    "sources": "becc86584046cc055a6d69a7158fefa2c62e603f1f59b343bad5d6bec3fbe1ba"
+    "sources": "08bb25f3581627bd3045ef29a5229dc4e876d33a3ae22b5bedafe570d5482d2a"
   },
   "ai-crawlers": {
     "lastmod": "2026-11-17",
@@ -216,8 +216,8 @@
     "sources": "c03d8a8e07ad58a00409215b4ea71620bf8c81949be944ce888bc953c3ff78c5"
   },
   "llm-token-budgets": {
-    "lastmod": "2026-11-17",
-    "sources": "e6320f66951939e7f88105f404a13f447f87f72ecb6a623bb5b2118f7efd004d"
+    "lastmod": "2026-11-18",
+    "sources": "6880533f3c9dcab6768be7658728770184f3c223b361381ebc1b4d63cba150d9"
   },
   "llms-txt": {
     "lastmod": "2026-11-17",
@@ -301,7 +301,7 @@
   },
   "speculative-decoding": {
     "lastmod": "2026-11-18",
-    "sources": "9275166f10c3f26cc9e3fabf122b34067c878c4054d0302eb0c0374efec7088c"
+    "sources": "e6edebb57ee0d5d0a5dc8d65fb2341fed3d8b5dbe939f6a44527eaf04849d8d2"
   },
   "stripe-technical-blog": {
     "lastmod": "2026-11-17",
@@ -317,7 +317,7 @@
   },
   "time-to-first-token": {
     "lastmod": "2026-11-18",
-    "sources": "56554a08985e3c16688e5a2fb821f653d0e22599b1855d91a0c5d8a3adb2c95d"
+    "sources": "020ba5149ecfe76bd7c1443f2d06709a5d04bbae5d2fd6ab33fbc20b832768f3"
   },
   "vector-embeddings": {
     "lastmod": "2026-11-17",

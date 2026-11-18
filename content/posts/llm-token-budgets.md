@@ -20,13 +20,13 @@ AWS's billing alarm fires after the money is spent, and its [documentation](http
 
 An LLM token budget is a limit on what one request or one period is allowed to spend, set before the spending happens. It can refuse a request where the alarm can only report money already gone, because [tokens can be counted](https://platform.claude.com/docs/en/build-with-claude/token-counting) before anything is sent.
 
-Budgets are the cost side of [LLM inference](/articles/ai-engineering/), where the other measures are about speed.
+Budgets are the cost side of [LLM inference](/articles/ai-engineering/), which is otherwise measured in latency and throughput.
 
-Where such a budget has to look first shows in numbers two Amazon engineers [published on November 9](https://strandsagents.com/blog/amazon-saves-millions-replacing-sonnet-with-strands-decider/). Their ticket-labeling agent used 6,554 input tokens and 170 output tokens for each ticket on Claude Sonnet 4.6, which by my arithmetic put 89% of its model bill on input, the prompt that gets sent again on every call.
+A pair of Amazon engineers [published on November 9](https://strandsagents.com/blog/amazon-saves-millions-replacing-sonnet-with-strands-decider/) the token counts for their ticket-labeling agent: 6,554 input tokens and 170 output tokens per ticket on Claude Sonnet 4.6. That put 89% of the model bill on input by my arithmetic, and input is the prompt that gets sent again on every call, so it is where a budget has to look first.
 
 ## What does a token cost?
 
-A token costs whatever the model's price list says for its direction, and output is priced several times higher than input. Anthropic's [pricing page](https://platform.claude.com/docs/en/about-claude/pricing), read on November 17, 2026, lists these rates for Claude Sonnet 5.5 in USD per million tokens.
+A token's price depends on the model and on whether it is input or output, and output costs five times as much as input on Claude Sonnet 5.5. Anthropic's [pricing page](https://platform.claude.com/docs/en/about-claude/pricing), read on November 17, 2026, lists these rates for Claude Sonnet 5.5 in USD per million tokens.
 
 | Token type | Price per million tokens, USD |
 | --- | --- |
@@ -35,7 +35,7 @@ A token costs whatever the model's price list says for its direction, and output
 | Cache write, five minutes | 2.50 |
 | Cache read | 0.10 |
 
-The count behind the price moves too. That page says of newer models that their tokenizer "produces approximately 30% more tokens for the same text", so a prompt measured on an old model is a low estimate on a new one.
+The number of tokens in a prompt changes between models too. The pricing page says Claude 4.7 and later models use a tokenizer that "produces approximately 30% more tokens for the same text", so a prompt counted on Sonnet 4.6 is a low estimate for Sonnet 5.5.
 
 ## Where does the money go in one call?
 
@@ -101,11 +101,11 @@ chat:   turn 1 sends 1,650 input tokens, turn 20 sends 9,250
         lapses before every turn      $0.3225  (-20% saved)
 ```
 
-The ticket cost in that output agrees with the post's own per-ticket figure.
+The ticket cost in that output agrees with the per-ticket figure in the post's own table.
 
-The post has an interest to declare. AWS wrote both it and the replacement, a model with a public repository called [Strands Decider](https://github.com/strands-labs/strands-decider) that the team ran on SageMaker instances AWS bills for, and its headline is that the swap "performed just as well at 98% less cost".
+The post is about replacing Sonnet 4.6 with a much smaller model, [Strands Decider](https://github.com/strands-labs/strands-decider), and its publisher has an interest in the result. It appears on the Strands Agents site, which AWS publishes, the team ran Strands Decider on SageMaker instances that AWS bills for, and its opening paragraph says the swap "performed just as well at 98% less cost".
 
-I'm using only the Sonnet side of their table. The lesson in it holds whatever replaces the model: the replacement prompt was 2,009 tokens and the output was one token, so the saving came from sending and asking for less.
+I'm using only the Sonnet column of their table for costs. A pair of figures from the other column applies to any model: the Strands Decider prompt was 2,009 tokens against 6,554, and its output was one token against 170, so part of the saving came from sending less and asking for less.
 
 ## Why does a chat cost more with every turn?
 
@@ -118,7 +118,7 @@ Each turn resends the system prompt and the whole conversation so far, so the in
 
 Prompt caching is the direct answer, because the resent part is identical from one turn to the next. With the unchanged prefix read from cache the conversation costs 69% less, and Anthropic's page says "Caching saves money after a small number of cache reads".
 
-That figure assumes every turn arrives before the cache lapses, a window the price table gives as five minutes, and a chat is where people pause. With the cache lapsing before every fifth turn the saving in the run is 48%, and with a lapse before every turn caching costs 20% more than going without.
+The 69% figure assumes every turn arrives before the cache lapses, a window the price table gives as five minutes, and people in a chat often pause for longer. With the cache lapsing before every fifth turn the saving in the run is 48%, and with a lapse before every turn caching costs 20% more than going without.
 
 A cached prefix shortens the wait as well as the bill, which is the subject of [time to first token](/articles/time-to-first-token/).
 
@@ -128,18 +128,18 @@ The other answer is to stop resending everything. Compaction replaces old turns 
 
 A budget should enforce a hard stop, per request and per month. Simon Willison [argued on October 3](https://simonwillison.net/2026/Oct/3/default-hard-budget-caps/) for the monthly kind as a default on every paid API: "after $X/month, cut this thing off and return errors".
 
-His reason is the failure a warning can't prevent. "Soft caps, "after $X/month, send me a warning email", will not cut it."
+His reason is that a warning doesn't stop the spending. "Soft caps, "after $X/month, send me a warning email", will not cut it."
 
-A per-request budget is the same idea at a smaller scale. Cap the output with the API's maximum-tokens parameter, and reject a prompt over a set size before it is sent.
+A per-request budget is the same idea at a smaller scale. Cap the output with the API's `max_tokens` parameter, and reject a prompt over a set size before it is sent.
 
 ## Where should you cut first?
 
-Start with what is sent on every call. The run covers the first three steps, and the last two come from the price list and from Amazon's post.
+Start with what is sent on every call. The script's output backs the first two steps below, the price list backs the next two, and the fifth is Amazon's result.
 
 1. Shorten the standing prompt, since it is paid for on every request.
 2. Cache the part of the prompt that doesn't change between requests.
 3. Cap the output length, because output tokens carry the higher price.
 4. Move work that can wait to a batch endpoint, which Anthropic prices "with a 50 percent discount on both input and output tokens".
-5. Try a smaller model where the task is a fixed choice.
+5. Try a smaller model where the task is a choice from a fixed list of labels.
 
-A smaller model is Amazon's result, and their own caveat belongs with it: "This worked because the task is a closed choice from a known catalog, the volume is high, and the latency of the old path mattered."
+The smaller-model step is Amazon's result, and their own caveat belongs with it: "This worked because the task is a closed choice from a known catalog, the volume is high, and the latency of the old path mattered."
