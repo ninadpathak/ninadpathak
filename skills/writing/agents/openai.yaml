@@ -1,0 +1,7 @@
+interface:
+  display_name: "Writing"
+  short_description: "Ninad's standard for long-form writing and edits"
+  default_prompt: "Use $writing to place the reader, pick the form, and write or edit this piece to Ninad's standard."
+
+policy:
+  allow_implicit_invocation: true

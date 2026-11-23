@@ -1,0 +1,182 @@
+{
+ "scope": "106 essays read newest to oldest, August 2026 through August 2010 (Founder Control); reading stopped at Ninad's direction on 2026-09-05. Hook types and thesis sentences are hand-classified in thinking.tsv; counts are computed from the stripped essay text.",
+ "essays": 106,
+ "words": 182509,
+ "share_thesis_in_first_sentence": 12.3,
+ "median_words_to_thesis_by_hook": {
+  "DEFINITION": 16.0,
+  "ANECDOTE": 77.0,
+  "BELIEF": 69,
+  "QUESTION": 76.5,
+  "PUZZLE": 85.5,
+  "EVENT": 106.5,
+  "THOUGHT": 77,
+  "NUMBER": 110,
+  "AUDIENCE": 208
+ },
+ "hook_type_distribution": {
+  "DEFINITION": [
+   36,
+   34.0
+  ],
+  "ANECDOTE": [
+   22,
+   20.8
+  ],
+  "BELIEF": [
+   13,
+   12.3
+  ],
+  "QUESTION": [
+   10,
+   9.4
+  ],
+  "PUZZLE": [
+   10,
+   9.4
+  ],
+  "EVENT": [
+   8,
+   7.5
+  ],
+  "THOUGHT": [
+   3,
+   2.8
+  ],
+  "NUMBER": [
+   3,
+   2.8
+  ],
+  "AUDIENCE": [
+   1,
+   0.9
+  ]
+ },
+ "opens_on_distribution": {
+  "SELF": [
+   37,
+   34.9
+  ],
+  "DEFINITION": [
+   34,
+   32.1
+  ],
+  "RECEIVED": [
+   17,
+   16.0
+  ],
+  "OTHERS": [
+   15,
+   14.2
+  ],
+  "HYPOTHETICAL": [
+   3,
+   2.8
+  ]
+ },
+ "median_words_to_thesis": 60.5,
+ "mean_words_to_thesis": 85,
+ "quartiles_words_to_thesis": [
+  15.0,
+  60.5,
+  109.25
+ ],
+ "share_thesis_within_first_100_words": 72.6,
+ "share_thesis_within_first_50_words": 43.4,
+ "share_thesis_after_300_words": 4.7,
+ "ending_returns_to_opening": {
+  "Y": [
+   63,
+   59.4
+  ],
+  "N": [
+   43,
+   40.6
+  ]
+ },
+ "phrase_totals": {
+  "why questions": 100,
+  "suppose": 15,
+  "imagine": 73,
+  "consider": 10,
+  "what if": 11,
+  "the reason": 93,
+  "because": 704,
+  "which means": 47,
+  "so (sentence start)": 361,
+  "in other words": 5,
+  "the test is": 3,
+  "or more precisely": 12,
+  "turns out": 56,
+  "the question is": 9,
+  "not x but y": 127,
+  "i could be wrong / i don.t know": 30,
+  "has to be / would have to": 127,
+  "opposite": 21,
+  "two kinds/ways": 17
+ },
+ "phrase_per_100k_words": {
+  "why questions": 54.8,
+  "suppose": 8.2,
+  "imagine": 40.0,
+  "consider": 5.5,
+  "what if": 6.0,
+  "the reason": 51.0,
+  "because": 385.7,
+  "which means": 25.8,
+  "so (sentence start)": 197.8,
+  "in other words": 2.7,
+  "the test is": 1.6,
+  "or more precisely": 6.6,
+  "turns out": 30.7,
+  "the question is": 4.9,
+  "not x but y": 69.6,
+  "i could be wrong / i don.t know": 16.4,
+  "has to be / would have to": 69.6,
+  "opposite": 11.5,
+  "two kinds/ways": 9.3
+ },
+ "phrase_median_per_essay": {
+  "why questions": 0.0,
+  "suppose": 0.0,
+  "imagine": 0.0,
+  "consider": 0.0,
+  "what if": 0.0,
+  "the reason": 1.0,
+  "because": 3.0,
+  "which means": 0.0,
+  "so (sentence start)": 2.0,
+  "in other words": 0.0,
+  "the test is": 0.0,
+  "or more precisely": 0.0,
+  "turns out": 0.0,
+  "the question is": 0.0,
+  "not x but y": 1.0,
+  "i could be wrong / i don.t know": 0.0,
+  "has to be / would have to": 0.0,
+  "opposite": 0.0,
+  "two kinds/ways": 0.0
+ },
+ "phrase_share_of_essays_with_at_least_one": {
+  "why questions": 40.6,
+  "suppose": 9.4,
+  "imagine": 34.0,
+  "consider": 8.5,
+  "what if": 7.5,
+  "the reason": 51.9,
+  "because": 85.8,
+  "which means": 31.1,
+  "so (sentence start)": 84.9,
+  "in other words": 4.7,
+  "the test is": 2.8,
+  "or more precisely": 11.3,
+  "turns out": 34.9,
+  "the question is": 7.5,
+  "not x but y": 57.5,
+  "i could be wrong / i don.t know": 22.6,
+  "has to be / would have to": 44.3,
+  "opposite": 16.0,
+  "two kinds/ways": 12.3
+ },
+ "thesis_not_found": []
+}

@@ -1,0 +1,228 @@
+{
+ "essays": 232,
+ "sentences": 32000,
+ "words": 498478,
+ "paragraphs": 8513,
+ "median_words_per_sentence": 14.0,
+ "mean_words_per_sentence": 15.6,
+ "median_sentences_per_paragraph": 4,
+ "mean_sentences_per_paragraph": 3.76,
+ "median_words_per_paragraph": 56,
+ "share_sentences_starting_I": 5.5,
+ "share_first_sentence_under_15_words": 39.7,
+ "median_first_sentence_words": 16.0,
+ "median_first_paragraph_words": 45.0,
+ "median_first_paragraph_sentences": 3.0,
+ "median_last_sentence_words": 15.0,
+ "share_sentences_8_words_or_fewer": 22.8,
+ "share_sentences_30_words_or_more": 7.5,
+ "share_one_sentence_paragraphs": 12.2,
+ "share_paragraphs_ending_with_question": 4.1,
+ "essays_ending_with_question": 9,
+ "first_sentences_that_are_questions": 18,
+ "median_essay_words": 1358.5,
+ "top_first_words": [
+  [
+   "the",
+   2567
+  ],
+  [
+   "but",
+   1972
+  ],
+  [
+   "and",
+   1559
+  ],
+  [
+   "if",
+   1497
+  ],
+  [
+   "i",
+   1365
+  ],
+  [
+   "so",
+   983
+  ],
+  [
+   "in",
+   951
+  ],
+  [
+   "it",
+   935
+  ],
+  [
+   "you",
+   868
+  ],
+  [
+   "it's",
+   767
+  ],
+  [
+   "they",
+   639
+  ],
+  [
+   "when",
+   621
+  ],
+  [
+   "this",
+   590
+  ],
+  [
+   "a",
+   559
+  ],
+  [
+   "there",
+   520
+  ],
+  [
+   "what",
+   494
+  ],
+  [
+   "we",
+   399
+  ],
+  [
+   "for",
+   370
+  ],
+  [
+   "that",
+   359
+  ],
+  [
+   "one",
+   357
+  ],
+  [
+   "that's",
+   321
+  ],
+  [
+   "at",
+   249
+  ],
+  [
+   "as",
+   249
+  ],
+  [
+   "how",
+   241
+  ],
+  [
+   "most",
+   238
+  ]
+ ],
+ "phrase_counts_total": {
+  "everyone": 353,
+  "most people": 173,
+  "in today's": 0,
+  "it's worth noting": 0,
+  "we all": 13,
+  "in this essay": 5,
+  "landscape": 2,
+  "delve": 0,
+  "crucial": 3,
+  "it is important to": 0,
+  "in a world where": 3,
+  "game-changer": 0,
+  "leverage (verb)": 32,
+  "robust": 3,
+  "ultimately": 34,
+  "at the end of the day": 0,
+  "needless to say": 3,
+  "the fact that": 68,
+  "I think": 421,
+  "probably": 657,
+  "seems": 1131,
+  "I suspect": 53,
+  "of course": 218,
+  "for example": 380,
+  "e.g.": 22,
+  "you": 10942,
+  "I": 5409,
+  "we": 2559,
+  "so ": 937,
+  "but ": 1931,
+  "and ": 1488,
+  "?": 1795,
+  "semicolon": 800,
+  "em dash": 743,
+  "n't/'s contractions": 14617,
+  "colon": 1720,
+  "parentheses": 916,
+  "quotation": 2203
+ },
+ "phrase_per_100k_words": {
+  "everyone": 70.8,
+  "most people": 34.7,
+  "in today's": 0.0,
+  "it's worth noting": 0.0,
+  "we all": 2.6,
+  "in this essay": 1.0,
+  "landscape": 0.4,
+  "delve": 0.0,
+  "crucial": 0.6,
+  "it is important to": 0.0,
+  "in a world where": 0.6,
+  "game-changer": 0.0,
+  "leverage (verb)": 6.4,
+  "robust": 0.6,
+  "ultimately": 6.8,
+  "at the end of the day": 0.0,
+  "needless to say": 0.6,
+  "the fact that": 13.6,
+  "I think": 84.5,
+  "probably": 131.8,
+  "seems": 226.9,
+  "I suspect": 10.6,
+  "of course": 43.7,
+  "for example": 76.2,
+  "e.g.": 4.4,
+  "you": 2195.1,
+  "I": 1085.1,
+  "we": 513.4,
+  "so ": 188.0,
+  "but ": 387.4,
+  "and ": 298.5,
+  "?": 360.1,
+  "semicolon": 160.5,
+  "em dash": 149.1,
+  "n't/'s contractions": 2932.3,
+  "colon": 345.1,
+  "parentheses": 183.8,
+  "quotation": 441.9
+ },
+ "I_sentence_start_by_decade": {
+  "199x": [
+   105,
+   2.9,
+   15
+  ],
+  "200x": [
+   20071,
+   5.8,
+   14
+  ],
+  "201x": [
+   6341,
+   4.8,
+   14
+  ],
+  "202x": [
+   5798,
+   5.1,
+   15.0
+  ]
+ }
+}

@@ -1,0 +1,1646 @@
+{
+  "retrieved": "2026-09-06",
+  "index": "https://paulgraham.com/articles.html",
+  "html_pages": 233,
+  "additional_texts": [
+    "acl1.txt",
+    "acl2.txt"
+  ],
+  "whole_read_indices": [
+    1,
+    60
+  ],
+  "pages": [
+    {
+      "index": 1,
+      "title": "How Universities Should Prepare Founders",
+      "url": "https://paulgraham.com/prepare.html",
+      "words": 2915,
+      "sha256": "f188f792f3cdc788398a2e6e6840f6349e1e0322ad6978063fee14bb0d39f048"
+    },
+    {
+      "index": 2,
+      "title": "How to Earn a Billion Dollars",
+      "url": "https://paulgraham.com/earn.html",
+      "words": 2362,
+      "sha256": "9d3dacc63bc24aabddf6a173b146349bbf9f2b4c8dd05ed47b02f614783e0927"
+    },
+    {
+      "index": 3,
+      "title": "How to Convert Between Wealth and Income Tax",
+      "url": "https://paulgraham.com/winc.html",
+      "words": 699,
+      "sha256": "809b19d78673c03db84074c38d05e57e2b24564c796c326e8d615ff2a828eb56"
+    },
+    {
+      "index": 4,
+      "title": "The Brand Age",
+      "url": "https://paulgraham.com/brandage.html",
+      "words": 7656,
+      "sha256": "be8cffd2d34c918debe486f67645170f402e6fb9dd10f2e518a1748700a80192"
+    },
+    {
+      "index": 5,
+      "title": "The Shape of the Essay Field",
+      "url": "https://paulgraham.com/field.html",
+      "words": 769,
+      "sha256": "ab3353bfa78c3d8c9331cabb1c989110fb8b62de56aa36321ac89d7d3a5b7649"
+    },
+    {
+      "index": 6,
+      "title": "Good Writing",
+      "url": "https://paulgraham.com/goodwriting.html",
+      "words": 1645,
+      "sha256": "c746f9de87d10954bbfcfe07a5f255e46a21987d128c16946b66040ff7626822"
+    },
+    {
+      "index": 7,
+      "title": "What to Do",
+      "url": "https://paulgraham.com/do.html",
+      "words": 1590,
+      "sha256": "3c4f79eaaa8f504c83282f63b5c6efa5b11a75d7137ecc3df6ac2c77869dadaf"
+    },
+    {
+      "index": 8,
+      "title": "The Origins of Wokeness",
+      "url": "https://paulgraham.com/woke.html",
+      "words": 6162,
+      "sha256": "065ca9cdeb8bb4f14144a108fe723df32b0f06c4cbd76b32bb246111f9d7f611"
+    },
+    {
+      "index": 9,
+      "title": "Writes and Write-Nots",
+      "url": "https://paulgraham.com/writes.html",
+      "words": 554,
+      "sha256": "b6d41ea288be26d9b6659d467d4b4ca44558c366d9fff98b2f382fd24380bc4b"
+    },
+    {
+      "index": 10,
+      "title": "When To Do What You Love",
+      "url": "https://paulgraham.com/when.html",
+      "words": 1545,
+      "sha256": "8721bccfaf8c5288975b77c8b3047754e30c09e7d6f841c972bbbd5b85a24790"
+    },
+    {
+      "index": 11,
+      "title": "Founder Mode",
+      "url": "https://paulgraham.com/foundermode.html",
+      "words": 1244,
+      "sha256": "473512132add831eeedfd58b2f8a18623379efcc72100836ee9fd17d9dfd77a2"
+    },
+    {
+      "index": 12,
+      "title": "The Right Kind of Stubborn",
+      "url": "https://paulgraham.com/persistence.html",
+      "words": 1936,
+      "sha256": "fb4689903fb7ff2fe0749963c4d760fd5184ba1bedc271180e57cac23dd80d73"
+    },
+    {
+      "index": 13,
+      "title": "The Reddits",
+      "url": "https://paulgraham.com/reddits.html",
+      "words": 1168,
+      "sha256": "1b22313bd39453091c3420be6ee581338c6d807055a19347e8f79fa7a6ed1714"
+    },
+    {
+      "index": 14,
+      "title": "How to Start Google",
+      "url": "https://paulgraham.com/google.html",
+      "words": 2826,
+      "sha256": "abf770b36622441ba199ebac5b21d10d5d9fb548c5f13eb3797b0535dcdecc29"
+    },
+    {
+      "index": 15,
+      "title": "The Best Essay",
+      "url": "https://paulgraham.com/best.html",
+      "words": 4338,
+      "sha256": "ce3199889bfcfe3d6255cba78009f9a63c48da801e338135486f6a7525350a41"
+    },
+    {
+      "index": 16,
+      "title": "Superlinear Returns",
+      "url": "https://paulgraham.com/superlinear.html",
+      "words": 4258,
+      "sha256": "60f6c5ceece07289ab09e2cda0432788de8059359ecd429fd2f93dc86ee20bf4"
+    },
+    {
+      "index": 17,
+      "title": "How to Do Great Work",
+      "url": "https://paulgraham.com/greatwork.html",
+      "words": 11822,
+      "sha256": "e917427208cbcee13f74c22eb43eecbaf61d55e6713fa57fec2ad7e19a0aa6a4"
+    },
+    {
+      "index": 18,
+      "title": "How to Get New Ideas",
+      "url": "https://paulgraham.com/getideas.html",
+      "words": 147,
+      "sha256": "0ebc315a3bad2746a9d12ef02d02629df65c21596c93fa7b804d8d6bbb3ec7a1"
+    },
+    {
+      "index": 19,
+      "title": "The Need to Read",
+      "url": "https://paulgraham.com/read.html",
+      "words": 446,
+      "sha256": "c1693083119050cfc9e95e11796d07eb15dafc92a36e0a5581def5740d91e050"
+    },
+    {
+      "index": 20,
+      "title": "What You (Want to)* Want",
+      "url": "https://paulgraham.com/want.html",
+      "words": 511,
+      "sha256": "67a25b60bb8bd7e61ccc4e71a043d25f683fa3b5547b4dc19b18d0864d0fae1a"
+    },
+    {
+      "index": 21,
+      "title": "Alien Truth",
+      "url": "https://paulgraham.com/alien.html",
+      "words": 684,
+      "sha256": "f89fba4c03649819179afa65f0eb9f8d21252b67c636d34836465d9ea118abfc"
+    },
+    {
+      "index": 22,
+      "title": "What I've Learned from Users",
+      "url": "https://paulgraham.com/users.html",
+      "words": 2193,
+      "sha256": "82192ab23a5563414cac6c3561d1cbb5bc0b3e962d723c700d3fa294e7ff2b3f"
+    },
+    {
+      "index": 23,
+      "title": "Heresy",
+      "url": "https://paulgraham.com/heresy.html",
+      "words": 2112,
+      "sha256": "26c2d11fb18eda98192ae0680efc8c78a668443e33b19f391b38636ff6966b2b"
+    },
+    {
+      "index": 24,
+      "title": "Putting Ideas into Words",
+      "url": "https://paulgraham.com/words.html",
+      "words": 1164,
+      "sha256": "9e2e03ba12473c009534ead942018db848e1577eb28e12f8799d61465eabbd5d"
+    },
+    {
+      "index": 25,
+      "title": "Is There Such a Thing as Good Taste?",
+      "url": "https://paulgraham.com/goodtaste.html",
+      "words": 1123,
+      "sha256": "d9b99af241bae8ee35df20674ff64361d12071208773cff0432491b289fc3070"
+    },
+    {
+      "index": 26,
+      "title": "Beyond Smart",
+      "url": "https://paulgraham.com/smart.html",
+      "words": 1422,
+      "sha256": "e5d1901be7388d0b430cb1708677617f31ab9214c7dbac16ba39adefa2a72322"
+    },
+    {
+      "index": 27,
+      "title": "Weird Languages",
+      "url": "https://paulgraham.com/weird.html",
+      "words": 348,
+      "sha256": "c2f434e658bc240a84166bbfe9b3fe2e1559aba51f278701620441d23fad257c"
+    },
+    {
+      "index": 28,
+      "title": "How to Work Hard",
+      "url": "https://paulgraham.com/hwh.html",
+      "words": 3313,
+      "sha256": "cb0d8d3d7a03e7c117b9264136a241f2b599401398cf5e434a0cbf14353ce5f3"
+    },
+    {
+      "index": 29,
+      "title": "A Project of One's Own",
+      "url": "https://paulgraham.com/own.html",
+      "words": 2510,
+      "sha256": "86c5ef4597db10fba495069567cfaa67f9eeda010a0c56ef80cecddd75043fb8"
+    },
+    {
+      "index": 30,
+      "title": "Fierce Nerds",
+      "url": "https://paulgraham.com/fn.html",
+      "words": 1248,
+      "sha256": "c7860898bfb1fed3b03a64d2fd73d072818e13ed92d072bee2c4abf5287a125e"
+    },
+    {
+      "index": 31,
+      "title": "Crazy New Ideas",
+      "url": "https://paulgraham.com/newideas.html",
+      "words": 1326,
+      "sha256": "f90226767f3932b1e1de467880645ca36a665a211a43dc2b29d980018be93b30"
+    },
+    {
+      "index": 32,
+      "title": "An NFT That Saves Lives",
+      "url": "https://paulgraham.com/nft.html",
+      "words": 314,
+      "sha256": "553809368b7b40204b752c5dd46fe411df40278073bdb02df92703ee08f6df57"
+    },
+    {
+      "index": 33,
+      "title": "The Real Reason to End the Death Penalty",
+      "url": "https://paulgraham.com/real.html",
+      "words": 763,
+      "sha256": "89c04e1adb0867d07c267456555f2cbc89b07e684510129a315c5831fbf1a60a"
+    },
+    {
+      "index": 34,
+      "title": "How People Get Rich Now",
+      "url": "https://paulgraham.com/richnow.html",
+      "words": 2583,
+      "sha256": "b01bcfc52b0963139a9016f21a6e058a0fb75cf49bc613c000e316b3fd8f9f14"
+    },
+    {
+      "index": 35,
+      "title": "Write Simply",
+      "url": "https://paulgraham.com/simply.html",
+      "words": 509,
+      "sha256": "1bec5f64841a0234e4cd45cf0c4e1e4773de066d114244a49d857afa5aede14b"
+    },
+    {
+      "index": 36,
+      "title": "Donate Unrestricted",
+      "url": "https://paulgraham.com/donate.html",
+      "words": 485,
+      "sha256": "9120b2bb8c19dd3caa069f2433925b362d80d4b18db7dbcf3ea307864942a678"
+    },
+    {
+      "index": 37,
+      "title": "What I Worked On",
+      "url": "https://paulgraham.com/worked.html",
+      "words": 13810,
+      "sha256": "fa025a21898cb08e2cac16dbfad386f4a3a20bdb7e3404334a588b292fd4b228"
+    },
+    {
+      "index": 38,
+      "title": "Earnestness",
+      "url": "https://paulgraham.com/earnest.html",
+      "words": 1671,
+      "sha256": "4a4e2c852b837e7c22a1689357bca8806eff4828638e3856487e4e645112a6c9"
+    },
+    {
+      "index": 39,
+      "title": "Billionaires Build",
+      "url": "https://paulgraham.com/ace.html",
+      "words": 3425,
+      "sha256": "18fac90157728a768633420fd6a85e498e8870251e3fdef891fc8c4bc6f778a8"
+    },
+    {
+      "index": 40,
+      "title": "The Airbnbs",
+      "url": "https://paulgraham.com/airbnbs.html",
+      "words": 1102,
+      "sha256": "fb0a24dbb64d148eeb616efd1f3cb02a41bb7c048bd6eefbe74cfea2ca47eb25"
+    },
+    {
+      "index": 41,
+      "title": "How to Think for Yourself",
+      "url": "https://paulgraham.com/think.html",
+      "words": 3448,
+      "sha256": "2e8cfe53f98d198528c3e691b5b20d581e00f5fde3fe6f06e60a7664123cbe3c"
+    },
+    {
+      "index": 42,
+      "title": "Early Work",
+      "url": "https://paulgraham.com/early.html",
+      "words": 2503,
+      "sha256": "ddc21b42b519ed0e22d02d9d6461541692bd7d455caf5a2aedff84772a84eddc"
+    },
+    {
+      "index": 43,
+      "title": "Modeling a Wealth Tax",
+      "url": "https://paulgraham.com/wtax.html",
+      "words": 421,
+      "sha256": "f4aa3fc54e77650d99f3d17f6fd60b24a445851ec20a7ee5b49f4ea542370dc4"
+    },
+    {
+      "index": 44,
+      "title": "The Four Quadrants of Conformism",
+      "url": "https://paulgraham.com/conformism.html",
+      "words": 1970,
+      "sha256": "48ec775a8311a926cf2274d227872787af8cebfc2c692ddf5159ac02283972bd"
+    },
+    {
+      "index": 45,
+      "title": "Orthodox Privilege",
+      "url": "https://paulgraham.com/orth.html",
+      "words": 650,
+      "sha256": "aae050a5603e24cf1f8e5b41d771675411ddcdf354f62a9c70a40aca48a2b192"
+    },
+    {
+      "index": 46,
+      "title": "Coronavirus and Credibility",
+      "url": "https://paulgraham.com/cred.html",
+      "words": 237,
+      "sha256": "ab3de91b34545b01915787b739820c512736604af8b2a8377cf9cf2d3df40f45"
+    },
+    {
+      "index": 47,
+      "title": "How to Write Usefully",
+      "url": "https://paulgraham.com/useful.html",
+      "words": 2868,
+      "sha256": "722ef3c0daa6839710478d9c717cfad16170b51f52de42377461869ccbed493c"
+    },
+    {
+      "index": 48,
+      "title": "Being a Noob",
+      "url": "https://paulgraham.com/noob.html",
+      "words": 373,
+      "sha256": "daceddb9d2c56b7ec626aca4bc327a76972fcc2d0e5cd390881023f0b1b0bc4c"
+    },
+    {
+      "index": 49,
+      "title": "Haters",
+      "url": "https://paulgraham.com/fh.html",
+      "words": 1391,
+      "sha256": "8b6ef3c77af3b354e25e6420a17a681b03d44a3981af22480b86effab550d5e1"
+    },
+    {
+      "index": 50,
+      "title": "The Two Kinds of Moderate",
+      "url": "https://paulgraham.com/mod.html",
+      "words": 668,
+      "sha256": "22fd8de5073ac746e1941631a17e0b5935d6e905f2008a123b06abf5bf218e04"
+    },
+    {
+      "index": 51,
+      "title": "Fashionable Problems",
+      "url": "https://paulgraham.com/fp.html",
+      "words": 190,
+      "sha256": "37bfbea5b4050f0c34106669cd6ecb9ab8c3d8abf18e7d434638ff30500a1b63"
+    },
+    {
+      "index": 52,
+      "title": "Having Kids",
+      "url": "https://paulgraham.com/kids.html",
+      "words": 1537,
+      "sha256": "0310ae6a789c8498ba1fddf38471134cfd67dcfcfca68e48174924de9aaa2839"
+    },
+    {
+      "index": 53,
+      "title": "The Lesson to Unlearn",
+      "url": "https://paulgraham.com/lesson.html",
+      "words": 4043,
+      "sha256": "f84fd66046f07bc110e011b43ef27c05cb15efd5c9fe29f5f57a8f9c9dd252fe"
+    },
+    {
+      "index": 54,
+      "title": "Novelty and Heresy",
+      "url": "https://paulgraham.com/nov.html",
+      "words": 255,
+      "sha256": "dd7b41fc925ebae1ca2929dfe5c7d7b05f51087fe698a7ab057b6011e6cadf73"
+    },
+    {
+      "index": 55,
+      "title": "The Bus Ticket Theory of Genius",
+      "url": "https://paulgraham.com/genius.html",
+      "words": 2632,
+      "sha256": "f92d74feddc5ede37ccb5d37209d653a82c57dd20e1c672b6254ee1d1e128ede"
+    },
+    {
+      "index": 56,
+      "title": "General and Surprising",
+      "url": "https://paulgraham.com/sun.html",
+      "words": 439,
+      "sha256": "75066246eabd11070dce17e67aaeb1ba087397e51e57079da3dcf4179d3b06b6"
+    },
+    {
+      "index": 57,
+      "title": "Charisma / Power",
+      "url": "https://paulgraham.com/pow.html",
+      "words": 121,
+      "sha256": "ae0fba444d93912daf5ad278d167819b2c4daceef388b73e37acc075ed3c5730"
+    },
+    {
+      "index": 58,
+      "title": "The Risk of Discovery",
+      "url": "https://paulgraham.com/disc.html",
+      "words": 216,
+      "sha256": "99abf078c79f6961dac532b7a15c8e6439c4a73ade4298f026c3aa01a85fdeb2"
+    },
+    {
+      "index": 59,
+      "title": "How to Make Pittsburgh a Startup Hub",
+      "url": "https://paulgraham.com/pgh.html",
+      "words": 2636,
+      "sha256": "945780e09e76b3ee333710b604fbad687b1217107c1055d6b02ef11517c2f993"
+    },
+    {
+      "index": 60,
+      "title": "Life is Short",
+      "url": "https://paulgraham.com/vb.html",
+      "words": 1675,
+      "sha256": "be916b622ae6d908eb65a233f2138a150432cbb6c6ab2f8058a99fc9fe79a341"
+    },
+    {
+      "index": 61,
+      "title": "Economic Inequality",
+      "url": "https://paulgraham.com/ineq.html",
+      "words": 3420,
+      "sha256": "de811fdeb7c72969266c9070b084b9bd99e0cb076363dfb9df72816e91a8a460"
+    },
+    {
+      "index": 62,
+      "title": "The Refragmentation",
+      "url": "https://paulgraham.com/re.html",
+      "words": 7186,
+      "sha256": "25a63ce7e13efa0c72893f253fa34e1238523ac3904177cbfc287f51ac892a83"
+    },
+    {
+      "index": 63,
+      "title": "Jessica Livingston",
+      "url": "https://paulgraham.com/jessica.html",
+      "words": 1968,
+      "sha256": "d824f4ee716eb72e1f070c9a18341d3f94e26a83a66830bb682fdb8304eaa5f4"
+    },
+    {
+      "index": 64,
+      "title": "A Way to Detect Bias",
+      "url": "https://paulgraham.com/bias.html",
+      "words": 565,
+      "sha256": "3b9e58627536cdcf3b17fd8386b0d1d83bcc281cb63c895cb6296e693295f287"
+    },
+    {
+      "index": 65,
+      "title": "Write Like You Talk",
+      "url": "https://paulgraham.com/talk.html",
+      "words": 708,
+      "sha256": "a0196c398a906b1a496b32d07b74cd46f27c00d53221b85cc727a5560a43ac25"
+    },
+    {
+      "index": 66,
+      "title": "Default Alive or Default Dead?",
+      "url": "https://paulgraham.com/aord.html",
+      "words": 1498,
+      "sha256": "ecdf44c6b18895ea7de5f90bfb6def4eb9abace49fc1c0142bc25d5d04988486"
+    },
+    {
+      "index": 67,
+      "title": "Why It's Safe for Founders to Be Nice",
+      "url": "https://paulgraham.com/safe.html",
+      "words": 785,
+      "sha256": "24a85588a47278bef7fc2ab2a1660e2141a252133b75fa4a95c8e0beb303262a"
+    },
+    {
+      "index": 68,
+      "title": "Change Your Name",
+      "url": "https://paulgraham.com/name.html",
+      "words": 758,
+      "sha256": "7e9d45806ea446eff18a2ff84cbc987c38c5da2d79fec11221cfb7c17349146c"
+    },
+    {
+      "index": 69,
+      "title": "What Microsoft Is this the Altair Basic of?",
+      "url": "https://paulgraham.com/altair.html",
+      "words": 377,
+      "sha256": "1e24418cf67a4efda8af69cd60badd4f4bdbea87cb7ee7666b63a67e1d61777d"
+    },
+    {
+      "index": 70,
+      "title": "The Ronco Principle",
+      "url": "https://paulgraham.com/ronco.html",
+      "words": 630,
+      "sha256": "850411084b0c7490b4598a09a9f7ac945490d6a494c98b73671a7a18e8076e56"
+    },
+    {
+      "index": 71,
+      "title": "What Doesn't Seem Like Work?",
+      "url": "https://paulgraham.com/work.html",
+      "words": 483,
+      "sha256": "c54d7332945408dd62198f7e673a008df7a9f18e2a2064df8018d9669be24b4f"
+    },
+    {
+      "index": 72,
+      "title": "Don't Talk to Corp Dev",
+      "url": "https://paulgraham.com/corpdev.html",
+      "words": 1291,
+      "sha256": "0428e12d373899707f2647270bd428bfb3a6362d7b704350cde93cc553673a39"
+    },
+    {
+      "index": 73,
+      "title": "Let the Other 95% of Great Programmers In",
+      "url": "https://paulgraham.com/95.html",
+      "words": 924,
+      "sha256": "1d40cf57fb27d4059dcea9a25a79d7f6c5be0485db16fec9c1b17b6d70eb0682"
+    },
+    {
+      "index": 74,
+      "title": "How to Be an Expert in a Changing World",
+      "url": "https://paulgraham.com/ecw.html",
+      "words": 1061,
+      "sha256": "02df7965a2f67163fa133341d70de90ca133d28a376ed6cf33d1f4e04d684de5"
+    },
+    {
+      "index": 75,
+      "title": "How You Know",
+      "url": "https://paulgraham.com/know.html",
+      "words": 647,
+      "sha256": "cd997e38c6a09e05c5d9c028eb6736a753e2195139e841d83e80c0287109db21"
+    },
+    {
+      "index": 76,
+      "title": "The Fatal Pinch",
+      "url": "https://paulgraham.com/pinch.html",
+      "words": 1599,
+      "sha256": "3c03c213e72a4324c3914354554ceebf5f73f4af029b60c191272507b04ab10c"
+    },
+    {
+      "index": 77,
+      "title": "Mean People Fail",
+      "url": "https://paulgraham.com/mean.html",
+      "words": 1138,
+      "sha256": "763f556806afed8e8edbe6e883691e47684ec1f9200a5b2ff069c68f1d2e3fc6"
+    },
+    {
+      "index": 78,
+      "title": "Before the Startup",
+      "url": "https://paulgraham.com/before.html",
+      "words": 4603,
+      "sha256": "eb34719099cfc3d27c0574b2685229dafbf544fe708ec2e90a112783653b1656"
+    },
+    {
+      "index": 79,
+      "title": "How to Raise Money",
+      "url": "https://paulgraham.com/fr.html",
+      "words": 10677,
+      "sha256": "213941511c02adbdcb58f2d663005ec755bc479703462b4d6eb353972e6ac73c"
+    },
+    {
+      "index": 80,
+      "title": "Investor Herd Dynamics",
+      "url": "https://paulgraham.com/herd.html",
+      "words": 1106,
+      "sha256": "a7ae7ce2d6075dc1d714dd5157a0256ba7fffc6502e0060f221403b0d6c68f58"
+    },
+    {
+      "index": 81,
+      "title": "How to Convince Investors",
+      "url": "https://paulgraham.com/convince.html",
+      "words": 3688,
+      "sha256": "ca77c4c6ee68f2c221c43d19a99e310bc0fda03e86edcc7b1b00e80c37142f1f"
+    },
+    {
+      "index": 82,
+      "title": "Do Things that Don't Scale",
+      "url": "https://paulgraham.com/ds.html",
+      "words": 4355,
+      "sha256": "1c433f4d95f0ffcb2a10df8ff4e56e696c0bf1a91973ddd0f9ccb6f457db2552"
+    },
+    {
+      "index": 83,
+      "title": "Startup Investing Trends",
+      "url": "https://paulgraham.com/invtrend.html",
+      "words": 2955,
+      "sha256": "12bfc472340016faf09ccb8f993564dc8e66c5db1865ea6efbcec3f693ac325b"
+    },
+    {
+      "index": 84,
+      "title": "How to Get Startup Ideas",
+      "url": "https://paulgraham.com/startupideas.html",
+      "words": 7215,
+      "sha256": "9a04e83536470a53083c5a7052dc0ccd364e49a70fb231732b334b2dc7caad63"
+    },
+    {
+      "index": 85,
+      "title": "The Hardware Renaissance",
+      "url": "https://paulgraham.com/hw.html",
+      "words": 402,
+      "sha256": "d10517e24651c52e3973cc035a11c7f09dfd52c925f676c830b21dad9ba11024"
+    },
+    {
+      "index": 86,
+      "title": "Startup = Growth",
+      "url": "https://paulgraham.com/growth.html",
+      "words": 5352,
+      "sha256": "aaf3db2cbb928b1bdb90ff32be8d464126f9f2493c09c5ff3ef9f3c97d4534e0"
+    },
+    {
+      "index": 87,
+      "title": "Black Swan Farming",
+      "url": "https://paulgraham.com/swan.html",
+      "words": 2158,
+      "sha256": "5212337443053fbd7539904f1d99203dcaa9e13012bd9db9632690a13ca0ffce"
+    },
+    {
+      "index": 88,
+      "title": "The Top of My Todo List",
+      "url": "https://paulgraham.com/todo.html",
+      "words": 233,
+      "sha256": "e73c1879bb4b12e4902de4fbe2cdb0e0272691ef44c8bf9447af70d49b1b00e0"
+    },
+    {
+      "index": 89,
+      "title": "Writing and Speaking",
+      "url": "https://paulgraham.com/speak.html",
+      "words": 1194,
+      "sha256": "4c5085489159181e1d4b8f227012bfb9b8814a184c879741f4ac72abff083fe5"
+    },
+    {
+      "index": 90,
+      "title": "How Y Combinator Started",
+      "url": "https://paulgraham.com/ycstart.html",
+      "words": 1447,
+      "sha256": "1db0b555072afe599f59f4d6638f3d3769afa47e1ede31d7ddcf3866926a6651"
+    },
+    {
+      "index": 91,
+      "title": "Defining Property",
+      "url": "https://paulgraham.com/property.html",
+      "words": 980,
+      "sha256": "c1994da300d66d5573231e093d0906dca8fd0afdce2d7a71d92178b9a8a637c5"
+    },
+    {
+      "index": 92,
+      "title": "Frighteningly Ambitious Startup Ideas",
+      "url": "https://paulgraham.com/ambitious.html",
+      "words": 3788,
+      "sha256": "1069667254765746a55dcc39d13b19a7cf60ab582b591593c771b19dc73a95d1"
+    },
+    {
+      "index": 93,
+      "title": "A Word to the Resourceful",
+      "url": "https://paulgraham.com/word.html",
+      "words": 799,
+      "sha256": "75c8410dd779685f64b56a4606b0f264f1e70e81c521c3f7ccb3448299a88a71"
+    },
+    {
+      "index": 94,
+      "title": "Schlep Blindness",
+      "url": "https://paulgraham.com/schlep.html",
+      "words": 850,
+      "sha256": "e671221a87e968f27f942bedc4a70777f248579e51f1361172c428c556be7823"
+    },
+    {
+      "index": 95,
+      "title": "Snapshot: Viaweb, June 1998",
+      "url": "https://paulgraham.com/vw.html",
+      "words": 869,
+      "sha256": "0480a3a188afb2e9024d64e18d587af675fd9eb3ba2e5fa6242a19dc1b490a03"
+    },
+    {
+      "index": 96,
+      "title": "Why Startup Hubs Work",
+      "url": "https://paulgraham.com/hubs.html",
+      "words": 1806,
+      "sha256": "38481b9276ae42b229c08ae788b664db87175e0a512dd89ed87a1975e30dcd33"
+    },
+    {
+      "index": 97,
+      "title": "The Patent Pledge",
+      "url": "https://paulgraham.com/patentpledge.html",
+      "words": 679,
+      "sha256": "604ecbf23dd5c2553d3f827023d6bce5e225be0587c6fd6f5e9e7ba0e3da0ee3"
+    },
+    {
+      "index": 98,
+      "title": "Subject: Airbnb",
+      "url": "https://paulgraham.com/airbnb.html",
+      "words": 1365,
+      "sha256": "9ab3b7f009878c77e8f1ea52e64a4ffffd5139aedc214c816e8d2d8074c1792a"
+    },
+    {
+      "index": 99,
+      "title": "Founder Control",
+      "url": "https://paulgraham.com/control.html",
+      "words": 779,
+      "sha256": "09a2e6ab10d8408fbc3f2c8337c20a54d63befc221af29916a81a46eb5aa7b00"
+    },
+    {
+      "index": 100,
+      "title": "Tablets",
+      "url": "https://paulgraham.com/tablets.html",
+      "words": 549,
+      "sha256": "d52424dbb55f58f7e034817018d55c7aaa2da546f352dd7ddcf199be02e1c14b"
+    },
+    {
+      "index": 101,
+      "title": "What We Look for in Founders",
+      "url": "https://paulgraham.com/founders.html",
+      "words": 797,
+      "sha256": "e20933affec11b84907a79201dde4bc57718594738af02e3db8d3a331a9bae7b"
+    },
+    {
+      "index": 102,
+      "title": "The New Funding Landscape",
+      "url": "https://paulgraham.com/superangels.html",
+      "words": 3582,
+      "sha256": "7c27b84eae95d6a7d6f0ea08d9d3ed588721b736cef68737f00da59849e883b2"
+    },
+    {
+      "index": 103,
+      "title": "Where to See Silicon Valley",
+      "url": "https://paulgraham.com/seesv.html",
+      "words": 1081,
+      "sha256": "75c3827975196ec38edfe61d49752c7974830cf5a39b8f97bf88a7df956e7a1e"
+    },
+    {
+      "index": 104,
+      "title": "High Resolution Fundraising",
+      "url": "https://paulgraham.com/hiresfund.html",
+      "words": 712,
+      "sha256": "6ba29da42b94bb2e08a36803c86e3ea78a12ed555a1e6c1b049b65e99efeb045"
+    },
+    {
+      "index": 105,
+      "title": "What Happened to Yahoo",
+      "url": "https://paulgraham.com/yahoo.html",
+      "words": 2049,
+      "sha256": "9c710aae8e34e192f12b9204737f9798e76a999c5a493237faf524d1112b5c0d"
+    },
+    {
+      "index": 106,
+      "title": "The Future of Startup Funding",
+      "url": "https://paulgraham.com/future.html",
+      "words": 3876,
+      "sha256": "e610e0983877e977e3fa447dfb909b5458683cee3d89b3f7ac3172638d824ddf"
+    },
+    {
+      "index": 107,
+      "title": "The Acceleration of Addictiveness",
+      "url": "https://paulgraham.com/addiction.html",
+      "words": 1273,
+      "sha256": "d8d6246b0d33b6dcd34318eeaa4eddd9ebc386ea5f7ef966e08188e034210fbd"
+    },
+    {
+      "index": 108,
+      "title": "The Top Idea in Your Mind",
+      "url": "https://paulgraham.com/top.html",
+      "words": 1166,
+      "sha256": "c5cb8f0a4a3080eb54bef7f2da1244b751eb0d8ba44a567b20a8c079c69a247b"
+    },
+    {
+      "index": 109,
+      "title": "How to Lose Time and Money",
+      "url": "https://paulgraham.com/selfindulgence.html",
+      "words": 678,
+      "sha256": "170f94c0968b97f97a4ff086d9c95b972f65f2360fc492c362fbfa6d748be53e"
+    },
+    {
+      "index": 110,
+      "title": "Organic Startup Ideas",
+      "url": "https://paulgraham.com/organic.html",
+      "words": 1004,
+      "sha256": "676052bfe403333dac4afdac1ef15e4eda78031396ecb252a3135605af28fdaf"
+    },
+    {
+      "index": 111,
+      "title": "Apple's Mistake",
+      "url": "https://paulgraham.com/apple.html",
+      "words": 2138,
+      "sha256": "179f0f1233ca04fa7ca0777f28577aa8b4d0d386e074bcddab2ef544e5bd9acd"
+    },
+    {
+      "index": 112,
+      "title": "What Startups Are Really Like",
+      "url": "https://paulgraham.com/really.html",
+      "words": 5059,
+      "sha256": "4aec46bb1092fcaa990841cea2cd946608c063f60c36c95972f61be10b15182b"
+    },
+    {
+      "index": 113,
+      "title": "Persuade xor Discover",
+      "url": "https://paulgraham.com/discover.html",
+      "words": 1299,
+      "sha256": "6b63d1746dcd958586c0ddf91ba1b777a77aa1c2acee7a8625865ff5fd7dc156"
+    },
+    {
+      "index": 114,
+      "title": "Post-Medium Publishing",
+      "url": "https://paulgraham.com/publishing.html",
+      "words": 1772,
+      "sha256": "9b47506602398ff7c1709a75ac31e0897a465bba3eb3c63f8f8e5db2be4ad26d"
+    },
+    {
+      "index": 115,
+      "title": "The List of N Things",
+      "url": "https://paulgraham.com/nthings.html",
+      "words": 1446,
+      "sha256": "0dfb82aa2b11fa661695343cf32d101dc34bd1bcf1a0ee7c6d41bb26f838103b"
+    },
+    {
+      "index": 116,
+      "title": "The Anatomy of Determination",
+      "url": "https://paulgraham.com/determination.html",
+      "words": 1499,
+      "sha256": "a8d3446188ad9f8041ca82640739822d47c57f54093247876271ef8e78143f7a"
+    },
+    {
+      "index": 117,
+      "title": "What Kate Saw in Silicon Valley",
+      "url": "https://paulgraham.com/kate.html",
+      "words": 813,
+      "sha256": "c6bebf63e882e3a8743112df9f6462199f05fab646466755275bcd056bbbc40c"
+    },
+    {
+      "index": 118,
+      "title": "The Trouble with the Segway",
+      "url": "https://paulgraham.com/segway.html",
+      "words": 379,
+      "sha256": "37c7cf611283037436a7b4f3a7db1790cd389a20c1e95da8068cbcb04c2cf2e4"
+    },
+    {
+      "index": 119,
+      "title": "Ramen Profitable",
+      "url": "https://paulgraham.com/ramenprofitable.html",
+      "words": 1841,
+      "sha256": "18db53b772f7b0e14ab621582ecc0addf2963d873e43a5c4d7ba17501b7123f1"
+    },
+    {
+      "index": 120,
+      "title": "Maker's Schedule, Manager's Schedule",
+      "url": "https://paulgraham.com/makersschedule.html",
+      "words": 1147,
+      "sha256": "d229bc4baf31fc845651180060a7391b24395aac7f3b3d9ea64ef8c9a8595f27"
+    },
+    {
+      "index": 121,
+      "title": "A Local Revolution?",
+      "url": "https://paulgraham.com/revolution.html",
+      "words": 1339,
+      "sha256": "0e294a30d17f35610e655b738cb3d0c2eb22eddd17241be6df979e4fc1e88961"
+    },
+    {
+      "index": 122,
+      "title": "Why Twitter is a Big Deal",
+      "url": "https://paulgraham.com/twitter.html",
+      "words": 147,
+      "sha256": "c7857f2bb2c48938b6639207afb05386233ee637610fbc07eaaec68d37426782"
+    },
+    {
+      "index": 123,
+      "title": "The Founder Visa",
+      "url": "https://paulgraham.com/foundervisa.html",
+      "words": 391,
+      "sha256": "8e8b47fb31895843e163634527639803fe5fd284fb9d4533b529512cf4d0c100"
+    },
+    {
+      "index": 124,
+      "title": "Five Founders",
+      "url": "https://paulgraham.com/5founders.html",
+      "words": 757,
+      "sha256": "7147badce26f60d7375bfc6604778831429feaa6c80f132f6cbb949bced78891"
+    },
+    {
+      "index": 125,
+      "title": "Relentlessly Resourceful",
+      "url": "https://paulgraham.com/relres.html",
+      "words": 1005,
+      "sha256": "3a37053e71898e8ce876e2390be327022cb614e5ea9bb1f7f4ac123c0251b057"
+    },
+    {
+      "index": 126,
+      "title": "How to Be an Angel Investor",
+      "url": "https://paulgraham.com/angelinvesting.html",
+      "words": 3952,
+      "sha256": "db82c2d60c21fe88fbedd6b3eeb330fee2f3408ab59e3873fb0834eb9ca381b6"
+    },
+    {
+      "index": 127,
+      "title": "Why TV Lost",
+      "url": "https://paulgraham.com/convergence.html",
+      "words": 1529,
+      "sha256": "626fc04b707be857f7823fa14bcf918c26e4f82ac85179051ec24d734611f313"
+    },
+    {
+      "index": 128,
+      "title": "Can You Buy a Silicon Valley?  Maybe.",
+      "url": "https://paulgraham.com/maybe.html",
+      "words": 1912,
+      "sha256": "423bb6b1ce4cb4ac26fdeb65c8853907417b750bc82187355b49a44828b13028"
+    },
+    {
+      "index": 129,
+      "title": "What I've Learned from Hacker News",
+      "url": "https://paulgraham.com/hackernews.html",
+      "words": 2862,
+      "sha256": "01fcfcccb78840f62b0924c5f4157088a8970e084928a69e7dbab2b205fadc2c"
+    },
+    {
+      "index": 130,
+      "title": "Startups in 13 Sentences",
+      "url": "https://paulgraham.com/13sentences.html",
+      "words": 1322,
+      "sha256": "4a2164d2c85a1c4ee679654800ad150a2f18d30b2b26ed7d60bd88ae84015433"
+    },
+    {
+      "index": 131,
+      "title": "Keep Your Identity Small",
+      "url": "https://paulgraham.com/identity.html",
+      "words": 867,
+      "sha256": "871443243a2dd4f3ed5875c05b5c19839f3f306b3b5da06764f0d89fa10b22f7"
+    },
+    {
+      "index": 132,
+      "title": "After Credentials",
+      "url": "https://paulgraham.com/credentials.html",
+      "words": 2391,
+      "sha256": "4e00044835ded91ba7153e7e59d049454c27e65a42003fa3f8747b75531d9139"
+    },
+    {
+      "index": 133,
+      "title": "Could VC be a Casualty of the Recession?",
+      "url": "https://paulgraham.com/divergence.html",
+      "words": 1349,
+      "sha256": "796209fda7abc2db1b5b42450cb9a6dec336521302db3ab5112d61ddf727360d"
+    },
+    {
+      "index": 134,
+      "title": "The High-Res Society",
+      "url": "https://paulgraham.com/highres.html",
+      "words": 1522,
+      "sha256": "25499d052a01e756258876f934e6b7127204373e97d8116da5441f7ded44d9e5"
+    },
+    {
+      "index": 135,
+      "title": "The Other Half of \"Artists Ship\"",
+      "url": "https://paulgraham.com/artistsship.html",
+      "words": 1309,
+      "sha256": "18d8894f539ddb0dd1296f0ef1acbb20feea095bc79447f4ce05d9d53aee0262"
+    },
+    {
+      "index": 136,
+      "title": "Why to Start a Startup in a Bad Economy",
+      "url": "https://paulgraham.com/badeconomy.html",
+      "words": 1108,
+      "sha256": "f0528b7f9ff9efff4b7d621d77285f242b68837ff9f19b2847427c69e07a64f2"
+    },
+    {
+      "index": 137,
+      "title": "A Fundraising Survival Guide",
+      "url": "https://paulgraham.com/fundraising.html",
+      "words": 4834,
+      "sha256": "50bc6268582b388485faa18471797fa793d5207ef30257d14dc1d2065fb3f78b"
+    },
+    {
+      "index": 138,
+      "title": "The Pooled-Risk Company Management Company",
+      "url": "https://paulgraham.com/prcmc.html",
+      "words": 1260,
+      "sha256": "a27a93ef1d93305c66b644d80e9a9076c5bc9299e4817f815cfa7a357548bb94"
+    },
+    {
+      "index": 139,
+      "title": "Cities and Ambition",
+      "url": "https://paulgraham.com/cities.html",
+      "words": 3604,
+      "sha256": "be6201e78da6dddebf77ffb464c104b503fd621c2cf79ce437d7f97674a99156"
+    },
+    {
+      "index": 140,
+      "title": "Disconnecting Distraction",
+      "url": "https://paulgraham.com/distraction.html",
+      "words": 1147,
+      "sha256": "128d4afec4427ebde22e3eeff773eea0a9818a98ba16d9d2cd20f6b61ba161d2"
+    },
+    {
+      "index": 141,
+      "title": "Lies We Tell Kids",
+      "url": "https://paulgraham.com/lies.html",
+      "words": 5247,
+      "sha256": "86b9a10c597170c4b4188f05d8325daecabbffcdf98902834a25a7cb0fa508c2"
+    },
+    {
+      "index": 142,
+      "title": "Be Good",
+      "url": "https://paulgraham.com/good.html",
+      "words": 2948,
+      "sha256": "e714aed96e14e214f6f4b47e631e67bd02367bdeed3a024b297d25e6ce010c41"
+    },
+    {
+      "index": 143,
+      "title": "Why There Aren't More Googles",
+      "url": "https://paulgraham.com/googles.html",
+      "words": 1335,
+      "sha256": "4d3713f4538afa511596f1c7e0df1c872124018da89bc56dced973b757bb7cda"
+    },
+    {
+      "index": 144,
+      "title": "Some Heroes",
+      "url": "https://paulgraham.com/heroes.html",
+      "words": 2695,
+      "sha256": "1c409bc8ac28ee40930c2b26af131a8499e2e53711d327fe040c18f832e8358c"
+    },
+    {
+      "index": 145,
+      "title": "How to Disagree",
+      "url": "https://paulgraham.com/disagree.html",
+      "words": 1498,
+      "sha256": "1bd5bc85b124872483effd4880bc63ca91a6afa3a8a5537b93ffee7d300c8e06"
+    },
+    {
+      "index": 146,
+      "title": "You Weren't Meant to Have a Boss",
+      "url": "https://paulgraham.com/boss.html",
+      "words": 2531,
+      "sha256": "fa5a8f0707c4e4f6f575074eeff5c8cb66fe90d2c8e891909ba7a2f3a918cfa3"
+    },
+    {
+      "index": 147,
+      "title": "A New Venture Animal",
+      "url": "https://paulgraham.com/ycombinator.html",
+      "words": 1986,
+      "sha256": "db9cafe774d0f5d0e60312fe7f100627728b6a55771ba901dde676eb2936f5d1"
+    },
+    {
+      "index": 148,
+      "title": "Trolls",
+      "url": "https://paulgraham.com/trolls.html",
+      "words": 892,
+      "sha256": "1e906e6fe23e69a0407e70f38932ce7eaaa1a9842044d8ccd95bfddb3685ac21"
+    },
+    {
+      "index": 149,
+      "title": "Six Principles for Making New Things",
+      "url": "https://paulgraham.com/newthings.html",
+      "words": 1167,
+      "sha256": "55c819785292fe086a26e338be97383ad8ae50e590001b6b17010b3eefb948d7"
+    },
+    {
+      "index": 150,
+      "title": "Why to Move to a Startup Hub",
+      "url": "https://paulgraham.com/startuphubs.html",
+      "words": 1457,
+      "sha256": "8bba5d157342874655b4b4629f9779650468e18d1d672494fcd2f2b27451a415"
+    },
+    {
+      "index": 151,
+      "title": "The Future of Web Startups",
+      "url": "https://paulgraham.com/webstartups.html",
+      "words": 3411,
+      "sha256": "96a4ad6fbbc8a6798ad62c34ebbea45d98bfc3feb53b6e7a4558cc9e8bf5b721"
+    },
+    {
+      "index": 152,
+      "title": "How to Do Philosophy",
+      "url": "https://paulgraham.com/philosophy.html",
+      "words": 4717,
+      "sha256": "313f9e919b486b67802dea36f4989e1956855fd9a5f8181c930ba8c32a096c3f"
+    },
+    {
+      "index": 153,
+      "title": "News from the Front",
+      "url": "https://paulgraham.com/colleges.html",
+      "words": 2216,
+      "sha256": "6642d45776555a68cd5d189005e5f7fbe6911ccd26e0c8f44911953428b53ec8"
+    },
+    {
+      "index": 154,
+      "title": "How Not to Die",
+      "url": "https://paulgraham.com/die.html",
+      "words": 1973,
+      "sha256": "234ba432fa9e968f883961ee4ed3b6217d7b6c44ef0d499e13f39f614cfdc069"
+    },
+    {
+      "index": 155,
+      "title": "Holding a Program in One's Head",
+      "url": "https://paulgraham.com/head.html",
+      "words": 1834,
+      "sha256": "81d8843dcaa3358e300e0b5575a8897850508fba258addef620096517298ca98"
+    },
+    {
+      "index": 156,
+      "title": "Stuff",
+      "url": "https://paulgraham.com/stuff.html",
+      "words": 1246,
+      "sha256": "5b36168d1df7a5a682fd3843b35b49eefcf3b6102c3bd3cd1d2cb3c4e5d4df73"
+    },
+    {
+      "index": 157,
+      "title": "The Equity Equation",
+      "url": "https://paulgraham.com/equity.html",
+      "words": 1132,
+      "sha256": "9e691a01ed03bd6441450610fa75a8e2455dbd69913e9934fe8c8557911d96e1"
+    },
+    {
+      "index": 158,
+      "title": "An Alternative Theory of Unions",
+      "url": "https://paulgraham.com/unions.html",
+      "words": 515,
+      "sha256": "fe96a9c7f42303e8124ec73fefa002605653dc6e0e060022609bacab0409fd23"
+    },
+    {
+      "index": 159,
+      "title": "The Hacker's Guide to Investors",
+      "url": "https://paulgraham.com/guidetoinvestors.html",
+      "words": 6244,
+      "sha256": "294cd0f4f3f35fb5b689c4b8bb51f3361c84ae0ead3ae85597e897cfad9cbb11"
+    },
+    {
+      "index": 160,
+      "title": "Two Kinds of Judgement",
+      "url": "https://paulgraham.com/judgement.html",
+      "words": 740,
+      "sha256": "547b944ed5d02610a05ff4ca52a80bd8250c9deec5030dda590d0c7eed1c4d65"
+    },
+    {
+      "index": 161,
+      "title": "Microsoft is Dead",
+      "url": "https://paulgraham.com/microsoft.html",
+      "words": 1286,
+      "sha256": "3bc94ba0eb07254261743017336b2a3294e43e457a0931eb3f95d2b3d74ce17c"
+    },
+    {
+      "index": 162,
+      "title": "Why to Not Not Start a Startup",
+      "url": "https://paulgraham.com/notnot.html",
+      "words": 6283,
+      "sha256": "4b4fec11aa957de21176b2ac44fd9ab8e83d9e61d78616e235c5d7977f138112"
+    },
+    {
+      "index": 163,
+      "title": "Is It Worth Being Wise?",
+      "url": "https://paulgraham.com/wisdom.html",
+      "words": 3743,
+      "sha256": "79629f31d9123e8fc239b83f5de76c346a1d809ab23c01f97892a877b71355b5"
+    },
+    {
+      "index": 164,
+      "title": "Learning from Founders",
+      "url": "https://paulgraham.com/foundersatwork.html",
+      "words": 775,
+      "sha256": "3d93afa7bb5fc63fdb43382f6463527ce1af78b8a27fabe67064ab442c6ffbe4"
+    },
+    {
+      "index": 165,
+      "title": "How Art Can Be Good",
+      "url": "https://paulgraham.com/goodart.html",
+      "words": 3624,
+      "sha256": "672480b8883d3dc0b77a4281d157118e780aefe9a8f62c6793a9970c2f75f1e4"
+    },
+    {
+      "index": 166,
+      "title": "The 18 Mistakes That Kill Startups",
+      "url": "https://paulgraham.com/startupmistakes.html",
+      "words": 5603,
+      "sha256": "1b372eb966f81695b017fd9344cd7fdaa1e112bd3cadde82450b08e615db708f"
+    },
+    {
+      "index": 167,
+      "title": "A Student's Guide to Startups",
+      "url": "https://paulgraham.com/mit.html",
+      "words": 6454,
+      "sha256": "b8826d75e8c70817fc50767559e2538a5239a7c337f828b4777cf9947f347010"
+    },
+    {
+      "index": 168,
+      "title": "How to Present to Investors",
+      "url": "https://paulgraham.com/investors.html",
+      "words": 2817,
+      "sha256": "6f9208dd463fb3b5337670fcb2aca48af191c1ad4382de3e7423f90e6eec49e2"
+    },
+    {
+      "index": 169,
+      "title": "Copy What You Like",
+      "url": "https://paulgraham.com/copy.html",
+      "words": 930,
+      "sha256": "d6d4c753679818117cf08bcc6a34a050222f2950f385e08c72a7319eafa0c77d"
+    },
+    {
+      "index": 170,
+      "title": "The Island Test",
+      "url": "https://paulgraham.com/island.html",
+      "words": 755,
+      "sha256": "f1bb6e1711d12458eae83a96026a082af30e4e377aaac8ebc2f62cc4188d0e4b"
+    },
+    {
+      "index": 171,
+      "title": "The Power of the Marginal",
+      "url": "https://paulgraham.com/marginal.html",
+      "words": 6062,
+      "sha256": "925c22ca765f00ca9c47eff3c630b583fabf76a483d4268a10063eb8848db6f7"
+    },
+    {
+      "index": 172,
+      "title": "Why Startups Condense in America",
+      "url": "https://paulgraham.com/america.html",
+      "words": 4764,
+      "sha256": "c5f9416dc71e97e280628bbbeee56844e1c6998eae29804fce8986679cbc2407"
+    },
+    {
+      "index": 173,
+      "title": "How to Be Silicon Valley",
+      "url": "https://paulgraham.com/siliconvalley.html",
+      "words": 3602,
+      "sha256": "fb28f4f316e83167ed232f55fbe3cc4445209cc5c65d337b2b540cddc166d1d2"
+    },
+    {
+      "index": 174,
+      "title": "The Hardest Lessons for Startups to Learn",
+      "url": "https://paulgraham.com/startuplessons.html",
+      "words": 4826,
+      "sha256": "32b14afda727fe036c986f7fdd3d46886c104f3d579da4b41a570e4ec5caaad3"
+    },
+    {
+      "index": 175,
+      "title": "See Randomness",
+      "url": "https://paulgraham.com/randomness.html",
+      "words": 587,
+      "sha256": "c0d9514dd0bb84f3041cb3ce3db9aebb59fe92ef60014047c50d36ea479aa1f1"
+    },
+    {
+      "index": 176,
+      "title": "Are Software Patents Evil?",
+      "url": "https://paulgraham.com/softwarepatents.html",
+      "words": 4658,
+      "sha256": "a9494c4f5bb8357c6a1a27d5dbc748693a43353410c120542063d620cfcad989"
+    },
+    {
+      "index": 177,
+      "title": "6,631,372",
+      "url": "https://paulgraham.com/6631327.html",
+      "words": 692,
+      "sha256": "8a82c3cb61aef0fb0fd6e3d6447adb79c7c59d76607e13cf6aba36412c2179f8"
+    },
+    {
+      "index": 178,
+      "title": "Why YC",
+      "url": "https://paulgraham.com/whyyc.html",
+      "words": 376,
+      "sha256": "d673fd796f5db2ee3c77516f9d20967e32be70f486a8f1f228d61919e4414462"
+    },
+    {
+      "index": 179,
+      "title": "How to Do What You Love",
+      "url": "https://paulgraham.com/love.html",
+      "words": 4687,
+      "sha256": "b02efb46583ce1ab960078eb355f52e91f812f999152deba1a0001bbebfbb2bb"
+    },
+    {
+      "index": 180,
+      "title": "Good and Bad Procrastination",
+      "url": "https://paulgraham.com/procrastination.html",
+      "words": 1807,
+      "sha256": "5ffa8e1e4192e03212dfe517f9e0c9a3efeb8425fef3bc443e0fd2f05ad2915d"
+    },
+    {
+      "index": 181,
+      "title": "Web 2.0",
+      "url": "https://paulgraham.com/web20.html",
+      "words": 3368,
+      "sha256": "92ca198ad0707b1c6804ccac54c1cc102f5d7f104f976d56c6eb961aa5f35867"
+    },
+    {
+      "index": 182,
+      "title": "How to Fund a Startup",
+      "url": "https://paulgraham.com/startupfunding.html",
+      "words": 8926,
+      "sha256": "1207745016e839ebff0ab1a48cc039439bf5e15f5f74188de81938c4c55630b7"
+    },
+    {
+      "index": 183,
+      "title": "The Venture Capital Squeeze",
+      "url": "https://paulgraham.com/vcsqueeze.html",
+      "words": 1568,
+      "sha256": "80ee3bcd3d396663c732ae4eb48bb1ec773cea183ecbdb7a7f20321cbfa2a69e"
+    },
+    {
+      "index": 184,
+      "title": "Ideas for Startups",
+      "url": "https://paulgraham.com/ideas.html",
+      "words": 3941,
+      "sha256": "0e1f56e0c6a8d5a38b2c53cbeae44d929f8d26049f5532d4ccb542a083f47e01"
+    },
+    {
+      "index": 185,
+      "title": "What I Did this Summer",
+      "url": "https://paulgraham.com/sfp.html",
+      "words": 2574,
+      "sha256": "070dac22c60d3aff90a06e98d46ee03aee3e934ec8ef65aa0512aa5da1114181"
+    },
+    {
+      "index": 186,
+      "title": "Inequality and Risk",
+      "url": "https://paulgraham.com/inequality.html",
+      "words": 2819,
+      "sha256": "f9d1395acec2e03d7718e1b6f962a6849952b3b2aeb05b4612aaeb644fedc145"
+    },
+    {
+      "index": 187,
+      "title": "After the Ladder",
+      "url": "https://paulgraham.com/ladder.html",
+      "words": 585,
+      "sha256": "129b7113d40128df3d4f907faa765d2a08bc7b795168ebf112682cc9f0d606db"
+    },
+    {
+      "index": 188,
+      "title": "What Business Can Learn from Open Source",
+      "url": "https://paulgraham.com/opensource.html",
+      "words": 4353,
+      "sha256": "3e824b4b56884ca2d36b85a321fb6d06bff7c420b790c87833b2d8195393d2c1"
+    },
+    {
+      "index": 189,
+      "title": "Hiring is Obsolete",
+      "url": "https://paulgraham.com/hiring.html",
+      "words": 4786,
+      "sha256": "e8f23e56f35f9e43551385aab71ebafd26741311c1adfb61da8f61f829017f8e"
+    },
+    {
+      "index": 190,
+      "title": "The Submarine",
+      "url": "https://paulgraham.com/submarine.html",
+      "words": 2308,
+      "sha256": "3b33fdb85aba4b5278b7455e71300e610c54f38e13a75b9a1931f2748fba9a46"
+    },
+    {
+      "index": 191,
+      "title": "Why Smart People Have Bad Ideas",
+      "url": "https://paulgraham.com/bronze.html",
+      "words": 3166,
+      "sha256": "33280944f0a0fdcf63e8018e8d70ba671d1697684e01aa79d088d6e5ed00dacc"
+    },
+    {
+      "index": 192,
+      "title": "Return of the Mac",
+      "url": "https://paulgraham.com/mac.html",
+      "words": 1004,
+      "sha256": "709e97e73d8c68f09cd1fbf418f2d18e081f2a7849449cad9722f6e4bc00e575"
+    },
+    {
+      "index": 193,
+      "title": "Writing,  Briefly",
+      "url": "https://paulgraham.com/writing44.html",
+      "words": 459,
+      "sha256": "e1c424cc7cbf12e494b0127ac9a673b2d5ab8be9b7dd34ac5635c46873145f0f"
+    },
+    {
+      "index": 194,
+      "title": "Undergraduation",
+      "url": "https://paulgraham.com/college.html",
+      "words": 3660,
+      "sha256": "3e8bb3fcbde52b0bc0e8b305a8e22d7774ccb0017ad3597730e034172b5e9d78"
+    },
+    {
+      "index": 195,
+      "title": "A Unified Theory of VC Suckage",
+      "url": "https://paulgraham.com/venturecapital.html",
+      "words": 1472,
+      "sha256": "fddf93682330d0e822db8c6cb8e722ff5e8bbb1c519dc7749b628a51619455bb"
+    },
+    {
+      "index": 196,
+      "title": "How to Start a Startup",
+      "url": "https://paulgraham.com/start.html",
+      "words": 9749,
+      "sha256": "adadd60f491adfc03f7fcc9cbc204cc64e5f28a426a9fab71b488c7238c79e8d"
+    },
+    {
+      "index": 197,
+      "title": "What You'll Wish You'd Known",
+      "url": "https://paulgraham.com/hs.html",
+      "words": 5070,
+      "sha256": "85df277d2b5f7426734147e6e18e227949f656b74ae93872ae4cf22a9b96f02e"
+    },
+    {
+      "index": 198,
+      "title": "Made in USA",
+      "url": "https://paulgraham.com/usa.html",
+      "words": 1846,
+      "sha256": "eae646b2f137c4f7476002304792102b33ec9c8fc90d1472cddf03c610dcc274"
+    },
+    {
+      "index": 199,
+      "title": "It's Charisma, Stupid",
+      "url": "https://paulgraham.com/charisma.html",
+      "words": 1495,
+      "sha256": "14c8226b32167122a9d6ca2d9c4a9b89a9d9c0b513c0edc6cbc723052ebe3c51"
+    },
+    {
+      "index": 200,
+      "title": "Bradley's Ghost",
+      "url": "https://paulgraham.com/polls.html",
+      "words": 618,
+      "sha256": "84a86abb9b67226ae67e199aa7dc56100ca8271cd680586d4dfa8538279ecc4f"
+    },
+    {
+      "index": 201,
+      "title": "A Version 1.0",
+      "url": "https://paulgraham.com/laundry.html",
+      "words": 4266,
+      "sha256": "79ca3c75e5f74d9c6279d17c05548a2c9932c244de7af023de687edaf0a6f5ad"
+    },
+    {
+      "index": 202,
+      "title": "What the Bubble Got Right",
+      "url": "https://paulgraham.com/bubble.html",
+      "words": 3729,
+      "sha256": "e3908073e521b6041f8e5a6b42a6dfe338f1b70159ee49b9368bb163f122f481"
+    },
+    {
+      "index": 203,
+      "title": "The Age of the Essay",
+      "url": "https://paulgraham.com/essay.html",
+      "words": 4523,
+      "sha256": "167fcfe8f45dadcb616a268e3c9eb53336cbed2ca1ece25b7a69ed66ccae2b98"
+    },
+    {
+      "index": 204,
+      "title": "The Python Paradox",
+      "url": "https://paulgraham.com/pypar.html",
+      "words": 449,
+      "sha256": "8c39a8265218de28d9ee011c2187b25d607ad760d89d50c063fc403d8b8a2eca"
+    },
+    {
+      "index": 205,
+      "title": "Great Hackers",
+      "url": "https://paulgraham.com/gh.html",
+      "words": 5228,
+      "sha256": "21ebdfbf786d59835e0b3d2a127337dae0d41bab159457001bae75e1c1126dd4"
+    },
+    {
+      "index": 206,
+      "title": "Mind the Gap",
+      "url": "https://paulgraham.com/gap.html",
+      "words": 5684,
+      "sha256": "77e1b72f263f180f84311d1e9725763ffa0cf901843050d254936c37b79340ce"
+    },
+    {
+      "index": 207,
+      "title": "How to Make Wealth",
+      "url": "https://paulgraham.com/wealth.html",
+      "words": 8947,
+      "sha256": "d6ba8db115324c93576dc0d9b92dfa0a898c189556a584230c63cbc686932045"
+    },
+    {
+      "index": 208,
+      "title": "The Word \"Hacker\"",
+      "url": "https://paulgraham.com/gba.html",
+      "words": 1937,
+      "sha256": "bf08aa087f5af4b82c1b9254e00d205bfe9de6df5f2547f5ef8e08ddc9a446be"
+    },
+    {
+      "index": 209,
+      "title": "What You Can't Say",
+      "url": "https://paulgraham.com/say.html",
+      "words": 5413,
+      "sha256": "356c116a5f0b91a6b65b8346625d55315f836b1779d038f830ca5953893fa38a"
+    },
+    {
+      "index": 210,
+      "title": "Filters that Fight Back",
+      "url": "https://paulgraham.com/ffb.html",
+      "words": 824,
+      "sha256": "0a805beec7292cd8f6b5f9f44cb6272c8b801d7eaf62e072aa12852b9f5e7b4b"
+    },
+    {
+      "index": 211,
+      "title": "Hackers and Painters",
+      "url": "https://paulgraham.com/hp.html",
+      "words": 5585,
+      "sha256": "7adb1c59de68a933d010ac77acc431735419bcfde1c6f3dab2b4e260205ec716"
+    },
+    {
+      "index": 212,
+      "title": "If Lisp is So Great",
+      "url": "https://paulgraham.com/iflisp.html",
+      "words": 416,
+      "sha256": "98210d45d867f3fad2a8ab9d2c5292d27c6560dca879458f667d717b77218ee1"
+    },
+    {
+      "index": 213,
+      "title": "The Hundred-Year Language",
+      "url": "https://paulgraham.com/hundred.html",
+      "words": 4791,
+      "sha256": "cce41ed41f40426d1c3bdebd71dd1ed76929c01a65d3ebf2881eead62126eec0"
+    },
+    {
+      "index": 214,
+      "title": "Why Nerds are Unpopular",
+      "url": "https://paulgraham.com/nerds.html",
+      "words": 5693,
+      "sha256": "4cb7e126af514393836f9d5462763e0370134b67e56bb12ac2ee8b3e947d6b10"
+    },
+    {
+      "index": 215,
+      "title": "Better Bayesian Filtering",
+      "url": "https://paulgraham.com/better.html",
+      "words": 4321,
+      "sha256": "4414064d42e2ac73c8083d97d24ca7185ed84585790fba021b5cbd2d7b39c94c"
+    },
+    {
+      "index": 216,
+      "title": "Design and Research",
+      "url": "https://paulgraham.com/desres.html",
+      "words": 2661,
+      "sha256": "5c5841629d30fd3307a6238e23c8e06c7587dd4c73d49b45aca9a33d5475a382"
+    },
+    {
+      "index": 217,
+      "title": "A Plan for Spam",
+      "url": "https://paulgraham.com/spam.html",
+      "words": 5314,
+      "sha256": "691774fbf1189da546836459da7e6e87178d4598aded306ce1942a4b1c16f969"
+    },
+    {
+      "index": 218,
+      "title": "Revenge of the Nerds",
+      "url": "https://paulgraham.com/icad.html",
+      "words": 5824,
+      "sha256": "539d6fc0e6f3dd17a510a93b79476cec35281bd5dc2849b31e2ec21532c448c7"
+    },
+    {
+      "index": 219,
+      "title": "Succinctness is Power",
+      "url": "https://paulgraham.com/power.html",
+      "words": 2996,
+      "sha256": "a354475992c8ae517852de1f1b54b9f397004f3a49b08d89e4fcc8ab5f4aa14a"
+    },
+    {
+      "index": 220,
+      "title": "What Languages Fix",
+      "url": "https://paulgraham.com/fix.html",
+      "words": 213,
+      "sha256": "d7e1adf503e0588f2a75882757fb4cfa0f10820c927dc1bc6500e0c79418d78d"
+    },
+    {
+      "index": 221,
+      "title": "Taste for Makers",
+      "url": "https://paulgraham.com/taste.html",
+      "words": 4321,
+      "sha256": "9353c5b5e57ad2d2c770eb879b46ca05b98cb0f9b453926df4b3abc07a35e10c"
+    },
+    {
+      "index": 222,
+      "title": "Why Arc Isn't Especially Object-Oriented",
+      "url": "https://paulgraham.com/noop.html",
+      "words": 486,
+      "sha256": "d75c74d1259fd3f4fd7d65c0a224543e4187f3cca02c87cab803e8af5f3f1a94"
+    },
+    {
+      "index": 223,
+      "title": "What Made Lisp Different",
+      "url": "https://paulgraham.com/diff.html",
+      "words": 700,
+      "sha256": "352fa3eb1694a2fcb98f6707248aacf176d7566c07a2403c4c622b79f499c409"
+    },
+    {
+      "index": 224,
+      "title": "The Other Road Ahead",
+      "url": "https://paulgraham.com/road.html",
+      "words": 11974,
+      "sha256": "be8cdfedec87b2537f65b79d4b11b85c77c06a28f39f1da2dbe894b33c16bec9"
+    },
+    {
+      "index": 225,
+      "title": "The Roots of Lisp",
+      "url": "https://paulgraham.com/rootsoflisp.html",
+      "words": 358,
+      "sha256": "c620db532f3f14eea9e2649a9ccb441cb1ce2d40e2fdfd4aa78f9e836c792407"
+    },
+    {
+      "index": 226,
+      "title": "Five Questions about Language Design",
+      "url": "https://paulgraham.com/langdes.html",
+      "words": 2941,
+      "sha256": "18750c724d0f4df08a3a9144b27c70fd220e6c9d59414031f6c7c91ca2cbee58"
+    },
+    {
+      "index": 227,
+      "title": "Being Popular",
+      "url": "https://paulgraham.com/popular.html",
+      "words": 7590,
+      "sha256": "5f59c1384d99059adf3299e25c51597f249a89e1684945d4c33ea1a20b832e4b"
+    },
+    {
+      "index": 228,
+      "title": "Java's Cover",
+      "url": "https://paulgraham.com/javacover.html",
+      "words": 1362,
+      "sha256": "371ddf387571d08f987b15123ee277ab423ea2876773bb20e4859cfdfa13e49f"
+    },
+    {
+      "index": 229,
+      "title": "Beating the Averages",
+      "url": "https://paulgraham.com/avg.html",
+      "words": 4456,
+      "sha256": "f4ae3562c2a232bab5a88b47f09702ef52ed7cb88249cd4b94e0f4a9a6b22925"
+    },
+    {
+      "index": 230,
+      "title": "Lisp for Web-Based Applications",
+      "url": "https://paulgraham.com/lwba.html",
+      "words": 54,
+      "sha256": "fe3e58049a2d544d9124ffcb9a914ce7bf9b274343cfee7d2beb3bd41075f514"
+    },
+    {
+      "index": 231,
+      "title": "Programming Bottom-Up",
+      "url": "https://paulgraham.com/progbot.html",
+      "words": 919,
+      "sha256": "466b0e0f47fbce67a0dcd7963d6731bdcc87b5b92f99bc9628b84f3f93e7207c"
+    },
+    {
+      "index": 232,
+      "title": "This Year We Can End the Death Penalty in California",
+      "url": "https://paulgraham.com/prop62.html",
+      "words": 187,
+      "sha256": "7d9473255bca9e24c59c10435e3728928f8d948f3add580cee6d1b860c8f9011"
+    },
+    {
+      "index": 233,
+      "title": "RSS",
+      "url": "https://paulgraham.com/rss.html",
+      "words": 10,
+      "sha256": "bafdba9cbc00bf84d3bc4c9ea243222531f00d9eb99348eb068aeb24727b8d5e"
+    }
+  ]
+}
