@@ -6,32 +6,34 @@ siblings:
 - documentation-template
 - documentation-best-practices
 date: 2026-11-23
-description: "The technical writing examples here are ten files from software docs, each with the check that ran on it, and seven show the weak line beside the finished one."
+description: "Ten software documentation examples, with before-and-after edits and the commands and checks that show where each version holds up."
 slug: technical-writing-examples
 status: published
 takeaways:
-- Of the ten technical writing examples checked on November 23, 2026, the only command that failed was a quickstart line with no expected output written under it.
-- An API reference row said the Content-Type header was required until a request without the header returned 202, and the row now says Recommended.
-- The checker scripts passed a troubleshooting heading rewritten as "Database write problems" and a release note rewritten as "Fixed an issue with webhook retries", so a person still has to read those lines.
+- "Put the old line beside the edit. Run the request or command that can settle what it should say."
+- "A request without Content-Type got 202, so the reference now says the header is recommended."
+- "A checker passed a vague troubleshooting heading and a vague release note. Both needed a person to read the line in context."
 title: "Technical Writing Examples: 10 Tested Samples With Edits Shown"
-work_note: "I'm Ninad Pathak, a freelance technical writer, and the samples on this page are the kind of quickstart and reference page I write for developer products. Each one was checked before it was listed, and the pages I write for you would be too. [Get in touch](/services/developer-documentation/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer, and I can help you write quickstarts, reference pages and tutorials like the samples on this page. [Get in touch](/services/developer-documentation/)."
 ---
 
-Every available check ran on eight documentation files from this site on November 23, 2026, and one command printed nothing. It was the last command in the GitHub quickstart, and the file showed no expected output under it.
+The reference said `Content-Type` was required. I left it out and got `202 Accepted`.
 
-Those eight files are the technical writing examples on this page, along with an error message and a how-to step I wrote today. The table below links each file and names the check it went through, and seven of the ten examples show a weaker version of a line beside the finished one.
+Then I sent `text/plain` and got another 202.
 
-All ten are software [technical documentation](/articles/technical-documentation/), so you won't find a white paper or a press release here. I'll go through the list first, then the edits.
+That's the kind of edit I want before a page goes out. Change what the table promises and add a test for the request that proved it wrong.
 
-## What counts as a technical writing example
+These examples show the old line beside the edit and, where you can run something, what it printed.
 
-A technical writing example is a finished document, or one part of it, that you can read and copy the shape of. A whole quickstart counts, and so does a single runbook step.
+## The examples and what I checked
 
-[Whatfix's list](https://whatfix.com/blog/technical-writing-examples/), updated on February 17, 2026, counts press releases and business plans among its twelve kinds. [Mintlify's page](https://www.mintlify.com/library/technical-writing-examples) from September 30, 2026 annotates seven pages from other companies' software docs, and its advice to "Test every command and code example against the supported product version" is the standard I've held my own examples to.
+These examples are all [technical documentation](/articles/technical-documentation/) for software. A first run, a reference entry, and an incident procedure answer different questions.
 
-## The ten examples and the check I ran on each
+[How to pick the document type](/articles/documentation-types/)
 
-Each row is one example, the check that ran on it on November 23, 2026 and what the check printed. The machine was Ubuntu 24.04 with Python 3.12.3 and Node.js 26.13.1.
+These examples cover software docs, from a first API call to the steps someone takes during an incident. The linked files are complete samples.
+
+The checks ran on November 23 on Ubuntu 24.04.
 
 | Kind | Example | Check | Result |
 |---|---|---|---|
@@ -46,63 +48,39 @@ Each row is one example, the check that ran on it on November 23, 2026 and what 
 | Design doc | [Export records design doc](/static/examples/design-doc-persist-exports.md), from the [design doc template](/articles/design-doc-template/) | `python3 check_design_doc.py --filled design-doc-persist-exports.md` | `PASS`, with `sections: 8/8` |
 | Postmortem | [Intake write failure postmortem](/static/examples/postmortem-intake-writes-failed.md), from the [postmortem template](/articles/postmortem-template/) | `python3 check_postmortem.py --filled postmortem-intake-writes-failed.md` | `PASS`, with `time to detect: 7 s` |
 
-Every script printed PASS, and the one failure came from the quickstart, which has no script. If you came for a user manual or a standard operating procedure, I'd copy the how-to step for the manual and the runbook for the procedure.
+## Fix the claim before you polish the line
 
-Which reader question each kind answers is on my page about the [types of technical documentation](/articles/documentation-types/), so this page skips it.
+The old API reference row and the correction are both in Git. The first said the header was required.
 
-## Technical writing examples with the edit shown
-
-Each pair below is a weaker version of one line and the line as the file has it today. Every section says whether the weaker version is real, taken from the site's git history, or one I wrote for this page.
-
-### API reference: a header that wasn't required
-
-Both versions of this row are in git history. The reference entry for `POST /exports` listed its `Content-Type` header like this when the page was first committed on October 22, 2026:
+The new one says what the service actually does.
 
 ```markdown
 | `Content-Type` | Yes | `application/json` |
 ```
 
-A correction committed 28 minutes later gave the row the text it has now:
-
 ```markdown
 | `Content-Type` | Recommended | `application/json`. The service parses the body as JSON whatever this header says. |
 ```
 
-I sent the request today with the header removed and again with `text/plain`, and both returned `202 Accepted`. A Required column is a claim about the service, so the correction also gave the check script a ninth case that sends no `Content-Type` and expects 202.
+The design doc had a similar problem. It rejected SQLite on the grounds that we'd need a native dependency, but Node already shipped `node:sqlite`.
 
-### Design doc: a rejection reason that was false
+The rewrite still rejects SQLite because a plain file lets someone inspect the fixture with `cat`. That was the property the example needed.
 
-The design doc's two versions are in git history too. Its first version, also from October 22, 2026, rejected SQLite with this line:
+[Node.js SQLite documentation](https://nodejs.org/docs/latest-v24.x/api/sqlite.html)
 
 ```markdown
 Rejected because: it adds a native dependency to a fixture that has none, for a single table that a line-per-record file handles.
 ```
 
-The file now says:
-
 ```markdown
 Rejected because: the fixture exists to be read, and a line-per-record file can be inspected with `cat` while someone follows the docs. SQLite's transactions add little for one append per request.
 ```
 
-The first reason reads well and was wrong. The [Node.js 24 documentation](https://nodejs.org/docs/latest-v24.x/api/sqlite.html) lists a built-in `node:sqlite` module, added in v22.5.0 and marked "Release candidate", so SQLite would have added no dependency.
+## Write for the screen the reader is looking at
 
-The rewrite still rejects SQLite, and its reason holds up, because a reader following the docs can open a line-per-record file with `cat`.
+The export service below comes from a [complete documentation example](/articles/documentation-template/) with a reference page you can check against it.
 
-### Troubleshooting guide: the error text as the heading
-
-The troubleshooting guide was written today and has no earlier version, so the first heading is a weak one I wrote for this page:
-
-```markdown
-## Database write problems
-```
-
-The heading in the file is the error text:
-
-```markdown
-## `database is locked`
-```
-
-I held a write lock open today on SQLite 3.45.1 and ran one insert from the `sqlite3` shell and from Python. The shell printed the first line for SQL passed as an argument and the second for SQL piped in, and Python printed the last:
+I could have titled an entry “Database write problems.” I made SQLite fail from the shell and from Python, and this is what readers would actually have in front of them.
 
 ```text
 Error: stepping, database is locked (5)
@@ -110,17 +88,43 @@ Runtime error near line 1: database is locked (5)
 sqlite3.OperationalError: database is locked
 ```
 
-A reader arrives with one of those lines on screen and searches the page for it. Every line contains `database is locked`, and "Database write problems" matches none of them.
+I'd use `database is locked` as the heading. It's the part all of those readers can search for.
 
-### Runbook: a step with its output and its undo
+An error message has the same job. The export service returned this when the request sent no idempotency key.
 
-The runbook has one commit, so I wrote this weak step for the page:
-
-```markdown
-4. Kill the stuck database sessions.
+```json
+{"error":"invalid_key"}
 ```
 
-Step 4 in the file gives the command, and the lines under it say what the output should be and what running it costs:
+I gave the missing-key case its own response in a copy of the service.
+
+```json
+{"error":"missing_key","message":"This request has no Idempotency-Key header. Send one with 1 to 64 letters, digits or hyphens, and reuse it when you retry."}
+```
+
+Now the message says what the server received and what to send next. The reference checker failed one case against the copy.
+
+The error body is part of the interface, so the reference has to change with it.
+
+## Let the reader tell when a command worked
+
+The last command in my GitHub quickstart printed nothing. There was no example output under it.
+
+For a rate-limit check, I'd show the reader both the command and the shape of its result.
+
+```bash
+curl -sS https://api.github.com/rate_limit | jq '.resources.core.remaining'
+```
+
+```text
+44
+```
+
+That number was the remaining allowance in my run. The reader should expect an integer, and their number will depend on their own requests.
+
+An on-call reader also needs to know what happens if there's no result. In the Postgres runbook, “Kill the stuck database sessions” would make the responder decide what stuck means.
+
+The actual step targets sessions idle in a transaction for more than five minutes and explains what a zero-row result means. It also says what the command can't recover.
 
 ```bash
 psql -U postgres -d shop -c "select pid, application_name, pg_terminate_backend(pid)
@@ -134,67 +138,19 @@ If not: Zero rows means no transaction has been idle that long, so go back to st
 Undo: Irreversible: each terminated session's open transaction rolls back, so its uncommitted writes are lost.
 ```
 
-The weak step leaves "stuck" to whoever is on call, and the real one defines it as idle inside a transaction for more than five minutes. I rebuilt the incident today on Postgres 16.15 in Docker, with 12 sessions that each updated a row of `orders` and never committed.
+My test got zero rows before the threshold and 12 rows ending in `t` after it. Those uncommitted changes rolled back, as the step says they will.
 
-With those sessions idle for `00:03:48`, the command returned `(0 rows)`, which is the If not line. At `00:05:20` it returned 12 rows ending in `t`, and afterwards all 50 rows of `orders` still had the status `new`, which is the lost write the Undo line describes.
+## Give the reviewer the parts a script can't see
 
-### Release notes: a fix that says who saw the bug
-
-The release notes also have one commit, so I wrote this weak line for the page:
-
-```markdown
-- Fixed an issue with webhook retries.
-```
-
-The file has this line under Fixes:
+The release notes checker passed both “Fixed an issue with webhook retries” and the line explaining what the fix does. The second tells people who saw duplicate deliveries that they can expect a change.
 
 ```markdown
 - Webhook retries no longer resend an event after a `2xx` response: integrations that saw duplicate deliveries.
 ```
 
-The real line names the old behavior and the reader it reached, so someone who received duplicate deliveries knows the release fixes their bug. The checker printed PASS for both versions, because it never reads the Fixes list.
+Several checks made the same distinction. They could ask for a command, a heading, or a number.
 
-## An error message and a how-to step, written today
-
-The site had no error message and no how-to step to show, so I wrote one of each today against tools I could run. Both weak versions are real, since one is a response the service sends now and the other is the quickstart command that printed nothing.
-
-### Error message: say what the server received
-
-The export service from the [technical documentation template](/articles/documentation-template/) answers a request that has no `Idempotency-Key` header with status 400 and this body:
-
-```json
-{"error":"invalid_key"}
-```
-
-A developer who sent no key is told that their key is invalid. I gave that case its own code and a message in a copy of the service, and the same request returned this:
-
-```json
-{"error":"missing_key","message":"This request has no Idempotency-Key header. Send one with 1 to 64 letters, digits or hyphens, and reuse it when you retry."}
-```
-
-The message says what the server received and what to send. The reference check then printed `FAIL: 1 of 9 documented responses differ` against the copy, because an error body is part of what the reference promises and its row has to change in the same commit.
-
-### How-to step: show the output under the command
-
-The quickstart command that printed nothing was `curl -sS -I https://api.github.com/rate_limit | grep -i x-ratelimit-remaining`. `curl -I` sends a HEAD request, and on November 23 GitHub answered a HEAD to `/rate_limit` with a 404 and a GET with a 200, so `grep` had no header to match.
-
-Here is the step rewritten with a GET and the output under it, and the quickstart file now carries this command:
-
-```bash
-curl -sS https://api.github.com/rate_limit | jq '.resources.core.remaining'
-```
-
-You should see a number no higher than 60, and on my run it was this:
-
-```text
-44
-```
-
-A reader comparing their terminal with `44` sees at once that an empty line is wrong. If the step prints `0`, the unauthenticated requests for the hour are used up, and `jq -r '.resources.core.reset | todate'` on the same response prints when the count resets.
-
-## What the checks don't catch
-
-The scripts check that the parts of a document are present, and four of the seven weak versions put through them still passed:
+A loose sentence could still pass.
 
 | Weak version | Script | Result |
 |---|---|---|
@@ -206,24 +162,8 @@ The scripts check that the parts of a document are present, and four of the seve
 | README usage command replaced by a sentence | `check_readme.py` | `FAIL`: `'Usage' has no command in a bash, sh or shell code block` |
 | Postmortem summary with no numbers, "a brief outage caused by a storage issue" | `check_postmortem.py` | `FAIL`: `Summary has no count with a unit (how many requests, users or minutes)` |
 
-A script can demand a command or a number. It can't tell whether a heading is the text a reader will search for, and that call stays with the reviewer.
+I'd use the checker for the parts it can prove. During review, I'd put the developer's error, output, or prior behavior next to the sentence they're about to read.
 
-The release notes are for a made-up SDK, so their PASS covers structure only. The design doc proposes a change nobody has built, and the part I could run was its Problem section, where a retry after a restart got `202` and a new `exp_1` as the doc says.
+If the sentence doesn't tell them what to do with what's on their screen, I'd fix that before asking whether it sounds better.
 
-For a check that needs a person, my page on [technical documentation best practices](/articles/documentation-best-practices/) has a one-page review card to fill in as you do a page's task from a clean account.
-
-## FAQ
-
-Each answer is about software documentation.
-
-### What are examples of technical writing in software?
-
-The table on this page lists ten, from a quickstart to a postmortem. Outside software the term also covers appliance manuals and standard operating procedures.
-
-### What makes a technical writing example worth copying?
-
-Copy an example that shows the output under each command, because that output is how a reader sees that a step has failed. Of the ten here, the one command that failed had no expected output under it.
-
-### How do you test a technical writing sample?
-
-Run every command it shows in a clean directory and compare what prints with what the page says. For a line with no command, such as a heading or a release note, write the weak version next to it and ask what a reader loses.
+For a page your team already owns, use the same test on its first command. [Documentation best practices](/articles/documentation-best-practices/)

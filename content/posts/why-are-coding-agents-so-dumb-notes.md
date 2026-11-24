@@ -10,71 +10,75 @@ bridges:
 - slug: vercel-agent-study-by-harness
   reason: That essay found two Claude models fetching pages differently under two harnesses, the kind of same-model comparison this essay relies on.
 date: 2026-11-23
-description: "Michael Lynch says the software around coding models is the weak part. I checked four of the complaints against the Claude Code, Codex and OpenCode docs and found a Claude Code setting behind each. The sandbox complaint held up in a test on Ubuntu 24.04."
+description: "I compared how Claude Code, Codex and OpenCode handle parallel work, cheaper models, unanswered questions and file access. I tested two Claude Code settings."
 slug: why-are-coding-agents-so-dumb-notes
 status: published
-title: "Notes on Michael Lynch's 'Why are coding agents so dumb?'"
-work_note: "The settings in this essay were all in the docs, and I still had to go looking for each one. I'm Ninad Pathak, a freelance technical writer for AI companies, and I write tutorials and technical articles that put a setting in front of the developer who needs it, after running it myself. [Talk to me about yours](/services/freelance-technical-writer-for-ai-companies/)."
+title: "What coding agents do by default and what you can change"
+work_note: "I'm Ninad Pathak, a freelance technical writer, and I can help you write the docs and tutorials for your coding agent. [Talk to me](/services/freelance-technical-writer-for-ai-companies/)."
 ---
 
-On October 9, Michael Lynch published [Why are coding agents so dumb?](https://mtlynch.io/why-are-coding-agents-so-dumb/), six complaints from a developer who uses Claude Code and OpenCode daily. Lynch argues that the models keep improving while the program that runs them stays bad, the program the post calls the agent and benchmark authors call the harness.
+A coding agent asked Michael Lynch what to call a branch and waited all night for an answer. I'd want it to name the branch and get on with the work.
 
-I think Lynch is right about the defaults, and that a heading like "Agents can't delegate" claims more than the docs support. Configuring agents is a subject of my [coding agents](/articles/coding-agents/) topic, so on November 23 I read the docs for Claude Code, Codex and OpenCode against four of the six complaints, and two of the Claude Code settings in those docs then ran in version 2.1.330.
+I went through Lynch's complaints looking for settings that would change what a coding agent does on its own. Claude Code has a timeout for unanswered questions, and a test confirmed I could send routine work to a cheaper model.
 
-## Benchmarks have started measuring the harness
+The sandbox test gave me more reason to care about the defaults. When Claude Code couldn't start the sandbox on Ubuntu, it warned me and ran the command anyway.
 
-I agree with Lynch that the harness deserves its own numbers, and two studies had started producing them a few weeks before Lynch wrote that barely any benchmark measures the agents themselves.
+[Michael Lynch’s *Why are coding agents so dumb?*](https://mtlynch.io/why-are-coding-agents-so-dumb/)
 
-<!-- evidence-three: HarnessTax's method text says each model and harness pair ran three times per task, which gives the 90 attempts per harness on 30 tasks --> [HarnessTax](https://harnesstax.github.io/), a study from UC Berkeley and Arena Intelligence that [reached Hacker News on September 16](https://news.ycombinator.com/item?id=49733726), ran the same 30 SWE-bench Lite tasks three times each through Claude Code, Codex CLI and Pi. Claude Fable 5 solved 88 of 90 attempts in Claude Code and 87 of 90 in each of the other two harnesses, at a mean cost of 133 cents per attempt in Claude Code and 67 cents in Pi.
+## What you can configure in each tool
 
-So on that benchmark Claude Code didn't make the model dumber, and it made nearly the same result cost twice as much.
+If you set up [coding agents](/articles/coding-agents/) for other people, check which of these decisions the tool makes before anyone adds a settings file.
 
-A second study, [submitted to arXiv on September 17](https://arxiv.org/abs/2609.20804), kept one harness fixed and changed one part of it at a time. When the file and search tools were removed and the model was left with a shell, Mistral Medium 3.5 fell to 45.4% of 500 SWE-Bench Verified tasks from 68.6%, and Nemotron-3 550B rose to 69.4% from 65.8%.
-
-The file tools that helped Mistral Medium 3.5 held Nemotron-3 550B back, so I'm wary of any list of what every agent should do out of the box, and Lynch's post has one. My [agent harness explainer](/articles/agent-harnesses/) covers a third benchmark, and the [Vercel agent study](/articles/vercel-agent-study-by-harness/) I split by harness showed two Claude models fetching pages differently under two harnesses.
-
-Neither HarnessTax nor the arXiv study can see an agent stopping to ask for a branch name, so for Lynch's complaints I went to the docs.
-
-## The settings behind four complaints
-
-Claude Code documents a setting for each of the four complaints I checked, and three of the four are off until you turn them on: the cheaper subagent model, the question timeout and the sandbox. Here is where each lives in the three agents' docs:
+Claude Code has a setting or feature for each complaint. The table shows what each tool documents, including where you have to change a default yourself.
 
 | Lynch's complaint | Claude Code | Codex CLI | OpenCode V2 |
 |---|---|---|---|
 | Subtasks run one at a time | [Subagents](https://code.claude.com/docs/en/sub-agents) start in the background, up to 20 at once | [Spawns subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents) when you or AGENTS.md ask | [Subagents](https://opencode.ai/docs/agents/) always run in the background |
 | Gruntwork stays on the expensive model | `CLAUDE_CODE_SUBAGENT_MODEL`, or `model:` in a subagent file | `agents.default_subagent_model` in `config.toml` | `model:` in an agent file |
 | An unanswered question stops the run | [`askUserQuestionTimeout`](https://code.claude.com/docs/en/tools-reference), default `never` | No key found in the [configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference) | A `question` [permission](https://opencode.ai/docs/permissions/) that a rule can deny |
-| No boundary on files | [`sandbox.enabled`](https://code.claude.com/docs/en/sandboxing), default off | [OS-enforced sandbox](https://learn.chatgpt.com/docs/agent-approvals-security), on by default | `external_directory` rule, default allow |
+| The agent can access files outside the project | [`sandbox.enabled`](https://code.claude.com/docs/en/sandboxing), default off | [OS-enforced sandbox](https://learn.chatgpt.com/docs/agent-approvals-security), on by default | `external_directory` rule, default allow |
 
-## Lynch's 10 subtasks weren't parallel work
+## When can an agent run tasks in parallel?
 
-I don't buy the example Lynch opens with, where OpenCode splits a feature into 10 todos and Lynch asks why it's doing "these embarrassingly parallel tasks one at a time". In Lynch's screenshot the second todo migrates authentication to the Passphrase type that the first todo adds, and the tenth is a final verification run.
+Claude Code, Codex, and OpenCode can all hand work to subagents. The part I’d check is whether the jobs can actually start at the same time.
 
-The screenshot shows OpenCode committing step one before it starts step two, so I read the 10 todos as a chain of commits. A commenter, eviks, [made the same objection](https://news.ycombinator.com/item?id=50029126) on October 10.
+In Lynch's OpenCode screenshot, the first task adds a `Passphrase` type and the second uses that type to migrate authentication. Those jobs have a reason to run in that order.
 
-Lynch is right that the harness decides whether independent work runs in parallel, and a commenter, kgeist, [described](https://news.ycombinator.com/item?id=50026656) one Qwen model that ran sequential todos under OpenCode and about six parallel subagents under another harness, QwenCode. The docs I read name no setting that tells an agent which todos are independent, or that it could draft a commit message during a test run, which is Lynch's Claude Code example.
+[A Hacker News commenter pointed out the same dependency.](https://news.ycombinator.com/item?id=50029126)
 
-## Cheaper subagents and unanswered questions are one setting each
+The choice of tool can still change how a model handles independent work. [Another commenter](https://news.ycombinator.com/item?id=50026656) reported that the same Qwen model worked through tasks one at a time in OpenCode and started about six subagents in parallel in QwenCode.
 
-In Claude Code each of these two complaints comes down to one setting. The test of the first, `CLAUDE_CODE_SUBAGENT_MODEL`, ran in version 2.1.330, with a prompt that told a Sonnet session to delegate one file search to a subagent.
+The docs I checked name no setting that tells the agent which tasks are independent. That leaves open one of Lynch's simpler examples, drafting a commit message while tests run.
 
-Without the variable the subagent's replies came from `claude-sonnet-5-5`, and with it set to `haiku` they came from `claude-haiku-5-5`. The setting works, and Lynch's real complaint stands, that the agent doesn't choose a cheaper model for itself.
+## How do you give routine work to a cheaper model?
 
-Claude Code's docs say Claude can pass a model when it starts a subagent, and in Lynch's screenshot Claude Code admits it named Opus for a routine job only because Opus is the default. I'd set the model per role in a subagent file, and my [subagents guide](/articles/claude-code-subagents/) has a tested one with a `model: haiku` line.
+Claude Code uses the main session's model for a subagent unless you specify another model. In Claude Code 2.1.330, a Sonnet session delegated the same file search twice.
 
-Lynch's wish list asks for an agent that decides alone after 30 minutes without an answer, and the second setting, `askUserQuestionTimeout`, closes an unanswered question after up to 10 minutes and tells Claude to proceed on its own judgment. I didn't test it, because its timer belongs to the interactive question dialog and my runs were headless.
+The subagent used `claude-sonnet-5-5` by default and `claude-haiku-5-5` with `CLAUDE_CODE_SUBAGENT_MODEL=haiku`.
 
-Lynch doesn't name the agent that stopped to ask for a branch name and then waited all night, and I'd put a decision like that in the task brief, which the frame stage of my [agentic workflows](/articles/agentic-workflows/) page covers.
+You can also set a model for one subagent, leaving the others alone. I'd use `model: haiku` for a role that does routine searches, as in my [subagents guide](/articles/claude-code-subagents/).
 
-## The sandbox complaint is the one I'd keep
+In Lynch's example, Claude Code used Opus for routine work because Opus was the default in that session.
 
-Lynch's sandbox complaint holds up against the docs and a test. Claude Code's sandboxing page says the sandbox is off by default, and that a sandboxed command can still read credential files such as `~/.ssh` unless you list them.
+## What happens when you miss a question?
 
-The same page says Claude can ask to rerun a blocked command outside the sandbox unless `allowUnsandboxedCommands` is `false`. OpenCode's permissions page gives every agent a base policy whose first rule allows every action, and its [migration guide](https://opencode.ai/docs/migrate-v1/) says V1 asked before touching paths outside the project and V2 doesn't.
+I'd put a branch-naming rule in the [task brief](/articles/agentic-workflows/) so the agent can make that decision on its own.
 
-But Codex is the exception to Lynch's claim that agents are only usable with access to everything, because its docs describe an OS-enforced sandbox that is on by default with the network off.
+In Claude Code, `askUserQuestionTimeout` tells the interactive question dialog how long to wait before asking Claude to proceed on its own. You can set it to wait up to 10 minutes.
 
-The test ran in Claude Code 2.1.330 on Ubuntu 24.04 on November 23, in a scratch repository with a fake key file in a folder beside it:
+I used Claude Code without the interactive dialog, so the timeout was outside the test.
+
+## Does the sandbox protect files by default?
+
+Claude Code's sandbox is off by default. Even when it's on, you have to list files such as `~/.ssh` if you want to block reads.
+
+To prevent Claude from asking to retry a blocked command outside the sandbox, set `allowUnsandboxedCommands` to `false`. [Claude Code sandboxing](https://code.claude.com/docs/en/sandboxing)
+
+Codex documents an OS-enforced sandbox with network access off by default. OpenCode V2 allows access to paths outside the project by default.
+
+V1 asked first. [Codex security docs](https://learn.chatgpt.com/docs/agent-approvals-security) · [OpenCode migration guide](https://opencode.ai/docs/migrate-v1/)
+
+On November 23, the Claude Code test ran on Ubuntu 24.04 with sandboxing enabled and unsandboxed retries disabled. The command tried to create a file and read a fake key in a directory next to the scratch repository.
 
 ```bash
 PROMPT='Use the Bash tool to run exactly this one command, then reply with its output and nothing else: touch ../outside/probe && cat ../outside/fake-key.txt'
@@ -89,18 +93,31 @@ The settings string is the sandboxing page's example. Claude Code printed this w
   Commands will run WITHOUT sandboxing. Network and filesystem restrictions will NOT be enforced.
 ```
 
-The sandboxing page documents this fallback in a warning box and names the fix, a third key, `"failIfUnavailable": true`. With that key added, the same command exited with status 1 and the message "Refusing to start without a working sandbox", and no file was created.
+Ubuntu's AppArmor settings stopped the sandbox from starting. Claude Code printed the warning, then created the file and read the fake key anyway.
 
-OpenAI's sandbox docs are a vendor describing its own product, and the one part tested here, the `codex sandbox` helper in codex-cli 0.171.0, hit the same bubblewrap error and ran nothing.
+With `"failIfUnavailable": true` added, the same run exited with status 1 and printed "Refusing to start without a working sandbox". No file was created.
 
-Lynch asks for access control that is deterministic, and a sandbox that falls back to no sandbox behind a warning on stderr doesn't meet that standard. I'd set `failIfUnavailable` wherever I'd enabled the sandbox.
+The `codex sandbox` helper in codex-cli 0.171.0 hit the same bubblewrap error and ran nothing.
 
-## Where "out of the box" is the right standard
+## What changes when you use a different coding tool with the same model?
 
-"Out of the box" is the right standard for the sandbox and too strict for model choice. Lynch uses the phrase against readers who'd say the fix is to edit a config file.
+Lynch argues that the software around the model deserves its own benchmarks. There's a good reason to measure it separately.
 
-HarnessTax is why I'd leave model choice to configuration, because it shows one harness's defaults costing twice as much for nearly the same result, and a default that picks a cheaper model can also pick one too weak for the task. A file boundary costs something too, and Claude Code's sandboxing page lists `jest` and `docker` among the tools its sandbox breaks.
+You can keep the model the same and get a different bill or a different result.
 
-I'd still want the boundary on by default, and an agent that refuses to start when the boundary can't.
+<!-- evidence-three: HarnessTax's method text says each model and harness pair ran three times per task, which gives the 90 attempts per harness on 30 tasks -->
+[HarnessTax](https://harnesstax.github.io/) gave Claude Fable 5 the same 30 coding tasks in Claude Code, Codex CLI and Pi, with three attempts per task in each tool. The model solved 88 of 90 attempts in Claude Code and 87 of 90 in each of the other tools.
 
-And I don't buy Lynch's guess that vendors underinvest in the harness, because Claude Code documents a setting for each of the four complaints I checked. The setting that stops the sandbox from falling back, `failIfUnavailable`, is one of them, and its default is `false`.
+Claude Code cost 133 cents per attempt on average. Pi cost 67 cents.
+
+A [second study](https://arxiv.org/abs/2609.20804) kept the coding tool fixed and took away its dedicated file and search tools, leaving the model with a shell. On 500 SWE-bench Verified tasks, Mistral Medium 3.5 fell to 45.4% from 68.6%.
+
+Nemotron-3 550B rose to 69.4% from 65.8%.
+
+The models responded differently to the same change. I'd choose a model for the job the subagent has to do and check the results before making it the default.
+
+My [agent harness explainer](/articles/agent-harnesses/) covers another benchmark, and the [Vercel study breakdown](/articles/vercel-agent-study-by-harness/) looks at how the choice of coding tool affected which pages Claude models fetched.
+
+File access is where I'd insist on a safer default. Claude Code's docs list tools such as Jest and Docker that can run into sandbox restrictions.
+
+I'd still turn on the sandbox and set `failIfUnavailable` so that a failed sandbox stops the run.

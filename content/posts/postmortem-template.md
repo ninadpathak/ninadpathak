@@ -6,80 +6,46 @@ siblings:
 - cloudflare-kv-cache-incident-report
 - troubleshooting-guide-template
 date: 2026-11-23
-description: "A Markdown postmortem template for software incidents, with a filled example from a test incident and a checker that derives time to detect from the timeline."
+description: "The health check stayed green while every write failed. Use this Markdown postmortem template to show what users saw and what the logs prove."
 slug: postmortem-template
 status: published
 takeaways:
-- Put the count of failed requests or affected users in the summary before the cause, because the checker fails a summary with no number in it.
-- Tag the timeline rows where impact started, where it was detected and where it was mitigated, so the checker can recompute the durations the postmortem states.
-- A health check that only reads returned 200 at every poll of the test incident while 156 of 156 write requests failed.
+- "Open with what users saw and how long it lasted. Put a log or metric behind each timeline entry."
+- "The checker reads the timeline and calculates how long it took to detect and stop the failure."
+- "The example health check kept returning 200 while all 156 attempts to write failed."
 title: "Postmortem Template for Software Incidents, With a Checker"
-work_note: "Your team writes the postmortem, and your users still need a page that explains the error they saw. I'm Ninad Pathak, a freelance technical writer, and I write troubleshooting pages after running the product myself. [Ask me about that page](/services/developer-documentation/)."
+work_note: "I'm Ninad Pathak, a freelance technical writer, and I can help you write your product's troubleshooting and reference pages. [Get in touch](/services/developer-documentation/)."
 ---
 
-The postmortem template on this page is a Markdown file with seven sections, and it comes with a filled example and a checker script. The checker recomputes the time to detect and the time to mitigate from the timeline, so a postmortem that states 20 seconds fails when its timeline shows 21.
+The health check said 200 while the service rejected every write. For 21 seconds, all 156 attempts to store an event failed.
 
-The example's numbers come from a small API built on November 23, 2026, with a 2 MiB size limit on its database file. Under steady traffic it rejected 156 of 156 write requests for 21 seconds with `disk I/O error`, while its health check kept returning 200.
+If I'd opened the postmortem with “a brief storage issue,” a reader would have missed what I wanted to understand. How could the service look healthy while it was refusing every event?
 
-A postmortem is the piece of [technical documentation](/articles/technical-documentation/) a team writes after a failure, for the people who weren't on call. The page covers software incidents such as an outage or a failed deploy, so it has nothing for a workplace incident report form.
+I set up that failure locally and filled in this Markdown postmortem template from the logs. The example shows what to put in the timeline, and the checker flags a duration that disagrees with it.
 
-## What is a postmortem template?
+## Copy the postmortem template
 
-A postmortem template is a fixed outline for the written record of one incident, which the team fills in once the incident is over. Atlassian's guide also calls a postmortem a post-incident review, and a team that calls its internal write-up an incident report means the same document.
+A postmortem gives people who weren’t on call a piece of [technical documentation](/articles/technical-documentation/) they can follow back to the evidence.
 
-My template has a header and seven sections:
+The template starts with a short summary of what users saw and how long they saw it. The impact section adds scope and data loss.
 
-1. **Header:** status, service, incident date and authors.
-2. **Summary:** what users saw, how many and for how long, then the cause in one line.
-3. **Impact:** what users saw, a count with its unit, the duration and any data loss.
-4. **Timeline:** one row per event in one stated time zone, each with its evidence.
-5. **Detection and response:** the alert, the time to detect, the mitigation and the resolution.
-6. **Root cause:** the trigger, the mechanism, what the team believed beforehand and the contributing factors.
-7. **Lessons learned:** what went well, what went wrong and where the team got lucky.
-8. **Action items:** each with a type, one owner, a due date and a status.
-
-## Copy the template, the example and the checker
-
-The checker needs only Python 3 and reads the one file you give it:
+The timeline shows what happened in order, with an evidence link for each event.
 
 - [Postmortem template (Markdown)](/static/templates/postmortem-template.md)
 - [Checker script](/static/templates/check_postmortem.py)
 - [Filled example: intake rejected every write for 21 seconds](/static/examples/postmortem-intake-writes-failed.md)
 
-## What Google, PagerDuty and Atlassian ask for
+After the timeline, describe how you detected and stopped the failure. Explain what made it possible, including what the team believed beforehand.
 
-Google's example postmortem, PagerDuty's template and Atlassian's template each have a counterpart for all seven of my sections, under different names. I read them on November 23, 2026, and the last row lists the parts I left out:
+Finish with what you learned and changes people can deliver, each with an owner and due date. [Why I keep a line for what the team believed](/articles/cloudflare-kv-cache-incident-report/)
 
-| My section | [Google's example](https://sre.google/sre-book/example-postmortem/), in the SRE book's first edition (2016) | [PagerDuty's template](https://docs.pagerduty.com/ops-guides/incident-response-guide/postmortem-template) | [Atlassian's template](https://www.atlassian.com/incident-management/postmortem/templates) |
-|---|---|---|---|
-| Summary | Summary | Overview, What Happened | Incident summary |
-| Impact, Timeline | Impact, Timeline | Impact, Timeline | Impact, Timeline |
-| Detection and response | Detection, Resolution | Resolution | Detection, Response, Recovery |
-| Root cause | Root Causes, Trigger | Contributing Factors | Leadup, Fault, Five Whys, Root cause |
-| Lessons learned | Lessons Learned | How'd We Do? | Lessons learned |
-| Action items | Action Items | Action Items | Corrective actions |
-| Left out | Supporting information | Responders, Messaging | Backlog check, Recurrence |
+## What the health check missed
 
-Mine differs in four places:
+A person who sees the same SQLite error on a different system could have a different cause. The [troubleshooting guide template](/articles/troubleshooting-guide-template/) shows how I'd write separate checks for the possible causes.
 
-| Where mine differs | Why |
-|---|---|
-| Each timeline row has an Evidence cell | PagerDuty's template has a Data Link column, and its [step-by-step guide](https://docs.pagerduty.com/ops-guides/postmortem-best-practices/step-by-step) wants a metric or page behind every item |
-| Root cause is split into a trigger, a mechanism and contributing factors | Google and Atlassian ask for a root cause, and PagerDuty's guide says to "Find contributing factors, not the root cause" |
-| Root cause has a `Believed before:` line | Google's example, PagerDuty's template and Atlassian's template have no field for what the team expected |
-| Each action item has a due date | Google's example gives its nine action items an owner and no due date, and [Atlassian's handbook](https://www.atlassian.com/incident-management/handbook/postmortems) asks "Who will take the actions and by when?" |
+The test service stored events in a SQLite database. I started it with a 2 MiB limit on files the process could write and sent it a steady stream of events.
 
-The `Believed before:` line comes from my essay on [Cloudflare's KV cache incident report](/articles/cloudflare-kv-cache-incident-report/), which argues that what a team believed when it shipped is the part other teams can learn from. That essay is also why the summary states the count before the cause.
-
-[OpenStatus's guide](https://www.openstatus.dev/guides/postmortem-template) from November 20, 2026 also ranks for this search, with a Markdown template and an example written "for a fictional startup", where mine records an incident that happened.
-
-## A filled postmortem example from a test incident
-
-The filled example is the postmortem for a test incident I caused on a local service on November 23, 2026, and its numbers and error text come from published logs, such as [the log of each command and its output](/static/examples/postmortem-intake-api/logs/response.log). [The service](/static/examples/postmortem-intake-api/service.py), which I named intake, is a Python 3.12.3 `http.server` program that stores events in SQLite 3.45.1 on Ubuntu 24.04.
-
-I started it under `ulimit -f 2048`, a 2 MiB cap on any file the process writes. The cap stands in for a small volume, which I had no root to mount.
-
-A load script sent about ten requests a second, and a monitor script polled every 5 seconds for a 5xx rate of 5% or more. The first write failed at 19:54:08 UTC and the alert printed 7 seconds later, and my second command after it put the database file's size beside the process limit and the free disk:
+The disk had room. The database file had reached its own limit.
 
 ```text
 $ ls -l data/; grep "Max file size" /proc/$(cat logs/service.pid)/limits; df -k data | tail -1
@@ -89,11 +55,21 @@ Max file size             2097152              2097152              bytes
 /dev/sda1      100476656 88269364  12190908  88% /
 ```
 
-The file was exactly as long as the limit, and the disk had 12 GB free. SQLite's `disk I/O error` points at the disk, and I checked `/proc/<pid>/limits` only because I'd set the limit myself five minutes earlier.
+SQLite reported `disk I/O error`. I knew to check the process limit because I'd set it myself, which gave me a head start a responder wouldn't have.
 
-`prlimit` couldn't raise the limit on the running process, so I restarted the service under a 64 MiB limit at 19:54:29 and the errors stopped. A cap that keeps the newest 1,500 events removed the cause 39 seconds later.
+[Service code](/static/examples/postmortem-intake-api/service.py) · [Response log](/static/examples/postmortem-intake-api/logs/response.log)
 
-The example's timeline has 15 rows, and the checker reads the bold tags on rows like these two:
+The health check ran `select 1`. It returned 200 on all four polls during the incident because that query made no write.
+
+Even adding a tiny write would have missed the problem. In a separate test a one-character insert succeeded at the limit while every 900-character write failed.
+
+## Write down the timeline before you write the diagnosis
+
+The first failure was at 19:54:08 UTC. The alert came seven seconds later.
+
+I restarted the service with a higher limit at 19:54:29 and the errors stopped. A cap on how many events it kept removed the cause 39 seconds later.
+
+The example records the times with the logs that support them.
 
 ```markdown
 | Time | Event | Evidence |
@@ -102,17 +78,11 @@ The example's timeline has 15 rows, and the checker reads the bold tags on rows 
 | 19:54:15 | **Detected**: the monitor prints `ALERT Intake5xxRate: 81% of requests returned 5xx for two polls` | `logs/monitor.log` |
 ```
 
-Now, a planted failure with its author on call says little about how long a real team would take. What it does show is in the Contributing factors list, where `GET /health` runs `select 1` and returned 200 at each of the 4 polls during the incident.
+I'd give the restart its own [runbook step](/articles/runbook-template/) with the result the responder should see. In the postmortem, I'd record why I thought that restart would help and when the first successful requests showed that it did.
 
-The obvious fix is a write probe in the health check, and that action item is marked `Won't do`. In a second run a one-character insert still succeeded at the limit and every 900-character write failed, so a small probe would have passed.
+## Make the stated durations agree with the logs
 
-The other four action items are done. In that run, with the cap turned off, a new alert at 80% of the limit printed 49 seconds before the first failed write.
-
-The restart belongs in a runbook for this alert, and my [runbook template](/articles/runbook-template/) gives each step the output that means it worked. And `disk I/O error` on a disk that isn't full has more than one cause, which is the case the [troubleshooting guide template](/articles/troubleshooting-guide-template/) is built for.
-
-## Check a postmortem before review
-
-Run the checker with `--filled` on the finished postmortem, and it prints PASS with the two durations it derived or a list of lines to fix:
+Run the checker against the filled report. It reads the timestamped rows for when impact started, when it was detected, and when it was mitigated.
 
 ```bash
 python3 check_postmortem.py --filled postmortem-intake-writes-failed.md
@@ -128,26 +98,9 @@ postmortem-intake-writes-failed.md: PASS
   unfilled placeholders: 0
 ```
 
-The script skips HTML comments and code blocks, and makes these checks:
+It also looks for evidence in the timeline, a named owner and due date for each action someone has agreed to take, and missing placeholders. I changed the duration to 20 seconds, shortened the cause, and removed the real owner and due date from an action.
 
-| Part | The checker fails when |
-|---|---|
-| Header | `Status:`, `Service:`, `Incident date:` or `Authors:` is missing or empty; the status isn't Draft, In review or Final; the date isn't a calendar date |
-| Sections | One of the seven is missing, empty or out of order |
-| Summary | It has no count with a unit |
-| Impact | `What users saw:`, `Scope:`, `Duration:` or `Data loss:` is missing or empty; `Scope:` has no count with a unit |
-| Timeline | `Time zone:` is missing, or isn't UTC or an offset such as UTC+05:30; the table lacks the columns Time, Event and Evidence |
-| Timeline rows | A time isn't a real `HH:MM`, `HH:MM:SS` or `YYYY-MM-DD HH:MM`, has no date, or is earlier than the row above; an Evidence cell is empty or says None, N/A, Unknown or TBD |
-| Timeline tags | `**Impact starts**`, `**Detected**` or `**Mitigated**` tags no row or several; `**Resolved**` tags several; Detected or Mitigated comes before Impact starts, or Resolved before Mitigated |
-| Durations | `Duration:` or `Time to detect:` has no number with a unit, or differs from what the tagged rows give |
-| Detection and response | `Detected by:`, `Time to detect:`, `Mitigation:` or `Resolution:` is missing or empty |
-| Root cause | `Trigger:`, `Mechanism:` or `Believed before:` is missing, or says only None, N/A, Unknown or TBD; `Mechanism:` is under 15 words or has nothing in backticks; `Contributing factors:` is missing or has no list item |
-| Lessons learned | One of its labelled lists is missing or empty |
-| Action items | The table lacks the columns Action, Type, Owner, Due and Status, or has no rows; no open or done item has the type prevent or mitigate |
-| Each action item | The action is empty or starts with "Investigate" or "Make sure"; the type isn't prevent, detect, mitigate or process; the status doesn't start with Open, Done or Won't do; a Won't do gives no reason; an open or done item has no calendar due date, or an owner that is empty or a stand-in such as TBD or "team" |
-| Whole file | It contains human error, operator error, careless, negligent, incompetent, forgot to, should have known, more careful, or a possessive followed by fault; with `--filled`, a `{{placeholder}}` is left |
-
-<!-- evidence-three: the output below names the edited lines and they are Duration, Mechanism and the row for action item 2 --> To see it fail, I copied the example to `draft2.md` and edited three lines:
+The checker showed what each edit had broken.
 
 ```text
 draft2.md: FAIL (6 problem(s))
@@ -159,34 +112,6 @@ draft2.md: FAIL (6 problem(s))
   - blame phrase 'human error' in: Mechanism: The database file filled up because of human error.
 ```
 
-That run exited with status 1, so a CI job can block a postmortem that fails. A PASS means the parts are present and the arithmetic agrees, and it can't tell you whether the mechanism is true.
+A pass tells me the times agree and the right fields are there. I'd still ask someone who wasn't on call to read the explanation and tell me what they think caused the failure.
 
-The blame check is a list of nine phrases, so a postmortem can still blame a person in other words and pass.
-
-## Postmortem vs incident report
-
-A postmortem is the internal record with the full timeline, and an incident report is the shorter account that customers read. PagerDuty's template drafts that customer message in its Messaging section, and I'd keep it as a separate document.
-
-My table of [internal and external documentation](/articles/internal-vs-external-docs/) has a row for which parts of a production incident go to each reader.
-
-## When the template doesn't fit
-
-A near miss doesn't fit, because the checker wants a row tagged Impact starts and an incident with no user impact has none. A timeline with a zone name such as Europe/Berlin fails too, since the checker accepts only UTC or a fixed offset.
-
-I made that check strict after reading the generated example on [ilert's page](https://www.ilert.com/blog/postmortem-template-to-optimize-your-incident-response) from April 1, 2025, whose header says the timestamps are local to Europe/Berlin while each one ends in `Z`.
-
-## FAQ
-
-Each answer is about a software incident.
-
-### What should a postmortem include?
-
-It needs a summary with a count of affected users or requests, a timeline in one stated time zone and the cause. Each action item at the end needs an owner and a due date.
-
-### What is a blameless postmortem?
-
-A blameless postmortem explains the incident through the system, and [Google's SRE book](https://sre.google/sre-book/postmortem-culture/) says it does so "without indicting any individual or team for bad or inappropriate behavior". Atlassian's handbook gets there by naming people by role in place of their names.
-
-### How soon after an incident should you write a postmortem?
-
-<!-- evidence-three: 3 calendar days is the figure PagerDuty's guide gives for scheduling a Sev-1 review meeting --> Atlassian's guide says to document the incident "ideally within 24 to 48 hours" of resolving it. PagerDuty's guide schedules the review meeting within 3 calendar days for a Sev-1 incident and 5 business days for a Sev-2.
+If they can't point to a line of evidence, that’s where I'd revise the report.

@@ -9,36 +9,49 @@ bridges:
 - slug: api-documentation
   reason: An agent copies code from the page it fetched, so the reference entry it copies from has to be checked against the service.
 date: 2026-11-23
-description: "Vercel and Ora traced 1,033 agent runs and published the rows. I recomputed the figures and split them by harness. The advice to fix the HTML first holds, and all 2,259 Markdown requests came from one harness, Vercel's own eve."
+description: "Every recorded Markdown request in Vercel’s agent study came from one fetch tool. The stronger finding was what happened when agents couldn’t read the HTML."
 slug: vercel-agent-study-by-harness
 status: published
-title: "Splitting Vercel's agent study by harness and model"
-work_note: "Whether an AI crawler can fetch your docs, and whether the answer is on the page it gets back, is what I test first in an AI-ready documentation audit. I'm Ninad Pathak, a freelance technical writer, and I built and published the tools the audit runs on, so you can rerun every finding. [Ask me about an audit](/services/ai-ready-documentation-audit/)."
+title: "Which agents asked for Markdown in Vercel’s study?"
+work_note: "I'm Ninad Pathak, a freelance technical writer, and I can help you test whether AI agents can read your docs. [Ask me about an audit](/services/ai-ready-documentation-audit/)."
 ---
 
-My essay on [Fern's agent traffic report](/articles/agents-reading-docs/) ended on the point that no traffic log shows whether the code an agent wrote after reading a page worked. On August 28, Vercel and the research lab Ora published [Make your site readable by AI agents](https://vercel.com/kb/guide/make-your-site-readable-by-ai-agents), a guide built on 1,033 traced agent runs across 25 product sites, where each run is followed from its first fetch to the page its final answer took its wording from.
+Vercel and Ora reported that agents asked for Markdown on 65.1% of the fetches they counted. When I grouped their data by the software that ran the model, every recorded request for Markdown came from one framework.
 
-The guide links [its data](https://github.com/agentready-org/standard/tree/main/data), a CSV with one row per run, so I recomputed its figures and then split them by harness and by model. Its main advice survived the split, and its Markdown figure turned out to describe one of the study's two harnesses.
+I'd still follow their advice to get the HTML working first. In a separate test, they put an answer on a page and changed how it was served.
 
-What an agent does after it fetches a page is one part of [AI search optimization](/articles/ai-search-optimization/) for documentation.
+That showed what could stop an agent from getting to the text at all. [Vercel and Ora’s guide](https://vercel.com/kb/guide/make-your-site-readable-by-ai-agents) · [Trace data](https://github.com/agentready-org/standard/tree/main/data)
 
-## The advice to fix the HTML first holds up
+## What stopped the fetch from working?
 
-I'd follow the guide's central instruction as written: "Make the HTML work before adding a Markdown mirror." The instruction rests on a controlled experiment, in which Ora served one documentation site under 19 configurations and tested whether two fetch clients could retrieve an answer planted on each page.
+For [AI search optimization](/articles/ai-search-optimization/), the first question is whether the agent can get to the text at all. [Fern’s agent traffic logs](/articles/agents-reading-docs/) can show a fetch.
 
-The answer became unreachable under three of the 19 configurations: one page kept its answer inside a JavaScript payload and failed for the client that doesn't run JavaScript, and two configurations returned 403 to agent user agents and failed for both clients.
+The experiment here can show whether the fetched page contains the answer.
 
-The 16 other configurations passed, including the plain server-rendered baseline with nothing added. That baseline is the limit of the experiment, because a page that already passes can't pass harder, so the test can show that llms.txt or a Markdown mirror isn't required and can't show whether either one helps.
+Ora served the same documentation site in 19 configurations. It planted an answer on a page and checked whether two fetch clients could retrieve it.
 
-The trace data points the same way as the experiment. I recomputed the guide's counts from the CSV, and agents reached a docs page in 855 of the 1,033 runs, while 394 of the 844 answers that Ora could trace to a fetched page traced to a docs page.
+The plain server-rendered page passed.
 
-Vercel hosts websites, and Ora runs the is-agentic.com scanner that the guide's last section sends you to, so both gain when a reader acts on the advice. They also published every row, and the rest of this essay exists because they did.
+The clients couldn't get the answer when the server returned 403 to their user agents. The client that didn't run JavaScript also failed when the answer was only in JavaScript.
 
-## Every Markdown request came from one harness
+A Markdown copy might help on another test, but this one already passed with HTML that contained the answer.
 
-<!-- evidence-three: the web_fetch_calls column of the study's trace CSV sums to 3,470 and its markdown_calls column to 2,259, which is 65.1% --> All 2,259 Markdown requests in the study came from eve, one of its two harnesses, and eve is [Vercel's own open-source agent framework](https://vercel.com/eve). The guide reports those requests as 65.1% of 3,470 web fetches, under a heading that does say "in the study harnesses".
+On a site I was checking, I'd start with the guide’s curl command. I'd look for a 200 response with the answer in the HTML.
 
-Here is the same figure split by harness and model, using the model names as the CSV writes them:
+```bash
+curl -iL -A 'Claude-User/1.0' https://example.com/your-page
+```
+
+A request from my machine can only show what the server returned to my machine. To find out whether a real agent got blocked, I'd check the server logs.
+
+## Which model actually asked for Markdown?
+
+If a real agent is blocked at the server, the [crawler guide](/articles/ai-crawlers/) shows where I'd look before changing how I serve the pages.
+
+<!-- evidence-three: The trace CSV sums to 3,470 web fetches and 2,259 Markdown requests. -->
+The CSV records 2,259 Markdown requests across 3,470 web fetches. They all came through eve, Vercel's framework.
+
+The difference inside eve is as interesting as the difference between frameworks.
 
 | Harness | Model | Runs | Web fetches | Fetches that asked for Markdown |
 |---|---|---|---|---|
@@ -49,7 +62,17 @@ Here is the same figure split by harness and model, using the model names as the
 | Claude Agent SDK | `claude-haiku-4-5` | 185 | 0 | 0 |
 | Claude Agent SDK | `claude-fable-5` | 120 | 0 | 0 |
 
-You can rebuild the table from `traces.csv` at commit `a6b0976` of the data repository with this script:
+Fable 5 asked for Markdown on just 20 of 465 eve fetches. Haiku 4.5 did so on 1,190 of 1,401 through the same tool.
+
+I wouldn't expect the format preference of one model to carry over to another.
+
+There's another limit in the data. The Claude Agent SDK showed zero counted web fetches on 373 runs, and 265 of those runs still reached a docs page.
+
+Some way of reading pages is missing from the web-fetch count. The CSV also can't tell us whether the request for Markdown reached the server or was handled inside eve.
+
+For a Markdown mirror I'd want a test that measures how much time or money it saves. [Mintlify’s benchmark](/articles/mintlify-llms-txt-benchmark/) gives an example using the same pages in HTML and Markdown.
+
+To reproduce this breakdown, run the script on `traces.csv` at commit `a6b0976`.
 
 ```python
 import csv
@@ -66,23 +89,13 @@ for (harness, model), (runs, fetches, markdown) in sorted(totals.items()):
     print(f"{harness:17}{model:19}{runs:5}{fetches:7}{markdown:7}")
 ```
 
-So inside eve the habit belongs to two models. `gpt-5.4` asked for Markdown on 1,049 of its 1,087 fetches and `claude-haiku-4-5` on 1,190 of its 1,401, while `claude-fable-5` asked on 20 of 465 through the same harness.
+## How did agents find the index?
 
-The Claude Agent SDK runs can't confirm or contradict that habit, because the CSV records zero web fetches for 373 of the harness's 541 runs. Agents in 265 of those 373 runs still reached a docs page, so the Agent SDK runs read pages through some tool that the web-fetch column doesn't count.
+Agents fetched `llms.txt` on six of the 15 sites that had one. Vercel and Ora say a link led the agent there in 356 of 416 fetches.
 
-I read 65.1% as a fact about one fetch tool that accepts a format and two models that like to set it. The data also doesn't say whether a Markdown request reached the site as an `Accept: text/markdown` header or was converted inside the harness, and only the header would ask a server for a mirror.
+The rest came from guessing the path.
 
-So I wouldn't write "two thirds of agents want Markdown" in a planning doc, and I wouldn't build a Markdown mirror on this number.
-
-The number I'd build one on is a cost. In [Mintlify's llms.txt benchmark](/articles/mintlify-llms-txt-benchmark/), Claude Code's reported cost per lookup was 19.4 cents on HTML pages and 15.8 cents on Markdown copies of the same pages.
-
-## Agents fetched llms.txt on six of fifteen sites that ship one
-
-Every one of the 329 runs that reached an llms.txt happened on the six sites with the largest run counts. The sample has nine more sites that publish the file, Twilio and Notion among them, and none of their 162 runs fetched it.
-
-The models don't explain those nine zeros. The 162 runs used `gpt-5.4` on eve and `claude-sonnet-4-6` on the Claude Agent SDK, and on the six larger sites those same two pairings reached llms.txt in 72 of 130 runs.
-
-A link might explain them. The guide found that agents arrived at llms.txt through a link in 356 of 416 fetches and guessed the path in the other 60, so on November 23 I fetched the six homepages with curl and searched the HTML for the file name:
+I checked those six homepages on November 23 to see which linked the file.
 
 | Site | Runs | Runs that reached llms.txt | Homepage links llms.txt on November 23 |
 |---|---|---|---|
@@ -93,32 +106,18 @@ A link might explain them. The guide found that agents arrived at llms.txt throu
 | monday.com | 124 | 21 | No |
 | stripe.com | 80 | 18 | No |
 
-On the four sites whose homepage links the file, agents reached llms.txt in 290 of 487 runs, and on the two that don't link it they reached the file in 39 of 204. That compares today's homepages with runs from June to August, and Twilio's footer links the file today while none of its 18 runs fetched it, so I'd call the pattern a hint.
+The sites with a homepage link saw the index in 290 of 487 runs. The other two saw it in 39 of 204.
 
-My view of llms.txt was that the file is good to have and that the evidence that models fetch it is thin. Fern's logs were one dataset where coding agents fetched the file, and these traces are a second, so I'd now add an instruction: link llms.txt from the homepage, in the `head` or the footer, where an agent that starts at the homepage will see it.
+I checked the homepages months after the runs, so I can't tell which links the agents saw. Twilio had a footer link when I checked and none of its 18 runs had fetched the file.
 
-The notes inside the file matter as well, because 120 of the 844 traced answers took their wording from llms.txt itself. A one-line description beside a link in that file can become the agent's answer, so each description has to be as accurate as the page it points to.
+I'd still link the index so an agent starting at the homepage has a route to it. I'd read the descriptions in it as if they were part of the docs.
 
-## Agents paste the code they find
+The study traced 120 of 844 answers to wording from the index itself.
 
-Agents copied code straight from the pages they fetched in 73 of the 119 runs whose answer included code. A sample of 119 runs is small, and I'd still plan around it, because a wrong code sample now reaches a developer's project through an agent, and the developer may never open the page it came from.
+## What people get back from those fetches
 
-So I'd spend a week running every code sample in the docs before I'd spend it on a Markdown mirror. The [API documentation guide](/articles/api-documentation/) shows one way to do that, with a script that checks a reference entry against the running service.
+In 73 of the 119 runs where an answer included code, the agent copied code from a fetched page. The developer might never open that page.
 
-## What I'd check on a docs site first
+That's where I'd spend time before building a Markdown mirror. Run the examples, starting with the ones someone could paste into a new project.
 
-Start with the guide's own command, which requests a page under `Claude-User`, the user agent Anthropic uses when a person asks Claude to fetch a page:
-
-```bash
-curl -iL -A 'Claude-User/1.0' https://example.com/your-page
-```
-
-The request passes if it ends in a 200 and the answer is in the returned HTML, and a 403 or an empty app shell fails it.
-
-The guide warns that this request can't confirm whether a real agent is blocked, since bot blockers judge where a request comes from. Your server logs, filtered to the IP ranges OpenAI and Anthropic publish, are the stronger check.
-
-The [AI crawlers guide](/articles/ai-crawlers/) covers the robots.txt side of access, and the [AI crawler access checker](/ai-crawler-checker/) tests a robots.txt against the agents it names.
-
-Borrow the study's percentages with care, because six sites supply 691 of the 1,033 runs and Ora's own site is one of the six. Dropping ora.ai's 119 runs leaves docs reach at 763 of 914, which is 83.5%, so the lab's own site doesn't move the headline figure.
-
-The runs were product tasks, which the data README lists as finding the pricing, looking up the rate limits and integrating the API. A docs site with no pricing page and no public API isn't in this sample, and I wouldn't assume its agents behave the same way.
+[Testing an API reference against a running service](/articles/api-documentation/)

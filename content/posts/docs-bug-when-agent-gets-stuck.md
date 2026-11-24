@@ -8,44 +8,48 @@ siblings:
 bridges:
 - slug: mcp-server-tutorial
   reason: The search test in this essay runs on the docs search server that tutorial builds.
+- slug: vercel-agent-study-by-harness
+  reason: The study tests what a fetch client can read from a public page.
 date: 2026-11-23
-description: "Jon Udell treats a how-to that Claude couldn't find as a docs bug and tests the fix with a search. That kind of test still passed on a page I made wrong. XMLUI's own repository has the test I'd add, for 199 of its 219 how-to pages."
+description: "A search test found my new how-to even after I replaced its working command with a wrong one. Jon Udell’s XMLUI example shows what else to test."
 slug: docs-bug-when-agent-gets-stuck
 status: published
-title: "Jon Udell files a docs bug when an agent gets stuck"
-work_note: "A docs page can come back first in a search and still carry a command that fails. I'm Ninad Pathak, a freelance technical writer, and I run every command on a page before your engineers see it. [Talk to me about your developer documentation](/services/developer-documentation/)."
+title: "The search found my how-to. The command was wrong."
+work_note: "I'm Ninad Pathak, a freelance technical writer, and I can help you write docs that both developers and coding agents can follow. [Talk to me](/services/developer-documentation/)."
 ---
 
-On August 26, Jon Udell [wrote in InfoWorld](https://www.infoworld.com/article/4211198/when-an-ai-agent-goes-off-the-rails-file-a-bug-to-fix-the-documentation-then-test-the-fix.html) about a coding session in which Claude had to turn a select widget into a radio group in Bram, Udell's desktop app built with the XMLUI framework. Claude searched XMLUI's how-to pages through the framework's MCP server and found nothing on radio groups, so it worked the conversion out from the RadioGroup reference page.
+I took `--bare` out of a how-to for creating a Python project with only a `pyproject.toml`. The docs search still returned the page first.
 
-Udell treated the missing how-to as a bug in the docs and had an agent write the page. The article calls that page "a testable fix", and the test was to have Claude repeat its failed search against the new docs and see the page come back first.
+The command now created five extra files and directories.
 
-I think filing it as a bug is right, and I think the search test is half of what I'd want before calling a bug in [technical documentation](/articles/technical-documentation/) fixed. So the same kind of test runs below on a small docs folder of my own, and after it comes a look in XMLUI's repository for a test that runs the new how-to's example.
+I was trying Jon Udell's idea of filing a docs bug when a coding agent gets stuck. I'd keep his test for whether the agent can find the fixed page.
 
-## The failed search is the reproduction
+I'd run the example on the page before closing the bug.
 
-Udell's bug has a reproduction because XMLUI's MCP server logs each query an agent makes and the results the agent saw. Udell asked Claude to find its failed searches in that log, and Claude came back with two queries from 21:12, the first of which had returned how-tos about forms.
+## Start with the query the agent actually ran
 
-I'd copy that step before anything else in the article. You can't rerun a complaint that the docs don't cover radio groups, and you can rerun a logged query against the next version of the docs.
+A failed search gives the team a specific [technical documentation](/articles/technical-documentation/) bug to reproduce.
 
-The failed searches had topped out at a relevance score of about 0.7, and with the new page in place the repeated search returned it first at 4.2. Udell can make that comparison because the MCP server can pin the version of the docs it searches, so the old docs and the new docs get the same query.
+Udell wanted Claude to replace a select widget with a set of radio buttons in Bram, his XMLUI desktop app. Claude got there using the component's reference page after the docs search failed to find a worked example.
 
-Udell co-maintains XMLUI and builds Bram, so the article is a maintainer's account of the maintainer's own project. It gives enough detail that I could check parts of that account.
+[Udell’s account in InfoWorld](https://www.infoworld.com/article/4211198/when-an-ai-agent-goes-off-the-rails-file-a-bug-to-fix-the-documentation-then-test-the-fix.html)
 
-## The search test passed on a page I made wrong
+The search server had logged what Claude typed and which pages came back. Udell replayed the query against the old docs and against the version with the new how-to.
 
-A search test keeps passing when the page it finds gives the wrong command, and I checked that with the docs search server from my [MCP server tutorial](/articles/mcp-server-tutorial/). I reused the tutorial's `server.py` unchanged on November 23, with MCP Python SDK 2.3.0 and uv 0.13.8 on Python 3.13.18.
+The old results topped out around 0.7. The new page came back first at 4.2.
 
-The server's `search_docs` tool returns the lines that contain the query, which makes it much cruder than XMLUI's scored search. My test folder held two how-to pages that I wrote about uv, one on adding a dependency and one on running a script.
+I'd attach that query to the bug report. Whoever fixes it can make the same request and see whether the right page comes back.
 
-The task with no page was creating a project that has only a `pyproject.toml`. I fixed the query before I wrote the page and ran it through the MCP Inspector:
+## A search can find the wrong instructions
+
+For my test I used the server from my [MCP server tutorial](/articles/mcp-server-tutorial/). It returns lines that contain the query.
+
+With MCP Python SDK 2.3.0 and uv 0.13.8, the same request ran against a folder before the how-to was added, after it was added, and after I changed its command.
 
 ```bash
 npx -y @modelcontextprotocol/inspector@2.12.0 --cli --method tools/call \
   --tool-name search_docs --tool-arg 'query=only a pyproject.toml' -- uv run server.py
 ```
-
-That command ran once against each of these states of the docs folder:
 
 | State of the how-to page | `result` the search returned |
 |---|---|
@@ -53,41 +57,23 @@ That command ran once against each of these states of the docs folder:
 | Added, telling the reader to run `uv init --bare demo` | `howto/create-a-bare-project.md`, line 1 |
 | Edited to say `uv init demo` | `howto/create-a-bare-project.md`, line 1 |
 
-The first row is the missing page showing up as a failed search, which the server logged as `search_docs 'only a pyproject.toml' returned 0 matches`. The second row is the fix passing its test.
+I chose the phrase myself and put it in the heading, so the search test was deliberately simple. It still illustrates what the check measures.
 
-<!-- evidence-three: the script output further down lists the six entries uv init demo created and the three besides src and README.md and pyproject.toml are .git and .gitignore and .python-version --> But the third row passes as well, and the page is now wrong. With uv 0.13.8, `uv init demo` creates a `src` folder, a `README.md` and three more entries beside `pyproject.toml`.
+The search can tell me the page is in the results. The last two rows give it no way to tell which page works.
 
-My test also had a weakness that Udell's doesn't. I chose the query and then wrote a heading that contains it, so I could have made any page pass, and Udell's queries came from a log of what Claude had searched for.
+## Run the example on the page
 
-## XMLUI already runs how-to examples in tests
+Start from the same clean state a reader gets, then follow the how-to as written. That's the first check in my [technical tutorial guide](/articles/writing-technical-tutorials/).
 
-XMLUI's repository already has tests that run a how-to's example in the framework, and Udell's article doesn't mention them. At [commit 57bc5f2](https://github.com/xmlui-org/xmlui/tree/57bc5f271cb8d7de0f87ecd92fbb6d7ded2ffdf5/xmlui/tests-e2e/how-to-examples) from November 19, the folder `xmlui/tests-e2e/how-to-examples` holds 199 Playwright spec files, and each one pulls a named example out of a how-to's Markdown and drives it in a browser.
+XMLUI already has a place to do this. At [commit 57bc5f2](https://github.com/xmlui-org/xmlui/tree/57bc5f271cb8d7de0f87ecd92fbb6d7ded2ffdf5/xmlui/tests-e2e/how-to-examples), Playwright tests pulled examples out of 199 of the 219 how-to pages and exercised them in a browser.
 
-Udell writes that agents are told to prefer how-to examples "that provide verified working patterns". For 199 of the 219 how-to pages a spec does the verifying, and the [RadioGroup how-to](https://github.com/xmlui-org/xmlui/blob/57bc5f271cb8d7de0f87ecd92fbb6d7ded2ffdf5/website/content/docs/pages/howto/present-choices-with-a-radiogroup.md) from the article is one of the 20 pages that no test reads.
+The new [RadioGroup how-to](https://github.com/xmlui-org/xmlui/blob/57bc5f271cb8d7de0f87ecd92fbb6d7ded2ffdf5/website/content/docs/pages/howto/present-choices-with-a-radiogroup.md) had no such test.
 
-<!-- evidence-three: pull request 3732 shows opened and merged times on August 11 that are three minutes apart --> [Pull request 3732](https://github.com/xmlui-org/xmlui/pull/3732), which added the page, was opened from Udell's account on August 11 and merged three minutes later with no review on record. Its description is signed by Udell's Claude and says the example is grounded in the RadioGroup component's reference examples.
+In a standalone XMLUI 0.14.28 app, the example displayed the choices with Pro selected. Clicking Free changed the text to `Selected plan: free`.
 
-So Claude wrote the how-to from the same reference page it had worked the conversion out from in the session. An agent in that position can write a confident page that's wrong, and a search score of 4.2 can't tell you whether it did.
+The reset button moved the selection back. I'd add those assertions to Playwright so the next change to RadioGroup has to pass them too.
 
-The example ran on November 23 in a standalone XMLUI 0.14.28 app driven by Playwright 1.65.1 in headless Chromium. The app rendered its radio buttons in one row with Pro selected, as the page says it will.
-
-Clicking Free changed the text below the buttons to `Selected plan: free`, and the Reset to Pro button moved the selection back. Udell's example works, and the evidence for that is a run of the example, which is a step the article doesn't describe.
-
-## The how-to's address returns 404 to a plain fetch
-
-On November 23, curl got HTTP status 404 from the how-to's address, `https://www.xmlui.org/docs/howto/present-choices-with-a-radiogroup`. The body was a JavaScript shell with 22 words of text, and none of them came from the how-to.
-
-A browser builds the page from that shell, so a person sees the how-to. An agent that fetches the address without running JavaScript gets the 404.
-
-The nine other how-to addresses I tried each returned 404 as well, while the RadioGroup reference page returned 200 with its text in the HTML. Udell's search test can't show that, because the MCP server searches a local cache of the docs, as [a February 20 post on XMLUI's blog](https://www.xmlui.org/blog/improving-the-xmlui-mcp-server) describes.
-
-So the search test shows the page is findable by an agent that has XMLUI's MCP server installed.
-
-## What I'd add before closing a docs bug
-
-I'd close a docs bug like Udell's only when two checks pass. The logged query has to return the new page, and a test has to run the page's example against the product.
-
-For XMLUI the second check is one more spec file in `how-to-examples`. For my uv page it's this script, which runs the page's command in an empty temporary folder, the clean start that my [tutorial guide](/articles/writing-technical-tutorials/) asks for:
+For the uv page, the equivalent test runs the command in a temporary directory and checks what it created. Run this against a page you control, since it executes the first Bash block it finds.
 
 ```python
 import re
@@ -105,20 +91,26 @@ print(f"{command} created {created}")
 sys.exit(0 if created == ["pyproject.toml"] else 1)
 ```
 
-On the edited page the script printed this line and exited with status 1, and it exited with 0 once I put `--bare` back:
+With `--bare` missing, the script exited with status 1 and printed the extra entries. Adding the flag back made it pass.
 
 ```text
 uv init demo created ['.git', '.gitignore', '.python-version', 'README.md', 'pyproject.toml', 'src']
 ```
 
-My [documentation review checklist](/articles/documentation-review/) puts that check first, before anyone edits a sentence. It also refuses a model's explanation as the source for a claim about the product, which is the rule a how-to written by an agent needs.
+## Check how the reader gets to the page
 
-Neither check shows that an agent given the original task now uses the page. I didn't rerun the select-to-radio conversion in a fresh session, and the article doesn't say that Udell did.
+On November 23, a browser showed the RadioGroup how-to, but curl got a 404 and a JavaScript shell with none of the instructions in it. The same happened for nine other how-to URLs.
 
-To find missing pages across many apps, Udell proposes mining the MCP logs and the code of real apps for searches that find no working pattern. Both find a page that's missing, and neither finds a wrong page, because a wrong how-to that ranks first is recorded in the MCP log as a hit.
+The RadioGroup reference returned 200 with its text in the HTML.
 
-A wrong page would show up only in Udell's third source, the session logs, as an agent that found the how-to and still struggled. Of those logs Udell writes, "I haven't yet gotten agents to reliably surface episodes of struggle."
+Udell’s search worked because the server uses a local copy of the docs. If an agent starts from the public URL, it needs to be able to retrieve the example there too.
 
-My [essay on on-call agents](/articles/agents-on-call-runbooks/) asks an agent for the same kind of record, after a runbook test in which the final check passed and the agent had cancelled the wrong queries. Until session logs can be searched for that kind of failure, a test that runs the page's example is the check that catches a wrong how-to before an agent copies it.
+[XMLUI’s explanation of its MCP server](https://www.xmlui.org/blog/improving-the-xmlui-mcp-server) · [Vercel’s agent fetch study](/articles/vercel-agent-study-by-harness/)
 
-For the RadioGroup page that test is one spec file with the checks made by hand in the November 23 run. It would give XMLUI 200 tested how-tos out of 219.
+If the bug report says the agent couldn't finish the task, I'd go one step further and repeat the original task in a fresh session. The search replay tells me it could find the page.
+
+Running the example tells me it works. A fresh session lets me watch whether the agent actually uses it.
+
+I'd put the replay and the example result in the [docs review](/articles/documentation-review/). If the original task was an on-call fix, I'd check that the agent can use the procedure and verify recovery on a test system.
+
+[Runbooks for agents on call](/articles/agents-on-call-runbooks/)
