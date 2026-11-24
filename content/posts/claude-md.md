@@ -82,6 +82,10 @@ Treat it as [documentation whose reader is an agent](/articles/documentation-typ
 
 I keep repository-wide commands in the shared file and move folder-specific rules into a scoped rule. Anthropic's docs also ask for related instructions grouped under headings, and [task-based headings](/articles/documentation-headings/) work for an agent reader the same way they do for a person.
 
+Each line you keep can go stale in its own way. My essay on [what I'd keep in AGENTS.md](/articles/what-to-keep-in-agents-md/) sorts lines by whether Claude Code's prompt audit can catch the drift.
+
+A procedure that only some tasks need can move out of the file into a skill, and the guide to [Claude Code skills](/articles/claude-code-skills/) tests when Claude Code loads one.
+
 ## Copy the template
 
 The [AGENTS.md template](/static/templates/agents-md-template.md) has four sections, and each placeholder asks for a command or a checkable rule:

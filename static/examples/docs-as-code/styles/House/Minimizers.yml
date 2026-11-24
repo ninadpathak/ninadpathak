@@ -1,0 +1,9 @@
+extends: existence
+message: "Remove '%s'. The reader decides whether a step is simple."
+level: error
+ignorecase: true
+tokens:
+  - simply
+  - just
+  - easy
+  - easily

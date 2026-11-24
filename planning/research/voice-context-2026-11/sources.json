@@ -460,12 +460,17 @@
         "AIs have such poor judgement for when to write a code comment that I prefer to have them write none at all.",
         "Don't add any comments or documentation unless I explicitly ask for them.",
         "Fable 5.1 added a new comment or docstring in 33 of the 100 tasks, and so did Gemini 3.8 Flash.",
-        "all 6 comments seem legitimate to me"
+        "all 6 comments seem legitimate to me",
+        "I took SWE-bench Verified and drew 100 tasks at random from the 261 that the annotators rated as taking 15 minutes to 1 hour",
+        "The system prompt is the one from inspect_evals with my two rules appended:",
+        "Claude Fable 5.1 86% 67% 59%",
+        "GPT-6 Astra 80% 94% 76%"
       ],
       "connects": [
         "code-documentation",
         "claude-md",
-        "best-llms-for-coding"
+        "best-llms-for-coding",
+        "what-to-keep-in-agents-md"
       ]
     },
     {
@@ -768,12 +773,16 @@
       "date": "2026-09-18",
       "title": "Claude Code changelog, 2.1.277",
       "quotes": [
-        "Added AGENTS.md support: in a project with no CLAUDE.md, Claude Code reads AGENTS.md instead"
+        "Added AGENTS.md support: in a project with no CLAUDE.md, Claude Code reads AGENTS.md instead",
+        "Changed AGENTS.md support to also work on Amazon Bedrock, Google Vertex AI, Microsoft Foundry, LLM gateways, and sessions with telemetry disabled",
+        "Added /doctor prompt-audit (also /checkup prompt-audit) to audit your CLAUDE.md files, skills, agents and commands for prompting patterns written for older models",
+        "Improved prompt-audit on Claude Code configuration: stale paths, stale commands and contradicting instruction files now lead the report"
       ],
       "connects": [
         "documentation-types",
         "claude-md",
-        "internal-vs-external-docs"
+        "internal-vs-external-docs",
+        "what-to-keep-in-agents-md"
       ],
       "discussion": "https://news.ycombinator.com/item?id=49760187"
     },
@@ -1779,7 +1788,32 @@
         "from about 2,500 in May to more than 30,000 in September this year",
         "CLAUDE.md tells Claude what the project is: the stack, the conventions, the goals and the non-goals.",
         "from about 2,500 in May to more than 30,000 in September this year.",
-        "a subagent reviews the diff with fresh context"
+        "a subagent reviews the diff with fresh context",
+        "Addy Osmani, Morgan Westlee Lunt, and Qing Wang",
+        "Oct 15, 2026",
+        "From June to September, merged pull requests to Claude Code's codebase more than doubled while the share that had to be reverted fell by more than 40 percent.",
+        "So the goal is that most pull requests in the Claude Code repos (the CLI, the desktop and web apps, and the mobile apps) merge with at most one human in the loop, who can be the author, with no increase in reverts or incidents.",
+        "To measure human time, we track human approvals per PR (median and 95th percentile), human comments, and how long a PR waits on a person.",
+        "Revert and incident rates are the guardrail: if they rise, we haven't saved human time, we've only moved it.",
+        "Human time covers both sides of review's cost: the time people spend reviewing, and the time they spend fixing what bad code breaks.",
+        "They say what failure looks like in that repo (for docs it's \"it lies,\" for config it's \"it misroutes\"), cap the nits, list paths to skip, and ask for a file and line as evidence instead of a guess from a name.",
+        "They also ask for a summary that starts with a count and says plainly when there's nothing to fix.",
+        "REVIEW.md, written by code owners, tells the reviewer what matters in their part of the code.",
+        "Then a separate group votes on each finding, and it only gets posted if enough of them agree it's real. Findings that are only about style, diagnostics, or cleanup get dropped.",
+        "Every finding has to be answered. You either fix it or resolve the thread with a reason.",
+        "The PR template asks how the change was tested and how to undo it. Claude can fill that in, but the person who asked for the change signs off on it.",
+        "None required once automated review and security checks are green",
+        "Docs, copy, internal-only features, additive changes behind a flag",
+        "The highest-risk code, plus a small set of paths that always need two people",
+        "On an agent-written PR, the person directing the agent counts as one of the required reviewers, the same as if they'd typed the code themselves.",
+        "The team collected past PRs that caused incidents, with their fix-forwards and reverts, and had engineers who know that code confirm each bug and where it lived. The reviewer runs against that set daily.",
+        "A round cap. After three rounds, the reviewer asks the author to step back and reconsider the approach.",
+        "Pass after one review and fix round 65% 78%",
+        "Reviewing risky code such as billing, the auto-updater and CI workflows.",
+        "Reading the evidence. Test output, the command that ran and what it returned, a screenshot, the reviewer's findings. If you can't say what the checks would miss, ask for a real review rather than a quick approval.",
+        "Run /code-review and /security-review locally, or a fresh-context subagent review.",
+        "Add an AI reviewer (Code Review for Claude Code, or the Claude Code GitHub Action) on one repo, tune REVIEW.md for a few weeks, then widen.",
+        "The goal hasn't changed: less human time per change, and no more reverts than before."
       ],
       "connects": [
         "nobody-understands-the-code",
@@ -1788,7 +1822,8 @@
         "agent-error-handling",
         "red-build-nobody-reads",
         "multi-agent-vs-single-agent",
-        "documentation-velocity"
+        "documentation-velocity",
+        "claude-code-team-code-review"
       ]
     },
     {
@@ -2382,10 +2417,14 @@
       "date": "2026-11-17",
       "title": "Postmortem Culture: Learning from Failure",
       "quotes": [
-        "a written record of an incident, its impact, the actions taken to mitigate or resolve it, the root cause(s), and the follow-up actions to prevent the incident from recurring"
+        "a written record of an incident, its impact, the actions taken to mitigate or resolve it, the root cause(s), and the follow-up actions to prevent the incident from recurring",
+        "it must focus on identifying the contributing causes of the incident without indicting any individual or team for bad or inappropriate behavior",
+        "Our postmortem documents are Google Docs, with an in-house template (see Example Postmortem).",
+        "A monitoring failure (which usually implies manual incident discovery)"
       ],
       "connects": [
-        "ai-agent-failures"
+        "ai-agent-failures",
+        "postmortem-template"
       ]
     },
     {
@@ -2395,10 +2434,26 @@
       "date": "2026-10-09",
       "title": "Why are coding agents so dumb?",
       "quotes": [
-        "stopped two minutes after I left to ask me what it should name a git branch and then sat all night waiting for my answer."
+        "stopped two minutes after I left to ask me what it should name a git branch and then sat all night waiting for my answer.",
+        "AI-assisted development has clearly advanced, but the models are doing the heavy lifting while the agents remain the bottleneck.",
+        "When I say “agent,” I mean the software that connects models to codebases and computer systems.",
+        "Agents can’t delegate",
+        "OpenCode dutifully broke the feature into 10 subtasks, but then it just… did them all one by one:",
+        "Why are you doing these embarrassingly parallel tasks one at a time?",
+        "Multiple times per day, I’ll see Claude Code sit around for several minutes waiting for my end-to-end tests to finish",
+        "It stopped two minutes after I left to ask me what it should name a git branch and then sat all night waiting for my answer.",
+        "even today, agents are only usable if you give them access to everything",
+        "I rolled my own sandbox so that agents can’t explore my filesystem beyond the repo directory.",
+        "I’m talking about my expectations of what coding agents should be able to do out of the box without me installing random plugins or skill files or spending hours tweaking the configuration.",
+        "All access control code is deterministic, not humble suggestions that the agent is welcome to ignore.",
+        "If I don’t answer a question in “Execute” mode, and I haven’t interacted with the session in 30 minutes, the agent makes the decision independently.",
+        "barely any of the benchmarks I’ve seen measure the agents themselves; they just measure the underlying models",
+        "My best hypothesis is that underinvestment in coding agents is an example of the principal-agent problem.",
+        "I use OpenCode and Claude Code as my daily drivers."
       ],
       "connects": [
-        "ai-agent-failures"
+        "ai-agent-failures",
+        "why-are-coding-agents-so-dumb-notes"
       ]
     },
     {
@@ -3646,10 +3701,16 @@
       "title": "Subagents",
       "quotes": [
         "Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions.",
-        "the subagent does that work in its own context and returns only the summary."
+        "the subagent does that work in its own context and returns only the summary.",
+        "With nothing configured, a subagent other than web-fetch that Claude spawns from your main conversation starts in the background.",
+        "By default, when 20 subagents are running in a session, spawning another with the Agent tool fails with Concurrent subagent limit reached",
+        "By default, a subagent you define runs on the same model as the conversation that starts it.",
+        "The per-invocation model parameter, which Claude can pass when it starts the subagent.",
+        "The CLAUDE_CODE_SUBAGENT_MODEL environment variable"
       ],
       "connects": [
-        "shared-vs-isolated-memory"
+        "shared-vs-isolated-memory",
+        "why-are-coding-agents-so-dumb-notes"
       ]
     },
     {
@@ -3863,10 +3924,13 @@
         "Remove protocol-level sessions and the Mcp-Session-Id header from the Streamable HTTP transport",
         "servers MUST implement this RPC to advertise their supported protocol versions",
         "a single long-lived POST-response stream for opted-in server-to-client change notifications",
-        "explicit, server-minted handles passed as ordinary tool arguments"
+        "explicit, server-minted handles passed as ordinary tool arguments",
+        "Remove protocol-level sessions and the Mcp-Session-Id header from the Streamable HTTP transport.",
+        "Make MCP stateless: remove the initialize/notifications/initialized handshake."
       ],
       "connects": [
-        "model-context-protocol"
+        "model-context-protocol",
+        "mcp-vs-api"
       ]
     },
     {
@@ -3877,10 +3941,17 @@
       "title": "Tools",
       "quotes": [
         "self-correct and retry with adjusted parameters",
-        "They are reported in tool results with isError: true"
+        "They are reported in tool results with isError: true",
+        "For backwards compatibility, a tool that returns structured content SHOULD also return the serialized JSON in a TextContent block.",
+        "Protocol Errors indicate issues with the request structure itself that models are less likely to be able to fix:",
+        "Unknown tool",
+        "Input validation errors (e.g., date in wrong format, value out of range)",
+        "They are reported in tool results with isError: true:",
+        "Tools in MCP are designed to be model-controlled"
       ],
       "connects": [
-        "model-context-protocol"
+        "model-context-protocol",
+        "mcp-vs-api"
       ]
     },
     {
@@ -5606,6 +5677,2090 @@
       ],
       "connects": [
         "documentation-structure"
+      ]
+    },
+    {
+      "id": "vercel-ora-agent-readable",
+      "url": "https://vercel.com/kb/guide/make-your-site-readable-by-ai-agents",
+      "author": "Vercel and Ora",
+      "date": "2026-08-28",
+      "title": "Make your site readable by AI agents",
+      "quotes": [
+        "Make the HTML work before adding a Markdown mirror.",
+        "Agents frequently requested Markdown in the study harnesses",
+        "we observed 1,033 agent runs across 25 sites and ran 190 controlled fetch probes",
+        "Six sites account for 691 of 1,033 runs, or 66.9%.",
+        "2,259 of 3,470 web fetches, or 65.1%, requested Markdown",
+        "Agents reached llms.txt through links in 356 of 416 attributed fetches, or 86%.",
+        "Of the 119 runs whose answer included code, 73, or 61%, contained lines taken verbatim from a page fetched on the site.",
+        "This curl request cannot confirm whether a real agent is blocked.",
+        "curl -iL -A 'Claude-User/1.0' https://example.com/your-page",
+        "Of those grounded answers, 394, or 47%, traced to a docs page."
+      ],
+      "connects": [
+        "vercel-agent-study-by-harness",
+        "llms-txt",
+        "agents-reading-docs"
+      ]
+    },
+    {
+      "id": "agentready-data-readme",
+      "url": "https://raw.githubusercontent.com/agentready-org/standard/a6b09767b8267e39f8265c3ad24347a5eb63fb47/data/README.md",
+      "author": "Ora",
+      "date": "2026-08-25",
+      "title": "Agent readiness spec - dataset",
+      "quotes": [
+        "find the pricing, look up the rate limits, integrate the API",
+        "Harnesses | claude-agent-sdk (541), eve (492)",
+        "fetches with an explicit format, fetches",
+        "One documentation site was served under **19 configurations**"
+      ],
+      "connects": [
+        "vercel-agent-study-by-harness"
+      ]
+    },
+    {
+      "id": "vercel-eve",
+      "url": "https://vercel.com/eve",
+      "author": "Vercel",
+      "date": "2026-11-23",
+      "title": "eve - The Agent Framework",
+      "quotes": [
+        "eve is an open-source agent framework for durable, long-running work."
+      ],
+      "connects": [
+        "vercel-agent-study-by-harness"
+      ]
+    },
+    {
+      "id": "mintlify-llms-txt-agent-benchmark",
+      "url": "https://mintlify.com/blog/llms-txt-agent-benchmark",
+      "author": "Aadit Shah",
+      "date": "2026-07-17",
+      "title": "Docs URL Benchmark: Markdown & llms.txt > HTML",
+      "quotes": [
+        "Back in November of last year, Paul, the CEO of Browserbase, told us that Claude Code kept 404ing on Mintlify-hosted docs, and that he could reproduce it every time. The worst part was that it was happening on our own docs too.",
+        "To make our pages readable for agents, we served a stripped-down markdown, but in doing so we stripped out the navigation too.",
+        "So at the bottom of every markdown page, we added a link to it, and the 404s stopped.",
+        "We took four ways to serve the same docs: HTML, plain markdown, markdown with a link to llms.txt, and markdown with the entire llms.txt inlined.",
+        "at 20 Mintlify docs sites, 5 questions per site, run 3 times across the 4 formats. All together, 2,400 runs in total.",
+        "The most surprising find was that markdown itself wasn't the fix, the map was.",
+        "Start for free and every page gets llms.txt and Markdown routes automatically."
+      ],
+      "connects": [
+        "mintlify-llms-txt-benchmark"
+      ],
+      "notes": "The figures 2.23, 1.42 and 0.11 are in the alt text and image of the first chart, which the verifier cannot read; they were confirmed against the repository rows on 2026-11-23."
+    },
+    {
+      "id": "mintlify-url-discovery-bench-results",
+      "url": "https://github.com/mintlify/url-discovery-bench/blob/5f055a89336cb94050e36eaa479374b390e92462/RESULTS.md",
+      "author": "Mintlify",
+      "date": "2026-07-14",
+      "title": "url-discovery-bench: RESULTS.md",
+      "quotes": [
+        "data/full/results.jsonl contains 2,672 rows: the 2,400 valid attempts behind every table\nabove, plus 272 failed attempts that the retry loop reran until each cell reached n=300.",
+        "html 59% 34% 7%",
+        "html 0.12 0.20",
+        "md 0.46 1.15",
+        "md-link 0.10 0.15",
+        "the run's proxy\nlogs are committed under data/full/logs/",
+        "claude / html 96.0 1.1 [1, 1.3] 6.7 296 44",
+        "codex / html 97.7 3.3 [2.7, 4.6] 26.5 285 67",
+        "codex / md 96.0 2.0 [1.5, 3.1] 24.9 156 57",
+        "codex / md-link 97.7 0.2 [0.1, 0.2] 13.2 115 45"
+      ],
+      "connects": [
+        "mintlify-llms-txt-benchmark"
+      ]
+    },
+    {
+      "id": "mintlify-url-discovery-bench-readme",
+      "url": "https://github.com/mintlify/url-discovery-bench/blob/5f055a89336cb94050e36eaa479374b390e92462/README.md",
+      "author": "Mintlify",
+      "date": "2026-07-14",
+      "title": "url-discovery-bench: README.md",
+      "quotes": [
+        "Across 20 Mintlify docs sites and two agents (Claude Code on Sonnet 5, Codex on GPT-5.5),",
+        "Tier 0: verify the findings (no API keys, instant)",
+        "20 sites × 5 questions × 4 arms × 2 agents × 3 attempts = 2,400 attempts",
+        "Grading is exact normalized-path match against expected."
+      ],
+      "connects": [
+        "mintlify-llms-txt-benchmark"
+      ]
+    },
+    {
+      "id": "redocly-llms-txt-still-overhyped",
+      "url": "https://redocly.com/blog/llms-txt-still-overhyped",
+      "author": "Adam Altman",
+      "date": "2026-09-09",
+      "title": "llms.txt is still overhyped",
+      "quotes": [
+        "In our logs, the Markdown copies are read many times more often than the index that links to them."
+      ],
+      "connects": [
+        "mintlify-llms-txt-benchmark"
+      ]
+    },
+    {
+      "id": "mintlify-docs-llmstxt",
+      "url": "https://www.mintlify.com/docs/ai/llmstxt",
+      "author": "Mintlify",
+      "date": "2026-11-23",
+      "title": "llms.txt (Mintlify documentation, fetched 2026-11-23; the page carries no publication date)",
+      "quotes": [
+        "Mintlify automatically hosts an llms.txt file at the root of your project that lists all available pages in your documentation. This file is always up to date and requires zero maintenance."
+      ],
+      "connects": [
+        "mintlify-llms-txt-benchmark"
+      ]
+    },
+    {
+      "id": "udell-infoworld-docs-bug",
+      "url": "https://www.infoworld.com/article/4211198/when-an-ai-agent-goes-off-the-rails-file-a-bug-to-fix-the-documentation-then-test-the-fix.html",
+      "author": "Jon Udell",
+      "date": "2026-08-26",
+      "title": "When an AI agent goes off the rails, file a bug to fix the documentation - then test the fix",
+      "quotes": [
+        "In this case Claude didn't find one, fell back to the documentation for the RadioGroup component, and after a bit of fumbling figured it out.",
+        "The absence of that document was a bug, and this new How To document is the fix.",
+        "Agents using the XMLUI Model Context Protocol (MCP) server are instructed to prefer How To examples that provide verified working patterns.",
+        "As a co-maintainer of XMLUI I am acutely sensitive to agents fumbling as they build XMLUI apps.",
+        "I file an issue and then direct an agent to write the missing document.",
+        "That new doc is a testable fix.",
+        "Two how-to searches, both at 21:12, both misses:",
+        "top hits: use-a-custom-formitem, prefill-a-form-from-an-api-response, use-regex-validation-in-formitem. Form-adjacent noise, zero radio content.",
+        "The failing searches had returned only weak matches with a top relevance score around 0.7.",
+        "After adding the new doc I asked it to repeat the search and compare. The new document surfaced at #1 with a 4.2 score, six times higher than anything else.",
+        "(Because the MCP server can pin the version of the docs it consults, direct A/B comparison is possible.)",
+        "the MCP server logs the queries that agents make plus the results they see",
+        "Then run the MCP searches that should find those patterns.",
+        "I haven't yet gotten agents to reliably surface episodes of struggle.",
+        "is now a consultant working for a startup while evolving Bram and XMLUI"
+      ],
+      "connects": [
+        "docs-bug-when-agent-gets-stuck"
+      ]
+    },
+    {
+      "id": "xmlui-howto-example-tests",
+      "url": "https://github.com/xmlui-org/xmlui/tree/57bc5f271cb8d7de0f87ecd92fbb6d7ded2ffdf5/xmlui/tests-e2e/how-to-examples",
+      "author": "xmlui-org",
+      "date": "2026-11-19",
+      "title": "xmlui/tests-e2e/how-to-examples at commit 57bc5f2",
+      "quotes": [
+        "customize-a-selects-selected-value.spec.ts"
+      ],
+      "connects": [
+        "docs-bug-when-agent-gets-stuck"
+      ],
+      "note": "Counts are computed, not quoted: at commit 57bc5f271cb8d7de0f87ecd92fbb6d7ded2ffdf5 (committed 2026-11-19) the Git tree (https://api.github.com/repos/xmlui-org/xmlui/git/trees/57bc5f271cb8d7de0f87ecd92fbb6d7ded2ffdf5?recursive=1) lists 219 .md files under website/content/docs/pages/howto/ and 199 .spec.ts files under xmlui/tests-e2e/how-to-examples/. Every one of the 199 spec files reads the how-to .md of the same name and calls extractXmluiExample. A grep of every .ts/.tsx/.js/.mjs file under xmlui/, packages/, integration-tests/, tools/ and website/src finds 199 distinct how-to .md files read; 20 are read by none, including present-choices-with-a-radiogroup.md."
+    },
+    {
+      "id": "xmlui-radiogroup-howto",
+      "url": "https://github.com/xmlui-org/xmlui/blob/57bc5f271cb8d7de0f87ecd92fbb6d7ded2ffdf5/website/content/docs/pages/howto/present-choices-with-a-radiogroup.md",
+      "author": "Jon Udell (commit author; pull request text generated with Claude Code)",
+      "date": "2026-08-11",
+      "title": "Present a short list of choices with a RadioGroup",
+      "quotes": [
+        "orientation=\"horizontal\" puts them in a row"
+      ],
+      "connects": [
+        "docs-bug-when-agent-gets-stuck"
+      ],
+      "note": "The example run on 2026-11-23 is the single xmlui-pg block in this file, copied unchanged into Main.xmlui."
+    },
+    {
+      "id": "xmlui-pr-3732",
+      "url": "https://github.com/xmlui-org/xmlui/pull/3732",
+      "author": "judell",
+      "date": "2026-08-11",
+      "title": "Docs: add a RadioGroup how-to (present a short list of choices)",
+      "quotes": [
+        "A runnable xmlui-pg playground, grounded in the component's own reference examples:",
+        "Raised by Jon's Claude (via Bram).",
+        "judell merged 1 commit into main"
+      ],
+      "connects": [
+        "docs-bug-when-agent-gets-stuck"
+      ],
+      "note": "Timestamps from https://api.github.com/repos/xmlui-org/xmlui/pulls/3732: created_at 2026-08-11T04:33:46Z, merged_at 2026-08-11T04:37:05Z, merged_by judell, comments 0, review_comments 0; /pulls/3732/reviews returned an empty list."
+    },
+    {
+      "id": "xmlui-blog-mcp-server",
+      "url": "https://www.xmlui.org/blog/improving-the-xmlui-mcp-server",
+      "author": "Jon Udell",
+      "date": "2026-02-20",
+      "title": "Improving the XMLUI MCP server",
+      "quotes": [
+        "the server refreshes a local cache of the XMLUI documentation."
+      ],
+      "connects": [
+        "docs-bug-when-agent-gets-stuck"
+      ]
+    },
+    {
+      "id": "johnson-deaton-podcast",
+      "url": "https://idratherbewriting.com/blog/podcast-deaton-anthropic-tw-automation",
+      "author": "Tom Johnson, with Sarah Deaton and Fabrizio Ferri-Benedetti",
+      "date": "2026-08-02",
+      "title": "Orchestrating docs instead of writing them yourself — podcast with Sarah Deaton of Anthropic",
+      "quotes": [
+        "by Tom Johnson on Aug 2, 2026",
+        "Note: These shownotes are AI-generated.",
+        "In this podcast, co-host Fabrizio Ferri-Benedetti and I chat with Sarah Deaton, a technical writer at Anthropic who works on the Claude Code docs",
+        "I rarely, if ever, am typing words that will end up on the page.",
+        "Well, everything is still human reviewed. I’m still ultimately the one pushing merge on everything.",
+        "You have to have an approval from a human to merge it in.",
+        "And then I’m not perfect, so things definitely have slipped.",
+        "I have another process going every time there’s a wrong claim that’s introduced in the docs, or that’s given by an AI assistant, or that is written as part of a draft.",
+        "I send it to Claude Tag, and I have this whole forensics thing going of, trace every single false claim.",
+        "And I’ve got a whole pitfalls doc of, these are the places we’ve gotten this wrong.",
+        "Claude Tag, so Claude in Slack",
+        "Just curious, can you give us an example of what are some of the root causes for Claude getting things wrong?",
+        "So if it’s looking at the source code, it might see this value is set here, but then it doesn’t see that in another file, maybe it’s overwritten.",
+        "So that’s something that until I codified what are all the places that feature flags are set and the different levels, it would sometimes escape that, and say this feature’s available for everyone when it’s only for certain people.",
+        "I have a skill called verify-docs-PR that has the pitfalls, has all the places that I know we’ve gotten wrong in the past, and it has these different pathways of where different things live in the source code that are verified.",
+        "if it finds anything was incorrect, it sends that trace to Slack to then reincorporate into our corpus of failures",
+        "And for that the metrics are like time from incorrect claim introduced to corrected.",
+        "There might be some incorrect claims we haven’t found.",
+        "This is just my style thing that I can’t get codified yet.",
+        "The reader is always the main character and they need to be taking an action or observing something.",
+        "stop saying a hook is going to do this for you and say you need to enable the hook to do this thing for you instead.",
+        "If anything, I am leaving suggestions in GitHub.",
+        "So every comment I make of “I didn’t like this” can then feed back into a skill or something.",
+        "that goes into another Slack channel that is polling every day to see how many corrections I made on a PR",
+        "my approach is I’m very trustful of the LLM’s output, and usually I prefer to just churn something out and then review later, or have mechanisms that self-heal the docs. But I know that in some other areas these might not be acceptable",
+        "And the AI assistant kept answering the default value as the example value, because it just saw a column with a number in it, or a value, and it was like, well, that’s probably the default. It didn’t read the header that said this is an example.",
+        "making labels next to the thing that someone’s going to be asking about",
+        "I am very lucky in this respect because I have unlimited tokens.",
+        "it churns for like two hours looking through the source code and the docs PRs and combining everything into one release PR"
+      ],
+      "connects": [
+        "pitfalls-list-for-ai-drafted-docs",
+        "claude-code-team-code-review"
+      ]
+    },
+    {
+      "id": "claude-code-settings-reference",
+      "url": "https://code.claude.com/docs/en/settings-reference",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "All settings (Claude Code docs)",
+      "quotes": [
+        "Default: unset, so Claude receives up to 30,000 characters inline",
+        "Removed in v2.1.277, together with the TaskOutput tool it sized.",
+        "Type: string, one of \"60s\", \"5m\", \"10m\", or \"never\"",
+        "false: Claude Code runs commands unsandboxed when the sandbox can't start"
+      ],
+      "connects": [
+        "pitfalls-list-for-ai-drafted-docs",
+        "why-are-coding-agents-so-dumb-notes"
+      ],
+      "notes": "Fetched 2026-11-23 as HTML and as settings-reference.md. Counted in the .md: 250 headings of the form ### `key`, 249 entries with a '* **Default**' line; the entry without one is taskOutputMaxChars. The rendered HTML text has 249 lines starting 'Default: '. The date is the fetch date; the page shows no publication date."
+    },
+    {
+      "id": "ninad-skills-essay-reference",
+      "url": "https://github.com/ninadpathak/ninadpathak/blob/main/skills/writing/references/essay.md",
+      "author": "Ninad Pathak",
+      "date": "2026-11-23",
+      "title": "Founder essays and reflective technical prose (writing skill), section Ninad's failure table",
+      "quotes": [
+        "4 \"Open a fresh Claude Code session\"; \"[N]k of the 200k-token window.\" Assume daily use. Use checked numbers only when their magnitude matters.",
+        "6 An intro dispensing compaction, cost, and the rest of the article. Establish circumstances and purpose; leave an investigation for the body.",
+        "7 A narrator surprised that something besides their own messages filled context. A discovery must be worthy of the claimed experience. Ordinary behaviour is shared knowledge.",
+        "Draft 11 is the closest attempt with no complaint recorded, not an unconditional approval",
+        "Documentation register The same fact said aloud",
+        "Draft 11 is the closest attempt with no complaint recorded, not an unconditional approval; its basic-behaviour opening was later rejected for daily users.",
+        "1 \"Everyone ranks\"; invented agent and bill; tease; coined term; punchline.",
+        "11 Closest voice, but unverified shares, tool-loading behaviour, cache lifetime, billing, and a claimed measurement."
+      ],
+      "connects": [
+        "pitfalls-list-for-ai-drafted-docs",
+        "eleven-rejected-essay-drafts"
+      ],
+      "notes": "The failure table has eleven data rows, drafts 1 to 11. Date is the day the skills folder was committed to the public repository (commit 799ec7b3, 2026-11-23T17:32:08Z)."
+    },
+    {
+      "id": "ninad-skills-feedback-log",
+      "url": "https://github.com/ninadpathak/ninadpathak/blob/main/skills/writing/references/essay-research/feedback-log-2026-09-05.md",
+      "author": "Ninad Pathak",
+      "date": "2026-11-23",
+      "title": "Ninad's corrections while building this skill, 2026-09-05 to 06",
+      "quotes": [
+        "Root's diagnosis: the skill listed \"X is not Y. It's Z.\" and \"Why would X? Not because Y.\" as PG moves, and the model used them three times in four paragraphs. PG uses each once per essay at most.",
+        "Cap at once per piece or remove from the rule list entirely.",
+        "Draft 11 (no complaint yet; closest so far)",
+        "Four paragraphs with bracketed placeholders, narrative about a bill.",
+        "Ninad's corrections while building this skill, 2026-09-05 to 06",
+        "Topic used for all drafts: \"Claude Code Context Window: What Fills It, What It Costs\"",
+        "Earlier topic: \"9 Agentic Search Tools Ranked by Index Points per Dollar\"",
+        "Root's diagnosis: the skill listed \"X is not Y. It's Z.\" and \"Why would X? Not because Y.\" as PG moves, and the model used them three times in four paragraphs.",
+        "\"not X. It's Y\" three times",
+        "The person reading the topic already knows about context windows enough to search about it.",
+        "Ninad: \"it starts with 'Most' and paul graham doesn't usually throw generalizations like these.\"",
+        "The idea of an intro is to share the backstory, the narrative, the 'why' and 'what' rather than 'full detail'.",
+        "This makes the author feel like a dumbass who has never used a tool in their life and is surprised by the most basic thing that an AI is designed to do.",
+        "Ninad: \"write from first principles\"",
+        "A language model remembers nothing between calls.",
+        "Ninad: \"this is extremely weird, not first principles, this feels dumbed down\"",
+        "Ninad: \"still trying too hard rather than explaining like you understand it\"",
+        "Every turn, Claude Code sends the model the whole conversation so far.",
+        "Walk away for five minutes and the cache is gone",
+        "so I measured one session.",
+        "Also (root's own finding): invented anecdote",
+        "I noticed this the way you notice most things about infrastructure, which is by getting a bill. I'd built a small research agent",
+        "Most of a Claude Code context window is filled by things you never typed...",
+        "it warned me the context was nearly full. I scrolled back and read everything I had typed."
+      ],
+      "connects": [
+        "pitfalls-list-for-ai-drafted-docs",
+        "eleven-rejected-essay-drafts"
+      ],
+      "notes": "Ten of the eleven drafts have a blockquoted excerpt; draft 2 is described and not quoted."
+    },
+    {
+      "id": "ninad-skills-checking",
+      "url": "https://github.com/ninadpathak/ninadpathak/blob/main/skills/writing/references/checking.md",
+      "author": "Ninad Pathak",
+      "date": "2026-11-23",
+      "title": "Checking a draft (writing skill)",
+      "quotes": [
+        "Ninad tests by reading, and \"I can't even read the second sentence\" is the standard no grep detects.",
+        "A checker only finds what it was told to look for. The first pass over this skill never counted dashes and let thirty-one through, one in the frontmatter description. When someone names a new tell, add it to the script's lists the same day.",
+        "Sweep the family, not the instance. Correcting the one line someone pointed at leaves the rest of the family in place.",
+        "Show a rewrite instead of writing a fourth rule. \"No filler\", \"no runway\" and \"no buildup\" each produced local compliance and recurrence elsewhere. Ninad's own rewritten passages moved the work further than any prohibition.",
+        "Describe a style reference's mechanics; never paste it. A sample intro handed over verbatim comes back as a beat-for-beat structural copy."
+      ],
+      "connects": [
+        "pitfalls-list-for-ai-drafted-docs",
+        "eleven-rejected-essay-drafts"
+      ]
+    },
+    {
+      "id": "ninad-skills-readme",
+      "url": "https://github.com/ninadpathak/ninadpathak/tree/main/skills",
+      "author": "Ninad Pathak",
+      "date": "2026-11-23",
+      "title": "Skills (README of the skills folder)",
+      "quotes": [
+        "These are the agent skills I write with.",
+        "the log of corrections I gave while the skill was being built"
+      ],
+      "connects": [
+        "pitfalls-list-for-ai-drafted-docs",
+        "eleven-rejected-essay-drafts"
+      ]
+    },
+    {
+      "id": "hn-lynch-eviks",
+      "url": "https://news.ycombinator.com/item?id=50029126",
+      "author": "eviks",
+      "date": "2026-10-10",
+      "title": "Hacker News comment on 'Why are coding agents so dumb?' (thread 50020947)",
+      "quotes": [
+        "Tasks are \"add e2e coverage\"and \"run final verification\""
+      ],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ]
+    },
+    {
+      "id": "hn-lynch-kgeist",
+      "url": "https://news.ycombinator.com/item?id=50026656",
+      "author": "kgeist",
+      "date": "2026-10-09",
+      "title": "Hacker News comment on 'Why are coding agents so dumb?' (thread 50020947)",
+      "quotes": [
+        "it immediately launched something like 6 parallel subagents, where OpenCode would have sequential TODOs with the same model by default"
+      ],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ]
+    },
+    {
+      "id": "harnesstax",
+      "url": "https://harnesstax.github.io/data/blog/harness-x-model.0af74054a7.json",
+      "author": "Melissa Z. Pan, Shuo Yang, Negar Arabzadeh, Wei-Lin Chiang, Ion Stoica, Matei Zaharia",
+      "date": "2026-09-16",
+      "title": "HarnessTax: How Much Does the Harness Matter for Coding Agents?",
+      "quotes": [
+        "1 UC Berkeley · 2 Arena Intelligence Inc.",
+        "We compare 21 model–harness pairs on the same 30 randomly sampled tasks from each benchmark: SWE-bench Lite and Terminal-Bench 2.0. We run each pair three times per task to capture variation between attempts.",
+        "Claude Fable 5 solves 97.8% of attempts in Claude Code, 96.7% in Codex and 96.7% in Pi, yet Claude Code costs about twice as much as Pi ($1.33 vs $0.67).",
+        "We start with each harness’s native configuration, select its high effort setting, and cap each attempt at 100 agent turns to control the cost of long runs."
+      ],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ],
+      "notes": "The page is rendered by JavaScript. Its text is served from https://harnesstax.github.io/data/blog/harness-x-model.0af74054a7.json (listed in /blog.json), which is what the quotes were checked against. The page carries no publication date; 2026-09-16 is the date of its Hacker News submission (item 49733726) and of its 'Accessed September 16, 2026' references. The build read on 2026-11-23 says generated 2026-11-19 01:32 UTC. 88 of 90 and 87 of 90 are 97.8% and 96.7% of 30 tasks times 3 attempts, confirmed in data/charts/system-harness-effect-swe.fe756518da.json (y = 0.977778, 0.966667, 0.966667; x = 1.3293, 0.8905, 0.6657).",
+      "cited_as": "https://harnesstax.github.io/"
+    },
+    {
+      "id": "hn-harnesstax-submission",
+      "url": "https://news.ycombinator.com/item?id=49733726",
+      "author": "Hacker News",
+      "date": "2026-09-16",
+      "title": "HarnessTax: How Much Does the Harness Matter for Coding Agents?",
+      "quotes": [],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ],
+      "notes": "Used only for the submission date. Algolia API created_at 2026-09-16T22:10:13Z, 233 points, 99 comments on 2026-11-23. The comments were not read."
+    },
+    {
+      "id": "arxiv-2609-20804-harness-design",
+      "url": "https://arxiv.org/html/2609.20804v1",
+      "author": "Run-Ze Fan, Zihao Zhang, Simin Ma, Yebowen Hu, Shouju Wang, Kaiqiang Song, Fei Liu, Hamed Zamani, Xiaoyang Wang",
+      "date": "2026-09-17",
+      "title": "An Empirical Study of Harness Design for Coding Agents",
+      "quotes": [
+        "we build a coding harness whose surrounding execution loop remains fixed while varying three central components: planning, action space, and context management",
+        "The bash-only setting removes predefined file, search, and web tools, leaving bash for general environment interaction",
+        "SWE-Bench Verified (Jimenez et al., 2024) , comprising 500 human-verified real GitHub issues",
+        "Mistral-Medium-3.5-128B exposes the workload boundary of this crossover. The full tool set improves success by 23.2 % 23.2\\% on SWE-Bench",
+        "For Nemotron-3 550B, bash-only improves success rate by 3.6 % 3.6\\% on SWE-Bench"
+      ],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ],
+      "notes": "Full text read at https://arxiv.org/html/2609.20804v1. Submitted 17 Sep 2026 per the abstract page (the leads list said 18 Sep). Table 3, 128K rows: Mistral-3.5-128B T4 68.60 and T4 bash only 45.40*; Nemotron-3 550B T4 65.80* and T4 bash only 69.40*.",
+      "cited_as": "https://arxiv.org/abs/2609.20804"
+    },
+    {
+      "id": "claude-code-docs-tools-reference",
+      "url": "https://code.claude.com/docs/en/tools-reference",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "Tools reference",
+      "quotes": [
+        "Questions stay open until you answer them. If you want a question you leave unanswered to eventually close and let Claude continue without you, set the askUserQuestionTimeout setting to 60s, 5m, or 10m",
+        "tells Claude you may be away from your keyboard, so Claude proceeds on its own judgment and can re-ask later",
+        "The timeout applies only to AskUserQuestion's multiple-choice questions"
+      ],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ],
+      "notes": "Read 2026-11-23. The settings reference gives the default as \"never\"."
+    },
+    {
+      "id": "claude-code-docs-sandboxing",
+      "url": "https://code.claude.com/docs/en/sandboxing",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "Configure the sandboxed Bash tool",
+      "quotes": [
+        "The sandbox is off by default.",
+        "Most of the machine, including credential files such as ~/.ssh and ~/.aws/credentials",
+        "There is no built-in credential deny list, so only the files and variables you list are restricted.",
+        "claude --settings '{\"sandbox\": {\"enabled\": true, \"allowUnsandboxedCommands\": false}}'",
+        "By default, when the platform doesn't support the sandbox or the dependency check at startup fails, Claude Code runs commands without sandboxing. To make Claude Code exit at startup instead, set sandbox.failIfUnavailable to true.",
+        "jest hangs or fails",
+        "docker commands fail",
+        "To put the tools, processes, and commands in this section behind one boundary, run the Claude Code process itself in a container, virtual machine, or the sandbox runtime",
+        "Unsandboxed retries: Claude can ask to run a command unsandboxed, usually after it fails in the sandbox",
+        "You can disable the unsandboxed retry by setting \"allowUnsandboxedCommands\": false in your sandbox settings"
+      ],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ],
+      "notes": "Read 2026-11-23. `wc -w` on the .md version of the page gives 14,103 words, the basis for 'runs past 14,000 words'."
+    },
+    {
+      "id": "codex-docs-subagents",
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+      "author": "OpenAI",
+      "date": "2026-11-23",
+      "title": "Subagents",
+      "quotes": [
+        "Current local Codex releases delegate when you ask directly or when\napplicable AGENTS.md or skill instructions request it.",
+        "If you don’t configure a subagent model or model_reasoning_effort, the\nsubagent inherits the parent agent’s model and reasoning effort.",
+        "agents.default_subagent_model"
+      ],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ],
+      "notes": "Read 2026-11-23. developers.openai.com/codex/subagents redirects here."
+    },
+    {
+      "id": "codex-docs-approvals-security",
+      "url": "https://learn.chatgpt.com/docs/agent-approvals-security",
+      "author": "OpenAI",
+      "date": "2026-11-23",
+      "title": "Agent approvals & security",
+      "quotes": [
+        "By default, the agent runs with network access turned off. Locally, Codex uses an OS-enforced sandbox that limits what it can touch (typically to the current workspace), plus an approval policy that controls when it must stop and ask you before acting."
+      ],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ],
+      "notes": "Read 2026-11-23."
+    },
+    {
+      "id": "codex-docs-config-reference",
+      "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
+      "author": "OpenAI",
+      "date": "2026-11-23",
+      "title": "Configuration reference",
+      "quotes": [
+        "agents.default_subagent_model"
+      ],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ],
+      "notes": "Read 2026-11-23 and searched for 'question', 'clarif' and 'request_user_input'. No key about unanswered questions turned up. The only near match is features.goals, 'Enable persisted goals and automatic continuation (stable; on by default)'."
+    },
+    {
+      "id": "opencode-docs-agents",
+      "url": "https://opencode.ai/docs/agents/",
+      "author": "Anomaly (OpenCode)",
+      "date": "2026-11-23",
+      "title": "Agents (OpenCode V2 docs)",
+      "quotes": [
+        "Subagents run with fresh context in their own child sessions. They always run in\nthe background",
+        "A subagent uses its configured model, or inherits the parent session’s model when none is configured."
+      ],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ],
+      "notes": "Read 2026-11-23. The docs header reads 'V2(latest)'."
+    },
+    {
+      "id": "opencode-docs-permissions",
+      "url": "https://opencode.ai/docs/permissions/",
+      "author": "Anomaly (OpenCode)",
+      "date": "2026-11-23",
+      "title": "Permissions (OpenCode V2 docs)",
+      "quotes": [
+        "{ \"action\": \"*\", \"resource\": \"*\", \"effect\": \"allow\" },",
+        "Because no default rule asks for external_directory, reads and edits outside\nthe Location and worktree proceed without a prompt.",
+        "question *",
+        "general Denies questions and launching subagents"
+      ],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ],
+      "notes": "Read 2026-11-23."
+    },
+    {
+      "id": "opencode-docs-migrate-v1",
+      "url": "https://opencode.ai/docs/migrate-v1/",
+      "author": "Anomaly (OpenCode)",
+      "date": "2026-11-23",
+      "title": "Migrate from V1 (OpenCode docs)",
+      "quotes": [
+        "V1 asks before accessing paths outside the project. V2 does not: external_directory is allowed by default."
+      ],
+      "connects": [
+        "why-are-coding-agents-so-dumb-notes"
+      ],
+      "notes": "Read 2026-11-23 from the .md version of the page."
+    },
+    {
+      "id": "cloudflare-style-guide-troubleshooting",
+      "url": "https://developers.cloudflare.com/style-guide/documentation-content-strategy/content-types/troubleshooting/",
+      "author": "Cloudflare",
+      "date": "2026-08-20",
+      "title": "Troubleshooting · Cloudflare Style Guide",
+      "quotes": [
+        "Last updated Aug 20, 2026",
+        "A troubleshooting page pairs each failure a reader hits with its cause and the steps that resolve it, organized by symptom rather than by question.",
+        "An error reference. A complete per-code catalog is reference material.",
+        "Keep troubleshooting inline until a product area passes roughly five entries, then move it to a dedicated page and leave a link behind at the inline site.",
+        "Entry titles: the verbatim symptom, ideally the exact error message",
+        "Bold Cause, Fix, and Verify labels give every entry the same internal order"
+      ],
+      "connects": [
+        "troubleshooting-guide-template"
+      ]
+    },
+    {
+      "id": "helpdocs-troubleshooting-guide-template",
+      "url": "https://www.helpdocs.io/templates/troubleshooting-guide/",
+      "author": "HelpDocs",
+      "date": "2026-11-23",
+      "title": "Free troubleshooting guide template (Word + AI prompt)",
+      "quotes": [
+        "1. Symptom or problem statement",
+        "2. Who and what it affects",
+        "3. Likely causes at a glance",
+        "4. Diagnostic path",
+        "5. Solutions by cause",
+        "6. Still stuck? Escalation and contact",
+        "7. Related issues and articles",
+        "| Export never finishes | File too large for the browser to process | Filter the date range and retry |"
+      ],
+      "connects": [
+        "troubleshooting-guide-template"
+      ],
+      "_note": "Page carries no date; date is the day it was fetched."
+    },
+    {
+      "id": "docsie-troubleshooting-guide-template",
+      "url": "https://www.docsie.io/solutions/templates/planning/troubleshooting-guide/",
+      "author": "Docsie",
+      "date": "2026-11-23",
+      "title": "Free Troubleshooting Guide Template | Docsie",
+      "quotes": [
+        "Symptom Description Possible Causes Diagnostic Steps Solutions Escalation Path Prevention",
+        "Steps to prevent recurrence.",
+        "curl -s https://api.internal/health | jq '.status'"
+      ],
+      "connects": [
+        "troubleshooting-guide-template"
+      ],
+      "_note": "Page carries no date; date is the day it was fetched."
+    },
+    {
+      "id": "sqlite-result-codes",
+      "url": "https://www.sqlite.org/rescode.html",
+      "author": "SQLite",
+      "date": "2026-02-18",
+      "title": "Result and Error Codes",
+      "quotes": [
+        "The SQLITE_READONLY_DIRECTORY result code indicates that the database is read-only because process does not have permission to create a journal file in the same directory as the database and the creation of a journal file is a prerequisite for writing.",
+        "process B will get back an SQLITE_BUSY result because SQLite only supports one writer at a time. Process B will need to wait for process A to finish its transaction before starting a new transaction."
+      ],
+      "connects": [
+        "troubleshooting-guide-template"
+      ]
+    },
+    {
+      "id": "sqlite-foreign-keys",
+      "url": "https://www.sqlite.org/foreignkeys.html",
+      "author": "SQLite",
+      "date": "2026-10-25",
+      "title": "SQLite Foreign Key Support",
+      "quotes": [
+        "Foreign key constraints are disabled by default (for backwards compatibility), so must be enabled separately for each database connection."
+      ],
+      "connects": [
+        "troubleshooting-guide-template"
+      ]
+    },
+    {
+      "id": "sqlite-cli",
+      "url": "https://www.sqlite.org/cli.html",
+      "author": "SQLite",
+      "date": "2026-10-25",
+      "title": "Command Line Shell For SQLite",
+      "quotes": [
+        "SQLite version 3.54.0 2026-10-15 18:36:39",
+        "If the named file does not exist, a new database file with the given name will be created automatically.",
+        ".timeout MS Try opening locked tables for MS milliseconds"
+      ],
+      "connects": [
+        "troubleshooting-guide-template"
+      ]
+    },
+    {
+      "id": "sqlite-uri",
+      "url": "https://www.sqlite.org/uri.html",
+      "author": "SQLite",
+      "date": "2026-11-18",
+      "title": "Uniform Resource Identifiers",
+      "quotes": [
+        "The mode query parameter determines if the new database is opened read-only, read-write, read-write and created if it does not exist, or that the database is a pure in-memory database that never interacts with disk, respectively."
+      ],
+      "connects": [
+        "troubleshooting-guide-template"
+      ],
+      "_note": "Backs the mode=rw line in static/examples/troubleshooting-sqlite.md, not a sentence in the post."
+    },
+    {
+      "id": "sqlite-tempfiles",
+      "url": "https://www.sqlite.org/tempfiles.html",
+      "author": "SQLite",
+      "date": "2025-06-12",
+      "title": "Temporary Files Used By SQLite",
+      "quotes": [
+        "The rollback journal is always located in the same directory as the database file and has the same name as the database file except with the 8 characters \"-journal\" appended."
+      ],
+      "connects": [
+        "troubleshooting-guide-template"
+      ],
+      "_note": "Backs the shop.db-journal line in the example file."
+    },
+    {
+      "id": "python-sqlite3-docs",
+      "url": "https://docs.python.org/3.12/library/sqlite3.html",
+      "author": "Python Software Foundation",
+      "date": "2026-11-23",
+      "title": "sqlite3 — DB-API 2.0 interface for SQLite databases (Python 3.12)",
+      "quotes": [
+        "How many seconds the connection should wait before raising an OperationalError when a table is locked."
+      ],
+      "connects": [
+        "troubleshooting-guide-template"
+      ],
+      "_note": "Backs the timeout line in the example file. Date is the day it was fetched."
+    },
+    {
+      "id": "mcp-spec-streamable-http",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/streamable-http",
+      "author": "Model Context Protocol project",
+      "date": "2026-07-28",
+      "title": "Streamable HTTP (MCP specification, revision 2026-07-28)",
+      "quotes": [
+        "The server exposes a single HTTP endpoint (the MCP endpoint) that accepts POST.",
+        "The client sends every JSON-RPC request or notification as its own HTTP POST.",
+        "The Streamable HTTP transport mirrors selected JSON-RPC body fields into HTTP headers so that intermediaries (load balancers, gateways, observability tooling) can route and inspect requests without parsing the body.",
+        "These headers are REQUIRED for compliance.",
+        "Servers MUST validate the Origin header on all incoming connections to prevent DNS rebinding attacks."
+      ],
+      "connects": [
+        "mcp-vs-api"
+      ]
+    },
+    {
+      "id": "mcp-client-best-practices",
+      "url": "https://modelcontextprotocol.io/docs/2026-07-28/develop/clients/client-best-practices",
+      "author": "Model Context Protocol project",
+      "date": "2026-07-28",
+      "title": "Client Best Practices (MCP documentation)",
+      "quotes": [
+        "Naive MCP host implementations pass the tool definitions of every connected server directly to the model at the start of each conversation.",
+        "Once the tool definitions take up a significant part of the available context window, clients should switch to progressive discovery."
+      ],
+      "connects": [
+        "mcp-vs-api"
+      ]
+    },
+    {
+      "id": "mcp-inspector-protocol-eras",
+      "url": "https://modelcontextprotocol.io/docs/2026-07-28/tools/inspector/protocol-eras",
+      "author": "Model Context Protocol project",
+      "date": "2026-07-28",
+      "title": "Protocol eras (MCP Inspector documentation)",
+      "quotes": [
+        "The default. Plain initialize, no probing at all.",
+        "Pin exactly 2026-07-28. No fallback, so a non-modern server fails loudly."
+      ],
+      "connects": [
+        "mcp-vs-api"
+      ]
+    },
+    {
+      "id": "mcp-spec-authorization",
+      "url": "https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization",
+      "author": "Model Context Protocol project",
+      "date": "2026-07-28",
+      "title": "Authorization (MCP specification, revision 2026-07-28)",
+      "quotes": [
+        "Authorization is OPTIONAL for MCP implementations.",
+        "Implementations using an HTTP-based transport SHOULD conform to this specification.",
+        "Implementations using an STDIO transport SHOULD NOT follow this specification, and instead retrieve credentials from the environment.",
+        "A protected MCP server acts as an OAuth 2.1 resource server",
+        "Note that authorization MUST be included in every HTTP request from client to server."
+      ],
+      "connects": [
+        "mcp-vs-api"
+      ]
+    },
+    {
+      "id": "truefoundry-mcp-vs-api",
+      "url": "https://www.truefoundry.com/blog/mcp-vs-api",
+      "author": "Abhishek Choudhary",
+      "date": "2026-06-30",
+      "title": "MCP vs API: What Is The Difference?",
+      "quotes": [
+        "Context-aware interactions: MCP supports multi-step workflows by maintaining context across tasks, unlike traditional stateless APIs.",
+        "Updated: June 30, 2026"
+      ],
+      "connects": [
+        "mcp-vs-api"
+      ]
+    },
+    {
+      "id": "openapi-specification-3-2-1",
+      "url": "https://spec.openapis.org/oas/latest.html",
+      "author": "OpenAPI Initiative",
+      "date": "2026-09-10",
+      "title": "OpenAPI Specification v3.2.1",
+      "quotes": [
+        "The OpenAPI Specification (OAS) defines a standard, language-agnostic interface to HTTP APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection."
+      ],
+      "connects": [
+        "mcp-vs-api",
+        "api-documentation"
+      ]
+    },
+    {
+      "id": "posthog-read-before-deleting-agents-md",
+      "url": "https://newsletter.posthog.com/p/your-agentsmd-is-holding-you-back",
+      "author": "Jina Yoon (PostHog)",
+      "date": "2026-08-31",
+      "title": "Read this before deleting your AGENTS.md",
+      "quotes": [
+        "For each line, if you can’t name the failure it prevents, delete it.",
+        "All merges into master go through the Trunk merge queue. Never run gh pr merge.",
+        "A couple days later, we paused the queue to fix some failing tests and forgot to update that line. Our agents therefore had wrong instructions for 21 hours. During that time, one engineer’s PR got stuck for 10 hours; another lost 45 minutes investigating the cause before updating the instructions.",
+        "but it couldn’t have caught it anyway since merge queue state lives in a GitHub setting rather than in code",
+        "Est. resident tokens: ~1,780",
+        "Verdict: trim ~350",
+        "Our AI onboarding wizard, for example, often landed on the wrong project in monorepos because our scripts pointed to root by default.",
+        "here are three practical ways to maintain your context",
+        "What information or guidance would have been useful to have in the integration prompt or documentation for this task? Specifically anything that would have prevented tool failures, erroneous edits, or other wasted turns.",
+        "We took this even further by feeding them back into our context-mill with a loop, making it self-driving.",
+        "paste the prompt that caused it into a failures.md"
+      ],
+      "connects": [
+        "what-to-keep-in-agents-md"
+      ],
+      "notes": "Fetched 2026-11-23. JSON-LD datePublished is 2026-08-31; the Hacker News submission (item 50117862, 4 points, 0 comments) is dated 2026-10-16. The label \"Delete this\" is text inside the post's second diagram image (substack-post-media ...9cee41b8-9730-45a2-a34e-559a12df7540_1392x876.png), not in the page text. The word \"self-driving\" links to https://posthog.com/self-driving."
+    },
+    {
+      "id": "posthog-self-driving-page",
+      "url": "https://posthog.com/self-driving",
+      "author": "PostHog",
+      "date": "2026-11-23",
+      "title": "Self-driving – Proactive fixes from product data",
+      "quotes": [
+        "Findings from all your sources are deduped and clustered into reports. Actionable ones become PRs."
+      ],
+      "connects": [
+        "what-to-keep-in-agents-md"
+      ],
+      "notes": "Product page, read 2026-11-23; no publication date on the page."
+    },
+    {
+      "id": "szypowicz-agents-md-telemetry",
+      "url": "https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/",
+      "author": "Przemek (blog.szypowi.cz)",
+      "date": "2026-09-23",
+      "title": "Claude Code reads AGENTS.md only when telemetry is on",
+      "quotes": [
+        "Claude Code 2.1.277 announced support for AGENTS.md.",
+        "With either variable set, AGENTS.md never loaded, so I had to clear both.",
+        "None of these cases print a warning.",
+        "They will conclude that the model ignores their instructions, and they will spend time on prompts when the file never reached the model in the first place.",
+        "With that file in place, the same canary test returns the word with CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 still set.",
+        "W is the plugin’s isOnByDefault value and it is false.",
+        "claude -p 'What is the canary word from the project instructions? Answer NONE if you have none. Do not read files.'"
+      ],
+      "connects": [
+        "what-to-keep-in-agents-md",
+        "claude-md"
+      ]
+    },
+    {
+      "id": "hn-agents-md-telemetry-thread",
+      "url": "https://news.ycombinator.com/item?id=49814947",
+      "author": "Hacker News (comment by mpoteat, item 49815363)",
+      "date": "2026-09-23",
+      "title": "Claude Code reads AGENTS.md only when telemetry is on [fixed]",
+      "quotes": [
+        "Sorry folks, this is a rollout artifact, we needed a way to turn this off remotely via feature flags if it broke something, and with telemetry off you don't get those. It's already been fixed as part of v2.1.281 releasing today.",
+        "Apologies again folks, this was a fully human error on my part - I should've found a better way to launch with a kill-switch."
+      ],
+      "connects": [
+        "what-to-keep-in-agents-md"
+      ],
+      "notes": "Read through the Algolia API (hn.algolia.com/api/v1/items/49814947) on 2026-11-23: 486 points, 284 comments. Story created 2026-09-23T12:15:33Z, mpoteat's comment 2026-09-23T12:56:30Z, 41 minutes apart."
+    },
+    {
+      "id": "claude-code-memory-docs-agents-md",
+      "url": "https://code.claude.com/docs/en/memory",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "How Claude remembers your project",
+      "quotes": [
+        "it cuts content Claude can derive from the codebase, such as directory layouts, dependency lists, and architecture overviews, and keeps pitfalls, rationale, and conventions that differ from tool defaults",
+        "Before v2.1.281, some sessions, such as those on Amazon Bedrock or with telemetry disabled, read CLAUDE.md files only.",
+        "from v2.1.276 or earlier. Claude reads AGENTS.md from your next session on",
+        "To block an action regardless of what Claude decides, use a",
+        "Claude looks for problems such as instructions written for older models, references to files or commands that don't exist, and files that contradict each other.",
+        "The first time Claude Code encounters external imports in a project, it shows an approval dialog listing the files.",
+        "Claude Code loads their imports without the dialog",
+        "They aren't enforced configuration. To block an action regardless of what Claude decides, use a PreToolUse hook instead."
+      ],
+      "connects": [
+        "what-to-keep-in-agents-md",
+        "claude-md",
+        "claude-code-skills",
+        "claude-code-hooks"
+      ],
+      "notes": "Fetched as memory.md on 2026-11-23."
+    },
+    {
+      "id": "claude-code-env-vars-feature-flags",
+      "url": "https://code.claude.com/docs/en/env-vars",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "Environment variables",
+      "quotes": [
+        "Set to 1 to turn off feature-flag fetching. Requires Claude Code v2.1.319 or later.",
+        "Setting it to 0 or false still opts out"
+      ],
+      "connects": [
+        "what-to-keep-in-agents-md"
+      ],
+      "notes": "Fetched as env-vars.md on 2026-11-23."
+    },
+    {
+      "id": "anthropic-new-rules-context-engineering",
+      "url": "https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models",
+      "author": "Thariq Shihipar (Anthropic)",
+      "date": "2026-07-24",
+      "title": "The new rules of context engineering for Claude 5 generation models",
+      "quotes": [
+        "We removed over 80% of Claude Code’s system prompt for models like Claude Opus 5 and Claude Fable 5 with no measurable loss on our coding evaluations.",
+        "In code: default to writing no comments.",
+        "In the new system prompt we say: Write code that reads like the surrounding code: match its comment density, naming, and idiom."
+      ],
+      "connects": [
+        "what-to-keep-in-agents-md"
+      ]
+    },
+    {
+      "id": "claude-code-skills-docs",
+      "url": "https://code.claude.com/docs/en/skills",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "Extend Claude with skills (Claude Code docs, undated page, read 2026-11-23)",
+      "quotes": [
+        "Claude Code skills follow the Agent Skills open standard",
+        "All fields are optional.",
+        "Defaults to the directory name.",
+        "Enterprise over personal, and personal over project.",
+        "truncated at 1,536 characters in the skill listing",
+        "has grown into a procedure rather than a fact",
+        "Claude Code reads SKILL.md from the target and loads the skill once even if several locations point at the same target.",
+        "executed, not loaded",
+        "stays in context across turns",
+        "All users on machines where your organization deploys it",
+        "Put the key use case first",
+        "Both load, because plugin skills are namespaced as /plugin-name:skill-name"
+      ],
+      "connects": [
+        "claude-code-skills"
+      ]
+    },
+    {
+      "id": "agent-skills-specification",
+      "url": "https://agentskills.io/specification",
+      "author": "Agent Skills project (agentskills.io)",
+      "date": "2026-11-23",
+      "title": "Specification (Agent Skills, undated page, read 2026-11-23)",
+      "quotes": [
+        "Max 1024 characters",
+        "Lowercase letters, numbers, and hyphens only.",
+        "Must match the parent directory name",
+        "fields are loaded at startup for all skills"
+      ],
+      "connects": [
+        "claude-code-skills"
+      ]
+    },
+    {
+      "id": "anthropic-agent-skills-post",
+      "url": "https://www.anthropic.com/research/equipping-agents-for-the-real-world-with-agent-skills",
+      "author": "Barry Zhang, Keith Lazuka and Mahesh Murag (Anthropic)",
+      "date": "2025-10-16",
+      "title": "Equipping agents for the real world with Agent Skills",
+      "quotes": [
+        "Published Oct 16, 2025",
+        "This led us to create Agent Skills"
+      ],
+      "connects": [
+        "claude-code-skills"
+      ]
+    },
+    {
+      "id": "claude-code-headless-docs",
+      "url": "https://code.claude.com/docs/en/headless",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "Claude Code headless docs (undated page, read 2026-11-23)",
+      "quotes": [
+        "a call that needs approval is denied unless something approves it"
+      ],
+      "connects": [
+        "claude-code-skills"
+      ]
+    },
+    {
+      "id": "claude-code-permissions-docs",
+      "url": "https://code.claude.com/docs/en/permissions",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "Claude Code permissions docs (undated page, read 2026-11-23)",
+      "quotes": [
+        "apply only when both the requested path and the file it resolves to match",
+        "with no parent-directory fallback",
+        "they also apply to redirection targets and to file commands it recognizes, such as cat, head, tail, sed, and tee."
+      ],
+      "connects": [
+        "claude-code-skills",
+        "claude-code-hooks"
+      ]
+    },
+    {
+      "id": "ninadpathak-writing-skill-md",
+      "url": "https://raw.githubusercontent.com/ninadpathak/ninadpathak/main/skills/writing/SKILL.md",
+      "author": "Ninad Pathak",
+      "date": "2026-11-23",
+      "title": "skills/writing/SKILL.md (public copy; the folder is at https://github.com/ninadpathak/ninadpathak/tree/main/skills)",
+      "quotes": [
+        "Ninad's writing standard for long-form work: articles, how-tos, explainers, docs, tutorials, READMEs, founder (Paul Graham-style) essays, personal and narrative nonfiction, spoken-narrative articles, video scripts and social posts. Also edits a draft to strip AI slop, or audits one without rewriting. Use for any of these; short messages need only the always-loaded core.",
+        "Read the one reference that matches before drafting.",
+        "| LinkedIn or X post | [references/social.md](references/social.md) |",
+        "python3 ~/.agents/skills/writing/scripts/check_prose.py draft.md"
+      ],
+      "connects": [
+        "claude-code-skills"
+      ]
+    },
+    {
+      "id": "ninadpathak-skills-readme",
+      "url": "https://raw.githubusercontent.com/ninadpathak/ninadpathak/main/skills/README.md",
+      "author": "Ninad Pathak",
+      "date": "2026-11-23",
+      "title": "skills/README.md (public copy)",
+      "quotes": [
+        "These are the agent skills I write with.",
+        "ln -s ~/.agents/skills/writing ~/.claude/skills/writing",
+        "Load it at session start, for example with an `@~/.agents/skills/writing/core.md` import in your `CLAUDE.md`."
+      ],
+      "connects": [
+        "claude-code-skills"
+      ]
+    },
+    {
+      "id": "ninadpathak-check-prose-py",
+      "url": "https://raw.githubusercontent.com/ninadpathak/ninadpathak/main/skills/writing/scripts/check_prose.py",
+      "author": "Ninad Pathak",
+      "date": "2026-11-23",
+      "title": "skills/writing/scripts/check_prose.py (public copy)",
+      "quotes": [
+        "The banned-word lists are read from ../core.md, their single home.",
+        "Fails (exit 1) on: banned words anywhere in the file"
+      ],
+      "connects": [
+        "claude-code-skills"
+      ]
+    },
+    {
+      "id": "claude-code-hooks-reference-nov23",
+      "url": "https://code.claude.com/docs/en/hooks",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "Hooks reference",
+      "quotes": [
+        "Hooks are user-defined shell commands, HTTP endpoints, MCP tool calls, LLM prompts, or subagents that execute automatically at specific points in Claude Code's lifecycle.",
+        "There are five types:",
+        "Hooks from settings files, managed policy settings, and plugins also run inside subagents.",
+        "Hook entries merge across settings levels rather than replacing each other",
+        "is always absolute",
+        "even though 1 is the conventional Unix failure code. If your hook is meant to enforce a policy, use exit 2.",
+        "Command hooks execute shell commands with your full user permissions.",
+        "run in a folder you've never trusted",
+        "which takes precedence over project and local settings",
+        "Defaults: 600 for command, http, and mcp_tool; 30 for prompt; 60 for agent.",
+        "doesn't block the tool call",
+        "There is no shell",
+        "Requires Claude Code v2.1.295 or later.",
+        "to write the log to a known location",
+        "Blocks the tool call",
+        "Shows stderr to Claude; the tool already ran"
+      ],
+      "connects": [
+        "claude-code-hooks"
+      ]
+    },
+    {
+      "id": "claude-code-hooks-guide",
+      "url": "https://code.claude.com/docs/en/hooks-guide",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "Automate actions with hooks",
+      "quotes": [
+        "Claude can still change the protected files with shell commands.",
+        "To limit which files commands can write to, see Configure sandboxing.",
+        "Matchers are case-sensitive"
+      ],
+      "connects": [
+        "claude-code-hooks"
+      ]
+    },
+    {
+      "id": "claude-code-permission-modes-docs-nov23",
+      "url": "https://code.claude.com/docs/en/permission-modes",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "Choose a permission mode",
+      "quotes": [
+        "acceptEdits mode auto-approves common filesystem Bash commands: mkdir, touch, rm, rmdir, mv, cp, and sed."
+      ],
+      "connects": [
+        "claude-code-hooks"
+      ]
+    },
+    {
+      "id": "hn-claude-code-team-code-review",
+      "url": "https://news.ycombinator.com/item?id=50122951",
+      "author": "Hacker News thread; comments by RGS1811 (item 50124069, 2026-10-16) and koolba (item 50124042, 2026-10-16)",
+      "date": "2026-10-16",
+      "title": "How the Claude Code team does code review (Hacker News discussion, 488 points when fetched 2026-11-23)",
+      "quotes": [
+        "How is the ability of a human to understand the code via hands-on familiarity not a direct dependency of their ability to do manual code review?",
+        "Having claude write an explainer (something I do a lot!) doesn't get you to the point where you can confidently assess a complex diff.",
+        "How anybody can let an LLM write docs and not even read them is pure insanity."
+      ],
+      "connects": [
+        "claude-code-team-code-review"
+      ]
+    },
+    {
+      "id": "anthropic-code-review-launch",
+      "url": "https://claude.com/resources/articles/code-review",
+      "author": "Anthropic",
+      "date": "2026-03-09",
+      "title": "Bringing Code Review to Claude Code",
+      "quotes": [
+        "DateMarch 9, 2026",
+        "Reviews are billed on token usage and generally average $15–25, scaling with PR size and complexity.",
+        "Now in research preview for Team and Enterprise."
+      ],
+      "connects": [
+        "claude-code-team-code-review"
+      ]
+    },
+    {
+      "id": "claude-code-docs-code-review-local",
+      "url": "https://code.claude.com/docs/en/code-review-local",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "Review locally with /code-review (Claude Code docs, read 2026-11-23)",
+      "quotes": [
+        "Instructions: the review follows your CLAUDE.md, including in a non-interactive -p run. It doesn't read REVIEW.md.",
+        "Run it in non-interactive mode, with the -p flag or the Agent SDK. Claude Code waits for the review and includes the findings in the response",
+        "The command works on any plan."
+      ],
+      "connects": [
+        "claude-code-team-code-review"
+      ]
+    },
+    {
+      "id": "claude-code-docs-code-review",
+      "url": "https://code.claude.com/docs/en/code-review",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "Code Review (Claude Code docs, read 2026-11-23)",
+      "quotes": [
+        "Plans: Team and Enterprise",
+        "How it examines your code: a review works from reading the diff and the surrounding code, without building or running your code."
+      ],
+      "connects": [
+        "claude-code-team-code-review"
+      ]
+    },
+    {
+      "id": "claude-code-docs-code-review-costs",
+      "url": "https://code.claude.com/docs/en/code-review-costs",
+      "author": "Anthropic",
+      "date": "2026-11-23",
+      "title": "Code Review costs and usage (Claude Code docs, read 2026-11-23)",
+      "quotes": [
+        "has no flat per-review price",
+        "Code Review is billed on token usage through"
+      ],
+      "connects": [
+        "claude-code-team-code-review"
+      ]
+    },
+    {
+      "id": "google-sre-example-postmortem",
+      "url": "https://sre.google/sre-book/example-postmortem/",
+      "author": "Google (Site Reliability Engineering, first edition, Appendix D)",
+      "date": "2016",
+      "title": "Example Postmortem",
+      "quotes": [
+        "Shakespeare Sonnet++ Postmortem (incident #465)",
+        "Date: 2015-10-21",
+        "Summary: Shakespeare Search down for 66 minutes during period of very high interest in Shakespeare due to discovery of a new sonnet.",
+        "Trigger: Latent bug triggered by sudden increase in traffic.",
+        "Detection: Borgmon detected high level of HTTP 500s and paged on-call.",
+        "Where we got lucky",
+        "This section is really for near misses",
+        "Supporting information:",
+        "Plug file descriptor leak in search ranking subsystem",
+        "Investigate running index MR/fusion continuously",
+        "2015-10-21 (all times UTC)",
+        "Copyright © 2017 Google, Inc. Published by O'Reilly Media, Inc."
+      ],
+      "connects": [
+        "postmortem-template"
+      ]
+    },
+    {
+      "id": "pagerduty-postmortem-template",
+      "url": "https://docs.pagerduty.com/ops-guides/incident-response-guide/postmortem-template",
+      "author": "PagerDuty",
+      "date": "2026-11-23",
+      "title": "Postmortem Template (Incident Response Guide)",
+      "quotes": [
+        "This is a standard template we use for postmortems at PagerDuty.",
+        "Be very specific here and include exact numbers.",
+        "Time (UTC) Event Data Link",
+        "Internal Email",
+        "External Message",
+        "Who was the IC?",
+        "What Are We Doing About This?"
+      ],
+      "connects": [
+        "postmortem-template"
+      ]
+    },
+    {
+      "id": "pagerduty-postmortem-step-by-step",
+      "url": "https://docs.pagerduty.com/ops-guides/postmortem-best-practices/step-by-step",
+      "author": "PagerDuty",
+      "date": "2026-11-23",
+      "title": "Step by Step (Postmortem Best Practices)",
+      "quotes": [
+        "For each item in the timeline, include a metric or some third-party page where the data came from.",
+        "Begin by focusing on the timeline.",
+        "Find contributing factors, not the root cause.",
+        "this should be scheduled within 3 calendar days for a Sev-1 and 5 business days for a Sev-2",
+        "Investigate monitoring for this scenario.",
+        "Make sure engineer checks that database schema can be parsed before updating.",
+        "What expectations did participants have about how things were going to develop?",
+        "Source: ;login: Spring 2017 Vol. 42, No. 1."
+      ],
+      "connects": [
+        "postmortem-template"
+      ]
+    },
+    {
+      "id": "pagerduty-postmortem-best-practices",
+      "url": "https://docs.pagerduty.com/ops-guides/postmortem-best-practices",
+      "author": "PagerDuty",
+      "date": "2026-11-23",
+      "title": "Postmortem Best Practices",
+      "quotes": [
+        "To run a postmortem in PagerDuty, create a Post-Incident Review. The PagerDuty Postmortems feature reached end of life on October 31, 2026."
+      ],
+      "connects": [
+        "postmortem-template"
+      ]
+    },
+    {
+      "id": "atlassian-postmortem-template",
+      "url": "https://www.atlassian.com/incident-management/postmortem/templates",
+      "author": "Atlassian",
+      "date": "2026-11-23",
+      "title": "Incident postmortem process: Track, document, and improve",
+      "quotes": [
+        "An incident postmortem, also known as a post-incident review, is the best way to work through what happened during an incident and capture lessons learned.",
+        "ideally within 24 to 48 hours",
+        "Detail the incident timeline. We recommend using UTC to standardize for timezones.",
+        "Root cause identification: The Five Whys",
+        "Backlog check",
+        "Recurrence",
+        "Corrective actions"
+      ],
+      "connects": [
+        "postmortem-template"
+      ]
+    },
+    {
+      "id": "atlassian-postmortem-handbook",
+      "url": "https://www.atlassian.com/incident-management/handbook/postmortems",
+      "author": "Atlassian",
+      "date": "2026-11-23",
+      "title": "Incident postmortems (Incident Management Handbook)",
+      "quotes": [
+        "Who will take the actions and by when?",
+        "Refer to individuals by role (eg \"the on-call Widgets engineer\") instead of name (while remaining clear and unambiguous about the facts)",
+        "Be sure to get at least one of these.",
+        "Provide a detailed incident timeline, in chronological order, timestamped with timezone(s).",
+        "Investigate monitoring for this scenario."
+      ],
+      "connects": [
+        "postmortem-template"
+      ]
+    },
+    {
+      "id": "openstatus-postmortem-template",
+      "url": "https://www.openstatus.dev/guides/postmortem-template",
+      "author": "openstatus",
+      "date": "2026-11-20",
+      "title": "Postmortem Template and Incident Report Template (Copy-Paste)",
+      "quotes": [
+        "Nov 20, 2026 | by openstatus",
+        "Here is what a completed postmortem looks like for a fictional startup"
+      ],
+      "connects": [
+        "postmortem-template"
+      ]
+    },
+    {
+      "id": "ilert-postmortem-template",
+      "url": "https://www.ilert.com/blog/postmortem-template-to-optimize-your-incident-response",
+      "author": "Marko Simon, ilert",
+      "date": "2025-04-01",
+      "title": "Postmortem Template to Optimize Your Incident Response",
+      "quotes": [
+        "Marko Simon April 1, 2025",
+        "All timestamps are local to Europe/Berlin.",
+        "14:26:24.109Z",
+        "A preview of the postmortem document created with ilert AI"
+      ],
+      "connects": [
+        "postmortem-template"
+      ]
+    },
+    {
+      "id": "smartsheet-post-mortem-templates",
+      "url": "https://www.smartsheet.com/content/post-mortem-templates",
+      "author": "Kate Eby, Smartsheet",
+      "date": "2020-06-30",
+      "title": "Free Post-Mortem Templates Roundup",
+      "quotes": [
+        "June 30, 2020"
+      ],
+      "connects": [
+        "postmortem-template"
+      ]
+    },
+    {
+      "id": "github-about-readmes",
+      "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes",
+      "author": "GitHub Docs",
+      "date": "2026-11-23",
+      "title": "About the repository README file",
+      "quotes": [
+        "A README is often the first item a visitor will see when visiting your repository.",
+        "What the project does",
+        "Why the project is useful",
+        "How users can get started with the project",
+        "Where users can get help with your project",
+        "Who maintains and contributes to the project",
+        "A README should only contain information necessary for developers to get started using and contributing to your project."
+      ],
+      "connects": [
+        "readme-template"
+      ],
+      "date_note": "The page carries no date; this is the day it was fetched and read.",
+      "fetched_file": "src/gh-readmes.txt"
+    },
+    {
+      "id": "make-a-readme",
+      "url": "https://www.makeareadme.com/",
+      "author": "Danny Guo",
+      "date": "2026-11-23",
+      "title": "Make a README",
+      "quotes": [
+        "Use examples liberally, and show the expected output if you can.",
+        "# returns 'geese'",
+        "so it's really up to the developers what information should be included in the README.",
+        "Make a README is maintained by Danny Guo",
+        "## Installation",
+        "## Usage",
+        "## Contributing",
+        "## License"
+      ],
+      "connects": [
+        "readme-template"
+      ],
+      "date_note": "The page carries no date; this is the day it was fetched and read.",
+      "fetched_file": "src/makeareadme.txt"
+    },
+    {
+      "id": "best-readme-template-blank",
+      "url": "https://raw.githubusercontent.com/othneildrew/Best-README-Template/main/BLANK_README.md",
+      "author": "othneildrew (GitHub user)",
+      "date": "2026-04-18",
+      "title": "Best-README-Template, BLANK_README.md",
+      "quotes": [
+        "Use this space to show useful examples of how a project can be used.",
+        "[![Contributors][contributors-shield]][contributors-url]",
+        "[![LinkedIn][linkedin-shield]][linkedin-url]",
+        "project_description",
+        "## Getting Started",
+        "## Usage",
+        "## Roadmap"
+      ],
+      "connects": [
+        "readme-template"
+      ],
+      "date_note": "Date of the repository's last push, from the GitHub API on 2026-11-23. The page links https://github.com/othneildrew/Best-README-Template.",
+      "fetched_file": "src/best-blank.md"
+    },
+    {
+      "id": "awesome-readme",
+      "url": "https://raw.githubusercontent.com/matiassingers/awesome-readme/master/readme.md",
+      "author": "Matias Singers",
+      "date": "2026-11-23",
+      "title": "Awesome README",
+      "quotes": [
+        "A curated list of awesome READMEs",
+        "[Matias Singers](https://mts.io) has waived all copyright",
+        "## Examples",
+        "## Architecture Examples"
+      ],
+      "connects": [
+        "readme-template"
+      ],
+      "date_note": "Fetched 2026-11-23. The page links https://github.com/matiassingers/awesome-readme. The count of 101 is the number of list items between the Examples and Architecture Examples headings.",
+      "fetched_file": "src/awesome-readme.md"
+    },
+    {
+      "id": "react-readme",
+      "url": "https://raw.githubusercontent.com/react/react/main/README.md",
+      "author": "React contributors",
+      "date": "2026-11-23",
+      "title": "React README",
+      "quotes": [
+        "This example will render \"Hello Taylor\" into a container on the page.",
+        "React is a JavaScript library for building user interfaces.",
+        "[Add React to an Existing Project](https://react.dev/learn/add-react-to-an-existing-project)"
+      ],
+      "connects": [
+        "readme-template"
+      ],
+      "date_note": "Fetched 2026-11-23 as part of the census.",
+      "fetched_file": "src/react-readme.md"
+    },
+    {
+      "id": "yt-dlp-readme",
+      "url": "https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/README.md",
+      "author": "yt-dlp contributors",
+      "date": "2026-11-23",
+      "title": "yt-dlp README",
+      "quotes": [
+        "test video.webm    # Literal name with correct extension",
+        "To_y.webm    # Restricted file name"
+      ],
+      "connects": [
+        "readme-template"
+      ],
+      "date_note": "Fetched 2026-11-23 as part of the census.",
+      "fetched_file": "src/yt-dlp-readme.md"
+    },
+    {
+      "id": "github-search-api-census",
+      "url": "https://api.github.com/search/repositories?q=language:Python&sort=stars&order=desc&per_page=15",
+      "author": "GitHub REST API",
+      "date": "2026-11-23",
+      "title": "GitHub search API, repositories sorted by stars",
+      "quotes": [
+        "yt-dlp/yt-dlp"
+      ],
+      "connects": [
+        "readme-template"
+      ],
+      "date_note": "One query per language (Python, JavaScript, TypeScript, Go, Rust), run 2026-11-23 19:46 UTC. Responses are in census/search-<language>.json, the 60 fetched READMEs in census/readmes/, and the counts in static/examples/readme-census-2026-11-23.csv.",
+      "fetched_file": "census/search-Python.json"
+    },
+    {
+      "id": "essay-decisions",
+      "url": "https://github.com/ninadpathak/ninadpathak/blob/main/skills/writing/references/essay-research/decisions.md",
+      "author": "the model that rewrote the skill",
+      "date": "2026-09-06",
+      "title": "Decisions - 2026-09-06",
+      "quotes": [
+        "Removed mandatory hooks, word-60 thesis deadlines, 80-word anecdote limits, paragraph and sentence quotas",
+        "Removed rhetorical tics from the drafting repertoire instead of granting a one-use allowance.",
+        "Treated draft 11 as the accepted style anchor because this task explicitly calls it accepted.",
+        "Ground truth is the feedback, including the current reviewer",
+        "rejection of the previous final trial. Draft 11 is a voice anchor, not blanket endorsement of its opener or its technical claims.",
+        "Removed the previous pass's permission to open by explaining ordinary request behavior to daily users",
+        "its failure required an evidence rule, not another keyword ban.",
+        "No session measurement was performed.",
+        "The tests are on introductions. They do not establish that a model can sustain this reasoning over a complete essay",
+        "Used skill-creator guidance for the skill rewrite"
+      ],
+      "connects": [
+        "eleven-rejected-essay-drafts"
+      ]
+    },
+    {
+      "id": "essay-test-rounds",
+      "url": "https://github.com/ninadpathak/ninadpathak/blob/main/skills/writing/references/essay-research/test-rounds.md",
+      "author": "the model that rewrote the skill",
+      "date": "2026-09-06",
+      "title": "Revision trials - 2026-09-06",
+      "quotes": [
+        "These are sequential self-tests, not independent model evaluations or Ninad's acceptance.",
+        "Every request Claude Code sends includes the context it has retained from the session.",
+        "Claude Code includes the retained conversation in each request to the model.",
+        "Each time Claude Code calls the model, it sends the conversation it has retained so far",
+        "Clearing a Claude Code session halfway through a bug can mean having to explain why an apparently sensible fix won't work.",
+        "No Claude Code cost experiment was performed.",
+        "No universal five-minute claim is warranted.",
+        "Claude facts checked on 2026-09-06 against primary documentation"
+      ],
+      "connects": [
+        "eleven-rejected-essay-drafts"
+      ]
+    },
+    {
+      "id": "whatfix-technical-writing-examples",
+      "url": "https://whatfix.com/blog/technical-writing-examples/",
+      "author": "Priyanka Malik (contributor), Whatfix",
+      "date": "2026-02-17",
+      "title": "12 Technical Writing Examples & Samples in 2026",
+      "quotes": [
+        "12 Technical Writing Examples & Samples in 2026",
+        "Last Updated: February 17, 2026",
+        "Press Release",
+        "Business Plans",
+        "Here are twelve examples of common technical writing documents"
+      ],
+      "connects": [
+        "technical-writing-examples"
+      ]
+    },
+    {
+      "id": "mintlify-technical-writing-examples",
+      "url": "https://www.mintlify.com/library/technical-writing-examples",
+      "author": "Harkirat Chahal, Mintlify",
+      "date": "2026-09-30",
+      "title": "Technical writing examples: 7 annotated samples and why they work",
+      "quotes": [
+        "Technical writing examples: 7 annotated samples and why they work",
+        "Published September 30, 2026",
+        "Test every command and code example against the supported product version",
+        "1. API reference example: Anthropic Messages API",
+        "7. Runbook example: GitLab's AlertmanagerNotificationsFailing"
+      ],
+      "connects": [
+        "technical-writing-examples"
+      ]
+    },
+    {
+      "id": "nodejs-24-sqlite-docs",
+      "url": "https://nodejs.org/docs/latest-v24.x/api/sqlite.html",
+      "author": "Node.js project",
+      "date": "2026-11-23",
+      "title": "SQLite | Node.js v24.22.3 Documentation",
+      "quotes": [
+        "Added in: v22.5.0",
+        "Stability: 1.2 - Release candidate.",
+        "SQLite is now a release candidate."
+      ],
+      "connects": [
+        "technical-writing-examples",
+        "design-doc-template"
+      ]
+    },
+    {
+      "id": "write-the-docs-docs-as-code",
+      "url": "https://www.writethedocs.org/guide/docs-as-code/",
+      "author": "Eric Holscher & the Write the Docs community",
+      "date": "2026-11-23",
+      "title": "Docs as code",
+      "quotes": [
+        "Documentation as Code (Docs as Code) refers to a philosophy that you should be writing documentation with the same tools as code:",
+        "Eric Holscher & the Write the Docs community",
+        "Issue Trackers",
+        "Version Control (Git)",
+        "Plain Text Markup (Markdown, reStructuredText, Asciidoc)",
+        "Code Reviews",
+        "Automated Tests",
+        "Generally a Docs as Code approach gives you the following benefits:",
+        "You can block merging of new features if they don’t include documentation, which incentivizes developers to write about features while they are fresh"
+      ],
+      "connects": [
+        "docs-as-code"
+      ],
+      "date_note": "The page carries no date; this is the day it was fetched and read.",
+      "fetched_file": "sources/wtd.txt"
+    },
+    {
+      "id": "gitbook-what-is-docs-as-code",
+      "url": "https://www.gitbook.com/blog/what-is-docs-as-code",
+      "author": "Steve Ashby",
+      "date": "2023-09-17",
+      "title": "What is docs as code? All the benefits and how to get started",
+      "quotes": [
+        "17 Sep, 2023",
+        "You can save your documentation in a dedicated repo, or store it alongside your code",
+        "These checks can catch formatting errors, broken links, and missing images"
+      ],
+      "connects": [
+        "docs-as-code"
+      ],
+      "fetched_file": "sources/gitbook.txt"
+    },
+    {
+      "id": "mintlify-what-is-docs-as-code",
+      "url": "https://www.mintlify.com/library/what-is-docs-as-code",
+      "author": "Harkirat Chahal",
+      "date": "2026-07-15",
+      "title": "What is docs-as-code? Approach, workflows, and how to adopt it",
+      "quotes": [
+        "Published July 15, 2026/Updated November 5, 2026",
+        "a basic CI setup confirms that the documentation site still builds and that internal links point to real pages",
+        "Teams can also add a style linter",
+        "technical reviewers can catch incorrect examples"
+      ],
+      "connects": [
+        "docs-as-code"
+      ],
+      "date_note": "Published July 15, 2026 and updated November 5, 2026; the article gives the update date.",
+      "fetched_file": "sources/mintlify.txt"
+    },
+    {
+      "id": "mkdocs-cli-strict",
+      "url": "https://www.mkdocs.org/user-guide/cli/",
+      "author": "MkDocs",
+      "date": "2026-11-23",
+      "title": "Command Line Interface",
+      "quotes": [
+        "Enable strict mode. This will cause MkDocs to abort the build on any warnings."
+      ],
+      "connects": [
+        "docs-as-code"
+      ],
+      "date_note": "The page carries no date; this is the day it was fetched and read.",
+      "fetched_file": "sources/mkdocs-cli.txt"
+    },
+    {
+      "id": "mkdocs-configuration-validation",
+      "url": "https://www.mkdocs.org/user-guide/configuration/#validation",
+      "author": "MkDocs",
+      "date": "2026-11-23",
+      "title": "Configuration",
+      "quotes": [
+        "Recommended settings for most sites (maximal strictness):",
+        "omitted_files: warn",
+        "absolute_links: warn # Or 'relative_to_docs' - new in MkDocs 1.6",
+        "unrecognized_links: warn",
+        "anchors: warn # New in MkDocs 1.6"
+      ],
+      "connects": [
+        "docs-as-code"
+      ],
+      "date_note": "The page carries no date; this is the day it was fetched and read.",
+      "fetched_file": "sources/mkdocs-config.txt"
+    },
+    {
+      "id": "mintlify-sdk-documentation-guide",
+      "url": "https://www.mintlify.com/library/sdk-documentation-guide",
+      "author": "Harkirat Chahal, Mintlify",
+      "date": "2026-10-16",
+      "title": "SDK documentation best practices: from quickstart to migration guides",
+      "quotes": [
+        "Published October 16, 2026",
+        "Test code samples against the SDK versions they claim to support and include examples in automated tests when possible.",
+        "a continuous integration (CI) workflow can install the documented SDK version and run code samples against a test environment to catch examples that no longer work."
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "One of the three ranking pages read before drafting. Mintlify sells a docs platform; the article cites it only for the CI recommendation."
+    },
+    {
+      "id": "stripe-python-readme",
+      "url": "https://raw.githubusercontent.com/stripe/stripe-python/2bbff430470360a501c2054221036e8dee5977d7/README.md",
+      "author": "Stripe",
+      "date": "2026-11-23",
+      "title": "Stripe Python Library README (commit 2bbff43, version 17.1.0)",
+      "quotes": [
+        "pip install --upgrade stripe",
+        "we currently support **Python 3.9+**.",
+        "client = StripeClient(\"sk_test_...\")",
+        "Configure individual requests with the `options` argument.",
+        "\"stripe_version\": \"2019-02-19\",",
+        "client = StripeClient(\"sk_test_...\", max_network_retries=2)",
+        "are automatically generated and added to",
+        "requests, when not given, to guarantee that retries are safe.",
+        "library includes type annotations."
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23. Date is the fetch date; the VERSION file at this commit reads 17.1.0."
+    },
+    {
+      "id": "stripe-sdk-versioning",
+      "url": "https://docs.stripe.com/sdks/versioning?lang=python",
+      "author": "Stripe",
+      "date": "2026-11-23",
+      "title": "How SDK versioning works",
+      "quotes": [
+        "Each SDK version uses the API version that is current at the time of its release to make API requests.",
+        "We support Python 3.9+.",
+        "Here’s the deprecation schedule:",
+        "The same wiki also has the mapping between SDK major versions and the API versions."
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "Page carries no date; date is the day it was fetched. The Python table on it has a 'support dropped' column with a month for each version."
+    },
+    {
+      "id": "stripe-api-create-customer",
+      "url": "https://docs.stripe.com/api/customers/create.md?lang=python",
+      "author": "Stripe",
+      "date": "2026-11-23",
+      "title": "Create a customer (Stripe API reference, Python)",
+      "quotes": [
+        "Creates a new customer object.",
+        "client = StripeClient(\"<<YOUR_SECRET_KEY>>\")",
+        "customer = client.v1.customers.create({",
+        "- `email` (string, optional)",
+        "## Returns"
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "Fetched as the page's Markdown version; the article links https://docs.stripe.com/api/customers/create?lang=python. Date is the fetch date."
+    },
+    {
+      "id": "stripe-error-handling",
+      "url": "https://docs.stripe.com/error-handling?lang=python",
+      "author": "Stripe",
+      "date": "2026-11-23",
+      "title": "Error handling",
+      "quotes": [
+        "stripe.CardError",
+        "stripe.InvalidRequestError",
+        "stripe.APIConnectionError",
+        "stripe.APIError",
+        "stripe.AuthenticationError",
+        "stripe.IdempotencyError",
+        "stripe.PermissionError",
+        "stripe.RateLimitError",
+        "stripe.SignatureVerificationError",
+        "A payment error occurred: Your card was declined.",
+        "An invalid request occurred."
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The nine class names are the nine rows of the Python table under 'Choose a response by error type'. Date is the fetch date."
+    },
+    {
+      "id": "stripe-auto-pagination",
+      "url": "https://docs.stripe.com/api/pagination/auto.md?lang=python",
+      "author": "Stripe",
+      "date": "2026-11-23",
+      "title": "Auto-pagination (Stripe API reference, Markdown version)",
+      "quotes": [
+        "then call `auto_paging_iter()` on the returned list object",
+        "then call `autoPagingIterable()` on the returned list object",
+        "then call `auto_paging_each` on the returned list object",
+        "then call `autoPagingIterator()` on the returned list object",
+        "To use the auto-pagination feature in Node 10+",
+        "Auto-pagination in Go is enabled by default.",
+        "To use the auto-pagination feature in .NET"
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "Seven languages have a paragraph in the Markdown version: Ruby, Python, PHP, Java, Node, Go and .NET. The HTML page at ?lang=python shows only the Python paragraph. Date is the fetch date."
+    },
+    {
+      "id": "stripe-python-changelog",
+      "url": "https://raw.githubusercontent.com/stripe/stripe-python/2bbff430470360a501c2054221036e8dee5977d7/CHANGELOG.md",
+      "author": "Stripe",
+      "date": "2026-11-18",
+      "title": "stripe-python CHANGELOG.md (commit 2bbff43)",
+      "quotes": [
+        "17.1.0 - 2026-11-18",
+        "This release changes the pinned API version to `2026-11-18.endive`."
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23."
+    },
+    {
+      "id": "stripe-python-migration-v15",
+      "url": "https://github.com/stripe/stripe-python/wiki/Migration-guide-for-v15",
+      "author": "Stripe",
+      "date": "2026-11-23",
+      "title": "Migration guide for v15 (stripe-python wiki)",
+      "quotes": [
+        "no longer inherits from",
+        "Upgrade to Python 3.9 or later before updating to the latest SDK version."
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "Wiki page; date is the fetch date. Its sections pair '# Before' and '# After' code."
+    },
+    {
+      "id": "aws-sdk-js-v3-readme",
+      "url": "https://raw.githubusercontent.com/aws/aws-sdk-js-v3/b9c18c5fe1c5bbc104d01f2790aa24f51fee8f5d/README.md",
+      "author": "Amazon Web Services",
+      "date": "2026-11-23",
+      "title": "AWS SDK for JavaScript v3 README (commit b9c18c5, version 3.1175.0)",
+      "quotes": [
+        "with a separate package for each service.",
+        "- v3.968.0 and higher requires Node.js >= 20.",
+        "const client = new DynamoDBClient({ region: \"us-west-2\" });",
+        "In v3, the clients expose paginateOperationName APIs that are written using async generators, allowing you to use async iterators in a for await..of loop."
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23. Date is the fetch date."
+    },
+    {
+      "id": "aws-sdk-js-v3-credentials-node",
+      "url": "https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/setting-credentials-node.html",
+      "author": "Amazon Web Services",
+      "date": "2026-11-23",
+      "title": "Set credentials in Node.js (AWS SDK for JavaScript Developer Guide for SDK Version 3)",
+      "quotes": [
+        "AWS SDK for JavaScript V3 provides a default credential provider chain in Node.js, so you are not required to supply a credential provider explicitly.",
+        "fromEnv()"
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "Page carries no date; date is the day it was fetched. fromEnv() is the first row of the provider table."
+    },
+    {
+      "id": "aws-sdk-js-v3-listtables-command",
+      "url": "https://raw.githubusercontent.com/aws/aws-sdk-js-v3/b9c18c5fe1c5bbc104d01f2790aa24f51fee8f5d/clients/client-dynamodb/src/commands/ListTablesCommand.ts",
+      "author": "Amazon Web Services",
+      "date": "2026-11-23",
+      "title": "ListTablesCommand.ts (commit b9c18c5)",
+      "quotes": [
+        "// smithy-typescript generated code",
+        "@throws {@link InternalServerError} (server fault)",
+        "@throws {@link InvalidEndpointException} (client fault)",
+        "@throws {@link DynamoDBServiceException}"
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23. The file has three @throws lines. The rendered API reference at docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/ loads with JavaScript and was not read as text."
+    },
+    {
+      "id": "aws-sdk-js-v3-error-handling",
+      "url": "https://raw.githubusercontent.com/aws/aws-sdk-js-v3/b9c18c5fe1c5bbc104d01f2790aa24f51fee8f5d/supplemental-docs/ERROR_HANDLING.md",
+      "author": "Amazon Web Services",
+      "date": "2026-11-23",
+      "title": "Error Handling (supplemental docs, commit b9c18c5)",
+      "quotes": [
+        "- An unmodeled error is one that does not appear in the list, but is thrown at runtime by the service.",
+        "Unmodeled errors are created as the default ServiceException class that exists for each AWS service, which the modeled",
+        "LambdaServiceException"
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23."
+    },
+    {
+      "id": "aws-sdk-js-v3-clients",
+      "url": "https://raw.githubusercontent.com/aws/aws-sdk-js-v3/b9c18c5fe1c5bbc104d01f2790aa24f51fee8f5d/supplemental-docs/CLIENTS.md",
+      "author": "Amazon Web Services",
+      "date": "2026-11-23",
+      "title": "SDK Clients (supplemental docs, commit b9c18c5)",
+      "quotes": [
+        "### Retry Strategy `retryStrategy`, `retryMode`, `maxAttempts`",
+        "The SDK's default retry strategy is based on exponential backoff, and only retries",
+        "// time limit (ms) for receiving response.",
+        "requestTimeout: 15_000,"
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23."
+    },
+    {
+      "id": "aws-sdk-js-v3-changelog",
+      "url": "https://raw.githubusercontent.com/aws/aws-sdk-js-v3/b9c18c5fe1c5bbc104d01f2790aa24f51fee8f5d/CHANGELOG.md",
+      "author": "Amazon Web Services",
+      "date": "2026-11-21",
+      "title": "AWS SDK for JavaScript v3 CHANGELOG.md (commit b9c18c5)",
+      "quotes": [
+        "# [3.1175.0](https://github.com/aws/aws-sdk-js-v3/compare/v3.1174.0...v3.1175.0) (2026-11-21)"
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23. The file is about 2.4 MB; only its first 6,000 bytes were read, which hold the 3.1175.0 and 3.1174.0 entries."
+    },
+    {
+      "id": "aws-sdk-js-v3-upgrading",
+      "url": "https://raw.githubusercontent.com/aws/aws-sdk-js-v3/b9c18c5fe1c5bbc104d01f2790aa24f51fee8f5d/UPGRADING.md",
+      "author": "Amazon Web Services",
+      "date": "2026-11-23",
+      "title": "Upgrading Notes (2.x to 3.x) (commit b9c18c5)",
+      "quotes": [
+        "# Upgrading Notes (2.x to 3.x)",
+        "This list is indexed by [v2 config parameters]"
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23."
+    },
+    {
+      "id": "aws-sdk-js-v3-supplemental-docs",
+      "url": "https://raw.githubusercontent.com/aws/aws-sdk-js-v3/b9c18c5fe1c5bbc104d01f2790aa24f51fee8f5d/supplemental-docs/README.md",
+      "author": "Amazon Web Services",
+      "date": "2026-11-23",
+      "title": "Supplemental documentation README (commit b9c18c5)",
+      "quotes": [
+        "This folder contains handwritten documentation from the developers of this SDK to supplement the programmatically generated documentation."
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23."
+    },
+    {
+      "id": "openai-python-readme",
+      "url": "https://raw.githubusercontent.com/openai/openai-python/7596fb8b75bd5b95dbc618d148fb8b0f96ca2aea/README.md",
+      "author": "OpenAI",
+      "date": "2026-11-23",
+      "title": "OpenAI Python API library README (commit 7596fb8, version 3.58.0)",
+      "quotes": [
+        "It is generated from our [OpenAPI specification](https://github.com/openai/openai-openapi).",
+        "from any Python 3.10+ application.",
+        "pip install openai",
+        "# This is the default and can be omitted",
+        "Stream consumption is not automatically retried, because replaying a request could duplicate output already delivered to your application.",
+        "Certain errors are automatically retried 2 times by default, with a short exponential backoff.",
+        "429 Rate Limit, and >=500 Internal errors are all retried by default.",
+        "By default requests time out after 10 minutes.",
+        "| 400 | `BadRequestError` |",
+        "| N/A | `APIConnectionError` |",
+        "This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:",
+        "Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:"
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23. The error table has eight rows. Date is the fetch date."
+    },
+    {
+      "id": "openai-python-version-policy",
+      "url": "https://raw.githubusercontent.com/openai/openai-python/7596fb8b75bd5b95dbc618d148fb8b0f96ca2aea/PYTHON_VERSION_POLICY.md",
+      "author": "OpenAI",
+      "date": "2026-11-23",
+      "title": "Python Version Support Policy (commit 7596fb8)",
+      "quotes": [
+        "Minimum Python version increases:",
+        "- ship in an SDK minor release, not a normal patch release;"
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23."
+    },
+    {
+      "id": "openai-python-api-md",
+      "url": "https://raw.githubusercontent.com/openai/openai-python/7596fb8b75bd5b95dbc618d148fb8b0f96ca2aea/api.md",
+      "author": "OpenAI",
+      "date": "2026-11-23",
+      "title": "api.md (commit 7596fb8)",
+      "quotes": [
+        "client.completions.<a href=\"./src/openai/resources/completions.py\">create</a>(\\*\\*<a href=\"src/openai/types/completion_create_params.py\">params</a>) -> <a href=\"./src/openai/types/completion.py\">Completion</a>"
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23. Counted 377 lines that start with '- <code' and all 377 contain '->'; 351 of them carry an HTTP verb and path in a title attribute and 26 are helper methods."
+    },
+    {
+      "id": "openai-python-changelog",
+      "url": "https://raw.githubusercontent.com/openai/openai-python/7596fb8b75bd5b95dbc618d148fb8b0f96ca2aea/CHANGELOG.md",
+      "author": "OpenAI",
+      "date": "2026-11-23",
+      "title": "openai-python CHANGELOG.md (commit 7596fb8)",
+      "quotes": [
+        "## [3.58.0](https://github.com/openai/openai-python/compare/v3.57.0...v3.58.0) (2026-11-23)"
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23."
+    },
+    {
+      "id": "openai-python-httpx2-migration",
+      "url": "https://raw.githubusercontent.com/openai/openai-python/7596fb8b75bd5b95dbc618d148fb8b0f96ca2aea/httpx2.md",
+      "author": "OpenAI",
+      "date": "2026-11-23",
+      "title": "Migrating to HTTPX2 (commit 7596fb8)",
+      "quotes": [
+        "# Migrating to HTTPX2",
+        "This guide explains what changes for applications that interact with the SDK's HTTP layer."
+      ],
+      "connects": [
+        "sdk-documentation"
+      ],
+      "_note": "The article links the github.com/.../blob/<same commit>/ page for this file; this raw URL is the same file at the same commit, fetched 2026-11-23."
+    },
+    {
+      "id": "anthropic-demystifying-evals",
+      "url": "https://www.anthropic.com/research/demystifying-evals-for-ai-agents",
+      "author": "Mikaela Grace, Jeremy Hadfield, Rodrigo Olivares and Jiri De Jonghe (Anthropic)",
+      "date": "2026-01-09",
+      "title": "Demystifying evals for AI agents",
+      "quotes": [
+        "Published Jan 9, 2026",
+        "is a single test with defined inputs and success criteria.",
+        "Each attempt at a task is a trial.",
+        "is logic that scores some aspect of the agent’s performance.",
+        "is the complete record of a trial",
+        "The outcome is the final state in the environment at the end of the trial.",
+        "we’re evaluating the harness and the model working together",
+        "grade what the agent produced, not the path it took",
+        "agents regularly find valid approaches that eval designers didn’t anticipate",
+        "Test both the cases where a behavior should occur and where it shouldn't.",
+        "We recommend choosing deterministic graders where possible, LLM graders where necessary or for additional flexibility, and using human graders judiciously for additional validation.",
+        "Production monitoring kicks in post-launch to detect distribution drift and unanticipated real-world failures."
+      ],
+      "connects": [
+        "ai-agent-evaluation"
+      ]
+    },
+    {
+      "id": "tau-bench-paper",
+      "url": "https://arxiv.org/html/2406.12045v1",
+      "author": "Shunyu Yao, Noah Shinn, Pedram Razavi and Karthik Narasimhan",
+      "date": "2024-06-17",
+      "title": "τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains",
+      "quotes": [
+        "We employ an efficient and faithful evaluation process that compares the database state at the end of a conversation with the annotated goal state.",
+        "i.i.d. task trials are successful, averaged across tasks"
+      ],
+      "connects": [
+        "ai-agent-evaluation"
+      ],
+      "notes": "The definition reads \"the chance that all k i.i.d. task trials are successful, averaged across tasks\"; the page renders k as math, so the ledger pins the words after it. The abstract page at the cited address gives the submission date, 17 Jun 2024.",
+      "cited_as": "https://arxiv.org/abs/2406.12045"
+    },
+    {
+      "id": "openai-swe-bench-verified",
+      "url": "https://openai.com/index/introducing-swe-bench-verified/",
+      "author": "OpenAI",
+      "date": "2024-08-13",
+      "title": "Introducing SWE-bench Verified",
+      "quotes": [
+        "OpenAI August 13, 2024",
+        "A proposed edit is evaluated by running both the FAIL_TO_PASS and PASS_TO_PASS tests.",
+        "Both sets of tests are required to pass for the edit to fully resolve the original GitHub issue.",
+        "Each sample also has associated PASS_TO_PASS tests, which pass both before and after the PR is merged"
+      ],
+      "connects": [
+        "ai-agent-evaluation"
+      ]
+    },
+    {
+      "id": "openai-evals-guide",
+      "url": "https://developers.openai.com/api/docs/guides/evals",
+      "author": "OpenAI",
+      "date": "2026-11-23",
+      "title": "Working with evals (OpenAI API docs, read 2026-11-23; the page carries no publication date)",
+      "quotes": [
+        "OpenAI is deprecating the Evals platform.",
+        "existing users on October 31, 2026, and the platform is scheduled to shut down on November 30, 2026."
+      ],
+      "connects": [
+        "ai-agent-evaluation"
       ]
     }
   ],

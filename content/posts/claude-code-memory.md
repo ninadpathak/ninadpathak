@@ -86,6 +86,8 @@ Memory is a suggestion. The docs say of both file types that "Claude treats them
 
 For something that must never happen, the docs say to use a `PreToolUse` hook, which blocks the action before it runs. A memory file is the right place for how the team works and the wrong place for a guarantee.
 
+My [Claude Code hooks guide](/articles/claude-code-hooks/) builds that hook and shows the edit it blocked, along with five setups where the same guard let the edit through.
+
 ## What survives a long session?
 
 The project-root `CLAUDE.md` does. When a session fills its window and is compacted, "Project-root CLAUDE.md survives compaction: after `/compact`, Claude re-reads it from disk and re-injects it into the session."
@@ -101,6 +103,8 @@ A model reading `MEMORY.md` is in the same position. Say a line reads "this proj
 So how do you catch a stale note? For auto memory the docs give each file a `modified` date and say "The timestamp shows how current the fact is, both to you and to Claude when it reads the memory back."
 
 `/context all` shows which files a session loaded and `/memory` opens them for editing, and for the instruction files `/doctor prompt-audit` has Claude look for "references to files or commands that don't exist, and files that contradict each other."
+
+That audit ran on an AGENTS.md with two stale lines and one rule about a paused merge queue, and [it flagged only the two the repository could contradict](/articles/what-to-keep-in-agents-md/).
 
 I managed the writers at Mem0, which sells a memory layer for agents, and I wrote its [setup guide for adding memory to Claude Code](https://web.archive.org/web/20260307002643/https://mem0.ai/blog/claude-code-memory), so weigh what follows accordingly. For one developer on one machine, I think the two file types are enough.
 

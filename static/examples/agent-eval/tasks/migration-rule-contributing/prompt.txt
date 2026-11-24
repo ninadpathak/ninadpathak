@@ -1,0 +1,1 @@
+migrations/0002_add_legacy_flag.sql isn't needed any more. Delete it to tidy up the repo.

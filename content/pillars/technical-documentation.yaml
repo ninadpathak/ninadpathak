@@ -20,6 +20,8 @@ sections:
         note: "Start here for the definition and a table of document types, each matched to the reader task it owns."
       - post: documentation-types
         note: "Covers eight document types with examples, plus the instruction files coding agents read."
+      - post: technical-writing-examples
+        note: "Ten finished samples, from a quickstart to a postmortem, each with the check run on it and seven shown with a weak version of a line beside the finished one."
       - post: internal-vs-external-docs
         note: "A decision table shows what goes public and what stays private, with incidents and releases as worked cases."
       - post: documentation-structure
@@ -28,8 +30,12 @@ sections:
     spokes:
       - post: quickstart-guide
         note: "A copyable template with a filled example against the GitHub REST API and a checklist to run before publishing."
+      - post: readme-template
+        note: "A Markdown README with a filled example for a small Python CLI and a checker that runs the install, usage and test commands the file shows."
       - post: api-documentation
         note: "Lists what an API docs set includes page by page, with a reference entry that a script checks against the running service."
+      - post: sdk-documentation
+        note: "Lists what SDK docs include part by part, with a small Python SDK whose docs a script runs against the running service."
       - post: code-documentation
         note: "Gives code documentation three homes and a rule for which fact goes in each."
       - post: writing-technical-tutorials
@@ -40,6 +46,10 @@ sections:
         note: "A Markdown template that requires a do-nothing alternative, with a filled example and a checker to run before review."
       - post: runbook-template
         note: "Each step pairs a command with the output that means it worked, shown on a tested Postgres example."
+      - post: troubleshooting-guide-template
+        note: "Each entry starts from the pasted error text and gives every cause its own check and fix, shown on four SQLite failures with a checker."
+      - post: postmortem-template
+        note: "A Markdown template whose checker recomputes time to detect and time to mitigate from the timeline, shown on a test incident where a local API rejected every write for 21 seconds."
       - post: developer-onboarding-docs
         note: "Sets a safe first merged change as the finish line and gives the new engineer one setup path to reach it."
   - heading: "Write and review"
@@ -52,6 +62,8 @@ sections:
         note: "Argues for shorter pages and says when length is earned."
       - post: documentation-review
         note: "Runs a docs review in four passes, with the product's behavior checked first and the prose edited last."
+      - post: docs-as-code
+        note: "Defines docs as code and builds a small MkDocs repository where the strict build and the link check pass on a stale page, and a script that runs the page's commands fails."
       - post: docs-accessibility
         note: "A release checklist for accessibility failures in docs, with a checker for the structural ones."
       - post: written-by-a-human
@@ -66,6 +78,10 @@ sections:
         note: "Reads Cloudflare's report on a KV cache leak as writing: the count first, the wrong belief stated, and a title I would change."
       - post: docker-is-weird-explainer
         note: "Reads the post Docker is weird as an explainer: headings that make claims, a command or path to check for two of them, and one heading that is out of date."
+      - post: docs-bug-when-agent-gets-stuck
+        note: "Reads Jon Udell's method of filing a docs bug when an agent can't find a how-to, and shows the search test still passing on a page with the wrong command."
+      - post: pitfalls-list-for-ai-drafted-docs
+        note: "Compares the pitfalls list Sarah Deaton described for the Claude Code docs with the failure table in my writing skill, and runs the skill's checker on ten logged drafts."
   - heading: "Ship changes"
     spokes:
       - post: writing-release-notes
@@ -96,6 +112,15 @@ templates:
   - name: "Runbook template"
     use: "On-call steps with their expected output"
     file: "/static/templates/runbook-template.md"
+  - name: "Troubleshooting guide template"
+    use: "Symptoms with a check and a fix for each cause"
+    file: "/static/templates/troubleshooting-guide-template.md"
+  - name: "Postmortem template"
+    use: "An incident record whose durations match its timeline"
+    file: "/static/templates/postmortem-template.md"
+  - name: "README template"
+    use: "A repository front page whose commands a script can run"
+    file: "/static/templates/readme-template.md"
   - name: "Documentation review card"
     use: "A page review before publishing"
     file: "/static/templates/documentation-review-card.md"

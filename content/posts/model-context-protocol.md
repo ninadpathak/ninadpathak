@@ -179,6 +179,8 @@ A coding agent with a terminal, such as Claude Code, can run `gh --help` and lea
 
 Other commenters in the thread said a good CLI or an ordinary API does the same job, and for a small case they're right. An application with two fixed tools can define them with plain function calling and deploy nothing extra, and I wouldn't add an MCP server to it.
 
+For the plain API side of that question, [MCP vs API](/articles/mcp-vs-api/) exposes one search function as an HTTP API and as an MCP server, and shows what each one sends back for a search and for a bad argument.
+
 ## Where does MCP fit in an agent harness?
 
 Inside an agent harness, MCP is how the tool registry gets tools that somebody else wrote and runs. The rest of the [agent harness](/articles/agent-harnesses/) is still your code: it runs the loop, decides what goes into the context window and asks the user before a risky tool call.

@@ -34,6 +34,8 @@ sections:
         note: "Explains MCP as it works after the 2026 stateless revision, with the messages printed from a running server."
       - post: mcp-server-tutorial
         note: "Builds a docs search server in Python and tests it without a model."
+      - post: mcp-vs-api
+        note: "Exposes one search function as an HTTP API and as an MCP server, and shows what each sends back for a search and for a bad argument."
   - heading: "A single agent or several"
     spokes:
       - post: multi-agent-vs-single-agent
@@ -44,6 +46,8 @@ sections:
         note: "Covers the error patterns that break agents in production and the handling that contains them."
       - post: ai-agent-failures
         note: "Catalogs why agents fail in production and what the field is doing about it."
+      - post: ai-agent-evaluation
+        note: "Grades Claude Code on eight small tasks, five runs each, and shows a run that passed its check for the wrong reason."
 bridges:
   - hub: agent-memory
     text: "The loop's remember step has a topic of its own, and [AI agent memory](/articles/agent-memory/) covers what gets written and read back."

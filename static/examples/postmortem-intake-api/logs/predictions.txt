@@ -1,0 +1,16 @@
+Predictions written 2026-11-23T19:49:30Z, before the first run that reaches the file-size limit.
+The service has only been run for two smoke tests of 6 and 13 seconds on port 8472.
+
+Setup for the run: service started under "ulimit -f 2048" (2 MiB per file), load.py at about
+10 requests a second (8 writes), monitor.py polling every 5 seconds.
+
+1. The database file will reach 2 MiB between 3 and 4 minutes after the load starts
+   (smoke test: 43 writes made a 53,248-byte file, about 1.2 KB a write, 8 writes a second).
+2. Once it does, POST /events will return 500 with the SQLite text "disk I/O error", and
+   every write after the first failure will fail. (Unsure: it might say "database or disk is full".)
+3. GET /events/latest will keep returning 200.
+4. GET /health will keep returning 200, so the health probe will not alert.
+5. The Intake5xxRate alert will print 10 to 15 seconds after the first failed write.
+6. "prlimit --fsize" on the running process will be refused, because bash's ulimit sets the
+   hard limit too, so raising the limit will need a restart.
+7. After a restart under a higher limit the database will open with no repair and writes will work.

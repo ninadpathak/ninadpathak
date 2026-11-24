@@ -61,6 +61,8 @@ Each of those runs passed the runbook's own final check, that the application co
 
 So the account is also how you find out that some of the incidents in the agent's 95% were closed badly. Finding bad closes is the concern of [my page on why AI agents fail](/articles/ai-agent-failures/).
 
+Jon Udell uses the same kind of record for documentation, where an MCP server's log of an agent's failed searches becomes [the reproduction for a docs bug](/articles/docs-bug-when-agent-gets-stuck/).
+
 ## The runbook is still for people
 
 If you take the first remedy and give people some incidents on purpose, they need something to practise from. They practise from the runbook, and the runbook has to work for a person who hasn't handled that kind of incident in months.

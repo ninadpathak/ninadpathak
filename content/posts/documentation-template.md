@@ -102,6 +102,8 @@ For a command-line tool, the same table works with one row per option: the allow
 
 Write the troubleshooting page as a table that tells the reader what to do for each state they might be in. The blank starter includes the page, and you supply the states and actions from your own product.
 
+A state table suits a failure with one known cause. When readers arrive with an error message and several possible causes, the [troubleshooting guide template](/articles/troubleshooting-guide-template/) starts each entry from the pasted error text and gives every cause its own check and fix.
+
 The filled example makes one failure happen on purpose. The service stores the request below and then closes the connection without sending a response:
 
 ```bash
@@ -148,6 +150,8 @@ On my run, with MkDocs 1.6.1, the validator printed a `PASS` line for each of it
 
 Those five commands never send a request to your product. The behavior test in the filled example is `node check.mjs`, and it doesn't test the starter's publishing setup.
 
+My [docs-as-code example](/articles/docs-as-code/) shows the same split on a MkDocs site, where the strict build passed on a stale usage page and a script that runs the page's commands failed.
+
 | Change | Page to review | Evidence to repeat |
 | --- | --- | --- |
 | Startup command changes | Getting started | Clean-directory startup and health request |
@@ -160,6 +164,8 @@ When one of those changes reaches users, release notes built on the [release not
 Writing the request guide, reference and troubleshooting pages this template holds is work I take on, described under [developer documentation](/services/developer-documentation/).
 
 I'd also give each filled page a named owner, and keep the product change that triggers its review next to that name.
+
+My [technical writing examples](/articles/technical-writing-examples/) page shows a weak version of a line beside the finished one for seven samples, including an error message from this export service.
 
 ## FAQ
 

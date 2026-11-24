@@ -138,6 +138,8 @@ A dictionary of 900 words suits a fleet of aircraft maintained from one set of m
 
 A script can't check whether the page helps. Sentence rules make text readable, and a readable page can still answer a question nobody asked.
 
+A script can't check voice either. When I [reran the brief behind my essay skill's eleven logged drafts](/articles/eleven-rejected-essay-drafts/), a script could list one sentence pattern in a model's draft, and I had to read each run to find the narrator it had invented.
+
 <figure class="np-figure">
   <a class="np-figure-zoom" href="/static/images/diagrams/technical-writing-for-engineers/docs-8020.svg"><picture><source media="(max-width: 712px)" srcset="/static/images/diagrams/technical-writing-for-engineers/docs-8020.narrow.svg" width="288" height="792"><img class="np-has-narrow" src="/static/images/diagrams/technical-writing-for-engineers/docs-8020.svg" width="720" height="464" alt="Practices that reach the reader are leading with the task, code that copies and runs, and a documentation update in every feature pull request. A style guide and a content calendar are drawn muted inside a cluster labelled ceremony and do not connect to the reader, because they matter only once the others are in place." loading="lazy" decoding="async"></picture></a>
   <figcaption>The practices that reach the reader are the task up front, code that runs and a docs change in the same pull request.</figcaption>

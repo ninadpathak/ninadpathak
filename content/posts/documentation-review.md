@@ -51,6 +51,10 @@ Reject a row when its source is the draft itself, somebody's memory of a demo, o
 
 If you ask an AI model about the product before you ask an engineer, treat its answers as questions to put to the engineer. A plausible explanation from a model is not a verification source.
 
+Jon Udell's fix for a how-to that Claude couldn't find was written by an agent and tested with a search, and [a search test still passes when the page's command is wrong](/articles/docs-bug-when-agent-gets-stuck/).
+
+When a model's draft does get a fact wrong, write down how it happened. My [comparison of the Claude Code docs pitfalls list with my own](/articles/pitfalls-list-for-ai-drafted-docs/) covers a list of traced errors that later pull requests are checked against.
+
 ### Run what the page documents
 
 Start in the environment the page promises its reader. Follow the released UI path, or run the API calls, CLI commands and code samples with the inputs the page gives.
@@ -312,6 +316,8 @@ External link checks need retries and a short list of allowed exceptions, becaus
 A check should report the file, the rule and the command that reproduces the failure locally. It shouldn't call a page "high quality" because it counted the headings.
 
 Whether the product matches the page, and whether the page helps its reader, still take a person to approve.
+
+A page that shows a command with its output is the exception. My [docs-as-code example](/articles/docs-as-code/) has a script that runs each of those commands in CI and fails when the page is stale.
 
 Writing a product's docs so they pass a review like this one is work I take on, described under [developer documentation](/services/developer-documentation/).
 

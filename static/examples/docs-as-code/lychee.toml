@@ -1,0 +1,6 @@
+# Options for the link check. Run it as: lychee --root-dir "$PWD/site" site
+no_progress = true
+mode = "plain"
+extensions = ["html"]
+include_fragments = "anchor-only"
+index_files = ["index.html"]

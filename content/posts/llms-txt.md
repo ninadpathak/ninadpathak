@@ -52,6 +52,10 @@ Ahrefs notes that its customers skew technical and SEO-aware, and it didn't chec
 
 Fern's figures for the API docs it hosts point the other way: the file is fetched there, by coding agents, as an index. I added this paragraph after reading that report, and [agents reading docs](/articles/agents-reading-docs/) sets the two studies side by side.
 
+Vercel and Ora's trace of 1,033 agent runs adds a detail about how the file gets found: agents reached llms.txt through a link in 356 of 416 fetches and guessed the path in the other 60. So I'd [link llms.txt from the homepage](/articles/vercel-agent-study-by-harness/), in the `head` or the footer.
+
+Mintlify's benchmark of 2,400 agent runs tested the same link on the Markdown copy of each page. When I [recomputed its published runs](/articles/mintlify-llms-txt-benchmark/), a pointer to llms.txt on each Markdown page cut 404s per task to 0.13 from 1.42.
+
 ## Four real files, checked against the proposal
 
 The table comes from the same validation engine that powers the [llms.txt validator](/llms-txt-validator/), run on four public files fetched with curl at 14:58 UTC on 2026-10-22. Each owner can change its file at any time, and Stripe's server varies its response by request headers, so these counts are a snapshot of what that request received:

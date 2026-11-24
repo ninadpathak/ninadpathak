@@ -118,6 +118,8 @@ The server never calls `print()`. The [stdio transport spec](https://modelcontex
 
 A refused path raises `ToolError` on purpose. SDK 2.3.0 sends a `ToolError` message to the client as an error result, and it turns any other exception into a generic "Error executing tool" with a crash traceback in the server log.
 
+The same `search_docs` function also runs behind a plain HTTP API in [MCP vs API](/articles/mcp-vs-api/), which puts the API's 400 response beside this server's error result.
+
 ## How to keep tool arguments inside one folder
 
 Resolve the path first, then check that the resolved location sits under the folder, because a tool's arguments come from the model and arrive as untrusted strings. `inside_docs()` calls `resolve()` before comparing, which collapses `..` segments and follows symlinks, then checks that the real location sits under `DOCS_DIR`.

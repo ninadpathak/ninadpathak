@@ -913,3 +913,61 @@ Left for Ninad from pass C: the first-person questions listed with batch 11, the
 
 After the set 9 review: the Mem0 disclosure on rag-vs-memory uses the confirmed wording with no join month ("I wrote 11 guides for Mem0 and ran its team of 13 writers in early 2026"). The only other place that gives a join month is `content/work/mem0.md`, a work page outside the posts and topic pages. The quote-chain section of shorter-documentation was rebuilt around his claim with one quote, the Carroll paragraph was cut because the book was never fetched, and code-documentation shows the current five-line docstring and pydoc output.
 
+
+## Batch 12 (2026-11-23, branch writing-batch-12)
+
+Twenty new pieces from the topic list of November 23: ten essays and ten search articles. Eighteen are `status: published` and were pushed to main on November 24. Two are held as drafts and were left out of that commit, because this repository is public and a draft file in it can be read by anyone. Every piece passed `check_prose.py` and the two-sentence build rule, and the build and the test suite pass with the eighteen in place.
+
+| Piece | Topic | What it rests on | Run or checked on November 23 |
+| --- | --- | --- | --- |
+| vercel-agent-study-by-harness (essay) | ai-search-optimization | Vercel and Ora's guide of August 28 and its public `traces.csv` at commit a6b0976 | Headline figures recomputed; split by harness and model; six homepages fetched with curl for an llms.txt link |
+| mintlify-llms-txt-benchmark (essay) | ai-search-optimization | Mintlify's post of July 17 and its repository at commit 5f055a8 | Four of five Tier 0 commands reproduce; wrong answers and cost per 404 computed from the rows; two live Mintlify fetches |
+| docs-bug-when-agent-gets-stuck (essay) | technical-documentation | Jon Udell's InfoWorld article of August 26, XMLUI's repository at 57bc5f2, pull request 3732 | The tutorial's docs search server run on three states of a test folder; Udell's example run in XMLUI 0.14.28; ten how-to addresses fetched |
+| pitfalls-list-for-ai-drafted-docs (essay) | technical-documentation | Tom Johnson's podcast with Sarah Deaton of August 2; the failure table and feedback log in `skills/writing` | `check_prose.py` run on the ten logged drafts; the Claude Code settings reference counted |
+| why-are-coding-agents-so-dumb-notes (essay) | coding-agents | Michael Lynch's post of October 9, HarnessTax, arXiv 2609.20804, the Claude Code, Codex and OpenCode docs | Claude Code 2.1.330 sandbox fallback and `failIfUnavailable`; `CLAUDE_CODE_SUBAGENT_MODEL` |
+| what-to-keep-in-agents-md (essay) | coding-agents | PostHog's newsletter post of August 31, Przemek's post of September 23, Anthropic's docs and changelog | `/doctor prompt-audit` on a four-rule AGENTS.md, twice; the telemetry canary in eleven runs |
+| claude-code-team-code-review (essay) | coding-agents | Anthropic's post of October 15, its Hacker News thread, the code review docs | `/code-review` on a branch with three planted defects, four runs |
+| eleven-rejected-essay-drafts (essay) | developer-experience | The feedback log, `decisions.md` and `test-rounds.md` in `skills/writing/references/essay-research` | Four briefs run three times each on Haiku 5.5 |
+| troubleshooting-guide-template | technical-documentation | Cloudflare's style guide, HelpDocs, Docsie, SQLite's docs | Four SQLite failures reproduced on 3.45.1; checker pass and fail |
+| postmortem-template | technical-documentation | Google's SRE book, PagerDuty's and Atlassian's templates | A test incident on a local API under a 2 MiB file limit; checker pass and fail |
+| readme-template | technical-documentation | GitHub's README docs, Make a README, a census of 20 READMEs | Checker with `--run` on the example project and three broken copies |
+| technical-writing-examples | technical-documentation | The site's own tested examples and their git history | Every checker rerun; the runbook's seven steps on Postgres 16.15 |
+| docs-as-code | technical-documentation | Write the Docs' guide, MkDocs 1.6.1, lychee 0.24.2, Vale 3.28.1 | A six-commit example repository; the workflow file was linted and not run on GitHub |
+| sdk-documentation | technical-documentation | The Stripe, AWS and OpenAI SDK repositories at pinned commits | A Python SDK for writing-lab; checker pass and two fails |
+| mcp-vs-api | ai-agents | The MCP specification of 2026-07-28 | One search function as an HTTP API and an MCP server, every call captured with curl |
+| ai-agent-evaluation | ai-agents | Anthropic's evals post of January 9, the tau-bench paper, SWE-bench Verified | 95 graded headless runs of Claude Code 2.1.330 across three variants |
+| claude-code-hooks | coding-agents | Anthropic's hooks reference and guide | Two hooks and five failing setups in Claude Code 2.1.330 |
+| claude-code-skills | coding-agents | Anthropic's skills docs, the Agent Skills specification, `skills/writing` | 23 headless runs for when the skill loads |
+
+Held as drafts, for Ninad to decide. Neither file is in the repository; both sit untracked in the working copy the batch was written in:
+
+- `ninety-posts-no-human-clicks`. The essay is built on this site's Search Console figures, and the services section above records "Don't show my Search Console numbers because they are extremely tiny." It stays a draft until he says the instruction does not cover an essay about those numbers. Its title's "human" is the measurement script's label, and the essay says no click could be traced to a stranger's search.
+- `old-posts-read-like-a-b2b-blog`. It quotes old sentences from his posts with the commits that added and removed them, including two first-person stories the rewrite cut as unbacked, and it says the engineer-to-writer page waits on facts only he can supply. The linked commits show their authors.
+- To publish either: add the file to `content/posts/`, set `status: published`, add it to `content/pillars/developer-experience.yaml`, and add two inbound links from posts in that topic. The two essays link each other, so they ship together or the link comes out.
+
+Positions in the essays are Claude's drafts and need his confirmation, as with batch 11. The ones that change a recorded view of his: the Mintlify essay says that for coding agents he would stop calling the evidence that models fetch llms.txt thin; the Vercel essay adds "link llms.txt from the homepage"; the code review essay says a documentation change should not merge without a person reading it.
+
+Existing pages the batch found out of date, not yet fixed:
+
+- `claude-md` says direct AGENTS.md support needs version 2.1.277 in three places. Anthropic's docs say sessions with telemetry off, or on Bedrock and similar providers, need 2.1.281, and that `/memory` lists a directly read AGENTS.md only from 2.1.280.
+- `model-context-protocol` says a client that still speaks a 2024 protocol version cannot use the SDK 2.3.0 server. The stdio server answered an old-format `initialize` with `protocolVersion: "2024-11-05"` in the `mcp-vs-api` runs.
+- `claude-code-memory` quotes "context, not enforced configuration"; the memory docs now read "They aren't enforced configuration".
+- `documentation-review`'s FAQ says automation cannot confirm that the product matches a claim on the page; `docs-as-code` shows a script confirming one kind of claim, a command with its output.
+- The AGENTS.md template's header comment says Gemini CLI reads AGENTS.md, and `coding-agent-memory` says Gemini CLI needs `context.fileName` set.
+
+Fixed in passing: the last command in `static/examples/github-rest-quickstart.md` sent a HEAD request to `/rate_limit`, which GitHub answered with 404 on November 23, so it printed nothing. The line now uses a GET and `jq`.
+
+Rules this batch added or ran into:
+
+- A ledger quote is recorded as the page's rendered text, without Markdown syntax, and against the URL the verifier can fetch. A JavaScript-rendered page is recorded at the data file its text comes from, with the cited address in `cited_as`.
+- Before a topic gains a post, check that some post in the topic does not link each existing post in its body, or a related card has nowhere to go and `test_related_cards_stay_in_the_hub_and_add_links_the_body_lacks` fails.
+- A link's anchor may not be the full title of the page it points at.
+- An essay that uses this site's own traffic figures, or quotes a cut passage from an older post, is held as a draft for his decision.
+- A new post must score zero on `rule_checker.py` and on `tools/audit_claims.py --paths`, and have a row in `page-pov-audit.md`, before it is pushed, because CI compares a new post against a baseline of zero. The build and the test suite do not run these three gates.
+- A test, build, count or measurement made in a drafting session is written with the run as the subject ("The audit ran twice on Haiku 5.5"), since he did not make the run himself. Opinions and reading stay in first person.
+- Money is written in cents, or in words for whole dollars, and a change is written "to 45.4% from 68.6%".
+- A counted "three" that the argument needs carries an `evidence-three` receipt that says where the count comes from.
+
+Not done: share cards for the eighteen new posts (each keeps the site default image until it is added to `tools/image-brand/og-cards.json` and rendered), films, and `content/lastmod.json`, which the lastmod bot writes.
+
+Facts that move: Claude Code 2.1.330 and the `haiku` and `sonnet` aliases; MCP SDK 2.3.0 and Inspector 2.16.0; the GitHub star census of November 23; Hacker News scores; the XMLUI how-to counts at commit 57bc5f2; OpenAI's Evals platform shutdown date of November 30, 2026; every vendor docs sentence quoted.

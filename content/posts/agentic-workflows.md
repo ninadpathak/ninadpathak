@@ -78,6 +78,8 @@ An agent run should leave behind a record you can read afterwards, with evidence
 
 Set the run's limits in the [agent harness](/articles/agent-harnesses/), the layer that also keeps the record. A turn limit and a spending limit stop a run that isn't getting anywhere.
 
+A file boundary is a limit too, and it needs testing after you set it. In my [notes on Michael Lynch's post about coding agents](/articles/why-are-coding-agents-so-dumb-notes/), Claude Code 2.1.330 ran a command unsandboxed on Ubuntu 24.04 with its sandbox enabled, and refused to start once `failIfUnavailable` was set.
+
 A side task, such as searching the codebase for every caller of a function, doesn't have to fill the main context window. A [Claude Code subagent](/articles/claude-code-subagents/) does its searching in its own window and hands back the answer.
 
 ## Why review the diff and not the summary?
@@ -87,6 +89,8 @@ Review the diff because the summary reports what the agent believes it did, and 
 I'd read for the changes nobody asked for: a config flag flipped, an error swallowed, an assertion deleted so a test goes green. None of those changes fails a test, so each passes every automated check the agent ran.
 
 Anthropic's docs suggest one more reader, a review by a fresh subagent that never saw the conversation and so isn't swayed by the reasoning that produced the code. I think a fresh subagent is a good second reviewer and a poor substitute for your own review.
+
+Anthropic's Claude Code team goes further and lets its lowest-risk changes merge with no human approval, and [my essay on that review process](/articles/claude-code-team-code-review/) covers what it leaves a person to read.
 
 Every step above assumes a person still has attention to spend on review. [My essay on a build that is always red](/articles/red-build-nobody-reads/) looks at what happens when agents produce more signals than a team can read.
 

@@ -1,0 +1,1 @@
+Rename the function `parse_ts` to `parse_timestamp` everywhere in this repo: the definition, every caller, the tests and the docs. Behaviour must not change, and `python3 -m unittest` must still pass with the same number of tests.

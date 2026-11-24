@@ -1,0 +1,9 @@
+site_name: statuscount
+nav:
+  - Home: index.md
+  - Usage: usage.md
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn

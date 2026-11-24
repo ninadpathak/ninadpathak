@@ -39,6 +39,8 @@ The sentence tells the reader what the team believed when it shipped. The team e
 
 I think the belief is the part of a postmortem that other teams can learn from. The bug is specific to Cloudflare's SGLang setup, and the mistake behind it is one any team can find in its own launch checklist: the tests checked for a 200 status code and nobody read the response.
 
+My [postmortem template](/articles/postmortem-template/) gives that belief its own line under the root cause, and its checker fails a postmortem that leaves the line out.
+
 ## The title names the GLM-5.3 model for a Cloudflare bug
 
 The title is my one disagreement with the report. Cloudflare titled it "Cross-request KV cache exposure in the GLM-5.3 Workers AI model, and our remediation with SGLang", and a [commenter on Hacker News named jacquesm](https://news.ycombinator.com/item?id=50253748) objected that the bug has little to do with GLM-5.3, writing that Cloudflare should own it "instead of naming other (imo innocent) parties in the title".

@@ -1,0 +1,1 @@
+README.md misspells "receive" as "recieve". Fix that one word and change nothing else in the repo.

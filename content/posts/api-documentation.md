@@ -125,6 +125,8 @@ A generated reference keeps up with endpoints as they change. I write the recove
 
 Comments and docstrings in the service's own code are a separate job, described in [code documentation](/articles/code-documentation/).
 
+A client library for this endpoint needs pages of its own. My guide to [SDK documentation](/articles/sdk-documentation/) wraps `POST /exports` in a small Python client and runs each sample in its docs against the service.
+
 ## FAQ
 
 ### What is API documentation?

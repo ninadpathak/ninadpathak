@@ -51,6 +51,8 @@ Why? Because the Anthropic team put a filter in front of the person, with a Clau
 
 What struck me is the reason they give for keeping that filter quiet: "Noise costs more when the author is an agent." A person waves off a small complaint, and an agent acts on it and opens another round.
 
+A filter also hides things, and in [my test of the team's local review command](/articles/claude-code-team-code-review/) a one-line skip rule removed two true findings from the report.
+
 ## Ration what reaches a person
 
 The on-call fix was to send fewer pages, and Ewaschuk's list has the test I'd apply to everything an agent can now produce faster than a team can read: "Every page should be actionable."

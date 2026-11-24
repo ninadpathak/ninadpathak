@@ -36,6 +36,10 @@ sections:
     spokes:
       - post: agents-reading-docs
         note: "A close read of Fern's claim that agents make over half the requests to the docs it hosts, and what the numbers leave out."
+      - post: vercel-agent-study-by-harness
+        note: "Recomputes the 1,033 agent runs Vercel and Ora traced and splits them by harness, where every Markdown request comes from one of the two."
+      - post: mintlify-llms-txt-benchmark
+        note: "Regenerates Mintlify's 2,400-run llms.txt benchmark from its published rows, where the link removes the 404s and Markdown saves more of the cost."
 bridges:
   - hub: technical-documentation
     text: "These checks cannot help a page that ordinary search fails to crawl, so the SEO checklist in the [technical documentation](/articles/technical-documentation/) topic comes first."

@@ -54,5 +54,5 @@ Apache-2.0
 
 ## Next steps
 
-- Check how many requests you have left: `curl -sS -I https://api.github.com/rate_limit | grep -i x-ratelimit-remaining`.
+- Check how many requests you have left: `curl -sS https://api.github.com/rate_limit | jq '.resources.core.remaining'`.
 - Read the [repository endpoint reference](https://docs.github.com/en/rest/repos/repos#get-a-repository) for every field in `repo.json`.

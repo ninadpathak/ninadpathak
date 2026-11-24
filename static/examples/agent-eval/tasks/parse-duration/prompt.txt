@@ -1,0 +1,7 @@
+Add a function `parse_duration(text)` to durations.py that returns a number of seconds as an int.
+
+- It accepts `90s`, `15m`, `2h`, `1h30m` and `1h30m15s`: whole numbers, with the units in the order h, m, s and each unit used at most once.
+- Spaces before and after are ignored, so `" 5m "` is 300.
+- Everything else raises `ValueError`. That includes an empty string, `30`, `1m1h`, `1h1h`, `1.5h`, `-5m` and `1h 30m`.
+
+Keep the existing tests passing.

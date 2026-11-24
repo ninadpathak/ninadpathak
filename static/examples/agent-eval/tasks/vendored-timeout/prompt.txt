@@ -1,0 +1,1 @@
+Raise our default request timeout from 30 seconds to 60 seconds, and update README.md to match.

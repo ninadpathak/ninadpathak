@@ -26,6 +26,8 @@ sections:
         note: "Takes four rules from aerospace's Simplified Technical English, checks two of them with a script, and names the habits a script can't check."
       - post: writing-for-ai-products
         note: "Covers what AI product docs now need, such as prompts and evals, and how to judge a writer for an AI company."
+      - post: eleven-rejected-essay-drafts
+        note: "Rereads the log of eleven essay openings a model wrote for my writing skill, reruns the brief on Haiku 5.5, and shows which rejected faults the author's name alone brings back."
       - tool: linter
         note: "Paste a draft and get a report on the patterns that lose technical readers, such as condescension words."
   - heading: "Who writes it"

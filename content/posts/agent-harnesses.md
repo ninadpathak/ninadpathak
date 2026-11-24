@@ -72,6 +72,8 @@ The benchmark has limits that its authors state: Runta ran it on Runta's own run
 
 So I wouldn't copy Runta's ranking into a purchasing decision. I'd copy the method: run two or more harnesses with the model you plan to use, on tasks from your own backlog, and compare cost per passing run.
 
+My guide to [AI agent evaluation](/articles/ai-agent-evaluation/) has a runner you can copy for that. Its 95 runs of Claude Code include four whose result was decided by one permission rule in the harness.
+
 ## How does a harness recover from a failed step?
 
 A harness recovers by saving state after every step and starting the next attempt from the last save. Say a run dies at step eighteen of twenty-five because a web page the agent was fetching returned a 503: without a saved checkpoint, the retry begins again at step one.

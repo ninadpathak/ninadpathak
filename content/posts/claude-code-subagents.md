@@ -99,6 +99,8 @@ The file ran against a scratch repository whose `docs/` folder mixed missing lin
 
 I'd rely on the `tools` line over the prompt. With the prompt's rule gone, the `tools` line alone kept the subagent from editing, and it held on every attempt.
 
+The `model` line has a session-wide counterpart, the `CLAUDE_CODE_SUBAGENT_MODEL` variable. In my [notes on Michael Lynch's post about coding agents](/articles/why-are-coding-agents-so-dumb-notes/), setting it to `haiku` moved a general-purpose subagent in a Sonnet session from `claude-sonnet-5-5` to `claude-haiku-5-5`.
+
 Haiku's Grep calls in an earlier draft's runs used a look-ahead pattern that Grep rejected, so step 2 of this file names the pattern and filters targets outside it. The checking runs with this file had no failed tool calls.
 
 The prose around the report varied between runs, and the passing run said it checked "all 4 inline relative links" before listing 5. The `broken: N` line was right every time, so I'd make the last line of any subagent's report a fixed format the parent can check.
@@ -124,7 +126,11 @@ I'd keep repeatable instructions in a skill and send a separate investigation to
 
 The [skills docs](https://code.claude.com/docs/en/skills) say a skill's body "loads only when it's used," and once invoked it "stays there across later turns." So a skill adds to your context, and a subagent keeps its work out of it.
 
+The page on [Claude Code skills](/articles/claude-code-skills/) measures that cost on one published skill, at 136 tokens for the listed description and 1,904 for the loaded body.
+
 [Hooks](https://code.claude.com/docs/en/hooks) are handlers, such as shell commands, that "execute automatically at specific points" in a session. Hooks from settings files also fire inside subagents, so I'd put a rule that must run before every tool call in a `PreToolUse` hook that matches every tool.
+
+My [Claude Code hooks guide](/articles/claude-code-hooks/) tests that claim, with a `PreToolUse` hook that blocked an edit made by a `general-purpose` subagent in Claude Code 2.1.330.
 
 ## When to keep the work in the main conversation
 

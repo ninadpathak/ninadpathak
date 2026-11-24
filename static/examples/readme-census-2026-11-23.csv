@@ -1,0 +1,31 @@
+language,rank_by_stars,repository,stars,included,skip_reason,readme_url,first_text_says_what_it_does,first_text_read,that_text_is_above_every_badge_and_image,install_or_build_command,usage_example_in_code_block,usage_output_shown_as_text,test_command,license_named_in_text,contributing_section_or_link
+Python,1,public-apis/public-apis,501017,no,list of links,https://raw.githubusercontent.com/public-apis/public-apis/master/README.md,,,,,,,,,
+Python,2,EbookFoundation/free-programming-books,402132,no,list of links,https://raw.githubusercontent.com/EbookFoundation/free-programming-books/main/README.md,,,,,,,,,
+Python,3,donnemartin/system-design-primer,378926,no,study notes,https://raw.githubusercontent.com/donnemartin/system-design-primer/master/README.md,,,,,,,,,
+Python,4,vinta/awesome-python,336670,no,list of links,https://raw.githubusercontent.com/vinta/awesome-python/master/README.md,,,,,,,,,
+Python,5,practical-tutorials/project-based-learning,290333,no,list of links,https://raw.githubusercontent.com/practical-tutorials/project-based-learning/master/README.md,,,,,,,,,
+Python,6,NousResearch/hermes-agent,265632,yes,,https://raw.githubusercontent.com/NousResearch/hermes-agent/main/README.md,yes,The self-improving AI agent built by Nous Research.,no,yes,yes,no,no,yes,yes
+Python,7,TheAlgorithms/Python,226416,no,collection of practice code,https://raw.githubusercontent.com/TheAlgorithms/Python/master/README.md,,,,,,,,,
+Python,8,yt-dlp/yt-dlp,210194,yes,,https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/README.md,yes,yt-dlp is a feature-rich command-line audio/video downloader with support for thousands of sites.,no,yes,yes,yes,no,yes,yes
+Python,9,anthropics/skills,199396,yes,,https://raw.githubusercontent.com/anthropics/skills/main/README.md,yes,"Skills are folders of instructions, scripts, and resources that Claude loads dynamically to improve performance on specialized tasks.",no,yes,no,no,no,yes,no
+Python,10,microsoft/markitdown,198068,yes,,https://raw.githubusercontent.com/microsoft/markitdown/main/README.md,yes,MarkItDown is a lightweight Python utility for converting various files to Markdown for use with LLMs and related text analysis pipelines.,no,yes,yes,no,yes,no,yes
+JavaScript,1,affaan-m/ECC,309469,yes,,https://raw.githubusercontent.com/affaan-m/ECC/main/README.md,no,Use the guided setup or native plugin commands.,no,yes,yes,no,yes,yes,yes
+JavaScript,2,react/react,252801,yes,,https://raw.githubusercontent.com/react/react/main/README.md,yes,React is a JavaScript library for building user interfaces.,no,no,yes,yes,no,yes,yes
+JavaScript,3,DietrichGebert/ponytail,197434,yes,,https://raw.githubusercontent.com/DietrichGebert/ponytail/main/README.md,no,He says nothing. He writes one line. It works.,no,yes,no,no,no,yes,no
+JavaScript,4,trekhleb/javascript-algorithms,196765,no,collection of practice code,https://raw.githubusercontent.com/trekhleb/javascript-algorithms/master/README.md,,,,,,,,,
+JavaScript,5,CyC2018/CS-Notes,186570,no,study notes,https://raw.githubusercontent.com/CyC2018/CS-Notes/master/README.md,,,,,,,,,
+JavaScript,6,twbs/bootstrap,175114,yes,,https://raw.githubusercontent.com/twbs/bootstrap/main/README.md,yes,"Sleek, intuitive, and powerful front-end framework for faster and easier web development.",no,yes,no,no,yes,yes,yes
+TypeScript,1,morluto/rea,475385,yes,,https://raw.githubusercontent.com/morluto/rea/main/README.md,yes,"One MCP for reverse engineering across binaries, applications, and runtime behavior.",yes,yes,yes,no,no,yes,yes
+TypeScript,2,freeCodeCamp/freeCodeCamp,459536,yes,,https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/README.md,yes,freeCodeCamp.org is a friendly community where you can learn to code for free.,no,no,no,no,no,yes,yes
+TypeScript,3,openclaw/openclaw,395103,yes,,https://raw.githubusercontent.com/openclaw/openclaw/main/README.md,yes,OpenClaw is an open-source AI assistant that runs on your own computer and meets you in the channels you already use,no,yes,yes,no,no,yes,yes
+TypeScript,4,nilbuild/developer-roadmap,372631,no,roadmaps and guides to read,https://raw.githubusercontent.com/nilbuild/developer-roadmap/master/readme.md,,,,,,,,,
+TypeScript,5,deepseek-ai/deepseek-harness,286025,yes,,https://raw.githubusercontent.com/deepseek-ai/deepseek-harness/master/README.md,yes,DeepSeek Harness (dsh) is an open-source agent harness developed by DeepSeek AI.,yes,yes,yes,no,no,yes,yes
+Go,1,avelino/awesome-go,195577,no,list of links,https://raw.githubusercontent.com/avelino/awesome-go/main/README.md,,,,,,,,,
+Go,2,ollama/ollama,187894,yes,,https://raw.githubusercontent.com/ollama/ollama/main/README.md,no,Start building with open models.,no,yes,yes,no,no,no,no
+Go,3,golang/go,140021,yes,,https://raw.githubusercontent.com/golang/go/master/README.md,yes,"Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.",yes,no,no,no,no,yes,yes
+Go,4,kubernetes/kubernetes,129242,yes,,https://raw.githubusercontent.com/kubernetes/kubernetes/master/README.md,yes,"Kubernetes, also known as K8s, is an open source system for managing containerized applications across multiple hosts.",no,yes,no,no,no,no,yes
+Go,5,JuliusBrussee/caveman,122384,yes,,https://raw.githubusercontent.com/JuliusBrussee/caveman/main/README.md,no,21% less than Codex per solved task on Terminal-Bench 4.,no,yes,yes,no,no,yes,yes
+Rust,1,ultraworkers/claw-code,194730,yes,,https://raw.githubusercontent.com/ultraworkers/claw-code/main/README.md,no,start with the real crab-powered harnesses,no,yes,yes,no,yes,yes,yes
+Rust,2,farion1231/cc-switch,156630,yes,,https://raw.githubusercontent.com/farion1231/cc-switch/main/README.md,yes,"The All-in-One Manager for Claude Code, Claude Desktop, Codex, Gemini CLI, Grok Build, OpenCode, OpenClaw, Hermes Agent, Pi, MiniMax Code, Kimi Code & Oh My Pi",yes,yes,no,no,no,yes,yes
+Rust,3,openai/codex,136242,yes,,https://raw.githubusercontent.com/openai/codex/main/README.md,yes,Codex CLI is a coding agent from OpenAI that runs locally on your computer.,yes,yes,no,no,no,yes,yes
+Rust,4,rustdesk/rustdesk,130993,yes,,https://raw.githubusercontent.com/rustdesk/rustdesk/master/README.md,no,"We need your help to translate this README, RustDesk UI and RustDesk Doc to your native language",no,yes,no,no,no,no,yes

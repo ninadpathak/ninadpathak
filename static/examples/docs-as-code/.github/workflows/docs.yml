@@ -1,0 +1,58 @@
+name: docs
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Install MkDocs
+        run: python -m pip install -r requirements.txt
+      - name: Install lychee and Vale
+        run: |
+          mkdir -p "$HOME/bin"
+          curl -sSfL https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-x86_64-unknown-linux-gnu.tar.gz \
+            | tar -xz -C "$HOME/bin" --strip-components=1 lychee-x86_64-unknown-linux-gnu/lychee
+          curl -sSfL https://github.com/vale-cli/vale/releases/download/v3.28.1/vale_3.28.1_Linux_64-bit.tar.gz \
+            | tar -xz -C "$HOME/bin" vale
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+      - name: Unit tests
+        run: python -m unittest discover -s tests
+      - name: Strict build
+        run: mkdocs build --strict
+      - name: Link check
+        run: lychee --root-dir "$PWD/site" site
+      - name: Prose lint
+        run: vale docs
+      - name: Example check
+        run: python scripts/check_examples.py docs
+
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: check
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Install MkDocs
+        run: python -m pip install -r requirements.txt
+      - name: Set the committer for the gh-pages branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Build and push the site to the gh-pages branch
+        run: mkdocs gh-deploy --force

@@ -105,6 +105,8 @@ Kubernetes' [troubleshooting documentation](https://kubernetes.io/docs/tasks/deb
 - A fix that is safe to try
 - When to stop and escalate
 
+My [troubleshooting guide template](/articles/troubleshooting-guide-template/) turns that list into a Markdown file, with a filled example made from four SQLite failures and a script that checks each entry.
+
 ### Type 6: Release notes and migration guides
 
 Release notes tell people what changed. Migration guides tell them what they need to do about that change.
@@ -147,6 +149,8 @@ A repository can now have another reader that needs documentation: a coding agen
 
 A README still gives a person the project overview and the way to contribute. An AGENTS.md file holds what an agent needs before it edits, such as the exact build and test commands and the changes it must not make.
 
+For the README itself, my [README template](/articles/readme-template/) has six parts and a checker that runs the commands the file shows.
+
 A repository can hold several AGENTS.md files, and agents.md says "the closest one takes precedence", so a package can carry its own rules.
 
 Keep the two files separate. Do not hide human onboarding inside an agent file, and do not expect a long README to provide the focused instruction an agent needs during an edit.
@@ -177,5 +181,7 @@ Then give each document an owner and a change that triggers its review:
 | A changed build command | README and agent instructions |
 
 Documentation costs less to maintain when each type has a named audience, a distinct job, and a change that tells its owner when to revisit it.
+
+To see finished pages before you write your own, my [technical writing examples](/articles/technical-writing-examples/) are ten samples, from a quickstart to a postmortem, each with the check that ran on it.
 
 Use the [technical documentation template](/articles/documentation-template/) to turn that inventory into a working plan. Then use the [technical documentation best practices](/articles/documentation-best-practices/) to test whether each page helps someone complete the job it promises.

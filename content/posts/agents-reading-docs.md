@@ -69,6 +69,10 @@ And these are coding agents working through API docs that one vendor hosts. Ahre
 
 I think both studies hold. Together they say the file gets used as an index by coding agents on API docs and sits unread nearly everywhere else.
 
+A third dataset has since changed what I'd do with the file. Vercel and Ora traced 1,033 agent runs, and when I [split those runs by harness and model](/articles/vercel-agent-study-by-harness/), every fetch of llms.txt happened on six of the fifteen sites that publish one.
+
+Mintlify's benchmark is a fourth dataset, and it's a lab test. Claude Code and Codex asked for `/llms.txt` on HTML pages that never linked it, roughly 450 times in 600 runs by the arithmetic in [my recomputation of its published runs](/articles/mintlify-llms-txt-benchmark/).
+
 Fern's logs show that "an agent reads llms.txt once, then fetches the Markdown for the pages it needs", and a short index file is useful to an agent that works that way. A single file holding the whole site isn't, which is why Fern says it stopped generating llms-full.txt.
 
 So I changed my article. The [llms.txt guide](/articles/llms-txt/) now sets Fern's finding beside the Ahrefs study where it used to cite Ahrefs alone, and it still tells you to check your own server logs.

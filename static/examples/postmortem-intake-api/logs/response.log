@@ -1,0 +1,167 @@
+
+[2026-11-23T19:49:39Z] $ setsid nohup ./start.sh 2048 > /dev/null 2>&1 & echo $! > logs/service.pid; cat logs/service.pid
+1180720
+
+[2026-11-23T19:49:40Z] $ grep "Max file size" /proc/$(cat logs/service.pid)/limits; curl -s http://127.0.0.1:8471/health
+Max file size             2097152              2097152              bytes     
+{"status": "ok"}
+[2026-11-23T19:49:40Z] $ setsid nohup python3 monitor.py logs/service.log >> logs/monitor.log 2>&1 & echo $! > logs/monitor.pid; cat logs/monitor.pid
+1180758
+
+[2026-11-23T19:49:40Z] $ setsid nohup python3 load.py >> logs/client.log 2>&1 & echo $! > logs/load.pid; cat logs/load.pid
+1180766
+
+[2026-11-23T19:54:19Z] $ tail -n 6 logs/service.log | cut -c1-120
+2026-11-23T19:54:18.826Z POST /events 500 13ms error="disk I/O error"
+2026-11-23T19:54:18.837Z GET /events/latest 200 0ms
+2026-11-23T19:54:18.928Z POST /events 500 7ms error="disk I/O error"
+2026-11-23T19:54:19.244Z POST /events 500 26ms error="disk I/O error"
+2026-11-23T19:54:19.253Z POST /events 500 8ms error="disk I/O error"
+2026-11-23T19:54:19.263Z GET /events/latest 200 15ms
+
+[2026-11-23T19:54:21Z] $ ls -l data/; grep "Max file size" /proc/$(cat logs/service.pid)/limits; df -k data | tail -1
+total 2052
+-rw-r--r-- 1 dev dev 2097152 Nov 23 19:54 events.db
+Max file size             2097152              2097152              bytes     
+/dev/sda1      100476656 88269364  12190908  88% /
+
+[2026-11-23T19:54:25Z] $ prlimit --pid $(cat logs/service.pid) --fsize=67108864:67108864
+prlimit: failed to set the FSIZE resource limit: Operation not permitted
+
+[2026-11-23T19:54:29Z] $ kill $(cat logs/service.pid); setsid nohup ./start.sh 65536 > /dev/null 2>&1 & echo $! > logs/service.pid; cat logs/service.pid
+1194063
+
+[2026-11-23T19:54:30Z] $ grep "Max file size" /proc/$(cat logs/service.pid)/limits; tail -n 5 logs/service.log | cut -c1-120
+Max file size             67108864             67108864             bytes     
+2026-11-23T19:54:29.786Z POST /events 201 7ms
+2026-11-23T19:54:30.145Z POST /events 201 10ms
+2026-11-23T19:54:30.153Z POST /events 201 15ms
+2026-11-23T19:54:30.185Z POST /events 201 7ms
+2026-11-23T19:54:30.196Z POST /events 201 8ms
+
+[2026-11-23T19:54:34Z] $ tail -n 400 logs/client.log | awk "{print \$2, \$4}" | sort | uniq -c; grep -c "" logs/client.log; tail -n 3 logs/monitor.log
+     77 GET 200
+      1 GET ERR
+    166 POST 201
+    155 POST 500
+      1 POST ERR
+2830
+2026-11-23T19:54:20Z health=200 requests=48 5xx=34 rate=71%
+2026-11-23T19:54:25Z health=200 requests=48 5xx=39 rate=81%
+2026-11-23T19:54:30Z health=200 requests=46 5xx=23 rate=50%
+
+[2026-11-23T19:54:34Z] $ sqlite3 "file:data/events.db?mode=ro" "pragma integrity_check; select count(*), max(id) from events;"; ls -l data/
+Error: in prepare, database is locked (5)
+total 2112
+-rw-r--r-- 1 dev dev 2146304 Nov 23 19:54 events.db
+-rw-r--r-- 1 dev dev    8720 Nov 23 19:54 events.db-journal
+
+[2026-11-23T19:54:39Z] $ sqlite3 -cmd ".timeout 5000" "file:data/events.db?mode=ro" "pragma integrity_check; select count(*), max(id) from events;"; ls -l data/; tail -n 2 logs/monitor.log
+ok
+2111|2111
+total 2144
+-rw-r--r-- 1 dev dev 2179072 Nov 23 19:54 events.db
+-rw-r--r-- 1 dev dev    8720 Nov 23 19:54 events.db-journal
+2026-11-23T19:54:30Z health=200 requests=46 5xx=23 rate=50%
+2026-11-23T19:54:35Z health=200 requests=43 5xx=0 rate=0%
+
+[2026-11-23T19:54:54Z] $ ls -l data/events.db; tail -n 1 logs/monitor.log
+-rw-r--r-- 1 dev dev 2306048 Nov 23 19:54 data/events.db
+2026-11-23T19:54:50Z health=200 requests=48 5xx=0 rate=0%
+
+[2026-11-23T19:54:59Z] $ mkdir -p smoke && (INTAKE_DB=smoke/events.db INTAKE_PORT=8472 INTAKE_KEEP=50 python3 service.py > smoke/service.log 2>&1 & echo $! > smoke/pid); python3 -c "import time; time.sleep(0.5)"; for i in $(seq 1 230); do curl -s -o /dev/null -X POST -d "{\"source\":\"t\",\"payload\":\"x\"}" http://127.0.0.1:8472/events; done; sqlite3 smoke/events.db "select count(*), min(id), max(id) from events"; kill $(cat smoke/pid); rm -rf smoke
+80|151|230
+
+[2026-11-23T19:55:08Z] $ kill $(cat logs/service.pid); setsid nohup ./start.sh 65536 > /dev/null 2>&1 & echo $! > logs/service.pid; cat logs/service.pid
+1196313
+
+[2026-11-23T19:55:10Z] $ tail -n 3 logs/service.log | cut -c1-100; ls -l data/events.db; sqlite3 -cmd ".timeout 5000" "file:data/events.db?mode=ro" "select count(*), min(id), max(id) from events"
+2026-11-23T19:55:09.865Z POST /events 201 6ms
+2026-11-23T19:55:09.915Z POST /events 201 7ms
+2026-11-23T19:55:09.993Z POST /events 201 5ms
+-rw-r--r-- 1 dev dev 2424832 Nov 23 19:55 data/events.db
+2350|1|2350
+
+[2026-11-23T19:55:14Z] $ setsid nohup bash -c "for i in \$(seq 1 40); do echo \$(date -u +%Y-%m-%dT%H:%M:%SZ) \$(stat -c %s data/events.db) bytes; sleep 15; done" >> logs/size.log 2>&1 & echo $! > logs/sampler.pid; cat logs/sampler.pid
+1196578
+
+[2026-11-23T19:58:49Z] $ INTAKE_DB=rerun/events.db INTAKE_PORT=8472 INTAKE_KEEP=0 setsid nohup bash -c "ulimit -f 2048; exec python3 service.py >> rerun/service.log 2>&1" > /dev/null 2>&1 & echo $! > rerun/service.pid; python3 -c "import time; time.sleep(0.7)"; curl -s http://127.0.0.1:8472/health; echo; INTAKE_PORT=8472 setsid nohup python3 monitor.py rerun/service.log >> rerun/monitor.log 2>&1 & echo $! > rerun/monitor.pid; INTAKE_PORT=8472 setsid nohup python3 load.py >> rerun/client.log 2>&1 & echo $! > rerun/load.pid; cat rerun/*.pid
+{"status": "ok", "db_bytes": 8192, "limit_bytes": 2097152}
+1206211
+1206210
+1206158
+
+[2026-11-23T20:03:20Z] $ grep -n ALERT rerun/monitor.log; grep -m1 " 500 " rerun/service.log; ls -l rerun/events.db
+45:2026-11-23T20:02:31Z ALERT IntakeDbNearLimit: database file is 1716224 of 2097152 bytes
+2026-11-23T20:03:20.462Z POST /events 500 5ms error="disk I/O error" db_bytes=2097152 limit_bytes=2097152
+-rw-r--r-- 1 dev dev 2097152 Nov 23 20:03 rerun/events.db
+
+[2026-11-23T20:03:25Z] $ bash -c "ulimit -f 2048; sqlite3 -cmd \".timeout 5000\" rerun/events.db \"begin; insert into events (received_at, source, payload) values (\x27probe\x27, \x27health\x27, \x27x\x27); rollback; select \x27tiny insert, rolled back: ok\x27;\""; bash -c "ulimit -f 2048; sqlite3 -cmd \".timeout 5000\" rerun/events.db \"insert into events (received_at, source, payload) values (\x27probe\x27, \x27health\x27, \x27x\x27); select \x27tiny insert, committed: ok\x27;\""; tail -n 3 rerun/monitor.log; tail -n 2 rerun/service.log | cut -c1-130
+Error: in prepare, unrecognized token: "\"
+  nto events (received_at, source, payload) values (\x27probe\x27, \x27health\x2
+                                      error here ---^
+Error: in prepare, unrecognized token: "\"
+  nto events (received_at, source, payload) values (\x27probe\x27, \x27health\x2
+                                      error here ---^
+2026-11-23T20:03:11Z health=200 requests=48 5xx=0 rate=0% db=96% of limit
+2026-11-23T20:03:16Z health=200 requests=49 5xx=0 rate=0% db=98% of limit
+2026-11-23T20:03:21Z health=200 requests=49 5xx=9 rate=18% db=100% of limit
+2026-11-23T20:03:25.139Z GET /events/latest 200 0ms
+2026-11-23T20:03:25.156Z POST /events 500 5ms error="disk I/O error" db_bytes=2097152 limit_bytes=2097152
+
+[2026-11-23T20:03:30Z] $ ./probe.sh rerun/events.db; tail -n 2 rerun/monitor.log; grep -c " 201 " rerun/service.log; tail -n 3 rerun/service.log | cut -c1-110
+tiny insert, rolled back: ok
+tiny insert, committed: ok
+2026-11-23T20:03:26Z health=200 requests=50 5xx=40 rate=80% db=100% of limit
+2026-11-23T20:03:26Z ALERT Intake5xxRate: 80% of requests returned 5xx for two polls
+2040
+2026-11-23T20:03:29.721Z POST /events 500 10ms error="disk I/O error" db_bytes=2097152 limit_bytes=2097152
+2026-11-23T20:03:29.875Z GET /events/latest 200 2ms
+2026-11-23T20:03:29.936Z POST /events 500 6ms error="disk I/O error" db_bytes=2097152 limit_bytes=2097152
+
+[2026-11-23T20:03:35Z] $ kill $(cat rerun/load.pid) $(cat rerun/monitor.pid) $(cat rerun/service.pid); echo stopped rerun
+stopped rerun
+
+[2026-11-23T20:04:23Z] $ INTAKE_DB=drill/events.db INTAKE_PORT=8472 INTAKE_KEEP=0 INTAKE_LOG=drill/service.log setsid nohup ./start.sh 2048 > /dev/null 2>&1 & echo $! > drill/service.pid; python3 -c "import time; time.sleep(0.7)"; grep "Max file size" /proc/$(cat drill/service.pid)/limits; curl -s http://127.0.0.1:8472/health; echo; INTAKE_PORT=8472 setsid nohup python3 monitor.py drill/service.log >> drill/monitor.log 2>&1 & echo $! > drill/monitor.pid; INTAKE_PORT=8472 setsid nohup python3 load.py >> drill/client.log 2>&1 & echo $! > drill/load.pid
+Max file size             2097152              unlimited            bytes     
+{"status": "ok", "db_bytes": 8192, "limit_bytes": 2097152}
+
+[2026-11-23T20:05:20Z] $ kill $(cat logs/service.pid) $(cat logs/monitor.pid); setsid nohup ./start.sh 65536 > /dev/null 2>&1 & echo $! > logs/service.pid; setsid nohup python3 monitor.py logs/service.log >> logs/monitor.log 2>&1 & echo $! > logs/monitor.pid; python3 -c "import time; time.sleep(1)"; grep "Max file size" /proc/$(cat logs/service.pid)/limits; curl -s http://127.0.0.1:8471/health; echo; sqlite3 -cmd ".timeout 5000" "file:data/events.db?mode=ro" "select count(*), min(id), max(id) from events"
+Max file size             67108864             unlimited            bytes     
+{"status": "ok", "db_bytes": 2473984, "limit_bytes": 67108864}
+1571|5501|7071
+
+[2026-11-23T20:07:59Z] $ tail -n 2 drill/monitor.log; prlimit --pid $(cat drill/service.pid) --fsize=67108864:unlimited; grep "Max file size" /proc/$(cat drill/service.pid)/limits; curl -s http://127.0.0.1:8472/health
+2026-11-23T20:07:59Z health=200 requests=48 5xx=0 rate=0% db=81% of limit
+2026-11-23T20:07:59Z ALERT IntakeDbNearLimit: database file is 1699840 of 2097152 bytes
+Max file size             67108864             unlimited            bytes     
+{"status": "ok", "db_bytes": 1703936, "limit_bytes": 67108864}
+[2026-11-23T20:09:26Z] $ ls -l drill/events.db; awk "{print \$2, \$4}" drill/client.log | sort | uniq -c; tail -n 1 drill/monitor.log; grep -c ALERT drill/monitor.log
+-rw-r--r-- 1 dev dev 2400256 Nov 23 20:09 drill/events.db
+    609 GET 200
+   2326 POST 201
+2026-11-23T20:09:24Z health=200 requests=51 5xx=0 rate=0% db=4% of limit
+1
+
+[2026-11-23T20:09:26Z] $ kill $(cat drill/load.pid) $(cat drill/monitor.pid) $(cat drill/service.pid); echo stopped drill
+stopped drill
+
+[2026-11-23T20:09:26Z] $ tail -n 2 logs/monitor.log; awk "\$1>\"2026-11-23T20:05:19Z\" {print \$2, \$4}" logs/client.log | sort | uniq -c; kill $(cat logs/load.pid) $(cat logs/monitor.pid) $(cat logs/service.pid); echo stopped main; sqlite3 data/events.db "select count(*), min(id), max(id) from events; pragma integrity_check"; ls -l data/events.db
+2026-11-23T20:09:21Z health=200 requests=48 5xx=0 rate=0% db=4% of limit
+2026-11-23T20:09:26Z health=200 requests=48 5xx=0 rate=0% db=4% of limit
+    486 GET 200
+      1 GET ERR
+   1910 POST 201
+      1 POST ERR
+stopped main
+1566|7401|8966
+ok
+-rw-r--r-- 1 dev dev 2473984 Nov 23 20:09 data/events.db
+
+[2026-11-23T20:10:54Z] $ bash -c "ulimit -f 1; python3 -c \"open(\x27data/efbig-test.bin\x27, \x27wb\x27).write(b\x27x\x27 * 4096)\"" 2>&1 | tail -n 1; rm -f data/efbig-test.bin
+SyntaxError: unexpected character after line continuation character
+
+[2026-11-23T20:10:59Z] $ ./efbig.sh
+
+[2026-11-23T20:11:05Z] $ ./efbig.sh
+OSError: [Errno 27] File too large

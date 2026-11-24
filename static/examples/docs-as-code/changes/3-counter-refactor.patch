@@ -1,0 +1,26 @@
+diff --git a/statuscount.py b/statuscount.py
+index 6cdb610..1a2362a 100644
+--- a/statuscount.py
++++ b/statuscount.py
+@@ -2,6 +2,7 @@
+ """Count the HTTP status codes in an access log in Common Log Format."""
+ import argparse
+ import sys
++from collections import Counter
+ 
+ 
+ def status_of(line):
+@@ -17,11 +18,8 @@ def status_of(line):
+ 
+ def count_statuses(lines, min_status=0):
+     """Return (status, count) pairs, highest count first."""
+-    counts = {}
+-    for line in lines:
+-        status = status_of(line)
+-        if status is not None and status >= min_status:
+-            counts[status] = counts.get(status, 0) + 1
++    statuses = (status_of(line) for line in lines)
++    counts = Counter(status for status in statuses if status is not None and status >= min_status)
+     return sorted(counts.items(), key=lambda pair: (-pair[1], pair[0]))
+ 
+ 

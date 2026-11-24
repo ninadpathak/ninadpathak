@@ -104,6 +104,8 @@ kaydub's documents went stale because they sat far from the code. I read that as
 
 Generated reference can list what a parameter accepts, and it can't say which call proves an integration works or what to do when a valid request fails in production.
 
+My [SDK documentation](/articles/sdk-documentation/) guide shows that limit on a small Python client, whose `create_export` signature has no way to say when a retry is safe.
+
 ## Where should each piece of code documentation go?
 
 Put each fact next to the code or workflow whose change would make it wrong.

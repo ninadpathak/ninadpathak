@@ -159,6 +159,8 @@ Tell the model what happened and what it is allowed to do next, in a result the 
 
 A result that says, for example, "The charge may have gone through and has not been retried" gives the model something to act on, and a stack trace invites a guess.
 
+The runs in [my eval of Claude Code](/articles/ai-agent-evaluation/) show the same thing with a denied command. Claude Code's denial text began "Permission to use Bash has been denied", and a Haiku agent that had one command refused concluded that it had no shell.
+
 Guessing is the largest single cause in the one breakdown of failed agent runs I know of. [Real-SWE 1.1](https://withspecific.com/blog/real-swe), an October benchmark of coding agents, classified its failed runs and found the biggest group to be the unverified assumption, a run that "Builds on a guess about the system instead of checking it in the workspace."
 
 ## What else belongs in the harness?

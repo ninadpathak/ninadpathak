@@ -48,6 +48,8 @@ Developers are already trying to fix the length inside the tools. A plugin calle
 
 The thread under it was less hopeful than the README, where a user, sleazebreeze, reported that the skill holds for a few turns before the verbosity returns. I'd expect the same of a human writer handed a style guide, because a style rule can shorten sentences and can't decide what a page is for, which is where the length comes from.
 
+A rule also wears off sooner when it travels without the sentence that broke it, and [my comparison of two pitfalls lists](/articles/pitfalls-list-for-ai-drafted-docs/) has the record of that from my own writing skill.
+
 ## How do you shorten documentation without losing detail?
 
 Give each page one job, answer it on the first screen, and move everything else to a page with its own job. The detail survives because it moves, and the reader who needs it follows a link.

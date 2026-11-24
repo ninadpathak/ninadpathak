@@ -16,12 +16,20 @@ sections:
     spokes:
       - post: claude-md
         note: "Tests which agent loads CLAUDE.md and which loads AGENTS.md by default, and gives a copyable AGENTS.md template."
+      - post: what-to-keep-in-agents-md
+        note: "Runs Claude Code's prompt audit on the stale merge-queue rule from PostHog's AGENTS.md post, retests the telemetry bug on 2.1.330, and sorts instruction lines by what can check them."
+      - post: claude-code-skills
+        note: "Takes a published writing skill apart file by file and tests in headless runs when Claude Code loads it, with the token cost of each part."
+      - post: claude-code-hooks
+        note: "Tests a PreToolUse guard and a PostToolUse checker hook in Claude Code 2.1.330, and lists five setups where the guard let the edit through."
   - heading: "Delegation"
     spokes:
       - post: claude-code-subagents
         note: "Shows what a Claude Code subagent starts with and when to pick one over a skill or a hook, with a tested example."
       - post: agentic-workflows
         note: "Five stages from prompt to pull request, set beside the five questions Anthropic asks before a run goes unattended."
+      - post: why-are-coding-agents-so-dumb-notes
+        note: "Checks four of Michael Lynch's complaints about coding agents against the Claude Code, Codex and OpenCode docs, and tests Claude Code's sandbox setting on Ubuntu 24.04."
   - heading: "Memory"
     spokes:
       - post: claude-code-memory
@@ -42,6 +50,8 @@ sections:
         note: "Argues that an agent can explain what code does, while what happened and how it shipped has to be written down by a person."
       - post: red-build-nobody-reads
         note: "Argues that a build light is a pager, and that agent-rate change wears it out unless a team rations what reaches a person."
+      - post: claude-code-team-code-review
+        note: "Reads Anthropic's account of code review on the Claude Code team against its docs, and runs /code-review on a branch with three planted defects, where a one-line skip rule hid two true findings."
 bridges:
   - hub: ai-agents
     text: "A coding agent is one agent loop with a harness around it, which the [AI agent architecture](/articles/ai-agents/) topic takes apart."

@@ -203,6 +203,8 @@ My template puts both halves in one file for an alert with a known cause, with D
 
 When an alert has many possible causes, I'd write the investigation as its own playbook and link one runbook per cause from it.
 
+The write-up after the incident is a third document. My [postmortem template](/articles/postmortem-template/) records each thing the responder ran with its time, and a checker recomputes the time to detect from those rows.
+
 ## FAQ
 
 ### What is a runbook?
