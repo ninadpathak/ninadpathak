@@ -49,7 +49,7 @@
   },
   "ai-agent-evaluation": {
     "lastmod": "2026-11-24",
-    "sources": "96815fd7a3c50169c023e376b075ccdcd11bf6d701f265fc0e9cd0812039e1f2"
+    "sources": "01499b8f369afb7e6cbcb3c487c3356f4b3708e1c05a669c2dc6255f4d628d40"
   },
   "ai-agent-failures": {
     "lastmod": "2026-11-18",
@@ -85,7 +85,7 @@
   },
   "claude-code-hooks": {
     "lastmod": "2026-11-24",
-    "sources": "a9b13c7ff486cc162cba9c1fecec1250f493a0893c6f8e777b47a47718354542"
+    "sources": "d72e26fc4d37d6e4c8320b1a5a5fa3523047a0065f37309953d9352eff5c79ea"
   },
   "claude-code-memory": {
     "lastmod": "2026-11-24",
@@ -93,7 +93,7 @@
   },
   "claude-code-skills": {
     "lastmod": "2026-11-24",
-    "sources": "5fe8aea50cb35c015669230d34bea02757722724ab1227bd58beee50568b7f40"
+    "sources": "782c0b9d4c3ccd90a193421b202c6449e04c46796b36708747c52526e31a6f19"
   },
   "claude-code-subagents": {
     "lastmod": "2026-11-24",
@@ -101,7 +101,7 @@
   },
   "claude-code-team-code-review": {
     "lastmod": "2026-11-24",
-    "sources": "508c8bc25bfa17868d968132ff2f5e27b984675a2680a26cae7036f79d49c085"
+    "sources": "d5d328b3f8e96d472632e20600647172435aa173b0a539114a77e60b4885b3f4"
   },
   "claude-md": {
     "lastmod": "2026-11-24",
@@ -161,11 +161,11 @@
   },
   "docs-as-code": {
     "lastmod": "2026-11-24",
-    "sources": "99f2d21a313e59aa0442583b99e85c7044de9f5f7e65464acf0bf3aaa753384a"
+    "sources": "0909eebb6d42a0806ffc0fdec3cfb028ecd6eaf363b498b62caa2fc51795c582"
   },
   "docs-bug-when-agent-gets-stuck": {
     "lastmod": "2026-11-24",
-    "sources": "789e9b3ccf1d99f882559f284817e93c6453a21aa9eaa9fff46a36ca5d6cd223"
+    "sources": "2e0319c1173bdc45370aef5be603286ff2ba1161eb7e5cc59049a5f84a6c3281"
   },
   "docs-seo": {
     "lastmod": "2026-11-18",
@@ -201,7 +201,7 @@
   },
   "eleven-rejected-essay-drafts": {
     "lastmod": "2026-11-24",
-    "sources": "82bfaf8da9bb443aa737c7692a37a30d6218c546f7f0ef83514316591db7191c"
+    "sources": "81957405738017c8c959ba22137071a40a08b4dbf241b389b391b671c14f802d"
   },
   "engineer-to-writer": {
     "lastmod": "2026-11-17",
@@ -257,7 +257,7 @@
   },
   "mcp-vs-api": {
     "lastmod": "2026-11-24",
-    "sources": "fc44605ea9cb381ef12054c81a5004cdc15f8a0f4a5198d688d3120c13ff00fd"
+    "sources": "84d7fd56af00aa565bd4a19783b73fe0bf910652136e8d9705b106b830a27a61"
   },
   "memory-compression": {
     "lastmod": "2026-11-18",
@@ -273,7 +273,7 @@
   },
   "mintlify-llms-txt-benchmark": {
     "lastmod": "2026-11-24",
-    "sources": "277b8bdb888ffe7d656d8e1d474af5b94dac156cf63688b5c3c1e5e49323fca2"
+    "sources": "60226ff00a90ccbdd27d1a5ee5870dd8537f9e8899445ef24ff5d5f95d407ed4"
   },
   "mixture-of-experts": {
     "lastmod": "2026-11-18",
@@ -293,11 +293,11 @@
   },
   "pitfalls-list-for-ai-drafted-docs": {
     "lastmod": "2026-11-24",
-    "sources": "5129d074e6699c2d40f66f07c1070af6810459bfdb59736a1acb3d6225eda7b0"
+    "sources": "836752b9209c22798958d8f6b144b2eef7a566d1da0413bf44371d55cbf76d68"
   },
   "postmortem-template": {
     "lastmod": "2026-11-24",
-    "sources": "4ce9bcf15fdd17cf170ca0b7c8cbf4e4d0cb2e8b1f017cf37896ed98d519f5e1"
+    "sources": "5f23fe86fc34b1ebf4900d06fb9ef85a2e590d036aab248ca023957c00a29f0e"
   },
   "quickstart-guide": {
     "lastmod": "2026-11-24",
@@ -317,7 +317,7 @@
   },
   "readme-template": {
     "lastmod": "2026-11-24",
-    "sources": "5269fb5249210b91c43d21c1d649e2e946a35b9fe283c46689b4d37238159d34"
+    "sources": "62336dbeeb00911db99d9135d05c3bc52ee2985f72a0fcf8c14f53e44a87a688"
   },
   "red-build-nobody-reads": {
     "lastmod": "2026-11-24",
@@ -333,7 +333,7 @@
   },
   "sdk-documentation": {
     "lastmod": "2026-11-24",
-    "sources": "2cb2b847ec26980d98fa580927154382550675a859181c1ad0bfbbf4a1549d4d"
+    "sources": "7f98af00ff82de22dff6e2bbb2b9ddddbfab8a14e107c427e4dc019f247e8bf3"
   },
   "semantic-caching": {
     "lastmod": "2026-11-18",
@@ -365,7 +365,7 @@
   },
   "technical-writing-examples": {
     "lastmod": "2026-11-24",
-    "sources": "6c1d046d62f3adba36eb2f05373a1ac7eb513108912bf1729a28839033cec195"
+    "sources": "e5c21e0dbda6aa1a7dd05bd36454a19c28218f24081ab7f6e1ea942b7e68253c"
   },
   "technical-writing-for-engineers": {
     "lastmod": "2026-11-24",
@@ -377,7 +377,7 @@
   },
   "troubleshooting-guide-template": {
     "lastmod": "2026-11-24",
-    "sources": "91c9370db54c32c28b0786c1fe92a63e94d171fc0e05796cb93e10b0b33429fa"
+    "sources": "a85cde42fbe3818a00a2289ba7f254e8b9d3bd3064554d3ab86c6d09317feedc"
   },
   "vector-embeddings": {
     "lastmod": "2026-11-18",
@@ -385,7 +385,7 @@
   },
   "vercel-agent-study-by-harness": {
     "lastmod": "2026-11-24",
-    "sources": "ea1b847b58b953aea801d76ac0de4a6193a2ccaca5c2a9232b0d402ac5f343d0"
+    "sources": "5e7db737980526cebe71af80e2f62b0ae870fc3e60f320103cdd8ef9c69e60e3"
   },
   "voice-agent-latency": {
     "lastmod": "2026-11-18",
@@ -401,11 +401,11 @@
   },
   "what-to-keep-in-agents-md": {
     "lastmod": "2026-11-24",
-    "sources": "52304e56953994d11617c2be0290866210d9d8fb807d503b77c98a3f64cd40aa"
+    "sources": "a76c41b5bb504220b773ef99a1256028b7a0cf636dda5f7595451dad35ba2baf"
   },
   "why-are-coding-agents-so-dumb-notes": {
     "lastmod": "2026-11-24",
-    "sources": "86dded813f0716b071c1ceb4d5babd77ac404e515303e4f29533ec144db708b2"
+    "sources": "20d879cb034c520b28d118b58af15e1f18ac0873795df079cf52d47727b7275e"
   },
   "writing-changelogs": {
     "lastmod": "2026-11-18",
