@@ -8,12 +8,12 @@
     "sources": "f781ba5132ad9427ee199807a5ed736e71ac9b44d231ae9001ef6bffefed333c"
   },
   "agent-error-handling": {
-    "lastmod": "2026-11-18",
-    "sources": "c1c984d2e79479abfe679db54852159d407507d8bbde50b33634fc81280cd835"
+    "lastmod": "2026-11-24",
+    "sources": "926dc2ed5078f7b28c4dbe45844d631dec1974b53c5cd286bbb5de0f073cf9f3"
   },
   "agent-harnesses": {
-    "lastmod": "2026-11-18",
-    "sources": "23a710c9c05c7e665bfa458bc17afd090c8d65b69828988dca6b6089fa9f2f5f"
+    "lastmod": "2026-11-24",
+    "sources": "90e0be286a097f6bf44ef1cc2e4fc49fcef8a10de7d5d51e95b4f1cd4ec8966d"
   },
   "agent-loop-anatomy": {
     "lastmod": "2026-11-18",
@@ -36,16 +36,20 @@
     "sources": "1d823f31e7ee7c39b89fbbd287bedb678fa07e7fea92788114008d70d772c0e5"
   },
   "agentic-workflows": {
-    "lastmod": "2026-11-18",
-    "sources": "2ac0d14c5e5d6b677cb1b12ae99a508dc748088e00fba478b74e94a71a579e89"
+    "lastmod": "2026-11-24",
+    "sources": "af04bcc151d379141d366e9a2d12b0807bebd7c97e945b44304df1960e9f627c"
   },
   "agents-on-call-runbooks": {
-    "lastmod": "2026-11-18",
-    "sources": "14a8d864df1eb58fab33517299949015f8c4d9e4e5d2f55cad46bafddb67b99d"
+    "lastmod": "2026-11-24",
+    "sources": "a6850e8bee38682609a54eb0d2743b1353213c37302da9308eaf1f4fbf702ef0"
   },
   "agents-reading-docs": {
-    "lastmod": "2026-11-18",
-    "sources": "4685cbe726617c52e4bf51cd93995487ca91bfa129d2c29d6359c9ae33f9926c"
+    "lastmod": "2026-11-24",
+    "sources": "ce42785005e0442327379c051fd5852a123ecf6ae716167c630a5e83b08ad51f"
+  },
+  "ai-agent-evaluation": {
+    "lastmod": "2026-11-24",
+    "sources": "96815fd7a3c50169c023e376b075ccdcd11bf6d701f265fc0e9cd0812039e1f2"
   },
   "ai-agent-failures": {
     "lastmod": "2026-11-18",
@@ -64,8 +68,8 @@
     "sources": "b3032f9ee1064f5035db276007941e309e2123146904fd917e9b208ce26d6416"
   },
   "api-documentation": {
-    "lastmod": "2026-11-17",
-    "sources": "8c6368ff3abc7dfac42d3d815a89e86042d2bc1f027ce22453ddedd18e0520f6"
+    "lastmod": "2026-11-24",
+    "sources": "3aa9346c31556dce422af4b38361768c942547e654e437fbb53a332d556760b8"
   },
   "best-llms-for-coding": {
     "lastmod": "2026-11-18",
@@ -79,29 +83,41 @@
     "lastmod": "2026-11-18",
     "sources": "c17453d73f4a019f51d91924bd1290a5d426cd5b2a5448c859225c669e07c326"
   },
+  "claude-code-hooks": {
+    "lastmod": "2026-11-24",
+    "sources": "a9b13c7ff486cc162cba9c1fecec1250f493a0893c6f8e777b47a47718354542"
+  },
   "claude-code-memory": {
-    "lastmod": "2026-11-18",
-    "sources": "ffa484ed415e5ef72b8042bd9db2761763edd6848106e914220faa97d52a44e4"
+    "lastmod": "2026-11-24",
+    "sources": "570905f58ec6afc67b5b511b6ca0eb6805dffa5c4f80784cc0704144120c9ba2"
+  },
+  "claude-code-skills": {
+    "lastmod": "2026-11-24",
+    "sources": "5fe8aea50cb35c015669230d34bea02757722724ab1227bd58beee50568b7f40"
   },
   "claude-code-subagents": {
-    "lastmod": "2026-11-17",
-    "sources": "bd5fce906a335ee674cf654560feb5be72bddfda1cc34079a323459c2b589ef0"
+    "lastmod": "2026-11-24",
+    "sources": "0b08e8296a1d7d3c9f4a370585188e872397ef80f68ec8599d2c70a77960e923"
+  },
+  "claude-code-team-code-review": {
+    "lastmod": "2026-11-24",
+    "sources": "508c8bc25bfa17868d968132ff2f5e27b984675a2680a26cae7036f79d49c085"
   },
   "claude-md": {
-    "lastmod": "2026-11-17",
-    "sources": "6e875f4f08c8974a7658ee99a14f219246fb8fcb4f129dea4ef7b5448849cad3"
+    "lastmod": "2026-11-24",
+    "sources": "b9e34ae7611b249efc7531adab7554f1791d381c037eff26764dd6a46bee9369"
   },
   "claude-vs-gemini-cli": {
     "lastmod": "2026-11-18",
     "sources": "c7a9c0fe5efb37f94bf3d5b803a94fb606219ad2496eb75d486990053e29415e"
   },
   "cloudflare-kv-cache-incident-report": {
-    "lastmod": "2026-11-18",
-    "sources": "645712f0fb5e48ed4222bfb32d311e3a2aa12fad154f4ff45cf808553f2cab84"
+    "lastmod": "2026-11-24",
+    "sources": "4180c5083f4ea4153eb89bf67756e6f1743860f5eb08df4764c0267768a96be8"
   },
   "code-documentation": {
-    "lastmod": "2026-11-18",
-    "sources": "61b971a69319f2df7ebce2c2daf2c15f7e3fd810fe0edcff0151e5b9eecb7ecf"
+    "lastmod": "2026-11-24",
+    "sources": "43b2e60e3e829039e8edf060ddab26e35ebf8b5810ea6b3d8850a440fcb57bc2"
   },
   "coding-agent-memory": {
     "lastmod": "2026-11-18",
@@ -143,6 +159,14 @@
     "lastmod": "2026-11-18",
     "sources": "a8451807a2713e95361e6d3a3b0b9689fcf6545a84f22ad704793f5c602f097a"
   },
+  "docs-as-code": {
+    "lastmod": "2026-11-24",
+    "sources": "99f2d21a313e59aa0442583b99e85c7044de9f5f7e65464acf0bf3aaa753384a"
+  },
+  "docs-bug-when-agent-gets-stuck": {
+    "lastmod": "2026-11-24",
+    "sources": "789e9b3ccf1d99f882559f284817e93c6453a21aa9eaa9fff46a36ca5d6cd223"
+  },
   "docs-seo": {
     "lastmod": "2026-11-18",
     "sources": "ffab9f384153348eec1872d9dfa11f68449be5add774bde6fd9674a84e5741b3"
@@ -156,24 +180,28 @@
     "sources": "295a109e4cdd4fd79374dddc652bbbb7f191f27b8f89037491d8648ba244e1d4"
   },
   "documentation-review": {
-    "lastmod": "2026-11-18",
-    "sources": "d19cb2aeee92c75974bb503d8624e30f1c951608b4233bb2773096e235004b25"
+    "lastmod": "2026-11-24",
+    "sources": "ad20cc8271b5324e5d79497bd8ddb5090f8ee4a519c9f28a2e2fb0ec0e790d0c"
   },
   "documentation-structure": {
     "lastmod": "2026-11-18",
     "sources": "53e0e315f24c4249e369e4a9defe62d3557c6ef8aed057b638a0b6af2e0b66c0"
   },
   "documentation-template": {
-    "lastmod": "2026-11-18",
-    "sources": "795ec78f39732ad52cf34eea2a33887538974926cc424ff5638b14a8397ec8f6"
+    "lastmod": "2026-11-24",
+    "sources": "ab002339c45799c871a57d1116d90062f54b481dd6dfab0f02e52969d96ed7da"
   },
   "documentation-types": {
-    "lastmod": "2026-11-18",
-    "sources": "effc3b015226efa6a88f530744c17506696b70b847237ff834ada6f31cd609c0"
+    "lastmod": "2026-11-24",
+    "sources": "cb6ba6082fa74f16e2bce78e8e629386b13ebb67fabc7ec6899f0cf422fa72b7"
   },
   "documentation-velocity": {
     "lastmod": "2026-11-18",
     "sources": "58e62a51858b0adaed0c977fb601d59532b61f71957a57e6d5fccaf7f343fec1"
+  },
+  "eleven-rejected-essay-drafts": {
+    "lastmod": "2026-11-24",
+    "sources": "82bfaf8da9bb443aa737c7692a37a30d6218c546f7f0ef83514316591db7191c"
   },
   "engineer-to-writer": {
     "lastmod": "2026-11-17",
@@ -220,12 +248,16 @@
     "sources": "6880533f3c9dcab6768be7658728770184f3c223b361381ebc1b4d63cba150d9"
   },
   "llms-txt": {
-    "lastmod": "2026-11-17",
-    "sources": "7919d7afcb3d44d17b6bc894125807e80b2de626e3c22bce481b2405dc161014"
+    "lastmod": "2026-11-24",
+    "sources": "938a75fd47a574facb401a6df71669570ecb617a433ca22076accb63b64068b2"
   },
   "mcp-server-tutorial": {
-    "lastmod": "2026-11-17",
-    "sources": "a6707d53e6048d154b3b7981ddcc4972ce5f7c716ce832641febf62149258ba3"
+    "lastmod": "2026-11-24",
+    "sources": "4d5629884527ac328f4a873eec7f12110a3d2f11a31b6ccd8cb5cbb03a7b45cb"
+  },
+  "mcp-vs-api": {
+    "lastmod": "2026-11-24",
+    "sources": "fc44605ea9cb381ef12054c81a5004cdc15f8a0f4a5198d688d3120c13ff00fd"
   },
   "memory-compression": {
     "lastmod": "2026-11-18",
@@ -239,13 +271,17 @@
     "lastmod": "2026-11-18",
     "sources": "19a6d71a8dcdb6a229831baa63de2bcf8cf96cd69869f3a18532f254676850e5"
   },
+  "mintlify-llms-txt-benchmark": {
+    "lastmod": "2026-11-24",
+    "sources": "277b8bdb888ffe7d656d8e1d474af5b94dac156cf63688b5c3c1e5e49323fca2"
+  },
   "mixture-of-experts": {
     "lastmod": "2026-11-18",
     "sources": "a5b9428407b21f8d39a2f77dbaaa3d2f078ebf03a86fcd58963ecbadf78326da"
   },
   "model-context-protocol": {
-    "lastmod": "2026-11-18",
-    "sources": "c8be71f1063f9773fabef87d53d6dff3f8cb4e6d104d5b193830e6f4396065d6"
+    "lastmod": "2026-11-24",
+    "sources": "0875664ae43924163680009bed4f88455e99c29cd20c809dabb69e1b4c2eb07a"
   },
   "multi-agent-vs-single-agent": {
     "lastmod": "2026-11-18",
@@ -255,9 +291,17 @@
     "lastmod": "2026-11-18",
     "sources": "66f13e83706ac9778a25c2b189f819c472110cf979a27fa4d89d3a22c54d6ac7"
   },
+  "pitfalls-list-for-ai-drafted-docs": {
+    "lastmod": "2026-11-24",
+    "sources": "5129d074e6699c2d40f66f07c1070af6810459bfdb59736a1acb3d6225eda7b0"
+  },
+  "postmortem-template": {
+    "lastmod": "2026-11-24",
+    "sources": "4ce9bcf15fdd17cf170ca0b7c8cbf4e4d0cb2e8b1f017cf37896ed98d519f5e1"
+  },
   "quickstart-guide": {
-    "lastmod": "2026-11-17",
-    "sources": "bb4f8b3bcd6dd850f9d70cdd6724882af008c6e5e0d2c6c50709b950c10a1b80"
+    "lastmod": "2026-11-24",
+    "sources": "6253a1432b510d2ab7c19982837184f6248af57039eebbc3445865cc806fc0fd"
   },
   "rag-evaluation": {
     "lastmod": "2026-11-18",
@@ -271,17 +315,25 @@
     "lastmod": "2026-11-18",
     "sources": "a1a4247b86caf40fe93ed4f5f8008bb43c35cc2935e8ffd29b6be29795ca270d"
   },
+  "readme-template": {
+    "lastmod": "2026-11-24",
+    "sources": "5269fb5249210b91c43d21c1d649e2e946a35b9fe283c46689b4d37238159d34"
+  },
   "red-build-nobody-reads": {
-    "lastmod": "2026-11-18",
-    "sources": "9dccb9cd0e57e379a7c200e270432aaf875c64ab4cfafb718fdb26d4c6c950d2"
+    "lastmod": "2026-11-24",
+    "sources": "608e95cc343e97afc58b5cda83f7fd329c578b51abce8d5172033d167dd72574"
   },
   "release-notes-template": {
     "lastmod": "2026-11-17",
     "sources": "9a16f1c84e8262d9bf7e2601912794241082c1596df735887a56e8afe32ccf87"
   },
   "runbook-template": {
-    "lastmod": "2026-11-17",
-    "sources": "91314382b4dccf3b0e8610c38b2528e8dc7bae435a393b8eaec792f0605d755c"
+    "lastmod": "2026-11-24",
+    "sources": "190313648a7d350e7cd7628671799169ac276f7b16b02bb39a5b64f272b58809"
+  },
+  "sdk-documentation": {
+    "lastmod": "2026-11-24",
+    "sources": "2cb2b847ec26980d98fa580927154382550675a859181c1ad0bfbbf4a1549d4d"
   },
   "semantic-caching": {
     "lastmod": "2026-11-18",
@@ -296,8 +348,8 @@
     "sources": "6eb5ac11c706fc1ac3dbef3c43494f854fe5a4cb86eeff1d9bf987e2cb4832c6"
   },
   "shorter-documentation": {
-    "lastmod": "2026-11-18",
-    "sources": "8e37e32b97eeb666e97fa87e142f5c34b48ab6498b910a06b3018d9a6272215d"
+    "lastmod": "2026-11-24",
+    "sources": "2d46cf32c264d8ed25cb8df44a4a2323591cf7561cf220b6592548a7e31a4b82"
   },
   "speculative-decoding": {
     "lastmod": "2026-11-18",
@@ -311,17 +363,29 @@
     "lastmod": "2026-11-18",
     "sources": "18663abf9c9dc4a5ebc617dd0e38b8db6f53c71f9314169b6407aaaf9e4750c3"
   },
+  "technical-writing-examples": {
+    "lastmod": "2026-11-24",
+    "sources": "6c1d046d62f3adba36eb2f05373a1ac7eb513108912bf1729a28839033cec195"
+  },
   "technical-writing-for-engineers": {
-    "lastmod": "2026-11-18",
-    "sources": "6bccab83623463d68014ae5dc9a5bab0b7757a0649d72a2e4e3db51f0e0ed909"
+    "lastmod": "2026-11-24",
+    "sources": "e6126e4910e2f82ff8a4a1d1ed86a9a9de53f51aaa583eeb2aa1b2dd0b2fe5d9"
   },
   "time-to-first-token": {
     "lastmod": "2026-11-18",
     "sources": "020ba5149ecfe76bd7c1443f2d06709a5d04bbae5d2fd6ab33fbc20b832768f3"
   },
+  "troubleshooting-guide-template": {
+    "lastmod": "2026-11-24",
+    "sources": "91c9370db54c32c28b0786c1fe92a63e94d171fc0e05796cb93e10b0b33429fa"
+  },
   "vector-embeddings": {
     "lastmod": "2026-11-18",
     "sources": "e2509c6e9d17035fcbf3ad43ab80dab052b5a1e77a165b6adc8ec2baf5344da7"
+  },
+  "vercel-agent-study-by-harness": {
+    "lastmod": "2026-11-24",
+    "sources": "ea1b847b58b953aea801d76ac0de4a6193a2ccaca5c2a9232b0d402ac5f343d0"
   },
   "voice-agent-latency": {
     "lastmod": "2026-11-18",
@@ -335,13 +399,21 @@
     "lastmod": "2026-11-18",
     "sources": "57ad7e98bdd3c109376ef322cc989fa4242e991b37b6c6a9a663cd4a7c906325"
   },
+  "what-to-keep-in-agents-md": {
+    "lastmod": "2026-11-24",
+    "sources": "52304e56953994d11617c2be0290866210d9d8fb807d503b77c98a3f64cd40aa"
+  },
+  "why-are-coding-agents-so-dumb-notes": {
+    "lastmod": "2026-11-24",
+    "sources": "86dded813f0716b071c1ceb4d5babd77ac404e515303e4f29533ec144db708b2"
+  },
   "writing-changelogs": {
     "lastmod": "2026-11-18",
     "sources": "ccba584a5f0c75c179ee14906f3263a9ec148703f21c5f698ef43a0178e1aada"
   },
   "writing-for-ai-products": {
-    "lastmod": "2026-11-18",
-    "sources": "b800bca33431f5f35a1aa77483579e401899c14fb8df5a1f5ba5721b5bfdbc10"
+    "lastmod": "2026-11-24",
+    "sources": "cb540281333cba3abea42ad2bb9283dd75691c4b3a0afc7d4a4fd7bef4b3cb04"
   },
   "writing-release-notes": {
     "lastmod": "2026-11-18",
